@@ -29,20 +29,32 @@ function focuseMode() {
     }
     else {
         // focus 
-        var sel    = window.getSelection(),
-            range = sel.getRangeAt( sel.rangeCount - 1 );
-        $focus = $( range.startContainer.parentNode.parentNode );
+        var sel   = window.getSelection();
+        if ( sel.type === "none" ) {
+            //  TO-DO notifcation
+            console.error( "selection is none tag." )
+            return;
+        }
+        var range = sel.getRangeAt( sel.rangeCount - 1 );
+        var node  = range.startContainer.nodeName;
+        if ( node.toLowerCase() !== "body" ) {
+            $focus = $( range.startContainer.parentNode.parentNode );
+        } else {
+            // TO-DO notifcation
+            console.error( "selection is body tag." )
+            return;
+        }
     }
     $focus.addClass( "ks-simpread-focus" );
 
     // add ks-simpread-mask
     $parent = $focus.parent();
-    tag      = $parent[0].tagName;
+    tag     = $parent[0].tagName;
     while ( tag.toLowerCase() != "body" ) {
         bakstyle = $parent.attr( "style" ) == undefined ? "" : $parent.attr( "style" );
         $parent.attr( "style", bakstyle + mask ).addClass("ks-simpread-mask");
         $parent = $parent.parent();
-        tag      = $parent[0].tagName;
+        tag     = $parent[0].tagName;
     }
 
     // background mask
@@ -55,13 +67,13 @@ function focuseMode() {
 
         // remove ks-simpread-mask
         $parent = $focus.parent();
-        tag      = $parent[0].tagName;
+        tag     = $parent[0].tagName;
         while ( tag.toLowerCase() != "body" ) {
             bakstyle = $parent.attr( "style" );
             bakstyle = bakstyle.replace( mask, "" );
             $parent.attr( "style", bakstyle ).removeClass( "ks-simpread-mask" );
             $parent = $parent.parent();
-            tag      = $parent[0].tagName;
+            tag     = $parent[0].tagName;
         }
     });
 
