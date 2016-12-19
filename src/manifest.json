@@ -19,5 +19,9 @@
       "run_at"  : "document_end"
     }
   ],
+  "web_accessible_resources": [
+    "focus-controlbar-tmpl.html",
+    "/assets/images/*"
+  ],
   "manifest_version": 2
 }

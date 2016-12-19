@@ -55,7 +55,10 @@ function focuseMode() {
     }
 
     // background mask
-    $( "body" ).append( '<div class="ks-simpread-bg"></div>' )
+    $( "body" ).append( '<div class="ks-simpread-bg"></div>' );
+
+    // add control bar
+    focusConstrolbar();
 
     // click mask remove it
     $( ".ks-simpread-bg" ).one( "click", function( event ) {
@@ -92,4 +95,18 @@ function focusStyle( $target, style, cls, type ) {
         bakstyle = bakstyle.replace( style, "" );
         $target.attr( "style", bakstyle ).removeClass( cls );
     }
+}
+
+/*
+    Add focus constrol bar
+*/
+function focusConstrolbar() {
+    $.get( chrome.extension.getURL( "./focus-controlbar-tmpl.html" ), function( tmpl ) {
+        $( ".ks-simpread-bg" ).append( tmpl );
+        var path = chrome.extension.getURL("/"),
+            $target = $( ".ks-simpread-constrolbar" ).find( "span" );
+        $($target[0]).attr( "style", "background-image:url(" + path + "assets/images/top.png)"     );
+        $($target[1]).attr( "style", "background-image:url(" + path + "assets/images/setting.png)" );
+        $($target[2]).attr( "style", "background-image:url(" + path + "assets/images/close.png)"   );
+    });
 }
