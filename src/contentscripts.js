@@ -9,7 +9,7 @@ Mousetrap.bind([ "a s" ], focuseMode );
     message request listener
 */
 chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
-    console.log(request);
+    console.log( request );
     focuseMode();
 });
 
@@ -20,6 +20,7 @@ function focuseMode() {
     console.log( "=== simpread start ===" )
 
     var $focus, $parent,
+        sel, range, node,
         tag, bakstyle,
         mask = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;";
 
@@ -28,20 +29,17 @@ function focuseMode() {
         $focus = $( "body" ).find( "article" );
     }
     else {
-        // focus 
-        var sel   = window.getSelection();
-        if ( sel.type === "none" ) {
-            //  TO-DO notifcation
-            console.error( "selection is none tag." )
-            return;
-        }
-        var range = sel.getRangeAt( sel.rangeCount - 1 );
-        var node  = range.startContainer.nodeName;
-        if ( node.toLowerCase() !== "body" ) {
+        // focus
+        try {
+            sel    = window.getSelection();
+            range  = sel.getRangeAt( sel.rangeCount - 1 );
+            node   = range.startContainer.nodeName;
+        if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
             $focus = $( range.startContainer.parentNode.parentNode );
-        } else {
+        } catch ( error ) {
             // TO-DO notifcation
-            console.error( "selection is body tag." )
+            console.log( sel, range, node )
+            console.error( error )
             return;
         }
     }
