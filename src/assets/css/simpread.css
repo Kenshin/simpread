@@ -1,25 +1,25 @@
 .ks-simpread-focus {
-	overflow: visible;
-	position: relative;
-	z-index: 2147483647;
-	box-shadow: 0 0 0 20px #fff;
-	background-color: #fff;
+    overflow: visible;
+    position: relative;
+    z-index: 2147483647;
+    box-shadow: 0 0 0 20px #fff;
+    background-color: #fff;
 }
 
 .ks-simpread-bg {
-	display: block;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba( 230, 230, 235, 0.8 );
-	z-index: 2147483646;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba( 230, 230, 235, 0.8 );
+    z-index: 2147483646;
 
-	-webkit-animation: effect 0.5s linear;
+    -webkit-animation: effect 0.5s linear;
 }
 
 @-webkit-keyframes effect {
-	from { opacity:0; }
-	to   { opacity:1; }
+    from { opacity:0; }
+    to   { opacity:1; }
 }
