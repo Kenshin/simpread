@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
 });
 
 /*
-    focus mode logic
+    Focus mode
 */
 function focuseMode() {
     console.log( "=== simpread start ===" )
@@ -59,7 +59,6 @@ function focuseMode() {
 
     // click mask remove it
     $( ".ks-simpread-bg" ).one( "click", function( event ) {
-        //$focus.removeClass( "ks-simpread-focus" );
         focusStyle( $focus, focusstyle, "ks-simpread-focus", "delete" );
         $( ".ks-simpread-bg" ).remove();
 
