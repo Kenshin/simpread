@@ -1,7 +1,8 @@
 console.log( "=== simpread focus controlbar load ===" )
 
 var fcontrol = ( function() {
-    var template = '<div class="ks-simpread-constrolbar">\
+    var timer,
+        template = '<div class="ks-simpread-constrolbar">\
                         <ul>\
                             <li><span class="topicon"></span></li>\
                             <li><span class="settingicon"></span></li>\
@@ -53,6 +54,7 @@ var fcontrol = ( function() {
             switch ( $(event.currentTarget).attr( "class" ) ) {
                 case "topicon":
                     console.log("==== focus control top active ====")
+                    moveTop();
                     break;
                 case "settingicon":
                     console.log("==== focus control setting active ====")
@@ -62,7 +64,34 @@ var fcontrol = ( function() {
                     $(root).click();
                     break;
             }
-        })
+        });
+        /*$( document ).scroll( function( event ) {
+            var osTop = document.body.scrollTop;
+            if ( osTop >= document.documentElement.clientHeight ) {
+                $target.find( "span" ).hide();
+            }else{
+                $target.find( "span" ).show();
+            }
+            if( !isTop ) {
+                clearInterval( timer );
+            }
+            isTop = false;
+        });*/
+    }
+
+    /*
+        Move top
+    */
+    function moveTop() {
+        timer = setInterval( function() {
+            var osTop = document.body.scrollTop;
+            var speed = Math.floor( -osTop / 3 );
+            document.body.scrollTop = osTop + speed;
+            isTop = true;
+            if( osTop == 0 ) {
+                clearInterval( timer );
+            }
+        }, 30 );
     }
 
     return new FControl();
