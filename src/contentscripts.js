@@ -24,8 +24,9 @@ function focuseMode() {
         maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
         focusstyle = "z-index: 2147483647; overflow: visible; position: relative;";
 
-    // find article tag
+    // get focus tag
     if ( $( "body" ).find( "article" ).length > 0 ) {
+        // find article tag
         $focus = $( "body" ).find( "article" );
     }
     else {
@@ -43,6 +44,8 @@ function focuseMode() {
             return;
         }
     }
+
+    // add focus
     focusStyle( $focus, focusstyle, "ks-simpread-focus", "add" );
 
     // add ks-simpread-mask
@@ -54,7 +57,7 @@ function focuseMode() {
         tag     = $parent[0].tagName;
     }
 
-    // background mask
+    // add background mask
     $( "body" ).append( '<div class="ks-simpread-bg"></div>' );
 
     // add control bar
