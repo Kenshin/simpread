@@ -44,7 +44,24 @@ function focuseMode() {
     }
 
     // add focus mode
-    focus.Init( $focus );
+    focus.Init( fixFocus( $focus ));
 
     return false;
+}
+
+/*
+    Fix $focus get bad tag, include: p, span, section
+    good tag include: div, article
+ */
+function fixFocus( $focus ) {
+    var tag = $focus[0].tagName.toLowerCase();
+    while ( 
+        ( tag === "p" ) ||
+        ( tag === "span" ) ||
+        ( tag === "section" )
+        ) {
+            $focus = $focus.parent();
+            tag    = $focus[0].tagName.toLowerCase();
+    }
+    return $focus;
 }
