@@ -11,14 +11,14 @@ var focus = ( function () {
         bgtmpl     = "<div class=" + bgcls + "></div>",
         bgclsjq    = "." + bgcls;
 
-    function Focus() {}
+    function Focus() { this.$target = null; }
 
     /*
         Add focus mode
     */
     Focus.prototype.Init = function( $target ) {
         console.log( "=== simpread focus add ===" );
-        this.constructor.prototype.$target = $target;
+        this.$target = $target;
         // add focus
         focusStyle( $target, focusstyle, focuscls, "add" );
 
