@@ -24,7 +24,6 @@
     }
   ],
   "web_accessible_resources": [
-    "/focus/template.html",
     "/assets/images/*"
   ],
   "manifest_version": 2

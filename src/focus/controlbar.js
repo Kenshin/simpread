@@ -1,7 +1,14 @@
 console.log( "=== simpread focus controlbar load ===" )
 
 var fcontrol = ( function() {
-    var $target;
+    var $target,
+        template = '<div class="ks-simpread-constrolbar">\
+                        <ul>\
+                            <li><span class="topicon"></span></li>\
+                            <li><span class="settingicon"></span></li>\
+                            <li><span class="closeicon"></span></li>\
+                        </ul>\
+                    </div>';
 
     function FControl() {}
 
@@ -10,14 +17,11 @@ var fcontrol = ( function() {
     */
     FControl.prototype.Init = function( root ) {
         console.log( "=== simpread focus controlbar add ===" );
-        var me = this;
-        $.get( chrome.extension.getURL( "/focus/template.html" ), function( tmpl ) {
-            me.constructor.prototype.$root = $(root);
-            $( root ).append( tmpl );
-                $target = $( ".ks-simpread-constrolbar" ).find( "span" );
-                addStyle();
-                addEventHandler();
-        });
+        this.constructor.prototype.$root = $(root);
+        $( root ).append( template );
+        $target = $( ".ks-simpread-constrolbar" ).find( "span" );
+        addStyle();
+        addEventHandler();
     }
 
     /*
