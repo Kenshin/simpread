@@ -58,7 +58,7 @@ function focuseMode() {
     $( "body" ).append( '<div class="ks-simpread-bg"></div>' );
 
     // add control bar
-    constrolbar();
+    fcontrol.Init();
 
     // click mask remove it
     $( ".ks-simpread-bg" ).on( "click", function( event ) {
@@ -66,6 +66,9 @@ function focuseMode() {
 
         // remove focus style
         focusStyle( $focus, focusstyle, "ks-simpread-focus", "delete" );
+
+        // remove control bar
+        fcontrol.Remove();
 
         // remove background style
         $( ".ks-simpread-bg" ).off( "click" );
