@@ -9,6 +9,7 @@ var fcontrol = ( function() {
         Add focus constrol bar
     */
     FControl.prototype.Init = function( root ) {
+        console.log( "=== simpread focus controlbar add ===" );
         var me = this;
         $.get( chrome.extension.getURL( "/focus/template.html" ), function( tmpl ) {
             me.constructor.prototype.$root = $(root);
@@ -23,6 +24,7 @@ var fcontrol = ( function() {
         Remove focus constrol bar
     */
     FControl.prototype.Remove = function() {
+        console.log( "=== simpread focus controlbar remove ===" );
         $target.off( "click" );
         $target.remove();
     }
@@ -44,13 +46,13 @@ var fcontrol = ( function() {
         $target.click( function( event) {
             switch ( $(event.currentTarget).attr( "class" ) ) {
                 case "topicon":
-                    console.log("111")
+                    console.log("==== focus control top active ====")
                     break;
                 case "settingicon":
-                    console.log("222")
+                    console.log("==== focus control setting active ====")
                     break;
                 case "closeicon":
-                    console.log("333")
+                    console.log("==== focus control close active ====")
                     FControl.prototype.$root.click();
                     break;
             }
