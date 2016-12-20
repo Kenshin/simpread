@@ -19,7 +19,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba( 230, 230, 235, 0.8 );
+    background-color: rgba( 235, 235, 235, 0.9 );
     z-index: 2147483646;
 
     -webkit-animation: effect 0.5s linear;
