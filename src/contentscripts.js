@@ -61,7 +61,7 @@ function focuseMode() {
     $( "body" ).append( '<div class="ks-simpread-bg"></div>' );
 
     // add control bar
-    fcontrol.Init();
+    fcontrol.Init( ".ks-simpread-bg" );
 
     // click mask remove it
     $( ".ks-simpread-bg" ).on( "click", function( event ) {

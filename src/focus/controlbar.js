@@ -8,9 +8,11 @@ var fcontrol = ( function() {
     /*
         Add focus constrol bar
     */
-    FControl.prototype.Init = function() {
+    FControl.prototype.Init = function( root ) {
+        var me = this;
         $.get( chrome.extension.getURL( "/focus/template.html" ), function( tmpl ) {
-            $( ".ks-simpread-bg" ).append( tmpl );
+            me.constructor.prototype.$root = $(root);
+            $( root ).append( tmpl );
                 $target = $( ".ks-simpread-constrolbar" ).find( "span" );
                 addStyle();
                 addEventHandler();
@@ -49,7 +51,7 @@ var fcontrol = ( function() {
                     break;
                 case "closeicon":
                     console.log("333")
-                    $(".ks-simpread-bg").click();
+                    FControl.prototype.$root.click();
                     break;
             }
         })
