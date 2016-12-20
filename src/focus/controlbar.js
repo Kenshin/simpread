@@ -1,8 +1,7 @@
 console.log( "=== simpread focus controlbar load ===" )
 
 var fcontrol = ( function() {
-    var $target,
-        template = '<div class="ks-simpread-constrolbar">\
+    var template = '<div class="ks-simpread-constrolbar">\
                         <ul>\
                             <li><span class="topicon"></span></li>\
                             <li><span class="settingicon"></span></li>\
@@ -10,18 +9,21 @@ var fcontrol = ( function() {
                         </ul>\
                     </div>';
 
-    function FControl() {}
+    function FControl() {
+        this.$parent = null;
+        this.$target = null;
+    }
 
     /*
         Add focus constrol bar
     */
     FControl.prototype.Init = function( root ) {
         console.log( "=== simpread focus controlbar add ===" );
-        this.constructor.prototype.$root = $(root);
+        this.$parent = $(root);
         $( root ).append( template );
-        $target = $( ".ks-simpread-constrolbar" ).find( "span" );
-        addStyle();
-        addEventHandler();
+        this.$target = $( ".ks-simpread-constrolbar" ).find( "span" );
+        addStyle( this.$target );
+        addEventHandler( this.$target, root );
     }
 
     /*
@@ -29,14 +31,14 @@ var fcontrol = ( function() {
     */
     FControl.prototype.Remove = function() {
         console.log( "=== simpread focus controlbar remove ===" );
-        $target.off( "click" );
-        $target.remove();
+        this.$target.off( "click" );
+        this.$target.remove();
     }
 
     /*
         Add focus constrol bar style
     */
-    function addStyle() {
+    function addStyle( $target ) {
         var path = chrome.extension.getURL("/");
         $($target[0]).attr( "style", "background-image:url(" + path + "assets/images/top.png)"     );
         $($target[1]).attr( "style", "background-image:url(" + path + "assets/images/setting.png)" );
@@ -46,7 +48,7 @@ var fcontrol = ( function() {
     /*
         Add focus constrol bar event
     */
-    function addEventHandler() {
+    function addEventHandler( $target, root ) {
         $target.click( function( event) {
             switch ( $(event.currentTarget).attr( "class" ) ) {
                 case "topicon":
@@ -57,7 +59,7 @@ var fcontrol = ( function() {
                     break;
                 case "closeicon":
                     console.log("==== focus control close active ====")
-                    FControl.prototype.$root.click();
+                    $(root).click();
                     break;
             }
         })
