@@ -16,7 +16,7 @@ var focus = ( function () {
     /*
         Add focus mode
     */
-    Focus.prototype.Init = function( $target ) {
+    Focus.prototype.Render = function( $target ) {
         console.log( "=== simpread focus add ===" );
         this.$target = $target;
         // add focus
@@ -35,7 +35,7 @@ var focus = ( function () {
         $( "body" ).append( bgtmpl );
 
         // add control bar
-        fcontrol.Init( bgclsjq );
+        fcontrol.Render( bgclsjq );
 
         // click mask remove it
         $( bgclsjq ).on( "click", function( event ) {

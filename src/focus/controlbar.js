@@ -17,7 +17,7 @@ var fcontrol = ( function() {
     /*
         Add focus constrol bar
     */
-    FControl.prototype.Init = function( root ) {
+    FControl.prototype.Render = function( root ) {
         console.log( "=== simpread focus controlbar add ===" );
         this.$parent = $(root);
         $( root ).append( template );

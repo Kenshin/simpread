@@ -44,7 +44,7 @@ function focuseMode() {
     }
 
     // add focus mode
-    focus.Init( fixFocus( $focus ));
+    focus.Render( fixFocus( $focus ));
 
     return false;
 }
