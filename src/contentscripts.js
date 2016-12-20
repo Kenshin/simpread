@@ -1,4 +1,4 @@
-console.log( "=== simpread init ===" )
+console.log( "=== simpread focus load ===" )
 
 /*
     keyboard event handler
@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
     Focus mode
 */
 function focuseMode() {
-    console.log( "=== simpread start ===" )
+    console.log( "=== simpread focus active ===" )
 
     var $focus, $parent,
         sel, range, node, tag,
@@ -58,14 +58,20 @@ function focuseMode() {
     $( "body" ).append( '<div class="ks-simpread-bg"></div>' );
 
     // add control bar
-    focusConstrolbar();
+    constrolbar();
 
     // click mask remove it
-    $( ".ks-simpread-bg" ).one( "click", function( event ) {
+    $( ".ks-simpread-bg" ).on( "click", function( event ) {
+        if ( $( event.target ).attr("class") != "ks-simpread-bg" ) return;
+
+        // remove focus style
         focusStyle( $focus, focusstyle, "ks-simpread-focus", "delete" );
+
+        // remove background style
+        $( ".ks-simpread-bg" ).off( "click" );
         $( ".ks-simpread-bg" ).remove();
 
-        // remove ks-simpread-mask
+        // remove ks-simpread-mask style
         $parent = $focus.parent();
         tag     = $parent[0].tagName;
         while ( tag.toLowerCase() != "body" ) {
@@ -95,18 +101,4 @@ function focusStyle( $target, style, cls, type ) {
         bakstyle = bakstyle.replace( style, "" );
         $target.attr( "style", bakstyle ).removeClass( cls );
     }
-}
-
-/*
-    Add focus constrol bar
-*/
-function focusConstrolbar() {
-    $.get( chrome.extension.getURL( "./focus-controlbar-tmpl.html" ), function( tmpl ) {
-        $( ".ks-simpread-bg" ).append( tmpl );
-        var path = chrome.extension.getURL("/"),
-            $target = $( ".ks-simpread-constrolbar" ).find( "span" );
-        $($target[0]).attr( "style", "background-image:url(" + path + "assets/images/top.png)"     );
-        $($target[1]).attr( "style", "background-image:url(" + path + "assets/images/setting.png)" );
-        $($target[2]).attr( "style", "background-image:url(" + path + "assets/images/close.png)"   );
-    });
 }

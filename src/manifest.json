@@ -14,13 +14,17 @@
   "content_scripts": [
     {
       "matches" : [ "*://*/*" ],
-      "js"      : [ "/vender/jquery-2.1.1.min.js", "/vender/mousetrap.min.js", "contentscripts.js" ],
+      "js"      : [ 
+        "/vender/jquery-2.1.1.min.js", "/vender/mousetrap.min.js",
+        "/focus/controlbar.js",
+        "contentscripts.js"
+       ],
       "css"     : [ "/assets/css/simpread.css" ],
       "run_at"  : "document_end"
     }
   ],
   "web_accessible_resources": [
-    "focus-controlbar-tmpl.html",
+    "/focus/template.html",
     "/assets/images/*"
   ],
   "manifest_version": 2
