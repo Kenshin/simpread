@@ -16,10 +16,14 @@
       "matches" : [ "*://*/*" ],
       "js"      : [ 
         "/vender/jquery-2.1.1.min.js", "/vender/mousetrap.min.js",
+        "/common/notify.js",
         "/focus/controlbar.js", "/focus/focus.js",
         "contentscripts.js"
        ],
-      "css"     : [ "/assets/css/simpread.css" ],
+      "css"     : [
+        "/assets/css/simpread.css",
+        "/common/notify.css"
+      ],
       "run_at"  : "document_end"
     }
   ],

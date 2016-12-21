@@ -36,9 +36,9 @@ function focuseMode() {
         if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
             $focus = $( range.startContainer.parentNode.parentNode );
         } catch ( error ) {
-            // TO-DO notifcation
             console.log( sel, range, node )
             console.error( error )
+            new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
             return;
         }
     }
