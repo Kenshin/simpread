@@ -22,6 +22,8 @@ function focuseMode() {
     var $focus,
         sel, range, node, tag;
 
+    if ( !focus.Verify() ) return;
+
     // get focus tag
     if ( $( "body" ).find( "article" ).length > 0 ) {
         // find article tag
@@ -45,8 +47,6 @@ function focuseMode() {
 
     // add focus mode
     focus.Render( fixFocus( $focus ));
-
-    return false;
 }
 
 /*

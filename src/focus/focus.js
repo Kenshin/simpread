@@ -66,6 +66,17 @@ var focus = ( function () {
     }
 
     /*
+        Verify ks-simpread-focus tag exit
+    */
+    Focus.prototype.Verify = function() {
+        if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /*
         Set focus style
         @param $target: jquery object
         @param style  : set style string
