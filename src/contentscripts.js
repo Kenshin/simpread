@@ -34,7 +34,7 @@ function focuseMode() {
             range  = sel.getRangeAt( sel.rangeCount - 1 );
             node   = range.startContainer.nodeName;
         if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
-            $focus = $( range.startContainer.parentNode.parentNode );
+            $focus = $( range.startContainer.parentNode );
         } catch ( error ) {
             console.log( sel, range, node )
             console.error( error )
