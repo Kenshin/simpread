@@ -60,6 +60,7 @@ function fixFocus( $focus ) {
         ( tag === "span"   ) ||
         ( tag === "strong" ) ||
         ( tag === "ul"     ) ||
+        ( tag === "li"     ) ||
         ( tag === "section" )
         ) {
             $focus = $focus.parent();
