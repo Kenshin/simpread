@@ -58,6 +58,7 @@ function fixFocus( $focus ) {
     while ( 
         ( tag === "p" ) ||
         ( tag === "span" ) ||
+        ( tag === "strong" ) ||
         ( tag === "section" )
         ) {
             $focus = $focus.parent();
