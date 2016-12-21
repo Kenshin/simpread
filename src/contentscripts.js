@@ -56,9 +56,10 @@ function focuseMode() {
 function fixFocus( $focus ) {
     var tag = $focus[0].tagName.toLowerCase();
     while ( 
-        ( tag === "p" ) ||
-        ( tag === "span" ) ||
+        ( tag === "p"      ) ||
+        ( tag === "span"   ) ||
         ( tag === "strong" ) ||
+        ( tag === "ul"     ) ||
         ( tag === "section" )
         ) {
             $focus = $focus.parent();
