@@ -5,6 +5,7 @@ chrome.contextMenus.create({
     "type"     : "normal",
     "title"    : "简阅 - 聚焦模式",
     "contexts" :  [ "all" ],
+    "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ],
     "onclick"  : function( info ) {
         chrome.tabs.query({ "active": true, "currentWindow": true }, function( tabs ) {
             if ( tabs[0].url == info.pageUrl ) {
