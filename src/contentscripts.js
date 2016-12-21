@@ -61,6 +61,7 @@ function fixFocus( $focus ) {
         ( tag === "strong" ) ||
         ( tag === "ul"     ) ||
         ( tag === "li"     ) ||
+        ( tag === "pre"    ) ||
         ( tag === "section" )
         ) {
             $focus = $focus.parent();
