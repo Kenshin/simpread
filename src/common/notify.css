@@ -61,7 +61,7 @@
 
 .notifygp .notify .close span {
     display: block;
-    background-image: url("../images/close.png");
+    /* background-image: url("../images/close.png"); */
     width: 16px;
     height: 16px;
 }

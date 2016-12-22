@@ -139,3 +139,5 @@ var Notify = ( function () {
     return Notify;
 
 })();
+
+module.exports = Notify;
