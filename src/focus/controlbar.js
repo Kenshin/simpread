@@ -87,7 +87,7 @@ var fcontrol = ( function() {
             var osTop = document.body.scrollTop;
             var speed = Math.floor( -osTop / 3 );
             document.body.scrollTop = osTop + speed;
-            isTop = true;
+            //isTop = true;
             if( osTop == 0 ) {
                 clearInterval( timer );
             }

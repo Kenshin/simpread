@@ -3,6 +3,7 @@ console.log( "=== simpread focus load ===" );
 var focus = ( function () {
 
     var $parent,
+        tag,
         focuscls   = "ks-simpread-focus",
         focusstyle = "z-index: 2147483647; overflow: visible; position: relative;",
         maskcls    = "ks-simpread-mask",
