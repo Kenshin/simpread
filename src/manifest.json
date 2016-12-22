@@ -13,7 +13,7 @@
   },
   "content_scripts": [
     {
-      "matches" : [ "*://*/*" ],
+      "matches" : [ "http://*/*", "https://*/*" ],
       "js"      : [ 
         "/vender/jquery-2.1.1.min.js", "/vender/mousetrap.min.js",
         "/common/notify.js",
