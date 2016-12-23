@@ -55,7 +55,7 @@ var focus = ( function () {
             // remove ks-simpread-mask style
             $parent = $target.parent();
             tag     = $parent[0].tagName;
-            while ( tag.toLowerCase() != "body" ) {
+            while ( tag && tag.toLowerCase() != "body" ) {
                 focusStyle( $parent, maskstyle, maskcls, "delete" );
                 $parent = $parent.parent();
                 tag     = $parent[0].tagName;
