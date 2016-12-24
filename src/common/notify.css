@@ -1,0 +1,72 @@
+
+/*
+* notify
+*/
+
+.notifygp {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    /*width: 400px;*/
+
+    display: -webkit-box;
+    -webkit-box-align: end;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+
+    margin: 15px;
+
+    font-size: 12px;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    font-weight: normal;
+
+    text-transform: none;
+    color: #fff;
+
+    pointer-events: none;
+}
+
+.notifygp .notify {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+    -webkit-box-align: start;
+
+    background: #555;
+    -webkit-border-radius: 5px;
+
+    padding: 10px;
+    margin-bottom: 10px;
+    /*width: 350px;*/
+    max-width: 400px;
+
+    opacity: .9;
+
+    pointer-events: auto;
+}
+
+.notifygp .notify div {
+    padding: 3px;
+}
+
+.notifygp .notify div a {
+    color: #fff;
+}
+
+.notifygp .notify .close {
+    position: absolute;
+    right: 10px;
+}
+
+.notifygp .notify .close span {
+    display: block;
+    /* background-image: url("../images/close.png"); */
+    width: 16px;
+    height: 16px;
+}
+
+.notifygp .notify .title {
+    font-weight: bolder;
+    font-size: 13px;
+}

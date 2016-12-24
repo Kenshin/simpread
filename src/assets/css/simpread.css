@@ -1,0 +1,68 @@
+/*
+    Focus style
+*/
+.ks-simpread-focus {
+    overflow: visible;
+    position: relative;
+    z-index: 2147483647;
+    box-shadow: 0 0 0 20px #fff;
+    background-color: #fff;
+}
+
+/*
+    Background style
+*/
+.ks-simpread-bg {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba( 235, 235, 235, 0.9 );
+    z-index: 2147483646;
+
+    -webkit-animation: effect 0.5s linear;
+}
+
+@-webkit-keyframes effect {
+    from { opacity:0; }
+    to   { opacity:1; }
+}
+
+/*
+    Control bar style
+*/
+.ks-simpread-constrolbar {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+}
+
+.ks-simpread-constrolbar ul {
+    color: #96a0a8;
+    border: 1px solid #ededed;
+}
+
+.ks-simpread-constrolbar li {
+    list-style: none;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.ks-simpread-constrolbar li:hover {
+    list-style: none;
+    cursor: pointer;
+    opacity: 1;
+    -webkit-transition: opacity .5s ease;
+}
+
+.ks-simpread-constrolbar span {
+    display: block;
+    width: 45px;
+    height: 45px;
+    background-repeat: no-repeat;
+    background-color: #999;
+    background-position: center;
+    border-bottom: solid 1px #ededed;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "简阅（SimpRead）",
+  "version": "0.1",
+  "description" : "简阅（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
+  "homepage_url" : "https://github.com/kenshin/simpread",
+  "author" : "Kenshin Wang <kenshin@ksria.com>",
+  "permissions": [
+    "contextMenus",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [ "background.js" ]
+  },
+  "content_scripts": [
+    {
+      "matches" : [ "http://*/*", "https://*/*" ],
+      "js"      : [ 
+        "/vender/jquery-2.1.1.min.js", "/vender/mousetrap.min.js",
+        "/common/notify.js",
+        "/focus/controlbar.js", "/focus/focus.js",
+        "contentscripts.js"
+       ],
+      "css"     : [
+        "/assets/css/simpread.css",
+        "/common/notify.css"
+      ],
+      "run_at"  : "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/assets/images/*"
+  ],
+  "manifest_version": 2
+}
