@@ -8,9 +8,9 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "develop": "NODE_ENV=development webpack --progress --colors --watch",
-    "server": "webpack-dev-server --hot --progress --colors",
-    "publish": "NODE_ENV=production webpack -p --progress --colors"
+    "develop": "NODE_ENV=development webpack --devtool=source-map --progress --colors --watch",
+    "publish": "NODE_ENV=production  webpack -p --progress --colors",
+    "server" : "webpack-dev-server --hot --progress --colors"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

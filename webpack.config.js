@@ -123,9 +123,7 @@ var webpack = require( 'webpack' ),
           controlbar: __dirname + '/src/focus/controlbar.js',
           foucsopt  : __dirname + '/src/focus/option.js'
         }
-      },
-
-      devtool:  isProduction() ? 'eval' : 'source-map'
+      }
 
 };
 
