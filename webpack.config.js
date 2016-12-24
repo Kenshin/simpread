@@ -1,21 +1,31 @@
 
-var webpack = require( 'webpack' ),
+const webpack = require( 'webpack' ),
     plugins = [
+
+      // public reqire( xxx )
       new webpack.ProvidePlugin({
         React    : 'react',
         ReactDOM : 'react-dom'
       }),
+
+      // vender files, include 'react' 'react-dom'
       new webpack.optimize.CommonsChunkPlugin({
         name     : 'common',
         filename : '[name].js'
       }),
+
+      // defined environment variable
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify( 'production' ) // or development
       }),
     ],
+
+    // conditions environment
     isProduction = function () {
       return process.env.NODE_ENV === 'production';
     },
+
+    // only when environment variable is 'production' call
     deploy = ( function () {
       var CopyWebpackPlugin  = require( 'copy-webpack-plugin'  ),
           CleanWebpackPlugin = require( 'clean-webpack-plugin' );
@@ -23,6 +33,7 @@ var webpack = require( 'webpack' ),
       // environment verify
       if ( isProduction() ) {
 
+        // delete publish folder
         plugins.push(
           new CleanWebpackPlugin([ 'publish' ], {
             verbose: true,
@@ -30,6 +41,7 @@ var webpack = require( 'webpack' ),
           })
         );
 
+        // copy files
         plugins.push(
           new CopyWebpackPlugin([
             { from : "src/manifest.json" , to :'../' },
@@ -38,6 +50,7 @@ var webpack = require( 'webpack' ),
           ])
         );
 
+        // call uglifyjs plugin
         plugins.push(
           new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -58,8 +71,11 @@ var webpack = require( 'webpack' ),
             }
           })
         );
+
       }
     })(),
+
+    // webpack config
     config = {
       entry: {
         common : [
