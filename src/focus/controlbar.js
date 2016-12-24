@@ -23,7 +23,7 @@ var fcontrol = ( function() {
         this.$parent = $(root);
         $( root ).append( template );
         this.$target = $( ".ks-simpread-constrolbar" ).find( "span" );
-        addStyle( this.$target );
+        //addStyle( this.$target );
         addEventHandler( this.$target, root );
     }
 
@@ -39,12 +39,14 @@ var fcontrol = ( function() {
     /*
         Add focus constrol bar style
     */
+    /*
     function addStyle( $target ) {
         var path = chrome.extension.getURL("/");
         $($target[0]).attr( "style", "background-image:url(" + path + "assets/images/top.png)"     );
         $($target[1]).attr( "style", "background-image:url(" + path + "assets/images/setting.png)" );
         $($target[2]).attr( "style", "background-image:url(" + path + "assets/images/close.png)"   );
     }
+    */
 
     /*
         Add focus constrol bar event
@@ -96,3 +98,5 @@ var fcontrol = ( function() {
 
     return new FControl();
 })();
+
+module.exports = fcontrol;

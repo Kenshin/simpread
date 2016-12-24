@@ -1,6 +1,13 @@
 console.log( "=== simpread focus load ===" );
 
-var focus = ( function () {
+// import css
+require( "../assets/css/simpread.css" );
+
+/*
+    import fcontrol from ./focus/controlbar.js
+*/
+var fcontrol = require( "controlbar" ),
+    focus = ( function () {
 
     var $parent,
         tag,
@@ -99,3 +106,5 @@ var focus = ( function () {
     return new Focus();
 
 })();
+
+module.exports = focus;
