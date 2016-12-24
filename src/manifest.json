@@ -15,7 +15,7 @@
     {
       "matches" : [ "http://*/*", "https://*/*" ],
       "js"      : [ 
-        "/bundle/common.js",
+        "/bundle/vendors.js",
         "/bundle/contentscripts.js"
        ],
       "run_at"  : "document_end"

@@ -10,7 +10,7 @@ const webpack = require( 'webpack' ),
 
       // vender files, include 'react' 'react-dom'
       new webpack.optimize.CommonsChunkPlugin({
-        name     : 'common',
+        name     : 'vendors',
         filename : '[name].js'
       }),
 
