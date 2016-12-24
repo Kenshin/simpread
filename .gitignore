@@ -1,5 +1,6 @@
 #ignore node_modules
 node_modules/**
+src/bundle/**
 
 # for mac
 **/.DS_Store
