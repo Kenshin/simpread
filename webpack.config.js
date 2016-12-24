@@ -78,14 +78,14 @@ const webpack = require( 'webpack' ),
     // webpack config
     config = {
       entry: {
-        common : [
+        vendors : [
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
           './src/vender/jquery-2.1.1.min.js',
           './src/vender/mousetrap.min.js',
 
-          './src/common/notify.js'
+          './src/vender/notify/notify.js'
         ],
         contentscripts : './src/contentscripts.js'
       },
@@ -122,7 +122,7 @@ const webpack = require( 'webpack' ),
           loader: 'expose?Mousetrap'
         },
         {
-          test  : require.resolve( './src/common/notify.js' ),
+          test  : require.resolve( './src/vender/notify/notify.js' ),
           loader: 'expose?Notify'
         }
         ]
@@ -133,7 +133,7 @@ const webpack = require( 'webpack' ),
           jquery    : __dirname + '/src/vender/jquery-2.1.1.min',
           mousetrap : __dirname + '/src/vender/mousetrap.min',
 
-          notify    : __dirname + '/src/common/notify.js',
+          notify    : __dirname + '/src/vender/notify/notify.js',
 
           focus     : __dirname + '/src/focus/focus.js',
           controlbar: __dirname + '/src/focus/controlbar.js',
