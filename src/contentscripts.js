@@ -9,7 +9,7 @@ var $ = require( "jquery" );
 var Mousetrap = require( "mousetrap" );
 
 // import notify css file
-require( "./common/notify.css" );
+require( "./vender/notify/notify.css" );
 var Notify = require( "notify" );
 
 /*
