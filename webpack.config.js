@@ -120,10 +120,6 @@ const webpack = require( 'webpack' ),
         {
           test  : require.resolve( './src/vender/mousetrap.min.js' ),
           loader: 'expose?Mousetrap'
-        },
-        {
-          test  : require.resolve( './src/vender/notify/notify.js' ),
-          loader: 'expose?Notify'
         }
         ]
       },
