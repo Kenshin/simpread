@@ -4,7 +4,7 @@
 .ks-simpread-focus {
     overflow: visible;
     position: relative;
-    z-index: 2147483647;
+    z-index: 2147483646;
     box-shadow: 0 0 0 20px #fff;
     background-color: #fff;
 }
@@ -20,7 +20,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba( 235, 235, 235, 0.9 );
-    z-index: 2147483646;
+    z-index: 2147483645;
 
     -webkit-animation: effect 0.5s linear;
 }
@@ -82,9 +82,57 @@
 /*
     Simpread Option
 */
+.ks-simpread-option-bg {
+    position: fixed;
+    top:  0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 2147483647;
+
+    display: -webkit-flex;
+    justify-content:center;
+    align-items:center;
+
+    -webkit-animation: popup 0.5s linear;
+
+}
+
 .ks-simpread-option-dialog {
     width: 300px;
     height: 300px;
-    background-color: blue;
-    z-index: 2147483647;
+
+    color: rgba(0, 0, 0, 0.870588);
+    background-color: rgb(255, 255, 255);
+
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
+    border-radius: 2px;
+
+    /*will-change: opacity;
+    transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;*/
+
+    /*
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    opacity: 1;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    will-change: opacity;
+    transform: translateZ(0px);
+    transition: left 0ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    */
+
+}
+
+@-webkit-keyframes popup {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

@@ -51,7 +51,7 @@ var setting  = require( "foucsopt" ),
                     break;
                 case "settingicon":
                     console.log("==== focus control setting active ====")
-                    setting.Render( $(root) );
+                    setting.Render();
                     break;
                 case "closeicon":
                     console.log("==== focus control close active ====")
