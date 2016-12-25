@@ -27,7 +27,6 @@ var setting  = require( "foucsopt" ),
         this.$parent = $(root);
         $( root ).append( template );
         this.$target = $( ".ks-simpread-constrolbar" ).find( "span" );
-        //addStyle( this.$target );
         addEventHandler( this.$target, root );
     }
 
@@ -39,18 +38,6 @@ var setting  = require( "foucsopt" ),
         this.$target.off( "click" );
         this.$target.remove();
     }
-
-    /*
-        Add focus constrol bar style
-    */
-    /*
-    function addStyle( $target ) {
-        var path = chrome.extension.getURL("/");
-        $($target[0]).attr( "style", "background-image:url(" + path + "assets/images/top.png)"     );
-        $($target[1]).attr( "style", "background-image:url(" + path + "assets/images/setting.png)" );
-        $($target[2]).attr( "style", "background-image:url(" + path + "assets/images/close.png)"   );
-    }
-    */
 
     /*
         Add focus constrol bar event
@@ -94,7 +81,6 @@ var setting  = require( "foucsopt" ),
             var osTop = document.body.scrollTop;
             var speed = Math.floor( -osTop / 3 );
             document.body.scrollTop = osTop + speed;
-            //isTop = true;
             if( osTop == 0 ) {
                 clearInterval( timer );
             }
