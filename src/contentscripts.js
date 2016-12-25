@@ -1,21 +1,17 @@
 console.log( "=== simpread contentscripts load ===" )
 
 /*
-    Golbal jQuery variable
+    import css files
 */
-var $ = require( "jquery" );
-
-// import Mousetrap
-var Mousetrap = require( "mousetrap" );
-
-// import notify css file
 require( "./vender/notify/notify.css" );
-var Notify = require( "notify" );
 
 /*
-    import focus from ./focus/focus.js
+    Golbal jQuery variable
 */
-var focus = require( "focus" );
+var $         = require( "jquery" ),
+    Mousetrap = require( "mousetrap" ),
+    Notify    = require( "notify" ),
+    focus     = require( "focus" );
 
 /*
     keyboard event handler
