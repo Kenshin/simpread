@@ -133,7 +133,10 @@ const webpack = require( 'webpack' ),
 
           focus     : __dirname + '/src/focus/focus.js',
           controlbar: __dirname + '/src/focus/controlbar.js',
-          foucsopt  : __dirname + '/src/focus/option.js'
+          foucsopt  : __dirname + '/src/focus/setting.js',
+
+          dialog    : __dirname + '/src/option/dialog.jsx'
+
         }
       }
 

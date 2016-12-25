@@ -1,6 +1,10 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-var fcontrol = ( function() {
+/*
+    import
+*/
+var setting  = require( "foucsopt" ),
+    fcontrol = ( function() {
     var timer,
         template = '<div class="ks-simpread-constrolbar">\
                         <ul>\
@@ -60,6 +64,7 @@ var fcontrol = ( function() {
                     break;
                 case "settingicon":
                     console.log("==== focus control setting active ====")
+                    setting.Render( $(root) );
                     break;
                 case "closeicon":
                     console.log("==== focus control close active ====")

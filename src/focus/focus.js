@@ -4,10 +4,10 @@ console.log( "=== simpread focus load ===" );
 require( "../assets/css/simpread.css" );
 
 /*
-    import fcontrol from ./focus/controlbar.js
+    import
 */
 var fcontrol = require( "controlbar" ),
-    focus = ( function () {
+    focus    = ( function () {
 
     var $parent,
         tag,
