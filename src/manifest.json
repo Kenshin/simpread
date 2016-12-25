@@ -15,15 +15,9 @@
     {
       "matches" : [ "http://*/*", "https://*/*" ],
       "js"      : [ 
-        "/vender/jquery-2.1.1.min.js", "/vender/mousetrap.min.js",
-        "/common/notify.js",
-        "/focus/controlbar.js", "/focus/focus.js",
-        "contentscripts.js"
+        "/bundle/vendors.js",
+        "/bundle/contentscripts.js"
        ],
-      "css"     : [
-        "/assets/css/simpread.css",
-        "/common/notify.css"
-      ],
       "run_at"  : "document_end"
     }
   ],

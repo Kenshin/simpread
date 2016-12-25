@@ -1,6 +1,19 @@
 console.log( "=== simpread contentscripts load ===" )
 
 /*
+    import css files
+*/
+require( "./vender/notify/notify.css" );
+
+/*
+    Golbal jQuery variable
+*/
+var $         = require( "jquery" ),
+    Mousetrap = require( "mousetrap" ),
+    Notify    = require( "notify" ),
+    focus     = require( "focus" );
+
+/*
     keyboard event handler
 */
 Mousetrap.bind([ "a s" ], focuseMode );
@@ -22,6 +35,7 @@ function focuseMode() {
     var $focus,
         sel, range, node, tag;
 
+    // Uniqueness verification
     if ( !focus.Verify() ) return;
 
     // get focus tag

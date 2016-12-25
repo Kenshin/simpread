@@ -66,3 +66,15 @@
     background-position: center;
     border-bottom: solid 1px #ededed;
 }
+
+.ks-simpread-constrolbar .topicon {
+    background-image: url( "../images/top.png" );
+}
+
+.ks-simpread-constrolbar .settingicon {
+    background-image: url( "../images/setting.png" );
+}
+
+.ks-simpread-constrolbar .closeicon {
+    background-image: url( "../images/close.png" );
+}
