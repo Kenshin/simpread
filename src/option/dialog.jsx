@@ -6,7 +6,8 @@ const optbgcls = "ks-simpread-option-bg",
 export default class Dialog extends React.Component {
 
     close() {
-        $( "." + optbgcls ).remove();
+        $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
+        $( "." + optbgcls ).one( "animationend", () => $( "." + optbgcls ).remove() );
     }
 
     save() {
