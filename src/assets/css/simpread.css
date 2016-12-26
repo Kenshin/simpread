@@ -146,7 +146,7 @@
     margin: 0 4px;
 
     color: #fff;
-    background-color: #26a69a;
+    background-color: #00897B;
 
     border: none;
     border-radius: 2px;
@@ -159,10 +159,25 @@
     font-size: 15px;
 
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+    transition: all .5s ease-in-out .1s;
+}
+
+.ks-simpread-option-dialog .ks-simpread-option-btn:hover {
+    background-color: #B2DFDB;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
 }
 
 .ks-simpread-option-dialog .ks-simpread-option-cancel {
-    background-color: #E0F2F1;
+    transition: all .5s ease-in-out .1s;
+    background-color: #80CBC4;
+}
+
+.ks-simpread-option-dialog .ks-simpread-option-cancel:hover {
+    background-color: #B2DFDB;
+}
+
+.ks-simpread-option-btn-click {
+    opacity: 1;
 }
 
 @-webkit-keyframes popup {
