@@ -218,22 +218,23 @@
     height: 100%;
 
     font-size: 20px;
-
 }
 
-.ks-simpread-option-focus-theme {
+.ks-simpread-option-focus-item {
     display: -webkit-flex;
     flex-flow:row nowrap;
     justify-content:flex-start;
 
-}
-
-.ks-simpread-option-focus-theme > span {
-    width: 100px;
     font-size: 15px;
+    width: 100%;
+    margin-bottom: 25px;
 }
 
-.ks-simpread-option-focus-theme .ks-simpread-option-focus-theme-group {
+.ks-simpread-option-focus-item span {
+    width: 100px;
+}
+
+.ks-simpread-option-focus-theme {
     display: -webkit-flex;
     flex-flow:row nowrap;
 
@@ -241,45 +242,52 @@
     height: 100%;
 }
 
-.ks-simpread-option-focus-theme-group-item {
+.ks-simpread-option-focus-theme-item {
     width: 40px;
     height: 20px;
 
     margin: 0 5px;
     cursor: pointer;
 
-    border: 1px solid #000;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(1) {
+.ks-simpread-option-focus-theme-item-active {
+    border: 1px solid #000;
+}
+
+.ks-simpread-option-focus-theme-item:nth-child(1) {
     background-color: rgba( 235, 235, 235, 0.9 );
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(2) {
+.ks-simpread-option-focus-theme-item:nth-child(2) {
     background-color: rgba( 216, 216, 216, 0.9 );
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(3) {
+.ks-simpread-option-focus-theme-item:nth-child(3) {
     background-color: rgba( 229, 221, 208, 0.9 );
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(4) {
+.ks-simpread-option-focus-theme-item:nth-child(4) {
     background-color: rgba( 243, 234, 203, 0.9 );
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(5) {
+.ks-simpread-option-focus-theme-item:nth-child(5) {
     background-color: rgba( 176, 192, 182, 0.9 );
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(6) {
+.ks-simpread-option-focus-theme-item:nth-child(6) {
     background-color: rgba( 28, 31, 43, 0.9 );
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(7) {
+.ks-simpread-option-focus-theme-item:nth-child(7) {
     background-color: rgba( 61, 66, 70, 0.9 );
 }
 
-.ks-simpread-option-focus-theme-group-item:nth-child(8) {
+.ks-simpread-option-focus-theme-item:nth-child(8) {
     background-color: rgba( 17, 18, 20, 0.9 );
+}
+
+.ks-simpread-option-focus-opacity {
+    width: 100%;
 }
