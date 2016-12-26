@@ -1,11 +1,11 @@
 console.log( "==== simpread focus setting load ====" )
 
-import Dialog, { dialogBg } from 'dialog'
+import Dialog, { getDialogBackground } from 'dialog'
 
 function Render() {
     ReactDOM.render(
         <Dialog />,
-        dialogBg()
+        getDialogBackground()
     )
 }
 

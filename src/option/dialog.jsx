@@ -47,7 +47,7 @@ export default class Dialog extends React.Component {
 /**
  * get Dialog background document
  */
-export function dialogBg() {
+export function getDialogBackground() {
     $( "body" ).append( optbg );
     return $( "." + optbgcls )[0];
 }
