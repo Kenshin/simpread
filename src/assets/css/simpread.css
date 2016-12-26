@@ -210,6 +210,9 @@
     }
 }
 
+/*
+    SimpRead Option Focus mode
+*/
 .ks-simpread-option-focus {
     display: -webkit-flex;
     flex-direction:column;
