@@ -75,6 +75,7 @@ function fixFocus( $focus ) {
         ( tag === "strong" ) ||
         ( tag === "ul"     ) ||
         ( tag === "li"     ) ||
+        ( tag === "code"   ) ||
         ( tag === "pre"    ) ||
         ( tag === "section" )
         ) {
