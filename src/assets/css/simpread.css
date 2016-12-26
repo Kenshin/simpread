@@ -95,21 +95,29 @@
     justify-content:center;
     align-items:center;
 
-    will-change:   opacity, top, transform;
+    color: #fff;
+    font-weight: 100;
+    font-size: 12px;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+
+    will-change:       opacity, top, transform;
     -webkit-animation: popup 0.5s ease;
 
 }
 
 .ks-simpread-option-dialog {
-    width: 300px;
-    height: 300px;
+    min-width: 300px;
+    min-height: 300px;
+
+    padding: 5px;
 
     color: rgba(0, 0, 0, 0.870588);
     background-color: rgb(255, 255, 255);
 
+    border-radius: 3px;
+
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
-    border-radius: 2px;
 
 }
 
