@@ -3,7 +3,7 @@ console.log( "=== simpread focus controlbar load ===" )
 /*
     import
 */
-var setting  = require( "foucsopt" ),
+var setting  = require( "foucsetting" ),
     fcontrol = ( function() {
     var timer,
         template = '<div class="ks-simpread-constrolbar">\

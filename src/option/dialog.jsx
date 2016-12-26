@@ -1,5 +1,7 @@
 console.log( "=== simpread option dialog ===" )
 
+import FocusOpt from 'focusopt'
+
 const optbgcls = "ks-simpread-option-bg",
       optbg    = '<div class="' + optbgcls + '"></div>';
 
@@ -23,7 +25,7 @@ export default class Dialog extends React.Component {
         return (
             <div className="ks-simpread-option-dialog">
                 <div className="ks-simpread-option-content">
-                    Hello React world!
+                    <FocusOpt />
                 </div>
                 <div className="ks-simpread-option-footer">
                     <a 

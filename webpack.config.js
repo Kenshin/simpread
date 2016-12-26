@@ -126,16 +126,17 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
-          jquery    : __dirname + '/src/vender/jquery-2.1.1.min',
-          mousetrap : __dirname + '/src/vender/mousetrap.min',
+          jquery     : __dirname + '/src/vender/jquery-2.1.1.min',
+          mousetrap  : __dirname + '/src/vender/mousetrap.min',
 
-          notify    : __dirname + '/src/vender/notify/notify.js',
+          notify     : __dirname + '/src/vender/notify/notify.js',
 
-          focus     : __dirname + '/src/focus/focus.js',
-          controlbar: __dirname + '/src/focus/controlbar.js',
-          foucsopt  : __dirname + '/src/focus/setting.js',
+          focus      : __dirname + '/src/focus/focus.js',
+          controlbar : __dirname + '/src/focus/controlbar.js',
+          foucsetting: __dirname + '/src/focus/setting.js',
 
-          dialog    : __dirname + '/src/option/dialog.jsx'
+          dialog     : __dirname + '/src/option/dialog.jsx',
+          focusopt   : __dirname + '/src/option/focus.jsx',
 
         }
       }
