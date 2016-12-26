@@ -124,7 +124,7 @@
 @-webkit-keyframes popup {
     from {
         opacity: 0;
-        top: -100px;
+        top: 100px;
         -webkit-transform: scaleX(0);
     }
     to {
