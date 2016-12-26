@@ -3,13 +3,18 @@ console.log( "=== simpread option dialog ===" )
 const optbgcls = "ks-simpread-option-bg",
       optbg    = '<div class="' + optbgcls + '"></div>';
 
+/**
+ * Dialog Rect component
+ */
 export default class Dialog extends React.Component {
 
+    // close dialog
     close() {
         $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
         $( "." + optbgcls ).one( "animationend", () => $( "." + optbgcls ).remove() );
     }
 
+    // save dialog focus option
     save() {
         console.log( "dialog click submit button." )
     }
@@ -39,7 +44,10 @@ export default class Dialog extends React.Component {
     }
 }
 
+/**
+ * get Dialog background document
+ */
 export function dialogBg() {
-    $( "body" ).append( optbg )
+    $( "body" ).append( optbg );
     return $( "." + optbgcls )[0];
 }
