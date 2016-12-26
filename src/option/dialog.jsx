@@ -4,6 +4,15 @@ const optbgcls = "ks-simpread-option-bg",
       optbg    = '<div class="' + optbgcls + '"></div>';
 
 export default class Dialog extends React.Component {
+
+    close() {
+        $( "." + optbgcls ).remove();
+    }
+
+    save() {
+        console.log( "dialog click submit button." )
+    }
+
     render() {
         return (
             <div className="ks-simpread-option-dialog">
@@ -11,8 +20,18 @@ export default class Dialog extends React.Component {
                     Hello React world!
                 </div>
                 <div className="ks-simpread-option-footer">
-                    <a href="javascript:void(0);" className="ks-simpread-option-btn ks-simpread-option-submit">确认</a>
-                    <a href="javascript:void(0);" className="ks-simpread-option-btn ks-simpread-option-cancel">取消</a>
+                    <a 
+                        href="javascript:void(0);"
+                        className="ks-simpread-option-btn ks-simpread-option-submit"
+                        onClick={ () => this.save() }>
+                        确认
+                    </a>
+                    <a 
+                        href="javascript:void(0);"
+                        className="ks-simpread-option-btn ks-simpread-option-cancel"
+                        onClick={ () => this.close() }>
+                        取消
+                    </a>
                 </div>
             </div>
         )
