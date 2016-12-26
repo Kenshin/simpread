@@ -11,7 +11,7 @@ export default class FocusOpt extends React.Component {
     render() {
         return (
             <div className="ks-simpread-option-focus">
-                <div className="ks-simpread-option-focus-item">
+                <div className="ks-simpread-option-focus-container">
                     <span>主题色：</span>
                     <ul className="ks-simpread-option-focus-theme"  onClick={ ()=> this.changeBgColor() }>
                         <li className="ks-simpread-option-focus-theme-item ks-simpread-option-focus-theme-item-active"></li>
@@ -24,7 +24,7 @@ export default class FocusOpt extends React.Component {
                         <li className="ks-simpread-option-focus-theme-item"></li>
                     </ul>
                 </div>
-                <div className="ks-simpread-option-focus-item">
+                <div className="ks-simpread-option-focus-container">
                     <span>透明度：</span>
                     <div className="ks-simpread-option-focus-opacity">
                         <input type="range" min="0" max="100" step="10" value="90">

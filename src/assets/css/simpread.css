@@ -220,7 +220,7 @@
     font-size: 20px;
 }
 
-.ks-simpread-option-focus-item {
+.ks-simpread-option-focus-container {
     display: -webkit-flex;
     flex-flow:row nowrap;
     justify-content:flex-start;
@@ -230,7 +230,7 @@
     margin-bottom: 25px;
 }
 
-.ks-simpread-option-focus-item span {
+.ks-simpread-option-focus-container span {
     width: 100px;
 }
 
