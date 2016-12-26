@@ -251,6 +251,7 @@
 
     margin: 0 5px;
     cursor: pointer;
+    list-style: none;
 
     border-radius: 3px;
 }
@@ -293,4 +294,28 @@
 
 .ks-simpread-option-focus-opacity {
     width: 100%;
+}
+
+.ks-simpread-option-focus-shortcuts {
+    width: 100%;
+}
+
+.ks-simpread-option-focus-shortcuts input[type="text"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 20px;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
+
+.ks-simpread-option-focus-shortcuts input[type="text"]:focus {
+    border-bottom: 1px solid #26a69a;
+    box-shadow: 0 1px 0 0 #26a69a;
 }
