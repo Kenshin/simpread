@@ -106,10 +106,13 @@
 }
 
 .ks-simpread-option-dialog {
+    display: -webkit-flex;
+    flex-direction:column;
+
     min-width: 300px;
     min-height: 300px;
 
-    padding: 5px;
+    padding: 10px;
 
     color: rgba(0, 0, 0, 0.870588);
     background-color: rgb(255, 255, 255);
@@ -119,6 +122,47 @@
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
 
+}
+
+.ks-simpread-option-dialog .ks-simpread-option-content {
+    width: 100%;
+    height: 100%;
+    min-height: 244px;
+}
+
+.ks-simpread-option-dialog .ks-simpread-option-footer {
+    width: 100%;
+
+    display: -webkit-flex;
+    flex-flow:row nowrap;
+    justify-content:flex-end;
+}
+
+.ks-simpread-option-dialog .ks-simpread-option-btn {
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    margin: 0 4px;
+
+    color: #fff;
+    background-color: #26a69a;
+
+    border: none;
+    border-radius: 2px;
+
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    cursor: pointer;
+
+    font-size: 15px;
+
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+.ks-simpread-option-dialog .ks-simpread-option-cancel {
+    background-color: #E0F2F1;
 }
 
 @-webkit-keyframes popup {

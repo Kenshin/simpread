@@ -7,7 +7,13 @@ export default class Dialog extends React.Component {
     render() {
         return (
             <div className="ks-simpread-option-dialog">
-                Hello React world!
+                <div className="ks-simpread-option-content">
+                    Hello React world!
+                </div>
+                <div className="ks-simpread-option-footer">
+                    <a href="javascript:void(0);" className="ks-simpread-option-btn ks-simpread-option-submit">确认</a>
+                    <a href="javascript:void(0);" className="ks-simpread-option-btn ks-simpread-option-cancel">取消</a>
+                </div>
             </div>
         )
     }
