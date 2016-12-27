@@ -223,6 +223,12 @@
     font-size: 20px;
 }
 
+.ks-simpread-option-focus input,
+.ks-simpread-option-focus textarea
+{
+    color: #9e9e9e;
+}
+
 .ks-simpread-option-focus-container {
     display: -webkit-flex;
     flex-flow:row nowrap;
@@ -235,6 +241,7 @@
 
 .ks-simpread-option-focus-container span {
     width: 100px;
+    text-align: right;
 }
 
 .ks-simpread-option-focus-theme {
@@ -244,6 +251,9 @@
 
     width: 100%;
     height: 100%;
+
+    margin: 0;
+    padding: 0;
 }
 
 .ks-simpread-option-focus-theme-item {
