@@ -40,6 +40,19 @@ export default class FocusOpt extends React.Component {
         this.setState({ opacity : opacity });
     }
 
+    changeShortcuts() {
+        this.setState({ shortcuts : event.key })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log(this.state.shortcuts,prevState)
+        this.refs.shortcuts.value = this.state.shortcuts;
+    }
+
+    componentDidMount() {
+        this.refs.shortcuts.value = this.state.shortcuts;
+    }
+
     constructor( props ) {
         super( props );
         this.state = {
@@ -78,7 +91,7 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>快捷键：</span>
                     <div className="ks-simpread-option-focus-shortcuts">
-                        <input type="text" value={ this.state.shortcuts } />
+                        <input ref="shortcuts" type="text" onKeyUp={ ()=> this.changeShortcuts() } />
                     </div>
                 </div>
                 <div className="ks-simpread-option-focus-container">
