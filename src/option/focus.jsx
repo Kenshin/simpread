@@ -1,15 +1,43 @@
 console.log( "===== simpread option focus mode load =====" )
 
+const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ];
+
 export default class FocusOpt extends React.Component {
 
     changeBgColor () {
-        console.log( $(event.target).css("background-color") )
-        if ( event.target.tagName.toLowerCase() != "li"  ) return;
-        $( ".ks-simpread-bg" ).css( "background-color", $(event.target).css( "background-color" ));
+        if ( event.target.tagName.toLowerCase() == "li" ) {
+
+            const target     = event.target,
+                  $target    = $(target),
+                  activestyl = "ks-simpread-option-focus-theme-item-active",
+                  $active    = $( ".ks-simpread-option-focus-theme" ).find( `.${activestyl}` ),
+                  bgcolor    = $target.css( bgcolorstyl ),
+                  color      = getColor( bgcolor ),
+                  opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
+                  newval     = `rgba(${color}, ${opacity})`;
+
+            // set new background color
+            $( bgcls ).css( bgcolorstyl, newval );
+
+            // update active
+            if ( $active.length > 0 ) {
+                $active.removeClass( activestyl );
+                $target.addClass(    activestyl );
+            }
+        }
     }
 
     changeOpacity() {
-        this.setState({ opacity : event.target.value });
+        const bgcolor = $( bgcls ).css( bgcolorstyl ),
+              opacity = event.target.value,
+              color   = getColor( bgcolor ),
+              newval  = `rgba(${color}, ${opacity / 100})`;
+
+        if ( color ) {
+            $( bgcls ).css( bgcolorstyl, newval );
+        }
+
+        this.setState({ opacity : opacity });
     }
 
     constructor( props ) {
@@ -41,7 +69,7 @@ export default class FocusOpt extends React.Component {
                     <div className="ks-simpread-option-focus-opacity">
                         <input 
                             type="range" 
-                            min="0" max="100" step="10" 
+                            min="50" max="95" step="5" 
                             value={ this.state.opacity }
                             onChange={ ()=> this.changeOpacity() }
                         />
@@ -67,5 +95,29 @@ export default class FocusOpt extends React.Component {
                 </div>
             </div>
         )
+    }
+}
+
+/**
+ * Get background opacity value
+ */
+function getOpacity( value ) {
+    const arr = value.match( /[0-9.]+(\))$/ig );
+    if ( arr.length > 0 ) {
+        return arr.join( "" ).replace( ")", "" );
+    } else {
+        return null;
+    }
+}
+
+/**
+ * Get background color value
+ */
+function getColor( value ) {
+    const arr = value.match( /[0-9]+, /ig );
+    if ( arr.length > 0 ) {
+        return arr.join( "" ).replace( /, $/, "" );
+    } else {
+        return null;
     }
 }
