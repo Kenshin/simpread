@@ -101,8 +101,8 @@ export default class FocusOpt extends React.Component {
 /**
  * Get background opacity value
  * 
- * @param  {String} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {String} e.g. 0.901961
+ * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
+ * @return {string} e.g. 0.901961
  */
 function getOpacity( value ) {
     const arr = value.match( /[0-9.]+(\))$/ig );
@@ -116,8 +116,8 @@ function getOpacity( value ) {
 /**
  * Get background color value
  * 
- * @param  {String} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {String} e.g. 235, 235, 235
+ * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
+ * @return {string} e.g. 235, 235, 235
  */
 function getColor( value ) {
     const arr = value.match( /[0-9]+, /ig );
