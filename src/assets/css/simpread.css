@@ -296,10 +296,6 @@
     background-color: rgba( 17, 18, 20, 0.9 );
 }
 
-.ks-simpread-option-focus-opacity {
-    width: 100%;
-}
-
 .ks-simpread-option-focus-shortcuts {
     width: 100%;
 }
@@ -322,6 +318,11 @@
 .ks-simpread-option-focus-shortcuts input[type="text"]:focus {
     border-bottom: 1px solid #00897B;
     box-shadow: 0 1px 0 0 #00897B;
+}
+
+.ks-simpread-option-focus-opacity {
+    width: 100%;
+    padding-top: 6px;
 }
 
 .ks-simpread-option-focus-opacity input[type=range] {
