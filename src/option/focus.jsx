@@ -8,10 +8,11 @@ export default class FocusOpt extends React.Component {
         $( ".ks-simpread-bg" ).css( "background-color", $(event.target).css( "background-color" ));
     }
 
-    changeShortcuts () {
-        console.log(event.key,event.keyCode)
-        //$( this.refs.shortcuts ).text( event.key );
-        //this.refs.shortcuts.value = event.key;
+    constructor( props ) {
+        super( props );
+        this.state = {
+            shortcuts : "A S",
+        };
     }
 
     render() {
@@ -39,7 +40,7 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>快捷键：</span>
                     <div className="ks-simpread-option-focus-shortcuts">
-                        <input ref="shortcuts" type="text" value="A S" onKeyPress={ ()=> this.changeShortcuts()  }></input>
+                        <input type="text" value={ this.state.shortcuts } />
                     </div>
                 </div>
             </div>
