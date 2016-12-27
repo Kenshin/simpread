@@ -59,6 +59,12 @@ export default class FocusOpt extends React.Component {
                         <textarea placeholder="每行一个，例如：<div class='xxxx'></div>"></textarea>
                     </div>
                 </div>
+                <div className="ks-simpread-option-focus-container">
+                    <span>高亮区域：</span>
+                    <div className="ks-simpread-option-focus-include">
+                        <input type="text" placeholder="默认为空，自动选择高亮区域。" />
+                    </div>
+                </div>
             </div>
         )
     }
