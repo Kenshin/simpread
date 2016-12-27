@@ -40,6 +40,8 @@
 }
 
 .ks-simpread-constrolbar ul {
+    margin: 0;
+    padding: 0;
     color: #96a0a8;
     border: 1px solid #ededed;
 }
