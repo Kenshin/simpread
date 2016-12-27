@@ -336,12 +336,16 @@
 
 .ks-simpread-option-focus-opacity input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 3px;
+  height: 1px;
   cursor: pointer;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
-  background: #b2dfdb;
+  background: #9e9e9e;
   border-radius: 1.3px;
-  border: 1px solid rgba(1, 1, 1, 0);
+  transition: all 0.3s;
+}
+
+.ks-simpread-option-focus-opacity input[type=range]::-webkit-slider-runnable-track:hover {
+  background: #00897B;
 }
 
 .ks-simpread-option-focus-opacity input[type=range]::-webkit-slider-thumb {
@@ -350,12 +354,18 @@
   height: 15px;
   width: 15px;
   border-radius: 50px;
-  background: #00897b;
+  background: #b2dfdb;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -7px;
+  transition: all 0.3s;
 }
 
+.ks-simpread-option-focus-opacity input[type=range]:focus::-webkit-slider-thumb {
+  background: #00897B;
+}
+
+
 .ks-simpread-option-focus-opacity input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #b2dfdb;
+  background: #00897B;
 }
