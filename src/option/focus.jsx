@@ -8,9 +8,14 @@ export default class FocusOpt extends React.Component {
         $( ".ks-simpread-bg" ).css( "background-color", $(event.target).css( "background-color" ));
     }
 
+    changeOpacity() {
+        this.setState({ opacity : event.target.value });
+    }
+
     constructor( props ) {
         super( props );
         this.state = {
+            opacity   : 90,
             shortcuts : "A S",
         };
     }
@@ -34,7 +39,12 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>透明度：</span>
                     <div className="ks-simpread-option-focus-opacity">
-                        <input type="range" min="0" max="100" step="10" value="90"></input>
+                        <input 
+                            type="range" 
+                            min="0" max="100" step="10" 
+                            value={ this.state.opacity }
+                            onChange={ ()=> this.changeOpacity() }
+                        />
                     </div>
                 </div>
                 <div className="ks-simpread-option-focus-container">
