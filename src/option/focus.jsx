@@ -53,6 +53,12 @@ export default class FocusOpt extends React.Component {
                         <input type="text" value={ this.state.shortcuts } />
                     </div>
                 </div>
+                <div className="ks-simpread-option-focus-container">
+                    <span>隐藏列表：</span>
+                    <div className="ks-simpread-option-focus-exclude">
+                        <textarea placeholder="每行一个，例如：<div class='xxxx'></div>"></textarea>
+                    </div>
+                </div>
             </div>
         )
     }
