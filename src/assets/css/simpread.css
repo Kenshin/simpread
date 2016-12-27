@@ -240,6 +240,7 @@
 .ks-simpread-option-focus-theme {
     display: -webkit-flex;
     flex-flow:row nowrap;
+    justify-content:space-between;
 
     width: 100%;
     height: 100%;
@@ -249,11 +250,14 @@
     width: 40px;
     height: 20px;
 
-    margin: 0 5px;
     cursor: pointer;
     list-style: none;
 
     border-radius: 3px;
+}
+
+.ks-simpread-option-focus-theme-item:not(:first-child) {
+    margin-left: 5px;
 }
 
 .ks-simpread-option-focus-theme-item-active {
@@ -316,6 +320,42 @@
 }
 
 .ks-simpread-option-focus-shortcuts input[type="text"]:focus {
-    border-bottom: 1px solid #26a69a;
-    box-shadow: 0 1px 0 0 #26a69a;
+    border-bottom: 1px solid #00897B;
+    box-shadow: 0 1px 0 0 #00897B;
+}
+
+.ks-simpread-option-focus-opacity input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 6px 0;
+}
+
+.ks-simpread-option-focus-opacity input[type=range]:focus {
+  outline: none;
+}
+
+.ks-simpread-option-focus-opacity input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
+  background: #b2dfdb;
+  border-radius: 1.3px;
+  border: 1px solid rgba(1, 1, 1, 0);
+}
+
+.ks-simpread-option-focus-opacity input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  border: 1px solid rgba(0, 0, 0, 0);
+  height: 15px;
+  width: 15px;
+  border-radius: 50px;
+  background: #00897b;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+
+.ks-simpread-option-focus-opacity input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #b2dfdb;
 }
