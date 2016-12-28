@@ -43,6 +43,10 @@ export default class FocusOpt extends React.Component {
         this.setState({ opacity : opacity });
     }
 
+    changExclude() {
+        this.state.exclude = this.refs.exclude.value.toLowerCase().trim().split( "\n" );
+    }
+
     changeShortcuts() {
         const key = control2ctrl( event.key.toLowerCase().trim() );
         if ( key.length == 1 ) {
@@ -89,6 +93,7 @@ export default class FocusOpt extends React.Component {
         this.state = {
             opacity   : 90,
             shortcuts : "A S",
+            exclude   : [],
         };
         prevShortcuts = this.state.shortcuts;
     }
@@ -129,7 +134,7 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>隐藏列表：</span>
                     <div className="ks-simpread-option-focus-exclude">
-                        <textarea placeholder="每行一个，例如：<div class='xxxx'></div>"></textarea>
+                        <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changExclude() }></textarea>
                     </div>
                 </div>
                 <div className="ks-simpread-option-focus-container">
