@@ -43,10 +43,6 @@ export default class FocusOpt extends React.Component {
         this.setState({ opacity : opacity });
     }
 
-    changExclude() {
-        this.state.exclude = getExclude( this.refs.exclude.value );
-    }
-
     changeShortcuts() {
         const key = control2ctrl( event.key.toLowerCase().trim() );
         if ( key.length == 1 ) {
@@ -64,6 +60,16 @@ export default class FocusOpt extends React.Component {
             new Notify().Render( 2, `当前输入【 ${key} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
             this.refs.shortcuts.value = this.refs.shortcuts.value.replace( key, "" );
         }
+    }
+
+    changExclude() {
+        this.state.exclude = getExclude( this.refs.exclude.value );
+        console.log( "this.state.exclude = ", this.state.exclude )
+    }
+
+    changeInclude() {
+        this.state.include = getInclude( this.refs.include.value );
+        console.log( "this.state.include = ", this.state.include )
     }
 
     componentDidUpdate() {
@@ -94,6 +100,7 @@ export default class FocusOpt extends React.Component {
             opacity   : 90,
             shortcuts : "A S",
             exclude   : [],
+            include   : {},
         };
         prevShortcuts = this.state.shortcuts;
     }
@@ -140,7 +147,7 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>高亮区域：</span>
                     <div className="ks-simpread-option-focus-include">
-                        <input type="text" placeholder="默认为空，自动选择高亮区域。" />
+                        <input ref="include" type="text" placeholder="默认为空，自动选择高亮区域。" onChange={ ()=>this.changeInclude() } />
                     </div>
                 </div>
             </div>
@@ -209,7 +216,7 @@ function control2ctrl( key ) {
 }
 
 /**
- * Get exclude tags,
+ * Get exclude tags
  * 
  * @param  {string} input exclude html tag, e.g.:
     <div class="article fmt article__content">
@@ -225,15 +232,34 @@ function control2ctrl( key ) {
  * 
  */
 function getExclude( tags ) {
-    let list  = [];
+    let [ list, obj ]  = [[], null ];
     const arr = tags.toLowerCase().trim().split( "\n" );
     for( let value of arr ) {
-        const item = value.match( / (class|id)=("|')[\w-_]+/ig );
-        if ( item && item.length > 0 ) {
-            const [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-            list.push({ tag, name});
+        obj = getInclude( value );
+        if ( obj ) {
+            list.push( obj );
         }
     }
-    console.log(list)
     return list;
+}
+
+/**
+ * Get include tag
+ * 
+ * @param  {string} input include html tag, e.g.:
+    <div class="article fmt article__content">
+ *
+ * @return {array} formatting e.g.:
+    { "tag" : "class", "name" : "article" }
+ * 
+ */
+function getInclude( content ) {
+    const item = content.match( / (class|id)=("|')[\w-_]+/ig );
+    if ( item && item.length > 0 ) {
+        const [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
+        return { tag, name };
+    } else {
+        //new Notify().Render( 2, `当前输入【 ${content} 】错误，请重新输入。` );
+        return null;
+    }
 }
