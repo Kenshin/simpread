@@ -188,7 +188,7 @@ function getColor( value ) {
  */
 function verifyShortkey( key ) {
     if (
-        key == "control" || key == "ctrl" || key == "alt" || key == "shift"
+        [ "control", "ctrl", "alt", "shift"].includes( key )
         /*|| key == "meta"    || key == "command"   || key == "enter"     || key == "backspace"
         || key == "arrowup" || key == "arrowdown" || key == "arrowleft" || key == "arrowright"*/
     ) {
