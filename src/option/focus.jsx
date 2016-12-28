@@ -27,6 +27,8 @@ export default class FocusOpt extends React.Component {
                 $active.removeClass( activestyl );
                 $target.addClass(    activestyl );
             }
+            this.setState({ bgcolor : newval });
+            console.log( "this.state.bgcolor = ", this.state.bgcolor )
         }
     }
 
@@ -35,12 +37,11 @@ export default class FocusOpt extends React.Component {
               opacity = event.target.value,
               color   = getColor( bgcolor ),
               newval  = `rgba(${color}, ${opacity / 100})`;
-
         if ( color ) {
             $( bgcls ).css( bgcolorstyl, newval );
         }
-
         this.setState({ opacity : opacity });
+        console.log( "this.state.opacity = ", this.state.opacity )
     }
 
     changeShortcuts() {
@@ -97,6 +98,7 @@ export default class FocusOpt extends React.Component {
     constructor( props ) {
         super( props );
         this.state = {
+            bgcolor   : "rgba( 235, 235, 235, 0.9 )",
             opacity   : 90,
             shortcuts : "A S",
             exclude   : [],
