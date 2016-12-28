@@ -28,7 +28,6 @@ export default class FocusOpt extends React.Component {
                 $target.addClass(    activestyl );
             }
             this.setState({ bgcolor : newval });
-            console.log( "this.state.bgcolor = ", this.state.bgcolor )
         }
     }
 
@@ -41,7 +40,6 @@ export default class FocusOpt extends React.Component {
             $( bgcls ).css( bgcolorstyl, newval );
         }
         this.setState({ opacity : opacity });
-        console.log( "this.state.opacity = ", this.state.opacity )
     }
 
     changeShortcuts() {
@@ -65,12 +63,10 @@ export default class FocusOpt extends React.Component {
 
     changExclude() {
         this.state.exclude = getExclude( this.refs.exclude.value );
-        console.log( "this.state.exclude = ", this.state.exclude )
     }
 
     changeInclude() {
         this.state.include = getInclude( this.refs.include.value );
-        console.log( "this.state.include = ", this.state.include )
     }
 
     componentDidUpdate() {
@@ -92,6 +88,7 @@ export default class FocusOpt extends React.Component {
     }
 
     componentDidMount() {
+        this.refs.opacity.value   = this.state.opacity;
         this.refs.shortcuts.value = this.state.shortcuts;
     }
 
@@ -126,10 +123,8 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>透明度：</span>
                     <div className="ks-simpread-option-focus-opacity">
-                        <input 
-                            type="range" 
-                            min="50" max="95" step="5" 
-                            value={ this.state.opacity }
+                        <input ref="opacity"
+                            type="range" min="50" max="95" step="5" 
                             onChange={ ()=> this.changeOpacity() }
                         />
                     </div>
