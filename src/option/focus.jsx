@@ -208,6 +208,22 @@ function control2ctrl( key ) {
     return key == "control" ? "ctrl" : key;
 }
 
+/**
+ * Get exclude tags,
+ * 
+ * @param  {string} input exclude html tag, e.g.:
+    <div class="article fmt article__content">
+    <h3 id="articleHeader1">原著序</h3>
+    <div class="col-xs-12 col-md-9 main ">
+    <img id="icon4weChat" style="height: 0;width: 0;">
+ *
+ * @return {array} formatting e.g.:
+    [{ "tag" : "class", "name" : "article" },
+     { "tag" : "id",    "name" : "articleHeader1" },
+     { "tag" : "class", "name" : "col-xs-12" },
+     { "tag" : "id",    "name" : "icon4weChat" }]
+ * 
+ */
 function getExclude( tags ) {
     let list  = [];
     const arr = tags.toLowerCase().trim().split( "\n" );
@@ -219,4 +235,5 @@ function getExclude( tags ) {
         }
     }
     console.log(list)
+    return list;
 }
