@@ -63,10 +63,12 @@ export default class FocusOpt extends React.Component {
 
     changExclude() {
         this.state.exclude = getExclude( this.refs.exclude.value );
+        console.log( "this.state.exclude = ", this.state.exclude )
     }
 
     changeInclude() {
         this.state.include = getInclude( this.refs.include.value );
+        console.log( "this.state.include = ", this.state.include )
     }
 
     componentDidUpdate() {
