@@ -11,12 +11,13 @@ require( "./vender/notify/notify.css" );
 var $         = require( "jquery" ),
     Mousetrap = require( "mousetrap" ),
     Notify    = require( "notify" ),
-    focus     = require( "focus" );
+    focus     = require( "focus" ),
+    shortcuts = ["a s"];
 
 /*
     keyboard event handler
 */
-Mousetrap.bind([ "a s" ], focuseMode );
+Mousetrap.bind( shortcuts, focuseMode );
 
 /*
     message request listener

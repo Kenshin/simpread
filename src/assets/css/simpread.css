@@ -293,6 +293,10 @@
     width: 100%;
 }
 
+.ks-simpread-option-focus-shortcuts input[type="text"] {
+    text-transform: uppercase;
+}
+
 .ks-simpread-option-focus-shortcuts input[type="text"],
 .ks-simpread-option-focus-include input[type="text"]
 {

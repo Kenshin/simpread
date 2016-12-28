@@ -1,6 +1,9 @@
 console.log( "===== simpread option focus mode load =====" )
 
+import Notify from 'notify';
+
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ];
+let prevShortcuts = null;
 
 export default class FocusOpt extends React.Component {
 
@@ -41,12 +44,40 @@ export default class FocusOpt extends React.Component {
     }
 
     changeShortcuts() {
-        this.setState({ shortcuts : event.key })
+        const key = control2ctrl( event.key.toLowerCase().trim() );
+        if ( key.length == 1 ) {
+            if ( /^[0-9a-z]{1}$/ig.test(key) ) {
+                this.setState({ shortcuts : key });
+            } else {
+                new Notify().Render( 2, `当前输入【 ${key} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
+                this.refs.shortcuts.value = this.refs.shortcuts.value.replace( key, "" );
+            }
+        } else if ( verifyShortkey( key )) {
+            this.setState({ shortcuts : key });
+        } else if ( key.length == 0 ) {
+            new Notify().Render( 2, `当前输入不能为空，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
+        } else {
+            new Notify().Render( 2, `当前输入【 ${key} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
+            this.refs.shortcuts.value = this.refs.shortcuts.value.replace( key, "" );
+        }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log(this.state.shortcuts,prevState)
-        this.refs.shortcuts.value = this.state.shortcuts;
+    componentDidUpdate() {
+        console.log( this.state.shortcuts, prevShortcuts )
+        const arr = prevShortcuts.toLowerCase().trim().split(" ");
+        switch ( arr.length ) {
+            case 1:
+                this.refs.shortcuts.value = `${arr[0]} ${this.state.shortcuts}`;
+                prevShortcuts             = this.refs.shortcuts.value;
+                break;
+            case 2:
+                this.refs.shortcuts.value = this.state.shortcuts;
+                prevShortcuts             = this.refs.shortcuts.value;
+                break;
+            default:
+                console.log( "发生了一些错误。", prevShortcuts, this.state.shortcuts )
+                break;
+        }
     }
 
     componentDidMount() {
@@ -59,6 +90,7 @@ export default class FocusOpt extends React.Component {
             opacity   : 90,
             shortcuts : "A S",
         };
+        prevShortcuts = this.state.shortcuts;
     }
 
     render() {
@@ -139,4 +171,34 @@ function getColor( value ) {
     } else {
         return null;
     }
+}
+
+/**
+ * Verify shortkey
+ * 
+ * @param  {string} shortkey, only include: ctrl shift alt number letters
+ *                            e.g. [a b] [a 1] [1 b] [shift a] [a ctrl] [1 alt] [1 shift]
+ * 
+ * @return {boolean}
+ */
+function verifyShortkey( key ) {
+    if (
+        key == "control" || key == "ctrl" || key == "alt" || key == "shift"
+        /*|| key == "meta"    || key == "command"   || key == "enter"     || key == "backspace"
+        || key == "arrowup" || key == "arrowdown" || key == "arrowleft" || key == "arrowright"*/
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Control keyword conver to ctrl keyword
+ * 
+ * @param  {string} keyword
+ * @return {string} keyword
+ */
+function control2ctrl( key ) {
+    return key == "control" ? "ctrl" : key;
 }
