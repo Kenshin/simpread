@@ -44,7 +44,7 @@ export default class FocusOpt extends React.Component {
     }
 
     changExclude() {
-        this.state.exclude = this.refs.exclude.value.toLowerCase().trim().split( "\n" );
+        this.state.exclude = getExclude( this.refs.exclude.value );
     }
 
     changeShortcuts() {
@@ -206,4 +206,17 @@ function verifyShortkey( key ) {
  */
 function control2ctrl( key ) {
     return key == "control" ? "ctrl" : key;
+}
+
+function getExclude( tags ) {
+    let list  = [];
+    const arr = tags.toLowerCase().trim().split( "\n" );
+    for( let value of arr ) {
+        const item = value.match( / (class|id)=("|')[\w-_]+/ig );
+        if ( item && item.length > 0 ) {
+            const [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
+            list.push({ tag, name});
+        }
+    }
+    console.log(list)
 }
