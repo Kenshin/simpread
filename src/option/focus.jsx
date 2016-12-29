@@ -73,6 +73,8 @@ export default class FocusOpt extends React.Component {
     }
 
     componentDidMount() {
+        $( bgcls ).css( bgcolorstyl, this.state.bgcolor );
+        setBgThemeStyle( this.state.bgcolor );
         this.refs.opacity.value   = this.state.opacity;
         this.refs.shortcuts.value = this.state.shortcuts;
     }
@@ -89,7 +91,7 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>主题色：</span>
                     <ul className="ks-simpread-option-focus-theme" onClick={ ()=> this.changeBgColor() }>
-                        <li className="ks-simpread-option-focus-theme-item ks-simpread-option-focus-theme-item-active"></li>
+                        <li className="ks-simpread-option-focus-theme-item"></li>
                         <li className="ks-simpread-option-focus-theme-item"></li>
                         <li className="ks-simpread-option-focus-theme-item"></li>
                         <li className="ks-simpread-option-focus-theme-item"></li>
@@ -259,4 +261,17 @@ function updateShortcuts() {
             break;
     }
     return shortcuts;
+}
+
+function setBgThemeStyle( bgcolor ) {
+    const $themes    = $( ".ks-simpread-option-focus-theme" ).children(),
+          newcolor   = getColor( bgcolor );
+
+    for ( let i = 0; i < $themes.length; i++ ) {
+         const $target = $($themes[i]),
+               color   = getColor( $target.css("background-color") )
+         if ( newcolor === color ) {
+             $target.addClass( " ks-simpread-option-focus-theme-item-active" );
+         }
+    }
 }
