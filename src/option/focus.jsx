@@ -2,9 +2,8 @@ console.log( "===== simpread option focus mode load =====" )
 
 import Notify from 'notify';
 
-const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ];
-let prevShortcuts = null;
-let keyword       = null;
+const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
+let   [ prevShortcuts, keyword ] = [null, null ];
 
 export default class FocusOpt extends React.Component {
 
