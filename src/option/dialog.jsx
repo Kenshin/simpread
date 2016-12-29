@@ -3,21 +3,21 @@ console.log( "=== simpread option dialog ===" )
 import FocusOpt from 'focusopt'
 
 let site = {
-    url  : "",
-    html : {
-        exclude   : [],
-        include   : {},
-}};
-
-const optbgcls = "ks-simpread-option-bg",
-      optbg    = `<div class="${ optbgcls }"></div>`,
-      option   = {
+        url  : "",
+        html : {
+            exclude   : [],
+            include   : "",
+    }},
+    option   = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         opacity   : 90,
         shortcuts : "A S",
         sites     : [ site ]
-      };
+};
+
+const optbgcls = "ks-simpread-option-bg",
+      optbg    = `<div class="${ optbgcls }"></div>`;
 
 /**
  * Dialog Rect component
@@ -41,12 +41,16 @@ export default class Dialog extends React.Component {
             }
         }
         // save local storage
-        localStorage["simpread-focus"] = JSON.stringify( option );
+        localStorage[ "simpread-focus" ] = JSON.stringify( option );
         this.close();
     }
 
     constructor( props ) {
         super( props );
+
+        // load local storage
+        option = JSON.parse( localStorage[ "simpread-focus" ] || option );
+
         for( let obj of option.sites ) {
             const url = getURI();
             if ( obj.url === url ) {
