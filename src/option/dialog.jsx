@@ -32,6 +32,13 @@ export default class Dialog extends React.Component {
 
     // save dialog focus option
     save() {
+        for( let i = 0; i < option.sites; i++ ) {
+            const url = getURI(),
+                  obj = option.sites[i];
+            if ( obj.url === url ) {
+                option.sites.splice( i, 1, site );
+            }
+        }
         console.log( "dialog click submit button.", option, site )
     }
 

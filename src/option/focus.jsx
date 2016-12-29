@@ -73,16 +73,17 @@ export default class FocusOpt extends React.Component {
     }
 
     componentDidMount() {
-        $( bgcls ).css( bgcolorstyl, this.state.bgcolor );
-        setBgThemeStyle( this.state.bgcolor );
-        this.refs.opacity.value   = this.state.opacity;
-        this.refs.shortcuts.value = this.state.shortcuts;
+        setBgThemeStyle( this.props.option.bgcolor );
+        this.refs.opacity.value   = this.props.option.opacity;
+        this.refs.shortcuts.value = this.props.option.shortcuts;
+        this.refs.exclude.value   = this.props.site.html.exclude.join( "\n") ;
+        this.refs.include.value   = JSON.stringify(this.props.site.html.include) === "{}" ? "" : JSON.stringify(this.props.site.html.include);
+        prevShortcuts             = this.props.option.shortcuts;
     }
 
     constructor( props ) {
         super( props );
-        this.state = this.props.option;
-        prevShortcuts = this.state.shortcuts;
+        //this.state = this.props.option;
     }
 
     render() {
