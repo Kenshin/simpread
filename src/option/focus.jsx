@@ -27,7 +27,8 @@ export default class FocusOpt extends React.Component {
                 $active.removeClass( activestyl );
                 $target.addClass(    activestyl );
             }
-            this.setState({ bgcolor : newval });
+            this.props.option.bgcolor = newval;
+            console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
         }
     }
 
@@ -39,7 +40,8 @@ export default class FocusOpt extends React.Component {
         if ( color ) {
             $( bgcls ).css( bgcolorstyl, newval );
         }
-        this.setState({ opacity : opacity });
+        this.props.option.opacity = opacity;
+        console.log( "this.props.option.opacity = ", this.props.option.opacity )
     }
 
     changeShortcuts() {
@@ -56,17 +58,18 @@ export default class FocusOpt extends React.Component {
                 prevShortcuts         = updateShortcuts();
             }
         }
-        this.refs.shortcuts.value = prevShortcuts;
+        this.refs.shortcuts.value   = prevShortcuts;
+        this.props.option.shortcuts = prevShortcuts;
     }
 
     changExclude() {
-        this.state.exclude = getExclude( event.target.value );
-        console.log( "this.state.exclude = ", this.state.exclude )
+        this.props.site.html.exclude = getExclude( event.target.value );
+        console.log( "this.props.site.html.exclude = ", this.props.site.html.exclude )
     }
 
     changeInclude() {
-        if ( html2Obj( event.target.value )) this.state.include = event.target.value;
-        console.log( "this.state.include = ", this.state.include )
+        if ( html2Obj( event.target.value )) this.props.site.html.include = event.target.value;
+        console.log( "this.props.site.html.include = ", this.props.site.html.include )
     }
 
     componentDidMount() {
@@ -76,13 +79,7 @@ export default class FocusOpt extends React.Component {
 
     constructor( props ) {
         super( props );
-        this.state = {
-            bgcolor   : "rgba( 235, 235, 235, 0.9 )",
-            opacity   : 90,
-            shortcuts : "A S",
-            exclude   : [],
-            include   : {},
-        };
+        this.state = this.props.option;
         prevShortcuts = this.state.shortcuts;
     }
 
