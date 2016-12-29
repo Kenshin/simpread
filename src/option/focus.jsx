@@ -189,24 +189,32 @@ function verifyShortkey( key ) {
  * 
  * @param  {string} input exclude html tag, e.g.:
     <div class="article fmt article__content">
+    <h1>
+    <div class="col-xs-12 col-md-9 main ">
+    <img id="icon4weChat" style="height: 0;width: 0;">
+    <div class="wsx_fade" style="pointer-events: none;"></div>
+    sdasdfas
+    
+
+    <div class="ks-simpread-bg">
+ *
+ * @return {array} verify success htmls
+    <div class="article fmt article__content">
     <h3 id="articleHeader1">原著序</h3>
     <div class="col-xs-12 col-md-9 main ">
     <img id="icon4weChat" style="height: 0;width: 0;">
- *
- * @return {array} formatting e.g.:
-    [{ "tag" : "class", "name" : "article" },
-     { "tag" : "id",    "name" : "articleHeader1" },
-     { "tag" : "class", "name" : "col-xs-12" },
-     { "tag" : "id",    "name" : "icon4weChat" }]
+    <div class="wsx_fade" style="pointer-events: none;"></div>
+    <div class="ks-simpread-bg">
  * 
  */
-function getExclude( tags ) {
+function getExclude( htmls ) {
     let [ list, obj ]  = [[], null ];
-    const arr = tags.toLowerCase().trim().split( "\n" );
+    const arr = htmls.toLowerCase().trim().split( "\n" );
     for( let value of arr ) {
-        obj = html2Obj( value );
-        if ( obj ) {
-            list.push( obj );
+        if ( html2Obj( value )) {
+            list.push( value );
+        } else {
+            //new Notify().Render( 2, `当前输入【 ${value} 】错误，请重新输入。` );
         }
     }
     return list;
@@ -228,7 +236,6 @@ function html2Obj( html ) {
         const [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
         return { tag, name };
     } else {
-        //new Notify().Render( 2, `当前输入【 ${html} 】错误，请重新输入。` );
         return null;
     }
 }
