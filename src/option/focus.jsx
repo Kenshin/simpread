@@ -65,7 +65,7 @@ export default class FocusOpt extends React.Component {
     }
 
     changeInclude() {
-        this.state.include = html2Obj( this.refs.include.value );
+        if ( html2Obj( event.target.value )) this.state.include = event.target.value;
         console.log( "this.state.include = ", this.state.include )
     }
 
