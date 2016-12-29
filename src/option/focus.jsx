@@ -4,6 +4,7 @@ import Notify from 'notify';
 
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ];
 let prevShortcuts = null;
+let keyword       = null;
 
 export default class FocusOpt extends React.Component {
 
@@ -43,21 +44,31 @@ export default class FocusOpt extends React.Component {
     }
 
     changeShortcuts() {
-        const key = control2ctrl( event.key.toLowerCase().trim() );
-        if ( key.length == 1 ) {
-            if ( /^[0-9a-z]{1}$/ig.test(key) ) {
-                this.setState({ shortcuts : key });
+        if ( event.type === "keydown" ) {
+            keyword = event.key.toLowerCase().trim() == "control" ? "ctrl" : event.key.toLowerCase().trim();
+            if ( keyword.length == 1 ) {
+                if ( !/^[0-9a-z]{1}$/ig.test( keyword )) {
+                    this.refs.shortcuts.value = prevShortcuts;
+                    new Notify().Render( 2, `当前输入【 ${keyword} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
+                }
+            } else if ( verifyShortkey( keyword )) {
+                prevShortcuts             = updateShortcuts();
+                this.refs.shortcuts.value = prevShortcuts;
+            } else if ( keyword.length == 0 ) {
+                this.refs.shortcuts.value = prevShortcuts;
+                new Notify().Render( 2, `当前输入不能为空，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
             } else {
-                new Notify().Render( 2, `当前输入【 ${key} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
-                this.refs.shortcuts.value = this.refs.shortcuts.value.replace( key, "" );
+                this.refs.shortcuts.value = prevShortcuts;
+                new Notify().Render( 2, `当前输入【 ${keyword} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
             }
-        } else if ( verifyShortkey( key )) {
-            this.setState({ shortcuts : key });
-        } else if ( key.length == 0 ) {
-            new Notify().Render( 2, `当前输入不能为空，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
         } else {
-            new Notify().Render( 2, `当前输入【 ${key} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
-            this.refs.shortcuts.value = this.refs.shortcuts.value.replace( key, "" );
+            console.log( "prevShortcuts, keyword = ", prevShortcuts, keyword )
+            if ( [ "", "backspace" ].includes(keyword) || !/^[0-9a-z]{1}$/ig.test( keyword )) {
+                this.refs.shortcuts.value = prevShortcuts;
+            } else {
+                prevShortcuts             = updateShortcuts();
+                this.refs.shortcuts.value = prevShortcuts;
+            }
         }
     }
 
@@ -69,24 +80,6 @@ export default class FocusOpt extends React.Component {
     changeInclude() {
         this.state.include = getInclude( this.refs.include.value );
         console.log( "this.state.include = ", this.state.include )
-    }
-
-    componentDidUpdate() {
-        console.log( this.state.shortcuts, prevShortcuts )
-        const arr = prevShortcuts.toLowerCase().trim().split(" ");
-        switch ( arr.length ) {
-            case 1:
-                this.refs.shortcuts.value = `${arr[0]} ${this.state.shortcuts}`;
-                prevShortcuts             = this.refs.shortcuts.value;
-                break;
-            case 2:
-                this.refs.shortcuts.value = this.state.shortcuts;
-                prevShortcuts             = this.refs.shortcuts.value;
-                break;
-            default:
-                console.log( "发生了一些错误。", prevShortcuts, this.state.shortcuts )
-                break;
-        }
     }
 
     componentDidMount() {
@@ -134,7 +127,7 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>快捷键：</span>
                     <div className="ks-simpread-option-focus-shortcuts">
-                        <input ref="shortcuts" type="text" onKeyUp={ ()=> this.changeShortcuts() } />
+                        <input ref="shortcuts" type="text" onKeyDown={ ()=> this.changeShortcuts() }  onChange={ ()=>this.changeShortcuts() } />
                     </div>
                 </div>
                 <div className="ks-simpread-option-focus-container">
@@ -205,16 +198,6 @@ function verifyShortkey( key ) {
 }
 
 /**
- * Control keyword conver to ctrl keyword
- * 
- * @param  {string} keyword
- * @return {string} keyword
- */
-function control2ctrl( key ) {
-    return key == "control" ? "ctrl" : key;
-}
-
-/**
  * Get exclude tags
  * 
  * @param  {string} input exclude html tag, e.g.:
@@ -261,4 +244,28 @@ function getInclude( content ) {
         //new Notify().Render( 2, `当前输入【 ${content} 】错误，请重新输入。` );
         return null;
     }
+}
+
+/**
+ * Update new shortcuts
+ * 
+ * @return {string} new shortcuts, e.g. [a s]
+ */
+function updateShortcuts() {
+    console.log( "prevShortcuts = ", prevShortcuts )
+    const arr     = prevShortcuts.toLowerCase().trim().split(" ");
+    let shortcuts = null;
+    switch ( arr.length ) {
+        case 1:
+            shortcuts = `${arr[0]} ${keyword}`;
+            break;
+        case 2:
+            shortcuts = keyword;
+            break;
+        default:
+            console.log( "发生了一些错误。", prevShortcuts, keyword )
+            shortcuts = prevShortcuts;
+            break;
+    }
+    return shortcuts;
 }
