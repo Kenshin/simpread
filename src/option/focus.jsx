@@ -60,12 +60,12 @@ export default class FocusOpt extends React.Component {
     }
 
     changExclude() {
-        this.state.exclude = getExclude( this.refs.exclude.value );
+        this.state.exclude = getExclude( event.target.value );
         console.log( "this.state.exclude = ", this.state.exclude )
     }
 
     changeInclude() {
-        this.state.include = getInclude( this.refs.include.value );
+        this.state.include = html2Obj( this.refs.include.value );
         console.log( "this.state.include = ", this.state.include )
     }
 
@@ -204,7 +204,7 @@ function getExclude( tags ) {
     let [ list, obj ]  = [[], null ];
     const arr = tags.toLowerCase().trim().split( "\n" );
     for( let value of arr ) {
-        obj = getInclude( value );
+        obj = html2Obj( value );
         if ( obj ) {
             list.push( obj );
         }
@@ -213,7 +213,7 @@ function getExclude( tags ) {
 }
 
 /**
- * Get include tag
+ * Conver html to jquery object
  * 
  * @param  {string} input include html tag, e.g.:
     <div class="article fmt article__content">
@@ -222,13 +222,13 @@ function getExclude( tags ) {
     { "tag" : "class", "name" : "article" }
  * 
  */
-function getInclude( content ) {
-    const item = content.match( / (class|id)=("|')[\w-_]+/ig );
+function html2Obj( html ) {
+    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
     if ( item && item.length > 0 ) {
         const [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
         return { tag, name };
     } else {
-        //new Notify().Render( 2, `当前输入【 ${content} 】错误，请重新输入。` );
+        //new Notify().Render( 2, `当前输入【 ${html} 】错误，请重新输入。` );
         return null;
     }
 }
