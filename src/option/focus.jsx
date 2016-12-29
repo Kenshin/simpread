@@ -47,17 +47,16 @@ export default class FocusOpt extends React.Component {
             keyword = event.key.toLowerCase().trim() == "control" ? "ctrl" : event.key.toLowerCase().trim();
             if ( verifyShortkey( keyword )) {
                 prevShortcuts = updateShortcuts();
-            } else if (  keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
+            } else if ( keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
                 new Notify().Render( 2, `当前输入【 ${keyword} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
             }
-            this.refs.shortcuts.value = prevShortcuts;
         } else {
             console.log( "prevShortcuts, keyword = ", prevShortcuts, keyword )
             if ( /^[0-9a-z]{1}$/ig.test( keyword ) ) {
                 prevShortcuts         = updateShortcuts();
             }
-            this.refs.shortcuts.value = prevShortcuts;
         }
+        this.refs.shortcuts.value = prevShortcuts;
     }
 
     changExclude() {
