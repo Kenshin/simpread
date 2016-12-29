@@ -53,12 +53,10 @@ export default class FocusOpt extends React.Component {
             this.refs.shortcuts.value = prevShortcuts;
         } else {
             console.log( "prevShortcuts, keyword = ", prevShortcuts, keyword )
-            if ( [ "", "backspace" ].includes(keyword) || !/^[0-9a-z]{1}$/ig.test( keyword )) {
-                this.refs.shortcuts.value = prevShortcuts;
-            } else {
-                prevShortcuts             = updateShortcuts();
-                this.refs.shortcuts.value = prevShortcuts;
+            if ( /^[0-9a-z]{1}$/ig.test( keyword ) ) {
+                prevShortcuts         = updateShortcuts();
             }
+            this.refs.shortcuts.value = prevShortcuts;
         }
     }
 
