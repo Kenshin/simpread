@@ -32,6 +32,7 @@ export default class Dialog extends React.Component {
 
     // save dialog focus option
     save() {
+        console.log( "dialog click submit button.", option )
         for( let i = 0; i < option.sites; i++ ) {
             const url = getURI(),
                   obj = option.sites[i];
@@ -39,7 +40,9 @@ export default class Dialog extends React.Component {
                 option.sites.splice( i, 1, site );
             }
         }
-        console.log( "dialog click submit button.", option, site )
+        // save local storage
+        localStorage["simpread-focus"] = JSON.stringify( option );
+        this.close();
     }
 
     constructor( props ) {
