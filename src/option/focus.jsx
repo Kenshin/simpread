@@ -46,21 +46,12 @@ export default class FocusOpt extends React.Component {
     changeShortcuts() {
         if ( event.type === "keydown" ) {
             keyword = event.key.toLowerCase().trim() == "control" ? "ctrl" : event.key.toLowerCase().trim();
-            if ( keyword.length == 1 ) {
-                if ( !/^[0-9a-z]{1}$/ig.test( keyword )) {
-                    this.refs.shortcuts.value = prevShortcuts;
-                    new Notify().Render( 2, `当前输入【 ${keyword} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
-                }
-            } else if ( verifyShortkey( keyword )) {
-                prevShortcuts             = updateShortcuts();
-                this.refs.shortcuts.value = prevShortcuts;
-            } else if ( keyword.length == 0 ) {
-                this.refs.shortcuts.value = prevShortcuts;
-                new Notify().Render( 2, `当前输入不能为空，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
-            } else {
-                this.refs.shortcuts.value = prevShortcuts;
+            if ( verifyShortkey( keyword )) {
+                prevShortcuts = updateShortcuts();
+            } else if (  keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
                 new Notify().Render( 2, `当前输入【 ${keyword} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
             }
+            this.refs.shortcuts.value = prevShortcuts;
         } else {
             console.log( "prevShortcuts, keyword = ", prevShortcuts, keyword )
             if ( [ "", "backspace" ].includes(keyword) || !/^[0-9a-z]{1}$/ig.test( keyword )) {
