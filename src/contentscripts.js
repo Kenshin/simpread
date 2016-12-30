@@ -12,15 +12,17 @@ var $         = require( "jquery" ),
     Mousetrap = require( "mousetrap" ),
     Notify    = require( "notify" ),
     focus     = require( "focus" ),
-    service   = require( "storage" );
+    storage   = require( "storage" ).storage,
+    mode      = require( "storage" ).STORAGE_MODE,
+    selector  = require( "storage" ).selector;
 
 /**
  * Sevice:storage Get data form chrome storage
  */
-service.storage.Get( function() {
+storage.Get( function() {
     // keyboard event handler
-    Mousetrap.bind( [ service.storage.focus.shortcuts.toLowerCase() ], focuseMode );
-})
+    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
+});
 
 /**
  * Message request listener
@@ -37,18 +39,23 @@ function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
     var $focus,
-        sel, range, node, tag;
+        sel, range, node, tag,
+        site   = storage.Getsite( mode.focus ),
+        target = selector( site.html.include );
 
     // uniqueness verification
     if ( !focus.Verify() ) return;
 
     // get focus tag
-    if ( $( "body" ).find( "article" ).length > 0 ) {
+    if ( target ) {
+        // get tag from chrome storage
+        $focus = $( "body" ).find( target );
+    } else if ( $( "body" ).find( "article" ).length > 0 ) {
         // find article tag
         $focus = $( "body" ).find( "article" );
     }
     else {
-        // focus
+        // auto get focus
         try {
             sel    = window.getSelection();
             range  = sel.getRangeAt( sel.rangeCount - 1 );

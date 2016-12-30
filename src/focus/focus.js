@@ -84,6 +84,10 @@ var fcontrol = require( "controlbar" ),
         }
     }
 
+    Focus.prototype.Get = function() {
+        
+    }
+
     /*
         Set focus style
         @param $target: jquery object
