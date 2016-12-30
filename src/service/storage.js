@@ -7,7 +7,7 @@ console.log( "=== simpread storage load ===" )
  * @class
  */
 
-const storagename = "simpread";
+const name = "simpread";
 
 let site = {
         url  : "",
@@ -24,7 +24,7 @@ let site = {
         sites     : [ site ],
     },
     simpread = {
-        focus  : focus,
+        focus,
         read   : {},
         option : {},
     },
@@ -95,7 +95,7 @@ class Storage {
      * Save simpread to chrome storage
      */
     Set() {
-        chrome.storage.local.set( { [storagename]: simpread }, function(){
+        chrome.storage.local.set( { [name]: simpread }, function(){
             console.log( "save chrome storage success!", simpread );
             origin   = clone( simpread );
         });
@@ -107,11 +107,11 @@ class Storage {
      * @param {function} callback
      */
     Get ( callback ) {
-        chrome.storage.local.get( [storagename], function( result ) {
+        chrome.storage.local.get( [name], function( result ) {
             console.log( "simpread storage result is", result );
             if ( result && !$.isEmptyObject( result )) {
-                origin   = clone( result[storagename] );
-                simpread = result[storagename];
+                origin   = clone( result[name] );
+                simpread = result[name];
             }
             callback();
         });
