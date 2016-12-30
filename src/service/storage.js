@@ -21,7 +21,7 @@ let site = {
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         opacity   : 90,
         shortcuts : "A S",
-        sites     : [ site ]
+        sites     : [ site ],
     },
     simpread = {
         focus  : focus,
@@ -32,14 +32,30 @@ let site = {
 
 class Storage {
 
+    /**
+     * Get simpread.focus data structure
+     * 
+     * @return {object} simpread["focus"]
+     */
     get focus() {
         return simpread[ "focus" ];
     }
 
+    /**
+     * Restore simpread[key]
+     * 
+     * @param {string} include `focus` `read` `option`
+     */
     Restore( key ) {
         simpread[key] = clone( origin[key] );
     }
 
+    /**
+     * Get current site form simpread[key][sites]
+     * 
+     * @param  {string} include `focus` `read` `option`
+     * @return {object} site object
+     */
     Getsite( key ) {
         const [ option, url ] = [ simpread[key],  getURI() ];
         let cursite = {};
@@ -56,6 +72,12 @@ class Storage {
         return cursite;
     }
 
+    /**
+     * Set current site object to simpread[key][sites]
+     * 
+     * @param {string} 
+     * @param {string} new site object
+     */
     Setsite( key, value ) {
         const [ option, url ] = [ simpread[key],  getURI() ];
         for( let i = 0; i < option.sites.length; i++ ) {
@@ -69,6 +91,9 @@ class Storage {
         option.sites.push( value );
     }
 
+    /**
+     * Save simpread to chrome storage
+     */
     Set() {
         chrome.storage.local.set( { [storagename]: simpread }, function(){
             console.log( "save chrome storage success!", simpread );
@@ -76,6 +101,11 @@ class Storage {
         });
     }
 
+    /**
+     * Get simpread object from chrome storage
+     * 
+     * @param {function} callback
+     */
     Get ( callback ) {
         chrome.storage.local.get( [storagename], function( result ) {
             console.log( "simpread storage result is", result );
@@ -106,7 +136,6 @@ function getURI() {
  * 
  * @param  {object} target object
  * @return {object} new target object
- * 
  */
 function clone( target ) {
     return $.extend( true, {}, target );
