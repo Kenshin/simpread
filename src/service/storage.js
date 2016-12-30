@@ -72,7 +72,7 @@ class Storage {
     Set() {
         chrome.storage.local.set( { [storagename]: simpread }, function(){
             console.log( "save chrome storage success!", simpread );
-            origin   = clone( simpread[storagename] );
+            origin   = clone( simpread );
         });
     }
 
