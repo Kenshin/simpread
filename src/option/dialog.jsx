@@ -49,7 +49,7 @@ export default class Dialog extends React.Component {
         super( props );
 
         // load local storage
-        option = JSON.parse( localStorage[ "simpread-focus" ] || option );
+        option = localStorage[ "simpread-focus" ] ? JSON.parse( localStorage[ "simpread-focus" ] ) : option;
 
         for( let obj of option.sites ) {
             const url = getURI();
