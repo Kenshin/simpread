@@ -1,7 +1,7 @@
 console.log( "=== simpread option dialog ===" )
 
 import FocusOpt  from 'focusopt';
-import {storage} from 'storage';
+import { storage, STORAGE_MODE } from 'storage';
 
 let [ option, site ] = [ {}, {} ];
 
@@ -15,7 +15,7 @@ export default class Dialog extends React.Component {
 
     // close dialog
     close( restore = true ) {
-        if ( restore ) storage.Restore( "focus" );
+        if ( restore ) storage.Restore( STORAGE_MODE.focus );
         $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
         $( "." + optbgcls ).one( "animationend", () => $( "." + optbgcls ).remove() );
     }
@@ -23,7 +23,7 @@ export default class Dialog extends React.Component {
     // save dialog focus option
     save() {
         console.log( "dialog click submit button.", option, site )
-        storage.Setsite( "focus", site );
+        storage.Setsite( STORAGE_MODE.focus, site );
         storage.Set();
         this.close( false );
     }
@@ -34,7 +34,7 @@ export default class Dialog extends React.Component {
 
     render() {
         option = storage.focus;
-        site   = storage.Getsite( "focus" );
+        site   = storage.Getsite( STORAGE_MODE.focus );
         return (
             <div className="ks-simpread-option-dialog">
                 <div className="ks-simpread-option-content">

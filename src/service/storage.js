@@ -7,7 +7,15 @@ console.log( "=== simpread storage load ===" )
  * @class
  */
 
-const name = "simpread";
+/**
+ * Storage mode, include `focus` `read` `option` 
+ */
+const mode = {
+        focus  : "focus",
+        read   : "read",
+        option : "option",
+    },
+    name = "simpread";
 
 let site = {
         url  : "",
@@ -38,13 +46,13 @@ class Storage {
      * @return {object} simpread["focus"]
      */
     get focus() {
-        return simpread[ "focus" ];
+        return simpread[ mode.focus ];
     }
 
     /**
      * Restore simpread[key]
      * 
-     * @param {string} include `focus` `read` `option`
+     * @param {string} @see mode
      */
     Restore( key ) {
         simpread[key] = clone( origin[key] );
@@ -53,7 +61,7 @@ class Storage {
     /**
      * Get current site form simpread[key][sites]
      * 
-     * @param  {string} include `focus` `read` `option`
+     * @param  {string} include @see mode
      * @return {object} site object
      */
     Getsite( key ) {
@@ -75,7 +83,7 @@ class Storage {
     /**
      * Set current site object to simpread[key][sites]
      * 
-     * @param {string} 
+     * @param {string} @see mode
      * @param {string} new site object
      */
     Setsite( key, value ) {
@@ -95,7 +103,7 @@ class Storage {
      * Save simpread to chrome storage
      */
     Set() {
-        chrome.storage.local.set( { [name]: simpread }, function(){
+        chrome.storage.local.set( { [name] : simpread }, function(){
             console.log( "save chrome storage success!", simpread );
             origin   = clone( simpread );
         });
@@ -142,4 +150,4 @@ function clone( target ) {
 }
 
 const storage = new Storage();
-export {storage};
+export { storage, mode as STORAGE_MODE };
