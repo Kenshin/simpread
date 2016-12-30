@@ -71,7 +71,7 @@ function focuseMode() {
     }
 
     // add focus mode
-    focus.Render( fixFocus( $focus ));
+    focus.Render( fixFocus( $focus ), site.html.exclude, storage.focus.bgcolor );
 }
 
 /**
