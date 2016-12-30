@@ -14,32 +14,32 @@ var $         = require( "jquery" ),
     focus     = require( "focus" ),
     service   = require( "storage" );
 
+/**
+ * Sevice:storage Get data form chrome storage
+ */
 service.storage.Get( function() {
-    /*
-        keyboard event handler
-    */
+    // keyboard event handler
     Mousetrap.bind( [ service.storage.focus.shortcuts.toLowerCase() ], focuseMode );
-
 })
 
-/*
-    message request listener
-*/
+/**
+ * Message request listener
+ */
 chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( request );
     focuseMode();
 });
 
-/*
-    Focus mode
-*/
+/**
+ * Focus mode
+ */
 function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
     var $focus,
         sel, range, node, tag;
 
-    // Uniqueness verification
+    // uniqueness verification
     if ( !focus.Verify() ) return;
 
     // get focus tag
@@ -67,9 +67,12 @@ function focuseMode() {
     focus.Render( fixFocus( $focus ));
 }
 
-/*
-    Fix $focus get bad tag, include: p, span, section
-    good tag include: div, article
+/**
+ * Fix $focus get bad tag, get good tag and return
+ * Good tag include: div, article
+ * 
+ * @param  {jquery} jquery object
+ * @return {jquery} jquery object
  */
 function fixFocus( $focus ) {
     var tag = $focus[0].tagName.toLowerCase();
