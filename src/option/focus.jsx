@@ -39,6 +39,7 @@ export default class FocusOpt extends React.Component {
               newval  = `rgba(${color}, ${opacity / 100})`;
         if ( color ) {
             $( bgcls ).css( bgcolorstyl, newval );
+            this.props.option.bgcolor = newval;
         }
         this.props.option.opacity = opacity;
         console.log( "this.props.option.opacity = ", this.props.option.opacity )
