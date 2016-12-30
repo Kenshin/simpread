@@ -12,12 +12,15 @@ var $         = require( "jquery" ),
     Mousetrap = require( "mousetrap" ),
     Notify    = require( "notify" ),
     focus     = require( "focus" ),
-    shortcuts = ["a s"];
+    service   = require( "storage" );
 
-/*
-    keyboard event handler
-*/
-Mousetrap.bind( shortcuts, focuseMode );
+service.storage.Get( function() {
+    /*
+        keyboard event handler
+    */
+    Mousetrap.bind( [ service.storage.focus.shortcuts.toLowerCase() ], focuseMode );
+
+})
 
 /*
     message request listener

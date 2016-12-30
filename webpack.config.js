@@ -131,6 +131,8 @@ const webpack = require( 'webpack' ),
 
           notify     : __dirname + '/src/vender/notify/notify.js',
 
+          storage    : __dirname + '/src/service/storage.js',
+
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.js',
           foucsetting: __dirname + '/src/focus/setting.js',
