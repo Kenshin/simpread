@@ -14,8 +14,8 @@ const optbgcls = "ks-simpread-option-bg",
 export default class Dialog extends React.Component {
 
     // close dialog
-    close() {
-        storage.Restore( "focus" );
+    close( restore = true ) {
+        if ( restore ) storage.Restore( "focus" );
         $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
         $( "." + optbgcls ).one( "animationend", () => $( "." + optbgcls ).remove() );
     }
@@ -25,7 +25,7 @@ export default class Dialog extends React.Component {
         console.log( "dialog click submit button.", option, site )
         storage.Setsite( "focus", site );
         storage.Set();
-        this.close();
+        this.close( false );
     }
 
     constructor( props ) {

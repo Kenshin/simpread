@@ -37,7 +37,7 @@ class Storage {
     }
 
     Restore( key ) {
-        simpread[key] = Object.assign( {}, origin[key] );
+        simpread[key] = clone( origin[key] );
     }
 
     Getsite( key ) {
@@ -51,7 +51,7 @@ class Storage {
             }
         }
         // add new site object
-        cursite     = Object.assign( {}, site );
+        cursite     = clone( site );
         cursite.url = url;
         return cursite;
     }
@@ -70,9 +70,9 @@ class Storage {
     }
 
     Set() {
-        console.log( simpread )
         chrome.storage.local.set( { [storagename]: simpread }, function(){
-            console.log( "save chrome storage success!" );
+            console.log( "save chrome storage success!", simpread );
+            origin   = clone( simpread[storagename] );
         });
     }
 
@@ -80,7 +80,7 @@ class Storage {
         chrome.storage.local.get( [storagename], function( result ) {
             console.log( "simpread storage result is", result );
             if ( result && !$.isEmptyObject( result )) {
-                origin   = Object.assign( {}, result[storagename] );
+                origin   = clone( result[storagename] );
                 simpread = result[storagename];
             }
             callback();
@@ -99,6 +99,17 @@ function getURI() {
           end      = arr.pop(),
           str      = arr.join( "" );
     return `${ window.location.protocol }//${ window.location.hostname }/${ str }/`;
+}
+
+/**
+ * Deep clone object
+ * 
+ * @param  {object} target object
+ * @return {object} new target object
+ * 
+ */
+function clone( target ) {
+    return $.extend( true, {}, target );
 }
 
 const storage = new Storage();
