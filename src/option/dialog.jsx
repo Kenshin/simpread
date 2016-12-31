@@ -14,8 +14,7 @@ const optbgcls = "ks-simpread-option-bg",
 export default class Dialog extends React.Component {
 
     // close dialog
-    close( restore = true ) {
-        if ( restore ) storage.Restore( STORAGE_MODE.focus );
+    close( restore = rollback() ) {
         $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
         $( "." + optbgcls ).one( "animationend", () => $( "." + optbgcls ).remove() );
     }
@@ -57,6 +56,14 @@ export default class Dialog extends React.Component {
             </div>
         )
     }
+}
+
+/**
+ * Roll back when cancel button click
+ */
+function rollback() {
+    storage.Restore( STORAGE_MODE.focus );
+    $( ".ks-simpread-bg" ).css({ "background-color" : storage.focus.bgcolor });
 }
 
 /**
