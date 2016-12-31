@@ -124,14 +124,13 @@ var fcontrol = require( "controlbar" ),
      * @param {string} include: 'add' 'delete'
      */
     function excludeStyle( $target, exclude, type ) {
-        var i = 0, len = exclude.length,  sel = "";
+        var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
         for ( i; i < len; i++ ) {
             tag  = getSelector( exclude[i] );
-            if ( tag ) {
-                if ( type == "delete" )   $target.find( tag ).hide();
-                else if ( type == "add" ) $target.find( tag ).show();
-            }
+            if ( tag ) tags.push( tag )
         }
+        if ( type == "delete" )   $target.find( tags.join(",") ).hide();
+        else if ( type == "add" ) $target.find( tags.join(",") ).show();
     }
 
     return new Focus();
