@@ -31,14 +31,18 @@ var fcontrol = require( "controlbar" ),
     Focus.prototype.Render = function( $target, exclude, bgcolor ) {
         console.log( "=== simpread focus add ===" );
         this.$target = $target;
-        // add focus
-        focusStyle( $target, focusstyle, focuscls, "add" );
+
+        // set include style
+        includeStyle( $target, focusstyle, focuscls, "add" );
+
+        // set exclude style
+        excludeStyle( $target, exclude, "delete" );
 
         // add ks-simpread-mask
         $parent = $target.parent();
         tag     = $parent[0].tagName;
         while ( tag.toLowerCase() != "body" ) {
-            focusStyle( $parent, maskstyle, maskcls, "add" );
+            includeStyle( $parent, maskstyle, maskcls, "add" );
             $parent = $parent.parent();
             tag     = $parent[0].tagName;
         }
@@ -49,9 +53,6 @@ var fcontrol = require( "controlbar" ),
         // add background color
         $( bgclsjq ).css({ "background-color" : bgcolor });
 
-        // delete exclude html
-        excludeStyle( $target, exclude, "delete" );
-
         // add control bar
         fcontrol.Render( bgclsjq );
 
@@ -59,10 +60,10 @@ var fcontrol = require( "controlbar" ),
         $( bgclsjq ).on( "click", function( event ) {
             if ( $( event.target ).attr("class") != bgcls ) return;
 
-            // remove focus style
-            focusStyle( $target, focusstyle, focuscls, "delete" );
+            // remove include style
+            includeStyle( $target, focusstyle, focuscls, "delete" );
 
-            // add exclude html
+            // remove exclude style
             excludeStyle( $target, exclude, "add" );
 
             // remove control bar
@@ -76,7 +77,7 @@ var fcontrol = require( "controlbar" ),
             $parent = $target.parent();
             tag     = $parent[0].tagName;
             while ( tag && tag.toLowerCase() != "body" ) {
-                focusStyle( $parent, maskstyle, maskcls, "delete" );
+                includeStyle( $parent, maskstyle, maskcls, "delete" );
                 $parent = $parent.parent();
                 tag     = $parent[0].tagName;
             }
@@ -97,45 +98,45 @@ var fcontrol = require( "controlbar" ),
         }
     }
 
-    /*
-        Set focus style
-        @param $target: jquery object
-        @param style  : set style string
-        @param cls    : set class string
-        @param type   : include 'add' and 'delete'
-    */
-    function focusStyle( $target, style, cls, type ) {
-        var bakstyle;
-        if ( type === "add" ) {
-            bakstyle = $target.attr( "style" ) == undefined ? "" : $target.attr( "style" );
-            $target.attr( "style", bakstyle + style ).addClass( cls );
-        } else if (  type === "delete" ) {
-            bakstyle = $target.attr( "style" );
-            bakstyle = bakstyle.replace( style, "" );
-            $target.attr( "style", bakstyle ).removeClass( cls );
-        }
-    }
-
-    /**
-     * Hidden style
-     * 
-     * @param {jquery} jquery object
-     * @param {array}  hidden html
-     * @param {string} include: 'add' 'delete'
-     */
-    function excludeStyle( $target, exclude, type ) {
-        var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
-        for ( i; i < len; i++ ) {
-            tag  = getSelector( exclude[i] );
-            if ( tag ) tags.push( tag )
-        }
-        if ( type == "delete" )   $target.find( tags.join(",") ).hide();
-        else if ( type == "add" ) $target.find( tags.join(",") ).show();
-    }
-
     return new Focus();
 
 })();
+
+/*
+    Set include style
+    @param $target: jquery object
+    @param style  : set style string
+    @param cls    : set class string
+    @param type   : include 'add' and 'delete'
+*/
+function includeStyle( $target, style, cls, type ) {
+    var bakstyle;
+    if ( type === "add" ) {
+        bakstyle = $target.attr( "style" ) == undefined ? "" : $target.attr( "style" );
+        $target.attr( "style", bakstyle + style ).addClass( cls );
+    } else if (  type === "delete" ) {
+        bakstyle = $target.attr( "style" );
+        bakstyle = bakstyle.replace( style, "" );
+        $target.attr( "style", bakstyle ).removeClass( cls );
+    }
+}
+
+/**
+ * Set exclude style
+ * 
+ * @param {jquery} jquery object
+ * @param {array}  hidden html
+ * @param {string} include: 'add' 'delete'
+ */
+function excludeStyle( $target, exclude, type ) {
+    var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
+    for ( i; i < len; i++ ) {
+        tag  = getSelector( exclude[i] );
+        if ( tag ) tags.push( tag )
+    }
+    if ( type == "delete" )   $target.find( tags.join(",") ).hide();
+    else if ( type == "add" ) $target.find( tags.join(",") ).show();
+}
 
 /**
  * Conver html to jquery object
