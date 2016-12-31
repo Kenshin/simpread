@@ -69,7 +69,7 @@ export default class FocusOpt extends React.Component {
     }
 
     changeInclude() {
-        if ( verifyHtml( event.target.value ) != -1 ) this.props.site.html.include = event.target.value;
+        if ( verifyHtml( event.target.value.trim() ) != -1 ) this.props.site.html.include = event.target.value.trim();
         console.log( "this.props.site.html.include = ", this.props.site.html.include )
     }
 
@@ -211,8 +211,8 @@ function getExclude( htmls ) {
     let [ list, obj ]  = [[], null ];
     const arr = htmls.toLowerCase().trim().split( "\n" );
     for( let value of arr ) {
-        if ( verifyHtml( value ) > 0 ) {
-            list.push( value );
+        if ( verifyHtml( value.trim() ) > 0 ) {
+            list.push( value.trim() );
         } else {
             //new Notify().Render( 2, `当前输入【 ${value} 】错误，请重新输入。` );
         }
