@@ -149,28 +149,5 @@ function clone( target ) {
     return $.extend( true, {}, target );
 }
 
-
-/**
- * Conver html to jquery object
- * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {array} formatting e.g.:
-    { "tag" : "class", "name" : "article" }
- * 
- */
-function htmltag2String( html ) {
-    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
-    if ( item && item.length > 0 ) {
-        let [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-        if      ( tag == "class" ) name = `.${name}`;
-        else if ( tag === "id"   ) name = `#${name}`;
-        return name;
-    } else {
-        return null;
-    }
-}
-
 const storage = new Storage();
-export { storage, mode as STORAGE_MODE, htmltag2String as selector };
+export { storage, mode as STORAGE_MODE };

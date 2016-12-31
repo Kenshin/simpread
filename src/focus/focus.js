@@ -126,7 +126,7 @@ var fcontrol = require( "controlbar" ),
     function excludeStyle( $target, exclude, type ) {
         var i = 0, len = exclude.length,  sel = "";
         for ( i; i < len; i++ ) {
-            tag  = htmltag2String( exclude[i] );
+            tag  = getSelector( exclude[i] );
             if ( tag ) {
                 if ( type == "delete" )   $target.find( tag ).hide();
                 else if ( type == "add" ) $target.find( tag ).show();
@@ -148,7 +148,7 @@ var fcontrol = require( "controlbar" ),
     { "tag" : "class", "name" : "article" }
  * 
  */
-function htmltag2String( html ) {
+function getSelector( html ) {
     const item = html.match( / (class|id)=("|')[\w-_]+/ig );
     if ( item && item.length > 0 ) {
         let [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
@@ -160,4 +160,5 @@ function htmltag2String( html ) {
     }
 }
 
-module.exports = focus;
+exports.focus       = focus;
+exports.getSelector = getSelector;

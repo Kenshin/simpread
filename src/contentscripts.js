@@ -10,11 +10,11 @@ require( "./vender/notify/notify.css" );
 */
 var $         = require( "jquery" ),
     Mousetrap = require( "mousetrap" ),
-    Notify    = require( "notify" ),
-    focus     = require( "focus" ),
+    Notify    = require( "notify"  ),
+    focus     = require( "focus"   ).focus,
+    selector  = require( "focus"   ).getSelector,
     storage   = require( "storage" ).storage,
-    mode      = require( "storage" ).STORAGE_MODE,
-    selector  = require( "storage" ).selector;
+    mode      = require( "storage" ).STORAGE_MODE;
 
 /**
  * Sevice:storage Get data form chrome storage
