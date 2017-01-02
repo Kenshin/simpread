@@ -2,6 +2,7 @@ console.log( "=== simpread option dialog ===" )
 
 import FocusOpt  from 'focusopt';
 import { storage, STORAGE_MODE } from 'storage';
+import Notify from 'notify';
 
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`;
@@ -21,6 +22,7 @@ export default class Dialog extends React.Component {
     save() {
         console.log( "dialog click submit button.", storage.current )
         storage.Set( STORAGE_MODE.focus );
+        new Notify().Render( 0, "更新成功；如果修改快捷键，需要刷新当前页面！" );
         this.close( false );
     }
 
