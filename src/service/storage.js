@@ -3,7 +3,6 @@ console.log( "=== simpread storage load ===" )
 /**
  * Read and Write Chrome storage
  * 
- * 
  * @class
  */
 
@@ -17,26 +16,29 @@ const mode = {
     },
     name = "simpread";
 
-let site = {
-        url  : "",
-        html : {
-            exclude   : [],
-            include   : "",
-        }
+let site  = {
+        exclude   : [],
+        include   : "",
     },
-    focus   = {
+    current = {
+        bgcolor: "",
+        opacity: "",
+        url    : "",
+        site   : site,
+    },
+    focus = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         opacity   : 90,
         shortcuts : "A S",
-        sites     : [ site ],
+        sites     : [[ "url", site ]],
     },
     simpread = {
         focus,
         read   : {},
         option : {},
     },
-    origin = {};
+    origin  = {};
 
 class Storage {
 
@@ -50,59 +52,50 @@ class Storage {
     }
 
     /**
+     * Get current data structure
+     * 
+     * @return {object} current
+     */
+    get current() {
+        return current;
+    }
+
+    /**
      * Restore simpread[key]
      * 
      * @param {string} @see mode
      */
     Restore( key ) {
         simpread[key] = clone( origin[key] );
+        this.Setcur( key );
     }
 
     /**
-     * Get current site form simpread[key][sites]
-     * 
-     * @param  {string} include @see mode
-     * @return {object} site object
-     */
-    Getsite( key ) {
-        const [ option, url ] = [ simpread[key],  getURI() ];
-        let cursite = {};
-        for( let obj of option.sites ) {
-            if ( obj.url === url ) {
-                // get origin site
-                cursite     = obj;
-                return cursite;
-            }
-        }
-        // add new site object
-        cursite     = clone( site );
-        cursite.url = url;
-        return cursite;
-    }
-
-    /**
-     * Set current site object to simpread[key][sites]
+     * Set current object
      * 
      * @param {string} @see mode
-     * @param {string} new site object
      */
-    Setsite( key, value ) {
-        const [ option, url ] = [ simpread[key],  getURI() ];
-        for( let i = 0; i < option.sites.length; i++ ) {
-            if ( option.sites[i].url === url ) {
-                // update site
-                option.sites.splice( i, 1, value );
-                return;
-            }
+    Setcur( key ) {
+        const [ url, sites ] = [getURI(), new Map( simpread[key].sites )];
+        current.site = sites.get( url );
+        current.url  = url;
+        while( !current.site ) {
+            sites.set( url, clone( site ));
+            current.site = sites.get( url );
+            simpread[key].sites.push([ url, sites.get(url) ]);
         }
-        // add site
-        option.sites.push( value );
+        swap( simpread[key], current );
+        console.log( "current site object is ", current )
+        return current;
     }
 
     /**
      * Save simpread to chrome storage
+     * 
+     * @param {string} @see mode
      */
-    Set() {
+    Set( key ) {
+        swap( current, simpread[key] );
         chrome.storage.local.set( { [name] : simpread }, function(){
             console.log( "save chrome storage success!", simpread );
             origin   = clone( simpread );
@@ -116,14 +109,20 @@ class Storage {
      */
     Get ( callback ) {
         chrome.storage.local.get( [name], function( result ) {
-            console.log( "simpread storage result is", result );
             if ( result && !$.isEmptyObject( result )) {
-                origin   = clone( result[name] );
                 simpread = result[name];
             }
+            origin   = clone( simpread );
             callback();
+            console.log( "simpread storage result is", result, simpread, origin );
         });
     }
+}
+
+function swap( source, target ) {
+    target.bgcolor   = source.bgcolor;
+    target.shortcuts = source.shortcuts;
+    target.opacity   = source.opacity;
 }
 
 /**

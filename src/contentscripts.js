@@ -40,8 +40,8 @@ function focuseMode() {
 
     var $focus,
         sel, range, node, tag,
-        site   = storage.Getsite( mode.focus ),
-        target = selector( site.html.include );
+        current = storage.Setcur( mode.focus ),
+        target  = selector( current.site.include );
 
     // uniqueness verification
     if ( !focus.Verify() ) return;
@@ -71,7 +71,7 @@ function focuseMode() {
     }
 
     // add focus mode
-    focus.Render( fixFocus( $focus ), site.html.exclude, storage.focus.bgcolor );
+    focus.Render( fixFocus( $focus ), current.site.exclude, current.bgcolor );
 }
 
 /**

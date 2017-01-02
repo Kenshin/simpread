@@ -3,8 +3,6 @@ console.log( "=== simpread option dialog ===" )
 import FocusOpt  from 'focusopt';
 import { storage, STORAGE_MODE } from 'storage';
 
-let [ option, site ] = [ {}, {} ];
-
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`;
 
@@ -21,9 +19,8 @@ export default class Dialog extends React.Component {
 
     // save dialog focus option
     save() {
-        console.log( "dialog click submit button.", option, site )
-        storage.Setsite( STORAGE_MODE.focus, site );
-        storage.Set();
+        console.log( "dialog click submit button.", storage.current )
+        storage.Set( STORAGE_MODE.focus );
         this.close( false );
     }
 
@@ -32,12 +29,10 @@ export default class Dialog extends React.Component {
     }
 
     render() {
-        option = storage.focus;
-        site   = storage.Getsite( STORAGE_MODE.focus );
         return (
             <div className="ks-simpread-option-dialog">
                 <div className="ks-simpread-option-content">
-                    <FocusOpt option={ option } site={ site } />
+                    <FocusOpt option={ storage.current } />
                 </div>
                 <div className="ks-simpread-option-footer">
                     <a 
@@ -63,7 +58,7 @@ export default class Dialog extends React.Component {
  */
 function rollback() {
     storage.Restore( STORAGE_MODE.focus );
-    $( ".ks-simpread-bg" ).css({ "background-color" : storage.focus.bgcolor });
+    $( ".ks-simpread-bg" ).css({ "background-color" : storage.current.bgcolor });
 }
 
 /**

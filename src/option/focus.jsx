@@ -64,21 +64,21 @@ export default class FocusOpt extends React.Component {
     }
 
     changExclude() {
-        this.props.site.html.exclude = getExclude( event.target.value );
-        console.log( "this.props.site.html.exclude = ", this.props.site.html.exclude )
+        this.props.option.site.exclude = getExclude( event.target.value );
+        console.log( "this.props.option.site.exclude = ", this.props.option.site.exclude )
     }
 
     changeInclude() {
-        if ( verifyHtml( event.target.value.trim() ) != -1 ) this.props.site.html.include = event.target.value.trim();
-        console.log( "this.props.site.html.include = ", this.props.site.html.include )
+        if ( verifyHtml( event.target.value.trim() ) != -1 ) this.props.option.site.include = event.target.value.trim();
+        console.log( "this.props.option.site.include = ", this.props.option.site.include )
     }
 
     componentDidMount() {
         setBgThemeStyle( this.props.option.bgcolor );
         this.refs.opacity.value   = this.props.option.opacity;
         this.refs.shortcuts.value = this.props.option.shortcuts;
-        this.refs.exclude.value   = this.props.site.html.exclude.join( "\n") ;
-        this.refs.include.value   = this.props.site.html.include;
+        this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
+        this.refs.include.value   = this.props.option.site.include;
         prevShortcuts             = this.props.option.shortcuts;
     }
 
