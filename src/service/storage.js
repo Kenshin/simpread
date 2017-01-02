@@ -119,6 +119,12 @@ class Storage {
     }
 }
 
+/**
+ * Swap source and target
+ * 
+ * @param {object} source origin
+ * @param {object} target origin
+ */
 function swap( source, target ) {
     target.bgcolor   = source.bgcolor;
     target.shortcuts = source.shortcuts;
