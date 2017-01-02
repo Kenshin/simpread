@@ -42,11 +42,11 @@ var Notify = ( function () {
         timer      = {},
         $container,
         TMPL       = '\
-        <div class="notify">\
-            <a href="#" class="close"><span></span></a>\
-            <div class="title">SimpTab has update.</div>\
-            <div class="content">New version changlog here.</div>\
-        </div>',
+        <notify-div class="notify">\
+            <notify-a href="#" class="close"><notify-span></notify-span></notify-a>\
+            <notify-div class="title">SimpTab has update.</notify-div>\
+            <notify-div class="content">New version changlog here.</notify-div>\
+        </notify-div>',
         closeHandle = function( event ) {
             $container.undelegate( "." + event.data + " .close", "click", closeHandle );
             hidden( $(this).parent() );
@@ -81,11 +81,17 @@ var Notify = ( function () {
 
             $tmpl.addClass( item );
             $container.append( $tmpl ).css( "z-index", 2147483647 );
+        },
+        registyElement = function( name, elements ) {
+            elements.forEach( function( item ) {
+                document.createElement( name + '-' + item );
+            });
         };
 
     function Notify() {
+        registyElement( "notify", [ "div", "a", "span" ] ); 
         if ( $( "body" ).find ( ".notifygp" ).length == 0 ) {
-            $( "body" ).append( '<div class="notifygp">' );
+            $( "body" ).append( '<notify-div class="notifygp">' );
             $container = $( ".notifygp" );
         }
     }
