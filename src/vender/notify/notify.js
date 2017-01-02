@@ -27,7 +27,11 @@
 *
 */
 var Notify = ( function () {
-    var VERSION = "1.1",
+    var VERSION = "1.2",
+        name    = "notify",
+        root    = "ks-notify-gp",
+        rootcls = "." + root,
+        roottmpl= '<notify-div class="' + root + '">',
         num     = 0,
         MESSAGE = 0,
         WARNING = 1,
@@ -89,10 +93,10 @@ var Notify = ( function () {
         };
 
     function Notify() {
-        registyElement( "notify", [ "div", "a", "span" ] ); 
-        if ( $( "body" ).find ( ".notifygp" ).length == 0 ) {
-            $( "body" ).append( '<notify-div class="notifygp">' );
-            $container = $( ".notifygp" );
+        registyElement( name, [ "div", "a", "span" ] ); 
+        if ( $( "body" ).find ( rootcls ).length == 0 ) {
+            $( "body" ).append( roottmpl );
+            $container = $( rootcls );
         }
     }
 
