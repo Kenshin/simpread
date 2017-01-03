@@ -98,7 +98,7 @@ export default class FocusOpt extends React.Component {
 
     render() {
         return (
-            <div className="ks-simpread-option-focus">
+            <sr-opt-focus>
                 <div className="ks-simpread-option-focus-container">
                     <span>主题色：</span>
                     <ul className="ks-simpread-option-focus-theme" onClick={ ()=> this.changeBgColor() }>
@@ -132,7 +132,7 @@ export default class FocusOpt extends React.Component {
                         <input ref="include" type="text" placeholder="默认为空，自动选择高亮区域。" onChange={ ()=>this.changeInclude() } />
                     </div>
                 </div>
-            </div>
+            </sr-opt-focus>
         )
     }
 }
