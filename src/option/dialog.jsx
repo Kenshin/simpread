@@ -22,7 +22,8 @@ export default class Dialog extends React.Component {
     save() {
         console.log( "dialog click submit button.", storage.current )
         storage.Set( STORAGE_MODE.focus );
-        new Notify().Render( 0, "更新成功；如果修改快捷键，需要刷新当前页面！" );
+        chrome.runtime.sendMessage({ type: "shortcuts" });
+        new Notify().Render( 0, "更新成功！" );
         this.close( false );
     }
 

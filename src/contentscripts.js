@@ -19,18 +19,32 @@ var $         = require( "jquery" ),
 /**
  * Sevice:storage Get data form chrome storage
  */
-storage.Get( function() {
-    // keyboard event handler
-    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
-});
+storage.Get( function() { bindShortcuts(); });
 
 /**
- * Message request listener
+ * Message request listener, message include: `focus` `shortcuts`
  */
 chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( request );
-    focuseMode();
+    switch ( request.type ) {
+        case "focus":
+            focuseMode();
+            break;
+        case "shortcuts":
+            bindShortcuts();
+            break;
+        default:
+            console.error( "misinformation message ", request )
+            break;
+    }
 });
+
+/**
+ * Keyboard event handler 
+ */
+function bindShortcuts() {
+    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
+}
 
 /**
  * Focus mode
