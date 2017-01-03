@@ -1,6 +1,6 @@
-/*
-    Focus style
-*/
+/**
+ *  Focus style
+ */
 .ks-simpread-focus {
     overflow: visible;
     position: relative;
@@ -9,9 +9,9 @@
     background-color: #fff;
 }
 
-/*
-    Background style
-*/
+/**
+ *  Background style
+ */
 .ks-simpread-bg {
     display: block;
     position: fixed;
@@ -30,9 +30,9 @@
     to   { opacity:1; }
 }
 
-/*
-    Control bar style
-*/
+/**
+ *  Control bar style
+ */
 .ks-simpread-constrolbar {
     position: fixed;
     right: 50px;
@@ -81,9 +81,9 @@
     background-image: url( "../images/close.png" );
 }
 
-/*
-    Simpread Option
-*/
+/**
+ *  Option background style
+ */
 .ks-simpread-option-bg {
     position: fixed;
     top:  0;
@@ -111,7 +111,10 @@
     -webkit-animation: popuphide 0.5s ease;
 }
 
-.ks-simpread-option-dialog {
+/**
+ * Dialog style
+*/
+sr-dialog {
     display: -webkit-flex;
     flex-direction:column;
 
@@ -130,13 +133,13 @@
 
 }
 
-.ks-simpread-option-dialog .ks-simpread-option-content {
+sr-dialog sr-dialog-conent {
     width: 100%;
     height: 100%;
     min-height: 244px;
 }
 
-.ks-simpread-option-dialog .ks-simpread-option-footer {
+sr-dialog sr-dialog-footer {
     display: -webkit-flex;
     flex-flow:row nowrap;
     justify-content:flex-end;
@@ -144,7 +147,7 @@
     width: 100%;
 }
 
-.ks-simpread-option-dialog .ks-simpread-option-btn {
+sr-dialog sr-dialog-control {
     display: inline-block;
     height: 36px;
     line-height: 36px;
@@ -168,22 +171,18 @@
     transition: all .5s ease-in-out .1s;
 }
 
-.ks-simpread-option-dialog .ks-simpread-option-btn:hover {
+sr-dialog sr-dialog-control:hover {
     background-color: #B2DFDB;
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
 }
 
-.ks-simpread-option-dialog .ks-simpread-option-cancel {
+sr-dialog sr-dialog-control[type="cancel"] {
     transition: all .5s ease-in-out .1s;
     background-color: #80CBC4;
 }
 
-.ks-simpread-option-dialog .ks-simpread-option-cancel:hover {
+sr-dialog sr-dialog-control[type="cancel"]:hover {
     background-color: #B2DFDB;
-}
-
-.ks-simpread-option-btn-click {
-    opacity: 1;
 }
 
 @-webkit-keyframes popupshow {
@@ -212,9 +211,9 @@
     }
 }
 
-/*
-    SimpRead Option Focus mode
-*/
+/**
+ *  Option: Focus mode
+ */
 .ks-simpread-option-focus {
     display: -webkit-flex;
     flex-direction:column;

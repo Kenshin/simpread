@@ -35,25 +35,19 @@ export default class Dialog extends React.Component {
         let Option;
         if ( this.props.type == STORAGE_MODE.focus ) Option = FocusOpt;
         return (
-            <div className="ks-simpread-option-dialog">
-                <div className="ks-simpread-option-content">
+            <sr-dialog>
+                <sr-dialog-conent>
                     <Option option={ storage.current } />
-                </div>
-                <div className="ks-simpread-option-footer">
-                    <a 
-                        href="javascript:void(0);"
-                        className="ks-simpread-option-btn ks-simpread-option-submit"
-                        onClick={ () => this.save() }>
+                </sr-dialog-conent>
+                <sr-dialog-footer>
+                    <sr-dialog-control href="javascript:void(0);" type="submit" onClick={ () => this.save() }>
                         确认
-                    </a>
-                    <a 
-                        href="javascript:void(0);"
-                        className="ks-simpread-option-btn ks-simpread-option-cancel"
-                        onClick={ () => this.close() }>
+                    </sr-dialog-control>
+                    <sr-dialog-control href="javascript:void(0);" type="cancel" onClick={ () => this.close() }>
                         取消
-                    </a>
-                </div>
-            </div>
+                    </sr-dialog-control>
+                </sr-dialog-footer>
+            </sr-dialog>
         )
     }
 }
