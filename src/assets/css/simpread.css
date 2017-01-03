@@ -276,15 +276,6 @@
     border: 1px solid #000;
 }
 
-.ks-simpread-option-focus-theme-item:nth-child(1) { background-color: rgba( 235, 235, 235, 0.9 );}
-.ks-simpread-option-focus-theme-item:nth-child(2) { background-color: rgba( 216, 216, 216, 0.9 );}
-.ks-simpread-option-focus-theme-item:nth-child(3) { background-color: rgba( 229, 221, 208, 0.9 );}
-.ks-simpread-option-focus-theme-item:nth-child(4) { background-color: rgba( 243, 234, 203, 0.9 );}
-.ks-simpread-option-focus-theme-item:nth-child(5) { background-color: rgba( 176, 192, 182, 0.9 );}
-.ks-simpread-option-focus-theme-item:nth-child(6) { background-color: rgba( 28, 31, 43, 0.9 );}
-.ks-simpread-option-focus-theme-item:nth-child(7) { background-color: rgba( 61, 66, 70, 0.9 );}
-.ks-simpread-option-focus-theme-item:nth-child(8) { background-color: rgba( 17, 18, 20, 0.9 );}
-
 .ks-simpread-option-focus-opacity,
 .ks-simpread-option-focus-shortcuts,
 .ks-simpread-option-focus-exclude,

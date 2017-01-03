@@ -4,6 +4,16 @@ import Notify from 'notify';
 
 const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
+const themes = [
+    "235, 235, 235, 0.9",
+    "216, 216, 216, 0.9",
+    "229, 221, 208, 0.9",
+    "243, 234, 203, 0.9",
+    "176, 192, 182, 0.9",
+    "28, 31, 43, 0.9",
+    "61, 66, 70, 0.9",
+    "17, 18, 20, 0.9"
+    ];
 
 export default class FocusOpt extends React.Component {
 
@@ -92,14 +102,7 @@ export default class FocusOpt extends React.Component {
                 <div className="ks-simpread-option-focus-container">
                     <span>主题色：</span>
                     <ul className="ks-simpread-option-focus-theme" onClick={ ()=> this.changeBgColor() }>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
-                        <li className="ks-simpread-option-focus-theme-item"></li>
+                        {themes.map( theme => <li className="ks-simpread-option-focus-theme-item" style={{backgroundColor: `rgba( ${theme} )`}}></li> )}
                     </ul>
                 </div>
                 <div className="ks-simpread-option-focus-container">
