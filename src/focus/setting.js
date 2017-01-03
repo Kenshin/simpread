@@ -7,7 +7,7 @@ import Dialog, { getDialogBackground } from 'dialog'
  */
 function Render() {
     ReactDOM.render(
-        <Dialog />,
+        <Dialog type="focus" />,
         getDialogBackground()
     )
 }

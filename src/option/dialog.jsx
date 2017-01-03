@@ -31,10 +31,12 @@ export default class Dialog extends React.Component {
     }
 
     render() {
+        let Option;
+        if ( this.props.type == STORAGE_MODE.focus ) Option = FocusOpt;
         return (
             <div className="ks-simpread-option-dialog">
                 <div className="ks-simpread-option-content">
-                    <FocusOpt option={ storage.current } />
+                    <Option option={ storage.current } />
                 </div>
                 <div className="ks-simpread-option-footer">
                     <a 
