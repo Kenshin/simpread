@@ -67,6 +67,8 @@ function rollback() {
  * get Dialog background document
  */
 export function getDialogBackground() {
-    $( "body" ).append( optbg );
+    if ( $( "body" ).find( "." + optbgcls ).length == 0 ) {
+        $( "body" ).append( optbg );
+    }
     return $( "." + optbgcls )[0];
 }
