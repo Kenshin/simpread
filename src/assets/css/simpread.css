@@ -328,13 +328,7 @@ sr-opt-item[type="opacity"] input[type=range]:focus::-webkit-slider-runnable-tra
     background: #00897B;
 }
 
-.ks-simpread-option-focus-shortcuts input[type="text"] {
-    text-transform: uppercase;
-}
-
-.ks-simpread-option-focus-shortcuts input[type="text"],
-.ks-simpread-option-focus-include input[type="text"]
-{
+sr-opt-item input[type="text"] {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #9e9e9e;
@@ -348,14 +342,16 @@ sr-opt-item[type="opacity"] input[type=range]:focus::-webkit-slider-runnable-tra
     transition: all 0.3s;
 }
 
-.ks-simpread-option-focus-shortcuts input[type="text"]:focus,
-.ks-simpread-option-focus-include input[type="text"]:focus
-{
+sr-opt-item input[type="text"]:focus  {
     border-bottom: 1px solid #00897B;
     box-shadow: 0 1px 0 0 #00897B;
 }
 
-.ks-simpread-option-focus-exclude textarea {
+sr-opt-item[type="shortcuts"] input[type="text"] {
+    text-transform: uppercase;
+}
+
+sr-opt-item[type="exclude"] textarea {
     display: block;
     width: 100%;
     min-height: 100px;
@@ -369,7 +365,7 @@ sr-opt-item[type="opacity"] input[type=range]:focus::-webkit-slider-runnable-tra
     transition: all 0.3s;
 }
 
-.ks-simpread-option-focus-exclude textarea:focus {
+sr-opt-item[type="exclude"] textarea:focus {
     border-bottom: 1px solid #00897B;
     box-shadow: 0 1px 0 0 #00897B;
 }

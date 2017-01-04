@@ -117,19 +117,19 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>快捷键：</sr-opt-label>
-                    <sr-opt-item type="ks-simpread-option-focus-shortcuts">
+                    <sr-opt-item type="shortcuts">
                         <input ref="shortcuts" type="text" onKeyDown={ ()=> this.changeShortcuts() }  onChange={ ()=>this.changeShortcuts() } />
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>隐藏列表：</sr-opt-label>
-                    <sr-opt-item class="ks-simpread-option-focus-exclude">
+                    <sr-opt-item type="exclude">
                         <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changExclude() }></textarea>
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>高亮区域：</sr-opt-label>
-                    <sr-opt-item class="ks-simpread-option-focus-include">
+                    <sr-opt-item type="include">
                         <input ref="include" type="text" placeholder="默认为空，自动选择高亮区域。" onChange={ ()=>this.changeInclude() } />
                     </sr-opt-item>
                 </sr-opt-gp>
