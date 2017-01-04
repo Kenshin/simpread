@@ -108,30 +108,30 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度：</sr-opt-label>
-                    <div className="ks-simpread-option-focus-opacity">
+                    <sr-opt-item type="opacity">
                         <input ref="opacity"
                             type="range" min="50" max="95" step="5" 
                             onChange={ ()=> this.changeOpacity() }
                         />
-                    </div>
+                    </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>快捷键：</sr-opt-label>
-                    <div className="ks-simpread-option-focus-shortcuts">
+                    <sr-opt-item type="ks-simpread-option-focus-shortcuts">
                         <input ref="shortcuts" type="text" onKeyDown={ ()=> this.changeShortcuts() }  onChange={ ()=>this.changeShortcuts() } />
-                    </div>
+                    </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>隐藏列表：</sr-opt-label>
-                    <div className="ks-simpread-option-focus-exclude">
+                    <sr-opt-item class="ks-simpread-option-focus-exclude">
                         <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changExclude() }></textarea>
-                    </div>
+                    </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>高亮区域：</sr-opt-label>
-                    <div className="ks-simpread-option-focus-include">
+                    <sr-opt-item class="ks-simpread-option-focus-include">
                         <input ref="include" type="text" placeholder="默认为空，自动选择高亮区域。" onChange={ ()=>this.changeInclude() } />
-                    </div>
+                    </sr-opt-item>
                 </sr-opt-gp>
             </sr-opt-focus>
         )
