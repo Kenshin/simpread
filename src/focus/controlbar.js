@@ -6,13 +6,13 @@ console.log( "=== simpread focus controlbar load ===" )
 var setting  = require( "foucsetting" ),
     fcontrol = ( function() {
     var timer,
-        template = '<div class="ks-simpread-constrolbar">\
-                        <ul>\
-                            <li><span class="topicon"></span></li>\
-                            <li><span class="settingicon"></span></li>\
-                            <li><span class="closeicon"></span></li>\
-                        </ul>\
-                    </div>';
+        template = '<sr-focus-ctl>\
+                        <sr-ul>\
+                            <li><sr-span class="topicon"></sr-span></li>\
+                            <li><sr-span class="settingicon"></sr-span></li>\
+                            <li><sr-span class="closeicon"></sr-span></li>\
+                        </sr-ul>\
+                    </sr-focus-ctl>';
 
     function FControl() {
         this.$parent = null;
@@ -26,7 +26,7 @@ var setting  = require( "foucsetting" ),
         console.log( "=== simpread focus controlbar add ===" );
         this.$parent = $(root);
         $( root ).append( template );
-        this.$target = $( ".ks-simpread-constrolbar" ).find( "span" );
+        this.$target = $( "sr-focus-ctl" ).find( "sr-span" );
         addEventHandler( this.$target, root );
     }
 

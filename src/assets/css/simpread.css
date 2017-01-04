@@ -33,33 +33,33 @@
 /**
  *  Control bar style
  */
-.ks-simpread-constrolbar {
+sr-focus-ctl {
     position: fixed;
     right: 50px;
     bottom: 50px;
 }
 
-.ks-simpread-constrolbar ul {
+sr-focus-ctl sr-ul {
     margin: 0;
     padding: 0;
     color: #96a0a8;
     border: 1px solid #ededed;
 }
 
-.ks-simpread-constrolbar li {
+sr-focus-ctl li {
     list-style: none;
     cursor: pointer;
     opacity: .5;
 }
 
-.ks-simpread-constrolbar li:hover {
+sr-focus-ctl li:hover {
     list-style: none;
     cursor: pointer;
     opacity: 1;
     -webkit-transition: opacity .5s ease;
 }
 
-.ks-simpread-constrolbar span {
+sr-focus-ctl sr-span {
     display: block;
     width: 45px;
     height: 45px;
@@ -69,15 +69,15 @@
     border-bottom: solid 1px #ededed;
 }
 
-.ks-simpread-constrolbar .topicon {
+sr-focus-ctl .topicon {
     background-image: url( "../images/top.png" );
 }
 
-.ks-simpread-constrolbar .settingicon {
+sr-focus-ctl .settingicon {
     background-image: url( "../images/setting.png" );
 }
 
-.ks-simpread-constrolbar .closeicon {
+sr-focus-ctl .closeicon {
     background-image: url( "../images/close.png" );
 }
 
