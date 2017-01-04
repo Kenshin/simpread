@@ -40,6 +40,15 @@ var setting  = require( "foucsetting" ),
     }
 
     /*
+        Open focus constrol bar item
+    */
+    FControl.prototype.Click = function( type ) {
+        if ( type == "setting" ) {
+            $(this.$target[1]).click();
+        }
+    }
+
+    /*
         Add focus constrol bar event
     */
     function addEventHandler( $target, root ) {
@@ -73,21 +82,21 @@ var setting  = require( "foucsetting" ),
         });*/
     }
 
-    /*
-        Move top
-    */
-    function moveTop() {
-        timer = setInterval( function() {
-            var osTop = document.body.scrollTop;
-            var speed = Math.floor( -osTop / 3 );
-            document.body.scrollTop = osTop + speed;
-            if( osTop == 0 ) {
-                clearInterval( timer );
-            }
-        }, 30 );
-    }
-
     return new FControl();
 })();
+
+/*
+    Move top
+*/
+function moveTop() {
+    timer = setInterval( function() {
+        var osTop = document.body.scrollTop;
+        var speed = Math.floor( -osTop / 3 );
+        document.body.scrollTop = osTop + speed;
+        if( osTop == 0 ) {
+            clearInterval( timer );
+        }
+    }, 30 );
+}
 
 module.exports = fcontrol;

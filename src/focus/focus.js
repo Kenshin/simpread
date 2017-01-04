@@ -92,6 +92,7 @@ var fcontrol = require( "controlbar" ),
     */
     Focus.prototype.Verify = function() {
         if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
+            fcontrol.Click( "setting" );
             return false;
         } else {
             return true;
