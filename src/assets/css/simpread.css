@@ -224,6 +224,7 @@ sr-opt-focus {
     height: 100%;
 
     font-size: 20px;
+    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 
 sr-opt-gp {
@@ -279,6 +280,7 @@ sr-opt-item input,
 sr-opt-item textarea
 {
     color: #9e9e9e;
+    font-size: 13px;
 }
 
 sr-opt-item[sr-type="opacity"] {
@@ -346,6 +348,7 @@ sr-opt-item input[type="text"] {
 
 sr-opt-item[sr-type="shortcuts"] input {
     text-transform: lowercase;
+    font-size: 15px;
 }
 
 sr-opt-item input[type="text"]:focus  {
