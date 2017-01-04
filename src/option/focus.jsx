@@ -213,7 +213,7 @@ function verifyShortkey( key ) {
  */
 function getExclude( htmls ) {
     let [ list, obj ]  = [[], null ];
-    const arr = htmls.toLowerCase().trim().split( "\n" );
+    const arr = htmls.trim().split( "\n" );
     for( let value of arr ) {
         if ( verifyHtml( value.trim() ) > 0 ) {
             list.push( value.trim() );
