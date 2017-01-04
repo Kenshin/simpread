@@ -24,7 +24,7 @@ export default class FocusOpt extends React.Component {
                   $target    = $(target),
                   $parent    = $target.parent(),
                   activestyl = "active",
-                  $active    = $parent.find( 'sr-opt-theme[type="active"]' ),
+                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' ),
                   bgcolor    = $target.css( bgcolorstyl ),
                   color      = getColor( bgcolor ),
                   opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
@@ -35,8 +35,8 @@ export default class FocusOpt extends React.Component {
 
             // update active
             if ( $active ) {
-                $active.removeAttr( "type" );
-                $target.attr( "type", activestyl );
+                $active.removeAttr( "sr-type" );
+                $target.attr( "sr-type", activestyl );
             }
             this.props.option.bgcolor = newval;
             console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
@@ -108,7 +108,7 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度：</sr-opt-label>
-                    <sr-opt-item type="opacity">
+                    <sr-opt-item sr-type="opacity">
                         <input ref="opacity"
                             type="range" min="50" max="95" step="5" 
                             onChange={ ()=> this.changeOpacity() }
@@ -117,19 +117,19 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>快捷键：</sr-opt-label>
-                    <sr-opt-item type="shortcuts">
+                    <sr-opt-item sr-type="shortcuts">
                         <input ref="shortcuts" type="text" onKeyDown={ ()=> this.changeShortcuts() }  onChange={ ()=>this.changeShortcuts() } />
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>隐藏列表：</sr-opt-label>
-                    <sr-opt-item type="exclude">
+                    <sr-opt-item sr-type="exclude">
                         <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changExclude() }></textarea>
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>高亮区域：</sr-opt-label>
-                    <sr-opt-item type="include">
+                    <sr-opt-item sr-type="include">
                         <input ref="include" type="text" placeholder="默认为空，自动选择高亮区域。" onChange={ ()=>this.changeInclude() } />
                     </sr-opt-item>
                 </sr-opt-gp>
@@ -277,7 +277,7 @@ function setBgThemeStyle( bgcolor ) {
          const $target = $($themes[i]),
                color   = getColor( $target.css( "background-color" ));
          if ( newcolor === color ) {
-             $target.attr( "type", "active" );
+             $target.attr( "sr-type", "active" );
          }
     }
 }
