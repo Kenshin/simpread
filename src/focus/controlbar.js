@@ -8,9 +8,9 @@ var setting  = require( "foucsetting" ),
     var timer,
         template = '<sr-focus-ctl>\
                         <sr-ul>\
-                            <li><sr-span class="topicon"></sr-span></li>\
-                            <li><sr-span class="settingicon"></sr-span></li>\
-                            <li><sr-span class="closeicon"></sr-span></li>\
+                            <sr-li><sr-span class="topicon"></sr-span></sr-li>\
+                            <sr-li><sr-span class="settingicon"></sr-span></sr-li>\
+                            <sr-li><sr-span class="closeicon"></sr-span></sr-li>\
                         </sr-ul>\
                     </sr-focus-ctl>';
 

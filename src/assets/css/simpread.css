@@ -40,19 +40,18 @@ sr-focus-ctl {
 }
 
 sr-focus-ctl sr-ul {
-    margin: 0;
-    padding: 0;
     color: #96a0a8;
     border: 1px solid #ededed;
 }
 
-sr-focus-ctl li {
+sr-focus-ctl sr-li {
+    display: list-item;
     list-style: none;
     cursor: pointer;
     opacity: .5;
 }
 
-sr-focus-ctl li:hover {
+sr-focus-ctl sr-li:hover {
     list-style: none;
     cursor: pointer;
     opacity: 1;
