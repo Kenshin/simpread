@@ -18,12 +18,13 @@ const themes = [
 export default class FocusOpt extends React.Component {
 
     changeBgColor () {
-        if ( event.target.tagName.toLowerCase() == "li" ) {
+        if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
 
             const target     = event.target,
                   $target    = $(target),
-                  activestyl = "ks-simpread-option-focus-theme-item-active",
-                  $active    = $( ".ks-simpread-option-focus-theme" ).find( `.${activestyl}` ),
+                  $parent    = $target.parent(),
+                  activestyl = "active",
+                  $active    = $parent.find( 'sr-opt-theme[type="active"]' ),
                   bgcolor    = $target.css( bgcolorstyl ),
                   color      = getColor( bgcolor ),
                   opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
@@ -33,9 +34,9 @@ export default class FocusOpt extends React.Component {
             $( bgcls ).css( bgcolorstyl, newval );
 
             // update active
-            if ( $active.length > 0 ) {
-                $active.removeClass( activestyl );
-                $target.addClass(    activestyl );
+            if ( $active ) {
+                $active.removeAttr( "type" );
+                $target.attr( "type", activestyl );
             }
             this.props.option.bgcolor = newval;
             console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
@@ -99,39 +100,39 @@ export default class FocusOpt extends React.Component {
     render() {
         return (
             <sr-opt-focus>
-                <div className="ks-simpread-option-focus-container">
-                    <span>主题色：</span>
-                    <ul className="ks-simpread-option-focus-theme" onClick={ ()=> this.changeBgColor() }>
-                        {themes.map( theme => <li className="ks-simpread-option-focus-theme-item" style={{backgroundColor: `rgba( ${theme} )`}}></li> )}
-                    </ul>
-                </div>
-                <div className="ks-simpread-option-focus-container">
-                    <span>透明度：</span>
+                <sr-opt-gp>
+                    <sr-opt-label>主题色：</sr-opt-label>
+                    <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
+                        {themes.map( theme => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}}></sr-opt-theme> )}
+                    </sr-opt-themes>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>透明度：</sr-opt-label>
                     <div className="ks-simpread-option-focus-opacity">
                         <input ref="opacity"
                             type="range" min="50" max="95" step="5" 
                             onChange={ ()=> this.changeOpacity() }
                         />
                     </div>
-                </div>
-                <div className="ks-simpread-option-focus-container">
-                    <span>快捷键：</span>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>快捷键：</sr-opt-label>
                     <div className="ks-simpread-option-focus-shortcuts">
                         <input ref="shortcuts" type="text" onKeyDown={ ()=> this.changeShortcuts() }  onChange={ ()=>this.changeShortcuts() } />
                     </div>
-                </div>
-                <div className="ks-simpread-option-focus-container">
-                    <span>隐藏列表：</span>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>隐藏列表：</sr-opt-label>
                     <div className="ks-simpread-option-focus-exclude">
                         <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changExclude() }></textarea>
                     </div>
-                </div>
-                <div className="ks-simpread-option-focus-container">
-                    <span>高亮区域：</span>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>高亮区域：</sr-opt-label>
                     <div className="ks-simpread-option-focus-include">
                         <input ref="include" type="text" placeholder="默认为空，自动选择高亮区域。" onChange={ ()=>this.changeInclude() } />
                     </div>
-                </div>
+                </sr-opt-gp>
             </sr-opt-focus>
         )
     }
@@ -269,14 +270,14 @@ function updateShortcuts() {
 }
 
 function setBgThemeStyle( bgcolor ) {
-    const $themes    = $( ".ks-simpread-option-focus-theme" ).children(),
+    const $themes    = $( "sr-opt-themes" ).children(),
           newcolor   = getColor( bgcolor );
 
     for ( let i = 0; i < $themes.length; i++ ) {
          const $target = $($themes[i]),
-               color   = getColor( $target.css("background-color") )
+               color   = getColor( $target.css( "background-color" ));
          if ( newcolor === color ) {
-             $target.addClass( " ks-simpread-option-focus-theme-item-active" );
+             $target.attr( "type", "active" );
          }
     }
 }

@@ -230,7 +230,7 @@ sr-opt-focus textarea
     color: #9e9e9e;
 }
 
-.ks-simpread-option-focus-container {
+sr-opt-gp {
     display: -webkit-flex;
     flex-flow:row nowrap;
     justify-content:flex-start;
@@ -240,12 +240,12 @@ sr-opt-focus textarea
     margin-bottom: 25px;
 }
 
-.ks-simpread-option-focus-container span {
+sr-opt-gp sr-opt-label {
     width: 100px;
     text-align: right;
 }
 
-.ks-simpread-option-focus-theme {
+sr-opt-themes {
     display: -webkit-flex;
     flex-flow:row nowrap;
     justify-content:space-between;
@@ -257,7 +257,7 @@ sr-opt-focus textarea
     padding: 0;
 }
 
-.ks-simpread-option-focus-theme-item {
+sr-opt-theme {
     width: 40px;
     height: 20px;
 
@@ -267,11 +267,11 @@ sr-opt-focus textarea
     border-radius: 3px;
 }
 
-.ks-simpread-option-focus-theme-item:not(:first-child) {
+sr-opt-theme:not(:first-child) {
     margin-left: 5px;
 }
 
-.ks-simpread-option-focus-theme-item-active {
+sr-opt-theme[type="active"] {
     border: 1px solid #000;
 }
 
