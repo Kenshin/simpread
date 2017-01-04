@@ -40,6 +40,9 @@ sr-focus-ctl {
 }
 
 sr-focus-ctl sr-ul {
+    display: block;
+    margin: 0;
+    padding: 0;
     color: #96a0a8;
     border: 1px solid #ededed;
 }
