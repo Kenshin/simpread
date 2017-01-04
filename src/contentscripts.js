@@ -52,7 +52,7 @@ function bindShortcuts() {
 function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
-    var $focus,
+    var $focus = [],
         sel, range, node, tag,
         current = storage.Setcur( mode.focus ),
         target  = selector( current.site.include );
@@ -60,29 +60,32 @@ function focuseMode() {
     // uniqueness verification
     if ( !focus.Verify() ) return;
 
+    // get tag from chrome storage
+    if ( target ) $focus = $( "body" ).find( target );
+
     // get focus tag
-    if ( target ) {
-        // get tag from chrome storage
-        $focus = $( "body" ).find( target );
-    } else if ( $( "body" ).find( "article" ).length > 0 ) {
-        // find article tag
-        $focus = $( "body" ).find( "article" );
-    }
-    else {
-        // auto get focus
-        try {
-            sel    = window.getSelection();
-            range  = sel.getRangeAt( sel.rangeCount - 1 );
-            node   = range.startContainer.nodeName;
-        if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
-            $focus = $( range.startContainer.parentNode );
-        } catch ( error ) {
-            console.log( sel, range, node )
-            console.error( error )
-            new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
-            return;
+    while ( $focus.length == 0 ) {
+        if ( $( "body" ).find( "article" ).length > 0 ) {
+            // find article tag
+            $focus = $( "body" ).find( "article" );
+        }
+        else {
+            // auto get focus
+            try {
+                sel    = window.getSelection();
+                range  = sel.getRangeAt( sel.rangeCount - 1 );
+                node   = range.startContainer.nodeName;
+            if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
+                $focus = $( range.startContainer.parentNode );
+            } catch ( error ) {
+                console.log( sel, range, node )
+                console.error( error )
+                new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
+                return;
+            }
         }
     }
+
 
     // add focus mode
     focus.Render( fixFocus( $focus ), current.site.exclude, current.bgcolor );
