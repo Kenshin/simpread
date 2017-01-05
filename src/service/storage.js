@@ -14,7 +14,7 @@ const mode = {
         read   : "read",
         option : "option",
     },
-    name = "simpread";
+    name = "simpread_test";
 
 let site  = {
         exclude   : [],
@@ -31,7 +31,7 @@ let site  = {
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         opacity   : 90,
         shortcuts : "A S",
-        sites     : [[ "url", site ]],
+        sites     : [[ "<url>", site ]],
     },
     simpread = {
         focus,
