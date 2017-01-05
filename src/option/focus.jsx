@@ -56,13 +56,14 @@ export default class FocusOpt extends React.Component {
         console.log( "this.props.option.opacity = ", this.props.option.opacity )
     }
 
-    changeShortcuts() {
+    changeShortcuts( event ) {
         if ( event.type === "keydown" ) {
-            keyword = event.key.toLowerCase().trim() == "control" ? "ctrl" : event.key.toLowerCase().trim();
+            const key = fixKey( event );
+            keyword   =  key == "control" ? "ctrl" : key;
             if ( verifyShortkey( keyword )) {
                 prevShortcuts = updateShortcuts();
             } else if ( keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
-                new Notify().Render( 2, `当前输入【 ${keyword} 】不合法，快捷键只能包括：【ctrl】【shift】【alt】【数字】与【字母】。` );
+                new Notify().Render( 2, `当前输入不合法，快捷键只能包括：【ctrl, shift, alt, 数字, 字母。】` );
             }
         } else {
             console.log( "prevShortcuts, keyword = ", prevShortcuts, keyword )
@@ -118,7 +119,7 @@ export default class FocusOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>快捷键：</sr-opt-label>
                     <sr-opt-item sr-type="shortcuts">
-                        <input ref="shortcuts" type="text" onKeyDown={ ()=> this.changeShortcuts() }  onChange={ ()=>this.changeShortcuts() } />
+                        <input ref="shortcuts" type="text" onKeyDown={ (event)=> this.changeShortcuts(event) }  onChange={ (event)=>this.changeShortcuts(event) } />
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
@@ -225,6 +226,21 @@ function getExclude( htmls ) {
 }
 
 /**
+ * Fix keyboard event key undefinde
+ * 
+ * @param  {event} keyboard event
+ * @return {string} valid key, include 0~9 a~z ctrl shift alt
+ */
+function fixKey( event ) {
+    const keycode = event.keyCode;
+    if ( [ 16, 17, 18 ].includes( keycode ) ) {
+        return event.key.toLowerCase().trim();
+    } else if ( keycode >= 49 || keycode  <= 90  ) {
+        return event.nativeEvent.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
+    }
+}
+
+/**
  * Verify html
  * 
  * @param  {string} input include html tag, e.g.:
@@ -269,6 +285,11 @@ function updateShortcuts() {
     return shortcuts;
 }
 
+/**
+ * Set background style
+ * 
+ * @param {string} background color
+ */
 function setBgThemeStyle( bgcolor ) {
     const $themes    = $( "sr-opt-themes" ).children(),
           newcolor   = getColor( bgcolor );
