@@ -1,8 +1,5 @@
 console.log( "=== simpread focus load ===" );
 
-// import css
-require( "../assets/css/simpread.css" );
-
 /*
     import
 */

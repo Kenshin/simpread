@@ -3,6 +3,7 @@ console.log( "=== simpread contentscripts load ===" )
 /*
     import css files
 */
+require( "./assets/css/simpread.css" );
 require( "./vender/notify/notify.css" );
 
 /*
