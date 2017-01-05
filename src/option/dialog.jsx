@@ -36,9 +36,9 @@ export default class Dialog extends React.Component {
         if ( this.props.type == STORAGE_MODE.focus ) Option = FocusOpt;
         return (
             <sr-dialog>
-                <sr-dialog-conent>
+                <sr-dialog-content>
                     <Option option={ storage.current } />
-                </sr-dialog-conent>
+                </sr-dialog-content>
                 <sr-dialog-footer>
                     <sr-dialog-control href="javascript:void(0);" sr-type="submit" onClick={ () => this.save() }>
                         确认
