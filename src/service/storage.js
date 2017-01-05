@@ -140,8 +140,8 @@ function getURI() {
     const pathname = window.location.pathname,
           arr      = pathname.split( "/" ),
           end      = arr.pop(),
-          str      = arr.join( "" );
-    return `${ window.location.protocol }//${ window.location.hostname }/${ str }/`;
+          str      = arr.join( "" ) === "" ? arr.join( "" ) : arr.join( "" ) + "/";
+    return `${ window.location.protocol }//${ window.location.hostname }/${ str }`;
 }
 
 /**
