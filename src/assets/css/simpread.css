@@ -43,8 +43,7 @@ sr-focus-ctl sr-ul {
     display: block;
     margin: 0;
     padding: 0;
-    color: #96a0a8;
-    border: 1px solid #ededed;
+    border: 1px solid #EEEEEE;
 }
 
 sr-focus-ctl sr-li {
@@ -66,9 +65,12 @@ sr-focus-ctl sr-span {
     width: 45px;
     height: 45px;
     background-repeat: no-repeat;
-    background-color: #999;
+    background-color: #9E9E9E;;
     background-position: center;
-    border-bottom: solid 1px #ededed;
+}
+
+sr-focus-ctl sr-li:not(:last-child) sr-span {
+    border-bottom: solid 1px #EEEEEE;
 }
 
 sr-focus-ctl .topicon {
