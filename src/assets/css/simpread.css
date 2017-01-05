@@ -151,7 +151,7 @@ sr-dialog sr-dialog-footer {
     width: 100%;
 }
 
-sr-dialog sr-dialog-control {
+sr-dialog sr-dialog-ctl {
     display: inline-block;
     height: 36px;
     line-height: 36px;
@@ -175,17 +175,17 @@ sr-dialog sr-dialog-control {
     transition: all .5s ease-in-out .1s;
 }
 
-sr-dialog sr-dialog-control:hover {
+sr-dialog sr-dialog-ctl:hover {
     background-color: #B2DFDB;
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
 }
 
-sr-dialog sr-dialog-control[sr-type="cancel"] {
+sr-dialog sr-dialog-ctl[sr-type="cancel"] {
     transition: all .5s ease-in-out .1s;
     background-color: #80CBC4;
 }
 
-sr-dialog sr-dialog-control[sr-type="cancel"]:hover {
+sr-dialog sr-dialog-ctl[sr-type="cancel"]:hover {
     background-color: #B2DFDB;
 }
 

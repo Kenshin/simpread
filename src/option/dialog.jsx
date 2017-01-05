@@ -40,12 +40,12 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <sr-dialog-control href="javascript:void(0);" sr-type="submit" onClick={ () => this.save() }>
+                    <sr-dialog-ctl href="javascript:void(0);" sr-type="submit" onClick={ () => this.save() }>
                         确认
-                    </sr-dialog-control>
-                    <sr-dialog-control href="javascript:void(0);" sr-type="cancel" onClick={ () => this.close() }>
+                    </sr-dialog-ctl>
+                    <sr-dialog-ctl href="javascript:void(0);" sr-type="cancel" onClick={ () => this.close() }>
                         取消
-                    </sr-dialog-control>
+                    </sr-dialog-ctl>
                 </sr-dialog-footer>
             </sr-dialog>
         )
