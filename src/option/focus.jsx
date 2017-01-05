@@ -63,7 +63,7 @@ export default class FocusOpt extends React.Component {
             if ( verifyShortkey( keyword )) {
                 prevShortcuts = updateShortcuts();
             } else if ( keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
-                new Notify().Render( 2, `当前输入不合法，快捷键只能包括：【ctrl, shift, alt, 数字, 字母。】` );
+                new Notify().Render( 2, `当前输入不合法，快捷键只能包括：ctrl, shift, alt, 数字, 字母。` );
             }
         } else {
             console.log( "prevShortcuts, keyword = ", prevShortcuts, keyword )
