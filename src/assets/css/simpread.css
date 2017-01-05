@@ -266,12 +266,23 @@ sr-opt-theme {
     border-radius: 3px;
 }
 
+sr-opt-theme:hover {
+     -webkit-animation: themestyl 1s ease-in-out;
+     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
 sr-opt-theme:not(:first-child) {
     margin-left: 5px;
 }
 
 sr-opt-theme[sr-type="active"] {
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 2px 20px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.7);
+}
+
+@-webkit-keyframes themestyl {
+    from { opacity: 0.2; }
+    to   { opacity: 1;   }
 }
 
 sr-opt-item {
@@ -323,11 +334,15 @@ sr-opt-item[sr-type="opacity"] input[type=range]::-webkit-slider-thumb {
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -7px;
-    transition: all 0.3s;
+    transition: all .5s ease-in-out .1s;
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-thumb {
     background: #00897B;
+}
+
+sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-thumb:hover {
+    background: #00695C;
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-runnable-track {
