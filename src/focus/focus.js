@@ -150,8 +150,8 @@ function getSelector( html ) {
     const item = html.match( / (class|id)=("|')[\w-_]+/ig );
     if ( item && item.length > 0 ) {
         let [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-        if      ( tag == "class" ) name = `.${name}`;
-        else if ( tag === "id"   ) name = `#${name}`;
+        if      ( tag.toLowerCase() === "class") name = `.${name}`;
+        else if ( tag.toLowerCase() === "id"   ) name = `#${name}`;
         return name;
     } else {
         return null;
