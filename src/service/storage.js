@@ -14,7 +14,7 @@ const mode = {
         read   : "read",
         option : "option",
     },
-    name = "simpread_test";
+    name = "simpread";
 
 let site  = {
         exclude   : [],
