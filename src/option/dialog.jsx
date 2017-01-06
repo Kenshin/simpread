@@ -62,10 +62,25 @@ function rollback() {
 
 /**
  * get Dialog background document
+ * 
+ * @return {jquery} ks-simpread-option-bg jquery object
  */
 export function getDialogBackground() {
     if ( $( "body" ).find( "." + optbgcls ).length == 0 ) {
         $( "body" ).append( optbg );
     }
     return $( "." + optbgcls )[0];
+}
+
+/**
+ * Verify dialog is popup
+ * 
+ * @return {boolean}
+ */
+export function isPopup() {
+     if ( $("." + optbgcls ).children().length == 0 ) {
+         return false;
+     } else {
+         return true;
+     }
 }
