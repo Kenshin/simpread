@@ -137,11 +137,8 @@ function swap( source, target ) {
  * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
  */
 function getURI() {
-    let arr = window.location.pathname.match( /[^\/]+/g );
-    if ( arr == null ) arr = [];
-    arr.pop();
-    const str = arr.join( "" ) === "" ? arr.join( "" ) : arr.join( "" ) + "/";
-    return `${ window.location.protocol }//${ window.location.hostname }/${ str }`;
+    const arr = window.location.pathname.match( /(\S+\/|^\/)/g );
+    return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
 }
 
 /**
