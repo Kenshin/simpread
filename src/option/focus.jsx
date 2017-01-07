@@ -170,26 +170,6 @@ function getColor( value ) {
 }
 
 /**
- * Verify shortkey
- * 
- * @param  {string} shortkey, only include: ctrl shift alt number letters
- *                            e.g. [a b] [a 1] [1 b] [shift a] [a ctrl] [1 alt] [1 shift]
- * 
- * @return {boolean}
- */
-function verifyShortkey( key ) {
-    if (
-        [ "control", "ctrl", "alt", "shift"].includes( key )
-        /*|| key == "meta"    || key == "command"   || key == "enter"     || key == "backspace"
-        || key == "arrowup" || key == "arrowdown" || key == "arrowleft" || key == "arrowright"*/
-    ) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
  * Get exclude tags
  * 
  * @param  {string} input exclude html tag, e.g.:
@@ -223,42 +203,6 @@ function getExclude( htmls ) {
         }
     }
     return list;
-}
-
-/**
- * Fix keyboard event key undefinde
- * 
- * @param  {event} keyboard event
- * @return {string} valid key, include 0~9 a~z ctrl shift alt
- */
-function fixKey( event ) {
-    const keycode = event.keyCode;
-    if ( [ 16, 17, 18 ].includes( keycode ) ) {
-        return event.key.toLowerCase().trim();
-    } else if ( keycode >= 49 || keycode  <= 90  ) {
-        return event.nativeEvent.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
-    }
-}
-
-/**
- * Verify html
- * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {int} -1: fail； 0: emputy html; 1:success
- * 
- */
-function verifyHtml( html ) {
-    if ( html == "" ) return 0;
-    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
-    if ( item && item.length > 0 ) {
-        //[tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-        //return { tag, name };
-        return 1;
-    } else {
-        return -1;
-    }
 }
 
 /**
@@ -300,5 +244,57 @@ function setBgThemeStyle( bgcolor ) {
          if ( newcolor === color ) {
              $target.attr( "sr-type", "active" );
          }
+    }
+}
+
+/**
+ * Fix keyboard event key undefinde
+ * 
+ * @param  {event} keyboard event
+ * @return {string} valid key, include 0~9 a~z ctrl shift alt
+ */
+function fixKey( event ) {
+    const keycode = event.keyCode;
+    if ( [ 16, 17, 18 ].includes( keycode ) ) {
+        return event.key.toLowerCase().trim();
+    } else if ( keycode >= 49 || keycode <= 90 ) {
+        return event.nativeEvent.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
+    }
+}
+
+/**
+ * Verify shortkey
+ * 
+ * @param  {string} shortkey, only include: ctrl shift alt number letters
+ *                  e.g. [a b] [a 1] [1 b] [shift a] [a ctrl] [1 alt] [1 shift]
+ * 
+ * @return {boolean}
+ */
+function verifyShortkey( key ) {
+    if ([ "control", "ctrl", "alt", "shift" ].includes( key )) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Verify html
+ * 
+ * @param  {string} input include html tag, e.g.:
+    <div class="article fmt article__content">
+ *
+ * @return {int} -1: fail； 0: emputy html; 1:success
+ * 
+ */
+function verifyHtml( html ) {
+    if ( html == "" ) return 0;
+    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
+    if ( item && item.length > 0 ) {
+        //[tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
+        //return { tag, name };
+        return 1;
+    } else {
+        return -1;
     }
 }
