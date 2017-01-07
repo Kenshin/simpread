@@ -10,12 +10,13 @@
     "storage"
   ],
   "background": {
-    "scripts": [ "background.js" ]
+    "scripts": [ "/bundle/common.js", "/bundle/background.js" ]
   },
   "content_scripts": [
     {
       "matches" : [ "http://*/*", "https://*/*" ],
       "js"      : [ 
+        "/bundle/common.js",
         "/bundle/vendors.js",
         "/bundle/contentscripts.js"
        ],
