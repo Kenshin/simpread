@@ -24,7 +24,8 @@
     }
   ],
   "web_accessible_resources": [
-    "/assets/images/*"
+    "/assets/images/*",
+    "website_list.json"
   ],
   "manifest_version": 2
 }

@@ -1,5 +1,7 @@
 console.log( "=== simpread storage load ===" )
 
+import "babel-polyfill";
+
 /**
  * Read and Write Chrome storage
  * 
@@ -17,6 +19,9 @@ const mode = {
     name = "simpread";
 
 let site  = {
+        name      : "",   // only read mode
+        title     : "",   // only read mode
+        desc      : "",   // only read mode
         exclude   : [],
         include   : "",
     },
@@ -33,9 +38,16 @@ let site  = {
         shortcuts : "A S",
         sites     : [],    // e.g. [ "<url>", site ]
     },
+    read  = {
+        version   : "2017-01-07",
+        theme     : "",
+        fontfamily: "",
+        fontsize  : 14,
+        sites     : []    // e.g. [ "<url>", site ]
+    },
     simpread = {
         focus,
-        read   : {},
+        read,
         option : {},
     },
     origin  = {};
@@ -117,6 +129,36 @@ class Storage {
             console.log( "simpread storage result is", result, simpread, origin );
         });
     }
+
+    /**
+     * Get local/remote JSON usage async
+     * 
+     * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     */
+    async GetNewsites( url ) {
+        const response = await fetch( url );
+        const sites    = await response.json();
+        simpread.read.sites.push( formatSites( sites ));
+        chrome.storage.local.set( { [name] : simpread }, function() {
+            console.log( "save chrome storage [read] success!", simpread );
+            origin   = clone( simpread );
+        });
+        //const sites    = await fetchJSON( url );
+        //await this.SetNewsites( sites );
+    }
+
+    /*
+    async SetNewsites( sites ) {
+        simpread.read.sites.push( sites );
+        console.log( "save chrome storage [read] success!", simpread );
+        chrome.storage.local.set( { [name] : simpread }, function(){
+            console.log( "save chrome storage [read] success!", simpread );
+            origin   = clone( simpread );
+            await "true";
+        });
+    }
+    */
+
 }
 
 /**
@@ -151,5 +193,38 @@ function clone( target ) {
     return $.extend( true, {}, target );
 }
 
+/**
+ * Format sites object from loacal or remote json file
+ * 
+ * @param  {object} sites.[array]
+ * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
+ */
+function formatSites( result ) {
+    const format = new Map();
+    for ( let site of result.sites ) {
+        const url = site.url;
+        delete site.url;
+        format.set( url, site );
+    }
+    return [ ...format ];
+}
+
+/**
+ * Fetch local/remote JSON usage async
+ * 
+ * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+ * @return {array} format sites array
+ */
+async function fetchJSON( url ) {
+    const response = await fetch( url );
+    const sites    = await response.json();
+    return formatSites( sites );
+}
+
 const storage = new Storage();
-export { storage, mode as STORAGE_MODE };
+
+export {
+    storage,
+    mode as STORAGE_MODE,
+    fetchJSON as GetNewsites
+};

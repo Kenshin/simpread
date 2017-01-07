@@ -86,6 +86,8 @@ const webpack = require( 'webpack' ),
           './src/vender/notify/notify.js'
         ],
         common : [
+          'babel-polyfill',
+          './src/service/storage.js',
           './src/vender/jquery-2.1.1.min.js',
         ],
         contentscripts : './src/contentscripts.js',
@@ -110,7 +112,7 @@ const webpack = require( 'webpack' ),
             exclude: /node_modules/,
             loader: 'babel',
             query: {
-              presets: [ 'es2015', 'react' ]
+              presets: [ 'es2015', 'stage-0', 'react' ]
             }
         },
         { test: /\.css$/,       loader: 'style!css'      },
@@ -134,6 +136,7 @@ const webpack = require( 'webpack' ),
           notify     : __dirname + '/src/vender/notify/notify.js',
 
           storage    : __dirname + '/src/service/storage.js',
+          local      : __dirname + '/src/service/local.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.js',
