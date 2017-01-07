@@ -27,7 +27,11 @@
 *
 */
 var Notify = ( function () {
-    var VERSION = "1.1",
+    var VERSION = "1.2",
+        name    = "notify",
+        root    = "ks-notify-gp",
+        rootcls = "." + root,
+        roottmpl= '<notify-div class="' + root + '">',
         num     = 0,
         MESSAGE = 0,
         WARNING = 1,
@@ -42,13 +46,21 @@ var Notify = ( function () {
         timer      = {},
         $container,
         TMPL       = '\
-        <div class="notify">\
-            <a href="#" class="close"><span></span></a>\
-            <div class="title">SimpTab has update.</div>\
-            <div class="content">New version changlog here.</div>\
-        </div>',
+        <notify-div class="notify">\
+            <notify-a href="#"><notify-span></notify-span></notify-a>\
+            <notify-title>SimpTab has update.</notify-title>\
+            <notify-content>New version changlog here.</notify-content>\
+        </notify-div>',
+        prefix      = function( value ) {
+            return name + "-" + value;
+        },
+        registyElement = function( name, elements ) {
+            elements.forEach( function( item ) {
+                document.createElement( prefix( item ));
+            });
+        },
         closeHandle = function( event ) {
-            $container.undelegate( "." + event.data + " .close", "click", closeHandle );
+            $container.undelegate( "." + event.data + " notify-a", "click", closeHandle );
             hidden( $(this).parent() );
         },
         delay = function( item ) {
@@ -64,15 +76,15 @@ var Notify = ( function () {
         },
         render = function() {
             var $tmpl    = $( TMPL ),
-                $title   = $tmpl.find(".title"),
-                $content = $tmpl.find(".content"),
-                $close   = $tmpl.find(".close"),
+                $title   = $tmpl.find(prefix( "title"   )),
+                $content = $tmpl.find(prefix( "content" )),
+                $close   = $tmpl.find(prefix( "a"       )),
                 item     = "notify-item-" + num++;
 
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
             if ( this.closed ) {
-                $container.delegate( "." + item + " .close", "click", item, closeHandle );
+                $container.delegate( "." + item + " notify-a", "click", item, closeHandle );
             }
             else {
                 $close.hide();
@@ -84,9 +96,10 @@ var Notify = ( function () {
         };
 
     function Notify() {
-        if ( $( "body" ).find ( ".notifygp" ).length == 0 ) {
-            $( "body" ).append( '<div class="notifygp">' );
-            $container = $( ".notifygp" );
+        registyElement( name, [ "div", "a", "span", "title", "content" ] ); 
+        if ( $( "body" ).find ( rootcls ).length == 0 ) {
+            $( "body" ).append( roottmpl );
+            $container = $( rootcls );
         }
     }
 

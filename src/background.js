@@ -1,5 +1,5 @@
-/*
-    create context menus
+/**
+    Create context menus
 */
 chrome.contextMenus.create({
     "type"     : "normal",
@@ -7,9 +7,9 @@ chrome.contextMenus.create({
     "contexts" :  [ "all" ],
     "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ],
     "onclick"  : function( info ) {
-        chrome.tabs.query({ "active": true, "currentWindow": true }, function( tabs ) {
+        getCurTab( function( tabs ) {
             if ( tabs[0].url == info.pageUrl ) {
-                chrome.tabs.sendMessage( tabs[0].id, tabs[0] );
+                chrome.tabs.sendMessage( tabs[0].id, { type: "focus" });
             }
             else {
                 // TO-DO
@@ -18,3 +18,17 @@ chrome.contextMenus.create({
         });
     }
 });
+
+/**
+    Listen runtime message
+ */
+chrome.runtime.onMessage.addListener( function( request ) {
+    getCurTab( function( tabs ) { chrome.tabs.sendMessage( tabs[0].id, request ); });
+});
+
+/**
+ * Get current tab object
+ */
+function getCurTab( callback ) {
+    chrome.tabs.query({ "active": true, "currentWindow": true }, function( tabs ) { callback( tabs ); });
+}

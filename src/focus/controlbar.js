@@ -1,14 +1,18 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-var fcontrol = ( function() {
+/*
+    import
+*/
+var setting  = require( "foucsetting" ),
+    fcontrol = ( function() {
     var timer,
-        template = '<div class="ks-simpread-constrolbar">\
-                        <ul>\
-                            <li><span class="topicon"></span></li>\
-                            <li><span class="settingicon"></span></li>\
-                            <li><span class="closeicon"></span></li>\
-                        </ul>\
-                    </div>';
+        template = '<sr-focus-ctl>\
+                        <sr-ul>\
+                            <sr-li><sr-span class="topicon"></sr-span></sr-li>\
+                            <sr-li><sr-span class="settingicon"></sr-span></sr-li>\
+                            <sr-li><sr-span class="closeicon"></sr-span></sr-li>\
+                        </sr-ul>\
+                    </sr-focus-ctl>';
 
     function FControl() {
         this.$parent = null;
@@ -22,8 +26,7 @@ var fcontrol = ( function() {
         console.log( "=== simpread focus controlbar add ===" );
         this.$parent = $(root);
         $( root ).append( template );
-        this.$target = $( ".ks-simpread-constrolbar" ).find( "span" );
-        //addStyle( this.$target );
+        this.$target = $( "sr-focus-ctl" ).find( "sr-span" );
         addEventHandler( this.$target, root );
     }
 
@@ -37,16 +40,13 @@ var fcontrol = ( function() {
     }
 
     /*
-        Add focus constrol bar style
+        Open focus constrol bar item
     */
-    /*
-    function addStyle( $target ) {
-        var path = chrome.extension.getURL("/");
-        $($target[0]).attr( "style", "background-image:url(" + path + "assets/images/top.png)"     );
-        $($target[1]).attr( "style", "background-image:url(" + path + "assets/images/setting.png)" );
-        $($target[2]).attr( "style", "background-image:url(" + path + "assets/images/close.png)"   );
+    FControl.prototype.Click = function( type ) {
+        if ( type == "setting" ) {
+            $(this.$target[1]).click();
+        }
     }
-    */
 
     /*
         Add focus constrol bar event
@@ -60,6 +60,7 @@ var fcontrol = ( function() {
                     break;
                 case "settingicon":
                     console.log("==== focus control setting active ====")
+                    setting.Render();
                     break;
                 case "closeicon":
                     console.log("==== focus control close active ====")
@@ -89,7 +90,6 @@ var fcontrol = ( function() {
             var osTop = document.body.scrollTop;
             var speed = Math.floor( -osTop / 3 );
             document.body.scrollTop = osTop + speed;
-            //isTop = true;
             if( osTop == 0 ) {
                 clearInterval( timer );
             }

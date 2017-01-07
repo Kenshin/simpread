@@ -1,18 +1,15 @@
 console.log( "=== simpread focus load ===" );
 
-// import css
-require( "../assets/css/simpread.css" );
-
 /*
-    import fcontrol from ./focus/controlbar.js
+    import
 */
 var fcontrol = require( "controlbar" ),
-    focus = ( function () {
+    focus    = ( function () {
 
     var $parent,
         tag,
         focuscls   = "ks-simpread-focus",
-        focusstyle = "z-index: 2147483647; overflow: visible; position: relative;",
+        focusstyle = "z-index: 2147483646; overflow: visible; position: relative;",
         maskcls    = "ks-simpread-mask",
         maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
         bgcls      = "ks-simpread-bg",
@@ -21,26 +18,37 @@ var fcontrol = require( "controlbar" ),
 
     function Focus() { this.$target = null; }
 
-    /*
-        Add focus mode
-    */
-    Focus.prototype.Render = function( $target ) {
+    /**
+     * Add focus mode
+     * 
+     * @param {jquery} jquery object
+     * @param {array}  exclude html array
+     * @param {string} background color style
+     */
+    Focus.prototype.Render = function( $target, exclude, bgcolor ) {
         console.log( "=== simpread focus add ===" );
         this.$target = $target;
-        // add focus
-        focusStyle( $target, focusstyle, focuscls, "add" );
+
+        // set include style
+        includeStyle( $target, focusstyle, focuscls, "add" );
+
+        // set exclude style
+        excludeStyle( $target, exclude, "delete" );
 
         // add ks-simpread-mask
         $parent = $target.parent();
         tag     = $parent[0].tagName;
         while ( tag.toLowerCase() != "body" ) {
-            focusStyle( $parent, maskstyle, maskcls, "add" );
+            includeStyle( $parent, maskstyle, maskcls, "add" );
             $parent = $parent.parent();
             tag     = $parent[0].tagName;
         }
 
-        // add background mask
+        // add background
         $( "body" ).append( bgtmpl );
+
+        // add background color
+        $( bgclsjq ).css({ "background-color" : bgcolor });
 
         // add control bar
         fcontrol.Render( bgclsjq );
@@ -49,8 +57,11 @@ var fcontrol = require( "controlbar" ),
         $( bgclsjq ).on( "click", function( event ) {
             if ( $( event.target ).attr("class") != bgcls ) return;
 
-            // remove focus style
-            focusStyle( $target, focusstyle, focuscls, "delete" );
+            // remove include style
+            includeStyle( $target, focusstyle, focuscls, "delete" );
+
+            // remove exclude style
+            excludeStyle( $target, exclude, "add" );
 
             // remove control bar
             fcontrol.Remove();
@@ -63,7 +74,7 @@ var fcontrol = require( "controlbar" ),
             $parent = $target.parent();
             tag     = $parent[0].tagName;
             while ( tag && tag.toLowerCase() != "body" ) {
-                focusStyle( $parent, maskstyle, maskcls, "delete" );
+                includeStyle( $parent, maskstyle, maskcls, "delete" );
                 $parent = $parent.parent();
                 tag     = $parent[0].tagName;
             }
@@ -78,28 +89,10 @@ var fcontrol = require( "controlbar" ),
     */
     Focus.prototype.Verify = function() {
         if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
+            fcontrol.Click( "setting" );
             return false;
         } else {
             return true;
-        }
-    }
-
-    /*
-        Set focus style
-        @param $target: jquery object
-        @param style  : set style string
-        @param cls    : set class string
-        @param type   : include 'add' and 'delete'
-    */
-    function focusStyle( $target, style, cls, type ) {
-        var bakstyle;
-        if ( type === "add" ) {
-            bakstyle = $target.attr( "style" ) == undefined ? "" : $target.attr( "style" );
-            $target.attr( "style", bakstyle + style ).addClass( cls );
-        } else if (  type === "delete" ) {
-            bakstyle = $target.attr( "style" );
-            bakstyle = bakstyle.replace( style, "" );
-            $target.attr( "style", bakstyle ).removeClass( cls );
         }
     }
 
@@ -107,4 +100,63 @@ var fcontrol = require( "controlbar" ),
 
 })();
 
-module.exports = focus;
+/*
+    Set include style
+    @param $target: jquery object
+    @param style  : set style string
+    @param cls    : set class string
+    @param type   : include 'add' and 'delete'
+*/
+function includeStyle( $target, style, cls, type ) {
+    var bakstyle;
+    if ( type === "add" ) {
+        bakstyle = $target.attr( "style" ) == undefined ? "" : $target.attr( "style" );
+        $target.attr( "style", bakstyle + style ).addClass( cls );
+    } else if (  type === "delete" ) {
+        bakstyle = $target.attr( "style" );
+        bakstyle = bakstyle.replace( style, "" );
+        $target.attr( "style", bakstyle ).removeClass( cls );
+    }
+}
+
+/**
+ * Set exclude style
+ * 
+ * @param {jquery} jquery object
+ * @param {array}  hidden html
+ * @param {string} include: 'add' 'delete'
+ */
+function excludeStyle( $target, exclude, type ) {
+    var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
+    for ( i; i < len; i++ ) {
+        tag  = getSelector( exclude[i] );
+        if ( tag ) tags.push( tag )
+    }
+    if ( type == "delete" )   $target.find( tags.join(",") ).hide();
+    else if ( type == "add" ) $target.find( tags.join(",") ).show();
+}
+
+/**
+ * Conver html to jquery object
+ * 
+ * @param  {string} input include html tag, e.g.:
+    <div class="article fmt article__content">
+ *
+ * @return {array} formatting e.g.:
+    { "tag" : "class", "name" : "article" }
+ * 
+ */
+function getSelector( html ) {
+    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
+    if ( item && item.length > 0 ) {
+        let [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
+        if      ( tag.toLowerCase() === "class") name = `.${name}`;
+        else if ( tag.toLowerCase() === "id"   ) name = `#${name}`;
+        return name;
+    } else {
+        return null;
+    }
+}
+
+exports.focus       = focus;
+exports.getSelector = getSelector;

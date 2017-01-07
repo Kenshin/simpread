@@ -6,7 +6,8 @@
   "author" : "Kenshin Wang <kenshin@ksria.com>",
   "permissions": [
     "contextMenus",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "background": {
     "scripts": [ "background.js" ]
