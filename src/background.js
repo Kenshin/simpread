@@ -6,11 +6,8 @@ import { storage } from 'storage';
  * Save local/remote website_list.json to chrome storage
  */
 storage.Get( function() {
-    if ( local.Firstload() ) {
-        storage.GetNewsites( "local" );
-    } else if( !local.Count() ) {
-        storage.GetNewsites( "remote" );
-    }
+    if ( local.Firstload() )  storage.GetNewsites( "local"  );
+    else if( !local.Count() ) storage.GetNewsites( "remote" );
 });
 
 /**

@@ -139,10 +139,9 @@ class Storage {
      * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
      */
     async GetNewsites( type ) {
-        const url      = type === "remote" ? remote : local;
-        const response = await fetch( url );
-        const sites    = await response.json();
-        const len      = simpread.sites.length;
+        const response = await fetch( type === "remote" ? remote : local ),
+              sites    = await response.json(),
+              len      = simpread.sites.length;
         if ( len == 0 ) {
             simpread.sites = formatSites( sites );
         } else {
