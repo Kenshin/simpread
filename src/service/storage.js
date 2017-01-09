@@ -134,17 +134,21 @@ class Storage {
      * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
      */
     async GetNewsites( type ) {
-        const url      = type === "remote" ? remote : local,
-              response = await fetch( url + "?random=" + Math.round(+new Date()) ),
-              sites    = await response.json(),
-              len      = simpread.sites.length;
-        if ( len == 0 ) {
-            simpread.sites = formatSites( sites );
-        } else {
-            addsites( formatSites( sites ));
-        }
-        if ( len == 0 || len != simpread.sites.length ) {
-            save();
+        try {
+            const url    = type === "remote" ? remote : local,
+                response = await fetch( url + "?random=" + Math.round(+new Date()) ),
+                sites    = await response.json(),
+                len      = simpread.sites.length;
+            if ( len == 0 ) {
+                simpread.sites = formatSites( sites );
+            } else {
+                addsites( formatSites( sites ));
+            }
+            if ( len == 0 || len != simpread.sites.length ) {
+                save();
+            }
+        } catch ( error ) {
+            console.error( error );
         }
     }
 
