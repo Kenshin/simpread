@@ -57,8 +57,8 @@ function focuseMode() {
         sel, range, node, tag,
         target;
 
-    if (  storage.current && $.isEmptyObject( storage.current ) ) storage.Setcur( mode.focus );
-    target  = selector( storage.current.site.include );
+    if ( storage.current && $.isEmptyObject( storage.current )) storage.Setcur( mode.focus );
+    target = selector( storage.current.site.include );
 
     // uniqueness verification
     if ( !focus.Verify() ) return;
