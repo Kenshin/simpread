@@ -1,6 +1,6 @@
 
 import local from 'local';
-import { storage, GetNewsites } from 'storage';
+import { storage } from 'storage';
 
 /**
  * Save local/remote website_list.json to chrome storage
@@ -47,23 +47,3 @@ chrome.runtime.onMessage.addListener( function( request ) {
 function getCurTab( callback ) {
     chrome.tabs.query({ "active": true, "currentWindow": true }, function( tabs ) { callback( tabs ); });
 }
-
-////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
-
-/*
-const firstload = local.Firstload();
-console.log( "firstload = ",firstload )
-
-const ismaxcount = local.Count();
-console.log( "count     = ",local.curcount, ismaxcount )
-
-GetNewsites( chrome.extension.getURL( "website_list.json" )).then( result => {
-    console.log( result )
-});
-
-if ( ismaxcount ) {
-    storage.GetNewsites();  // remote url http://ojec5ddd5.bkt.clouddn.com/website_list.json
-    storage.Set( "read" );
-}
-*/

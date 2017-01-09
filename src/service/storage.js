@@ -151,21 +151,7 @@ class Storage {
         if ( len == 0 || len != simpread.sites.length ) {
             save();
         }
-        //const sites    = await fetchJSON( url );
-        //await this.SetNewsites( sites );
     }
-
-    /*
-    async SetNewsites( sites ) {
-        simpread.read.sites.push( sites );
-        console.log( "save chrome storage [read] success!", simpread );
-        chrome.storage.local.set( { [name] : simpread }, function(){
-            console.log( "save chrome storage [read] success!", simpread );
-            origin   = clone( simpread );
-            await "true";
-        });
-    }
-    */
 
 }
 
@@ -244,22 +230,9 @@ function save() {
     });
 }
 
-/******************************************
- * Fetch local/remote JSON usage async
- * 
- * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
- * @return {array} format sites array
- */
-async function fetchJSON( url ) {
-    const response = await fetch( url );
-    const sites    = await response.json();
-    return formatSites( sites );
-}
-
 const storage = new Storage();
 
 export {
     storage,
-    mode as STORAGE_MODE,
-    fetchJSON as GetNewsites
+    mode as STORAGE_MODE
 };
