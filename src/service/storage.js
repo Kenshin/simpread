@@ -11,44 +11,44 @@ import "babel-polyfill";
 /**
  * Storage mode, include `focus` `read` `option` 
  */
-const mode = {
+const name = "simpread",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
+    local  = chrome.extension.getURL( "website_list.json" ),
+    mode   = {
         focus  : "focus",
         read   : "read",
         option : "option",
     },
-    name   = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
-    local  = chrome.extension.getURL( "website_list.json" );
-
-let site  = {
+    site   = {
         name      : "",   // only read mode
         title     : "",   // only read mode
         desc      : "",   // only read mode
         exclude   : [],
         include   : "",
     },
-    current = {},
-    focus = {
+    focus  = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         opacity   : 90,
         shortcuts : "A S",
         sites     : [],    // e.g. [ "<url>", site ]
     },
-    read  = {
+    read   = {
         version   : "2017-01-07",
         theme     : "",
         fontfamily: "",
         fontsize  : 14,
         sites     : []    // e.g. [ "<url>", site ]
-    },
+    };
+
+let current  = {},
+    origin   = {},
     simpread = {
         focus,
         read,
         sites  : [],
         option : {},
-    },
-    origin  = {};
+    };
 
 class Storage {
 
@@ -125,7 +125,7 @@ class Storage {
             }
             origin   = clone( simpread );
             callback();
-            console.log( "simpread storage result is", result, simpread, origin );
+            console.log( "chrome storage read success!", simpread, origin, result );
         });
     }
 
@@ -135,7 +135,8 @@ class Storage {
      * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
      */
     async GetNewsites( type ) {
-        const response = await fetch( type === "remote" ? remote : local ),
+        const url      = type === "remote" ? remote : local,
+              response = await fetch( url + "?random=" + Math.round(+new Date()) ),
               sites    = await response.json(),
               len      = simpread.sites.length;
         if ( len == 0 ) {
@@ -171,7 +172,7 @@ function swap( source, target ) {
  * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
  */
 function getURI() {
-    const arr = window.location.pathname.match( /(\S+\/|^\/)/g );
+    const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
     return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
 }
 
@@ -209,13 +210,11 @@ function formatSites( result ) {
 function addsites( sites ) {
     const old  = new Map( simpread.sites );
     const urls = [ ...old.keys() ];
-    let   news = [];
     for ( const site of sites ) {
         if ( !urls.includes( site[0] ) ) {
-            news.push( site[0], site[1] );
+            simpread.sites.push([ site[0], site[1] ]);
         }
     }
-    if ( news.length > 0 ) simpread.sites.push( news );
 }
 
 /**
