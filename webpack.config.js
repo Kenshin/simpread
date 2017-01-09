@@ -45,6 +45,7 @@ const webpack = require( 'webpack' ),
         plugins.push(
           new CopyWebpackPlugin([
             { from : "src/manifest.json" , to :'../' },
+            { from : "src/website_list.json" , to :'../' },
             { context: 'src/assets/images/', from : "*" , to :'../assets/images' }
           ])
         );
