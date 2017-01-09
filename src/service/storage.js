@@ -15,9 +15,9 @@ const name = "simpread",
     remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
     local  = chrome.extension.getURL( "website_list.json" ),
     mode   = {
-        focus  : "focus",
-        read   : "read",
-        option : "option",
+        focus     : "focus",
+        read      : "read",
+        option    : "option",
     },
     site   = {
         name      : "",   // only read mode
@@ -81,7 +81,10 @@ class Storage {
     }
 
     /**
-     * Set current object
+     * Set current object, current object structure include:
+     * 
+     * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
+     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily }
      * 
      * @param {string} @see mode
      */
@@ -100,7 +103,6 @@ class Storage {
             simpread[key].sites.push([ url, current.site ]);
         }
         console.log( "current site object is ", current )
-        return current;
     }
 
     /**
