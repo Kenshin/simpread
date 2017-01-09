@@ -55,8 +55,10 @@ function focuseMode() {
 
     var $focus = [],
         sel, range, node, tag,
-        current = storage.Setcur( mode.focus ),
-        target  = selector( current.site.include );
+        target;
+
+    if (  storage.current && $.isEmptyObject( storage.current ) ) storage.Setcur( mode.focus );
+    target  = selector( storage.current.site.include );
 
     // uniqueness verification
     if ( !focus.Verify() ) return;
@@ -89,7 +91,7 @@ function focuseMode() {
 
 
     // add focus mode
-    focus.Render( fixFocus( $focus ), current.site.exclude, current.bgcolor );
+    focus.Render( fixFocus( $focus ), storage.current.site.exclude, storage.current.bgcolor );
 }
 
 /**
