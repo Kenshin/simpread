@@ -16,7 +16,9 @@ const mode = {
         read   : "read",
         option : "option",
     },
-    name = "simpread";
+    name   = "simpread",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
+    local  = chrome.extension.getURL( "website_list.json" );
 
 let site  = {
         name      : "",   // only read mode
@@ -48,6 +50,7 @@ let site  = {
     simpread = {
         focus,
         read,
+        sites  : [],
         option : {},
     },
     origin  = {};
@@ -135,14 +138,19 @@ class Storage {
      * 
      * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
      */
-    async GetNewsites( url ) {
+    async GetNewsites( type ) {
+        const url      = type === "remote" ? remote : local;
         const response = await fetch( url );
         const sites    = await response.json();
-        simpread.read.sites.push( formatSites( sites ));
-        chrome.storage.local.set( { [name] : simpread }, function() {
-            console.log( "save chrome storage [read] success!", simpread );
-            origin   = clone( simpread );
-        });
+        const len      = simpread.sites.length;
+        if ( len == 0 ) {
+            simpread.sites = formatSites( sites );
+        } else {
+            addsites( formatSites( sites ));
+        }
+        if ( len == 0 || len != simpread.sites.length ) {
+            save();
+        }
         //const sites    = await fetchJSON( url );
         //await this.SetNewsites( sites );
     }
@@ -210,6 +218,33 @@ function formatSites( result ) {
 }
 
 /**
+ * Add new sites to old sites
+ * 
+ * @param {array} new sites from local or remote
+ */
+function addsites( sites ) {
+    const old  = new Map( simpread.sites );
+    const urls = [ ...old.keys() ];
+    let   news = [];
+    for ( const site of sites ) {
+        if ( !urls.includes( site[0] ) ) {
+            news.push( site[0], site[1] );
+        }
+    }
+    if ( news.length > 0 ) simpread.sites.push( news );
+}
+
+/**
+ * Call chrome storage set
+ */
+function save() {
+    chrome.storage.local.set( { [name] : simpread }, function() {
+        console.log( "chrome storage save success!", simpread );
+        origin   = clone( simpread );
+    });
+}
+
+/******************************************
  * Fetch local/remote JSON usage async
  * 
  * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json

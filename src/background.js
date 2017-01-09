@@ -3,6 +3,17 @@ import local from 'local';
 import { storage, GetNewsites } from 'storage';
 
 /**
+ * Save local/remote website_list.json to chrome storage
+ */
+storage.Get( function() {
+    if ( local.Firstload() ) {
+        storage.GetNewsites( "local" );
+    } else if( !local.Count() ) {
+        storage.GetNewsites( "remote" );
+    }
+});
+
+/**
  * Create context menus
 */
 chrome.contextMenus.create({
@@ -40,17 +51,12 @@ function getCurTab( callback ) {
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
-// load new sites
-if ( local.Firstload() ) {
-    storage.GetNewsites( chrome.extension.getURL( "website_list.json" ));
-}
-
-const ismaxcount = local.Count();
-console.log( "count     = ",local.curcount, ismaxcount )
-
 /*
 const firstload = local.Firstload();
 console.log( "firstload = ",firstload )
+
+const ismaxcount = local.Count();
+console.log( "count     = ",local.curcount, ismaxcount )
 
 GetNewsites( chrome.extension.getURL( "website_list.json" )).then( result => {
     console.log( result )
