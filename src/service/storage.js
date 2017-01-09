@@ -92,9 +92,12 @@ class Storage {
         current.mode = key;
         current.site = sites.get( url );
         while( !current.site ) {
-            sites.set( url, clone( site ));
-            current.site = sites.get( url );
-            simpread[key].sites.push([ url, sites.get(url) ]);
+            current.site = findSitebyURL( url );
+            if ( !current.site ) {
+                sites.set( url, clone( site ));
+                current.site = sites.get( url );
+            }
+            simpread[key].sites.push([ url, current.site ]);
         }
         console.log( "current site object is ", current )
         return current;
@@ -155,7 +158,7 @@ class Storage {
  */
 function swap( source, target ) {
     for ( const key of Object.keys( source ) ) {
-        if ( ![ "site", "version", "url", "mode" ].includes( key ) ) {
+        if ( ![ "site", "sites", "version", "url", "mode" ].includes( key ) ) {
             target[key] = source[key];
         }
     }
@@ -213,6 +216,21 @@ function addsites( sites ) {
         }
     }
     if ( news.length > 0 ) simpread.sites.push( news );
+}
+
+/**
+ * Find site by url from simpread.sites
+ * 
+ * @param  {string} url
+ * @return {object} site object or not found return undefined
+ */
+function findSitebyURL( url ) {
+    const site  = new Map( simpread.sites );
+    const urls = [ ...site.keys() ];
+    if ( urls.includes( url ) ) {
+        return clone( site.get( url ));
+    }
+    return undefined;
 }
 
 /**
