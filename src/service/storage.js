@@ -136,7 +136,7 @@ class Storage {
     async GetNewsites( type ) {
         try {
             const url    = type === "remote" ? remote : local,
-                response = await fetch( url + "?random=" + Math.round(+new Date()) ),
+                response = await fetch( url + "?_=" + Math.round(+new Date()) ),
                 sites    = await response.json(),
                 len      = simpread.sites.length;
             if ( len == 0 ) {
