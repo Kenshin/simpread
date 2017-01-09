@@ -8,9 +8,6 @@ import "babel-polyfill";
  * @class
  */
 
-/**
- * Storage mode, include `focus` `read` `option` 
- */
 const name = "simpread",
     remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
     local  = chrome.extension.getURL( "website_list.json" ),
