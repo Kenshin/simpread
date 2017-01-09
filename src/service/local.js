@@ -4,7 +4,7 @@ const id    = "simpread",
         COUNT : "count",
         FIRST : "firstload",
       },
-      MAX_COUNT = 5;
+      MAX_COUNT = 20;
 
 let curcount;
 
