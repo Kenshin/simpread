@@ -27,12 +27,7 @@ let site  = {
         exclude   : [],
         include   : "",
     },
-    current = {
-        bgcolor: "",
-        opacity: "",
-        url    : "",
-        site   : site,
-    },
+    current = {},
     focus = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
@@ -92,14 +87,15 @@ class Storage {
      */
     Setcur( key ) {
         const [ url, sites ] = [getURI(), new Map( simpread[key].sites )];
-        current.site = sites.get( url );
+        current      = swap( simpread[key], {} );
         current.url  = url;
+        current.mode = key;
+        current.site = sites.get( url );
         while( !current.site ) {
             sites.set( url, clone( site ));
             current.site = sites.get( url );
             simpread[key].sites.push([ url, sites.get(url) ]);
         }
-        swap( simpread[key], current );
         console.log( "current site object is ", current )
         return current;
     }
@@ -111,10 +107,7 @@ class Storage {
      */
     Set( key ) {
         swap( current, simpread[key] );
-        chrome.storage.local.set( { [name] : simpread }, function(){
-            console.log( "save chrome storage success!", simpread );
-            origin   = clone( simpread );
-        });
+        save();
     }
 
     /**
@@ -155,15 +148,18 @@ class Storage {
 }
 
 /**
- * Swap source and target
+ * Swap source and target property
  * 
  * @param {object} source origin
  * @param {object} target origin
  */
 function swap( source, target ) {
-    target.bgcolor   = source.bgcolor;
-    target.shortcuts = source.shortcuts;
-    target.opacity   = source.opacity;
+    for ( const key of Object.keys( source ) ) {
+        if ( ![ "site", "version", "url", "mode" ].includes( key ) ) {
+            target[key] = source[key];
+        }
+    }
+    return target;
 }
 
 /**
