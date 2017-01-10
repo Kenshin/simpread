@@ -17,6 +17,7 @@ class Read extends React.Component {
     componentDidMount() {
         const theme = `sr-rd-${ this.props.read.theme }`;
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
+        //beautiHtml();
     }
 
     constructor( props ) {
@@ -79,6 +80,15 @@ function wrap( site ) {
 function formatHtml( html ) {
     return html.trim().toLowerCase().replace( / style="[a-z0-9-_: ;#.]+"/g, "" );
 }
+
+/*
+function beautiHtml() {
+    const $target = $("sr-rd-content");
+    $target.find( "img" ).map( function( index, item ) {
+        console.log(item)
+    })
+}
+*/
 
 /**
  * Get read root
