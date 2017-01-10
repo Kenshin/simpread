@@ -31,6 +31,9 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
         case "focus":
             focuseMode();
             break;
+        case "read":
+            readMode();
+            break;
         case "shortcuts":
             bindShortcuts();
             break;
@@ -108,4 +111,12 @@ function fixFocus( $focus ) {
             tag    = $focus[0].tagName.toLowerCase();
     }
     return $focus;
+}
+
+/**
+ * Read mode
+ */
+function readMode() {
+    console.log( "=== simpread read  mode active ===" )
+    storage.Setcur( mode.read );
 }
