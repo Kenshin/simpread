@@ -15,15 +15,14 @@ storage.Get( function() {
 */
 const menu = {
         "type"     : "normal",
-        "title"    : "聚焦模式",
         "contexts" :  [ "all" ],
         "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ]
     },
     foucsmenu = {},
     readmenu  = {};
 
-Object.assign( foucsmenu, menu, { id: "focus" });
-Object.assign( readmenu,  menu, { id: "read"  });
+Object.assign( foucsmenu, menu, { id: "focus", "title" : "聚焦模式" });
+Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
 
 chrome.contextMenus.create( foucsmenu );
 chrome.contextMenus.create( readmenu  );
