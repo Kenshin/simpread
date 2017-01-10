@@ -22,9 +22,9 @@ class Read extends React.Component {
     render() {
         return(
             <sr-read class="sr-rd-font">
-                <sr-rd-title>{ this.props.wraper.title }</sr-rd-title>
-                <sr-rd-desc>{ this.props.wraper.desc }</sr-rd-desc>
-                <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wraper.include }} ></sr-rd-content>
+                <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
+                <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
+                <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
             </sr-read>
         )
     }
@@ -37,21 +37,21 @@ class Read extends React.Component {
  * @method 
  */
 function Render() {
-    ReactDOM.render( <Read read={ storage.current } wraper={ wrap(storage.current.site) } />, getReadRoot() );
+    ReactDOM.render( <Read read={ storage.current } wrapper={ wrap(storage.current.site) } />, getReadRoot() );
 }
 
 function wrap( site ) {
-    const wraper  = Clone( site ),
+    const wrapper  = Clone( site ),
           title   = util.selector( site.title   ),
           desc    = util.selector( site.desc    ),
           include = util.selector( site.include );
 
-    wraper.title   = $root.find( title ).text().trim();
-    wraper.desc    = $root.find( desc ).text().trim();
-    wraper.include = $root.find( include ).html();
+    wrapper.title   = $root.find( title ).text().trim();
+    wrapper.desc    = $root.find( desc ).text().trim();
+    wrapper.include = $root.find( include ).html();
     //util.excludeStyle( $root, site.exclude, "hide" );
 
-    return wraper;
+    return wrapper;
 }
 
 /**
