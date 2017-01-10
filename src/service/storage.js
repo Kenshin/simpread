@@ -162,6 +162,15 @@ class Storage {
         }
     }
 
+    /**
+     * Verity current changed
+     * 
+     * @param {string} @see mode
+     */
+    VerifyCur( type ) {
+        return ( current.mode && current.mode != type ) || $.isEmptyObject( current );
+    }
+
 }
 
 /**
