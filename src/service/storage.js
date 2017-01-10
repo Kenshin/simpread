@@ -32,6 +32,7 @@ const name = "simpread",
     },
     read   = {
         version   : "2017-01-07",
+        shortcuts : "A A",
         theme     : "",
         fontfamily: "",
         fontsize  : 14,
@@ -56,6 +57,15 @@ class Storage {
      */
     get focus() {
         return simpread[ mode.focus ];
+    }
+
+    /**
+     * Get simpread.read data structure
+     * 
+     * @return {object} simpread["read"]
+     */
+    get read() {
+        return simpread[ mode.read ];
     }
 
     /**

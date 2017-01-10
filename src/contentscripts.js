@@ -48,6 +48,7 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
  */
 function bindShortcuts() {
     Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
+    Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
 }
 
 /**
