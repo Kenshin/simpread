@@ -396,12 +396,11 @@ sr-opt-item[sr-type="exclude"] textarea:focus {
  *  Read mode
  */
 .ks-simpread-read {
-    overflow: visible;
-    position: fixed;
-
     display: -webkit-flex;
     justify-content:center;
     align-items:center;
+
+    position: relative;
 
     width: 100%;
     height: 100%;
@@ -443,14 +442,11 @@ sr-read {
 
     text-align: center;
 
-    margin-top:  0;
-    margin-bottom: 0;
+    margin-top:  20px;
+    margin-bottom: 20px;
 
     margin-left: 20%;
     margin-right: 20%;
-
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .sr-rd-theme1 {

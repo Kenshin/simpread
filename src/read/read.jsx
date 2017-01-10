@@ -6,13 +6,17 @@ import * as util          from 'util';
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
-      $root   = $( "body" );
+      $root   = $( "html" );
 
 class Read extends React.Component {
 
+    componentWillMount() {
+        $( "body" ).css({ "display": "none" });
+    }
+
     componentDidMount() {
-        //$root.css({ "overflow": "hidden" });
-        $root.find( rdclsjq ).addClass( `sr-rd-${ this.props.read.theme }` );
+        const theme = `sr-rd-${ this.props.read.theme }`;
+        $root.addClass( theme ).find( rdclsjq ).addClass( theme );
     }
 
     render() {
