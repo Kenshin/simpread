@@ -19,6 +19,18 @@ class Read extends React.Component {
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
     }
 
+    constructor( props ) {
+        super( props );
+        switch ( this.props.read.theme ) {
+            case "theme1":
+               require( "theme1" );
+               break;
+            case "theme2":
+               require( "theme2" );
+               break;
+        }
+    }
+
     render() {
         return(
             <sr-read class="sr-rd-font">

@@ -149,6 +149,9 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/option/dialog.jsx',
           focusopt   : __dirname + '/src/option/focus.jsx',
 
+          theme1     : '../assets/css/theme1.css',
+          theme2     : '../assets/css/theme2.css',
+
         }
       }
 
