@@ -60,7 +60,7 @@ function focuseMode() {
         sel, range, node, tag,
         target;
 
-    if ( storage.current && $.isEmptyObject( storage.current )) storage.Setcur( mode.focus );
+    if ( (storage.current.mode && storage.current.mode != mode.focus) || $.isEmptyObject( storage.current )) storage.Setcur( mode.focus );
     target = selector( storage.current.site.include );
 
     // uniqueness verification
@@ -92,7 +92,6 @@ function focuseMode() {
         }
     }
 
-
     // add focus mode
     focus.Render( fixFocus( $focus ), storage.current.site.exclude, storage.current.bgcolor );
 }
@@ -118,5 +117,5 @@ function fixFocus( $focus ) {
  */
 function readMode() {
     console.log( "=== simpread read  mode active ===" )
-    storage.Setcur( mode.read );
+    if ( (storage.current.mode && storage.current.mode != mode.read ) || $.isEmptyObject( storage.current )) storage.Setcur( mode.read );
 }
