@@ -1,0 +1,13 @@
+{
+    "sites"  : [{
+        "name"    : "cnbeta.com",
+        "url"     : "http://www.cnbeta.com/articles/",
+        "title"   : "<h2 id='news_title'>",
+        "desc"    : "<div class='introduction'>",
+        "include" : "<div class='body' style=''>",
+        "exclude" : [
+            "<div class='clearfix' style='margin:0 10px;'>",
+            "<div class='rating_box clearfix'>"
+        ]
+    }]
+}

@@ -1,5 +1,17 @@
+
+import local from 'local';
+import { storage } from 'storage';
+
 /**
-    Create context menus
+ * Save local/remote website_list.json to chrome storage
+ */
+storage.Get( function() {
+    if ( local.Firstload() )  storage.GetNewsites( "local"  );
+    else if( !local.Count() ) storage.GetNewsites( "remote" );
+});
+
+/**
+ * Create context menus
 */
 chrome.contextMenus.create({
     "type"     : "normal",
@@ -20,7 +32,7 @@ chrome.contextMenus.create({
 });
 
 /**
-    Listen runtime message
+ * Listen runtime message
  */
 chrome.runtime.onMessage.addListener( function( request ) {
     getCurTab( function( tabs ) { chrome.tabs.sendMessage( tabs[0].id, request ); });

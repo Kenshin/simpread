@@ -1,44 +1,51 @@
 console.log( "=== simpread storage load ===" )
 
+import "babel-polyfill";
+
 /**
  * Read and Write Chrome storage
  * 
  * @class
  */
 
-/**
- * Storage mode, include `focus` `read` `option` 
- */
-const mode = {
-        focus  : "focus",
-        read   : "read",
-        option : "option",
+const name = "simpread",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
+    local  = chrome.extension.getURL( "website_list.json" ),
+    mode   = {
+        focus     : "focus",
+        read      : "read",
+        option    : "option",
     },
-    name = "simpread";
-
-let site  = {
+    site   = {
+        name      : "",   // only read mode
+        title     : "",   // only read mode
+        desc      : "",   // only read mode
         exclude   : [],
         include   : "",
     },
-    current = {
-        bgcolor: "",
-        opacity: "",
-        url    : "",
-        site   : site,
-    },
-    focus = {
+    focus  = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         opacity   : 90,
         shortcuts : "A S",
         sites     : [],    // e.g. [ "<url>", site ]
     },
+    read   = {
+        version   : "2017-01-07",
+        theme     : "",
+        fontfamily: "",
+        fontsize  : 14,
+        sites     : []    // e.g. [ "<url>", site ]
+    };
+
+let current  = {},
+    origin   = {},
     simpread = {
         focus,
-        read   : {},
+        read,
+        sites  : [],
         option : {},
-    },
-    origin  = {};
+    };
 
 class Storage {
 
@@ -71,22 +78,28 @@ class Storage {
     }
 
     /**
-     * Set current object
+     * Set current object, current object structure include:
+     * 
+     * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
+     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily }
      * 
      * @param {string} @see mode
      */
     Setcur( key ) {
         const [ url, sites ] = [getURI(), new Map( simpread[key].sites )];
-        current.site = sites.get( url );
+        current      = swap( simpread[key], {} );
         current.url  = url;
+        current.mode = key;
+        current.site = sites.get( url );
         while( !current.site ) {
-            sites.set( url, clone( site ));
-            current.site = sites.get( url );
-            simpread[key].sites.push([ url, sites.get(url) ]);
+            current.site = findSitebyURL( url );
+            if ( !current.site ) {
+                sites.set( url, clone( site ));
+                current.site = sites.get( url );
+            }
+            simpread[key].sites.push([ url, current.site ]);
         }
-        swap( simpread[key], current );
         console.log( "current site object is ", current )
-        return current;
     }
 
     /**
@@ -96,10 +109,7 @@ class Storage {
      */
     Set( key ) {
         swap( current, simpread[key] );
-        chrome.storage.local.set( { [name] : simpread }, function(){
-            console.log( "save chrome storage success!", simpread );
-            origin   = clone( simpread );
-        });
+        save();
     }
 
     /**
@@ -114,21 +124,49 @@ class Storage {
             }
             origin   = clone( simpread );
             callback();
-            console.log( "simpread storage result is", result, simpread, origin );
+            console.log( "chrome storage read success!", simpread, origin, result );
         });
     }
+
+    /**
+     * Get local/remote JSON usage async
+     * 
+     * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     */
+    async GetNewsites( type ) {
+        try {
+            const url    = type === "remote" ? remote : local,
+                response = await fetch( url + "?_=" + Math.round(+new Date()) ),
+                sites    = await response.json(),
+                len      = simpread.sites.length;
+            if ( len == 0 ) {
+                simpread.sites = formatSites( sites );
+            } else {
+                addsites( formatSites( sites ));
+            }
+            if ( len == 0 || len != simpread.sites.length ) {
+                save();
+            }
+        } catch ( error ) {
+            console.error( error );
+        }
+    }
+
 }
 
 /**
- * Swap source and target
+ * Swap source and target property
  * 
  * @param {object} source origin
  * @param {object} target origin
  */
 function swap( source, target ) {
-    target.bgcolor   = source.bgcolor;
-    target.shortcuts = source.shortcuts;
-    target.opacity   = source.opacity;
+    for ( const key of Object.keys( source ) ) {
+        if ( ![ "site", "sites", "version", "url", "mode" ].includes( key ) ) {
+            target[key] = source[key];
+        }
+    }
+    return target;
 }
 
 /**
@@ -137,7 +175,7 @@ function swap( source, target ) {
  * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
  */
 function getURI() {
-    const arr = window.location.pathname.match( /(\S+\/|^\/)/g );
+    const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
     return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
 }
 
@@ -151,5 +189,65 @@ function clone( target ) {
     return $.extend( true, {}, target );
 }
 
+/**
+ * Format sites object from loacal or remote json file
+ * 
+ * @param  {object} sites.[array]
+ * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
+ */
+function formatSites( result ) {
+    const format = new Map();
+    for ( let site of result.sites ) {
+        const url = site.url;
+        delete site.url;
+        format.set( url, site );
+    }
+    return [ ...format ];
+}
+
+/**
+ * Add new sites to old sites
+ * 
+ * @param {array} new sites from local or remote
+ */
+function addsites( sites ) {
+    const old  = new Map( simpread.sites );
+    const urls = [ ...old.keys() ];
+    for ( const site of sites ) {
+        if ( !urls.includes( site[0] ) ) {
+            simpread.sites.push([ site[0], site[1] ]);
+        }
+    }
+}
+
+/**
+ * Find site by url from simpread.sites
+ * 
+ * @param  {string} url
+ * @return {object} site object or not found return undefined
+ */
+function findSitebyURL( url ) {
+    const site  = new Map( simpread.sites );
+    const urls = [ ...site.keys() ];
+    if ( urls.includes( url ) ) {
+        return clone( site.get( url ));
+    }
+    return undefined;
+}
+
+/**
+ * Call chrome storage set
+ */
+function save() {
+    chrome.storage.local.set( { [name] : simpread }, function() {
+        console.log( "chrome storage save success!", simpread );
+        origin   = clone( simpread );
+    });
+}
+
 const storage = new Storage();
-export { storage, mode as STORAGE_MODE };
+
+export {
+    storage,
+    mode as STORAGE_MODE
+};

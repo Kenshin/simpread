@@ -8,10 +8,10 @@ const webpack = require( 'webpack' ),
         ReactDOM : 'react-dom'
       }),
 
-      // vender files, include 'react' 'react-dom'
+      // chunk files
       new webpack.optimize.CommonsChunkPlugin({
-        name     : 'vendors',
-        filename : '[name].js'
+        names     : [ 'vendors', 'common' ],
+        minChunks : Infinity
       }),
 
       // defined environment variable
@@ -45,7 +45,7 @@ const webpack = require( 'webpack' ),
         plugins.push(
           new CopyWebpackPlugin([
             { from : "src/manifest.json" , to :'../' },
-            { from : "src/background.js" , to :'../' },
+            { from : "src/website_list.json" , to :'../' },
             { context: 'src/assets/images/', from : "*" , to :'../assets/images' }
           ])
         );
@@ -82,12 +82,17 @@ const webpack = require( 'webpack' ),
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
-          './src/vender/jquery-2.1.1.min.js',
           './src/vender/mousetrap.min.js',
 
           './src/vender/notify/notify.js'
         ],
-        contentscripts : './src/contentscripts.js'
+        common : [
+          'babel-polyfill',
+          './src/service/storage.js',
+          './src/vender/jquery-2.1.1.min.js',
+        ],
+        contentscripts : './src/contentscripts.js',
+        background     : './src/background.js',
       },
 
       output: {
@@ -108,7 +113,7 @@ const webpack = require( 'webpack' ),
             exclude: /node_modules/,
             loader: 'babel',
             query: {
-              presets: [ 'es2015', 'react' ]
+              presets: [ 'es2015', 'stage-0', 'react' ]
             }
         },
         { test: /\.css$/,       loader: 'style!css'      },
@@ -132,6 +137,7 @@ const webpack = require( 'webpack' ),
           notify     : __dirname + '/src/vender/notify/notify.js',
 
           storage    : __dirname + '/src/service/storage.js',
+          local      : __dirname + '/src/service/local.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.js',
