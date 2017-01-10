@@ -120,7 +120,14 @@ function fixFocus( $focus ) {
  */
 function readMode() {
     console.log( "=== simpread read  mode active ===" )
+
     if ( storage.VerifyCur( mode.read ) ) {
         storage.Setcur( mode.read );
+    }
+
+    if ( storage.current.site.name === "" ) {
+        new Notify().Render( 1, "当前页面没有适配，如需要请自行添加。" );
+        //TO-DO
+        return;
     }
 }
