@@ -15,7 +15,8 @@ var $         = require( "jquery" ),
     focus     = require( "focus"   ).focus,
     selector  = require( "focus"   ).getSelector,
     storage   = require( "storage" ).storage,
-    mode      = require( "storage" ).STORAGE_MODE;
+    mode      = require( "storage" ).STORAGE_MODE,
+    read      = require( "read"    );
 
 /**
  * Sevice:storage Get data form chrome storage
@@ -130,4 +131,6 @@ function readMode() {
         //TO-DO
         return;
     }
+
+    read.Render();
 }

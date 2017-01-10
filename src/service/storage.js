@@ -33,7 +33,7 @@ const name = "simpread",
     read   = {
         version   : "2017-01-07",
         shortcuts : "A A",
-        theme     : "",
+        theme     : "theme1",
         fontfamily: "",
         fontsize  : 14,
         sites     : []    // e.g. [ "<url>", site ]
@@ -268,5 +268,6 @@ const storage = new Storage();
 
 export {
     storage,
-    mode as STORAGE_MODE
+    mode  as STORAGE_MODE,
+    clone as Clone
 };
