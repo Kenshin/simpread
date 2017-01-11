@@ -4,6 +4,15 @@
   "description": "SimpRead develop/deploy",
   "author": "Kenshin Wang <kenshin@ksria.com>",
   "license": "MIT",
+  "homepage": "http://ksria.com/simpread",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kenshin/simpread.git"
+  },
+  "bugs": {
+    "url" : "https://github.com/kenshin/simpread/issues",
+    "email" : "kenshin@ksria.com"    
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
