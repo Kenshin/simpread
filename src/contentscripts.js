@@ -120,7 +120,7 @@ function fixFocus( $focus ) {
  * Read mode
  */
 function readMode() {
-    console.log( "=== simpread read  mode active ===" )
+    console.log( "=== simpread read mode active ===" )
 
     if ( storage.VerifyCur( mode.read ) ) {
         storage.Setcur( mode.read );
