@@ -1,6 +1,7 @@
 console.log( "=== simpread option dialog ===" )
 
 import FocusOpt  from 'focusopt';
+import ReadOpt   from 'readopt';
 import { storage, STORAGE_MODE } from 'storage';
 import Notify from 'notify';
 
@@ -34,6 +35,7 @@ export default class Dialog extends React.Component {
     render() {
         let Option;
         if ( this.props.type == STORAGE_MODE.focus ) Option = FocusOpt;
+        else Option = ReadOpt;
         return (
             <sr-dialog>
                 <sr-dialog-content>
@@ -63,11 +65,12 @@ function rollback() {
 /**
  * get Dialog background document
  * 
+ * @param  {string} target include: body and html
  * @return {jquery} ks-simpread-option-bg jquery object
  */
-export function getDialogBackground() {
-    if ( $( "body" ).find( "." + optbgcls ).length == 0 ) {
-        $( "body" ).append( optbg );
+export function getDialogBackground( target = "body" ) {
+    if ( $(target).find( "." + optbgcls ).length == 0 ) {
+        $(target).append( optbg );
     }
     return $( "." + optbgcls )[0];
 }
