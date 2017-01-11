@@ -41,17 +41,23 @@ function excludeStyle( $target, exclude, type ) {
  * @param  {string} input include html tag, e.g.:
     <div class="article fmt article__content">
  *
- * @return {array} formatting e.g.:
-    { "tag" : "class", "name" : "article" }
- * 
+ * @return {string} formatting e.g.:
+            h2#news_title
+            div.introduction
+            div.content
+            div.clearfix
+            div.rating_box
+            span
+ *
  */
 function getSelector( html ) {
-    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
+    const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
     if ( item && item.length > 0 ) {
-        let [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-        if      ( tag.toLowerCase() === "class") name = `.${name}`;
-        else if ( tag.toLowerCase() === "id"   ) name = `#${name}`;
-        return name;
+        let [tag, prop, value] = item[0].trim().replace( /['"<]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
+        if      ( !prop ) prop = tag;
+        else if ( prop.toLowerCase() === "class") prop = `${tag}.${value}`;
+        else if ( prop.toLowerCase() === "id"   ) prop = `${tag}#${value}`;
+        return prop;
     } else {
         return null;
     }
