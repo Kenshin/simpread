@@ -37,7 +37,7 @@ class Read extends React.Component {
             <sr-read class="sr-rd-font">
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
-                <sr-rd-content dangerouslySetInnerHTML={{__html: formatHtml(this.props.wrapper.include) }} ></sr-rd-content>
+                <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
             </sr-read>
         )
     }
@@ -66,7 +66,7 @@ function wrap( site ) {
           include = util.selector( site.include );
     wrapper.title   = $root.find( title ).text().trim();
     wrapper.desc    = $root.find( desc ).text().trim();
-    wrapper.include = $root.find( include ).html();
+    wrapper.include = formatHtml($root.find( include ).html());
     //util.excludeStyle( $root, site.exclude, "hide" );
     return wrapper;
 }
@@ -78,7 +78,19 @@ function wrap( site ) {
  * @return {string} format html string
  */
 function formatHtml( html ) {
-    return html.trim().toLowerCase().replace( / style="[a-z0-9-_: ;#.]+"/g, "" );
+    return html.trim().toLowerCase()
+            .replace( / style="[a-z0-9-_: ;#.]+"/g, "" )
+            .replace( /<\/?[0-9a-z]+/g, item => {
+                if ( !item.includes( "img" ) ) {
+                    if ( item[1] == "/" ) {
+                        item = "</sr-rd-" + item.substr(2);
+                    } else {
+                        item = "<sr-rd-" + item.substr(1);
+                    }
+                }
+                console.log(item)
+                return item;
+            });
 }
 
 /*
