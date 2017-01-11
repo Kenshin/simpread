@@ -33,7 +33,7 @@ export default class Dialog extends React.Component {
     }
 
     render() {
-        const Option = this.props.type == STORAGE_MODE.focus ? FocusOpt : ReadOpt;
+        const Option = storage.current.mode == STORAGE_MODE.focus ? FocusOpt : ReadOpt;
         return (
             <sr-dialog>
                 <sr-dialog-content>
