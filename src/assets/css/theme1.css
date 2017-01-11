@@ -1,6 +1,6 @@
 
-.sr-rd-theme1 {
-    background-color: #fdf6e3;
+.sr-rd-theme {
+    background-color: #fff;
 }
 
 sr-rd-title {
@@ -32,9 +32,16 @@ sr-rd-content {
     text-align: justify;
 }
 
-sr-rd-content img,
-sr-rd-content p
-{
+sr-rd-content sr-rd-p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    margin: 10px;
+}
+
+sr-rd-content img {
     border: 0;
     margin: 10px;
 }
