@@ -17,6 +17,7 @@ class Read extends React.Component {
     }
 
     componentDidMount() {
+        util.exclude( $("sr-read"), this.props.wrapper.exclude, "delete" );
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         //beautiHtml();
     }
@@ -92,7 +93,6 @@ function wrap( site ) {
     wrapper.title   = $root.find( title ).text().trim();
     wrapper.desc    = $root.find( desc ).text().trim();
     wrapper.include = rules($root.find( include ).html());
-    //util.excludeStyle( $root, site.exclude, "hide" );
     return wrapper;
 }
 
