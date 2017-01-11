@@ -18,8 +18,8 @@ class Read extends React.Component {
 
     componentDidMount() {
         util.exclude( $("sr-read"), this.props.wrapper.exclude, "delete" );
+        beautify( $("sr-read"));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
-        //beautiHtml();
     }
 
     constructor( props ) {
@@ -117,14 +117,45 @@ function rules( html ) {
             })*/
 }
 
-/*
-function beautiHtml() {
-    const $target = $("sr-rd-content");
-    $target.find( "img" ).map( function( index, item ) {
-        console.log(item)
-    })
+/**
+ * Beautify html
+ * 
+ * @param {jquery} 
+ */
+function beautify( $target ) {
+    $target.find( "img" ).map( ( index, item ) => {
+        const $target = $(item),
+              lazysrc = $target.attr( "data-src" ),
+              original= $target.attr( "original" );
+        let   $parent = $target.parent(),
+              tagname = $parent[0].tagName.toLowerCase();
+
+        // remove lazy src
+        if ( lazysrc ) {
+            const img = $( "<img>" );
+            img.attr( "src", lazysrc );
+            $parent.append( img );
+            $target.remove();
+        }
+
+        // remove lazy src
+        if ( original ) {
+            const img = $( "<img>" );
+            img.attr( "src", original );
+            $parent.append( img );
+            $target.remove();
+        }
+
+        // center
+        while ( ![ "p", "div", "span" ].includes( tagname ) ) {
+            $parent = $parent.parent();
+            tagname = $parent[0].tagName.toLowerCase();
+        }
+
+        $parent.css({ "text-align" : "center" });
+
+    });
 }
-*/
 
 /**
  * Get read root
