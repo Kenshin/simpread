@@ -1,21 +1,22 @@
-console.log( "=== simpread read  load ===" )
+console.log( "=== simpread read load ===" )
 
+import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
-      $root   = $( "html" );
+      $root   = $( "html" ),
+      theme   = `sr-rd-theme-bg`;
 
 class Read extends React.Component {
 
     componentWillMount() {
-        $( "body" ).css({ "display": "none" });
+        $( "body" ).addClass( "ks-simpread-body-hide" );
     }
 
     componentDidMount() {
-        const theme = `sr-rd-${ this.props.read.theme }`;
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         //beautiHtml();
     }
@@ -32,12 +33,23 @@ class Read extends React.Component {
         }
     }
 
+   // exit read mode
+   exit() {
+        $root.removeClass( theme );
+        $( "body" ).removeClass( "ks-simpread-body-hide" );
+        $( rdclsjq ).addClass( "ks-simpread-read-hide" );
+        $( rdclsjq ).one( "animationend", () => {
+            $( rdclsjq ).remove();
+        });
+    }
+
     render() {
         return(
             <sr-read class="sr-rd-font">
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
+                <ReadCtlbar exit={ ()=> this.exit() } />
             </sr-read>
         )
     }
@@ -47,10 +59,23 @@ class Read extends React.Component {
 /**
  * Render entry
  * 
- * @method 
  */
 function Render() {
     ReactDOM.render( <Read read={ storage.current } wrapper={ wrap(storage.current.site) } />, getReadRoot() );
+}
+
+/**
+ * Verify ks-simpread-read tag exit
+ * 
+ * @return {boolean}
+ */
+function Exist() {
+    if ( $root.find( rdclsjq ).length > 0 ) {
+        ReadCtlAdapter( "setting" );
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -113,4 +138,4 @@ function getReadRoot() {
     return $( rdclsjq )[0];
 }
 
-export { Render };
+export { Render, Exist };

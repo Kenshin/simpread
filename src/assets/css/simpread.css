@@ -1,5 +1,5 @@
 /**
- *  Focus style
+ *  Focus: Focus style
  */
 .ks-simpread-focus {
     overflow: visible;
@@ -10,7 +10,7 @@
 }
 
 /**
- *  Background style
+ *  Focus: Background style
  */
 .ks-simpread-bg {
     display: block;
@@ -31,7 +31,7 @@
 }
 
 /**
- *  Control bar style
+ *  Focus: Control bar style
  */
 sr-focus-ctl {
     position: fixed;
@@ -414,6 +414,11 @@ sr-opt-item[sr-type="exclude"] textarea:focus {
     -webkit-animation: readmodeshow 0.5s ease;
 }
 
+.ks-simpread-read-hide {
+    -webkit-animation: readmodehide 0.3s ease;
+    position: fixed;
+}
+
 @-webkit-keyframes readmodeshow {
     from {
         opacity: 0;
@@ -423,6 +428,21 @@ sr-opt-item[sr-type="exclude"] textarea:focus {
         opacity: 1;
         top: 0;
     }
+}
+
+@-webkit-keyframes readmodehide {
+    from {
+        opacity: 1;
+        top: 0;
+    }
+    to {
+        opacity: 0;
+        top: 10000px;
+    }
+}
+
+.ks-simpread-body-hide {
+    display: none;
 }
 
 .sr-rd-font {
@@ -451,4 +471,15 @@ sr-read {
 
 sr-rd-title, sr-rd-desc, sr-rd-content {
     width: 100%;
+}
+
+/**
+ *  Read: Control bar
+ */
+sr-read-ctl {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100%;
 }
