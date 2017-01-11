@@ -62,13 +62,18 @@ function focuseMode() {
         sel, range, node, tag,
         target;
 
+    if ( read.Exist(false) ) {
+        new Notify().Render( 1, "请先退出阅读模式，才能进入聚焦模式。" );
+        return;
+    }
+
     if ( storage.VerifyCur( mode.focus ) ) {
          storage.Setcur( mode.focus );
     }
     target = selector( storage.current.site.include );
 
     // uniqueness verification
-    if ( focus.Exist() ) return;
+    if ( focus.Exist(true) ) return;
 
     // get tag from chrome storage
     if ( target ) $focus = $( "body" ).find( target );
@@ -122,6 +127,11 @@ function fixFocus( $focus ) {
 function readMode() {
     console.log( "=== simpread read mode active ===" )
 
+    if ( focus.Exist(false) ) {
+        new Notify().Render( 1, "请先退出聚焦模式，才能进入阅读模式。" );
+        return;
+    }
+
     if ( storage.VerifyCur( mode.read ) ) {
         storage.Setcur( mode.read );
     }
@@ -131,6 +141,8 @@ function readMode() {
         //TO-DO
         return;
     }
+
+    if ( read.Exist(true) ) return;
 
     read.Render();
 }

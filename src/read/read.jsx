@@ -69,9 +69,9 @@ function Render() {
  * 
  * @return {boolean}
  */
-function Exist() {
+function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        ReadCtlAdapter( "setting" );
+        if (action) ReadCtlAdapter( "setting" );
         return true;
     } else {
         return false;
