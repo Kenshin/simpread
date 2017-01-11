@@ -32,7 +32,9 @@ sr-rd-content {
     text-align: justify;
 }
 
-sr-rd-content sr-rd-p {
+sr-rd-content sr-rd-p,
+sr-rd-content sr-rd-span,
+sr-rd-content sr-rd-div  {
     display: block;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
@@ -41,6 +43,9 @@ sr-rd-content sr-rd-p {
     margin: 10px;
 }
 
+sr-rd-content p,
+sr-rd-content span,
+sr-rd-content div,
 sr-rd-content img {
     border: 0;
     margin: 10px;
