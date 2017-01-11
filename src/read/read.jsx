@@ -66,7 +66,7 @@ function wrap( site ) {
           include = util.selector( site.include );
     wrapper.title   = $root.find( title ).text().trim();
     wrapper.desc    = $root.find( desc ).text().trim();
-    wrapper.include = formatHtml($root.find( include ).html());
+    wrapper.include = rules($root.find( include ).html());
     //util.excludeStyle( $root, site.exclude, "hide" );
     return wrapper;
 }
@@ -77,11 +77,10 @@ function wrap( site ) {
  * @param  {string} html string
  * @return {string} format html string
  */
-function formatHtml( html ) {
-    return html.trim().toLowerCase()
-            .replace( / style="[a-z0-9-_: ;#.]+"/g, "" )
-            .replace( /<\/?[0-9a-z]+/g, item => {
-                if ( !item.includes( "img" ) ) {
+function rules( html ) {
+    return html.trim().replace( / style="[a-zA-Z0-9-_: ;#.]+"/g, "" );
+            /*.replace( /<\/?[0-9a-z]+/g, item => {
+                if ( [ "<p", "<div", "<span" ].includes( item ) ) {
                     if ( item[1] == "/" ) {
                         item = "</sr-rd-" + item.substr(2);
                     } else {
@@ -90,7 +89,7 @@ function formatHtml( html ) {
                 }
                 console.log(item)
                 return item;
-            });
+            })*/
 }
 
 /*
