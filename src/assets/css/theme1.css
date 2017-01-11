@@ -1,4 +1,8 @@
 
+/**
+ * Github style
+ */
+
 .sr-rd-theme-bg {
     background-color: #fff;
 }
@@ -14,14 +18,20 @@ sr-rd-title {
 }
 
 sr-rd-desc {
-    font-style:italic;
-    font-size:1.1em;
-    line-height:1.8em;
-    padding-left:1em;
-    border-left:4px solid #D5D5D5;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 1.5rem;
+    padding: 0 15px;
+
+    font-style:italic;
+    font-size:1.1em;
+    line-height:1.8em;
+
+    text-align: left;
+
+    border-left: 4px solid #dddddd;
+    color: #777777;
+
 }
 
 sr-rd-content {
@@ -32,20 +42,17 @@ sr-rd-content {
     text-align: justify;
 }
 
-sr-rd-content sr-rd-p,
-sr-rd-content sr-rd-span,
-sr-rd-content sr-rd-div  {
+sr-rd-content p,
+sr-rd-content span,
+sr-rd-content div  {
     display: block;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
-    margin: 10px;
+    margin: 10px 0 10px;
 }
 
-sr-rd-content p,
-sr-rd-content span,
-sr-rd-content div,
 sr-rd-content img {
     border: 0;
     margin: 10px;
