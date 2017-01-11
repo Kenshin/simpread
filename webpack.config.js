@@ -145,9 +145,12 @@ const webpack = require( 'webpack' ),
           foucsetting: __dirname + '/src/focus/setting.js',
 
           read       : __dirname + '/src/read/read.jsx',
+          readctlbar : __dirname + '/src/read/controlbar.jsx',
+          readsetting: __dirname + '/src/read/setting.js',
 
           dialog     : __dirname + '/src/option/dialog.jsx',
           focusopt   : __dirname + '/src/option/focus.jsx',
+          readopt    : __dirname + '/src/option/read.jsx',
 
           theme1     : '../assets/css/theme1.css',
           theme2     : '../assets/css/theme2.css',
