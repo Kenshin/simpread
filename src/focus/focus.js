@@ -87,12 +87,12 @@ var fcontrol = require( "controlbar" ),
     /*
         Verify ks-simpread-focus tag exit
     */
-    Focus.prototype.Verify = function() {
+    Focus.prototype.Exist = function() {
         if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
             fcontrol.Click( "setting" );
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 

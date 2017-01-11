@@ -68,7 +68,7 @@ function focuseMode() {
     target = selector( storage.current.site.include );
 
     // uniqueness verification
-    if ( !focus.Verify() ) return;
+    if ( focus.Exist() ) return;
 
     // get tag from chrome storage
     if ( target ) $focus = $( "body" ).find( target );
