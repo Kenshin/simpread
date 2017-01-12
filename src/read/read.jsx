@@ -143,16 +143,19 @@ function beautify( $target ) {
               $parent = $target.parent(),
               tagname = $parent[0].tagName.toLowerCase();
 
+        // remove all image tag
+        if ( src ) remove(src);
+
         // fix image overflow
-        $target.one( "load", ()=>fixOverflowImgsize() );
-        
+        //$target.one( "load", ()=>fixOverflowImgsize() );
+
         // adapter
-        if ( src && src.includes( "36kr.com" )) remove(src);     // adpater 36kr
-        if ( src && src.includes( "pingwest.com" )) remove(src); // adpater pingwest
         if ( lazysrc  ) remove(lazysrc);                         // adapter qdaily
         if ( original ) remove(original);                        // adapter cnbeta
-        if ( src && storage.current.site.name == "ifanr.com" ) remove(src); // adapter ifanr
-        if ( src && storage.current.site.name == "jiemian.com" ) remove(src); // adapter ifanr
+        //if ( src && src.includes( "36kr.com" )) remove(src);     // adpater 36kr
+        //if ( src && src.includes( "pingwest.com" )) remove(src); // adpater pingwest
+        //if ( src && storage.current.site.name == "ifanr.com" ) remove(src); // adapter ifanr
+        //if ( src && storage.current.site.name == "jiemian.com" ) remove(src); // adapter ifanr
 
         // remove other class and add center class
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
