@@ -27,7 +27,7 @@ sr-rd-desc {
     font-size:1.1em;
     line-height:1.8em;
 
-    text-align: left;
+    text-align: justify;
 
     border-left: 4px solid #dddddd;
     color: #777777;
@@ -51,6 +51,8 @@ sr-rd-content div  {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     margin: 10px 0 10px;
+
+    color: rgb(51, 51, 51);
 }
 
 sr-rd-content img {
