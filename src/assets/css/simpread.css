@@ -472,6 +472,14 @@ sr-rd-title, sr-rd-desc, sr-rd-content {
     width: 100%;
 }
 
+.sr-rd-content-center {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
+}
+
 /**
  *  Read: Control bar
  */
