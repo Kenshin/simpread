@@ -148,6 +148,7 @@ function beautify( $target ) {
             tagname = $parent[0].tagName.toLowerCase();
         }
         $parent.removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
+        if ( storage.current.site.name != "sspai.com" ) $parent.addClass( "sr-rd-content-img" );
 
     });
 }
