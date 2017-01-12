@@ -86,12 +86,12 @@ function Exist( action = true ) {
  * @return {object} wrapper object
  */
 function wrap( site ) {
-    const wrapper  = Clone( site ),
-          title   = util.selector( site.title   ),
-          desc    = util.selector( site.desc    ),
-          include = util.selector( site.include );
+    const wrapper   = Clone( site ),
+          title     = util.selector( site.title   ),
+          desc      = util.selector( site.desc    ),
+          include   = util.selector( site.include );
     wrapper.title   = $root.find( title ).text().trim();
-    wrapper.desc    = $root.find( desc ).text().trim();
+    wrapper.desc    = $root.find( desc  ).text().trim();
     wrapper.include = rules($root.find( include ).html());
     return wrapper;
 }
