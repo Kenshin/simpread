@@ -4,10 +4,94 @@
         "url"     : "http://www.cnbeta.com/articles/",
         "title"   : "<h2 id='news_title'>",
         "desc"    : "<div class='introduction'>",
-        "include" : "<div class='body' style=''>",
+        "include" : "<div class='content'>",
         "exclude" : [
             "<div class='clearfix' style='margin:0 10px;'>",
             "<div class='rating_box clearfix'>"
+        ]
+    },{
+        "name"    : "qdaily.com",
+        "url"     : "http://www.qdaily.com/articles/",
+        "title"   : "<h2 class='title'>",
+        "desc"    : "<p class='excerpt'>",
+        "include" : "<div class='article-detail-bd'>",
+        "exclude" : [
+            "<div class='author-share clearfix'>"
+        ]
+    },{
+        "name"    : "36kr.com",
+        "url"     : "http://36kr.com/p/",
+        "title"   : "<title>",
+        "desc"    : "<section class='summary'>",
+        "include" : "<section class='textblock'>",
+        "exclude" : [
+            "<div class='author-panel'>",
+            "<section class='article-footer-label'>",
+            "<section class='report-code-section'>",
+            "<section class='single-post-tags'>",
+            "<div class='share-nav'>"
+        ]
+    },{
+        "name"    : "pingwest.com",
+        "url"     : "http://www.pingwest.com/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='sc-container'>",
+        "exclude" : [
+            "<p class='post-footer-wx'>"
+        ]
+    },{
+        "name"    : "jiemian.com",
+        "url"     : "http://www.jiemian.com/article/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-main' style=''>",
+        "exclude" : [
+            "<div class='share-view' style='top: 1544px;'>",
+            "<div class='article-btn'>",
+            "<div class='article-footer'"
+        ]
+    },{
+        "name"    : "thepaper.cn",
+        "url"     : "http://www.thepaper.cn/",
+        "title"   : "<h1 class='news_title'>",
+        "desc"    : "",
+        "include" : "<div class='news_txt' data-size='standard' style=''>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "vice.cn",
+        "url"     : "http://www.vice.cn/read/",
+        "title"   : "<h3 class='article-title'>",
+        "desc"    : "<div class='article-summary'>",
+        "include" : "<div class='article-body'>",
+        "exclude" : [
+            "<div class='contributor-list'>",
+            "<span class='site-signature-icon'></span>",
+            "<div class='social-share social-share-btm'>",
+            "<div class='article-copyright'>"
+        ]
+    },{
+        "name"    : "weixin.qq.com",
+        "url"     : "http://mp.weixin.qq.com/s/",
+        "title"   : "<h2 class='rich_media_title' id='activity-name'>",
+        "desc"    : "",
+        "include" : "<div class='rich_media_content' id='js_content' style=''>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "jandan.net",
+        "url"     : "http://jandan.net/2017/01/09/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='post f' style=''>",
+        "exclude" : [
+            "<p>",
+            "<div class='time_s'>",
+            "<span class='comment-big'>",
+            "<div class='star-rating>"
         ]
     }]
 }
