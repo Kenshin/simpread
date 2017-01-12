@@ -59,3 +59,22 @@ sr-rd-content img {
     border: 0;
     margin: 10px;
 }
+
+sr-rd-content blockquote {
+    position: relative;
+    margin: 0px;
+    background-color: rgba(0,0,0,0.05);
+    padding: 25px;
+    padding-left: 56px;
+    margin-bottom: 30px;
+}
+
+sr-rd-content blockquote:before {
+    content: '“';
+    position: absolute;
+    top: -9px;
+    left: 16px;
+    font-family: "Arial";
+    font-size: 80px;
+    color: rgba(0,0,0,0.15);
+}
