@@ -146,6 +146,7 @@ function beautify( $target ) {
         if ( src && src.includes( "pingwest.com" )) remove(src); // adpater pingwest
         if ( lazysrc  ) remove(lazysrc);                         // adapter qdaily
         if ( original ) remove(original);                        // adapter cnbeta
+        if ( src && storage.current.site.name == "ifanr.com" ) remove(src);
 
         // remove other class and add center class
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
