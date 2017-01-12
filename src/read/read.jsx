@@ -125,6 +125,7 @@ function rules( html ) {
 function beautify( $target ) {
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
+              src     = $target.attr( "src"      ),
               lazysrc = $target.attr( "data-src" ),
               original= $target.attr( "original" ),
               remove  = (src)=>{
@@ -136,16 +137,16 @@ function beautify( $target ) {
         let   $parent = $target.parent(),
               tagname = $parent[0].tagName.toLowerCase();
 
-        if ( lazysrc ) remove(lazysrc);
-        if ( original ) remove(original);
-        if ($parent.hasClass( "load-html-img" )) $parent.removeClass( "load-html-img" );
+        if ( src.includes( "pingwest.com" )) remove(src); // adpater pingwest
+        if ( lazysrc ) remove(lazysrc);                   // adapter qdaily
+        if ( original ) remove(original);                 // adapter cnbeta
+        if ($parent.hasClass( "load-html-img" )) $parent.removeClass( "load-html-img" ); // adapter 36kr
 
         // center
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
             $parent = $parent.parent();
             tagname = $parent[0].tagName.toLowerCase();
         }
-
         $parent.css({ "text-align" : "center" });
 
     });
