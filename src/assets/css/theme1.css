@@ -58,6 +58,7 @@ sr-rd-content div  {
 sr-rd-content img {
     border: 0;
     margin: 10px;
+    width: 100%;
 }
 
 sr-rd-content blockquote {
