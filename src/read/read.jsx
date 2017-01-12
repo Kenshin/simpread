@@ -120,31 +120,25 @@ function rules( html ) {
 /**
  * Beautify html
  * 
- * @param {jquery} 
+ * @param {jquery}
  */
 function beautify( $target ) {
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
               lazysrc = $target.attr( "data-src" ),
-              original= $target.attr( "original" );
+              original= $target.attr( "original" ),
+              remove  = (src)=>{
+                const img = $( "<img>" );
+                img.attr( "src", src );
+                $parent.append( img );
+                $target.remove();
+        };
         let   $parent = $target.parent(),
               tagname = $parent[0].tagName.toLowerCase();
 
-        // remove lazy src
-        if ( lazysrc ) {
-            const img = $( "<img>" );
-            img.attr( "src", lazysrc );
-            $parent.append( img );
-            $target.remove();
-        }
-
-        // remove lazy src
-        if ( original ) {
-            const img = $( "<img>" );
-            img.attr( "src", original );
-            $parent.append( img );
-            $target.remove();
-        }
+        if ( lazysrc ) remove(lazysrc);
+        if ( original ) remove(original);
+        if ($parent.hasClass( "load-html-img" )) $parent.removeClass( "load-html-img" );
 
         // center
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
