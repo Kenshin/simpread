@@ -129,17 +129,22 @@ function beautify( $target ) {
               lazysrc = $target.attr( "data-src" ),
               original= $target.attr( "original" ),
               remove  = (src)=>{
-                const img = $( "<img>" );
-                img.attr( "src", src );
-                $parent.append( img );
+                $img  = $( "<img>" );
+                $img.attr( "src", src );
+                $parent.append( $img );
                 $target.remove();
-        };
-        let   $parent = $target.parent(),
+              },
+              fixOverflowImgsize = () => {
+                  if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
+                  if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
+              };
+        let   $img    = $target,
+              $parent = $target.parent(),
               tagname = $parent[0].tagName.toLowerCase();
 
         if ( src && src.includes( "36kr.com" )) remove(src);     // adpater 36kr
         if ( src && src.includes( "pingwest.com" )) remove(src); // adpater pingwest
-        if ( lazysrc ) remove(lazysrc);                          // adapter qdaily
+        if ( lazysrc  ) remove(lazysrc);                         // adapter qdaily
         if ( original ) remove(original);                        // adapter cnbeta
 
         // remove other class and add center class
@@ -148,8 +153,7 @@ function beautify( $target ) {
             tagname = $parent[0].tagName.toLowerCase();
         }
         $parent.removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
-        if ( storage.current.site.name != "sspai.com" ) $parent.addClass( "sr-rd-content-img" );
-
+        fixOverflowImgsize();
     });
 }
 
