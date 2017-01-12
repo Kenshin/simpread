@@ -137,17 +137,17 @@ function beautify( $target ) {
         let   $parent = $target.parent(),
               tagname = $parent[0].tagName.toLowerCase();
 
-        if ( src.includes( "pingwest.com" )) remove(src); // adpater pingwest
-        if ( lazysrc ) remove(lazysrc);                   // adapter qdaily
-        if ( original ) remove(original);                 // adapter cnbeta
-        if ($parent.hasClass( "load-html-img" )) $parent.removeClass( "load-html-img" ); // adapter 36kr
+        if ( src && src.includes( "36kr.com" )) remove(src);     // adpater 36kr
+        if ( src && src.includes( "pingwest.com" )) remove(src); // adpater pingwest
+        if ( lazysrc ) remove(lazysrc);                          // adapter qdaily
+        if ( original ) remove(original);                        // adapter cnbeta
 
-        // center
+        // remove other class and add center class
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
             $parent = $parent.parent();
             tagname = $parent[0].tagName.toLowerCase();
         }
-        $parent.css({ "text-align" : "center" });
+        $parent.removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
 
     });
 }
