@@ -1,3 +1,4 @@
+console.log( "=== simpread util load ===" )
 
 /*
     Set include style
@@ -53,7 +54,7 @@ function excludeStyle( $target, exclude, type ) {
 function getSelector( html ) {
     const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
     if ( item && item.length > 0 ) {
-        let [tag, prop, value] = item[0].trim().replace( /['"<]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
+        let [tag, prop, value] = item[0].trim().replace( /['"<>]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
         if      ( !prop ) prop = tag;
         else if ( prop.toLowerCase() === "class") prop = `${tag}.${value}`;
         else if ( prop.toLowerCase() === "id"   ) prop = `${tag}#${value}`;
