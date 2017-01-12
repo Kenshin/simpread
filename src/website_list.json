@@ -70,6 +70,15 @@
             "<img id='s1' >"
         ]
     },{
+        "name"    : "dgtle.com",
+        "url"     : "http://www.dgtle.com/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='view_content'>",
+        "exclude" : [
+            "<div id='comments_top'>"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
