@@ -52,6 +52,24 @@
             "<div class='article-footer'"
         ]
     },{
+        "name"    : "ifanr.com",
+        "url"     : "http://www.ifanr.com/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "sspai.com",
+        "url"     : "http://sspai.com/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<img id='s1' >"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
