@@ -82,6 +82,7 @@ const webpack = require( 'webpack' ),
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
+          './src/vender/pangu.min.js',
           './src/vender/mousetrap.min.js',
 
           './src/vender/notify/notify.js'
@@ -131,8 +132,9 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
-          jquery     : __dirname + '/src/vender/jquery-2.1.1.min',
-          mousetrap  : __dirname + '/src/vender/mousetrap.min',
+          jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
+          mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
+          pangu      : __dirname + '/src/vender/pangu.min.js',
 
           notify     : __dirname + '/src/vender/notify/notify.js',
 

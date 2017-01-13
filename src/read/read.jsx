@@ -1,5 +1,6 @@
 console.log( "=== simpread read load ===" )
 
+import pangu from 'pangu';
 import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -102,9 +103,9 @@ function wrap( site ) {
           title     = util.selector( site.title   ),
           desc      = util.selector( site.desc    ),
           include   = util.selector( site.include );
-    wrapper.title   = $root.find( title ).text().trim();
-    wrapper.desc    = $root.find( desc  ).text().trim();
-    wrapper.include = rules($root.find( include ).html());
+    wrapper.title   = pangu.spacing($root.find( title ).text().trim());
+    wrapper.desc    = pangu.spacing($root.find( desc  ).text().trim());
+    wrapper.include = pangu.spacing(rules($root.find( include ).html()));
     return wrapper;
 }
 
