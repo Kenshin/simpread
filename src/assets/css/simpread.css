@@ -480,6 +480,14 @@ sr-rd-title, sr-rd-desc, sr-rd-content {
     -webkit-box-orient: vertical;
 }
 
+sr-rd-content img {
+    border: 0;
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #bbb;
+}
+
 .sr-rd-content-img {
     width: 100%;
     height: auto;

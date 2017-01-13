@@ -55,10 +55,10 @@ sr-rd-content div  {
     color: rgb(51, 51, 51);
 }
 
-sr-rd-content img {
+/*sr-rd-content img {
     border: 0;
     margin: 10px;
-}
+}*/
 
 sr-rd-content pre {
     white-space: pre-wrap;
