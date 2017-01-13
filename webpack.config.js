@@ -117,7 +117,7 @@ const webpack = require( 'webpack' ),
             }
         },
         { test: /\.css$/,       loader: 'style!css'      },
-        { test: /\.(png|jpg)$/, loader: 'url?limit=8192' },
+        { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288' },
         {
           test  : require.resolve( './src/vender/jquery-2.1.1.min.js' ),
           loader: 'expose?jQuery!expose?$'
