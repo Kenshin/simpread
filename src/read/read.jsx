@@ -125,37 +125,25 @@ function rules( html ) {
 function beautify( $target ) {
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
+              $img    = $( "<img>" ),
               src     = $target.attr( "src"      ),
               lazysrc = $target.attr( "data-src" ),
               original= $target.attr( "original" ),
-              remove  = (src)=>{
-                $img  = $( "<img>" );
-                $img.attr( "src", src );
-                $img.one( "load", ()=>fixOverflowImgsize() );
-                $parent.append( $img );
-                $target.remove();
-              },
               fixOverflowImgsize = () => {
                   if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
                   if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               };
-        let   $img    = $target,
-              $parent = $target.parent(),
-              tagname = $parent[0].tagName.toLowerCase();
+        let  newsrc, newwidth, newheight,
+             $parent = $target.parent(),
+             tagname = $parent[0].tagName.toLowerCase();
 
-        // remove all image tag
-        if ( src ) remove(src);
-
-        // fix image overflow
-        //$target.one( "load", ()=>fixOverflowImgsize() );
-
-        // adapter
-        if ( lazysrc  ) remove(lazysrc);                         // adapter qdaily
-        if ( original ) remove(original);                        // adapter cnbeta
-        //if ( src && src.includes( "36kr.com" )) remove(src);     // adpater 36kr
-        //if ( src && src.includes( "pingwest.com" )) remove(src); // adpater pingwest
-        //if ( src && storage.current.site.name == "ifanr.com" ) remove(src); // adapter ifanr
-        //if ( src && storage.current.site.name == "jiemian.com" ) remove(src); // adapter ifanr
+        // remove current image and create new image object
+        newsrc = original ? original : src;
+        newsrc = lazysrc  ? lazysrc  : newsrc;
+        $img.attr( "src", newsrc );
+        $img.one( "load", ()=>fixOverflowImgsize() );
+        $parent.append( $img );
+        $target.remove();
 
         // remove other class and add center class
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
@@ -163,6 +151,7 @@ function beautify( $target ) {
             tagname = $parent[0].tagName.toLowerCase();
         }
         $parent.removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
+
     });
 }
 
