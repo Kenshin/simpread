@@ -18,8 +18,9 @@ class Read extends React.Component {
     }
 
     componentDidMount() {
+        pangu.spacingElementByClassName( rdcls );
         util.exclude( $("sr-read"), this.props.wrapper.exclude, "delete" );
-        beautify( $("sr-read"));
+        beautify( $( "sr-read" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
     }
 
@@ -103,31 +104,10 @@ function wrap( site ) {
           title     = util.selector( site.title   ),
           desc      = util.selector( site.desc    ),
           include   = util.selector( site.include );
-    wrapper.title   = pangu.spacing($root.find( title ).text().trim());
-    wrapper.desc    = pangu.spacing($root.find( desc  ).text().trim());
-    wrapper.include = pangu.spacing(rules($root.find( include ).html()));
+    wrapper.title   = query( title );
+    wrapper.desc    = query( desc  );
+    wrapper.include = query( include, "html" );
     return wrapper;
-}
-
-/**
- * Format html
- * 
- * @param  {string} html string
- * @return {string} format html string
- */
-function rules( html ) {
-    return html.trim().replace( / style="[a-zA-Z0-9-_: ;#.]+"/g, "" );
-            /*.replace( /<\/?[0-9a-z]+/g, item => {
-                if ( [ "<p", "<div", "<span" ].includes( item ) ) {
-                    if ( item[1] == "/" ) {
-                        item = "</sr-rd-" + item.substr(2);
-                    } else {
-                        item = "<sr-rd-" + item.substr(1);
-                    }
-                }
-                console.log(item)
-                return item;
-            })*/
 }
 
 /**
@@ -174,11 +154,42 @@ function beautify( $target ) {
                 tagname = $parent[0].tagName.toLowerCase();
             }
         }
-        $parent.removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
+        $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
     });
     if ( storage.current.site.name == "dgtle.com" ) {
         $target.find( "blockquote" ).parent().removeClass( "quote" );
     }
 }
+
+/**
+ * Query content usage jquery
+ * 
+ * @param  {string} query content
+ * @param  {string} type, incldue: text and html
+ * @return {string} query result
+ */
+function query( content, type = "text" ) {
+    if ( util.specTest( content ) ) {
+        content = util.specAction( content );
+    } else if ( type == "html" ) {
+        content = $root.find( content ).html().trim();
+    } else {
+        content = $root.find( content ).text().trim();
+    }
+    return content;
+}
+
+/**
+ * Format html, include:
+ * - remove all tag style property
+ * 
+ * @param  {string} html string
+ * @return {string} format html string
+ */
+/*
+function rules( html ) {
+    return html.trim().replace( / style="[a-zA-Z0-9-_: ;#.]+"/g, "" );
+}
+*/
 
 export { Render, Exist };
