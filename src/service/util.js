@@ -29,7 +29,13 @@ function includeStyle( $target, style, cls, type ) {
 function excludeStyle( $target, exclude, type ) {
     var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
     for ( i; i < len; i++ ) {
-        tag  = getSelector( exclude[i] );
+        const content = exclude[i];
+        if ( specTest( content )) {
+            const del = specAction( content );
+            console.log("asdfadfasdfasdfasdfsdddd", del)
+            continue;
+        };
+        tag  = getSelector( content );
         if ( tag ) tags.push( tag )
     }
     if ( type == "delete" )   $target.find( tags.join(",") ).hide();
@@ -52,6 +58,7 @@ function excludeStyle( $target, exclude, type ) {
  *
  */
 function getSelector( html ) {
+    if ( specTest( html )) return html;
     const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
     if ( item && item.length > 0 ) {
         let [tag, prop, value] = item[0].trim().replace( /['"<>]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
@@ -64,8 +71,48 @@ function getSelector( html ) {
     }
 }
 
+/**
+ * Verify special action, action include:
+   - [[{juqery code}]] // new Function
+   - [['text']]        // remove '<text>'
+   - [[/regexp/]]      // regexp 
+ * 
+ * @param  {string} verify content
+ * @return {boolen} verify result
+ */
+function specTest( content ) {
+    return /^(\[\[)[{'/]{1}[ \S]+[}'/]\]\]{1}($)/g.test( content );
+}
+
+/**
+ * Exec special action, action include: @see specTest
+ * 
+ * @param  {string} content
+ * @return {string} result
+ */
+function specAction( content ) {
+    let value = content.replace( /(^)\[\[|\]\]$/g, "" );
+    switch (value[0]) {
+        case "{":
+            value   = value.replace( /^{|}$/g, "" );
+            content = ( v=>new Function( `return ${v}` )() )(value);
+            break;
+        case "'":
+            content = value.replace( /^'|'$/g, "" );
+            break;
+        case "/":
+            break;
+        default:
+            console.error( "Not support current action.", content )
+            break;
+    }
+    return content;
+}
+
 export {
     includeStyle as include,
     excludeStyle as exclude,
-    getSelector  as selector
+    getSelector  as selector,
+    specTest     as specTest,
+    specAction   as specAction
 }
