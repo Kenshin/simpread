@@ -125,6 +125,7 @@ function rules( html ) {
 function beautify( $target ) {
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
+              $orgpar = $target.parent(),
               $img    = $( "<img>" ),
               src     = $target.attr( "src"      ),
               lazysrc = $target.attr( "data-src" ),
@@ -149,6 +150,14 @@ function beautify( $target ) {
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
             $parent = $parent.parent();
             tagname = $parent[0].tagName.toLowerCase();
+            if ( tagname == "sr-read" ) {
+                console.log($img[0])
+                const $p = $( "<p>" );
+                $p.append( $img );
+                $orgpar.append( $p );
+                $parent = $p;
+                tagname = $parent[0].tagName.toLowerCase();
+            }
         }
         $parent.removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
 
