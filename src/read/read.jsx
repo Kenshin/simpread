@@ -140,11 +140,12 @@ function beautify( $target ) {
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
-              $img    = $( "<img>" ),
+              $img    = $( "<img class='sr-rd-content-img-load'>" ),
               src     = $target.attr( "src"      ),
               lazysrc = $target.attr( "data-src" ),
               original= $target.attr( "original" ),
               fixOverflowImgsize = () => {
+                  $img.removeClass( "sr-rd-content-img-load" );
                   if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
                   if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               };

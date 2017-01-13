@@ -481,11 +481,21 @@ sr-rd-title, sr-rd-desc, sr-rd-content {
 }
 
 sr-rd-content img {
-    border: 0;
     margin: 10px;
     padding: 5px;
     background: #fff;
     border: 1px solid #bbb;
+}
+
+.sr-rd-content-img-load {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    padding: 0;
+    border-style: none;
+    border-width: 0;
+    background-repeat: no-repeat;
+    background-image: url( "../images/loading.gif" );
 }
 
 .sr-rd-content-img {
