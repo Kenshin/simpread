@@ -151,7 +151,6 @@ function beautify( $target ) {
             $parent = $parent.parent();
             tagname = $parent[0].tagName.toLowerCase();
             if ( tagname == "sr-read" ) {
-                console.log($img[0])
                 const $p = $( "<p>" );
                 $p.append( $img );
                 $orgpar.append( $p );
