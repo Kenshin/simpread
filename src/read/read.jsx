@@ -66,6 +66,18 @@ function Render() {
 }
 
 /**
+ * Get read root
+ * 
+ * @return {jquery} read root jquery object
+ */
+function getReadRoot() {
+    if ( $root.find( rdclsjq ).length == 0 ) {
+        $root.append( bgtmpl );
+    }
+    return $( rdclsjq )[0];
+}
+
+/**
  * Verify ks-simpread-read tag exit
  * 
  * @return {boolean}
@@ -118,7 +130,9 @@ function rules( html ) {
 }
 
 /**
- * Beautify html
+ * Beautify html, include: 
+ * - all webiste image, remove old image and create new image
+ * - dgtle.com remove blockquote parent div class
  * 
  * @param {jquery}
  */
@@ -159,20 +173,10 @@ function beautify( $target ) {
             }
         }
         $parent.removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
-
     });
-}
-
-/**
- * Get read root
- * 
- * @return {jquery} read root jquery object
- */
-function getReadRoot() {
-    if ( $root.find( rdclsjq ).length == 0 ) {
-        $root.append( bgtmpl );
+    if ( storage.current.site.name == "dgtle.com" ) {
+        $target.find( "blockquote" ).parent().removeClass( "quote" );
     }
-    return $( rdclsjq )[0];
 }
 
 export { Render, Exist };
