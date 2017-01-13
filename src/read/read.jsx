@@ -133,7 +133,7 @@ function beautify( $target ) {
                   if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
                   if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               };
-        let  newsrc, newwidth, newheight,
+        let  newsrc,
              $parent = $target.parent(),
              tagname = $parent[0].tagName.toLowerCase();
 
