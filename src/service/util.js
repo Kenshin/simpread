@@ -31,7 +31,13 @@ function excludeStyle( $target, exclude, type ) {
     for ( i; i < len; i++ ) {
         const content = exclude[i];
         if ( specTest( content )) {
-            tag = specAction( content );
+             const [ value, type ] = specAction( content );
+             if ( type == 1 ) {
+                 tag = value;
+             } else if ( type == 2 ) {
+                 const str = $target.html().match( new RegExp( value, "g" ) ).join( "" );
+                 tag = `*[${str}]`;
+             }
         } else {
             tag = getSelector( content );
         }
@@ -88,30 +94,34 @@ function specTest( content ) {
  * Exec special action, action include: @see specTest
  * 
  * @param  {string} content
- * @return {string} result
+ * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// )
  */
 function specAction( content ) {
-    let value = content.replace( /(^)\[\[|\]\]$/g, "" );
+    let [ value, type ] = [ content.replace( /(^)\[\[|\]\]$/g, "" ) ];
     switch (value[0]) {
         case "{":
             value      = value.replace( /^{|}$/g, "" );
             content    = ( v=>new Function( `return ${v}` )() )(value);
+            type       = 0;
             break;
         case "'":
             content    = value.replace( /^'|'$/g, "" );
             const name = content.match(/^<[a-zA-Z0-9_-]+>/g).join("").replace( /<|>/g, "" );
             const str  = content.replace( /<[/a-zA-Z0-9_-]+>/g, "" );
             content    =  `${name}:contains(${str})`;
+            type       = 1;
             break;
         case "/":
             // *[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']
             content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" );
+            type       = 2;
             break;
         default:
             console.error( "Not support current action.", content )
+            type       = -1;
             break;
     }
-    return content;
+    return [ content, type ];
 }
 
 export {
