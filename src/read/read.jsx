@@ -18,10 +18,10 @@ class Read extends React.Component {
     }
 
     componentDidMount() {
-        pangu.spacingElementByClassName( rdcls );
-        util.exclude( $("sr-read"), this.props.wrapper.exclude, "delete" );
-        beautify( $( "sr-read" ));
+        util.exclude( $("sr-rd-content"), this.props.wrapper.exclude, "delete" );
+        beautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
+        pangu.spacingElementByClassName( rdcls );
     }
 
     constructor( props ) {
