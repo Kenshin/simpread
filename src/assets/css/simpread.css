@@ -440,7 +440,8 @@ sr-opt-item[sr-type="exclude"] textarea:focus {
     }
 }
 
-.ks-simpread-body-hide {
+.ks-simpread-body-hide,
+.sr-rd-content-exclude {
     display: none;
 }
 

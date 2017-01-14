@@ -154,7 +154,9 @@ function beautify( $target ) {
                 tagname = $parent[0].tagName.toLowerCase();
             }
         }
-        $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
+        if ( !$parent.hasClass( "sr-rd-content-exclude" ) ) {
+            $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
+        }
     });
     if ( storage.current.site.name == "dgtle.com" ) {
         $target.find( "blockquote" ).parent().removeClass( "quote" );

@@ -40,8 +40,8 @@ function excludeStyle( $target, exclude, type ) {
         tag  = getSelector( content );
         if ( tag ) tags.push( tag )
     }
-    if ( type == "delete" )   $target.find( tags.join(",") ).hide();
-    else if ( type == "add" ) $target.find( tags.join(",") ).show();
+    if ( type == "delete" )   $target.find( tags.join(",") ).addClass( "sr-rd-content-exclude" );
+    else if ( type == "add" ) $target.find( tags.join(",") ).removeClass( "sr-rd-content-exclude" );
 }
 
 /**
