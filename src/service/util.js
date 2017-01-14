@@ -31,8 +31,10 @@ function excludeStyle( $target, exclude, type ) {
     for ( i; i < len; i++ ) {
         const content = exclude[i];
         if ( specTest( content )) {
-            const del = specAction( content );
-            console.log("asdfadfasdfasdfasdfsdddd", del)
+            const del  = specAction( content );
+            const name = del.match(/^<[a-zA-Z0-9_-]+>/g).join("").replace( /<|>/g, "" );
+            const str  = del.replace( /<[/a-zA-Z0-9_-]+>/g, "" );
+            $target.find( `${name}:contains(${str})` ).remove();
             continue;
         };
         tag  = getSelector( content );
