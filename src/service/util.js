@@ -117,7 +117,7 @@ function specAction( content ) {
             break;
         case "/":
             // *[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']
-            content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" );
+            content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" ).replace( /'/g, '"' );
             type       = 2;
             break;
         default:
