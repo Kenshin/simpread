@@ -118,7 +118,7 @@ function wrap( site ) {
  * @param {jquery}
  */
 function beautify( $target ) {
-    $target.find( "img" ).map( ( index, item ) => {
+    $target.find( "img:not(.sr-rd-content-exclude)" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
               $img    = $( "<img class='sr-rd-content-img-load'>" ),
@@ -172,7 +172,7 @@ function beautify( $target ) {
  */
 function query( content, type = "text" ) {
     if ( util.specTest( content ) ) {
-        content = util.specAction( content );
+        content = util.specAction( content )[0];
     } else if ( type == "html" ) {
         content = $root.find( content ).html().trim();
     } else {
