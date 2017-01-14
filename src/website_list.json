@@ -70,7 +70,8 @@
         "include" : "<article>",
         "exclude" : [
             "<div class='c-appso-download'>",
-            "[['<strong>本文由让手机更好用</strong>']]"
+            "[['<strong>本文由让手机更好用</strong>']]",
+            "[[/src=\\S+(AppSo-qrcode-signature)\\S+/]]"
         ]
     },{
         "name"    : "sspai.com",
