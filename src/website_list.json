@@ -71,18 +71,21 @@
         "exclude" : [
             "<div class='c-appso-download'>",
             "[['<strong>本文由让手机更好用</strong>']]",
-            "[[/src=\\S+(AppSo-qrcode-signature)\\S+/]]",
+            "[[/src=\\S+(AppSo-qrcode-signature)\\S+'/]]",
             "[['<strong>▽</strong>']]",
-            "[[/src=\\S+(banner2)\\S+/]]"
+            "[[/src=\\S+(banner2)\\S+'/]]"
         ]
     },{
         "name"    : "sspai.com",
         "url"     : "http://sspai.com/",
-        "title"   : "<title>",
-        "desc"    : "",
+        "title"   : "[[{$($('body').find('h1.title')[0]).text()}]]",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
         "include" : "<div class='content'>",
         "exclude" : [
-            "<img id='s1' >"
+            "<img id='s1' >",
+            "[['<span>我们主张分享真实的产品体验</span>']]",
+            "[['<span>本文内容仅代表作者本人观点</span>']]",
+            "[[/src=\\S+(342459.png)\\S+'/]]"
         ]
     },{
         "name"    : "dgtle.com",
