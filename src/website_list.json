@@ -8,7 +8,7 @@
         "exclude" : [
             "<div class='clearfix' style='margin:0 10px;'>",
             "<div class='rating_box clearfix'>",
-            "[['[广告] 活动入口:']]"
+            "[['<strong>[广告]活动入口:</strong>']]"
         ]
     },{
         "name"    : "qdaily.com",
@@ -69,7 +69,8 @@
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
         "include" : "<article>",
         "exclude" : [
-            ""
+            "<div class='c-appso-download'>",
+            "[['<strong>本文由让手机更好用</strong>']]"
         ]
     },{
         "name"    : "sspai.com",
