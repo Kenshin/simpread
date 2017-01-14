@@ -27,16 +27,20 @@ function includeStyle( $target, style, cls, type ) {
  * @param {string} include: 'add' 'delete'
  */
 function excludeStyle( $target, exclude, type ) {
-    var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
-    for ( i; i < len; i++ ) {
-        const content = exclude[i];
+    let tags = [], tag = "";
+    for ( let content of exclude ) {
         if ( specTest( content )) {
              const [ value, type ] = specAction( content );
              if ( type == 1 ) {
                  tag = value;
              } else if ( type == 2 ) {
-                 const str = $target.html().match( new RegExp( value, "g" ) ).join( "" );
-                 tag = `*[${str}]`;
+                 const arr = $target.html().match( new RegExp( value, "g" ) );
+                 if ( arr && arr.length > 0 ) {
+                    const str = arr.join( "" );
+                    tag = `*[${str}]`;
+                 } else {
+                     tag = undefined;
+                 }
              }
         } else {
             tag = getSelector( content );
