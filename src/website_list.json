@@ -83,6 +83,7 @@
         "include" : "<div class='content'>",
         "exclude" : [
             "<img id='s1' >",
+            "<hr>",
             "[['<span>我们主张分享真实的产品体验</span>']]",
             "[['<span>本文内容仅代表作者本人观点</span>']]",
             "[[/src=\\S+(342459.png)\\S+'/]]"
@@ -95,6 +96,100 @@
         "include" : "<div id='view_content'>",
         "exclude" : [
             "<div id='comments_top'>"
+        ]
+    },{
+        "name"    : "daily.zhihu.com",
+        "url"     : "https://daily.zhihu.com/story/",
+        "title"   : "<h1 class='headline-title'>",
+        "desc"    : "",
+        "include" : "<div class='content' style=''>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "zhuanlan.zhihu.com",
+        "url"     : "https://zhuanlan.zhihu.com/p/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<section class='entry-content'> ",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "geekpark.net",
+        "url"     : "http://www.geekpark.net/topics/",
+        "title"   : "<h1 class='topic-title'>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<article class='article-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "jianshu.com",
+        "url"     : "http://www.jianshu.com/p/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div class='show-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "waerfa.com",
+        "url"     : "http://www.waerfa.com/",
+        "title"   : "<h1 class='Article__title'>",
+        "desc"    : "",
+        "include" : "<div class='Article__content Content'>",
+        "exclude" : [
+            "<div class='u-post-share-wrap'>"
+        ]
+    },{
+        "name"    : "mp.weixin.qq.com",
+        "url"     : "http://mp.weixin.qq.com/",
+        "title"   : "<h2 id='activity-name'>",
+        "desc"    : "",
+        "include" : "<div id='js_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "guokr.com",
+        "url"     : "http://www.guokr.com/article/",
+        "title"   : "<h1 id='articleTitle'>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div id='articleContent'>",
+        "exclude" : [
+            "<div class='article-extend'>",
+			"<p class='copyright'>"
+        ]
+    },{
+        "name"    : "zuimeia.com",
+        "url"     : "http://zuimeia.com/app/",
+        "title"   : "<span class='sub-title'>",
+        "desc"    : "<div class='short-des'>",
+        "include" : "<div id='article_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "jobbole.com",
+        "url"     : "http://blog.jobbole.com/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='entry'>",
+        "exclude" : [
+            "<div class='copyright-area'>",
+			"<blockquote class='rewards'>",
+			"<div class='post-adds'>",
+			"<div id='author-bio'>"
+        ]
+    },{
+        "name"    : "cnodejs.org",
+        "url"     : "https://cnodejs.org/topic/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='topic_content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "thepaper.cn",
@@ -116,15 +211,6 @@
             "<span class='site-signature-icon'></span>",
             "<div class='social-share social-share-btm'>",
             "<div class='article-copyright'>"
-        ]
-    },{
-        "name"    : "weixin.qq.com",
-        "url"     : "http://mp.weixin.qq.com/s/",
-        "title"   : "<h2 class='rich_media_title' id='activity-name'>",
-        "desc"    : "",
-        "include" : "<div class='rich_media_content' id='js_content' style=''>",
-        "exclude" : [
-            ""
         ]
     },{
         "name"    : "jandan.net",
