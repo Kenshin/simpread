@@ -31,14 +31,11 @@ function excludeStyle( $target, exclude, type ) {
     for ( i; i < len; i++ ) {
         const content = exclude[i];
         if ( specTest( content )) {
-            const del  = specAction( content );
-            const name = del.match(/^<[a-zA-Z0-9_-]+>/g).join("").replace( /<|>/g, "" );
-            const str  = del.replace( /<[/a-zA-Z0-9_-]+>/g, "" );
-            $target.find( `${name}:contains(${str})` ).remove();
-            continue;
-        };
-        tag  = getSelector( content );
-        if ( tag ) tags.push( tag )
+            tag = specAction( content );
+        } else {
+            tag = getSelector( content );
+        }
+        if ( tag ) tags.push( tag );
     }
     if ( type == "delete" )   $target.find( tags.join(",") ).addClass( "sr-rd-content-exclude" );
     else if ( type == "add" ) $target.find( tags.join(",") ).removeClass( "sr-rd-content-exclude" );
@@ -101,6 +98,9 @@ function specAction( content ) {
             break;
         case "'":
             content = value.replace( /^'|'$/g, "" );
+            const name = content.match(/^<[a-zA-Z0-9_-]+>/g).join("").replace( /<|>/g, "" );
+            const str  = content.replace( /<[/a-zA-Z0-9_-]+>/g, "" );
+            content    =  `${name}:contains(${str})`;
             break;
         case "/":
             break;
