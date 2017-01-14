@@ -72,7 +72,7 @@
             "<div class='c-appso-download'>",
             "[['<strong>本文由让手机更好用</strong>']]",
             "[[/src=\\S+(AppSo-qrcode-signature)\\S+/]]",
-            "[['<strong>扫码解锁</strong>']]",
+            "[['<strong>▽</strong>']]",
             "[[/src=\\S+(banner2)\\S+/]]"
         ]
     },{
