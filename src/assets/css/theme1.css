@@ -55,6 +55,18 @@ sr-rd-content div  {
     color: rgb(51, 51, 51);
 }
 
+sr-rd-content a {
+    color: #4183c4;
+    text-decoration: none;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+  text-decoration: underline;
+}
+
+
 /*sr-rd-content img {
     border: 0;
     margin: 10px;
