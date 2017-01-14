@@ -43,7 +43,6 @@ sr-rd-content {
 }
 
 sr-rd-content p,
-sr-rd-content span,
 sr-rd-content div  {
     display: block;
     -webkit-margin-before: 1em;
