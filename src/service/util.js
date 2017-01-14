@@ -74,7 +74,8 @@ function getSelector( html ) {
  * Verify special action, action include:
    - [[{juqery code}]] // new Function
    - [['text']]        // remove '<text>'
-   - [[/regexp/]]      // regexp 
+   - [[/regexp/]]      // regexp e.g. $("sr-rd-content").find( "*[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']" )
+
  * 
  * @param  {string} verify content
  * @return {boolen} verify result
@@ -93,16 +94,18 @@ function specAction( content ) {
     let value = content.replace( /(^)\[\[|\]\]$/g, "" );
     switch (value[0]) {
         case "{":
-            value   = value.replace( /^{|}$/g, "" );
-            content = ( v=>new Function( `return ${v}` )() )(value);
+            value      = value.replace( /^{|}$/g, "" );
+            content    = ( v=>new Function( `return ${v}` )() )(value);
             break;
         case "'":
-            content = value.replace( /^'|'$/g, "" );
+            content    = value.replace( /^'|'$/g, "" );
             const name = content.match(/^<[a-zA-Z0-9_-]+>/g).join("").replace( /<|>/g, "" );
             const str  = content.replace( /<[/a-zA-Z0-9_-]+>/g, "" );
             content    =  `${name}:contains(${str})`;
             break;
         case "/":
+            // *[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']
+            content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" );
             break;
         default:
             console.error( "Not support current action.", content )
