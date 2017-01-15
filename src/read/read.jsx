@@ -126,7 +126,7 @@ function beautify( $target ) {
               src     = $target.attr( "src" ),
               lazysrc = $target.attr( "data-src" ),
               zuimei  = $target.attr( "data-original" ),
-              original= $target.attr( "original" ),
+              cnbeta  = $target.attr( "original" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
                   if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
@@ -137,9 +137,9 @@ function beautify( $target ) {
              tagname = $parent[0].tagName.toLowerCase();
 
         // remove current image and create new image object
-        newsrc = original ? original : src;
-        newsrc = lazysrc  ? lazysrc  : newsrc;
-        newsrc = zuimei   ? zuimei   : newsrc;
+        newsrc = cnbeta  ? cnbeta  : src;
+        newsrc = lazysrc ? lazysrc : newsrc;
+        newsrc = zuimei  ? zuimei  : newsrc;
         $img.attr( "src", newsrc );
         $img.one( "load", ()=>fixOverflowImgsize() );
         $parent.append( $img );
