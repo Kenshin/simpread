@@ -115,6 +115,7 @@ function wrap( site ) {
  * - task: all webiste image, remove old image and create new image
  * - task: all [sr-rd-content-exclude] remove style
  * - task: all webiste blockquote, remove style
+ * - task: all webiste iframe, embed add center style
  * 
  * @param {jquery}
  */
@@ -182,6 +183,9 @@ function beautify( $target ) {
            $parent.removeClass( "quote" );
         }
     });
+    $target.find( "iframe, embed" ).map( ( index, item )=> {
+        $(item).wrap( "<div class='sr-rd-content-center'></div>" );
+    })
 }
 
 /**
