@@ -144,8 +144,15 @@ function beautify( $target ) {
         $img.one( "load", ()=>fixOverflowImgsize() );
         $parent.append( $img );
         $target.remove();
+        $img.wrap( "<div class='sr-rd-content-center'></div>" );
 
-        // remove other class and add center class
+        // origin style
+        if ( $parent[0].tagName.toLowerCase() !== "sr-read" ) {
+            $img.parent().unwrap();
+        }
+
+        // beautify style
+        /* remove other class and add center class
         while ( ![ "p", "div", "span" ].includes( tagname ) ) {
             $parent = $parent.parent();
             tagname = $parent[0].tagName.toLowerCase();
@@ -160,6 +167,7 @@ function beautify( $target ) {
         if ( !$parent.hasClass( "sr-rd-content-exclude" ) ) {
             $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
         }
+        */
     });
     $target.find( "sr-rd-content-exclude" ).map( ( index, item ) => {
         $(item).removeAttr( "style" );
