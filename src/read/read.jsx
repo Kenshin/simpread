@@ -123,8 +123,9 @@ function beautify( $target ) {
         const $target = $(item),
               $orgpar = $target.parent(),
               $img    = $( "<img class='sr-rd-content-img-load'>" ),
-              src     = $target.attr( "src"      ),
+              src     = $target.attr( "src" ),
               lazysrc = $target.attr( "data-src" ),
+              zuimei  = $target.attr( "data-original" ),
               original= $target.attr( "original" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
@@ -138,6 +139,7 @@ function beautify( $target ) {
         // remove current image and create new image object
         newsrc = original ? original : src;
         newsrc = lazysrc  ? lazysrc  : newsrc;
+        newsrc = zuimei   ? zuimei   : newsrc;
         $img.attr( "src", newsrc );
         $img.one( "load", ()=>fixOverflowImgsize() );
         $parent.append( $img );
