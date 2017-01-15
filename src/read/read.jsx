@@ -112,9 +112,9 @@ function wrap( site ) {
 
 /**
  * Beautify html, include: 
- * - all webiste image, remove old image and create new image
- * - dgtle.com remove blockquote parent div class
- * - all [img.sr-rd-content-exclude] remove style
+ * - task: all webiste image, remove old image and create new image
+ * - task: all [sr-rd-content-exclude] remove style
+ * - task: all webiste blockquote, remove style
  * 
  * @param {jquery}
  */
@@ -161,12 +161,19 @@ function beautify( $target ) {
             $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
         }
     });
-    $target.find( "img.sr-rd-content-exclude" ).map( ( index, item ) => {
+    $target.find( "sr-rd-content-exclude" ).map( ( index, item ) => {
         $(item).removeAttr( "style" );
     });
-    if ( storage.current.site.name == "dgtle.com" ) {
-        $target.find( "blockquote" ).parent().removeClass( "quote" );
-    }
+    $target.find( "blockquote" ).map( ( index, item ) => {
+        const $target = $(item),
+              $parent = $target.parent();
+
+        $target.removeAttr( "style" );
+
+        if ( storage.current.site.name == "dgtle.com" ) {
+           $parent.removeClass( "quote" );
+        }
+    });
 }
 
 /**
