@@ -2,6 +2,7 @@ console.log( "=== simpread read load ===" )
 
 import pangu       from 'pangu';
 import ProgressBar from 'readschedule';
+import Footer      from 'readfooter';
 
 import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
@@ -59,6 +60,7 @@ class Read extends React.Component {
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
+                <Footer />
                 <ReadCtlbar exit={ ()=> this.exit() } />
             </sr-read>
         )

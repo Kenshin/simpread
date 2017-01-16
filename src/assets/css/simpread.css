@@ -519,6 +519,53 @@ sr-rd-content img {
 }
 
 /**
+* Read mode Footer
+ */
+sr-rd-footer {
+    margin-top: 10px;
+    padding: 40px 0 30px;
+    text-align: center;
+    border-top: 1px solid #E0E0E0;
+    clear: both;
+}
+
+sr-rd-footer-end {
+    display: block;
+    width: 70px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: initial;
+    color: #fff;
+    background: #424242;
+}
+
+sr-rd-footer p {
+    display: block;
+    padding: 0;
+    margin-bottom: 20px;
+    min-height: 24px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #787878;
+}
+
+sr-rd-footer p a {
+    text-decoration: none;
+    color: #787878;
+    font-size: 17px;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+    color: #787878;
+    text-decoration: underline;
+}
+
+/**
  *  Read: Control bar
  */
 sr-read-ctl {
