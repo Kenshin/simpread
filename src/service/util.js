@@ -20,13 +20,13 @@ function includeStyle( $target, style, cls, type ) {
 }
 
 /**
- * Set exclude style
+ * Get exclude tags list
  * 
- * @param {jquery} jquery object
- * @param {array}  hidden html
- * @param {string} include: 'add' 'delete'
+ * @param  {jquery} jquery object
+ * @param  {array}  hidden html
+ * @return {string} tags list string
  */
-function excludeStyle( $target, exclude, type ) {
+function excludeSelector( $target, exclude ) {
     let tags = [], tag = "";
     for ( let content of exclude ) {
         if ( specTest( content )) {
@@ -47,8 +47,7 @@ function excludeStyle( $target, exclude, type ) {
         }
         if ( tag ) tags.push( tag );
     }
-    if ( type == "delete" )   $target.find( tags.join(",") ).addClass( "sr-rd-content-exclude" );
-    else if ( type == "add" ) $target.find( tags.join(",") ).removeClass( "sr-rd-content-exclude" );
+    return tags.join( "," );
 }
 
 /**
@@ -130,7 +129,7 @@ function specAction( content ) {
 
 export {
     includeStyle as include,
-    excludeStyle as exclude,
+    excludeSelector as exclude,
     getSelector  as selector,
     specTest     as specTest,
     specAction   as specAction
