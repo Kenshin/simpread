@@ -151,6 +151,7 @@ const webpack = require( 'webpack' ),
           read       : __dirname + '/src/read/read.jsx',
           readctlbar : __dirname + '/src/read/controlbar.jsx',
           readsetting: __dirname + '/src/read/setting.js',
+          readschedule: __dirname + '/src/read/component/progressbar.jsx',
 
           dialog     : __dirname + '/src/option/dialog.jsx',
           focusopt   : __dirname + '/src/option/focus.jsx',
