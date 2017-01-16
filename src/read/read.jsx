@@ -18,7 +18,6 @@ class Read extends React.Component {
     }
 
     componentDidMount() {
-        //util.exclude( $("sr-rd-content"), this.props.wrapper.exclude, "delete" );
         excludeStyle( $("sr-rd-content"), this.props.wrapper.exclude, "delete" );
         beautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
@@ -180,7 +179,7 @@ function beautify( $target ) {
         $img.wrap( "<div class='sr-rd-content-center'></div>" );
 
         // origin style
-        if ( $parent[0].tagName.toLowerCase() !== "sr-read" ) {
+        if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-exclude" ) ) {
             $img.parent().unwrap();
         }
 
