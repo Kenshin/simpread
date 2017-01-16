@@ -26,6 +26,15 @@ class Read extends React.Component {
         pangu.spacingElementByClassName( rdcls );
     }
 
+    componentWillUnmount() {
+        $root.removeClass( theme );
+        $( "body" ).removeClass( "ks-simpread-body-hide" );
+        $( rdclsjq ).addClass( "ks-simpread-read-hide" );
+        $( rdclsjq ).one( "animationend", () => {
+            $( rdclsjq ).remove();
+        });
+    }
+
     constructor( props ) {
         super( props );
         switch ( this.props.read.theme ) {
@@ -40,12 +49,6 @@ class Read extends React.Component {
 
    // exit read mode
    exit() {
-        $root.removeClass( theme );
-        $( "body" ).removeClass( "ks-simpread-body-hide" );
-        $( rdclsjq ).addClass( "ks-simpread-read-hide" );
-        $( rdclsjq ).one( "animationend", () => {
-            $( rdclsjq ).remove();
-        });
         ReactDOM.unmountComponentAtNode( getReadRoot() );
     }
 
