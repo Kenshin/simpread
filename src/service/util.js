@@ -1,24 +1,5 @@
 console.log( "=== simpread util load ===" )
 
-/*
-    Set include style
-    @param $target: jquery object
-    @param style  : set style string
-    @param cls    : set class string
-    @param type   : include 'add' and 'delete'
-*/
-function includeStyle( $target, style, cls, type ) {
-    var bakstyle;
-    if ( type === "add" ) {
-        bakstyle = $target.attr( "style" ) == undefined ? "" : $target.attr( "style" );
-        $target.attr( "style", bakstyle + style ).addClass( cls );
-    } else if (  type === "delete" ) {
-        bakstyle = $target.attr( "style" );
-        bakstyle = bakstyle.replace( style, "" );
-        $target.attr( "style", bakstyle ).removeClass( cls );
-    }
-}
-
 /**
  * Get exclude tags list
  * 
@@ -115,7 +96,6 @@ function specAction( content ) {
             type       = 1;
             break;
         case "/":
-            // *[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']
             content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" ).replace( /'/g, '"' );
             type       = 2;
             break;
@@ -128,9 +108,8 @@ function specAction( content ) {
 }
 
 export {
-    includeStyle as include,
     excludeSelector as exclude,
-    getSelector  as selector,
-    specTest     as specTest,
-    specAction   as specAction
+    getSelector     as selector,
+    specTest        as specTest,
+    specAction      as specAction
 }
