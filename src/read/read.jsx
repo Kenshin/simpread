@@ -18,7 +18,8 @@ class Read extends React.Component {
     }
 
     componentDidMount() {
-        util.exclude( $("sr-rd-content"), this.props.wrapper.exclude, "delete" );
+        //util.exclude( $("sr-rd-content"), this.props.wrapper.exclude, "delete" );
+        excludeStyle( $("sr-rd-content"), this.props.wrapper.exclude, "delete" );
         beautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
@@ -126,6 +127,19 @@ function query( content, type = "text" ) {
         content = $root.find( content ).text().trim();
     }
     return content;
+}
+
+/**
+ * Set exclude style
+ * 
+ * @param {jquery} jquery object
+ * @param {array}  hidden html
+ * @param {string} include: 'add' 'delete'
+ */
+function excludeStyle( $target, exclude, type ) {
+    const tags = util.exclude( $target, exclude );
+    if ( type == "delete" )   $target.find( tags ).addClass( "sr-rd-content-exclude" );
+    else if ( type == "add" ) $target.find( tags ).removeClass( "sr-rd-content-exclude" );
 }
 
 /**
