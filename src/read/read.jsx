@@ -111,6 +111,24 @@ function wrap( site ) {
 }
 
 /**
+ * Query content usage jquery
+ * 
+ * @param  {string} query content
+ * @param  {string} type, incldue: text and html
+ * @return {string} query result
+ */
+function query( content, type = "text" ) {
+    if ( util.specTest( content ) ) {
+        content = util.specAction( content )[0];
+    } else if ( type == "html" ) {
+        content = $root.find( content ).html().trim();
+    } else {
+        content = $root.find( content ).text().trim();
+    }
+    return content;
+}
+
+/**
  * Beautify html, include: 
  * - task: all webiste image, remove old image and create new image
  * - task: all [sr-rd-content-exclude] remove style
@@ -186,24 +204,6 @@ function beautify( $target ) {
     $target.find( "iframe, embed" ).map( ( index, item )=> {
         $(item).wrap( "<div class='sr-rd-content-center'></div>" );
     })
-}
-
-/**
- * Query content usage jquery
- * 
- * @param  {string} query content
- * @param  {string} type, incldue: text and html
- * @return {string} query result
- */
-function query( content, type = "text" ) {
-    if ( util.specTest( content ) ) {
-        content = util.specAction( content )[0];
-    } else if ( type == "html" ) {
-        content = $root.find( content ).html().trim();
-    } else {
-        content = $root.find( content ).text().trim();
-    }
-    return content;
 }
 
 /**
