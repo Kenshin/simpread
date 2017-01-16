@@ -156,6 +156,7 @@ async function excludes( $target, exclude, type ) {
  * - task: all [sr-rd-content-exclude] remove style
  * - task: all webiste blockquote, remove style
  * - task: all webiste iframe, embed add center style
+ * - task: all hr tag add sr-rd-content-exclude class
  * 
  * @param {jquery}
  */
@@ -225,7 +226,10 @@ async function beautify( $target ) {
     });
     $target.find( "iframe, embed" ).map( ( index, item )=> {
         $(item).wrap( "<div class='sr-rd-content-center'></div>" );
-    })
+    });
+    $target.find( "hr" ).map( ( index, item )=> {
+        $(item).addClass( "sr-rd-content-exclude" );
+    });
 }
 
 /**
