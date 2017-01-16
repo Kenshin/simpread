@@ -393,7 +393,7 @@ sr-opt-item[sr-type="exclude"] textarea:focus {
 }
 
 /**
- *  Read mode
+ *  Read mode background
  */
 .ks-simpread-read {
     display: -webkit-flex;
@@ -445,6 +445,20 @@ sr-opt-item[sr-type="exclude"] textarea:focus {
     display: none;
 }
 
+/**
+* Read process
+ */
+read-process {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+}
+
+/**
+* Read mode
+ */
 .sr-rd-font {
     font-family: "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
     font-size: 16px;

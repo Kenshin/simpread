@@ -1,6 +1,8 @@
 console.log( "=== simpread read load ===" )
 
-import pangu from 'pangu';
+import pangu       from 'pangu';
+import ProgressBar from 'progressbar';
+
 import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -13,6 +15,10 @@ const rdcls   = "ks-simpread-read",
 
 class Read extends React.Component {
 
+    state = {
+        progress: 0,
+    }
+
     componentWillMount() {
         $( "body" ).addClass( "ks-simpread-body-hide" );
     }
@@ -22,6 +28,27 @@ class Read extends React.Component {
         await beautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
+
+        $(document).scroll( () => {
+            const offset = document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight );
+            this.setState({ process : offset });
+            bar.animate( offset );
+        });
+
+        var bar = new ProgressBar.Line( "read-process", {
+            strokeWidth: 4,
+            easing: 'easeInOut',
+            duration: 1000,
+            color: '#304FFE',
+            trailColor: '#fff',
+            trailWidth: 0,
+            svgStyle: {width: '100%', height: '100%'}
+        });
+        bar.animate( this.state.progress );
+    }
+
+    componentWillUnmount() {
+        $(document).off( "scroll" );
     }
 
     constructor( props ) {
@@ -49,6 +76,7 @@ class Read extends React.Component {
     render() {
         return(
             <sr-read class="sr-rd-font">
+                <read-process></read-process>
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>

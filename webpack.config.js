@@ -84,6 +84,7 @@ const webpack = require( 'webpack' ),
 
           './src/vender/pangu.min.js',
           './src/vender/mousetrap.min.js',
+          './src/vender/progressbar.min.js',
 
           './src/vender/notify/notify.js'
         ],
@@ -135,6 +136,7 @@ const webpack = require( 'webpack' ),
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           pangu      : __dirname + '/src/vender/pangu.min.js',
+          progressbar: __dirname + '/src/vender/progressbar.min.js',
 
           notify     : __dirname + '/src/vender/notify/notify.js',
 
