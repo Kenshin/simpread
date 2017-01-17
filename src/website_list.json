@@ -159,7 +159,7 @@
         "include" : "<div id='articleContent'>",
         "exclude" : [
             "<div class='article-extend'>",
-			"<p class='copyright'>"
+            "<p class='copyright'>"
         ]
     },{
         "name"    : "zuimeia.com",
@@ -178,9 +178,9 @@
         "include" : "<div class='entry'>",
         "exclude" : [
             "<div class='copyright-area'>",
-			"<blockquote class='rewards'>",
-			"<div class='post-adds'>",
-			"<div id='author-bio'>"
+            "<sr-blockquote class='rewards'>",
+            "<div class='post-adds'>",
+            "<div id='author-bio'>"
         ]
     },{
         "name"    : "cnodejs.org",
