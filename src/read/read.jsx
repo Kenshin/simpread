@@ -167,6 +167,16 @@ async function beautify( $target ) {
             $target.remove();
         }
     });
+    /*$target.find( ".com-insert-images" ).map( (index, item) => {
+        const $target = $(item);
+        let   imgs    = $target.find( "img" ).map( (index, item)=>{
+            const src = $(item).attr( "data-src" ),
+                  img = `<img class='sr-rd-content-img-load' src='${src}'>`;
+            return img;
+        });
+        $target.empty().removeAttr( "class" );
+        $target.append( imgs.get().join() );
+    });*/
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
