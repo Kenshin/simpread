@@ -149,7 +149,8 @@ async function excludes( $target, exclude ) {
 }
 
 /**
- * Beautify html, include: 
+ * Beautify html, include:
+ * - task: all webiste image, when style height = 0px, remove it
  * - task: all webiste image, remove old image and create new image
  * - task: all [sr-rd-content-exclude] remove style
  * - task: all webiste sr-blockquote, remove style
@@ -159,6 +160,13 @@ async function excludes( $target, exclude ) {
  * @param {jquery}
  */
 async function beautify( $target ) {
+    $target.find( "img" ).map( (index, item) => {
+        const $target = $(item),
+              height  = Number.parseInt($target.css("height"));
+        if ( storage.current.site.name == "qdaily.com" && height == 0 ) {
+            $target.remove();
+        }
+    });
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
