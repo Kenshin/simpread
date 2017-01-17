@@ -81,7 +81,8 @@ sr-rd-content pre {
     color: #666;
 }
 
-sr-rd-content blockquote {
+sr-rd-content sr-blockquote {
+    display: block;
     position: relative;
     margin: 0px;
     background-color: rgba(0,0,0,0.05);
@@ -90,7 +91,7 @@ sr-rd-content blockquote {
     margin-bottom: 30px;
 }
 
-sr-rd-content blockquote:before {
+sr-rd-content sr-blockquote:before {
     content: '“';
     position: absolute;
     top: -9px;
