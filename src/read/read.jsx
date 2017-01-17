@@ -156,6 +156,7 @@ async function excludes( $target, exclude ) {
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
  * - task: all hr tag add sr-rd-content-exclude class
+ * - task: rework com-insert-images class
  * 
  * @param {jquery}
  */
@@ -167,16 +168,17 @@ async function beautify( $target ) {
             $target.remove();
         }
     });
-    /*$target.find( ".com-insert-images" ).map( (index, item) => {
+    $target.find( ".com-insert-images" ).map( (index, item) => {
         const $target = $(item);
         let   imgs    = $target.find( "img" ).map( (index, item)=>{
             const src = $(item).attr( "data-src" ),
-                  img = `<img class='sr-rd-content-img-load' src='${src}'>`;
+                  img = `<div class='sr-rd-content-center'><img class='sr-rd-content-img-load' src='${src}'></div>`;
             return img;
         });
+        const str = imgs.get().join( "" );
         $target.empty().removeAttr( "class" );
-        $target.append( imgs.get().join() );
-    });*/
+        $target.append( str );
+    });
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
