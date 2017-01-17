@@ -35,23 +35,21 @@ sr-rd-desc {
 }
 
 sr-rd-content {
-    color: #2f2f2f;
+    color: #363636;
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 32px;
     text-align: justify;
 }
 
 sr-rd-content p,
 sr-rd-content div  {
     display: block;
+    margin: 10px 0 10px;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
-    margin: 10px 0 10px;
-
-    color: rgb(51, 51, 51);
 }
 
 sr-rd-content a {
