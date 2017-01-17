@@ -21,7 +21,7 @@ class Read extends React.Component {
     }
 
     async componentDidMount() {
-        await excludes( $("sr-rd-content"), this.props.wrapper.exclude, "delete" );
+        await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
         await beautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
@@ -142,12 +142,10 @@ function query( content, type = "text" ) {
  * 
  * @param {jquery} jquery object
  * @param {array}  hidden html
- * @param {string} include: 'add' 'delete'
  */
-async function excludes( $target, exclude, type ) {
+async function excludes( $target, exclude ) {
     const tags = util.exclude( $target, exclude );
-    if ( type == "delete" )   $target.find( tags ).addClass( "sr-rd-content-exclude" );
-    else if ( type == "add" ) $target.find( tags ).removeClass( "sr-rd-content-exclude" );
+    $target.find( tags ).remove();
 }
 
 /**
@@ -161,7 +159,7 @@ async function excludes( $target, exclude, type ) {
  * @param {jquery}
  */
 async function beautify( $target ) {
-    $target.find( "img:not(.sr-rd-content-exclude)" ).map( ( index, item ) => {
+    $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
               $img    = $( "<img class='sr-rd-content-img-load'>" ),
@@ -211,9 +209,9 @@ async function beautify( $target ) {
         }
         */
     });
-    $target.find( "sr-rd-content-exclude" ).map( ( index, item ) => {
+    /*$target.find( "sr-rd-content-exclude" ).map( ( index, item ) => {
         $(item).removeAttr( "style" );
-    });
+    });*/
     $target.find( "sr-blockquote" ).map( ( index, item ) => {
         const $target = $(item),
               $parent = $target.parent();
