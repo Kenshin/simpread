@@ -51,7 +51,9 @@
         "exclude" : [
             "<div class='share-view' style='top: 1544px;'>",
             "<div class='article-btn'>",
-            "<div class='article-footer'"
+            "<div class='article-footer'>",
+            "<p class='report-view'>",
+            "<img class='img-focus'>"
         ]
     },{
         "name"    : "ifanr.com",
