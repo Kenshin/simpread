@@ -130,7 +130,7 @@ function query( content, type = "text" ) {
     if ( util.specTest( content ) ) {
         content = util.specAction( content )[0];
     } else if ( type == "html" ) {
-        content = $root.find( content ).html().trim();
+        content = rules($root.find( content ).html().trim());
     } else {
         content = $root.find( content ).text().trim();
     }
@@ -154,7 +154,7 @@ async function excludes( $target, exclude, type ) {
  * Beautify html, include: 
  * - task: all webiste image, remove old image and create new image
  * - task: all [sr-rd-content-exclude] remove style
- * - task: all webiste blockquote, remove style
+ * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
  * - task: all hr tag add sr-rd-content-exclude class
  * 
@@ -214,12 +214,10 @@ async function beautify( $target ) {
     $target.find( "sr-rd-content-exclude" ).map( ( index, item ) => {
         $(item).removeAttr( "style" );
     });
-    $target.find( "blockquote" ).map( ( index, item ) => {
+    $target.find( "sr-blockquote" ).map( ( index, item ) => {
         const $target = $(item),
               $parent = $target.parent();
-
-        $target.removeAttr( "style" );
-
+        $target.removeAttr( "style" ).removeAttr( "class" );
         if ( storage.current.site.name == "dgtle.com" ) {
            $parent.removeClass( "quote" );
         }
@@ -234,15 +232,13 @@ async function beautify( $target ) {
 
 /**
  * Format html, include:
- * - remove all tag style property
+ * - change all blockquote to sr-blockquote
  * 
  * @param  {string} html string
  * @return {string} format html string
  */
-/*
 function rules( html ) {
-    return html.trim().replace( / style="[a-zA-Z0-9-_: ;#.]+"/g, "" );
+    return html.trim().replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" );
 }
-*/
 
 export { Render, Exist };
