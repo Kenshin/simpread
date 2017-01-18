@@ -445,6 +445,12 @@ sr-opt-item[sr-type="exclude"] textarea:focus {
     display: none;
 }
 
+.sr-rd-content-nobeautify {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
 /**
 * Read process
  */

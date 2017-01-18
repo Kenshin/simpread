@@ -22,6 +22,7 @@ class Read extends React.Component {
 
     async componentDidMount() {
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
+        await notbeautify( $( "sr-rd-content" ));
         await beautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
@@ -149,6 +150,38 @@ async function excludes( $target, exclude ) {
 }
 
 /**
+ * Not beautify html
+ * 
+ * @param {jquery}
+ */
+async function notbeautify( $target ) {
+    switch ( storage.current.site.name ) {
+        case "sspai.com":
+            $target.find( ".relation-apps" ).map( (index, item) => {
+                // TO-DO
+                $(item).remove();
+            });
+            break;
+        case "smzdm.com":
+            $target.find( "img.face, .insert-outer" ).map( (index, item) => {
+                if ( $(item).is("img") ) {
+                    $(item).addClass( "sr-rd-content-nobeautify" );
+                } else {
+                    $(item).find( "img" ).addClass( "sr-rd-content-nobeautify" );
+                }
+            });
+            break;
+        case "infoq.com":
+            $target.find( "img" ).map( (index, item) => {
+                if ( $(item).css("float") == "left" ) {
+                    $(item).addClass( "sr-rd-content-nobeautify" );
+                }
+            });
+            break;
+    }
+}
+
+/**
  * Beautify html, include:
  * - task: all webiste image, when style height = 0px, remove it
  * - task: rework com-insert-images class, only incldue qdaily.com
@@ -175,7 +208,7 @@ async function beautify( $target ) {
               str     = imgs.get().join( "" );
         $target.empty().removeAttr( "class" ).append( str );
     });
-    $target.find( "img" ).map( ( index, item ) => {
+    $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
               $img    = $( "<img class='sr-rd-content-img-load'>" ),
