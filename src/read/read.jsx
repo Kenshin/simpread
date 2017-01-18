@@ -151,12 +151,12 @@ async function excludes( $target, exclude ) {
 /**
  * Beautify html, include:
  * - task: all webiste image, when style height = 0px, remove it
+ * - task: rework com-insert-images class, only incldue qdaily.com
  * - task: all webiste image, remove old image and create new image
  * - task: all [sr-rd-content-exclude] remove style
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
  * - task: all hr tag add sr-rd-content-exclude class
- * - task: rework com-insert-images class
  * 
  * @param {jquery}
  */
@@ -176,8 +176,7 @@ async function beautify( $target ) {
             return img;
         });
         const str = imgs.get().join( "" );
-        $target.empty().removeAttr( "class" );
-        $target.append( str );
+        $target.empty().removeAttr( "class" ).append( str );
     });
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
@@ -188,6 +187,7 @@ async function beautify( $target ) {
               zuimei  = $target.attr( "data-original" ),
               cnbeta  = $target.attr( "original" ),
               fixOverflowImgsize = () => {
+                  const $img = $( event.target );
                   $img.removeClass( "sr-rd-content-img-load" );
                   if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
                   if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
@@ -196,15 +196,20 @@ async function beautify( $target ) {
              $parent = $target.parent(),
              tagname = $parent[0].tagName.toLowerCase();
 
+        if ( $target.hasClass( "sr-rd-content-img-load" ) ) {
+            $target.one( "load", ()=>fixOverflowImgsize() );
+            return;
+        }
+
         // remove current image and create new image object
         newsrc = cnbeta  ? cnbeta  : src;
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
         $img.attr( "src", newsrc );
-        $img.one( "load", ()=>fixOverflowImgsize() );
         $parent.append( $img );
         $target.remove();
         $img.wrap( "<div class='sr-rd-content-center'></div>" );
+        $img.one( "load", ()=>fixOverflowImgsize() );
 
         // origin style
         if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-exclude" ) ) {
