@@ -169,13 +169,9 @@ async function beautify( $target ) {
         }
     });
     $target.find( ".com-insert-images" ).map( (index, item) => {
-        const $target = $(item);
-        let   imgs    = $target.find( "img" ).map( (index, item)=>{
-            const src = $(item).attr( "data-src" ),
-                  img = `<div class='sr-rd-content-center'><img class='sr-rd-content-img-load' src='${src}'></div>`;
-            return img;
-        });
-        const str = imgs.get().join( "" );
+        const $target = $(item),
+              imgs    = $target.find( "img" ).map( (index, item)=>`<div><img data-src='${$(item).attr( "data-src" )}'></div>`),
+              str     = imgs.get().join( "" );
         $target.empty().removeAttr( "class" ).append( str );
     });
     $target.find( "img" ).map( ( index, item ) => {
@@ -193,12 +189,6 @@ async function beautify( $target ) {
         let  newsrc, $img,
              $parent = $target.parent(),
              tagname = $parent[0].tagName.toLowerCase();
-
-        if ( $target.hasClass( "sr-rd-content-img-load" ) ) {
-            $img = $target;
-            $img.one( "load", ()=>fixOverflowImgsize() );
-            return;
-        }
 
         // create new image object
         newsrc = cnbeta  ? cnbeta  : src;
