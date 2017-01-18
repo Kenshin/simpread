@@ -235,6 +235,15 @@
             "[['<b>QCon北京2017</b>']]"
         ]
     },{
+        "name"    : "freebuf.com",
+        "url"     : "http://www.freebuf.com/vuls/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='contenttxt'>",
+        "exclude" : [
+            "[['<b>注明来自</b>']]"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
