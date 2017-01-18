@@ -185,6 +185,16 @@
             ""
         ]
     },{
+        "name"    : "huxiu.com",
+        "url"     : "https://www.huxiu.com/article/",
+        "title"   : "<h1 class='t-h1'>",
+        "desc"    : "",
+        "include" : "<div id='article_content'>",
+        "exclude" : [
+            "<div class='neirong-shouquan'>",
+            "<div class='neirong-shouquan-public'>"
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
