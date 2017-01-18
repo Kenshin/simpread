@@ -170,7 +170,7 @@ async function beautify( $target ) {
     });
     $target.find( ".com-insert-images" ).map( (index, item) => {
         const $target = $(item),
-              imgs    = $target.find( "img" ).map( (index, item)=>`<div><img data-src='${$(item).attr( "data-src" )}'></div>`),
+              imgs    = $target.find( "img" ).map( (index, item)=>`<div>${item.outerHTML}</div>` ),
               str     = imgs.get().join( "" );
         $target.empty().removeAttr( "class" ).append( str );
     });
