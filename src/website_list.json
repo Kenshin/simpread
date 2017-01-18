@@ -62,7 +62,10 @@
         "desc"    : "",
         "include" : "<article>",
         "exclude" : [
-            ""
+            "[['<span>快速关注知晓程序</span>']]",
+            "[['<strong>本文由知晓程序原创出品</strong>']]",
+            "[['<strong>爱范儿旗下专注于小程序生态的公众号</strong>']]",
+            "[[/src=\\S+(zxcx-1)\\S+'/]]"
         ]
     },{
         "name"    : "ifanr.com",
