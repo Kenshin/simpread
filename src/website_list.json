@@ -176,6 +176,15 @@
             ""
         ]
     },{
+        "name"    : "matrix.sspai.com",
+        "url"     : "http://matrix.sspai.com/p/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
@@ -195,6 +204,35 @@
         "include" : "<div class='topic_content'>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "ruby-china.org",
+        "url"     : "http://ruby-china.org/topics/",
+        "title"   : "<h1 class='media-heading'>",
+        "desc"    : "",
+        "include" : "<div class='panel-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "infoq.com",
+        "url"     : "http://www.infoq.com/cn/articles/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='text_info_article'>",
+        "exclude" : [
+            "<div class='random_links'>",
+            "<div id='comment_here'>",
+            "<div class='comments'>",
+            "<div class='all_comments'>",
+            "<div id='overlay_comments'>",
+            "<div id='replyPopup'>",
+            "<div id='editCommentPopup'>",
+            "<div id='messagePopup'>",
+            "<div id='responseContent'>",
+            "[['<p>对本文的审校</p>']]",
+            "[['<p>中文站投稿或者参与内容翻译工作</p>']]",
+            "[['<b>QCon北京2017</b>']]"
         ]
     },{
         "name"    : "thepaper.cn",
