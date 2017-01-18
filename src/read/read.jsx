@@ -177,6 +177,7 @@ async function beautify( $target ) {
     $target.find( "img" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
+              $img    = $( "<img class='sr-rd-content-img-load'>" ),
               src     = $target.attr( "src" ),
               lazysrc = $target.attr( "data-src" ),
               zuimei  = $target.attr( "data-original" ),
@@ -186,23 +187,24 @@ async function beautify( $target ) {
                   if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
                   if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               };
-        let  newsrc, $img,
+        let  newsrc,
              $parent = $target.parent(),
              tagname = $parent[0].tagName.toLowerCase();
 
-        // create new image object
+        // remove current image and create new image object
         newsrc = cnbeta  ? cnbeta  : src;
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
-        $parent.append( `<div class='sr-rd-content-center'><img class='sr-rd-content-img-load' src='${newsrc}'></div>` );
-        $img   = $parent.find( "img" );
+        $img.attr( "src", newsrc );
         $img.one( "load", ()=>fixOverflowImgsize() );
-
-        // remove current image and origin style
+        $parent.append( $img );
         $target.remove();
-        if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-exclude" ) ) {
+        $img.wrap( "<div class='sr-rd-content-center'></div>" );
+
+        // origin style
+        /*if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-exclude" ) ) {
             $img.parent().unwrap();
-        }
+        }*/
 
         // beautify style
         /* remove other class and add center class
