@@ -3,6 +3,11 @@
  * Github style
  */
 
+/**
+ * Normal style
+ */
+sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:bold;line-height:1.4;text-align:left;color: #363636;}sr-rd-content h1{padding-bottom:.3em;font-size:2.25em;line-height:1.2}sr-rd-content h2{padding-bottom:.3em;font-size:1.75em;line-height:1.225}sr-rd-content h3{font-size:1.5em;line-height:1.43}sr-rd-content h4{font-size:1.25em}sr-rd-content h5{font-size:1em}sr-rd-content h6{font-size:1em;color:#777}
+
 .sr-rd-theme-bg {
     background-color: #fff;
 }
@@ -43,24 +48,27 @@ sr-rd-content {
 }
 
 sr-rd-content p,
-sr-rd-content div  {
+sr-rd-content div {
     display: block;
     margin: 10px 0 10px;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
+    font-size: 15px;
 }
 
 sr-rd-content a {
     color: #4183c4;
     text-decoration: none;
+    font-size: 15px;
 }
 
 sr-rd-content a:hover,
 sr-rd-content a:focus,
 sr-rd-content a:active {
-  text-decoration: underline;
+    color: #4183c4;
+    text-decoration: underline;
 }
 
 
