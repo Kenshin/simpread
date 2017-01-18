@@ -244,6 +244,56 @@
             "[['<b>注明来自</b>']]"
         ]
     },{
+        "name"    : "segmentfault.com",
+        "url"     : "https://segmentfault.com/a/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article__content'",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "gold.xitu.io",
+        "url"     : "https://gold.xitu.io/post/",
+        "title"   : "<div class='post-title'>",
+        "desc"    : "",
+        "include" : "<div class='post-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "importnew.com",
+        "url"     : "http://www.importnew.com/",
+        "title"   : "<div class='entry-header'>",
+        "desc"    : "",
+        "include" : "<div class='entry'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "solidot.org",
+        "url"     : "http://www.solidot.org/",
+        "title"   : "<div class='bg_htit'>",
+        "desc"    : "",
+        "include" : "<div class='p_mainnew'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "ifeve.com",
+        "url"     : "http://ifeve.com/",
+        "title"   : "<h3 class='title'>",
+        "desc"    : "",
+        "include" : "<div class='post_content'>",
+        "exclude" : [
+            "<div id='jiathis_style_32x32'>",
+            "<div class='abh_box'>",
+            "<span class='wpfp-span'>",
+            "<div class='yarpp-related'>",
+            "[['<p>转载请注明</p>']]",
+            "[[/src=\\S+(ifeve500X150)\\S+'/]]"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
