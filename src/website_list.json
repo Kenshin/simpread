@@ -326,5 +326,14 @@
             "<span class='comment-big'>",
             "<div class='star-rating>"
         ]
+    },{
+        "name"    : "smzdm.com",
+        "url"     : "http://post.smzdm.com/p/",
+        "title"   : "<h1 class='item-name'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            "<h1 class='item-name'>"
+        ]
     }]
 }
