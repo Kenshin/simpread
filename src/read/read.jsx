@@ -157,6 +157,7 @@ async function excludes( $target, exclude ) {
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
  * - task: all hr tag add sr-rd-content-exclude class
+ * - task: all pre tag remove class
  * 
  * @param {jquery}
  */
@@ -240,6 +241,9 @@ async function beautify( $target ) {
     });
     $target.find( "hr" ).map( ( index, item )=> {
         $(item).addClass( "sr-rd-content-exclude" );
+    });
+    $target.find( "pre" ).map( ( index, item )=> {
+        $(item).find( "code" ).removeAttr( "class" );
     });
 }
 
