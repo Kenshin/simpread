@@ -92,8 +92,8 @@ sr-rd-content sr-blockquote {
 sr-rd-content sr-blockquote:before {
     content: '“';
     position: absolute;
-    top: -9px;
-    left: 16px;
+    top: 25px;
+    left: 15px;
     font-family: "Arial";
     font-size: 80px;
     color: rgba(0,0,0,0.15);
