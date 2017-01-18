@@ -187,6 +187,12 @@ async function beautify( $target ) {
                   $img.removeClass( "sr-rd-content-img-load" );
                   if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
                   if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
+              },
+              loaderrorHandle = () => {
+                  $img.addClass( "sr-rd-content-exclude" );
+                  if ( $img.parent().hasClass( "sr-rd-content-center" )) {
+                      $img.parent().removeAttr( "class" ).addClass( "sr-rd-content-exclude" );
+                  }
               };
         let  newsrc,
              $parent = $target.parent(),
@@ -196,8 +202,7 @@ async function beautify( $target ) {
         newsrc = cnbeta  ? cnbeta  : src;
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
-        $img.attr( "src", newsrc );
-        $img.one( "load", ()=>fixOverflowImgsize() );
+        $img.attr( "src", newsrc ).one( "load", ()=>fixOverflowImgsize() ).one( "error", ()=>loaderrorHandle() );
         $parent.append( $img );
         $target.remove();
         $img.wrap( "<div class='sr-rd-content-center'></div>" );
