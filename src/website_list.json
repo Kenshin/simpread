@@ -213,6 +213,15 @@
             "<header>"
         ]
     },{
+        "name"    : "leiphone.com",
+        "url"     : "http://www.leiphone.com/*",
+        "title"   : "<h1 class='headTit'>",
+        "desc"    : "",
+        "include" : "<div class='lph-article-comView'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
@@ -320,6 +329,15 @@
             "<div class='yarpp-related'>",
             "[['<p>转载请注明</p>']]",
             "[[/src=\\S+(ifeve500X150)\\S+'/]]"
+        ]
+    },{
+        "name"    : "translate.oschina.net",
+        "url"     : "https://www.oschina.net/translate/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "thepaper.cn",
