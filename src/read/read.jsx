@@ -196,7 +196,6 @@ async function specbeautify( $target ) {
  * Common Beautify html, include:
  * - task: all webiste image, when style height = 0px, remove it
  * - task: all webiste image, remove old image and create new image
- * - task: all [sr-rd-content-exclude] remove style
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
  * - task: all hr tag add sr-rd-content-exclude class
@@ -267,9 +266,6 @@ async function commbeautify( $target ) {
         }
         */
     });
-    /*$target.find( "sr-rd-content-exclude" ).map( ( index, item ) => {
-        $(item).removeAttr( "style" );
-    });*/
     $target.find( "sr-blockquote" ).map( ( index, item ) => {
         const $target = $(item),
               $parent = $target.parent();
