@@ -180,6 +180,7 @@ async function specbeautify( $target ) {
             break;
         case "douban.com":
             $target.find( ".review-content" ).children().unwrap();
+            $target.find( "table" ).addClass( "sr-rd-content-center" );
             break;
         case "qdaily.com":
             $target.find( ".com-insert-images" ).map( (index, item) => {
