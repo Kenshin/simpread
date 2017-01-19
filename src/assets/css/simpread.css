@@ -501,6 +501,15 @@ sr-rd-title, sr-rd-desc, sr-rd-content {
     -webkit-box-orient: vertical;
 }
 
+sr-rd-content-error {
+    display: block;
+    position: relative;
+    margin: 0px;
+    padding: 25px;
+    margin-bottom: 30px;
+    background-color: rgba(0,0,0,0.05);
+}
+
 sr-rd-content img {
     margin: 10px;
     padding: 5px;

@@ -14,6 +14,14 @@ const rdcls   = "ks-simpread-read",
       $root   = $( "html" ),
       theme   = `sr-rd-theme-bg`;
 
+const errorpage = `
+        <sr-rd-content-error>
+            <p>当前页面解析后 <b style="color: #E57373;">无法正常显示</b>，您可能需要 <b style="color: #E57373;">手动添加</b>，请使用 <span style="color: #4183c4;">快捷键</span> 或 <span style="color: #4183c4;">侧栏手动</span> 打开 <span style="color: #4183c4;">选项页面</span>。</p>
+            <p>
+                或者 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">报告此页面</a> 以便让 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 变得更加出色，谢谢。
+            </p>
+        </sr-rd-content-error>`;
+
 class Read extends React.Component {
 
     componentWillMount() {
@@ -131,7 +139,7 @@ function query( content, type = "text" ) {
     if ( util.specTest( content ) ) {
         content = util.specAction( content )[0];
     } else if ( type == "html" ) {
-        content = rules($root.find( content ).html().trim());
+        content = rules( getcontent( $root.find( content ) ));
     } else {
         content = $root.find( content ).text().trim();
     }
@@ -302,6 +310,30 @@ async function commbeautify( $target ) {
  */
 function rules( html ) {
     return html.trim().replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" );
+}
+
+/**
+ * Get content from current.site.include
+ * 
+ * @param  {jquery} jquery object e.g. $root.find( content )
+ * @return {string} $target html
+ */
+function getcontent( $target ) {
+    let html = "";
+    switch ( $target.length ) {
+        case 0:
+            // TO-DO
+            html = errorpage;
+            break;
+        case 1:
+            html = $target.html().trim();
+            break;
+        default:
+            // TO-DO
+            html = errorpage;
+            break;
+    }
+    return html;
 }
 
 export { Render, Exist };
