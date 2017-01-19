@@ -245,14 +245,16 @@ function addsites( sites ) {
  * @return {object} site object or not found return undefined
  */
 function findSitebyURL( url ) {
-    const site     = new Map( simpread.sites ),
-          urls     = [ ...site.keys() ],
-          wildcard = url.match( /\.[.a-zA-z0-9-_]+/g );
+    const sites     = new Map( simpread.sites ),
+          urls     = [ ...sites.keys() ],
+          arr      = url.match( /[.a-zA-z0-9-_]+/g ),
+          wildcard = arr[1];
     for ( const cur of urls ) {
-        if ( cur.includes( "*" ) && cur.includes( wildcard ) ) {
-            return clone( site.get( cur ));
+        const name = sites.get(cur).name;
+        if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
+            return clone( sites.get( cur ));
         } else if ( cur == url ) {
-            return clone( site.get( url ));
+            return clone( sites.get( url ));
         }
     }
     return undefined;
