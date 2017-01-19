@@ -515,6 +515,7 @@ sr-rd-content img {
     padding: 5px;
     background: #fff;
     border: 1px solid #bbb;
+    box-shadow: 1px 1px 3px #d4d4d4;
 }
 
 .sr-rd-content-img-load {
