@@ -150,7 +150,8 @@ async function excludes( $target, exclude ) {
 }
 
 /**
- * Special beautify html with other webiste
+ * Special beautify html with other webiste, incldue:
+ * - sspai.com, mzdm.com, infoq.com, douban.com, qdaily.com, huxiu.com
  * 
  * @param {jquery}
  */
