@@ -204,6 +204,15 @@
             ""
         ]
     },{
+        "name"    : "qingmang.me",
+        "url"     : "http://qingmang.me/articles/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            "<header>"
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
