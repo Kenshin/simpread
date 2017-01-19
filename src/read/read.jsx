@@ -181,13 +181,20 @@ async function notbeautify( $target ) {
         case "douban.com":
             $target.find( ".review-content" ).children().unwrap();
             break;
+        case "qdaily.com":
+            $target.find( ".com-insert-images" ).map( (index, item) => {
+                const $target = $(item),
+                    imgs    = $target.find( "img" ).map( (index, item)=>`<div>${item.outerHTML}</div>` ),
+                    str     = imgs.get().join( "" );
+                $target.empty().removeAttr( "class" ).append( str );
+            });
+            break;
     }
 }
 
 /**
  * Beautify html, include:
  * - task: all webiste image, when style height = 0px, remove it
- * - task: rework com-insert-images class, only incldue qdaily.com
  * - task: all webiste image, remove old image and create new image
  * - task: all [sr-rd-content-exclude] remove style
  * - task: all webiste sr-blockquote, remove style
@@ -204,12 +211,6 @@ async function beautify( $target ) {
         if ( storage.current.site.name == "qdaily.com" && height == 0 ) {
             $target.remove();
         }
-    });
-    $target.find( ".com-insert-images" ).map( (index, item) => {
-        const $target = $(item),
-              imgs    = $target.find( "img" ).map( (index, item)=>`<div>${item.outerHTML}</div>` ),
-              str     = imgs.get().join( "" );
-        $target.empty().removeAttr( "class" ).append( str );
     });
     $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         const $target = $(item),
