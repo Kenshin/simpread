@@ -412,5 +412,14 @@
             "<span class='ifengLogo'>",
             "[['<p>原标题</p>']]"
         ]
+    },{
+        "name"    : "news.mtime.com",
+        "url"     : "http://news.mtime.com/*",
+        "title"   : "<h2>",
+        "desc"    : "<div class='newsnote'>",
+        "include" : "<div id='newsContent'>",
+        "exclude" : [
+            ""
+        ]
     }]
 }
