@@ -160,6 +160,7 @@ async function excludes( $target, exclude ) {
 /**
  * Special beautify html with other webiste, incldue:
  * - sspai.com, mzdm.com, infoq.com, douban.com, qdaily.com, huxiu.com
+ * - news.mtime.com
  * 
  * @param {jquery}
  */
@@ -205,9 +206,21 @@ async function specbeautify( $target ) {
             });
             break;
         case "huxiu.com":
-            $target.find("p").map( ( index, item ) => {
+            $target.find( "p" ).map( ( index, item ) => {
                 const str = $(item).html().toLowerCase().trim();
-                if (  str == "&nbsp;" || str == "<br>"|| str == "" ) $(item).remove();
+                if ( str == "&nbsp;" || str == "<br>" || str == "" ) $(item).remove();
+            });
+            break;
+        case "news.mtime.com":
+            $target.find( "div" ).map( ( index, item ) => {
+                const str = $(item).text().toLowerCase().trim();
+                if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
+            });
+            $target.find( ".newspictool" ).map( ( index, item ) => {
+                const $target = $(item),
+                      $img    = $target.find( "img" ).addClass( "sr-rd-content-nobeautify" ),
+                      $label  = $target.find( "p:last" );
+                $target.removeAttr( "class" ).addClass( "sr-rd-content-center" ).empty().append( $img ).append( $label );
             });
             break;
     }
