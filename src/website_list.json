@@ -205,7 +205,7 @@
         ]
     },{
         "name"    : "qingmang.me",
-        "url"     : "http://qingmang.me/articles/",
+        "url"     : "http://qingmang.me/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<article>",
