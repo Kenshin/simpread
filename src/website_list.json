@@ -195,6 +195,15 @@
             "<div class='neirong-shouquan-public'>"
         ]
     },{
+        "name"    : "douban.com",
+        "url"     : "https://www.douban.com/**",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='link-report'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
