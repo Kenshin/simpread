@@ -388,5 +388,29 @@
         "exclude" : [
             ""
         ]
+    },{
+        "name"    : "young.ifeng.com",
+        "url"     : "http://young.ifeng.com/a/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='ya_main_con'>",
+        "exclude" : [
+            "<p class='yamc_zrbj'>",
+            "<p class='yamc_sming'>",
+            "<span class='ifengLogo'>",
+            "[['<p>原标题</p>']]",
+            "[['<strong>获取更多有趣又有料的内容</strong>']]",
+            "[[/src=\\S+(a76d59f9f93e84b_size52_w700_h236)\\S+'/]]"
+        ]
+    },{
+        "name"    : "news.ifeng.com",
+        "url"     : "http://news.ifeng.com/a/*",
+        "title"   : "<h1 id='artical_topic'>",
+        "desc"    : "",
+        "include" : "<div id='artical_real'>",
+        "exclude" : [
+            "<span class='ifengLogo'>",
+            "[['<p>原标题</p>']]"
+        ]
     }]
 }
