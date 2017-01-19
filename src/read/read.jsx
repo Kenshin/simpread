@@ -178,6 +178,9 @@ async function notbeautify( $target ) {
                 }
             });
             break;
+        case "douban.com":
+            $target.find( ".review-content" ).children().unwrap();
+            break;
     }
 }
 
