@@ -218,7 +218,7 @@ async function specbeautify( $target ) {
             });
             $target.find( ".newspictool" ).map( ( index, item ) => {
                 const $target = $(item),
-                      $img    = $target.find( "img" ).addClass( "sr-rd-content-nobeautify" ),
+                      $img    = $target.find( "img" ),
                       $label  = $target.find( "p:last" );
                 $target.removeAttr( "class" ).addClass( "sr-rd-content-center" ).empty().append( $img ).append( $label );
             });
@@ -267,10 +267,12 @@ async function commbeautify( $target ) {
         newsrc = cnbeta  ? cnbeta  : src;
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
-        $img.attr( "src", newsrc ).one( "load", ()=>fixOverflowImgsize() ).one( "error", ()=>loaderrorHandle() );
-        $parent.append( $img );
+        $img.attr( "src", newsrc )
+            .one( "load",  ()=>fixOverflowImgsize() )
+            .one( "error", ()=>loaderrorHandle()    )
+            .prependTo( $parent )
+            .wrap( "<div class='sr-rd-content-center'></div>" );
         $target.remove();
-        $img.wrap( "<div class='sr-rd-content-center'></div>" );
 
         // origin style
         /*if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-exclude" ) ) {
