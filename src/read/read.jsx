@@ -195,6 +195,12 @@ async function specbeautify( $target ) {
                 $target.empty().removeAttr( "class" ).append( str );
             });
             break;
+        case "huxiu.com":
+            $target.find("p").map( ( index, item ) => {
+                const str = $(item).html().toLowerCase().trim();
+                if (  str == "&nbsp;" || str == "<br>"|| str == "" ) $(item).remove();
+            });
+            break;
     }
 }
 
