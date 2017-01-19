@@ -363,5 +363,21 @@
         "exclude" : [
             "<h1 class='item-name'>"
         ]
+    },{
+        "name"    : "news.mydrivers.com",
+        "url"     : "http://news.mydrivers.com/*",
+        "title"   : "<div id='thread_subject'>",
+        "desc"    : "",
+        "include" : "<div class='news_info'>",
+        "exclude" : [
+            "<div class='btnPrev'>",
+            "<div class='btnNext'>",
+            "<div class='postpage'>",
+            "<div class='adggg1'>",
+            "<p class='news_bq'>",
+            "<p class='jcuo1'>",
+            "<div id='weixin'>",
+            "<table>"
+        ]
     }]
 }
