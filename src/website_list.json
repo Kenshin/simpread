@@ -103,20 +103,20 @@
             "<div id='comments_top'>"
         ]
     },{
-        "name"    : "daily.zhihu.com",
-        "url"     : "https://daily.zhihu.com/story/",
-        "title"   : "<h1 class='headline-title'>",
-        "desc"    : "",
-        "include" : "<div class='content' style=''>",
-        "exclude" : [
-            ""
-        ]
-    },{
         "name"    : "zhuanlan.zhihu.com",
         "url"     : "https://zhuanlan.zhihu.com/p/",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<section class='entry-content'> ",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "zhihu.com",
+        "url"     : "https://daily.zhihu.com/story/*",
+        "title"   : "<h1 class='headline-title'>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
         "exclude" : [
             ""
         ]
