@@ -183,10 +183,15 @@ async function specbeautify( $target ) {
             $target.find( "table" ).addClass( "sr-rd-content-center" );
             break;
         case "qdaily.com":
+            $target.find( "img" ).map( (index, item) => {
+                const $target = $(item),
+                      height  = Number.parseInt($target.css("height"));
+                if ( height == 0 ) $target.remove();
+            });
             $target.find( ".com-insert-images" ).map( (index, item) => {
                 const $target = $(item),
-                    imgs    = $target.find( "img" ).map( (index, item)=>`<div>${item.outerHTML}</div>` ),
-                    str     = imgs.get().join( "" );
+                      imgs    = $target.find( "img" ).map( (index, item)=>`<div>${item.outerHTML}</div>` ),
+                      str     = imgs.get().join( "" );
                 $target.empty().removeAttr( "class" ).append( str );
             });
             break;
@@ -195,7 +200,6 @@ async function specbeautify( $target ) {
 
 /**
  * Common Beautify html, include:
- * - task: all webiste image, when style height = 0px, remove it
  * - task: all webiste image, remove old image and create new image
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
@@ -205,13 +209,6 @@ async function specbeautify( $target ) {
  * @param {jquery}
  */
 async function commbeautify( $target ) {
-    $target.find( "img" ).map( (index, item) => {
-        const $target = $(item),
-              height  = Number.parseInt($target.css("height"));
-        if ( storage.current.site.name == "qdaily.com" && height == 0 ) {
-            $target.remove();
-        }
-    });
     $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
