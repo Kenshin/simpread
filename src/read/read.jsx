@@ -219,8 +219,11 @@ async function commbeautify( $target ) {
               cnbeta  = $target.attr( "original" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
-                  if ( $img[0].clientHeight > 620 ) $img.attr( "height", 620 );
-                  if ( $img[0].clientWidth  > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
+                  if ( $img[0].clientHeight > 620 ) {
+                      $img.attr( "height", 620 );
+                      if ( $img[0].clientWidth < $("sr-rd-content").width()) $img.css({ "width":"auto" });
+                  }
+                  if ( $img[0].clientWidth > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               },
               loaderrorHandle = () => {
                   $img.addClass( "sr-rd-content-exclude" );
