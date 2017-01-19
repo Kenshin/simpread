@@ -379,5 +379,14 @@
             "<div id='weixin'>",
             "<table>"
         ]
+    },{
+        "name"    : "ftchinese.com",
+        "url"     : "http://www.ftchinese.com/story/",
+        "title"   : "<h1 class='story-headline'>",
+        "desc"    : "<div class='story-lead'>",
+        "include" : "<div class='story-body'>",
+        "exclude" : [
+            ""
+        ]
     }]
 }
