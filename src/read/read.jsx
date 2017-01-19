@@ -22,8 +22,8 @@ class Read extends React.Component {
 
     async componentDidMount() {
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-        await notbeautify( $( "sr-rd-content" ));
-        await beautify( $( "sr-rd-content" ));
+        await specbeautify( $( "sr-rd-content" ));
+        await commbeautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
     }
@@ -150,11 +150,11 @@ async function excludes( $target, exclude ) {
 }
 
 /**
- * Not beautify html
+ * Special beautify html with other webiste
  * 
  * @param {jquery}
  */
-async function notbeautify( $target ) {
+async function specbeautify( $target ) {
     switch ( storage.current.site.name ) {
         case "sspai.com":
             $target.find( ".relation-apps" ).map( (index, item) => {
@@ -193,7 +193,7 @@ async function notbeautify( $target ) {
 }
 
 /**
- * Beautify html, include:
+ * Common Beautify html, include:
  * - task: all webiste image, when style height = 0px, remove it
  * - task: all webiste image, remove old image and create new image
  * - task: all [sr-rd-content-exclude] remove style
@@ -204,7 +204,7 @@ async function notbeautify( $target ) {
  * 
  * @param {jquery}
  */
-async function beautify( $target ) {
+async function commbeautify( $target ) {
     $target.find( "img" ).map( (index, item) => {
         const $target = $(item),
               height  = Number.parseInt($target.css("height"));
