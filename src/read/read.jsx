@@ -344,8 +344,7 @@ function getcontent( $target ) {
             html = $target.html().trim();
             break;
         default:
-            // TO-DO
-            html = errorpage;
+            html = $target.map( (index, item) => $(item).html() ).get().join( "" );
             break;
     }
     return html;
