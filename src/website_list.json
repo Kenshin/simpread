@@ -68,7 +68,7 @@
             "[[/src=\\S+(zxcx-1)\\S+'/]]"
         ]
     },{
-        "name"    : "ifanr.com",
+        "name"    : "app.ifanr.com",
         "url"     : "http://www.ifanr.com/app/",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
@@ -79,6 +79,15 @@
             "[[/src=\\S+(AppSo-qrcode-signature)\\S+'/]]",
             "[['<strong>▽</strong>']]",
             "[[/src=\\S+(banner2)\\S+'/]]"
+        ]
+    },{
+        "name"    : "dasheng.ifanr.com",
+        "url"     : "http://www.ifanr.com/dasheng/",
+        "title"   : "<p class='c-single-dasheng__content'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "sspai.com",
@@ -157,7 +166,7 @@
             ""
         ]
     },{
-        "name"    : "guokr.com",
+        "name"    : "article.guokr.com",
         "url"     : "http://www.guokr.com/article/",
         "title"   : "<h1 id='articleTitle'>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
@@ -167,7 +176,7 @@
             "<p class='copyright'>"
         ]
     },{
-        "name"    : "guokr.com",
+        "name"    : "post.guokr.com",
         "url"     : "http://www.guokr.com/post/",
         "title"   : "<h1 id='articleTitle'>",
         "desc"    : "",
