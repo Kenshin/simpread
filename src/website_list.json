@@ -167,6 +167,15 @@
             "<p class='copyright'>"
         ]
     },{
+        "name"    : "guokr.com",
+        "url"     : "http://www.guokr.com/post/",
+        "title"   : "<h1 id='articleTitle'>",
+        "desc"    : "",
+        "include" : "<div id='articleContent' >",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "zuimeia.com",
         "url"     : "http://zuimeia.com/app/",
         "title"   : "<span class='sub-title'>",
@@ -438,6 +447,15 @@
         "include" : "<div id='newsContent'>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "feng.com",
+        "url"     : "http://www.feng.com/*",
+        "title"   : "<h1>",
+        "desc"    : "<p class='content_title'>",
+        "include" : "<div id='article_content'>",
+        "exclude" : [
+            "<p class='content_title'>"
         ]
     }]
 }
