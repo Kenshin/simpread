@@ -231,7 +231,11 @@ async function specbeautify( $target ) {
             $target.find( ".conserve-photo" ).remove();
             $target.find( "table" ).addClass( "sr-rd-content-center" );
             break;
+        case "azofreeware.com":
+            $target.find( "iframe" ).remove();
+            break;
         case "apprcn.com":
+            removeSpareSpace( $target, "p" );
             $target.find( "img" ).map( ( index, item ) => {
                 const $target = $(item),
                       src     = $target.attr( "src" );
@@ -244,7 +248,7 @@ async function specbeautify( $target ) {
             });
             break;
         default:
-            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com" ].includes( storage.current.site.name )) {
+            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );
             } else if ([ "nationalgeographic.com.cn" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "div" );
