@@ -552,5 +552,32 @@
         "exclude" : [
             "<p class='content_title'>"
         ]
+    },{
+        "name"    : "caixin.com",
+        "url"     : "http://companies.caixin.com/*",
+        "title"   : "<h1>",
+        "desc"    : "<div id='subhead'>",
+        "include" : "<div id='Main_Content_Val'>",
+        "exclude" : [
+             "[[/src=\\S+(favicon)\\S+'/]]"
+        ]
+    },{
+        "name"    : "ithome.com",
+        "url"     : "http://www.ithome.com/html/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='paragraph'> ",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.sohu.com",
+        "url"     : "http://news.sohu.com/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='contentText'>",
+        "exclude" : [
+            ""
+        ]
     }]
 }
