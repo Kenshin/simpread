@@ -226,11 +226,25 @@ async function specbeautify( $target ) {
             $target.find( ".pre-numbering" ).remove();
             $target.find( "pre" ).removeAttr( "style" ).removeAttr( "class" );
             $target.find( "code" ).removeAttr( "style" );
+            break;
         case "news.sohu.com":
             $target.find( ".conserve-photo" ).remove();
             $target.find( "table" ).addClass( "sr-rd-content-center" );
+            break;
+        case "apprcn.com":
+            $target.find( "img" ).map( ( index, item ) => {
+                const $target = $(item),
+                      src     = $target.attr( "src" );
+                if ( src && src.includes( "Apprcn_Wechat_Small.jpeg" ) ) $target.parent().remove();
+            });
+            $target.find( "a" ).map( ( index, item ) => {
+                const $target = $(item),
+                      text    = $target.text();
+                if ( text == "来自反斗软件" ) $target.parent().remove();
+            });
+            break;
         default:
-            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com" ].includes( storage.current.site.name )) {
+            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );
             } else if ([ "nationalgeographic.com.cn" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "div" );
