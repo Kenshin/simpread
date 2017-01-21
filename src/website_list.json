@@ -349,6 +349,15 @@
             "[[/src=\\S+(ifeve500X150)\\S+'/]]"
         ]
     },{
+        "name"    : "my.oschina.net",
+        "url"     : "https://my.oschina.net/*",
+        "title"   : "<title>",
+        "desc"    : "<div class='blog-abstract'>",
+        "include" : "<div class='BlogContent'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "translate.oschina.net",
         "url"     : "https://www.oschina.net/translate/",
         "title"   : "<title>",
@@ -377,6 +386,15 @@
         "title"   : "<span class='link_title'>",
         "desc"    : "",
         "include" : "<div id='article_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "lib.csdn.net",
+        "url"     : "http://lib.csdn.net/article/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='divtexts'>",
         "exclude" : [
             ""
         ]
