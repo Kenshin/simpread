@@ -579,5 +579,23 @@
         "exclude" : [
             ""
         ]
+    },{
+        "name"    : "sina.com.cn",
+        "url"     : "http://news.sina.com.cn/*",
+        "title"   : "<h1 id='artibodyTitle'>",
+        "desc"    : "",
+        "include" : "<div id='artibody'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "163.com",
+        "url"     : "http://news.163.com/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='endText'>",
+        "exclude" : [
+            "<div class='ep-source'>"
+        ]
     }]
 }
