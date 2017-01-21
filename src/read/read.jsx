@@ -219,8 +219,11 @@ async function specbeautify( $target ) {
             $target.find( ".pre-numbering" ).remove();
             $target.find( "pre" ).removeAttr( "style" ).removeAttr( "class" );
             $target.find( "code" ).removeAttr( "style" );
+        case "news.sohu.com":
+            $target.find( ".conserve-photo" ).remove();
+            $target.find( "table" ).addClass( "sr-rd-content-center" );
         default:
-            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net" ].includes( storage.current.site.name )) {
+            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );
             } else if ([ "nationalgeographic.com.cn" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "div" );
