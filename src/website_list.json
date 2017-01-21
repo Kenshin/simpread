@@ -240,6 +240,42 @@
             ""
         ]
     },{
+        "name"    : "tmtpost.com",
+        "url"     : "http://www.tmtpost.com/",
+        "title"   : "<h1>",
+        "desc"    : "<p class='post-abstract'>",
+        "include" : "<article>",
+        "exclude" : [
+			"<h1>",
+            "<div class='post-info'>",
+			"<p class='post-abstract'>",
+			"<div class='pro_icon'>",
+			"<div class='pro_intro tc'>",
+			"[['<strong>更多精彩内容</strong>']]",
+			"[['<strong>关注钛媒体微信号</strong>']]",
+			"[[/src=\\S+(wzny_ewm)\\S+'/]]"
+        ]
+    },{
+        "name"    : "songshuhui.net",
+        "url"     : "http://songshuhui.net/archives/",
+        "title"   : "<span class='contenttitle'>",
+        "desc"    : "",
+        "include" : "<div class='entry'>",
+        "exclude" : [
+            "<div class='bshare-custom'>",
+			"<div class='my-related-posts-box'>",
+			"[['<strong>相关文章</strong>']]"
+        ]
+    },{
+        "name"    : "infzm.com",
+        "url"     : "http://www.infzm.com/content/",
+        "title"   : "<h1 class='articleHeadline'>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<section id='articleContent'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
