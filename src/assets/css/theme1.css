@@ -85,13 +85,14 @@ sr-rd-content a:active {
 }*/
 
 sr-rd-content pre {
-    white-space: pre-wrap;
     display: block;
-    background: #f8f8f8;
     padding: 10px 20px;
-    border: none;
     margin-bottom: 25px;
     color: #666;
+    background: #f8f8f8;
+    white-space: pre-wrap;
+    border: none;
+    font-family: "Source Code Pro", monospace;
 }
 
 sr-rd-content sr-blockquote {
