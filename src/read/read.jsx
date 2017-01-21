@@ -223,6 +223,11 @@ async function specbeautify( $target ) {
                 $target.removeAttr( "class" ).addClass( "sr-rd-content-center" ).empty().append( $img ).append( $label );
             });
             break;
+        case "blog.csdn.net":
+            $target.find( ".save_code " ).remove();
+            $target.find( ".pre-numbering " ).remove();
+            $target.find( "pre " ).removeAttr( "style" ).removeAttr( "class" );
+            $target.find( "code " ).removeAttr( "style" );
     }
 }
 
