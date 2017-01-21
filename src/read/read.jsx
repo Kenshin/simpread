@@ -188,6 +188,13 @@ async function specbeautify( $target ) {
                 }
             });
             break;
+        case "appinn.com":
+            $target.find( "img" ).map( (index, item) => {
+                if ( $(item).attr("class") == "emoji" ) {
+                    $(item).addClass( "sr-rd-content-nobeautify" );
+                }
+            });
+            break;
         case "douban.com":
             $target.find( ".review-content" ).children().unwrap();
             $target.find( "table" ).addClass( "sr-rd-content-center" );
