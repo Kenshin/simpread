@@ -306,6 +306,33 @@
 			"<div id='wp-share-list-container'>"
         ]
     },{
+        "name"    : "playpcesor.com",
+        "url"     : "http://www.playpcesor.com/*",
+        "title"   : "<h3 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "steachs.com",
+        "url"     : "https://steachs.com/archives/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='post-contents'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "azofreeware.com",
+        "url"     : "http://www.azofreeware.com/*",
+        "title"   : "<h2 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
