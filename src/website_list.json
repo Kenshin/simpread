@@ -285,6 +285,16 @@
             ""
         ]
     },{
+        "name"    : "appinn.com",
+        "url"     : "http://www.appinn.com/",
+        "title"   : "<h2 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            "<div class='open_social_box share_box'>",
+			"[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]"
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
