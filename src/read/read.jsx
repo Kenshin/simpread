@@ -206,10 +206,6 @@ async function specbeautify( $target ) {
             });
             break;
         case "news.mtime.com":
-            /*$target.find( "div" ).map( ( index, item ) => {
-                const str = $(item).text().toLowerCase().trim();
-                if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
-            });*/
             removeSpareSpace( $target, "div" );
             $target.find( ".newspictool" ).map( ( index, item ) => {
                 const $target = $(item),
