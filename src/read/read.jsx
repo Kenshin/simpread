@@ -205,12 +205,6 @@ async function specbeautify( $target ) {
                 $target.empty().removeAttr( "class" ).append( str );
             });
             break;
-        case "huxiu.com":
-            $target.find( "p" ).map( ( index, item ) => {
-                const str = $(item).html().toLowerCase().trim();
-                if ( str == "&nbsp;" || str == "<br>" || str == "" ) $(item).remove();
-            });
-            break;
         case "news.mtime.com":
             $target.find( "div" ).map( ( index, item ) => {
                 const str = $(item).text().toLowerCase().trim();
@@ -228,11 +222,13 @@ async function specbeautify( $target ) {
             $target.find( ".pre-numbering" ).remove();
             $target.find( "pre" ).removeAttr( "style" ).removeAttr( "class" );
             $target.find( "code" ).removeAttr( "style" );
-        case "lib.csdn.net":
-             $target.find( "p" ).map( ( index, item ) => {
-                const str = $(item).text().toLowerCase().trim();
-                if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
-            });
+        default:
+            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net" ].includes( storage.current.site.name )) {
+                $target.find( "p" ).map( ( index, item ) => {
+                    const str = $(item).text().toLowerCase().trim();
+                    if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
+                });
+            }
             break;
     }
 }
