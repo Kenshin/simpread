@@ -206,10 +206,11 @@ async function specbeautify( $target ) {
             });
             break;
         case "news.mtime.com":
-            $target.find( "div" ).map( ( index, item ) => {
+            /*$target.find( "div" ).map( ( index, item ) => {
                 const str = $(item).text().toLowerCase().trim();
                 if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
-            });
+            });*/
+            removeSpareSpace( $target, "div" );
             $target.find( ".newspictool" ).map( ( index, item ) => {
                 const $target = $(item),
                       $img    = $target.find( "img" ),
@@ -224,10 +225,9 @@ async function specbeautify( $target ) {
             $target.find( "code" ).removeAttr( "style" );
         default:
             if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net" ].includes( storage.current.site.name )) {
-                $target.find( "p" ).map( ( index, item ) => {
-                    const str = $(item).text().toLowerCase().trim();
-                    if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
-                });
+                removeSpareSpace( $target, "p" );
+            } else if ([ "nationalgeographic.com.cn" ].includes( storage.current.site.name )) {
+                removeSpareSpace( $target, "div" );
             }
             break;
     }
@@ -355,6 +355,19 @@ function getcontent( $target ) {
             break;
     }
     return html;
+}
+
+/**
+ * Remove spare space
+ * 
+ * @param {jquery} jquery object
+ * @param {string} html tag, e.g. div p
+ */
+function removeSpareSpace( $target, tag ) {
+    $target.find( tag ).map( ( index, item ) => {
+        const str = $(item).text().toLowerCase().trim();
+        if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
+    });
 }
 
 export { Render, Exist };
