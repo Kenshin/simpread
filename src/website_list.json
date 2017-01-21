@@ -358,6 +358,29 @@
             ""
         ]
     },{
+        "name"    : "geek.csdn.net",
+        "url"     : "http://geek.csdn.net/news/detail/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='markdown_views'>",
+        "exclude" : [
+            "[['<p>欢迎关注CSDN大数据公众号</p>']]",
+            "[['<strong>关注以下公众号</strong>']]",
+            "[[/src=\\S+(20170119091646909)\\S+'/]]",
+			"[[/src=\\S+(20170119152206448)\\S+'/]]",
+			"[[/src=\\S+(20170120110155787)\\S+'/]]",
+			"[[/src=\\S+(8tPUexU)\\S+'/]]"
+        ]
+    },{
+        "name"    : "blog.csdn.net",
+        "url"     : "http://blog.csdn.net/*",
+        "title"   : "<span class='link_title'>",
+        "desc"    : "",
+        "include" : "<div id='article_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
