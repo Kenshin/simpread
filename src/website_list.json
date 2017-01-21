@@ -276,6 +276,15 @@
             ""
         ]
     },{
+        "name"    : "nationalgeographic.com.cn",
+        "url"     : "http://www.nationalgeographic.com.cn/*",
+        "title"   : "<div class='title'>",
+        "desc"    : "",
+        "include" : "<div id='detailMain_box_img'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
