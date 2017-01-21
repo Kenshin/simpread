@@ -224,10 +224,16 @@ async function specbeautify( $target ) {
             });
             break;
         case "blog.csdn.net":
-            $target.find( ".save_code " ).remove();
-            $target.find( ".pre-numbering " ).remove();
-            $target.find( "pre " ).removeAttr( "style" ).removeAttr( "class" );
-            $target.find( "code " ).removeAttr( "style" );
+            $target.find( ".save_code" ).remove();
+            $target.find( ".pre-numbering" ).remove();
+            $target.find( "pre" ).removeAttr( "style" ).removeAttr( "class" );
+            $target.find( "code" ).removeAttr( "style" );
+        case "lib.csdn.net":
+             $target.find( "p" ).map( ( index, item ) => {
+                const str = $(item).text().toLowerCase().trim();
+                if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
+            });
+            break;
     }
 }
 
