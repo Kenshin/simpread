@@ -295,6 +295,17 @@
 			"[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]"
         ]
     },{
+        "name"    : "apprcn.com",
+        "url"     : "http://www.apprcn.com/",
+        "title"   : "<h2 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            "<div class='wumii-hook'>",
+			"<div id='wumiiDisplayDiv'>",
+			"<div id='wp-share-list-container'>"
+        ]
+    },{
         "name"    : "jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
