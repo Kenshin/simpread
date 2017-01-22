@@ -164,7 +164,7 @@ function getcontent( $target ) {
             html = $target.html().trim();
             break;
         default:
-            html = $target.map( (index, item) => $(item).html() ).get().join( "" );
+            html = $target.map( (index, item) => $(item).html() ).get().join( "<br>" );
             break;
     }
     return html;
