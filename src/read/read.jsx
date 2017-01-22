@@ -208,13 +208,8 @@ async function specbeautify( $target ) {
             });
             break;
         case "smzdm.com":
-            $target.find( "img.face, .insert-outer" ).map( (index, item) => {
-                if ( $(item).is("img") ) {
-                    $(item).addClass( "sr-rd-content-nobeautify" );
-                } else {
-                    $(item).find( "img" ).addClass( "sr-rd-content-nobeautify" );
-                }
-            });
+            $target.find( "img.face" ).addClass( "sr-rd-content-nobeautify" );
+            $target.find( ".insert-outer img" ).addClass( "sr-rd-content-nobeautify" );
             break;
         case "infoq.com":
             $target.find( "img" ).map( (index, item) => {
@@ -224,11 +219,7 @@ async function specbeautify( $target ) {
             });
             break;
         case "appinn.com":
-            $target.find( "img" ).map( (index, item) => {
-                if ( $(item).attr("class") == "emoji" ) {
-                    $(item).addClass( "sr-rd-content-nobeautify" );
-                }
-            });
+            $target.find( ".emoji" ).addClass( "sr-rd-content-nobeautify" );
             break;
         case "douban.com":
             $target.find( ".review-content" ).children().unwrap();
