@@ -278,6 +278,9 @@ async function specbeautify( $target ) {
             $target.find( ".replace_div" ).removeAttr( "class" ).removeAttr( "style" );
             $target.find( ".replace_tip" ).remove();
             break;
+        case "question.zhihu.com":
+            $target.find( ".zu-edit-button" ).remove();
+            break;
         default:
             if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com", "hacpai.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );

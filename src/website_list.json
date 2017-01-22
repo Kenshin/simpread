@@ -139,6 +139,15 @@
             ""
         ]
     },{
+        "name"    : "question.zhihu.com",
+        "url"     : "https://www.zhihu.com/question/",
+        "title"   : "[[{$('span.zm-editable-content').text().replace('修改','')}]]",
+        "desc"    : "",
+        "include" : "<div class='zm-editable-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "geekpark.net",
         "url"     : "http://www.geekpark.net/topics/",
         "title"   : "<h1 class='topic-title'>",
