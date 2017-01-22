@@ -121,11 +121,20 @@
             ""
         ]
     },{
-        "name"    : "zhihu.com",
-        "url"     : "https://daily.zhihu.com/story/*",
+        "name"    : "dudu.zhihu.com",
+        "url"     : "http://dudu.zhihu.com/story/*",
         "title"   : "<h1 class='headline-title'>",
         "desc"    : "",
         "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "daily.zhihu.com",
+        "url"     : "https://daily.zhihu.com/story/",
+        "title"   : "<h1 class='headline-title'>",
+        "desc"    : "",
+        "include" : "[[{$('.content').html()}]]",
         "exclude" : [
             ""
         ]
