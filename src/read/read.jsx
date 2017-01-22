@@ -136,12 +136,12 @@ function wrap( site ) {
  * @return {string} query result
  */
 function query( content, type = "text" ) {
-    if ( type == "html" ) {
+    if ( util.specTest( content ) ) {
+        content = rules( util.specAction( content )[0] );
+    } else if ( type == "html" ) {
         content = rules( getcontent( $root.find( content ) ));
     } else if ( type == "multi" ) {
         // TO-DO
-    } else if ( util.specTest( content ) ) {
-        content = util.specAction( content )[0];
     } else {
         content = $root.find( content ).text().trim();
     }
