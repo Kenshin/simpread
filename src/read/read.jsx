@@ -336,9 +336,8 @@ async function commbeautify( $target ) {
         $img.attr( "src", newsrc )
             .one( "load",  ()=>fixOverflowImgsize() )
             .one( "error", ()=>loaderrorHandle()    )
-            .prependTo( $parent )
+            .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );
-        $target.remove();
 
         // origin style
         /*if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-exclude" ) ) {
