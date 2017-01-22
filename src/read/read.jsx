@@ -132,14 +132,16 @@ function wrap( site ) {
  * Query content usage jquery
  * 
  * @param  {string} query content
- * @param  {string} type, incldue: text and html
+ * @param  {string} type, incldue: text,  html and multi
  * @return {string} query result
  */
 function query( content, type = "text" ) {
-    if ( util.specTest( content ) ) {
-        content = util.specAction( content )[0];
-    } else if ( type == "html" ) {
+    if ( type == "html" ) {
         content = rules( getcontent( $root.find( content ) ));
+    } else if ( type == "multi" ) {
+        // TO-DO
+    } else if ( util.specTest( content ) ) {
+        content = util.specAction( content )[0];
     } else {
         content = $root.find( content ).text().trim();
     }
@@ -156,7 +158,6 @@ function getcontent( $target ) {
     let html = "";
     switch ( $target.length ) {
         case 0:
-            // TO-DO
             html = errorpage;
             break;
         case 1:
