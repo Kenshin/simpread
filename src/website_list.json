@@ -672,5 +672,14 @@
         "exclude" : [
             ""
         ]
+    },{
+        "name"    : "mifengtd.cn",
+        "url"     : "http://www.mifengtd.cn/articles/",
+        "title"   : "<a class='p-name'>",
+        "desc"    : "",
+        "include" : "<div class='e-content'>",
+        "exclude" : [
+            ""
+        ]
     }]
 }
