@@ -283,7 +283,7 @@ async function specbeautify( $target ) {
             });
             break;
         default:
-            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com" ].includes( storage.current.site.name )) {
+            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com", "hacpai.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );
             } else if ([ "nationalgeographic.com.cn" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "div" );
