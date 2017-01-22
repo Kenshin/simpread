@@ -136,6 +136,11 @@ function readMode() {
         storage.Setcur( mode.read );
     }
 
+    if ( window.location.hostname == "tieba.baidu.com" && !window.location.href.includes( "see_lz=1" ) ) {
+        new Notify().Render( 1, "只有选中【只看楼主】后，才能进入阅读模式。" );
+        return;
+    }
+    
     if ( storage.current.site.name === "" ) {
         new Notify().Render( 1, "当前页面没有适配，如需要请自行添加。" );
         //TO-DO

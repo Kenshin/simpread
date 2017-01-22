@@ -273,6 +273,11 @@ async function specbeautify( $target ) {
                 if ( text == "来自反斗软件" ) $target.parent().remove();
             });
             break;
+        case "tieba.baidu.com":
+            $target.find( ".BDE_Smiley" ).addClass( "sr-rd-content-nobeautify" );
+            $target.find( ".replace_div" ).removeAttr( "class" ).removeAttr( "style" );
+            $target.find( ".replace_tip" ).remove();
+            break;
         default:
             if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com", "hacpai.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );
