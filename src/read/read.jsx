@@ -147,6 +147,40 @@ function query( content, type = "text" ) {
 }
 
 /**
+ * Get content from current.site.include
+ * 
+ * @param  {jquery} jquery object e.g. $root.find( content )
+ * @return {string} $target html
+ */
+function getcontent( $target ) {
+    let html = "";
+    switch ( $target.length ) {
+        case 0:
+            // TO-DO
+            html = errorpage;
+            break;
+        case 1:
+            html = $target.html().trim();
+            break;
+        default:
+            html = $target.map( (index, item) => $(item).html() ).get().join( "" );
+            break;
+    }
+    return html;
+}
+
+/**
+ * Format html, include:
+ * - change all blockquote to sr-blockquote
+ * 
+ * @param  {string} html string
+ * @return {string} format html string
+ */
+function rules( html ) {
+    return html.trim().replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" );
+}
+
+/**
  * Set exclude style
  * 
  * @param {jquery} jquery object
@@ -345,40 +379,6 @@ async function commbeautify( $target ) {
     $target.find( "pre" ).map( ( index, item )=> {
         $(item).find( "code" ).removeAttr( "class" );
     });
-}
-
-/**
- * Format html, include:
- * - change all blockquote to sr-blockquote
- * 
- * @param  {string} html string
- * @return {string} format html string
- */
-function rules( html ) {
-    return html.trim().replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" );
-}
-
-/**
- * Get content from current.site.include
- * 
- * @param  {jquery} jquery object e.g. $root.find( content )
- * @return {string} $target html
- */
-function getcontent( $target ) {
-    let html = "";
-    switch ( $target.length ) {
-        case 0:
-            // TO-DO
-            html = errorpage;
-            break;
-        case 1:
-            html = $target.html().trim();
-            break;
-        default:
-            html = $target.map( (index, item) => $(item).html() ).get().join( "" );
-            break;
-    }
-    return html;
 }
 
 /**
