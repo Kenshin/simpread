@@ -492,6 +492,24 @@
             ""
         ]
     },{
+        "name"    : "hacpai.com",
+        "url"     : "https://hacpai.com/article/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "freebuf.com",
+        "url"     : "http://www.freebuf.com/*",
+        "title"   : "[[{$('.title h2').text()}]]",
+        "desc"    : "",
+        "include" : "<div id='contenttxt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
@@ -644,6 +662,15 @@
         "include" : "<div id='endText'>",
         "exclude" : [
             "<div class='ep-source'>"
+        ]
+    },{
+        "name"    : "timetimetime.net",
+        "url"     : "http://www.timetimetime.net/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "[[{$('.neir').html()}]]",
+        "exclude" : [
+            ""
         ]
     }]
 }
