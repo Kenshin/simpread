@@ -193,7 +193,8 @@ class Storage {
         } else if ( current.site.name === "" ) {
             return -1;
         } else {
-            const sites = new Map( simpread.sites ),
+            return 0;
+            /*const sites = new Map( simpread.sites ),
                   url   = href.endsWith("/") ? href : href + "/",
                   urls  = [ ...sites.keys() ].filter( item => {
                       if ( item.includes( url )) {
@@ -205,7 +206,7 @@ class Storage {
                 return -1;
             } else {
                 return 0;
-            }
+            }*/
         }
     }
 
@@ -289,11 +290,15 @@ function findSitebyURL( url ) {
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
           wildcard = arr[1];
     for ( const cur of urls ) {
-        const name = sites.get(cur).name;
+        const name   = sites.get(cur).name,
+              suffix = cur.replace( "*", "" );
         if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
+            if ( suffix != url ) {
+                return undefined;
+            }
+        }
+        if ( suffix == url ) {
             return [ clone( sites.get( cur )), cur ];
-        } else if ( cur == url ) {
-            return [ clone( sites.get( url )), url ];
         }
     }
     return undefined;
