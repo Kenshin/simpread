@@ -296,21 +296,6 @@ async function specbeautify( $target ) {
 }
 
 /**
- * Format html, include:
- * - change all <blockquote> to <sr-blockquote>
- * - remove useless <br>
- * 
- * @param  {string} html string
- * @return {string} format html string
- */
-//function rules( html ) {
-//    return html.trim()
-//            .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
-//            .replace( /<br>\n<br>(\n<br>)*/g, "<br>" )
-//            .replace( /<\/(div|p)>\n(<br>\n)*/g, (value) => value.replace( "<br>", "" ) );
-//}
-
-/**
  * Beautify html, incldue:
  * 
  * - change all <blockquote> to <sr-blockquote>
