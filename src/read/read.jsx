@@ -301,6 +301,8 @@ async function specbeautify( $target ) {
                 removeSpareSpace( $target, "p" );
             } else if ([ "nationalgeographic.com.cn" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "div" );
+            }else if ([ "chiphell.com" ].includes( storage.current.site.name )) {
+                removeSpareSpace( $target, "font" );
             }
             break;
     }
