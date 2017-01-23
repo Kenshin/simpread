@@ -277,7 +277,9 @@ async function specbeautify( $target ) {
         case "chiphell.com":
             $target.find( "img" ).map( ( index, item ) => {
                 const $target = $(item),
+                      $parent = $target.parent(),
                       src     = $target.attr( "src" );
+                if ( $parent.is( "ignore_js_op" )) $target.unwrap();
                 if ( src && src.includes( "static/image/smiley" ) ) $target.addClass( "sr-rd-content-nobeautify" );
             });
             $target.find( ".quote" ).remove();
@@ -321,7 +323,7 @@ async function htmlbeautify( $target ) {
         return html.trim()
                 .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
                 .replace( /<br>\n<br>(\n<br>)*/g, "<br>" )
-                .replace( /<\/(div|p)>\n(<br>\n)*/g, (value) => value.replace( "<br>", "" ) );
+                .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
     });
 }
 
