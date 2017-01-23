@@ -717,5 +717,14 @@
         "exclude" : [
             ""
         ]
+    },{
+        "name"    : "chiphell.com",
+        "url"     : "https://www.chiphell.com/*",
+        "title"   : "<span id='thread_subject'>",
+        "desc"    : "",
+        "include" : "<td class='t_f'>",
+        "exclude" : [
+            "<i class='pstatus'>"
+        ]
     }]
 }
