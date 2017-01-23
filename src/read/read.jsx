@@ -281,14 +281,13 @@ async function specbeautify( $target ) {
                 if ( src && src.includes( "static/image/smiley" ) ) $target.addClass( "sr-rd-content-nobeautify" );
             });
             $target.find( ".quote" ).remove();
+            removeSpareSpace( $target, "font" );
             break;
         default:
             if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com", "hacpai.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );
             } else if ([ "nationalgeographic.com.cn" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "div" );
-            }else if ([ "chiphell.com" ].includes( storage.current.site.name )) {
-                removeSpareSpace( $target, "font" );
             }
             break;
     }
