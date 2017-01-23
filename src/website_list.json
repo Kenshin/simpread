@@ -682,6 +682,15 @@
             "<div class='ep-source'>"
         ]
     },{
+        "name"    : "qq.com",
+        "url"     : "http://www.qq.com/*",
+        "title"   : "[[{$('.hd h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div id='Cnt-Main-Article-QQ'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "timetimetime.net",
         "url"     : "http://www.timetimetime.net/*",
         "title"   : "<h1>",
