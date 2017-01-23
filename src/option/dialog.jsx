@@ -1,6 +1,7 @@
 console.log( "=== simpread option dialog ===" )
 
 import FocusOpt  from 'focusopt';
+import ReadOpt   from 'readopt';
 import { storage, STORAGE_MODE } from 'storage';
 import Notify from 'notify';
 
@@ -21,7 +22,7 @@ export default class Dialog extends React.Component {
     // save dialog focus option
     save() {
         console.log( "dialog click submit button.", storage.current )
-        storage.Set( STORAGE_MODE.focus );
+        storage.Set( storage.current.mode );
         chrome.runtime.sendMessage({ type: "shortcuts" });
         new Notify().Render( 0, "更新成功！" );
         this.close( false );
@@ -32,8 +33,7 @@ export default class Dialog extends React.Component {
     }
 
     render() {
-        let Option;
-        if ( this.props.type == STORAGE_MODE.focus ) Option = FocusOpt;
+        const Option = storage.current.mode == STORAGE_MODE.focus ? FocusOpt : ReadOpt;
         return (
             <sr-dialog>
                 <sr-dialog-content>
@@ -56,18 +56,19 @@ export default class Dialog extends React.Component {
  * Roll back when cancel button click
  */
 function rollback() {
-    storage.Restore( STORAGE_MODE.focus );
+    storage.Restore( storage.current.mode );
     $( ".ks-simpread-bg" ).css({ "background-color" : storage.current.bgcolor });
 }
 
 /**
  * get Dialog background document
  * 
+ * @param  {string} target include: body and html
  * @return {jquery} ks-simpread-option-bg jquery object
  */
-export function getDialogBackground() {
-    if ( $( "body" ).find( "." + optbgcls ).length == 0 ) {
-        $( "body" ).append( optbg );
+export function getDialogBackground( target = "body" ) {
+    if ( $(target).find( "." + optbgcls ).length == 0 ) {
+        $(target).append( optbg );
     }
     return $( "." + optbgcls )[0];
 }

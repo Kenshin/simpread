@@ -7,7 +7,7 @@ import Dialog, { getDialogBackground, isPopup } from 'dialog'
  */
 function Render() {
     if ( isPopup() ) return;
-    ReactDOM.render( <Dialog type="focus" />, getDialogBackground() );
+    ReactDOM.render( <Dialog />, getDialogBackground() );
 }
 
 module.exports.Render = Render;

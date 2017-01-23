@@ -82,7 +82,9 @@ const webpack = require( 'webpack' ),
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
+          './src/vender/pangu.min.js',
           './src/vender/mousetrap.min.js',
+          './src/vender/progressbar.min.js',
 
           './src/vender/notify/notify.js'
         ],
@@ -117,7 +119,7 @@ const webpack = require( 'webpack' ),
             }
         },
         { test: /\.css$/,       loader: 'style!css'      },
-        { test: /\.(png|jpg)$/, loader: 'url?limit=8192' },
+        { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288' },
         {
           test  : require.resolve( './src/vender/jquery-2.1.1.min.js' ),
           loader: 'expose?jQuery!expose?$'
@@ -131,11 +133,14 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
-          jquery     : __dirname + '/src/vender/jquery-2.1.1.min',
-          mousetrap  : __dirname + '/src/vender/mousetrap.min',
+          jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
+          mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
+          pangu      : __dirname + '/src/vender/pangu.min.js',
+          progressbar: __dirname + '/src/vender/progressbar.min.js',
 
           notify     : __dirname + '/src/vender/notify/notify.js',
 
+          util       : __dirname + '/src/service/util.js',
           storage    : __dirname + '/src/service/storage.js',
           local      : __dirname + '/src/service/local.js',
 
@@ -143,8 +148,18 @@ const webpack = require( 'webpack' ),
           controlbar : __dirname + '/src/focus/controlbar.js',
           foucsetting: __dirname + '/src/focus/setting.js',
 
+          read       : __dirname + '/src/read/read.jsx',
+          readctlbar : __dirname + '/src/read/controlbar.jsx',
+          readsetting: __dirname + '/src/read/setting.js',
+          readschedule: __dirname + '/src/read/component/progressbar.jsx',
+          readfooter : __dirname + '/src/read/component/footer.jsx',
+
           dialog     : __dirname + '/src/option/dialog.jsx',
           focusopt   : __dirname + '/src/option/focus.jsx',
+          readopt    : __dirname + '/src/option/read.jsx',
+
+          theme1     : '../assets/css/theme1.css',
+          theme2     : '../assets/css/theme2.css',
 
         }
       }

@@ -96,9 +96,9 @@ var Notify = ( function () {
         };
 
     function Notify() {
-        registyElement( name, [ "div", "a", "span", "title", "content" ] ); 
-        if ( $( "body" ).find ( rootcls ).length == 0 ) {
-            $( "body" ).append( roottmpl );
+        registyElement( name, [ "div", "a", "span", "title", "content" ] );
+        if ( $( "html" ).find ( rootcls ).length == 0 ) {
+            $( "html" ).append( roottmpl );
             $container = $( rootcls );
         }
     }

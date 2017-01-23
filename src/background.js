@@ -13,21 +13,24 @@ storage.Get( function() {
 /**
  * Create context menus
 */
-chrome.contextMenus.create({
-    "type"     : "normal",
-    "title"    : "简阅 - 聚焦模式",
-    "contexts" :  [ "all" ],
-    "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ],
-    "onclick"  : function( info ) {
-        getCurTab( function( tabs ) {
-            if ( tabs[0].url == info.pageUrl ) {
-                chrome.tabs.sendMessage( tabs[0].id, { type: "focus" });
-            }
-            else {
-                // TO-DO
-                // notifcation 
-            }
-        });
+const menu = {
+        "type"     : "normal",
+        "contexts" :  [ "all" ],
+        "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ]
+    },
+    foucsmenu = {},
+    readmenu  = {};
+
+Object.assign( foucsmenu, menu, { id: "focus", "title" : "聚焦模式" });
+Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
+
+chrome.contextMenus.create( foucsmenu );
+chrome.contextMenus.create( readmenu  );
+
+chrome.contextMenus.onClicked.addListener( function( info, tab ) {
+    console.log( info, tab )
+    if ( info.pageUrl == tab.url ) {
+        chrome.tabs.sendMessage( tab.id, { type: info.menuItemId });
     }
 });
 

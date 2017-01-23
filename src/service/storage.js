@@ -1,4 +1,3 @@
-console.log( "=== simpread storage load ===" )
 
 import "babel-polyfill";
 
@@ -32,7 +31,8 @@ const name = "simpread",
     },
     read   = {
         version   : "2017-01-07",
-        theme     : "",
+        shortcuts : "A A",
+        theme     : "theme1",
         fontfamily: "",
         fontsize  : 14,
         sites     : []    // e.g. [ "<url>", site ]
@@ -56,6 +56,15 @@ class Storage {
      */
     get focus() {
         return simpread[ mode.focus ];
+    }
+
+    /**
+     * Get simpread.read data structure
+     * 
+     * @return {object} simpread["read"]
+     */
+    get read() {
+        return simpread[ mode.read ];
     }
 
     /**
@@ -152,6 +161,15 @@ class Storage {
         }
     }
 
+    /**
+     * Verity current changed
+     * 
+     * @param {string} @see mode
+     */
+    VerifyCur( type ) {
+        return ( current.mode && current.mode != type ) || $.isEmptyObject( current );
+    }
+
 }
 
 /**
@@ -221,16 +239,23 @@ function addsites( sites ) {
 }
 
 /**
- * Find site by url from simpread.sites
+ * Find site by url from simpread.sites, include wildcard, support: *
  * 
  * @param  {string} url
  * @return {object} site object or not found return undefined
  */
 function findSitebyURL( url ) {
-    const site  = new Map( simpread.sites );
-    const urls = [ ...site.keys() ];
-    if ( urls.includes( url ) ) {
-        return clone( site.get( url ));
+    const sites     = new Map( simpread.sites ),
+          urls     = [ ...sites.keys() ],
+          arr      = url.match( /[.a-zA-z0-9-_]+/g ),
+          wildcard = arr[1];
+    for ( const cur of urls ) {
+        const name = sites.get(cur).name;
+        if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
+            return clone( sites.get( cur ));
+        } else if ( cur == url ) {
+            return clone( sites.get( url ));
+        }
     }
     return undefined;
 }
@@ -249,5 +274,6 @@ const storage = new Storage();
 
 export {
     storage,
-    mode as STORAGE_MODE
+    mode  as STORAGE_MODE,
+    clone as Clone
 };

@@ -15,7 +15,8 @@ var $         = require( "jquery" ),
     focus     = require( "focus"   ).focus,
     selector  = require( "focus"   ).getSelector,
     storage   = require( "storage" ).storage,
-    mode      = require( "storage" ).STORAGE_MODE;
+    mode      = require( "storage" ).STORAGE_MODE,
+    read      = require( "read"    );
 
 /**
  * Sevice:storage Get data form chrome storage
@@ -31,6 +32,9 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
         case "focus":
             focuseMode();
             break;
+        case "read":
+            readMode();
+            break;
         case "shortcuts":
             bindShortcuts();
             break;
@@ -45,6 +49,7 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
  */
 function bindShortcuts() {
     Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
+    Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
 }
 
 /**
@@ -57,11 +62,18 @@ function focuseMode() {
         sel, range, node, tag,
         target;
 
-    if ( storage.current && $.isEmptyObject( storage.current )) storage.Setcur( mode.focus );
+    if ( read.Exist(false) ) {
+        new Notify().Render( 1, "请先退出阅读模式，才能进入聚焦模式。" );
+        return;
+    }
+
+    if ( storage.VerifyCur( mode.focus ) ) {
+         storage.Setcur( mode.focus );
+    }
     target = selector( storage.current.site.include );
 
     // uniqueness verification
-    if ( !focus.Verify() ) return;
+    if ( focus.Exist(true) ) return;
 
     // get tag from chrome storage
     if ( target ) $focus = $( "body" ).find( target );
@@ -89,7 +101,6 @@ function focuseMode() {
         }
     }
 
-
     // add focus mode
     focus.Render( fixFocus( $focus ), storage.current.site.exclude, storage.current.bgcolor );
 }
@@ -108,4 +119,38 @@ function fixFocus( $focus ) {
             tag    = $focus[0].tagName.toLowerCase();
     }
     return $focus;
+}
+
+/**
+ * Read mode
+ */
+function readMode() {
+    console.log( "=== simpread read mode active ===" )
+
+    if ( focus.Exist(false) ) {
+        new Notify().Render( 1, "请先退出聚焦模式，才能进入阅读模式。" );
+        return;
+    }
+
+    if ( storage.VerifyCur( mode.read ) ) {
+        storage.Setcur( mode.read );
+    }
+
+    if ( window.location.hostname == "tieba.baidu.com" && !window.location.href.includes( "see_lz=1" ) ) {
+        new Notify().Render( 1, "只有选中【只看楼主】后，才能进入阅读模式。" );
+        return;
+    } else if ( window.location.hostname == "www.chiphell.com" && !window.location.href.includes( "mod=viewthread" ) ) {
+        new Notify().Render( 1, "只有选中【只看该作者】后，才能进入阅读模式。" );
+        return;
+    }
+    
+    if ( storage.current.site.name === "" ) {
+        new Notify().Render( 1, "当前页面没有适配，如需要请自行添加。" );
+        //TO-DO
+        return;
+    }
+
+    if ( read.Exist(true) ) return;
+
+    read.Render();
 }

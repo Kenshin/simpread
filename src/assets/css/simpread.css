@@ -1,5 +1,5 @@
 /**
- *  Focus style
+ *  Focus: Focus style
  */
 .ks-simpread-focus {
     overflow: visible;
@@ -10,7 +10,7 @@
 }
 
 /**
- *  Background style
+ *  Focus: Background style
  */
 .ks-simpread-bg {
     display: block;
@@ -31,7 +31,7 @@
 }
 
 /**
- *  Control bar style
+ *  Focus: Control bar style
  */
 sr-focus-ctl {
     position: fixed;
@@ -390,4 +390,205 @@ sr-opt-item[sr-type="exclude"] textarea {
 sr-opt-item[sr-type="exclude"] textarea:focus {
     border-bottom: 1px solid #00897B;
     box-shadow: 0 1px 0 0 #00897B;
+}
+
+/**
+ *  Read mode background
+ */
+.ks-simpread-read {
+    display: -webkit-flex;
+    justify-content:center;
+    align-items:center;
+
+    position: relative;
+
+    width: 100%;
+    top: 0;
+    left: 0;
+
+    z-index: 2147483646;
+    background-color: #fff;
+
+    will-change:       opacity, top;
+    -webkit-animation: readmodeshow 0.5s ease;
+}
+
+.ks-simpread-read-hide {
+    -webkit-animation: readmodehide 0.3s ease;
+    position: fixed;
+}
+
+@-webkit-keyframes readmodeshow {
+    from {
+        opacity: 0;
+        top: 10000px;
+    }
+    to {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+@-webkit-keyframes readmodehide {
+    from {
+        opacity: 1;
+        top: 0;
+    }
+    to {
+        opacity: 0;
+        top: 10000px;
+    }
+}
+
+.ks-simpread-body-hide,
+.sr-rd-content-exclude {
+    display: none;
+}
+
+.sr-rd-content-nobeautify {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: 0 0 0;
+}
+
+/**
+* Read process
+ */
+read-process {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+}
+
+/**
+* Read mode
+ */
+.sr-rd-font {
+    font-family: "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    color:#222;
+    -webkit-text-size-adjust:none;
+    line-height: 1.5rem;
+}
+
+sr-read {
+    display: -webkit-flex;
+    flex-flow:column nowrap;
+
+    min-width: 400px;
+    min-height: 400px;
+
+    text-align: center;
+
+    margin-top:  20px;
+    margin-bottom: 20px;
+
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+sr-rd-title, sr-rd-desc, sr-rd-content {
+    width: 100%;
+}
+
+.sr-rd-content-center {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
+}
+
+sr-rd-content-error {
+    display: block;
+    position: relative;
+    margin: 0px;
+    padding: 25px;
+    margin-bottom: 30px;
+    background-color: rgba(0,0,0,0.05);
+}
+
+sr-rd-content img {
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #bbb;
+    box-shadow: 1px 1px 3px #d4d4d4;
+}
+
+.sr-rd-content-img-load {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    padding: 0;
+    border-style: none;
+    border-width: 0;
+    background-repeat: no-repeat;
+    background-image: url( "../images/loading.gif" );
+}
+
+.sr-rd-content-img {
+    width: 100%;
+    height: auto;
+}
+
+/**
+* Read mode Footer
+ */
+sr-rd-footer {
+    margin-top: 10px;
+    padding: 40px 0 30px;
+    text-align: center;
+    border-top: 1px solid #E0E0E0;
+    clear: both;
+}
+
+sr-rd-footer-end {
+    display: block;
+    width: 70px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: initial;
+    color: #fff;
+    background: #424242;
+}
+
+sr-rd-footer p {
+    display: block;
+    padding: 0;
+    margin-bottom: 20px;
+    min-height: 24px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #787878;
+}
+
+sr-rd-footer p a {
+    text-decoration: none;
+    color: #787878;
+    font-size: 17px;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+    color: #787878;
+    text-decoration: underline;
+}
+
+/**
+ *  Read: Control bar
+ */
+sr-read-ctl {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100%;
 }
