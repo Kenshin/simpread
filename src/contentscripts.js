@@ -139,6 +139,9 @@ function readMode() {
     if ( window.location.hostname == "tieba.baidu.com" && !window.location.href.includes( "see_lz=1" ) ) {
         new Notify().Render( 1, "只有选中【只看楼主】后，才能进入阅读模式。" );
         return;
+    } else if ( window.location.hostname == "www.chiphell.com" && !window.location.href.includes( "mod=viewthread" ) ) {
+        new Notify().Render( 1, "只有选中【只看该作者】后，才能进入阅读模式。" );
+        return;
     }
     
     if ( storage.current.site.name === "" ) {
