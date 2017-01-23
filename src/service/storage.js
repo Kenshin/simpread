@@ -170,6 +170,43 @@ class Storage {
         return ( current.mode && current.mode != type ) || $.isEmptyObject( current );
     }
 
+    /**
+     * Adapter site
+     * 
+     * @return {number} 0: success; -1: not exsit; -2:tieba.com; -3:chiphell.com
+     */
+    Adapter() {
+        const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
+        if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
+            return -2;
+        } else if ( hostname == "www.chiphell.com" ) {
+            if ( pathname == "/forum.php" && window.location.search.includes( "mod=viewthread" ) ) {
+                return 0;
+            } else if ( pathname.includes( "thread" ) && window.location.search == "" ) {
+                return -3;
+            } else {
+                return -1;
+            }
+        } else if ( current.site.name === "" ) {
+            return -1;
+        } else {
+            const sites = new Map( simpread.sites ),
+                  url   = href.endsWith("/") ? href : href + "/",
+                  urls  = [ ...sites.keys() ].filter( item => {
+                      if ( item.includes( url )) {
+                          const href   = item.replace( "*", "" ),
+                                suffix = href.replace( url, "" );
+                          if ( suffix != "" ) return url;
+                      }
+                  });
+            if ( urls.length > 0 ) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
 }
 
 /**
