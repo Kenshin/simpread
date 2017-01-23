@@ -101,12 +101,15 @@ class Storage {
         current.mode = key;
         current.site = sites.get( url );
         while( !current.site ) {
-            current.site = findSitebyURL( url );
-            if ( !current.site ) {
+            const arr = findSitebyURL( url );
+            if ( arr ) {
+                current.site = arr[0];
+                current.url  = arr[1];
+            } else {
                 sites.set( url, clone( site ));
                 current.site = sites.get( url );
             }
-            simpread[key].sites.push([ url, current.site ]);
+            simpread[key].sites.push([ current.url, current.site ]);
         }
         console.log( "current site object is ", current )
     }
@@ -278,7 +281,7 @@ function addsites( sites ) {
  * Find site by url from simpread.sites, include wildcard, support: *
  * 
  * @param  {string} url
- * @return {object} site object or not found return undefined
+ * @return {array} arr[0]: current site; arr[1]: current url
  */
 function findSitebyURL( url ) {
     const sites     = new Map( simpread.sites ),
@@ -288,9 +291,9 @@ function findSitebyURL( url ) {
     for ( const cur of urls ) {
         const name = sites.get(cur).name;
         if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
-            return clone( sites.get( cur ));
+            return [ clone( sites.get( cur )), cur ];
         } else if ( cur == url ) {
-            return clone( sites.get( url ));
+            return [ clone( sites.get( url )), url ];
         }
     }
     return undefined;
