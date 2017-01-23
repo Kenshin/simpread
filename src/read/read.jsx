@@ -257,6 +257,9 @@ async function specbeautify( $target ) {
             $target.find( ".conserve-photo" ).remove();
             $target.find( "table" ).addClass( "sr-rd-content-center" );
             break;
+        case "qq.com":
+            $target.find( ".rv-root-v2, #backqqcom" ).remove();
+            break;
         case "azofreeware.com":
             $target.find( "iframe" ).remove();
             break;
