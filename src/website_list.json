@@ -638,7 +638,7 @@
         ]
     },{
         "name"    : "caixin.com",
-        "url"     : "http://companies.caixin.com/*",
+        "url"     : "http://www.caixin.com/*",
         "title"   : "<h1>",
         "desc"    : "<div id='subhead'>",
         "include" : "<div id='Main_Content_Val'>",
