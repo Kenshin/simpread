@@ -194,8 +194,7 @@ class Storage {
                   url   = href.endsWith("/") ? href : href + "/",
                   urls  = [ ...sites.keys() ].filter( item => {
                       if ( item.includes( url )) {
-                          const href   = item.replace( "*", "" ),
-                                suffix = href.replace( url, "" );
+                          const suffix = item.replace( url, "" );
                           if ( suffix != "" ) return url;
                       }
                   });
