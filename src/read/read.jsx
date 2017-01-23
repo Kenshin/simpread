@@ -31,6 +31,7 @@ class Read extends React.Component {
     async componentDidMount() {
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
         await specbeautify( $( "sr-rd-content" ));
+        await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
@@ -137,9 +138,9 @@ function wrap( site ) {
  */
 function query( content, type = "text" ) {
     if ( util.specTest( content ) ) {
-        content = rules( util.specAction( content )[0] );
+        content = util.specAction( content )[0];
     } else if ( type == "html" ) {
-        content = rules( getcontent( $root.find( content ) ));
+        content = getcontent( $root.find( content ) );
     } else if ( type == "multi" ) {
         // TO-DO
     } else {
@@ -168,21 +169,6 @@ function getcontent( $target ) {
             break;
     }
     return html;
-}
-
-/**
- * Format html, include:
- * - change all <blockquote> to <sr-blockquote>
- * - remove useless <br>
- * 
- * @param  {string} html string
- * @return {string} format html string
- */
-function rules( html ) {
-    return html.trim()
-            .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
-            .replace( /<br>\n<br>(\n<br>)*/g, "<br>" )
-            .replace( /<\/(div|p)>\n(<br>\n)*/g, (value) => value.replace( "<br>", "" ) );
 }
 
 /**
@@ -306,6 +292,38 @@ async function specbeautify( $target ) {
             }
             break;
     }
+}
+
+/**
+ * Format html, include:
+ * - change all <blockquote> to <sr-blockquote>
+ * - remove useless <br>
+ * 
+ * @param  {string} html string
+ * @return {string} format html string
+ */
+//function rules( html ) {
+//    return html.trim()
+//            .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
+//            .replace( /<br>\n<br>(\n<br>)*/g, "<br>" )
+//            .replace( /<\/(div|p)>\n(<br>\n)*/g, (value) => value.replace( "<br>", "" ) );
+//}
+
+/**
+ * Beautify html, incldue:
+ * 
+ * - change all <blockquote> to <sr-blockquote>
+ * - remove useless <br>
+ * 
+ * @param {jquery} jquery object
+ */
+async function htmlbeautify( $target ) {
+    $target.html( ( index, html ) => {
+        return html.trim()
+                .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
+                .replace( /<br>\n<br>(\n<br>)*/g, "<br>" )
+                .replace( /<\/(div|p)>\n(<br>\n)*/g, (value) => value.replace( "<br>", "" ) );
+    });
 }
 
 /**
