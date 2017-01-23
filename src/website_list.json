@@ -232,7 +232,7 @@
         ]
     },{
         "name"    : "douban.com",
-        "url"     : "https://www.douban.com/**",
+        "url"     : "https://www.douban.com/*",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div id='link-report'>",
