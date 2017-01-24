@@ -103,6 +103,15 @@
             "[[/src=\\S+(342459.png)\\S+'/]]"
         ]
     },{
+        "name"    : "matrix.sspai.com",
+        "url"     : "http://matrix.sspai.com/p/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "dgtle.com",
         "url"     : "http://www.dgtle.com/",
         "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
@@ -208,15 +217,6 @@
         "title"   : "<span class='sub-title'>",
         "desc"    : "<div class='short-des'>",
         "include" : "<div id='article_content'>",
-        "exclude" : [
-            ""
-        ]
-    },{
-        "name"    : "matrix.sspai.com",
-        "url"     : "http://matrix.sspai.com/p/",
-        "title"   : "<h1 class='title'>",
-        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "<div class='content'>",
         "exclude" : [
             ""
         ]
