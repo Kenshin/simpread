@@ -102,7 +102,6 @@ class Storage {
         current.mode = key;
         current.site = sites.get( url );
         while( !current.site ) {
-            //const arr = findSitebyURL( url );
             const arr = st.Getsite( new Map( simpread.sites ), url );
             if ( arr ) {
                 current.site = arr[0];
@@ -177,30 +176,6 @@ class Storage {
                $.isEmptyObject( current );
     }
 
-    /**
-     * Adapter site
-     * 
-     * @return {number} 0: success; -1: not exsit; -2:tieba.com; -3:chiphell.com
-     */
-    /*Adapter() {
-        const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
-        if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
-            return -2;
-        } else if ( hostname == "www.chiphell.com" ) {
-            if ( pathname == "/forum.php" && window.location.search.includes( "mod=viewthread" ) ) {
-                return 0;
-            } else if ( pathname.includes( "thread" ) && window.location.search == "" ) {
-                return -3;
-            } else {
-                return -1;
-            }
-        } else if ( current.site.name === "" ) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }*/
-
 }
 
 /**
@@ -217,18 +192,6 @@ function swap( source, target ) {
     }
     return target;
 }
-
-/**
- * Get URI
- * 
- * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
- */
-/*
-function getURI() {
-    const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
-    return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
-}
-*/
 
 /**
  * Deep clone object
@@ -270,39 +233,6 @@ function addsites( sites ) {
         }
     }
 }
-
-/**
- * Find site by url from simpread.sites, include wildcard, support: *
- * 
- * @param  {string} url
- * @return {array} arr[0]: current site; arr[1]: current url
- */
-/*function findSitebyURL( url ) {
-    const sites    = new Map( simpread.sites ),
-          urls     = [ ...sites.keys() ],
-          arr      = url.match( /[.a-zA-z0-9-_]+/g ),
-          wildcard = arr[1],
-          trueurl  = window.location.href,
-          href     = trueurl.endsWith("/") ? trueurl : trueurl + "/";
-    for ( const cur of urls ) {
-        const name   = sites.get(cur).name;
-        let   suffix = cur.replace( "*", "" );
-        if ( url.includes( "chiphell.com" ) ) suffix = url;
-        if ( suffix == url && suffix.includes( "mp.weixin.qq.com" ) ) suffix = url;
-        else if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
-            */
-            //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
-            //    if    ( suffix != url ) return undefined;
-            //} else if ( suffix == url ) return undefined;
-            //suffix = url;
-        /*}
-        if ( suffix == url && href != url ) {
-            return [ clone( sites.get( cur )), cur ];
-        }
-    }
-    return undefined;
-}
-*/
 
 /**
  * Call chrome storage set
