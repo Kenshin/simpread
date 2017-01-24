@@ -281,7 +281,7 @@ function findSitebyURL( url ) {
     for ( const cur of urls ) {
         const name   = sites.get(cur).name;
         let   suffix = cur.replace( "*", "" );
-        if ( name == "chiphell.com" ) suffix = url;
+        if ( url.includes( "chiphell.com" ) ) suffix = url;
         else if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
             if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
                 if    ( suffix != url ) return undefined;
