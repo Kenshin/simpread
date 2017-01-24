@@ -35,6 +35,7 @@ class Read extends React.Component {
         await commbeautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
+        if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
     }
 
     componentWillUnmount() {
