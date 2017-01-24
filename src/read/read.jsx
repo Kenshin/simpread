@@ -227,6 +227,7 @@ async function specbeautify( $target ) {
                       str     = imgs.get().join( "" );
                 $target.empty().removeAttr( "class" ).append( str );
             });
+            $target.find( ".com-insert-embed" ).remove();
             break;
         case "news.mtime.com":
             removeSpareSpace( $target, "div" );
