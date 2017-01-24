@@ -194,19 +194,6 @@ class Storage {
             return -1;
         } else {
             return 0;
-            /*const sites = new Map( simpread.sites ),
-                  url   = href.endsWith("/") ? href : href + "/",
-                  urls  = [ ...sites.keys() ].filter( item => {
-                      if ( item.includes( url )) {
-                          const suffix = item.replace( url, "" );
-                          if ( suffix != "" ) return url;
-                      }
-                  });
-            if ( urls.length > 0 ) {
-                return -1;
-            } else {
-                return 0;
-            }*/
         }
     }
 
