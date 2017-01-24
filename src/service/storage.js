@@ -1,5 +1,6 @@
 
 import "babel-polyfill";
+import * as st from 'site';
 
 /**
  * Read and Write Chrome storage
@@ -95,13 +96,14 @@ class Storage {
      * @param {string} @see mode
      */
     Setcur( key ) {
-        const [ url, sites ] = [getURI(), new Map( simpread[key].sites )];
+        const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
         current      = swap( simpread[key], {} );
         current.url  = url;
         current.mode = key;
         current.site = sites.get( url );
         while( !current.site ) {
-            const arr = findSitebyURL( url );
+            //const arr = findSitebyURL( url );
+            const arr = st.Getsite( new Map( simpread.sites ), url );
             if ( arr ) {
                 current.site = arr[0];
                 current.url  = arr[1];
@@ -171,7 +173,7 @@ class Storage {
      */
     VerifyCur( type ) {
         return ( current.mode && current.mode != type ) ||
-               ( current.url  && current.url != getURI() ) ||
+               ( current.url  && current.url != st.GetURI() ) ||
                $.isEmptyObject( current );
     }
 
@@ -180,7 +182,7 @@ class Storage {
      * 
      * @return {number} 0: success; -1: not exsit; -2:tieba.com; -3:chiphell.com
      */
-    Adapter() {
+    /*Adapter() {
         const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
         if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
             return -2;
@@ -197,7 +199,7 @@ class Storage {
         } else {
             return 0;
         }
-    }
+    }*/
 
 }
 
@@ -221,10 +223,12 @@ function swap( source, target ) {
  * 
  * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
  */
+/*
 function getURI() {
     const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
     return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
 }
+*/
 
 /**
  * Deep clone object
@@ -273,7 +277,7 @@ function addsites( sites ) {
  * @param  {string} url
  * @return {array} arr[0]: current site; arr[1]: current url
  */
-function findSitebyURL( url ) {
+/*function findSitebyURL( url ) {
     const sites    = new Map( simpread.sites ),
           urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
@@ -286,17 +290,19 @@ function findSitebyURL( url ) {
         if ( url.includes( "chiphell.com" ) ) suffix = url;
         if ( suffix == url && suffix.includes( "mp.weixin.qq.com" ) ) suffix = url;
         else if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
-            if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
-                if    ( suffix != url ) return undefined;
-            } else if ( suffix == url ) return undefined;
-            suffix = url;
-        }
+            */
+            //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
+            //    if    ( suffix != url ) return undefined;
+            //} else if ( suffix == url ) return undefined;
+            //suffix = url;
+        /*}
         if ( suffix == url && href != url ) {
             return [ clone( sites.get( cur )), cur ];
         }
     }
     return undefined;
 }
+*/
 
 /**
  * Call chrome storage set

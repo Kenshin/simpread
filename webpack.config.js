@@ -143,6 +143,7 @@ const webpack = require( 'webpack' ),
           util       : __dirname + '/src/service/util.js',
           storage    : __dirname + '/src/service/storage.js',
           local      : __dirname + '/src/service/local.js',
+          site       : __dirname + '/src/service/site.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.js',

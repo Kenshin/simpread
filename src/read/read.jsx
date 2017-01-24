@@ -7,6 +7,7 @@ import Footer      from 'readfooter';
 import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
+import * as st            from 'site';
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -30,6 +31,7 @@ class Read extends React.Component {
 
     async componentDidMount() {
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
+        await st.Adapter( storage.current.site.name, $( "sr-rd-content" ) );
         await specbeautify( $( "sr-rd-content" ));
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
@@ -191,6 +193,14 @@ async function excludes( $target, exclude ) {
  * @param {jquery}
  */
 async function specbeautify( $target ) {
+    if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "steachs.com", "hacpai.com", "apprcn.com", "mp.weixin.qq.com" ].includes( storage.current.site.name )) {
+        removeSpareSpace( $target, "p" );
+    } else if ([ "nationalgeographic.com.cn", "dgtle.com", "news.mtime.com" ].includes( storage.current.site.name )) {
+        removeSpareSpace( $target, "div" );
+    } else if ( ["chiphell.com"].includes( storage.current.site.name ) ) {
+        removeSpareSpace( $target, "font" );
+    }
+    /*
     switch ( storage.current.site.name ) {
         case "sspai.com":
             $target.find( ".relation-apps" ).map( (index, item) => {
@@ -306,6 +316,7 @@ async function specbeautify( $target ) {
             }
             break;
     }
+    */
 }
 
 /**

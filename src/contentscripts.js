@@ -16,6 +16,7 @@ var $         = require( "jquery" ),
     selector  = require( "focus"   ).getSelector,
     storage   = require( "storage" ).storage,
     mode      = require( "storage" ).STORAGE_MODE,
+    st        = require( "site"    ),
     read      = require( "read"    );
 
 /**
@@ -138,7 +139,7 @@ function readMode() {
 
     if ( read.Exist(true) ) return;
 
-    switch ( storage.Adapter() ) {
+    switch ( st.Verify( storage.current.site.name ) ) {
         case 0:
             read.Render();
             break;
