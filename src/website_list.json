@@ -647,7 +647,7 @@
         ]
     },{
         "name"    : "ithome.com",
-        "url"     : "http://www.ithome.com/html/*",
+        "url"     : "http://www.ithome.com/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='paragraph'> ",
