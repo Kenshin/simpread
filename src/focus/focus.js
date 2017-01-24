@@ -133,29 +133,4 @@ function excludeStyle( $target, exclude, type ) {
     else if ( type == "add" ) $target.find( tags ).show();
 }
 
-/**
- * Conver html to jquery object
- * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {array} formatting e.g.:
-    { "tag" : "class", "name" : "article" }
- * 
- */
-/*
-function getSelector( html ) {
-    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
-    if ( item && item.length > 0 ) {
-        let [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-        if      ( tag.toLowerCase() === "class") name = `.${name}`;
-        else if ( tag.toLowerCase() === "id"   ) name = `#${name}`;
-        return name;
-    } else {
-        return null;
-    }
-}
-*/
-
 exports.focus       = focus;
-//exports.getSelector = getSelector;
