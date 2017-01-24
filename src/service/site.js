@@ -172,6 +172,29 @@ async function specbeautify( name, $target ) {
 }
 
 /**
+ * Remove spare tag
+ * 
+ * @param {string} storage.current.site.name
+ * @param {jquery} jquery object
+ */
+async function removeSpareTag( name, $target ) {
+    let [ remove, tag ] = [ false, "" ];
+    if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "steachs.com", "hacpai.com", "apprcn.com", "mp.weixin.qq.com" ].includes( name )) {
+        [ remove, tag ] = [ true, "p" ];
+    } else if ([ "nationalgeographic.com.cn", "dgtle.com", "news.mtime.com" ].includes( name )) {
+        [ remove, tag ] = [ true, "div" ];
+    } else if ( ["chiphell.com"].includes( name ) ) {
+        [ remove, tag ] = [ true, "font" ];
+    }
+    if ( remove ) {
+        $target.find( tag ).map( ( index, item ) => {
+            const str = $(item).text().toLowerCase().trim();
+            if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
+        });
+    }
+}
+
+/**
  * Adapter site
  * 
  * @param  {string} current.site.name
@@ -207,8 +230,9 @@ function clone( target ) {
 }
 
 export {
-    getURI        as GetURI,
-    findSitebyURL as Getsite,
-    specbeautify  as Adapter,
-    verify        as Verify
+    getURI         as GetURI,
+    findSitebyURL  as Getsite,
+    specbeautify   as Beautify,
+    removeSpareTag as RemoveTag,
+    verify         as Verify
 }
