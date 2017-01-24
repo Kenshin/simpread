@@ -285,19 +285,23 @@ function addsites( sites ) {
  * @return {array} arr[0]: current site; arr[1]: current url
  */
 function findSitebyURL( url ) {
-    const sites     = new Map( simpread.sites ),
+    const sites    = new Map( simpread.sites ),
           urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
-          wildcard = arr[1];
+          wildcard = arr[1],
+          trueurl  = window.location.href,
+          href     = trueurl.endsWith("/") ? trueurl : trueurl + "/";
     for ( const cur of urls ) {
-        const name   = sites.get(cur).name,
-              suffix = cur.replace( "*", "" );
-        if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
-            if ( suffix != url ) {
-                return undefined;
-            }
+        const name   = sites.get(cur).name;
+        let   suffix = cur.replace( "*", "" );
+        if ( name == "chiphell.com" ) suffix = url;
+        else if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
+            if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
+                if    ( suffix != url ) return undefined;
+            } else if ( suffix == url ) return undefined;
+            suffix = url;
         }
-        if ( suffix == url ) {
+        if ( suffix == url && href != url ) {
             return [ clone( sites.get( cur )), cur ];
         }
     }
