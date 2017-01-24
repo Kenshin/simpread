@@ -242,6 +242,10 @@ async function specbeautify( $target ) {
             $target.find( ".pre-numbering" ).remove();
             $target.find( "pre" ).removeAttr( "style" ).removeAttr( "class" );
             $target.find( "code" ).removeAttr( "style" );
+            $target.find( ".dp-highlighter" ).map( ( index, item )=> {
+                $(item).find(".bar .tools").remove();
+                if ( $(item).next().is( "pre" )) $(item).next().remove();
+            });
             break;
         case "news.sohu.com":
             $target.find( ".conserve-photo" ).remove();
