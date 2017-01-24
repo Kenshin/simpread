@@ -264,14 +264,14 @@
         "desc"    : "<p class='post-abstract'>",
         "include" : "<article>",
         "exclude" : [
-			"<h1>",
+            "<h1>",
             "<div class='post-info'>",
-			"<p class='post-abstract'>",
-			"<div class='pro_icon'>",
-			"<div class='pro_intro tc'>",
-			"[['<strong>更多精彩内容</strong>']]",
-			"[['<strong>关注钛媒体微信号</strong>']]",
-			"[[/src=\\S+(wzny_ewm)\\S+'/]]"
+            "<p class='post-abstract'>",
+            "<div class='pro_icon'>",
+            "<div class='pro_intro tc'>",
+            "[['<strong>更多精彩内容</strong>']]",
+            "[['<strong>关注钛媒体微信号</strong>']]",
+            "[[/src=\\S+(wzny_ewm)\\S+'/]]"
         ]
     },{
         "name"    : "songshuhui.net",
@@ -281,8 +281,8 @@
         "include" : "<div class='entry'>",
         "exclude" : [
             "<div class='bshare-custom'>",
-			"<div class='my-related-posts-box'>",
-			"[['<strong>相关文章</strong>']]"
+            "<div class='my-related-posts-box'>",
+            "[['<strong>相关文章</strong>']]"
         ]
     },{
         "name"    : "infzm.com",
@@ -310,7 +310,7 @@
         "include" : "<div class='entry-content'>",
         "exclude" : [
             "<div class='open_social_box share_box'>",
-			"[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]"
+            "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]"
         ]
     },{
         "name"    : "apprcn.com",
@@ -320,8 +320,8 @@
         "include" : "<div class='entry-content'>",
         "exclude" : [
             "<div class='wumii-hook'>",
-			"<div id='wumiiDisplayDiv'>",
-			"<div id='wp-share-list-container'>"
+            "<div id='wumiiDisplayDiv'>",
+            "<div id='wp-share-list-container'>"
         ]
     },{
         "name"    : "playpcesor.com",
@@ -487,9 +487,9 @@
             "[['<p>欢迎关注CSDN大数据公众号</p>']]",
             "[['<strong>关注以下公众号</strong>']]",
             "[[/src=\\S+(20170119091646909)\\S+'/]]",
-			"[[/src=\\S+(20170119152206448)\\S+'/]]",
-			"[[/src=\\S+(20170120110155787)\\S+'/]]",
-			"[[/src=\\S+(8tPUexU)\\S+'/]]"
+            "[[/src=\\S+(20170119152206448)\\S+'/]]",
+            "[[/src=\\S+(20170120110155787)\\S+'/]]",
+            "[[/src=\\S+(8tPUexU)\\S+'/]]"
         ]
     },{
         "name"    : "blog.csdn.net",
