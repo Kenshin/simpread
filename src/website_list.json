@@ -502,7 +502,7 @@
         ]
     },{
         "name"    : "lib.csdn.net",
-        "url"     : "http://lib.csdn.net/article/*",
+        "url"     : "http://lib.csdn.net/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='divtexts'>",
