@@ -186,19 +186,24 @@ async function excludes( $target, exclude ) {
 }
 
 /**
- * Special beautify html with other webiste, incldue:
- * - sspai.com, mzdm.com, infoq.com, douban.com, qdaily.com, huxiu.com
- * - news.mtime.com
+ * Special beautify html, only incldue: remove spare tag
  * 
  * @param {jquery}
  */
 async function specbeautify( $target ) {
+    let [ remove, tag ] = [ false, "" ];
     if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "steachs.com", "hacpai.com", "apprcn.com", "mp.weixin.qq.com" ].includes( storage.current.site.name )) {
-        removeSpareSpace( $target, "p" );
+        [ remove, tag ] = [ true, "p" ];
     } else if ([ "nationalgeographic.com.cn", "dgtle.com", "news.mtime.com" ].includes( storage.current.site.name )) {
-        removeSpareSpace( $target, "div" );
+        [ remove, tag ] = [ true, "div" ];
     } else if ( ["chiphell.com"].includes( storage.current.site.name ) ) {
-        removeSpareSpace( $target, "font" );
+        [ remove, tag ] = [ true, "font" ];
+    }
+    if ( remove ) {
+        $target.find( tag ).map( ( index, item ) => {
+            const str = $(item).text().toLowerCase().trim();
+            if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
+        });
     }
 }
 
@@ -305,19 +310,6 @@ async function commbeautify( $target ) {
     });
     $target.find( "pre" ).map( ( index, item )=> {
         $(item).find( "code" ).removeAttr( "class" );
-    });
-}
-
-/**
- * Remove spare space
- * 
- * @param {jquery} jquery object
- * @param {string} html tag, e.g. div p
- */
-function removeSpareSpace( $target, tag ) {
-    $target.find( tag ).map( ( index, item ) => {
-        const str = $(item).text().toLowerCase().trim();
-        if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
     });
 }
 
