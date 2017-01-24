@@ -1,6 +1,7 @@
 console.log( "===== simpread option focus mode load =====" )
 
-import Notify from 'notify';
+import Notify    from 'notify';
+import * as util from 'util';
 
 const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
@@ -289,10 +290,9 @@ function verifyShortkey( key ) {
  */
 function verifyHtml( html ) {
     if ( html == "" ) return 0;
+    else if ( util.specTest( html )) return 1;
     const item = html.match( / (class|id)=("|')[\w-_]+/ig );
     if ( item && item.length > 0 ) {
-        //[tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-        //return { tag, name };
         return 1;
     } else {
         return -1;
