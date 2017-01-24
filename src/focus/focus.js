@@ -3,7 +3,8 @@ console.log( "=== simpread focus load ===" );
 /*
     import
 */
-var fcontrol = require( "controlbar" ),
+var util     = require( "util" ),
+    fcontrol = require( "controlbar" ),
     focus    = ( function () {
 
     var $parent,
@@ -127,13 +128,9 @@ function includeStyle( $target, style, cls, type ) {
  * @param {string} include: 'add' 'delete'
  */
 function excludeStyle( $target, exclude, type ) {
-    var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
-    for ( i; i < len; i++ ) {
-        tag  = getSelector( exclude[i] );
-        if ( tag ) tags.push( tag )
-    }
-    if ( type == "delete" )   $target.find( tags.join(",") ).hide();
-    else if ( type == "add" ) $target.find( tags.join(",") ).show();
+    const tags = util.exclude( $target, exclude );
+    if ( type == "delete" )   $target.find( tags ).hide();
+    else if ( type == "add" ) $target.find( tags ).show();
 }
 
 /**
@@ -146,6 +143,7 @@ function excludeStyle( $target, exclude, type ) {
     { "tag" : "class", "name" : "article" }
  * 
  */
+/*
 function getSelector( html ) {
     const item = html.match( / (class|id)=("|')[\w-_]+/ig );
     if ( item && item.length > 0 ) {
@@ -157,6 +155,7 @@ function getSelector( html ) {
         return null;
     }
 }
+*/
 
 exports.focus       = focus;
-exports.getSelector = getSelector;
+//exports.getSelector = getSelector;
