@@ -596,7 +596,7 @@
         ]
     },{
         "name"    : "young.ifeng.com",
-        "url"     : "http://young.ifeng.com/a/*",
+        "url"     : "http://young.ifeng.com/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='ya_main_con'>",
@@ -610,7 +610,7 @@
         ]
     },{
         "name"    : "news.ifeng.com",
-        "url"     : "http://news.ifeng.com/a/*",
+        "url"     : "http://news.ifeng.com/*",
         "title"   : "<h1 id='artical_topic'>",
         "desc"    : "",
         "include" : "<div id='artical_real'>",
