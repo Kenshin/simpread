@@ -214,7 +214,7 @@ async function htmlbeautify( $target ) {
     $target.html( ( index, html ) => {
         return html.trim()
                 .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
-                .replace( /<br>\n<br>(\n<br>)*/g, "<br>" )
+                .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
                 .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
     });
 }
