@@ -31,8 +31,8 @@ class Read extends React.Component {
 
     async componentDidMount() {
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-        await st.Adapter( storage.current.site.name, $( "sr-rd-content" ) );
-        await specbeautify( $( "sr-rd-content" ));
+        await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
+        await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
@@ -183,28 +183,6 @@ function getcontent( $target ) {
 async function excludes( $target, exclude ) {
     const tags = util.exclude( $target, exclude );
     $target.find( tags ).remove();
-}
-
-/**
- * Special beautify html, only incldue: remove spare tag
- * 
- * @param {jquery}
- */
-async function specbeautify( $target ) {
-    let [ remove, tag ] = [ false, "" ];
-    if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "steachs.com", "hacpai.com", "apprcn.com", "mp.weixin.qq.com" ].includes( storage.current.site.name )) {
-        [ remove, tag ] = [ true, "p" ];
-    } else if ([ "nationalgeographic.com.cn", "dgtle.com", "news.mtime.com" ].includes( storage.current.site.name )) {
-        [ remove, tag ] = [ true, "div" ];
-    } else if ( ["chiphell.com"].includes( storage.current.site.name ) ) {
-        [ remove, tag ] = [ true, "font" ];
-    }
-    if ( remove ) {
-        $target.find( tag ).map( ( index, item ) => {
-            const str = $(item).text().toLowerCase().trim();
-            if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
-        });
-    }
 }
 
 /**
