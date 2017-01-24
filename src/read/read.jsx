@@ -215,6 +215,7 @@ async function specbeautify( $target ) {
         case "douban.com":
             $target.find( ".review-content" ).children().unwrap();
             $target.find( "table" ).addClass( "sr-rd-content-center" );
+            $target.find( "p" ).css({"white-space": "pre-wrap"});
             break;
         case "qdaily.com":
             $target.find( "img" ).map( (index, item) => {
