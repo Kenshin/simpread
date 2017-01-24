@@ -50,6 +50,10 @@ sr-rd-content {
     text-align: justify;
 }
 
+sr-rd-content p {
+    white-space: pre-wrap;
+}
+
 sr-rd-content p,
 sr-rd-content div {
     display: block;
