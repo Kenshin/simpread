@@ -185,7 +185,7 @@
         ]
     },{
         "name"    : "mp.weixin.qq.com",
-        "url"     : "http://mp.weixin.qq.com/",
+        "url"     : "http://mp.weixin.qq.com/*",
         "title"   : "<h2 id='activity-name'>",
         "desc"    : "",
         "include" : "<div id='js_content'>",
