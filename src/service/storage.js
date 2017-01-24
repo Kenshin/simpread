@@ -144,7 +144,7 @@ class Storage {
     /**
      * Get local/remote JSON usage async
      * 
-     * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     * @param {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
      */
     async GetNewsites( type ) {
         try {
@@ -154,10 +154,8 @@ class Storage {
                 len      = simpread.sites.length;
             if ( len == 0 ) {
                 simpread.sites = formatSites( sites );
-            } else {
-                addsites( formatSites( sites ));
             }
-            if ( len == 0 || len != simpread.sites.length ) {
+            if ( len == 0 || addsites( formatSites( sites )) ) {
                 save();
             }
         } catch ( error ) {
@@ -222,16 +220,23 @@ function formatSites( result ) {
 /**
  * Add new sites to old sites
  * 
- * @param {array} new sites from local or remote
+ * @param  {array} new sites from local or remote
+ * @return {boolean} true: update; false:not update
  */
 function addsites( sites ) {
-    const old  = new Map( simpread.sites );
-    const urls = [ ...old.keys() ];
-    for ( const site of sites ) {
+    const old  = new Map( simpread.sites ),
+          urls = [ ...old.keys() ];
+    let   update = false;
+    sites.map( ( site, index ) => {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
+            update = true;
+        } else if ( urls.includes( site[0] ) && site[1].override ) {
+            simpread.sites.splice( index, 1, site );
+            update = true;
         }
-    }
+    });
+    return update;
 }
 
 /**
