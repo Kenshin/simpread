@@ -292,6 +292,9 @@ async function specbeautify( $target ) {
         case "jiemian.com":
             $target.find( "script" ).remove();
             break;
+        case "36kr.com":
+            $target.find( ".load-html-img" ).removeAttr( "class" );
+            break;
         default:
             if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com", "hacpai.com" ].includes( storage.current.site.name )) {
                 removeSpareSpace( $target, "p" );
