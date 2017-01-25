@@ -109,11 +109,11 @@ var util     = require( "util" ),
             target;
         target = util.selector( include );
         if ( util.specTest( target) ) {
-
+            var value = util.specAction( include )[0];
+            $focus = $( "body" ).find( value );
         } else if ( target ) {
             $focus = $( "body" ).find( target );
         }
-
         while ( $focus.length == 0 ) {
             if ( $( "body" ).find( "article" ).length > 0 ) {
                 $focus = $( "body" ).find( "article" );
