@@ -13,10 +13,14 @@ import { storage, STORAGE_MODE as mode } from 'storage';
 /**
  * Sevice: storage Get data form chrome storage
  */
-storage.Get( function() { bindShortcuts(); });
+storage.Get( function() {
+    bindShortcuts();
+    const code = storage.Setcur( mode.read );
+    chrome.runtime.sendMessage({ type: "browser_action", value: code });
+});
 
 /**
- * Message request listener, message include: `focus` `shortcuts`
+ * Listen runtime message, include: `focus` `read` `shortcuts`
  */
 chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( request );
@@ -29,9 +33,6 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
             break;
         case "shortcuts":
             bindShortcuts();
-            break;
-        default:
-            console.error( "misinformation message ", request )
             break;
     }
 });

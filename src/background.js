@@ -27,10 +27,26 @@ Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
 chrome.contextMenus.create( foucsmenu );
 chrome.contextMenus.create( readmenu  );
 
+/**
+ * Listen runtime message
+ */
 chrome.contextMenus.onClicked.addListener( function( info, tab ) {
     console.log( info, tab )
     if ( info.pageUrl == tab.url ) {
         chrome.tabs.sendMessage( tab.id, { type: info.menuItemId });
+    }
+});
+
+/**
+ * Listen runtime message, include: `browser_action`
+ */
+chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    console.log( request );
+    switch ( request.type ) {
+        case "browser_action":
+            const icon = request.value != -1 ? "" : "-disable";
+            chrome.browserAction.setIcon({ path: chrome.extension.getURL( `assets/images/icon72${icon}.png` ) });
+            break;
     }
 });
 
