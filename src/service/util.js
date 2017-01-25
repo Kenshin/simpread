@@ -1,6 +1,26 @@
 console.log( "=== simpread util load ===" )
 
 /**
+ * Verify html
+ * 
+ * @param  {string} input include html tag, e.g.:
+    <div class="article fmt article__content">
+ *
+ * @return {array} 0: int include ( -1: fail； 0: empty html; 1: success; 2: special tag )
+ *                 1: result
+ */
+function verifyHtml( html ) {
+    if ( html == "" ) return [ 0, html ];
+    else if ( specTest( html )) return [ 2, html ];
+    const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
+    if ( item && item.length > 0 ) {
+        return [ 1, item ];
+    } else {
+        return [ -1, undefined ];
+    }
+}
+
+/**
  * Get exclude tags list
  * 
  * @param  {jquery} jquery object
@@ -52,9 +72,12 @@ function excludeSelector( $target, exclude ) {
  *
  */
 function getSelector( html ) {
-    if ( specTest( html )) return html;
-    const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
-    if ( item && item.length > 0 ) {
+    //if ( specTest( html )) return html;
+    //const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
+    //if ( item && item.length > 0 ) {
+    const [ code, item ] = verifyHtml( html );
+    if ( code == 2 ) return html;
+    else if ( code == 1 ) {
         let [tag, prop, value] = item[0].trim().replace( /['"<>]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
         if      ( !prop ) prop = tag;
         else if ( prop.toLowerCase() === "class") prop = `${tag}.${value}`;
@@ -121,6 +144,7 @@ function specAction( content ) {
 }
 
 export {
+    verifyHtml      as verifyHtml,
     excludeSelector as exclude,
     getSelector     as selector,
     specTest        as specTest,
