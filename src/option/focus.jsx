@@ -82,7 +82,7 @@ export default class FocusOpt extends React.Component {
     }
 
     changeInclude() {
-        if ( verifyHtml( event.target.value.trim() ) != -1 ) this.props.option.site.include = event.target.value.trim();
+        if ( util.verifyHtml( event.target.value.trim() )[0] != -1 ) this.props.option.site.include = event.target.value.trim();
         console.log( "this.props.option.site.include = ", this.props.option.site.include )
     }
 
@@ -197,7 +197,7 @@ function getExclude( htmls ) {
     let [ list, obj ]  = [[], null ];
     const arr = htmls.trim().split( "\n" );
     for( let value of arr ) {
-        if ( verifyHtml( value.trim() ) > 0 ) {
+        if ( util.verifyHtml( value.trim() )[0] > 0 ) {
             list.push( value.trim() );
         } else {
             //new Notify().Render( 2, `当前输入【 ${value} 】错误，请重新输入。` );
@@ -285,9 +285,10 @@ function verifyShortkey( key ) {
  * @param  {string} input include html tag, e.g.:
     <div class="article fmt article__content">
  *
- * @return {int} -1: fail； 0: emputy html; 1:success
+ * @return {int} -1: fail； 0: empty html; 1: success
  * 
  */
+/*
 function verifyHtml( html ) {
     if ( html == "" ) return 0;
     else if ( util.specTest( html )) return 1;
@@ -298,3 +299,4 @@ function verifyHtml( html ) {
         return -1;
     }
 }
+*/
