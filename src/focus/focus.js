@@ -1,8 +1,5 @@
 console.log( "=== simpread focus load ===" );
 
-/*
-    import
-*/
 var util     = require( "util" ),
     fcontrol = require( "controlbar" ),
     focus    = ( function () {
