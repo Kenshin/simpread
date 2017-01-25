@@ -122,6 +122,9 @@ async function specbeautify( name, $target ) {
         case "appinn.com":
             $target.find( ".emoji" ).addClass( "sr-rd-content-nobeautify" );
             break;
+        case "hacpai.com":
+            $target.find( ".emoji" ).addClass( "sr-rd-content-nobeautify" );
+            break;
         case "douban.com":
             $target.find( ".review-content" ).children().unwrap();
             $target.find( "table" ).addClass( "sr-rd-content-center" );
