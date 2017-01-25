@@ -50,7 +50,7 @@
         "include" : "<div class='article-main' style=''>",
         "exclude" : [
             "<div class='share-view' style='top: 1544px;'>",
-            "<div class='article-btn'>",
+            "[[[$('.article-btn')]]]",
             "<div class='article-footer'>",
             "<p class='report-view'>",
             "<img class='img-focus'>"
@@ -92,9 +92,9 @@
     },{
         "name"    : "sspai.com",
         "url"     : "http://sspai.com/",
-        "title"   : "[[{$($('body').find('h1.title')[0]).text()}]]",
+        "title"   : "<h1 class='title'>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "<div class='content'>",
+        "include" : "[[[$('.content')]]]",
         "exclude" : [
             "<img id='s1' >",
             "<hr>",
