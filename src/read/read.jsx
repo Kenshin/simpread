@@ -140,8 +140,23 @@ function wrap( site ) {
  * @return {string} query result
  */
 function query( content, type = "text" ) {
+    /*
     if ( util.specTest( content ) ) {
         content = util.specAction( content )[0];
+    } else if ( type == "html" ) {
+        content = getcontent( $root.find( content ) );
+    } else if ( type == "multi" ) {
+        // TO-DO
+    } else {
+        content = $root.find( content ).text().trim();
+    }*/
+    if ( util.specTest( content ) ) {
+        const [ value, state ] = util.specAction( content );
+        if ( state == 0 ) {
+            content = value;
+        } else if ( state == 3 ) {
+            content = getcontent( $root.find( value ) );
+        }
     } else if ( type == "html" ) {
         content = getcontent( $root.find( content ) );
     } else if ( type == "multi" ) {
