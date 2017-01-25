@@ -15,8 +15,8 @@ import { storage, STORAGE_MODE as mode } from 'storage';
  */
 storage.Get( function() {
     bindShortcuts();
-    const code = storage.Setcur( mode.read );
-    chrome.runtime.sendMessage({ type: "browser_action", value: code });
+    storage.Setcur( mode.read );
+    chrome.runtime.sendMessage({ type: "browser_action", value: storage.rdstcode });
 });
 
 /**
@@ -34,6 +34,8 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
         case "shortcuts":
             bindShortcuts();
             break;
+        case "tab_selected":
+            chrome.runtime.sendMessage({ type: "browser_action", value: storage.rdstcode });
     }
 });
 

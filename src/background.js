@@ -28,7 +28,7 @@ chrome.contextMenus.create( foucsmenu );
 chrome.contextMenus.create( readmenu  );
 
 /**
- * Listen runtime message
+ * Listen contextMenus message
  */
 chrome.contextMenus.onClicked.addListener( function( info, tab ) {
     console.log( info, tab )
@@ -55,6 +55,14 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
  */
 chrome.runtime.onMessage.addListener( function( request ) {
     getCurTab( function( tabs ) { chrome.tabs.sendMessage( tabs[0].id, request ); });
+});
+
+/**
+ * Listen chrome tab active message
+ */
+chrome.tabs.onActivated.addListener( function( selected ){
+    console.log( selected )
+    chrome.tabs.sendMessage( selected.tabId, { type : "tab_selected", value: selected.tabId });
 });
 
 /**
