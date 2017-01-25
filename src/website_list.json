@@ -140,7 +140,6 @@
         ]
     },{
         "name"    : "daily.zhihu.com",
-        "override": true,
         "url"     : "https://daily.zhihu.com/story/",
         "title"   : "<h1 class='headline-title'>",
         "desc"    : "",
@@ -374,7 +373,6 @@
         ]
     },{
         "name"    : "ruby-china.org",
-        "override": true,
         "url"     : "http://ruby-china.org/topics/",
         "title"   : "<h1 class='media-heading'>",
         "desc"    : "",
@@ -416,7 +414,7 @@
         "url"     : "https://segmentfault.com/a/",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='article__content'",
+        "include" : "<div class='article__content'>",
         "exclude" : [
             ""
         ]
@@ -484,7 +482,7 @@
         "url"     : "http://geek.csdn.net/news/detail/",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='markdown_views'>",
+        "include" : "<div class='news_description'>",
         "exclude" : [
             "[['<p>欢迎关注CSDN大数据公众号</p>']]",
             "[['<strong>关注以下公众号</strong>']]",
@@ -663,7 +661,7 @@
         "desc"    : "",
         "include" : "<div id='contentText'>",
         "exclude" : [
-            ""
+            "<div class='conserve-photo'>"
         ]
     },{
         "name"    : "sina.com.cn",
