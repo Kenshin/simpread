@@ -88,11 +88,11 @@ function readMode() {
         return;
     }
 
+    if ( read.Exist(true) ) return;
+
     if ( storage.VerifyCur( mode.read ) ) {
         storage.Setcur( mode.read );
     }
-
-    if ( read.Exist(true) ) return;
 
     switch ( st.Verify( storage.current.site.name ) ) {
         case 0:
