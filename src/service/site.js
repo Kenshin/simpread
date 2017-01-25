@@ -15,7 +15,7 @@ function getURI() {
  * 
  * @param  {map}    simpread.sites
  * @param  {string} url
- * @return {array}  arr[0]: current site; arr[1]: current url
+ * @return {array}  0: current site; 1: current url
  */
 function findSitebyURL( sites, url ) {
     const urls     = [ ...sites.keys() ],
@@ -48,10 +48,57 @@ function findSitebyURL( sites, url ) {
 }
 
 /**
- * Special beautify html with other webiste, incldue:
+ * Remove spare tag
  * 
  * @param {string} storage.current.site.name
  * @param {jquery} jquery object
+ */
+async function removeSpareTag( name, $target ) {
+    let [ remove, tag ] = [ false, "" ];
+    if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "steachs.com", "hacpai.com", "apprcn.com", "mp.weixin.qq.com" ].includes( name )) {
+        [ remove, tag ] = [ true, "p" ];
+    } else if ([ "nationalgeographic.com.cn", "dgtle.com", "news.mtime.com" ].includes( name )) {
+        [ remove, tag ] = [ true, "div" ];
+    } else if ( ["chiphell.com"].includes( name ) ) {
+        [ remove, tag ] = [ true, "font" ];
+    }
+    if ( remove ) {
+        $target.find( tag ).map( ( index, item ) => {
+            const str = $(item).text().toLowerCase().trim();
+            if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
+        });
+    }
+}
+
+/**
+ * Verify site
+ * 
+ * @param  {string} storage.current.site.name
+ * @return {number} 0: success; -1: not exsit; -2: tieba.com; -3: chiphell.com
+ */
+function verify( name ) {
+    const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
+    if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
+        return -2;
+    } else if ( hostname == "www.chiphell.com" ) {
+        if ( pathname == "/forum.php" && window.location.search.includes( "mod=viewthread" ) ) {
+            return 0;
+        } else if ( pathname.includes( "thread" ) && window.location.search == "" ) {
+            return -3;
+        } else {
+            return -1;
+        }
+    } else if ( name === "" ) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+/**
+ * Beautify html
+ * 
+ * @param {string} storage.current.site.name
  */
 async function specbeautify( name, $target ) {
     switch ( name ) {
@@ -95,7 +142,6 @@ async function specbeautify( name, $target ) {
             $target.find( ".com-insert-embed" ).remove();
             break;
         case "news.mtime.com":
-            //removeSpareSpace( $target, "div" );
             $target.find( ".newspictool" ).map( ( index, item ) => {
                 const $target = $(item),
                       $img    = $target.find( "img" ),
@@ -124,7 +170,6 @@ async function specbeautify( name, $target ) {
             $target.find( "iframe" ).remove();
             break;
         case "apprcn.com":
-            //removeSpareSpace( $target, "p" );
             $target.find( "img" ).map( ( index, item ) => {
                 const $target = $(item),
                       src     = $target.attr( "src" );
@@ -153,7 +198,6 @@ async function specbeautify( name, $target ) {
                 if ( src && src.includes( "static/image/smiley" ) ) $target.addClass( "sr-rd-content-nobeautify" );
             });
             $target.find( ".quote" ).remove();
-            //removeSpareSpace( $target, "font" );
             break;
         case "jiemian.com":
             $target.find( "script" ).remove();
@@ -161,61 +205,6 @@ async function specbeautify( name, $target ) {
         case "36kr.com":
             $target.find( ".load-html-img" ).removeAttr( "class" );
             break;
-        /*default:
-            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com", "hacpai.com" ].includes( storage.current.site.name )) {
-                removeSpareSpace( $target, "p" );
-            } else if ([ "nationalgeographic.com.cn", "dgtle.com" ].includes( storage.current.site.name )) {
-                removeSpareSpace( $target, "div" );
-            }
-            break;*/
-    }
-}
-
-/**
- * Remove spare tag
- * 
- * @param {string} storage.current.site.name
- * @param {jquery} jquery object
- */
-async function removeSpareTag( name, $target ) {
-    let [ remove, tag ] = [ false, "" ];
-    if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "steachs.com", "hacpai.com", "apprcn.com", "mp.weixin.qq.com" ].includes( name )) {
-        [ remove, tag ] = [ true, "p" ];
-    } else if ([ "nationalgeographic.com.cn", "dgtle.com", "news.mtime.com" ].includes( name )) {
-        [ remove, tag ] = [ true, "div" ];
-    } else if ( ["chiphell.com"].includes( name ) ) {
-        [ remove, tag ] = [ true, "font" ];
-    }
-    if ( remove ) {
-        $target.find( tag ).map( ( index, item ) => {
-            const str = $(item).text().toLowerCase().trim();
-            if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
-        });
-    }
-}
-
-/**
- * Adapter site
- * 
- * @param  {string} current.site.name
- * @return {number} 0: success; -1: not exsit; -2:tieba.com; -3:chiphell.com
- */
-function verify( name ) {
-    const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
-    if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
-        return -2;
-    } else if ( hostname == "www.chiphell.com" ) {
-        if ( pathname == "/forum.php" && window.location.search.includes( "mod=viewthread" ) ) {
-            return 0;
-        } else if ( pathname.includes( "thread" ) && window.location.search == "" ) {
-            return -3;
-        } else {
-            return -1;
-        }
-    } else if ( name === "" ) {
-        return -1;
-    } else {
-        return 0;
     }
 }
 
