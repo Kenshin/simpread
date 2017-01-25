@@ -59,50 +59,16 @@ function bindShortcuts() {
 function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
-    //var $focus = [],
-    //    sel, range, node, tag;
-    //    target;
-
     if ( read.Exist(false) ) {
         new Notify().Render( 1, "请先退出阅读模式，才能进入聚焦模式。" );
         return;
     }
 
-    // uniqueness verification
     if ( focus.Exist(true) ) return;
 
     if ( storage.VerifyCur( mode.focus ) ) {
          storage.Setcur( mode.focus );
     }
-
-    // get tag from chrome storage
-    /*
-    target = selector( storage.current.site.include );
-    if ( target ) $focus = $( "body" ).find( target );
-
-    // get focus tag
-    while ( $focus.length == 0 ) {
-        if ( $( "body" ).find( "article" ).length > 0 ) {
-            // find article tag
-            $focus = $( "body" ).find( "article" );
-        }
-        else {
-            // auto get focus
-            try {
-                sel    = window.getSelection();
-                range  = sel.getRangeAt( sel.rangeCount - 1 );
-                node   = range.startContainer.nodeName;
-            if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
-                $focus = $( range.startContainer.parentNode );
-            } catch ( error ) {
-                console.log( sel, range, node )
-                console.error( error )
-                new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
-                return;
-            }
-        }
-    }
-    */
 
     var $focus = focus.GetFocus( storage.current.site.include );
     if ( $focus ) {
@@ -111,24 +77,6 @@ function focuseMode() {
         new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
     }
 }
-
-/**
- * Fix $focus get bad tag, get good tag and return
- * Good tag include: div, article
- * 
- * @param  {jquery} jquery object
- * @return {jquery} jquery object
- */
-/*
-function fixFocus( $focus ) {
-    var tag = $focus[0].tagName.toLowerCase();
-    while ( [ "p", "span", "strong", "ul", "li", "code", "pre", "pre" ].includes( tag )) {
-            $focus = $focus.parent();
-            tag    = $focus[0].tagName.toLowerCase();
-    }
-    return $focus;
-}
-*/
 
 /**
  * Read mode

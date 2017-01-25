@@ -128,7 +128,6 @@ var util     = require( "util" ),
                 } catch ( error ) {
                     console.log( sel, range, node )
                     console.error( error )
-                    //new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
                     return undefined;
                 }
             }
