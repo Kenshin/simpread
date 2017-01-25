@@ -140,10 +140,11 @@
         ]
     },{
         "name"    : "daily.zhihu.com",
+        "override": true,
         "url"     : "https://daily.zhihu.com/story/",
         "title"   : "<h1 class='headline-title'>",
         "desc"    : "",
-        "include" : "[[{$('.content').html()}]]",
+        "include" : "[[[$('.content')]]]",
         "exclude" : [
             ""
         ]
@@ -373,10 +374,11 @@
         ]
     },{
         "name"    : "ruby-china.org",
+        "override": true,
         "url"     : "http://ruby-china.org/topics/",
         "title"   : "<h1 class='media-heading'>",
         "desc"    : "",
-        "include" : "<div class='panel-body'>",
+        "include" : "<article>",
         "exclude" : [
             ""
         ]
