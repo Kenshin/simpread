@@ -1,21 +1,7 @@
 console.log( "=== simpread contentscripts load ===" )
 
-/**
- * Import css files
- */
 import './assets/css/simpread.css';
 import './vender/notify/notify.css';
-
-/*
-var $         = require( "jquery" ),
-    Mousetrap = require( "mousetrap" ),
-    Notify    = require( "notify"  ),
-    focus     = require( "focus"   ).focus,
-    storage   = require( "storage" ).storage,
-    mode      = require( "storage" ).STORAGE_MODE,
-    st        = require( "site"    ),
-    read      = require( "read"    );
-*/
 
 import Mousetrap from 'mousetrap';
 import Notify    from 'notify';
