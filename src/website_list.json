@@ -695,7 +695,7 @@
         "url"     : "http://www.timetimetime.net/*",
         "title"   : "<h1>",
         "desc"    : "",
-        "include" : "[[{$('.neir').html()}]]",
+        "include" : "[[[$('.neir')]]]",
         "exclude" : [
             ""
         ]
