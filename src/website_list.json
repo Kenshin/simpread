@@ -629,8 +629,9 @@
         ]
     },{
         "name"    : "feng.com",
+        "override": true,
         "url"     : "http://www.feng.com/*",
-        "title"   : "<h1>",
+        "title"   : "[[{$('.h2').text()==''?$('h1').text():$('.h2').text()}]]",
         "desc"    : "<p class='content_title'>",
         "include" : "<div id='article_content'>",
         "exclude" : [
