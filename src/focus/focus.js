@@ -85,9 +85,12 @@ var util     = require( "util" ),
 
     }
 
-    /*
-        Verify ks-simpread-focus tag exit
-    */
+    /**
+     * Verify exit
+     * 
+     * @param  {boolean} when true, call fcontrol.Click()
+     * @return {boolen} true: exist; false: not exist
+     */
     Focus.prototype.Exist = function( action ) {
         if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
             if (action) fcontrol.Click( "setting" );
@@ -139,12 +142,13 @@ var util     = require( "util" ),
 
 })();
 
-/*
-    Set include style
-    @param $target: jquery object
-    @param style  : set style string
-    @param cls    : set class string
-    @param type   : include 'add' and 'delete'
+/**
+ *  Set include style
+ * 
+ *  @param {jquery} jquery object
+ *  @param {string} set style string
+ *  @param {string} set class string
+ *  @param {string} include 'add' and 'delete'
 */
 function includeStyle( $target, style, cls, type ) {
     var bakstyle;
