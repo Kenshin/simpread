@@ -72,9 +72,6 @@ function excludeSelector( $target, exclude ) {
  *
  */
 function getSelector( html ) {
-    //if ( specTest( html )) return html;
-    //const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
-    //if ( item && item.length > 0 ) {
     const [ code, item ] = verifyHtml( html );
     if ( code == 2 ) return html;
     else if ( code == 1 ) {

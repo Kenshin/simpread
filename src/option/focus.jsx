@@ -278,25 +278,3 @@ function verifyShortkey( key ) {
         return false;
     }
 }
-
-/**
- * Verify html
- * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {int} -1: fail； 0: empty html; 1: success
- * 
- */
-/*
-function verifyHtml( html ) {
-    if ( html == "" ) return 0;
-    else if ( util.specTest( html )) return 1;
-    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
-    if ( item && item.length > 0 ) {
-        return 1;
-    } else {
-        return -1;
-    }
-}
-*/
