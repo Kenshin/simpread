@@ -46,6 +46,9 @@ function excludeSelector( $target, exclude ) {
             div.clearfix
             div.rating_box
             span
+            special tag, @see specTest
+                 e.g. [['<strong>▽</strong>']]        [[[$('.article-btn')]]]
+                      [[/src=\\S+(342459.png)\\S+'/]] [[{$('.content').html()}]]
  *
  */
 function getSelector( html ) {
