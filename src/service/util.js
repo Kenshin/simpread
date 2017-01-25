@@ -22,6 +22,8 @@ function excludeSelector( $target, exclude ) {
                  } else {
                      tag = undefined;
                  }
+             } else if ( type == 3 ) {
+                 value.remove();
              }
         } else {
             tag = getSelector( content );
@@ -62,23 +64,26 @@ function getSelector( html ) {
 
 /**
  * Verify special action, action include:
-   - [[{juqery code}]] // new Function
+   - [[{juqery code}]] // new Function, e.g. $("xxx").xxx() return string
    - [['text']]        // remove '<text>'
    - [[/regexp/]]      // regexp e.g. $("sr-rd-content").find( "*[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']" )
+   - [[[juqery code]]] // new Function, e.g. $("xxx").find() return jquery object
 
  * 
  * @param  {string} verify content
  * @return {boolen} verify result
  */
 function specTest( content ) {
-    return /^(\[\[)[{'/]{1}[ \S]+[}'/]\]\]{1}($)/g.test( content );
+    return /^(\[\[)[\[{'/]{1}[ \S]+[}'/\]]\]\]{1}($)/g.test( content );
 }
 
 /**
  * Exec special action, action include: @see specTest
+ * type: 0, 3 - be chiefly used in include logic
+ * type: 1, 2 - be chiefly used in exclude logic
  * 
  * @param  {string} content
- * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// )
+ * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// 3:[])
  */
 function specAction( content ) {
     let [ value, type ] = [ content.replace( /(^)\[\[|\]\]$/g, "" ) ];
@@ -98,6 +103,11 @@ function specAction( content ) {
         case "/":
             content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" ).replace( /'/g, '"' );
             type       = 2;
+            break;
+        case "[":
+            value      = value.replace( /^{|}$/g, "" );
+            content    = ( v=>new Function( `return ${v}` )() )(value)[0];
+            type       = 3;
             break;
         default:
             console.error( "Not support current action.", content )
