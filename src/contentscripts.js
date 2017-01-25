@@ -68,15 +68,15 @@ function focuseMode() {
         return;
     }
 
-    if ( storage.VerifyCur( mode.focus ) ) {
-         storage.Setcur( mode.focus );
-    }
-    target = selector( storage.current.site.include );
-
     // uniqueness verification
     if ( focus.Exist(true) ) return;
 
+    if ( storage.VerifyCur( mode.focus ) ) {
+         storage.Setcur( mode.focus );
+    }
+
     // get tag from chrome storage
+    target = selector( storage.current.site.include );
     if ( target ) $focus = $( "body" ).find( target );
 
     // get focus tag
