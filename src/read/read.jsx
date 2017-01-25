@@ -7,6 +7,7 @@ import Footer      from 'readfooter';
 import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
+import * as st            from 'site';
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -30,11 +31,13 @@ class Read extends React.Component {
 
     async componentDidMount() {
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-        await specbeautify( $( "sr-rd-content" ));
+        await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
+        await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
+        if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
     }
 
     componentWillUnmount() {
@@ -138,7 +141,12 @@ function wrap( site ) {
  */
 function query( content, type = "text" ) {
     if ( util.specTest( content ) ) {
-        content = util.specAction( content )[0];
+        const [ value, state ] = util.specAction( content );
+        if ( state == 0 ) {
+            content = value;
+        } else if ( state == 3 ) {
+            content = getcontent( $root.find( value ) );
+        }
     } else if ( type == "html" ) {
         content = getcontent( $root.find( content ) );
     } else if ( type == "multi" ) {
@@ -183,119 +191,6 @@ async function excludes( $target, exclude ) {
 }
 
 /**
- * Special beautify html with other webiste, incldue:
- * - sspai.com, mzdm.com, infoq.com, douban.com, qdaily.com, huxiu.com
- * - news.mtime.com
- * 
- * @param {jquery}
- */
-async function specbeautify( $target ) {
-    switch ( storage.current.site.name ) {
-        case "sspai.com":
-            $target.find( ".relation-apps" ).map( (index, item) => {
-                // TO-DO
-                $(item).remove();
-            });
-            break;
-        case "smzdm.com":
-            $target.find( "img.face" ).addClass( "sr-rd-content-nobeautify" );
-            $target.find( ".insert-outer img" ).addClass( "sr-rd-content-nobeautify" );
-            break;
-        case "infoq.com":
-            $target.find( "img" ).map( (index, item) => {
-                if ( $(item).css("float") == "left" ) {
-                    $(item).addClass( "sr-rd-content-nobeautify" );
-                }
-            });
-            break;
-        case "appinn.com":
-            $target.find( ".emoji" ).addClass( "sr-rd-content-nobeautify" );
-            break;
-        case "douban.com":
-            $target.find( ".review-content" ).children().unwrap();
-            $target.find( "table" ).addClass( "sr-rd-content-center" );
-            break;
-        case "qdaily.com":
-            $target.find( "img" ).map( (index, item) => {
-                const $target = $(item),
-                      height  = Number.parseInt($target.css("height"));
-                if ( height == 0 ) $target.remove();
-            });
-            $target.find( ".com-insert-images" ).map( (index, item) => {
-                const $target = $(item),
-                      imgs    = $target.find( "img" ).map( (index, item)=>`<div>${item.outerHTML}</div>` ),
-                      str     = imgs.get().join( "" );
-                $target.empty().removeAttr( "class" ).append( str );
-            });
-            break;
-        case "news.mtime.com":
-            removeSpareSpace( $target, "div" );
-            $target.find( ".newspictool" ).map( ( index, item ) => {
-                const $target = $(item),
-                      $img    = $target.find( "img" ),
-                      $label  = $target.find( "p:last" );
-                $target.removeAttr( "class" ).addClass( "sr-rd-content-center" ).empty().append( $img ).append( $label );
-            });
-            break;
-        case "blog.csdn.net":
-            $target.find( ".save_code" ).remove();
-            $target.find( ".pre-numbering" ).remove();
-            $target.find( "pre" ).removeAttr( "style" ).removeAttr( "class" );
-            $target.find( "code" ).removeAttr( "style" );
-            break;
-        case "news.sohu.com":
-            $target.find( ".conserve-photo" ).remove();
-            $target.find( "table" ).addClass( "sr-rd-content-center" );
-            break;
-        case "qq.com":
-            $target.find( ".rv-root-v2, #backqqcom" ).remove();
-            break;
-        case "azofreeware.com":
-            $target.find( "iframe" ).remove();
-            break;
-        case "apprcn.com":
-            removeSpareSpace( $target, "p" );
-            $target.find( "img" ).map( ( index, item ) => {
-                const $target = $(item),
-                      src     = $target.attr( "src" );
-                if ( src && src.includes( "Apprcn_Wechat_Small.jpeg" ) ) $target.parent().remove();
-            });
-            $target.find( "a" ).map( ( index, item ) => {
-                const $target = $(item),
-                      text    = $target.text();
-                if ( text == "来自反斗软件" ) $target.parent().remove();
-            });
-            break;
-        case "tieba.baidu.com":
-            $target.find( ".BDE_Smiley" ).addClass( "sr-rd-content-nobeautify" );
-            $target.find( ".replace_div" ).removeAttr( "class" ).removeAttr( "style" );
-            $target.find( ".replace_tip" ).remove();
-            break;
-        case "question.zhihu.com":
-            $target.find( ".zu-edit-button" ).remove();
-            break;
-        case "chiphell.com":
-            $target.find( "img" ).map( ( index, item ) => {
-                const $target = $(item),
-                      $parent = $target.parent(),
-                      src     = $target.attr( "src" );
-                if ( $parent.is( "ignore_js_op" )) $target.unwrap();
-                if ( src && src.includes( "static/image/smiley" ) ) $target.addClass( "sr-rd-content-nobeautify" );
-            });
-            $target.find( ".quote" ).remove();
-            removeSpareSpace( $target, "font" );
-            break;
-        default:
-            if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "apprcn.com", "steachs.com", "hacpai.com" ].includes( storage.current.site.name )) {
-                removeSpareSpace( $target, "p" );
-            } else if ([ "nationalgeographic.com.cn", "dgtle.com" ].includes( storage.current.site.name )) {
-                removeSpareSpace( $target, "div" );
-            }
-            break;
-    }
-}
-
-/**
  * Beautify html, incldue:
  * 
  * - change all <blockquote> to <sr-blockquote>
@@ -307,7 +202,7 @@ async function htmlbeautify( $target ) {
     $target.html( ( index, html ) => {
         return html.trim()
                 .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
-                .replace( /<br>\n<br>(\n<br>)*/g, "<br>" )
+                .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
                 .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
     });
 }
@@ -398,19 +293,6 @@ async function commbeautify( $target ) {
     });
     $target.find( "pre" ).map( ( index, item )=> {
         $(item).find( "code" ).removeAttr( "class" );
-    });
-}
-
-/**
- * Remove spare space
- * 
- * @param {jquery} jquery object
- * @param {string} html tag, e.g. div p
- */
-function removeSpareSpace( $target, tag ) {
-    $target.find( tag ).map( ( index, item ) => {
-        const str = $(item).text().toLowerCase().trim();
-        if ( $(item).find( "img" ).length == 0 && str == "" ) $(item).remove();
     });
 }
 

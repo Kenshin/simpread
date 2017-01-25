@@ -1,5 +1,7 @@
+console.log( "=== simpread storage load ===" )
 
 import "babel-polyfill";
+import * as st from 'site';
 
 /**
  * Read and Write Chrome storage
@@ -95,18 +97,21 @@ class Storage {
      * @param {string} @see mode
      */
     Setcur( key ) {
-        const [ url, sites ] = [getURI(), new Map( simpread[key].sites )];
+        const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
         current      = swap( simpread[key], {} );
         current.url  = url;
         current.mode = key;
         current.site = sites.get( url );
         while( !current.site ) {
-            current.site = findSitebyURL( url );
-            if ( !current.site ) {
+            const arr = st.Getsite( new Map( simpread.sites ), url );
+            if ( arr ) {
+                current.site = arr[0];
+                current.url  = arr[1];
+            } else {
                 sites.set( url, clone( site ));
                 current.site = sites.get( url );
             }
-            simpread[key].sites.push([ url, current.site ]);
+            simpread[key].sites.push([ current.url, current.site ]);
         }
         console.log( "current site object is ", current )
     }
@@ -140,7 +145,7 @@ class Storage {
     /**
      * Get local/remote JSON usage async
      * 
-     * @param  {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     * @param {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
      */
     async GetNewsites( type ) {
         try {
@@ -150,10 +155,8 @@ class Storage {
                 len      = simpread.sites.length;
             if ( len == 0 ) {
                 simpread.sites = formatSites( sites );
-            } else {
-                addsites( formatSites( sites ));
             }
-            if ( len == 0 || len != simpread.sites.length ) {
+            if ( len == 0 || addsites( formatSites( sites )) ) {
                 save();
             }
         } catch ( error ) {
@@ -167,7 +170,9 @@ class Storage {
      * @param {string} @see mode
      */
     VerifyCur( type ) {
-        return ( current.mode && current.mode != type ) || $.isEmptyObject( current );
+        return ( current.mode && current.mode != type ) ||
+               ( current.url  && current.url != st.GetURI() ) ||
+               $.isEmptyObject( current );
     }
 
 }
@@ -185,16 +190,6 @@ function swap( source, target ) {
         }
     }
     return target;
-}
-
-/**
- * Get URI
- * 
- * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
- */
-function getURI() {
-    const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
-    return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
 }
 
 /**
@@ -226,38 +221,23 @@ function formatSites( result ) {
 /**
  * Add new sites to old sites
  * 
- * @param {array} new sites from local or remote
+ * @param  {array} new sites from local or remote
+ * @return {boolean} true: update; false:not update
  */
 function addsites( sites ) {
-    const old  = new Map( simpread.sites );
-    const urls = [ ...old.keys() ];
-    for ( const site of sites ) {
+    const old  = new Map( simpread.sites ),
+          urls = [ ...old.keys() ];
+    let   update = false;
+    sites.map( ( site, index ) => {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
+            update = true;
+        } else if ( urls.includes( site[0] ) && site[1].override ) {
+            simpread.sites.splice( index, 1, site );
+            update = true;
         }
-    }
-}
-
-/**
- * Find site by url from simpread.sites, include wildcard, support: *
- * 
- * @param  {string} url
- * @return {object} site object or not found return undefined
- */
-function findSitebyURL( url ) {
-    const sites     = new Map( simpread.sites ),
-          urls     = [ ...sites.keys() ],
-          arr      = url.match( /[.a-zA-z0-9-_]+/g ),
-          wildcard = arr[1];
-    for ( const cur of urls ) {
-        const name = sites.get(cur).name;
-        if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
-            return clone( sites.get( cur ));
-        } else if ( cur == url ) {
-            return clone( sites.get( url ));
-        }
-    }
-    return undefined;
+    });
+    return update;
 }
 
 /**

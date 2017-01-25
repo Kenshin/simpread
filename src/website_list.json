@@ -50,7 +50,7 @@
         "include" : "<div class='article-main' style=''>",
         "exclude" : [
             "<div class='share-view' style='top: 1544px;'>",
-            "<div class='article-btn'>",
+            "[[[$('.article-btn')]]]",
             "<div class='article-footer'>",
             "<p class='report-view'>",
             "<img class='img-focus'>"
@@ -92,15 +92,24 @@
     },{
         "name"    : "sspai.com",
         "url"     : "http://sspai.com/",
-        "title"   : "[[{$($('body').find('h1.title')[0]).text()}]]",
+        "title"   : "<h1 class='title'>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "<div class='content'>",
+        "include" : "[[[$('.content')]]]",
         "exclude" : [
             "<img id='s1' >",
             "<hr>",
             "[['<span>我们主张分享真实的产品体验</span>']]",
             "[['<span>本文内容仅代表作者本人观点</span>']]",
             "[[/src=\\S+(342459.png)\\S+'/]]"
+        ]
+    },{
+        "name"    : "matrix.sspai.com",
+        "url"     : "http://matrix.sspai.com/p/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "dgtle.com",
@@ -134,7 +143,7 @@
         "url"     : "https://daily.zhihu.com/story/",
         "title"   : "<h1 class='headline-title'>",
         "desc"    : "",
-        "include" : "[[{$('.content').html()}]]",
+        "include" : "[[[$('.content')]]]",
         "exclude" : [
             ""
         ]
@@ -176,7 +185,7 @@
         ]
     },{
         "name"    : "mp.weixin.qq.com",
-        "url"     : "http://mp.weixin.qq.com/",
+        "url"     : "http://mp.weixin.qq.com/*",
         "title"   : "<h2 id='activity-name'>",
         "desc"    : "",
         "include" : "<div id='js_content'>",
@@ -212,15 +221,6 @@
             ""
         ]
     },{
-        "name"    : "matrix.sspai.com",
-        "url"     : "http://matrix.sspai.com/p/",
-        "title"   : "<h1 class='title'>",
-        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "<div class='content'>",
-        "exclude" : [
-            ""
-        ]
-    },{
         "name"    : "huxiu.com",
         "url"     : "https://www.huxiu.com/article/",
         "title"   : "<h1 class='t-h1'>",
@@ -232,7 +232,7 @@
         ]
     },{
         "name"    : "douban.com",
-        "url"     : "https://www.douban.com/**",
+        "url"     : "https://www.douban.com/*",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div id='link-report'>",
@@ -264,14 +264,14 @@
         "desc"    : "<p class='post-abstract'>",
         "include" : "<article>",
         "exclude" : [
-			"<h1>",
+            "<h1>",
             "<div class='post-info'>",
-			"<p class='post-abstract'>",
-			"<div class='pro_icon'>",
-			"<div class='pro_intro tc'>",
-			"[['<strong>更多精彩内容</strong>']]",
-			"[['<strong>关注钛媒体微信号</strong>']]",
-			"[[/src=\\S+(wzny_ewm)\\S+'/]]"
+            "<p class='post-abstract'>",
+            "<div class='pro_icon'>",
+            "<div class='pro_intro tc'>",
+            "[['<strong>更多精彩内容</strong>']]",
+            "[['<strong>关注钛媒体微信号</strong>']]",
+            "[[/src=\\S+(wzny_ewm)\\S+'/]]"
         ]
     },{
         "name"    : "songshuhui.net",
@@ -281,8 +281,8 @@
         "include" : "<div class='entry'>",
         "exclude" : [
             "<div class='bshare-custom'>",
-			"<div class='my-related-posts-box'>",
-			"[['<strong>相关文章</strong>']]"
+            "<div class='my-related-posts-box'>",
+            "[['<strong>相关文章</strong>']]"
         ]
     },{
         "name"    : "infzm.com",
@@ -310,7 +310,7 @@
         "include" : "<div class='entry-content'>",
         "exclude" : [
             "<div class='open_social_box share_box'>",
-			"[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]"
+            "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]"
         ]
     },{
         "name"    : "apprcn.com",
@@ -320,8 +320,8 @@
         "include" : "<div class='entry-content'>",
         "exclude" : [
             "<div class='wumii-hook'>",
-			"<div id='wumiiDisplayDiv'>",
-			"<div id='wp-share-list-container'>"
+            "<div id='wumiiDisplayDiv'>",
+            "<div id='wp-share-list-container'>"
         ]
     },{
         "name"    : "playpcesor.com",
@@ -376,7 +376,7 @@
         "url"     : "http://ruby-china.org/topics/",
         "title"   : "<h1 class='media-heading'>",
         "desc"    : "",
-        "include" : "<div class='panel-body'>",
+        "include" : "<article>",
         "exclude" : [
             ""
         ]
@@ -414,7 +414,7 @@
         "url"     : "https://segmentfault.com/a/",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='article__content'",
+        "include" : "<div class='article__content'>",
         "exclude" : [
             ""
         ]
@@ -482,14 +482,14 @@
         "url"     : "http://geek.csdn.net/news/detail/",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='markdown_views'>",
+        "include" : "<div class='news_description'>",
         "exclude" : [
             "[['<p>欢迎关注CSDN大数据公众号</p>']]",
             "[['<strong>关注以下公众号</strong>']]",
             "[[/src=\\S+(20170119091646909)\\S+'/]]",
-			"[[/src=\\S+(20170119152206448)\\S+'/]]",
-			"[[/src=\\S+(20170120110155787)\\S+'/]]",
-			"[[/src=\\S+(8tPUexU)\\S+'/]]"
+            "[[/src=\\S+(20170119152206448)\\S+'/]]",
+            "[[/src=\\S+(20170120110155787)\\S+'/]]",
+            "[[/src=\\S+(8tPUexU)\\S+'/]]"
         ]
     },{
         "name"    : "blog.csdn.net",
@@ -502,7 +502,7 @@
         ]
     },{
         "name"    : "lib.csdn.net",
-        "url"     : "http://lib.csdn.net/article/*",
+        "url"     : "http://lib.csdn.net/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='divtexts'>",
@@ -561,7 +561,7 @@
             "<div class='star-rating>"
         ]
     },{
-        "name"    : "smzdm.com",
+        "name"    : "post.smzdm.com",
         "url"     : "http://post.smzdm.com/p/",
         "title"   : "<h1 class='item-name'>",
         "desc"    : "",
@@ -596,7 +596,7 @@
         ]
     },{
         "name"    : "young.ifeng.com",
-        "url"     : "http://young.ifeng.com/a/*",
+        "url"     : "http://young.ifeng.com/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='ya_main_con'>",
@@ -610,7 +610,7 @@
         ]
     },{
         "name"    : "news.ifeng.com",
-        "url"     : "http://news.ifeng.com/a/*",
+        "url"     : "http://news.ifeng.com/*",
         "title"   : "<h1 id='artical_topic'>",
         "desc"    : "",
         "include" : "<div id='artical_real'>",
@@ -629,8 +629,9 @@
         ]
     },{
         "name"    : "feng.com",
+        "override": true,
         "url"     : "http://www.feng.com/*",
-        "title"   : "<h1>",
+        "title"   : "[[{$('.h2').text()==''?$('h1').text():$('.h2').text()}]]",
         "desc"    : "<p class='content_title'>",
         "include" : "<div id='article_content'>",
         "exclude" : [
@@ -638,7 +639,7 @@
         ]
     },{
         "name"    : "caixin.com",
-        "url"     : "http://companies.caixin.com/*",
+        "url"     : "http://www.caixin.com/*",
         "title"   : "<h1>",
         "desc"    : "<div id='subhead'>",
         "include" : "<div id='Main_Content_Val'>",
@@ -647,7 +648,7 @@
         ]
     },{
         "name"    : "ithome.com",
-        "url"     : "http://www.ithome.com/html/*",
+        "url"     : "http://www.ithome.com/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='paragraph'> ",
@@ -661,7 +662,7 @@
         "desc"    : "",
         "include" : "<div id='contentText'>",
         "exclude" : [
-            ""
+            "<div class='conserve-photo'>"
         ]
     },{
         "name"    : "sina.com.cn",
@@ -695,7 +696,7 @@
         "url"     : "http://www.timetimetime.net/*",
         "title"   : "<h1>",
         "desc"    : "",
-        "include" : "[[{$('.neir').html()}]]",
+        "include" : "[[[$('.neir')]]]",
         "exclude" : [
             ""
         ]

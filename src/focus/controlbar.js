@@ -1,8 +1,5 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-/*
-    import
-*/
 var setting  = require( "foucsetting" ),
     fcontrol = ( function() {
     var timer,
@@ -19,9 +16,11 @@ var setting  = require( "foucsetting" ),
         this.$target = null;
     }
 
-    /*
-        Add focus constrol bar
-    */
+    /**
+     * Add focus constrol bar
+     * 
+     * @param {string} jquery selector
+     */
     FControl.prototype.Render = function( root ) {
         console.log( "=== simpread focus controlbar add ===" );
         this.$parent = $(root);
@@ -30,27 +29,32 @@ var setting  = require( "foucsetting" ),
         addEventHandler( this.$target, root );
     }
 
-    /*
-        Remove focus constrol bar
-    */
+    /**
+     * Remove focus constrol bar
+     */
     FControl.prototype.Remove = function() {
         console.log( "=== simpread focus controlbar remove ===" );
         this.$target.off( "click" );
         this.$target.remove();
     }
 
-    /*
-        Open focus constrol bar item
-    */
+    /**
+     * Open focus constrol bar item
+     * 
+     * @param {string} action type, include: 'setting'
+     */
     FControl.prototype.Click = function( type ) {
         if ( type == "setting" ) {
             $(this.$target[1]).click();
         }
     }
 
-    /*
-        Add focus constrol bar event
-    */
+    /**
+     * Add focus constrol bar event
+     * 
+     * @param {jquery} jquery object
+     * @param {string} jquery selector
+     */
     function addEventHandler( $target, root ) {
         $target.click( function( event) {
             switch ( $(event.currentTarget).attr( "class" ) ) {
@@ -82,9 +86,9 @@ var setting  = require( "foucsetting" ),
         });*/
     }
 
-    /*
-        Move top
-    */
+    /**
+     * Move top
+     */
     function moveTop() {
         timer = setInterval( function() {
             var osTop = document.body.scrollTop;

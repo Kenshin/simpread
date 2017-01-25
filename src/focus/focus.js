@@ -1,9 +1,7 @@
 console.log( "=== simpread focus load ===" );
 
-/*
-    import
-*/
-var fcontrol = require( "controlbar" ),
+var util     = require( "util" ),
+    fcontrol = require( "controlbar" ),
     focus    = ( function () {
 
     var $parent,
@@ -84,9 +82,12 @@ var fcontrol = require( "controlbar" ),
 
     }
 
-    /*
-        Verify ks-simpread-focus tag exit
-    */
+    /**
+     * Verify exit
+     * 
+     * @param  {boolean} when true, call fcontrol.Click()
+     * @return {boolen} true: exist; false: not exist
+     */
     Focus.prototype.Exist = function( action ) {
         if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
             if (action) fcontrol.Click( "setting" );
@@ -96,16 +97,55 @@ var fcontrol = require( "controlbar" ),
         }
     }
 
+    /**
+     * Get focus
+     * 
+     * @param {string} storage.current.site.include
+     * @return {jquery} focus jquery object or undefined
+     */
+    Focus.prototype.GetFocus = function( include ) {
+        var $focus = [],
+            sel, range, node, tag,
+            target;
+        target = util.selector( include );
+        if ( util.specTest( target) ) {
+            var value = util.specAction( include )[0];
+            $focus = $( "body" ).find( value );
+        } else if ( target ) {
+            $focus = $( "body" ).find( target );
+        }
+        while ( $focus.length == 0 ) {
+            if ( $( "body" ).find( "article" ).length > 0 ) {
+                $focus = $( "body" ).find( "article" );
+            }
+            else {
+                try {
+                    sel    = window.getSelection();
+                    range  = sel.getRangeAt( sel.rangeCount - 1 );
+                    node   = range.startContainer.nodeName;
+                if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
+                    $focus = $( range.startContainer.parentNode );
+                } catch ( error ) {
+                    console.log( sel, range, node )
+                    console.error( error )
+                    return undefined;
+                }
+            }
+        }
+        return fixFocus( $focus );
+    }
+
     return new Focus();
 
 })();
 
-/*
-    Set include style
-    @param $target: jquery object
-    @param style  : set style string
-    @param cls    : set class string
-    @param type   : include 'add' and 'delete'
+/**
+ *  Set include style
+ * 
+ *  @param {jquery} jquery object
+ *  @param {string} set style string
+ *  @param {string} set class string
+ *  @param {string} include 'add' and 'delete'
 */
 function includeStyle( $target, style, cls, type ) {
     var bakstyle;
@@ -127,36 +167,25 @@ function includeStyle( $target, style, cls, type ) {
  * @param {string} include: 'add' 'delete'
  */
 function excludeStyle( $target, exclude, type ) {
-    var i = 0, len = exclude.length, sel = "", tags = [], tag = "";
-    for ( i; i < len; i++ ) {
-        tag  = getSelector( exclude[i] );
-        if ( tag ) tags.push( tag )
-    }
-    if ( type == "delete" )   $target.find( tags.join(",") ).hide();
-    else if ( type == "add" ) $target.find( tags.join(",") ).show();
+    const tags = util.exclude( $target, exclude );
+    if ( type == "delete" )   $target.find( tags ).hide();
+    else if ( type == "add" ) $target.find( tags ).show();
 }
 
 /**
- * Conver html to jquery object
+ * Fix $focus get bad tag, get good tag and return
+ * Good tag include: div, article
  * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {array} formatting e.g.:
-    { "tag" : "class", "name" : "article" }
- * 
+ * @param  {jquery} jquery object
+ * @return {jquery} jquery object
  */
-function getSelector( html ) {
-    const item = html.match( / (class|id)=("|')[\w-_]+/ig );
-    if ( item && item.length > 0 ) {
-        let [tag, name] = item[0].trim().replace( /'|"/ig, "" ).split( "=" );
-        if      ( tag.toLowerCase() === "class") name = `.${name}`;
-        else if ( tag.toLowerCase() === "id"   ) name = `#${name}`;
-        return name;
-    } else {
-        return null;
+function fixFocus( $focus ) {
+    var tag = $focus[0].tagName.toLowerCase();
+    while ( [ "p", "span", "strong", "ul", "li", "code", "pre", "pre" ].includes( tag )) {
+            $focus = $focus.parent();
+            tag    = $focus[0].tagName.toLowerCase();
     }
+    return $focus;
 }
 
 exports.focus       = focus;
-exports.getSelector = getSelector;

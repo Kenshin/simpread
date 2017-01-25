@@ -1,6 +1,26 @@
 console.log( "=== simpread util load ===" )
 
 /**
+ * Verify html
+ * 
+ * @param  {string} input include html tag, e.g.:
+    <div class="article fmt article__content">
+ *
+ * @return {array} 0: int include ( -1: fail； 0: empty html; 1: success; 2: special tag )
+ *                 1: result
+ */
+function verifyHtml( html ) {
+    if ( html == "" ) return [ 0, html ];
+    else if ( specTest( html )) return [ 2, html ];
+    const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
+    if ( item && item.length > 0 ) {
+        return [ 1, item ];
+    } else {
+        return [ -1, undefined ];
+    }
+}
+
+/**
  * Get exclude tags list
  * 
  * @param  {jquery} jquery object
@@ -22,6 +42,8 @@ function excludeSelector( $target, exclude ) {
                  } else {
                      tag = undefined;
                  }
+             } else if ( type == 3 ) {
+                 value.remove();
              }
         } else {
             tag = getSelector( content );
@@ -44,12 +66,15 @@ function excludeSelector( $target, exclude ) {
             div.clearfix
             div.rating_box
             span
+            special tag, @see specTest
+                 e.g. [['<strong>▽</strong>']]        [[[$('.article-btn')]]]
+                      [[/src=\\S+(342459.png)\\S+'/]] [[{$('.content').html()}]]
  *
  */
 function getSelector( html ) {
-    if ( specTest( html )) return html;
-    const item = html.match( /<\S+ (class|id)=("|')[\w-_]+|<[^/]\S+>/ig );
-    if ( item && item.length > 0 ) {
+    const [ code, item ] = verifyHtml( html );
+    if ( code == 2 ) return html;
+    else if ( code == 1 ) {
         let [tag, prop, value] = item[0].trim().replace( /['"<>]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
         if      ( !prop ) prop = tag;
         else if ( prop.toLowerCase() === "class") prop = `${tag}.${value}`;
@@ -62,23 +87,26 @@ function getSelector( html ) {
 
 /**
  * Verify special action, action include:
-   - [[{juqery code}]] // new Function
+   - [[{juqery code}]] // new Function, e.g. $("xxx").xxx() return string
    - [['text']]        // remove '<text>'
    - [[/regexp/]]      // regexp e.g. $("sr-rd-content").find( "*[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']" )
+   - [[[juqery code]]] // new Function, e.g. $("xxx").find() return jquery object
 
  * 
  * @param  {string} verify content
  * @return {boolen} verify result
  */
 function specTest( content ) {
-    return /^(\[\[)[{'/]{1}[ \S]+[}'/]\]\]{1}($)/g.test( content );
+    return /^(\[\[)[\[{'/]{1}[ \S]+[}'/\]]\]\]{1}($)/g.test( content );
 }
 
 /**
  * Exec special action, action include: @see specTest
+ * type: 0, 3 - be chiefly used in include logic
+ * type: 1, 2 - be chiefly used in exclude logic
  * 
  * @param  {string} content
- * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// )
+ * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// 3:[])
  */
 function specAction( content ) {
     let [ value, type ] = [ content.replace( /(^)\[\[|\]\]$/g, "" ) ];
@@ -99,6 +127,11 @@ function specAction( content ) {
             content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" ).replace( /'/g, '"' );
             type       = 2;
             break;
+        case "[":
+            value      = value.replace( /^{|}$/g, "" );
+            content    = ( v=>new Function( `return ${v}` )() )(value)[0];
+            type       = 3;
+            break;
         default:
             console.error( "Not support current action.", content )
             type       = -1;
@@ -108,6 +141,7 @@ function specAction( content ) {
 }
 
 export {
+    verifyHtml      as verifyHtml,
     excludeSelector as exclude,
     getSelector     as selector,
     specTest        as specTest,
