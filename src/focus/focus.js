@@ -97,6 +97,45 @@ var util     = require( "util" ),
         }
     }
 
+    /**
+     * Get focus
+     * 
+     * @param {string} storage.current.site.include
+     * @return {jquery} focus jquery object or undefined
+     */
+    Focus.prototype.GetFocus = function( include ) {
+        var $focus = [],
+            sel, range, node, tag,
+            target;
+        target = util.selector( include );
+        if ( util.specTest( target) ) {
+
+        } else if ( target ) {
+            $focus = $( "body" ).find( target );
+        }
+
+        while ( $focus.length == 0 ) {
+            if ( $( "body" ).find( "article" ).length > 0 ) {
+                $focus = $( "body" ).find( "article" );
+            }
+            else {
+                try {
+                    sel    = window.getSelection();
+                    range  = sel.getRangeAt( sel.rangeCount - 1 );
+                    node   = range.startContainer.nodeName;
+                if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
+                    $focus = $( range.startContainer.parentNode );
+                } catch ( error ) {
+                    console.log( sel, range, node )
+                    console.error( error )
+                    //new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
+                    return undefined;
+                }
+            }
+        }
+        return fixFocus( $focus );
+    }
+
     return new Focus();
 
 })();
@@ -131,6 +170,22 @@ function excludeStyle( $target, exclude, type ) {
     const tags = util.exclude( $target, exclude );
     if ( type == "delete" )   $target.find( tags ).hide();
     else if ( type == "add" ) $target.find( tags ).show();
+}
+
+/**
+ * Fix $focus get bad tag, get good tag and return
+ * Good tag include: div, article
+ * 
+ * @param  {jquery} jquery object
+ * @return {jquery} jquery object
+ */
+function fixFocus( $focus ) {
+    var tag = $focus[0].tagName.toLowerCase();
+    while ( [ "p", "span", "strong", "ul", "li", "code", "pre", "pre" ].includes( tag )) {
+            $focus = $focus.parent();
+            tag    = $focus[0].tagName.toLowerCase();
+    }
+    return $focus;
 }
 
 exports.focus       = focus;

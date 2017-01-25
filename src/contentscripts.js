@@ -59,9 +59,9 @@ function bindShortcuts() {
 function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
-    var $focus = [],
-        sel, range, node, tag,
-        target;
+    //var $focus = [],
+    //    sel, range, node, tag;
+    //    target;
 
     if ( read.Exist(false) ) {
         new Notify().Render( 1, "请先退出阅读模式，才能进入聚焦模式。" );
@@ -76,6 +76,7 @@ function focuseMode() {
     }
 
     // get tag from chrome storage
+    /*
     target = selector( storage.current.site.include );
     if ( target ) $focus = $( "body" ).find( target );
 
@@ -101,9 +102,14 @@ function focuseMode() {
             }
         }
     }
+    */
 
-    // add focus mode
-    focus.Render( fixFocus( $focus ), storage.current.site.exclude, storage.current.bgcolor );
+    var $focus = focus.GetFocus( storage.current.site.include );
+    if ( $focus ) {
+        focus.Render( $focus, storage.current.site.exclude, storage.current.bgcolor );
+    } else {
+        new Notify().Render( 1, "当前并未获取任何正文，请重新选取。" );
+    }
 }
 
 /**
@@ -113,6 +119,7 @@ function focuseMode() {
  * @param  {jquery} jquery object
  * @return {jquery} jquery object
  */
+/*
 function fixFocus( $focus ) {
     var tag = $focus[0].tagName.toLowerCase();
     while ( [ "p", "span", "strong", "ul", "li", "code", "pre", "pre" ].includes( tag )) {
@@ -121,6 +128,7 @@ function fixFocus( $focus ) {
     }
     return $focus;
 }
+*/
 
 /**
  * Read mode
