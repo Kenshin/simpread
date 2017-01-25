@@ -108,7 +108,7 @@ async function specbeautify( name, $target ) {
                 $(item).remove();
             });
             break;
-        case "smzdm.com":
+        case "post.smzdm.com":
             $target.find( "img.face" ).addClass( "sr-rd-content-nobeautify" );
             $target.find( ".insert-outer img" ).addClass( "sr-rd-content-nobeautify" );
             break;
