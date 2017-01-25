@@ -3,9 +3,10 @@ console.log( "=== simpread contentscripts load ===" )
 /**
  * Import css files
  */
-require( "./assets/css/simpread.css" );
-require( "./vender/notify/notify.css" );
+import './assets/css/simpread.css';
+import './vender/notify/notify.css';
 
+/*
 var $         = require( "jquery" ),
     Mousetrap = require( "mousetrap" ),
     Notify    = require( "notify"  ),
@@ -14,6 +15,14 @@ var $         = require( "jquery" ),
     mode      = require( "storage" ).STORAGE_MODE,
     st        = require( "site"    ),
     read      = require( "read"    );
+*/
+
+import Mousetrap from 'mousetrap';
+import Notify    from 'notify';
+import {focus}   from 'focus';
+import * as read from 'read';
+import * as st   from 'site';
+import { storage, STORAGE_MODE as mode } from 'storage';
 
 /**
  * Sevice: storage Get data form chrome storage
@@ -66,7 +75,7 @@ function focuseMode() {
          storage.Setcur( mode.focus );
     }
 
-    var $focus = focus.GetFocus( storage.current.site.include );
+    const $focus = focus.GetFocus( storage.current.site.include );
     if ( $focus ) {
         focus.Render( $focus, storage.current.site.exclude, storage.current.bgcolor );
     } else {
