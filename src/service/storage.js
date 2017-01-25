@@ -95,8 +95,10 @@ class Storage {
      * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily }
      * 
      * @param {string} @see mode
+     * @param {int} -1: not found; 0: simpread.read.sites; 1: simpread.sites
      */
     Setcur( key ) {
+        let code = 0;
         const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
         current      = swap( simpread[key], {} );
         current.url  = url;
@@ -107,13 +109,16 @@ class Storage {
             if ( arr ) {
                 current.site = arr[0];
                 current.url  = arr[1];
+                code = 1;
             } else {
                 sites.set( url, clone( site ));
                 current.site = sites.get( url );
+                code = -1;
             }
             simpread[key].sites.push([ current.url, current.site ]);
         }
         console.log( "current site object is ", current )
+        return code;
     }
 
     /**
