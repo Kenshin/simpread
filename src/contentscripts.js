@@ -1,14 +1,11 @@
 console.log( "=== simpread contentscripts load ===" )
 
-/*
-    import css files
-*/
+/**
+ * Import css files
+ */
 require( "./assets/css/simpread.css" );
 require( "./vender/notify/notify.css" );
 
-/*
-    Golbal jQuery variable
-*/
 var $         = require( "jquery" ),
     Mousetrap = require( "mousetrap" ),
     Notify    = require( "notify"  ),
@@ -19,7 +16,7 @@ var $         = require( "jquery" ),
     read      = require( "read"    );
 
 /**
- * Sevice:storage Get data form chrome storage
+ * Sevice: storage Get data form chrome storage
  */
 storage.Get( function() { bindShortcuts(); });
 
