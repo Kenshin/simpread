@@ -23,6 +23,11 @@
       "run_at"  : "document_end"
     }
   ],
+  "browser_action": {
+    "default_icon": {
+      "32": "assets/images/icon72.png"
+    }
+  },
   "web_accessible_resources": [
     "/assets/images/*",
     "website_list.json"
