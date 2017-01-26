@@ -25,7 +25,7 @@ Object.assign( foucsmenu, menu, { id: "focus", "title" : "聚焦模式" });
 Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
 
 chrome.contextMenus.create( foucsmenu );
-chrome.contextMenus.create( readmenu  );
+let rdmenuid = chrome.contextMenus.create( readmenu  );
 
 /**
  * Listen contextMenus message
@@ -49,7 +49,7 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
         case "browser_action":
             getCurTab( tabs => {
                 if ( tabs[0].url == request.value.url ) {
-                    setBrowserIcon( tabs[0].id, request.value.code );
+                    setMenuAndIcon( tabs[0].id, request.value.code );
                 }
             });
             break;
@@ -65,7 +65,7 @@ chrome.tabs.onActivated.addListener( function( active ) {
         if ( !tabs[0].url.startsWith( "chrome://" ) ) {
             chrome.tabs.sendMessage( tabs[0].id, { type : "tab_selected" });
         } else {
-            setBrowserIcon( tabs[0].id, -1 );
+            setMenuAndIcon( tabs[0].id, -1 );
         }
     });
 });
@@ -87,18 +87,26 @@ function getCurTab( callback ) {
 }
 
 /**
- * Set brower action icon
+ * Set page action icon and context menu
  * 
  * @param {int} tab.id
  * @param {int} -1: disable icon;
  */
-function setBrowserIcon( id, code ) {
+function setMenuAndIcon( id, code ) {
     let icon = "";
     if ( code == -1 ) {
-        chrome.pageAction.hide( id );
         icon = "-disable";
+        chrome.pageAction.hide( id );
+        if ( rdmenuid ) {
+            chrome.contextMenus.remove( rdmenuid );
+            rdmenuid = undefined;
+        }
     } else {
         chrome.pageAction.show( id );
+        if ( !rdmenuid ) {
+            delete readmenu.generatedId;
+            rdmenuid = chrome.contextMenus.create( readmenu );
+        }
     }
     chrome.pageAction.setIcon({ tabId: id, path: chrome.extension.getURL( `assets/images/icon72${icon}.png` ) });
 }
