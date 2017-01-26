@@ -24,6 +24,7 @@ export default class Dialog extends React.Component {
         console.log( "dialog click submit button.", storage.current )
         storage.Set( storage.current.mode );
         chrome.runtime.sendMessage({ type: "shortcuts" });
+        if ( storage.current.mode == STORAGE_MODE.read ) chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
         new Notify().Render( 0, "更新成功！" );
         this.close( false );
     }
