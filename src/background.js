@@ -32,7 +32,7 @@ chrome.contextMenus.create( readmenu  );
  */
 chrome.contextMenus.onClicked.addListener( function( info, tab ) {
     console.log( "background contentmenu Listener", info, tab );
-    if ( info.pageUrl == tab.url ) {
+    if ( !tab.url.startsWith( "chrome://" ) ) {
         chrome.tabs.sendMessage( tab.id, { type: info.menuItemId });
     }
 });
