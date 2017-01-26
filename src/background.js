@@ -101,6 +101,4 @@ function setBrowserIcon( id, code ) {
         chrome.pageAction.show( id );
     }
     chrome.pageAction.setIcon({ tabId: id, path: chrome.extension.getURL( `assets/images/icon72${icon}.png` ) });
-    //const icon = code != -1 ? "" : "-disable";
-    //chrome.browserAction.setIcon({ path: chrome.extension.getURL( `assets/images/icon72${icon}.png` ) });
 }
