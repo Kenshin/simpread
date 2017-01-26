@@ -28,7 +28,7 @@
   ],
   "browser_action": {
     "default_icon": {
-      "32": "assets/images/icon72.png"
+      "32": "assets/images/icon72-disable.png"
     }
   },
   "web_accessible_resources": [
