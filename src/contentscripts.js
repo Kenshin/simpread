@@ -16,14 +16,14 @@ import { storage, STORAGE_MODE as mode } from 'storage';
 storage.Get( function() {
     bindShortcuts();
     storage.Setcur( mode.read );
-    chrome.runtime.sendMessage({ type: "browser_action", value: storage.rdstcode });
+    chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
 });
 
 /**
- * Listen runtime message, include: `focus` `read` `shortcuts`
+ * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
  */
 chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
-    console.log( request );
+    console.log( "contentscripts runtime Listener", request );
     switch ( request.type ) {
         case "focus":
             focuseMode();
@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
             bindShortcuts();
             break;
         case "tab_selected":
-            chrome.runtime.sendMessage({ type: "browser_action", value: storage.rdstcode });
+            chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
     }
 });
 

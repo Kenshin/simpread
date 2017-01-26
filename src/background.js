@@ -47,18 +47,27 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
             getCurTab( function( tabs ) { chrome.tabs.sendMessage( tabs[0].id, request ); });
             break;
         case "browser_action":
-            const icon = request.value != -1 ? "" : "-disable";
-            chrome.browserAction.setIcon({ path: chrome.extension.getURL( `assets/images/icon72${icon}.png` ) });
+            getCurTab( tabs => {
+                if ( tabs[0].url == request.value.url ) {
+                    setBrowserIcon( request.value.code );
+                }
+            });
             break;
     }
 });
 
 /**
- * Listen chrome tab active message, include: `tab_selected` 
+ * Listen chrome tab active message, include: `tab_selected`
  */
 chrome.tabs.onActivated.addListener( function( active ) {
     console.log( "background tabs Listener", active );
-    chrome.tabs.sendMessage( active.tabId, { type : "tab_selected", value: active.tabId });
+    getCurTab( (tabs) => {
+        if ( !tabs[0].url.startsWith( "chrome://" ) ) {
+            chrome.tabs.sendMessage( tabs[0].id, { type : "tab_selected" });
+        } else {
+            setBrowserIcon( -1 );
+        }
+    });
 });
 
 /**
@@ -68,4 +77,14 @@ chrome.tabs.onActivated.addListener( function( active ) {
  */
 function getCurTab( callback ) {
     chrome.tabs.query({ "active": true, "currentWindow": true }, function( tabs ) { callback( tabs ); });
+}
+
+/**
+ * Set brower action icon
+ * 
+ * @param {int} -1: disable icon;
+ */
+function setBrowserIcon( code ) {
+    const icon = code != -1 ? "" : "-disable";
+    chrome.browserAction.setIcon({ path: chrome.extension.getURL( `assets/images/icon72${icon}.png` ) });
 }
