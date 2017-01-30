@@ -20,7 +20,7 @@ function getURI() {
 function findSitebyURL( sites, url ) {
     const urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
-          wildcard = arr[1],
+          wildcard = arr[1].replace( "www.", "" ),
           isroot   = ()=>window.location.pathname != "/";
     let   found;
     for ( const cur of urls ) {
@@ -34,7 +34,7 @@ function findSitebyURL( sites, url ) {
             found = cur;
             break;
         }
-        else if ( isroot() && cur.includes( "*" ) && wildcard.includes( name ) ) {
+        else if ( isroot() && cur.includes( "*" ) && wildcard == name ) {
             if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
                 if    ( suffix != url ) return undefined;
             } else if ( suffix == url ) return undefined;
