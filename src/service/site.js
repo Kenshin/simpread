@@ -24,14 +24,23 @@ function getURI() {
  * @return {array}  0: current site; 1: current url
  */
 function findSitebyURL( sites, url ) {
-    const urls     = [ ...sites.keys() ],
+    const subname  = (names)=>{
+            const arr = names.match( /\.\S+\.\S+/g );
+            if ( arr ) {
+                return arr[0].substr(1);
+            } else {
+                return names;
+            }
+          },
+          urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
           wildcard = arr[1].replace( "www.", "" ),
+          hostname = subname( window.location.hostname ),
           isroot   = ()=>window.location.pathname != "/";
     let   found;
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
-              suffix = cur.replace( "*", "" );
+              sufname= subname( name );
         if ( cur.includes( "chiphell.com"    )  && url.includes( "chiphell.com" )     ||
              cur.includes( "tieba.baidu.com" )  && url.includes( "tieba.baidu.com" )  ||
              cur.includes( "mp.weixin.qq.com" ) && url.includes( "mp.weixin.qq.com" ) ||
@@ -40,7 +49,7 @@ function findSitebyURL( sites, url ) {
             found = cur;
             break;
         }
-        else if ( isroot() && cur.includes( "*" ) && wildcard.includes(name) ) {
+        else if ( isroot() && cur.includes( "*" ) && wildcard.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
             //    if    ( suffix != url ) return undefined;
             //} else if ( suffix == url ) return undefined;
