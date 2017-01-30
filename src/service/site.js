@@ -20,20 +20,21 @@ function getURI() {
 function findSitebyURL( sites, url ) {
     const urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
-          wildcard = arr[1];
+          wildcard = arr[1],
+          isroot   = ()=>window.location.pathname != "/";
     let   found;
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               suffix = cur.replace( "*", "" );
-        if ( cur.includes( "chiphell.com"    )  && url.includes( "chiphell.com" )      ||
-             cur.includes( "tieba.baidu.com" )  && url.includes( "tieba.baidu.com" )   ||
+        if ( cur.includes( "chiphell.com"    )  && url.includes( "chiphell.com" )     ||
+             cur.includes( "tieba.baidu.com" )  && url.includes( "tieba.baidu.com" )  ||
              cur.includes( "mp.weixin.qq.com" ) && url.includes( "mp.weixin.qq.com" ) ||
-             cur == url
+             cur == url && isroot()
         ) {
             found = cur;
             break;
         }
-        else if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
+        else if ( isroot() && cur.includes( "*" ) && wildcard.includes( name ) ) {
             if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
                 if    ( suffix != url ) return undefined;
             } else if ( suffix == url ) return undefined;
