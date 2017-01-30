@@ -34,7 +34,7 @@ function findSitebyURL( sites, url ) {
           },
           urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
-          wildcard = arr[1].replace( "www.", "" ),
+          uri      = arr[1].replace( "www.", "" ),
           hostname = subname( window.location.hostname ),
           isroot   = ()=>window.location.pathname != "/";
     let   found;
@@ -49,7 +49,7 @@ function findSitebyURL( sites, url ) {
             found = cur;
             break;
         }
-        else if ( isroot() && cur.includes( "*" ) && wildcard.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
+        else if ( isroot() && cur.includes( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
             //    if    ( suffix != url ) return undefined;
             //} else if ( suffix == url ) return undefined;
