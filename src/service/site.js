@@ -40,10 +40,10 @@ function findSitebyURL( sites, url ) {
             found = cur;
             break;
         }
-        else if ( isroot() && cur.includes( "*" ) && wildcard == name ) {
-            if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
-                if    ( suffix != url ) return undefined;
-            } else if ( suffix == url ) return undefined;
+        else if ( isroot() && cur.includes( "*" ) && wildcard.includes(name) ) {
+            //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
+            //    if    ( suffix != url ) return undefined;
+            //} else if ( suffix == url ) return undefined;
             found = cur;
             break;
         }
