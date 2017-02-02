@@ -238,19 +238,20 @@ function formatSites( result ) {
  * @return {boolean} true: update; false:not update
  */
 function addsites( sites ) {
-    const old  = new Map( simpread.sites ),
-          urls = [ ...old.keys() ];
-    let   update = false;
-    sites.map( ( site, index ) => {
+    const update   = new Map( simpread.sites ),
+          urls     = [ ...update.keys() ];
+    let   isupdate = false;
+    sites.map( ( site ) => {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
-            update = true;
+            isupdate = true;
         } else if ( urls.includes( site[0] ) && site[1].override ) {
-            simpread.sites.splice( index, 1, site );
-            update = true;
+            update.set( site[0], site[1] );
+            simpread.sites = [ ...update ];
+            isupdate = true;
         }
     });
-    return update;
+    return isupdate;
 }
 
 /**
