@@ -664,7 +664,7 @@
             "<div class='conserve-photo'>"
         ]
     },{
-        "name"    : "sina.com.cn",
+        "name"    : "news.sina.com.cn",
         "url"     : "http://news.sina.com.cn/*",
         "title"   : "<h1 id='artibodyTitle'>",
         "desc"    : "",
@@ -673,7 +673,7 @@
             ""
         ]
     },{
-        "name"    : "163.com",
+        "name"    : "news.163.com",
         "url"     : "http://news.163.com/*",
         "title"   : "<title>",
         "desc"    : "",
