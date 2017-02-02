@@ -709,6 +709,39 @@
             ""
         ]
     },{
+        "name"    : "vgtime.com",
+        "url"     : "http://www.vgtime.com/article/",
+        "title"   : "<h1 class='art_max_width'>",
+        "desc"    : "",
+        "include" : "<div class='paragraph'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "keke289.com",
+        "url"     : "http://www.keke289.com/news/",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<section class='article-bd'>",
+        "exclude" : [
+            "<div class='article-annotation'>",
+			"[['<strong>关注科客网官方微信kekebat</strong>']]"
+        ]
+    },{
+        "name"    : "ebrun.com",
+		"override": true,
+        "url"     : "http://www.ebrun.com/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='contdiv'>",
+        "exclude" : [
+            "<p class='ybfirst_go'>",
+			"<div id='corp'>",
+			"[[/src=\\S+(2017013185214858280529103)\\S+'/]]",
+			"[['<span>百人讲新年纳新 588份精华课件免费赠</span>']]",
+			"[['<p>【版权提示】亿邦动力网倡导尊重与保护知识产权。</p>']]"
+        ]
+    },{
         "name"    : "tieba.baidu.com",
         "url"     : "http://tieba.baidu.com/p/",
         "title"   : "[[{$('.core_title_txt').text()}]]",
