@@ -87,6 +87,7 @@ function readMode() {
 
     if ( storage.VerifyCur( mode.read ) ) {
         storage.Setcur( mode.read );
+        chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
     }
 
     switch ( st.Verify( storage.current.site.name ) ) {
