@@ -24,23 +24,23 @@ function getURI() {
  * @return {array}  0: current site; 1: current url
  */
 function findSitebyURL( sites, url ) {
-    const subname  = (names)=>{
+    const domain   = (names)=>{
             const arr = names.replace( "www.", "" ).match( /\.\S+\.\S+/g );
             if ( arr ) {
                 return arr[0].substr(1);
             } else {
-                return names;
+                return names.replace( "www.", "" );
             }
           },
           urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
           uri      = arr[1].replace( "www.", "" ),
-          hostname = subname( window.location.hostname ),
+          hostname = domain( window.location.hostname ),
           isroot   = ()=>window.location.pathname == "/" || /\/(default|index|portal).[0-9a-zA-Z]+$/.test(window.location.pathname);
     let   found;
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
-              sufname= subname( name );
+              sufname= domain( name );
         if ( !isroot() && cur == url ) {
             found = cur;
             break;
