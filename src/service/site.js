@@ -25,7 +25,7 @@ function getURI() {
  */
 function findSitebyURL( sites, url ) {
     const subname  = (names)=>{
-            const arr = names.match( /\.\S+\.\S+/g );
+            const arr = names.replace( "www.", "" ).match( /\.\S+\.\S+/g );
             if ( arr ) {
                 return arr[0].substr(1);
             } else {
