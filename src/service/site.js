@@ -6,8 +6,14 @@ console.log( "=== simpread site load ===" )
  * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
  */
 function getURI() {
-    const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
-    return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
+    //const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
+    //return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
+    const name = (pathname) => {
+        pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
+        return pathname.replace( /\/[@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
+    },
+    path = name( window.location.pathname );
+    return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
 }
 
 /**
@@ -18,25 +24,31 @@ function getURI() {
  * @return {array}  0: current site; 1: current url
  */
 function findSitebyURL( sites, url ) {
-    const urls     = [ ...sites.keys() ],
+    const domain   = (names)=>{
+            const arr = names.replace( "www.", "" ).match( /\.\S+\.\S+/g );
+            if ( arr ) {
+                return arr[0].substr(1);
+            } else {
+                return names.replace( "www.", "" );
+            }
+          },
+          urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
-          wildcard = arr[1];
+          uri      = arr[1].replace( "www.", "" ),
+          hostname = domain( window.location.hostname ),
+          isroot   = ()=>window.location.pathname == "/" || /\/(default|index|portal).[0-9a-zA-Z]+$/.test(window.location.pathname);
     let   found;
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
-              suffix = cur.replace( "*", "" );
-        if ( cur.includes( "chiphell.com"    )  && url.includes( "chiphell.com" )      ||
-             cur.includes( "tieba.baidu.com" )  && url.includes( "tieba.baidu.com" )   ||
-             cur.includes( "mp.weixin.qq.com" ) && url.includes( "mp.weixin.qq.com" ) ||
-             cur == url
-        ) {
+              sufname= domain( name );
+        if ( !isroot() && cur == url ) {
             found = cur;
             break;
         }
-        else if ( cur.includes( "*" ) && wildcard.includes( name ) ) {
-            if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
-                if    ( suffix != url ) return undefined;
-            } else if ( suffix == url ) return undefined;
+        else if ( !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
+            //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
+            //    if    ( suffix != url ) return undefined;
+            //} else if ( suffix == url ) return undefined;
             found = cur;
             break;
         }

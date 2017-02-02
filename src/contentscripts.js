@@ -13,13 +13,17 @@ import { storage, STORAGE_MODE as mode } from 'storage';
 /**
  * Sevice: storage Get data form chrome storage
  */
-storage.Get( function() { bindShortcuts(); });
+storage.Get( function() {
+    bindShortcuts();
+    storage.Setcur( mode.read );
+    chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
+});
 
 /**
- * Message request listener, message include: `focus` `shortcuts`
+ * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
  */
 chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
-    console.log( request );
+    console.log( "contentscripts runtime Listener", request );
     switch ( request.type ) {
         case "focus":
             focuseMode();
@@ -30,9 +34,8 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
         case "shortcuts":
             bindShortcuts();
             break;
-        default:
-            console.error( "misinformation message ", request )
-            break;
+        case "tab_selected":
+            chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
     }
 });
 
@@ -84,6 +87,7 @@ function readMode() {
 
     if ( storage.VerifyCur( mode.read ) ) {
         storage.Setcur( mode.read );
+        chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
     }
 
     switch ( st.Verify( storage.current.site.name ) ) {

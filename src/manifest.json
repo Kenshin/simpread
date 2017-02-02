@@ -4,6 +4,9 @@
   "description" : "简阅（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
   "homepage_url" : "https://github.com/kenshin/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
+  "icons" : {
+    "128" : "assets/images/icon72.png"
+  },
   "permissions": [
     "contextMenus",
     "tabs",
@@ -23,6 +26,11 @@
       "run_at"  : "document_end"
     }
   ],
+  "page_action": {
+    "default_icon": {
+      "32": "assets/images/icon72-disable.png"
+    }
+  },
   "web_accessible_resources": [
     "/assets/images/*",
     "website_list.json"

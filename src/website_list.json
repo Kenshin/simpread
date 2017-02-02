@@ -131,7 +131,7 @@
         ]
     },{
         "name"    : "dudu.zhihu.com",
-        "url"     : "http://dudu.zhihu.com/story/*",
+        "url"     : "http://dudu.zhihu.com/story/",
         "title"   : "<h1 class='headline-title'>",
         "desc"    : "",
         "include" : "<div class='content'>",
@@ -629,7 +629,6 @@
         ]
     },{
         "name"    : "feng.com",
-        "override": true,
         "url"     : "http://www.feng.com/*",
         "title"   : "[[{$('.h2').text()==''?$('h1').text():$('.h2').text()}]]",
         "desc"    : "<p class='content_title'>",
