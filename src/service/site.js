@@ -36,20 +36,16 @@ function findSitebyURL( sites, url ) {
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
           uri      = arr[1].replace( "www.", "" ),
           hostname = subname( window.location.hostname ),
-          isroot   = ()=>window.location.pathname != "/";
+          isroot   = ()=>window.location.pathname == "/" || /\/(default|index|portal).[0-9a-zA-Z]+$/.test(window.location.pathname);
     let   found;
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= subname( name );
-        if ( cur.includes( "chiphell.com"    )  && url.includes( "chiphell.com" )     ||
-             cur.includes( "tieba.baidu.com" )  && url.includes( "tieba.baidu.com" )  ||
-             cur.includes( "mp.weixin.qq.com" ) && url.includes( "mp.weixin.qq.com" ) ||
-             cur == url && isroot()
-        ) {
+        if ( !isroot() && cur == url ) {
             found = cur;
             break;
         }
-        else if ( isroot() && cur.includes( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
+        else if ( !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
             //    if    ( suffix != url ) return undefined;
             //} else if ( suffix == url ) return undefined;
