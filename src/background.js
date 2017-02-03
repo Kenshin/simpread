@@ -60,14 +60,30 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
  * Listen chrome tab active message, include: `tab_selected`
  */
 chrome.tabs.onActivated.addListener( function( active ) {
-    console.log( "background tabs Listener", active );
     getCurTab( (tabs) => {
-        if ( !tabs[0].url.startsWith( "chrome://" ) ) {
-            chrome.tabs.sendMessage( tabs[0].id, { type : "tab_selected" });
-        } else {
-            setMenuAndIcon( tabs[0].id, -1 );
+        if ( tabs[0].status == "complete" ) {
+            console.log( "background tabs Listener:active", active );
+            if ( !tabs[0].url.startsWith( "chrome://" ) ) {
+                chrome.tabs.sendMessage( tabs[0].id, { type : "tab_selected" });
+            } else {
+                setMenuAndIcon( tabs[0].id, -1 );
+            }
         }
     });
+});
+
+/**
+ * Listen chrome tab update message, include: `tab_selected`
+ */
+chrome.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
+    if ( changeInfo.status == "complete" ) {
+        console.log( "background tabs Listener:update", tabId, changeInfo, tab );
+        if ( !tab.url.startsWith( "chrome://" ) ) {
+            chrome.tabs.sendMessage( tabId, { type : "tab_selected" });
+        } else {
+            setMenuAndIcon( tab.id, -1 );
+        }
+    }
 });
 
 /**
