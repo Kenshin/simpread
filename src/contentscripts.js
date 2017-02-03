@@ -16,8 +16,6 @@ import { storage, STORAGE_MODE as mode } from 'storage';
 storage.Get( function() {
     bindShortcuts();
     getCurrent();
-    //storage.Setcur( mode.read );
-    //chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
 });
 
 /**
@@ -37,7 +35,6 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
             break;
         case "tab_selected":
             getCurrent();
-            //chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
     }
 });
 
@@ -62,9 +59,6 @@ function focuseMode() {
 
     if ( focus.Exist(true) ) return;
 
-    /*if ( storage.VerifyCur( mode.focus ) ) {
-         storage.Setcur( mode.focus );
-    }*/
     getCurrent( false );
 
     const $focus = focus.GetFocus( storage.current.site.include );
@@ -88,10 +82,6 @@ function readMode() {
 
     if ( read.Exist(true) ) return;
 
-    /*if ( storage.VerifyCur( mode.read ) ) {
-        storage.Setcur( mode.read );
-        chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
-    }*/
     getCurrent();
 
     switch ( st.Verify( storage.current.site.name ) ) {
