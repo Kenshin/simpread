@@ -15,8 +15,9 @@ import { storage, STORAGE_MODE as mode } from 'storage';
  */
 storage.Get( function() {
     bindShortcuts();
-    storage.Setcur( mode.read );
-    chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
+    getCurrent();
+    //storage.Setcur( mode.read );
+    //chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
 });
 
 /**
@@ -35,7 +36,8 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
             bindShortcuts();
             break;
         case "tab_selected":
-            chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
+            getCurrent();
+            //chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
     }
 });
 
@@ -60,9 +62,10 @@ function focuseMode() {
 
     if ( focus.Exist(true) ) return;
 
-    if ( storage.VerifyCur( mode.focus ) ) {
+    /*if ( storage.VerifyCur( mode.focus ) ) {
          storage.Setcur( mode.focus );
-    }
+    }*/
+    getCurrent( false );
 
     const $focus = focus.GetFocus( storage.current.site.include );
     if ( $focus ) {
@@ -85,10 +88,11 @@ function readMode() {
 
     if ( read.Exist(true) ) return;
 
-    if ( storage.VerifyCur( mode.read ) ) {
+    /*if ( storage.VerifyCur( mode.read ) ) {
         storage.Setcur( mode.read );
         chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
-    }
+    }*/
+    getCurrent();
 
     switch ( st.Verify( storage.current.site.name ) ) {
         case 0:
@@ -103,5 +107,17 @@ function readMode() {
         case -3:
             new Notify().Render( 1, "只有选中【只看该作者】后，才能进入阅读模式。" );
             break;
+    }
+}
+
+/**
+ * Get storage.current
+ * 
+ * @param {boolean} when true, push message
+ */
+function getCurrent( upicon = true ) {
+    if ( storage.VerifyCur( mode.read ) ) {
+        storage.Setcur( mode.read );
+        if ( upicon ) chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
     }
 }
