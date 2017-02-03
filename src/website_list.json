@@ -797,6 +797,15 @@
 			"[['<p>【版权提示】亿邦动力网倡导尊重与保护知识产权。</p>']]"
         ]
     },{
+        "name"    : "g-cores.com",
+        "url"     : "http://www.g-cores.com/articles/",
+        "title"   : "<h1 class='story_title'>",
+        "desc"    : "<p class='story_desc'>",
+        "include" : "<div class='story'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "tieba.baidu.com",
         "url"     : "http://tieba.baidu.com/p/",
         "title"   : "[[{$('.core_title_txt').text()}]]",
