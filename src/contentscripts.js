@@ -10,6 +10,7 @@ import * as read from 'read';
 import * as st   from 'site';
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as msg  from 'message';
+import {browser} from 'browser';
 
 /**
  * Sevice: storage Get data form chrome storage
@@ -22,7 +23,7 @@ storage.Get( function() {
 /**
  * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
  */
-chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "contentscripts runtime Listener", request );
     switch ( request.type ) {
         case msg.MESSAGE_ACTION.focus_mode:
@@ -114,5 +115,5 @@ function entry( current, other, ...str ) {
  */
 function getCurrent( mode = undefined, upicon = true ) {
     if ( mode && storage.VerifyCur( mode ) )  storage.Setcur( mode );
-    if ( upicon ) chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
+    if ( upicon ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }

@@ -5,6 +5,7 @@ import FocusOpt  from 'focusopt';
 import ReadOpt   from 'readopt';
 import { storage, STORAGE_MODE } from 'storage';
 import * as msg  from 'message';
+import {browser} from 'browser';
 
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`;
@@ -24,8 +25,8 @@ export default class Dialog extends React.Component {
     save() {
         console.log( "dialog click submit button.", storage.current )
         storage.Set( storage.current.mode );
-        chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
-        if ( storage.current.mode == STORAGE_MODE.read ) chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
+        if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
         new Notify().Render( 0, "更新成功！" );
         this.close( false );
     }
