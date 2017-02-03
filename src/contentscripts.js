@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) 
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            getCurrent( mode.read );
+            getCurrent();
     }
 });
 
@@ -109,10 +109,10 @@ function entry( current, other, ...str ) {
 /**
  * Get storage.current
  * 
- * @param {string}  value is mode.focus or mode.read
+ * @param {string}  value is mode.focus or mode.read or undefined
  * @param {boolean} when true, push message
  */
-function getCurrent( mode, upicon = true ) {
-    if ( storage.VerifyCur( mode ) )  storage.Setcur( mode );
+function getCurrent( mode = undefined, upicon = true ) {
+    if ( mode && storage.VerifyCur( mode ) )  storage.Setcur( mode );
     if ( upicon ) chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }
