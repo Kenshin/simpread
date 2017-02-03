@@ -52,13 +52,14 @@ function bindShortcuts() {
 function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
-    if ( read.Exist(false) ) {
+    /*if ( read.Exist(false) ) {
         new Notify().Render( 1, "请先退出阅读模式，才能进入聚焦模式。" );
         return;
     }
 
-    if ( focus.Exist(true) ) return;
+    if ( focus.Exist(true) ) return;*/
 
+    if ( !entry( focus, read, "阅读", "聚焦" )) return;
     getCurrent( false );
 
     const $focus = focus.GetFocus( storage.current.site.include );
@@ -75,13 +76,14 @@ function focuseMode() {
 function readMode() {
     console.log( "=== simpread read mode active ===" )
 
-    if ( focus.Exist(false) ) {
+    /*if ( focus.Exist(false) ) {
         new Notify().Render( 1, "请先退出聚焦模式，才能进入阅读模式。" );
         return;
     }
 
-    if ( read.Exist(true) ) return;
+    if ( read.Exist(true) ) return;*/
 
+    if ( !entry( read, focus, "聚焦", "阅读" )) return;
     getCurrent();
 
     switch ( st.Verify( storage.current.site.name ) ) {
@@ -98,6 +100,23 @@ function readMode() {
             new Notify().Render( 1, "只有选中【只看该作者】后，才能进入阅读模式。" );
             break;
     }
+}
+
+/**
+ * Focus and Read mode entry
+ * 
+ * @param  {object}  current mode object
+ * @param  {object}  other   mode object
+ * @param  {array}   render str
+ * @return {boolean} true:continue; false: return
+ */
+function entry( current, other, ...str ) {
+    if ( other.Exist(false) ) {
+        new Notify().Render( 1, `请先退出${str[0]}模式，才能进入${str[1]}模式。` );
+        return false;
+    }
+    if ( current.Exist(true) ) return false;
+    return true;
 }
 
 /**
