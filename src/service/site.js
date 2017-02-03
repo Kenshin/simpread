@@ -226,6 +226,12 @@ async function specbeautify( name, $target ) {
         case "news.cnblogs.com":
             $target.find( ".topic_img" ).remove();
             break;
+        case "g-cores.com":
+            $target.find( ".swiper-slide-active" ).find( "img" ).map( ( index, item ) => {
+                const $target = $(item);
+                $target.parent().parent().parent().parent().parent().parent().removeAttr( "class" ).removeAttr( "style" ).html($target);
+            });
+            break;
     }
 }
 
