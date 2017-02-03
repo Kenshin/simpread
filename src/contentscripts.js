@@ -9,13 +9,14 @@ import {focus}   from 'focus';
 import * as read from 'read';
 import * as st   from 'site';
 import { storage, STORAGE_MODE as mode } from 'storage';
+import * as msg  from 'message';
 
 /**
  * Sevice: storage Get data form chrome storage
  */
 storage.Get( function() {
     bindShortcuts();
-    getCurrent();
+    getCurrent( mode.read );
 });
 
 /**
@@ -24,17 +25,17 @@ storage.Get( function() {
 chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "contentscripts runtime Listener", request );
     switch ( request.type ) {
-        case "focus":
+        case msg.MESSAGE_ACTION.focus_mode:
             focuseMode();
             break;
-        case "read":
+        case msg.MESSAGE_ACTION.read_mode:
             readMode();
             break;
-        case "shortcuts":
+        case msg.MESSAGE_ACTION.shortcuts:
             bindShortcuts();
             break;
-        case "tab_selected":
-            getCurrent();
+        case msg.MESSAGE_ACTION.tab_selected:
+            getCurrent( mode.read );
     }
 });
 
@@ -53,7 +54,7 @@ function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
     if ( !entry( focus, read, "阅读", "聚焦" )) return;
-    getCurrent( false );
+    getCurrent( mode.focus, false );
 
     const $focus = focus.GetFocus( storage.current.site.include );
     if ( $focus ) {
@@ -70,7 +71,7 @@ function readMode() {
     console.log( "=== simpread read mode active ===" )
 
     if ( !entry( read, focus, "聚焦", "阅读" )) return;
-    getCurrent();
+    getCurrent( mode.read );
 
     switch ( st.Verify( storage.current.site.name ) ) {
         case 0:
@@ -108,11 +109,14 @@ function entry( current, other, ...str ) {
 /**
  * Get storage.current
  * 
+ * @param {string}  value is mode.focus or mode.read
  * @param {boolean} when true, push message
  */
-function getCurrent( upicon = true ) {
-    if ( storage.VerifyCur( mode.read ) ) {
-        storage.Setcur( mode.read );
-        if ( upicon ) chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
+function getCurrent( mode, upicon = true ) {
+    if ( storage.VerifyCur( mode ) ) {
+        storage.Setcur( mode );
+        //if ( upicon ) chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
+        //if ( upicon ) msg.Pub( msg.MESSAGE_MODE.runtime, msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href });
     }
+    if ( upicon ) chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }

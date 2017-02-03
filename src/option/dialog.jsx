@@ -1,9 +1,10 @@
 console.log( "=== simpread option dialog ===" )
 
+import Notify    from 'notify';
 import FocusOpt  from 'focusopt';
 import ReadOpt   from 'readopt';
 import { storage, STORAGE_MODE } from 'storage';
-import Notify from 'notify';
+import * as msg  from 'message';
 
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`;
@@ -23,8 +24,10 @@ export default class Dialog extends React.Component {
     save() {
         console.log( "dialog click submit button.", storage.current )
         storage.Set( storage.current.mode );
-        chrome.runtime.sendMessage({ type: "shortcuts" });
-        if ( storage.current.mode == STORAGE_MODE.read ) chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
+        //chrome.runtime.sendMessage({ type: "shortcuts" });
+        //if ( storage.current.mode == STORAGE_MODE.read ) chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
+        chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
+        if ( storage.current.mode == STORAGE_MODE.read ) chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
         new Notify().Render( 0, "更新成功！" );
         this.close( false );
     }
