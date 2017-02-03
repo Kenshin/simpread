@@ -52,13 +52,6 @@ function bindShortcuts() {
 function focuseMode() {
     console.log( "=== simpread focus mode active ===" )
 
-    /*if ( read.Exist(false) ) {
-        new Notify().Render( 1, "请先退出阅读模式，才能进入聚焦模式。" );
-        return;
-    }
-
-    if ( focus.Exist(true) ) return;*/
-
     if ( !entry( focus, read, "阅读", "聚焦" )) return;
     getCurrent( false );
 
@@ -75,13 +68,6 @@ function focuseMode() {
  */
 function readMode() {
     console.log( "=== simpread read mode active ===" )
-
-    /*if ( focus.Exist(false) ) {
-        new Notify().Render( 1, "请先退出聚焦模式，才能进入阅读模式。" );
-        return;
-    }
-
-    if ( read.Exist(true) ) return;*/
 
     if ( !entry( read, focus, "聚焦", "阅读" )) return;
     getCurrent();
