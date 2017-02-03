@@ -113,10 +113,6 @@ function entry( current, other, ...str ) {
  * @param {boolean} when true, push message
  */
 function getCurrent( mode, upicon = true ) {
-    if ( storage.VerifyCur( mode ) ) {
-        storage.Setcur( mode );
-        //if ( upicon ) chrome.runtime.sendMessage({ type: "browser_action", value: { code: storage.rdstcode, url: window.location.href } });
-        //if ( upicon ) msg.Pub( msg.MESSAGE_MODE.runtime, msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href });
-    }
+    if ( storage.VerifyCur( mode ) )  storage.Setcur( mode );
     if ( upicon ) chrome.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }
