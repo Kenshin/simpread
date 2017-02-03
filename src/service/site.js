@@ -220,6 +220,12 @@ async function specbeautify( name, $target ) {
         case "36kr.com":
             $target.find( ".load-html-img" ).removeAttr( "class" );
             break;
+        case "cnblogs.com":
+            $target.find( ".cnblogs_code_toolbar" ).remove();
+            break;
+        case "news.cnblogs.com":
+            $target.find( ".topic_img" ).remove();
+            break;
     }
 }
 

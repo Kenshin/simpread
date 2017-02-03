@@ -557,6 +557,33 @@
             "[['<p>（完）</p>']]"
         ]
     },{
+        "name"    : "v2ex.com",
+        "url"     : "https://www.v2ex.com/t/",
+        "title"   : "[[{$('.header h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='markdown_body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.cnblogs.com",
+        "url"     : "https://news.cnblogs.com/n/",
+        "title"   : "<div id='news_title'>",
+        "desc"    : "",
+        "include" : "<div id='news_body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "cnblogs.com",
+        "url"     : "http://www.cnblogs.com/*",
+        "title"   : "<a id='cb_post_title_url'>",
+        "desc"    : "",
+        "include" : "<div id='cnblogs_post_body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
