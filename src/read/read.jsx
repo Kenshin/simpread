@@ -52,8 +52,8 @@ class Read extends React.Component {
     constructor( props ) {
         super( props );
         switch ( this.props.read.theme ) {
-            case "theme1":
-               require( "theme1" );
+            case "github":
+               require( "github" );
                break;
             case "theme2":
                require( "theme2" );

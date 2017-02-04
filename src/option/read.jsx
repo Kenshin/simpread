@@ -21,10 +21,10 @@ export default class ReadOpt extends React.Component {
         if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
 
             // add test code
-            if ( this.props.option.theme == "theme1" ) {
+            if ( this.props.option.theme == "github" ) {
                 this.props.option.theme = "theme2";
             } else {
-                this.props.option.theme = "theme1";
+                this.props.option.theme = "github";
             }
             console.log( "this.props.option.theme = ", this.props.option.theme )
 

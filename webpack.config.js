@@ -163,7 +163,7 @@ const webpack = require( 'webpack' ),
           focusopt   : __dirname + '/src/option/focus.jsx',
           readopt    : __dirname + '/src/option/read.jsx',
 
-          theme1     : '../assets/css/theme1.css',
+          github     : '../assets/css/theme_github.css',
           theme2     : '../assets/css/theme2.css',
 
         }
