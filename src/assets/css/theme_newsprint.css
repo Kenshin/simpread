@@ -41,7 +41,7 @@ sr-rd-title {
     margin-bottom: 1em;
 
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1.5;
     font-weight: 500;
 
     color: #0077bb;
@@ -53,15 +53,18 @@ sr-rd-desc {
     color: rgba(102,128,153,0.6);
     background-color: rgba(102,128,153,0.075);
     border-radius: 4px;
+
+    margin-bottom: 1em;
+    padding: 0 15px;
+
     font-size: 20px;
-    padding: 5px;
     line-height: 1.5;
 }
 
 sr-rd-content {
     text-align: justify;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 1.5;
     color: #2C3E50;
 }
 
@@ -74,8 +77,8 @@ sr-rd-content div {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     color: #2C3E50;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 sr-rd-content a {
