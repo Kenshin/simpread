@@ -4,6 +4,7 @@ const mode = {
     chrome : "chrome",
     sogou  : "sogouExplorer",
 }
+let browser_type;
 
 /**
  * Chromium browser api adapter
@@ -13,12 +14,12 @@ const mode = {
 class Browser {
 
     /**
-     * adapter[read]
+     * Browser adapter[read]
      * 
      * @return {object} current chromium
      */
     get adapter() {
-        switch ( this.type ) {
+        switch ( browser_type ) {
             case mode.chrome:
                 return chrome;
             case mode.sogou:
@@ -26,8 +27,17 @@ class Browser {
         }
     }
 
+    /**
+     * Browser type[read]
+     * 
+     * @return {string} browser type @see mode
+     */
+    get type() {
+        return browser_type;
+    }
+
     constructor( type ) {
-        this.type = type;
+        browser_type = type;
     }
 
 }
