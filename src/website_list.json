@@ -68,6 +68,26 @@
             "[[/src=\\S+(zxcx-1)\\S+'/]]"
         ]
     },{
+        "name"    : "news.ifanr.com",
+        "url"     : "http://www.ifanr.com/news/",
+        "title"   : "<h1 class='c-single-normal__title'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "minapp.ifanr.com",
+        "url"     : "http://www.ifanr.com/minapp/",
+        "title"   : "<h1 class='c-single-normal__title'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            "[['<span>本文由知晓程序授权转载</span>']]",
+            "[[/src=\\S+(new_zx-1)\\S+'/]]",
+			"[[/src=\\S+(zxcx-qun-1)\\S+'/]]"
+        ]
+    },{
         "name"    : "app.ifanr.com",
         "url"     : "http://www.ifanr.com/app/",
         "title"   : "<title>",
@@ -460,6 +480,24 @@
             "[[/src=\\S+(ifeve500X150)\\S+'/]]"
         ]
     },{
+        "name"    : "translate.oschina.net",
+        "url"     : "https://www.oschina.net/translate/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "project.oschina.net",
+        "url"     : "https://www.oschina.net/p/",
+        "title"   : "[[{$('header.box').find('a').attr('title')}]]",
+        "desc"    : "",
+        "include" : "<div class='editor-viewer'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "my.oschina.net",
         "url"     : "https://my.oschina.net/*",
         "title"   : "<title>",
@@ -469,13 +507,14 @@
             ""
         ]
     },{
-        "name"    : "translate.oschina.net",
-        "url"     : "https://www.oschina.net/translate/",
-        "title"   : "<title>",
+        "name"    : "oschina.net",
+        "url"     : "https://www.oschina.net/news/*",
+        "title"   : "<h1>",
         "desc"    : "",
-        "include" : "<div class='content'>",
+        "include" : "<div class='editor-viewer'>",
         "exclude" : [
-            ""
+            "[[/src=\\S+(hot3)\\S+'/]]",
+			"<div class='thumb'>"
         ]
     },{
         "name"    : "geek.csdn.net",
@@ -524,6 +563,42 @@
         "title"   : "[[{$('.title h2').text()}]]",
         "desc"    : "",
         "include" : "<div id='contenttxt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "ruanyifeng.com",
+        "url"     : "http://www.ruanyifeng.com/blog/*",
+        "title"   : "<h1 id='page-title'>",
+        "desc"    : "",
+        "include" : "<div id='main-content'>",
+        "exclude" : [
+            "[['<p>（完）</p>']]"
+        ]
+    },{
+        "name"    : "v2ex.com",
+        "url"     : "https://www.v2ex.com/t/",
+        "title"   : "[[{$('.header h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='markdown_body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.cnblogs.com",
+        "url"     : "https://news.cnblogs.com/n/",
+        "title"   : "<div id='news_title'>",
+        "desc"    : "",
+        "include" : "<div id='news_body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "cnblogs.com",
+        "url"     : "http://www.cnblogs.com/*",
+        "title"   : "<a id='cb_post_title_url'>",
+        "desc"    : "",
+        "include" : "<div id='cnblogs_post_body'>",
         "exclude" : [
             ""
         ]
@@ -664,7 +739,7 @@
             "<div class='conserve-photo'>"
         ]
     },{
-        "name"    : "sina.com.cn",
+        "name"    : "news.sina.com.cn",
         "url"     : "http://news.sina.com.cn/*",
         "title"   : "<h1 id='artibodyTitle'>",
         "desc"    : "",
@@ -673,7 +748,7 @@
             ""
         ]
     },{
-        "name"    : "163.com",
+        "name"    : "news.163.com",
         "url"     : "http://news.163.com/*",
         "title"   : "<title>",
         "desc"    : "",
@@ -705,6 +780,47 @@
         "title"   : "<a class='p-name'>",
         "desc"    : "",
         "include" : "<div class='e-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "vgtime.com",
+        "url"     : "http://www.vgtime.com/article/",
+        "title"   : "<h1 class='art_max_width'>",
+        "desc"    : "",
+        "include" : "<div class='paragraph'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "keke289.com",
+        "url"     : "http://www.keke289.com/news/",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<section class='article-bd'>",
+        "exclude" : [
+            "<div class='article-annotation'>",
+			"[['<strong>关注科客网官方微信kekebat</strong>']]"
+        ]
+    },{
+        "name"    : "ebrun.com",
+        "url"     : "http://www.ebrun.com/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='contdiv'>",
+        "exclude" : [
+            "<p class='ybfirst_go'>",
+			"<div id='corp'>",
+			"[[/src=\\S+(2017013185214858280529103)\\S+'/]]",
+			"[['<span>百人讲新年纳新 588份精华课件免费赠</span>']]",
+			"[['<p>【版权提示】亿邦动力网倡导尊重与保护知识产权。</p>']]"
+        ]
+    },{
+        "name"    : "g-cores.com",
+        "url"     : "http://www.g-cores.com/articles/",
+        "title"   : "<h1 class='story_title'>",
+        "desc"    : "<p class='story_desc'>",
+        "include" : "<div class='story'>",
         "exclude" : [
             ""
         ]

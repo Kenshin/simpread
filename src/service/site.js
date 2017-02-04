@@ -41,7 +41,7 @@ function findSitebyURL( sites, url ) {
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
-        if ( !isroot() && cur == url ) {
+        if ( !isroot() && !cur.endsWith( "*" ) && cur == url ) {
             found = cur;
             break;
         }
@@ -219,6 +219,18 @@ async function specbeautify( name, $target ) {
             break;
         case "36kr.com":
             $target.find( ".load-html-img" ).removeAttr( "class" );
+            break;
+        case "cnblogs.com":
+            $target.find( ".cnblogs_code_toolbar" ).remove();
+            break;
+        case "news.cnblogs.com":
+            $target.find( ".topic_img" ).remove();
+            break;
+        case "g-cores.com":
+            $target.find( ".swiper-slide-active" ).find( "img" ).map( ( index, item ) => {
+                const $target = $(item);
+                $target.parent().parent().parent().parent().parent().parent().removeAttr( "class" ).removeAttr( "style" ).html($target);
+            });
             break;
     }
 }

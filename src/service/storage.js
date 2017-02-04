@@ -1,7 +1,8 @@
 console.log( "=== simpread storage load ===" )
 
 import "babel-polyfill";
-import * as st from 'site';
+import * as st   from 'site';
+import {browser} from 'browser';
 
 /**
  * Read and Write Chrome storage
@@ -11,7 +12,7 @@ import * as st from 'site';
 
 const name = "simpread",
     remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
-    local  = chrome.extension.getURL( "website_list.json" ),
+    local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
         read      : "read",
@@ -145,7 +146,7 @@ class Storage {
      * @param {function} callback
      */
     Get ( callback ) {
-        chrome.storage.local.get( [name], function( result ) {
+        browser.storage.local.get( [name], function( result ) {
             if ( result && !$.isEmptyObject( result )) {
                 simpread = result[name];
             }
@@ -238,26 +239,27 @@ function formatSites( result ) {
  * @return {boolean} true: update; false:not update
  */
 function addsites( sites ) {
-    const old  = new Map( simpread.sites ),
-          urls = [ ...old.keys() ];
-    let   update = false;
-    sites.map( ( site, index ) => {
+    const update   = new Map( simpread.sites ),
+          urls     = [ ...update.keys() ];
+    let   isupdate = false;
+    sites.map( ( site ) => {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
-            update = true;
+            isupdate = true;
         } else if ( urls.includes( site[0] ) && site[1].override ) {
-            simpread.sites.splice( index, 1, site );
-            update = true;
+            update.set( site[0], site[1] );
+            simpread.sites = [ ...update ];
+            isupdate = true;
         }
     });
-    return update;
+    return isupdate;
 }
 
 /**
  * Call chrome storage set
  */
 function save() {
-    chrome.storage.local.set( { [name] : simpread }, function() {
+    browser.storage.local.set( { [name] : simpread }, function() {
         console.log( "chrome storage save success!", simpread );
         origin   = clone( simpread );
     });
