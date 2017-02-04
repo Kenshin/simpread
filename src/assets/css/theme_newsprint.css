@@ -1,32 +1,102 @@
 
+/**
+ * Newsprint style
+ */
+
+/**
+ *Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
+ */
+
+sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{font-weight:bold}sr-rd-content h1{font-size:1.875em;line-height:1.6em;margin-top:2em}sr-rd-content h2,sr-rd-content h3{font-size:1.3125em;line-height:1.15;margin-top:2.285714em;margin-bottom:1.15em}sr-rd-content h3{font-weight:normal}sr-rd-content h4{font-size:1.125em;margin-top:2.67em}sr-rd-content h5,sr-rd-content h6{font-size:1em}sr-rd-content h1{border-bottom:1px solid;margin-bottom:1.875em;padding-bottom:.8125em}
+sr-rd-content ul,sr-rd-content ol{margin:0 0 1.5em 1.5em}sr-rd-content ol li{list-style-type:decimal;list-style-position:outside}sr-rd-content ul li{list-style-type:disc;list-style-position:outside}
+sr-rd-content code,sr-rd-content pre{background-color:#dadada;padding-left:1ch;padding-right:1ch}sr-rd-content pre{margin-left:2em;margin-bottom:3em}sr-rd-content pre,sr-rd-content code,sr-rd-content tt{font-size:.875em;line-height:1.714285em}
+sr-rd-content table{margin-bottom:1.5em;font-size:1em}sr-rd-content thead th,sr-rd-content tfoot th{padding:.25em .25em .25em .4em;text-transform:uppercase}sr-rd-content th{text-align:left}sr-rd-content td{vertical-align:top;padding:.25em .25em .25em .4em}
+sr-rd-content sr-blockquote {
+    display: block;
+    position: relative;
+    padding: 10px 15px;
+    border-left-style: solid;
+    border-left-width: 10px;
+    border-color: #D6DBDF;
+    background: none repeat scroll 0 0 rgba(102,128,153,.05);
+}
+
+sr-rd-content sr-blockquote:before {
+    content: '';
+    position: absolute;
+}
+
+/**
+ * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
+ */
+
 .sr-rd-theme-bg {
-    background-color: #fdf6e3;
+    background-color: #f3f2ee;
+    color: #2C3E50;
 }
 
 sr-rd-title {
-    font-family: "PT Sans","SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
+    font-family: PingFang SC,Hiragino Sans GB,Microsoft Yahei,WenQuanYi Micro Hei,sans-serif;
     text-rendering: optimizelegibility;
     margin-bottom: 1em;
 
-    font-size: 34px;
-    font-weight: 700;
-    line-height: 1.3;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+
+    color: #0077bb;
+    margin: 50px 0 20px;
+    font-size: 30px;
 }
 
 sr-rd-desc {
-    font-style:italic;
-    font-size:1.1em;
-    line-height:1.8em;
-    padding-left:1em;
-    border-left:4px solid #D5D5D5;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 1.5rem;
+    color: rgba(102,128,153,0.6);
+    font-style: normal;
+    font-weight: normal;
+    background-color: rgba(102,128,153,0.075);
+    border-radius: 4px;
+    color: rgba(102,128,153,0.6);
+    font-style: normal;
+    font-weight: normal;
 }
 
 sr-rd-content {
-    color: #2f2f2f;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.7;
+    text-align: justify;
+    font-size: 14px;
+    line-height: 20px;
+    color: #2C3E50;
+}
+
+sr-rd-content p,
+sr-rd-content div {
+    display: block;
+    float: inherit;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    color: #2C3E50;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+sr-rd-content a {
+    color: #08c;
+    text-decoration: none;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+    color: #5BA4E5;
+}
+
+sr-rd-content pre {
+    display: block;
+    font-family: "Source Code Pro", monospace;
+    line-height: 20px;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    border-radius: 4px;
 }
