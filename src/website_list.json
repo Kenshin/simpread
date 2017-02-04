@@ -480,7 +480,28 @@
             "[[/src=\\S+(ifeve500X150)\\S+'/]]"
         ]
     },{
+        "name"    : "translate.oschina.net",
+		"override": true,
+        "url"     : "https://www.oschina.net/translate/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "project.oschina.net",
+		"override": true,
+        "url"     : "https://www.oschina.net/p/",
+        "title"   : "[[{$('header.box').find('a').attr('title')}]]",
+        "desc"    : "",
+        "include" : "<div class='editor-viewer'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "my.oschina.net",
+		"override": true,
         "url"     : "https://my.oschina.net/*",
         "title"   : "<title>",
         "desc"    : "<div class='blog-abstract'>",
@@ -489,13 +510,14 @@
             ""
         ]
     },{
-        "name"    : "translate.oschina.net",
-        "url"     : "https://www.oschina.net/translate/",
-        "title"   : "<title>",
+        "name"    : "oschina.net",
+		"override": true,
+        "url"     : "https://www.oschina.net/news/*",
+        "title"   : "<h1>",
         "desc"    : "",
-        "include" : "<div class='content'>",
+        "include" : "<div class='editor-viewer'>",
         "exclude" : [
-            ""
+            "[[/src=\\S+(hot3.png)\\S+'/]]"
         ]
     },{
         "name"    : "geek.csdn.net",

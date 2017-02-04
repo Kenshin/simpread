@@ -41,7 +41,7 @@ function findSitebyURL( sites, url ) {
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
-        if ( !isroot() && cur == url ) {
+        if ( !isroot() && !cur.endsWith( "*" ) && cur == url ) {
             found = cur;
             break;
         }
