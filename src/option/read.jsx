@@ -22,7 +22,7 @@ export default class ReadOpt extends React.Component {
 
             // add test code
             if ( this.props.option.theme == "github" ) {
-                this.props.option.theme = "theme2";
+                this.props.option.theme = "newsprint";
             } else {
                 this.props.option.theme = "github";
             }

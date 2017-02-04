@@ -164,7 +164,7 @@ const webpack = require( 'webpack' ),
           readopt    : __dirname + '/src/option/read.jsx',
 
           github     : '../assets/css/theme_github.css',
-          theme2     : '../assets/css/theme2.css',
+          newsprint  : '../assets/css/theme_newsprint.css',
 
         }
       }

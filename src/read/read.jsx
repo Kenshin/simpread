@@ -55,8 +55,8 @@ class Read extends React.Component {
             case "github":
                require( "github" );
                break;
-            case "theme2":
-               require( "theme2" );
+            case "newsprint":
+               require( "newsprint" );
                break;
         }
     }
