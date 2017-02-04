@@ -508,7 +508,6 @@
         ]
     },{
         "name"    : "oschina.net",
-		"override": true,
         "url"     : "https://www.oschina.net/news/*",
         "title"   : "<h1>",
         "desc"    : "",
