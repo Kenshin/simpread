@@ -5,49 +5,28 @@ import Notify from 'notify';
 const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
 const themes = [
-    "235, 235, 235, 0.9",
-    "216, 216, 216, 0.9",
-    "229, 221, 208, 0.9",
-    "243, 234, 203, 0.9",
-    "176, 192, 182, 0.9",
-    "28, 31, 43, 0.9",
-    "61, 66, 70, 0.9",
-    "17, 18, 20, 0.9"
-    ];
+    "251, 251, 251,  1",
+    "243, 242, 238, 1",
+    "252, 252, 252, 1"
+    ],
+    themes_name = [ "github", "newsprint", "gothic" ];
 
 export default class ReadOpt extends React.Component {
 
     changeBgColor () {
         if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
-
-            // add test code
-            if ( this.props.option.theme == "github" ) {
-                this.props.option.theme = "newsprint";
-            } else {
-                this.props.option.theme = "github";
-            }
-            console.log( "this.props.option.theme = ", this.props.option.theme )
-
-            /*
             const target     = event.target,
                   $target    = $(target),
                   $parent    = $target.parent(),
                   activestyl = "active",
-                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' ),
-                  bgcolor    = $target.css( bgcolorstyl ),
-                  color      = getColor( bgcolor ),
-                  opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
-                  newval     = `rgba(${color}, ${opacity})`;
-
-            // set new background color
-            $( bgcls ).css( bgcolorstyl, newval );
-
-            // update active
+                  theme      = $target.attr( "name" ),
+                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' );
             if ( $active ) {
                 $active.removeAttr( "sr-type" );
                 $target.attr( "sr-type", activestyl );
             }
-            */
+            this.props.option.theme = theme;
+            console.log( "this.props.option.theme = ", this.props.option.theme )
         }
     }
 
@@ -98,7 +77,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>主题色：</sr-opt-label>
                     <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
-                        {themes.map( theme => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}}></sr-opt-theme> )}
+                        {themes.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ themes_name[idx] }></sr-opt-theme> )}
                     </sr-opt-themes>
                 </sr-opt-gp>
                 <sr-opt-gp>
