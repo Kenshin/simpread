@@ -59,6 +59,9 @@ class Read extends React.Component {
             case "newsprint":
                require( "newsprint" );
                break;
+            case "gothic":
+               require( "gothic" );
+               break;
         }
     }
 

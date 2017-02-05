@@ -165,6 +165,7 @@ const webpack = require( 'webpack' ),
 
           github     : '../assets/css/theme_github.css',
           newsprint  : '../assets/css/theme_newsprint.css',
+          gothic     : '../assets/css/theme_gothic.css',
 
         }
       }

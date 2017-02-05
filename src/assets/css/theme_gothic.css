@@ -1,0 +1,113 @@
+
+/**
+ * Gothic style
+ */
+
+/**
+ *Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
+ */
+
+sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{color:#111}sr-rd-content h1{font-weight:normal;line-height:4rem;margin:0 0 1.75rem;padding:20px 30px;text-align:center;text-transform:uppercase;margin-top:4rem}sr-rd-content h2{font-weight:normal;line-height:3rem;margin:0 0 1.9375rem;padding:0 30px;text-align:center;text-transform:uppercase;margin-top:3rem}sr-rd-content h3{font-weight:normal}sr-rd-content h4{font-weight:normal}sr-rd-content h5{font-size:1.125rem;font-weight:normal}sr-rd-content h6{font-size:1rem;font-weight:bold}
+sr-rd-content ul,sr-rd-content ol{list-style-type: disc;padding:0;margin-top:0;margin-bottom:0;margin-left: 3em;}sr-rd-content ol ol,sr-rd-content ul ol{list-style-type:lower-roman}sr-rd-content ul ul ol,sr-rd-content ul ol ol,sr-rd-content ol ul ol,sr-rd-content ol ol ol{list-style-type:lower-alpha}
+sr-rd-content pre{min-height:30px;background:#f8f8f8;padding:1.5em;font-weight:300;font-size:1em;padding-bottom:1.5em;padding-top:3em;margin-top:-1.5em;color:#999;border-left:1000px #f8f8f8 solid;margin-left:-1000px;border-right:1000px #f8f8f8 solid;margin-right:-1000px;margin-bottom:2em}sr-rd-content code{padding:.5em;padding:.1em;font-size:.9em;margin-left:.2em;margin-right:.2em}
+sr-rd-content table{margin-bottom:20px}sr-rd-content table th,sr-rd-content table td{padding:8px;line-height:1.25rem;vertical-align:top;border-top:1px solid #ddd}sr-rd-content table th{font-weight:bold}sr-rd-content table thead th{vertical-align:bottom}sr-rd-content table caption+thead tr:first-child th,sr-rd-content table caption+thead tr:first-child td,sr-rd-content table colgroup+thead tr:first-child th,sr-rd-content table colgroup+thead tr:first-child td,sr-rd-content table thead:first-child tr:first-child th,sr-rd-content table thead:first-child tr:first-child td{border-top:0}sr-rd-content table tbody+tbody{border-top:2px solid #ddd}
+sr-rd-content sr-blockquote {
+    display: block;
+    position: relative;
+	margin: 0 0 1.11111rem;
+	padding: 0.5rem 1.11111rem 0 1.05556rem;
+	border-left: 1px solid gray;
+}
+sr-rd-content sr-blockquote,
+sr-rd-content sr-blockquote p {
+	line-height: 1.6;
+	color: #6f6f6f;
+}
+
+sr-rd-content sr-blockquote:before {
+    content: '';
+    position: absolute;
+}
+
+/**
+ * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
+ */
+
+.sr-rd-theme-bg {
+    background: rgb(252, 252, 252);
+    color: #333;
+}
+
+sr-rd-title {
+    text-rendering: optimizelegibility;
+
+    margin: 4rem 0px 1.75rem;
+    margin-top: 2.75rem;
+    padding: 20px 30px;
+
+    font-weight: normal;
+    line-height: 4rem;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: rgb(17, 17, 17);
+    font-size: 2rem;
+}
+
+sr-rd-desc {
+    line-height: 1.6;
+    border-left: 1px solid gray;
+
+    margin: 0px 0px 1.11111rem;
+    padding: 0.5rem 1.11111rem 0px 1.05556rem;
+
+    color: rgb(111, 111, 111);
+}
+
+sr-rd-content {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #333;
+}
+
+sr-rd-content p,
+sr-rd-content div {
+    display: block;
+    float: inherit;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    color: rgb(17, 17, 17);
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0px 0px 1.25rem;
+}
+
+sr-rd-content a {
+    color: rgb(153, 0, 0);
+    text-decoration: none;
+    margin: 0 2px;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+    color: rgb(153, 0, 0);
+    text-decoration: underline;
+}
+
+sr-rd-content pre {
+    display: block;
+    font-family: "Source Code Pro", monospace;
+    line-height: 20px;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+
+    border: 1px solid #ccc;
+    background: transparent;
+    margin: 0px;
+}
