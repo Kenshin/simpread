@@ -30,15 +30,15 @@ class Read extends React.Component {
     }
 
     async componentDidMount() {
+        $root.addClass( theme ).find( rdclsjq ).addClass( theme );
+        if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
         if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "sr-rd-content-exclude" );
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
         await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
         await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
-        $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
-        if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
     }
 
     componentWillUnmount() {
