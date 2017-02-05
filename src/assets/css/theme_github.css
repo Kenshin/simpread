@@ -37,6 +37,7 @@ sr-rd-content sr-blockquote:before {
 
 .sr-rd-theme-bg {
     background-color: #fff;
+    color:#333;
 }
 
 sr-rd-title {
