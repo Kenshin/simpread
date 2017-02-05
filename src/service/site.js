@@ -235,6 +235,12 @@ async function specbeautify( name, $target ) {
         case "feng.com":
             $target.find( "span" ).removeAttr( "style" );
             break;
+        case "young.ifeng.com":
+            $target.find( "span" ).removeAttr( "style" );
+            break;
+        case "ftchinese.com":
+            $target.find( "script" ).remove();
+            break;
     }
 }
 
