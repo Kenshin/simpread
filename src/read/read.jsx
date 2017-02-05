@@ -30,6 +30,7 @@ class Read extends React.Component {
     }
 
     async componentDidMount() {
+        if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "sr-rd-content-exclude" );
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
         await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
         await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
