@@ -232,6 +232,9 @@ async function specbeautify( name, $target ) {
                 $target.parent().parent().parent().parent().parent().parent().removeAttr( "class" ).removeAttr( "style" ).html($target);
             });
             break;
+        case "feng.com":
+            $target.find( "span" ).removeAttr( "style" );
+            break;
     }
 }
 
