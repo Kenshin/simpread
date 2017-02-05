@@ -122,7 +122,7 @@ sr-dialog {
     display: -webkit-flex;
     flex-direction:column;
 
-    min-width: 300px;
+    min-width: 495px;
     min-height: 300px;
 
     padding: 20px;
@@ -304,6 +304,7 @@ sr-opt-item[sr-type="opacity"] input[type=range] {
     -webkit-appearance: none;
     width: 100%;
     margin: 6px 0;
+    border: none;
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range]:focus {
