@@ -78,12 +78,13 @@ sr-rd-content div {
     -webkit-margin-end: 0px;
     color: #2C3E50;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.8;
 }
 
 sr-rd-content a {
     color: #08c;
     text-decoration: none;
+    margin: 0 2px;
 }
 
 sr-rd-content a:hover,
