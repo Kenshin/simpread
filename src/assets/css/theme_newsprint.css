@@ -4,7 +4,7 @@
  */
 
 /**
- *Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
+ * Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
  */
 
 sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{font-weight:bold}sr-rd-content h1{font-size:1.875em;line-height:1.6em;margin-top:2em}sr-rd-content h2,sr-rd-content h3{font-size:1.3125em;line-height:1.15;margin-top:2.285714em;margin-bottom:1.15em}sr-rd-content h3{font-weight:normal}sr-rd-content h4{font-size:1.125em;margin-top:2.67em}sr-rd-content h5,sr-rd-content h6{font-size:1em}sr-rd-content h1{border-bottom:1px solid;margin-bottom:1.875em;padding-bottom:.8125em}
@@ -12,8 +12,6 @@ sr-rd-content ul,sr-rd-content ol{margin:0 0 1.5em 1.5em}sr-rd-content ol li{lis
 sr-rd-content code,sr-rd-content pre{padding-left:1ch;padding-right:1ch}sr-rd-content pre{margin-left:2em;margin-bottom:3em}sr-rd-content pre,sr-rd-content code,sr-rd-content tt{font-size:.875em;line-height:1.714285em}
 sr-rd-content table{margin-bottom:1.5em;font-size:1em}sr-rd-content thead th,sr-rd-content tfoot th{padding:.25em .25em .25em .4em;text-transform:uppercase}sr-rd-content th{text-align:left}sr-rd-content td{vertical-align:top;padding:.25em .25em .25em .4em}
 sr-rd-content sr-blockquote {
-    display: block;
-    position: relative;
     padding: 10px 15px;
     border-left-style: solid;
     border-left-width: 10px;
@@ -23,7 +21,6 @@ sr-rd-content sr-blockquote {
 
 sr-rd-content sr-blockquote:before {
     content: '';
-    position: absolute;
 }
 
 /**
@@ -37,7 +34,6 @@ sr-rd-content sr-blockquote:before {
 
 sr-rd-title {
     font-family: PingFang SC,Hiragino Sans GB,Microsoft Yahei,WenQuanYi Micro Hei,sans-serif;
-    text-rendering: optimizelegibility;
     margin-bottom: 1em;
 
     font-size: 14px;
@@ -62,7 +58,6 @@ sr-rd-desc {
 }
 
 sr-rd-content {
-    text-align: justify;
     font-size: 16px;
     line-height: 1.5;
     color: #2C3E50;
@@ -70,12 +65,6 @@ sr-rd-content {
 
 sr-rd-content p,
 sr-rd-content div {
-    display: block;
-    float: inherit;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
     color: #2C3E50;
     font-size: 16px;
     line-height: 1.8;
@@ -84,7 +73,6 @@ sr-rd-content div {
 sr-rd-content a {
     color: #08c;
     text-decoration: none;
-    margin: 0 2px;
 }
 
 sr-rd-content a:hover,
@@ -94,11 +82,6 @@ sr-rd-content a:active {
 }
 
 sr-rd-content pre {
-    display: block;
-    font-family: "Source Code Pro", monospace;
     line-height: 20px;
-    word-break: break-all;
-    word-wrap: break-word;
-    white-space: pre-wrap;
     border-radius: 4px;
 }

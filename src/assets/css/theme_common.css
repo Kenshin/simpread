@@ -1,0 +1,57 @@
+
+
+/**
+ * Common style, include:
+ * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, sr-blockquote
+ */
+
+sr-rd-title, sr-rd-desc, sr-rd-content {
+    width: 100%;
+}
+
+sr-rd-title {
+    text-rendering: optimizelegibility;
+}
+
+sr-rd-content {
+    text-align: justify;
+}
+
+sr-rd-content p,
+sr-rd-content div {
+    display: block;
+    float: inherit;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+sr-rd-content a {
+    margin: 0 2px;
+}
+
+sr-rd-content pre {
+    display: block;
+    font-family: "Source Code Pro", monospace;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+sr-rd-content img {
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #bbb;
+    box-shadow: 1px 1px 3px #d4d4d4;
+}
+
+sr-rd-content sr-blockquote {
+    display: block;
+    position: relative;
+}
+
+sr-rd-content sr-blockquote:before {
+    position: absolute;
+}
