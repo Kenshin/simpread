@@ -63,6 +63,17 @@ class Read extends React.Component {
                require( "gothic" );
                break;
         }
+        ////////////////////
+        /*const theme = this.props.read.theme
+        $( "head" ).find( "style" ).map( (index, item) => {
+            const $target = $(item),
+                css     = $target.text();
+            if ( css.startsWith( "sr-rd-theme-" ) && !css.startsWith( `sr-rd-theme-${theme}` ) ) {
+                //console.log(theme, $target[0])
+                $target.remove();
+            }
+        });*/
+        ////////////////////
     }
 
    // exit read mode
