@@ -60,7 +60,7 @@ export default class ReadOpt extends React.Component {
     }
 
     componentDidMount() {
-        //setBgThemeStyle( this.props.option.bgcolor );
+        setBgThemeStyle( this.props.option.theme );
         this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
         this.refs.include.value   = this.props.option.site.include;
@@ -183,22 +183,19 @@ function updateShortcuts() {
 /**
  * Set background style
  * 
- * @param {string} background color
+ * @param {string} theme name
  */
-/*
-function setBgThemeStyle( bgcolor ) {
-    const $themes    = $( "sr-opt-themes" ).children(),
-          newcolor   = getColor( bgcolor );
+function setBgThemeStyle( theme ) {
+    const $themes    = $( "sr-opt-themes" ).children();
 
     for ( let i = 0; i < $themes.length; i++ ) {
          const $target = $($themes[i]),
-               color   = getColor( $target.css( "background-color" ));
-         if ( newcolor === color ) {
+               name    = $target.attr( "name" );
+         if ( theme === name ) {
              $target.attr( "sr-type", "active" );
          }
     }
 }
-*/
 
 /**
  * Fix keyboard event key undefinde
