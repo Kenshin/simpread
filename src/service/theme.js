@@ -1,17 +1,13 @@
 console.log( "=== simpread theme load ===" )
 
-import 'github';
-import 'newsprint';
-import 'gothic';
-
-const flag   = "sr-rd-theme-",
+const names  = [ "github", "newsprint", "gothic" ],
+      flag   = "sr-rd-theme-",
       themes = {},
       colors = [
         "251, 251, 251,  1",
         "243, 242, 238, 1",
         "252, 252, 252, 1"
-       ],
-       names = [ "github", "newsprint", "gothic" ];
+       ];
 
 let curtheme = "";
 
@@ -58,18 +54,14 @@ class Theme {
     Change( theme ) {
         curtheme = theme;
         findThemeStyle( function( name, css, $target ) {
-            if ( name == theme ) {
-                $target.html( themes[theme] );
-            } else {
-                $target.html( `${flag}${name}` + "{}" );
-            }
+            if ( name == theme )  $target.html( themes[theme] );
+            else                  $target.html( `${flag}${name}` + "{}" );
         });
     }
 
     constructor() {
-        findThemeStyle( function( name, content ) {
-            themes[name] = content;
-        });
+        for ( const name of names ) { require( `../assets/css/theme_${name}.css` ); }
+        findThemeStyle( function( name, content ) { themes[name] = content; });
     }
 }
 

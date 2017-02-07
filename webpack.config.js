@@ -164,10 +164,6 @@ const webpack = require( 'webpack' ),
           focusopt   : __dirname + '/src/option/focus.jsx',
           readopt    : __dirname + '/src/option/read.jsx',
 
-          github     : '../assets/css/theme_github.css',
-          newsprint  : '../assets/css/theme_newsprint.css',
-          gothic     : '../assets/css/theme_gothic.css',
-
         }
       }
 
