@@ -61,8 +61,8 @@ export default class Dialog extends React.Component {
  */
 function rollback() {
     storage.Restore( storage.current.mode );
-    $( ".ks-simpread-bg" ).css({ "background-color" : storage.current.bgcolor });
-    if ( th.theme != storage.current.theme ) th.Change( storage.current.theme );
+    if ( storage.current.mode == STORAGE_MODE.focus ) $( ".ks-simpread-bg" ).css({ "background-color" : storage.current.bgcolor });
+    if ( storage.current.mode == STORAGE_MODE.read && th.theme != storage.current.theme ) th.Change( storage.current.theme );
 }
 
 /**
