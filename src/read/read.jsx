@@ -10,12 +10,6 @@ import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
 
-/*
-import 'github';
-import 'newsprint';
-import 'gothic';
-*/
-
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
@@ -36,22 +30,6 @@ class Read extends React.Component {
     componentWillMount() {
         $( "body" ).addClass( "ks-simpread-body-hide" );
         th.Change( this.props.read.theme );
-        /*
-        const theme = this.props.read.theme;
-        $( "head" ).find( "style" ).map( (index, item) => {
-            const $target = $(item),
-                  css     = $target.text();
-            if ( css.startsWith( "sr-rd-theme-" ) ) {
-                const arr  = css.replace( "sr-rd-theme-", "" ).match( /\w+/ ),
-                      name = arr[ arr.length - 1 ];
-                if ( name == theme ) {
-                    $target.html( themes[theme] );
-                } else {
-                    $target.html( `sr-rd-theme-${name}` + "{}" );
-                }
-            }
-        });
-        */
     }
 
     async componentDidMount() {
@@ -73,24 +51,6 @@ class Read extends React.Component {
         $( rdclsjq ).one( "animationend webkitAnimationEnd", () => {
             $( rdclsjq ).remove();
         });
-    }
-
-    constructor( props ) {
-        super( props );
-        /*
-        const theme = this.props.read.theme
-        if ( $.isEmptyObject( themes ) ) {
-            $( "head" ).find( "style" ).map( (index, item) => {
-                const $target = $(item),
-                    css     = $target.text();
-                if ( css.startsWith( "sr-rd-theme-" ) ) {
-                    const arr  = css.replace( "sr-rd-theme-", "" ).match( /\w+/ ),
-                        name = arr[ arr.length - 1 ];
-                    themes[name] = css;
-                }
-            });
-        }
-        */
     }
 
    // exit read mode
