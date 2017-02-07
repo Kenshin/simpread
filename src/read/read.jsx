@@ -83,7 +83,6 @@ class Read extends React.Component {
                 }
             });
         }
-        console.log(themes)
     }
 
    // exit read mode
