@@ -1,15 +1,19 @@
 console.log( "===== simpread option read mode load =====" )
 
 import Notify from 'notify';
+import th     from 'theme';
 
 const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
+
+/*
 const themes = [
     "251, 251, 251,  1",
     "243, 242, 238, 1",
     "252, 252, 252, 1"
     ],
     themes_name = [ "github", "newsprint", "gothic" ];
+*/
 
 export default class ReadOpt extends React.Component {
 
@@ -26,6 +30,7 @@ export default class ReadOpt extends React.Component {
                 $target.attr( "sr-type", activestyl );
             }
             this.props.option.theme = theme;
+            th.Change( this.props.option.theme );
             console.log( "this.props.option.theme = ", this.props.option.theme )
         }
     }
@@ -77,7 +82,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>主题色：</sr-opt-label>
                     <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
-                        {themes.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ themes_name[idx] }></sr-opt-theme> )}
+                        {th.colors.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ th.names[idx] }></sr-opt-theme> )}
                     </sr-opt-themes>
                 </sr-opt-gp>
                 <sr-opt-gp>
