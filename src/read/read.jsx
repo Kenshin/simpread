@@ -71,19 +71,6 @@ class Read extends React.Component {
 
     constructor( props ) {
         super( props );
-        /*
-        switch ( this.props.read.theme ) {
-            case "github":
-               require( "github" );
-               break;
-            case "newsprint":
-               require( "newsprint" );
-               break;
-            case "gothic":
-               require( "gothic" );
-               break;
-        }
-        */
         const theme = this.props.read.theme
         if ( $.isEmptyObject( themes ) ) {
             $( "head" ).find( "style" ).map( (index, item) => {
