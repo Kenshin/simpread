@@ -5,7 +5,13 @@ import 'newsprint';
 import 'gothic';
 
 const flag   = "sr-rd-theme-",
-      themes = {};
+      themes = {},
+      color  = [
+        "251, 251, 251,  1",
+        "243, 242, 238, 1",
+        "252, 252, 252, 1"
+       ],
+       names = [ "github", "newsprint", "gothic" ];
 
 /**
  * Theme class
@@ -14,6 +20,14 @@ const flag   = "sr-rd-theme-",
  */
 
 class Theme {
+
+    get colors() {
+        return  color;
+    }
+
+    get names() {
+        return names;
+    }
 
     /**
      * Change theme
