@@ -6,15 +6,6 @@ import th     from 'theme';
 const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
 
-/*
-const themes = [
-    "251, 251, 251,  1",
-    "243, 242, 238, 1",
-    "252, 252, 252, 1"
-    ],
-    themes_name = [ "github", "newsprint", "gothic" ];
-*/
-
 export default class ReadOpt extends React.Component {
 
     changeBgColor () {
