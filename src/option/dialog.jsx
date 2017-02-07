@@ -6,6 +6,7 @@ import ReadOpt   from 'readopt';
 import { storage, STORAGE_MODE } from 'storage';
 import * as msg  from 'message';
 import {browser} from 'browser';
+import th        from 'theme';
 
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`;
@@ -61,6 +62,7 @@ export default class Dialog extends React.Component {
 function rollback() {
     storage.Restore( storage.current.mode );
     $( ".ks-simpread-bg" ).css({ "background-color" : storage.current.bgcolor });
+    if ( th.theme != storage.current.theme ) th.Change( storage.current.theme );
 }
 
 /**
