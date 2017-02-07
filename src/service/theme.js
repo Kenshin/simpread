@@ -1,3 +1,4 @@
+console.log( "=== simpread theme load ===" )
 
 import 'github';
 import 'newsprint';
