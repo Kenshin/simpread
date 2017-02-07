@@ -13,6 +13,8 @@ const flag   = "sr-rd-theme-",
        ],
        names = [ "github", "newsprint", "gothic" ];
 
+let curtheme = "";
+
 /**
  * Theme class
  * 
@@ -29,12 +31,17 @@ class Theme {
         return names;
     }
 
+    get theme() {
+        return curtheme;
+    }
+
     /**
      * Change theme
      * 
      * @param {string} theme name
      */
     Change( theme ) {
+        curtheme = theme;
         findThemeStyle( function( name, css, $target ) {
             if ( name == theme ) {
                 $target.html( themes[theme] );
