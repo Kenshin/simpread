@@ -6,7 +6,7 @@ import 'gothic';
 
 const flag   = "sr-rd-theme-",
       themes = {},
-      color  = [
+      colors = [
         "251, 251, 251,  1",
         "243, 242, 238, 1",
         "252, 252, 252, 1"
@@ -29,7 +29,7 @@ class Theme {
      * @return {array} theme colors
      */
     get colors() {
-        return  color;
+        return  colors;
     }
 
     /**
@@ -61,7 +61,7 @@ class Theme {
             if ( name == theme ) {
                 $target.html( themes[theme] );
             } else {
-                $target.html( `sr-rd-theme-${name}` + "{}" );
+                $target.html( `${flag}${name}` + "{}" );
             }
         });
     }
