@@ -14,8 +14,7 @@ const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
       $root   = $( "html" ),
-      theme   = `sr-rd-theme-bg`,
-      themes  = {};
+      theme   = `sr-rd-theme-bg`;
 
 const errorpage = `
         <sr-rd-content-error>
