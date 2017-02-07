@@ -8,10 +8,13 @@ import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
 import * as st            from 'site';
+import th                 from 'theme';
 
+/*
 import 'github';
 import 'newsprint';
 import 'gothic';
+*/
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -32,6 +35,8 @@ class Read extends React.Component {
 
     componentWillMount() {
         $( "body" ).addClass( "ks-simpread-body-hide" );
+        th.Change( this.props.read.theme );
+        /*
         const theme = this.props.read.theme;
         $( "head" ).find( "style" ).map( (index, item) => {
             const $target = $(item),
@@ -46,6 +51,7 @@ class Read extends React.Component {
                 }
             }
         });
+        */
     }
 
     async componentDidMount() {
@@ -71,6 +77,7 @@ class Read extends React.Component {
 
     constructor( props ) {
         super( props );
+        /*
         const theme = this.props.read.theme
         if ( $.isEmptyObject( themes ) ) {
             $( "head" ).find( "style" ).map( (index, item) => {
@@ -83,6 +90,7 @@ class Read extends React.Component {
                 }
             });
         }
+        */
     }
 
    // exit read mode
