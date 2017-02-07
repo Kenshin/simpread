@@ -23,14 +23,29 @@ let curtheme = "";
 
 class Theme {
 
+    /**
+     * Theme colors[read]
+     * 
+     * @return {array} theme colors
+     */
     get colors() {
         return  color;
     }
 
+    /**
+     * Theme names[read]
+     * 
+     * @return {array} theme name array
+     */
     get names() {
         return names;
     }
 
+    /**
+     * Current theme name[read]
+     * 
+     * @return {string} theme name
+     */
     get theme() {
         return curtheme;
     }
