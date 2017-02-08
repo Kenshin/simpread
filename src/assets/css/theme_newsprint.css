@@ -85,4 +85,5 @@ sr-rd-content a:active {
 sr-rd-content pre {
     line-height: 20px;
     border-radius: 4px;
+    background-color: rgb(218, 218, 218);
 }
