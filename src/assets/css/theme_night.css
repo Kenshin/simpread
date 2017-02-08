@@ -1,0 +1,83 @@
+sr-rd-theme-night{display:none;}
+
+/**
+ * Night style
+ */
+
+/**
+ * Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
+ */
+
+sr-rd-content h1{margin-top:2em}sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{color:#dedede}
+sr-rd-content ul,sr-rd-content ol{padding:0 0 0 1.875rem}sr-rd-content ul{list-style:square}sr-rd-content ol{list-style:decimal}sr-rd-content ul ul,sr-rd-content ol ol,sr-rd-content ul ol,sr-rd-content ol ul{margin:0}sr-rd-content li div{padding-top:0}sr-rd-content li p,sr-rd-content li{margin:0;position:relative}
+sr-rd-content pre,sr-rd-content pre code,{background:rgba(0,0,0,0.05);font-size:.9rem}sr-rd-content p code,sr-rd-content li code{padding:2px 5px;background:rgba(0,0,0,0.05);font-size:.875rem;text-align:left}
+sr-rd-content table{max-width:100%;width:100%;border-collapse:collapse;border-spacing:0}sr-rd-content th,sr-rd-content td{padding:5px 10px;vertical-align:top}sr-rd-content table a{color:#dedede}sr-rd-content th,sr-rd-content td{border:solid 1px #474d54}
+sr-blockquote{
+    padding-left: 1.875rem;
+    margin: 0 0 1.875rem 1.875rem;
+    border-left: solid 2px #474d54;
+    padding-left: 30px;
+    margin-top: 35px;
+}
+
+/**
+ * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
+ */
+
+.sr-rd-theme-bg {
+    font-size: 16px;
+    background: rgb(54, 59, 64);
+    color: #b8bfc6;
+}
+
+sr-rd-title {
+    color: #DEDEDE;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1.5px;
+}
+
+sr-rd-desc {
+    color: #b8bfc6;
+    padding-left: 1.875rem;
+    margin: 0 0 1.875rem 1.875rem;
+    border-left: solid 2px #474d54;
+    padding-left: 30px;
+    margin-top: 35px;
+}
+
+sr-rd-content {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #b8bfc6;
+}
+
+sr-rd-content *,
+sr-rd-content p,
+sr-rd-content div {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #b8bfc6;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+sr-rd-content a {
+    color: #e0e0e0;
+    text-decoration: underline;
+    transition: all .2s ease-in-out;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+    color: #fff;
+}
+
+sr-rd-content pre {
+    padding: 10px 30px;
+    margin-bottom: 20px;
+    border: 1px solid;
+    font-size: 0.9rem;
+}
