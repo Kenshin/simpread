@@ -1,0 +1,75 @@
+sr-rd-theme-monospace{display:none;}
+
+/**
+ * Monospace style
+ */
+
+/**
+ * Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
+ */
+
+sr-rd-content h1{font-size:2rem}sr-rd-content h2{font-size:1.8rem}sr-rd-content h3{font-size:1.6rem}sr-rd-content h4{font-size:1.4rem}sr-rd-content h5{font-size:1.2rem}sr-rd-content h6{font-size:1rem}
+sr-rd-content ul,sr-rd-content ol{padding-left:30px}sr-rd-content ul:first-child,sr-rd-content ol:first-child{margin-top:0}sr-rd-content ul:last-child,sr-rd-content ol:last-child{margin-bottom:0}sr-rd-content li{margin:0;position:relative;line-height:1.8;}
+sr-rd-content pre,sr-rd-content pre code,{border-radius:0;border-width:0;background:0;border:0;margin:0}sr-rd-content p code,sr-rd-content li code{border:1px solid #ddd;background-color:#f8f8f8;border-radius:3px;padding:2px 4px 0 4px;font-size:.9em}
+sr-rd-content table{padding:0;word-break:initial}sr-rd-content table tr{border-top:1px solid #ccc;background-color:white;margin:0;padding:0}sr-rd-content table tr:nth-child(2n){background-color:#f8f8f8}sr-rd-content table tr th{font-weight:bold;border:1px solid #ccc;text-align:left;margin:0;padding:6px 13px}sr-rd-content table tr td{border:1px solid #ccc;text-align:left;margin:0;padding:6px 13px}sr-rd-content table tr th:first-child,sr-rd-content table tr td:first-child{margin-top:0}sr-rd-content table tr th:last-child,sr-rd-content table tr td:last-child{margin-bottom:0}
+sr-blockquote{
+    border-left: 4px solid #dddddd;
+    padding: 0 15px;
+    margin: 0.8em 0;
+    color: #777777;
+}
+
+/**
+ * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
+ */
+
+.sr-rd-theme-bg {
+    font-size: 14px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(51, 51, 51);
+}
+
+sr-rd-title {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+
+sr-rd-desc {
+    font-size: 14px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(51, 51, 51);
+}
+
+sr-rd-content {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: rgb(51, 51, 51);
+}
+
+sr-rd-content *,
+sr-rd-content p,
+sr-rd-content div {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin: 0.8em 0;
+}
+
+sr-rd-content a {
+    color: #4183C4;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+    color: #4183C4;
+}
+
+sr-rd-content pre {
+    margin: 0px;
+    padding: 2px 4px 0px 4px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    font-size: inherit;
+}
