@@ -42,6 +42,7 @@ sr-rd-desc {
     margin: 1rem 0px;
     padding: 1.33em;
     font-style: italic;
+    font-size: 1.3rem;
     border-left: 5px solid rgb(122, 122, 122);
     color: rgb(85, 85, 85);
 }
