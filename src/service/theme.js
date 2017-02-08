@@ -1,6 +1,6 @@
 console.log( "=== simpread theme load ===" )
 
-const names  = [ "github", "newsprint", "gothic", "engwrite", "octopress", "pixyii", "monospace", "night" ],
+const names  = [ "github", "newsprint", "gothic", "engwrite", "octopress", "pixyii", "monospace", "night", "dark" ],
       flag   = "sr-rd-theme-",
       themes = {},
       colors = [
@@ -11,7 +11,8 @@ const names  = [ "github", "newsprint", "gothic", "engwrite", "octopress", "pixy
         "248, 248, 248, 1",
         "255, 255, 255, 1",
         "255, 255, 255, 1",
-        "54,  59,  64,  1"
+        "54,  59,  64,  1",
+        "34,  34,  34,  1"
        ];
 
 let curtheme = "";
