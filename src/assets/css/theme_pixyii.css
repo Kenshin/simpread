@@ -62,7 +62,8 @@ sr-rd-content div {
     font-weight: 300;
 }
 
-sr-rd-content a {
+sr-rd-content a,
+sr-rd-content a:link {
     color: rgb(70, 63, 92);
     text-decoration: underline;
 }

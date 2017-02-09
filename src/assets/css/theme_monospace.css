@@ -57,7 +57,8 @@ sr-rd-content div {
     margin: 0.8em 0;
 }
 
-sr-rd-content a {
+sr-rd-content a,
+sr-rd-content a:link {
     color: #4183C4;
 }
 

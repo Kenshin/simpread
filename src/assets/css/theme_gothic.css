@@ -72,7 +72,8 @@ sr-rd-content div {
     margin: 0px 0px 1.25rem;
 }
 
-sr-rd-content a {
+sr-rd-content a,
+sr-rd-content a:link {
     color: rgb(153, 0, 0);
     text-decoration: none;
 }

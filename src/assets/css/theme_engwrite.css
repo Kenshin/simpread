@@ -54,7 +54,8 @@ sr-rd-content div {
     line-height: 1.8;
 }
 
-sr-rd-content a {
+sr-rd-content a,
+sr-rd-content a:link {
     color: rgb(174, 55, 55);
     text-decoration: none;
 }

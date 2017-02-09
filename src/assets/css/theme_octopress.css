@@ -62,7 +62,8 @@ sr-rd-content div {
     vertical-align: baseline;
 }
 
-sr-rd-content a {
+sr-rd-content a,
+sr-rd-content a:link {
     color: #1863a1;
 }
 

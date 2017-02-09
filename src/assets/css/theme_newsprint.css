@@ -70,7 +70,8 @@ sr-rd-content div {
     line-height: 1.8;
 }
 
-sr-rd-content a {
+sr-rd-content a,
+sr-rd-content a:link {
     color: #08c;
     text-decoration: none;
 }
