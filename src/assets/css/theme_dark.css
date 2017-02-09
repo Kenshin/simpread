@@ -43,10 +43,12 @@ sr-rd-title {
 
 sr-rd-desc {
     background-color: rgba(128, 128, 128, 0.05);
+    color: rgb(235, 235, 235);
+    padding: 0 20px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 0 20px;
     border-left: 8px solid #979797;
+    text-align: left;
 }
 
 sr-rd-content {
