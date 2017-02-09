@@ -18,6 +18,10 @@ sr-rd-content {
     text-align: justify;
 }
 
+sr-rd-desc {
+    text-align: left;
+}
+
 sr-rd-content p,
 sr-rd-content div {
     display: block;
@@ -51,6 +55,7 @@ sr-rd-content img {
 sr-rd-content sr-blockquote {
     display: block;
     position: relative;
+    text-align: left;
 }
 
 sr-rd-content sr-blockquote:before {

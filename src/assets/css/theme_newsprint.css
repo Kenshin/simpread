@@ -18,6 +18,7 @@ sr-rd-content sr-blockquote {
     border-left-width: 10px;
     border-color: #D6DBDF;
     background: none repeat scroll 0 0 rgba(102,128,153,.05);
+    text-align: left;
 }
 
 sr-rd-content sr-blockquote:before {
@@ -53,6 +54,7 @@ sr-rd-desc {
 
     font-size: 20px;
     line-height: 1.5;
+    text-align: center;
 }
 
 sr-rd-content {

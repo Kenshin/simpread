@@ -13,7 +13,6 @@ sr-rd-content ul,sr-rd-content ol{padding:0 0 0 1.875rem}sr-rd-content ul{list-s
 sr-rd-content pre,sr-rd-content pre code,{background:rgba(0,0,0,0.05);font-size:.9rem}sr-rd-content p code,sr-rd-content li code{padding:2px 5px;background:rgba(0,0,0,0.05);font-size:.875rem;text-align:left}
 sr-rd-content table{max-width:100%;width:100%;border-collapse:collapse;border-spacing:0}sr-rd-content th,sr-rd-content td{padding:5px 10px;vertical-align:top}sr-rd-content table a{color:#dedede}sr-rd-content th,sr-rd-content td{border:solid 1px #474d54}
 sr-blockquote{
-    padding-left: 1.875rem;
     margin: 0 0 1.875rem 1.875rem;
     border-left: solid 2px #474d54;
     padding-left: 30px;
@@ -43,7 +42,6 @@ sr-rd-desc {
     margin: 0 0 1.875rem 1.875rem;
     margin-top: 35px;
     padding-left: 1.875rem;
-    text-align: left;
 }
 
 sr-rd-content {
