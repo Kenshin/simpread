@@ -31,9 +31,9 @@ sr-blockquote{
 }
 
 sr-rd-title {
-    padding-bottom: .3em;
     font-size: 2.25em;
     line-height: 1.2;
+    padding-bottom: .3em;
     border-bottom: 1px solid #eee;
 }
 

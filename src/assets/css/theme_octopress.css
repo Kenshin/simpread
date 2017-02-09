@@ -30,10 +30,6 @@ sr-blockquote{
 }
 
 sr-rd-title {
-    padding-top: 1em;
-    padding-bottom: 0.2em;
-    margin-bottom: 1em;
-    text-rendering: optimizelegibility;
     font-size: 2.2em;
     line-height: 1.2em;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIW…sTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC) bottom left repeat-x;

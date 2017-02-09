@@ -35,14 +35,11 @@ sr-rd-content sr-blockquote:before {
 
 sr-rd-title {
     font-family: PingFang SC,Hiragino Sans GB,Microsoft Yahei,WenQuanYi Micro Hei,sans-serif;
-    margin-bottom: 1em;
 
-    font-size: 14px;
     line-height: 1.5;
     font-weight: 500;
 
     color: #0077bb;
-    margin: 50px 0 20px;
     font-size: 30px;
 }
 

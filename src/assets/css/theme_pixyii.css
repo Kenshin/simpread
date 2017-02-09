@@ -31,11 +31,10 @@ sr-blockquote{
 }
 
 sr-rd-title {
-    font-size: 3rem;
     font-family: Lato, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 3rem;
     font-weight: 900;
     line-height: 1.2;
-    margin: 1em 0px 0.5em;
 }
 
 sr-rd-desc {

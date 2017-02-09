@@ -11,6 +11,7 @@ sr-rd-title, sr-rd-desc, sr-rd-content {
 
 sr-rd-title {
     text-rendering: optimizelegibility;
+    margin: 1em 0px 0.5em;
 }
 
 sr-rd-content {

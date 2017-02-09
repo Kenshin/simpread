@@ -38,10 +38,6 @@ sr-rd-content sr-blockquote:before {
 }
 
 sr-rd-title {
-    margin: 4rem 0px 1.75rem;
-    margin-top: 2.75rem;
-    padding: 20px 30px;
-
     font-weight: normal;
     line-height: 4rem;
     text-align: center;
