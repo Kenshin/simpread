@@ -40,11 +40,11 @@ sr-rd-title {
 
 sr-rd-desc {
     color: #b8bfc6;
-    padding-left: 1.875rem;
-    margin: 0 0 1.875rem 1.875rem;
     border-left: solid 2px #474d54;
-    padding-left: 30px;
+    margin: 0 0 1.875rem 1.875rem;
     margin-top: 35px;
+    padding-left: 1.875rem;
+    text-align: left;
 }
 
 sr-rd-content {
