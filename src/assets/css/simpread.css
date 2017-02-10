@@ -561,15 +561,16 @@ sr-rd-footer p {
     color: #787878;
 }
 
-sr-rd-footer p a {
+sr-rd-footer p a,
+sr-rd-footer p a:link {
     text-decoration: none;
     color: #787878;
     font-size: 17px;
 }
 
-sr-rd-content a:hover,
-sr-rd-content a:focus,
-sr-rd-content a:active {
+sr-rd-footer p a:hover,
+sr-rd-footer p a:focus,
+sr-rd-footer a:active {
     color: #787878;
     text-decoration: underline;
 }
