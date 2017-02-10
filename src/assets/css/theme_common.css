@@ -61,3 +61,7 @@ sr-rd-content sr-blockquote {
 sr-rd-content sr-blockquote:before {
     position: absolute;
 }
+
+sr-rd-content table {
+    width: 100%;
+}
