@@ -8,10 +8,9 @@ sr-rd-theme-night{display:none;}
  * Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
  */
 
-sr-rd-content h1{margin-top:2em}sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{color:#dedede}
+sr-rd-content h1{margin-top:2em}sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{color:#dedede}sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{font-family:Lucida Grande,Corbal,Georgia,serif;font-weight:400;clear:both;-ms-word-wrap:break-word;word-wrap:break-word;margin:0;padding:0}sr-rd-content h1{font-size:3.6rem;line-height:4rem;margin-bottom:2.4rem;letter-spacing:-1.5px}sr-rd-content h2{font-size:2.4rem;line-height:3rem}sr-rd-content h2,sr-rd-content h3{margin-bottom:2.4rem;letter-spacing:-1px}sr-rd-content h3{font-size:1.8rem;line-height:2.4rem}sr-rd-content h4{font-size:1.6rem;line-height:2.2rem;margin-bottom:2.4rem}sr-rd-content h5{font-size:1rem;line-height:1.25rem;margin-bottom:1.5rem}sr-rd-content h6{font-size:1.6rem;line-height:1.6rem;margin-bottom:.75rem;font-weight:700}
 sr-rd-content ul,sr-rd-content ol{padding:0 0 0 1.875rem}sr-rd-content ul{list-style:square}sr-rd-content ol{list-style:decimal}sr-rd-content ul ul,sr-rd-content ol ol,sr-rd-content ul ol,sr-rd-content ol ul{margin:0}sr-rd-content li div{padding-top:0}sr-rd-content li p,sr-rd-content li{margin:0;position:relative}
-sr-rd-content pre,sr-rd-content pre code,{background:rgba(0,0,0,0.05);font-size:.9rem}sr-rd-content p code,sr-rd-content li code{padding:2px 5px;background:rgba(0,0,0,0.05);font-size:.875rem;text-align:left}
-sr-rd-content table{max-width:100%;width:100%;border-collapse:collapse;border-spacing:0}sr-rd-content th,sr-rd-content td{padding:5px 10px;vertical-align:top}sr-rd-content table a{color:#dedede}sr-rd-content th,sr-rd-content td{border:solid 1px #474d54}
+sr-rd-content pre{background:0 0}sr-rd-content pre code,sr-rd-content pre code *{font-size:1.2rem}sr-rd-content li code,sr-rd-content p code{padding:2px 5px;font-size:1.2rem;text-align:left;background:rgba(0,0,0,.05)}sr-rd-content table{max-width:100%;width:100%;border-collapse:collapse;border-spacing:0}sr-rd-content th,sr-rd-content td{padding:5px 10px;vertical-align:top}sr-rd-content table a{color:#dedede}sr-rd-content th,sr-rd-content td{border:solid 1px #474d54}
 sr-blockquote{
     margin: 0 0 1.875rem 1.875rem;
     border-left: solid 2px #474d54;
@@ -24,7 +23,7 @@ sr-blockquote{
  */
 
 .sr-rd-theme-bg {
-    font-size: 16px;
+    font-size: 62.5%;
     background: rgb(54, 59, 64);
     color: #b8bfc6;
 }
@@ -46,7 +45,7 @@ sr-rd-desc {
 
 sr-rd-content {
     line-height: 1.6;
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: #b8bfc6;
 }
 
@@ -54,7 +53,7 @@ sr-rd-content *,
 sr-rd-content p,
 sr-rd-content div {
     line-height: 1.6;
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: #b8bfc6;
     margin-top: 0;
     margin-bottom: 1.5rem;
@@ -77,5 +76,4 @@ sr-rd-content pre {
     padding: 10px 30px;
     margin-bottom: 20px;
     border: 1px solid;
-    font-size: 0.9rem;
 }
