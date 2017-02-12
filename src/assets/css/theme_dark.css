@@ -11,7 +11,6 @@ sr-rd-theme-dark{display:none;}
 sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{font-weight:700;color:#dbdbfd}sr-rd-content h1{font-size:3rem}sr-rd-content h2{font-size:2.8rem}sr-rd-content h3{font-size:2.5rem}sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{color:#549ad8}sr-rd-content h5{font-size:2rem}sr-rd-content h6{font-size:1.8rem}
 sr-rd-content strong {color: #ffffc5;} sr-rd-content em {color: #c885f5;}
 sr-rd-content table{width:100%;line-height:1.6rem;border-collapse:collapse;border-spacing:0;empty-cells:show;border:1px solid #cbcbcb}sr-rd-content thead{background-color:#263238;color:#f5f5f5;text-align:left;vertical-align:bottom}sr-rd-content td,sr-rd-content th{border-left:1px solid #cbcbcb;border-width:0 0 0 1px;margin:0;overflow:visible;padding:.5em 1em}
-sr-rd-content pre,sr-rd-content pre code{font-size:1.2rem;text-align:left}sr-rd-content pre code *{font-size:1.2rem}sr-rd-content li code,sr-rd-content p code{color:#caca16;text-align:left;font-size:1.2rem;padding:0 5px}
 sr-blockquote{
     background-color: rgba(128, 128, 128, 0.05);
     border-top-right-radius: 5px;
@@ -65,6 +64,7 @@ sr-rd-content div {
 sr-rd-content a,
 sr-rd-content a:link {
     color: #8ac9ff;
+    text-decoration: underline;
 }
 
 sr-rd-content a:hover,
@@ -76,9 +76,12 @@ sr-rd-content a:active {
 }
 
 sr-rd-content pre {
-    background-color: #263238;
     color: #e9eded;
-    border: none;
-    border-radius: 3px;
-    padding: 5px 10px;
+    background-color: #263238;
+}
+
+sr-rd-content li code,
+sr-rd-content p code {
+    color: #caca16;
+    background-color: transparent;
 }

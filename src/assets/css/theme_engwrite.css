@@ -10,41 +10,6 @@ sr-rd-theme-engwrite{display:none;}
 
 sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{margin:20px 0 10px;padding:0;font-weight:500;-webkit-font-smoothing:antialiased}sr-rd-content h1{font-weight:300;text-align:center;font-size:2.8rem;color:#933d3f}sr-rd-content h2{font-size:2.4rem;border-bottom:1px solid #ccc;color:#000}sr-rd-content h3{font-size:1.8rem}sr-rd-content h4,sr-rd-content h5{font-size:1.6rem}sr-rd-content h6{color:#777;font-size:1.6rem}
 sr-rd-content ul,sr-rd-content ol{padding-left:30px}sr-rd-content ul li>:first-child,sr-rd-content ol li>:first-child,sr-rd-content ul li ul:first-of-type,sr-rd-content ol li ol:first-of-type,sr-rd-content ul li ol:first-of-type,sr-rd-content ol li ul:first-of-type{margin-top:0}sr-rd-content ul ul,sr-rd-content ul ol,sr-rd-content ol ol,sr-rd-content ol ul{margin-bottom:0}
-sr-rd-content pre {
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    padding: 6px 10px;
-    border-radius: 3px;
-}
-
-sr-rd-content pre code {
-    font-size: 1.2rem;
-    line-height: 1;
-}
-
-sr-rd-content code {
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
-    border-radius: 3px;
-    font-size: 1.2rem;
-    white-space: pre;
-}
-
-sr-rd-content pre code,sr-rd-content pre code * {
-    font-size: 1.2rem;
-}
-
-sr-rd-content li code,sr-rd-content p code {
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
-    border: 1px solid #eaeaea;
-    background-color: #f4ece3;
-    border-radius: 3px;
-    font-size: 1.2rem;
-}
-
 sr-rd-content table th{font-weight:bold}sr-rd-content table th,sr-rd-content table td{border:1px solid #ccc;padding:6px 13px}sr-rd-content table tr{border-top:1px solid #ccc;background-color:#fff}sr-rd-content table tr:nth-child(2n){background-color:#f8f8f8}
 sr-blockquote{text-align:left;border-top:1px dotted #cdc7bc;border-bottom:1px dotted #cdc7bc;padding:0 15px;background-color:#f8edda;color:#777}sr-blockquote>:first-child{margin-top:0}sr-blockquote>:last-child{margin-bottom:0}
 
@@ -102,5 +67,12 @@ sr-rd-content a:active {
 
 sr-rd-content pre {
     border: 1px solid rgb(204, 204, 204);
-    background-color: rgb(252, 245, 237);
+    border-radius: 3px;
+}
+
+sr-rd-content li code,
+sr-rd-content p code {
+    border: 1px solid rgb(234, 234, 234);
+    background-color: rgb(244, 236, 227);
+    border-radius: 3px;
 }
