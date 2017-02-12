@@ -55,7 +55,6 @@ sr-blockquote{text-align:left;border-top:1px dotted #cdc7bc;border-bottom:1px do
 .sr-rd-theme-bg {
     background-color: rgb(252, 245, 237);
     color: rgb(51, 51, 51);
-    font-size: 62.5%;
 }
 
 sr-rd-title {
@@ -75,19 +74,17 @@ sr-rd-desc {
 }
 
 sr-rd-content {
-    font-size: 1.6rem;
-    line-height: 1.8;
     color: rgb(51, 51, 51);
     padding: 20px 0;
     margin: 0px auto;
+    line-height: 1.8;
 }
 
 sr-rd-content *,
 sr-rd-content p,
 sr-rd-content div {
     color: rgb(51, 51, 51);
-    font-size: 1.6rem;
-    line-height: 1.8;
+	line-height: 1.8;
 }
 
 sr-rd-content a,

@@ -2,8 +2,13 @@
 
 /**
  * Common style, include:
+ * .sr-rd-theme-bg
  * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, sr-blockquote
  */
+ 
+.sr-rd-theme-bg {
+    font-size: 62.5%;
+}
 
 sr-rd-title, sr-rd-desc, sr-rd-content {
     width: 100%;
@@ -22,6 +27,11 @@ sr-rd-desc {
     text-align: left;
 }
 
+sr-rd-content {
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
 sr-rd-content p,
 sr-rd-content div {
     display: block;
@@ -30,6 +40,9 @@ sr-rd-content div {
     -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
+    line-height: 1.6;
+    font-size: 1.6rem;
+    margin: 0 0 1.2em 0;
 }
 
 sr-rd-content a {

@@ -23,7 +23,6 @@ sr-blockquote{
  */
 
 .sr-rd-theme-bg {
-    font-size: 62.5%;
     background: rgb(54, 59, 64);
     color: #b8bfc6;
 }
@@ -44,16 +43,12 @@ sr-rd-desc {
 }
 
 sr-rd-content {
-    line-height: 1.6;
-    font-size: 1.6rem;
     color: #b8bfc6;
 }
 
 sr-rd-content *,
 sr-rd-content p,
 sr-rd-content div {
-    line-height: 1.6;
-    font-size: 1.6rem;
     color: #b8bfc6;
     margin-top: 0;
     margin-bottom: 1.5rem;
