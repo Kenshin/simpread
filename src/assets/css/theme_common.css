@@ -42,6 +42,12 @@ sr-rd-content div {
     -webkit-margin-end: 0px;
     line-height: 1.6;
     font-size: 1.6rem;
+}
+
+sr-rd-content p,
+sr-rd-content div,
+sr-rd-content ol,
+sr-rd-content ul {
     margin: 0 0 1.2em 0;
 }
 
