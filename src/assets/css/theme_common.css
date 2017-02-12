@@ -93,7 +93,7 @@ sr-rd-content ol {
 
 sr-rd-content pre {
     display: block;
-    font-family: "Source Code Pro", monospace;
+    font-family: "Source Code Pro", Consolas, "Liberation Mono", Courier, monospace;
 
     word-break: break-all;
     word-wrap: break-word;
