@@ -285,6 +285,7 @@ async function commbeautify( $target ) {
     $target.find( "pre" ).map( ( index, item )=> {
         $(item).find( "code" ).removeAttr( "class" );
     });
+    $target.find( "pre" ).removeAttr( "class" );
 }
 
 export { Render, Exist };
