@@ -65,12 +65,13 @@ sr-rd-title {
 }
 
 sr-rd-desc {
-    border-top: 1px dotted rgb(205, 199, 188);
-    border-bottom: 1px dotted rgb(205, 199, 188);
-    padding: 0px 15px;
+    padding: 5px;
     background-color: rgb(248, 237, 218);
     color: rgb(119, 119, 119);
-    text-align: left;
+    font-size: 2rem;
+    text-align: center;
+    border-top: 1px dotted rgb(205, 199, 188);
+    border-bottom: 1px dotted rgb(205, 199, 188);
 }
 
 sr-rd-content {

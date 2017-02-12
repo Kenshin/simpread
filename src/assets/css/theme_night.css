@@ -35,11 +35,12 @@ sr-rd-title {
 }
 
 sr-rd-desc {
+    margin: 35px;
+    margin-left: 0;
+    padding-left: 1.875rem;
+    font-size: 2rem;
     color: #b8bfc6;
     border-left: solid 2px #474d54;
-    margin: 0 0 1.875rem 1.875rem;
-    margin-top: 35px;
-    padding-left: 1.875rem;
 }
 
 sr-rd-content {

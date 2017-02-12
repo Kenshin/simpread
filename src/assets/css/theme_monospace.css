@@ -38,6 +38,7 @@ sr-rd-title {
 sr-rd-desc {
     padding: 0 15px;
     margin: 0.8em 0;
+    font-size: 2.0rem;
     color: #777777;
     border-left: 4px solid #dddddd;
 }

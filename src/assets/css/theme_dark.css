@@ -40,9 +40,12 @@ sr-rd-title {
 }
 
 sr-rd-desc {
+    margin: 20px;
+    margin-left: 0;
+    padding: 5px 20px;
+    font-size: 2.2rem;
     background-color: rgba(128, 128, 128, 0.05);
     color: rgb(235, 235, 235);
-    padding: 0 20px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-left: 8px solid #979797;
