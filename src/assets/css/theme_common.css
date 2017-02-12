@@ -49,20 +49,14 @@ sr-rd-content p,
 sr-rd-content div,
 sr-rd-content ol,
 sr-rd-content ul,
+sr-rd-content pre,
+sr-rd-content table,
 sr-rd-content sr-blockquote {
     margin: 0 0 1.2em 0;
 }
 
 sr-rd-content a {
     padding: 0 5px;
-}
-
-sr-rd-content pre {
-    display: block;
-    font-family: "Source Code Pro", monospace;
-    word-break: break-all;
-    word-wrap: break-word;
-    white-space: pre-wrap;
 }
 
 sr-rd-content img {
@@ -90,4 +84,36 @@ sr-rd-content sr-blockquote * {
 
 sr-rd-content table {
     width: 100%;
+}
+
+
+sr-rd-content pre {
+    display: block;
+    font-family: "Source Code Pro", monospace;
+
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+
+    padding: 15px;
+    line-height: 1.5;
+
+    overflow: auto;
+}
+
+sr-rd-content pre code {
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+sr-rd-content pre code * {
+    font-size: 1.1rem;
+}
+
+sr-rd-content li code,
+sr-rd-content p code {
+    margin: 0 4px;
+    padding: 2px 4px;
+    font-size: 1.1rem;
 }
