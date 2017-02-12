@@ -105,6 +105,13 @@ sr-rd-content pre {
     overflow: auto;
 }
 
+sr-rd-content pre,
+sr-rd-content li pre code,
+sr-rd-content p pre code {
+    background-color: transparent;
+    border: none;
+}
+
 sr-rd-content pre code {
     margin: 0;
     padding: 0;
