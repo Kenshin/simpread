@@ -86,6 +86,10 @@ sr-rd-content table {
     width: 100%;
 }
 
+sr-rd-content ul,
+sr-rd-content ol {
+    line-height: 2;
+}
 
 sr-rd-content pre {
     display: block;
