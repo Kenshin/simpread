@@ -47,7 +47,8 @@ sr-rd-content div {
 sr-rd-content p,
 sr-rd-content div,
 sr-rd-content ol,
-sr-rd-content ul {
+sr-rd-content ul,
+sr-rd-content sr-blockquote {
     margin: 0 0 1.2em 0;
 }
 
@@ -74,11 +75,16 @@ sr-rd-content img {
 sr-rd-content sr-blockquote {
     display: block;
     position: relative;
+    padding: 15px 25px;
     text-align: left;
 }
 
 sr-rd-content sr-blockquote:before {
     position: absolute;
+}
+
+sr-rd-content sr-blockquote * {
+    margin: 0;
 }
 
 sr-rd-content table {

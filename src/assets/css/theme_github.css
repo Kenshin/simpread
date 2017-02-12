@@ -13,7 +13,6 @@ sr-rd-content ul,sr-rd-content ol{list-style-type: disc;padding:0;padding-left:2
 sr-rd-content pre{padding:10px;line-height:1.45}sr-rd-content pre code{margin:0;border-radius:3px;font-size:1.1rem}sr-rd-content pre code *{font-size:1.1rem}sr-rd-content li code,sr-rd-content p code{padding:2px 4px;border:1px solid #ddd;border-radius:3px;background-color:#f8f8f8;font-size:1.1rem}
 sr-rd-content table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}sr-rd-content table th{font-weight:bold}sr-rd-content table th,sr-rd-content table td{padding:6px 13px;border:1px solid #ddd}sr-rd-content table tr{background-color:#fff;border-top:1px solid #ccc}sr-rd-content table tr:nth-child(2n){background-color:#f8f8f8}
 sr-rd-content sr-blockquote {
-    padding: 0 15px;
     color: #777;
     border-left: 4px solid #ddd;
 }
