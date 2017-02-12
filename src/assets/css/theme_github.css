@@ -50,6 +50,7 @@ sr-rd-desc:before {
     top: -9px;
     left: 16px;
     font-size: 80px;
+    font-family: "Arial";
     color: rgba(0,0,0,0.15);
 }
 
