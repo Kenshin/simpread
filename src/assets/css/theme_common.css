@@ -38,10 +38,6 @@ sr-rd-content p,
 sr-rd-content div {
     display: block;
     float: inherit;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
     line-height: 1.6;
     font-size: 1.6rem;
 }
@@ -51,9 +47,11 @@ sr-rd-content div,
 sr-rd-content pre,
 sr-rd-content sr-blockquote {
     margin: 0 0 1.2em 0;
+    /*
     word-break: break-all;
     word-wrap: break-word;
     white-space: pre-wrap;
+    */
 }
 
 sr-rd-content a {
@@ -128,6 +126,10 @@ sr-rd-content pre {
     font-size: 1.1rem;
 
     overflow: auto;
+}
+
+sr-rd-content pre * {
+    font-size: 1.1rem;
 }
 
 sr-rd-content pre,
