@@ -92,7 +92,15 @@ sr-rd-content table {
 
 sr-rd-content ul,
 sr-rd-content ol {
-    line-height: 2;
+    line-height: 1.1;
+}
+
+sr-rd-content ul,
+sr-rd-content ol,
+sr-rd-content ul *,
+sr-rd-content ol * {
+    margin: 0;
+    line-height: 1.1;
 }
 
 sr-rd-content pre {
