@@ -31,7 +31,7 @@ sr-blockquote{
 
 sr-rd-title {
     padding-bottom: .3em;
-    font-size: 2.25em;
+    font-size: 2.8rem;
     font-weight: bold;
     line-height: 1.2;
     color: #dbdbfd;
@@ -42,7 +42,7 @@ sr-rd-desc {
     margin: 20px;
     margin-left: 0;
     padding: 5px 20px;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     background-color: rgba(128, 128, 128, 0.05);
     color: rgb(235, 235, 235);
     border-top-right-radius: 5px;
