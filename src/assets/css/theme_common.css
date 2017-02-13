@@ -47,8 +47,8 @@ sr-rd-content div,
 sr-rd-content pre,
 sr-rd-content sr-blockquote {
     margin: 0 0 1.2em 0;
-    /*
     word-break: break-all;
+    /*
     word-wrap: break-word;
     white-space: pre-wrap;
     */
@@ -80,6 +80,7 @@ sr-rd-content sr-blockquote:before {
 
 sr-rd-content sr-blockquote * {
     margin: 0;
+    font-size: inherit;
 }
 
 sr-rd-content table {
