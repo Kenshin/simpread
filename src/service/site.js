@@ -221,6 +221,7 @@ async function specbeautify( name, $target ) {
             $target.find( ".load-html-img" ).removeAttr( "class" );
             break;
         case "cnblogs.com":
+            $target.find( ".cnblogs_code" ).removeClass();
             $target.find( ".cnblogs_code_toolbar" ).remove();
             break;
         case "news.cnblogs.com":
