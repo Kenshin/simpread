@@ -89,7 +89,7 @@ sr-rd-content table {
     margin: 0 0 1.2em 0;
 }
 
-sr-rd-content ul, sr-rd-content-ul {
+sr-rd-content ul {
     margin: 0 0 1.2em 0;
     padding: 0;
     margin-left: 1.3em;
@@ -101,7 +101,7 @@ sr-rd-content ul li, sr-rd-content ol li {
     list-style: disc;
 }
 
-sr-rd-content ol, sr-rd-content-ol {
+sr-rd-content ol {
     list-style: decimal;
     margin-left: 1.9em;
 }
