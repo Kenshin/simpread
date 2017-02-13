@@ -242,6 +242,9 @@ async function specbeautify( name, $target ) {
         case "ftchinese.com":
             $target.find( "script" ).remove();
             break;
+        case "segmentfault.com":
+            $target.find( ".widget-codetool" ).remove();
+            break;
     }
 }
 
