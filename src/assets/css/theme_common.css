@@ -3,7 +3,7 @@
 /**
  * Common style, include:
  * .sr-rd-theme-bg
- * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, sr-blockquote
+ * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, code, sr-blockquote, ul ol
  */
  
 .sr-rd-theme-bg {
@@ -48,8 +48,6 @@ sr-rd-content div {
 
 sr-rd-content p,
 sr-rd-content div,
-sr-rd-content ol,
-sr-rd-content ul,
 sr-rd-content pre,
 sr-rd-content table,
 sr-rd-content sr-blockquote {
@@ -90,17 +88,30 @@ sr-rd-content table {
     width: 100%;
 }
 
-sr-rd-content ul,
-sr-rd-content ol {
+sr-rd-content ul, sr-rd-content-ul {
+    margin: 0 0 1.2em 0;
+    padding: 0;
+    margin-left: 1.3em;
+    list-style: disc;
     line-height: 1.1;
 }
 
-sr-rd-content ul,
-sr-rd-content ol,
-sr-rd-content ul *,
-sr-rd-content ol * {
-    margin: 0;
-    line-height: 1.1;
+sr-rd-content ul li, sr-rd-content ol li {
+    list-style: disc;
+}
+
+sr-rd-content ol, sr-rd-content-ol {
+    list-style: decimal;
+    margin-left: 1.9em;
+}
+
+sr-rd-content li ul, sr-rd-content li ol {
+    margin-bottom: 0.8em;
+    margin-left: 2em;
+}
+
+sr-rd-content li ul {
+    list-style: circle;
 }
 
 sr-rd-content pre {
