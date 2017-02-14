@@ -394,7 +394,7 @@
         ]
     },{
         "name"    : "ruby-china.org",
-        "url"     : "http://ruby-china.org/topics/",
+        "url"     : "https://ruby-china.org/topics/",
         "title"   : "<h1 class='media-heading'>",
         "desc"    : "",
         "include" : "<article>",
