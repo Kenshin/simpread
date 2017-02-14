@@ -138,7 +138,8 @@
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
         "include" : "<div id='view_content'>",
         "exclude" : [
-            "<div id='comments_top'>"
+            "<div id='comments_top'>",
+			"[[/src=\\S+(xxxxxbbs)\\S+'/]]"
         ]
     },{
         "name"    : "zhuanlan.zhihu.com",
