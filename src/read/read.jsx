@@ -204,7 +204,8 @@ async function htmlbeautify( $target ) {
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
  * - task: all hr tag add sr-rd-content-exclude class
- * - task: all pre tag remove class
+ * - task: all pre/code tag remove class
+ * - task: all a tag remove style
  * 
  * @param {jquery}
  */
@@ -286,6 +287,7 @@ async function commbeautify( $target ) {
         $(item).find( "code" ).removeAttr( "class" );
     });
     $target.find( "pre" ).removeAttr( "class" );
+    $target.find( "a" ).removeAttr( "style" );
 }
 
 export { Render, Exist };
