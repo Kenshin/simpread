@@ -138,9 +138,14 @@ sr-rd-content pre {
     overflow: auto;
 }
 
+sr-rd-content pre div {
+    font-size: 1.1rem;
+}
+
 sr-rd-content pre * {
     font-size: 1.1rem;
 }
+
 
 sr-rd-content pre,
 sr-rd-content li pre code,
