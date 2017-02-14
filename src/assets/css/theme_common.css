@@ -90,19 +90,23 @@ sr-rd-content table {
 
 sr-rd-content ul {
     margin: 0 0 1.2em 0;
-    padding: 0;
     margin-left: 1.3em;
-    list-style: disc;
-    line-height: 1.1;
-}
-
-sr-rd-content ul li, sr-rd-content ol li {
+    padding: 0;
     list-style: disc;
 }
 
 sr-rd-content ol {
     list-style: decimal;
-    margin-left: 1.9em;
+    margin-left: 0;
+}
+
+sr-rd-content ul li, sr-rd-content ol li {
+    list-style: disc;
+    margin: 0 0 1.2em 0;
+}
+
+sr-rd-content ul li *, sr-rd-content ol li * {
+    margin: 0;
 }
 
 sr-rd-content li ul, sr-rd-content li ol {
