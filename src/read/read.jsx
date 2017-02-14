@@ -277,7 +277,7 @@ async function commbeautify( $target ) {
            $parent.removeClass( "quote" );
         }
     });
-    $target.find( "iframe, embed" ).map( ( index, item )=> {
+    $target.find( "iframe:not(.sr-rd-content-nobeautify), embed:not(.sr-rd-content-nobeautify)" ).map( ( index, item )=> {
         $(item).wrap( "<div class='sr-rd-content-center'></div>" );
     });
     $target.find( "hr" ).map( ( index, item )=> {

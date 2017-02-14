@@ -256,6 +256,9 @@ async function specbeautify( name, $target ) {
          case "ruby-china.org":
             $target.find( ".twemoji" ).remove();
             break;
+        case "w3cplus.com":
+            $target.find( "iframe" ).addClass( "sr-rd-content-nobeautify" );
+            break;
     }
 }
 
