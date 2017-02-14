@@ -148,6 +148,7 @@ const webpack = require( 'webpack' ),
           site       : __dirname + '/src/service/site.js',
           message    : __dirname + '/src/service/message.js',
           browser    : __dirname + '/src/service/browser.js',
+          theme      : __dirname + '/src/service/theme.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.js',
@@ -162,9 +163,6 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/option/dialog.jsx',
           focusopt   : __dirname + '/src/option/focus.jsx',
           readopt    : __dirname + '/src/option/read.jsx',
-
-          theme1     : '../assets/css/theme1.css',
-          theme2     : '../assets/css/theme2.css',
 
         }
       }

@@ -8,6 +8,7 @@ import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
 import * as st            from 'site';
+import th                 from 'theme';
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -27,17 +28,19 @@ class Read extends React.Component {
 
     componentWillMount() {
         $( "body" ).addClass( "ks-simpread-body-hide" );
+        th.Change( this.props.read.theme );
     }
 
     async componentDidMount() {
+        $root.addClass( theme ).find( rdclsjq ).addClass( theme );
+        if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
+        if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "sr-rd-content-exclude" );
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
         await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
         await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
-        $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         pangu.spacingElementByClassName( rdcls );
-        if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
     }
 
     componentWillUnmount() {
@@ -47,18 +50,6 @@ class Read extends React.Component {
         $( rdclsjq ).one( "animationend webkitAnimationEnd", () => {
             $( rdclsjq ).remove();
         });
-    }
-
-    constructor( props ) {
-        super( props );
-        switch ( this.props.read.theme ) {
-            case "theme1":
-               require( "theme1" );
-               break;
-            case "theme2":
-               require( "theme2" );
-               break;
-        }
     }
 
    // exit read mode
@@ -294,6 +285,7 @@ async function commbeautify( $target ) {
     $target.find( "pre" ).map( ( index, item )=> {
         $(item).find( "code" ).removeAttr( "class" );
     });
+    $target.find( "pre" ).removeAttr( "class" );
 }
 
 export { Render, Exist };

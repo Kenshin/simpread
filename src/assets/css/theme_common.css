@@ -1,0 +1,158 @@
+
+
+/**
+ * Common style, include:
+ * .sr-rd-theme-bg
+ * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, code, sr-blockquote, ul ol
+ */
+ 
+.sr-rd-theme-bg {
+    font-size: 62.5%;
+}
+
+sr-rd-title, sr-rd-desc, sr-rd-content {
+    width: 100%;
+}
+
+sr-rd-title {
+    text-rendering: optimizelegibility;
+    margin: 1em 0px 0.5em;
+}
+
+sr-rd-content {
+    text-align: justify;
+}
+
+sr-rd-desc {
+    text-align: left;
+    line-height: 2.4;
+    margin: 0 0 1.2em 0;
+}
+
+sr-rd-content {
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+sr-rd-content p,
+sr-rd-content div {
+    display: block;
+    float: inherit;
+    line-height: 1.6;
+    font-size: 1.6rem;
+}
+
+sr-rd-content p,
+sr-rd-content div,
+sr-rd-content pre,
+sr-rd-content sr-blockquote {
+    margin: 0 0 1.2em 0;
+    word-break: break-all;
+    /*
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    */
+}
+
+sr-rd-content a {
+    padding: 0 5px;
+}
+
+sr-rd-content img {
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #bbb;
+    box-shadow: 1px 1px 3px #d4d4d4;
+}
+
+sr-rd-content sr-blockquote {
+    display: block;
+    position: relative;
+    padding: 15px 25px;
+    text-align: left;
+    line-height: 1;
+}
+
+sr-rd-content sr-blockquote:before {
+    position: absolute;
+}
+
+sr-rd-content sr-blockquote * {
+    margin: 0;
+    font-size: inherit;
+}
+
+sr-rd-content table {
+    width: 100%;
+    margin: 0 0 1.2em 0;
+}
+
+sr-rd-content ul {
+    margin: 0 0 1.2em 0;
+    padding: 0;
+    margin-left: 1.3em;
+    list-style: disc;
+    line-height: 1.1;
+}
+
+sr-rd-content ul li, sr-rd-content ol li {
+    list-style: disc;
+}
+
+sr-rd-content ol {
+    list-style: decimal;
+    margin-left: 1.9em;
+}
+
+sr-rd-content li ul, sr-rd-content li ol {
+    margin-bottom: 0.8em;
+    margin-left: 2em;
+}
+
+sr-rd-content li ul {
+    list-style: circle;
+}
+
+sr-rd-content pre {
+    display: block;
+    font-family: "Source Code Pro", Consolas, "Liberation Mono", Courier, monospace;
+
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre;
+
+    padding: 15px;
+    line-height: 1.5;
+    font-size: 1.1rem;
+
+    overflow: auto;
+}
+
+sr-rd-content pre * {
+    font-size: 1.1rem;
+}
+
+sr-rd-content pre,
+sr-rd-content li pre code,
+sr-rd-content p pre code {
+    background-color: transparent;
+    border: none;
+}
+
+sr-rd-content pre code {
+    margin: 0;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+sr-rd-content pre code * {
+    font-size: 1.1rem;
+}
+
+sr-rd-content li code,
+sr-rd-content p code {
+    margin: 0 4px;
+    padding: 2px 4px;
+    font-size: 1.1rem;
+}

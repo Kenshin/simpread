@@ -1,53 +1,28 @@
 console.log( "===== simpread option read mode load =====" )
 
 import Notify from 'notify';
+import th     from 'theme';
 
 const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
-const themes = [
-    "235, 235, 235, 0.9",
-    "216, 216, 216, 0.9",
-    "229, 221, 208, 0.9",
-    "243, 234, 203, 0.9",
-    "176, 192, 182, 0.9",
-    "28, 31, 43, 0.9",
-    "61, 66, 70, 0.9",
-    "17, 18, 20, 0.9"
-    ];
 
 export default class ReadOpt extends React.Component {
 
     changeBgColor () {
         if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
-
-            // add test code
-            if ( this.props.option.theme == "theme1" ) {
-                this.props.option.theme = "theme2";
-            } else {
-                this.props.option.theme = "theme1";
-            }
-            console.log( "this.props.option.theme = ", this.props.option.theme )
-
-            /*
             const target     = event.target,
                   $target    = $(target),
                   $parent    = $target.parent(),
                   activestyl = "active",
-                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' ),
-                  bgcolor    = $target.css( bgcolorstyl ),
-                  color      = getColor( bgcolor ),
-                  opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
-                  newval     = `rgba(${color}, ${opacity})`;
-
-            // set new background color
-            $( bgcls ).css( bgcolorstyl, newval );
-
-            // update active
+                  theme      = $target.attr( "name" ),
+                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' );
             if ( $active ) {
                 $active.removeAttr( "sr-type" );
                 $target.attr( "sr-type", activestyl );
             }
-            */
+            this.props.option.theme = theme;
+            th.Change( this.props.option.theme );
+            console.log( "this.props.option.theme = ", this.props.option.theme )
         }
     }
 
@@ -81,7 +56,7 @@ export default class ReadOpt extends React.Component {
     }
 
     componentDidMount() {
-        //setBgThemeStyle( this.props.option.bgcolor );
+        setBgThemeStyle( this.props.option.theme );
         this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
         this.refs.include.value   = this.props.option.site.include;
@@ -98,7 +73,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>主题色：</sr-opt-label>
                     <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
-                        {themes.map( theme => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}}></sr-opt-theme> )}
+                        {th.colors.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ th.names[idx] }></sr-opt-theme> )}
                     </sr-opt-themes>
                 </sr-opt-gp>
                 <sr-opt-gp>
@@ -204,22 +179,19 @@ function updateShortcuts() {
 /**
  * Set background style
  * 
- * @param {string} background color
+ * @param {string} theme name
  */
-/*
-function setBgThemeStyle( bgcolor ) {
-    const $themes    = $( "sr-opt-themes" ).children(),
-          newcolor   = getColor( bgcolor );
+function setBgThemeStyle( theme ) {
+    const $themes    = $( "sr-opt-themes" ).children();
 
     for ( let i = 0; i < $themes.length; i++ ) {
          const $target = $($themes[i]),
-               color   = getColor( $target.css( "background-color" ));
-         if ( newcolor === color ) {
+               name    = $target.attr( "name" );
+         if ( theme === name ) {
              $target.attr( "sr-type", "active" );
          }
     }
 }
-*/
 
 /**
  * Fix keyboard event key undefinde

@@ -122,7 +122,7 @@ sr-dialog {
     display: -webkit-flex;
     flex-direction:column;
 
-    min-width: 300px;
+    min-width: 495px;
     min-height: 300px;
 
     padding: 20px;
@@ -304,6 +304,7 @@ sr-opt-item[sr-type="opacity"] input[type=range] {
     -webkit-appearance: none;
     width: 100%;
     margin: 6px 0;
+    border: none;
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range]:focus {
@@ -467,11 +468,14 @@ read-process {
 * Read mode
  */
 .sr-rd-font {
+    /* 
     font-family: "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
     font-size: 16px;
-    color:#222;
-    -webkit-text-size-adjust:none;
     line-height: 1.5rem;
+    */
+    font: 300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    color:#333;
+    -webkit-text-size-adjust:none;
 }
 
 sr-read {
@@ -490,18 +494,6 @@ sr-read {
     margin-right: 20%;
 }
 
-sr-rd-title, sr-rd-desc, sr-rd-content {
-    width: 100%;
-}
-
-.sr-rd-content-center {
-    text-align: center;
-    display: -webkit-box;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
-    -webkit-box-orient: vertical;
-}
-
 sr-rd-content-error {
     display: block;
     position: relative;
@@ -511,12 +503,9 @@ sr-rd-content-error {
     background-color: rgba(0,0,0,0.05);
 }
 
-sr-rd-content img {
-    margin: 10px;
-    padding: 5px;
-    background: #fff;
-    border: 1px solid #bbb;
-    box-shadow: 1px 1px 3px #d4d4d4;
+.sr-rd-content-img {
+    width: 90%;
+    height: auto;
 }
 
 .sr-rd-content-img-load {
@@ -530,9 +519,12 @@ sr-rd-content img {
     background-image: url( "../images/loading.gif" );
 }
 
-.sr-rd-content-img {
-    width: 90%;
-    height: auto;
+.sr-rd-content-center {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
 }
 
 /**
@@ -569,15 +561,16 @@ sr-rd-footer p {
     color: #787878;
 }
 
-sr-rd-footer p a {
+sr-rd-footer p a,
+sr-rd-footer p a:link {
     text-decoration: none;
     color: #787878;
     font-size: 17px;
 }
 
-sr-rd-content a:hover,
-sr-rd-content a:focus,
-sr-rd-content a:active {
+sr-rd-footer p a:hover,
+sr-rd-footer p a:focus,
+sr-rd-footer a:active {
     color: #787878;
     text-decoration: underline;
 }

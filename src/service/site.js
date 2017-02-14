@@ -221,6 +221,7 @@ async function specbeautify( name, $target ) {
             $target.find( ".load-html-img" ).removeAttr( "class" );
             break;
         case "cnblogs.com":
+            $target.find( ".cnblogs_code" ).removeClass();
             $target.find( ".cnblogs_code_toolbar" ).remove();
             break;
         case "news.cnblogs.com":
@@ -231,6 +232,18 @@ async function specbeautify( name, $target ) {
                 const $target = $(item);
                 $target.parent().parent().parent().parent().parent().parent().removeAttr( "class" ).removeAttr( "style" ).html($target);
             });
+            break;
+        case "feng.com":
+            $target.find( "span" ).removeAttr( "style" );
+            break;
+        case "young.ifeng.com":
+            $target.find( "span" ).removeAttr( "style" );
+            break;
+        case "ftchinese.com":
+            $target.find( "script" ).remove();
+            break;
+        case "segmentfault.com":
+            $target.find( ".widget-codetool" ).remove();
             break;
     }
 }

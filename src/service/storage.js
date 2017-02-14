@@ -35,7 +35,7 @@ const name = "simpread",
     read   = {
         version   : "2017-01-07",
         shortcuts : "A A",
-        theme     : "theme1",
+        theme     : "github",
         fontfamily: "",
         fontsize  : 14,
         sites     : []    // e.g. [ "<url>", site ]
