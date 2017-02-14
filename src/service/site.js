@@ -259,6 +259,9 @@ async function specbeautify( name, $target ) {
         case "w3cplus.com":
             $target.find( "iframe" ).addClass( "sr-rd-content-nobeautify" );
             break;
+        case "aotu.io":
+            $target.find( ".gutter" ).remove();
+            break;
     }
 }
 
