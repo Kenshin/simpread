@@ -421,6 +421,34 @@
             "<p class='post-copyright'>"
         ]
     },{
+        "name"    : "div.io",
+        "url"     : "http://div.io/topic/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='topic-firstfloor-detail'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.aotu.io",
+		"override": true,
+        "url"     : "https://news.aotu.io/a/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='news-body'>",
+        "exclude" : [
+            "[['<p>未经许可，禁止转载。</p>']]"
+        ]
+    },{
+        "name"    : "aotu.io",
+        "url"     : "https://aotu.io/*",
+        "title"   : "<h1 class='post-tit'>",
+        "desc"    : "",
+        "include" : "<div class='post-content'>",
+        "exclude" : [
+            "<div class='post-revision'>"
+        ]
+    },{
         "name"    : "ruby-china.org",
         "url"     : "https://ruby-china.org/topics/",
         "title"   : "<h1 class='media-heading'>",
