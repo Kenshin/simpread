@@ -403,13 +403,22 @@
         ]
     },{
         "name"    : "w3cplus.com",
-		"override":true,
         "url"     : "https://www.w3cplus.com/*",
         "title"   : "<h1 id='page-title'>",
         "desc"    : "",
         "include" : "<div class='body-content'>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "w3cways.com",
+		"override":true,
+        "url"     : "http://www.w3cways.com/",
+        "title"   : "[[{$('.container').find('h2 span').text()}]]",
+        "desc"    : "",
+        "include" : "<article class='article-content'>",
+        "exclude" : [
+            "<p class='post-copyright'>"
         ]
     },{
         "name"    : "ruby-china.org",
