@@ -372,7 +372,7 @@
             ""
         ]
     },{
-        "name"    : "jobbole.com",
+        "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
         "desc"    : "",
@@ -384,11 +384,30 @@
             "<div id='author-bio'>"
         ]
     },{
+        "name"    : "top.jobbole.com",
+        "url"     : "http://top.jobbole.com/",
+        "title"   : "<h1 class='p-tit-single'>",
+        "desc"    : "",
+        "include" : "<div class='p-entry'>",
+        "exclude" : [
+            "<div class='textwidget'>"
+        ]
+    },{
         "name"    : "cnodejs.org",
         "url"     : "https://cnodejs.org/topic/",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div class='topic_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "w3cplus.com",
+		"override":true,
+        "url"     : "https://www.w3cplus.com/*",
+        "title"   : "<h1 id='page-title'>",
+        "desc"    : "",
+        "include" : "<div class='body-content'>",
         "exclude" : [
             ""
         ]
@@ -600,6 +619,15 @@
         "title"   : "<a id='cb_post_title_url'>",
         "desc"    : "",
         "include" : "<div id='cnblogs_post_body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "tuicool.com",
+        "url"     : "http://www.tuicool.com/articles/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='article_body'>",
         "exclude" : [
             ""
         ]
