@@ -88,6 +88,11 @@ sr-rd-content table {
     margin: 0 0 1.2em 0;
 }
 
+sr-rd-content ul, sr-rd-content ol {
+    margin: 0;
+    padding: 0;
+}
+
 sr-rd-content ul {
     margin: 0 0 1.2em 0;
     margin-left: 1.3em;
@@ -97,7 +102,7 @@ sr-rd-content ul {
 
 sr-rd-content ol {
     list-style: decimal;
-    margin-left: 0;
+    margin-left: 1.3em;
 }
 
 sr-rd-content ul li, sr-rd-content ol li {
