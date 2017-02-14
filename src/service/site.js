@@ -246,6 +246,13 @@ async function specbeautify( name, $target ) {
         case "segmentfault.com":
             $target.find( ".widget-codetool" ).remove();
             break;
+        case "mp.weixin.qq.com":
+            $target.find( 'section[powered-by="xiumi.us"]' ).find( "img" ).map( ( index, item ) => {
+                const $target = $(item),
+                      src     = $target.attr( "data-src" );
+                $target.addClass( "sr-rd-content-nobeautify" ).attr( "src", src );
+            });
+            break;
     }
 }
 
