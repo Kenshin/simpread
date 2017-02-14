@@ -62,7 +62,7 @@ sr-rd-content a:link {
 sr-rd-content a:hover,
 sr-rd-content a:focus,
 sr-rd-content a:active {
-    color: rgb(174, 55, 55);
+    text-decoration: underline;
 }
 
 sr-rd-content pre {
