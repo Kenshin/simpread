@@ -253,6 +253,9 @@ async function specbeautify( name, $target ) {
                 $target.addClass( "sr-rd-content-nobeautify" ).attr( "src", src );
             });
             break;
+         case "ruby-china.org":
+            $target.find( ".twemoji" ).remove();
+            break;
     }
 }
 
