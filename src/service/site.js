@@ -10,7 +10,7 @@ function getURI() {
     //return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
     const name = (pathname) => {
         pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
-        return pathname.replace( /\/[@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
+        return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
     },
     path = name( window.location.pathname );
     return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
