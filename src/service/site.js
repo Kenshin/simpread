@@ -283,6 +283,9 @@ async function specbeautify( name, $target ) {
                 $target.html( "<link>" );
             });
             break;
+        case "wkee.net":
+            $target.find( "script" ).remove();
+            break;
     }
 }
 
