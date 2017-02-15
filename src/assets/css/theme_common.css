@@ -120,6 +120,7 @@ sr-rd-content ul li, sr-rd-content ol li {
 
 sr-rd-content ul li *, sr-rd-content ol li * {
     margin: 0;
+    text-align: initial;
 }
 
 sr-rd-content li ul, sr-rd-content li ol {
