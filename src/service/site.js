@@ -269,6 +269,20 @@ async function specbeautify( name, $target ) {
             });
             $target.find( "table" ).addClass( "sr-rd-content-center" );
             break;
+        case "colobu.com":
+            $target.find( ".highlight table" ).map( ( index, item ) => {
+                const $target = $(item),
+                      $pre    = $target.find( "pre" );
+                $target.html( $pre[1] );
+                $target.unwrap();
+            });
+            break;
+        case "hao.caibaojian.com":
+            $target.find( ".tlink" ).map( ( index, item ) => {
+                const $target = $(item);
+                $target.html( "<link>" );
+            });
+            break;
     }
 }
 
