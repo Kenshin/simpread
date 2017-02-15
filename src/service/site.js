@@ -260,7 +260,14 @@ async function specbeautify( name, $target ) {
             $target.find( "iframe" ).addClass( "sr-rd-content-nobeautify" );
             break;
         case "aotu.io":
-            $target.find( ".gutter" ).remove();
+            $target.find( ".highlight table" ).map( ( index, item ) => {
+                const $target = $(item),
+                      $pre    = $target.find( "pre" ),
+                      $table  = $target.find( "table" );
+                $target.html( $pre[1] );
+                $table.unwrap();
+            });
+            $target.find( "table" ).addClass( "sr-rd-content-center" );
             break;
     }
 }
