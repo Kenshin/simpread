@@ -84,12 +84,16 @@ sr-rd-content sr-blockquote * {
 }
 
 sr-rd-content table {
-    display: block;
     width: 100%;
     margin: 0 0 1.2em 0;
     word-break: keep-all;
     word-break:normal;
     overflow: auto;
+    border: none;
+}
+
+sr-rd-content table th, sr-rd-content table td {
+    border: none;
 }
 
 sr-rd-content ul, sr-rd-content ol {
