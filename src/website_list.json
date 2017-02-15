@@ -412,7 +412,6 @@
         ]
     },{
         "name"    : "w3cways.com",
-		"override":true,
         "url"     : "http://www.w3cways.com/",
         "title"   : "[[{$('.container').find('h2 span').text()}]]",
         "desc"    : "",
@@ -431,7 +430,6 @@
         ]
     },{
         "name"    : "news.aotu.io",
-		"override": true,
         "url"     : "https://news.aotu.io/a/*",
         "title"   : "<h1>",
         "desc"    : "",
@@ -690,6 +688,53 @@
         "include" : "<div class='entry-content'>",
         "exclude" : [
             "<div class='entry-meta'>"
+        ]
+    },{
+        "name"    : "open-open.com",
+        "url"     : "http://www.open-open.com/*",
+        "title"   : "<h1 id='articleTitle'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "colobu.com",
+        "url"     : "http://colobu.com/*",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='article-entry'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "liqi.io",
+        "url"     : "http://liqi.io/",
+        "title"   : "<h1 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            "[['<span>你也可以分享自己的利器</span>']]"
+        ]
+    },{
+        "name"    : "caibaojian.com",
+        "url"     : "http://caibaojian.com/",
+        "title"   : "<h1 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'> ",
+        "exclude" : [
+            "<div class='article_index'>",
+			"[['<span>原创翻译，未经许可，禁止转载</span>']]"
+        ]
+    },{
+        "name"    : "hao.caibaojian.com",
+        "url"     : "http://hao.caibaojian.com/",
+        "title"   : "<h1 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'> ",
+        "exclude" : [
+            "<div class='article_index'>",
+			"[['<span>原创翻译，未经许可，禁止转载</span>']]"
         ]
     },{
         "name"    : "thepaper.cn",
