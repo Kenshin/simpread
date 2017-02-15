@@ -756,6 +756,26 @@
 			"<p class='ibm-back-to-top'>"
         ]
     },{
+        "name"    : "guanggoo.com",
+        "url"     : "http://www.guanggoo.com/t/",
+        "title"   : "<h3 class='title'>",
+        "desc"    : "",
+        "include" : "[[{$($('.ui-content')[0]).html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "wkee.net",
+		"override": true,
+        "url"     : "http://wkee.net/post/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content0'>",
+        "exclude" : [
+            "<p class='author'>",
+			"<div class='sharebar'>"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
