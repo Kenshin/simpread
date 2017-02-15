@@ -669,6 +669,29 @@
             ""
         ]
     },{
+        "name"    : "w3ctech.com",
+        "url"     : "https://www.w3ctech.com/topic/",
+        "title"   : "[[{$('.topic_info ').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='callout'>",
+        "exclude" : [
+            "[['<h2>关注我们</h2>']]",
+			"[['<p>本文原文</p>']]",
+			"[['<p>我们专注于H5技术生态的改善</p>']]",
+			"[['<p>欢迎有兴趣的同行一起来玩儿</p>']]",
+			"[[/src=\\S+(yufe2015)\\S+'/]]",
+			"<div id='wx-qrcode'>"
+        ]
+    },{
+        "name"    : "html-js.com",
+        "url"     : "http://www.html-js.com/article/",
+        "title"   : "[[{$('.wrapper ').find('div[rel=bookmark]').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            "<div class='entry-meta'>"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
