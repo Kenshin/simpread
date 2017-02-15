@@ -737,6 +737,25 @@
 			"[['<span>原创翻译，未经许可，禁止转载</span>']]"
         ]
     },{
+        "name"    : "xfenglin.com",
+        "url"     : "http://xfenglin.com/a/",
+        "title"   : "[[{$('.t-head').find('h2').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='article__content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "ibm.com",
+        "url"     : "https://www.ibm.com/developerworks/cn/web/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "[[{$($('.ibm-columns')[0]).html()}]]",
+        "exclude" : [
+            "<div class='dw-article-sidebar'>",
+			"<p class='ibm-back-to-top'>"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
