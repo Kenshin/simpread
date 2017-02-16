@@ -6,16 +6,16 @@ import * as util from 'util';
 import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
 
-const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ];
-const themes = [
-    "235, 235, 235, 0.9",
-    "216, 216, 216, 0.9",
-    "229, 221, 208, 0.9",
-    "243, 234, 203, 0.9",
-    "176, 192, 182, 0.9",
-    "28, 31, 43, 0.9",
-    "61, 66, 70, 0.9",
-    "17, 18, 20, 0.9"
+const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ],
+      themes = [
+        "235, 235, 235, 0.9",
+        "216, 216, 216, 0.9",
+        "229, 221, 208, 0.9",
+        "243, 234, 203, 0.9",
+        "176, 192, 182, 0.9",
+        "28, 31, 43, 0.9",
+        "61, 66, 70, 0.9",
+        "17, 18, 20, 0.9"
     ];
 
 export default class FocusOpt extends React.Component {
@@ -46,24 +46,6 @@ export default class FocusOpt extends React.Component {
     changeShortcuts( shortcuts ) {
         this.props.option.shortcuts = shortcuts;
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
-        /*
-        if ( event.type === "keydown" ) {
-            const key = fixKey( event );
-            keyword   =  key == "control" ? "ctrl" : key;
-            if ( verifyShortkey( keyword )) {
-                prevShortcuts = updateShortcuts();
-            } else if ( keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
-                new Notify().Render( 2, `当前输入不合法，快捷键只能包括：ctrl, shift, alt, 数字, 字母。` );
-            }
-        } else {
-            console.log( "prevShortcuts, keyword = ", prevShortcuts, keyword )
-            if ( /^[0-9a-z]{1}$/ig.test( keyword ) ) {
-                prevShortcuts         = updateShortcuts();
-            }
-        }
-        this.refs.shortcuts.value   = prevShortcuts;
-        this.props.option.shortcuts = prevShortcuts;
-        */
     }
 
     changExclude() {
@@ -78,10 +60,8 @@ export default class FocusOpt extends React.Component {
 
     componentDidMount() {
         this.refs.opacity.value   = this.props.option.opacity;
-        //this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
         this.refs.include.value   = this.props.option.site.include;
-        //prevShortcuts             = this.props.option.shortcuts;
     }
 
     constructor( props ) {
@@ -192,64 +172,3 @@ function getExclude( htmls ) {
     }
     return list;
 }
-
-/**
- * Update new shortcuts
- * 
- * @return {string} new shortcuts, e.g. [a s]
- */
-/*
-function updateShortcuts() {
-    console.log( "prevShortcuts = ", prevShortcuts )
-    const arr     = prevShortcuts.toLowerCase().trim().split(" ");
-    let shortcuts = null;
-    switch ( arr.length ) {
-        case 1:
-            shortcuts = `${arr[0]} ${keyword}`;
-            break;
-        case 2:
-            shortcuts = keyword;
-            break;
-        default:
-            console.log( "发生了一些错误。", prevShortcuts, keyword )
-            shortcuts = prevShortcuts;
-            break;
-    }
-    return shortcuts;
-}
-*/
-
-/**
- * Fix keyboard event key undefinde
- * 
- * @param  {event} keyboard event
- * @return {string} valid key, include 0~9 a~z ctrl shift alt
- */
-/*
-function fixKey( event ) {
-    const keycode = event.keyCode;
-    if ( [ 16, 17, 18 ].includes( keycode ) ) {
-        return event.key.toLowerCase().trim();
-    } else if ( keycode >= 49 || keycode <= 90 ) {
-        return event.nativeEvent.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
-    }
-}
-*/
-
-/**
- * Verify shortkey
- * 
- * @param  {string} shortkey, only include: ctrl shift alt number letters
- *                  e.g. [a b] [a 1] [1 b] [shift a] [a ctrl] [1 alt] [1 shift]
- * 
- * @return {boolean}
- */
-/*
-function verifyShortkey( key ) {
-    if ([ "control", "ctrl", "alt", "shift" ].includes( key )) {
-        return true;
-    } else {
-        return false;
-    }
-}
-*/
