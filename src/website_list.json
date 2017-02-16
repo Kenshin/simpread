@@ -379,7 +379,7 @@
         "include" : "<div class='entry'>",
         "exclude" : [
             "<div class='copyright-area'>",
-            "<sr-blockquote class='rewards'>",
+            "<blockquote class='rewards'>",
             "<div class='post-adds'>",
             "<div id='author-bio'>"
         ]
@@ -766,7 +766,6 @@
         ]
     },{
         "name"    : "wkee.net",
-		"override": true,
         "url"     : "http://wkee.net/post/",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
