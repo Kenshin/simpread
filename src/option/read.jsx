@@ -2,13 +2,14 @@ console.log( "===== simpread option read mode load =====" )
 
 import Notify from 'notify';
 import th     from 'theme';
+import ThemeSel from 'themesel';
 
-const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
 
 export default class ReadOpt extends React.Component {
 
-    changeBgColor () {
+    changeBgColor( theme ) {
+        /*
         if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
             const target     = event.target,
                   $target    = $(target),
@@ -20,10 +21,11 @@ export default class ReadOpt extends React.Component {
                 $active.removeAttr( "sr-type" );
                 $target.attr( "sr-type", activestyl );
             }
-            this.props.option.theme = theme;
-            th.Change( this.props.option.theme );
-            console.log( "this.props.option.theme = ", this.props.option.theme )
         }
+        */
+        this.props.option.theme = theme;
+        th.Change( this.props.option.theme );
+        console.log( "this.props.option.theme = ", this.props.option.theme )
     }
 
     changeShortcuts( event ) {
@@ -56,7 +58,7 @@ export default class ReadOpt extends React.Component {
     }
 
     componentDidMount() {
-        setBgThemeStyle( this.props.option.theme );
+        //setBgThemeStyle( this.props.option.theme );
         this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
         this.refs.include.value   = this.props.option.site.include;
@@ -72,9 +74,7 @@ export default class ReadOpt extends React.Component {
             <sr-opt-focus>
                 <sr-opt-gp>
                     <sr-opt-label>主题色：</sr-opt-label>
-                    <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
-                        {th.colors.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ th.names[idx] }></sr-opt-theme> )}
-                    </sr-opt-themes>
+                    <ThemeSel themes={ th.colors } names={ th.names } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>快捷键：</sr-opt-label>
@@ -181,6 +181,7 @@ function updateShortcuts() {
  * 
  * @param {string} theme name
  */
+/*
 function setBgThemeStyle( theme ) {
     const $themes    = $( "sr-opt-themes" ).children();
 
@@ -192,6 +193,7 @@ function setBgThemeStyle( theme ) {
          }
     }
 }
+*/
 
 /**
  * Fix keyboard event key undefinde
