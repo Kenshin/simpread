@@ -50,7 +50,6 @@ export default class FocusOpt extends React.Component {
     }
 
     changeInclude( value ) {
-        //if ( util.verifyHtml( event.target.value.trim() )[0] != -1 )this.props.option.site.include = event.target.value.trim();
         this.props.option.site.include = value;
         console.log( "this.props.option.site.include = ", this.props.option.site.include )
     }
@@ -63,7 +62,6 @@ export default class FocusOpt extends React.Component {
     componentDidMount() {
         this.refs.opacity.value   = this.props.option.opacity;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
-        //this.refs.include.value   = this.props.option.site.include;
     }
 
     constructor( props ) {

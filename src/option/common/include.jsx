@@ -6,7 +6,6 @@ export default class Include extends React.Component {
 
     changeInclude() {
         if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
-            //this.props.option.site.include = event.target.value.trim();
             this.props.changeInclude( event.target.value.trim() );
         }
     }

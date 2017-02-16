@@ -21,7 +21,6 @@ export default class ReadOpt extends React.Component {
     }
 
     changeInclude( value ) {
-        //if ( verifyHtml( event.target.value.trim() ) != -1 ) this.props.option.site.include = event.target.value.trim();
         this.props.option.site.include = value;
         console.log( "this.props.option.site.include = ", this.props.option.site.include )
     }
@@ -33,7 +32,6 @@ export default class ReadOpt extends React.Component {
 
     componentDidMount() {
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
-        //this.refs.include.value   = this.props.option.site.include;
     }
 
     constructor( props ) {
