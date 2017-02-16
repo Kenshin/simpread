@@ -9,20 +9,6 @@ let   [ prevShortcuts, keyword ] = [null, null ];
 export default class ReadOpt extends React.Component {
 
     changeBgColor( theme ) {
-        /*
-        if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
-            const target     = event.target,
-                  $target    = $(target),
-                  $parent    = $target.parent(),
-                  activestyl = "active",
-                  theme      = $target.attr( "name" ),
-                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' );
-            if ( $active ) {
-                $active.removeAttr( "sr-type" );
-                $target.attr( "sr-type", activestyl );
-            }
-        }
-        */
         this.props.option.theme = theme;
         th.Change( this.props.option.theme );
         console.log( "this.props.option.theme = ", this.props.option.theme )
@@ -58,7 +44,6 @@ export default class ReadOpt extends React.Component {
     }
 
     componentDidMount() {
-        //setBgThemeStyle( this.props.option.theme );
         this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
         this.refs.include.value   = this.props.option.site.include;
@@ -98,23 +83,6 @@ export default class ReadOpt extends React.Component {
         )
     }
 }
-
-/**
- * Get background color value
- * 
- * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {string} e.g. 235, 235, 235
- */
-/*
-function getColor( value ) {
-    const arr = value.match( /[0-9]+, /ig );
-    if ( arr.length > 0 ) {
-        return arr.join( "" ).replace( /, $/, "" );
-    } else {
-        return null;
-    }
-}
-*/
 
 /**
  * Get exclude tags
@@ -175,25 +143,6 @@ function updateShortcuts() {
     }
     return shortcuts;
 }
-
-/**
- * Set background style
- * 
- * @param {string} theme name
- */
-/*
-function setBgThemeStyle( theme ) {
-    const $themes    = $( "sr-opt-themes" ).children();
-
-    for ( let i = 0; i < $themes.length; i++ ) {
-         const $target = $($themes[i]),
-               name    = $target.attr( "name" );
-         if ( theme === name ) {
-             $target.attr( "sr-type", "active" );
-         }
-    }
-}
-*/
 
 /**
  * Fix keyboard event key undefinde
