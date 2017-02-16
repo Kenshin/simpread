@@ -1,7 +1,5 @@
 console.log( "===== simpread option common: ThemeSel =====" )
 
-const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
-
 export default class ThemeSel extends React.Component {
 
     changeBgColor () {
@@ -12,20 +10,11 @@ export default class ThemeSel extends React.Component {
                   activestyl = "active",
                   newval     = $target.attr( "name" ),
                   $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' );
-                  /*
-                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' ),
-                  bgcolor    = $target.css( bgcolorstyl ),
-                  color      = getColor( bgcolor ),
-                  opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
-                  newval     = `rgba(${color}, ${opacity})`;
-                  */
             if ( $active ) {
                 $active.removeAttr( "sr-type" );
                 $target.attr( "sr-type", activestyl );
             }
-            //this.props.option.bgcolor = newval;
-            console.log( "this.props.option.bgcolor = ", newval )
-            this.props.changeBgColor( newval );
+            this.props.changeBgColor( newval, $target );
         }
     }
 
