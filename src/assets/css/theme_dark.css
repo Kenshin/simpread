@@ -58,6 +58,7 @@ sr-rd-content {
 sr-rd-content *,
 sr-rd-content p,
 sr-rd-content div {
+    color: rgb(235, 235, 235);
     line-height: 1.7;
 }
 
