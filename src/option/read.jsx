@@ -5,6 +5,7 @@ import th        from 'theme';
 
 import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
+import Include   from 'include';
 
 export default class ReadOpt extends React.Component {
 
@@ -19,19 +20,20 @@ export default class ReadOpt extends React.Component {
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
+    changeInclude( value ) {
+        //if ( verifyHtml( event.target.value.trim() ) != -1 ) this.props.option.site.include = event.target.value.trim();
+        this.props.option.site.include = value;
+        console.log( "this.props.option.site.include = ", this.props.option.site.include )
+    }
+
     changExclude() {
         this.props.option.site.exclude = getExclude( event.target.value );
         console.log( "this.props.option.site.exclude = ", this.props.option.site.exclude )
     }
 
-    changeInclude() {
-        if ( verifyHtml( event.target.value.trim() ) != -1 ) this.props.option.site.include = event.target.value.trim();
-        console.log( "this.props.option.site.include = ", this.props.option.site.include )
-    }
-
     componentDidMount() {
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
-        this.refs.include.value   = this.props.option.site.include;
+        //this.refs.include.value   = this.props.option.site.include;
     }
 
     constructor( props ) {
@@ -60,7 +62,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>高亮区域：</sr-opt-label>
                     <sr-opt-item sr-type="include">
-                        <input ref="include" type="text" placeholder="默认为空，自动选择高亮区域。" onChange={ ()=>this.changeInclude() } />
+                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
                     </sr-opt-item>
                 </sr-opt-gp>
             </sr-opt-focus>

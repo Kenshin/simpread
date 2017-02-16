@@ -165,6 +165,7 @@ const webpack = require( 'webpack' ),
           readopt    : __dirname + '/src/option/read.jsx',
           themesel   : __dirname + '/src/option/common/theme.jsx',
           shortcuts  : __dirname + '/src/option/common/shortcuts.jsx',
+          include    : __dirname + '/src/option/common/include.jsx',
 
         }
       }
