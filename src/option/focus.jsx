@@ -3,6 +3,8 @@ console.log( "===== simpread option focus mode load =====" )
 import Notify    from 'notify';
 import * as util from 'util';
 
+import ThemeSel from 'themesel';
+
 const [ bgcolorstyl, bgcls     ] = [ "background-color", ".ks-simpread-bg" ];
 let   [ prevShortcuts, keyword ] = [null, null ];
 const themes = [
@@ -18,9 +20,16 @@ const themes = [
 
 export default class FocusOpt extends React.Component {
 
-    changeBgColor () {
+    changeBgColor( bgcolor, $target ) {
+        bgcolor       = $target.css( bgcolorstyl );
+        const color   = getColor( bgcolor ),
+              opacity = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
+              newval  = `rgba(${color}, ${opacity})`;
+        $( bgcls ).css( bgcolorstyl, newval );
+        this.props.option.bgcolor = newval;
+        console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
+        /*
         if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
-
             const target     = event.target,
                   $target    = $(target),
                   $parent    = $target.parent(),
@@ -30,18 +39,12 @@ export default class FocusOpt extends React.Component {
                   color      = getColor( bgcolor ),
                   opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
                   newval     = `rgba(${color}, ${opacity})`;
-
-            // set new background color
-            $( bgcls ).css( bgcolorstyl, newval );
-
-            // update active
             if ( $active ) {
                 $active.removeAttr( "sr-type" );
                 $target.attr( "sr-type", activestyl );
             }
-            this.props.option.bgcolor = newval;
-            console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
         }
+        */
     }
 
     changeOpacity() {
@@ -87,7 +90,7 @@ export default class FocusOpt extends React.Component {
     }
 
     componentDidMount() {
-        setBgThemeStyle( this.props.option.bgcolor );
+        //setBgThemeStyle( this.props.option.bgcolor );
         this.refs.opacity.value   = this.props.option.opacity;
         this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
@@ -104,9 +107,7 @@ export default class FocusOpt extends React.Component {
             <sr-opt-focus>
                 <sr-opt-gp>
                     <sr-opt-label>主题色：</sr-opt-label>
-                    <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
-                        {themes.map( theme => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}}></sr-opt-theme> )}
-                    </sr-opt-themes>
+                    <ThemeSel themes={ themes } names={ themes } theme={ getColor(this.props.option.bgcolor) + ", 0.9" } changeBgColor={ (val,target)=>this.changeBgColor(val,target) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度：</sr-opt-label>
@@ -235,6 +236,7 @@ function updateShortcuts() {
  * 
  * @param {string} background color
  */
+/*
 function setBgThemeStyle( bgcolor ) {
     const $themes    = $( "sr-opt-themes" ).children(),
           newcolor   = getColor( bgcolor );
@@ -247,6 +249,7 @@ function setBgThemeStyle( bgcolor ) {
          }
     }
 }
+*/
 
 /**
  * Fix keyboard event key undefinde
