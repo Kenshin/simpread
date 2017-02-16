@@ -71,7 +71,7 @@ sr-rd-content sr-blockquote {
     position: relative;
     padding: 15px 25px;
     text-align: left;
-    line-height: 1;
+    line-height: initial;
 }
 
 sr-rd-content sr-blockquote:before {
