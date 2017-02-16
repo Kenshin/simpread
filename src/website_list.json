@@ -776,6 +776,16 @@
 			"<div class='sharebar'>"
         ]
     },{
+        "name"    : "voidcn.com",
+        "url"     : "http://www.voidcn.com/blog/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div class='post-content'>",
+        "exclude" : [
+            "<div class='wumii-hook'>",
+			"[[/src=\\S+(pixel)\\S+'/]]"
+        ]
+    },{
         "name"    : "thepaper.cn",
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
