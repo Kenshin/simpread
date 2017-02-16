@@ -1,10 +1,12 @@
 console.log( "===== simpread option read mode load =====" )
 
-import Notify from 'notify';
-import th     from 'theme';
-import ThemeSel from 'themesel';
+import Notify    from 'notify';
+import th        from 'theme';
 
-let   [ prevShortcuts, keyword ] = [null, null ];
+import ThemeSel  from 'themesel';
+import Shortcuts from 'shortcuts';
+
+//let   [ prevShortcuts, keyword ] = [null, null ];
 
 export default class ReadOpt extends React.Component {
 
@@ -14,7 +16,10 @@ export default class ReadOpt extends React.Component {
         console.log( "this.props.option.theme = ", this.props.option.theme )
     }
 
-    changeShortcuts( event ) {
+    changeShortcuts( shortcuts ) {
+        this.props.option.shortcuts = shortcuts;
+        console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
+        /*
         if ( event.type === "keydown" ) {
             const key = fixKey( event );
             keyword   =  key == "control" ? "ctrl" : key;
@@ -31,6 +36,7 @@ export default class ReadOpt extends React.Component {
         }
         this.refs.shortcuts.value   = prevShortcuts;
         this.props.option.shortcuts = prevShortcuts;
+        */
     }
 
     changExclude() {
@@ -44,10 +50,10 @@ export default class ReadOpt extends React.Component {
     }
 
     componentDidMount() {
-        this.refs.shortcuts.value = this.props.option.shortcuts;
+        //this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
         this.refs.include.value   = this.props.option.site.include;
-        prevShortcuts             = this.props.option.shortcuts;
+        //prevShortcuts             = this.props.option.shortcuts;
     }
 
     constructor( props ) {
@@ -64,7 +70,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>快捷键：</sr-opt-label>
                     <sr-opt-item sr-type="shortcuts">
-                        <input ref="shortcuts" type="text" onKeyDown={ (event)=> this.changeShortcuts(event) }  onChange={ (event)=>this.changeShortcuts(event) } />
+                        <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
@@ -125,6 +131,7 @@ function getExclude( htmls ) {
  * 
  * @return {string} new shortcuts, e.g. [a s]
  */
+/*
 function updateShortcuts() {
     console.log( "prevShortcuts = ", prevShortcuts )
     const arr     = prevShortcuts.toLowerCase().trim().split(" ");
@@ -143,6 +150,7 @@ function updateShortcuts() {
     }
     return shortcuts;
 }
+*/
 
 /**
  * Fix keyboard event key undefinde
@@ -150,6 +158,7 @@ function updateShortcuts() {
  * @param  {event} keyboard event
  * @return {string} valid key, include 0~9 a~z ctrl shift alt
  */
+/*
 function fixKey( event ) {
     const keycode = event.keyCode;
     if ( [ 16, 17, 18 ].includes( keycode ) ) {
@@ -158,6 +167,7 @@ function fixKey( event ) {
         return event.nativeEvent.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
     }
 }
+*/
 
 /**
  * Verify shortkey
@@ -167,6 +177,7 @@ function fixKey( event ) {
  * 
  * @return {boolean}
  */
+/*
 function verifyShortkey( key ) {
     if ([ "control", "ctrl", "alt", "shift" ].includes( key )) {
         return true;
@@ -174,6 +185,7 @@ function verifyShortkey( key ) {
         return false;
     }
 }
+*/
 
 /**
  * Verify html
