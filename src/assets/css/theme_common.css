@@ -58,6 +58,10 @@ sr-rd-content a {
     padding: 0 5px;
 }
 
+sr-rd-content a:hover {
+    background: transparent;
+}
+
 sr-rd-content img {
     margin: 10px;
     padding: 5px;
