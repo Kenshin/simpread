@@ -1,11 +1,12 @@
 console.log( "===== simpread option focus mode load =====" )
 
-import Notify    from 'notify';
-import * as util from 'util';
+//import Notify    from 'notify';
+//import * as util from 'util';
 
 import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
 import Include   from 'include';
+import Exclude   from 'exclude';
 
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ],
       themes = [
@@ -54,14 +55,15 @@ export default class FocusOpt extends React.Component {
         console.log( "this.props.option.site.include = ", this.props.option.site.include )
     }
 
-    changExclude() {
-        this.props.option.site.exclude = getExclude( event.target.value );
+    changeExclude( value ) {
+        //this.props.option.site.exclude = getExclude( event.target.value );
+        this.props.option.site.exclude = value;
         console.log( "this.props.option.site.exclude = ", this.props.option.site.exclude )
     }
 
     componentDidMount() {
         this.refs.opacity.value   = this.props.option.opacity;
-        this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
+        //this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
     }
 
     constructor( props ) {
@@ -93,7 +95,7 @@ export default class FocusOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>隐藏列表：</sr-opt-label>
                     <sr-opt-item sr-type="exclude">
-                        <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changExclude() }></textarea>
+                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
@@ -160,6 +162,7 @@ function getColor( value ) {
     <div class="ks-simpread-bg">
  * 
  */
+/*
 function getExclude( htmls ) {
     let [ list, obj ]  = [[], null ];
     const arr = htmls.trim().split( "\n" );
@@ -172,3 +175,4 @@ function getExclude( htmls ) {
     }
     return list;
 }
+*/

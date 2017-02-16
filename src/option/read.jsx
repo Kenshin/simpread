@@ -1,11 +1,12 @@
 console.log( "===== simpread option read mode load =====" )
 
-import Notify    from 'notify';
+//import Notify    from 'notify';
 import th        from 'theme';
 
 import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
 import Include   from 'include';
+import Exclude   from 'exclude';
 
 export default class ReadOpt extends React.Component {
 
@@ -25,14 +26,15 @@ export default class ReadOpt extends React.Component {
         console.log( "this.props.option.site.include = ", this.props.option.site.include )
     }
 
-    changExclude() {
-        this.props.option.site.exclude = getExclude( event.target.value );
+    changeExclude( value ) {
+        //this.props.option.site.exclude = getExclude( event.target.value );
+        this.props.option.site.exclude = value;
         console.log( "this.props.option.site.exclude = ", this.props.option.site.exclude )
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
-    }
+    }*/
 
     constructor( props ) {
         super( props );
@@ -54,7 +56,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>隐藏列表：</sr-opt-label>
                     <sr-opt-item sr-type="exclude">
-                        <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changExclude() }></textarea>
+                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
@@ -91,6 +93,7 @@ export default class ReadOpt extends React.Component {
     <div class="ks-simpread-bg">
  * 
  */
+/*
 function getExclude( htmls ) {
     let [ list, obj ]  = [[], null ];
     const arr = htmls.trim().split( "\n" );
@@ -103,6 +106,7 @@ function getExclude( htmls ) {
     }
     return list;
 }
+*/
 
 /**
  * Verify html
@@ -113,6 +117,7 @@ function getExclude( htmls ) {
  * @return {int} -1: fail； 0: emputy html; 1:success
  * 
  */
+/*
 function verifyHtml( html ) {
     if ( html == "" ) return 0;
     const item = html.match( / (class|id)=("|')[\w-_]+/ig );
@@ -124,3 +129,4 @@ function verifyHtml( html ) {
         return -1;
     }
 }
+*/

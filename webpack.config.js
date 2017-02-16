@@ -166,6 +166,7 @@ const webpack = require( 'webpack' ),
           themesel   : __dirname + '/src/option/common/theme.jsx',
           shortcuts  : __dirname + '/src/option/common/shortcuts.jsx',
           include    : __dirname + '/src/option/common/include.jsx',
+          exclude    : __dirname + '/src/option/common/exclude.jsx',
 
         }
       }
