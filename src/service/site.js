@@ -223,7 +223,10 @@ async function specbeautify( name, $target ) {
             break;
         case "cnblogs.com":
             $target.find( ".cnblogs_code" ).removeClass();
+            $target.find( ".cnblogs_code_hide" ).removeClass().removeAttr( "style" );
             $target.find( ".cnblogs_code_toolbar" ).remove();
+            $target.find( ".code_img_opened" ).remove();
+            $target.find( ".code_img_closed" ).remove();
             break;
         case "news.cnblogs.com":
             $target.find( ".topic_img" ).remove();
