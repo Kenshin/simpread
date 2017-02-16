@@ -28,23 +28,6 @@ export default class FocusOpt extends React.Component {
         $( bgcls ).css( bgcolorstyl, newval );
         this.props.option.bgcolor = newval;
         console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
-        /*
-        if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
-            const target     = event.target,
-                  $target    = $(target),
-                  $parent    = $target.parent(),
-                  activestyl = "active",
-                  $active    = $parent.find( 'sr-opt-theme[sr-type="active"]' ),
-                  bgcolor    = $target.css( bgcolorstyl ),
-                  color      = getColor( bgcolor ),
-                  opacity    = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
-                  newval     = `rgba(${color}, ${opacity})`;
-            if ( $active ) {
-                $active.removeAttr( "sr-type" );
-                $target.attr( "sr-type", activestyl );
-            }
-        }
-        */
     }
 
     changeOpacity() {
@@ -90,7 +73,6 @@ export default class FocusOpt extends React.Component {
     }
 
     componentDidMount() {
-        //setBgThemeStyle( this.props.option.bgcolor );
         this.refs.opacity.value   = this.props.option.opacity;
         this.refs.shortcuts.value = this.props.option.shortcuts;
         this.refs.exclude.value   = this.props.option.site.exclude.join( "\n") ;
@@ -230,26 +212,6 @@ function updateShortcuts() {
     }
     return shortcuts;
 }
-
-/**
- * Set background style
- * 
- * @param {string} background color
- */
-/*
-function setBgThemeStyle( bgcolor ) {
-    const $themes    = $( "sr-opt-themes" ).children(),
-          newcolor   = getColor( bgcolor );
-
-    for ( let i = 0; i < $themes.length; i++ ) {
-         const $target = $($themes[i]),
-               color   = getColor( $target.css( "background-color" ));
-         if ( newcolor === color ) {
-             $target.attr( "sr-type", "active" );
-         }
-    }
-}
-*/
 
 /**
  * Fix keyboard event key undefinde
