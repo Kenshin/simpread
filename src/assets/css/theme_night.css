@@ -39,6 +39,7 @@ sr-rd-desc {
     margin-left: 0;
     padding-left: 1.875rem;
     font-size: 2rem;
+    line-height: 2;
     color: #b8bfc6;
     border-left: solid 2px #474d54;
 }

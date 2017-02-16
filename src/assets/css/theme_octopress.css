@@ -38,7 +38,7 @@ sr-rd-title {
 sr-rd-desc {
     font-style: italic;
     font-size: 1.92rem;
-    line-height: 2.4rem;
+    line-height: 2;
     padding-left: 1em;
     border-left: 4px solid rgba(170,170,170,0.5);
 }

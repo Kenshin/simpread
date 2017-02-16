@@ -50,6 +50,7 @@ sr-rd-desc {
     padding: 0.5rem 1.11111rem 0px 1.05556rem;
 
     font-size: 2rem;
+    line-height: 2;
     color: rgb(111, 111, 111);
 
     border-left: 1px solid gray;
