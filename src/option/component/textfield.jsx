@@ -1,6 +1,6 @@
 console.log( "==== simpread option component: TextField ====" )
 
-let root  = "text-field",
+let root  = "text-field", placeholder,
     $root, $input;
 
 export default class TextField extends React.Component {
@@ -11,15 +11,20 @@ export default class TextField extends React.Component {
     }
 
     changeBlur() {
-        if ( $input.val() == "" ) {
+        if ( $input.val() == "" && placeholder == "" ) {
             $( "text-field-float" ).removeAttr( "class" );
         }
         $( "hr" ).removeAttr( "class" );
     }
 
     componentDidMount() {
-        $root  = $(root);
-        $input = $root.find( "input" );
+        $root       = $(root);
+        $input      = $root.find( "input" );
+        placeholder = $input.attr( "placeholder" );
+
+        if ( placeholder != "" ) {
+            $( "text-field-float" ).addClass( "text-field-floated" );
+        }
     }
 
     render() {
@@ -28,7 +33,7 @@ export default class TextField extends React.Component {
                 <text-field-float ref="float">高亮内容</text-field-float>
                 <input ref="include" 
                        type="text" 
-                       placeholder="" 
+                       placeholder="默认为空，自动选择高亮区域。" 
                        onFocus={ ()=>this.changeFocus() }
                        onBlur= { ()=>this.changeBlur() }
                 />
