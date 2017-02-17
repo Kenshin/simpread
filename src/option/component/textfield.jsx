@@ -1,30 +1,32 @@
 console.log( "==== simpread option component: TextField ====" )
 
 let root  = "text-field", placeholder,
-    $root, $input,
+    $root, $input, $float, $hr,
     element;
 
 export default class TextField extends React.Component {
 
     changeFocus() {
-        $( "text-field-float" ).addClass( "text-field-floated" );
-        $( "hr" ).addClass( "text-field-hr-focus" );
+        $float.addClass( "text-field-floated" );
+        $hr.addClass( "text-field-hr-focus" );
     }
 
     changeBlur() {
         if ( $input.val() == "" && placeholder == "" ) {
-            $( "text-field-float" ).removeAttr( "class" );
+            $float.removeAttr( "class" );
         }
-        $( "hr" ).removeAttr( "class" );
+        $hr.removeAttr( "class" );
     }
 
     componentDidMount() {
         $root       = $(root);
-        $input      = $root.find( "input" );
+        $input      = this.props.multi ? $root.find( "textarea" ) : $root.find( "input" );
+        $float      = $input.prev();
+        $hr         = $input.next().find( "hr" );
         placeholder = $input.attr( "placeholder" );
 
         if ( placeholder != "" ) {
-            $( "text-field-float" ).addClass( "text-field-floated" );
+            $float.addClass( "text-field-floated" );
         }
     }
 
@@ -36,7 +38,7 @@ export default class TextField extends React.Component {
 
         element = this.props.multi ? (
             <textarea ref="textfield" 
-                       placeholder="默认为空，自动选择高亮区域。" 
+                       placeholder="" 
                        onFocus={ ()=>this.changeFocus() }
                        onBlur= { ()=>this.changeBlur() }
             />
