@@ -53,7 +53,7 @@
             "[[[$('.article-btn')]]]",
             "<div class='article-footer'>",
             "<p class='report-view'>",
-            "<img class='img-focus'>"
+            "[[/src=\\S+(146241438767289600_a580xH)\\S+'/]]"
         ]
     },{
         "name"    : "ifanr.com",
