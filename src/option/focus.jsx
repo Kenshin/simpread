@@ -5,6 +5,8 @@ import Shortcuts from 'shortcuts';
 import Include   from 'include';
 import Exclude   from 'exclude';
 
+import TextField from 'textfield';
+
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ],
       themes = [
         "235, 235, 235, 0.9",
@@ -94,6 +96,12 @@ export default class FocusOpt extends React.Component {
                     <sr-opt-item sr-type="include">
                         <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
                     </sr-opt-item>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <TextField multi={ true } />
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <TextField multi={ false } />
                 </sr-opt-gp>
             </sr-opt-focus>
         )
