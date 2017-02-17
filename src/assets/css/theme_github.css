@@ -12,7 +12,6 @@ sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-conten
 sr-rd-content ul,sr-rd-content ol{list-style-type: disc;padding:0;padding-left:2em;}sr-rd-content ol ol,sr-rd-content ul ol{list-style-type:lower-roman}sr-rd-content ul ul ol,sr-rd-content ul ol ol,sr-rd-content ol ul ol,sr-rd-content ol ol ol{list-style-type:lower-alpha}
 sr-rd-content table{width:100%;overflow:auto;word-break:normal;word-break:keep-all}sr-rd-content table th{font-weight:bold}sr-rd-content table th,sr-rd-content table td{padding:6px 13px;border:1px solid #ddd}sr-rd-content table tr{background-color:#fff;border-top:1px solid #ccc}sr-rd-content table tr:nth-child(2n){background-color:#f8f8f8}
 sr-rd-content sr-blockquote {
-    color: #777;
     border-left: 4px solid #ddd;
 }
 
@@ -40,6 +39,7 @@ sr-rd-desc {
     padding: 25px;
     padding-left: 56px;
     font-size: 1.8rem;
+    color: #777;
     background-color: rgba(0,0,0,0.05);
 }
 

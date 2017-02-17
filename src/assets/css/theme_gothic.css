@@ -18,12 +18,8 @@ sr-rd-content sr-blockquote {
 }
 sr-rd-content sr-blockquote,
 sr-rd-content sr-blockquote p {
-    line-height: 1.6;
+    line-height: 2;
     color: #6f6f6f;
-}
-
-sr-rd-content sr-blockquote:before {
-    content: '';
 }
 
 /**
