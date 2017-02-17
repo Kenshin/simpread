@@ -1,7 +1,8 @@
 console.log( "==== simpread option component: TextField ====" )
 
 let root  = "text-field", placeholder,
-    $root, $input;
+    $root, $input,
+    element;
 
 export default class TextField extends React.Component {
 
@@ -27,16 +28,31 @@ export default class TextField extends React.Component {
         }
     }
 
+     constructor( props ) {
+        super( props );
+    }
+
     render() {
-        return (
-            <text-field>
-                <text-field-float ref="float">高亮内容</text-field-float>
-                <input ref="include" 
+
+        element = this.props.multi ? (
+            <textarea ref="textfield" 
+                       placeholder="默认为空，自动选择高亮区域。" 
+                       onFocus={ ()=>this.changeFocus() }
+                       onBlur= { ()=>this.changeBlur() }
+            />
+        ) : (
+            <input ref="textfield" 
                        type="text" 
                        placeholder="默认为空，自动选择高亮区域。" 
                        onFocus={ ()=>this.changeFocus() }
                        onBlur= { ()=>this.changeBlur() }
-                />
+             />
+        );
+
+        return (
+            <text-field>
+                <text-field-float ref="float">高亮内容</text-field-float>
+                { element }
                 <div>
                     <text-field-hr/>
                     <hr/>
