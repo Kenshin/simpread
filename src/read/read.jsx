@@ -204,7 +204,8 @@ async function htmlbeautify( $target ) {
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
  * - task: all hr tag add sr-rd-content-exclude class
- * - task: all pre tag remove class
+ * - task: all pre/code tag remove class
+ * - task: all a tag remove style
  * 
  * @param {jquery}
  */
@@ -276,7 +277,7 @@ async function commbeautify( $target ) {
            $parent.removeClass( "quote" );
         }
     });
-    $target.find( "iframe, embed" ).map( ( index, item )=> {
+    $target.find( "iframe:not(.sr-rd-content-nobeautify), embed:not(.sr-rd-content-nobeautify)" ).map( ( index, item )=> {
         $(item).wrap( "<div class='sr-rd-content-center'></div>" );
     });
     $target.find( "hr" ).map( ( index, item )=> {
@@ -286,6 +287,7 @@ async function commbeautify( $target ) {
         $(item).find( "code" ).removeAttr( "class" );
     });
     $target.find( "pre" ).removeAttr( "class" );
+    $target.find( "a" ).removeAttr( "style" );
 }
 
 export { Render, Exist };

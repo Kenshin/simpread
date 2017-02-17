@@ -10,7 +10,7 @@ function getURI() {
     //return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
     const name = (pathname) => {
         pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
-        return pathname.replace( /\/[@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
+        return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
     },
     path = name( window.location.pathname );
     return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
@@ -141,6 +141,7 @@ async function specbeautify( name, $target ) {
             $target.find( ".review-content" ).children().unwrap();
             $target.find( "table" ).addClass( "sr-rd-content-center" );
             $target.find( "p" ).css({"white-space": "pre-wrap"});
+            $target.find( ".cc" ).removeClass();
             break;
         case "qdaily.com":
             $target.find( "img" ).map( (index, item) => {
@@ -222,7 +223,10 @@ async function specbeautify( name, $target ) {
             break;
         case "cnblogs.com":
             $target.find( ".cnblogs_code" ).removeClass();
+            $target.find( ".cnblogs_code_hide" ).removeClass().removeAttr( "style" );
             $target.find( ".cnblogs_code_toolbar" ).remove();
+            $target.find( ".code_img_opened" ).remove();
+            $target.find( ".code_img_closed" ).remove();
             break;
         case "news.cnblogs.com":
             $target.find( ".topic_img" ).remove();
@@ -244,6 +248,46 @@ async function specbeautify( name, $target ) {
             break;
         case "segmentfault.com":
             $target.find( ".widget-codetool" ).remove();
+            break;
+        case "mp.weixin.qq.com":
+            $target.find( 'section[powered-by="xiumi.us"]' ).find( "img" ).map( ( index, item ) => {
+                const $target = $(item),
+                      src     = $target.attr( "data-src" );
+                $target.addClass( "sr-rd-content-nobeautify" ).attr( "src", src );
+            });
+            break;
+         case "ruby-china.org":
+            $target.find( ".twemoji" ).remove();
+            break;
+        case "w3cplus.com":
+            $target.find( "iframe" ).addClass( "sr-rd-content-nobeautify" );
+            break;
+        case "aotu.io":
+            $target.find( ".highlight table" ).map( ( index, item ) => {
+                const $target = $(item),
+                      $pre    = $target.find( "pre" ),
+                      $table  = $target.find( "table" );
+                $target.html( $pre[1] );
+                $table.unwrap();
+            });
+            $target.find( "table" ).addClass( "sr-rd-content-center" );
+            break;
+        case "colobu.com":
+            $target.find( ".highlight table" ).map( ( index, item ) => {
+                const $target = $(item),
+                      $pre    = $target.find( "pre" );
+                $target.html( $pre[1] );
+                $target.unwrap();
+            });
+            break;
+        case "hao.caibaojian.com":
+            $target.find( ".tlink" ).map( ( index, item ) => {
+                const $target = $(item);
+                $target.html( "<link>" );
+            });
+            break;
+        case "wkee.net":
+            $target.find( "script" ).remove();
             break;
     }
 }

@@ -9,7 +9,7 @@ sr-rd-theme-gothic{display:none;}
  */
 
 sr-rd-content h1{line-height:4rem;margin:4rem 0 1.75rem;padding:20px 30px}sr-rd-content h1,sr-rd-content h2{font-weight:400;text-align:center;text-transform:uppercase}sr-rd-content h2{line-height:3rem;margin:3rem 0 1.9375rem;padding:0 30px}sr-rd-content h3,sr-rd-content h4,sr-rd-content h5{font-weight:400}sr-rd-content h6{font-weight:700}sr-rd-content h1{font-size:3.6rem}sr-rd-content h2{font-size:3.2rem}sr-rd-content h3{font-size:2.5rem}sr-rd-content h4{font-size:2.2rem}sr-rd-content h5{font-size:1.9rem}sr-rd-content h6{font-size:1.7rem}sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{margin-top:1.2em;margin-bottom:0.6em;color:#111}
-sr-rd-content ol,sr-rd-content ul{list-style-type:disc;margin-left:3em}sr-rd-content ol ol,sr-rd-content ul ol{list-style-type:lower-roman}sr-rd-content ol ol ol,sr-rd-content ol ul ol,sr-rd-content ul ol ol,sr-rd-content ul ul ol{list-style-type:lower-alpha}
+sr-rd-content ol,sr-rd-content ul{list-style-type:disc}sr-rd-content ul, sr-rd-content ol{margin-left:3em}sr-rd-content ol ol,sr-rd-content ul ol{list-style-type:lower-roman}sr-rd-content ol ol ol,sr-rd-content ol ul ol,sr-rd-content ul ol ol,sr-rd-content ul ul ol{list-style-type:lower-alpha}
 sr-rd-content table{margin-bottom:20px}sr-rd-content table th,sr-rd-content table td{padding:8px;line-height:1.25rem;vertical-align:top;border-top:1px solid #ddd}sr-rd-content table th{font-weight:bold}sr-rd-content table thead th{vertical-align:bottom}sr-rd-content table caption+thead tr:first-child th,sr-rd-content table caption+thead tr:first-child td,sr-rd-content table colgroup+thead tr:first-child th,sr-rd-content table colgroup+thead tr:first-child td,sr-rd-content table thead:first-child tr:first-child th,sr-rd-content table thead:first-child tr:first-child td{border-top:0}sr-rd-content table tbody+tbody{border-top:2px solid #ddd}
 sr-rd-content sr-blockquote {
     margin: 0 0 1.11111rem;
@@ -18,12 +18,8 @@ sr-rd-content sr-blockquote {
 }
 sr-rd-content sr-blockquote,
 sr-rd-content sr-blockquote p {
-    line-height: 1.6;
+    line-height: 2;
     color: #6f6f6f;
-}
-
-sr-rd-content sr-blockquote:before {
-    content: '';
 }
 
 /**
@@ -50,6 +46,7 @@ sr-rd-desc {
     padding: 0.5rem 1.11111rem 0px 1.05556rem;
 
     font-size: 2rem;
+    line-height: 2;
     color: rgb(111, 111, 111);
 
     border-left: 1px solid gray;

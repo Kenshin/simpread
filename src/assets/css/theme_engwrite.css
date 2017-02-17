@@ -11,7 +11,21 @@ sr-rd-theme-engwrite{display:none;}
 sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{margin:20px 0 10px;padding:0;font-weight:500;-webkit-font-smoothing:antialiased}sr-rd-content h1{font-weight:300;text-align:center;font-size:2.8rem;color:#933d3f}sr-rd-content h2{font-size:2.4rem;border-bottom:1px solid #ccc;color:#000}sr-rd-content h3{font-size:1.8rem}sr-rd-content h4,sr-rd-content h5{font-size:1.6rem}sr-rd-content h6{color:#777;font-size:1.6rem}
 sr-rd-content ul,sr-rd-content ol{padding-left:30px}sr-rd-content ul li>:first-child,sr-rd-content ol li>:first-child,sr-rd-content ul li ul:first-of-type,sr-rd-content ol li ol:first-of-type,sr-rd-content ul li ol:first-of-type,sr-rd-content ol li ul:first-of-type{margin-top:0}sr-rd-content ul ul,sr-rd-content ul ol,sr-rd-content ol ol,sr-rd-content ol ul{margin-bottom:0}
 sr-rd-content table th{font-weight:bold}sr-rd-content table th,sr-rd-content table td{border:1px solid #ccc;padding:6px 13px}sr-rd-content table tr{border-top:1px solid #ccc;background-color:#fff}sr-rd-content table tr:nth-child(2n){background-color:#f8f8f8}
-sr-blockquote{text-align:left;border-top:1px dotted #cdc7bc;border-bottom:1px dotted #cdc7bc;padding:0 15px;background-color:#f8edda;color:#777}sr-blockquote>:first-child{margin-top:0}sr-blockquote>:last-child{margin-bottom:0}
+sr-rd-content sr-blockquote {
+    text-align: left;
+    border-top: 1px dotted #cdc7bc;
+    border-bottom: 1px dotted #cdc7bc;
+    background-color: #f8edda;
+    color: #777
+}
+
+sr-blockquote >:first-child {
+    margin-top: 0
+}
+
+sr-blockquote >:last-child {
+    margin-bottom: 0
+}
 
 /**
  * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
@@ -30,7 +44,7 @@ sr-rd-title {
 }
 
 sr-rd-desc {
-    padding: 5px;
+    padding: 10px;
     background-color: rgb(248, 237, 218);
     color: rgb(119, 119, 119);
     font-size: 2rem;
@@ -50,7 +64,7 @@ sr-rd-content *,
 sr-rd-content p,
 sr-rd-content div {
     color: rgb(51, 51, 51);
-	line-height: 1.8;
+    line-height: 1.8;
 }
 
 sr-rd-content a,
@@ -62,7 +76,7 @@ sr-rd-content a:link {
 sr-rd-content a:hover,
 sr-rd-content a:focus,
 sr-rd-content a:active {
-    color: rgb(174, 55, 55);
+    text-decoration: underline;
 }
 
 sr-rd-content pre {

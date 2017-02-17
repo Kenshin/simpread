@@ -163,6 +163,10 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/option/dialog.jsx',
           focusopt   : __dirname + '/src/option/focus.jsx',
           readopt    : __dirname + '/src/option/read.jsx',
+          themesel   : __dirname + '/src/option/common/theme.jsx',
+          shortcuts  : __dirname + '/src/option/common/shortcuts.jsx',
+          include    : __dirname + '/src/option/common/include.jsx',
+          exclude    : __dirname + '/src/option/common/exclude.jsx',
 
         }
       }

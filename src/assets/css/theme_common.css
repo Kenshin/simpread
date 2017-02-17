@@ -58,6 +58,10 @@ sr-rd-content a {
     padding: 0 5px;
 }
 
+sr-rd-content a:hover {
+    background: transparent;
+}
+
 sr-rd-content img {
     margin: 10px;
     padding: 5px;
@@ -71,7 +75,7 @@ sr-rd-content sr-blockquote {
     position: relative;
     padding: 15px 25px;
     text-align: left;
-    line-height: 1;
+    line-height: inherit;
 }
 
 sr-rd-content sr-blockquote:before {
@@ -86,23 +90,41 @@ sr-rd-content sr-blockquote * {
 sr-rd-content table {
     width: 100%;
     margin: 0 0 1.2em 0;
+    word-break: keep-all;
+    word-break:normal;
+    overflow: auto;
+    border: none;
+}
+
+sr-rd-content table th, sr-rd-content table td {
+    border: none;
+}
+
+sr-rd-content ul, sr-rd-content ol {
+    margin: 0;
+    padding: 0;
 }
 
 sr-rd-content ul {
     margin: 0 0 1.2em 0;
-    padding: 0;
     margin-left: 1.3em;
-    list-style: disc;
-    line-height: 1.1;
-}
-
-sr-rd-content ul li, sr-rd-content ol li {
+    padding: 0;
     list-style: disc;
 }
 
 sr-rd-content ol {
     list-style: decimal;
-    margin-left: 1.9em;
+    margin-left: 1.3em;
+}
+
+sr-rd-content ul li, sr-rd-content ol li {
+    list-style: disc;
+    margin: 0 0 1.2em 0;
+}
+
+sr-rd-content ul li *, sr-rd-content ol li * {
+    margin: 0;
+    text-align: initial;
 }
 
 sr-rd-content li ul, sr-rd-content li ol {
@@ -129,9 +151,14 @@ sr-rd-content pre {
     overflow: auto;
 }
 
+sr-rd-content pre div {
+    font-size: 1.1rem;
+}
+
 sr-rd-content pre * {
     font-size: 1.1rem;
 }
+
 
 sr-rd-content pre,
 sr-rd-content li pre code,
