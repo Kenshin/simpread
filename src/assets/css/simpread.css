@@ -586,3 +586,96 @@ sr-read-ctl {
     width: 100px;
     height: 100%;
 }
+
+/**
+ *  Custom component
+ */
+
+text-field {
+    font: 300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+
+    display: inline-block;
+    position: relative;
+
+    width: 100%;
+    height: 72px;
+}
+
+text-field input[type="text"] {
+    color: rgba(51, 51, 51, .87);
+    background-color: transparent;
+
+    height: 20px;
+    width: 100%;
+
+    margin-top: 14px;
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
+
+text-field-float {
+    display: block;
+    position: absolute;
+
+    top: 12px;
+
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.298039);
+
+    user-select: none;
+    pointer-events: none;
+
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    transform: scale(1) translate( 0px, 0px );
+    transform-origin: left top 0px;
+}
+
+.text-field-floated {
+    color: #00897B;
+
+    top: -8px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    transform: scale(0.75) translate( 0px, -8px );
+}
+
+text-field-hr {
+    display: block;
+    border-top: none rgb(224, 224, 224);
+    border-left: none rgb(224, 224, 224);
+    border-right: none rgb(224, 224, 224);
+    border-bottom: 1px solid rgb(224, 224, 224);
+    bottom: 28px;
+    box-sizing: content-box;
+    margin: 0px;
+    position: absolute;
+    width: 100%;
+}
+
+hr {
+    display: block;
+    border-top: none rgb(0, 188, 212);
+    border-left: none rgb(0, 188, 212);
+    border-right: none rgb(0, 188, 212);
+    border-bottom: 2px solid rgb(0, 188, 212);
+    bottom: 28px;
+    box-sizing: content-box;
+    margin: 0px;
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.text-field-hr-focus {
+    transform: scaleX(1);
+}
