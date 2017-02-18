@@ -625,28 +625,19 @@ text-field textarea {
     color: rgba(51, 51, 51, .87);
     background-color: transparent;
 
-    height: 48px;
+    height: 60px;
     width: 100%;
 
-    margin-top: 36px;
-    margin-bottom: -36px;
+    top: 20px;
     padding: 0px;
 
-    resize: none;
-
-    /*font-style: inherit;
-    font-variant: inherit;
-    font-weight: inherit;
-    font-stretch: inherit;
-    font-size: inherit;
-    font-family: inherit;
-
-    line-height: inherit;*/
+    line-height: 1.2;
 
     cursor: inherit;
 
     border: none;
     outline: none;
+    resize: none;
 
     box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -682,7 +673,7 @@ text-field-float {
     transform: scale(0.75) translate( 0px, -8px );
 }
 
-text-field-hr {
+text-field-border {
     display: block;
     border-top: none rgb(224, 224, 224);
     border-left: none rgb(224, 224, 224);
