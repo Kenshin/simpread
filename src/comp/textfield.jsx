@@ -4,10 +4,13 @@ let root  = "text-field", hint,
     $target, $float, $state, $border, $error,
     element;
 
+const [ MIN_ROWS, steps ] = [ 3, 24 ];
+
 export default class TextField extends React.Component {
 
     static defaultProps = {
         multi       : false,
+        rows        : MIN_ROWS,
         placeholder : "",
         floatingtext: "",
         errortext   : "",
@@ -15,6 +18,7 @@ export default class TextField extends React.Component {
 
     static propTypes = {
         multi       : React.PropTypes.bool,
+        rows        : React.PropTypes.number,
         placeholder : React.PropTypes.string,
         errortext   : React.PropTypes.string,
         floatingtext: React.PropTypes.string,
@@ -56,6 +60,13 @@ export default class TextField extends React.Component {
 
         if ( this.props.floatingtext == "" ) $float.hide();
         if ( $target.attr( "placeholder" ) != "" ) $float.addClass( "text-field-floated" );
+        if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
+            const rows   = this.props.rows - MIN_ROWS,
+                  height = $target.height(),
+                  parheight = $target.parent().height();
+            $target.height( height + rows * steps );
+            $target.parent().height( parheight + rows * steps );
+        }
     }
 
      constructor( props ) {
