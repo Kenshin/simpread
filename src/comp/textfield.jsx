@@ -1,7 +1,7 @@
 console.log( "==== simpread component: TextField ====" )
 
 let root  = "text-field", hint,
-    $root, $target, $input, $float, $hr, $border,
+    $target, $float, $state, $error, $border,
     element;
 
 export default class TextField extends React.Component {
@@ -21,46 +21,42 @@ export default class TextField extends React.Component {
     }
 
     changeFocus() {
-        $target  = $( event.target );
-        $float   = $target.prev();
-        $hr      = $target.next().find( "hr" );
+        $target = $( this.refs.target );
+        $state  = $( this.refs.state );
         $float.addClass( "text-field-floated" );
-        $hr.addClass( "text-field-hr-focus" );
+        $state.addClass( "text-field-hr-focus" );
         $target.css( "font-size", "13px" );
     }
 
     changeBlur() {
-        $target     = $( event.target );
-        $float      = $target.prev();
-        $hr         = $target.next().find( "hr" );
+        $target     = $( this.refs.target );
         hint        = $target.attr( "placeholder" );
         const val   = $target.val();
         if ( val == "" && hint == "" ) {
             $float.removeAttr( "class" );
         }
-        $hr.removeAttr( "class" );
+        $state.removeAttr( "class" );
         if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
     changeHeight() {
         const [ oriheight, steps ] = [ 28, 24 ];
         let  height= oriheight,
-             rows  = this.refs.textarea.value.split( "\n" ).length - 1;
+             rows  = this.refs.target.value.split( "\n" ).length - 1;
         if ( rows > 2 ) rows = 2;
-        $target    = $( event.target );
-        $hr        = $target.next().find( "hr" );
-        $border    = $target.next().find( "text-field-border" );
         if ( rows == 0 ) height = oriheight;
         else             height = oriheight - rows * steps;
-        $hr.css("bottom", height );
+        $state.css("bottom", height );
         $border.css("bottom", height );
     }
 
     componentDidMount() {
-        $root       = $(root);
-        $input      = this.props.multi ? $root.find( "textarea" ) : $root.find( "input" );
-        $float      = $input.prev();
-        hint        = $input.attr( "placeholder" );
+        $target     = $( this.refs.target );
+        $float      = $( this.refs.float );
+        $state      = $( this.refs.state );
+        $border     = $( this.refs.border );
+        $error      = $( this.refs.error );
+        hint        = $target.attr( "placeholder" );
 
         if ( this.props.floatingtext == "" ) $float.hide();
         if ( hint != "" ) $float.addClass( "text-field-floated" );
@@ -73,14 +69,14 @@ export default class TextField extends React.Component {
     render() {
 
         element = this.props.multi ? (
-            <textarea ref="textarea" 
+            <textarea ref="target" 
                        placeholder={ this.props.placeholder }
                        onFocus  ={ ()=>this.changeFocus() }
                        onBlur   ={ ()=>this.changeBlur() }
                        onChange ={ ()=>this.changeHeight() }
             />
         ) : (
-            <input ref="input" 
+            <input ref="target" 
                        type="text" 
                        placeholder={ this.props.placeholder }
                        onFocus={ ()=>this.changeFocus() }
@@ -93,10 +89,10 @@ export default class TextField extends React.Component {
                 <text-field-float ref="float">{this.props.floatingtext}</text-field-float>
                 { element }
                 <div>
-                    <text-field-border/>
-                    <hr/>
+                    <text-field-border ref="border"/>
+                    <hr ref="state"/>
                 </div>
-                <text-field-error></text-field-error>
+                <text-field-error ref="error">{ this.props.errortext }</text-field-error>
             </text-field>
         )
     }
