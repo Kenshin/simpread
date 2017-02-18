@@ -1,7 +1,7 @@
 console.log( "==== simpread component: TextField ====" )
 
 let root  = "text-field", hint,
-    $target, $float, $state, $error, $border,
+    $target, $float, $state, $border, $error,
     element;
 
 export default class TextField extends React.Component {
@@ -21,18 +21,16 @@ export default class TextField extends React.Component {
     }
 
     changeFocus() {
-        $target = $( this.refs.target );
-        $state  = $( this.refs.state );
+        setjQueryObj( this.refs );
         $float.addClass( "text-field-floated" );
         $state.addClass( "text-field-hr-focus" );
         $target.css( "font-size", "13px" );
     }
 
     changeBlur() {
-        $target     = $( this.refs.target );
-        hint        = $target.attr( "placeholder" );
-        const val   = $target.val();
-        if ( val == "" && hint == "" ) {
+        setjQueryObj( this.refs );
+        const val = $target.val();
+        if ( val == "" && $target.attr( "placeholder" ) == "" ) {
             $float.removeAttr( "class" );
         }
         $state.removeAttr( "class" );
@@ -40,6 +38,7 @@ export default class TextField extends React.Component {
     }
 
     changeHeight() {
+        setjQueryObj( this.refs );
         const [ oriheight, steps ] = [ 28, 24 ];
         let  height= oriheight,
              rows  = this.refs.target.value.split( "\n" ).length - 1;
@@ -51,15 +50,10 @@ export default class TextField extends React.Component {
     }
 
     componentDidMount() {
-        $target     = $( this.refs.target );
-        $float      = $( this.refs.float );
-        $state      = $( this.refs.state );
-        $border     = $( this.refs.border );
-        $error      = $( this.refs.error );
-        hint        = $target.attr( "placeholder" );
+        setjQueryObj( this.refs );
 
         if ( this.props.floatingtext == "" ) $float.hide();
-        if ( hint != "" ) $float.addClass( "text-field-floated" );
+        if ( $target.attr( "placeholder" ) != "" ) $float.addClass( "text-field-floated" );
     }
 
      constructor( props ) {
@@ -97,4 +91,17 @@ export default class TextField extends React.Component {
         )
     }
 
+}
+
+/**
+ * Set jQuery object from this.refs
+ * 
+ * @param {object} this.refs
+ */
+function setjQueryObj( obj ) {
+    $target     = $( obj.target );
+    $float      = $( obj.float );
+    $state      = $( obj.state );
+    $border     = $( obj.border );
+    $error      = $( obj.error );
 }
