@@ -23,7 +23,7 @@ export default class TextField extends React.Component {
     changeFocus() {
         setjQueryObj( this.refs );
         $float.addClass( "text-field-floated" );
-        $state.addClass( "text-field-hr-focus" );
+        $state.addClass( "text-field-state-focus" );
         $target.css( "font-size", "13px" );
     }
 
@@ -38,6 +38,7 @@ export default class TextField extends React.Component {
     }
 
     changeHeight() {
+        /*
         setjQueryObj( this.refs );
         const [ oriheight, steps ] = [ 28, 24 ];
         let  height= oriheight,
@@ -47,6 +48,7 @@ export default class TextField extends React.Component {
         else             height = oriheight - rows * steps;
         $state.css("bottom", height );
         $border.css("bottom", height );
+        */
     }
 
     componentDidMount() {
@@ -84,7 +86,7 @@ export default class TextField extends React.Component {
                 { element }
                 <div>
                     <text-field-border ref="border"/>
-                    <hr ref="state"/>
+                    <text-field-state ref="state"/>
                 </div>
                 <text-field-error ref="error">{ this.props.errortext }</text-field-error>
             </text-field>
