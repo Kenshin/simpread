@@ -664,6 +664,10 @@ text-field-float {
     transform-origin: left top 0px;
 }
 
+.text-field-float-error {
+    color: rgb(244, 67, 54);
+}
+
 .text-field-floated {
     color: #00897B;
 
