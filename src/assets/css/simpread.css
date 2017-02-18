@@ -705,6 +705,16 @@ hr {
     transform: scaleX(1);
 }
 
+text-field-error {
+    display: block;
+    position: relative;
+    bottom: 2px;
+    font-size: 12px;
+    line-height: 12px;
+    color: rgb(244, 67, 54);
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
 .text-field-hr-error {
     border-top: none rgb(244, 67, 54);
     border-left: none rgb(244, 67, 54);
