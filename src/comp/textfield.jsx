@@ -9,8 +9,8 @@ export default class TextField extends React.Component {
     static defaultProps = {
         multi       : false,
         placeholder : "",
-        errortext   : "",
         floatingtext: "",
+        errortext   : "",
     };
 
     static propTypes = {
@@ -62,9 +62,8 @@ export default class TextField extends React.Component {
         $float      = $input.prev();
         hint        = $input.attr( "placeholder" );
 
-        if ( hint != "" ) {
-            $float.addClass( "text-field-floated" );
-        }
+        if ( this.props.floatingtext == "" ) $float.hide();
+        if ( hint != "" ) $float.addClass( "text-field-floated" );
     }
 
      constructor( props ) {
