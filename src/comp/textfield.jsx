@@ -15,10 +15,11 @@ export default class TextField extends React.Component {
     }
 
     changeBlur() {
-        $target  = $( event.target );
-        $float   = $target.prev();
-        $hr      = $target.next().find( "hr" );
-        if ( $input.val() == "" && placeholder == "" ) {
+        $target     = $( event.target );
+        $float      = $target.prev();
+        $hr         = $target.next().find( "hr" );
+        placeholder = $target.attr( "placeholder" );
+        if ( $target.val() == "" && placeholder == "" ) {
             $float.removeAttr( "class" );
         }
         $hr.removeAttr( "class" );
