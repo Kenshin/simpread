@@ -1,7 +1,7 @@
 console.log( "==== simpread component: TextField ====" )
 
 let root  = "text-field", placeholder,
-    $root, $target, $input, $float, $hr,
+    $root, $target, $input, $float, $hr, $border,
     element;
 
 export default class TextField extends React.Component {
@@ -24,6 +24,20 @@ export default class TextField extends React.Component {
         $hr.removeAttr( "class" );
     }
 
+    changeHeight() {
+        const [ oriheight, steps ] = [ 28, 24 ];
+        let  height= oriheight,
+             rows  = this.refs.textarea.value.split( "\n" ).length - 1;
+        if ( rows > 2 ) rows = 2;
+        $target    = $( event.target );
+        $hr        = $target.next().find( "hr" );
+        $border    = $target.next().find( "text-field-border" );
+        if ( rows == 0 ) height = oriheight;
+        else             height = oriheight - rows * steps;
+        $hr.css("bottom", height );
+        $border.css("bottom", height );
+    }
+
     componentDidMount() {
         $root       = $(root);
         $input      = this.props.multi ? $root.find( "textarea" ) : $root.find( "input" );
@@ -42,17 +56,18 @@ export default class TextField extends React.Component {
     render() {
 
         element = this.props.multi ? (
-            <textarea ref="textfield" 
+            <textarea ref="textarea" 
                        placeholder="" 
-                       onFocus={ ()=>this.changeFocus() }
-                       onBlur= { ()=>this.changeBlur() }
+                       onFocus  ={ ()=>this.changeFocus() }
+                       onBlur   ={ ()=>this.changeBlur() }
+                       onChange ={ ()=>this.changeHeight() }
             />
         ) : (
-            <input ref="textfield" 
+            <input ref="input" 
                        type="text" 
                        placeholder="默认为空，自动选择高亮区域。" 
                        onFocus={ ()=>this.changeFocus() }
-                       onBlur= { ()=>this.changeBlur() }
+                       onBlur ={ ()=>this.changeBlur() }
              />
         );
 
@@ -61,7 +76,7 @@ export default class TextField extends React.Component {
                 <text-field-float ref="float">高亮内容</text-field-float>
                 { element }
                 <div>
-                    <text-field-hr/>
+                    <text-field-border/>
                     <hr/>
                 </div>
                 <text-field-error></text-field-error>
