@@ -98,7 +98,7 @@ export default class FocusOpt extends React.Component {
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <TextField multi={ false } placeholder={"默认为空，自动选择高亮区域。"} floatingtext={"高亮区域"} />
+                    <TextField multi={ false } placeholder={"默认为空，自动选择高亮区域。"} floatingtext={"高亮区域"} errortext="当前输入为非法。" />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField multi={ true } placeholder={"默认为空，不隐藏任何内容。"} floatingtext={"隐藏列表"} />
