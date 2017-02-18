@@ -12,6 +12,7 @@ export default class TextField extends React.Component {
         $hr      = $target.next().find( "hr" );
         $float.addClass( "text-field-floated" );
         $hr.addClass( "text-field-hr-focus" );
+        $target.css( "font-size", "13px" );
     }
 
     changeBlur() {
@@ -19,10 +20,12 @@ export default class TextField extends React.Component {
         $float      = $target.prev();
         $hr         = $target.next().find( "hr" );
         placeholder = $target.attr( "placeholder" );
-        if ( $target.val() == "" && placeholder == "" ) {
+        const val   = $target.val();
+        if ( val == "" && placeholder == "" ) {
             $float.removeAttr( "class" );
         }
         $hr.removeAttr( "class" );
+        if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
     changeHeight() {
@@ -58,7 +61,7 @@ export default class TextField extends React.Component {
 
         element = this.props.multi ? (
             <textarea ref="textarea" 
-                       placeholder="" 
+                       placeholder="默认为空，不隐藏任何内容。" 
                        onFocus  ={ ()=>this.changeFocus() }
                        onBlur   ={ ()=>this.changeBlur() }
                        onChange ={ ()=>this.changeHeight() }
