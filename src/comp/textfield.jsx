@@ -1,10 +1,24 @@
 console.log( "==== simpread component: TextField ====" )
 
-let root  = "text-field", placeholder,
+let root  = "text-field", hint,
     $root, $target, $input, $float, $hr, $border,
     element;
 
 export default class TextField extends React.Component {
+
+    static defaultProps = {
+        multi       : false,
+        placeholder : "",
+        errortext   : "",
+        floatingtext: "",
+    };
+
+    static propTypes = {
+        multi       : React.PropTypes.bool,
+        placeholder : React.PropTypes.string,
+        errortext   : React.PropTypes.string,
+        floatingtext: React.PropTypes.string,
+    }
 
     changeFocus() {
         $target  = $( event.target );
@@ -19,9 +33,9 @@ export default class TextField extends React.Component {
         $target     = $( event.target );
         $float      = $target.prev();
         $hr         = $target.next().find( "hr" );
-        placeholder = $target.attr( "placeholder" );
+        hint        = $target.attr( "placeholder" );
         const val   = $target.val();
-        if ( val == "" && placeholder == "" ) {
+        if ( val == "" && hint == "" ) {
             $float.removeAttr( "class" );
         }
         $hr.removeAttr( "class" );
@@ -46,9 +60,9 @@ export default class TextField extends React.Component {
         $root       = $(root);
         $input      = this.props.multi ? $root.find( "textarea" ) : $root.find( "input" );
         $float      = $input.prev();
-        placeholder = $input.attr( "placeholder" );
+        hint        = $input.attr( "placeholder" );
 
-        if ( placeholder != "" ) {
+        if ( hint != "" ) {
             $float.addClass( "text-field-floated" );
         }
     }
@@ -61,7 +75,7 @@ export default class TextField extends React.Component {
 
         element = this.props.multi ? (
             <textarea ref="textarea" 
-                       placeholder="默认为空，不隐藏任何内容。" 
+                       placeholder={ this.props.placeholder }
                        onFocus  ={ ()=>this.changeFocus() }
                        onBlur   ={ ()=>this.changeBlur() }
                        onChange ={ ()=>this.changeHeight() }
@@ -69,7 +83,7 @@ export default class TextField extends React.Component {
         ) : (
             <input ref="input" 
                        type="text" 
-                       placeholder="默认为空，自动选择高亮区域。" 
+                       placeholder={ this.props.placeholder }
                        onFocus={ ()=>this.changeFocus() }
                        onBlur ={ ()=>this.changeBlur() }
              />
@@ -77,7 +91,7 @@ export default class TextField extends React.Component {
 
         return (
             <text-field>
-                <text-field-float ref="float">高亮内容</text-field-float>
+                <text-field-float ref="float">{this.props.floatingtext}</text-field-float>
                 { element }
                 <div>
                     <text-field-border/>
