@@ -98,10 +98,10 @@ export default class FocusOpt extends React.Component {
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <TextField multi={ true } />
+                    <TextField multi={ false } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <TextField multi={ false } />
+                    <TextField multi={ true } />
                 </sr-opt-gp>
             </sr-opt-focus>
         )
