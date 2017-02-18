@@ -1,17 +1,23 @@
 console.log( "==== simpread option component: TextField ====" )
 
 let root  = "text-field", placeholder,
-    $root, $input, $float, $hr,
+    $root, $target, $input, $float, $hr,
     element;
 
 export default class TextField extends React.Component {
 
     changeFocus() {
+        $target  = $( event.target );
+        $float   = $target.prev();
+        $hr      = $target.next().find( "hr" );
         $float.addClass( "text-field-floated" );
         $hr.addClass( "text-field-hr-focus" );
     }
 
     changeBlur() {
+        $target  = $( event.target );
+        $float   = $target.prev();
+        $hr      = $target.next().find( "hr" );
         if ( $input.val() == "" && placeholder == "" ) {
             $float.removeAttr( "class" );
         }
@@ -22,7 +28,6 @@ export default class TextField extends React.Component {
         $root       = $(root);
         $input      = this.props.multi ? $root.find( "textarea" ) : $root.find( "input" );
         $float      = $input.prev();
-        $hr         = $input.next().find( "hr" );
         placeholder = $input.attr( "placeholder" );
 
         if ( placeholder != "" ) {
