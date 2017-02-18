@@ -1,4 +1,4 @@
-console.log( "==== simpread option component: TextField ====" )
+console.log( "==== simpread component: TextField ====" )
 
 let root  = "text-field", placeholder,
     $root, $target, $input, $float, $hr,
