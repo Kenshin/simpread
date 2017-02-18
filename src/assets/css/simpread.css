@@ -688,10 +688,10 @@ text-field-border {
 
 hr {
     display: block;
-    border-top: none rgb(0, 188, 212);
-    border-left: none rgb(0, 188, 212);
-    border-right: none rgb(0, 188, 212);
-    border-bottom: 2px solid rgb(0, 188, 212);
+    border-top: none rgba(0, 137, 123, .8);
+    border-left: none rgba(0, 137, 123, .8);
+    border-right: none rgba(0, 137, 123, .8);
+    border-bottom: 2px solid rgba(0, 137, 123, .8);
     bottom: 28px;
     box-sizing: content-box;
     margin: 0px;
@@ -703,4 +703,11 @@ hr {
 
 .text-field-hr-focus {
     transform: scaleX(1);
+}
+
+.text-field-hr-error {
+    border-top: none rgb(244, 67, 54);
+    border-left: none rgb(244, 67, 54);
+    border-right: none rgb(244, 67, 54);
+    border-bottom: 2px solid rgb(244, 67, 54);
 }
