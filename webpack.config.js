@@ -168,6 +168,8 @@ const webpack = require( 'webpack' ),
           include    : __dirname + '/src/option/common/include.jsx',
           exclude    : __dirname + '/src/option/common/exclude.jsx',
 
+          textfield  : __dirname + '/src/comp/textfield.jsx',
+
         }
       }
 
