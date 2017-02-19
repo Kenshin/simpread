@@ -98,7 +98,7 @@ export default class TextField extends React.Component {
                     <text-field-border ref="border"/>
                     <text-field-state ref="state"/>
                 </div>
-                <text-field-error ref="error">{ this.props.errortext }</text-field-error>
+                <text-field-error ref="error" dangerouslySetInnerHTML={{__html: this.props.errortext }}></text-field-error>
             </text-field>
         )
     }
