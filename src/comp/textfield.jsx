@@ -4,7 +4,7 @@ let $target, $float, $state, $border, $error,
     element, styles;
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
-      cssinjs = ( props )=>{
+      cssinjs = ()=>{
 
     const color     = 'rgba(51, 51, 51, .87)',
           err_color = 'rgb(244, 67, 54)',
@@ -162,21 +162,6 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
         };
 
-        if ( props.floatingtext == "" ) styles.float.display = styles.display;
-        if ( props.multi && ( props.rows > MIN_ROWS )) {
-            const rows      = props.rows - MIN_ROWS,
-                  height    = Number.parseInt(styles.textarea.height),
-                  parheight = Number.parseInt(styles.root.height);
-             styles.textarea.height = `${height + rows * steps}px`;
-             styles.root.height     = `${parheight + rows * steps}px`;
-        }
-        styles.float = props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_floated }
-        styles.state = styles.state_normal;
-        if ( props.errortext != "" ) {
-            styles.state = { ...styles.state_normal, ...styles.state_error };
-            styles.float = { ...styles.float, ...styles.float_error };
-        }
-
     return styles;
 }
 
@@ -220,9 +205,22 @@ export default class TextField extends React.Component {
         if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
-     constructor( props ) {
-        super( props );
-        styles = cssinjs( this.props );
+    componentWillMount() {
+        styles = cssinjs();
+        if ( this.props.floatingtext == "" ) styles.float.display = styles.display;
+        if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
+            const rows      = this.props.rows - MIN_ROWS,
+                  height    = Number.parseInt(styles.textarea.height),
+                  parheight = Number.parseInt(styles.root.height);
+             styles.textarea.height = `${height + rows * steps}px`;
+             styles.root.height     = `${parheight + rows * steps}px`;
+        }
+        styles.float = this.props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_floated }
+        styles.state = styles.state_normal;
+        if ( this.props.errortext != "" ) {
+            styles.state = { ...styles.state_normal, ...styles.state_error };
+            styles.float = { ...styles.float, ...styles.float_error };
+        }
     }
 
     render() {
