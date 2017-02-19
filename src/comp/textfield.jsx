@@ -183,8 +183,6 @@ export default class TextField extends React.Component {
         setjQueryObj( this.refs );
         $state.css({ ...styles.state_normal, ...styles.state_focus });
         $float.css({ ...styles.float_normal, ...styles.float_floated });
-        //$float.addClass( "text-field-floated" );
-        //$state.addClass( "text-field-state-focus" );
         $target.css( "font-size", "13px" );
     }
 
@@ -192,40 +190,10 @@ export default class TextField extends React.Component {
         setjQueryObj( this.refs );
         const val = $target.val();
         if ( val == "" && $target.attr( "placeholder" ) == "" ) {
-            //$float.removeAttr( "class" );
             $float.css({ ...styles.float_normal });
         }
-        //$state.removeAttr( "class" );
         $state.css({ ...styles.state_normal });
         if ( val == "" ) $target.css( "font-size", "16px" );
-    }
-
-    changeHeight() {
-        /*
-        setjQueryObj( this.refs );
-        const [ oriheight, steps ] = [ 28, 24 ];
-        let  height= oriheight,
-             rows  = this.refs.target.value.split( "\n" ).length - 1;
-        if ( rows > 2 ) rows = 2;
-        if ( rows == 0 ) height = oriheight;
-        else             height = oriheight - rows * steps;
-        $state.css("bottom", height );
-        $border.css("bottom", height );
-        */
-    }
-
-    componentDidMount() {
-        setjQueryObj( this.refs );
-
-        //if ( this.props.floatingtext == "" ) $float.hide();
-        //if ( $target.attr( "placeholder" ) != "" ) $float.addClass( "text-field-floated" );
-        /*if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
-            const rows   = this.props.rows - MIN_ROWS,
-                  height = $target.height(),
-                  parheight = $target.parent().height();
-            $target.height( height + rows * steps );
-            $target.parent().height( parheight + rows * steps );
-        }*/
     }
 
      constructor( props ) {
