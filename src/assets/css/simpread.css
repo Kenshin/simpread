@@ -586,18 +586,3 @@ sr-read-ctl {
     width: 100px;
     height: 100%;
 }
-
-/**
- *  Custom component
- */
-
-.text-field-float-error {
-    color: rgb(244, 67, 54);
-}
-
-.text-field-hr-error {
-    border-top: none rgb(244, 67, 54);
-    border-left: none rgb(244, 67, 54);
-    border-right: none rgb(244, 67, 54);
-    border-bottom: 2px solid rgb(244, 67, 54);
-}
