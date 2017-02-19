@@ -7,6 +7,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ( props )=>{
 
     const color = 'rgba(51, 51, 51, .87)',
+          err_color = 'rgb(244, 67, 54)',
           styles = {
             display : 'none',
             root: {
@@ -83,7 +84,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 display: 'block',
                 position: 'absolute',
 
-                top: '12px',
+                margin: '8px 0 0 0',
 
                 fontSize: '16px',
                 fontWeight: 400,
@@ -100,12 +101,16 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             float_floated : {
                 color: '#00897B',
 
-                top: '-8px',
+                margin: '-8px 0 0 0',
 
                 fontSize: '14px',
                 fontWeight: 'bold',
 
                 transform: 'scale(0.75) translate( 0px, -8px )',
+            },
+
+            float_error : {
+                color: err_color,
             },
 
             state : {},
@@ -131,6 +136,14 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 transform: 'scaleX(1)',
             },
 
+            state_error : {
+                transform: 'scaleX(1)',
+                borderTop: `none ${err_color}`,
+                borderLeft: `none ${err_color}`,
+                borderRight: `none ${err_color}`,
+                borderBottom: `2px solid ${err_color}`,
+            },
+
             error : {
                 display: 'block',
 
@@ -142,9 +155,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 userSelect: 'none',
 
-                color: 'rgb(244, 67, 54)',
+                color: err_color,
                 transform: 'scale(0.75) translate( -80px, 0 )',
             },
+
         };
 
         if ( props.floatingtext == "" ) styles.float.display = styles.display;
@@ -157,6 +171,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
         }
         styles.float = props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_floated }
         styles.state = styles.state_normal;
+        if ( props.errortext != "" ) {
+            styles.state = { ...styles.state_normal, ...styles.state_error };
+            styles.float = { ...styles.float, ...styles.float_error };
+        }
 
     return styles;
 }
@@ -184,15 +202,20 @@ export default class TextField extends React.Component {
         $state.css({ ...styles.state_normal, ...styles.state_focus });
         $float.css({ ...styles.float_normal, ...styles.float_floated });
         $target.css( "font-size", "13px" );
+        if ( this.props.errortext != "" ) $state.css({ ...styles.state_normal, ...styles.state_error });
     }
 
     changeBlur() {
         setjQueryObj( this.refs );
         const val = $target.val();
         if ( val == "" && $target.attr( "placeholder" ) == "" ) {
-            $float.css({ ...styles.float_normal });
+            styles.float = styles.float_normal;
+        } else {
+            styles.float = { ...styles.float_normal, ...styles.float_floated };
         }
-        $state.css({ ...styles.state_normal });
+        $float.css({ ...styles.float });
+        if ( this.props.errortext == "" ) $state.css({ ...styles.state_normal });
+        else $float.css({ ...styles.float, ...styles.float_error });
         if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
