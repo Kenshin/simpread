@@ -6,9 +6,10 @@ let $target, $float, $state, $border, $error,
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ( props )=>{
 
-    const color = 'rgba(51, 51, 51, .87)',
+    const color     = 'rgba(51, 51, 51, .87)',
           err_color = 'rgb(244, 67, 54)',
-          styles = {
+          margin    = '8px 0 0 0',
+          styles    = {
             display : 'none',
             root: {
                 font: '300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
@@ -19,7 +20,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 width: '100%',
                 height: '72px',
 
-                marginBottom: '8px',
+                margin,
             },
 
             input: {
@@ -29,7 +30,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 height: '20px',
                 width: '100%',
 
-                marginTop: '8px',
+                margin,
                 padding: 0,
 
                 border: 'none',
@@ -49,7 +50,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 height: '60px',
                 width: '100%',
 
-                marginTop: '8px',
+                margin,
                 padding: 0,
 
                 lineHeight: 1.5,
@@ -68,7 +69,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             border : {
                 display: 'block',
 
-                margin: '8px 0 0 0',
+                margin,
                 width: '100%',
 
                 borderTop: 'none rgb(224, 224, 224)',
@@ -84,7 +85,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 display: 'block',
                 position: 'absolute',
 
-                margin: '8px 0 0 0',
+                margin,
 
                 fontSize: '16px',
                 fontWeight: 400,
@@ -101,7 +102,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             float_floated : {
                 color: '#00897B',
 
-                margin: '-8px 0 0 0',
+                margin: `-${margin}`,
 
                 fontSize: '14px',
                 fontWeight: 'bold',
@@ -147,7 +148,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             error : {
                 display: 'block',
 
-                marginTop: '8px',
+                margin,
 
                 fontSize: '14px',
                 fontWeight: 'bold',
