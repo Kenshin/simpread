@@ -591,6 +591,7 @@ sr-read-ctl {
  *  Custom component
  */
 
+/*
 text-field {
     font: 300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
 
@@ -663,11 +664,13 @@ text-field-float {
     transform: scale(1) translate( 0px, 0px );
     transform-origin: left top 0px;
 }
+*/
 
 .text-field-float-error {
     color: rgb(244, 67, 54);
 }
 
+/*
 .text-field-floated {
     color: #00897B;
 
@@ -681,8 +684,6 @@ text-field-float {
 
 text-field-border {
     display: block;
-    /*position: absolute;*/
-    /*bottom: 28px;*/
 
     margin: 8px 0 0 0;
     width: 100%;
@@ -696,8 +697,8 @@ text-field-border {
 
 text-field-state {
     display: block;
-    /*position: absolute;*/
-    /*bottom: 28px;*/
+    position: absolute;
+    bottom: 34px;
 
     margin: 0px;
     width: 100%;
@@ -711,11 +712,13 @@ text-field-state {
     transform: scaleX(0);
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
+*/
 
 .text-field-state-focus {
     transform: scaleX(1);
 }
 
+/*
 text-field-error {
     display: block;
 
@@ -730,6 +733,7 @@ text-field-error {
 
     transform: scale(0.75) translate( -80px, 0 );
 }
+*/
 
 .text-field-hr-error {
     border-top: none rgb(244, 67, 54);
