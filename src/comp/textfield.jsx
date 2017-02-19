@@ -209,7 +209,6 @@ export default class TextField extends React.Component {
                        placeholder={ this.props.placeholder }
                        onFocus  ={ ()=>this.changeFocus() }
                        onBlur   ={ ()=>this.changeBlur() }
-                       onChange ={ ()=>this.changeHeight() }
             />
         ) : (
             <input ref="target" 
