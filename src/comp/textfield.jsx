@@ -8,6 +8,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
     const color = 'rgba(51, 51, 51, .87)',
           styles = {
+            display : 'none',
             root: {
                 font: '300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
 
@@ -63,7 +64,22 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 WebkitAppearance: 'textfield',
             },
 
-            float : {
+            border : {
+                display: 'block',
+
+                margin: '8px 0 0 0',
+                width: '100%',
+
+                borderTop: 'none rgb(224, 224, 224)',
+                borderLeft: 'none rgb(224, 224, 224)',
+                borderRight: 'none rgb(224, 224, 224)',
+                borderBottom: '1px solid rgb(224, 224, 224)',
+                boxSizing: 'content-box',
+            },
+
+            float : {},
+
+            float_normal : {
                 display: 'block',
                 position: 'absolute',
 
@@ -81,25 +97,24 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 transformOrigin: 'left top 0px',
             },
 
-            border : {
-                display: 'block',
+            float_floated : {
+                color: '#00897B',
 
-                margin: '8px 0 0 0',
-                width: '100%',
+                top: '-8px',
 
-                borderTop: 'none rgb(224, 224, 224)',
-                borderLeft: 'none rgb(224, 224, 224)',
-                borderRight: 'none rgb(224, 224, 224)',
-                borderBottom: '1px solid rgb(224, 224, 224)',
-                boxSizing: 'content-box',
+                fontSize: '14px',
+                fontWeight: 'bold',
+
+                transform: 'scale(0.75) translate( 0px, -8px )',
             },
 
-            state : {
+            state : {},
+
+            state_normal : {
                 display: 'block',
                 position: 'absolute',
-                bottom: '34px',
 
-                margin: 0,
+                margin: '-1px 0 0 0',
                 width: '100%',
 
                 borderTop: 'none rgba(0, 137, 123, .8)',
@@ -110,6 +125,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 transform: 'scaleX(0)',
                 transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+            },
+
+            state_focus : {
+                transform: 'scaleX(1)',
             },
 
             error : {
@@ -125,28 +144,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 color: 'rgb(244, 67, 54)',
                 transform: 'scale(0.75) translate( -80px, 0 )',
-            }
+            },
         };
 
-        const classes = {
-            display : 'none',
-            floated : {
-                color: '#00897B',
-
-                top: '-8px',
-
-                fontSize: '14px',
-                fontWeight: 'bold',
-
-                transform: 'scale(0.75) translate( 0px, -8px )',
-            },
-            focus : {
-                transform: 'scaleX(1)',
-            }
-        }
-
-        if ( props.floatingtext == "" ) styles.float.display = classes.display;
-        if ( props.placeholder != ""  ) styles.float = { ...styles.float, ...classes.floated }
+        if ( props.floatingtext == "" ) styles.float.display = styles.display;
         if ( props.multi && ( props.rows > MIN_ROWS )) {
             const rows      = props.rows - MIN_ROWS,
                   height    = Number.parseInt(styles.textarea.height),
@@ -154,6 +155,8 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
              styles.textarea.height = `${height + rows * steps}px`;
              styles.root.height     = `${parheight + rows * steps}px`;
         }
+        styles.float = props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_floated }
+        styles.state = styles.state_normal;
 
     return styles;
 }
@@ -178,6 +181,8 @@ export default class TextField extends React.Component {
 
     changeFocus() {
         setjQueryObj( this.refs );
+        $state.css({ ...styles.state_normal, ...styles.state_focus });
+        $float.css({ ...styles.float_normal, ...styles.float_floated });
         //$float.addClass( "text-field-floated" );
         //$state.addClass( "text-field-state-focus" );
         $target.css( "font-size", "13px" );
@@ -188,8 +193,10 @@ export default class TextField extends React.Component {
         const val = $target.val();
         if ( val == "" && $target.attr( "placeholder" ) == "" ) {
             //$float.removeAttr( "class" );
+            $float.css({ ...styles.float_normal });
         }
         //$state.removeAttr( "class" );
+        $state.css({ ...styles.state_normal });
         if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
