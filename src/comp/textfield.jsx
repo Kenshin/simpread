@@ -9,18 +9,18 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
     const color     = 'rgba(51, 51, 51, .87)',
           err_color = 'rgb(244, 67, 54)',
           margin    = '8px 0 0 0',
+          display   = 'block',
           styles    = {
-            display : 'none',
+            hidden : 'none',
             root: {
                 font: '300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
 
-                display: 'inline-block',
+                display,
                 position: 'relative',
+                margin,
 
                 width: '100%',
                 height: '72px',
-
-                margin,
             },
 
             input: {
@@ -67,7 +67,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             },
 
             border : {
-                display: 'block',
+                display,
 
                 margin,
                 width: '100%',
@@ -82,7 +82,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             float : {},
 
             float_normal : {
-                display: 'block',
+                display,
                 position: 'absolute',
 
                 margin,
@@ -117,7 +117,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             state : {},
 
             state_normal : {
-                display: 'block',
+                display,
                 position: 'absolute',
 
                 margin: '-1px 0 0 0',
@@ -146,7 +146,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             },
 
             error : {
-                display: 'block',
+                display,
 
                 margin,
 
@@ -207,7 +207,7 @@ export default class TextField extends React.Component {
 
     componentWillMount() {
         styles = cssinjs();
-        if ( this.props.floatingtext == "" ) styles.float.display = styles.display;
+        if ( this.props.floatingtext == "" ) styles.float.display = styles.hidden;
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows      = this.props.rows - MIN_ROWS,
                   height    = Number.parseInt(styles.textarea.height),
