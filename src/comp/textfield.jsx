@@ -10,6 +10,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
           err_color = 'rgb(244, 67, 54)',
           margin    = '8px 0 0 0',
           display   = 'block',
+          medium    = "14px",
+          large     = "16px",
+          lineHeight= 1.5,
+          fontWeight= "bold"
           styles    = {
             hidden : 'none',
             root: {
@@ -33,6 +37,8 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
+                float_focus: medium,
+
                 border: 'none',
                 outline: 'none',
 
@@ -53,7 +59,8 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
-                lineHeight: 1.5,
+                float_focus: medium,
+                lineHeight,
 
                 cursor: 'inherit',
 
@@ -87,7 +94,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 margin,
 
-                fontSize: '16px',
+                float_focus: large,
                 fontWeight: 400,
                 color: 'rgba(0, 0, 0, 0.298039)',
 
@@ -99,13 +106,13 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 transformOrigin: 'left top 0px',
             },
 
-            float_floated : {
+            float_focus : {
                 color: '#00897B',
 
                 margin: `-${margin}`,
 
-                fontSize: '14px',
-                fontWeight: 'bold',
+                float_focus: medium,
+                fontWeight,
 
                 transform: 'scale(0.75) translate( 0px, -8px )',
             },
@@ -150,9 +157,9 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 margin,
 
-                fontSize: '14px',
-                fontWeight: 'bold',
-                lineHeight: '12px',
+                fontSize: medium,
+                fontWeight,
+                lineHeight,
 
                 userSelect: 'none',
 
@@ -187,12 +194,12 @@ export default class TextField extends React.Component {
         setjQueryObj( this.refs );
         if ( this.props.errortext != "" ) {
             $state.css({ ...styles.state_normal, ...styles.state_error });
-            $float.css({ ...styles.float_normal, ...styles.float_floated, ...styles.float_error });
+            $float.css({ ...styles.float_normal, ...styles.float_focus, ...styles.float_error });
         } else {
             $state.css({ ...styles.state_normal, ...styles.state_focus });
-            $float.css({ ...styles.float_normal, ...styles.float_floated });
+            $float.css({ ...styles.float_normal, ...styles.float_focus });
         }
-        $target.css( "font-size", "13px" );
+        //$target.css( "font-size", "13px" );
     }
 
     changeBlur() {
@@ -201,11 +208,11 @@ export default class TextField extends React.Component {
         if ( val == "" && $target.attr( "placeholder" ) == "" ) {
             styles.float = styles.float_normal;
         } else {
-            styles.float = { ...styles.float_normal, ...styles.float_floated };
+            styles.float = { ...styles.float_normal, ...styles.float_focus };
         }
         $float.css({ ...styles.float });
         if ( this.props.errortext == "" ) $state.css({ ...styles.state_normal });
-        if ( val == "" ) $target.css( "font-size", "16px" );
+        //if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
     componentWillMount() {
@@ -218,8 +225,8 @@ export default class TextField extends React.Component {
              styles.textarea.height = `${height + rows * steps}px`;
              styles.root.height     = `${parheight + rows * steps}px`;
         }
-        styles.float = this.props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_floated }
-        styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error   };
+        styles.float = this.props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_focus }
+        styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error };
     }
 
     render() {
