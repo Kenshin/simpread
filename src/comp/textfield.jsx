@@ -28,6 +28,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 width,
                 height: '72px',
+                lineHeight: 1,
             },
 
             input: {
@@ -159,6 +160,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 display,
 
                 margin,
+                width,
 
                 fontSize: medium,
                 fontWeight,
@@ -167,7 +169,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 userSelect: 'none',
 
                 color: error_color,
-                transform: 'scale(0.75) translate( -80px, 0 )',
+                transform: 'scale(0.75) translate( -77px, 0 )',
             },
 
         };
