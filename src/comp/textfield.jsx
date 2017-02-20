@@ -98,7 +98,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 margin,
 
-                float_focus: large,
+                fontSize: large,
                 fontWeight: 400,
                 color: 'rgba(0, 0, 0, 0.298039)',
 
