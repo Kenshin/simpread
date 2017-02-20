@@ -38,7 +38,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
-                float_focus: medium,
+                fontSize: medium,
 
                 border: 'none',
                 outline: 'none',
@@ -60,7 +60,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
-                float_focus: medium,
+                fontSize: medium,
                 lineHeight,
 
                 cursor: 'inherit',
@@ -112,7 +112,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 margin: `-${margin}`,
 
-                float_focus: medium,
+                fontSize: medium,
                 fontWeight,
 
                 transform: 'scale(0.75) translate( 0px, -8px )',
