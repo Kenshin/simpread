@@ -184,6 +184,7 @@ export default class TextField extends React.Component {
         multi       : false,
         rows        : MIN_ROWS,
         password    : false,
+        value       : "",
         placeholder : "",
         floatingtext: "",
         errortext   : "",
@@ -193,6 +194,7 @@ export default class TextField extends React.Component {
         multi       : React.PropTypes.bool,
         rows        : React.PropTypes.number,
         password    : React.PropTypes.bool,
+        value       : React.PropTypes.string,
         placeholder : React.PropTypes.string,
         floatingtext: React.PropTypes.string,
         errortext   : React.PropTypes.string,
@@ -240,8 +242,11 @@ export default class TextField extends React.Component {
         styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error };
     }
 
-    render() {
+    componentDidMount() {
+        this.refs.target.value = this.props.value;
+    }
 
+    render() {
         const props = {
             placeholder :this.props.placeholder,
             onFocus  : ()=>this.changeFocus(),
