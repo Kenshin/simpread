@@ -200,12 +200,13 @@ export default class TextField extends React.Component {
     }
 
     state = {
-        type: this.props.password ? "password" : "text"
+        type  : this.props.password ? "password" : "text",
+        error : this.props.errortext,
     }
 
     changeFocus() {
         setjQueryObj( this.refs );
-        if ( this.props.errortext != "" ) {
+        if ( this.state.error != "" ) {
             $state.css({ ...styles.state_normal, ...styles.state_error });
             $float.css({ ...styles.float_normal, ...styles.float_focus, ...styles.float_error });
         } else {
@@ -221,11 +222,16 @@ export default class TextField extends React.Component {
         } else {
             $float.css({ ...styles.float_normal, ...styles.float_focus });
         }
-        if ( this.props.errortext == "" ) $state.css({ ...styles.state_normal });
+        if ( this.state.error == "" ) $state.css({ ...styles.state_normal });
     }
 
     change() {
         if ( this.props.onChange ) this.props.onChange( event );
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        //console.log("adfasfasdf",nextProps, nextState)
+        //this.setState({ error: nextProps.errortext });
     }
 
     componentWillMount() {
@@ -239,7 +245,7 @@ export default class TextField extends React.Component {
              styles.root.height     = `${parheight + rows * steps}px`;
         }
         styles.float = this.props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_focus }
-        styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error };
+        styles.state = this.state.error       == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error };
     }
 
     render() {
@@ -272,7 +278,7 @@ export default class TextField extends React.Component {
                     <text-field-border ref="border" style={ styles.border }/>
                     <text-field-state ref="state" style={ styles.state }/>
                 </div>
-                <text-field-error ref="error" style={ styles.error } dangerouslySetInnerHTML={{__html: this.props.errortext }}></text-field-error>
+                <text-field-error ref="error" style={ styles.error } dangerouslySetInnerHTML={{__html: this.state.error }}></text-field-error>
             </text-field>
         )
     }
