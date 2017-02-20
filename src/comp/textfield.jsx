@@ -10,10 +10,11 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
           err_color = 'rgb(244, 67, 54)',
           margin    = '8px 0 0 0',
           display   = 'block',
-          medium    = "14px",
-          large     = "16px",
+          medium    = '14px',
+          large     = '16px',
           lineHeight= 1.5,
-          fontWeight= "bold"
+          fontWeight= 'bold',
+          width     = '100%',
           styles    = {
             hidden : 'none',
             root: {
@@ -23,7 +24,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 position: 'relative',
                 margin,
 
-                width: '100%',
+                width,
                 height: '72px',
             },
 
@@ -31,8 +32,8 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 color,
                 backgroundColor: 'transparent',
 
+                width,
                 height: '20px',
-                width: '100%',
 
                 margin,
                 padding: 0,
@@ -53,8 +54,8 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 color,
                 backgroundColor: 'transparent',
 
+                width,
                 height: '60px',
-                width: '100%',
 
                 margin,
                 padding: 0,
@@ -76,8 +77,8 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             border : {
                 display,
 
+                width,
                 margin,
-                width: '100%',
 
                 borderTop: 'none rgb(224, 224, 224)',
                 borderLeft: 'none rgb(224, 224, 224)',
@@ -127,8 +128,8 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 display,
                 position: 'absolute',
 
+                width,
                 margin: '-1px 0 0 0',
-                width: '100%',
 
                 borderTop: 'none rgba(0, 137, 123, .8)',
                 borderLeft: 'none rgba(0, 137, 123, .8)',
