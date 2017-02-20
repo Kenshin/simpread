@@ -202,20 +202,16 @@ export default class TextField extends React.Component {
             $state.css({ ...styles.state_normal, ...styles.state_focus });
             $float.css({ ...styles.float_normal, ...styles.float_focus });
         }
-        //$target.css( "font-size", "13px" );
     }
 
     changeBlur() {
         setjQueryObj( this.refs );
-        const val = $target.val();
-        if ( val == "" && $target.attr( "placeholder" ) == "" ) {
-            styles.float = styles.float_normal;
+        if ( $target.val() == "" && $target.attr( "placeholder" ) == "" ) {
+            $float.css( styles.float_normal );
         } else {
-            styles.float = { ...styles.float_normal, ...styles.float_focus };
+            $float.css({ ...styles.float_normal, ...styles.float_focus });
         }
-        $float.css({ ...styles.float });
         if ( this.props.errortext == "" ) $state.css({ ...styles.state_normal });
-        //if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
     componentWillMount() {
