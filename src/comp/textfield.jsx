@@ -205,13 +205,7 @@ export default class TextField extends React.Component {
 
     changeFocus() {
         setjQueryObj( this.refs );
-        if ( this.props.errortext != "" ) {
-            $state.css({ ...styles.state_normal, ...styles.state_error });
-            $float.css({ ...styles.float_normal, ...styles.float_focus, ...styles.float_error });
-        } else {
-            $state.css({ ...styles.state_normal, ...styles.state_focus });
-            $float.css({ ...styles.float_normal, ...styles.float_focus });
-        }
+        changeState( this.props.errortext );
     }
 
     changeBlur() {
@@ -226,6 +220,10 @@ export default class TextField extends React.Component {
 
     change() {
         if ( this.props.onChange ) this.props.onChange( event );
+    }
+
+    componentWillUpdate( nextProps ) {
+        changeState( nextProps.errortext );
     }
 
     componentWillMount() {
@@ -290,4 +288,19 @@ function setjQueryObj( obj ) {
     $state      = $( obj.state );
     $border     = $( obj.border );
     $error      = $( obj.error );
+}
+
+/**
+ * Change state style
+ * 
+ * @param {string} error text
+ */
+function changeState( errortext ) {
+    if ( errortext != "" ) {
+        $state.css({ ...styles.state_normal, ...styles.state_error });
+        $float.css({ ...styles.float_normal, ...styles.float_focus, ...styles.float_error });
+    } else {
+        $state.css({ ...styles.state_normal, ...styles.state_focus });
+        $float.css({ ...styles.float_normal, ...styles.float_focus });
+    }
 }
