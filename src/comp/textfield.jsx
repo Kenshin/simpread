@@ -185,10 +185,14 @@ export default class TextField extends React.Component {
 
     changeFocus() {
         setjQueryObj( this.refs );
-        $state.css({ ...styles.state_normal, ...styles.state_focus });
-        $float.css({ ...styles.float_normal, ...styles.float_floated });
+        if ( this.props.errortext != "" ) {
+            $state.css({ ...styles.state_normal, ...styles.state_error });
+            $float.css({ ...styles.float_normal, ...styles.float_floated, ...styles.float_error });
+        } else {
+            $state.css({ ...styles.state_normal, ...styles.state_focus });
+            $float.css({ ...styles.float_normal, ...styles.float_floated });
+        }
         $target.css( "font-size", "13px" );
-        if ( this.props.errortext != "" ) $state.css({ ...styles.state_normal, ...styles.state_error });
     }
 
     changeBlur() {
@@ -201,7 +205,6 @@ export default class TextField extends React.Component {
         }
         $float.css({ ...styles.float });
         if ( this.props.errortext == "" ) $state.css({ ...styles.state_normal });
-        else $float.css({ ...styles.float, ...styles.float_error });
         if ( val == "" ) $target.css( "font-size", "16px" );
     }
 
@@ -216,11 +219,7 @@ export default class TextField extends React.Component {
              styles.root.height     = `${parheight + rows * steps}px`;
         }
         styles.float = this.props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_floated }
-        styles.state = styles.state_normal;
-        if ( this.props.errortext != "" ) {
-            styles.state = { ...styles.state_normal, ...styles.state_error };
-            styles.float = { ...styles.float, ...styles.float_error };
-        }
+        styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error   };
     }
 
     render() {
