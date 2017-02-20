@@ -20,7 +20,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
           styles      = {
             hidden : 'none',
             root: {
-                font: '300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
+                font: `300 ${large}/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans`,
 
                 display,
                 position: 'relative',
