@@ -196,6 +196,7 @@ export default class TextField extends React.Component {
         placeholder : React.PropTypes.string,
         floatingtext: React.PropTypes.string,
         errortext   : React.PropTypes.string,
+        onChange    : React.PropTypes.func,
     }
 
     state = {
@@ -223,6 +224,10 @@ export default class TextField extends React.Component {
         if ( this.props.errortext == "" ) $state.css({ ...styles.state_normal });
     }
 
+    change() {
+        if ( this.props.onChange ) this.props.onChange( event );
+    }
+
     componentWillMount() {
         styles = cssinjs();
         if ( this.props.floatingtext == "" ) styles.float.display = styles.hidden;
@@ -239,20 +244,23 @@ export default class TextField extends React.Component {
 
     render() {
 
+        const props = {
+            placeholder :this.props.placeholder,
+            onFocus  : ()=>this.changeFocus(),
+            onBlur   : ()=>this.changeBlur(),
+            onChange : ()=>this.change(),
+        };
+
         element = this.props.multi ? (
             <textarea ref="target" 
                        style={ styles.textarea }
-                       placeholder={ this.props.placeholder }
-                       onFocus  ={ ()=>this.changeFocus() }
-                       onBlur   ={ ()=>this.changeBlur() }
+                       { ...props }
             />
         ) : (
             <input ref="target" 
                        style={ styles.input }
                        type={ this.state.type } 
-                       placeholder={ this.props.placeholder }
-                       onFocus={ ()=>this.changeFocus() }
-                       onBlur ={ ()=>this.changeBlur() }
+                       { ...props }
              />
         );
 
