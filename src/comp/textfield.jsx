@@ -10,6 +10,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
           error_color = 'rgba(244, 67, 54, 1)',
           focus_color = 'rgba(0, 137, 123, .8)',
           border_color= 'rgba(224, 224, 224, 1)',
+          label_color = 'rgba(0, 0, 0, 0.3)',
           margin      = '8px 0 0 0',
           display     = 'block',
           medium      = '14px',
@@ -100,7 +101,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 fontSize: large,
                 fontWeight: 400,
-                color: 'rgba(0, 0, 0, 0.298039)',
+                color: label_color,
 
                 userSelect: 'none',
                 pointerEvents: 'none',
@@ -111,7 +112,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             },
 
             float_focus : {
-                color: '#00897B',
+                color: focus_color,
 
                 margin: `-${margin}`,
 
