@@ -183,6 +183,7 @@ export default class TextField extends React.Component {
     static defaultProps = {
         multi       : false,
         rows        : MIN_ROWS,
+        password    : false,
         placeholder : "",
         floatingtext: "",
         errortext   : "",
@@ -191,9 +192,14 @@ export default class TextField extends React.Component {
     static propTypes = {
         multi       : React.PropTypes.bool,
         rows        : React.PropTypes.number,
+        password    : React.PropTypes.bool,
         placeholder : React.PropTypes.string,
-        errortext   : React.PropTypes.string,
         floatingtext: React.PropTypes.string,
+        errortext   : React.PropTypes.string,
+    }
+
+    state = {
+        type: this.props.password ? "password" : "text"
     }
 
     changeFocus() {
@@ -243,7 +249,7 @@ export default class TextField extends React.Component {
         ) : (
             <input ref="target" 
                        style={ styles.input }
-                       type="text" 
+                       type={ this.state.type } 
                        placeholder={ this.props.placeholder }
                        onFocus={ ()=>this.changeFocus() }
                        onBlur ={ ()=>this.changeBlur() }
