@@ -19,16 +19,13 @@ export default class Include extends React.Component {
         }
     }
 
-    componentDidMount() {
-        //this.refs.include.value = this.props.include;
-    }
-
     render() {
         return (
             <TextField 
                 multi={ false } 
                 placeholder="默认为空，自动选择高亮区域。" 
                 floatingtext="高亮区域" 
+                value={ this.props.include }
                 errortext={ this.state.error }
                 onChange={ ()=>this.changeInclude() }
             />
