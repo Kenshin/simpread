@@ -1,21 +1,32 @@
 console.log( "===== simpread option common: exclude =====" )
 
 import { verifyHtml } from 'util';
+import TextField      from 'textfield';
 
 export default class Exclude extends React.Component {
 
+    state = {
+        error : ""
+    };
+
     changeExclude() {
-        //this.props.option.site.exclude = getExclude( event.target.value );
         this.props.changeExclude( getExclude( event.target.value ) );
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         this.refs.exclude.value   = this.props.exclude.join( "\n" );
-    }
+    }*/
 
     render() {
         return (
-            <textarea ref="exclude" placeholder="每行一个，例如：<div class='xxxx'></div>" onChange={ ()=> this.changeExclude() }></textarea>
+            <TextField 
+                multi={ true } 
+                placeholder="每行一个，例如：<div class='xxxx'></div>" 
+                floatingtext="隐藏列表" 
+                value={ this.props.exclude.join( "\n" ) }
+                errortext={ this.state.error }
+                onChange={ ()=>this.changeExclude() }
+            />
         )
     }
 
