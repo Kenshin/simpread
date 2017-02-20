@@ -84,15 +84,10 @@ export default class FocusOpt extends React.Component {
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>隐藏列表：</sr-opt-label>
-                    <sr-opt-item sr-type="exclude">
-                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
-                    </sr-opt-item>
+                    <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-item sr-type="include">
-                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
-                    </sr-opt-item>
+                    <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
                 </sr-opt-gp>
             </sr-opt-focus>
         )
