@@ -6,16 +6,18 @@ let $target, $float, $state, $border, $error,
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
 
-    const color     = 'rgba(51, 51, 51, .87)',
-          err_color = 'rgb(244, 67, 54)',
-          margin    = '8px 0 0 0',
-          display   = 'block',
-          medium    = '14px',
-          large     = '16px',
-          lineHeight= 1.5,
-          fontWeight= 'bold',
-          width     = '100%',
-          styles    = {
+    const color       = 'rgba(51, 51, 51, .87)',
+          error_color = 'rgb(244, 67, 54)',
+          focus_color = 'rgba(0, 137, 123, .8)',
+          border_color= 'rgb(224, 224, 224)',
+          margin      = '8px 0 0 0',
+          display     = 'block',
+          medium      = '14px',
+          large       = '16px',
+          lineHeight  = 1.5,
+          fontWeight  = 'bold',
+          width       = '100%',
+          styles      = {
             hidden : 'none',
             root: {
                 font: '300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
@@ -80,10 +82,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 width,
                 margin,
 
-                borderTop: 'none rgb(224, 224, 224)',
-                borderLeft: 'none rgb(224, 224, 224)',
-                borderRight: 'none rgb(224, 224, 224)',
-                borderBottom: '1px solid rgb(224, 224, 224)',
+                borderTop: `none ${border_color}`,
+                borderLeft: `none ${border_color}`,
+                borderRight: `none ${border_color}`,
+                borderBottom: `1px solid ${border_color}`,
                 boxSizing: 'content-box',
             },
 
@@ -119,7 +121,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
             },
 
             float_error : {
-                color: err_color,
+                color: error_color,
             },
 
             state : {},
@@ -131,10 +133,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 width,
                 margin: '-1px 0 0 0',
 
-                borderTop: 'none rgba(0, 137, 123, .8)',
-                borderLeft: 'none rgba(0, 137, 123, .8)',
-                borderRight: 'none rgba(0, 137, 123, .8)',
-                borderBottom: '2px solid rgba(0, 137, 123, .8)',
+                borderTop: `none ${focus_color}`,
+                borderLeft: `none ${focus_color}`,
+                borderRight: `none ${focus_color}`,
+                borderBottom: `2px solid ${focus_color}`,
                 boxSizing: 'content-box',
 
                 transform: 'scaleX(0)',
@@ -147,10 +149,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
             state_error : {
                 transform: 'scaleX(1)',
-                borderTop: `none ${err_color}`,
-                borderLeft: `none ${err_color}`,
-                borderRight: `none ${err_color}`,
-                borderBottom: `2px solid ${err_color}`,
+                borderTop: `none ${error_color}`,
+                borderLeft: `none ${error_color}`,
+                borderRight: `none ${error_color}`,
+                borderBottom: `2px solid ${error_color}`,
             },
 
             error : {
@@ -164,7 +166,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 userSelect: 'none',
 
-                color: err_color,
+                color: error_color,
                 transform: 'scale(0.75) translate( -80px, 0 )',
             },
 
