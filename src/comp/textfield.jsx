@@ -1,7 +1,8 @@
 console.log( "==== simpread component: TextField ====" )
 
 let $target, $float, $state, $border, $error,
-    element, styles, err_height;
+    element, styles, err_height,
+    stylemaps = new Map();
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
@@ -210,11 +211,12 @@ export default class TextField extends React.Component {
 
     changeFocus() {
         setjQueryObj( this.refs );
-        changeState( this.props.errortext );
+        changeState( stylemaps.get(this), this.props.errortext );
     }
 
     changeBlur() {
         setjQueryObj( this.refs );
+        styles = stylemaps.get(this);
         if ( $target.val() == "" && $target.attr( "placeholder" ) == "" ) {
             $float.css( styles.float_normal );
         } else {
@@ -232,11 +234,12 @@ export default class TextField extends React.Component {
     }
 
     componentWillUpdate( nextProps ) {
-        changeState( nextProps.errortext );
+        changeState( stylemaps.get(this), nextProps.errortext );
     }
 
     componentDidUpdate( prevProps, prevState ) {
         setjQueryObj( this.refs );
+        styles = stylemaps.get(this);
         if ( this.props.errortext != "" && ( !err_height || $error.height() != err_height )) {
             $error.parent().height( Number.parseInt(styles.root.height) + $error.height() );
             err_height = $error.height();
@@ -247,7 +250,8 @@ export default class TextField extends React.Component {
     }
 
     componentWillMount() {
-        styles = cssinjs();
+        stylemaps.set( this, cssinjs() );
+        styles = stylemaps.get(this);
         if ( this.props.floatingtext == "" ) styles.float.display = styles.hidden;
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows        = this.props.rows - MIN_ROWS,
@@ -320,7 +324,7 @@ function setjQueryObj( obj ) {
  * 
  * @param {string} error text
  */
-function changeState( errortext ) {
+function changeState( styles, errortext ) {
     if ( errortext != "" ) {
         $state.css({ ...styles.state_normal, ...styles.state_error });
         $float.css({ ...styles.float_normal, ...styles.float_focus, ...styles.float_error });
