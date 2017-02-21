@@ -252,7 +252,7 @@ export default class TextField extends React.Component {
              styles.textarea.height = `${txheight + rows * steps}px`;
              styles.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
         }
-        styles.float = this.props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_focus }
+        styles.float = this.props.placeholder == "" && this.props.value == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_focus }
         styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error };
     }
 
