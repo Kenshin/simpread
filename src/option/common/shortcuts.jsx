@@ -18,6 +18,7 @@ export default class Shortcuts extends React.Component {
             if ( verifyShortkey( keyword )) {
                 prevShortcuts = updateShortcuts();
                 this.setState({ error : "" });
+                this.props.changeShortcuts( prevShortcuts );
             } else if ( keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
                 this.setState({ error : `当前输入: ${keyword} 不合法，快捷键只能包括：ctrl, shift, alt, 数字, 字母。` });
             }
@@ -25,10 +26,10 @@ export default class Shortcuts extends React.Component {
             if ( /^[0-9a-z]{1}$/ig.test( keyword ) ) {
                 prevShortcuts = updateShortcuts();
                 this.setState({ error : "" });
+                this.props.changeShortcuts( prevShortcuts );
             }
         }
         this.setState({ value: prevShortcuts });
-        this.props.changeShortcuts( prevShortcuts );
     }
 
     componentDidMount() {
