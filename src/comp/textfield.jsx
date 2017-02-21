@@ -234,7 +234,18 @@ export default class TextField extends React.Component {
     }
 
     componentWillUpdate( nextProps ) {
-        changeState( styles.get(this), nextProps.errortext );
+        for( const key of Object.keys(this.props) ) {
+            if ( this.props[key] != nextProps[key] ) {
+                switch (key) {
+                    case "errortext":
+                        changeState( styles.get(this), nextProps.errortext );
+                        break;
+                    case "value":
+                        this.refs.target.value = nextProps.value;
+                        break;
+                }
+            }
+        }
     }
 
     componentDidUpdate( prevProps, prevState ) {
