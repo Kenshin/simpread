@@ -25,10 +25,11 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
                 display,
                 position: 'relative',
-                margin,
+                margin: 0,
+                padding: 0,
 
                 width,
-                height: '72px',
+                height: '45px',
                 lineHeight: 1,
             },
 
