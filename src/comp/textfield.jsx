@@ -1,8 +1,8 @@
 console.log( "==== simpread component: TextField ====" )
 
 let $target, $float, $state, $border, $error,
-    element, styles, err_height,
-    stylemaps = new Map();
+    element, style, err_height,
+    styles = new Map();
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
@@ -211,18 +211,18 @@ export default class TextField extends React.Component {
 
     changeFocus() {
         setjQueryObj( this.refs );
-        changeState( stylemaps.get(this), this.props.errortext );
+        changeState( styles.get(this), this.props.errortext );
     }
 
     changeBlur() {
         setjQueryObj( this.refs );
-        styles = stylemaps.get(this);
+        style = styles.get(this);
         if ( $target.val() == "" && $target.attr( "placeholder" ) == "" ) {
-            $float.css( styles.float_normal );
+            $float.css( style.float_normal );
         } else {
-            $float.css({ ...styles.float_normal, ...styles.float_focus });
+            $float.css({ ...style.float_normal, ...style.float_focus });
         }
-        if ( this.props.errortext == "" ) $state.css({ ...styles.state_normal });
+        if ( this.props.errortext == "" ) $state.css({ ...style.state_normal });
     }
 
     change() {
@@ -234,35 +234,35 @@ export default class TextField extends React.Component {
     }
 
     componentWillUpdate( nextProps ) {
-        changeState( stylemaps.get(this), nextProps.errortext );
+        changeState( styles.get(this), nextProps.errortext );
     }
 
     componentDidUpdate( prevProps, prevState ) {
         setjQueryObj( this.refs );
-        styles = stylemaps.get(this);
+        style = styles.get(this);
         if ( this.props.errortext != "" && ( !err_height || $error.height() != err_height )) {
-            $error.parent().height( Number.parseInt(styles.root.height) + $error.height() );
+            $error.parent().height( Number.parseInt(style.root.height) + $error.height() );
             err_height = $error.height();
         } else if ( this.props.errortext == "" ) {
-            $error.parent().height( styles.root.height );
+            $error.parent().height( style.root.height );
             err_height = undefined;
         }
     }
 
     componentWillMount() {
-        stylemaps.set( this, cssinjs() );
-        styles = stylemaps.get(this);
-        if ( this.props.floatingtext == "" ) styles.float.display = styles.hidden;
+        styles.set( this, cssinjs() );
+        style = styles.get(this);
+        if ( this.props.floatingtext == "" ) style.float.display = style.hidden;
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows        = this.props.rows - MIN_ROWS,
-                  txheight    = Number.parseInt(styles.textarea.height),
-                  inheight    = Number.parseInt(styles.input.height),
-                  parheight   = Number.parseInt(styles.root.height);
-             styles.textarea.height = `${txheight + rows * steps}px`;
-             styles.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
+                  txheight    = Number.parseInt(style.textarea.height),
+                  inheight    = Number.parseInt(style.input.height),
+                  parheight   = Number.parseInt(style.root.height);
+             style.textarea.height = `${txheight + rows * steps}px`;
+             style.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
         }
-        styles.float = this.props.placeholder == "" && this.props.value == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_focus }
-        styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error };
+        style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
+        style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
     }
 
     componentDidMount() {
@@ -280,26 +280,26 @@ export default class TextField extends React.Component {
 
         element = this.props.multi ? (
             <textarea ref="target" 
-                       style={ styles.textarea }
+                       style={ style.textarea }
                        { ...props }
             />
         ) : (
             <input ref="target" 
-                       style={ styles.input }
+                       style={ style.input }
                        type={ this.state.type } 
                        { ...props }
              />
         );
 
         return (
-            <text-field style={ styles.root }>
-                <text-field-float ref="float" style={ styles.float }>{this.props.floatingtext}</text-field-float>
+            <text-field style={ style.root }>
+                <text-field-float ref="float" style={ style.float }>{this.props.floatingtext}</text-field-float>
                 { element }
                 <div>
-                    <text-field-border ref="border" style={ styles.border }/>
-                    <text-field-state ref="state" style={ styles.state }/>
+                    <text-field-border ref="border" style={ style.border }/>
+                    <text-field-state ref="state" style={ style.state }/>
                 </div>
-                <text-field-error ref="error" style={ styles.error }>{ this.props.errortext }</text-field-error>
+                <text-field-error ref="error" style={ style.error }>{ this.props.errortext }</text-field-error>
             </text-field>
         )
     }
@@ -324,12 +324,12 @@ function setjQueryObj( obj ) {
  * 
  * @param {string} error text
  */
-function changeState( styles, errortext ) {
+function changeState( style, errortext ) {
     if ( errortext != "" ) {
-        $state.css({ ...styles.state_normal, ...styles.state_error });
-        $float.css({ ...styles.float_normal, ...styles.float_focus, ...styles.float_error });
+        $state.css({ ...style.state_normal, ...style.state_error });
+        $float.css({ ...style.float_normal, ...style.float_focus, ...style.float_error });
     } else {
-        $state.css({ ...styles.state_normal, ...styles.state_focus });
-        $float.css({ ...styles.float_normal, ...styles.float_focus });
+        $state.css({ ...style.state_normal, ...style.state_focus });
+        $float.css({ ...style.float_normal, ...style.float_focus });
     }
 }
