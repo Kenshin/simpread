@@ -13,7 +13,7 @@ export default class Exclude extends React.Component {
         const { good, bad } = getExclude( event.target.value );
         this.props.changeExclude( good );
         if ( bad.length > 0 ) {
-            this.setState({ error: `错误的输入：${bad.join(", ")}` });
+            this.setState({ error: `格式错误：${bad.join(", ")}` });
         } else {
             this.setState({ error: "" });
         }
@@ -62,6 +62,7 @@ export default class Exclude extends React.Component {
  */
 function getExclude( htmls ) {
     let [ good, bad, obj ]  = [[], [], null ];
+    if ( htmls.trim() == "" ) return { good, bad };
     const arr = htmls.trim().split( "\n" );
     for( let value of arr ) {
         if ( verifyHtml( value.trim() )[0] > 0 ) {
