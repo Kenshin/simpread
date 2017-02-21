@@ -122,10 +122,10 @@ sr-dialog {
     display: -webkit-flex;
     flex-direction:column;
 
-    min-width: 495px;
+    min-width: 500px;
     min-height: 300px;
 
-    padding: 20px;
+    padding: 39px 24px 24px;
 
     color: rgba(0, 0, 0, 0.870588);
     background-color: rgb(255, 255, 255);
@@ -240,8 +240,16 @@ sr-opt-gp {
 }
 
 sr-opt-gp sr-opt-label {
-    width: 100px;
-    text-align: right;
+    display: block;
+    position: absolute;
+    margin: -8px 0 0 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(0, 137, 123, .8);
+    user-select: none;
+    pointer-events: none;
+    transform: scale(0.75) translate( 0px, -8px );
+    transform-origin: left top 0px;
 }
 
 sr-opt-themes {
@@ -252,7 +260,7 @@ sr-opt-themes {
     width: 100%;
     height: 100%;
 
-    margin: 0;
+    margin: 8px 0 0 0;
     padding: 0;
 }
 
@@ -299,6 +307,8 @@ sr-opt-item textarea
 
 sr-opt-item[sr-type="opacity"] {
     padding-top: 6px;
+    margin: 8px 0 0 0;
+    height: 20px;
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range] {
