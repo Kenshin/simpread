@@ -184,7 +184,7 @@ export default class TextField extends React.Component {
 
     static defaultProps = {
         multi       : false,
-        rows        : MIN_ROWS,
+        rows        : MIN_ROWS + 1,
         password    : false,
         value       : "",
         placeholder : "",
@@ -245,11 +245,12 @@ export default class TextField extends React.Component {
         styles = cssinjs();
         if ( this.props.floatingtext == "" ) styles.float.display = styles.hidden;
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
-            const rows      = this.props.rows - MIN_ROWS,
-                  height    = Number.parseInt(styles.textarea.height),
-                  parheight = Number.parseInt(styles.root.height);
-             styles.textarea.height = `${height + rows * steps}px`;
-             styles.root.height     = `${parheight + rows * steps}px`;
+            const rows        = this.props.rows - MIN_ROWS,
+                  txheight    = Number.parseInt(styles.textarea.height),
+                  inheight    = Number.parseInt(styles.input.height),
+                  parheight   = Number.parseInt(styles.root.height);
+             styles.textarea.height = `${txheight + rows * steps}px`;
+             styles.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
         }
         styles.float = this.props.placeholder == "" ? styles.float_normal : { ...styles.float_normal, ...styles.float_focus }
         styles.state = this.props.errortext   == "" ? styles.state_normal : { ...styles.state_normal, ...styles.state_error };
