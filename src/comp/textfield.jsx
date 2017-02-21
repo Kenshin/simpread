@@ -201,6 +201,7 @@ export default class TextField extends React.Component {
         floatingtext: React.PropTypes.string,
         errortext   : React.PropTypes.string,
         onChange    : React.PropTypes.func,
+        onKeyDown   : React.PropTypes.func,
     }
 
     state = {
@@ -224,6 +225,10 @@ export default class TextField extends React.Component {
 
     change() {
         if ( this.props.onChange ) this.props.onChange( event );
+    }
+
+    changeKeyDown() {
+        if ( this.props.onKeyDown ) this.props.onKeyDown( event );
     }
 
     componentWillUpdate( nextProps ) {
@@ -266,6 +271,7 @@ export default class TextField extends React.Component {
             onFocus  : ()=>this.changeFocus(),
             onBlur   : ()=>this.changeBlur(),
             onChange : ()=>this.change(),
+            onKeyDown: ()=>this.changeKeyDown(),
         };
 
         element = this.props.multi ? (
