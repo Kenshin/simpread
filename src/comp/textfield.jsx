@@ -237,7 +237,6 @@ export default class TextField extends React.Component {
 
     componentDidUpdate( prevProps, prevState ) {
         setjQueryObj( this.refs );
-        if ( !this.props.multi ) return;
         if ( this.props.errortext != "" && ( !err_height || $error.height() != err_height )) {
             $error.parent().height( Number.parseInt(styles.root.height) + $error.height() );
             err_height = $error.height();
