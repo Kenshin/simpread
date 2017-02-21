@@ -1,7 +1,7 @@
 console.log( "==== simpread component: TextField ====" )
 
 let $target, $float, $state, $border, $error,
-    element, styles;
+    element, styles, err_height;
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
@@ -159,6 +159,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
             error : {
                 display,
+                position: 'absolute',
 
                 margin,
                 width,
@@ -228,6 +229,17 @@ export default class TextField extends React.Component {
         changeState( nextProps.errortext );
     }
 
+    componentDidUpdate( prevProps, prevState ) {
+        setjQueryObj( this.refs );
+        if ( this.props.errortext != "" && ( !err_height || $error.height() != err_height )) {
+            $error.parent().height( Number.parseInt(styles.root.height) + $error.height() );
+            err_height = $error.height();
+        } else if ( this.props.errortext == "" ) {
+            $error.parent().height( styles.root.height );
+            err_height = undefined;
+        }
+    }
+ 
     componentWillMount() {
         styles = cssinjs();
         if ( this.props.floatingtext == "" ) styles.float.display = styles.hidden;
@@ -275,7 +287,7 @@ export default class TextField extends React.Component {
                     <text-field-border ref="border" style={ styles.border }/>
                     <text-field-state ref="state" style={ styles.state }/>
                 </div>
-                <text-field-error ref="error" style={ styles.error } dangerouslySetInnerHTML={{__html: this.props.errortext }}></text-field-error>
+                <text-field-error ref="error" style={ styles.error }>{ this.props.errortext }</text-field-error>
             </text-field>
         )
     }
