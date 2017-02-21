@@ -68,7 +68,6 @@ function getExclude( htmls ) {
         if ( verifyHtml( value.trim() )[0] > 0 ) {
             good.push( value.trim() );
         } else {
-            //new Notify().Render( 2, `当前输入【 ${value} 】错误，请重新输入。` );
             bad.push( value.trim() );
         }
     }
