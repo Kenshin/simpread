@@ -65,11 +65,11 @@ export default class FocusOpt extends React.Component {
         return (
             <sr-opt-focus>
                 <sr-opt-gp>
-                    <sr-opt-label>主题色：</sr-opt-label>
+                    <sr-opt-label>主题色</sr-opt-label>
                     <ThemeSel themes={ themes } names={ themes } theme={ getColor(this.props.option.bgcolor) + ", 0.9" } changeBgColor={ (val,target)=>this.changeBgColor(val,target) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>透明度：</sr-opt-label>
+                    <sr-opt-label>透明度</sr-opt-label>
                     <sr-opt-item sr-type="opacity">
                         <input ref="opacity"
                             type="range" min="50" max="95" step="5" 
