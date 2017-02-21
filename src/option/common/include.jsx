@@ -1,8 +1,7 @@
 console.log( "===== simpread option common: Include =====" )
 
 import { verifyHtml } from 'util';
-
-import TextField from 'textfield';
+import TextField      from 'textfield';
 
 export default class Include extends React.Component {
 
