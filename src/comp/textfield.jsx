@@ -1,8 +1,8 @@
 console.log( "==== simpread component: TextField ====" )
 
 let $target, $float, $state, $border, $error,
-    element, style, err_height,
-    styles = new Map();
+    element,
+    style, styles = new Map();
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
@@ -240,12 +240,10 @@ export default class TextField extends React.Component {
     componentDidUpdate( prevProps, prevState ) {
         setjQueryObj( this.refs );
         style = styles.get(this);
-        if ( this.props.errortext != "" && ( !err_height || $error.height() != err_height )) {
+        if ( this.props.errortext != "" ) {
             $error.parent().height( Number.parseInt(style.root.height) + $error.height() );
-            err_height = $error.height();
         } else if ( this.props.errortext == "" ) {
             $error.parent().height( style.root.height );
-            err_height = undefined;
         }
     }
 
