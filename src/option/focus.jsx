@@ -78,10 +78,7 @@ export default class FocusOpt extends React.Component {
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>快捷键：</sr-opt-label>
-                    <sr-opt-item sr-type="shortcuts">
-                        <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
-                    </sr-opt-item>
+                    <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
