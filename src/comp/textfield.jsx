@@ -164,7 +164,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 position: 'absolute',
 
                 margin,
-                width,
+                width: '110%',
 
                 fontSize: medium,
                 fontWeight,
@@ -173,7 +173,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 userSelect: 'none',
 
                 color: error_color,
-                transform: 'scale(0.75) translate( -77px, 0 )',
+                transform: 'scale(0.75) translate( -80px, 0 )',
             },
 
         };
