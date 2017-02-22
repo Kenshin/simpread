@@ -1,9 +1,12 @@
 console.log( "==== simpread component: Floating Action Button ====" )
 
-let style, styles = new Map();
+let $target, type,
+    style, styles = new Map();
 
+const path =  "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/";
 const cssinjs = () => {
     const first_color = 'rgb(244, 67, 54)',
+          second_color= 'rgb(33, 150, 243)',
           focus_color = 'rgb(198, 40, 40)',
           styles      = {
 
@@ -17,16 +20,23 @@ const cssinjs = () => {
                 height: 'auto',
               },
 
-              fab : {},
+              first: {},
+              second: {},
+
+              first_item : {
+                backgroundColor: first_color,
+                transform: 'rotate(0deg)',
+              },
+
+              second_item: {
+                backgroundColor: second_color,
+              },
 
               normal : {
                 display: 'block',
                 position: 'relative',
 
                 color: '#fff',
-                backgroundColor: first_color,
-
-                lineHeight: '56px',
 
                 margin: 0,
                 padding: 0,
@@ -40,19 +50,28 @@ const cssinjs = () => {
               large : {
                 width: '56px',
                 height: '56px',
-                transform: 'rotate(0deg)',
+                lineHeight: '56px',
               },
 
               small : {
                 width: '40px',
                 height: '40px',
+                lineHeight: '40px',
               },
 
-              focus : {
+              first_focus : {
                   backgroundColor: focus_color,
                   transition: 'all 450ms 0ms',
                   transform: 'rotate(45deg)',
               },
+
+              second_focus : {
+                  backgroundColor: '#1565C0',
+                  transition: 'all 450ms 0ms',
+              },
+
+              first_icon: {},
+              second_icon: {},
 
               icon : {
                   display: 'block',
@@ -61,7 +80,6 @@ const cssinjs = () => {
                   border: 'none',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
-                  backgroundImage: 'url(chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/exit_icon.png)',
               },
 
           };
@@ -89,22 +107,54 @@ export default class Fab extends React.Component {
 
     mouseOverHandler() {
         style = styles.get( this.state.id );
-        $( event.target ).parent().css({ ...style.normal, ...style.large, ...style.focus });
+        $target = $( event.target );
+        type    = $target.attr( "type" );
+        if ( type == "first" ) {
+            $target.parent().css({ ...style.first, ...style.first_focus });
+        } else {
+            $target.parent().css({ ...style.second, ...style.second_focus });
+        }
     }
 
     mouseOutHandler() {
-        $( event.target ).parent().css({ ...style.normal, ...style.large });
+        style = styles.get( this.state.id );
+        $target = $( event.target );
+        type    = $target.attr( "type" );
+        if ( type == "first" ) {
+            $target.parent().css({ ...style.normal, ...style.large, ...style.first_item });
+        } else {
+            $target.parent().css({ ...style.normal, ...style.small, ...style.second_item });
+        }
     }
 
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
-        style.fab = { ...style.normal, ...style.large };
+
+        style.first = { ...style.first_item, ...style.normal, ...style.large };
+        style.first_icon = { ...style.icon };
+        style.first_icon.backgroundImage = `url(${path}assets/images/exit_icon.png)`;
+
+        style.second = { ...style.second_item, ...style.normal, ...style.small };
+        style.second_icon = { ...style.icon };
+        style.second_icon.backgroundImage = `url(${path}assets/images/more_icon.png)`;
+
         return (
             <fab style={ style.root }>
-                <a style={ style.fab }>
+                <a style={ style.second }>
                     <i 
-                        style={ style.icon } 
+                        type="second"
+                        style={ style.second_icon } 
+                        name={"more"}
+                        onClick={ ()=>this.clickHandler() } 
+                        onMouseOver={ ()=> this.mouseOverHandler() }
+                        onMouseOut={ ()=> this.mouseOutHandler() }
+                    ></i>
+                </a>
+                <a style={ style.first }>
+                    <i 
+                        type="first"
+                        style={ style.first_icon } 
                         name={"exit"}
                         onClick={ ()=>this.clickHandler() } 
                         onMouseOver={ ()=> this.mouseOverHandler() }
