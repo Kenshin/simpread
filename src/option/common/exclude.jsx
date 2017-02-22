@@ -24,7 +24,7 @@ export default class Exclude extends React.Component {
             <TextField 
                 multi={ true } 
                 rows={ this.props.rows }
-                placeholder="每行一个，例如：<div class='xxxx'></div>" 
+                placeholder="默认为空，每行一个，例如：<div class='xxxx'></div>" 
                 floatingtext="隐藏列表" 
                 value={ this.props.exclude.join( "\n" ) }
                 errortext={ this.state.error }

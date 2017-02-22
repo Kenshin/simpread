@@ -70,7 +70,6 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <TextField 
                         multi={ false } 
-                        placeholder="默认为空，自动选择高亮区域。" 
                         floatingtext="标题" 
                         value={ this.props.option.site.title }
                         errortext={ this.state.errtitle }
