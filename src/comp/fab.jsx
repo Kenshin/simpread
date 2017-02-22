@@ -11,6 +11,9 @@ const cssinjs = () => {
           styles      = {
 
               root : {
+                display: '-webkit-box',
+                WebkitBoxAlign: 'center',
+                WebkitBoxOrient: 'vertical',
                 position: 'fixed',
 
                 bottom: '45px',
@@ -24,7 +27,7 @@ const cssinjs = () => {
                 display: 'block',
                 position: 'relative',
 
-                margin: 0,
+                margin: '0 0 15px',
                 padding: 0,
 
                 width: '40px',
