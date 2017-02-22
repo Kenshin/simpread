@@ -535,14 +535,3 @@ sr-rd-footer a:active {
     color: #787878;
     text-decoration: underline;
 }
-
-/**
- *  Read: Control bar
- */
-sr-read-ctl {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 100%;
-}
