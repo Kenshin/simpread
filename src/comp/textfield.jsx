@@ -206,17 +206,18 @@ export default class TextField extends React.Component {
     }
 
     state = {
+        id    : Math.round(+new Date()),
         type  : this.props.password ? "password" : "text",
     }
 
     changeFocus() {
         setjQueryObj( this.refs );
-        changeState( styles.get(this), this.props.errortext );
+        changeState( styles.get(this.state.id), this.props.errortext );
     }
 
     changeBlur() {
         setjQueryObj( this.refs );
-        style = styles.get(this);
+        style = styles.get(this.state.id);
         if ( $target.val() == "" && $target.attr( "placeholder" ) == "" ) {
             $float.css( style.float_normal );
         } else {
@@ -238,7 +239,7 @@ export default class TextField extends React.Component {
             if ( this.props[key] != nextProps[key] ) {
                 switch (key) {
                     case "errortext":
-                        changeState( styles.get(this), nextProps.errortext );
+                        changeState( styles.get(this.state.id), nextProps.errortext );
                         break;
                     case "value":
                         this.refs.target.value = nextProps.value;
@@ -250,7 +251,7 @@ export default class TextField extends React.Component {
 
     componentDidUpdate( prevProps, prevState ) {
         setjQueryObj( this.refs );
-        style = styles.get(this);
+        style = styles.get(this.state.id);
         if ( this.props.errortext != "" ) {
             $error.parent().height( Number.parseInt(style.root.height) + $error.height() );
         } else if ( this.props.errortext == "" ) {
@@ -259,8 +260,8 @@ export default class TextField extends React.Component {
     }
 
     componentWillMount() {
-        styles.set( this, cssinjs() );
-        style = styles.get(this);
+        styles.set( this.state.id, cssinjs() );
+        style = styles.get(this.state.id);
         if ( this.props.floatingtext == "" ) style.float.display = style.hidden;
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows        = this.props.rows - MIN_ROWS,
@@ -279,6 +280,7 @@ export default class TextField extends React.Component {
     }
 
     render() {
+        console.log("adfasdfasfasdf",this.state.id)
         const props = {
             placeholder :this.props.placeholder,
             onFocus  : ()=>this.changeFocus(),
