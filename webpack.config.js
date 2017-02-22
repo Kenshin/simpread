@@ -169,6 +169,7 @@ const webpack = require( 'webpack' ),
           exclude    : __dirname + '/src/option/common/exclude.jsx',
 
           textfield  : __dirname + '/src/comp/textfield.jsx',
+          fab        : __dirname + '/src/comp/fab.jsx',
 
         }
       }

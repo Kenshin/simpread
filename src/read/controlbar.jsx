@@ -1,6 +1,7 @@
 console.log( "=== simpread read controlbar load ===" )
 
 import setting from 'readsetting';
+import Fab     from 'fab';
 
 /**
  * Read controlbar
@@ -12,19 +13,21 @@ class ReadCtlbar extends React.Component {
     open() {
         setting.Render();
     }
-    
+
+    onAction( event, type ) {
+        switch ( type ) {
+            case "exit":
+                this.props.exit();
+                break;
+            case "setting":
+                action( type );
+                break;
+        }
+    }
+
     render() {
         return (
-            <sr-read-ctl>
-                <sr-ul>
-                    <sr-li>
-                        <span onClick={ ()=> this.open() } >弹出</span>
-                    </sr-li>
-                    <sr-li>
-                        <span onClick={ ()=> this.props.exit() }>退出</span>
-                    </sr-li>
-                </sr-ul>
-            </sr-read-ctl>
+            <Fab onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
 }
