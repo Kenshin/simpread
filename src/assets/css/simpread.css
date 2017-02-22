@@ -122,10 +122,10 @@ sr-dialog {
     display: -webkit-flex;
     flex-direction:column;
 
-    min-width: 500px;
+    min-width: 480px;
     min-height: 300px;
 
-    padding: 39px 24px 24px;
+    padding: 39px 24px 16px;
 
     color: rgba(0, 0, 0, 0.870588);
     background-color: rgb(255, 255, 255);
