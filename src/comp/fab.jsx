@@ -5,8 +5,8 @@ let $target, type,
 
 const path =  "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/";
 const cssinjs = () => {
-    const first_color = 'rgb(244, 67, 54)',
-          second_color= 'rgb(33, 150, 243)',
+    const spec_color = 'rgb(244, 67, 54)',
+          normal_color= 'rgb(33, 150, 243)',
           focus_color = 'rgb(198, 40, 40)',
           styles      = {
 
@@ -20,19 +20,19 @@ const cssinjs = () => {
                 height: 'auto',
               },
 
-              first: {},
-              second: {},
+              spec: {},
+              normal: {},
 
-              first_item : {
-                backgroundColor: first_color,
+              spec_item : {
+                backgroundColor: spec_color,
                 transform: 'rotate(0deg)',
               },
 
-              second_item: {
-                backgroundColor: second_color,
+              normal_item: {
+                backgroundColor: normal_color,
               },
 
-              normal : {
+              origin : {
                 display: 'block',
                 position: 'relative',
 
@@ -59,19 +59,19 @@ const cssinjs = () => {
                 lineHeight: '40px',
               },
 
-              first_focus : {
+              spec_focus : {
                   backgroundColor: focus_color,
                   transition: 'all 450ms 0ms',
                   transform: 'rotate(45deg)',
               },
 
-              second_focus : {
+              normal_focus : {
                   backgroundColor: '#1565C0',
                   transition: 'all 450ms 0ms',
               },
 
-              first_icon: {},
-              second_icon: {},
+              spec_icon: {},
+              normal_icon: {},
 
               icon : {
                   display: 'block',
@@ -109,10 +109,10 @@ export default class Fab extends React.Component {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
-        if ( type == "first" ) {
-            $target.parent().css({ ...style.first, ...style.first_focus });
+        if ( type == "spec" ) {
+            $target.parent().css({ ...style.spec, ...style.spec_focus });
         } else {
-            $target.parent().css({ ...style.second, ...style.second_focus });
+            $target.parent().css({ ...style.normal, ...style.normal_focus });
         }
     }
 
@@ -120,10 +120,10 @@ export default class Fab extends React.Component {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
-        if ( type == "first" ) {
-            $target.parent().css({ ...style.normal, ...style.large, ...style.first_item });
+        if ( type == "spec" ) {
+            $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
         } else {
-            $target.parent().css({ ...style.normal, ...style.small, ...style.second_item });
+            $target.parent().css({ ...style.origin, ...style.small, ...style.normal_item });
         }
     }
 
@@ -131,30 +131,30 @@ export default class Fab extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
-        style.first = { ...style.first_item, ...style.normal, ...style.large };
-        style.first_icon = { ...style.icon };
-        style.first_icon.backgroundImage = `url(${path}assets/images/exit_icon.png)`;
+        style.spec = { ...style.spec_item, ...style.origin, ...style.large };
+        style.spec_icon = { ...style.icon };
+        style.spec_icon.backgroundImage = `url(${path}assets/images/exit_icon.png)`;
 
-        style.second = { ...style.second_item, ...style.normal, ...style.small };
-        style.second_icon = { ...style.icon };
-        style.second_icon.backgroundImage = `url(${path}assets/images/more_icon.png)`;
+        style.normal = { ...style.normal_item, ...style.origin, ...style.small };
+        style.normal_icon = { ...style.icon };
+        style.normal_icon.backgroundImage = `url(${path}assets/images/more_icon.png)`;
 
         return (
             <fab style={ style.root }>
-                <a style={ style.second }>
+                <a style={ style.normal }>
                     <i 
-                        type="second"
-                        style={ style.second_icon } 
+                        type="normal"
+                        style={ style.normal_icon } 
                         name={"more"}
                         onClick={ ()=>this.clickHandler() } 
                         onMouseOver={ ()=> this.mouseOverHandler() }
                         onMouseOut={ ()=> this.mouseOutHandler() }
                     ></i>
                 </a>
-                <a style={ style.first }>
+                <a style={ style.spec }>
                     <i 
-                        type="first"
-                        style={ style.first_icon } 
+                        type="spec"
+                        style={ style.spec_icon } 
                         name={"exit"}
                         onClick={ ()=>this.clickHandler() } 
                         onMouseOver={ ()=> this.mouseOverHandler() }
