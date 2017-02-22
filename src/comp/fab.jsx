@@ -24,10 +24,15 @@ const cssinjs = () => {
                 display: 'block',
                 position: 'relative',
 
-                color: '#fff',
-
                 margin: 0,
                 padding: 0,
+
+                width: '40px',
+                height: '40px',
+                lineHeight: '40px',
+
+                color: '#fff',
+                backgroundColor: normal_color,
 
                 borderRadius: '50%',
 
@@ -41,22 +46,12 @@ const cssinjs = () => {
                 lineHeight: '56px',
               },
 
-              small : {
-                width: '40px',
-                height: '40px',
-                lineHeight: '40px',
-              },
-
               spec: {},
               normal: {},
 
               spec_item : {
                 backgroundColor: spec_color,
                 transform: 'rotate(0deg)',
-              },
-
-              normal_item: {
-                backgroundColor: normal_color,
               },
 
               spec_focus : {
@@ -66,7 +61,7 @@ const cssinjs = () => {
               },
 
               normal_focus : {
-                  backgroundColor: '#1565C0',
+                  backgroundColor: 'rgb(21, 101, 192)',
                   transition: 'all 450ms 0ms',
               },
 
@@ -123,7 +118,7 @@ export default class Fab extends React.Component {
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
         } else {
-            $target.parent().css({ ...style.origin, ...style.small, ...style.normal_item });
+            $target.parent().css({ ...style.origin });
         }
     }
 
@@ -131,11 +126,11 @@ export default class Fab extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
-        style.spec = { ...style.spec_item, ...style.origin, ...style.large };
+        style.spec = { ...style.origin, ...style.large, ...style.spec_item };
         style.spec_icon = { ...style.icon };
         style.spec_icon.backgroundImage = `url(${path}assets/images/exit_icon.png)`;
 
-        style.normal = { ...style.normal_item, ...style.origin, ...style.small };
+        style.normal = { ...style.origin };
         style.normal_icon = { ...style.icon };
         style.normal_icon.backgroundImage = `url(${path}assets/images/more_icon.png)`;
 
