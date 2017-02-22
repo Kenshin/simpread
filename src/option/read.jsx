@@ -61,7 +61,7 @@ export default class ReadOpt extends React.Component {
         return (
             <sr-opt-focus>
                 <sr-opt-gp>
-                    <sr-opt-label>主题色：</sr-opt-label>
+                    <sr-opt-label>主题色</sr-opt-label>
                     <ThemeSel themes={ th.colors } names={ th.names } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
