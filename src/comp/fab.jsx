@@ -20,18 +20,6 @@ const cssinjs = () => {
                 height: 'auto',
               },
 
-              spec: {},
-              normal: {},
-
-              spec_item : {
-                backgroundColor: spec_color,
-                transform: 'rotate(0deg)',
-              },
-
-              normal_item: {
-                backgroundColor: normal_color,
-              },
-
               origin : {
                 display: 'block',
                 position: 'relative',
@@ -57,6 +45,18 @@ const cssinjs = () => {
                 width: '40px',
                 height: '40px',
                 lineHeight: '40px',
+              },
+
+              spec: {},
+              normal: {},
+
+              spec_item : {
+                backgroundColor: spec_color,
+                transform: 'rotate(0deg)',
+              },
+
+              normal_item: {
+                backgroundColor: normal_color,
               },
 
               spec_focus : {
