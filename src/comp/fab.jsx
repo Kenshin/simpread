@@ -84,6 +84,21 @@ const cssinjs = () => {
     return styles;
 };
 
+const Button = ( props ) => {
+    return (
+        <a style={ props.style }>
+            <i 
+                type={ props.type }
+                name={ props.name }
+                style={ props.icon } 
+                onClick={ ()=>props.onClick() } 
+                onMouseOver={ ()=> props.onMouseOver() }
+                onMouseOut={ ()=> props.onMouseOver() }
+            ></i>
+        </a>
+    )
+};
+
 export default class Fab extends React.Component {
 
     static defaultProps = {
@@ -137,28 +152,16 @@ export default class Fab extends React.Component {
         style.normal_icon = { ...style.icon };
         style.normal_icon.backgroundImage = `url(${path}assets/images/more_icon.png)`;
 
+        const props = {
+            onClick    : ()=>this.clickHandler(),
+            onMouseOver: ()=>this.mouseOverHandler(),
+            onMouseOut : ()=>this.mouseOutHandler(),
+        };
+
         return (
             <fab style={ style.root }>
-                <a style={ style.normal }>
-                    <i 
-                        type="normal"
-                        style={ style.normal_icon } 
-                        name={"more"}
-                        onClick={ ()=>this.clickHandler() } 
-                        onMouseOver={ ()=> this.mouseOverHandler() }
-                        onMouseOut={ ()=> this.mouseOutHandler() }
-                    ></i>
-                </a>
-                <a style={ style.spec }>
-                    <i 
-                        type="spec"
-                        style={ style.spec_icon } 
-                        name={"exit"}
-                        onClick={ ()=>this.clickHandler() } 
-                        onMouseOver={ ()=> this.mouseOverHandler() }
-                        onMouseOut={ ()=> this.mouseOutHandler() }
-                    ></i>
-                </a>
+                <Button type={ "normal" } style={ style.normal } icon={ style.normal_icon } name={ "more" } { ...props }/>
+                <Button type={ "spec" }   style={ style.spec }   icon={ style.spec_icon }   name={ "exit" } { ...props }/>
             </fab>
         )
     }
