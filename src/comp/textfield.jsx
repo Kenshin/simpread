@@ -280,7 +280,6 @@ export default class TextField extends React.Component {
     }
 
     render() {
-        console.log("adfasdfasfasdf",this.state.id)
         const props = {
             placeholder :this.props.placeholder,
             onFocus  : ()=>this.changeFocus(),
