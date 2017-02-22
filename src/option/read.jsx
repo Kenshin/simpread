@@ -58,10 +58,7 @@ export default class ReadOpt extends React.Component {
                     <ThemeSel themes={ th.colors } names={ th.names } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>快捷键：</sr-opt-label>
-                    <sr-opt-item sr-type="shortcuts">
-                        <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
-                    </sr-opt-item>
+                    <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>标题：</sr-opt-label>
@@ -76,16 +73,10 @@ export default class ReadOpt extends React.Component {
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>高亮区域：</sr-opt-label>
-                    <sr-opt-item sr-type="include">
-                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
-                    </sr-opt-item>
+                    <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>隐藏列表：</sr-opt-label>
-                    <sr-opt-item sr-type="exclude">
-                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
-                    </sr-opt-item>
+                    <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
                 </sr-opt-gp>
             </sr-opt-focus>
         )
