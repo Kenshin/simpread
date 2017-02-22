@@ -260,7 +260,7 @@ sr-opt-themes {
     width: 100%;
     height: 100%;
 
-    margin: 8px 0 0 0;
+    margin: 8px 0 17px;
     padding: 0;
 }
 
@@ -296,13 +296,6 @@ sr-opt-theme[sr-type="active"] {
 
 sr-opt-item {
     width: 100%;
-}
-
-sr-opt-item input,
-sr-opt-item textarea
-{
-    color: #9e9e9e;
-    font-size: 13px;
 }
 
 sr-opt-item[sr-type="opacity"] {
@@ -359,49 +352,6 @@ sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-thumb:hov
 
 sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-runnable-track {
     background: #00897B;
-}
-
-sr-opt-item input[type="text"] {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #9e9e9e;
-    border-radius: 0;
-    outline: none;
-    height: 20px;
-    width: 100%;
-    padding: 0;
-    box-shadow: none;
-    box-sizing: content-box;
-    transition: all 0.3s;
-}
-
-sr-opt-item[sr-type="shortcuts"] input {
-    text-transform: lowercase;
-    font-size: 15px;
-}
-
-sr-opt-item input[type="text"]:focus  {
-    border-bottom: 1px solid #00897B;
-    box-shadow: 0 1px 0 0 #00897B;
-}
-
-sr-opt-item[sr-type="exclude"] textarea {
-    display: block;
-    width: 100%;
-    min-height: 100px;
-    outline: 0;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #9e9e9e;
-    box-shadow: none;
-    border-radius: 0;
-    transition: all 0.3s;
-}
-
-sr-opt-item[sr-type="exclude"] textarea:focus {
-    border-bottom: 1px solid #00897B;
-    box-shadow: 0 1px 0 0 #00897B;
 }
 
 /**
