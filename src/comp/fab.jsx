@@ -93,7 +93,7 @@ const Button = ( props ) => {
                 style={ props.icon } 
                 onClick={ ()=>props.onClick() } 
                 onMouseOver={ ()=> props.onMouseOver() }
-                onMouseOut={ ()=> props.onMouseOver() }
+                onMouseOut={ ()=> props.onMouseOut() }
             ></i>
         </a>
     )
