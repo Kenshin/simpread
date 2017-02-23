@@ -15,6 +15,7 @@ class ReadCtlbar extends React.Component {
     }
 
     onAction( event, type ) {
+        console.log( "fab type is =", type )
         switch ( type ) {
             case "exit":
                 this.props.exit();
