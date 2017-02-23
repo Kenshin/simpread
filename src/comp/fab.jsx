@@ -91,7 +91,7 @@ const cssinjs = () => {
                 padding: 0,
                 margin: 0,
 
-                opacity: 1,
+                opacity: 0,
                 transition: 'opacity .5s ease',
               },
 
@@ -168,7 +168,7 @@ export default class Fab extends React.Component {
         } else {
             $target.parent().css({ ...style.normal, ...style.normal_focus });
             if ( $target.parent().next() && $target.parent().next().is( "ul" ) ) {
-                //$target.parent().next().css( "opacity", 1 );
+                $target.parent().next().css( "opacity", 1 );
             }
         }
     }
@@ -186,12 +186,22 @@ export default class Fab extends React.Component {
         }
     }
 
-    barMouseOutHandler() {
+    fabMouseOutHandler() {
         $target = $( event.target );
-        while ( !$target.is( "ul" ) ) {
+        while( !$target.is( "fab" ) ) {
             $target = $target.parent();
         }
-        //$target.css( "opacity", 0 );
+        $target.find( "ul" ).css( "opacity", 0 );
+    }
+
+    liMouseLeaveHandler() {
+        $target = $( event.target );
+        type    = $target.attr( "type" );
+        if ( $target.is( "i" ) ) {
+            $target.parent().next().css( "opacity", 0 );
+        } else if ( $target.is( "li" ) ) {
+            $target.find("ul").css( "opacity", 0 );
+        }
     }
 
     componentDidMount() {
@@ -219,26 +229,26 @@ export default class Fab extends React.Component {
         };
 
         return (
-            <fab style={ style.root }>
+            <fab style={ style.root } onMouseLeave={ ()=>this.fabMouseOutHandler() }>
                 <Button id={ "exit" } name={"退出"} icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
-                <Button id={ "more" } name={"更多"} icon={ [style.icon, `${path}assets/images/more_icon.png` ] } type={ "normal" } style={ style.origin } { ...props }/>
-                <ul style={ style.ul } onMouseLeave={ ()=>this.barMouseOutHandler() }>
-                    <li style={ style.li } >
+                <Button id={ "more" } name={"更多"} icon={ [style.icon, `${path}assets/images/more_icon.png` ] } type={ "anchor" } style={ style.origin } { ...props }/>
+                <ul style={ style.ul }>
+                    <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
                         <Button id={ "fontsize" } name={"字体大小"} icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/>
-                        <ul style={{ ...style.ul, ...style.ul_hori }} onMouseLeave={ ()=>this.barMouseOutHandler() }>
+                        <ul style={{ ...style.ul, ...style.ul_hori }}>
                             <li style={ style.li_hori } ><Button id={ "fontsizeup" } name={"增大"} icon={ [style.icon, `${path}assets/images/fontsize_large_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
                             <li style={ style.li_hori } ><Button id={ "fontsizedown"  } name={"减小"} icon={ [style.icon, `${path}assets/images/fontsize_small_icon.png`  ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
                         </ul>
                     </li>
-                    <li style={ style.li } >
+                    <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
                         <Button id={ "weight" } name={"版面布局"} icon={ [style.icon, `${path}assets/images/weight_icon.png` ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/>
-                        <ul style={{ ...style.ul, ...style.ul_hori }} onMouseLeave={ ()=>this.barMouseOutHandler() }>
+                        <ul style={{ ...style.ul, ...style.ul_hori }}>
                             <li style={ style.li_hori } ><Button id={ "wightlarge" } name={"加宽"} icon={ [style.icon, `${path}assets/images/weight_large_icon.png` ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/></li>
                             <li style={ style.li_hori } ><Button id={ "wightnormal"  } name={"正常"} icon={ [style.icon, `${path}assets/images/weight_normal_icon.png`  ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/></li>
                             <li style={ style.li_hori } ><Button id={ "wightsmall"  } name={"窄"} icon={ [style.icon, `${path}assets/images/weight_small_icon.png`  ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/></li>
                         </ul>
                     </li>
-                    <li style={ style.li } ><Button id={ "setting"  } name={"设定"} icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } color="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
+                    <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } ><Button id={ "setting"  } name={"设定"} icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } color="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
                 </ul>
             </fab>
         )
