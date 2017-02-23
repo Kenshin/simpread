@@ -5,9 +5,9 @@ let $target, type,
 
 const path =  "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/";
 const cssinjs = () => {
-    const spec_color = 'rgb(244, 67, 54)',
-          normal_color= 'rgb(33, 150, 243)',
-          focus_color = 'rgb(198, 40, 40)',
+    const spec_color = 'rgba(244, 67, 54, 1)',
+          normal_color= 'rgba(33, 150, 243, 1)',
+          focus_color = 'rgba(198, 40, 40, 1)',
           styles      = {
 
               root : {
@@ -64,8 +64,8 @@ const cssinjs = () => {
               },
 
               normal_focus : {
-                  backgroundColor: 'rgb(21, 101, 192)',
                   transition: 'all 450ms 0ms',
+                  boxShadow: '0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2)',
               },
 
               spec_icon: {},
