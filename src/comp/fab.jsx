@@ -14,6 +14,7 @@ const cssinjs = () => {
                 display: '-webkit-box',
                 WebkitBoxAlign: 'center',
                 WebkitBoxOrient: 'vertical',
+                WebkitBoxDirection: 'reverse',
                 position: 'fixed',
 
                 bottom: '45px',
@@ -160,8 +161,8 @@ export default class Fab extends React.Component {
 
         return (
             <fab style={ style.root }>
-                <Button type={ "normal" } style={ style.normal } icon={ style.normal_icon } name={ "more" } { ...props }/>
                 <Button type={ "spec" }   style={ style.spec }   icon={ style.spec_icon }   name={ "exit" } { ...props }/>
+                <Button type={ "normal" } style={ style.normal } icon={ style.normal_icon } name={ "more" } { ...props }/>
             </fab>
         )
     }
