@@ -36,7 +36,7 @@ const cssinjs = () => {
                 lineHeight: '40px',
 
                 color: '#fff',
-                backgroundColor: normal_color,
+                //backgroundColor: normal_color,
 
                 borderRadius: '50%',
 
@@ -95,8 +95,9 @@ const Button = ( props ) => {
             <i 
                 type={ props.type }
                 name={ props.name }
-                style={ props.icon[0] } 
-                onClick={ ()=>props.onClick() } 
+                color={ props.bgcolor }
+                style={ props.icon[0] }
+                onClick={ ()=>props.onClick() }
                 onMouseOver={ ()=> props.onMouseOver() }
                 onMouseOut={ ()=> props.onMouseOut() }
             ></i>
@@ -138,9 +139,11 @@ export default class Fab extends React.Component {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
+        const bgcolor = $target.attr( "color" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
         } else {
+            if ( bgcolor ) style.origin.backgroundColor = bgcolor;
             $target.parent().css({ ...style.origin });
         }
     }
@@ -160,8 +163,8 @@ export default class Fab extends React.Component {
 
         return (
             <fab style={ style.root }>
-                <Button type={ "spec" }   style={ style.spec }   name={ "exit" } icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] }   { ...props }/>
-                <Button type={ "normal" } style={ style.origin } name={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } { ...props }/>
+                <Button name={ "exit" } icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
+                <Button name={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } bgcolor="rgba(33, 150, 243, 1)" type={ "normal" } style={ style.origin } { ...props }/>
             </fab>
         )
     }
