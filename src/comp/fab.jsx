@@ -194,6 +194,17 @@ export default class Fab extends React.Component {
         //$target.css( "opacity", 0 );
     }
 
+    componentDidMount() {
+        const $root = $( "fab" );
+        const $ul   = $($root.children()[2]);
+        if ( $ul.is("ul") ) {
+            $ul.children().map( ( idx, item )=> {
+                const $ul = $(item).find( "ul" );
+                if ( $ul ) $ul.css( "top", `${idx * $ul.height()}px` );
+            })
+        }
+    }
+
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
