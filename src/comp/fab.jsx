@@ -97,15 +97,15 @@ const cssinjs = () => {
 
 const Button = ( props ) => {
     props.icon[0].backgroundImage =  `url(${props.icon[1]})`;
-    if ( props.bgcolor ) {
-        props.style.backgroundColor = props.bgcolor;
+    if ( props.color ) {
+        props.style.backgroundColor = props.color;
     }
     return (
         <a style={ props.style }>
             <i 
                 type={ props.type }
                 name={ props.name }
-                color={ props.bgcolor }
+                color={ props.color }
                 style={ props.icon[0] }
                 onClick={ ()=>props.onClick() }
                 onMouseOver={ ()=> props.onMouseOver() }
@@ -149,11 +149,11 @@ export default class Fab extends React.Component {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
-        const bgcolor = $target.attr( "color" );
+        const color = $target.attr( "color" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
         } else {
-            if ( bgcolor ) style.origin.backgroundColor = bgcolor;
+            if ( color ) style.origin.backgroundColor = color;
             $target.parent().css({ ...style.origin });
         }
     }
@@ -174,10 +174,10 @@ export default class Fab extends React.Component {
         return (
             <fab style={ style.root }>
                 <Button name={ "exit" } icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
-                <Button name={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } bgcolor="rgba(33, 150, 243, 1)" type={ "normal" } style={ style.origin } { ...props }/>
+                <Button name={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } color="rgba(33, 150, 243, 1)" type={ "normal" } style={ style.origin } { ...props }/>
                 <ul style={ style.ul }>
-                    <li><Button name={ "fontsize" } icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } bgcolor="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
-                    <li><Button name={ "setting"  } icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } bgcolor="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
+                    <li><Button name={ "fontsize" } icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
+                    <li><Button name={ "setting"  } icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } color="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
                 </ul>
             </fab>
         )
