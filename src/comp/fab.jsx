@@ -104,7 +104,7 @@ const Button = ( props ) => {
         <a style={ props.style }>
             <i 
                 type={ props.type }
-                name={ props.name }
+                id={ props.id }
                 color={ props.color }
                 style={ props.icon[0] }
                 onClick={ ()=>props.onClick() }
@@ -130,7 +130,7 @@ export default class Fab extends React.Component {
     }
 
     clickHandler() {
-        const type = $( event.target ).attr( "name" );
+        const type = $( event.target ).attr( "id" );
         if ( this.props.onAction ) this.props.onAction( event, type );
     }
 
@@ -173,11 +173,11 @@ export default class Fab extends React.Component {
 
         return (
             <fab style={ style.root }>
-                <Button name={ "exit" } icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
-                <Button name={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } color="rgba(33, 150, 243, 1)" type={ "normal" } style={ style.origin } { ...props }/>
+                <Button id={ "exit" } icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
+                <Button id={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } color="rgba(33, 150, 243, 1)" type={ "normal" } style={ style.origin } { ...props }/>
                 <ul style={ style.ul }>
-                    <li><Button name={ "fontsize" } icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
-                    <li><Button name={ "setting"  } icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } color="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
+                    <li><Button id={ "fontsize" } icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
+                    <li><Button id={ "setting"  } icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } color="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
                 </ul>
             </fab>
         )
