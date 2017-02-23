@@ -81,27 +81,21 @@ const cssinjs = () => {
                   backgroundRepeat: 'no-repeat',
               },
 
-              ul : {
-                display: '-webkit-flex',
-                flexFlow: 'column nowrap',
-
-                listStyle: 'none',
-
-                padding: 0,
-                margin: 0,
-              },
-
           };
     return styles;
 };
 
 const Button = ( props ) => {
+    props.icon[0].backgroundImage =  `url(${props.icon[1]})`;
+    if ( props.bgcolor ) {
+        props.style.backgroundColor = props.bgcolor;
+    }
     return (
         <a style={ props.style }>
             <i 
                 type={ props.type }
                 name={ props.name }
-                style={ props.icon } 
+                style={ props.icon[0] } 
                 onClick={ ()=>props.onClick() } 
                 onMouseOver={ ()=> props.onMouseOver() }
                 onMouseOut={ ()=> props.onMouseOut() }
@@ -157,11 +151,6 @@ export default class Fab extends React.Component {
 
         style.spec = { ...style.origin, ...style.large, ...style.spec_item };
         style.spec_icon = { ...style.icon };
-        style.spec_icon.backgroundImage = `url(${path}assets/images/exit_icon.png)`;
-
-        style.normal = { ...style.origin };
-        style.normal_icon = { ...style.icon };
-        style.normal_icon.backgroundImage = `url(${path}assets/images/more_icon.png)`;
 
         const props = {
             onClick    : ()=>this.clickHandler(),
@@ -171,12 +160,8 @@ export default class Fab extends React.Component {
 
         return (
             <fab style={ style.root }>
-                <Button type={ "spec" }   style={ style.spec }   icon={ style.spec_icon }   name={ "exit" } { ...props }/>
-                <Button type={ "normal" } style={ style.normal } icon={ style.normal_icon } name={ "more" } { ...props }/>
-                <ul style={ style.ul }>
-                    <li><Button type={ "normal" } style={ style.normal } icon={ style.normal_icon } name={ "fontsize" } { ...props }/></li>
-                    <li><Button type={ "normal" } style={ style.normal } icon={ style.normal_icon } name={ "setting"  } { ...props }/></li>
-                </ul>
+                <Button type={ "spec" }   style={ style.spec }   name={ "exit" } icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] }   { ...props }/>
+                <Button type={ "normal" } style={ style.origin } name={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } { ...props }/>
             </fab>
         )
     }
