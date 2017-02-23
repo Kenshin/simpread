@@ -82,13 +82,16 @@ const cssinjs = () => {
               },
 
               ul : {
-                display: '-webkit-flex',
+                display: 'block',
                 flexFlow: 'column nowrap',
 
                 listStyle: 'none',
 
                 padding: 0,
                 margin: 0,
+
+                opacity: 0,
+                transition: 'opacity .5s ease',
               },
 
           };
@@ -145,6 +148,9 @@ export default class Fab extends React.Component {
             $target.parent().css({ ...style.spec, ...style.spec_focus });
         } else {
             $target.parent().css({ ...style.normal, ...style.normal_focus });
+            if ( $target.parent().next() && $target.parent().next().is( "ul" ) ) {
+                $target.parent().next().css( "opacity", 1 );
+            }
         }
     }
 
@@ -159,6 +165,14 @@ export default class Fab extends React.Component {
             if ( color ) style.origin.backgroundColor = color;
             $target.parent().css({ ...style.origin });
         }
+    }
+
+    barMouseOutHandler() {
+        $target = $( event.target );
+        while ( !$target.is( "ul" ) ) {
+            $target = $target.parent();
+        }
+        $target.css( "opacity", 0 );
     }
 
     render() {
@@ -178,7 +192,7 @@ export default class Fab extends React.Component {
             <fab style={ style.root }>
                 <Button id={ "exit" } name={"退出"} icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
                 <Button id={ "more" } name={"更多"} icon={ [style.icon, `${path}assets/images/more_icon.png` ] } type={ "normal" } style={ style.origin } { ...props }/>
-                <ul style={ style.ul }>
+                <ul style={ style.ul } onMouseLeave={ ()=>this.barMouseOutHandler() }>
                     <li><Button id={ "fontsize" } name={"字体大小"} icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
                     <li><Button id={ "setting"  } name={"设定"} icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } color="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
                 </ul>
