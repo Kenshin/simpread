@@ -81,6 +81,16 @@ const cssinjs = () => {
                   backgroundRepeat: 'no-repeat',
               },
 
+              ul : {
+                display: '-webkit-flex',
+                flexFlow: 'column nowrap',
+
+                listStyle: 'none',
+
+                padding: 0,
+                margin: 0,
+              },
+
           };
     return styles;
 };
@@ -165,6 +175,10 @@ export default class Fab extends React.Component {
             <fab style={ style.root }>
                 <Button name={ "exit" } icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
                 <Button name={ "more" } icon={ [style.icon, `${path}assets/images/more_icon.png` ] } bgcolor="rgba(33, 150, 243, 1)" type={ "normal" } style={ style.origin } { ...props }/>
+                <ul style={ style.ul }>
+                    <li><Button name={ "fontsize" } icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } bgcolor="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
+                    <li><Button name={ "setting"  } icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } bgcolor="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
+                </ul>
             </fab>
         )
     }
