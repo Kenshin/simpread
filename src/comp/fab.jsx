@@ -96,15 +96,15 @@ const cssinjs = () => {
 };
 
 const Button = ( props ) => {
-    props.icon[0].backgroundImage =  `url(${props.icon[1]})`;
+    props.icon[0].backgroundImage = `url(${props.icon[1]})`;
     if ( props.color ) {
         props.style.backgroundColor = props.color;
     }
     return (
         <a style={ props.style }>
             <i 
-                type={ props.type }
                 id={ props.id }
+                type={ props.type }
                 name={ props.name }
                 color={ props.color }
                 style={ props.icon[0] }
