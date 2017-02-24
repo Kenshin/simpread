@@ -54,6 +54,11 @@ const items = {
             },
         },
     },
+    "share" : {
+        "name" : "共享",
+        "icon" : path("share_icon"),
+        "color": "#8BC34A",
+    },
 };
 
 /**
