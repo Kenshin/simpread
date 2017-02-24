@@ -244,11 +244,12 @@ export default class Fab extends React.Component {
             };
         };
 
-        let spec, anchor, others;
+        let spec, anchor, others = [];
 
         if ( keys.length > 0 ) {
             spec = <Button { ...props( this, keys[0], style.spec, style.spec_icon, 0 ) } />;
         }
+
         /*if ( keys.length > 1 ) {
             this.props.item[ "more" ] = {
                 "name" : "更多",
@@ -257,19 +258,22 @@ export default class Fab extends React.Component {
             anchor = <Button { ...props( this, keys[1], style.origin, style.icon, 1 ) } />;
         }*/
 
-        others = keys.filter( ( item, idx ) => {
-            if ( idx > 0 ) {
-                return <li><Button { ...props( this, keys[idx], style.origin, style.icon, idx ) } /></li>
-            }
-        });
+        for( let idx = 1; idx < keys.length; idx++ ) {
+            others.push(
+                (<li onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
+                    <Button { ...props( this, keys[idx], style.origin, style.icon, idx ) } />
+                </li>)
+            );
+        }
+        if ( others.length > 1 ) {
+            others = ( <ul style={ style.ul }>{ others }</ul> );
+        }
 
         return (
             <fab style={ style.root } onMouseLeave={ ()=>this.fabMouseOutHandler() }>
                 { spec   }
                 { anchor }
-                <ul style={ style.ul }>
                 { others }
-                </ul>
             </fab>
         )
     }
