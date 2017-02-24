@@ -222,11 +222,6 @@ export default class Fab extends React.Component {
         style = styles.get( this.state.id );
 
         const props = ( obj, id, type, style, icon_style, idx )=> {
-            /*const type = idx=>{
-                    if ( idx == 0 ) return "spec";
-                    else if ( idx == 1) return "anchor";
-                    else return "normal";
-            };*/
             return {
                 id         : id,
                 type       : type,
