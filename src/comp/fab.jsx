@@ -223,12 +223,12 @@ export default class Fab extends React.Component {
 
         const props = ( obj, id, type, style, icon_style, idx )=> {
             return {
-                id         : id,
-                type       : type,
-                style      : style,
+                id,
+                type,
+                style,
                 name       : obj.name,
-                icon       : [ icon_style, obj.icon ],
                 color      : obj.color,
+                icon       : [ icon_style, obj.icon ],
                 onClick    : ()=>this.clickHandler(),
                 onMouseOver: ()=>this.mouseOverHandler(),
                 onMouseOut : ()=>this.mouseOutHandler(),
@@ -270,7 +270,6 @@ export default class Fab extends React.Component {
                     child.push(
                         sublist( subitem[subkeys[j]], subkeys[j], style , j )
                     )
-                    console.log( subitem[subkeys[j]] )
                 }
             }
 
