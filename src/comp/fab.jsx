@@ -3,7 +3,6 @@ console.log( "==== simpread component: Floating Action Button ====" )
 let $target, type,
     style, styles = new Map();
 
-//const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` );
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
           normal_color= 'rgba(33, 150, 243, 1)',
@@ -80,6 +79,8 @@ const cssinjs = () => {
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
               },
+
+              anchor_icon : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
 
               ul : {
                 display: '-webkit-flex',
@@ -220,9 +221,6 @@ export default class Fab extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
-        style.spec = { ...style.origin, ...style.large, ...style.spec_item };
-        style.spec_icon = { ...style.icon };
-
         const props = ( key, style, icon_style, idx )=> {
             const type = idx=>{
                     if ( idx == 0 ) return "spec";
@@ -249,13 +247,14 @@ export default class Fab extends React.Component {
             keys.splice( 1, 0, "anchor" );
             this.props.items[ "anchor" ] = {
                 "name" : "更多",
-                "icon" : "chrome-extension://khcgjohhnlcddpjedacmlpeiinfampjf/assets/images/anchor_icon.png",
+                "icon" : style.anchor_icon,
             }
             anchor = <Button { ...props( keys[1], style.origin, style.icon, 1 ) } />;
         }
 
         if ( keys.length > 0 ) {
-            spec = <Button { ...props( keys[0], style.spec, style.spec_icon, 0 ) } />;
+            style.spec = { ...style.origin, ...style.large, ...style.spec_item };
+            spec = <Button { ...props( keys[0], style.spec, style.icon, 0 ) } />;
         }
 
         for( let idx = 2; idx < keys.length; idx++ ) {
