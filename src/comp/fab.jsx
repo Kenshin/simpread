@@ -3,7 +3,7 @@ console.log( "==== simpread component: Floating Action Button ====" )
 let $target, type,
     style, styles = new Map();
 
-const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` );
+//const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` );
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
           normal_color= 'rgba(33, 150, 243, 1)',
@@ -147,7 +147,7 @@ export default class Fab extends React.Component {
     }
 
     static propTypes = {
-        items    : React.PropTypes.array,
+        items    : React.PropTypes.object,
         onAction : React.PropTypes.func,
     }
 
@@ -220,8 +220,6 @@ export default class Fab extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
-        const keys = Object.keys( this.props.items );
-
         style.spec = { ...style.origin, ...style.large, ...style.spec_item };
         style.spec_icon = { ...style.icon };
 
@@ -244,28 +242,30 @@ export default class Fab extends React.Component {
             };
         };
 
-        let spec, anchor, others = [];
+        let keys, spec, anchor, others = [];
+        keys = Object.keys( this.props.items );
+
+        if ( keys.length > 1 ) {
+            keys.splice( 1, 0, "anchor" );
+            this.props.items[ "anchor" ] = {
+                "name" : "更多",
+                "icon" : "chrome-extension://khcgjohhnlcddpjedacmlpeiinfampjf/assets/images/more_icon.png",
+            }
+            anchor = <Button { ...props( keys[1], style.origin, style.icon, 1 ) } />;
+        }
 
         if ( keys.length > 0 ) {
             spec = <Button { ...props( keys[0], style.spec, style.spec_icon, 0 ) } />;
         }
 
-        /*if ( keys.length > 1 ) {
-            this.props.item[ "more" ] = {
-                "name" : "更多",
-                "icon" : path("exit_icon"),
-            }
-            anchor = <Button { ...props( this, keys[1], style.origin, style.icon, 1 ) } />;
-        }*/
-
-        for( let idx = 1; idx < keys.length; idx++ ) {
+        for( let idx = 2; idx < keys.length; idx++ ) {
             others.push(
                 (<li onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
                     <Button { ...props( keys[idx], style.origin, style.icon, idx ) } />
                 </li>)
             );
         }
-        if ( others.length > 1 ) {
+        if ( others.length > 0 ) {
             others = ( <ul style={ style.ul }>{ others }</ul> );
         }
 
