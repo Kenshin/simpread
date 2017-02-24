@@ -235,13 +235,16 @@ export default class Fab extends React.Component {
             };
         };
 
-        const sublist = ( obj, key, style, idx ) => {
+        const sublist = ( obj, key, style, idx, child ) => {
             return (
-                <li style={ style.li_hori } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
+                <li style={ child ? style.li : style.li_hori } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
                     <Button { ...props( obj, key, "normal", style.origin, style.icon, idx ) } />
+                    <ul style={{ ...style.ul, ...style.ul_hori }}>
+                        { child }
+                    </ul>
                 </li>
             )
-        }
+        };
 
         let keys, spec, anchor, others = [];
 
@@ -268,20 +271,21 @@ export default class Fab extends React.Component {
                 const subkeys = Object.keys( subitem );
                 for ( let j = 0; j < subkeys.length; j++ ) {
                     child.push(
-                        sublist( subitem[subkeys[j]], subkeys[j], style , j )
+                        sublist( subitem[subkeys[j]], subkeys[j], style , j, undefined )
                     )
                 }
             }
 
-            const list = (
+            /*const list = (
                 <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
                     <Button { ...props( this.props.items[keys[idx]], keys[idx], "normal", style.origin, style.icon, idx ) } />
                     <ul style={{ ...style.ul, ...style.ul_hori }}>
                         { child }
                     </ul>
                 </li>
-            )
-            others.push( list );
+            )*/
+
+            others.push( sublist( this.props.items[keys[idx]], keys[idx], style, idx, child ));
         }
         if ( others.length > 0 ) {
             others = ( <ul style={ style.ul }>{ others }</ul> );
