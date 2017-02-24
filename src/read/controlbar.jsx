@@ -6,7 +6,7 @@ import Fab     from 'fab';
 
 const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` );
 const items = {
-    "close" : {
+    "exit" : {
         "name" : "关闭",
         "icon" : path("exit_icon"),
     },
