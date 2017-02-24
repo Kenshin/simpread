@@ -3,7 +3,7 @@ console.log( "==== simpread component: Floating Action Button ====" )
 let $target, type,
     style, styles = new Map();
 
-const path =  "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/";
+//const path =  "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/";
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
           normal_color= 'rgba(33, 150, 243, 1)',
@@ -147,6 +147,7 @@ export default class Fab extends React.Component {
     }
 
     static propTypes = {
+        items    : React.PropTypes.array,
         onAction : React.PropTypes.func,
     }
 
@@ -219,36 +220,55 @@ export default class Fab extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
+        const keys = Object.keys( this.props.items );
+
         style.spec = { ...style.origin, ...style.large, ...style.spec_item };
         style.spec_icon = { ...style.icon };
 
-        const props = {
-            onClick    : ()=>this.clickHandler(),
-            onMouseOver: ()=>this.mouseOverHandler(),
-            onMouseOut : ()=>this.mouseOutHandler(),
+        const props = ( items, key, style, icon_style, idx )=> {
+            const type = idx=>{
+                    if ( idx == 0 ) return "spec";
+                    else if ( idx == 1) return "anchor";
+                    else return "normal";
+            };
+            return {
+                id         : key,
+                type       : type( idx ),
+                style      : style,
+                name       : this.props.items[key].name,
+                icon       : [ icon_style, this.props.items[key].icon ],
+                color      : this.props.items[key].color,
+                onClick    : ()=>this.clickHandler(),
+                onMouseOver: ()=>this.mouseOverHandler(),
+                onMouseOut : ()=>this.mouseOutHandler(),
+            };
         };
+
+        let spec, anchor, others;
+
+        if ( keys.length > 0 ) {
+            spec = <Button { ...props( this, keys[0], style.spec, style.spec_icon, 0 ) } />;
+        }
+        /*if ( keys.length > 1 ) {
+            this.props.item[ "more" ] = {
+                "name" : "更多",
+                "icon" : path("exit_icon"),
+            }
+            anchor = <Button { ...props( this, keys[1], style.origin, style.icon, 1 ) } />;
+        }*/
+
+        others = keys.filter( ( item, idx ) => {
+            if ( idx > 0 ) {
+                return <li><Button { ...props( this, keys[idx], style.origin, style.icon, idx ) } /></li>
+            }
+        });
 
         return (
             <fab style={ style.root } onMouseLeave={ ()=>this.fabMouseOutHandler() }>
-                <Button id={ "exit" } name={"退出"} icon={ [style.spec_icon, `${path}assets/images/exit_icon.png`] } type={ "spec" } style={ style.spec } { ...props }/>
-                <Button id={ "more" } name={"更多"} icon={ [style.icon, `${path}assets/images/more_icon.png` ] } type={ "anchor" } style={ style.origin } { ...props }/>
+                { spec   }
+                { anchor }
                 <ul style={ style.ul }>
-                    <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
-                        <Button id={ "fontsize" } name={"字体大小"} icon={ [style.icon, `${path}assets/images/fontsize_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/>
-                        <ul style={{ ...style.ul, ...style.ul_hori }}>
-                            <li style={ style.li_hori } ><Button id={ "fontsizeup" } name={"增大"} icon={ [style.icon, `${path}assets/images/fontsize_large_icon.png` ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
-                            <li style={ style.li_hori } ><Button id={ "fontsizedown"  } name={"减小"} icon={ [style.icon, `${path}assets/images/fontsize_small_icon.png`  ] } color="#9E9E9E" type={ "normal" } style={ style.origin } { ...props }/></li>
-                        </ul>
-                    </li>
-                    <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
-                        <Button id={ "weight" } name={"版面布局"} icon={ [style.icon, `${path}assets/images/weight_icon.png` ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/>
-                        <ul style={{ ...style.ul, ...style.ul_hori }}>
-                            <li style={ style.li_hori } ><Button id={ "wightlarge" } name={"加宽"} icon={ [style.icon, `${path}assets/images/weight_large_icon.png` ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/></li>
-                            <li style={ style.li_hori } ><Button id={ "wightnormal"  } name={"正常"} icon={ [style.icon, `${path}assets/images/weight_normal_icon.png`  ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/></li>
-                            <li style={ style.li_hori } ><Button id={ "wightsmall"  } name={"窄"} icon={ [style.icon, `${path}assets/images/weight_small_icon.png`  ] } color="#FFEB3B" type={ "normal" } style={ style.origin } { ...props }/></li>
-                        </ul>
-                    </li>
-                    <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } ><Button id={ "setting"  } name={"设定"} icon={ [style.icon, `${path}assets/images/setting_icon.png`  ] } color="#FF5722" type={ "normal" } style={ style.origin } { ...props }/></li>
+                { others }
                 </ul>
             </fab>
         )
