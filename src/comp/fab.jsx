@@ -3,7 +3,7 @@ console.log( "==== simpread component: Floating Action Button ====" )
 let $target, type,
     style, styles = new Map();
 
-//const path =  "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/";
+const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` );
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
           normal_color= 'rgba(33, 150, 243, 1)',
@@ -225,7 +225,7 @@ export default class Fab extends React.Component {
         style.spec = { ...style.origin, ...style.large, ...style.spec_item };
         style.spec_icon = { ...style.icon };
 
-        const props = ( items, key, style, icon_style, idx )=> {
+        const props = ( key, style, icon_style, idx )=> {
             const type = idx=>{
                     if ( idx == 0 ) return "spec";
                     else if ( idx == 1) return "anchor";
@@ -247,7 +247,7 @@ export default class Fab extends React.Component {
         let spec, anchor, others = [];
 
         if ( keys.length > 0 ) {
-            spec = <Button { ...props( this, keys[0], style.spec, style.spec_icon, 0 ) } />;
+            spec = <Button { ...props( keys[0], style.spec, style.spec_icon, 0 ) } />;
         }
 
         /*if ( keys.length > 1 ) {
@@ -261,7 +261,7 @@ export default class Fab extends React.Component {
         for( let idx = 1; idx < keys.length; idx++ ) {
             others.push(
                 (<li onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
-                    <Button { ...props( this, keys[idx], style.origin, style.icon, idx ) } />
+                    <Button { ...props( keys[idx], style.origin, style.icon, idx ) } />
                 </li>)
             );
         }
