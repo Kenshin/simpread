@@ -241,8 +241,8 @@ export default class Fab extends React.Component {
         };
 
         let keys, spec, anchor, others = [];
-        keys = Object.keys( this.props.items );
 
+        keys = Object.keys( this.props.items );
         if ( keys.length > 1 ) {
             keys.splice( 1, 0, "anchor" );
             this.props.items[ "anchor" ] = {
