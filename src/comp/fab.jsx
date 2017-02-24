@@ -257,7 +257,7 @@ export default class Fab extends React.Component {
             spec = <Button { ...props( keys[0], style.spec, style.icon, 0 ) } />;
         }
 
-        for( let idx = 2; idx < keys.length; idx++ ) {
+        for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             others.push(
                 (<li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
                     <Button { ...props( keys[idx], style.origin, style.icon, idx ) } />
