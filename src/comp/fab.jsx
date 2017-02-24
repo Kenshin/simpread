@@ -249,7 +249,7 @@ export default class Fab extends React.Component {
             keys.splice( 1, 0, "anchor" );
             this.props.items[ "anchor" ] = {
                 "name" : "更多",
-                "icon" : "chrome-extension://khcgjohhnlcddpjedacmlpeiinfampjf/assets/images/more_icon.png",
+                "icon" : "chrome-extension://khcgjohhnlcddpjedacmlpeiinfampjf/assets/images/anchor_icon.png",
             }
             anchor = <Button { ...props( keys[1], style.origin, style.icon, 1 ) } />;
         }
