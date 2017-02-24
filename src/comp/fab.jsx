@@ -221,24 +221,32 @@ export default class Fab extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
-        const props = ( key, style, icon_style, idx )=> {
-            const type = idx=>{
+        const props = ( obj, id, type, style, icon_style, idx )=> {
+            /*const type = idx=>{
                     if ( idx == 0 ) return "spec";
                     else if ( idx == 1) return "anchor";
                     else return "normal";
-            };
+            };*/
             return {
-                id         : key,
-                type       : type( idx ),
+                id         : id,
+                type       : type,
                 style      : style,
-                name       : this.props.items[key].name,
-                icon       : [ icon_style, this.props.items[key].icon ],
-                color      : this.props.items[key].color,
+                name       : obj.name,
+                icon       : [ icon_style, obj.icon ],
+                color      : obj.color,
                 onClick    : ()=>this.clickHandler(),
                 onMouseOver: ()=>this.mouseOverHandler(),
                 onMouseOut : ()=>this.mouseOutHandler(),
             };
         };
+
+        const sublist = ( obj, key, style, idx ) => {
+            return (
+                <li style={ style.li_hori } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
+                    <Button { ...props( obj, key, "normal", style.origin, style.icon, idx ) } />
+                </li>
+            )
+        }
 
         let keys, spec, anchor, others = [];
 
@@ -249,20 +257,37 @@ export default class Fab extends React.Component {
                 "name" : "更多",
                 "icon" : style.anchor_icon,
             }
-            anchor = <Button { ...props( keys[1], style.origin, style.icon, 1 ) } />;
+            anchor = <Button { ...props( this.props.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } />;
         }
 
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
-            spec = <Button { ...props( keys[0], style.spec, style.icon, 0 ) } />;
+            spec = <Button { ...props( this.props.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
         }
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
-            others.push(
-                (<li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
-                    <Button { ...props( keys[idx], style.origin, style.icon, idx ) } />
-                </li>)
-            );
+
+            const child = [];
+            const subitem = this.props.items[ keys[idx] ].items;
+            if ( subitem ) {
+                const subkeys = Object.keys( subitem );
+                for ( let j = 0; j < subkeys.length; j++ ) {
+                    child.push(
+                        sublist( subitem[subkeys[j]], subkeys[j], style , j )
+                    )
+                    console.log( subitem[subkeys[j]] )
+                }
+            }
+
+            const list = (
+                <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
+                    <Button { ...props( this.props.items[keys[idx]], keys[idx], "normal", style.origin, style.icon, idx ) } />
+                    <ul style={{ ...style.ul, ...style.ul_hori }}>
+                        { child }
+                    </ul>
+                </li>
+            )
+            others.push( list );
         }
         if ( others.length > 0 ) {
             others = ( <ul style={ style.ul }>{ others }</ul> );
