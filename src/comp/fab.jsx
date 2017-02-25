@@ -119,16 +119,17 @@ const cssinjs = () => {
 };
 
 /**
- * Button react jsx( stateless component )
+ * Button react stateless component
  * 
  * @param {object} react props, include:
- *   - id          : identify
- *   - type        : type, include: sepc, anchor, normal
- *   - name        : name
- *   - color       : background color
- *   - onClick     : click event handler
- *   - onMouseOver : mouse over event handler
- *   - onMouseOut  : mouse out event handler
+ *   - id          : [PropTypes.string] identify
+ *   - type        : [PropTypes.string] type, include: sepc, anchor, normal
+ *   - style       : [PropTypes.object] <a> style
+ *   - name        : [PropTypes.string] name
+ *   - color       : [PropTypes.string] background color
+ *   - onClick     : [PropTypes.func]   click event handler
+ *   - onMouseOver : [PropTypes.func]   mouse over event handler
+ *   - onMouseOut  : [PropTypes.func]   mouse out event handler
  */
 const Button = ( props ) => {
     props.icon[0].backgroundImage = `url(${props.icon[1]})`;
@@ -154,13 +155,13 @@ const Button = ( props ) => {
 };
 
 /**
- * List react jsx( stateless component )
+ * ListView react stateless component
  * 
  * @param {object} react props, include:
- *   - style      : <li> style 
- *   - child      : <ul> child
- *   - mouseLeave : <li> mouse leave event handler
- *   - btn_props  : <Button> component props
+ *   - style      : [PropTypes.object]  <li> style 
+ *   - child      : [PropTypes.element] <ul> child
+ *   - mouseLeave : [PropTypes.func]    <li> mouse leave event handler
+ *   - btn_props  : [PropTypes.object]  <Button> component props
  */
 const ListView = ( props ) => {
     return (
