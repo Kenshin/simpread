@@ -269,14 +269,14 @@ export default class Fab extends React.Component {
         let spec, anchor, others = [];
 
         const keys  = this.state.keys,
-              btn_props = ( id, type, style, items, icon_style )=> {
+              btn_props = ( id, type, style, { name, color, icon }, icon_style )=> {
                 return {
                     id,
                     type,
                     style,
-                    name       : items.name,
-                    color      : items.color,
-                    icon       : [ icon_style, items.icon ],
+                    name,
+                    color,
+                    icon       : [ icon_style, icon ],
                     onClick    : ()=>this.btnClickHandler(),
                     onMouseOver: ()=>this.btnMouseOverHandler(),
                     onMouseOut : ()=>this.btnMouseOutHandler(),
