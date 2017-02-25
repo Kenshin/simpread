@@ -118,6 +118,18 @@ const cssinjs = () => {
     return styles;
 };
 
+/**
+ * Button react jsx( stateless component )
+ * 
+ * @param {object} react props, include:
+ *   - id          : identify
+ *   - type        : type, include: sepc, anchor, normal
+ *   - name        : name
+ *   - color       : background color
+ *   - onClick     : click event handler
+ *   - onMouseOver : mouse over event handler
+ *   - onMouseOut  : mouse out event handler
+ */
 const Button = ( props ) => {
     props.icon[0].backgroundImage = `url(${props.icon[1]})`;
     if ( props.color ) {
