@@ -80,8 +80,6 @@ const cssinjs = () => {
                   backgroundRepeat: 'no-repeat',
               },
 
-              //anchor_icon : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
-
               ul : {
                 display: '-webkit-flex',
                 position: 'initial',
