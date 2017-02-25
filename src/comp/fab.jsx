@@ -193,7 +193,7 @@ export default class Fab extends React.Component {
         if ( this.props.onAction ) this.props.onAction( event, type );
     }
 
-    mouseOverHandler() {
+    btnMouseOverHandler() {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
@@ -207,7 +207,7 @@ export default class Fab extends React.Component {
         }
     }
 
-    mouseOutHandler() {
+    btnMouseOutHandler() {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
@@ -278,8 +278,8 @@ export default class Fab extends React.Component {
                     color      : items.color,
                     icon       : [ icon_style, items.icon ],
                     onClick    : ()=>this.clickHandler(),
-                    onMouseOver: ()=>this.mouseOverHandler(),
-                    onMouseOut : ()=>this.mouseOutHandler(),
+                    onMouseOver: ()=>this.btnMouseOverHandler(),
+                    onMouseOut : ()=>this.btnMouseOutHandler(),
                 };
             },
             list    = ( items, key, style, idx, child ) => {
