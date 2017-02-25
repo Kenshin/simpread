@@ -271,30 +271,30 @@ export default class Fab extends React.Component {
         let spec, anchor, others = [];
 
         const keys  = this.state.keys,
-              props = ( obj, id, type, style, icon_style, idx )=> {
+              btn_props = ( items, id, type, style, icon_style, idx )=> {
                 return {
                     id,
                     type,
                     style,
-                    name       : obj.name,
-                    color      : obj.color,
-                    icon       : [ icon_style, obj.icon ],
+                    name       : items.name,
+                    color      : items.color,
+                    icon       : [ icon_style, items.icon ],
                     onClick    : ()=>this.clickHandler(),
                     onMouseOver: ()=>this.mouseOverHandler(),
                     onMouseOut : ()=>this.mouseOutHandler(),
                 };
             },
-            list    = ( obj, key, style, idx, child ) => {
-                const btn_props = props( obj, key, "normal", style.origin, style.icon, idx );
-                return <ListView child={ child } style={ style } btn_props={ btn_props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
+            list    = ( items, key, style, idx, child ) => {
+                const props = btn_props( items, key, "normal", style.origin, style.icon, idx );
+                return <ListView child={ child } style={ style } btn_props={ props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
         };
 
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
-            spec = <Button { ...props( this.state.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
+            spec = <Button { ...btn_props( this.state.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
         }
 
-        keys.length > 1 && ( anchor = <Button { ...props( this.state.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } /> );
+        keys.length > 1 && ( anchor = <Button { ...btn_props( this.state.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } /> );
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             const child   = [],
