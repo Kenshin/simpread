@@ -238,30 +238,28 @@ export default class Fab extends React.Component {
 
         let spec, anchor, others = [];
 
-        const props = ( obj, id, type, style, icon_style, idx )=> {
-            return {
-                id,
-                type,
-                style,
-                name       : obj.name,
-                color      : obj.color,
-                icon       : [ icon_style, obj.icon ],
-                onClick    : ()=>this.clickHandler(),
-                onMouseOver: ()=>this.mouseOverHandler(),
-                onMouseOut : ()=>this.mouseOutHandler(),
-            };
+        const keys  = this.state.keys,
+              props = ( obj, id, type, style, icon_style, idx )=> {
+                return {
+                    id,
+                    type,
+                    style,
+                    name       : obj.name,
+                    color      : obj.color,
+                    icon       : [ icon_style, obj.icon ],
+                    onClick    : ()=>this.clickHandler(),
+                    onMouseOver: ()=>this.mouseOverHandler(),
+                    onMouseOut : ()=>this.mouseOutHandler(),
+                };
+            },
+            list    = ( obj, key, style, idx, child ) => {
+                return (
+                    <li style={ child ? style.li : style.li_hori } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
+                        <Button { ...props( obj, key, "normal", style.origin, style.icon, idx ) } />
+                        { child && <ul style={{ ...style.ul, ...style.ul_hori }}> {child} </ul> }
+                    </li>
+                )
         };
-
-        const List = ( obj, key, style, idx, child ) => {
-            return (
-                <li style={ child ? style.li : style.li_hori } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
-                    <Button { ...props( obj, key, "normal", style.origin, style.icon, idx ) } />
-                    { child && <ul style={{ ...style.ul, ...style.ul_hori }}> {child} </ul> }
-                </li>
-            )
-        };
-
-        const keys = this.state.keys;
 
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
@@ -277,11 +275,11 @@ export default class Fab extends React.Component {
                 const subkeys = Object.keys( items );
                 for ( let j = 0; j < subkeys.length; j++ ) {
                     child.push(
-                        List( items[subkeys[j]], subkeys[j], style , j, undefined )
+                        list( items[subkeys[j]], subkeys[j], style , j, undefined )
                     )
                 }
             }
-            others.push( List( this.state.items[keys[idx]], keys[idx], style, idx, child ));
+            others.push( list( this.state.items[keys[idx]], keys[idx], style, idx, child ));
         }
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
