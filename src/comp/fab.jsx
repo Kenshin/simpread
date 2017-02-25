@@ -271,12 +271,12 @@ export default class Fab extends React.Component {
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             const child   = [],
-                  subitem = this.state.items[ keys[idx] ].items;
-            if ( subitem ) {
-                const subkeys = Object.keys( subitem );
+                  items   = this.state.items[ keys[idx] ].items;
+            if ( items ) {
+                const subkeys = Object.keys( items );
                 for ( let j = 0; j < subkeys.length; j++ ) {
                     child.push(
-                        List( subitem[subkeys[j]], subkeys[j], style , j, undefined )
+                        List( items[subkeys[j]], subkeys[j], style , j, undefined )
                     )
                 }
             }
