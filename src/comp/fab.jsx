@@ -236,6 +236,8 @@ export default class Fab extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
+        let spec, anchor, others = [];
+
         const props = ( obj, id, type, style, icon_style, idx )=> {
             return {
                 id,
@@ -259,9 +261,8 @@ export default class Fab extends React.Component {
             )
         };
 
-        let keys, spec, anchor, others = [];
+        const keys = this.state.keys;
 
-        keys = this.state.keys;
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
             spec = <Button { ...props( this.state.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
