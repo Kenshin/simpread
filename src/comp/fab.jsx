@@ -80,7 +80,7 @@ const cssinjs = () => {
                   backgroundRepeat: 'no-repeat',
               },
 
-              anchor_icon : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
+              //anchor_icon : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
 
               ul : {
                 display: '-webkit-flex',
@@ -153,7 +153,8 @@ export default class Fab extends React.Component {
     }
 
     state = {
-        id : Math.round(+new Date()),
+        id   : Math.round(+new Date()),
+        keys : [],
     }
 
     clickHandler() {
@@ -206,6 +207,18 @@ export default class Fab extends React.Component {
         }
     }
 
+    componentWillMount() {
+        const keys = Object.keys( this.props.items );
+        if ( keys.length > 1 ) {
+            keys.splice( 1, 0, "anchor" );
+            this.props.items[ "anchor" ] = {
+                "name" : "更多",
+                "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
+            }
+        }
+        this.setState({ keys: keys });
+    }
+
     componentDidMount() {
         const $root = $( "fab" );
         const $ul   = $($root.children()[2]);
@@ -218,6 +231,7 @@ export default class Fab extends React.Component {
     }
 
     render() {
+        console.log("asdfadfasdfasdfasdf")
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
@@ -246,20 +260,13 @@ export default class Fab extends React.Component {
 
         let keys, spec, anchor, others = [];
 
-        keys = Object.keys( this.props.items );
-        if ( keys.length > 1 ) {
-            keys.splice( 1, 0, "anchor" );
-            this.props.items[ "anchor" ] = {
-                "name" : "更多",
-                "icon" : style.anchor_icon,
-            }
-            anchor = <Button { ...props( this.props.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } />;
-        }
-
+        keys = this.state.keys;
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
             spec = <Button { ...props( this.props.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
         }
+
+        keys.length > 1 && ( anchor = <Button { ...props( this.props.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } /> );
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             const child   = [],
