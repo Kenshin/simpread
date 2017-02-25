@@ -158,14 +158,14 @@ const Button = ( props ) => {
  * ListView react stateless component
  * 
  * @param {object} react props, include:
- *   - style      : [PropTypes.object]  <li> style 
- *   - child      : [PropTypes.element] <ul> child
- *   - mouseLeave : [PropTypes.func]    <li> mouse leave event handler
- *   - btn_props  : [PropTypes.object]  <Button> component props
+ *   - style        : [PropTypes.object]  <li> style 
+ *   - child        : [PropTypes.element] <ul> child
+ *   - onMouseLeave : [PropTypes.func]    <li> mouse leave event handler
+ *   - btn_props    : [PropTypes.object]  <Button> component props
  */
 const ListView = ( props ) => {
     return (
-        <li style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ ()=> props.mouseLeave() }>
+        <li style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ ()=> props.onMouseLeave() }>
             <Button { ...props.btn_props } />
             { props.child && <ul style={{ ...props.style.ul, ...props.style.ul_hori }}> { props.child } </ul> }
         </li>
@@ -285,7 +285,7 @@ export default class Fab extends React.Component {
             },
             list    = ( obj, key, style, idx, child ) => {
                 const btn_props = props( obj, key, "normal", style.origin, style.icon, idx );
-                return <ListView child={ child } style={ style } btn_props={ btn_props } mouseLeave={ ()=> this.liMouseLeaveHandler() } />
+                return <ListView child={ child } style={ style } btn_props={ btn_props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
         };
 
         if ( keys.length > 0 ) {
