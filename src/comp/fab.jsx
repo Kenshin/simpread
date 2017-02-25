@@ -271,7 +271,7 @@ export default class Fab extends React.Component {
         let spec, anchor, others = [];
 
         const keys  = this.state.keys,
-              btn_props = ( items, id, type, style, icon_style, idx )=> {
+              btn_props = ( id, type, style, items, icon_style, idx )=> {
                 return {
                     id,
                     type,
@@ -285,16 +285,16 @@ export default class Fab extends React.Component {
                 };
             },
             list    = ( items, key, style, idx, child ) => {
-                const props = btn_props( items, key, "normal", style.origin, style.icon, idx );
+                const props = btn_props( key, "normal", style.origin, items, style.icon, idx );
                 return <ListView child={ child } style={ style } btn_props={ props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
         };
 
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
-            spec = <Button { ...btn_props( this.state.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
+            spec = <Button { ...btn_props( keys[0], "spec", style.spec, this.state.items[keys[0]], style.icon, 0 ) } />;
         }
 
-        keys.length > 1 && ( anchor = <Button { ...btn_props( this.state.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } /> );
+        keys.length > 1 && ( anchor = <Button { ...btn_props( keys[1], "anchor", style.origin, this.state.items[keys[1]], style.icon, 1 ) } /> );
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             const child   = [],
