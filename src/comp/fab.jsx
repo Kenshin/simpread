@@ -155,6 +155,7 @@ export default class Fab extends React.Component {
     state = {
         id   : Math.round(+new Date()),
         keys : [],
+        items: {},
     }
 
     clickHandler() {
@@ -208,15 +209,16 @@ export default class Fab extends React.Component {
     }
 
     componentWillMount() {
-        const keys = Object.keys( this.props.items );
+        const keys  = Object.keys( this.props.items ),
+              items = this.props.items;
         if ( keys.length > 1 ) {
             keys.splice( 1, 0, "anchor" );
-            this.props.items[ "anchor" ] = {
+            items[ "anchor" ] = {
                 "name" : "更多",
                 "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
             }
         }
-        this.setState({ keys: keys });
+        this.setState({ keys, items, });
     }
 
     componentDidMount() {
@@ -231,7 +233,6 @@ export default class Fab extends React.Component {
     }
 
     render() {
-        console.log("asdfadfasdfasdfasdf")
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
@@ -263,14 +264,14 @@ export default class Fab extends React.Component {
         keys = this.state.keys;
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
-            spec = <Button { ...props( this.props.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
+            spec = <Button { ...props( this.state.items[keys[0]], keys[0], "spec", style.spec, style.icon, 0 ) } />;
         }
 
-        keys.length > 1 && ( anchor = <Button { ...props( this.props.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } /> );
+        keys.length > 1 && ( anchor = <Button { ...props( this.state.items[keys[1]], keys[1], "anchor", style.origin, style.icon, 1 ) } /> );
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             const child   = [],
-                  subitem = this.props.items[ keys[idx] ].items;
+                  subitem = this.state.items[ keys[idx] ].items;
             if ( subitem ) {
                 const subkeys = Object.keys( subitem );
                 for ( let j = 0; j < subkeys.length; j++ ) {
@@ -279,7 +280,7 @@ export default class Fab extends React.Component {
                     )
                 }
             }
-            others.push( List( this.props.items[keys[idx]], keys[idx], style, idx, child ));
+            others.push( List( this.state.items[keys[idx]], keys[idx], style, idx, child ));
         }
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
