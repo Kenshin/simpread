@@ -141,6 +141,24 @@ const Button = ( props ) => {
     )
 };
 
+/**
+ * List react jsx( stateless component )
+ * 
+ * @param {object} react props, include:
+ *   - style      : <li> style 
+ *   - child      : <ul> child
+ *   - mouseLeave : <li> mouse leave event handler
+ *   - btn_props  : <Button> component props
+ */
+const ListView = ( props ) => {
+    return (
+        <li style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ ()=> props.mouseLeave() }>
+            <Button { ...props.btn_props } />
+            { props.child && <ul style={{ ...props.style.ul, ...props.style.ul_hori }}> { props.child } </ul> }
+        </li>
+    )
+};
+
 export default class Fab extends React.Component {
 
     static defaultProps = {
@@ -253,12 +271,8 @@ export default class Fab extends React.Component {
                 };
             },
             list    = ( obj, key, style, idx, child ) => {
-                return (
-                    <li style={ child ? style.li : style.li_hori } onMouseLeave={ ()=> this.liMouseLeaveHandler() }>
-                        <Button { ...props( obj, key, "normal", style.origin, style.icon, idx ) } />
-                        { child && <ul style={{ ...style.ul, ...style.ul_hori }}> {child} </ul> }
-                    </li>
-                )
+                const btn_props = props( obj, key, "normal", style.origin, style.icon, idx );
+                return <ListView child={ child } style={ style } btn_props={ btn_props } mouseLeave={ ()=> this.liMouseLeaveHandler() } />
         };
 
         if ( keys.length > 0 ) {
