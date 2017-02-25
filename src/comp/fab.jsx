@@ -127,6 +127,7 @@ const cssinjs = () => {
  *   - style       : [PropTypes.object] <a> style
  *   - name        : [PropTypes.string] name
  *   - color       : [PropTypes.string] background color
+ *   - icon        : [PropTypes.array]  0: icon style; 1: icon path
  *   - onClick     : [PropTypes.func]   click event handler
  *   - onMouseOver : [PropTypes.func]   mouse over event handler
  *   - onMouseOut  : [PropTypes.func]   mouse out event handler
