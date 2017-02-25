@@ -188,7 +188,7 @@ export default class Fab extends React.Component {
         items: {},
     }
 
-    clickHandler() {
+    btnClickHandler() {
         const type = $( event.target ).attr( "id" );
         if ( this.props.onAction ) this.props.onAction( event, type );
     }
@@ -277,7 +277,7 @@ export default class Fab extends React.Component {
                     name       : items.name,
                     color      : items.color,
                     icon       : [ icon_style, items.icon ],
-                    onClick    : ()=>this.clickHandler(),
+                    onClick    : ()=>this.btnClickHandler(),
                     onMouseOver: ()=>this.btnMouseOverHandler(),
                     onMouseOut : ()=>this.btnMouseOutHandler(),
                 };
