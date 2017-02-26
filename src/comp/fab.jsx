@@ -240,7 +240,7 @@ export default class Fab extends React.Component {
 
     componentWillMount() {
         const keys  = Object.keys( this.props.items ),
-              items = this.props.items;
+              items = { ...this.props.items };
         if ( keys.length > 2 ) {
             keys.splice( 1, 0, "anchor" );
             items[ "anchor" ] = {
@@ -248,7 +248,7 @@ export default class Fab extends React.Component {
                 "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
             }
         }
-        this.setState({ keys, items, });
+        this.setState({ keys, items });
     }
 
     componentDidMount() {
@@ -258,8 +258,15 @@ export default class Fab extends React.Component {
             $ul.children().map( ( idx, item )=> {
                 const $ul = $(item).find( "ul" );
                 if ( $ul ) $ul.css( "top", `${idx * $ul.height()}px` );
-            })
+            });
         }
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            keys : [],
+            items: {}
+        });
     }
 
     render() {
