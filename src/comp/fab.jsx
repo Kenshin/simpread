@@ -166,7 +166,7 @@ const ListView = ( props ) => {
     return (
         <li style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ ()=> props.onMouseLeave() }>
             <Button { ...props.btn_props } />
-            { props.child && <ul style={{ ...props.style.ul, ...props.style.ul_hori }}> { props.child } </ul> }
+            { props.child && props.child.length > 0 && <ul style={{ ...props.style.ul, ...props.style.ul_hori }}> { props.child } </ul> }
         </li>
     )
 };
