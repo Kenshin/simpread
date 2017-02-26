@@ -203,7 +203,9 @@ export default class Fab extends React.Component {
         } else {
             $target.parent().css({ ...style.normal, ...style.normal_focus });
             if ( $target.parent().next() && $target.parent().next().is( "ul" ) ) {
-                $target.parent().next().css( "opacity", 1 );
+                $target.parent().next().css( "opacity", 1 ).attr( "current", true ).css( "visibility", "visible" );
+                $target.parent().parent().parent().find("ul[current!=true]").css( "opacity", 0 ).css( "visibility", "hidden" );
+                $target.parent().next().removeAttr( "current" );
             }
         }
     }
@@ -226,16 +228,16 @@ export default class Fab extends React.Component {
         while( !$target.is( "fab" ) ) {
             $target = $target.parent();
         }
-        $target.find( "ul" ).css( "opacity", 0 );
+        $target.find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
     }
 
     liMouseLeaveHandler() {
         $target = $( event.target );
         type    = $target.attr( "type" );
         if ( $target.is( "i" ) ) {
-            $target.parent().next().css( "opacity", 0 );
+            $target.parent().next().css( "opacity", 0 ).css( "visibility", "hidden" );
         } else if ( $target.is( "li" ) ) {
-            $target.find("ul").css( "opacity", 0 );
+            $target.find("ul").css( "opacity", 0 ).css( "visibility", "hidden" );
         }
     }
 
