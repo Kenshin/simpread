@@ -65,7 +65,7 @@ const cssinjs = () => {
 
               normal_focus : {
                   transition: 'all 450ms 0ms',
-                  boxShadow: '0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2)',
+                  boxShadow: '0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15)',
               },
 
               spec_icon: {},
