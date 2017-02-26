@@ -125,13 +125,13 @@ const cssinjs = () => {
  *   - style       : [PropTypes.object] <a> style
  *   - name        : [PropTypes.string] name
  *   - color       : [PropTypes.string] background color
- *   - icon        : [PropTypes.array]  0: icon style; 1: icon path
+ *   - icon        : [PropTypes.object]  { style, path }
  *   - onClick     : [PropTypes.func]   click event handler
  *   - onMouseOver : [PropTypes.func]   mouse over event handler
  *   - onMouseOut  : [PropTypes.func]   mouse out event handler
  */
 const Button = ( props ) => {
-    props.icon[0].backgroundImage = `url(${props.icon[1]})`;
+    props.icon.style.backgroundImage = `url(${props.icon.path})`;
     if ( props.color ) {
         props.style.backgroundColor = props.color;
     } else {
@@ -144,7 +144,7 @@ const Button = ( props ) => {
                 type={ props.type }
                 name={ props.name }
                 color={ props.color }
-                style={ props.icon[0] }
+                style={ props.icon.style }
                 onClick={ ()=>props.onClick() }
                 onMouseOver={ ()=> props.onMouseOver() }
                 onMouseOut={ ()=> props.onMouseOut() }
@@ -276,7 +276,7 @@ export default class Fab extends React.Component {
                     style,
                     name,
                     color,
-                    icon       : [ icon_style, icon ],
+                    icon       : { style: icon_style, path: icon },
                     onClick    : ()=>this.btnClickHandler(),
                     onMouseOver: ()=>this.btnMouseOverHandler(),
                     onMouseOut : ()=>this.btnMouseOutHandler(),
