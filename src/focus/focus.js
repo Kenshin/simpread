@@ -61,9 +61,6 @@ var util     = require( "util" ),
             // remove exclude style
             excludeStyle( $target, exclude, "add" );
 
-            // remove control bar
-            //fcontrol.Remove();
-
             // remove background
             $( bgclsjq ).off( "click" );
             $( bgclsjq ).remove();
@@ -90,7 +87,6 @@ var util     = require( "util" ),
      */
     Focus.prototype.Exist = function( action ) {
         if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
-            //if (action) fcontrol.Click( "setting" );
             if (action) fcontrol.elem.onAction( undefined, "setting" );
             return true;
         } else {
