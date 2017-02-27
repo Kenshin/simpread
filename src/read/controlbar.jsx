@@ -13,7 +13,7 @@ const items = {
     "setting" : {
         "name" : "设定",
         "icon" : path("setting_icon"),
-        "color": "#FF5722",
+        "color": "#03A9F4",
     },
     "weight" : {
         "name" : "版面布局",
