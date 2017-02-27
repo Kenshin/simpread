@@ -151,7 +151,7 @@ const webpack = require( 'webpack' ),
           theme      : __dirname + '/src/service/theme.js',
 
           focus      : __dirname + '/src/focus/focus.js',
-          controlbar : __dirname + '/src/focus/controlbar.js',
+          controlbar : __dirname + '/src/focus/controlbar.jsx',
           foucsetting: __dirname + '/src/focus/setting.js',
 
           read       : __dirname + '/src/read/read.jsx',
