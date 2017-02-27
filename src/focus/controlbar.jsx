@@ -14,12 +14,12 @@ const path = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
     "setting" : {
         "name" : "设定",
         "icon" : path("setting_icon"),
-        "color": "#03A9F4",
+        "color": "#f87f76",
     },
     "top" : {
         "name" : "返回顶部",
         "icon" : path("top_icon"),
-        "color": "#AED581",
+        "color": "#f99d97",
     },
 };
 
