@@ -33,6 +33,7 @@
 /**
  *  Focus: Control bar style
  */
+ /*
 sr-focus-ctl {
     position: fixed;
     right: 50px;
@@ -84,6 +85,7 @@ sr-focus-ctl .settingicon {
 sr-focus-ctl .closeicon {
     background-image: url( "../images/close.png" );
 }
+*/
 
 /**
  *  Option background style
