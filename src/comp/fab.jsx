@@ -4,9 +4,9 @@ let $target, type,
     style, styles = new Map();
 
 const cssinjs = () => {
-    const spec_color = 'rgba(244, 67, 54, .8)',
-          normal_color= 'rgba(158, 158, 158, .8)',
-          focus_color = 'rgba(244, 67, 54, 1)',
+    const spec_color = 'rgba(244, 67, 54, 1)',
+          normal_color= 'rgba(245, 82, 70, .8)',
+          focus_color = 'rgba(243, 52, 38, .9)',
           styles      = {
 
               root : {
