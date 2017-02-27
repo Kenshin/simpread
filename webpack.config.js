@@ -170,6 +170,7 @@ const webpack = require( 'webpack' ),
 
           textfield  : __dirname + '/src/comp/textfield.jsx',
           fab        : __dirname + '/src/comp/fab.jsx',
+          button     : __dirname + '/src/comp/button.jsx',
 
         }
       }
