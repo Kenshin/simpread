@@ -31,63 +31,6 @@
 }
 
 /**
- *  Focus: Control bar style
- */
- /*
-sr-focus-ctl {
-    position: fixed;
-    right: 50px;
-    bottom: 50px;
-}
-
-sr-focus-ctl sr-ul {
-    display: block;
-    margin: 0;
-    padding: 0;
-    border: 1px solid #EEEEEE;
-}
-
-sr-focus-ctl sr-li {
-    display: list-item;
-    list-style: none;
-    cursor: pointer;
-    opacity: .5;
-}
-
-sr-focus-ctl sr-li:hover {
-    list-style: none;
-    cursor: pointer;
-    opacity: 1;
-    -webkit-transition: opacity .5s ease;
-}
-
-sr-focus-ctl sr-span {
-    display: block;
-    width: 45px;
-    height: 45px;
-    background-repeat: no-repeat;
-    background-color: #9E9E9E;;
-    background-position: center;
-}
-
-sr-focus-ctl sr-li:not(:last-child) sr-span {
-    border-bottom: solid 1px #EEEEEE;
-}
-
-sr-focus-ctl .topicon {
-    background-image: url( "../images/top.png" );
-}
-
-sr-focus-ctl .settingicon {
-    background-image: url( "../images/setting.png" );
-}
-
-sr-focus-ctl .closeicon {
-    background-image: url( "../images/close.png" );
-}
-*/
-
-/**
  *  Option background style
  */
 .ks-simpread-option-bg {
