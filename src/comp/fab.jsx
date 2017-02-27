@@ -278,7 +278,7 @@ export default class Fab extends React.Component {
 
         let spec, anchor, others = [];
 
-        const keys  = this.state.keys,
+        const keys = this.state.keys,
               btn_props = ( id, type, style, { name, color, icon }, icon_style )=> {
                 return {
                     id,
@@ -292,7 +292,7 @@ export default class Fab extends React.Component {
                     onMouseOut : ()=>this.btnMouseOutHandler(),
                 };
             },
-            list    = ( items, key, style, idx, child ) => {
+            list = ( items, key, style, child ) => {
                 const props = btn_props( key, "normal", style.origin, items, style.icon );
                 return <ListView id={ key } child={ child } style={ style } btn_props={ props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
         };
@@ -310,10 +310,10 @@ export default class Fab extends React.Component {
             if ( items ) {
                 const subkeys = Object.keys( items );
                 for ( let j = 0; j < subkeys.length; j++ ) {
-                    child.push( list( items[subkeys[j]], subkeys[j], style , j, undefined ) )
+                    child.push( list( items[subkeys[j]], subkeys[j], style, undefined ) )
                 }
             }
-            others.push( list( this.state.items[keys[idx]], keys[idx], style, idx, child ));
+            others.push( list( this.state.items[keys[idx]], keys[idx], style, child ));
         }
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
