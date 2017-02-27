@@ -244,7 +244,7 @@ export default class Fab extends React.Component {
     componentWillMount() {
         const keys  = Object.keys( this.props.items ),
               items = { ...this.props.items };
-        if ( keys.length > 2 ) {
+        if ( keys.length > 1 ) {
             keys.splice( 1, 0, "anchor" );
             items[ "anchor" ] = {
                 "name" : "更多",
