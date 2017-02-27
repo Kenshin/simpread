@@ -10,6 +10,11 @@ const items = {
         "name" : "关闭",
         "icon" : path("exit_icon"),
     },
+    "setting" : {
+        "name" : "设定",
+        "icon" : path("setting_icon"),
+        "color": "#FF5722",
+    },
     "weight" : {
         "name" : "版面布局",
         "icon" : path("weight_icon"),
