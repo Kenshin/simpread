@@ -74,16 +74,34 @@ const cssinjs = () => {
         },
 
         span : {
+            display: 'flex',
+            alignItems: 'center',
 
+            userSelect: 'none',
+        },
+
+        text: {
+            padding: '0 8px 0',
+ 
             textDecoration: 'none',
             textAlign: 'center',
             letterSpacing: '.5px',
 
             fontSize: '15px',
             lineHeight: '1',
+        },
 
-            userSelect: 'none',
-        }
+        icon: {
+            order: -1,
+            display: 'block',
+
+            width: '24px',
+            height: '24px',
+
+            border: 'none',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+        },
     }
 
     return  styles;
@@ -97,6 +115,7 @@ export default class Button extends React.Component {
         text    : "",
         disable : false,
         icon    : "",
+        order   : "ascending",
         type    : "flat",
         mode    : "normal",
         color   : "",
@@ -110,6 +129,7 @@ export default class Button extends React.Component {
         text    : React.PropTypes.string,
         disable : React.PropTypes.bool,
         icon    : React.PropTypes.string,
+        order   : React.PropTypes.string,
         type    : React.PropTypes.string,
         mode    : React.PropTypes.string,
         color   : React.PropTypes.string,
@@ -165,6 +185,10 @@ export default class Button extends React.Component {
 
         style.root = { ...style.normal_root, ...current };
 
+        this.props.text == "" && ( style.text.display = "none" );
+        this.props.icon != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+        this.props.order != "ascending" && ( style.icon.order = 1 );
+
         const events = this.props.disable ? {} : {
                 onMouseOver : ()=>this.onMouseOver(),
                 onMouseOut  : ()=>this.onMouseOut(),
@@ -177,9 +201,9 @@ export default class Button extends React.Component {
                 type={ this.props.type } mode={ this.props.mode } 
                 { ...events }>
                 <div ref="mask" style={ style.mask }>
-                    <span style={ style.span } >
-                        <i></i>
-                        { this.props.text }
+                    <span style={ style.span }>
+                        <i style={ style.icon }></i>
+                        <span style={ style.text }>{ this.props.text }</span>
                     </span>
                 </div>
             </a>
