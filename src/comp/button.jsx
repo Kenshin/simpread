@@ -5,9 +5,6 @@ let style, styles = new Map();
 const cssinjs = () => {
     const styles = {
         root : {
-            display: '-webkit-flex',
-            justifyContent: 'center',
-            alignItems: 'center',
 
             minWidth: '88px',
             height: '36px',
@@ -27,15 +24,22 @@ const cssinjs = () => {
             transition: 'all .5s ease-in-out .1s',
         },
 
-        span : {
-            display: 'block',
+        mask: {
+            display: '-webkit-flex',
+            justifyContent: 'center',
+            alignItems: 'center',
 
             width: '100%',
+            height: '100%',
 
             margin: 0,
             padding: '0 16px',
 
             border: 'none',
+
+        },
+
+        span : {
 
             textDecoration: 'none',
             textAlign: 'center',
@@ -56,7 +60,7 @@ export default class Button extends React.Component {
 
     static defaultProps = {
         type    : "flat",
-        value   : "",
+        text    : "",
         disable : false,
         icon    : "",
         mode    : "primary",
@@ -65,7 +69,7 @@ export default class Button extends React.Component {
 
     static propTypes = {
         type    : React.PropTypes.string,
-        value   : React.PropTypes.string,
+        text    : React.PropTypes.string,
         disable : React.PropTypes.bool,
         icon    : React.PropTypes.string,
         mode    : React.PropTypes.string,
@@ -82,10 +86,12 @@ export default class Button extends React.Component {
 
         return (
             <a style={ style.root }>
-                <span style={ style.span } >
-                    <i></i>
-                    { this.props.value }
-                </span>
+                <div style={ style.mask }>
+                    <span style={ style.span } >
+                        <i></i>
+                        { this.props.text }
+                    </span>
+                </div>
             </a>
         )
     }
