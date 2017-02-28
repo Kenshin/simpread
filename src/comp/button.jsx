@@ -1,6 +1,6 @@
 console.log( "==== simpread component: Button ====" )
 
-let $target, $mask, style, styles = new Map();
+let $mask, style, styles = new Map();
 
 const raisedstyle = {
         backgroundColor : "rgba(0, 137, 123, 1)",
@@ -117,10 +117,8 @@ export default class Button extends React.Component {
     }
 
     onMouseOver() {
-        style   = styles.get( this.state.id );
-        $target = $( this.refs.target );
-        $mask   = $( this.refs.mask   );
-        if ( $target.attr( "type" ) == "raised" ) {
+        [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
+        if ( this.props.type == "raised" ) {
             $mask.css({ ...style.mask, ...style.raised_focus });
         } else {
             $mask.css({ ...style.mask, ...style.flat_focus });
@@ -128,10 +126,8 @@ export default class Button extends React.Component {
     }
 
     onMouseOut() {
-        style   = styles.get( this.state.id );
-        $target = $( this.refs.target );
-        $mask   = $( this.refs.mask   );
-        if ( $target.attr( "type" ) == "raised" ) {
+        [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
+        if ( this.props.type == "raised" ) {
             $mask.css({ ...style.mask, ...style.raised });
         } else {
             $mask.css({ ...style.mask, ...style.flat });
