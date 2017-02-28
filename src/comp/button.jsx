@@ -96,7 +96,7 @@ export default class Button extends React.Component {
         disable : false,
         icon    : "",
         type    : "raised",
-        mode    : "primary",
+        mode    : "normal",
         color   : "",
         backgroundColor : "",
         hoverColor : "",
