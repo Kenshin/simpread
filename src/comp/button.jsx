@@ -97,9 +97,9 @@ export default class Button extends React.Component {
         icon    : "",
         type    : "raised",
         mode    : "primary",
-        color   : raisedstyle.color,
-        backgroundColor : raisedstyle.backgroundColor,
-        hoverColor : raisedstyle.hoverColor,
+        color   : "",
+        backgroundColor : "",
+        hoverColor : "",
     }
 
     static propTypes = {
@@ -118,15 +118,18 @@ export default class Button extends React.Component {
 
     state = {
         id : Math.round(+new Date()),
+        color: ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type == "flat" ),
+        backgroundColor: ((bool)=>bool ? flatstyle.backgroundColor : raisedstyle.backgroundColor)( this.props.type == "flat" ),
+        hoverColor: ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type == "flat" ),
     }
 
     onMouseOver() {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         if ( this.props.type == "raised" ) {
-            style.raised_focus.backgroundColor = this.props.hoverColor;
+            style.raised_focus.backgroundColor = this.state.hoverColor;
             $mask.css({ ...style.mask, ...style.raised_focus });
         } else {
-            style.flat_focus.backgroundColor = this.props.hoverColor;
+            style.flat_focus.backgroundColor = this.state.hoverColor;
             $mask.css({ ...style.mask, ...style.flat_focus });
         }
     }
@@ -134,12 +137,12 @@ export default class Button extends React.Component {
     onMouseOut() {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         if ( this.props.type == "raised" ) {
-            style.raised.color = this.props.color;
-            style.raised.backgroundColor = this.props.backgroundColor;
+            style.raised.color = this.state.color;
+            style.raised.backgroundColor = this.state.backgroundColor;
             $mask.css({ ...style.mask, ...style.raised });
         } else {
-            style.flat.color = this.props.color;
-            style.flat.backgroundColor = this.props.backgroundColor;
+            style.flat.color = this.state.color;
+            style.flat.backgroundColor = this.statebackgroundColor;
             $mask.css({ ...style.mask, ...style.flat });
         }
     }
@@ -148,16 +151,23 @@ export default class Button extends React.Component {
         this.props.onClick && this.props.onClick( event );
     }
 
+    componentWillMount() {
+        this.props.color != "" && this.setState({ color: this.props.color });
+        this.props.backgroundColor != "" && this.setState({ backgroundColor: this.props.backgroundColor });
+        this.props.hoverColor != "" && this.setState({ hoverColor: this.props.hoverColor });
+    }
+
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
+
         if ( this.props.type == "raised" ) {
-            style.raised.color = this.props.color;
-            style.raised.backgroundColor = this.props.backgroundColor;
+            style.raised.color = this.state.color;
+            style.raised.backgroundColor = this.state.backgroundColor;
             style.root = { ...style.normal_root, ...style.raised };
         } else {
-            style.flat.color = this.props.color;
-            style.flat.backgroundColor = this.props.backgroundColor;
+            style.flat.color = this.state.color;
+            style.flat.backgroundColor = this.state.backgroundColor;
             style.root = { ...style.normal_root, ...style.flat };
         }
 
