@@ -151,9 +151,6 @@ export default class Button extends React.Component {
             style.root = { ...style.normal_root, ...style.flat };
         }
 
-        styles.set( this.state.id, style );
-        style = styles.get( this.state.id );
-
         return (
             <a  ref="target" style={ style.root }
                 href={ this.props.href } target={ this.props.target } disabled={ this.props.disable }
