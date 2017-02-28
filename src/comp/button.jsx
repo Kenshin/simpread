@@ -60,23 +60,11 @@ const cssinjs = () => {
         },
 
         raised: {
-            //color : raisedstyle.color,
-            //backgroundColor : raisedstyle.backgroundColor,
             boxShadow: '0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)',
-        },
-
-        raised_focus: {
-            //backgroundColor : raisedstyle.hoverColor,
         },
 
         flat: {
             fontWeight: 'bold',
-            //color : flatstyle.color,
-            //backgroundColor : flatstyle.backgroundColor,
-        },
-
-        flat_focus: {
-            //backgroundColor : flatstyle.hoverColor,
         },
 
         span : {
@@ -104,7 +92,7 @@ export default class Button extends React.Component {
         text    : "",
         disable : false,
         icon    : "",
-        type    : "raised",
+        type    : "flat",
         mode    : "normal",
         color   : "",
         backgroundColor : "",
@@ -134,17 +122,8 @@ export default class Button extends React.Component {
 
     onMouseOver() {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
-        current = this.props.type == "raised" ? { ...style.raised_focus } : { ...style.flat_focus };
-        current.backgroundColor = this.state.hoverColor;
+        current = { backgroundColor : this.state.hoverColor };
         $mask.css({ ...style.mask, ...current });
-        /*if ( this.props.type == "raised" ) {
-            current = { ...style.raised_focus };
-            style.raised_focus.backgroundColor = this.state.hoverColor;
-            $mask.css({ ...style.mask, ...style.raised_focus });
-        } else {
-            style.flat_focus.backgroundColor = this.state.hoverColor;
-            $mask.css({ ...style.mask, ...style.flat_focus });
-        }*/
     }
 
     onMouseOut() {
@@ -153,15 +132,6 @@ export default class Button extends React.Component {
         current.color = this.state.color;
         current.backgroundColor = this.state.backgroundColor;
         $mask.css({ ...style.mask, ...current });
-        /*if ( this.props.type == "raised" ) {
-            style.raised.color = this.state.color;
-            style.raised.backgroundColor = this.state.backgroundColor;
-            $mask.css({ ...style.mask, ...style.raised });
-        } else {
-            style.flat.color = this.state.color;
-            style.flat.backgroundColor = this.state.backgroundColor;
-            $mask.css({ ...style.mask, ...style.flat });
-        }*/
     }
 
     onClick() {
