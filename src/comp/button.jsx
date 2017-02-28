@@ -1,6 +1,6 @@
 console.log( "==== simpread component: Button ====" )
 
-let $mask, style, styles = new Map();
+let current = {}, $mask, style, styles = new Map();
 
 const raisedstyle = {
         color           : "rgba(255, 255, 255, .7)",
@@ -104,7 +104,7 @@ export default class Button extends React.Component {
         text    : "",
         disable : false,
         icon    : "",
-        type    : "flat",
+        type    : "raised",
         mode    : "normal",
         color   : "",
         backgroundColor : "",
@@ -134,18 +134,26 @@ export default class Button extends React.Component {
 
     onMouseOver() {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
-        if ( this.props.type == "raised" ) {
+        current = this.props.type == "raised" ? { ...style.raised_focus } : { ...style.flat_focus };
+        current.backgroundColor = this.state.hoverColor;
+        $mask.css({ ...style.mask, ...current });
+        /*if ( this.props.type == "raised" ) {
+            current = { ...style.raised_focus };
             style.raised_focus.backgroundColor = this.state.hoverColor;
             $mask.css({ ...style.mask, ...style.raised_focus });
         } else {
             style.flat_focus.backgroundColor = this.state.hoverColor;
             $mask.css({ ...style.mask, ...style.flat_focus });
-        }
+        }*/
     }
 
     onMouseOut() {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
-        if ( this.props.type == "raised" ) {
+        current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
+        current.color = this.state.color;
+        current.backgroundColor = this.state.backgroundColor;
+        $mask.css({ ...style.mask, ...current });
+        /*if ( this.props.type == "raised" ) {
             style.raised.color = this.state.color;
             style.raised.backgroundColor = this.state.backgroundColor;
             $mask.css({ ...style.mask, ...style.raised });
@@ -153,7 +161,7 @@ export default class Button extends React.Component {
             style.flat.color = this.state.color;
             style.flat.backgroundColor = this.state.backgroundColor;
             $mask.css({ ...style.mask, ...style.flat });
-        }
+        }*/
     }
 
     onClick() {
@@ -169,8 +177,6 @@ export default class Button extends React.Component {
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
-
-        let current = {};
 
         current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
         current.color = this.state.color;
