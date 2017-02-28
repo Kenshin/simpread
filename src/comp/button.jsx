@@ -1,6 +1,6 @@
 console.log( "==== simpread component: Button ====" )
 
-let style, styles = new Map();
+let $target, style, styles = new Map();
 
 const raisedstyle = {
         backgroundColor : "rgba(0, 137, 123, 1)",
@@ -55,6 +55,8 @@ const cssinjs = () => {
         },
 
         flat: {
+            color : 'rgba(0, 0, 0, 0.870588)',
+            fontWeight: 'bold',
             backgroundColor : flatstyle.backgroundColor,
         },
 
@@ -112,8 +114,31 @@ export default class Button extends React.Component {
         id : Math.round(+new Date()),
     }
 
+    onMouseOver() {
+        styles.set( this.state.id, cssinjs() );
+        style = styles.get( this.state.id );
+
+        if ( $target.attr( "type" ) == "raised" ) {
+            //$target.css({ ...style.foc });
+        } else {
+
+        }
+    }
+
+    onMouseOut() {
+        if ( $target.attr( "type" ) == "raised" ) {
+
+        } else {
+            
+        }
+    }
+
     onClick() {
         this.props.onClick && this.props.onClick( event );
+    }
+
+    componentDidMount() {
+        $target = $( this.refs.target );
     }
 
     render() {
@@ -127,10 +152,13 @@ export default class Button extends React.Component {
         }
 
         return (
-            <a style={ style.root } 
+            <a  ref="target"
+                style={ style.root } 
                 href={ this.props.href } 
                 target={ this.props.target }
                 disabled={ this.props.disable }
+                onMouseOver={ ()=>this.onMouseOver() }
+                onMouseOut={ ()=>this.onMouseOut() }
                 onClick={ ()=>this.onClick() }>
                 <div style={ style.focus }>
                     <span style={ style.span } >
