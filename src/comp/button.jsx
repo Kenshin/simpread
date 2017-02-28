@@ -8,7 +8,7 @@ const raisedstyle = {
         hoverColor      : "rgba( 255, 255, 255, .4)",
     },
     flatstyle = {
-        color           : "rgba(0, 0, 0, .8)",
+        color           : "rgba(0, 137, 123, .8)",
         backgroundColor : "transparent",
         hoverColor      : "rgba( 153, 153, 153, .4)"
     },
@@ -70,7 +70,7 @@ const cssinjs = () => {
         },
 
         flat: {
-            fontWeight: 'bold',
+            fontWeight: 400,
         },
 
         span : {
