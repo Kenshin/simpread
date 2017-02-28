@@ -14,7 +14,19 @@ const raisedstyle = {
     },
     secondary = {
         opacity: 0.6
-    };
+    },
+    disable = {
+        flat: {
+            cursor: "no-drop",
+            color: "rgba(0, 0, 0, 0.298039)",
+        },
+        raised: {
+            cursor: "no-drop",
+            color: "rgba(0, 0, 0, 0.298039)",
+            backgroundColor: "rgb(229, 229, 229)",
+            boxShadow: "none",
+        }
+    }
 
 const cssinjs = () => {
     const styles = {
@@ -114,12 +126,14 @@ export default class Button extends React.Component {
     }
 
     onMouseOver() {
+        if ( this.props.disable ) return;
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         current = { backgroundColor : this.state.hoverColor };
         $mask.css({ ...style.mask, ...current });
     }
 
     onMouseOut() {
+        if ( this.props.disable ) return;
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
         current.color = this.state.color;
@@ -128,7 +142,7 @@ export default class Button extends React.Component {
     }
 
     onClick() {
-        this.props.onClick && this.props.onClick( event );
+        !this.props.disable && this.props.onClick && this.props.onClick( event );
     }
 
     componentWillMount() {
@@ -148,11 +162,14 @@ export default class Button extends React.Component {
         this.props.mode == "secondary" && 
             Object.keys( secondary ).forEach( ( key) => {current[ key ] = secondary[ key ]});
 
+        this.props.disable &&
+            Object.keys( disable[ this.props.type ] ).forEach( ( key) => {current[ key ] = disable[ this.props.type ][ key ]});
+
         style.root = { ...style.normal_root, ...current };
 
         return (
             <a  ref="target" style={ style.root }
-                href={ this.props.href } target={ this.props.target } disabled={ this.props.disable }
+                href={ this.props.href } target={ this.props.target }
                 type={ this.props.type } mode={ this.props.mode }
                 onMouseOver={ ()=>this.onMouseOver() }
                 onMouseOut={ ()=>this.onMouseOut() }
