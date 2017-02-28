@@ -13,13 +13,7 @@ const raisedstyle = {
         hoverColor      : "rgba( 153, 153, 153, .4)"
     },
     secondary = {
-        raised : {
-            //backgroundColor: 'rgba( 255, 255, 255, .4)'
-            opacity: 0.6
-        },
-        flat: {
-            opacity: 0.6,
-        }
+        opacity: 0.6
     };
 
 const cssinjs = () => {
@@ -77,7 +71,6 @@ const cssinjs = () => {
             lineHeight: '1',
 
             userSelect: 'none',
-
         }
     }
 
@@ -153,7 +146,7 @@ export default class Button extends React.Component {
         current.backgroundColor = this.state.backgroundColor;
 
         this.props.mode == "secondary" && 
-            Object.keys( secondary[ this.props.type ] ).forEach( ( key) => {current[ key ] = secondary[ this.props.type ][ key ]});
+            Object.keys( secondary ).forEach( ( key) => {current[ key ] = secondary[ key ]});
 
         style.root = { ...style.normal_root, ...current };
 
