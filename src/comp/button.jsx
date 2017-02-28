@@ -95,7 +95,7 @@ export default class Button extends React.Component {
         text    : "",
         disable : false,
         icon    : "",
-        type    : "raised",
+        type    : "flat",
         mode    : "normal",
         color   : "",
         backgroundColor : "",
@@ -142,7 +142,7 @@ export default class Button extends React.Component {
             $mask.css({ ...style.mask, ...style.raised });
         } else {
             style.flat.color = this.state.color;
-            style.flat.backgroundColor = this.statebackgroundColor;
+            style.flat.backgroundColor = this.state.backgroundColor;
             $mask.css({ ...style.mask, ...style.flat });
         }
     }
