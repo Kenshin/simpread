@@ -8,12 +8,15 @@ const raisedstyle = {
     },
     flatstyle = {
         backgroundColor : "transparent",
-        hoverColor      : "rgba( 153, 153, 153, .2)"
+        hoverColor      : "rgba( 153, 153, 153, .4)"
     };
 
 const cssinjs = () => {
     const styles = {
-        root : {
+
+        root: {},
+        normal_root : {
+            display: 'block',
             minWidth: '88px',
             height: '36px',
 
@@ -24,12 +27,11 @@ const cssinjs = () => {
 
             cursor: 'pointer',
 
-            transition: 'all .5s ease-in-out .1s',
+            border: 'none',
+            borderRadius: '2px',
         },
 
-        mask: {},
-
-        normal_mask: {
+        mask: {
             display: '-webkit-flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -42,7 +44,7 @@ const cssinjs = () => {
 
             border: 'none',
             borderRadius: '2px',
-
+            transition: 'all .5s ease-in-out',
         },
 
         raised: {
@@ -106,7 +108,7 @@ export default class Button extends React.Component {
         mode    : React.PropTypes.string,
         color   : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
-        hoverColor  : React.PropTypes.string,
+        hoverColor : React.PropTypes.string,
         onClick : React.PropTypes.func,
     }
 
@@ -115,21 +117,24 @@ export default class Button extends React.Component {
     }
 
     onMouseOver() {
-        styles.set( this.state.id, cssinjs() );
-        style = styles.get( this.state.id );
-
+        style   = styles.get( this.state.id );
+        $target = $( this.refs.target );
+        $mask   = $( this.refs.mask   );
         if ( $target.attr( "type" ) == "raised" ) {
-            //$target.css({ ...style.foc });
+            $mask.css({ ...style.mask, ...style.raised_focus });
         } else {
-
+            $mask.css({ ...style.mask, ...style.flat_focus });
         }
     }
 
     onMouseOut() {
+        style   = styles.get( this.state.id );
+        $target = $( this.refs.target );
+        $mask   = $( this.refs.mask   );
         if ( $target.attr( "type" ) == "raised" ) {
-
+            $mask.css({ ...style.mask, ...style.raised });
         } else {
-            
+            $mask.css({ ...style.mask, ...style.flat });
         }
     }
 
@@ -137,27 +142,22 @@ export default class Button extends React.Component {
         this.props.onClick && this.props.onClick( event );
     }
 
-    componentDidMount() {
-        $target = $( this.refs.target );
-        $mask   = $( this.refs.mask   );
-    }
-
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
-
         if ( this.props.type == "raised" ) {
-            style.mask = { ...style.normal_mask, ...style.raised };
+            style.root = { ...style.normal_root, ...style.raised };
         } else {
-            style.mask = { ...style.normal_mask, ...style.flat };
+            style.root = { ...style.normal_root, ...style.flat };
         }
 
+        styles.set( this.state.id, style );
+        style = styles.get( this.state.id );
+
         return (
-            <a  ref="target"
-                style={ style.root } 
-                href={ this.props.href } 
-                target={ this.props.target }
-                disabled={ this.props.disable }
+            <a  ref="target" style={ style.root }
+                href={ this.props.href } target={ this.props.target } disabled={ this.props.disable }
+                type={ this.props.type } mode={ this.props.mode }
                 onMouseOver={ ()=>this.onMouseOver() }
                 onMouseOut={ ()=>this.onMouseOut() }
                 onClick={ ()=>this.onClick() }>
