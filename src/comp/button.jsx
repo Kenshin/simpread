@@ -3,10 +3,12 @@ console.log( "==== simpread component: Button ====" )
 let $mask, style, styles = new Map();
 
 const raisedstyle = {
+        color           : "rgba(255, 255, 255, .7)",
         backgroundColor : "rgba(0, 137, 123, 1)",
         hoverColor      : "rgba( 255, 255, 255, .4)",
     },
     flatstyle = {
+        color           : "rgba(0, 0, 0, .8)",
         backgroundColor : "transparent",
         hoverColor      : "rgba( 153, 153, 153, .4)"
     };
@@ -24,7 +26,6 @@ const cssinjs = () => {
             margin: '6px',
             padding: 0,
 
-            color: '#fff',
             textDecoration: 'none',
 
             cursor: 'pointer',
@@ -50,6 +51,7 @@ const cssinjs = () => {
         },
 
         raised: {
+            color : raisedstyle.color,
             backgroundColor : raisedstyle.backgroundColor,
             boxShadow: '0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)',
         },
@@ -59,8 +61,8 @@ const cssinjs = () => {
         },
 
         flat: {
-            color : 'rgba(0, 0, 0, 0.870588)',
             fontWeight: 'bold',
+            color : flatstyle.color,
             backgroundColor : flatstyle.backgroundColor,
         },
 
@@ -95,7 +97,7 @@ export default class Button extends React.Component {
         icon    : "",
         type    : "raised",
         mode    : "primary",
-        color   : "rgba(0, 137, 123, 1)",
+        color   : raisedstyle.color,
         backgroundColor : raisedstyle.backgroundColor,
         hoverColor : raisedstyle.hoverColor,
     }
