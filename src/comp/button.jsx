@@ -17,6 +17,7 @@ const cssinjs = () => {
         root: {},
         normal_root : {
             display: 'block',
+
             minWidth: '88px',
             height: '36px',
 
@@ -24,6 +25,7 @@ const cssinjs = () => {
             padding: 0,
 
             color: '#fff',
+            textDecoration: 'none',
 
             cursor: 'pointer',
 
