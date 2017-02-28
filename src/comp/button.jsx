@@ -126,14 +126,12 @@ export default class Button extends React.Component {
     }
 
     onMouseOver() {
-        if ( this.props.disable ) return;
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         current = { backgroundColor : this.state.hoverColor };
         $mask.css({ ...style.mask, ...current });
     }
 
     onMouseOut() {
-        if ( this.props.disable ) return;
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
         current.color = this.state.color;
@@ -142,7 +140,7 @@ export default class Button extends React.Component {
     }
 
     onClick() {
-        !this.props.disable && this.props.onClick && this.props.onClick( event );
+        this.props.onClick && this.props.onClick( event );
     }
 
     componentWillMount() {
@@ -167,13 +165,17 @@ export default class Button extends React.Component {
 
         style.root = { ...style.normal_root, ...current };
 
+        const events = this.props.disable ? {} : {
+                onMouseOver : ()=>this.onMouseOver(),
+                onMouseOut  : ()=>this.onMouseOut(),
+                onClick     : ()=>this.onClick(),
+        };
+
         return (
             <a  ref="target" style={ style.root }
                 href={ this.props.href } target={ this.props.target }
-                type={ this.props.type } mode={ this.props.mode }
-                onMouseOver={ ()=>this.onMouseOver() }
-                onMouseOut={ ()=>this.onMouseOut() }
-                onClick={ ()=>this.onClick() }>
+                type={ this.props.type } mode={ this.props.mode } 
+                { ...events }>
                 <div ref="mask" style={ style.mask }>
                     <span style={ style.span } >
                         <i></i>
