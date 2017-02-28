@@ -11,6 +11,15 @@ const raisedstyle = {
         color           : "rgba(0, 0, 0, .8)",
         backgroundColor : "transparent",
         hoverColor      : "rgba( 153, 153, 153, .4)"
+    },
+    secondary = {
+        raised : {
+            //backgroundColor: 'rgba( 255, 255, 255, .4)'
+            opacity: 0.6
+        },
+        flat: {
+            opacity: 0.6,
+        }
     };
 
 const cssinjs = () => {
@@ -161,15 +170,17 @@ export default class Button extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
-        if ( this.props.type == "raised" ) {
-            style.raised.color = this.state.color;
-            style.raised.backgroundColor = this.state.backgroundColor;
-            style.root = { ...style.normal_root, ...style.raised };
-        } else {
-            style.flat.color = this.state.color;
-            style.flat.backgroundColor = this.state.backgroundColor;
-            style.root = { ...style.normal_root, ...style.flat };
+        let current = {};
+        current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
+        current.color = this.state.color;
+        current.backgroundColor = this.state.backgroundColor;
+
+        if ( this.props.mode == "secondary" ) {
+            for ( let key of Object.keys( secondary[ this.props.type ] ) ) {
+                current[ key ] = secondary[ this.props.type ][ key ];
+            }
         }
+        style.root = { ...style.normal_root, ...current };
 
         return (
             <a  ref="target" style={ style.root }
