@@ -171,15 +171,14 @@ export default class Button extends React.Component {
         style = styles.get( this.state.id );
 
         let current = {};
+
         current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
         current.color = this.state.color;
         current.backgroundColor = this.state.backgroundColor;
 
-        if ( this.props.mode == "secondary" ) {
-            for ( let key of Object.keys( secondary[ this.props.type ] ) ) {
-                current[ key ] = secondary[ this.props.type ][ key ];
-            }
-        }
+        this.props.mode == "secondary" && 
+            Object.keys( secondary[ this.props.type ] ).forEach( ( key) => {current[ key ] = secondary[ this.props.type ][ key ]});
+
         style.root = { ...style.normal_root, ...current };
 
         return (
