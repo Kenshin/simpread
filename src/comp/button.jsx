@@ -1,6 +1,6 @@
 console.log( "==== simpread component: Button ====" )
 
-let $target, style, styles = new Map();
+let $target, $mask, style, styles = new Map();
 
 const raisedstyle = {
         backgroundColor : "rgba(0, 137, 123, 1)",
@@ -27,9 +27,9 @@ const cssinjs = () => {
             transition: 'all .5s ease-in-out .1s',
         },
 
-        focus: {},
+        mask: {},
 
-        normal_focus: {
+        normal_mask: {
             display: '-webkit-flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -139,6 +139,7 @@ export default class Button extends React.Component {
 
     componentDidMount() {
         $target = $( this.refs.target );
+        $mask   = $( this.refs.mask   );
     }
 
     render() {
@@ -146,9 +147,9 @@ export default class Button extends React.Component {
         style = styles.get( this.state.id );
 
         if ( this.props.type == "raised" ) {
-            style.focus = { ...style.normal_focus, ...style.raised };
+            style.mask = { ...style.normal_mask, ...style.raised };
         } else {
-            style.focus = { ...style.normal_focus, ...style.flat };
+            style.mask = { ...style.normal_mask, ...style.flat };
         }
 
         return (
@@ -160,7 +161,7 @@ export default class Button extends React.Component {
                 onMouseOver={ ()=>this.onMouseOver() }
                 onMouseOut={ ()=>this.onMouseOut() }
                 onClick={ ()=>this.onClick() }>
-                <div style={ style.focus }>
+                <div ref="mask" style={ style.mask }>
                     <span style={ style.span } >
                         <i></i>
                         { this.props.text }
