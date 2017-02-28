@@ -7,6 +7,7 @@ import { storage, STORAGE_MODE } from 'storage';
 import * as msg  from 'message';
 import {browser} from 'browser';
 import th        from 'theme';
+import Button    from 'button';
 
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`;
@@ -44,12 +45,10 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <sr-dialog-ctl href="javascript:void(0);" sr-type="submit" onClick={ () => this.save() }>
-                        确认
-                    </sr-dialog-ctl>
                     <sr-dialog-ctl href="javascript:void(0);" sr-type="cancel" onClick={ () => this.close() }>
                         取消
                     </sr-dialog-ctl>
+                    <Button text="确认" />
                 </sr-dialog-footer>
             </sr-dialog>
         )
