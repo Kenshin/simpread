@@ -140,9 +140,9 @@ export default class Button extends React.Component {
 
     state = {
         id : Math.round(+new Date()),
-        color: ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type == "flat" ),
-        backgroundColor: ((bool)=>bool ? flatstyle.backgroundColor : raisedstyle.backgroundColor)( this.props.type == "flat" ),
-        hoverColor: ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type == "flat" ),
+        color: ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type != "raised" ),
+        backgroundColor: ((bool)=>bool ? flatstyle.backgroundColor : raisedstyle.backgroundColor)( this.props.type != "raised" ),
+        hoverColor: ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
     }
 
     onMouseOver() {
