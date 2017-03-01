@@ -115,7 +115,7 @@ export default class Button extends React.Component {
         text    : "",
         disable : false,
         icon    : "",
-        order   : "ascending",
+        order   : "before",
         type    : "flat",
         mode    : "normal",
         color   : "",
@@ -185,9 +185,9 @@ export default class Button extends React.Component {
 
         style.root = { ...style.normal_root, ...current };
 
-        this.props.text == "" && ( style.text.display = "none" );
-        this.props.icon != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
-        this.props.order != "ascending" && ( style.icon.order = 1 );
+        this.props.text  == "" && ( style.text.display = "none" );
+        this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+        this.props.order == "after" && ( style.icon.order = 1 );
 
         const events = this.props.disable ? {} : {
                 onMouseOver : ()=>this.onMouseOver(),
