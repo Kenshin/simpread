@@ -9,8 +9,6 @@ import { storage, Clone } from 'storage';
 import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
-import * as tooltip       from 'tooltip';
-
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -80,7 +78,6 @@ class Read extends React.Component {
  */
 function Render() {
     ReactDOM.render( <Read read={ storage.current } wrapper={ wrap(storage.current.site) } />, getReadRoot() );
-    tooltip.Render( getReadRoot() );
 }
 
 /**
