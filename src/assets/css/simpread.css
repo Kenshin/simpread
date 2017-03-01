@@ -96,6 +96,7 @@ sr-dialog sr-dialog-footer {
     width: 100%;
 }
 
+/*
 sr-dialog sr-dialog-ctl {
     display: inline-block;
     height: 36px;
@@ -133,6 +134,7 @@ sr-dialog sr-dialog-ctl[sr-type="cancel"] {
 sr-dialog sr-dialog-ctl[sr-type="cancel"]:hover {
     background-color: #B2DFDB;
 }
+*/
 
 @-webkit-keyframes popupshow {
     from {
