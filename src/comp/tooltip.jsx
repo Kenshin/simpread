@@ -107,6 +107,9 @@ class ToolTip extends React.Component {
 
 }
 
+/**
+ * Render
+ */
 function Render() {
     $( "html" ).on( "mouseenter", "[tooltip]", ()=>{
         const $target = $( event.target );        
@@ -119,4 +122,11 @@ function Render() {
     });
 }
 
-export { Render };
+/**
+ * Exit
+ */
+function Exit() {
+    $( "html" ).off( "mouseenter", "[tooltip]" );
+}
+
+export { Render, Exit };
