@@ -201,7 +201,7 @@ export default class Button extends React.Component {
         };
 
         return (
-            <a  ref="target" style={ style.root }
+            <a  style={ style.root }
                 href={ this.props.href } target={ this.props.target }
                 type={ this.props.type } mode={ this.props.mode } 
                 { ...events }>
