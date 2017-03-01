@@ -37,7 +37,8 @@ const cssinjs = () => {
             top: '36PX',
             left: '-28.5px',
             opacity: 0.9,
-            transfrom: 'translate( 0px, 24px )',
+            transform: 'translate( 0px, 0px )',
+            transition: 'top 0ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
         text: {
