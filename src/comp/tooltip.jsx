@@ -79,12 +79,10 @@ class ToolTip extends React.Component {
 
     static defaultProps = {
         text   : "",
-        target : "",
     }
 
     static propTypes = {
         text  : React.PropTypes.string,
-        target: React.PropTypes.string,
     }
     
     state = {
