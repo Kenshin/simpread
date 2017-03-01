@@ -172,6 +172,25 @@ const ListView = ( props ) => {
     )
 };
 
+/**
+ * Custom component: Floating action button, component e.g.
+ * 
+    <Button id={ "exit" } name={"退出"} icon={ {style.spec_icon, `${path}assets/images/exit_icon.png`} } type={ "spec" }   style={ style.spec } />
+    <Button id={ "more" } name={"更多"} icon={ {style.icon, `${path}assets/images/more_icon.png` } }     type={ "anchor" } style={ style.origin } />
+    <ul style={ style.ul }>
+        <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
+            <Button id={ "fontsize" } name={"字体大小"} icon={ {style.icon, `${path}assets/images/fontsize_icon.png` } } color="#9E9E9E" type={ "normal" } style={ style.origin } />
+            <ul style={{ ...style.ul, ...style.ul_hori }}>
+                <li style={ style.li_hori } ><Button id={ "fontsizedown"  } name={"减小"} icon={ {style.icon, `${path}assets/images/fontsize_small_icon.png`  } } color="#9E9E9E" type={ "normal" } style={ style.origin } /></li>
+            </ul>
+        </li>
+        <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
+            <Button id={ "weight" } name={"版面布局"} icon={ {style.icon, `${path}assets/images/weight_icon.png` } } color="#FFEB3B" type={ "normal" } style={ style.origin } />
+        </li>
+    </ul>
+ * 
+ * @class
+ */
 export default class Fab extends React.Component {
 
     static defaultProps = {

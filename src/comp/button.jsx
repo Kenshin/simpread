@@ -107,6 +107,11 @@ const cssinjs = () => {
     return  styles;
 }
 
+/**
+ * Custom <a> tag component: Button
+ * 
+ * @class
+ */
 export default class Button extends React.Component {
 
     static defaultProps = {

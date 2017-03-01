@@ -181,6 +181,11 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
     return styles;
 }
 
+/**
+ * Custom <input>/<textarea> tag component: TextField
+ * 
+ * @class
+ */
 export default class TextField extends React.Component {
 
     static defaultProps = {
