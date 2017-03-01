@@ -1,5 +1,7 @@
 console.log( "===== simpread option common: ThemeSel =====" )
 
+import * as tooltip from 'tooltip';
+
 export default class ThemeSel extends React.Component {
 
     changeBgColor () {
@@ -20,6 +22,7 @@ export default class ThemeSel extends React.Component {
 
     componentDidMount() {
         setBgThemeStyle( this.props.theme );
+        tooltip.Render();
     }
 
     render() {
