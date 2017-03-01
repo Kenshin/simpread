@@ -57,6 +57,7 @@ class Read extends React.Component {
    // exit read mode
    exit() {
         ReactDOM.unmountComponentAtNode( getReadRoot() );
+        tooltip.Exit();
     }
 
     render() {
