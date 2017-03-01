@@ -12,8 +12,8 @@ const cssinjs = () => {
             width: '105px',
             height: '32px',
 
-            //top: '-10000px',
-            //left: '-28px',
+            top: '-10000px',
+            left: '-28px',
 
             zIndex: 3000,
 
@@ -24,18 +24,13 @@ const cssinjs = () => {
             color: 'rgb(255, 255, 255)',
 
             overflow: 'hidden',
-            //opacity: 0,
+            opacity: 0,
 
             userSelect: 'none',
 
             transition: 'top 0ms cubic-bezier(0.23, 1, 0.32, 1) 450ms, transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
             borderRadius: '2px',
             boxSizing: 'border-box',
-
-            top: '36PX',
-            left: '-28.5px',
-            opacity: 0.9,
-            transfrom: 'translate( 0px, 24px )',
         },
 
         root_focus: {
@@ -48,24 +43,17 @@ const cssinjs = () => {
         text: {
             position: 'absolute',
 
-            //width: 0,
-            //height: 0,
+            width: 0,
+            height: 0,
 
             left: '50%',
             top: 0,
 
-            //backgroundColor: 'transparent',
+            backgroundColor: 'transparent',
 
             borderRadius: '50%',
             transform: 'translate(-50%, -50%)',
-            //transition: 'width 0ms cubic-bezier(0.23, 1, 0.32, 1) 450ms, height 0ms cubic-bezier(0.23, 1, 0.32, 1) 450ms, backgroundColor 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-
-            width: '123px',
-            height: '123px',
-
-            backgroundColor: 'rgb(97, 97, 97)',
-
-            transition: 'width 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, height 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, backgroundColor 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+            transition: 'width 0ms cubic-bezier(0.23, 1, 0.32, 1) 450ms, height 0ms cubic-bezier(0.23, 1, 0.32, 1) 450ms, backgroundColor 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
         text_focus: {
@@ -103,9 +91,6 @@ class ToolTip extends React.Component {
     }
 
     render() {
-
-        console.log("asdfassdfasdfadsf")
-
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
@@ -123,14 +108,11 @@ class ToolTip extends React.Component {
 
 function Render() {
     $( "html" ).on( "mouseenter", "[tooltip]", ()=>{
-        const $target = $( event.target );
-        console.log( $target.find( "sr-tooltip" ).length )
-        
+        const $target = $( event.target );        
         if ( $target.find( "sr-tooltip" ).length == 0 ) {
             ReactDOM.render( <ToolTip text={ $target.attr( "tooltip" ) } />, event.target );
-            $target.one( "mouseleave", ()=>{
-                console.log("sfasdfasf", $( event.target ))
-                $( event.target ).remove();
+            $target.one( "mouseleave", () => {
+                $( event.currentTarget ).find( "sr-tooltip" ).remove();
             });
         }
     });
