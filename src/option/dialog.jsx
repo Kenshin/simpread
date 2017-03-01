@@ -45,8 +45,8 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <Button text="取消" mode="secondary" onClick={ ()=>this.close() } />
-                    <Button text="确认" onClick={ ()=>this.save() } />
+                    <Button text="取 消" mode="secondary" onClick={ ()=>this.close() } />
+                    <Button text="确 认" onClick={ ()=>this.save() } />
                 </sr-dialog-footer>
             </sr-dialog>
         )
