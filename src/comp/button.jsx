@@ -58,7 +58,7 @@ const cssinjs = () => {
             height: '100%',
 
             margin: 0,
-            padding: '0 16px',
+            padding: '0 8px',
 
             border: 'none',
             borderRadius: '2px',
