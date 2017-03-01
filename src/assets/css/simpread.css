@@ -96,7 +96,9 @@ sr-dialog {
     min-width: 480px;
     min-height: 300px;
 
-    padding: 39px 24px 16px;
+    margin: 0;
+    padding: 0;
+    /*padding: 39px 24px 16px;*/
 
     color: rgba(0, 0, 0, 0.870588);
     background-color: rgb(255, 255, 255);
@@ -112,6 +114,8 @@ sr-dialog sr-dialog-content {
     width: 100%;
     height: 100%;
     min-height: 244px;
+
+    padding: 39px 24px 0;
 }
 
 sr-dialog sr-dialog-footer {
@@ -120,6 +124,8 @@ sr-dialog sr-dialog-footer {
     justify-content:flex-end;
 
     width: 100%;
+
+    /*margin: 24px 0 0;*/
 }
 
 /**
