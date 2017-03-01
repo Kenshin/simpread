@@ -205,12 +205,12 @@ export default class Button extends React.Component {
                 href={ this.props.href } target={ this.props.target }
                 type={ this.props.type } mode={ this.props.mode } 
                 { ...events }>
-                <div ref="mask" style={ style.mask }>
-                    <span style={ style.span }>
-                        <i style={ style.icon }></i>
-                        <span style={ style.text }>{ this.props.text }</span>
-                    </span>
-                </div>
+                <button-div ref="mask" style={ style.mask }>
+                    <button-span style={ style.span }>
+                        <button-icon style={ style.icon }></button-icon>
+                        <button-text style={ style.text }>{ this.props.text }</button-text>
+                    </button-span>
+                </button-div>
             </a>
         )
     }
