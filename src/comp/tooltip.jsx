@@ -168,13 +168,14 @@ class ToolTip extends React.Component {
  * @param {string} class name, e.g. ks-simpread-read
  */
 function Render( root ) {
-    const $root = $( `.${root}` );
+    const $root   = $( `.${root}` ),
+          tooltip = getTooltipRoot( $root );
     $root.find("[data-tooltip]").map( ( idx, item )=>{
         const $item = $(item),
               position = $item.attr( "data-tooltip-position" ),
               delay    = $item.attr( "data-tooltip-delay" ),
               text     = $item.attr( "data-tooltip" );
-        //ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay }/>, $root[0] );
+        ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay }/>, tooltip );
         $item.tooltip({ position, delay, text, root });
     });
     /*
@@ -188,6 +189,15 @@ function Render( root ) {
         }
     });
     */
+}
+
+/**
+ * Create Tooltip root html
+ * @param {jquery} jquery object
+ */
+function getTooltipRoot( $root ) {
+    $root.prepend( "<sr-tooltip-root></sr-tooltip-root>" );
+    return $( "sr-tooltip-root" )[0];
 }
 
 /**
