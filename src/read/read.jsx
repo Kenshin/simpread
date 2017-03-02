@@ -9,6 +9,7 @@ import { storage, Clone } from 'storage';
 import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
+import * as tooltip       from 'tooltip';
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -41,6 +42,7 @@ class Read extends React.Component {
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         pangu.spacingElementByClassName( rdcls );
+        tooltip.Render( rdcls );
     }
 
     componentWillUnmount() {
