@@ -86,8 +86,6 @@ const cssinjs = () => {
             maxWidth: 'calc(100% - 4px)',
             minHeight: '36px',
 
-            //fontSize: '14px',
-            //lineHeight: 1,
             textAlign: 'center',
 
             zIndex: 2000,
@@ -203,8 +201,10 @@ function getTooltipRoot( $root ) {
 /**
  * Exit
  */
+/*
 function Exit() {
     $( "html" ).off( "mouseenter", "[tooltip]" );
 }
+*/
 
-export { Render, Exit };
+export { Render };
