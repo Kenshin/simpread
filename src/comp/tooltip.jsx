@@ -194,7 +194,7 @@ function Render( root ) {
  * @param {jquery} jquery object
  */
 function getTooltipRoot( $root ) {
-    $root.prepend( "<sr-tooltip-root></sr-tooltip-root>" );
+    $root.append( "<sr-tooltip-root></sr-tooltip-root>" );
     return $( "sr-tooltip-root" )[0];
 }
 
