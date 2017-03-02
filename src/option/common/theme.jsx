@@ -25,7 +25,7 @@ export default class ThemeSel extends React.Component {
     render() {
         return (
             <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
-                { this.props.themes.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ this.props.names[idx] } tooltip={ this.props.names[idx] }></sr-opt-theme> )}
+                { this.props.themes.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ this.props.names[idx] }></sr-opt-theme> )}
             </sr-opt-themes>
         )
     }
