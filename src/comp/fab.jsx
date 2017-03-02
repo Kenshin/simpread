@@ -138,7 +138,8 @@ const Button = ( props ) => {
         props.color = props.style.backgroundColor;
     }
     return (
-        <a style={ props.style }>
+        <a style={ props.style }
+           data-tooltip={ props.name } data-tooltip-position="bottom" data-tooltip-delay="50" >
             <i 
                 id={ props.id }
                 type={ props.type }
