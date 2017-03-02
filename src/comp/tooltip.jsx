@@ -77,7 +77,7 @@ const cssinjs = () => {
         root : {
             font: '300 14px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
 
-            position: absolute,
+            position: 'absolute',
 
             top: 0,
             left: 0,
@@ -129,13 +129,17 @@ const cssinjs = () => {
 class ToolTip extends React.Component {
 
     static defaultProps = {
-        text   : "",
+        text     : "",
+        position : "bottom",
+        delay    : 350,
     }
 
     static propTypes = {
-        text  : React.PropTypes.string,
+        text     : React.PropTypes.string,
+        position : React.PropTypes.oneOf([ "bottom", "top", "left", "right" ]),
+        delay    : React.PropTypes.number,
     }
-    
+
     state = {
         id : Math.round(+new Date()),
     }
@@ -170,6 +174,7 @@ function Render( root ) {
               position = $item.attr( "data-tooltip-position" ),
               delay    = $item.attr( "data-tooltip-delay" ),
               text     = $item.attr( "data-tooltip" );
+        //ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay }/>, $root[0] );
         $item.tooltip({ position, delay, text, root });
     });
     /*
