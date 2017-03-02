@@ -1,10 +1,13 @@
 console.log( "==== simpread component: ToolTip ====" )
 
+import '../vender/velocity.min.js';
+import '../vender/tooltip.js';
+
 let style, styles = new Map();
 const cssinjs = () => {
     const styles = {
 
-        root: {
+        /*root: {
             position: 'relative',
 
             padding: '0px 16px',
@@ -69,6 +72,54 @@ const cssinjs = () => {
         span: {
             position: 'relative',
             whiteSpace: 'nowrap',
+        },*/
+
+        root : {
+            font: '300 14px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
+
+            position: absolute,
+
+            top: 0,
+            left: 0,
+            padding: '10px 8px',
+
+            maxWidth: 'calc(100% - 4px)',
+            minHeight: '36px',
+
+            //fontSize: '14px',
+            //lineHeight: 1,
+            textAlign: 'center',
+
+            zIndex: 2000,
+
+            color: '#fff',
+            backgroundColor: 'transparent',
+
+            borderRadius: '2px',
+
+            pointerEvents: 'none',
+
+            opacity: 0,
+            overflow: 'hidden',
+            visibility: 'hidden',
+        },
+
+        background: {
+            position: 'absolute',
+
+            width: '14px',
+            height: '7px',
+
+            backgroundColor: '#323232',
+
+            borderRadius: '0 0 50% 50%',
+
+            zIndex: -1,
+
+            transformOrigin: '50% 0%',
+
+            opacity: 0,
+            visibility: 'hidden',
         },
     }
 
@@ -89,16 +140,18 @@ class ToolTip extends React.Component {
         id : Math.round(+new Date()),
     }
 
+    componentWillUnmount() {
+        console.log("==== tooltip exit ====")
+    }
+
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
         return (
             <sr-tooltip>
-                <div ref="root" style={{ ...style.root, ...style.root_focus }}>
-                    <div ref="text" style={{ ...style.text, ...style.text_focus }}></div>
-                    <span style={ style.span }>{ this.props.text }</span>
-                </div>
+                <span>{ this.props.text }</span>
+                <div style={ style.background }></div>
             </sr-tooltip>
         )
     }
@@ -107,8 +160,19 @@ class ToolTip extends React.Component {
 
 /**
  * Render
+ * 
+ * @param {string} class name, e.g. ks-simpread-read
  */
-function Render() {
+function Render( root ) {
+    const $root = $( `.${root}` );
+    $root.find("[data-tooltip]").map( ( idx, item )=>{
+        const $item = $(item),
+              position = $item.attr( "data-tooltip-position" ),
+              delay    = $item.attr( "data-tooltip-delay" ),
+              text     = $item.attr( "data-tooltip" );
+        $item.tooltip({ position, delay, text, root });
+    });
+    /*
     $( "html" ).on( "mouseenter", "[tooltip]", ()=>{
         const $target = $( event.target );        
         if ( $target.find( "sr-tooltip" ).length == 0 ) {
@@ -118,6 +182,7 @@ function Render() {
             });
         }
     });
+    */
 }
 
 /**
