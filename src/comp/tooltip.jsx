@@ -120,8 +120,7 @@ class ToolTip extends React.Component {
                   tooltipHeight = $target.outerHeight(),
                   tooltipWidth  = $target.outerWidth(),
                   backWidth     = $back[0].offsetWidth,
-                  backHeight    = $back[0].offsetHeight,
-                  margin = 0;
+                  backHeight    = $back[0].offsetHeight;
 
             let tooltipVert = "0px", tooltipHori = "0px",
                 scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
@@ -137,7 +136,7 @@ class ToolTip extends React.Component {
 
             if ( this.props.position == "bottom" ) {
                 tooltipVert = "+14px";
-                targetTop   = top  + originHeight + margin;
+                targetTop   = top  + originHeight;
                 targetLeft  = left + originWidth/2 - tooltipWidth/2;
                 position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else if ( this.props.position == "top" ) {
@@ -148,12 +147,12 @@ class ToolTip extends React.Component {
             } else if ( this.props.position == "left" ) {
                 tooltipHori = '-14px';
                 targetTop   = top  + ( originHeight - tooltipHeight ) / 2;
-                targetLeft  = left - tooltipWidth + margin;
+                targetLeft  = left - tooltipWidth;
                 position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else {
                 tooltipHori = '+14px';
                 targetTop   = top  + ( originHeight - tooltipHeight ) / 2;
-                targetLeft  = left + tooltipWidth + margin;
+                targetLeft  = left + tooltipWidth;
                 position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             }
 
