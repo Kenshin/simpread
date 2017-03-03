@@ -480,6 +480,7 @@ sr-tooltip {
     visibility: hidden
 }
 
+/*
 .backdrop {
     position: absolute;
 
@@ -497,3 +498,4 @@ sr-tooltip {
     opacity: 0;
     visibility: hidden;
 }
+*/
