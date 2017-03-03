@@ -80,8 +80,7 @@ class ToolTip extends React.Component {
     onMouseEnter() {
         const showTooltip = ()=> {
             started = true;
-            $target = $( this.refs.target );
-            $back   = $( this.refs.back );
+            [ $target, $back ] = [ $( this.refs.target ), $( this.refs.back ) ];
 
             $target.velocity( "stop" );
             $back.velocity( "stop" );
@@ -109,9 +108,9 @@ class ToolTip extends React.Component {
             }
 
             if ( this.props.position == "bottom" ) {
-                targetTop      = top + this.props.item.outerHeight() + margin;
+                targetTop      = top  + this.props.item.outerHeight() + margin;
                 targetLeft     = left + originWidth/2 - tooltipWidth/2;
-                newCoordinates = realPosition(targetLeft, targetTop, tooltipWidth, tooltipHeight);
+                newCoordinates = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
                 tooltipVerticalMovement = '+10px';
                 $back.css({
                     top: 0,
@@ -142,22 +141,19 @@ class ToolTip extends React.Component {
         started = false;
         clearTimeout( timeout );
         setTimeout( () => {
-            $target = $( this.refs.target );
-            $back   = $( this.refs.back );
-            //if ( started !== true) {
+            [ $target, $back ] = [ $( this.refs.target ), $( this.refs.back ) ];
             $target.velocity({
-                opacity: 0, translateY: 0, translateX: 0}, { duration: 225, queue: false});
+                opacity: 0, translateY: 0, translateX: 0}, { duration: 225, queue: false });
             $back.velocity({opacity: 0, scaleX: 1, scaleY: 1}, {
-                duration:225,
-                queue: false,
+                duration: 225,
+                queue:    false,
                 complete: () => {
-                    $back.css({ visibility: 'hidden' });
+                    $back.css({   visibility: 'hidden' });
                     $target.css({ visibility: 'hidden' });
                     started = false;
                 }
             });
-            //}
-          },225);
+          },225 );
     }
 
     componentDidMount() {
