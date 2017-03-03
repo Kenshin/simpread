@@ -16,16 +16,18 @@ const cssinjs = () => {
     const styles = {
 
         root : {
-            font: '300 14px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
+            font: '300 14px/1 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
 
+            display: 'flex',
+            alignItems: 'center',
             position: 'absolute',
 
             top: 0,
             left: 0,
-            padding: '10px 8px',
+            padding: '0 16px',
 
             maxWidth: 'calc(100% - 4px)',
-            minHeight: '36px',
+            height: '32px',
 
             textAlign: 'center',
 
@@ -49,7 +51,7 @@ const cssinjs = () => {
             width: '14px',
             height: '7px',
 
-            backgroundColor: '#323232',
+            backgroundColor: 'rgba(97, 97, 98, .9)',
 
             borderRadius: '0 0 50% 50%',
 
@@ -119,7 +121,7 @@ class ToolTip extends React.Component {
                   tooltipWidth  = $target.outerWidth(),
                   backWidth     = $back[0].offsetWidth,
                   backHeight    = $back[0].offsetHeight,
-                  margin = 5;
+                  margin = 0;
 
             let tooltipVert = '0px', tooltipHori = '0px',
                 scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
@@ -137,7 +139,7 @@ class ToolTip extends React.Component {
                 targetTop  = top  + this.props.$item.outerHeight() + margin;
                 targetLeft = left + originWidth/2 - tooltipWidth/2;
                 position   = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
-                tooltipVert = '+10px';
+                tooltipVert = '+14px';
                 $back.css({
                     top: 0,
                     left: 0,
