@@ -182,10 +182,10 @@ class ToolTip extends React.Component {
         style = styles.get( this.state.id );
 
         return (
-            <sr-tooltip ref="target" style={ style.root } id={ this.state.id }>
+            <tooltip-tip ref="target" style={ style.root } id={ this.state.id }>
                 <span>{ this.props.text }</span>
                 <div ref="back" style={ style.back }></div>
-            </sr-tooltip>
+            </tooltip-tip>
         )
     }
 
@@ -214,9 +214,9 @@ function Render( root ) {
  * @return {element} html element
  */
 function getTooltipRoot( $root ) {
-    $root.find( "sr-tooltip-root" ).length == 0 && $root.append( "<sr-tooltip-root>" );
-    $( "sr-tooltip-root" ).append( "<sr-tooltip-gp>" );
-    return $( "sr-tooltip-gp" ).last()[0];
+    $root.find( "tooltip-gp" ).length == 0 && $root.append( "<tooltip-gp>" );
+    $( "tooltip-gp" ).append( "<tooltip-tips>" );
+    return $( "tooltip-tips" ).last()[0];
 }
 
 /**
