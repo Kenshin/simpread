@@ -90,12 +90,11 @@ class ToolTip extends React.Component {
                   originHeight  = this.props.item.outerHeight(),
                   tooltipHeight = $target.outerHeight(),
                   tooltipWidth  = $target.outerWidth(),
-                  backdropOffsetWidth  = $back[0].offsetWidth,
-                  backdropOffsetHeight = $back[0].offsetHeight,
+                  backWidth     = $back[0].offsetWidth,
+                  backHeight    = $back[0].offsetHeight,
                   margin = 5;
 
-            let tooltipVerticalMovement   = '0px',
-                tooltipHorizontalMovement = '0px',
+            let tooltipVert = '0px', tooltipHori = '0px',
                 scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
                 targetTop, targetLeft, position, top, left;
 
@@ -111,11 +110,11 @@ class ToolTip extends React.Component {
                 targetTop  = top  + this.props.item.outerHeight() + margin;
                 targetLeft = left + originWidth/2 - tooltipWidth/2;
                 position   = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
-                tooltipVerticalMovement = '+10px';
+                tooltipVert = '+10px';
                 $back.css({
                     top: 0,
                     left: 0,
-                    marginLeft: (tooltipWidth/2) - (backdropOffsetWidth/2)
+                    marginLeft: (tooltipWidth/2) - (backWidth/2)
                 });
             }
 
@@ -124,12 +123,12 @@ class ToolTip extends React.Component {
                 left: position.x
             });
 
-            scaleXFactor = Math.SQRT2 * tooltipWidth / parseInt(backdropOffsetWidth);
-            scaleYFactor = Math.SQRT2 * tooltipHeight / parseInt(backdropOffsetHeight);
-            scaleFactor  = Math.max(scaleXFactor, scaleYFactor);
+            scaleXFactor = Math.SQRT2 * tooltipWidth  / parseInt( backWidth  );
+            scaleYFactor = Math.SQRT2 * tooltipHeight / parseInt( backHeight );
+            scaleFactor  = Math.max( scaleXFactor, scaleYFactor );
 
-            $target.velocity({ translateY: tooltipVerticalMovement, translateX: tooltipHorizontalMovement}, { duration: 350, queue: false })
-              .velocity({opacity: 1}, {duration: 300, delay: 50, queue: false});
+            $target.velocity({ translateY: tooltipVert, translateX: tooltipHori }, { duration: 350, queue: false })
+              .velocity({ opacity: 1 }, { duration: 300, delay: 50, queue: false });
             $back.css({ visibility: 'visible' })
               .velocity({opacity:1},{duration: 55, delay: 0, queue: false})
               .velocity({scaleX: scaleFactor, scaleY: scaleFactor}, {duration: 300, delay: 0, queue: false, easing: 'easeInOutQuad'});
