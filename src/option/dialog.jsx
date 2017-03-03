@@ -22,7 +22,7 @@ export default class Dialog extends React.Component {
     close( restore = rollback() ) {
         $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
         $( "." + optbgcls ).one( "animationend webkitAnimationEnd", () => $( "." + optbgcls ).remove() );
-        tooltip.Exit();
+        tooltip.Exit( optbgcls );
     }
 
     // save dialog focus option
