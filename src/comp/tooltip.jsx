@@ -136,15 +136,29 @@ class ToolTip extends React.Component {
             }
 
             if ( this.props.position == "bottom" ) {
-                targetTop  = top  + this.props.$item.outerHeight() + margin;
-                targetLeft = left + originWidth/2 - tooltipWidth/2;
-                position   = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
+                targetTop   = top  + originHeight + margin;
+                targetLeft  = left + originWidth/2 - tooltipWidth/2;
+                position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
                 tooltipVert = "+14px";
                 $back.css({
                     top: 0,
                     left: 0,
                     marginLeft: (tooltipWidth/2) - (backWidth/2)
                 });
+            } else if ( this.props.position == "top" ) {
+                
+            } else if ( this.props.position == "left" ) {
+                targetTop   = top  + ( originHeight - tooltipHeight ) / 2;
+                targetLeft  = left - tooltipWidth + margin;
+                position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
+                tooltipHori = '-14px';
+                $back.css({
+                    top: 0,
+                    left: 0,
+                    marginLeft: (tooltipWidth/2) - (backWidth/2)
+                });
+            } else {
+                
             }
 
             $target.css({
