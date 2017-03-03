@@ -66,7 +66,21 @@ const cssinjs = () => {
 }
 
 /**
- * Tooltip
+ * Tooltip, component e.g. 
+    <tooltip-gp>
+        <tooltip-tips>
+            <tooltip-tip id="1488523418015">
+                <span>关闭</span>
+                <div></div>
+            </tooltip-tip>
+        </tooltip-tips>
+        <tooltip-tips>
+            <tooltip-tip id="1488523418017">
+                <span>更多</span>
+                <div></div>
+            </tooltip-tip>
+        </tooltip-tips>
+    </tooltip-gp>
  * 
  * @class
  */
