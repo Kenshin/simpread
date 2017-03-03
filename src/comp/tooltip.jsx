@@ -168,7 +168,7 @@ class ToolTip extends React.Component {
         style = styles.get( this.state.id );
 
         return (
-            <sr-tooltip ref="target" id={ this.state.id }>
+            <sr-tooltip ref="target" style={ style.root } id={ this.state.id }>
                 <span>{ this.props.text }</span>
                 <div ref="back" style={ style.background }></div>
             </sr-tooltip>
