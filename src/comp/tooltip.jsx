@@ -79,37 +79,38 @@ class ToolTip extends React.Component {
 
     onMouseEnter() {
         const showTooltip = ()=> {
+            started = true;
             $target = $( this.refs.target );
             $back   = $( this.refs.back );
-            started = true;
+
             $target.velocity( "stop" );
             $back.velocity( "stop" );
             $target.css({ visibility: 'visible', left: '0px', top: '0px' });
-            const originWidth = this.props.item.outerWidth();
-            const originHeight = this.props.item.outerHeight();
-            const tooltipHeight = $target.outerHeight();
-            const tooltipWidth = $target.outerWidth();
-            let tooltipVerticalMovement = '0px';
-            let tooltipHorizontalMovement = '0px';
-            const backdropOffsetWidth = $back[0].offsetWidth;
-            const backdropOffsetHeight = $back[0].offsetHeight;
-            const margin = 5;
-            let scaleXFactor = 8;
-            let scaleYFactor = 8;
-            let scaleFactor = 0;
-            let targetTop, targetLeft, newCoordinates, top, left;
+
+            const originWidth   = this.props.item.outerWidth(),
+                  originHeight  = this.props.item.outerHeight(),
+                  tooltipHeight = $target.outerHeight(),
+                  tooltipWidth  = $target.outerWidth(),
+                  backdropOffsetWidth = $back[0].offsetWidth,
+                  backdropOffsetHeight = $back[0].offsetHeight,
+                  margin = 5;
+
+            let tooltipVerticalMovement   = '0px',
+                tooltipHorizontalMovement = '0px',
+                scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
+                targetTop, targetLeft, newCoordinates, top, left;
 
             if ( this.props.item.css( "position" ) == "static" ) {
-                top = this.props.item.position().top;
+                top  = this.props.item.position().top;
                 left = this.props.item.position().left;
             } else {
-                top = this.props.item.offset().top;
+                top  = this.props.item.offset().top;
                 left = this.props.item.offset().left;
             }
 
             if ( this.props.position == "bottom" ) {
-                targetTop = top + this.props.item.outerHeight() + margin;
-                targetLeft = left + originWidth/2 - tooltipWidth/2;
+                targetTop      = top + this.props.item.outerHeight() + margin;
+                targetLeft     = left + originWidth/2 - tooltipWidth/2;
                 newCoordinates = realPosition(targetLeft, targetTop, tooltipWidth, tooltipHeight);
                 tooltipVerticalMovement = '+10px';
                 $back.css({
@@ -126,14 +127,13 @@ class ToolTip extends React.Component {
 
             scaleXFactor = Math.SQRT2 * tooltipWidth / parseInt(backdropOffsetWidth);
             scaleYFactor = Math.SQRT2 * tooltipHeight / parseInt(backdropOffsetHeight);
-            scaleFactor = Math.max(scaleXFactor, scaleYFactor);
+            scaleFactor  = Math.max(scaleXFactor, scaleYFactor);
 
             $target.velocity({ translateY: tooltipVerticalMovement, translateX: tooltipHorizontalMovement}, { duration: 350, queue: false })
               .velocity({opacity: 1}, {duration: 300, delay: 50, queue: false});
             $back.css({ visibility: 'visible' })
               .velocity({opacity:1},{duration: 55, delay: 0, queue: false})
               .velocity({scaleX: scaleFactor, scaleY: scaleFactor}, {duration: 300, delay: 0, queue: false, easing: 'easeInOutQuad'});
-
         };
         timeout = setTimeout( showTooltip, this.props.delay );
     }
