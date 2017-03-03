@@ -208,25 +208,30 @@ function getTooltipRoot( $root ) {
     return $( "sr-tooltip-gp" ).last()[0];
 }
 
-function realPosition(x, y, width, height) {
-    var newX = x;
-    var newY = y;
-
-    if (newX < 0) {
-      newX = 4;
-    } else if (newX + width > window.innerWidth) {
-      newX -= newX + width - window.innerWidth;
+/**
+ * Calculate x and y position
+ * 
+ * @param {number} left position
+ * @param {number} top position
+ * @param {number} tooltip width
+ * @param {number} tooltip height
+ * @return {object} news { x, y }
+ */
+function realPosition( x, y, width, height ) {
+    if ( x < 0 ) {
+        x = 4;
+    } else if ( x + width > window.innerWidth ) {
+        x -= x + width - window.innerWidth;
     }
 
-    if (newY < 0) {
-      newY = 4;
-    } else if (newY + height > window.innerHeight + $(window).scrollTop) {
-      newY -= newY + height - window.innerHeight;
+    if ( y < 0 ) {
+        y = 4;
+    } else if ( y + height > window.innerHeight + $(window).scrollTop ) {
+        y -= y + height - window.innerHeight;
     }
 
-    return {x: newX, y: newY};
-  };
-
+    return { x, y };
+}
 
 /**
  * Exit
