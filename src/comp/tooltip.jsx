@@ -34,7 +34,7 @@ const cssinjs = () => {
             visibility: 'hidden',
         },
 
-        background: {
+        back: {
             position: 'absolute',
 
             width: '14px',
@@ -170,7 +170,7 @@ class ToolTip extends React.Component {
         return (
             <sr-tooltip ref="target" style={ style.root } id={ this.state.id }>
                 <span>{ this.props.text }</span>
-                <div ref="back" style={ style.background }></div>
+                <div ref="back" style={ style.back }></div>
             </sr-tooltip>
         )
     }
