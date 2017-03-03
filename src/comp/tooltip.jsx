@@ -224,9 +224,13 @@ function Render( root ) {
 
 /**
  * Exit
+ * 
+ * @param {string} Render param
  */
-function Exit() {
-    ReactDOM.unmountComponentAtNode( $( "tooltip-tips" )[0] );
+function Exit( root ) {
+    $( `.${root}` ).find( "tooltip-tips" ).map( ( idx, item )=>{
+        ReactDOM.unmountComponentAtNode( $(item)[0] );
+    });
 }
 
 /**
