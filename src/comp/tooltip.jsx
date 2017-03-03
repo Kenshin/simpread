@@ -65,6 +65,11 @@ const cssinjs = () => {
     return styles;
 }
 
+/**
+ * Tooltip
+ * 
+ * @class
+ */
 class ToolTip extends React.Component {
 
     static defaultProps = {
