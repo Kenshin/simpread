@@ -188,7 +188,8 @@ class ToolTip extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log("==== tooltip exit ====")
+        this.props.$item.off( "mouseenter", this.onMouseEnter );
+        this.props.$item.off( "mouseleave", this.onMouseLeave );
     }
 
     render() {
@@ -219,6 +220,13 @@ function Render( root ) {
               text     = $item.attr( "data-tooltip" );
         ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
     });
+}
+
+/**
+ * Exit
+ */
+function Exit() {
+    ReactDOM.unmountComponentAtNode( $( "tooltip-tips" )[0] );
 }
 
 /**
@@ -258,4 +266,4 @@ function realPosition( x, y, width, height ) {
     return { x, y };
 }
 
-export { Render };
+export { Render, Exit };
