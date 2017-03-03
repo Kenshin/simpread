@@ -90,14 +90,14 @@ class ToolTip extends React.Component {
                   originHeight  = this.props.item.outerHeight(),
                   tooltipHeight = $target.outerHeight(),
                   tooltipWidth  = $target.outerWidth(),
-                  backdropOffsetWidth = $back[0].offsetWidth,
+                  backdropOffsetWidth  = $back[0].offsetWidth,
                   backdropOffsetHeight = $back[0].offsetHeight,
                   margin = 5;
 
             let tooltipVerticalMovement   = '0px',
                 tooltipHorizontalMovement = '0px',
                 scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
-                targetTop, targetLeft, newCoordinates, top, left;
+                targetTop, targetLeft, position, top, left;
 
             if ( this.props.item.css( "position" ) == "static" ) {
                 top  = this.props.item.position().top;
@@ -108,9 +108,9 @@ class ToolTip extends React.Component {
             }
 
             if ( this.props.position == "bottom" ) {
-                targetTop      = top  + this.props.item.outerHeight() + margin;
-                targetLeft     = left + originWidth/2 - tooltipWidth/2;
-                newCoordinates = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
+                targetTop  = top  + this.props.item.outerHeight() + margin;
+                targetLeft = left + originWidth/2 - tooltipWidth/2;
+                position   = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
                 tooltipVerticalMovement = '+10px';
                 $back.css({
                     top: 0,
@@ -120,8 +120,8 @@ class ToolTip extends React.Component {
             }
 
             $target.css({
-                top: newCoordinates.y,
-                left: newCoordinates.x
+                top: position.y,
+                left: position.x
             });
 
             scaleXFactor = Math.SQRT2 * tooltipWidth / parseInt(backdropOffsetWidth);
