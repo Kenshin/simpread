@@ -141,9 +141,9 @@ class ToolTip extends React.Component {
                 targetLeft  = left + originWidth/2 - tooltipWidth/2;
                 position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else if ( this.props.position == "top" ) {
-                tooltipHori = '-14px';
-                targetTop   = top  - tooltipHeight + Number.parseInt( tooltipHori );
-                targetLeft  = left + ( originWidth - tooltipWidth ) / 2 + Number.parseInt( $target.css( "padding-left" ));
+                tooltipVert = '-14px';
+                targetTop   = top  - tooltipHeight;
+                targetLeft  = left + ( originWidth - tooltipWidth ) / 2;
                 position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else if ( this.props.position == "left" ) {
                 tooltipHori = '-14px';
