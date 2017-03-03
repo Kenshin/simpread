@@ -1,7 +1,6 @@
 console.log( "==== simpread component: ToolTip ====" )
 
 import '../vender/velocity.min.js';
-import '../vender/tooltip.js';
 
 let started = false, timeout, $target, $back, style, styles = new Map();
 const cssinjs = () => {
@@ -191,7 +190,6 @@ function Render( root ) {
               delay    = $item.attr( "data-tooltip-delay" ),
               text     = $item.attr( "data-tooltip" );
         ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } item={ $item } />, getTooltipRoot( $root ) );
-        //$item.tooltip({ position, delay, text, root });
     });
 }
 
