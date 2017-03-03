@@ -215,7 +215,7 @@ function Render( root ) {
  */
 function getTooltipRoot( $root ) {
     $root.find( "tooltip-gp" ).length == 0 && $root.append( "<tooltip-gp>" );
-    $( "tooltip-gp" ).append( "<tooltip-tips>" );
+    $root.find( "tooltip-gp" ).append( "<tooltip-tips>" );
     return $( "tooltip-tips" ).last()[0];
 }
 
