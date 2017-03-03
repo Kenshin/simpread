@@ -113,7 +113,7 @@ class ToolTip extends React.Component {
 
             $target.velocity( "stop" );
             $back.velocity( "stop" );
-            $target.css({ visibility: 'visible', left: '0px', top: '0px' });
+            $target.css({ visibility: "visible", left: "0px", top: "0px" });
 
             const originWidth   = this.props.$item.outerWidth(),
                   originHeight  = this.props.$item.outerHeight(),
@@ -123,7 +123,7 @@ class ToolTip extends React.Component {
                   backHeight    = $back[0].offsetHeight,
                   margin = 0;
 
-            let tooltipVert = '0px', tooltipHori = '0px',
+            let tooltipVert = "0px", tooltipHori = "0px",
                 scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
                 targetTop, targetLeft, position, top, left;
 
@@ -139,7 +139,7 @@ class ToolTip extends React.Component {
                 targetTop  = top  + this.props.$item.outerHeight() + margin;
                 targetLeft = left + originWidth/2 - tooltipWidth/2;
                 position   = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
-                tooltipVert = '+14px';
+                tooltipVert = "+14px";
                 $back.css({
                     top: 0,
                     left: 0,
@@ -158,9 +158,9 @@ class ToolTip extends React.Component {
 
             $target.velocity({ translateY: tooltipVert, translateX: tooltipHori }, { duration: 350, queue: false })
               .velocity({ opacity: 1 }, { duration: 300, delay: 50, queue: false });
-            $back.css({ visibility: 'visible' })
+            $back.css({ visibility: "visible" })
               .velocity({ opacity: 1 }, { duration: 55, delay: 0, queue: false })
-              .velocity({ scaleX: scaleFactor, scaleY: scaleFactor }, { duration: 300, delay: 0, queue: false, easing: 'easeInOutQuad' });
+              .velocity({ scaleX: scaleFactor, scaleY: scaleFactor }, { duration: 300, delay: 0, queue: false, easing: "easeInOutQuad" });
         };
         timeout = setTimeout( showTooltip, this.props.delay );
     }
@@ -176,8 +176,8 @@ class ToolTip extends React.Component {
                 duration: 225,
                 queue:    false,
                 complete: () => {
-                    $back.css({   visibility: 'hidden' });
-                    $target.css({ visibility: 'hidden' });
+                    $back.css({   visibility: "hidden" });
+                    $target.css({ visibility: "hidden" });
                     started = false;
                 }
             });
