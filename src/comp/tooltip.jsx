@@ -76,14 +76,14 @@ class ToolTip extends React.Component {
         text     : "",
         position : "bottom",
         delay    : 350,
-        item     : undefined,
+        $item    : undefined,
     }
 
     static propTypes = {
         text     : React.PropTypes.string,
         position : React.PropTypes.oneOf([ "bottom", "top", "left", "right" ]),
         delay    : React.PropTypes.number,
-        item     : React.PropTypes.any,
+        $item    : React.PropTypes.any,
     }
 
     state = {
@@ -99,8 +99,8 @@ class ToolTip extends React.Component {
             $back.velocity( "stop" );
             $target.css({ visibility: 'visible', left: '0px', top: '0px' });
 
-            const originWidth   = this.props.item.outerWidth(),
-                  originHeight  = this.props.item.outerHeight(),
+            const originWidth   = this.props.$item.outerWidth(),
+                  originHeight  = this.props.$item.outerHeight(),
                   tooltipHeight = $target.outerHeight(),
                   tooltipWidth  = $target.outerWidth(),
                   backWidth     = $back[0].offsetWidth,
@@ -111,16 +111,16 @@ class ToolTip extends React.Component {
                 scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
                 targetTop, targetLeft, position, top, left;
 
-            if ( this.props.item.css( "position" ) == "static" ) {
-                top  = this.props.item.position().top;
-                left = this.props.item.position().left;
+            if ( this.props.$item.css( "position" ) == "static" ) {
+                top  = this.props.$item.position().top;
+                left = this.props.$item.position().left;
             } else {
-                top  = this.props.item.offset().top;
-                left = this.props.item.offset().left;
+                top  = this.props.$item.offset().top;
+                left = this.props.$item.offset().left;
             }
 
             if ( this.props.position == "bottom" ) {
-                targetTop  = top  + this.props.item.outerHeight() + margin;
+                targetTop  = top  + this.props.$item.outerHeight() + margin;
                 targetLeft = left + originWidth/2 - tooltipWidth/2;
                 position   = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
                 tooltipVert = '+10px';
@@ -169,8 +169,8 @@ class ToolTip extends React.Component {
     }
 
     componentDidMount() {
-        this.props.item.on( "mouseenter", this.onMouseEnter.bind( this ) );
-        this.props.item.on( "mouseleave", this.onMouseLeave.bind( this ) );
+        this.props.$item.on( "mouseenter", this.onMouseEnter.bind( this ) );
+        this.props.$item.on( "mouseleave", this.onMouseLeave.bind( this ) );
     }
 
     componentWillUnmount() {
@@ -203,7 +203,7 @@ function Render( root ) {
               position = $item.attr( "data-tooltip-position" ),
               delay    = $item.attr( "data-tooltip-delay" ),
               text     = $item.attr( "data-tooltip" );
-        ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } item={ $item } />, getTooltipRoot( $root ) );
+        ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
     });
 }
 
