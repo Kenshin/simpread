@@ -8,6 +8,7 @@ import * as msg  from 'message';
 import {browser} from 'browser';
 import th        from 'theme';
 import Button    from 'button';
+import * as tooltip from 'tooltip';
 
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`;
@@ -35,6 +36,10 @@ export default class Dialog extends React.Component {
 
     constructor( props ) {
         super( props );
+    }
+
+    componentDidMount() {
+        tooltip.Render( optbgcls );
     }
 
     render() {
