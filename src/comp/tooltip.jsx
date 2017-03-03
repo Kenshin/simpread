@@ -3,7 +3,7 @@ console.log( "==== simpread component: ToolTip ====" )
 import '../vender/velocity.min.js';
 import '../vender/tooltip.js';
 
-let style, styles = new Map();
+let started = false, timeout, $target, $back, style, styles = new Map();
 const cssinjs = () => {
     const styles = {
 
@@ -130,16 +130,98 @@ class ToolTip extends React.Component {
         text     : "",
         position : "bottom",
         delay    : 350,
+        item     : undefined,
     }
 
     static propTypes = {
         text     : React.PropTypes.string,
         position : React.PropTypes.oneOf([ "bottom", "top", "left", "right" ]),
         delay    : React.PropTypes.number,
+        item     : React.PropTypes.any,
     }
 
     state = {
         id : Math.round(+new Date()),
+    }
+
+    onMouseEnter() {
+        const showTooltip = ()=> {
+            $target = $( this.refs.target );
+            $back   = $( this.refs.back );
+            started = true;
+            $target.velocity( "stop" );
+            $back.velocity( "stop" );
+            $target.css({ visibility: 'visible', left: '0px', top: '0px' });
+            const originWidth = this.props.item.outerWidth();
+            const originHeight = this.props.item.outerHeight();
+            const tooltipHeight = $target.outerHeight();
+            const tooltipWidth = $target.outerWidth();
+            let tooltipVerticalMovement = '0px';
+            let tooltipHorizontalMovement = '0px';
+            const backdropOffsetWidth = $back[0].offsetWidth;
+            const backdropOffsetHeight = $back[0].offsetHeight;
+            const margin = 5;
+            let scaleXFactor = 8;
+            let scaleYFactor = 8;
+            let scaleFactor = 0;
+            let targetTop, targetLeft, newCoordinates;
+
+            if ( this.props.position == "bottom" ) {
+                targetTop = this.props.item.offset().top + this.props.item.outerHeight() + margin;
+                targetLeft = this.props.item.offset().left + originWidth/2 - tooltipWidth/2;
+                newCoordinates = realPosition(targetLeft, targetTop, tooltipWidth, tooltipHeight);
+                tooltipVerticalMovement = '+10px';
+                $back.css({
+                    top: 0,
+                    left: 0,
+                    marginLeft: (tooltipWidth/2) - (backdropOffsetWidth/2)
+                });
+            }
+
+            $target.css({
+                top: newCoordinates.y,
+                left: newCoordinates.x
+            });
+
+            scaleXFactor = Math.SQRT2 * tooltipWidth / parseInt(backdropOffsetWidth);
+            scaleYFactor = Math.SQRT2 * tooltipHeight / parseInt(backdropOffsetHeight);
+            scaleFactor = Math.max(scaleXFactor, scaleYFactor);
+
+            $target.velocity({ translateY: tooltipVerticalMovement, translateX: tooltipHorizontalMovement}, { duration: 350, queue: false })
+              .velocity({opacity: 1}, {duration: 300, delay: 50, queue: false});
+            $back.css({ visibility: 'visible' })
+              .velocity({opacity:1},{duration: 55, delay: 0, queue: false})
+              .velocity({scaleX: scaleFactor, scaleY: scaleFactor}, {duration: 300, delay: 0, queue: false, easing: 'easeInOutQuad'});
+
+        };
+        timeout = setTimeout( showTooltip, this.props.delay );
+    }
+
+    onMouseLeave() {
+        started = false;
+        clearTimeout( timeout );
+        setTimeout( () => {
+            $target = $( this.refs.target );
+            $back   = $( this.refs.back );
+            //if ( started !== true) {
+            $target.velocity({
+                opacity: 0, translateY: 0, translateX: 0}, { duration: 225, queue: false});
+            $back.velocity({opacity: 0, scaleX: 1, scaleY: 1}, {
+                duration:225,
+                queue: false,
+                complete: () => {
+                    $back.css({ visibility: 'hidden' });
+                    $target.css({ visibility: 'hidden' });
+                    started = false;
+                }
+            });
+            //}
+          },225);
+    }
+
+    componentDidMount() {
+        this.props.item.on( "mouseenter", this.onMouseEnter.bind( this ) );
+        this.props.item.on( "mouseleave", this.onMouseLeave.bind( this ) );
     }
 
     componentWillUnmount() {
@@ -151,9 +233,9 @@ class ToolTip extends React.Component {
         style = styles.get( this.state.id );
 
         return (
-            <sr-tooltip>
+            <sr-tooltip ref="target" id={ this.state.id }>
                 <span>{ this.props.text }</span>
-                <div style={ style.background }></div>
+                <div ref="back" style={ style.background }></div>
             </sr-tooltip>
         )
     }
@@ -172,8 +254,8 @@ function Render( root ) {
               position = $item.attr( "data-tooltip-position" ),
               delay    = $item.attr( "data-tooltip-delay" ),
               text     = $item.attr( "data-tooltip" );
-        ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay }/>, getTooltipRoot( $root ) );
-        $item.tooltip({ position, delay, text, root });
+        ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } item={ $item } />, getTooltipRoot( $root ) );
+        //$item.tooltip({ position, delay, text, root });
     });
     /*
     $( "html" ).on( "mouseenter", "[tooltip]", ()=>{
@@ -199,6 +281,26 @@ function getTooltipRoot( $root ) {
     $( "sr-tooltip-root" ).append( "<sr-tooltip-gp>" );
     return $( "sr-tooltip-gp" ).last()[0];
 }
+
+function realPosition(x, y, width, height) {
+    var newX = x;
+    var newY = y;
+
+    if (newX < 0) {
+      newX = 4;
+    } else if (newX + width > window.innerWidth) {
+      newX -= newX + width - window.innerWidth;
+    }
+
+    if (newY < 0) {
+      newY = 4;
+    } else if (newY + height > window.innerHeight + $(window).scrollTop) {
+      newY -= newY + height - window.innerHeight;
+    }
+
+    return {x: newX, y: newY};
+  };
+
 
 /**
  * Exit
