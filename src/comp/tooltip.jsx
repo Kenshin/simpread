@@ -1,5 +1,14 @@
 console.log( "==== simpread component: ToolTip ====" )
 
+/*
+ * Reference to Materialize( MIT license ) tooltip
+ *
+ * Author      Alvin Wang( alvin7@gmail.com ) https://github.com/Dogfalo
+ * Materialize http://materializecss.com/
+ * Tooltip     https://github.com/Dogfalo/materialize/blob/master/js/tooltip.js
+ *
+ */
+
 import '../vender/velocity.min.js';
 
 let started = false, timeout, $target, $back, style, styles = new Map();
