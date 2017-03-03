@@ -158,7 +158,15 @@ class ToolTip extends React.Component {
                     marginLeft: (tooltipWidth/2) - (backWidth/2)
                 });
             } else {
-                
+                targetTop   = top  + ( originHeight - tooltipHeight ) / 2;
+                targetLeft  = left + tooltipWidth + margin;
+                position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
+                tooltipHori = '+14px';
+                $back.css({
+                    top: 0,
+                    left: 0,
+                    marginLeft: (tooltipWidth/2) - (backWidth/2)
+                });
             }
 
             $target.css({
