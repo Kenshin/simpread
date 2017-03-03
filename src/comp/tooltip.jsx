@@ -159,7 +159,7 @@ class ToolTip extends React.Component {
             $back.css({
                 top: 0,
                 left: 0,
-                marginLeft: (tooltipWidth/2) - (backWidth/2)
+                marginLeft: ( tooltipWidth - backWidth ) / 2
             });
 
             $target.css({
