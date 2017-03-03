@@ -97,11 +97,19 @@ class ToolTip extends React.Component {
             let scaleXFactor = 8;
             let scaleYFactor = 8;
             let scaleFactor = 0;
-            let targetTop, targetLeft, newCoordinates;
+            let targetTop, targetLeft, newCoordinates, top, left;
+
+            if ( this.props.item.css( "position" ) == "static" ) {
+                top = this.props.item.position().top;
+                left = this.props.item.position().left;
+            } else {
+                top = this.props.item.offset().top;
+                left = this.props.item.offset().left;
+            }
 
             if ( this.props.position == "bottom" ) {
-                targetTop = this.props.item.offset().top + this.props.item.outerHeight() + margin;
-                targetLeft = this.props.item.offset().left + originWidth/2 - tooltipWidth/2;
+                targetTop = top + this.props.item.outerHeight() + margin;
+                targetLeft = left + originWidth/2 - tooltipWidth/2;
                 newCoordinates = realPosition(targetLeft, targetTop, tooltipWidth, tooltipHeight);
                 tooltipVerticalMovement = '+10px';
                 $back.css({
