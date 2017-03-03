@@ -137,7 +137,7 @@ class ToolTip extends React.Component {
             if ( this.props.position == "bottom" ) {
                 tooltipVert = "+14px";
                 targetTop   = top  + originHeight;
-                targetLeft  = left + originWidth/2 - tooltipWidth/2;
+                targetLeft  = left + ( originWidth - tooltipWidth ) / 2;
                 position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else if ( this.props.position == "top" ) {
                 tooltipVert = '-14px';
