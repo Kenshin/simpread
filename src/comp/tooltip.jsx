@@ -233,13 +233,4 @@ function realPosition( x, y, width, height ) {
     return { x, y };
 }
 
-/**
- * Exit
- */
-/*
-function Exit() {
-    $( "html" ).off( "mouseenter", "[tooltip]" );
-}
-*/
-
 export { Render };
