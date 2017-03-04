@@ -178,13 +178,14 @@ class ToolTip extends React.Component {
 
     onMouseLeave() {
         started = false;
+        const delay = 225;
         clearTimeout( timeout );
         setTimeout( () => {
             [ $target, $back ] = [ $( this.refs.target ), $( this.refs.back ) ];
             $target.velocity({
-                opacity: 0, translateY: 0, translateX: 0}, { duration: 225, queue: false });
+                opacity: 0, translateY: 0, translateX: 0}, { duration: delay, queue: false });
             $back.velocity({opacity: 0, scaleX: 1, scaleY: 1}, {
-                duration: 225,
+                duration: delay,
                 queue:    false,
                 complete: () => {
                     $back.css({   visibility: "hidden" });
@@ -192,7 +193,7 @@ class ToolTip extends React.Component {
                     started = false;
                 }
             });
-          },225 );
+          }, delay );
     }
 
     componentDidMount() {
