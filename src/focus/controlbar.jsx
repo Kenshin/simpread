@@ -3,6 +3,7 @@ console.log( "=== simpread focus controlbar load ===" )
 import {browser} from 'browser';
 import setting   from 'foucsetting';
 import Fab       from 'fab';
+import * as waves   from  'waves';
 
 let timer, $root;
 const path = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
@@ -21,6 +22,11 @@ const path = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
         "icon" : path("top_icon"),
         "color": "#f99d97",
     },
+},
+    waves_options = {
+        name    : "sr-fab",
+        root    : "ks-simpread-bg",
+        classes : [ "waves-circle" ],
 };
 
 class FControl extends React.Component {
@@ -45,9 +51,13 @@ class FControl extends React.Component {
         $root.click();
     }
 
+    componentDidMount() {
+        waves.Render( waves_options );
+    }
+
     render() {
         return (
-            <Fab ref="target" items={ items } onAction={ (event, type)=>this.onAction(event, type ) } />
+            <Fab ref="target" items={ items } waves={ waves_options.name } onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
 }
