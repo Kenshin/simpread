@@ -232,7 +232,8 @@ function Render( root ) {
               position = $item.attr( "data-tooltip-position" ),
               delay    = $item.attr( "data-tooltip-delay" ),
               text     = $item.attr( "data-tooltip" );
-        ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
+        text && text != "" && 
+            ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
     });
 }
 
