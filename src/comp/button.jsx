@@ -126,6 +126,7 @@ export default class Button extends React.Component {
         color   : "",
         backgroundColor : "",
         hoverColor : "",
+        waves   : undefined,
     }
 
     static propTypes = {
@@ -140,6 +141,7 @@ export default class Button extends React.Component {
         color   : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
         hoverColor : React.PropTypes.string,
+        waves   : React.PropTypes.string,
         onClick : React.PropTypes.func,
     }
 
@@ -201,7 +203,7 @@ export default class Button extends React.Component {
         };
 
         return (
-            <a  style={ style.root }
+            <a  style={ style.root }     className={ this.props.waves }
                 href={ this.props.href } target={ this.props.target }
                 type={ this.props.type } mode={ this.props.mode } 
                 { ...events }>
