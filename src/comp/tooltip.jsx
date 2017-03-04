@@ -124,7 +124,7 @@ class ToolTip extends React.Component {
 
             let tooltipVert = "0px", tooltipHori = "0px",
                 scaleXFactor = 8, scaleYFactor = 8, scaleFactor = 0,
-                targetTop, targetLeft, position, top, left;
+                targetTop, targetLeft, top, left;
 
             if ( this.props.$item.css( "position" ) == "static" ) {
                 top  = this.props.$item.position().top;
@@ -138,22 +138,18 @@ class ToolTip extends React.Component {
                 tooltipVert = "+14px";
                 targetTop   = top  + originHeight;
                 targetLeft  = left + ( originWidth - tooltipWidth ) / 2;
-                position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else if ( this.props.position == "top" ) {
                 tooltipVert = '-14px';
                 targetTop   = top  - tooltipHeight;
                 targetLeft  = left + ( originWidth - tooltipWidth ) / 2;
-                position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else if ( this.props.position == "left" ) {
                 tooltipHori = '-14px';
                 targetTop   = top  + ( originHeight - tooltipHeight ) / 2;
                 targetLeft  = left - tooltipWidth;
-                position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             } else {
                 tooltipHori = '+14px';
                 targetTop   = top  + ( originHeight - tooltipHeight ) / 2;
                 targetLeft  = left + originWidth + Number.parseInt( tooltipHori ) - Number.parseInt( $target.css( "padding-left" ));
-                position    = realPosition( targetLeft, targetTop, tooltipWidth, tooltipHeight );
             }
 
             $back.css({
@@ -260,31 +256,6 @@ function getTooltipRoot( $root ) {
     $root.find( "tooltip-gp" ).length == 0 && $root.append( "<tooltip-gp>" );
     $root.find( "tooltip-gp" ).append( "<tooltip-tips>" );
     return $( "tooltip-tips" ).last()[0];
-}
-
-/**
- * Calculate x and y position
- * 
- * @param {number} left position
- * @param {number} top position
- * @param {number} tooltip width
- * @param {number} tooltip height
- * @return {object} news { x, y }
- */
-function realPosition( x, y, width, height ) {
-    if ( x < 0 ) {
-        x = 4;
-    } else if ( x + width > window.innerWidth ) {
-        x -= x + width - window.innerWidth;
-    }
-
-    if ( y < 0 ) {
-        y = 4;
-    } else if ( y + height > window.innerHeight + $(window).scrollTop ) {
-        y -= y + height - window.innerHeight;
-    }
-
-    return { x, y };
 }
 
 export { Render, Exit };
