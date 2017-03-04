@@ -139,7 +139,7 @@ const Button = ( props ) => {
     }
     return (
         <a style={ props.style }
-           data-tooltip={ props.name } data-tooltip-position="bottom" data-tooltip-delay="50" >
+           data-tooltip={ props.type == "anchor" ? "" : props.name } data-tooltip-position="bottom" data-tooltip-delay="50" >
             <i 
                 id={ props.id }
                 type={ props.type }
