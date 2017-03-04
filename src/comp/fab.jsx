@@ -125,7 +125,8 @@ const cssinjs = () => {
  *   - style       : [PropTypes.object] <a> style
  *   - name        : [PropTypes.string] name
  *   - color       : [PropTypes.string] background color
- *   - icon        : [PropTypes.object]  { style, path }
+ *   - icon        : [PropTypes.object] { style, path }
+ *   - waves       : [PropTypes.string] waves 
  *   - onClick     : [PropTypes.func]   click event handler
  *   - onMouseOver : [PropTypes.func]   mouse over event handler
  *   - onMouseOut  : [PropTypes.func]   mouse out event handler
@@ -138,7 +139,7 @@ const Button = ( props ) => {
         props.color = props.style.backgroundColor;
     }
     return (
-        <a style={ props.style }
+        <a style={ props.style } className={  props.waves }
            data-tooltip={ props.type == "anchor" ? "" : props.name } data-tooltip-position="bottom" data-tooltip-delay="50" >
             <i 
                 id={ props.id }
@@ -196,10 +197,12 @@ export default class Fab extends React.Component {
 
     static defaultProps = {
         items : {},
+        waves : undefined,
     }
 
     static propTypes = {
         items    : React.PropTypes.object,
+        waves    : React.PropTypes.string,
         onAction : React.PropTypes.func,
     }
 
@@ -299,30 +302,31 @@ export default class Fab extends React.Component {
         let spec, anchor, others = [];
 
         const keys = this.state.keys,
-              btn_props = ( id, type, style, { name, color, icon }, icon_style )=> {
+              btn_props = ( id, type, style, { name, color, icon }, icon_style, waves )=> {
                 return {
                     id,
                     type,
                     style,
                     name,
                     color,
+                    waves,
                     icon       : { style: icon_style, path: icon },
                     onClick    : ()=>this.btnClickHandler(),
                     onMouseOver: ()=>this.btnMouseOverHandler(),
                     onMouseOut : ()=>this.btnMouseOutHandler(),
                 };
             },
-            list = ( items, key, style, child ) => {
-                const props = btn_props( key, "normal", style.origin, items, style.icon );
+            list = ( items, key, style, child, waves ) => {
+                const props = btn_props( key, "normal", style.origin, items, style.icon, waves );
                 return <ListView id={ key } child={ child } style={ style } btn_props={ props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
         };
 
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
-            spec = <Button { ...btn_props( keys[0], "spec", style.spec, this.state.items[keys[0]], style.icon ) } />;
+            spec = <Button { ...btn_props( keys[0], "spec", style.spec, this.state.items[keys[0]], style.icon, this.props.waves ) } />;
         }
 
-        keys.length > 1 && ( anchor = <Button { ...btn_props( keys[1], "anchor", style.origin, this.state.items[keys[1]], style.icon ) } /> );
+        keys.length > 1 && ( anchor = <Button { ...btn_props( keys[1], "anchor", style.origin, this.state.items[keys[1]], style.icon, this.props.waves ) } /> );
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             const child   = [],
@@ -330,10 +334,10 @@ export default class Fab extends React.Component {
             if ( items ) {
                 const subkeys = Object.keys( items );
                 for ( let j = 0; j < subkeys.length; j++ ) {
-                    child.push( list( items[subkeys[j]], subkeys[j], style, undefined ) )
+                    child.push( list( items[subkeys[j]], subkeys[j], style, undefined, this.props.waves ) )
                 }
             }
-            others.push( list( this.state.items[keys[idx]], keys[idx], style, child ));
+            others.push( list( this.state.items[keys[idx]], keys[idx], style, child, this.props.waves ));
         }
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
