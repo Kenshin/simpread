@@ -9,9 +9,14 @@ import {browser} from 'browser';
 import th        from 'theme';
 import Button    from 'button';
 import * as tooltip from 'tooltip';
+import * as waves   from  'waves';
 
 const optbgcls = "ks-simpread-option-bg",
-      optbg    = `<div class="${ optbgcls }"></div>`;
+      optbg    = `<div class="${ optbgcls }"></div>`,
+      waves_options = {
+        name : "sr-wave",
+        root : optbgcls,
+};
 
 /**
  * Dialog Rect component
@@ -40,6 +45,7 @@ export default class Dialog extends React.Component {
     }
 
     componentDidMount() {
+        waves.Render( waves_options );
         tooltip.Render( optbgcls );
     }
 
@@ -51,8 +57,8 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <Button text="取 消" mode="secondary" onClick={ ()=>this.close() } />
-                    <Button text="确 认" onClick={ ()=>this.save() } />
+                    <Button text="取 消" mode="secondary" waves={ waves_options.name } onClick={ ()=>this.close() } />
+                    <Button text="确 认" waves={ waves_options.name } onClick={ ()=>this.save() } />
                 </sr-dialog-footer>
             </sr-dialog>
         )

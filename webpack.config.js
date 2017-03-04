@@ -172,6 +172,7 @@ const webpack = require( 'webpack' ),
           fab        : __dirname + '/src/comp/fab.jsx',
           button     : __dirname + '/src/comp/button.jsx',
           tooltip    : __dirname + '/src/comp/tooltip.jsx',
+          waves      : __dirname + '/src/comp/waves.js',
 
         }
       }
