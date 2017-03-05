@@ -126,6 +126,7 @@ export default class Button extends React.Component {
         color   : "",
         backgroundColor : "",
         hoverColor : "",
+        tooltip : {},
         waves   : undefined,
     }
 
@@ -141,6 +142,7 @@ export default class Button extends React.Component {
         color   : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
         hoverColor : React.PropTypes.string,
+        tooltip : React.PropTypes.object,
         waves   : React.PropTypes.string,
         onClick : React.PropTypes.func,
     }
@@ -206,6 +208,7 @@ export default class Button extends React.Component {
             <a  style={ style.root }     className={ this.props.waves }
                 href={ this.props.href } target={ this.props.target }
                 type={ this.props.type } mode={ this.props.mode } 
+                data-tooltip={ this.props[ this.props.tooltip.target ] } data-tooltip-position={ this.props.tooltip.position } data-tooltip-delay={ this.props.tooltip.delay }
                 { ...events }>
                 <button-div ref="mask" style={ style.mask }>
                     <button-span style={ style.span }>
