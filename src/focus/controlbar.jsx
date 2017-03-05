@@ -26,7 +26,7 @@ const path = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
     waves_options = {
         name    : "sr-fab",
         root    : "ks-simpread-bg",
-        classes : [ "waves-circle" ],
+        classes : [ "waves-circle", "waves-float" ],
 };
 
 class FControl extends React.Component {

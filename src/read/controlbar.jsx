@@ -64,7 +64,7 @@ const items = {
     waves_options = {
         name    : "sr-fab",
         root    : "ks-simpread-read",
-        classes : [ "waves-circle" ],
+        classes : [ "waves-circle", "waves-float" ],
 };
 
 /**
