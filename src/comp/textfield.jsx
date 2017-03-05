@@ -196,6 +196,7 @@ export default class TextField extends React.Component {
         placeholder : "",
         floatingtext: "",
         errortext   : "",
+        tooltip      : {},
     };
 
     static propTypes = {
@@ -206,6 +207,7 @@ export default class TextField extends React.Component {
         placeholder : React.PropTypes.string,
         floatingtext: React.PropTypes.string,
         errortext   : React.PropTypes.string,
+        tooltip     : React.PropTypes.object,
         onChange    : React.PropTypes.func,
         onKeyDown   : React.PropTypes.func,
     }
@@ -291,7 +293,8 @@ export default class TextField extends React.Component {
             onBlur   : ()=>this.changeBlur(),
             onChange : ()=>this.change(),
             onKeyDown: ()=>this.changeKeyDown(),
-        };
+        },
+        tooltip = this.props.tooltip;
 
         element = this.props.multi ? (
             <textarea ref="target" 
@@ -307,7 +310,8 @@ export default class TextField extends React.Component {
         );
 
         return (
-            <text-field style={ style.root }>
+            <text-field style={ style.root }
+                data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <text-field-float ref="float" style={ style.float }>{this.props.floatingtext}</text-field-float>
                 { element }
                 <div>
