@@ -24,10 +24,11 @@ const cssinjs = () => {
 
             top: 0,
             left: 0,
-            padding: '0 16px',
+            padding: '5px 16px',
 
-            maxWidth: 'calc(100% - 4px)',
-            height: '32px',
+            minHeight: '32px',
+            maxHeight: '150px',
+            maxWidth: '400px',
 
             textAlign: 'center',
 
