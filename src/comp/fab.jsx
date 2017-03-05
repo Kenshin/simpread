@@ -126,6 +126,7 @@ const cssinjs = () => {
  *   - name        : [PropTypes.string] name
  *   - color       : [PropTypes.string] background color
  *   - icon        : [PropTypes.object] { style, path }
+ *   - tooltip     : [PropTypes.object] tooltip 
  *   - waves       : [PropTypes.string] waves 
  *   - onClick     : [PropTypes.func]   click event handler
  *   - onMouseOver : [PropTypes.func]   mouse over event handler
@@ -140,7 +141,7 @@ const Button = ( props ) => {
     }
     return (
         <a style={ props.style } className={  props.waves }
-           data-tooltip={ props.type == "anchor" ? "" : props.name } data-tooltip-position="bottom" data-tooltip-delay="50" >
+           data-tooltip={ props.type == "anchor" ? "" : props[ props.tooltip.target ] } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay } >
             <i 
                 id={ props.id }
                 type={ props.type }
@@ -196,12 +197,14 @@ const ListView = ( props ) => {
 export default class Fab extends React.Component {
 
     static defaultProps = {
-        items : {},
-        waves : undefined,
+        items   : {},
+        tooltip : {},
+        waves   : undefined,
     }
 
     static propTypes = {
         items    : React.PropTypes.object,
+        tooltip  : React.PropTypes.object,
         waves    : React.PropTypes.string,
         onAction : React.PropTypes.func,
     }
@@ -302,13 +305,14 @@ export default class Fab extends React.Component {
         let spec, anchor, others = [];
 
         const keys = this.state.keys,
-              btn_props = ( id, type, style, { name, color, icon }, icon_style, waves )=> {
+              btn_props = ( id, type, style, { name, color, icon }, icon_style, tooltip, waves )=> {
                 return {
                     id,
                     type,
                     style,
                     name,
                     color,
+                    tooltip,
                     waves,
                     icon       : { style: icon_style, path: icon },
                     onClick    : ()=>this.btnClickHandler(),
@@ -316,17 +320,17 @@ export default class Fab extends React.Component {
                     onMouseOut : ()=>this.btnMouseOutHandler(),
                 };
             },
-            list = ( items, key, style, child, waves ) => {
-                const props = btn_props( key, "normal", style.origin, items, style.icon, waves );
+            list = ( items, key, style, child, tooltip, waves ) => {
+                const props = btn_props( key, "normal", style.origin, items, style.icon, tooltip, waves );
                 return <ListView id={ key } child={ child } style={ style } btn_props={ props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
         };
 
         if ( keys.length > 0 ) {
             style.spec = { ...style.origin, ...style.large, ...style.spec_item };
-            spec = <Button { ...btn_props( keys[0], "spec", style.spec, this.state.items[keys[0]], style.icon, this.props.waves ) } />;
+            spec = <Button { ...btn_props( keys[0], "spec", style.spec, this.state.items[keys[0]], style.icon, this.props.tooltip, this.props.waves ) } />;
         }
 
-        keys.length > 1 && ( anchor = <Button { ...btn_props( keys[1], "anchor", style.origin, this.state.items[keys[1]], style.icon, this.props.waves ) } /> );
+        keys.length > 1 && ( anchor = <Button { ...btn_props( keys[1], "anchor", style.origin, this.state.items[keys[1]], style.icon, this.props.tooltip, this.props.waves ) } /> );
 
         for( let idx = keys.length - 1; idx >= 2; idx-- ) {
             const child   = [],
@@ -334,10 +338,10 @@ export default class Fab extends React.Component {
             if ( items ) {
                 const subkeys = Object.keys( items );
                 for ( let j = 0; j < subkeys.length; j++ ) {
-                    child.push( list( items[subkeys[j]], subkeys[j], style, undefined, this.props.waves ) )
+                    child.push( list( items[subkeys[j]], subkeys[j], style, undefined, this.props.tooltip, this.props.waves ) )
                 }
             }
-            others.push( list( this.state.items[keys[idx]], keys[idx], style, child, this.props.waves ));
+            others.push( list( this.state.items[keys[idx]], keys[idx], style, child, this.props.tooltip, this.props.waves ));
         }
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
