@@ -139,9 +139,10 @@ const Button = ( props ) => {
     } else {
         props.color = props.style.backgroundColor;
     }
+    const tooltip =  props.type == "anchor" ? "" : ( props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ] );
     return (
         <a style={ props.style } className={  props.waves }
-           data-tooltip={ props.type == "anchor" ? "" : props[ props.tooltip.target ] } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay } >
+           data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay } >
             <i 
                 id={ props.id }
                 type={ props.type }

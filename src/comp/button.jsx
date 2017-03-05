@@ -202,13 +202,14 @@ export default class Button extends React.Component {
                 onMouseOver : ()=>this.onMouseOver(),
                 onMouseOut  : ()=>this.onMouseOut(),
                 onClick     : ()=>this.onClick(),
-        };
+        },
+        tooltip = this.props.tooltip;
 
         return (
             <a  style={ style.root }     className={ this.props.waves }
                 href={ this.props.href } target={ this.props.target }
                 type={ this.props.type } mode={ this.props.mode } 
-                data-tooltip={ this.props[ this.props.tooltip.target ] } data-tooltip-position={ this.props.tooltip.position } data-tooltip-delay={ this.props.tooltip.delay }
+                data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
                 { ...events }>
                 <button-div ref="mask" style={ style.mask }>
                     <button-span style={ style.span }>
