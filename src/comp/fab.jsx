@@ -91,6 +91,7 @@ const cssinjs = () => {
                 margin: 0,
 
                 opacity: 0,
+                visibility: 'hidden',
                 transition: 'opacity .5s ease',
               },
 
