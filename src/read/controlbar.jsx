@@ -64,7 +64,7 @@ const items = {
     waves_options = {
         name    : "sr-fab",
         root    : "ks-simpread-read",
-        classes : [ "waves-circle", "waves-float" ],
+        classes : [ "waves-circle", "waves-float", "waves-light" ],
 },
     tooltip_options = {
         target   : "name",
