@@ -65,6 +65,11 @@ const items = {
         name    : "sr-fab",
         root    : "ks-simpread-read",
         classes : [ "waves-circle", "waves-float" ],
+},
+    tooltip_options = {
+        target   : "name",
+        position : "bottom",
+        delay    : 50,
 };
 
 /**
@@ -96,7 +101,7 @@ class ReadCtlbar extends React.Component {
 
     render() {
         return (
-            <Fab items={ items } waves={ waves_options.name } onAction={ (event, type)=>this.onAction(event, type ) } />
+            <Fab items={ items } tooltip={ tooltip_options } waves={ waves_options.name } onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
 }
