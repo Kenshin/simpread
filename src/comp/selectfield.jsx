@@ -240,9 +240,10 @@ export default class SelectField extends React.Component {
     }
 
     render() {
-
+        const tooltip = this.props.tooltip;
         return (
-            <select-field style={ style.root }>
+            <select-field style={ style.root }
+                data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <select-float style={ style.float }>{ this.props.floatingtext }</select-float>
                 <div style={ style.text }>
                     <span style={ style.value }>{ this.state.value }</span>
