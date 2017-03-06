@@ -2,15 +2,16 @@ console.log( "==== simpread component: SelectField ====" )
 
 let style, styles = new Map();
 
+const color       = 'rgba(51, 51, 51, .87)',
+      error_color = 'rgba(244, 67, 54, 1)',
+      focus_color = 'rgba(0, 137, 123, .8)',
+      border_color= 'rgba(224, 224, 224, 1)',
+      label_color = 'rgba(0, 0, 0, 0.3)',
+      placehoder_color = 'rgba(176, 176, 176, 1)';
+
 const cssinjs = () => {
 
-    const color       = 'rgba(51, 51, 51, .87)',
-          error_color = 'rgba(244, 67, 54, 1)',
-          focus_color = 'rgba(0, 137, 123, .8)',
-          border_color= 'rgba(224, 224, 224, 1)',
-          label_color = 'rgba(0, 0, 0, 0.3)',
-          placehoder_color = 'rgba(176, 176, 176, 1)',
-          display     = 'block',
+    const display     = 'block',
           width       = '100%',
           margin      = '8px 0 0 0',
           medium      = '14px',
@@ -199,7 +200,7 @@ const cssinjs_list = () => {
             minHeight: '100px',
             maxHeight: '718px',
 
-            color: 'rgba(0, 0, 0, 0.870588)',
+            color,
             backgroundColor: 'rgb(255, 255, 255)',
 
             boxSizing: 'border-box',
@@ -226,8 +227,17 @@ const cssinjs_list = () => {
         },
 
         list_filed_icon: {
-            display: 'inline',
-            width: '56px',
+            display: 'block',
+
+            width: '24px',
+            height: '24px',
+
+            margin: '0 16px 0 0',
+            padding: '16px',
+
+            border: 'none',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
         },
 
         list_filed_value: {
@@ -237,8 +247,12 @@ const cssinjs_list = () => {
 
         list_filed_info: {
             display: 'inline',
-            padding: '0 16px',
+            padding: '0 0 0 16px',
+
             fontSize: '13px',
+            textAlign: 'right',
+
+            minWidth: '100px',
         },
 
     }
@@ -281,11 +295,18 @@ class ListView extends React.Component {
         this.props.items.length == 0 && ( style.root.display = style.hidden );
 
         const list = this.props.items.map( ( item, idx ) => {
+            const [ icon_style, info_style ] =[ { ...style.list_filed_icon }, { ...style.list_filed_info } ];
+            item.info == "" && ( info_style.display = style.hidden );
+            if ( item.icon != "" ) {
+                icon_style.backgroundImage = `url(${ item.icon })`;
+            } else {
+                icon_style.display = style.hidden;
+            }
             return (
                 <list-field style={ style.list_filed }>
-                    <list-field-icon style={ style.list_filed_icon }>{ item.icon }</list-field-icon>
+                    <i style={ icon_style }></i>
                     <list-field-vlaue style={ style.list_filed_value }>{ item.value }</list-field-vlaue>
-                    <list-field-info style={ style.list_filed_info }>{ item.info }</list-field-info>
+                    <list-field-info style={ info_style }>{ item.info }</list-field-info>
                 </list-field>
             )
         });
