@@ -7,7 +7,9 @@ const color       = 'rgba(51, 51, 51, .87)',
       focus_color = 'rgba(0, 137, 123, .8)',
       border_color= 'rgba(224, 224, 224, 1)',
       label_color = 'rgba(0, 0, 0, 0.3)',
-      placehoder_color = 'rgba(176, 176, 176, 1)';
+      placehoder_color = 'rgba(176, 176, 176, 1)',
+      selected_color = 'rgb(255, 64, 129)',
+      hover_color = 'rgba(0, 0, 0, 0.09 )';
 
 const cssinjs = () => {
 
@@ -288,6 +290,14 @@ class ListView extends React.Component {
         id : Math.round(+new Date()),
     };
 
+    onMouseOver() {
+        const $target = $( event.target );
+        if ( $target.is( "list-field" ) ) {
+            $( "list-field[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
+            $target.attr( "active", true ).css( "background-color", hover_color );
+        }
+    }
+
     render() {
         styles.set( this.state.id, cssinjs_list() );
         style = styles.get( this.state.id );
@@ -295,17 +305,18 @@ class ListView extends React.Component {
         this.props.items.length == 0 && ( style.root.display = style.hidden );
 
         const list = this.props.items.map( ( item, idx ) => {
-            const [ icon_style, info_style ] =[ { ...style.list_filed_icon }, { ...style.list_filed_info } ];
+            const [ value_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
             item.info == "" && ( info_style.display = style.hidden );
             if ( item.icon != "" ) {
                 icon_style.backgroundImage = `url(${ item.icon })`;
             } else {
                 icon_style.display = style.hidden;
             }
+            item.active && ( value_style.color = selected_color );
             return (
-                <list-field style={ style.list_filed }>
+                <list-field style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() }>
                     <i style={ icon_style }></i>
-                    <list-field-vlaue style={ style.list_filed_value }>{ item.value }</list-field-vlaue>
+                    <list-field-vlaue style={ value_style }>{ item.value }</list-field-vlaue>
                     <list-field-info style={ info_style }>{ item.info }</list-field-info>
                 </list-field>
             )
