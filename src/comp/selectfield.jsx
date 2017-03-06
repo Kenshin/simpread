@@ -181,6 +181,123 @@ const cssinjs = () => {
     return styles;
 }
 
+const cssinjs_list = () => {
+
+    const styles = {
+        hidden : 'none',
+        root : {
+            display: 'block',
+            position: 'absolute',
+
+            top: 0,
+            left: 0,
+
+            margin: 0,
+            padding: '8px 16px',
+
+            width: '100%',
+            minHeight: '100px',
+            maxHeight: '718px',
+
+            color: 'rgba(0, 0, 0, 0.870588)',
+            backgroundColor: 'rgb(255, 255, 255)',
+
+            boxSizing: 'border-box',
+            boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
+            borderRadius: '2px',
+
+            zIndex: 2100,
+
+            opacity: 1,
+
+            transform: 'scaleY(1)',
+            transformOrigin: 'left top 0px',
+            transition: 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+
+            overflowY: 'auto',
+        },
+
+        list_filed: {
+            display: 'flex',
+            alignItems: 'center',
+
+            height: '56px',
+            width: '100%',
+        },
+
+        list_filed_icon: {
+            display: 'inline',
+            width: '56px',
+        },
+
+        list_filed_value: {
+            display: 'inline',
+            width: '100%',
+        },
+
+        list_filed_info: {
+            display: 'inline',
+            padding: '0 16px',
+            fontSize: '13px',
+        },
+
+    }
+
+    return styles;
+}
+
+class ListView extends React.Component {
+
+    static defaultProps = {
+        items : [],
+        icon  : "",
+        value : "",
+        info  : "",
+        color : "",
+        selectedColor   : "",
+        hoverColor      : "",
+        backgroundColor : "",
+    }
+
+    static propTypes = {
+        item  : React.PropTypes.array,
+        icon  : React.PropTypes.string,
+        value : React.PropTypes.string,
+        info  : React.PropTypes.string,
+        color : React.PropTypes.string,
+        selectedColor   : React.PropTypes.string,
+        hoverColor      : React.PropTypes.string,
+        backgroundColor : React.PropTypes.string,
+    };
+
+    state = {
+        id : Math.round(+new Date()),
+    };
+
+    render() {
+        styles.set( this.state.id, cssinjs_list() );
+        style = styles.get( this.state.id );
+
+        this.props.items.length == 0 && ( style.root.display = style.hidden );
+
+        const list = this.props.items.map( ( item, idx ) => {
+            return (
+                <list-field style={ style.list_filed }>
+                    <list-field-icon style={ style.list_filed_icon }>{ item.icon }</list-field-icon>
+                    <list-field-vlaue style={ style.list_filed_value }>{ item.value }</list-field-vlaue>
+                    <list-field-info style={ style.list_filed_info }>{ item.info }</list-field-info>
+                </list-field>
+            )
+        });
+        
+        return (
+            <list-view style={ style.root }>
+                { list }
+            </list-view> 
+        )
+    }
+}
+
 export default class SelectField extends React.Component {
 
     static defaultProps = {
@@ -211,6 +328,10 @@ export default class SelectField extends React.Component {
         id    : Math.round(+new Date()),
         value : this.props.value,
     };
+
+    onClick() {
+        this.props.items.length > 0 && this.setState({ items: this.props.items });
+    }
 
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
@@ -247,7 +368,10 @@ export default class SelectField extends React.Component {
                 data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <select-float style={ style.float }>{ this.props.floatingtext }</select-float>
                 <div style={ style.text }>
-                    <span style={ style.value }  className={ this.props.waves }>{ this.state.value }</span>
+                    <span style={ style.value } 
+                          className={ this.props.waves }
+                          onClick={ ()=> this.onClick() }
+                    >{ this.state.value }</span>
                     <icon style={ style.icon }></icon>
                 </div>
                 <div>
@@ -255,6 +379,7 @@ export default class SelectField extends React.Component {
                     <select-state style={ style.state }></select-state>
                 </div>
                 <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
+                <ListView items={ this.state.items } />
             </select-field>
         )
 
