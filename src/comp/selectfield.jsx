@@ -138,12 +138,19 @@ const cssinjs = () => {
 
             text: {
                 display,
+
                 height: '20px',
+
+                margin: 0,
+                padding: 0,
             },
 
             value: {
                 display,
+
                 margin,
+                padding: '0 20px 0 0',
+
                 fontSize: medium,
                 lineHeight,
             },
@@ -207,6 +214,8 @@ export default class SelectField extends React.Component {
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
+
+        this.props.width && ( style.root.width = this.props.width );
 
         this.props.floatingtext == "" && ( style.float.display = style.hidden );
         if ( this.state.value   == "" ) {
