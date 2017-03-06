@@ -10,6 +10,25 @@ import Shortcuts from 'shortcuts';
 import Include   from 'include';
 import Exclude   from 'exclude';
 
+const fontsize = [
+    {
+        icon  : "",
+        value : "增大",
+        info  : "ctrl + A",
+    },
+    {
+        icon  : "",
+        value : "正常",
+        info  : "ctrl + B",
+        active: true,
+    },
+    {
+        icon  : "",
+        value : "减小",
+        info  : "ctrl + C",
+    },
+];
+
 export default class ReadOpt extends React.Component {
 
     state = {
@@ -69,7 +88,7 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" />
+                    <SelectField items={ fontsize } floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 
