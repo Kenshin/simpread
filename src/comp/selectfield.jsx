@@ -151,6 +151,7 @@ const cssinjs = () => {
                 margin,
                 padding: '0 20px 0 0',
 
+                textAlign: 'left',
                 fontSize: medium,
                 lineHeight,
             },
@@ -246,7 +247,7 @@ export default class SelectField extends React.Component {
                 data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <select-float style={ style.float }>{ this.props.floatingtext }</select-float>
                 <div style={ style.text }>
-                    <span style={ style.value }>{ this.state.value }</span>
+                    <span style={ style.value }  className={ this.props.waves }>{ this.state.value }</span>
                     <icon style={ style.icon }></icon>
                 </div>
                 <div>
