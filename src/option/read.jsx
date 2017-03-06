@@ -1,7 +1,9 @@
 console.log( "===== simpread option read mode load =====" )
 
 import { verifyHtml } from 'util';
+import {browser}   from 'browser';
 import th          from 'theme';
+
 import TextField   from 'textfield';
 import SelectField from 'selectfield';
 
@@ -10,23 +12,24 @@ import Shortcuts from 'shortcuts';
 import Include   from 'include';
 import Exclude   from 'exclude';
 
-const fontsize = [
-    {
-        icon  : "",
-        value : "增大",
-        info  : "ctrl + A",
-    },
-    {
-        icon  : "",
-        value : "正常",
-        info  : "ctrl + B",
-        active: true,
-    },
-    {
-        icon  : "",
-        value : "减小",
-        info  : "ctrl + C",
-    },
+const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
+      fontsize = [
+        {
+            icon  : "",
+            value : "增大",
+            info  : "ctrl + A",
+        },
+        {
+            icon  : "",
+            value : "正常",
+            info  : "ctrl + B",
+            active: true,
+        },
+        {
+            icon  : "",
+            value : "减小",
+            info  : "",
+        },
 ];
 
 export default class ReadOpt extends React.Component {
