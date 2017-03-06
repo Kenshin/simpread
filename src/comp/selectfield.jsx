@@ -31,7 +31,13 @@ const cssinjs = () => {
                 height: '45px',
                 lineHeight: 1,
 
+                cursor: 'pointer',
                 userSelect: 'none',
+            },
+
+            disable: {
+                color: label_color,
+                cursor: 'not-allowed',
             },
 
             border: {
@@ -45,6 +51,10 @@ const cssinjs = () => {
                 borderRight: `none ${border_color}`,
                 borderBottom: `1px solid ${border_color}`,
                 boxSizing: 'content-box',
+            },
+
+            border_disable: {
+                borderBottom: `1px dashed ${border_color}`,
             },
 
             float: {},
@@ -129,8 +139,6 @@ const cssinjs = () => {
             text: {
                 display,
                 height: '20px',
-
-                cursor: 'pointer',
             },
 
             value: {
@@ -169,7 +177,7 @@ export default class SelectField extends React.Component {
 
     static defaultProps = {
         value        : "",
-        disable      : true,
+        disable      : false,
         width        : undefined,
         placeholder  : "",
         floatingtext : "",
@@ -204,6 +212,11 @@ export default class SelectField extends React.Component {
         if ( this.state.value   == "" ) {
             this.setState({ value: this.props.placeholder })
             style.value = { ...style.value, ...style.placeholder };
+        }
+
+        if ( this.props.disable ) {
+            style.root   = { ...style.root, ...style.disable };
+            style.border = { ...style.border, ...style.border_disable };
         }
 
         style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
