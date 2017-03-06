@@ -1,8 +1,9 @@
 console.log( "===== simpread option read mode load =====" )
 
 import { verifyHtml } from 'util';
-import th        from 'theme';
-import TextField from 'textfield';
+import th          from 'theme';
+import TextField   from 'textfield';
+import SelectField from 'selectfield';
 
 import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
@@ -66,6 +67,9 @@ export default class ReadOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <SelectField floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 
