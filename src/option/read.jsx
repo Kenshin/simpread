@@ -69,7 +69,7 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" />
+                    <SelectField floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" errortext="此项为必填，请重新选择。" />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 

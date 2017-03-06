@@ -232,6 +232,13 @@ export default class SelectField extends React.Component {
         style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
     }
 
+    componentDidMount() {
+        style = styles.get( this.state.id );
+        const $error = $( this.refs.error );
+        this.props.errortext != "" &&
+            $error.parent().height( Number.parseInt(style.root.height) + $error.height() );
+    }
+
     render() {
 
         return (
@@ -245,7 +252,7 @@ export default class SelectField extends React.Component {
                     <select-border style={ style.border }></select-border>
                     <select-state style={ style.state }></select-state>
                 </div>
-                <select-field-error style={ style.error }>{ this.props.errortext }</select-field-error>
+                <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
             </select-field>
         )
 
