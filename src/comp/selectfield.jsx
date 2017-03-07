@@ -213,10 +213,6 @@ const cssinjs_list = () => {
 
             opacity: 1,
 
-            transform: 'scaleY(1)',
-            transformOrigin: 'left top 0px',
-            transition: 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-
             overflowY: 'auto',
         },
 
@@ -228,6 +224,8 @@ const cssinjs_list = () => {
 
             height: '56px',
             width: '100%',
+
+            transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
         list_filed_icon: {
