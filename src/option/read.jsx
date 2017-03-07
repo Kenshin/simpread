@@ -31,6 +31,25 @@ const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
             value : "58%",
             name  : "减小",
             info  : "",
+      }],
+      fontweight = [
+        {
+            icon  : "",
+            value : "10%",
+            name  : "宽栏",
+            info  : "shift + A",
+        },
+        {
+            icon  : "",
+            value : "20%",
+            name  : "正常",
+            info  : "shift + B",
+        },
+        {
+            icon  : "",
+            value : "30%",
+            name  : "窄栏",
+            info  : "shift + C",
         },
 ];
 
@@ -54,6 +73,10 @@ export default class ReadOpt extends React.Component {
 
     changeFontsize( value, name ) {
         console.log( "this.props.option.fontsize = ", value, name )
+    }
+
+    changeFontweight( value, name ) {
+        console.log( "this.props.option.fontweight = ", value, name )
     }
 
     changeTitle() {
@@ -98,6 +121,9 @@ export default class ReadOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <SelectField items={ fontsize } floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" onChange={ (v,n)=>this.changeFontsize(v,n) } />
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <SelectField items={ fontweight } floatingtext="版面布局" placeholder="默认为正常宽度" onChange={ (v,n)=>this.changeFontweight(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 
