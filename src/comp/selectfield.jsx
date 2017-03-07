@@ -302,10 +302,9 @@ class ListView extends React.Component {
     }
 
     onClick() {
-        const $target = $( event.target );
-        let value     = $( event.target ).find( "list-field-value" ).text();
-        $target.is( "list-field-value" ) && ( value = $target.text() );
-        this.props.onChange && this.props.onChange( value );
+        let $target = $( event.target );
+        while ( !$target.is( "list-field" )) { $target = $target.parent(); }
+        this.props.onChange && this.props.onChange( $target.find( "list-field-value" ).text() );
     }
 
     render() {
