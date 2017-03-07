@@ -9,7 +9,7 @@ const color       = 'rgba(51, 51, 51, .87)',
       label_color = 'rgba(0, 0, 0, 0.3)',
       placehoder_color = 'rgba(176, 176, 176, 1)',
       selected_color = 'rgb(255, 64, 129)',
-      hover_color = 'rgba(0, 0, 0, 0.09 )';
+      hover_color = 'rgba(238, 238, 238, 1)';
 
 const cssinjs = () => {
 
@@ -196,7 +196,7 @@ const cssinjs_list = () => {
             left: 0,
 
             margin: 0,
-            padding: '8px 16px',
+            padding: 0,
 
             width: '100%',
             minHeight: '100px',
@@ -206,7 +206,7 @@ const cssinjs_list = () => {
             backgroundColor: 'rgb(255, 255, 255)',
 
             boxSizing: 'border-box',
-            boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
+            boxShadow: '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
             borderRadius: '2px',
 
             zIndex: 2100,
@@ -223,6 +223,8 @@ const cssinjs_list = () => {
         list_filed: {
             display: 'flex',
             alignItems: 'center',
+
+            padding: '0 16px',
 
             height: '56px',
             width: '100%',
