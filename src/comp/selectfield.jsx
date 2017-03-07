@@ -148,7 +148,7 @@ const cssinjs = () => {
                 padding: 0,
             },
 
-            value: {
+            name: {
                 display,
 
                 margin,
@@ -276,6 +276,7 @@ class ListView extends React.Component {
         items           : [],
         active          : "",
         icon            : "",
+        name            : "",
         value           : "",
         info            : "",
         color           : "",
@@ -288,6 +289,7 @@ class ListView extends React.Component {
         item            : React.PropTypes.array,
         active          : React.PropTypes.string,
         icon            : React.PropTypes.string,
+        name            : React.PropTypes.string,
         value           : React.PropTypes.string,
         info            : React.PropTypes.string,
         color           : React.PropTypes.string,
@@ -312,7 +314,7 @@ class ListView extends React.Component {
     onClick() {
         let $target = $( event.target );
         while ( !$target.is( "list-field" )) { $target = $target.parent(); }
-        this.props.onChange && this.props.onChange( $target.find( "list-field-value" ).text() );
+        this.props.onChange && this.props.onChange( $target.find( "list-field-name" ).attr( "value" ), $target.find( "list-field-name" ).text() );
     }
 
     render() {
@@ -322,18 +324,18 @@ class ListView extends React.Component {
         if ( this.props.items.length > 1 )  style.root = { ...style.root, ...style.open };
 
         const list = this.props.items.map( ( item, idx ) => {
-            const [ value_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
+            const [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
             item.info == "" && ( info_style.display = style.hidden );
             if ( item.icon != "" ) {
                 icon_style.backgroundImage = `url(${ item.icon })`;
             } else {
                 icon_style.display = style.hidden;
             }
-            item.value == this.props.active && ( value_style.color = selected_color );
+            item.name == this.props.active && ( name_style.color = selected_color );
             return (
                 <list-field style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
                     <i style={ icon_style }></i>
-                    <list-field-value style={ value_style }>{ item.value }</list-field-value>
+                    <list-field-name style={ name_style } value={ item.value }>{ item.name }</list-field-name>
                     <list-field-info  style={ info_style }>{ item.info }</list-field-info>
                 </list-field>
             )
@@ -376,18 +378,18 @@ export default class SelectField extends React.Component {
 
     state = {
         id    : Math.round(+new Date()),
-        value : this.props.value,
+        name  : this.props.value,
     };
 
     onClick() {
         this.props.items.length > 0 && this.setState({ items: this.props.items });
     }
 
-    onChange( value ) {
-        this.props.onChange && this.props.onChange( value );
+    onChange( value, name ) {
+        this.props.onChange && this.props.onChange( value, name );
         this.setState({
             items : [],
-            value,
+            name,
         });
     }
 
@@ -398,9 +400,9 @@ export default class SelectField extends React.Component {
         this.props.width && ( style.root.width = this.props.width );
 
         this.props.floatingtext == "" && ( style.float.display = style.hidden );
-        if ( this.state.value   == "" ) {
-            this.setState({ value: this.props.placeholder })
-            style.value = { ...style.value, ...style.placeholder };
+        if ( this.state.name    == "" ) {
+            this.setState({ name: this.props.placeholder })
+            style.name = { ...style.name, ...style.placeholder };
         }
 
         if ( this.props.disable ) {
@@ -427,10 +429,10 @@ export default class SelectField extends React.Component {
                 data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <select-float style={ style.float }>{ this.props.floatingtext }</select-float>
                 <div style={ style.text }>
-                    <span style={ style.value } 
+                    <span style={ style.name } 
                           className={ this.props.waves }
                           onClick={ ()=> this.onClick() }
-                    >{ this.state.value }</span>
+                    >{ this.state.name }</span>
                     <icon style={ style.icon }></icon>
                 </div>
                 <div>
@@ -438,7 +440,7 @@ export default class SelectField extends React.Component {
                     <select-state style={ style.state }></select-state>
                 </div>
                 <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
-                <ListView active={ this.state.value } items={ this.state.items } onChange={ (v)=>this.onChange(v) } />
+                <ListView active={ this.state.name } items={ this.state.items } onChange={ (v,n)=>this.onChange(v,n) } />
             </select-field>
         )
 
