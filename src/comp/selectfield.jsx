@@ -385,7 +385,6 @@ export default class SelectField extends React.Component {
         style.root  = this.props.disable ? { ...style.root_normal, ...style.disable } : { ...style.root_normal };
         style.name  = this.state.name == "" ? { ...style.name_normal, ...style.placeholder } : { ...style.name_normal };
         style.float = this.props.placeholder == "" && this.state.name == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
-        style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
 
         const tooltip = this.props.tooltip;
         return (
