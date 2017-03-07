@@ -120,10 +120,10 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField items={ fontsize } floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" onChange={ (v,n)=>this.changeFontsize(v,n) } />
+                    <SelectField items={ fontsize } floatingtext="字体大小" placeholder="默认为 正常" onChange={ (v,n)=>this.changeFontsize(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField items={ weight } floatingtext="版面布局" placeholder="默认为正常宽度" onChange={ (v,n)=>this.changeWeight(v,n) } />
+                    <SelectField items={ weight } floatingtext="版面布局" placeholder="默认为 正常" onChange={ (v,n)=>this.changeWeight(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 
