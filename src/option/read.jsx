@@ -16,17 +16,20 @@ const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
       fontsize = [
         {
             icon  : "",
-            value : "增大",
+            value : "70%",
+            name  : "增大",
             info  : "ctrl + A",
         },
         {
             icon  : "",
-            value : "正常",
+            value : "62.5%",
+            name  : "正常",
             info  : "ctrl + B",
         },
         {
             icon  : "",
-            value : "减小",
+            value : "58%",
+            name  : "减小",
             info  : "",
         },
 ];
@@ -47,6 +50,10 @@ export default class ReadOpt extends React.Component {
     changeShortcuts( shortcuts ) {
         this.props.option.shortcuts = shortcuts;
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
+    }
+
+    changeFontsize( value, name ) {
+        console.log( "this.props.option.fontsize = ", value, name )
     }
 
     changeTitle() {
@@ -90,7 +97,7 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField items={ fontsize } floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" />
+                    <SelectField items={ fontsize } floatingtext="字体大小" placeholder="请选择字体大小，默认为正常。" onChange={ (v,n)=>this.changeFontsize(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 
