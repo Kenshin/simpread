@@ -23,7 +23,6 @@ const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
             icon  : "",
             value : "正常",
             info  : "ctrl + B",
-            active: true,
         },
         {
             icon  : "",
