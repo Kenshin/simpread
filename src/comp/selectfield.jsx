@@ -391,11 +391,10 @@ export default class SelectField extends React.Component {
             <select-field style={ style.root }
                 data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <select-float style={ style.float }>{ this.props.floatingtext }</select-float>
-                <div style={ style.text }>
-                    <span style={ style.name } 
-                          className={ this.props.waves }
-                          onClick={ ()=> this.onClick() }
-                    >{ this.state.name == "" ? this.props.placeholder : this.state.name }</span>
+                <div style={ style.text } onClick={ ()=> this.onClick() }>
+                    <span style={ style.name } className={ this.props.waves }>
+                        { this.state.name == "" ? this.props.placeholder : this.state.name 
+                    }</span>
                     <icon style={ style.icon }></icon>
                 </div>
                 <select-border style={ style.border }></select-border>
