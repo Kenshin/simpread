@@ -13,10 +13,7 @@ import * as waves   from  'waves';
 
 const optbgcls = "ks-simpread-option-bg",
       optbg    = `<div class="${ optbgcls }"></div>`,
-      waves_options = {
-        name : "sr-wave",
-        root : optbgcls,
-};
+      waves_options = { root : optbgcls };
 
 /**
  * Dialog Rect component
@@ -57,8 +54,8 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <Button text="取 消" mode="secondary" waves={ waves_options.name } onClick={ ()=>this.close() } />
-                    <Button text="确 认" waves={ waves_options.name } onClick={ ()=>this.save() } />
+                    <Button text="取 消" mode="secondary" waves={ "sr-button waves-effect waves-button" } onClick={ ()=>this.close() } />
+                    <Button text="确 认" waves={ "sr-button waves-effect waves-button" } onClick={ ()=>this.save() } />
                 </sr-dialog-footer>
             </sr-dialog>
         )
