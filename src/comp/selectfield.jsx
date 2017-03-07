@@ -149,7 +149,8 @@ const cssinjs = () => {
                 padding: 0,
             },
 
-            name: {
+            name: {},
+            name_normal: {
                 display,
 
                 margin,
@@ -384,7 +385,7 @@ export default class SelectField extends React.Component {
     };
 
     onClick() {
-        this.props.items.length > 0 && this.setState({ items: this.props.items });
+        !this.props.disable && this.props.items.length > 0 && this.setState({ items: this.props.items });
     }
 
     onChange( value, name ) {
@@ -395,29 +396,6 @@ export default class SelectField extends React.Component {
         });
     }
 
-    componentWillMount() {
-        styles.set( this.state.id, cssinjs() );
-        style = styles.get( this.state.id );
-
-        if ( this.props.disable ) {
-            style.root   = { ...style.root_normal, ...style.disable };
-            style.border = { ...style.border, ...style.border_disable };
-        } else {
-            style.root   = { ...style.root_normal };
-        }
-
-        this.props.width && ( style.root.width = this.props.width );
-
-        this.props.floatingtext == "" && ( style.float.display = style.hidden );
-        if ( this.state.name    == "" ) {
-            this.setState({ name: this.props.placeholder })
-            style.name = { ...style.name, ...style.placeholder };
-        }
-
-        style.float = this.props.placeholder == "" && this.state.name == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
-        style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
-    }
-
     componentDidMount() {
         style = styles.get( this.state.id );
         const $error = $( this.refs.error );
@@ -426,7 +404,18 @@ export default class SelectField extends React.Component {
     }
 
     render() {
+        styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
+
+        this.props.width              && ( style.root.width = this.props.width );
+        this.props.disable            && ( style.border = { ...style.border, ...style.border_disable });
+        this.props.floatingtext == "" && ( style.float.display = style.hidden  );
+
+        style.root  = this.props.disable ? { ...style.root_normal, ...style.disable } : { ...style.root_normal };
+        style.name  = this.state.name == "" ? { ...style.name_normal, ...style.placeholder } : { ...style.name_normal };
+        style.float = this.props.placeholder == "" && this.state.name == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
+        style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
+
         const tooltip = this.props.tooltip;
         return (
             <select-field style={ style.root }
@@ -436,7 +425,7 @@ export default class SelectField extends React.Component {
                     <span style={ style.name } 
                           className={ this.props.waves }
                           onClick={ ()=> this.onClick() }
-                    >{ this.state.name }</span>
+                    >{ this.state.name == "" ? this.props.placeholder : this.state.name }</span>
                     <icon style={ style.icon }></icon>
                 </div>
                 <div>
