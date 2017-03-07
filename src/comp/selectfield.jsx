@@ -354,7 +354,7 @@ class ListView extends React.Component {
 export default class SelectField extends React.Component {
 
     static defaultProps = {
-        value        : "",
+        name        : "",
         disable      : false,
         width        : undefined,
         placeholder  : "",
@@ -366,7 +366,7 @@ export default class SelectField extends React.Component {
     };
 
     static propTypes = {
-        value        : React.PropTypes.string,
+        name         : React.PropTypes.string,
         disable      : React.PropTypes.bool,
         width        : React.PropTypes.string,
         placeholder  : React.PropTypes.string,
@@ -380,7 +380,7 @@ export default class SelectField extends React.Component {
 
     state = {
         id    : Math.round(+new Date()),
-        name  : this.props.value,
+        name  : this.props.name,
     };
 
     onClick() {
@@ -414,7 +414,7 @@ export default class SelectField extends React.Component {
             style.name = { ...style.name, ...style.placeholder };
         }
 
-        style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
+        style.float = this.props.placeholder == "" && this.state.name == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
         style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
     }
 
