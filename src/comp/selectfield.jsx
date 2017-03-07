@@ -375,6 +375,7 @@ export default class SelectField extends React.Component {
 
     onChange( value ) {
         this.props.onChange && this.props.onChange( value );
+        this.setState({ items : [] });
     }
 
     componentWillMount() {
@@ -406,6 +407,7 @@ export default class SelectField extends React.Component {
     }
 
     render() {
+        style = styles.get( this.state.id );
         const tooltip = this.props.tooltip;
         return (
             <select-field style={ style.root }
