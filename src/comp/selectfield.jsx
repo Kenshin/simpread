@@ -302,7 +302,10 @@ class ListView extends React.Component {
     }
 
     onClick() {
-        this.props.onChange && this.props.onChange( this.refs.value.innerText );
+        const $target = $( event.target );
+        let value     = $( event.target ).find( "list-field-value" ).text();
+        $target.is( "list-field-value" ) && ( value = $target.text() );
+        this.props.onChange && this.props.onChange( value );
     }
 
     render() {
@@ -323,8 +326,8 @@ class ListView extends React.Component {
             return (
                 <list-field style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
                     <i style={ icon_style }></i>
-                    <list-field-value ref="value" style={ value_style }>{ item.value }</list-field-value>
-                    <list-field-info style={ info_style }>{ item.info }</list-field-info>
+                    <list-field-value style={ value_style }>{ item.value }</list-field-value>
+                    <list-field-info  style={ info_style }>{ item.info }</list-field-info>
                 </list-field>
             )
         });
@@ -375,7 +378,10 @@ export default class SelectField extends React.Component {
 
     onChange( value ) {
         this.props.onChange && this.props.onChange( value );
-        this.setState({ items : [] });
+        this.setState({
+            items : [],
+            value,
+        });
     }
 
     componentWillMount() {
