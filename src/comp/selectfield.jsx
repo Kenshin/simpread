@@ -206,6 +206,8 @@ const cssinjs_list = () => {
             height: '56px',
             width: '100%',
 
+            textAlign: 'left',
+
             transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
@@ -246,6 +248,7 @@ const cssinjs_list = () => {
 class ListView extends React.Component {
 
     static defaultProps = {
+        waves           : "",
         items           : [],
         active          : "",
         icon            : "",
@@ -255,6 +258,7 @@ class ListView extends React.Component {
     };
 
     static propTypes = {
+        waves           : React.PropTypes.string,
         items           : React.PropTypes.array,
         active          : React.PropTypes.string,
         icon            : React.PropTypes.string,
@@ -279,7 +283,7 @@ class ListView extends React.Component {
     onClick() {
         let $target = $( event.target );
         while ( !$target.is( "list-field" )) { $target = $target.parent(); }
-        this.props.onChange && this.props.onChange( $target.find( "list-field-name" ).attr( "value" ), $target.find( "list-field-name" ).text() );
+        setTimeout( ()=>this.props.onChange && this.props.onChange( $target.find( "list-field-name" ).attr( "value" ), $target.find( "list-field-name" ).text() ), 130 );
     }
 
     render() {
@@ -298,14 +302,14 @@ class ListView extends React.Component {
             }
             item.name == this.props.active && ( name_style.color = selected_color );
             return (
-                <list-field style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
+                <list-field class={ this.props.waves } style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
                     <i style={ icon_style }></i>
                     <list-field-name style={ name_style } value={ item.value }>{ item.name }</list-field-name>
-                    <list-field-info  style={ info_style }>{ item.info }</list-field-info>
+                    <list-field-info style={ info_style }>{ item.info }</list-field-info>
                 </list-field>
             )
         });
-        
+
         return (
             <list-view style={ style.root }>
                 { list }
@@ -390,7 +394,7 @@ export default class SelectField extends React.Component {
                 </div>
                 <select-border style={ style.border }></select-border>
                 <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
-                <ListView active={ this.state.name } items={ this.state.items } onChange={ (v,n)=>this.onChange(v,n) } />
+                <ListView waves={ this.props.waves } active={ this.state.name } items={ this.state.items } onChange={ (v,n)=>this.onChange(v,n) } />
             </select-field>
         )
 
