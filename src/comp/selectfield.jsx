@@ -265,25 +265,26 @@ const cssinjs_list = () => {
 class ListView extends React.Component {
 
     static defaultProps = {
-        items : [],
-        icon  : "",
-        value : "",
-        info  : "",
-        color : "",
+        items           : [],
+        icon            : "",
+        value           : "",
+        info            : "",
+        color           : "",
         selectedColor   : "",
         hoverColor      : "",
         backgroundColor : "",
     }
 
     static propTypes = {
-        item  : React.PropTypes.array,
-        icon  : React.PropTypes.string,
-        value : React.PropTypes.string,
-        info  : React.PropTypes.string,
-        color : React.PropTypes.string,
+        item            : React.PropTypes.array,
+        icon            : React.PropTypes.string,
+        value           : React.PropTypes.string,
+        info            : React.PropTypes.string,
+        color           : React.PropTypes.string,
         selectedColor   : React.PropTypes.string,
         hoverColor      : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
+        onChange        : React.PropTypes.func,
     };
 
     state = {
@@ -296,6 +297,10 @@ class ListView extends React.Component {
             $( "list-field[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
             $target.attr( "active", true ).css( "background-color", hover_color );
         }
+    }
+
+    onClick() {
+        this.props.onChange && this.props.onChange( this.refs.value.innerText );
     }
 
     render() {
@@ -314,9 +319,9 @@ class ListView extends React.Component {
             }
             item.active && ( value_style.color = selected_color );
             return (
-                <list-field style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() }>
+                <list-field style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
                     <i style={ icon_style }></i>
-                    <list-field-vlaue style={ value_style }>{ item.value }</list-field-vlaue>
+                    <list-field-value ref="value" style={ value_style }>{ item.value }</list-field-value>
                     <list-field-info style={ info_style }>{ item.info }</list-field-info>
                 </list-field>
             )
@@ -354,6 +359,7 @@ export default class SelectField extends React.Component {
         items        : React.PropTypes.array,
         waves        : React.PropTypes.string,
         tooltip      : React.PropTypes.object,
+        onChange     : React.PropTypes.func,
     };
 
     state = {
@@ -363,6 +369,10 @@ export default class SelectField extends React.Component {
 
     onClick() {
         this.props.items.length > 0 && this.setState({ items: this.props.items });
+    }
+
+    onChange( value ) {
+        this.props.onChange && this.props.onChange( value );
     }
 
     componentWillMount() {
@@ -411,7 +421,7 @@ export default class SelectField extends React.Component {
                     <select-state style={ style.state }></select-state>
                 </div>
                 <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
-                <ListView items={ this.state.items } />
+                <ListView items={ this.state.items } onChange={ (v)=>this.onChange(v) } />
             </select-field>
         )
 
