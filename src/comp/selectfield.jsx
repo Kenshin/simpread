@@ -288,7 +288,7 @@ class ListView extends React.Component {
     }
 
     static propTypes = {
-        item            : React.PropTypes.array,
+        items           : React.PropTypes.array,
         active          : React.PropTypes.string,
         icon            : React.PropTypes.string,
         name            : React.PropTypes.string,
