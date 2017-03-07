@@ -22,7 +22,8 @@ const cssinjs = () => {
           fontWeight  = 'bold',
           styles      = {
             hidden : 'none',
-            root: {
+            root: {},
+            root_normal: {
                 font: `300 ${large}/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans`,
 
                 display,
@@ -188,7 +189,8 @@ const cssinjs_list = () => {
 
     const styles = {
         hidden : 'none',
-        root : {
+        root : {},
+        root_normal : {
             display: 'block',
             position: 'absolute',
 
@@ -321,7 +323,7 @@ class ListView extends React.Component {
         styles.set( this.state.id, cssinjs_list() );
         style = styles.get( this.state.id );
 
-        if ( this.props.items.length > 1 )  style.root = { ...style.root, ...style.open };
+        style.root = this.props.items.length > 1 ? { ...style.root_normal, ...style.open } : { ...style.root_normal };
 
         const list = this.props.items.map( ( item, idx ) => {
             const [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
@@ -397,17 +399,19 @@ export default class SelectField extends React.Component {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
+        if ( this.props.disable ) {
+            style.root   = { ...style.root_normal, ...style.disable };
+            style.border = { ...style.border, ...style.border_disable };
+        } else {
+            style.root   = { ...style.root_normal };
+        }
+
         this.props.width && ( style.root.width = this.props.width );
 
         this.props.floatingtext == "" && ( style.float.display = style.hidden );
         if ( this.state.name    == "" ) {
             this.setState({ name: this.props.placeholder })
             style.name = { ...style.name, ...style.placeholder };
-        }
-
-        if ( this.props.disable ) {
-            style.root   = { ...style.root, ...style.disable };
-            style.border = { ...style.border, ...style.border_disable };
         }
 
         style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
