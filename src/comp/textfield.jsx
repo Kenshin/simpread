@@ -8,10 +8,11 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
 
     const color           = 'rgba(51, 51, 51, .87)',
-          error_color     = 'rgba(244, 67, 54, 1)',
+          secondary_color = 'rgba(204, 204, 204, 1)',
+
           focus_color     = 'rgba(0, 137, 123, .8)',
           border_color    = 'rgba(224, 224, 224, 1)',
-          secondary_color = 'rgba(204, 204, 204, 1)',
+          error_color     = 'rgba(244, 67, 54, 1)',
 
           margin      = '8px 0 0 0',
           display     = 'block',
