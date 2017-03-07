@@ -252,11 +252,7 @@ class ListView extends React.Component {
         name            : "",
         value           : "",
         info            : "",
-        color           : "",
-        selectedColor   : "",
-        hoverColor      : "",
-        backgroundColor : "",
-    }
+    };
 
     static propTypes = {
         items           : React.PropTypes.array,
@@ -265,10 +261,6 @@ class ListView extends React.Component {
         name            : React.PropTypes.string,
         value           : React.PropTypes.string,
         info            : React.PropTypes.string,
-        color           : React.PropTypes.string,
-        selectedColor   : React.PropTypes.string,
-        hoverColor      : React.PropTypes.string,
-        backgroundColor : React.PropTypes.string,
         onChange        : React.PropTypes.func,
     };
 
