@@ -2,14 +2,16 @@ console.log( "==== simpread component: SelectField ====" )
 
 let style, styles = new Map();
 
-const color       = 'rgba(51, 51, 51, .87)',
-      error_color = 'rgba(244, 67, 54, 1)',
-      focus_color = 'rgba(0, 137, 123, .8)',
-      border_color= 'rgba(224, 224, 224, 1)',
-      label_color = 'rgba(0, 0, 0, 0.3)',
-      placehoder_color = 'rgba(176, 176, 176, 1)',
-      selected_color = 'rgb(255, 64, 129)',
-      hover_color = 'rgba(238, 238, 238, 1)';
+const color            = 'rgba(51, 51, 51, .87)',
+      secondary_color  = 'rgba(0, 0, 0, 0.3)',
+
+      focus_color      = 'rgba(0, 137, 123, .8)',
+      border_color     = 'rgba(224, 224, 224, 1)',
+      error_color      = 'rgba(244, 67, 54, 1)',
+
+      selected_color   = 'rgba(255, 64, 129, 1)',
+      hover_color      = 'rgba(238, 238, 238, 1)',
+      background_color = 'rgba(255, 255, 255, 1)';
 
 const cssinjs = () => {
 
@@ -40,7 +42,7 @@ const cssinjs = () => {
             },
 
             disable: {
-                color: label_color,
+                color: secondary_color,
                 cursor: 'not-allowed',
             },
 
@@ -71,7 +73,7 @@ const cssinjs = () => {
 
                 fontSize: large,
                 fontWeight: 400,
-                color: label_color,
+                color: secondary_color,
 
                 userSelect: 'none',
                 pointerEvents: 'none',
@@ -162,7 +164,7 @@ const cssinjs = () => {
             },
 
             placeholder: {
-                color: placehoder_color,
+                color: 'rgba(176, 176, 176, 1)',
             },
 
             icon: {
@@ -206,7 +208,7 @@ const cssinjs_list = () => {
             maxHeight: '718px',
 
             color,
-            backgroundColor: 'rgb(255, 255, 255)',
+            backgroundColor: background_color,
 
             boxSizing: 'border-box',
             boxShadow: '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
