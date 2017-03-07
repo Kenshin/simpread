@@ -94,37 +94,6 @@ const cssinjs = () => {
                 transform: 'scale(0.75) translate( 0px, -8px )',
             },
 
-            state: {},
-
-            state_normal: {
-                display,
-                position: 'absolute',
-
-                width,
-                margin: '-1px 0 0 0',
-
-                borderTop: `none ${focus_color}`,
-                borderLeft: `none ${focus_color}`,
-                borderRight: `none ${focus_color}`,
-                borderBottom: `2px solid ${focus_color}`,
-                boxSizing: 'content-box',
-
-                transform: 'scaleX(0)',
-                transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-            },
-
-            state_focust: {
-                transform: 'scaleX(1)',
-            },
-
-            state_error : {
-                transform: 'scaleX(1)',
-                borderTop: `none ${error_color}`,
-                borderLeft: `none ${error_color}`,
-                borderRight: `none ${error_color}`,
-                borderBottom: `2px solid ${error_color}`,
-            },
-
             error: {
                 display,
                 position: 'absolute',
@@ -430,10 +399,7 @@ export default class SelectField extends React.Component {
                     >{ this.state.name == "" ? this.props.placeholder : this.state.name }</span>
                     <icon style={ style.icon }></icon>
                 </div>
-                <div>
-                    <select-border style={ style.border }></select-border>
-                    <select-state style={ style.state }></select-state>
-                </div>
+                <select-border style={ style.border }></select-border>
                 <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
                 <ListView active={ this.state.name } items={ this.state.items } onChange={ (v,n)=>this.onChange(v,n) } />
             </select-field>
