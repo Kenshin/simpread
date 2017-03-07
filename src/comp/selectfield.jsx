@@ -3,7 +3,7 @@ console.log( "==== simpread component: SelectField ====" )
 let style, styles = new Map();
 
 const color            = 'rgba(51, 51, 51, .87)',
-      secondary_color  = 'rgba(0, 0, 0, 0.3)',
+      secondary_color  = 'rgba(204, 204, 204, 1)',
 
       focus_color      = 'rgba(0, 137, 123, .8)',
       border_color     = 'rgba(224, 224, 224, 1)',
@@ -71,8 +71,7 @@ const cssinjs = () => {
 
                 margin,
 
-                fontSize: large,
-                fontWeight: 400,
+                fontSize: medium,
                 color: secondary_color,
 
                 userSelect: 'none',
@@ -133,7 +132,7 @@ const cssinjs = () => {
             },
 
             placeholder: {
-                color: 'rgba(204, 204, 204, 1)',
+                color: secondary_color,
             },
 
             icon: {
