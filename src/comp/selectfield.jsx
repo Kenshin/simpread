@@ -211,9 +211,17 @@ const cssinjs_list = () => {
 
             zIndex: 2100,
 
-            opacity: 1,
-
             overflowY: 'auto',
+
+            opacity: 0,
+            transform: 'scaleY(0)',
+            transformOrigin: 'left top 0px',
+            transition : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+        },
+
+        open: {
+            opacity: 1,
+            transform: 'scaleY(1)',
         },
 
         list_filed: {
@@ -311,7 +319,7 @@ class ListView extends React.Component {
         styles.set( this.state.id, cssinjs_list() );
         style = styles.get( this.state.id );
 
-        this.props.items.length == 0 && ( style.root.display = style.hidden );
+        if ( this.props.items.length > 1 )  style.root = { ...style.root, ...style.open };
 
         const list = this.props.items.map( ( item, idx ) => {
             const [ value_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
