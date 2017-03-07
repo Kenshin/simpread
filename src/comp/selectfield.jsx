@@ -268,6 +268,7 @@ class ListView extends React.Component {
 
     static defaultProps = {
         items           : [],
+        active          : "",
         icon            : "",
         value           : "",
         info            : "",
@@ -279,6 +280,7 @@ class ListView extends React.Component {
 
     static propTypes = {
         item            : React.PropTypes.array,
+        active          : React.PropTypes.string,
         icon            : React.PropTypes.string,
         value           : React.PropTypes.string,
         info            : React.PropTypes.string,
@@ -321,7 +323,7 @@ class ListView extends React.Component {
             } else {
                 icon_style.display = style.hidden;
             }
-            item.active && ( value_style.color = selected_color );
+            item.value == this.props.active && ( value_style.color = selected_color );
             return (
                 <list-field style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
                     <i style={ icon_style }></i>
@@ -430,7 +432,7 @@ export default class SelectField extends React.Component {
                     <select-state style={ style.state }></select-state>
                 </div>
                 <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
-                <ListView items={ this.state.items } onChange={ (v)=>this.onChange(v) } />
+                <ListView active={ this.state.value } items={ this.state.items } onChange={ (v)=>this.onChange(v) } />
             </select-field>
         )
 
