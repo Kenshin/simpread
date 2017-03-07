@@ -133,7 +133,7 @@ const cssinjs = () => {
             },
 
             placeholder: {
-                color: 'rgba(176, 176, 176, 1)',
+                color: 'rgba(204, 204, 204, 1)',
             },
 
             icon: {
