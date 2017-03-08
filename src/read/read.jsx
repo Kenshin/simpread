@@ -10,6 +10,7 @@ import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
 import * as tooltip       from 'tooltip';
+import * as waves         from 'waves';
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -43,6 +44,7 @@ class Read extends React.Component {
         await commbeautify( $( "sr-rd-content" ));
         pangu.spacingElementByClassName( rdcls );
         tooltip.Render( rdcls );
+        waves.Render({ root: rdcls, name: "sr-fab" });
     }
 
     componentWillUnmount() {

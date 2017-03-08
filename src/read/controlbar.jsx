@@ -3,7 +3,6 @@ console.log( "=== simpread read controlbar load ===" )
 import {browser} from 'browser';
 import setting from 'readsetting';
 import Fab     from 'fab';
-import * as waves   from  'waves';
 
 const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` );
 const items = {
@@ -61,11 +60,6 @@ const items = {
         "color": "#8BC34A",
     },
 },
-    waves_options = {
-        name    : "sr-fab",
-        root    : "ks-simpread-read",
-        classes : [ "waves-circle", "waves-float", "waves-light" ],
-},
     tooltip_options = {
         target   : "name",
         position : "bottom",
@@ -95,13 +89,9 @@ class ReadCtlbar extends React.Component {
         }
     }
 
-    componentDidMount() {
-        waves.Render( waves_options );
-    }
-
     render() {
         return (
-            <Fab items={ items } tooltip={ tooltip_options } waves={ waves_options.name } onAction={ (event, type)=>this.onAction(event, type ) } />
+            <Fab items={ items } tooltip={ tooltip_options } waves="sr-fab waves-circle waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
 }
