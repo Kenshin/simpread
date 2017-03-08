@@ -136,9 +136,10 @@ export default class Switch extends React.Component {
         width        : undefined,
         label        : "",
         order        : "before",
-        thumbColor   : "",
-        trackColor   : "",
-        trackedColor : "",
+        thumbColor   : undefined,
+        thumbedColor : undefined,
+        trackColor   : undefined,
+        trackedColor : undefined,
         waves        : "",
         tooltip      : "",
     };
@@ -150,6 +151,7 @@ export default class Switch extends React.Component {
         label        : React.PropTypes.string,
         order        : React.PropTypes.string,
         thumbColor   : React.PropTypes.string,
+        thumbedColor : React.PropTypes.string,
         trackColor   : React.PropTypes.string,
         trackedColor : React.PropTypes.string,
         waves        : React.PropTypes.string,
@@ -172,6 +174,11 @@ export default class Switch extends React.Component {
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
+
+        this.props.thumbColor   && ( style.thumb_normal.backgroundColor = this.props.thumbColor );
+        this.props.thumbedColor && ( style.thumbed.backgroundColor      = this.props.thumbedColor );
+        this.props.trackColor   && ( style.track_normal.backgroundColor = this.props.trackColor );
+        this.props.trackedColor && ( style.tracked.backgroundColor      = this.props.trackedColor );
 
         if ( this.state.checked ) {
             style.thumb = { ...style.thumb_normal, ...style.thumbed };
