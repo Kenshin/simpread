@@ -45,8 +45,15 @@ const cssinjs = () => {
 
             fontSize: '14px',
             fontWeight: 400,
-            textAlign: 'left',
+        },
 
+        label_after: {
+            textAlign: 'right',
+            order: 2,
+        },
+
+        label_before: {
+            textAlign: 'left',
             order: -1,
         },
 
@@ -158,6 +165,7 @@ export default class Switch extends React.Component {
 
         this.props.label == "" && ( style.label.display = style.hidden );
 
+        style.label = this.props.order == "before" ? { ...style.label, ...style.label_before } : { ...style.label, ...style.label_after };
         //style.root = this.props.disable ? { ...style.root, ...style.disable } : { ...styel.root, ...style.enable };
 
         this.props.width && ( style.root.width = this.props.width );
