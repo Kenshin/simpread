@@ -3,6 +3,7 @@ console.log( "=== simpread focus load ===" );
 var util     = require( "util" ),
     fcontrol = require( "controlbar" ),
     tooltip  = require( "tooltip" ),
+    waves    = require( "waves" ),
     focus    = ( function () {
 
     var $parent,
@@ -54,6 +55,7 @@ var util     = require( "util" ),
 
         // add tooltip
         tooltip.Render( bgcls );
+        waves.Render({ root: bgcls, name: "sr-fab" });
 
         // click mask remove it
         $( bgclsjq ).on( "click", function( event ) {
