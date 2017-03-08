@@ -157,14 +157,22 @@ export default class Switch extends React.Component {
     };
 
     state = {
-        id : Math.round(+new Date()),
+        id      : Math.round(+new Date()),
+        checked : this.props.checked,
     };
+
+    onClick() {
+        !this.props.disable && this.setState({
+            checked: !this.state.checked,
+        });
+        !this.props.disable && this.props.onChange && this.props.onChange( !this.state.checked );
+    }
 
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
-        if ( this.props.checked ) {
+        if ( this.state.checked ) {
             style.thumb = { ...style.thumb_normal, ...style.thumbed };
             style.track = { ...style.track_normal, ...style.tracked };
         } else {
@@ -186,7 +194,7 @@ export default class Switch extends React.Component {
         this.props.width && ( style.root.width = this.props.width );
 
         return (
-            <switch style={ style.root }>
+            <switch style={ style.root } onClick={ ()=>this.onClick() }>
                 <span style={ style.label }>{ this.props.label }</span>
                 <switch-rang style={ style.range }>
                     <thumb style={ style.thumb }></thumb>
