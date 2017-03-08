@@ -27,6 +27,11 @@ const path = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
         name    : "sr-fab",
         root    : "ks-simpread-bg",
         classes : [ "waves-circle", "waves-float" ],
+    },
+    tooltip_options = {
+        target   : "name",
+        position : "bottom",
+        delay    : 50,
 };
 
 class FControl extends React.Component {
@@ -57,7 +62,7 @@ class FControl extends React.Component {
 
     render() {
         return (
-            <Fab ref="target" items={ items } waves={ waves_options.name } onAction={ (event, type)=>this.onAction(event, type ) } />
+            <Fab ref="target" tooltip={ tooltip_options } waves={ waves_options.name } items={ items } onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
 }

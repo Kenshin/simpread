@@ -2,6 +2,7 @@ console.log( "=== simpread focus load ===" );
 
 var util     = require( "util" ),
     fcontrol = require( "controlbar" ),
+    tooltip  = require( "tooltip" ),
     focus    = ( function () {
 
     var $parent,
@@ -51,6 +52,9 @@ var util     = require( "util" ),
         // add control bar
         fcontrol.Render( bgclsjq );
 
+        // add tooltip
+        tooltip.Render( bgcls );
+
         // click mask remove it
         $( bgclsjq ).on( "click", function( event ) {
             if ( $( event.target ).attr("class") != bgcls ) return;
@@ -60,6 +64,9 @@ var util     = require( "util" ),
 
             // remove exclude style
             excludeStyle( $target, exclude, "add" );
+
+            // remove tooltip
+            tooltip.Exit( rdcls );
 
             // remove background
             $( bgclsjq ).off( "click" );
