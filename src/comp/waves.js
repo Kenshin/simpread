@@ -18,7 +18,7 @@ const wavesopts = {
  */
 export function Render( ...options ) {
     for ( let option of options ) {
-        if ( !option.root ) return;
+        if ( !option.root || !option.name ) return;
         const ops = { ...wavesopts, ...option };
         Waves.init( ops );
         Waves.attach( `.${ ops.name }` , ops.classes );
