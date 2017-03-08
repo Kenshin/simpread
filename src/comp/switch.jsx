@@ -14,7 +14,7 @@ const color           = "rgba(51, 51, 51, .87)",
 const cssinjs = () => {
 
     const styles = {
-
+        hidden: 'none',
         root: {
             display: 'flex',
             alignItems: 'center',
@@ -26,8 +26,12 @@ const cssinjs = () => {
             margin: 0,
             padding: 0,
 
-            cursor: 'pointer',
             overflow: 'visible',
+        },
+
+        enable: {
+            color: color,
+            cursor: 'pointer',
         },
 
         disable: {
@@ -36,7 +40,8 @@ const cssinjs = () => {
         },
 
         label: {
-            color: color,
+            display: 'block',
+            width: '100%',
 
             fontSize: '14px',
             fontWeight: 400,
@@ -59,7 +64,9 @@ const cssinjs = () => {
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
-        thumb: {
+        thumb: {},
+
+        thumb_normal: {
             position: 'absolute',
             top: '1px',
             left: '0px',
@@ -82,7 +89,9 @@ const cssinjs = () => {
             backgroundColor: thumbed_color,
         },
 
-        track: {
+        track: {},
+
+        track_normal: {
             display: 'block',
             width: '100%',
             height: '14px',
@@ -105,7 +114,7 @@ const cssinjs = () => {
 export default class Switch extends React.Component {
 
     static defaultProps = {
-        value        : false,
+        checked      : false,
         disable      : false,
         width        : undefined,
         label        : "",
@@ -118,7 +127,7 @@ export default class Switch extends React.Component {
     };
 
     static propTypes = {
-        value        : React.PropTypes.bool,
+        checked      : React.PropTypes.bool,
         disable      : React.PropTypes.bool,
         width        : React.PropTypes.string,
         label        : React.PropTypes.string,
@@ -138,6 +147,20 @@ export default class Switch extends React.Component {
     render() {
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
+
+        if ( this.props.checked ) {
+            style.thumb = { ...style.thumb_normal, ...style.thumbed };
+            style.track = { ...style.track_normal, ...style.tracked };
+        } else {
+            style.thumb = { ...style.thumb_normal };
+            style.track = { ...style.track_normal };
+        }
+
+        this.props.label == "" && ( style.label.display = style.hidden );
+
+        //style.root = this.props.disable ? { ...style.root, ...style.disable } : { ...styel.root, ...style.enable };
+
+        this.props.width && ( style.root.width = this.props.width );
 
         return (
             <switch style={ style.root }>
