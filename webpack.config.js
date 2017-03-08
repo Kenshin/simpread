@@ -172,6 +172,7 @@ const webpack = require( 'webpack' ),
           fab        : __dirname + '/src/comp/fab.jsx',
           button     : __dirname + '/src/comp/button.jsx',
           selectfield: __dirname + '/src/comp/selectfield.jsx',
+          switch     : __dirname + '/src/comp/switch.jsx',
           tooltip    : __dirname + '/src/comp/tooltip.jsx',
           waves      : __dirname + '/src/comp/waves.js',
 
