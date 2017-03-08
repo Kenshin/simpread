@@ -68,7 +68,7 @@ var util     = require( "util" ),
             excludeStyle( $target, exclude, "add" );
 
             // remove tooltip
-            tooltip.Exit( rdcls );
+            tooltip.Exit( bgcls );
 
             // remove background
             $( bgclsjq ).off( "click" );
