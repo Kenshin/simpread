@@ -9,17 +9,19 @@
     position: fixed;
     top: 0;
     right: 0;
+
+    margin: 0;
+    padding: 0;
+
+    font: 300 14px PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+
     /*height: 100%;
     width: 400px;*/
-
-    margin: 15px;
-
-    font-size: 12px;
+    /*font-size: 12px;
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-    font-weight: normal;
+    font-weight: normal;*/
 
     text-transform: none;
-    color: #fff;
 
     pointer-events: none;
 }
@@ -30,23 +32,30 @@
 .ks-notify-gp .notify {
     display: -webkit-flex;
     flex-flow: column nowrap;
+    justify-content: center;
 
-    background: #555;
-    -webkit-border-radius: 5px;
+    margin: 15px 15px 0;
+    padding: 14px 24px;
 
-    padding: 10px;
-    margin-bottom: 10px;
-    min-width: 250px;
-    max-width: 400px;
+    min-width: 288px;
+    max-width: 568px;
+    min-height: 48px;
+    max-height: 80px;
 
-    opacity: .9;
+    /*opacity: .9;*/
 
+    color: rgba(255, 255, 255, .7);
+    background-color: rgba(50, 50, 50, 1);
+
+    border-radius: 2px;
     pointer-events: auto;
+    user-select: none;
 }
 
 .ks-notify-gp notify-title,
 .ks-notify-gp notify-content {
-    padding: 3px;
+    /* padding: 3px;*/
+    text-align: left;
 }
 
 .ks-notify-gp .notify notify-div notify-a {
