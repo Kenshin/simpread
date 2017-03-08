@@ -52,7 +52,7 @@ class FControl extends React.Component {
 
     render() {
         return (
-            <Fab ref="target" tooltip={ tooltip_options } waves={ "sr-fab waves-circle waves-float" } items={ items } onAction={ (event, type)=>this.onAction(event, type ) } />
+            <Fab ref="target" tooltip={ tooltip_options } waves="sr-fab waves-circle waves-float" items={ items } onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
 }
