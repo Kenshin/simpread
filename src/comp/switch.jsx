@@ -193,8 +193,12 @@ export default class Switch extends React.Component {
         this.props.label == "" && ( style.label.display = style.hidden );
         this.props.width && ( style.root.width = this.props.width );
 
+        const tooltip = this.props.tooltip;
+
         return (
-            <switch style={ style.root } onClick={ ()=>this.onClick() }>
+            <switch style={ style.root }
+                    data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
+                    onClick={ ()=>this.onClick() }>
                 <span style={ style.label }>{ this.props.label }</span>
                 <switch-rang style={ style.range }>
                     <thumb style={ style.thumb }></thumb>
