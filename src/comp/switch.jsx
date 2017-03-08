@@ -77,6 +77,7 @@ const cssinjs = () => {
         thumb: {},
 
         thumb_normal: {
+            display: 'block',
             position: 'absolute',
             top: '1px',
             left: '0px',
@@ -201,7 +202,7 @@ export default class Switch extends React.Component {
                     onClick={ ()=>this.onClick() }>
                 <span style={ style.label }>{ this.props.label }</span>
                 <switch-rang style={ style.range }>
-                    <thumb style={ style.thumb }></thumb>
+                    <thumb style={ style.thumb } className={ this.props.waves }></thumb>
                     <track style={ style.track }></track>
                 </switch-rang>
             </switch>
