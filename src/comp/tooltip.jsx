@@ -216,7 +216,7 @@ class ToolTip extends React.Component {
 
         return (
             <tooltip-tip ref="target" style={ style.root } id={ this.state.id }>
-                <span dangerouslySetInnerHTML={{ __html: this.props.text }}></span>
+                <span>{ this.props.text }</span>
                 <div ref="back" style={ style.back }></div>
             </tooltip-tip>
         )
