@@ -45,6 +45,9 @@ const cssinjs = () => {
 
             fontSize: '14px',
             fontWeight: 400,
+
+            userSelect: 'none',
+            pointerEvents: 'none',
         },
 
         label_after: {
@@ -94,6 +97,12 @@ const cssinjs = () => {
             left: '100%',
             marginLeft: '-20px',
             backgroundColor: thumbed_color,
+        },
+
+        thumb_disable: {
+            left: 0,
+            marginLeft: 0,
+            backgroundColor: secondary_color,
         },
 
         track: {},
@@ -163,11 +172,17 @@ export default class Switch extends React.Component {
             style.track = { ...style.track_normal };
         }
 
-        this.props.label == "" && ( style.label.display = style.hidden );
+        if ( this.props.disable ) {
+            style.root  = { ...style.root, ...style.disable };
+            style.thumb = { ...style.thumb, ...style.thumb_disable };
+            style.track = { ...style.track_normal };
+        } else {
+            style.root  = { ...style.root, ...style.enable };
+        }
 
         style.label = this.props.order == "before" ? { ...style.label, ...style.label_before } : { ...style.label, ...style.label_after };
-        //style.root = this.props.disable ? { ...style.root, ...style.disable } : { ...styel.root, ...style.enable };
 
+        this.props.label == "" && ( style.label.display = style.hidden );
         this.props.width && ( style.root.width = this.props.width );
 
         return (
