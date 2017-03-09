@@ -48,6 +48,7 @@ var Notify = ( function () {
             type    : NORMAL,
             mode    : MODE.toast,
             delay   : 1000 * 5,
+            icon    : "",
         },
         timer      = {},
         $root,
