@@ -3,17 +3,16 @@
 * Options:
 * - title   ( string, optional, if value is "" not show.)
 * - content ( string, required)
-* - type    ( int, MESSAGE/WARING/ERROR)
-*           ( optional, default is MESSAGE )
+* - type    ( int, NORMAL/SUCCESS/WARING/ERROR)
+*           ( optional, default is NORMAL )
 *
 * Param:
 * - string：
 *   - 1：content
-*   - 2：type content
-*   - 3：type title content
-*   - 4：type title content closed
+*   - 2：type content or title content
+*
 * - object
-*   - { type: xxx, title: xxx, content: xxx, close: true/false   }
+*   - { type: xxx, title: xxx, content: xxx }
 *
 * Example:
 * new Notify().Render( "Test" );
@@ -29,14 +28,15 @@ var Notify = ( function () {
         root    = "notify-gp",
         roottmpl= "<" + root + ">",
         num     = 0,
-        MESSAGE = 0,
-        WARNING = 1,
-        ERROR   = 2,
+        NORMAL  = 0,
+        SUCCESS = 1,
+        WARNING = 2,
+        ERROR   = 3,
         options = {
+            version : VERSION,
             title   : "",
             content : "",
-            type    : MESSAGE,
-            version : VERSION
+            type    : NORMAL,
         },
         timer      = {},
         $container,
@@ -81,6 +81,7 @@ var Notify = ( function () {
 
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
+
             /*if ( this.closed ) {
                 $container.delegate( "." + item + " notify-a", "click", item, closeHandle );
             }
@@ -88,6 +89,19 @@ var Notify = ( function () {
                 $close.hide();
                 timer[item] = setTimeout( delay.bind( $tmpl, item ), 1000 * 5 );
             }*/
+
+            switch( this.type ) {
+                case 1:
+                    $content.addClass( "notify-success" );
+                    break;
+                case 2:
+                    $content.addClass( "notify-warning" );
+                    break;
+                case 3:
+                    $content.addClass( "notify-error" );
+                    break;
+            }
+
             $close.hide();
             timer[item] = setTimeout( delay.bind( $tmpl, item ), 1000 * 5 );
 
