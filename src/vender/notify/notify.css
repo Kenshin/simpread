@@ -67,7 +67,7 @@ notify-gp notify-content {
 notify-gp notify-i {
     display: none;
 
-    margin: 0 2px 0 0;
+    margin: 0 10px 0 0;
 
     width: 24px;
     height: 24px;
@@ -140,12 +140,30 @@ notify-gp notify-a notify-span {
     height: auto;
     max-height: 200px;
 
-    font-size: 1.3rem;
-
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 
 .notify-modal .notify-modal-content {
     margin-top: 5px;
+    font-size: 1.3rem;
     white-space: normal;
+}
+
+.notify-modal .notify-modal-content a {
+    margin: 0;
+    padding: 0;
+
+    color: inherit;
+
+    font-size: inherit;
+    text-decoration: underline;
+    
+    cursor: pointer;
+}
+
+.notify-modal .notify-modal-content a:hover,
+.notify-modal .notify-modal-content a:active,
+.notify-modal .notify-modal-content a:visited,
+.notify-modal .notify-modal-content a:focus {
+    color: inherit;
 }
