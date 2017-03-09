@@ -1,10 +1,8 @@
 "use strict";
 /*
-* Value:
+* Options:
 * - title   ( string, optional, if value is "" not show.)
 * - content ( string, required)
-* - closed  ( boolean, optional, if value is "" not show.)
-*           ( when value is true, notify box show always, when value is false notify hidden after 1 minute. )
 * - type    ( int, MESSAGE/WARING/ERROR)
 *           ( optional, default is MESSAGE )
 *
@@ -37,7 +35,6 @@ var Notify = ( function () {
         options = {
             title   : "",
             content : "",
-            closed  : false,
             type    : MESSAGE,
             version : VERSION
         },
@@ -84,13 +81,15 @@ var Notify = ( function () {
 
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
-            if ( this.closed ) {
+            /*if ( this.closed ) {
                 $container.delegate( "." + item + " notify-a", "click", item, closeHandle );
             }
             else {
                 $close.hide();
                 timer[item] = setTimeout( delay.bind( $tmpl, item ), 1000 * 5 );
-            }
+            }*/
+            $close.hide();
+            timer[item] = setTimeout( delay.bind( $tmpl, item ), 1000 * 5 );
 
             $tmpl.addClass( item );
             $container.append( $tmpl ).css( "z-index", 2147483647 );
@@ -107,7 +106,6 @@ var Notify = ( function () {
 
     Notify.prototype.title   = options.title;
     Notify.prototype.content = options.content;
-    Notify.prototype.closed  = options.closed;
     Notify.prototype.type    = options.type;
 
     Notify.prototype.Render  = function () {
@@ -136,12 +134,6 @@ var Notify = ( function () {
                     this.type    = arguments[0];
                     this.title   = arguments[1];
                     this.content = arguments[2];
-                    break;
-                case 4:
-                    this.type    = arguments[0];
-                    this.title   = arguments[1];
-                    this.content = arguments[2];
-                    this.closed  = arguments[3];
                     break;
             }
             render.bind( self )();
