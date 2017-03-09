@@ -130,6 +130,8 @@ var Notify = ( function () {
     Notify.prototype.title   = options.title;
     Notify.prototype.content = options.content;
     Notify.prototype.type    = options.type;
+    Notify.prototype.mode    = options.mode;
+    Notify.prototype.delay   = options.delay;
 
     Notify.prototype.Render  = function () {
 
@@ -156,7 +158,7 @@ var Notify = ( function () {
                         this.mode  = MODE.modal,
                         this.title = arguments[0];
                     }
-                    this.content = arguments[1];
+                    this.content   = arguments[1];
                     break;
             }
             render.bind( self )();
