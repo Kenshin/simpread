@@ -127,13 +127,12 @@ var Notify = ( function () {
                     this.content = arguments[0];
                     break;
                 case 2:
-                    this.type    = arguments[0];
+                    if ( typeof arguments[0] == "number" ) {
+                        this.type  = arguments[0];
+                    } else {
+                        this.title = arguments[0];
+                    }
                     this.content = arguments[1];
-                    break;
-                case 3:
-                    this.type    = arguments[0];
-                    this.title   = arguments[1];
-                    this.content = arguments[2];
                     break;
             }
             render.bind( self )();
