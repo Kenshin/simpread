@@ -1,5 +1,4 @@
 "use strict";
-
 /*
 * Value:
 * - title   ( string, optional, if value is "" not show.)
@@ -69,7 +68,8 @@ var Notify = ( function () {
             hidden( this );
         },
         hidden = function( target ) {
-            target.hide( 500, function() {
+            target.addClass( "notify-hide" );
+            target.slideUp( 500, function() {
                 target.remove();
                 if ($container.children().length === 0 ) $container.css( "z-index", 0 );
             });
@@ -93,6 +93,7 @@ var Notify = ( function () {
 
             $tmpl.addClass( item );
             $container.append( $tmpl ).css( "z-index", 2147483647 );
+            setTimeout( function() { $tmpl.addClass( "notify-show" );}, 200 );
         };
 
     function Notify() {
