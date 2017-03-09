@@ -46,8 +46,8 @@ var Notify = ( function () {
         TMPL       = '\
         <notify>\
             <notify-a href="#"><notify-span></notify-span></notify-a>\
-            <notify-title>SimpTab has update.</notify-title>\
-            <notify-content>New version changlog here.</notify-content>\
+            <notify-title></notify-title>\
+            <notify-content></notify-content>\
         </notify>',
         prefix      = function( value ) {
             return name + "-" + value;
