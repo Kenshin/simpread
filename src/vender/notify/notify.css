@@ -172,4 +172,5 @@ notify-gp notify-a notify-span {
     position: fixed;
     bottom: 0;
     left: 50%;
+    transform-origin: left bottom 0px;
 }
