@@ -27,8 +27,7 @@ notify-gp {
 */
 notify-gp notify {
     display: -webkit-flex;
-    /*flex-flow: column nowrap;
-    justify-content: center;*/
+    align-items: center;
 
     margin: 0;
     margin-top: 15px;
@@ -83,6 +82,18 @@ notify-gp notify-a {
     position: absolute;
     right: 10px;
     cursor: pointer;
+}
+
+notify-gp notify-i {
+    display: none;
+
+    margin: 0 2px 0 0;
+
+    width: 24px;
+    height: 24px;
+
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 notify-gp notify-a notify-span {

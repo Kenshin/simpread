@@ -45,7 +45,8 @@ var Notify = ( function () {
         $container,
         TMPL       = '\
         <notify>\
-            <notify-a href="#"><notify-span></notify-span></notify-a>\
+            <notify-a href="javascript:;"><notify-span></notify-span></notify-a>\
+            <notify-i></notify-i>\
             <notify-title></notify-title>\
             <notify-content></notify-content>\
         </notify>',
@@ -96,7 +97,7 @@ var Notify = ( function () {
         };
 
     function Notify() {
-        registyElement( name, [ "gp", "div", "a", "span", "title", "content" ] );
+        registyElement( name, [ "gp", "div", "a", "span", "title", "content", "i" ] );
         if ( $( "html" ).find ( root ).length == 0 ) {
             $( "html" ).append( roottmpl );
             $container = $( root );
