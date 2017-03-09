@@ -47,7 +47,7 @@ var Notify = ( function () {
             mode    : MODE.toast,
         },
         timer      = {},
-        $container,
+        $root,
         TMPL       = '\
         <notify>\
             <notify-a href="javascript:;"><notify-span></notify-span></notify-a>\
@@ -65,7 +65,7 @@ var Notify = ( function () {
             });
         },
         closeHandle = function( event ) {
-            $container.undelegate( "." + event.data + " notify-a", "click", closeHandle );
+            $root.undelegate( "." + event.data + " notify-a", "click", closeHandle );
             hidden( $(this).parent() );
         },
         delay = function( item ) {
@@ -77,7 +77,7 @@ var Notify = ( function () {
             target.addClass( "notify-hide" );
             target.slideUp( 500, function() {
                 target.remove();
-                if ($container.children().length === 0 ) $container.css( "z-index", 0 );
+                if ($root.children().length === 0 ) $root.css( "z-index", 0 );
             });
         },
         render = function() {
@@ -93,7 +93,7 @@ var Notify = ( function () {
             if ( this.mode === MODE.modal ) {
                 $target.addClass( "notify-modal" );
                 $content.addClass( "notify-modal-content" );
-                $container.delegate( "." + item + " notify-a", "click", item, closeHandle );
+                $root.delegate( "." + item + " notify-a", "click", item, closeHandle );
             } else {
                 $close.hide();
                 timer[item] = setTimeout( delay.bind( $target, item ), 1000 * 5 );
@@ -113,7 +113,7 @@ var Notify = ( function () {
             }
 
             $target.addClass( item );
-            $container.append( $target ).css( "z-index", 2147483647 );
+            $root.append( $target ).css( "z-index", 2147483647 );
             setTimeout( function() { $target.addClass( "notify-show" );}, 200 );
         };
 
@@ -121,7 +121,7 @@ var Notify = ( function () {
         registyElement( name, [ "gp", "div", "a", "span", "title", "content", "i" ] );
         if ( $( "html" ).find ( root ).length == 0 ) {
             $( "html" ).append( roottmpl );
-            $container = $( root );
+            $root = $( root );
         }
     }
 
