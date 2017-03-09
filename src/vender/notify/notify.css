@@ -3,23 +3,18 @@
 * Notify Group
 */
 .ks-notify-gp {
+    font: 300 62.5% PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+
     display: -webkit-flex;
     flex-flow: column nowrap;
 
     position: fixed;
+
     top: 0;
     right: 0;
 
-    margin: 0;
+    margin: 0 15px 0 0;
     padding: 0;
-
-    font: 300 62.5% PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
-
-    /*height: 100%;
-    width: 400px;*/
-    /*font-size: 12px;
-    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-    font-weight: normal;*/
 
     text-transform: none;
 
@@ -34,13 +29,13 @@
     flex-flow: column nowrap;
     justify-content: center;
 
-    margin: 15px 15px 0;
+    margin: 0;
+    margin-top: 15px;
     padding: 14px 24px;
 
     min-width: 288px;
     max-width: 568px;
-    min-height: 48px;
-    max-height: 48px;
+
     height: 48px;
 
     color: rgba(255, 255, 255, .7);
@@ -57,15 +52,18 @@
 }
 
 .ks-notify-gp notify-content {
+    display: block;
+
     font-size: 1.4rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: left;
 }
 
-.ks-notify-gp .notify notify-div notify-a {
-    color: #fff;
-}
-
 .ks-notify-gp .notify notify-a {
+    color: inherit;
     position: absolute;
     right: 10px;
     cursor: pointer;
