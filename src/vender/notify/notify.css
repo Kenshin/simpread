@@ -70,11 +70,29 @@ notify-gp notify-content {
     display: block;
 
     font-size: 1.4rem;
+    text-align: left;
 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-align: left;
+}
+
+notify-gp notify-action {
+    display: block;
+
+    margin: 0 0 0 24px;
+
+    max-width: 80px;
+    min-width: 53px;
+
+    color: rgba(255, 238, 88, 1);
+
+    font-size: inherit;
+    text-transform: uppercase;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 notify-gp notify-a {

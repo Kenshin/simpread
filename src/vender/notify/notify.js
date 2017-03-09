@@ -49,6 +49,7 @@ var Notify = ( function () {
             <notify-i></notify-i>\
             <notify-title></notify-title>\
             <notify-content></notify-content>\
+            <notify-action>提交</notify-action>\
         </notify>',
         prefix      = function( value ) {
             return name + "-" + value;
