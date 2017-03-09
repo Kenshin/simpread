@@ -71,7 +71,7 @@ var Notify = ( function () {
             });
         },
         closeHandle = function( event ) {
-            $root.undelegate( "." + event.data + " notify-a", "click", closeHandle );
+            $root.off( "click", "." + event.data + " notify-a", closeHandle );
             hidden( $(this).parent() );
         },
         delayHandler = function( item ) {
@@ -81,7 +81,7 @@ var Notify = ( function () {
         },
         callbackHander = function( event ) {
             event.data[1]();
-            $root.off( "." + event.data[0] + " notify-action", "click", callbackHander );
+            $root.off( "click", "." + event.data[0] + " notify-action", callbackHander );
             hidden( $(this).parent() );
         },
         hidden = function( target ) {
@@ -105,7 +105,7 @@ var Notify = ( function () {
             if ( this.mode === MODE.modal ) {
                 $target.addClass( "notify-modal" );
                 $content.addClass( "notify-modal-content" );
-                $root.delegate( "." + item + " notify-a", "click", item, closeHandle );
+                $root.on( "click", "." + item + " notify-a", item, closeHandle );
             } else {
                 $close.hide();
                 this.mode == MODE.snackbar && $target.addClass( "notify-snackbar" );
