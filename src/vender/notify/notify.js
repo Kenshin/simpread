@@ -81,23 +81,23 @@ var Notify = ( function () {
             });
         },
         render = function() {
-            var $tmpl    = $( TMPL ),
-                $title   = $tmpl.find(prefix( "title"   )),
-                $content = $tmpl.find(prefix( "content" )),
-                $close   = $tmpl.find(prefix( "a"       )),
+            var $target  = $( TMPL ),
+                $title   = $target.find(prefix( "title"   )),
+                $content = $target.find(prefix( "content" )),
+                $close   = $target.find(prefix( "a"       )),
                 item     = "notify-item-" + num++;
 
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
 
             if ( this.mode === MODE.modal ) {
-                $tmpl.addClass( "notify-modal" );
+                $target.addClass( "notify-modal" );
                 $content.addClass( "notify-modal-content" );
                 $container.delegate( "." + item + " notify-a", "click", item, closeHandle );
             } else {
                 $close.hide();
-                timer[item] = setTimeout( delay.bind( $tmpl, item ), 1000 * 5 );
-                this.mode == MODE.snackbar && $tmpl.addClass( "notify-snackbar" );
+                timer[item] = setTimeout( delay.bind( $target, item ), 1000 * 5 );
+                this.mode == MODE.snackbar && $target.addClass( "notify-snackbar" );
             }
 
             switch( this.type ) {
@@ -112,9 +112,9 @@ var Notify = ( function () {
                     break;
             }
 
-            $tmpl.addClass( item );
-            $container.append( $tmpl ).css( "z-index", 2147483647 );
-            setTimeout( function() { $tmpl.addClass( "notify-show" );}, 200 );
+            $target.addClass( item );
+            $container.append( $target ).css( "z-index", 2147483647 );
+            setTimeout( function() { $target.addClass( "notify-show" );}, 200 );
         };
 
     function Notify() {
