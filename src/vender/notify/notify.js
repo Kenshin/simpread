@@ -126,7 +126,7 @@ var Notify = ( function () {
                     break;
             }
 
-            if ( this.action !== "" && this.callback ) {
+            if ( this.action !== "" && this.callback && typeof this.callback == "function" ) {
                 $content.css( "width", "100%" );
                 $action.text( this.action ).css( "display", "block" );
                 $root.on( "click", "." + item + " notify-action", [ item, this.callback ], callbackHander );
@@ -184,6 +184,11 @@ var Notify = ( function () {
                         this.title = arguments[0];
                     }
                     this.content   = arguments[1];
+                    break;
+                case 3:
+                    this.content   = arguments[0];
+                    this.action    = arguments[1];
+                    this.callback  = arguments[2];
                     break;
             }
             render.bind( self )();
