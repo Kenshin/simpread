@@ -77,11 +77,10 @@ var Notify = ( function () {
             hidden( this );
         },
         hidden = function( target ) {
-            /*target.addClass( "notify-hide" );
-            target.slideUp( 500, function() {
+            target.addClass( "notify-hide" ).slideUp( 500, function() {
                 target.remove();
                 if ($root.children().length === 0 ) $root.css( "z-index", 0 );
-            });*/
+            });
         },
         render = function() {
             var $target  = $( TMPL ),
