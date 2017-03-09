@@ -28,9 +28,8 @@
 var Notify = ( function () {
     var VERSION = "1.2",
         name    = "notify",
-        root    = "ks-notify-gp",
-        rootcls = "." + root,
-        roottmpl= '<notify-div class="' + root + '">',
+        root    = "notify-gp",
+        roottmpl= "<" + root + ">",
         num     = 0,
         MESSAGE = 0,
         WARNING = 1,
@@ -45,11 +44,11 @@ var Notify = ( function () {
         timer      = {},
         $container,
         TMPL       = '\
-        <notify-div class="notify">\
+        <notify>\
             <notify-a href="#"><notify-span></notify-span></notify-a>\
             <notify-title>SimpTab has update.</notify-title>\
             <notify-content>New version changlog here.</notify-content>\
-        </notify-div>',
+        </notify>',
         prefix      = function( value ) {
             return name + "-" + value;
         },
@@ -97,10 +96,10 @@ var Notify = ( function () {
         };
 
     function Notify() {
-        registyElement( name, [ "div", "a", "span", "title", "content" ] );
-        if ( $( "html" ).find ( rootcls ).length == 0 ) {
+        registyElement( name, [ "gp", "div", "a", "span", "title", "content" ] );
+        if ( $( "html" ).find ( root ).length == 0 ) {
             $( "html" ).append( roottmpl );
-            $container = $( rootcls );
+            $container = $( root );
         }
     }
 
