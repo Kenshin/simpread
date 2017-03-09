@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
 
-    font: 300 14px PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    font: 300 62.5% PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
 
     /*height: 100%;
     width: 400px;*/
@@ -40,9 +40,8 @@
     min-width: 288px;
     max-width: 568px;
     min-height: 48px;
-    max-height: 80px;
-
-    /*opacity: .9;*/
+    max-height: 48px;
+    height: 48px;
 
     color: rgba(255, 255, 255, .7);
     background-color: rgba(50, 50, 50, 1);
@@ -52,9 +51,13 @@
     user-select: none;
 }
 
-.ks-notify-gp notify-title,
+.ks-notify-gp notify-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
 .ks-notify-gp notify-content {
-    /* padding: 3px;*/
+    font-size: 1.4rem;
     text-align: left;
 }
 
