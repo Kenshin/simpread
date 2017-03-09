@@ -8,6 +8,7 @@
 * - mode    ( string, toast/modal/snackbar)
 *           ( optional, default is toast )
 * - delay   ( boolean, optional )
+* - icon    ( string,  optional )
 *
 * Param:
 * - string：
@@ -15,14 +16,14 @@
 *   - 2：type content or title content
 *
 * - object
-*   - { type: xxx, title: xxx, content: xxx }
+*   - { type: xxx, title: xxx, content: xxx, mode: xxx, icon: xxx }
 *
 * Example:
 * new Notify().Render( "Test" );
 * new Notify().Render( 0, "Test 2" );
 * new Notify().Render( 0, "Test title", "Test 3" );
 * new Notify().Render( 0, "SimpTab has update.", "New version changlog here.", true );
-* new Notify().Render( { title: "SimpTab has update.", content: "New version changlog here.", type: 0, closed: true } );
+* new Notify().Render({ content: "带 icon 的 toast", icon: "xxxxx" } );
 *
 */
 var Notify = ( function () {
@@ -76,17 +77,18 @@ var Notify = ( function () {
             hidden( this );
         },
         hidden = function( target ) {
-            target.addClass( "notify-hide" );
+            /*target.addClass( "notify-hide" );
             target.slideUp( 500, function() {
                 target.remove();
                 if ($root.children().length === 0 ) $root.css( "z-index", 0 );
-            });
+            });*/
         },
         render = function() {
             var $target  = $( TMPL ),
                 $title   = $target.find(prefix( "title"   )),
                 $content = $target.find(prefix( "content" )),
                 $close   = $target.find(prefix( "a"       )),
+                $icon    = $target.find(prefix( "i"       )),
                 item     = "notify-item-" + num++;
 
             this.title   ? $title.text( this.title )     : $title.hide();
@@ -101,6 +103,9 @@ var Notify = ( function () {
                 timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay );
                 this.mode == MODE.snackbar && $target.addClass( "notify-snackbar" );
             }
+
+            this.mode !== MODE.modal && this.icon !== "" &&
+                $icon.css({ "background-image": "url(" + this.icon + ")", "display": "block" });
 
             switch( this.type ) {
                 case 1:
@@ -132,6 +137,7 @@ var Notify = ( function () {
     Notify.prototype.type    = options.type;
     Notify.prototype.mode    = options.mode;
     Notify.prototype.delay   = options.delay;
+    Notify.prototype.icon    = options.icon;
 
     Notify.prototype.Render  = function () {
 
