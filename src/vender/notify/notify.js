@@ -121,6 +121,7 @@ var Notify = ( function () {
 
             $target.addClass( item );
             $root.append( $target ).css( "z-index", 2147483647 );
+            this.mode == MODE.snackbar && $target.css( "margin-left", "-" + $target.width()/2 + "px" );
             setTimeout( function() { $target.addClass( "notify-show" );}, 200 );
         };
 
