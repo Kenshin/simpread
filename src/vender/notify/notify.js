@@ -49,6 +49,8 @@ var Notify = ( function () {
             mode    : MODE.toast,
             delay   : 1000 * 5,
             icon    : "",
+            action  : "",
+            callback: undefined,
         },
         timer      = {},
         $root,
@@ -77,6 +79,11 @@ var Notify = ( function () {
             delete timer[item];
             hidden( this );
         },
+        callbackHander = function( event ) {
+            event.data[1]();
+            $root.off( "." + event.data[0] + " notify-action", "click", callbackHander );
+            hidden( $(this).parent() );
+        },
         hidden = function( target ) {
             target.addClass( "notify-hide" ).slideUp( 500, function() {
                 target.remove();
@@ -89,6 +96,7 @@ var Notify = ( function () {
                 $content = $target.find(prefix( "content" )),
                 $close   = $target.find(prefix( "a"       )),
                 $icon    = $target.find(prefix( "i"       )),
+                $action  = $target.find(prefix( "action"  )),
                 item     = "notify-item-" + num++;
 
             this.title   ? $title.text( this.title )     : $title.hide();
@@ -100,7 +108,6 @@ var Notify = ( function () {
                 $root.delegate( "." + item + " notify-a", "click", item, closeHandle );
             } else {
                 $close.hide();
-                timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay );
                 this.mode == MODE.snackbar && $target.addClass( "notify-snackbar" );
             }
 
@@ -119,10 +126,19 @@ var Notify = ( function () {
                     break;
             }
 
+            if ( this.action !== "" && this.callback ) {
+                $content.css( "width", "100%" );
+                $action.text( this.action ).css( "display", "block" );
+                $root.on( "click", "." + item + " notify-action", [ item, this.callback ], callbackHander );
+            }
+
+            this.mode !== MODE.modal && ( this.action == "" && !this.callback ) &&
+                ( timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay ) );
+
             $target.addClass( item );
             $root.append( $target ).css( "z-index", 2147483647 );
             this.mode == MODE.snackbar && $target.css( "margin-left", "-" + $target.width()/2 + "px" );
-            setTimeout( function() { $target.addClass( "notify-show" );}, 200 );
+            setTimeout( function() { $target.addClass( "notify-show" ); }, 200 );
         };
 
     function Notify() {
@@ -139,6 +155,8 @@ var Notify = ( function () {
     Notify.prototype.mode    = options.mode;
     Notify.prototype.delay   = options.delay;
     Notify.prototype.icon    = options.icon;
+    Notify.prototype.action  = options.action;
+    Notify.prototype.callback= options.callback;
 
     Notify.prototype.Render  = function () {
 
