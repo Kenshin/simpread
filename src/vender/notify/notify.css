@@ -167,3 +167,9 @@ notify-gp notify-a notify-span {
 .notify-modal .notify-modal-content a:focus {
     color: inherit;
 }
+
+.notify-snackbar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+}
