@@ -77,7 +77,7 @@ notify-gp notify-i {
 }
 
 notify-gp notify-action {
-    display: block;
+    display: none;
 
     margin: 0 0 0 24px;
 
