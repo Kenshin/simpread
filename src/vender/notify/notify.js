@@ -5,6 +5,8 @@
 * - content ( string, required)
 * - type    ( int, NORMAL/SUCCESS/WARING/ERROR)
 *           ( optional, default is NORMAL )
+* - mode    ( string, toast/modal/snackbar)
+*           ( optional, default is toast )
 *
 * Param:
 * - string：
@@ -32,11 +34,17 @@ var Notify = ( function () {
         SUCCESS = 1,
         WARNING = 2,
         ERROR   = 3,
+        MODE    = {
+            toast    : "toast",
+            modal    : "modal",
+            snackbar : "snackbar",
+        },
         options = {
             version : VERSION,
             title   : "",
             content : "",
             type    : NORMAL,
+            mode    : MODE.toast,
         },
         timer      = {},
         $container,
@@ -82,13 +90,15 @@ var Notify = ( function () {
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
 
-            /*if ( this.closed ) {
+            if ( this.mode === MODE.modal ) {
+                $tmpl.addClass( "notify-modal" );
+                $content.addClass( "notify-modal-content" );
                 $container.delegate( "." + item + " notify-a", "click", item, closeHandle );
-            }
-            else {
+            } else {
                 $close.hide();
                 timer[item] = setTimeout( delay.bind( $tmpl, item ), 1000 * 5 );
-            }*/
+                this.mode == MODE.snackbar && $tmpl.addClass( "notify-snackbar" );
+            }
 
             switch( this.type ) {
                 case 1:
@@ -101,9 +111,6 @@ var Notify = ( function () {
                     $content.addClass( "notify-error" );
                     break;
             }
-
-            $close.hide();
-            timer[item] = setTimeout( delay.bind( $tmpl, item ), 1000 * 5 );
 
             $tmpl.addClass( item );
             $container.append( $tmpl ).css( "z-index", 2147483647 );
@@ -144,6 +151,7 @@ var Notify = ( function () {
                     if ( typeof arguments[0] == "number" ) {
                         this.type  = arguments[0];
                     } else {
+                        this.mode  = MODE.modal,
                         this.title = arguments[0];
                     }
                     this.content = arguments[1];
