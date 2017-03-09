@@ -7,6 +7,7 @@
 *           ( optional, default is NORMAL )
 * - mode    ( string, toast/modal/snackbar)
 *           ( optional, default is toast )
+* - delay   ( boolean, optional )
 *
 * Param:
 * - string：
@@ -45,6 +46,7 @@ var Notify = ( function () {
             content : "",
             type    : NORMAL,
             mode    : MODE.toast,
+            delay   : 1000 * 5,
         },
         timer      = {},
         $root,
@@ -68,7 +70,7 @@ var Notify = ( function () {
             $root.undelegate( "." + event.data + " notify-a", "click", closeHandle );
             hidden( $(this).parent() );
         },
-        delay = function( item ) {
+        delayHandler = function( item ) {
             clearTimeout( timer[item] );
             delete timer[item];
             hidden( this );
@@ -96,7 +98,7 @@ var Notify = ( function () {
                 $root.delegate( "." + item + " notify-a", "click", item, closeHandle );
             } else {
                 $close.hide();
-                timer[item] = setTimeout( delay.bind( $target, item ), 1000 * 5 );
+                timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay );
                 this.mode == MODE.snackbar && $target.addClass( "notify-snackbar" );
             }
 
