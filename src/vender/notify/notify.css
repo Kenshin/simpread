@@ -82,7 +82,7 @@ notify-gp notify-action {
     margin: 0 0 0 24px;
 
     max-width: 80px;
-    min-width: 53px;
+    min-width: 25px;
 
     color: rgba(255, 238, 88, 1);
 
@@ -92,6 +92,8 @@ notify-gp notify-action {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    cursor: pointer;
 }
 
 notify-gp notify-a {
