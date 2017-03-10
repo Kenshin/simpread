@@ -6,7 +6,7 @@ const color           = "rgba(51, 51, 51, .87)",
       secondary_color = "rgba(204, 204, 204, 1)",
 
       thumb_color     = "rgba(245, 245, 245, 1)",
-      thumbed_color   = "rgba(0, 137, 123, .8)",
+      thumbed_color   = "rgba(0, 137, 123, 1)",
 
       track_color     = "rgba(189, 189, 189, 1)",
       tracked_color   = "rgba(0, 137, 123, .5)";
