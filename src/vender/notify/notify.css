@@ -176,3 +176,37 @@ notify-gp notify-a notify-span {
     left: 50%;
     transform-origin: left bottom 0px;
 }
+
+.notify-position-left-top-corner {
+    align-items: flex-start;
+
+    margin: 0 0 0 15px;
+
+    left: 0;
+    right: initial;
+}
+
+.notify-position-left-bottom-corner {
+    flex-flow: column-reverse wrap-reverse;
+
+    margin: 0 0 15px 15px;
+
+    right: initial;
+    top: initial;
+
+    left: 0;
+    bottom: 0;
+}
+
+.notify-position-right-bottom-corner {
+    flex-flow: column-reverse wrap-reverse;
+    align-items: flex-start;
+
+    margin: 0 15px 15px 0;
+
+    top: initial;
+    left: initial;
+
+    bottom: 0;
+    right: 0;
+}
