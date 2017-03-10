@@ -82,12 +82,13 @@ notify-gp notify-action {
     margin: 0 0 0 24px;
 
     max-width: 80px;
-    min-width: 25px;
+    min-width: 56px;
 
     color: rgba(255, 238, 88, 1);
 
     font-size: inherit;
     text-transform: uppercase;
+    text-align: right;
 
     overflow: hidden;
     text-overflow: ellipsis;
