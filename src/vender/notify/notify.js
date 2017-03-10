@@ -132,7 +132,7 @@ var Notify = ( function () {
                 $root.on( "click", "." + item + " notify-action", [ item, this.callback ], callbackHander );
             }
 
-            this.mode !== MODE.modal && ( this.action == "" || !this.callback ) &&
+            this.mode !== MODE.modal && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
                 ( timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay ) );
 
             $target.addClass( item );
