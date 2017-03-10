@@ -21,9 +21,9 @@ const cssinjs = () => {
             position: 'relative',
 
             width: '100%',
-            height: '45px',
+            height: '37px',
 
-            margin: 0,
+            margin: '8px 0 0 0',
             padding: 0,
 
             overflow: 'visible',

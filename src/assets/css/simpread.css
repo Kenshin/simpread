@@ -218,9 +218,8 @@ sr-opt-item {
 }
 
 sr-opt-item[sr-type="opacity"] {
-    padding-top: 6px;
     margin: 8px 0 0 0;
-    height: 20px;
+    height: 37px;
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range] {
