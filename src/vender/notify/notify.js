@@ -1,14 +1,25 @@
 "use strict";
+
 /*
 * Options:
 * - title   ( string, optional, if value is "" not show.)
+*
 * - content ( string, required)
+*
 * - type    ( int, NORMAL/SUCCESS/WARING/ERROR)
 *           ( optional, default is NORMAL )
+*
 * - mode    ( string, toast/modal/snackbar)
 *           ( optional, default is toast )
+*
 * - delay   ( boolean, optional )
+*           ( default is 1000 * 5 )
+*
 * - icon    ( string,  optional )
+*
+* - action  ( string,  optional )
+* - callback( func,    optional )
+*           ( when action != "" must set callback )
 *
 * Param:
 * - string：
@@ -16,14 +27,20 @@
 *   - 2：type content or title content
 *
 * - object
-*   - { type: xxx, title: xxx, content: xxx, mode: xxx, icon: xxx }
+*   - { type: xxx, title: xxx, content: xxx, mode: xxx, icon: xxx, delay: 500, action: xxx, callback:()=>{xxxx} }
 *
 * Example:
-* new Notify().Render( "Test" );
-* new Notify().Render( 0, "Test 2" );
-* new Notify().Render( 0, "Test title", "Test 3" );
-* new Notify().Render( 0, "SimpTab has update.", "New version changlog here.", true );
-* new Notify().Render({ content: "带 icon 的 toast", icon: "xxxxx" } );
+* new Notify().Render( "测试一个参数的 toast" );
+* new Notify().Render( 0, "测试两个参数的 toast" );
+* new Notify().Render( 1, "测试两个参数的 toast" );
+* new Notify().Render( 2, "测试两个参数的 toast" );
+* new Notify().Render( 3, "测试两个参数的 toast" );
+* new Notify().Render( "SimpTab 版本提示", `已更新到最新版本，详细请看 <a>CHANGELOG</a>` );
+* new Notify().Render({ content: "带 icon 的 toast", icon: "<path>/weight_icon.png" } );
+* new Notify().Render({ content: "带 delay 的 toast", delay: 10000 } );
+* new Notify().Render({ content: "带 icon 的 snackbar", icon: "<path>/fontsize_icon.png" });
+* new Notify().Render({ content: "带 callback 的 toast", icon: "<path>/icon.png", mode: "snackbar", action: "提交", callback: ()=>{console.log("dddddddd")}} );
+* new Notify().Render( "错误的 callback", "undo", '()=>{console.log("eeeeeeee")}' );
 *
 */
 var Notify = ( function () {
