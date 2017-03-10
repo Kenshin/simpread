@@ -23,6 +23,7 @@
     z-index: 2147483645;
 
     -webkit-animation: effect 0.5s linear;
+    -webkit-font-smoothing: antialiased;
 }
 
 @-webkit-keyframes effect {
@@ -53,7 +54,8 @@
 
     will-change:       opacity, top, transform;
     -webkit-animation: popupshow 0.5s ease;
-
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    -webkit-font-smoothing: antialiased;
 }
 
 @-webkit-keyframes popupshow {
@@ -291,6 +293,7 @@ sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-runnable-
 
     will-change:       opacity, top;
     -webkit-animation: readmodeshow 0.5s ease;
+    -webkit-font-smoothing: antialiased;
 }
 
 .ks-simpread-read-hide {
