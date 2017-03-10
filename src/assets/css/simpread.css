@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 /**
  *  Focus: Focus style
  */
@@ -104,7 +108,6 @@ sr-dialog {
 
     border-radius: 3px;
 
-    box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
 
 }
@@ -119,7 +122,6 @@ sr-dialog sr-dialog-content {
     padding: 39px 24px 0;
 
     overflow-y: auto;
-    box-sizing: border-box;
 }
 
 sr-dialog sr-dialog-footer {
@@ -128,7 +130,6 @@ sr-dialog sr-dialog-footer {
     justify-content:flex-end;
 
     width: 100%;
-    box-sizing: border-box;
 }
 
 /**
@@ -191,7 +192,6 @@ sr-opt-theme {
 
     border-radius: 3px;
     border: 1px solid #212121;
-    box-sizing: border-box;
 }
 
 sr-opt-theme:hover {
