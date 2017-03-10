@@ -30,11 +30,14 @@
 *   - { type: xxx, title: xxx, content: xxx, mode: xxx, icon: xxx, delay: 500, action: xxx, callback:()=>{xxxx} }
 *
 * Example:
-* new Notify().Render( "测试一个参数的 toast" );
-* new Notify().Render( 0, "测试两个参数的 toast" );
-* new Notify().Render( 1, "测试两个参数的 toast" );
-* new Notify().Render( 2, "测试两个参数的 toast" );
-* new Notify().Render( 3, "测试两个参数的 toast" );
+* new Notify().Render( "一个参数的 toast" );
+* new Notify().Render( 0, "两个参数的 toast" );
+* new Notify().Render( 1, "两个参数的 toast" );
+* new Notify().Render( 2, "两个参数的 toast" );
+* new Notify().Render( 3, "两个参数的 toast" );
+* new Notify().Render( "snackbar", "两个参数的 snackbar" );
+* new Notify().Render( "三个参数的 callback", "undo", ()=>{console.log("bbbbbb")} );
+* new Notify().Render( "snackbar", "四个参数的 snackbar callback", "undo", ()=>{console.log("rrrrrr")} );
 * new Notify().Render( "SimpTab 版本提示", `已更新到最新版本，详细请看 <a>CHANGELOG</a>` );
 * new Notify().Render({ content: "带 icon 的 toast", icon: "<path>/weight_icon.png" } );
 * new Notify().Render({ content: "带 delay 的 toast", delay: 10000 } );
