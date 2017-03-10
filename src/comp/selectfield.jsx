@@ -208,6 +208,7 @@ const cssinjs_list = () => {
 
             textAlign: 'left',
 
+            boxSizing: 'border-box',
             transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
