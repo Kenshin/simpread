@@ -3,7 +3,7 @@
 * Notify Group
 */
 notify-gp {
-    font: 300 62.5% PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    font: 300 14px PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
 
     display: -webkit-flex;
     flex-flow: column nowrap;
@@ -34,10 +34,12 @@ notify-gp notify {
     max-width: 568px;
 
     height: 48px;
+    max-height: 48px;
 
     color: rgba(255, 255, 255, .7);
     background-color: rgba(50, 50, 50, 1);
 
+    box-sizing: border-box;
     border-radius: 2px;
     pointer-events: auto;
     user-select: none;
@@ -49,14 +51,14 @@ notify-gp notify {
 }
 
 notify-gp notify-title {
-    font-size: 1.3rem;
+    font-size: 13px;
     font-weight: bold;
 }
 
 notify-gp notify-content {
     display: block;
 
-    font-size: 1.4rem;
+    font-size: 14px;
     text-align: left;
 
     overflow: hidden;
@@ -148,7 +150,7 @@ notify-gp .notify-modal {
 
 notify-gp .notify-modal .notify-modal-content {
     margin-top: 5px;
-    font-size: 1.3rem;
+    font-size: 13px;
     white-space: normal;
 }
 
