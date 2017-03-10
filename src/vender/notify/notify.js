@@ -102,10 +102,10 @@ var Notify = ( function () {
             hidden( $(this).parent() );
         },
         hidden = function( target ) {
-            target.addClass( "notify-hide" ).slideUp( 500, function() {
+            /*target.addClass( "notify-hide" ).slideUp( 500, function() {
                 target.remove();
                 if ($root.children().length === 0 ) $root.css( "z-index", 0 );
-            });
+            });*/
         },
         render = function() {
             var $target  = $( TMPL ),
@@ -194,7 +194,10 @@ var Notify = ( function () {
                     this.content = arguments[0];
                     break;
                 case 2:
-                    if ( typeof arguments[0] == "number" ) {
+                    if ( arguments[0] == MODE.snackbar ) {
+                        this.mode = arguments[0];
+                    }
+                    else if ( typeof arguments[0] == "number" ) {
                         this.type  = arguments[0];
                     } else {
                         this.mode  = MODE.modal,
@@ -206,6 +209,14 @@ var Notify = ( function () {
                     this.content   = arguments[0];
                     this.action    = arguments[1];
                     this.callback  = arguments[2];
+                    break;
+                case 4:
+                    if ( arguments[0] == MODE.snackbar ) {
+                        this.mode      = arguments[0];
+                        this.content   = arguments[1];
+                        this.action    = arguments[2];
+                        this.callback  = arguments[3];
+                    }
                     break;
             }
             render.bind( self )();
