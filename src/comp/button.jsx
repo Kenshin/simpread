@@ -62,6 +62,7 @@ const cssinjs = () => {
 
             border: 'none',
             borderRadius: '2px',
+            boxSizing: 'border-box',
             transition: 'all .5s ease-in-out',
         },
 
