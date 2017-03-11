@@ -172,6 +172,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 fontSize: medium,
                 fontWeight,
                 lineHeight,
+                textAlign: 'initial',
 
                 userSelect: 'none',
 
