@@ -51,7 +51,8 @@ const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
             name  : "窄栏",
             info  : "shift + C",
         },
-];
+],
+labels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
 
 export default class ReadOpt extends React.Component {
 
@@ -114,7 +115,7 @@ export default class ReadOpt extends React.Component {
             <sr-opt-focus>
                 <sr-opt-gp>
                     <sr-opt-label>主题色</sr-opt-label>
-                    <ThemeSel themes={ th.colors } names={ th.names } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
+                    <ThemeSel themes={ th.colors } names={ th.names } labels={ labels } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
