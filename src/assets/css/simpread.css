@@ -225,10 +225,14 @@ sr-opt-item[sr-type="opacity"] {
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range] {
-    -webkit-appearance: none;
     width: 100%;
+
     margin: 6px 0;
+    padding: 0;
+
     border: none;
+    background-color: transparent;
+    -webkit-appearance: none;
 }
 
 sr-opt-item[sr-type="opacity"] input[type=range]:focus {
