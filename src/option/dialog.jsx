@@ -7,9 +7,13 @@ import { storage, STORAGE_MODE } from 'storage';
 import * as msg  from 'message';
 import {browser} from 'browser';
 import th        from 'theme';
+import Button    from 'button';
+import * as tooltip from 'tooltip';
+import * as waves   from  'waves';
 
-const optbgcls = "ks-simpread-option-bg",
-      optbg    = `<div class="${ optbgcls }"></div>`;
+const optbgcls   = "ks-simpread-option-bg",
+      optbgclsjq = `.${optbgcls}`,
+      optbg      = `<div class="${ optbgcls }"></div>`;
 
 /**
  * Dialog Rect component
@@ -20,6 +24,7 @@ export default class Dialog extends React.Component {
     close( restore = rollback() ) {
         $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
         $( "." + optbgcls ).one( "animationend webkitAnimationEnd", () => $( "." + optbgcls ).remove() );
+        tooltip.Exit( optbgclsjq );
     }
 
     // save dialog focus option
@@ -36,6 +41,11 @@ export default class Dialog extends React.Component {
         super( props );
     }
 
+    componentDidMount() {
+        waves.Render({ root: optbgcls, name: "sr-button" });
+        tooltip.Render( optbgclsjq );
+    }
+
     render() {
         const Option = storage.current.mode == STORAGE_MODE.focus ? FocusOpt : ReadOpt;
         return (
@@ -44,12 +54,8 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <sr-dialog-ctl href="javascript:void(0);" sr-type="submit" onClick={ () => this.save() }>
-                        确认
-                    </sr-dialog-ctl>
-                    <sr-dialog-ctl href="javascript:void(0);" sr-type="cancel" onClick={ () => this.close() }>
-                        取消
-                    </sr-dialog-ctl>
+                    <Button text="取 消" mode="secondary" waves="sr-button waves-effect waves-button" onClick={ ()=>this.close() } />
+                    <Button text="确 认" waves="sr-button waves-effect waves-button" onClick={ ()=>this.save() } />
                 </sr-dialog-footer>
             </sr-dialog>
         )

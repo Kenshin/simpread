@@ -65,11 +65,11 @@ export default class FocusOpt extends React.Component {
         return (
             <sr-opt-focus>
                 <sr-opt-gp>
-                    <sr-opt-label>主题色：</sr-opt-label>
+                    <sr-opt-label>主题色</sr-opt-label>
                     <ThemeSel themes={ themes } names={ themes } theme={ getColor(this.props.option.bgcolor) + ", 0.9" } changeBgColor={ (val,target)=>this.changeBgColor(val,target) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>透明度：</sr-opt-label>
+                    <sr-opt-label>透明度</sr-opt-label>
                     <sr-opt-item sr-type="opacity">
                         <input ref="opacity"
                             type="range" min="50" max="95" step="5" 
@@ -78,22 +78,13 @@ export default class FocusOpt extends React.Component {
                     </sr-opt-item>
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>快捷键：</sr-opt-label>
-                    <sr-opt-item sr-type="shortcuts">
-                        <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
-                    </sr-opt-item>
+                    <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>隐藏列表：</sr-opt-label>
-                    <sr-opt-item sr-type="exclude">
-                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
-                    </sr-opt-item>
+                    <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <sr-opt-label>高亮区域：</sr-opt-label>
-                    <sr-opt-item sr-type="include">
-                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
-                    </sr-opt-item>
+                    <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
                 </sr-opt-gp>
             </sr-opt-focus>
         )

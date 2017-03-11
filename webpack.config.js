@@ -151,7 +151,7 @@ const webpack = require( 'webpack' ),
           theme      : __dirname + '/src/service/theme.js',
 
           focus      : __dirname + '/src/focus/focus.js',
-          controlbar : __dirname + '/src/focus/controlbar.js',
+          controlbar : __dirname + '/src/focus/controlbar.jsx',
           foucsetting: __dirname + '/src/focus/setting.js',
 
           read       : __dirname + '/src/read/read.jsx',
@@ -167,6 +167,14 @@ const webpack = require( 'webpack' ),
           shortcuts  : __dirname + '/src/option/common/shortcuts.jsx',
           include    : __dirname + '/src/option/common/include.jsx',
           exclude    : __dirname + '/src/option/common/exclude.jsx',
+
+          textfield  : __dirname + '/src/comp/textfield.jsx',
+          fab        : __dirname + '/src/comp/fab.jsx',
+          button     : __dirname + '/src/comp/button.jsx',
+          selectfield: __dirname + '/src/comp/selectfield.jsx',
+          switch     : __dirname + '/src/comp/switch.jsx',
+          tooltip    : __dirname + '/src/comp/tooltip.jsx',
+          waves      : __dirname + '/src/comp/waves.js',
 
         }
       }

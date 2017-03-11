@@ -1,10 +1,15 @@
 console.log( "===== simpread option common: Shortcuts =====" )
 
-import Notify from 'notify';
+import TextField from 'textfield';
 
 let [ prevShortcuts, keyword ] = [ null, null ];
 
 export default class Shortcuts extends React.Component {
+
+    state = {
+        error : "",
+        value : this.props.shortcuts,
+    };
 
     changeShortcuts( event ) {
         if ( event.type === "keydown" ) {
@@ -12,26 +17,34 @@ export default class Shortcuts extends React.Component {
             keyword   =  key == "control" ? "ctrl" : key;
             if ( verifyShortkey( keyword )) {
                 prevShortcuts = updateShortcuts();
+                this.setState({ error : "" });
+                this.props.changeShortcuts( prevShortcuts );
             } else if ( keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
-                new Notify().Render( 2, `当前输入不合法，快捷键只能包括：ctrl, shift, alt, 数字, 字母。` );
+                this.setState({ error : `当前输入: ${keyword} 不合法，快捷键只能包括：ctrl, shift, alt, 数字, 字母。` });
             }
         } else {
             if ( /^[0-9a-z]{1}$/ig.test( keyword ) ) {
-                prevShortcuts         = updateShortcuts();
+                prevShortcuts = updateShortcuts();
+                this.setState({ error : "" });
+                this.props.changeShortcuts( prevShortcuts );
             }
         }
-        this.refs.shortcuts.value   = prevShortcuts;
-        this.props.changeShortcuts( prevShortcuts );
+        this.setState({ value: prevShortcuts });
     }
 
     componentDidMount() {
-        this.refs.shortcuts.value = this.props.shortcuts;
-        prevShortcuts             = this.props.shortcuts;
+        prevShortcuts = this.state.value;
     }
 
     render() {
         return (
-            <input ref="shortcuts" type="text" onKeyDown={ (event)=> this.changeShortcuts(event) }  onChange={ (event)=>this.changeShortcuts(event) } />
+            <TextField 
+                multi={ false } 
+                floatingtext="快捷键" 
+                value={ this.state.value }
+                errortext={ this.state.error }
+                onKeyDown={ (event)=> this.changeShortcuts(event) } onChange={ (event)=>this.changeShortcuts(event) }
+            />
         )
     }
 
@@ -87,6 +100,6 @@ function fixKey( event ) {
     if ( [ 16, 17, 18 ].includes( keycode ) ) {
         return event.key.toLowerCase().trim();
     } else if ( keycode >= 49 || keycode <= 90 ) {
-        return event.nativeEvent.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
+        return event.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
     }
 }

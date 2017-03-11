@@ -2,6 +2,8 @@ console.log( "=== simpread focus load ===" );
 
 var util     = require( "util" ),
     fcontrol = require( "controlbar" ),
+    tooltip  = require( "tooltip" ),
+    waves    = require( "waves" ),
     focus    = ( function () {
 
     var $parent,
@@ -51,6 +53,10 @@ var util     = require( "util" ),
         // add control bar
         fcontrol.Render( bgclsjq );
 
+        // add tooltip and waves
+        tooltip.Render( bgclsjq );
+        waves.Render({ root: bgcls, name: "sr-fab" });
+
         // click mask remove it
         $( bgclsjq ).on( "click", function( event ) {
             if ( $( event.target ).attr("class") != bgcls ) return;
@@ -61,8 +67,8 @@ var util     = require( "util" ),
             // remove exclude style
             excludeStyle( $target, exclude, "add" );
 
-            // remove control bar
-            fcontrol.Remove();
+            // remove tooltip
+            tooltip.Exit( bgclsjq );
 
             // remove background
             $( bgclsjq ).off( "click" );
@@ -90,7 +96,7 @@ var util     = require( "util" ),
      */
     Focus.prototype.Exist = function( action ) {
         if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
-            if (action) fcontrol.Click( "setting" );
+            if (action) fcontrol.elem.onAction( undefined, "setting" );
             return true;
         } else {
             return false;

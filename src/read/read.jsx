@@ -9,6 +9,8 @@ import { storage, Clone } from 'storage';
 import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
+import * as tooltip       from 'tooltip';
+import * as waves         from 'waves';
 
 const rdcls   = "ks-simpread-read",
       bgtmpl  = `<div class="${rdcls}"></div>`,
@@ -41,6 +43,8 @@ class Read extends React.Component {
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         pangu.spacingElementByClassName( rdcls );
+        tooltip.Render( "sr-read" );
+        waves.Render({ root: rdcls, name: "sr-fab" });
     }
 
     componentWillUnmount() {
@@ -54,6 +58,7 @@ class Read extends React.Component {
 
    // exit read mode
    exit() {
+        tooltip.Exit( "sr-read" );
         ReactDOM.unmountComponentAtNode( getReadRoot() );
     }
 
