@@ -231,10 +231,10 @@ class ToolTip extends React.Component {
 /**
  * Render
  * 
- * @param {string} class name, e.g. ks-simpread-read
+ * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
  */
 function Render( root ) {
-    const $root   = $( `.${root}` );
+    const $root   = $( root );
     $root.find("[data-tooltip]").map( ( idx, item )=>{
         const $item = $(item),
               position = $item.attr( "data-tooltip-position" ),
@@ -248,10 +248,10 @@ function Render( root ) {
 /**
  * Exit
  * 
- * @param {string} Render param
+ * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
  */
 function Exit( root ) {
-    $( `.${root}` ).find( "tooltip-tips" ).map( ( idx, item )=>{
+    $( root ).find( "tooltip-tips" ).map( ( idx, item )=>{
         ReactDOM.unmountComponentAtNode( $(item)[0] );
     });
 }
