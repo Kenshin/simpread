@@ -69,7 +69,7 @@ const cssinjs = () => {
 }
 
 /**
- * Tooltip, component e.g. 
+ * Custom component: Tooltip, component e.g. 
     <tooltip-gp>
         <tooltip-tips>
             <tooltip-tip id="1488523418015">

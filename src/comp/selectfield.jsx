@@ -319,6 +319,11 @@ class ListView extends React.Component {
     }
 }
 
+/**
+ * Custom component: SelectField
+ * 
+ * @class
+ */
 export default class SelectField extends React.Component {
 
     static defaultProps = {

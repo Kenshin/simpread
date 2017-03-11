@@ -128,6 +128,11 @@ const cssinjs = () => {
     return styles;
 }
 
+/**
+ * Custom component: Switich
+ * 
+ * @class
+ */
 export default class Switch extends React.Component {
 
     static defaultProps = {
