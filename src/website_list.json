@@ -1,10 +1,10 @@
 {
     "sites"  : [{
         "name"    : "cnbeta.com",
-        "url"     : "http://www.cnbeta.com/articles/",
-        "title"   : "<h2 id='news_title'>",
-        "desc"    : "<div class='introduction'>",
-        "include" : "<div class='content'>",
+        "url"     : "http://www.cnbeta.com/*",
+        "title"   : "[[{$('header.title h1').text()}]]",
+        "desc"    : "[[{$('.article-summary').text()}]]",
+        "include" : "<div class='article-content'>",
         "exclude" : [
             "<div class='clearfix' style='margin:0 10px;'>",
             "<div class='rating_box clearfix'>",
@@ -85,7 +85,7 @@
         "exclude" : [
             "[['<span>本文由知晓程序授权转载</span>']]",
             "[[/src=\\S+(new_zx-1)\\S+'/]]",
-			"[[/src=\\S+(zxcx-qun-1)\\S+'/]]"
+            "[[/src=\\S+(zxcx-qun-1)\\S+'/]]"
         ]
     },{
         "name"    : "app.ifanr.com",
@@ -111,7 +111,8 @@
         ]
     },{
         "name"    : "sspai.com",
-        "url"     : "http://sspai.com/",
+        "override": true,
+        "url"     : "https://sspai.com/post/",
         "title"   : "<h1 class='title'>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
         "include" : "[[[$('.content')]]]",
@@ -123,15 +124,6 @@
             "[[/src=\\S+(342459.png)\\S+'/]]"
         ]
     },{
-        "name"    : "matrix.sspai.com",
-        "url"     : "http://matrix.sspai.com/p/",
-        "title"   : "<h1 class='title'>",
-        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "<div class='content'>",
-        "exclude" : [
-            ""
-        ]
-    },{
         "name"    : "dgtle.com",
         "url"     : "http://www.dgtle.com/",
         "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
@@ -139,7 +131,7 @@
         "include" : "<div id='view_content'>",
         "exclude" : [
             "<div id='comments_top'>",
-			"[[/src=\\S+(xxxxxbbs)\\S+'/]]"
+            "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
         ]
     },{
         "name"    : "zhuanlan.zhihu.com",
@@ -494,11 +486,31 @@
             ""
         ]
     },{
-        "name"    : "gold.xitu.io",
-        "url"     : "https://gold.xitu.io/post/",
-        "title"   : "<div class='post-title'>",
+        "name"    : "post.juejin.im",
+        "override": true,
+        "url"     : "https://juejin.im/post/",
+        "title"   : "<h1 class='post-title'>",
         "desc"    : "",
-        "include" : "<div class='post-content'>",
+        "include" : "<div class='post-content-container'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "entry.juejin.im",
+        "override": true,
+        "url"     : "https://juejin.im/entry/",
+        "title"   : "[[{$('.entry-public-view h1').text()}]]",
+        "desc"    : "<div class='header'>",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "qianduan.net",
+        "url"     : "https://www.qianduan.net/",
+        "title"   : "<h1 class='post-title'>",
+        "desc"    : "",
+        "include" : "<section class='post-content'>",
         "exclude" : [
             ""
         ]
@@ -569,7 +581,7 @@
         "include" : "<div class='editor-viewer'>",
         "exclude" : [
             "[[/src=\\S+(hot3)\\S+'/]]",
-			"<div class='thumb'>"
+            "<div class='thumb'>"
         ]
     },{
         "name"    : "geek.csdn.net",
@@ -674,11 +686,11 @@
         "include" : "<div class='callout'>",
         "exclude" : [
             "[['<h2>关注我们</h2>']]",
-			"[['<p>本文原文</p>']]",
-			"[['<p>我们专注于H5技术生态的改善</p>']]",
-			"[['<p>欢迎有兴趣的同行一起来玩儿</p>']]",
-			"[[/src=\\S+(yufe2015)\\S+'/]]",
-			"<div id='wx-qrcode'>"
+            "[['<p>本文原文</p>']]",
+            "[['<p>我们专注于H5技术生态的改善</p>']]",
+            "[['<p>欢迎有兴趣的同行一起来玩儿</p>']]",
+            "[[/src=\\S+(yufe2015)\\S+'/]]",
+            "<div id='wx-qrcode'>"
         ]
     },{
         "name"    : "html-js.com",
@@ -724,7 +736,7 @@
         "include" : "<div class='entry-content'> ",
         "exclude" : [
             "<div class='article_index'>",
-			"[['<span>原创翻译，未经许可，禁止转载</span>']]"
+            "[['<span>原创翻译，未经许可，禁止转载</span>']]"
         ]
     },{
         "name"    : "hao.caibaojian.com",
@@ -734,7 +746,7 @@
         "include" : "<div class='entry-content'> ",
         "exclude" : [
             "<div class='article_index'>",
-			"[['<span>原创翻译，未经许可，禁止转载</span>']]"
+            "[['<span>原创翻译，未经许可，禁止转载</span>']]"
         ]
     },{
         "name"    : "xfenglin.com",
@@ -753,7 +765,7 @@
         "include" : "[[{$($('.ibm-columns')[0]).html()}]]",
         "exclude" : [
             "<div class='dw-article-sidebar'>",
-			"<p class='ibm-back-to-top'>"
+            "<p class='ibm-back-to-top'>"
         ]
     },{
         "name"    : "guanggoo.com",
@@ -772,7 +784,7 @@
         "include" : "<div id='content0'>",
         "exclude" : [
             "<p class='author'>",
-			"<div class='sharebar'>"
+            "<div class='sharebar'>"
         ]
     },{
         "name"    : "voidcn.com",
@@ -782,7 +794,7 @@
         "include" : "<div class='post-content'>",
         "exclude" : [
             "<div class='wumii-hook'>",
-			"[[/src=\\S+(pixel)\\S+'/]]"
+            "[[/src=\\S+(pixel)\\S+'/]]"
         ]
     },{
         "name"    : "thepaper.cn",
@@ -807,15 +819,20 @@
         ]
     },{
         "name"    : "jandan.net",
-        "url"     : "http://jandan.net/2017/01/09/",
-        "title"   : "<h1>",
+        "override": true,
+        "url"     : "http://jandan.net/*",
+        "title"   : "[[{$('.post h1').text()}]]",
         "desc"    : "",
-        "include" : "<div class='post f' style=''>",
+        "include" : "[[{$($('.post')[0]).html()}]]",
         "exclude" : [
-            "<p>",
+            "<script>",
+            "<h3>",
             "<div class='time_s'>",
-            "<span class='comment-big'>",
-            "<div class='star-rating>"
+            "<h1>",
+            "<div class='shang'>",
+            "<div class='star-rating>",
+            "<a class='jandan-zan'>",
+            "<span class='comment-big'>"
         ]
     },{
         "name"    : "post.smzdm.com",
@@ -982,7 +999,7 @@
         "include" : "<section class='article-bd'>",
         "exclude" : [
             "<div class='article-annotation'>",
-			"[['<strong>关注科客网官方微信kekebat</strong>']]"
+            "[['<strong>关注科客网官方微信kekebat</strong>']]"
         ]
     },{
         "name"    : "ebrun.com",
@@ -992,10 +1009,10 @@
         "include" : "<div class='contdiv'>",
         "exclude" : [
             "<p class='ybfirst_go'>",
-			"<div id='corp'>",
-			"[[/src=\\S+(2017013185214858280529103)\\S+'/]]",
-			"[['<span>百人讲新年纳新 588份精华课件免费赠</span>']]",
-			"[['<p>【版权提示】亿邦动力网倡导尊重与保护知识产权。</p>']]"
+            "<div id='corp'>",
+            "[[/src=\\S+(2017013185214858280529103)\\S+'/]]",
+            "[['<span>百人讲新年纳新 588份精华课件免费赠</span>']]",
+            "[['<p>【版权提示】亿邦动力网倡导尊重与保护知识产权。</p>']]"
         ]
     },{
         "name"    : "g-cores.com",
