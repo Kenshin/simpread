@@ -195,12 +195,17 @@ async function excludes( $target, exclude ) {
  * @param {jquery} jquery object
  */
 async function htmlbeautify( $target ) {
-    $target.html( ( index, html ) => {
-        return html.trim()
-                .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
-                .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
-                .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
-    });
+    try {
+        $target.html( ( index, html ) => {
+            return html.trim()
+                    .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
+                    .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
+                    .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
+        });
+    } catch ( error ) {
+        console.error( error );
+        return $target.html();
+    }
 }
 
 /**
