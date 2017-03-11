@@ -322,6 +322,10 @@ class ListView extends React.Component {
 /**
  * Custom component: SelectField
  * 
+ * Reference: 
+ * - https://material.io/guidelines/components/lists-controls.html
+ * - http://www.material-ui.com/#/components/select-field
+ * 
  * @class
  */
 export default class SelectField extends React.Component {

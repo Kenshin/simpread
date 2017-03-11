@@ -131,6 +131,10 @@ const cssinjs = () => {
 /**
  * Custom component: Switich
  * 
+ * Reference:
+ * - https://material.io/guidelines/components/selection-controls.html
+ * - http://www.material-ui.com/#/components/toggle
+ * 
  * @class
  */
 export default class Switch extends React.Component {

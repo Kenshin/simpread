@@ -187,6 +187,10 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 /**
  * Custom <input>/<textarea> tag component: TextField
  * 
+ * Reference:
+ * - https://material.io/guidelines/components/text-fields.html
+ * - http://www.material-ui.com/#/components/text-field
+ * 
  * @class
  */
 export default class TextField extends React.Component {

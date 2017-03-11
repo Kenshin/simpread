@@ -85,6 +85,10 @@ const cssinjs = () => {
         </tooltip-tips>
     </tooltip-gp>
  * 
+ * Reference:
+ * - https://material.io/guidelines/components/tooltips.html
+ * - http://materializecss.com/dialogs.html
+ * 
  * @class
  */
 class ToolTip extends React.Component {

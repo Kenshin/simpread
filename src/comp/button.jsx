@@ -111,6 +111,13 @@ const cssinjs = () => {
 /**
  * Custom <a> tag component: Button
  * 
+ * Reference:
+ * - https://material.io/guidelines/components/buttons.html
+ * - https://material.io/guidelines/components/buttons-floating-action-button.html
+ * - http://www.material-ui.com/#/components/flat-button
+ * - http://www.material-ui.com/#/components/raised-button
+ * - http://www.material-ui.com/#/components/icon-button
+ * 
  * @class
  */
 export default class Button extends React.Component {

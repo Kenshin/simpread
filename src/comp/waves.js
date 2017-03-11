@@ -14,6 +14,9 @@ const wavesopts = {
 /**
  * Waves 
  * 
+ * External library:
+ * - http://fian.my.id/Waves/
+ * 
  * @param {...rest} multi option
  */
 export function Render( ...options ) {

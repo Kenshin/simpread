@@ -194,6 +194,10 @@ const ListView = ( props ) => {
         </li>
     </ul>
  * 
+ * Reference:
+ * - https://material.io/guidelines/components/buttons-floating-action-button.html
+ * - http://materializecss.com/buttons.html
+ * 
  * @class
  */
 export default class Fab extends React.Component {
