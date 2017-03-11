@@ -1,7 +1,11 @@
 console.log( "==== simpread component: ToolTip ====" )
 
 /*
- * Reference to Materialize( MIT license ) tooltip
+ * Tooltip
+ * 
+ * Reference:
+ * - https://material.io/guidelines/components/tooltips.html
+ * - http://materializecss.com/dialogs.html
  *
  * Author      Alvin Wang( alvin7@gmail.com ) https://github.com/Dogfalo
  * Materialize http://materializecss.com/
@@ -84,10 +88,6 @@ const cssinjs = () => {
             </tooltip-tip>
         </tooltip-tips>
     </tooltip-gp>
- * 
- * Reference:
- * - https://material.io/guidelines/components/tooltips.html
- * - http://materializecss.com/dialogs.html
  * 
  * @class
  */
