@@ -43,7 +43,7 @@ class Read extends React.Component {
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         pangu.spacingElementByClassName( rdcls );
-        tooltip.Render( rdcls );
+        tooltip.Render( "sr-read" );
         waves.Render({ root: rdcls, name: "sr-fab" });
     }
 
@@ -58,7 +58,7 @@ class Read extends React.Component {
 
    // exit read mode
    exit() {
-        tooltip.Exit( rdcls );
+        tooltip.Exit( "sr-read" );
         ReactDOM.unmountComponentAtNode( getReadRoot() );
     }
 

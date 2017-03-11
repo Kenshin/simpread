@@ -53,8 +53,8 @@ var util     = require( "util" ),
         // add control bar
         fcontrol.Render( bgclsjq );
 
-        // add tooltip
-        tooltip.Render( bgcls );
+        // add tooltip and waves
+        tooltip.Render( bgclsjq );
         waves.Render({ root: bgcls, name: "sr-fab" });
 
         // click mask remove it
@@ -68,7 +68,7 @@ var util     = require( "util" ),
             excludeStyle( $target, exclude, "add" );
 
             // remove tooltip
-            tooltip.Exit( bgcls );
+            tooltip.Exit( bgclsjq );
 
             // remove background
             $( bgclsjq ).off( "click" );

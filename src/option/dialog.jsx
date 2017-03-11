@@ -11,8 +11,9 @@ import Button    from 'button';
 import * as tooltip from 'tooltip';
 import * as waves   from  'waves';
 
-const optbgcls = "ks-simpread-option-bg",
-      optbg    = `<div class="${ optbgcls }"></div>`;
+const optbgcls   = "ks-simpread-option-bg",
+      optbgclsjq = `.${optbgcls}`,
+      optbg      = `<div class="${ optbgcls }"></div>`;
 
 /**
  * Dialog Rect component
@@ -23,7 +24,7 @@ export default class Dialog extends React.Component {
     close( restore = rollback() ) {
         $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
         $( "." + optbgcls ).one( "animationend webkitAnimationEnd", () => $( "." + optbgcls ).remove() );
-        tooltip.Exit( optbgcls );
+        tooltip.Exit( optbgclsjq );
     }
 
     // save dialog focus option
@@ -42,7 +43,7 @@ export default class Dialog extends React.Component {
 
     componentDidMount() {
         waves.Render({ root: optbgcls, name: "sr-button" });
-        tooltip.Render( optbgcls );
+        tooltip.Render( optbgclsjq );
     }
 
     render() {
