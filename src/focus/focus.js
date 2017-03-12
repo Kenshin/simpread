@@ -8,9 +8,9 @@ var util     = require( "util" ),
 
     var $parent,
         tag,
-        focuscls   = "ks-simpread-focus",
+        focuscls   = "simpread-focus-highlight",
         focusstyle = "z-index: 2147483646; overflow: visible; position: relative;",
-        maskcls    = "ks-simpread-mask",
+        maskcls    = "simpread-focus-mask",
         maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
         bgcls      = "simpread-focus-root",
         bgtmpl     = "<div class=" + bgcls + "></div>",
@@ -35,7 +35,7 @@ var util     = require( "util" ),
         // set exclude style
         excludeStyle( $target, exclude, "delete" );
 
-        // add ks-simpread-mask
+        // add simpread-focus-mask
         $parent = $target.parent();
         tag     = $parent[0].tagName;
         while ( tag.toLowerCase() != "body" ) {
@@ -74,7 +74,7 @@ var util     = require( "util" ),
             $( bgclsjq ).off( "click" );
             $( bgclsjq ).remove();
 
-            // remove ks-simpread-mask style
+            // remove simpread-focus-mask style
             $parent = $target.parent();
             tag     = $parent[0].tagName;
             while ( tag && tag.toLowerCase() != "body" ) {

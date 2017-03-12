@@ -24,14 +24,13 @@
 /**
  *  Focus: Focus style
  */
-.ks-simpread-focus {
+.simpread-focus-highlight {
     overflow: visible;
     position: relative;
     z-index: 2147483646;
     box-shadow: 0 0 0 20px #fff;
     background-color: #fff;
 }
-
 
 /**
  *  Option: background style
