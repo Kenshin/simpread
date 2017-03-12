@@ -1,3 +1,9 @@
+/**
+ * Golbal
+ */
+.simpread-hidden {
+    display: none;
+}
 
 /**
  *  Focus: Background style
@@ -317,10 +323,6 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
     position: fixed;
 }
 
-.simpread-read-body-hide {
-    display: none;
-}
-
 @-webkit-keyframes readmodeshow {
     from {
         opacity: 0;
@@ -446,10 +448,6 @@ sr-rd-footer a:active {
     -webkit-box-align: center;
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
-}
-
-.sr-rd-content-hide {
-    display: none;
 }
 
 .sr-rd-content-nobeautify {

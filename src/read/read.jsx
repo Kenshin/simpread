@@ -29,14 +29,14 @@ const errorpage = `
 class Read extends React.Component {
 
     componentWillMount() {
-        $( "body" ).addClass( "simpread-read-body-hide" );
+        $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
     }
 
     async componentDidMount() {
         $root.addClass( theme ).find( rdclsjq ).addClass( theme );
         if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
-        if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "sr-rd-content-hide" );
+        if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
         await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
         await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
@@ -49,7 +49,7 @@ class Read extends React.Component {
 
     componentWillUnmount() {
         $root.removeClass( theme );
-        $( "body" ).removeClass( "simpread-read-body-hide" );
+        $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).addClass( "simpread-read-root-hide" );
         $( rdclsjq ).one( "animationend webkitAnimationEnd", () => {
             $( rdclsjq ).remove();
@@ -213,7 +213,7 @@ async function htmlbeautify( $target ) {
  * - task: all webiste image, remove old image and create new image
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
- * - task: all hr tag add sr-rd-content-hide class
+ * - task: all hr tag add simpread-hidden class
  * - task: all pre/code tag remove class
  * - task: all a tag remove style
  * 
@@ -237,9 +237,9 @@ async function commbeautify( $target ) {
                   if ( $img[0].clientWidth > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               },
               loaderrorHandle = () => {
-                  $img.addClass( "sr-rd-content-hide" );
+                  $img.addClass( "simpread-hidden" );
                   if ( $img.parent().hasClass( "sr-rd-content-center" )) {
-                      $img.parent().removeAttr( "class" ).addClass( "sr-rd-content-hide" );
+                      $img.parent().removeAttr( "class" ).addClass( "simpread-hidden" );
                   }
               };
         let  newsrc,
@@ -257,7 +257,7 @@ async function commbeautify( $target ) {
             .wrap( "<div class='sr-rd-content-center'></div>" );
 
         // origin style
-        /*if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-hide" ) ) {
+        /*if ( tagname !== "sr-read" && !$parent.hasClass( "simpread-hidden" ) ) {
             $img.parent().unwrap();
         }*/
 
@@ -274,7 +274,7 @@ async function commbeautify( $target ) {
                 tagname = $parent[0].tagName.toLowerCase();
             }
         }
-        if ( !$parent.hasClass( "sr-rd-content-hide" ) ) {
+        if ( !$parent.hasClass( "simpread-hidden" ) ) {
             $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
         }
         */
@@ -291,7 +291,7 @@ async function commbeautify( $target ) {
         $(item).wrap( "<div class='sr-rd-content-center'></div>" );
     });
     $target.find( "hr" ).map( ( index, item )=> {
-        $(item).addClass( "sr-rd-content-hide" );
+        $(item).addClass( "simpread-hidden" );
     });
     $target.find( "pre" ).map( ( index, item )=> {
         $(item).find( "code" ).removeAttr( "class" );
