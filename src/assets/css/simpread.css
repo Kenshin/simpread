@@ -318,6 +318,10 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
     position: fixed;
 }
 
+.simpread-read-body-hide {
+    display: none;
+}
+
 @-webkit-keyframes readmodeshow {
     from {
         opacity: 0;
@@ -338,10 +342,6 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
         opacity: 0;
         top: 10000px;
     }
-}
-
-.ks-simpread-body-hide {
-    display: none;
 }
 
 /**

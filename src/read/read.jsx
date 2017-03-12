@@ -29,7 +29,7 @@ const errorpage = `
 class Read extends React.Component {
 
     componentWillMount() {
-        $( "body" ).addClass( "ks-simpread-body-hide" );
+        $( "body" ).addClass( "simpread-read-body-hide" );
         th.Change( this.props.read.theme );
     }
 
@@ -49,7 +49,7 @@ class Read extends React.Component {
 
     componentWillUnmount() {
         $root.removeClass( theme );
-        $( "body" ).removeClass( "ks-simpread-body-hide" );
+        $( "body" ).removeClass( "simpread-read-body-hide" );
         $( rdclsjq ).addClass( "simpread-read-root-hide" );
         $( rdclsjq ).one( "animationend webkitAnimationEnd", () => {
             $( rdclsjq ).remove();
