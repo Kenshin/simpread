@@ -29,11 +29,11 @@
     background-color: rgba( 235, 235, 235, 0.9 );
     z-index: 2147483645;
 
-    -webkit-animation: effect 0.5s linear;
+    animation: effect 0.5s linear;
     -webkit-font-smoothing: antialiased;
 }
 
-@-webkit-keyframes effect {
+@keyframes effect {
     from { opacity:0; }
     to   { opacity:1; }
 }
@@ -71,12 +71,12 @@
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 
     will-change:       opacity, top, transform;
-    -webkit-animation: popupshow 0.5s ease;
+    animation: popupshow 0.5s ease;
     text-shadow: 0 1px rgba(0,0,0,0.3);
     -webkit-font-smoothing: antialiased;
 }
 
-@-webkit-keyframes popupshow {
+@keyframes popupshow {
     from {
         opacity: 0;
         top: 100px;
@@ -89,7 +89,7 @@
     }
 }
 
-@-webkit-keyframes popuphide {
+@keyframes popuphide {
     from {
         opacity: 1;
         top: 0;
@@ -103,7 +103,7 @@
 }
 
 .simpread-option-root-hide {
-    -webkit-animation: popuphide 0.5s ease;
+    animation: popuphide 0.5s ease;
 }
 
 /**
@@ -216,7 +216,7 @@ sr-opt-theme {
 }
 
 sr-opt-theme:hover {
-     -webkit-animation: themestyl 1s ease-in-out;
+     animation: themestyl 1s ease-in-out;
      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
 }
 
@@ -228,7 +228,7 @@ sr-opt-theme[sr-type="active"] {
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 2px 20px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.7);
 }
 
-@-webkit-keyframes themestyl {
+@keyframes themestyl {
     from { opacity: 0.2; }
     to   { opacity: 1;   }
 }
@@ -311,16 +311,16 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
     background-color: #fff;
 
     will-change:       opacity, top;
-    -webkit-animation: readmodeshow 0.5s ease;
+    animation: readmodeshow 0.5s ease;
     -webkit-font-smoothing: antialiased;
 }
 
 .simpread-read-root-hide {
-    -webkit-animation: readmodehide 0.3s ease;
+    animation: readmodehide 0.3s ease;
     position: fixed;
 }
 
-@-webkit-keyframes readmodeshow {
+@keyframes readmodeshow {
     from {
         opacity: 0;
         top: 10000px;
@@ -331,7 +331,7 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
     }
 }
 
-@-webkit-keyframes readmodehide {
+@keyframes readmodehide {
     from {
         opacity: 1;
         top: 0;
