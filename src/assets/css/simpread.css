@@ -425,34 +425,3 @@ sr-rd-footer a:active {
     color: #787878;
     text-decoration: underline;
 }
-
-.sr-rd-content-img {
-    width: 90%;
-    height: auto;
-}
-
-.sr-rd-content-img-load {
-    width: 48px;
-    height: 48px;
-    margin: 0;
-    padding: 0;
-    border-style: none;
-    border-width: 0;
-    background-repeat: no-repeat;
-    background-image: url( "../images/loading.gif" );
-}
-
-.sr-rd-content-center {
-    text-align: center;
-    display: -webkit-box;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
-    -webkit-box-orient: vertical;
-}
-
-.sr-rd-content-nobeautify {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-shadow: 0 0 0;
-}
