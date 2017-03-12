@@ -448,7 +448,7 @@ sr-rd-footer a:active {
     -webkit-box-orient: vertical;
 }
 
-.sr-rd-content-exclude {
+.sr-rd-content-hide {
     display: none;
 }
 
