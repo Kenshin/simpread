@@ -71,12 +71,12 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度</sr-opt-label>
-                    <sr-opt-item sr-type="opacity">
+                    <opacity>
                         <input ref="opacity"
                             type="range" min="50" max="95" step="5" 
                             onChange={ ()=> this.changeOpacity() }
                         />
-                    </sr-opt-item>
+                    </opacity>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />

@@ -223,7 +223,6 @@ sr-opt-theme:not(:first-child) {
 }
 
 sr-opt-theme[sr-type="active"] {
-    /*border: 1px solid #000;*/
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 2px 20px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.7);
 }
 
@@ -232,16 +231,13 @@ sr-opt-theme[sr-type="active"] {
     to   { opacity: 1;   }
 }
 
-sr-opt-item {
-    width: 100%;
-}
-
-sr-opt-item[sr-type="opacity"] {
+opacity {
     margin: 8px 0 0 0;
+    width: 100%;
     height: 37px;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range] {
+opacity input[type=range] {
     width: 100%;
 
     margin: 6px 0;
@@ -252,11 +248,11 @@ sr-opt-item[sr-type="opacity"] input[type=range] {
     -webkit-appearance: none;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range]:focus {
+opacity input[type=range]:focus {
     outline: none;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range]::-webkit-slider-runnable-track {
+opacity input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 1px;
     cursor: pointer;
@@ -266,11 +262,11 @@ sr-opt-item[sr-type="opacity"] input[type=range]::-webkit-slider-runnable-track 
     transition: all 0.3s;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range]::-webkit-slider-runnable-track:hover {
+opacity input[type=range]::-webkit-slider-runnable-track:hover {
     background: #00897B;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range]::-webkit-slider-thumb {
+opacity input[type=range]::-webkit-slider-thumb {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
     border: 1px solid rgba(0, 0, 0, 0);
     height: 20px;
@@ -283,15 +279,15 @@ sr-opt-item[sr-type="opacity"] input[type=range]::-webkit-slider-thumb {
     transition: all .5s ease-in-out .1s;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-thumb {
+opacity input[type=range]:focus::-webkit-slider-thumb {
     background: #00897B;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-thumb:hover {
+opacity input[type=range]:focus::-webkit-slider-thumb:hover {
     background: #00695C;
 }
 
-sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-runnable-track {
+opacity input[type=range]:focus::-webkit-slider-runnable-track {
     background: #00897B;
 }
 
