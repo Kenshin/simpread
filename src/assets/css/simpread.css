@@ -1,13 +1,3 @@
-/**
- *  Focus: Focus style
- */
-.ks-simpread-focus {
-    overflow: visible;
-    position: relative;
-    z-index: 2147483646;
-    box-shadow: 0 0 0 20px #fff;
-    background-color: #fff;
-}
 
 /**
  *  Focus: Background style
@@ -32,7 +22,19 @@
 }
 
 /**
- *  Option background style
+ *  Focus: Focus style
+ */
+.ks-simpread-focus {
+    overflow: visible;
+    position: relative;
+    z-index: 2147483646;
+    box-shadow: 0 0 0 20px #fff;
+    background-color: #fff;
+}
+
+
+/**
+ *  Option: background style
  */
 .simpread-option-root {
     position: fixed;
@@ -279,7 +281,7 @@ sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-runnable-
 }
 
 /**
- *  Read mode background
+ *  Read: background style
  */
 .simpread-read-root {
     display: -webkit-flex;
