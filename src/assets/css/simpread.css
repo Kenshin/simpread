@@ -1,9 +1,6 @@
 /**
- * Golbal
+ * Golbal style
  */
-.simpread-hidden {
-    display: none;
-}
 
 .sr-rd-font {
     /* 
@@ -16,21 +13,27 @@
     -webkit-text-size-adjust:none;
 }
 
+.simpread-hidden {
+    display: none;
+}
+
 /**
- *  Focus: Background style
+ *  Focus: Background( root ) style
  */
 .simpread-focus-root {
     display: block;
     position: fixed;
+
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+
+    -webkit-font-smoothing: antialiased;
     background-color: rgba( 235, 235, 235, 0.9 );
     z-index: 2147483645;
 
     animation: effect 0.5s linear;
-    -webkit-font-smoothing: antialiased;
 }
 
 @keyframes effect {
@@ -38,42 +41,43 @@
     to   { opacity:1; }
 }
 
-/**
- *  Focus: Focus style
- */
 .simpread-focus-highlight {
-    overflow: visible;
     position: relative;
-    z-index: 2147483646;
+
     box-shadow: 0 0 0 20px #fff;
     background-color: #fff;
+
+    overflow: visible;
+    z-index: 2147483646;
 }
 
 /**
- *  Option: background style
+ *  Option: background( root ) style
  */
 .simpread-option-root {
+    display: -webkit-flex;
+    justify-content:center;
+    align-items:center;
+
     position: fixed;
+
     top:  0;
     left: 0;
     width: 100%;
     height: 100%;
 
-    z-index: 2147483647;
-
-    display: -webkit-flex;
-    justify-content:center;
-    align-items:center;
-
     color: #fff;
+
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    -webkit-font-smoothing: antialiased;
     font-weight: 100;
     font-size: 12px;
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 
-    will-change:       opacity, top, transform;
+    will-change: opacity, top, transform;
     animation: popupshow 0.5s ease;
-    text-shadow: 0 1px rgba(0,0,0,0.3);
-    -webkit-font-smoothing: antialiased;
+
+    z-index: 2147483647;
 }
 
 @keyframes popupshow {
@@ -107,7 +111,7 @@
 }
 
 /**
- * Dialog style
+ * Dialog: style
 */
 sr-dialog {
     display: -webkit-flex;
@@ -173,20 +177,26 @@ sr-opt-gp {
     flex-flow:row nowrap;
     justify-content:flex-start;
 
-    font-size: 15px;
     width: 100%;
     margin-bottom: 25px;
+
+    font-size: 15px;
 }
 
 sr-opt-gp sr-opt-label {
     display: block;
     position: absolute;
+
     margin: -8px 0 0 0;
+
     font-size: 14px;
     font-weight: bold;
+
     color: rgba(0, 137, 123, .8);
+
     user-select: none;
     pointer-events: none;
+
     transform: scale(0.75) translate( 0px, -8px );
     transform-origin: left top 0px;
 }
@@ -235,6 +245,7 @@ sr-opt-theme[sr-type="active"] {
 
 opacity {
     margin: 8px 0 0 0;
+
     width: 100%;
     height: 37px;
 }
@@ -257,11 +268,14 @@ opacity input[type=range]:focus {
 opacity input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 1px;
-    cursor: pointer;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
+
     background: #9e9e9e;
+
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
     border-radius: 1.3px;
+
     transition: all 0.3s;
+    cursor: pointer;
 }
 
 opacity input[type=range]::-webkit-slider-runnable-track:hover {
@@ -269,15 +283,19 @@ opacity input[type=range]::-webkit-slider-runnable-track:hover {
 }
 
 opacity input[type=range]::-webkit-slider-thumb {
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-    border: 1px solid rgba(0, 0, 0, 0);
     height: 20px;
     width: 20px;
-    border-radius: 50px;
+
+    margin-top: -9px;
+
     background: rgba(0, 137, 123, 1);
+
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 50px;
+
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -9px;
     transition: all .5s ease-in-out .1s;
 }
 
@@ -294,7 +312,7 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 /**
- *  Read: background style
+ *  Read: background( root ) style
  */
 .simpread-read-root {
     display: -webkit-flex;
@@ -303,16 +321,19 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
 
     position: relative;
 
-    width: 100%;
     top: 0;
     left: 0;
 
-    z-index: 2147483646;
+    width: 100%;
+
+    -webkit-font-smoothing: antialiased;
+
     background-color: #fff;
 
-    will-change:       opacity, top;
+    z-index: 2147483646;
+
+    will-change: opacity, top;
     animation: readmodeshow 0.5s ease;
-    -webkit-font-smoothing: antialiased;
 }
 
 .simpread-read-root-hide {
@@ -343,7 +364,7 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 /**
- * Read: Read style
+ * Read: Read mode style
  */
 sr-read {
     display: -webkit-flex;
@@ -354,7 +375,7 @@ sr-read {
 
     text-align: center;
 
-    margin-top:  20px;
+    margin-top: 20px;
     margin-bottom: 20px;
 
     margin-left: 20%;
@@ -363,8 +384,10 @@ sr-read {
 
 read-process {
     position: fixed;
+
     top: 0;
     left: 0;
+
     height: 3px;
     width: 100%;
 }
@@ -372,9 +395,11 @@ read-process {
 sr-rd-content-error {
     display: block;
     position: relative;
+
     margin: 0px;
-    padding: 25px;
     margin-bottom: 30px;
+    padding: 25px;
+
     background-color: rgba(0,0,0,0.05);
 }
 
@@ -385,6 +410,7 @@ sr-rd-footer {
     padding: 40px 0 30px;
 
     text-align: center;
+
     border-top: 1px solid #E0E0E0;
     clear: both;
 }
