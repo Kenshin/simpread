@@ -91,6 +91,20 @@
 }
 
 /**
+* Read mode
+ */
+.sr-rd-font {
+    /* 
+    font-family: "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.5rem;
+    */
+    font: 300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    color:#333;
+    -webkit-text-size-adjust:none;
+}
+
+/**
  * Dialog style
 */
 sr-dialog {
@@ -350,20 +364,6 @@ read-process {
     left: 0;
     height: 3px;
     width: 100%;
-}
-
-/**
-* Read mode
- */
-.sr-rd-font {
-    /* 
-    font-family: "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
-    font-size: 16px;
-    line-height: 1.5rem;
-    */
-    font: 300 16px/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
-    color:#333;
-    -webkit-text-size-adjust:none;
 }
 
 sr-read {
