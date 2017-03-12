@@ -344,13 +344,6 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
     display: none;
 }
 
-.sr-rd-content-nobeautify {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-shadow: 0 0 0;
-}
-
 /**
  * Read: Read style
  */
@@ -458,4 +451,11 @@ sr-rd-footer a:active {
 
 .sr-rd-content-exclude {
     display: none;
+}
+
+.sr-rd-content-nobeautify {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: 0 0 0;
 }
