@@ -364,6 +364,14 @@ sr-read {
     margin-right: 20%;
 }
 
+read-process {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+}
+
 sr-rd-content-error {
     display: block;
     position: relative;
@@ -371,14 +379,6 @@ sr-rd-content-error {
     padding: 25px;
     margin-bottom: 30px;
     background-color: rgba(0,0,0,0.05);
-}
-
-read-process {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 100%;
 }
 
 sr-rd-footer {
