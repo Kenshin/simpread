@@ -152,7 +152,8 @@ sr-dialog sr-dialog-footer {
 /**
  *  Option: Focus mode
  */
-sr-opt-focus {
+sr-opt-focus,
+sr-opt-read {
     display: -webkit-flex;
     flex-direction:column;
 

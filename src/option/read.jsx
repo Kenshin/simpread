@@ -112,7 +112,7 @@ export default class ReadOpt extends React.Component {
 
     render() {
         return (
-            <sr-opt-focus>
+            <sr-opt-read>
                 <sr-opt-gp>
                     <sr-opt-label>主题色</sr-opt-label>
                     <ThemeSel themes={ th.colors } names={ th.names } labels={ labels } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
@@ -151,7 +151,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
                 </sr-opt-gp>
-            </sr-opt-focus>
+            </sr-opt-read>
         )
     }
 }
