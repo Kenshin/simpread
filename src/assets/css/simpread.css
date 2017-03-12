@@ -340,8 +340,7 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
     }
 }
 
-.ks-simpread-body-hide,
-.sr-rd-content-exclude {
+.ks-simpread-body-hide {
     display: none;
 }
 
@@ -455,4 +454,8 @@ sr-rd-footer a:active {
     -webkit-box-align: center;
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
+}
+
+.sr-rd-content-exclude {
+    display: none;
 }
