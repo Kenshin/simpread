@@ -12,7 +12,7 @@
 /**
  *  Focus: Background style
  */
-.ks-simpread-bg {
+.simpread-focus-root {
     display: block;
     position: fixed;
     top: 0;
@@ -34,7 +34,7 @@
 /**
  *  Option background style
  */
-.ks-simpread-option-bg {
+.simpread-option-root {
     position: fixed;
     top:  0;
     left: 0;
@@ -84,7 +84,7 @@
     }
 }
 
-.ks-simpread-option-bg-hide {
+.simpread-option-root-hide {
     -webkit-animation: popuphide 0.5s ease;
 }
 
@@ -281,7 +281,7 @@ sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-runnable-
 /**
  *  Read mode background
  */
-.ks-simpread-read {
+.simpread-read-root {
     display: -webkit-flex;
     justify-content:center;
     align-items:center;
@@ -300,7 +300,7 @@ sr-opt-item[sr-type="opacity"] input[type=range]:focus::-webkit-slider-runnable-
     -webkit-font-smoothing: antialiased;
 }
 
-.ks-simpread-read-hide {
+.simpread-read-root-hide {
     -webkit-animation: readmodehide 0.3s ease;
     position: fixed;
 }

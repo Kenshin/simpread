@@ -12,7 +12,7 @@ import th                 from 'theme';
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
 
-const rdcls   = "ks-simpread-read",
+const rdcls   = "simpread-read-root",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
       $root   = $( "html" ),
@@ -50,7 +50,7 @@ class Read extends React.Component {
     componentWillUnmount() {
         $root.removeClass( theme );
         $( "body" ).removeClass( "ks-simpread-body-hide" );
-        $( rdclsjq ).addClass( "ks-simpread-read-hide" );
+        $( rdclsjq ).addClass( "simpread-read-root-hide" );
         $( rdclsjq ).one( "animationend webkitAnimationEnd", () => {
             $( rdclsjq ).remove();
         });
@@ -98,7 +98,7 @@ function getReadRoot() {
 }
 
 /**
- * Verify ks-simpread-read tag exit
+ * Verify simpread-read-root tag exit
  * 
  * @return {boolean}
  */

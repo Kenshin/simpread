@@ -12,7 +12,7 @@ var util     = require( "util" ),
         focusstyle = "z-index: 2147483646; overflow: visible; position: relative;",
         maskcls    = "ks-simpread-mask",
         maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
-        bgcls      = "ks-simpread-bg",
+        bgcls      = "simpread-focus-root",
         bgtmpl     = "<div class=" + bgcls + "></div>",
         bgclsjq    = "." + bgcls;
 

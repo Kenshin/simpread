@@ -5,7 +5,7 @@ import Shortcuts from 'shortcuts';
 import Include   from 'include';
 import Exclude   from 'exclude';
 
-const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ],
+const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ],
       themes = [
         "235, 235, 235, 0.9",
         "216, 216, 216, 0.9",
