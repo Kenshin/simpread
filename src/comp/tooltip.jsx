@@ -20,8 +20,6 @@ const cssinjs = () => {
     const styles = {
 
         root : {
-            font: '300 14px/1 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans',
-
             display: 'flex',
             alignItems: 'center',
             position: 'absolute',
@@ -34,6 +32,7 @@ const cssinjs = () => {
             maxHeight: '150px',
             maxWidth: '400px',
 
+            fontSize: '14px',
             textAlign: 'center',
 
             zIndex: 2000,

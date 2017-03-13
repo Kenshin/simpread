@@ -26,8 +26,6 @@ const cssinjs = () => {
             hidden : 'none',
             root: {},
             root_normal: {
-                font: `300 ${large}/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans`,
-
                 display,
                 position: 'relative',
                 margin: 0,
@@ -230,6 +228,7 @@ const cssinjs_list = () => {
         list_filed_value: {
             display: 'inline',
             width: '100%',
+            fontSize: 'inherit',
         },
 
         list_filed_info: {
