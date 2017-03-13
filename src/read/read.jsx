@@ -13,7 +13,7 @@ import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
 
 const rdcls   = "simpread-read-root",
-      bgtmpl  = `<div class="${rdcls}"></div>`,
+      bgtmpl  = `<div class="${rdcls} simpread-font"></div>`,
       rdclsjq = "." + rdcls,
       $root   = $( "html" ),
       theme   = `sr-rd-theme-bg`;
@@ -64,7 +64,7 @@ class Read extends React.Component {
 
     render() {
         return(
-            <sr-read class="sr-rd-font">
+            <sr-read>
                 <ProgressBar />
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>

@@ -13,7 +13,7 @@ import * as waves   from  'waves';
 
 const optbgcls   = "simpread-option-root",
       optbgclsjq = `.${optbgcls}`,
-      optbg      = `<div class="${ optbgcls }"></div>`;
+      optbg      = `<div class="${ optbgcls } simpread-font"></div>`;
 
 /**
  * Dialog Rect component
