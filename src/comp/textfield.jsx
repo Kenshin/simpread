@@ -46,6 +46,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
+                fontFamily: 'sans-serif',
                 fontSize: medium,
 
                 border: 'none',
@@ -68,6 +69,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
+                fontFamily: 'sans-serif',
                 fontSize: medium,
                 lineHeight,
 

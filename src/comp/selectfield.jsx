@@ -126,8 +126,9 @@ const cssinjs = () => {
                 margin,
                 padding: '0 20px 0 0',
 
-                textAlign: 'left',
+                fontFamily: 'sans-serif',
                 fontSize: medium,
+                textAlign: 'left',
                 lineHeight,
             },
 
