@@ -137,16 +137,19 @@ sr-rd-content li ul {
 }
 
 sr-rd-content pre {
+    font-family: Consolas, Monaco, 'Andale Mono', "Source Code Pro", "Liberation Mono", Courier, monospace;
+
     display: block;
-    font-family: "Source Code Pro", Consolas, "Liberation Mono", Courier, monospace;
+
+    padding: 15px;
+
+    font-size: 1.1rem;
+    line-height: 1.5;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
 
     word-break: break-all;
     word-wrap: break-word;
     white-space: pre;
-
-    padding: 15px;
-    line-height: 1.5;
-    font-size: 1.1rem;
 
     overflow: auto;
 }
