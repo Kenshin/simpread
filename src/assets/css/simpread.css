@@ -69,39 +69,39 @@
     text-shadow: 0 1px rgba(0,0,0,0.3);
 
     will-change: opacity, top, transform;
-    animation: popupshow 0.5s ease;
+    animation: option-show 0.5s ease;
 
     z-index: 2147483647;
 }
 
-@keyframes popupshow {
-    from {
-        opacity: 0;
-        top: 100px;
-        -webkit-transform: scaleX(0);
-    }
-    to {
-        opacity: 1;
-        top: 0;
-        -webkit-transform: scaleX(1);
-    }
-}
-
-@keyframes popuphide {
-    from {
-        opacity: 1;
-        top: 0;
-        -webkit-transform: scaleX(1);
-    }
-    to {
-        opacity: 0;
-        top: 100px;
-        -webkit-transform: scaleX(0);
-    }
-}
-
 .simpread-option-root-hide {
-    animation: popuphide 0.5s ease;
+    animation: option-hide 0.5s ease;
+}
+
+@keyframes option-show {
+    from {
+        opacity: 0;
+        top: 100px;
+        -webkit-transform: scaleX(0);
+    }
+    to {
+        opacity: 1;
+        top: 0;
+        -webkit-transform: scaleX(1);
+    }
+}
+
+@keyframes option-hide {
+    from {
+        opacity: 1;
+        top: 0;
+        -webkit-transform: scaleX(1);
+    }
+    to {
+        opacity: 0;
+        top: 100px;
+        -webkit-transform: scaleX(0);
+    }
 }
 
 /**
