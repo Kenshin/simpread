@@ -50,16 +50,17 @@ class Read extends React.Component {
     componentWillUnmount() {
         $root.removeClass( theme );
         $( "body" ).removeClass( "simpread-hidden" );
-        $( rdclsjq ).addClass( "simpread-read-root-hide" );
-        $( rdclsjq ).one( "animationend webkitAnimationEnd", () => {
-            $( rdclsjq ).remove();
-        });
+        $( rdclsjq ).remove();
+        tooltip.Exit( "sr-read" );
     }
 
    // exit read mode
    exit() {
-        tooltip.Exit( "sr-read" );
-        ReactDOM.unmountComponentAtNode( getReadRoot() );
+        $( rdclsjq )
+            .addClass( "simpread-read-root-hide" )
+            .one( "animationend webkitAnimationEnd", () => {
+            ReactDOM.unmountComponentAtNode( getReadRoot() );
+        });
     }
 
     render() {
