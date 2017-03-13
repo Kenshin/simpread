@@ -31,10 +31,10 @@
     background-color: rgba( 235, 235, 235, 0.9 );
     z-index: 2147483645;
 
-    animation: effect 0.5s linear;
+    animation: focus-show 0.5s linear;
 }
 
-@keyframes effect {
+@keyframes focus-show {
     from { opacity:0; }
     to   { opacity:1; }
 }
