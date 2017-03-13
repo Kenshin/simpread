@@ -13,6 +13,7 @@
 
     color:#333;
 
+    text-rendering: optimizelegibility;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
 }
