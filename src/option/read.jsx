@@ -13,45 +13,53 @@ import Include   from 'include';
 import Exclude   from 'exclude';
 
 const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
-      fontsize = [
-        {
-            icon  : "",
+      fontfamily = [{
+            value : "apple-system",
+            name  : "系统默认（ MAC ）",
+            info  : "ctrl + A",
+            style : {
+                text: { fontFamily: "-apple-system" }
+            }
+        },{
+            value : "pingfang",
+            name  : "苹果苹方字体",
+            info  : "ctrl + B",
+            style : {
+                text: { fontFamily: "PingFang SC" }
+            }
+        },{
+            value : "yahei",
+            name  : "微软雅黑",
+            info  : "",
+            style : {
+                text: { fontFamily: "Microsoft Yahei" }
+            }
+      }],
+      fontsize = [{
             value : "70%",
             name  : "增大",
             info  : "ctrl + A",
-        },
-        {
-            icon  : "",
+        },{
             value : "62.5%",
             name  : "正常",
             info  : "ctrl + B",
-        },
-        {
-            icon  : "",
+        },{
             value : "58%",
             name  : "减小",
-            info  : "",
       }],
-      weight = [
-        {
-            icon  : "",
+      weight = [{
             value : "10%",
             name  : "宽栏",
             info  : "shift + A",
-        },
-        {
-            icon  : "",
+        },{
             value : "20%",
             name  : "正常",
             info  : "shift + B",
-        },
-        {
-            icon  : "",
+        },{
             value : "30%",
             name  : "窄栏",
             info  : "shift + C",
-        },
-],
+}],
 labels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
 
 export default class ReadOpt extends React.Component {
