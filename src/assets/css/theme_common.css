@@ -2,11 +2,11 @@
 
 /**
  * Common style, include:
- * .sr-rd-theme-bg
+ * .simpread-theme-root
  * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, code, sr-blockquote, ul ol
  */
  
-.sr-rd-theme-bg {
+.simpread-theme-root {
     font-size: 62.5%;
 }
 
