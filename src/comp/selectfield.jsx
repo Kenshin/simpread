@@ -287,8 +287,8 @@ class ListView extends React.Component {
 
         const list = this.props.items.map( ( item, idx ) => {
             let [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
-            item.info == "" && ( info_style.display = style.hidden );
-            if ( item.icon != "" ) {
+            ( !item.info || item.info == "" ) && ( info_style.display = style.hidden );
+            if ( item.icon && item.icon != "" ) {
                 icon_style.backgroundImage = `url(${ item.icon })`;
             } else {
                 icon_style.display = style.hidden;
