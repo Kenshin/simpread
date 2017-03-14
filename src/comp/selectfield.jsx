@@ -294,7 +294,7 @@ class ListView extends React.Component {
         style.root = this.props.items.length > 1 ? { ...style.root_normal, ...style.open } : { ...style.root_normal };
 
         const list = this.props.items.map( ( item, idx ) => {
-            const [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
+            let [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
             item.info == "" && ( info_style.display = style.hidden );
             if ( item.icon != "" ) {
                 icon_style.backgroundImage = `url(${ item.icon })`;
@@ -302,6 +302,10 @@ class ListView extends React.Component {
                 icon_style.display = style.hidden;
             }
             item.name == this.props.active && ( name_style.color = selected_color );
+            item.style && item.style.root  && ( style.list_filed = { ...style.list_filed, ...item.style.root });
+            item.style && item.style.icon  && ( icon_style       = { ...icon_style, ...item.style.icon });
+            item.style && item.style.text  && ( name_style       = { ...name_style, ...item.style.text });
+            item.style && item.style.state && ( info_style       = { ...info_style, ...item.style.state });
             return (
                 <list-field class={ this.props.waves } style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
                     <i style={ icon_style }></i>
