@@ -252,20 +252,12 @@ class ListView extends React.Component {
         waves           : "",
         items           : [],
         active          : "",
-        icon            : "",
-        name            : "",
-        value           : "",
-        info            : "",
     };
 
     static propTypes = {
         waves           : React.PropTypes.string,
         items           : React.PropTypes.array,
         active          : React.PropTypes.string,
-        icon            : React.PropTypes.string,
-        name            : React.PropTypes.string,
-        value           : React.PropTypes.string,
-        info            : React.PropTypes.string,
         onChange        : React.PropTypes.func,
     };
 
