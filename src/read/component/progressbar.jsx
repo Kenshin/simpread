@@ -45,5 +45,5 @@ export default class ProcessBar extends React.Component {
  */
 function scrollEventHandle() {
     const offset = document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight );
-    bar.animate( offset );
+    offset && bar.animate( offset );
 }
