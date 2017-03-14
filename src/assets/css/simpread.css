@@ -309,6 +309,8 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
     align-items:center;
 
     position: initial;
+    margin: 0;
+    padding: 20px 20%;
 
     top: 0;
     left: 0;
@@ -340,12 +342,6 @@ sr-read {
     min-height: 400px;
 
     text-align: center;
-
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-    margin-left: 20%;
-    margin-right: 20%;
 }
 
 read-process {
