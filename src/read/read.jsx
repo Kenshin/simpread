@@ -16,7 +16,7 @@ const rdcls   = "simpread-read-root",
       bgtmpl  = `<div class="${rdcls} simpread-font"></div>`,
       rdclsjq = "." + rdcls,
       $root   = $( "html" ),
-      theme   = `sr-rd-theme-bg`;
+      theme   = "simpread-theme-root";
 
 const errorpage = `
         <sr-rd-content-error>
@@ -35,7 +35,6 @@ class Read extends React.Component {
 
     async componentDidMount() {
         $root.addClass( theme ).find( rdclsjq )
-            .addClass( theme )
             .velocity( "slideDown", { duration: 1500, delay: 100 })
             .addClass( "simpread-read-root-show" );
 
