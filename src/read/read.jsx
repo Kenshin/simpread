@@ -64,7 +64,7 @@ class Read extends React.Component {
    exit() {
         $( rdclsjq ).velocity( "slideUp", {
             duration: 1000,
-            complete: function( elements ) {
+            complete: ( elements ) => {
                 ReactDOM.unmountComponentAtNode( getReadRoot() );
             }
         }).addClass( "simpread-read-root-hide" );
