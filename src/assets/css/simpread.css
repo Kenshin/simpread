@@ -31,12 +31,8 @@
     background-color: rgba( 235, 235, 235, 0.9 );
     z-index: 2147483645;
 
-    animation: focus-show 0.5s linear;
-}
-
-@keyframes focus-show {
-    from { opacity:0; }
-    to   { opacity:1; }
+    opacity: 0;
+    transition : opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
 .simpread-focus-highlight {

@@ -48,7 +48,9 @@ var util     = require( "util" ),
         $( "body" ).append( bgtmpl );
 
         // add background color
-        $( bgclsjq ).css({ "background-color" : bgcolor });
+        $( bgclsjq )
+            .css({ "background-color" : bgcolor })
+            .velocity({ opacity: 1 });
 
         // add control bar
         fcontrol.Render( bgclsjq );
@@ -60,19 +62,15 @@ var util     = require( "util" ),
         // click mask remove it
         $( bgclsjq ).on( "click", function( event ) {
             if ( $( event.target ).attr("class") != bgcls ) return;
-
-            // remove include style
-            includeStyle( $target, focusstyle, focuscls, "delete" );
-
-            // remove exclude style
-            excludeStyle( $target, exclude, "add" );
-
-            // remove tooltip
-            tooltip.Exit( bgclsjq );
-
-            // remove background
-            $( bgclsjq ).off( "click" );
-            $( bgclsjq ).remove();
+             $( bgclsjq ).velocity({ opacity: 0 }, {
+                 complete: ()=> {
+                    includeStyle( $target, focusstyle, focuscls, "delete" );
+                    excludeStyle( $target, exclude, "add" );
+                    tooltip.Exit( bgclsjq );
+                    $( bgclsjq ).remove();
+                    $( bgclsjq ).off( "click" );
+                 }
+             });
 
             // remove simpread-focus-mask style
             $parent = $target.parent();
