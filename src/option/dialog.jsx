@@ -49,7 +49,7 @@ export default class Dialog extends React.Component {
         tooltip.Render( optbgclsjq );
         $( optbgclsjq )
             .velocity({ top: 0 }, { queue: false })
-            .velocity({ opacity: 1 }, { queue: false })
+            .velocity({ opacity: 1 });
     }
 
     render() {
