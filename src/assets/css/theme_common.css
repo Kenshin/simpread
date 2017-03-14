@@ -7,7 +7,7 @@
  */
  
 .simpread-theme-root {
-    font-size: 62.5%;
+    font-size: 62.5%!important;
 }
 
 sr-rd-title, sr-rd-desc, sr-rd-content {
