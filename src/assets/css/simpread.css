@@ -55,7 +55,7 @@
 
     position: fixed;
 
-    top:  0;
+    top: -100px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -64,40 +64,8 @@
 
     text-shadow: 0 1px rgba(0,0,0,0.3);
 
-    will-change: opacity, top, transform;
-    animation: option-show 0.5s ease;
-
+    opacity: 0;
     z-index: 2147483647;
-}
-
-.simpread-option-root-hide {
-    animation: option-hide 0.5s ease;
-}
-
-@keyframes option-show {
-    from {
-        opacity: 0;
-        top: 100px;
-        -webkit-transform: scaleX(0);
-    }
-    to {
-        opacity: 1;
-        top: 0;
-        -webkit-transform: scaleX(1);
-    }
-}
-
-@keyframes option-hide {
-    from {
-        opacity: 1;
-        top: 0;
-        -webkit-transform: scaleX(1);
-    }
-    to {
-        opacity: 0;
-        top: 100px;
-        -webkit-transform: scaleX(0);
-    }
 }
 
 /**

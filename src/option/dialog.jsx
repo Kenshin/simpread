@@ -22,9 +22,12 @@ export default class Dialog extends React.Component {
 
     // close dialog
     close( restore = rollback() ) {
-        $( "." + optbgcls ).addClass( "simpread-option-root-hide" );
-        $( "." + optbgcls ).one( "animationend webkitAnimationEnd", () => $( "." + optbgcls ).remove() );
-        tooltip.Exit( optbgclsjq );
+        $( optbgclsjq )
+            .velocity({ top: -100 }, { queue: false })
+            .velocity({ opacity: 0 }, { complete: ()=>{
+                tooltip.Exit( optbgclsjq );
+                $( optbgclsjq ).remove();
+            }});
     }
 
     // save dialog focus option
@@ -44,6 +47,9 @@ export default class Dialog extends React.Component {
     componentDidMount() {
         waves.Render({ root: optbgcls, name: "sr-button" });
         tooltip.Render( optbgclsjq );
+        $( optbgclsjq )
+            .velocity({ top: 0 }, { queue: false })
+            .velocity({ opacity: 1 }, { queue: false })
     }
 
     render() {
