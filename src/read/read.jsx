@@ -13,7 +13,7 @@ import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
 
 const rdcls   = "simpread-read-root",
-      bgtmpl  = `<div class="${rdcls} simpread-font"></div>`,
+      bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
       $root   = $( "html" ),
       theme   = "simpread-theme-root";
@@ -34,9 +34,12 @@ class Read extends React.Component {
     }
 
     async componentDidMount() {
-        $root.addClass( theme ).find( rdclsjq )
-            .velocity( "slideDown", { duration: 1500, delay: 100 })
-            .addClass( "simpread-read-root-show" );
+        $root
+            .addClass( "simpread-font" )
+            .addClass( theme )
+            .find( rdclsjq )
+                .velocity( "slideDown", { duration: 1500, delay: 100 })
+                .addClass( "simpread-read-root-show" );
 
         if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
         if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
