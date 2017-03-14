@@ -34,7 +34,11 @@ class Read extends React.Component {
     }
 
     async componentDidMount() {
-        $root.addClass( theme ).find( rdclsjq ).addClass( theme );
+        $root.addClass( theme ).find( rdclsjq )
+            .addClass( theme )
+            .velocity( "slideDown", { duration: 1500, delay: 100 })
+            .addClass( "simpread-read-root-show" );
+
         if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
         if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
@@ -50,17 +54,18 @@ class Read extends React.Component {
     componentWillUnmount() {
         $root.removeClass( theme );
         $( "body" ).removeClass( "simpread-hidden" );
-        $( rdclsjq )
-            .addClass( "simpread-read-root-hide" )
-            .one( "animationend webkitAnimationEnd", () => {
-            $( rdclsjq ).remove();
-        });
+        $( rdclsjq ).remove();
+        tooltip.Exit( "sr-read" );
     }
 
    // exit read mode
    exit() {
-        tooltip.Exit( "sr-read" );
-        ReactDOM.unmountComponentAtNode( getReadRoot() );
+        $( rdclsjq ).velocity( "slideUp", {
+            duration: 1000,
+            complete: function( elements ) {
+                ReactDOM.unmountComponentAtNode( getReadRoot() );
+            }
+        }).addClass( "simpread-read-root-hide" );
     }
 
     render() {
