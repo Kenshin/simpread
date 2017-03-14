@@ -274,7 +274,6 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
 
     position: initial;
     margin: 0;
-    padding: 20px 20%;
 
     top: 0;
     left: 0;
@@ -301,6 +300,8 @@ opacity input[type=range]:focus::-webkit-slider-runnable-track {
 sr-read {
     display: -webkit-flex;
     flex-flow:column nowrap;
+
+    margin: 20px 20%;
 
     min-width: 400px;
     min-height: 400px;
