@@ -38,7 +38,7 @@ class Read extends React.Component {
             .addClass( "simpread-font" )
             .addClass( theme )
             .find( rdclsjq )
-                .velocity( "slideDown", { duration: 1500, delay: 100 })
+                .velocity( { opacity: 1 }, { delay: 100 })
                 .addClass( "simpread-read-root-show" );
 
         if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
@@ -62,8 +62,8 @@ class Read extends React.Component {
 
    // exit read mode
    exit() {
-        $( rdclsjq ).velocity( "slideUp", {
-            duration: 1000,
+        $( rdclsjq ).velocity( { opacity: 0 }, {
+            delay: 100,
             complete: ( elements ) => {
                 ReactDOM.unmountComponentAtNode( getReadRoot() );
             }
