@@ -5,9 +5,12 @@ import './assets/css/theme_common.css';
 import './vender/notify/notify.css';
 
 import Mousetrap from 'mousetrap';
+import Velocity  from 'velocity';
 import Notify    from 'notify';
+
 import {focus}   from 'focus';
 import * as read from 'read';
+
 import * as st   from 'site';
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as msg  from 'message';
