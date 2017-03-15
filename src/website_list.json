@@ -135,9 +135,9 @@
     },{
         "name"    : "zhuanlan.zhihu.com",
         "url"     : "https://zhuanlan.zhihu.com/p/",
-        "title"   : "<title>",
+        "title"   : "<h1 class='PostIndex-title'>",
         "desc"    : "",
-        "include" : "<section class='entry-content'> ",
+        "include" : "<div class='PostIndex-content'",
         "exclude" : [
             ""
         ]
