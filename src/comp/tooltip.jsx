@@ -13,8 +13,6 @@ console.log( "==== simpread component: ToolTip ====" )
  *
  */
 
-import '../vender/velocity.min.js';
-
 let started = false, timeout, $target, $back, style, styles = new Map();
 const cssinjs = () => {
     const styles = {
