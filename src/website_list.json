@@ -111,7 +111,6 @@
         ]
     },{
         "name"    : "sspai.com",
-        "override": true,
         "url"     : "https://sspai.com/post/",
         "title"   : "<h1 class='title'>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
@@ -238,7 +237,7 @@
         "url"     : "https://www.huxiu.com/article/",
         "title"   : "<h1 class='t-h1'>",
         "desc"    : "",
-        "include" : "<div id='article_content'>",
+        "include" : "<div class='article-content-wrap'>",
         "exclude" : [
             "<div class='neirong-shouquan'>",
             "<div class='neirong-shouquan-public'>"
@@ -443,7 +442,7 @@
         "url"     : "https://ruby-china.org/topics/",
         "title"   : "<h1 class='media-heading'>",
         "desc"    : "",
-        "include" : "<article>",
+        "include" : "[[{$($('.panel-body')[0]).html()}]]",
         "exclude" : [
             ""
         ]
@@ -487,7 +486,6 @@
         ]
     },{
         "name"    : "post.juejin.im",
-        "override": true,
         "url"     : "https://juejin.im/post/",
         "title"   : "<h1 class='post-title'>",
         "desc"    : "",
@@ -497,7 +495,6 @@
         ]
     },{
         "name"    : "entry.juejin.im",
-        "override": true,
         "url"     : "https://juejin.im/entry/",
         "title"   : "[[{$('.entry-public-view h1').text()}]]",
         "desc"    : "<div class='header'>",
@@ -730,7 +727,6 @@
         ]
     },{
         "name"    : "daqianduan.com",
-        "override": true,
         "url"     : "http://www.daqianduan.com/",
         "title"   : "<h1 class='article-title'>",
         "desc"    : "",
@@ -829,7 +825,6 @@
         ]
     },{
         "name"    : "jandan.net",
-        "override": true,
         "url"     : "http://jandan.net/*",
         "title"   : "[[{$('.post h1').text()}]]",
         "desc"    : "",
