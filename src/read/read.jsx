@@ -38,6 +38,7 @@ class Read extends React.Component {
             .addClass( "simpread-font" )
             .addClass( theme )
             .find( rdclsjq )
+                .addClass( theme )
                 .velocity( { opacity: 1 }, { delay: 100 })
                 .addClass( "simpread-read-root-show" );
 
