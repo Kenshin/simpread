@@ -65,7 +65,17 @@
     text-shadow: 0 1px rgba(0,0,0,0.3);
 
     opacity: 0;
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
     z-index: 2147483647;
+}
+
+.simpread-option-root-show {
+    top: 0;
+}
+
+.simpread-option-root-hide {
+    top: -100px;
 }
 
 /**

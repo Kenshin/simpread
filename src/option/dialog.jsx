@@ -23,7 +23,7 @@ export default class Dialog extends React.Component {
     // close dialog
     close( restore = rollback() ) {
         $( optbgclsjq )
-            .velocity({ top: -100 }, { queue: false })
+            .addClass( "simpread-option-root-hide" )
             .velocity({ opacity: 0 }, { complete: ()=>{
                 tooltip.Exit( optbgclsjq );
                 $( optbgclsjq ).remove();
@@ -48,8 +48,8 @@ export default class Dialog extends React.Component {
         waves.Render({ root: optbgcls, name: "sr-button" });
         tooltip.Render( optbgclsjq );
         $( optbgclsjq )
-            .velocity({ top: 0 }, { queue: false })
-            .velocity({ opacity: 1 });
+            .velocity({ opacity: 1 })
+            .addClass( "simpread-option-root-show" );
     }
 
     render() {
