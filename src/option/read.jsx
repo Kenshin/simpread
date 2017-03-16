@@ -13,48 +13,56 @@ import Include        from 'include';
 import Exclude        from 'exclude';
 
 const fontfamily = [{
+            value : "default",
+            name  : "系统默认",
+            info  : "F + 1",
+        },{
             value : "PingFang SC",
             name  : "苹果苹方字体",
-            info  : "ctrl + B",
+            info  : "F + 2",
             style : {
                 text: { fontFamily: "PingFang SC" }
             }
         },{
-            value : "default",
-            name  : "系统默认",
-            info  : "ctrl + A",
-        },{
             value : "Microsoft Yahei",
             name  : "微软雅黑",
-            info  : "",
+            info  : "F + 3",
             style : {
                 text: { fontFamily: "Microsoft Yahei" }
+            }
+      },{
+            value : "Source Han Sans CN",
+            name  : "思源黑体",
+            info  : "F + 4",
+            style : {
+                text: { fontFamily: "Source Han Sans CN" }
             }
       }],
       fontsize = [{
             value : "70%",
             name  : "增大",
-            info  : "ctrl + A",
+            info  : "S + 1",
         },{
             value : "62.5%",
             name  : "正常",
-            info  : "ctrl + B",
+            info  : "S + 2",
         },{
             value : "58%",
             name  : "减小",
+            info  : "S + 3",
       }],
       layout = [{
             value : "15%",
             name  : "宽栏",
-            info  : "shift + A",
+            info  : "W + 1",
         },{
             value : "20%",
             name  : "正常",
-            info  : "shift + B",
+            info  : "W + 2",
         },{
             value : "25%",
             name  : "窄栏",
-            info  : "shift + C",
+            info  : "W + 3",
 }],
 labels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
 
