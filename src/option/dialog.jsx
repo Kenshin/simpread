@@ -1,15 +1,18 @@
 console.log( "=== simpread option dialog ===" )
 
-import Notify    from 'notify';
-import FocusOpt  from 'focusopt';
-import ReadOpt   from 'readopt';
+import FocusOpt     from 'focusopt';
+import ReadOpt      from 'readopt';
+
 import { storage, STORAGE_MODE } from 'storage';
-import * as msg  from 'message';
-import {browser} from 'browser';
-import th        from 'theme';
-import Button    from 'button';
+import * as msg     from 'message';
+import {browser}    from 'browser';
+import th           from 'theme';
+import Notify       from 'notify';
+import * as ss      from 'stylesheet';
+
+import Button       from 'button';
 import * as tooltip from 'tooltip';
-import * as waves   from  'waves';
+import * as waves   from 'waves';
 
 const optbgcls   = "simpread-option-root",
       optbgclsjq = `.${optbgcls}`,
@@ -75,7 +78,12 @@ export default class Dialog extends React.Component {
 function rollback() {
     storage.Restore( storage.current.mode );
     if ( storage.current.mode == STORAGE_MODE.focus ) $( ".simpread-focus-root" ).css({ "background-color" : storage.current.bgcolor });
-    if ( storage.current.mode == STORAGE_MODE.read && th.theme != storage.current.theme ) th.Change( storage.current.theme );
+    if ( storage.current.mode == STORAGE_MODE.read ) {
+        th.theme != storage.current.theme && th.Change( storage.current.theme );
+        ss.FontFamily( storage.current.fontfamily );
+        ss.FontSize( storage.current.fontsize );
+        ss.Layout( storage.current.layout );
+    }
 }
 
 /**
