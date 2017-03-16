@@ -106,7 +106,6 @@ sr-dialog sr-dialog-content {
     height: 100%;
 
     min-height: 244px;
-    max-height: 625px;
 
     padding: 39px 24px 0;
 
@@ -122,7 +121,18 @@ sr-dialog sr-dialog-footer {
     width: 100%;
 
     box-sizing: border-box;
-    border-top: 1px solid rgba(224, 224, 224, 1);
+}
+
+@media all and ( max-height: 783px ) {
+
+    sr-dialog sr-dialog-content {
+        max-height: 625px;
+    }
+
+    sr-dialog sr-dialog-footer {
+        border-top: 1px solid rgba(224, 224, 224, 1);
+    }
+
 }
 
 /**
