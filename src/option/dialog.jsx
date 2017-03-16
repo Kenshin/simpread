@@ -50,7 +50,7 @@ export default class Dialog extends React.Component {
         $( optbgclsjq )
             .velocity({ opacity: 1 })
             .addClass( "simpread-option-root-show" );
-        $("sr-dialog-content").height() < 585 && $("sr-dialog-footer").css( "border-top", "none" );
+        $( "sr-dialog-content" ).height() < 585 && $( "sr-dialog-footer" ).css( "border-top", "none" );
     }
 
     render() {
