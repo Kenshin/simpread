@@ -1,12 +1,10 @@
 console.log( "=== simpread read controlbar load ===" )
 
-//import {browser} from 'browser';
 import * as ss from 'stylesheet';
 
 import setting from 'readsetting';
 import Fab     from 'fab';
 
-//const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` );
 const items = {
     "exit" : {
         "name" : "关闭",

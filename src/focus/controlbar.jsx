@@ -1,14 +1,12 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-//import {browser} from 'browser';
 import * as ss   from 'stylesheet';
 
 import setting   from 'foucsetting';
 import Fab       from 'fab';
 
 let timer, $root;
-//const path = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
-const items  = {
+const items = {
     "exit" : {
         "name" : "关闭",
         "icon" : ss.IconPath("exit_icon"),
