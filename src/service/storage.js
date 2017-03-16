@@ -33,12 +33,13 @@ const name = "simpread",
         sites     : [],    // e.g. [ "<url>", site ]
     },
     read   = {
-        version   : "2017-01-07",
+        version   : "2017-03-16",
         shortcuts : "A A",
         theme     : "github",
-        fontfamily: "",
-        fontsize  : 14,
-        sites     : []    // e.g. [ "<url>", site ]
+        fontfamily: "default",
+        fontsize  : "",  // default 62.5%
+        layout    : "",  // default 20%
+        sites     : []   // e.g. [ "<url>", site ]
     };
 
 let current  = {},
@@ -103,7 +104,7 @@ class Storage {
      * Set current object, current object structure include:
      * 
      * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
-     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily }
+     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
      * 
      * @param {string} @see mode
      */
