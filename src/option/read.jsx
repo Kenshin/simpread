@@ -1,8 +1,8 @@
 console.log( "===== simpread option read mode load =====" )
 
 import { verifyHtml } from 'util';
-import {browser}   from 'browser';
-import th          from 'theme';
+//import {browser}   from 'browser';
+import th             from 'theme';
 
 import TextField   from 'textfield';
 import SelectField from 'selectfield';
@@ -12,8 +12,8 @@ import Shortcuts from 'shortcuts';
 import Include   from 'include';
 import Exclude   from 'exclude';
 
-const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
-      fontfamily = [{
+//const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
+const fontfamily = [{
             value : "apple-system",
             name  : "系统默认（ MAC ）",
             info  : "ctrl + A",
