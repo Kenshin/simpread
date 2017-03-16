@@ -74,9 +74,39 @@ function Opacity( opacity ) {
     }
 }
 
+/**
+ * Set read mode font family
+ * 
+ * @param {string} font family name e.g. PingFang SC; Microsoft Yahei
+ */
+function fontFamily( family ) {
+    $( "sr-read" ).attr( "style", `font-family: ${family}!important` );
+}
+
+/**
+ * Set read mode font size
+ * 
+ * @param {string} font size, e.g. 70% 62.5%
+ */
+function fontSize( value ) {
+    $( "html" ).attr( "style", `font-size: ${value}!important` );
+}
+
+/**
+ * Set read mode layout width
+ * 
+ * @param {string} layout width
+ */
+function layout( width ) {
+    $( "sr-read" ).attr( "style", `margin: 20px ${width}` );
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
     BackgroundColor,
-    Opacity
+    Opacity,
+    fontFamily as FontFamily,
+    fontSize   as FontSize,
+    layout     as Layout,
 }
