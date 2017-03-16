@@ -120,7 +120,9 @@ sr-dialog sr-dialog-footer {
     justify-content:flex-end;
 
     width: 100%;
+
     box-sizing: border-box;
+    border-top: 1px solid rgba(224, 224, 224, 1);
 }
 
 /**
