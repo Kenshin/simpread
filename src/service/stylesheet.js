@@ -1,6 +1,8 @@
 console.log( "=== simpread stylesheet load ===" )
 
-const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ]
+import {browser} from 'browser';
+
+const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ];
 
 /**
  * Get background opacity value
@@ -16,6 +18,14 @@ const getOpacity = value => {
         return null;
     }
 };
+
+/**
+ * Get chrome extension icon path
+ * @param {string} icon name
+ */
+function iconPath( name ) {
+    return browser.extension.getURL( `assets/images/${name}.png` )
+}
 
 /**
  * Get background color value
@@ -65,6 +75,7 @@ function Opacity( opacity ) {
 }
 
 export {
+    iconPath as IconPath,
     getColor as GetColor,
     BackgroundColor,
     Opacity
