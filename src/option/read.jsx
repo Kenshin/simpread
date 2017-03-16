@@ -18,22 +18,29 @@ const fontfamily = [{
             info  : "F + 1",
         },{
             value : "PingFang SC",
-            name  : "苹果苹方字体",
+            name  : "苹方字体",
             info  : "F + 2",
             style : {
                 text: { fontFamily: "PingFang SC" }
             }
         },{
+            value : "冬青黑体",
+            name  : "冬青黑体",
+            info  : "F + 3",
+            style : {
+                text: { fontFamily: "Hiragino Sans GB" }
+            }
+      },{
             value : "Microsoft Yahei",
             name  : "微软雅黑",
-            info  : "F + 3",
+            info  : "F + 4",
             style : {
                 text: { fontFamily: "Microsoft Yahei" }
             }
       },{
             value : "Source Han Sans CN",
             name  : "思源黑体",
-            info  : "F + 4",
+            info  : "F + 5",
             style : {
                 text: { fontFamily: "Source Han Sans CN" }
             }
