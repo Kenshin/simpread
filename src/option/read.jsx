@@ -2,31 +2,32 @@ console.log( "===== simpread option read mode load =====" )
 
 import { verifyHtml } from 'util';
 import th             from 'theme';
+import * as ss        from 'stylesheet';
 
-import TextField   from 'textfield';
-import SelectField from 'selectfield';
+import TextField      from 'textfield';
+import SelectField    from 'selectfield';
 
-import ThemeSel  from 'themesel';
-import Shortcuts from 'shortcuts';
-import Include   from 'include';
-import Exclude   from 'exclude';
+import ThemeSel       from 'themesel';
+import Shortcuts      from 'shortcuts';
+import Include        from 'include';
+import Exclude        from 'exclude';
 
 const fontfamily = [{
-            value : "apple-system",
+            value : "-apple-system",
             name  : "系统默认（ MAC ）",
             info  : "ctrl + A",
             style : {
                 text: { fontFamily: "-apple-system" }
             }
         },{
-            value : "pingfang",
+            value : "PingFang SC",
             name  : "苹果苹方字体",
             info  : "ctrl + B",
             style : {
                 text: { fontFamily: "PingFang SC" }
             }
         },{
-            value : "yahei",
+            value : "Microsoft Yahei",
             name  : "微软雅黑",
             info  : "",
             style : {
@@ -45,8 +46,8 @@ const fontfamily = [{
             value : "58%",
             name  : "减小",
       }],
-      weight = [{
-            value : "10%",
+      layout = [{
+            value : "15%",
             name  : "宽栏",
             info  : "shift + A",
         },{
@@ -54,7 +55,7 @@ const fontfamily = [{
             name  : "正常",
             info  : "shift + B",
         },{
-            value : "30%",
+            value : "25%",
             name  : "窄栏",
             info  : "shift + C",
 }],
@@ -80,10 +81,12 @@ export default class ReadOpt extends React.Component {
 
     changeFontsize( value, name ) {
         console.log( "this.props.option.fontsize = ", value, name )
+        ss.FontSize( value );
     }
 
-    changeWeight( value, name ) {
-        console.log( "this.props.option.weight = ", value, name )
+    changeLayout( value, name ) {
+        console.log( "this.props.option.layout = ", value, name )
+        ss.Layout( value );
     }
 
     changeTitle() {
@@ -130,7 +133,7 @@ export default class ReadOpt extends React.Component {
                     <SelectField waves="sr-selectfield waves-effect waves-button" items={ fontsize } floatingtext="字体大小" placeholder="默认为 正常" onChange={ (v,n)=>this.changeFontsize(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ weight } floatingtext="版面布局" placeholder="默认为 正常" onChange={ (v,n)=>this.changeWeight(v,n) } />
+                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ layout } floatingtext="版面布局" placeholder="默认为 正常" onChange={ (v,n)=>this.changeLayout(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 
