@@ -13,19 +13,16 @@ import Include        from 'include';
 import Exclude        from 'exclude';
 
 const fontfamily = [{
-            value : "-apple-system",
-            name  : "系统默认（ MAC ）",
-            info  : "ctrl + A",
-            style : {
-                text: { fontFamily: "-apple-system" }
-            }
-        },{
             value : "PingFang SC",
             name  : "苹果苹方字体",
             info  : "ctrl + B",
             style : {
                 text: { fontFamily: "PingFang SC" }
             }
+        },{
+            value : "default",
+            name  : "系统默认",
+            info  : "ctrl + A",
         },{
             value : "Microsoft Yahei",
             name  : "微软雅黑",
@@ -79,6 +76,11 @@ export default class ReadOpt extends React.Component {
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
+    changeFontfamily( value, name ) {
+        console.log( "this.props.option.fontfamily = ", value, name )
+        ss.FontFamily( value );
+    }
+
     changeFontsize( value, name ) {
         console.log( "this.props.option.fontsize = ", value, name )
         ss.FontSize( value );
@@ -128,6 +130,9 @@ export default class ReadOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ fontfamily } floatingtext="字体类型" placeholder="默认为 系统类型" onChange={ (v,n)=>this.changeFontfamily(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <SelectField waves="sr-selectfield waves-effect waves-button" items={ fontsize } floatingtext="字体大小" placeholder="默认为 正常" onChange={ (v,n)=>this.changeFontsize(v,n) } />
