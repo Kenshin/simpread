@@ -11,9 +11,9 @@ import Button    from 'button';
 import * as tooltip from 'tooltip';
 import * as waves   from  'waves';
 
-const optbgcls   = "ks-simpread-option-bg",
+const optbgcls   = "simpread-option-root",
       optbgclsjq = `.${optbgcls}`,
-      optbg      = `<div class="${ optbgcls }"></div>`;
+      optbg      = `<div class="${ optbgcls } simpread-font"></div>`;
 
 /**
  * Dialog Rect component
@@ -22,9 +22,12 @@ export default class Dialog extends React.Component {
 
     // close dialog
     close( restore = rollback() ) {
-        $( "." + optbgcls ).addClass( "ks-simpread-option-bg-hide" );
-        $( "." + optbgcls ).one( "animationend webkitAnimationEnd", () => $( "." + optbgcls ).remove() );
-        tooltip.Exit( optbgclsjq );
+        $( optbgclsjq )
+            .addClass( "simpread-option-root-hide" )
+            .velocity({ opacity: 0 }, { complete: ()=>{
+                tooltip.Exit( optbgclsjq );
+                $( optbgclsjq ).remove();
+            }});
     }
 
     // save dialog focus option
@@ -44,6 +47,10 @@ export default class Dialog extends React.Component {
     componentDidMount() {
         waves.Render({ root: optbgcls, name: "sr-button" });
         tooltip.Render( optbgclsjq );
+        $( optbgclsjq )
+            .velocity({ opacity: 1 })
+            .addClass( "simpread-option-root-show" );
+        $( "sr-dialog-content" ).height() < 585 && $( "sr-dialog-footer" ).css( "border-top", "none" );
     }
 
     render() {
@@ -67,7 +74,7 @@ export default class Dialog extends React.Component {
  */
 function rollback() {
     storage.Restore( storage.current.mode );
-    if ( storage.current.mode == STORAGE_MODE.focus ) $( ".ks-simpread-bg" ).css({ "background-color" : storage.current.bgcolor });
+    if ( storage.current.mode == STORAGE_MODE.focus ) $( ".simpread-focus-root" ).css({ "background-color" : storage.current.bgcolor });
     if ( storage.current.mode == STORAGE_MODE.read && th.theme != storage.current.theme ) th.Change( storage.current.theme );
 }
 
@@ -75,7 +82,7 @@ function rollback() {
  * get Dialog background document
  * 
  * @param  {string} target include: body and html
- * @return {jquery} ks-simpread-option-bg jquery object
+ * @return {jquery} simpread-option-root jquery object
  */
 export function getDialogBackground( target = "body" ) {
     if ( $(target).find( "." + optbgcls ).length == 0 ) {

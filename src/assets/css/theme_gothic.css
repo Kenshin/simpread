@@ -26,7 +26,7 @@ sr-rd-content sr-blockquote p {
  * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
  */
 
-.sr-rd-theme-bg {
+.simpread-theme-root {
     background: rgb(252, 252, 252);
     color: #333;
 }

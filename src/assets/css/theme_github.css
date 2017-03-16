@@ -19,7 +19,7 @@ sr-rd-content sr-blockquote {
  * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
  */
 
-.sr-rd-theme-bg {
+.simpread-theme-root {
     background-color: #fff;
     color:#333;
 }

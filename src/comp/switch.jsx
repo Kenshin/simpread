@@ -43,6 +43,7 @@ const cssinjs = () => {
             display: 'block',
             width: '100%',
 
+            fontFamily: 'sans-serif',
             fontSize: '14px',
             fontWeight: 400,
 

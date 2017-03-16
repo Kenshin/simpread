@@ -12,11 +12,11 @@ import th                 from 'theme';
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
 
-const rdcls   = "ks-simpread-read",
+const rdcls   = "simpread-read-root",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
       $root   = $( "html" ),
-      theme   = `sr-rd-theme-bg`;
+      theme   = "simpread-theme-root";
 
 const errorpage = `
         <sr-rd-content-error>
@@ -29,14 +29,21 @@ const errorpage = `
 class Read extends React.Component {
 
     componentWillMount() {
-        $( "body" ).addClass( "ks-simpread-body-hide" );
+        $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
     }
 
     async componentDidMount() {
-        $root.addClass( theme ).find( rdclsjq ).addClass( theme );
+        $root
+            .addClass( "simpread-font" )
+            .addClass( theme )
+            .find( rdclsjq )
+                .addClass( theme )
+                .velocity( { opacity: 1 }, { delay: 100 })
+                .addClass( "simpread-read-root-show" );
+
         if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
-        if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "sr-rd-content-exclude" );
+        if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
         await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
         await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
         await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
@@ -49,22 +56,24 @@ class Read extends React.Component {
 
     componentWillUnmount() {
         $root.removeClass( theme );
-        $( "body" ).removeClass( "ks-simpread-body-hide" );
-        $( rdclsjq ).addClass( "ks-simpread-read-hide" );
-        $( rdclsjq ).one( "animationend webkitAnimationEnd", () => {
-            $( rdclsjq ).remove();
-        });
+        $( "body" ).removeClass( "simpread-hidden" );
+        $( rdclsjq ).remove();
+        tooltip.Exit( "sr-read" );
     }
 
    // exit read mode
    exit() {
-        tooltip.Exit( "sr-read" );
-        ReactDOM.unmountComponentAtNode( getReadRoot() );
+        $( rdclsjq ).velocity( { opacity: 0 }, {
+            delay: 100,
+            complete: ( elements ) => {
+                ReactDOM.unmountComponentAtNode( getReadRoot() );
+            }
+        }).addClass( "simpread-read-root-hide" );
     }
 
     render() {
         return(
-            <sr-read class="sr-rd-font">
+            <sr-read>
                 <ProgressBar />
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
@@ -98,7 +107,7 @@ function getReadRoot() {
 }
 
 /**
- * Verify ks-simpread-read tag exit
+ * Verify simpread-read-root tag exit
  * 
  * @return {boolean}
  */
@@ -195,12 +204,17 @@ async function excludes( $target, exclude ) {
  * @param {jquery} jquery object
  */
 async function htmlbeautify( $target ) {
-    $target.html( ( index, html ) => {
-        return html.trim()
-                .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
-                .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
-                .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
-    });
+    try {
+        $target.html( ( index, html ) => {
+            return html.trim()
+                    .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
+                    .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
+                    .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
+        });
+    } catch ( error ) {
+        console.error( error );
+        return $target.html();
+    }
 }
 
 /**
@@ -208,7 +222,7 @@ async function htmlbeautify( $target ) {
  * - task: all webiste image, remove old image and create new image
  * - task: all webiste sr-blockquote, remove style
  * - task: all webiste iframe, embed add center style
- * - task: all hr tag add sr-rd-content-exclude class
+ * - task: all hr tag add simpread-hidden class
  * - task: all pre/code tag remove class
  * - task: all a tag remove style
  * 
@@ -225,16 +239,20 @@ async function commbeautify( $target ) {
               cnbeta  = $target.attr( "original" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
-                  if ( $img[0].clientHeight > 620 ) {
+                  console.log($img[0].clientHeight )
+                  if ( $img[0].clientWidth > 1000 ) {
+                      $img.css( "zoom",  "0.6" );
+                  }
+                  else if ( $img[0].clientHeight > 620 ) {
                       $img.attr( "height", 620 );
                       if ( $img[0].clientWidth < $("sr-rd-content").width()) $img.css({ "width":"auto" });
                   }
                   if ( $img[0].clientWidth > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               },
               loaderrorHandle = () => {
-                  $img.addClass( "sr-rd-content-exclude" );
+                  $img.addClass( "simpread-hidden" );
                   if ( $img.parent().hasClass( "sr-rd-content-center" )) {
-                      $img.parent().removeAttr( "class" ).addClass( "sr-rd-content-exclude" );
+                      $img.parent().removeAttr( "class" ).addClass( "simpread-hidden" );
                   }
               };
         let  newsrc,
@@ -252,7 +270,7 @@ async function commbeautify( $target ) {
             .wrap( "<div class='sr-rd-content-center'></div>" );
 
         // origin style
-        /*if ( tagname !== "sr-read" && !$parent.hasClass( "sr-rd-content-exclude" ) ) {
+        /*if ( tagname !== "sr-read" && !$parent.hasClass( "simpread-hidden" ) ) {
             $img.parent().unwrap();
         }*/
 
@@ -269,7 +287,7 @@ async function commbeautify( $target ) {
                 tagname = $parent[0].tagName.toLowerCase();
             }
         }
-        if ( !$parent.hasClass( "sr-rd-content-exclude" ) ) {
+        if ( !$parent.hasClass( "simpread-hidden" ) ) {
             $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
         }
         */
@@ -286,7 +304,7 @@ async function commbeautify( $target ) {
         $(item).wrap( "<div class='sr-rd-content-center'></div>" );
     });
     $target.find( "hr" ).map( ( index, item )=> {
-        $(item).addClass( "sr-rd-content-exclude" );
+        $(item).addClass( "simpread-hidden" );
     });
     $target.find( "pre" ).map( ( index, item )=> {
         $(item).find( "code" ).removeAttr( "class" );

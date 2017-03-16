@@ -85,6 +85,7 @@ const webpack = require( 'webpack' ),
           './src/vender/pangu.min.js',
           './src/vender/mousetrap.min.js',
           './src/vender/progressbar.min.js',
+          './src/vender/velocity.min.js',
 
           './src/vender/notify/notify.js'
         ],
@@ -139,6 +140,7 @@ const webpack = require( 'webpack' ),
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           pangu      : __dirname + '/src/vender/pangu.min.js',
           progressbar: __dirname + '/src/vender/progressbar.min.js',
+          velocity   : __dirname + '/src/vender/velocity.min.js',
 
           notify     : __dirname + '/src/vender/notify/notify.js',
 
@@ -149,6 +151,7 @@ const webpack = require( 'webpack' ),
           message    : __dirname + '/src/service/message.js',
           browser    : __dirname + '/src/service/browser.js',
           theme      : __dirname + '/src/service/theme.js',
+          stylesheet : __dirname + '/src/service/stylesheet.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',

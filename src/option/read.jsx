@@ -1,57 +1,77 @@
 console.log( "===== simpread option read mode load =====" )
 
 import { verifyHtml } from 'util';
-import {browser}   from 'browser';
-import th          from 'theme';
+import th             from 'theme';
+import * as ss        from 'stylesheet';
 
-import TextField   from 'textfield';
-import SelectField from 'selectfield';
+import TextField      from 'textfield';
+import SelectField    from 'selectfield';
 
-import ThemeSel  from 'themesel';
-import Shortcuts from 'shortcuts';
-import Include   from 'include';
-import Exclude   from 'exclude';
+import ThemeSel       from 'themesel';
+import Shortcuts      from 'shortcuts';
+import Include        from 'include';
+import Exclude        from 'exclude';
 
-const path  = icon=>browser.extension.getURL( `assets/images/${icon}.png` ),
-      fontsize = [
-        {
-            icon  : "",
+const fontfamily = [{
+            value : "default",
+            name  : "系统默认",
+            info  : "F + 1",
+        },{
+            value : "PingFang SC",
+            name  : "苹方字体",
+            info  : "F + 2",
+            style : {
+                text: { fontFamily: "PingFang SC" }
+            }
+        },{
+            value : "冬青黑体",
+            name  : "冬青黑体",
+            info  : "F + 3",
+            style : {
+                text: { fontFamily: "Hiragino Sans GB" }
+            }
+      },{
+            value : "Microsoft Yahei",
+            name  : "微软雅黑",
+            info  : "F + 4",
+            style : {
+                text: { fontFamily: "Microsoft Yahei" }
+            }
+      },{
+            value : "Source Han Sans CN",
+            name  : "思源黑体",
+            info  : "F + 5",
+            style : {
+                text: { fontFamily: "Source Han Sans CN" }
+            }
+      }],
+      fontsize = [{
             value : "70%",
             name  : "增大",
-            info  : "ctrl + A",
-        },
-        {
-            icon  : "",
+            info  : "S + 1",
+        },{
             value : "62.5%",
             name  : "正常",
-            info  : "ctrl + B",
-        },
-        {
-            icon  : "",
+            info  : "S + 2",
+        },{
             value : "58%",
             name  : "减小",
-            info  : "",
+            info  : "S + 3",
       }],
-      weight = [
-        {
-            icon  : "",
-            value : "10%",
+      layout = [{
+            value : "15%",
             name  : "宽栏",
-            info  : "shift + A",
-        },
-        {
-            icon  : "",
+            info  : "W + 1",
+        },{
             value : "20%",
             name  : "正常",
-            info  : "shift + B",
-        },
-        {
-            icon  : "",
-            value : "30%",
+            info  : "W + 2",
+        },{
+            value : "25%",
             name  : "窄栏",
-            info  : "shift + C",
-        },
-];
+            info  : "W + 3",
+}],
+labels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
 
 export default class ReadOpt extends React.Component {
 
@@ -71,12 +91,19 @@ export default class ReadOpt extends React.Component {
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
-    changeFontsize( value, name ) {
-        console.log( "this.props.option.fontsize = ", value, name )
+    changeFontfamily( value, name ) {
+        console.log( "this.props.option.fontfamily = ", value, name )
+        ss.FontFamily( value );
     }
 
-    changeWeight( value, name ) {
-        console.log( "this.props.option.weight = ", value, name )
+    changeFontsize( value, name ) {
+        console.log( "this.props.option.fontsize = ", value, name )
+        ss.FontSize( value );
+    }
+
+    changeLayout( value, name ) {
+        console.log( "this.props.option.layout = ", value, name )
+        ss.Layout( value );
     }
 
     changeTitle() {
@@ -111,19 +138,22 @@ export default class ReadOpt extends React.Component {
 
     render() {
         return (
-            <sr-opt-focus>
+            <sr-opt-read>
                 <sr-opt-gp>
                     <sr-opt-label>主题色</sr-opt-label>
-                    <ThemeSel themes={ th.colors } names={ th.names } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
+                    <ThemeSel themes={ th.colors } names={ th.names } labels={ labels } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
+                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ fontfamily } floatingtext="字体类型" placeholder="默认为 系统类型" onChange={ (v,n)=>this.changeFontfamily(v,n) } />
+                </sr-opt-gp>
+                <sr-opt-gp>
                     <SelectField waves="sr-selectfield waves-effect waves-button" items={ fontsize } floatingtext="字体大小" placeholder="默认为 正常" onChange={ (v,n)=>this.changeFontsize(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ weight } floatingtext="版面布局" placeholder="默认为 正常" onChange={ (v,n)=>this.changeWeight(v,n) } />
+                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ layout } floatingtext="版面布局" placeholder="默认为 正常" onChange={ (v,n)=>this.changeLayout(v,n) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 
@@ -150,7 +180,7 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
                 </sr-opt-gp>
-            </sr-opt-focus>
+            </sr-opt-read>
         )
     }
 }

@@ -2,12 +2,12 @@
 
 /**
  * Common style, include:
- * .sr-rd-theme-bg
+ * .simpread-theme-root
  * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, code, sr-blockquote, ul ol
  */
  
-.sr-rd-theme-bg {
-    font-size: 62.5%;
+.simpread-theme-root {
+    font-size: 62.5%!important;
 }
 
 sr-rd-title, sr-rd-desc, sr-rd-content {
@@ -137,16 +137,19 @@ sr-rd-content li ul {
 }
 
 sr-rd-content pre {
+    font-family: Consolas, Monaco, 'Andale Mono', "Source Code Pro", "Liberation Mono", Courier, monospace;
+
     display: block;
-    font-family: "Source Code Pro", Consolas, "Liberation Mono", Courier, monospace;
+
+    padding: 15px;
+
+    font-size: 1.1rem;
+    line-height: 1.5;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
 
     word-break: break-all;
     word-wrap: break-word;
     white-space: pre;
-
-    padding: 15px;
-    line-height: 1.5;
-    font-size: 1.1rem;
 
     overflow: auto;
 }
@@ -158,7 +161,6 @@ sr-rd-content pre div {
 sr-rd-content pre * {
     font-size: 1.1rem;
 }
-
 
 sr-rd-content pre,
 sr-rd-content li pre code,
@@ -182,4 +184,35 @@ sr-rd-content p code {
     margin: 0 4px;
     padding: 2px 4px;
     font-size: 1.1rem;
+}
+
+.sr-rd-content-img {
+    width: 90%;
+    height: auto;
+}
+
+.sr-rd-content-img-load {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    padding: 0;
+    border-style: none;
+    border-width: 0;
+    background-repeat: no-repeat;
+    background-image: url( "../images/loading.gif" );
+}
+
+.sr-rd-content-center {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
+}
+
+.sr-rd-content-nobeautify {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: 0 0 0;
 }

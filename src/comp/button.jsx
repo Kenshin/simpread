@@ -41,6 +41,7 @@ const cssinjs = () => {
             margin: '6px',
             padding: 0,
 
+            fontFamily: 'sans-serif',
             textDecoration: 'none',
 
             cursor: 'pointer',

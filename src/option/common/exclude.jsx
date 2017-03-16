@@ -46,7 +46,6 @@ export default class Exclude extends React.Component {
     <div class="wsx_fade" style="pointer-events: none;"></div>
     sdasdfas
     h1
-    <div class="ks-simpread-bg">
  *
  * @return {object}
  * good array: verify success htmls e.g.:
@@ -55,7 +54,6 @@ export default class Exclude extends React.Component {
         <div class="col-xs-12 col-md-9 main ">
         <img id="icon4weChat" style="height: 0;width: 0;">
         <div class="wsx_fade" style="pointer-events: none;"></div>
-        <div class="ks-simpread-bg">
     bad array: error htmls, e.g.:
         sdasdfas
         h1

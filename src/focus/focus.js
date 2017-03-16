@@ -8,11 +8,11 @@ var util     = require( "util" ),
 
     var $parent,
         tag,
-        focuscls   = "ks-simpread-focus",
+        focuscls   = "simpread-focus-highlight",
         focusstyle = "z-index: 2147483646; overflow: visible; position: relative;",
-        maskcls    = "ks-simpread-mask",
+        maskcls    = "simpread-focus-mask",
         maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
-        bgcls      = "ks-simpread-bg",
+        bgcls      = "simpread-focus-root",
         bgtmpl     = "<div class=" + bgcls + "></div>",
         bgclsjq    = "." + bgcls;
 
@@ -35,7 +35,7 @@ var util     = require( "util" ),
         // set exclude style
         excludeStyle( $target, exclude, "delete" );
 
-        // add ks-simpread-mask
+        // add simpread-focus-mask
         $parent = $target.parent();
         tag     = $parent[0].tagName;
         while ( tag.toLowerCase() != "body" ) {
@@ -48,7 +48,9 @@ var util     = require( "util" ),
         $( "body" ).append( bgtmpl );
 
         // add background color
-        $( bgclsjq ).css({ "background-color" : bgcolor });
+        $( bgclsjq )
+            .css({ "background-color" : bgcolor })
+            .velocity({ opacity: 1 });
 
         // add control bar
         fcontrol.Render( bgclsjq );
@@ -60,21 +62,17 @@ var util     = require( "util" ),
         // click mask remove it
         $( bgclsjq ).on( "click", function( event ) {
             if ( $( event.target ).attr("class") != bgcls ) return;
+             $( bgclsjq ).velocity({ opacity: 0 }, {
+                 complete: ()=> {
+                    includeStyle( $target, focusstyle, focuscls, "delete" );
+                    excludeStyle( $target, exclude, "add" );
+                    tooltip.Exit( bgclsjq );
+                    $( bgclsjq ).remove();
+                    $( bgclsjq ).off( "click" );
+                 }
+             });
 
-            // remove include style
-            includeStyle( $target, focusstyle, focuscls, "delete" );
-
-            // remove exclude style
-            excludeStyle( $target, exclude, "add" );
-
-            // remove tooltip
-            tooltip.Exit( bgclsjq );
-
-            // remove background
-            $( bgclsjq ).off( "click" );
-            $( bgclsjq ).remove();
-
-            // remove ks-simpread-mask style
+            // remove simpread-focus-mask style
             $parent = $target.parent();
             tag     = $parent[0].tagName;
             while ( tag && tag.toLowerCase() != "body" ) {

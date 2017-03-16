@@ -5,8 +5,9 @@ import Shortcuts from 'shortcuts';
 import Include   from 'include';
 import Exclude   from 'exclude';
 
-const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ],
-      themes = [
+import * as ss   from 'stylesheet';
+
+const themes = [
         "235, 235, 235, 0.9",
         "216, 216, 216, 0.9",
         "229, 221, 208, 0.9",
@@ -15,29 +16,21 @@ const [ bgcolorstyl, bgcls ] = [ "background-color", ".ks-simpread-bg" ],
         "28, 31, 43, 0.9",
         "61, 66, 70, 0.9",
         "17, 18, 20, 0.9"
-    ];
+    ],
+    labels = [ "白练", "灰青", "素色", "鸟之子色", "青磁鼠", "焦茶", "御纳戸色", "黒鸢" ];
 
 export default class FocusOpt extends React.Component {
 
     changeBgColor( bgcolor, $target ) {
-        bgcolor       = $target.css( bgcolorstyl );
-        const color   = getColor( bgcolor ),
-              opacity = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
-              newval  = `rgba(${color}, ${opacity})`;
-        $( bgcls ).css( bgcolorstyl, newval );
-        this.props.option.bgcolor = newval;
+        bgcolor = $target.css( "background-color" );
+        this.props.option.bgcolor = ss.BackgroundColor( bgcolor );
         console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
     }
 
     changeOpacity() {
-        const bgcolor = $( bgcls ).css( bgcolorstyl ),
-              opacity = event.target.value,
-              color   = getColor( bgcolor ),
-              newval  = `rgba(${color}, ${opacity / 100})`;
-        if ( color ) {
-            $( bgcls ).css( bgcolorstyl, newval );
-            this.props.option.bgcolor = newval;
-        }
+        const opacity = event.target.value,
+              bgcolor = ss.Opacity( opacity );
+        bgcolor && ( this.props.option.bgcolor = bgcolor );
         this.props.option.opacity = opacity;
         console.log( "this.props.option.opacity = ", this.props.option.opacity )
     }
@@ -66,16 +59,16 @@ export default class FocusOpt extends React.Component {
             <sr-opt-focus>
                 <sr-opt-gp>
                     <sr-opt-label>主题色</sr-opt-label>
-                    <ThemeSel themes={ themes } names={ themes } theme={ getColor(this.props.option.bgcolor) + ", 0.9" } changeBgColor={ (val,target)=>this.changeBgColor(val,target) } />
+                    <ThemeSel themes={ themes } names={ themes } labels={ labels } theme={ ss.GetColor(this.props.option.bgcolor) + ", 0.9" } changeBgColor={ (val,target)=>this.changeBgColor(val,target) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度</sr-opt-label>
-                    <sr-opt-item sr-type="opacity">
+                    <opacity>
                         <input ref="opacity"
                             type="range" min="50" max="95" step="5" 
                             onChange={ ()=> this.changeOpacity() }
                         />
-                    </sr-opt-item>
+                    </opacity>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
@@ -88,35 +81,5 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
             </sr-opt-focus>
         )
-    }
-}
-
-/**
- * Get background opacity value
- * 
- * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {string} e.g. 0.901961
- */
-function getOpacity( value ) {
-    const arr = value.match( /[0-9.]+(\))$/ig );
-    if ( arr.length > 0 ) {
-        return arr.join( "" ).replace( ")", "" );
-    } else {
-        return null;
-    }
-}
-
-/**
- * Get background color value
- * 
- * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {string} e.g. 235, 235, 235
- */
-function getColor( value ) {
-    const arr = value.match( /[0-9]+, /ig );
-    if ( arr.length > 0 ) {
-        return arr.join( "" ).replace( /, $/, "" );
-    } else {
-        return null;
     }
 }

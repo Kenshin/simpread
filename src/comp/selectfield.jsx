@@ -26,8 +26,6 @@ const cssinjs = () => {
             hidden : 'none',
             root: {},
             root_normal: {
-                font: `300 ${large}/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans`,
-
                 display,
                 position: 'relative',
                 margin: 0,
@@ -126,8 +124,9 @@ const cssinjs = () => {
                 margin,
                 padding: '0 20px 0 0',
 
-                textAlign: 'left',
+                fontFamily: 'sans-serif',
                 fontSize: medium,
+                textAlign: 'left',
                 lineHeight,
             },
 
@@ -229,6 +228,7 @@ const cssinjs_list = () => {
         list_filed_value: {
             display: 'inline',
             width: '100%',
+            fontSize: 'inherit',
         },
 
         list_filed_info: {
@@ -252,20 +252,12 @@ class ListView extends React.Component {
         waves           : "",
         items           : [],
         active          : "",
-        icon            : "",
-        name            : "",
-        value           : "",
-        info            : "",
     };
 
     static propTypes = {
         waves           : React.PropTypes.string,
         items           : React.PropTypes.array,
         active          : React.PropTypes.string,
-        icon            : React.PropTypes.string,
-        name            : React.PropTypes.string,
-        value           : React.PropTypes.string,
-        info            : React.PropTypes.string,
         onChange        : React.PropTypes.func,
     };
 
@@ -294,14 +286,18 @@ class ListView extends React.Component {
         style.root = this.props.items.length > 1 ? { ...style.root_normal, ...style.open } : { ...style.root_normal };
 
         const list = this.props.items.map( ( item, idx ) => {
-            const [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
-            item.info == "" && ( info_style.display = style.hidden );
-            if ( item.icon != "" ) {
+            let [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
+            ( !item.info || item.info == "" ) && ( info_style.display = style.hidden );
+            if ( item.icon && item.icon != "" ) {
                 icon_style.backgroundImage = `url(${ item.icon })`;
             } else {
                 icon_style.display = style.hidden;
             }
             item.name == this.props.active && ( name_style.color = selected_color );
+            item.style && item.style.root  && ( style.list_filed = { ...style.list_filed, ...item.style.root });
+            item.style && item.style.icon  && ( icon_style       = { ...icon_style, ...item.style.icon });
+            item.style && item.style.text  && ( name_style       = { ...name_style, ...item.style.text });
+            item.style && item.style.state && ( info_style       = { ...info_style, ...item.style.state });
             return (
                 <list-field class={ this.props.waves } style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
                     <i style={ icon_style }></i>

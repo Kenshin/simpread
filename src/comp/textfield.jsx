@@ -24,8 +24,6 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
           styles      = {
             hidden : 'none',
             root: {
-                font: `300 ${large}/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans`,
-
                 display,
                 position: 'relative',
                 margin: 0,
@@ -46,6 +44,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
+                fontFamily: 'sans-serif',
                 fontSize: medium,
 
                 border: 'none',
@@ -68,6 +67,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 margin,
                 padding: 0,
 
+                fontFamily: 'sans-serif',
                 fontSize: medium,
                 lineHeight,
 
@@ -172,6 +172,7 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 fontSize: medium,
                 fontWeight,
                 lineHeight,
+                textAlign: 'initial',
 
                 userSelect: 'none',
 
