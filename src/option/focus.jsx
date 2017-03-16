@@ -7,7 +7,6 @@ import Exclude   from 'exclude';
 
 import * as ss   from 'stylesheet';
 
-//const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ],
 const themes = [
         "235, 235, 235, 0.9",
         "216, 216, 216, 0.9",
@@ -24,27 +23,11 @@ export default class FocusOpt extends React.Component {
 
     changeBgColor( bgcolor, $target ) {
         bgcolor = $target.css( "background-color" );
-        /*
-        const color   = getColor( bgcolor ),
-              opacity = getOpacity( $( bgcls ).css( bgcolorstyl ) ),
-              newval  = `rgba(${color}, ${opacity})`;
-        $( bgcls ).css( bgcolorstyl, newval );
-        */
         this.props.option.bgcolor = ss.BackgroundColor( bgcolor );
         console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
     }
 
     changeOpacity() {
-        /*
-        const bgcolor = $( bgcls ).css( bgcolorstyl ),
-              opacity = event.target.value,
-              color   = getColor( bgcolor ),
-              newval  = `rgba(${color}, ${opacity / 100})`;
-        if ( color ) {
-            $( bgcls ).css( bgcolorstyl, newval );
-            this.props.option.bgcolor = newval;
-        }
-        */
         const opacity = event.target.value,
               bgcolor = ss.Opacity( opacity );
         bgcolor && ( this.props.option.bgcolor = bgcolor );
@@ -100,37 +83,3 @@ export default class FocusOpt extends React.Component {
         )
     }
 }
-
-/**
- * Get background opacity value
- * 
- * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {string} e.g. 0.901961
- */
-/*
-function getOpacity( value ) {
-    const arr = value.match( /[0-9.]+(\))$/ig );
-    if ( arr.length > 0 ) {
-        return arr.join( "" ).replace( ")", "" );
-    } else {
-        return null;
-    }
-}
-*/
-
-/**
- * Get background color value
- * 
- * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {string} e.g. 235, 235, 235
- */
-/*
-function getColor( value ) {
-    const arr = value.match( /[0-9]+, /ig );
-    if ( arr.length > 0 ) {
-        return arr.join( "" ).replace( /, $/, "" );
-    } else {
-        return null;
-    }
-}
-*/
