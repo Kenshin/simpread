@@ -151,6 +151,7 @@ const webpack = require( 'webpack' ),
           message    : __dirname + '/src/service/message.js',
           browser    : __dirname + '/src/service/browser.js',
           theme      : __dirname + '/src/service/theme.js',
+          stylesheet : __dirname + '/src/service/stylesheet.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
