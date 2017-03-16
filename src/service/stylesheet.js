@@ -80,9 +80,7 @@ function Opacity( opacity ) {
  * @param {string} font family name e.g. PingFang SC; Microsoft Yahei
  */
 function fontFamily( family ) {
-    family == "default" ? 
-        $( "sr-read" ).removeAttr( "style" ) : 
-        $( "sr-read" ).attr( "style", `font-family: ${family}!important` );
+    $( "sr-read" ).css( "font-family", family == "default" ? "" : family );
 }
 
 /**
@@ -100,7 +98,7 @@ function fontSize( value ) {
  * @param {string} layout width
  */
 function layout( width ) {
-    $( "sr-read" ).attr( "style", `margin: 20px ${width}` );
+    $( "sr-read" ).css( "margin", `20px ${width}` );
 }
 
 export {
