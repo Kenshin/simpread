@@ -43,6 +43,7 @@ const name = "simpread",
     };
 
 let current  = {},
+    curori   = {},
     origin   = {},
     simpread = {
         focus,
@@ -109,11 +110,23 @@ class Storage {
      * @param {string} @see mode
      */
     Setcur( key ) {
-        setCode( key, 0 );
+        //setCode( key, 0 );
         const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
         current      = swap( simpread[key], {} );
         current.url  = url;
         current.mode = key;
+        let arr = st.Getsite( new Map( simpread[key].sites ), url );
+        arr  ? setCode( key, 0 ) : setCode( key, 1 );
+        !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
+        if ( arr ) {
+            current.site = arr[0];
+            current.url  = arr[1];
+        } else {
+            sites.set( url, clone( site ));
+            current.site = sites.get( url );
+            setCode( key, -1 );
+        }
+        /*
         current.site = sites.get( url );
         while( !current.site ) {
             const arr = st.Getsite( new Map( simpread.sites ), url );
@@ -126,8 +139,11 @@ class Storage {
                 current.site = sites.get( url );
                 setCode( key, -1 );
             }
-            simpread[key].sites.push([ current.url, current.site ]);
+            //simpread[key].sites.push([ current.url, current.site ]);
         }
+        */
+        curori      = { ...current };
+        curori.site = { ...current.site };
         console.log( "current site object is ", current )
     }
 
@@ -137,8 +153,14 @@ class Storage {
      * @param {string} @see mode
      */
     Set( key ) {
-        swap( current, simpread[key] );
-        save();
+        const { code } = compare();
+        if ( code != 0 ) {
+            ( code == 2 || code == 3 ) && simpread[key].sites.push([ current.url, current.site ]);
+            swap( current, simpread[key] );
+            save();
+        }
+        console.log( simpread[key] )
+        return code;
     }
 
     /**
@@ -262,7 +284,9 @@ function addsites( sites ) {
 function save() {
     browser.storage.local.set( { [name] : simpread }, function() {
         console.log( "chrome storage save success!", simpread );
-        origin   = clone( simpread );
+        origin      = clone( simpread );
+        curori      = { ...current };
+        curori.site = { ...current.site };
     });
 }
 
@@ -276,6 +300,31 @@ function setCode( type, value ) {
     if ( type == mode.read ) rdstcode = value;
 }
 
+/**
+ * Compare current and curori( origin_current )
+ * 
+ * return {object}
+ *      code    {number} include 0: equal； 1: option changed; 2: site changed; 3: all changed
+ *      changed {array}  changed key, e.g. [ "theme", "title", "exclude" ]
+ */
+function compare() {
+    let key, code = 0, changed = [], site_changed = false;
+    for ( key of Object.keys( curori ) ) {
+        if ( typeof curori[key] == "string" && curori[key] != current[key] ) {
+            changed.push( key );
+            code = 1;
+        }
+    }
+    for ( key of Object.keys( curori.site ) ) {
+        if ( ( typeof curori.site[key] == "object" && curori.site[key].join( "" ) != current.site[key].join( "" ) ) || curori.site[key] != current.site[key] ) {
+            changed.push( key );
+            site_changed = true;
+        }
+    }
+    site_changed && ( code = code + 2 );
+    console.log( code, changed );
+    return { code, changed };
+}
 const storage = new Storage();
 
 export {
