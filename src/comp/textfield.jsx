@@ -253,10 +253,10 @@ export default class TextField extends React.Component {
         for( const key of Object.keys(this.props) ) {
             if ( this.props[key] != nextProps[key] ) {
                 switch (key) {
-                    case "errortext":
+                    /*case "errortext":
                         setjQueryObj( this.refs );
                         changeState( styles.get(this.state.id), nextProps.errortext );
-                        break;
+                        break;*/
                     case "value":
                         this.refs.target.value = nextProps.value;
                         break;
