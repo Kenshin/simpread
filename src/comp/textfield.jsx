@@ -249,6 +249,7 @@ export default class TextField extends React.Component {
         if ( this.props.onKeyDown ) this.props.onKeyDown( event );
     }
 
+    /*
     componentWillUpdate( nextProps ) {
         for( const key of Object.keys(this.props) ) {
             if ( this.props[key] != nextProps[key] ) {
@@ -260,6 +261,7 @@ export default class TextField extends React.Component {
             }
         }
     }
+    */
 
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
@@ -288,6 +290,7 @@ export default class TextField extends React.Component {
             onKeyDown: ()=>this.changeKeyDown(),
         },
         tooltip = this.props.tooltip;
+        style = styles.get(this.state.id);
 
         element = this.props.multi ? (
             <textarea ref="target" 
