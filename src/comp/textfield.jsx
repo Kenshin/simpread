@@ -30,7 +30,6 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 padding: 0,
 
                 width,
-                height: '45px',
                 lineHeight: 1,
             },
 
@@ -164,20 +163,21 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
             error : {
                 display,
-                position: 'absolute',
+                position: 'relative',
 
                 margin,
-                width: '110%',
+                maxWidth: '428px',
 
                 fontSize: medium,
                 fontWeight,
                 lineHeight,
                 textAlign: 'initial',
+                wordWrap: 'break-word',
 
                 userSelect: 'none',
 
                 color: error_color,
-                transform: 'scale(0.75) translate( -80px, 0 )',
+                transform: 'scale(0.75) translate( -73px, 0 )',
             },
 
         };
@@ -265,6 +265,7 @@ export default class TextField extends React.Component {
         }
     }
 
+    /*
     componentDidUpdate( prevProps, prevState ) {
         setjQueryObj( this.refs );
         style = styles.get(this.state.id);
@@ -274,6 +275,7 @@ export default class TextField extends React.Component {
             $error.parent().height( style.root.height );
         }
     }
+    */
 
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
@@ -282,10 +284,10 @@ export default class TextField extends React.Component {
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows        = this.props.rows - MIN_ROWS,
                   txheight    = Number.parseInt(style.textarea.height),
-                  inheight    = Number.parseInt(style.input.height),
-                  parheight   = Number.parseInt(style.root.height);
+                  inheight    = Number.parseInt(style.input.height);
+                  //parheight   = Number.parseInt(style.root.height);
              style.textarea.height = `${txheight + rows * steps}px`;
-             style.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
+             //style.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
         }
         style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
         style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
