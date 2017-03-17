@@ -110,7 +110,6 @@ class Storage {
      * @param {string} @see mode
      */
     Setcur( key ) {
-        //setCode( key, 0 );
         const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
         current      = swap( simpread[key], {} );
         current.url  = url;
@@ -126,22 +125,6 @@ class Storage {
             current.site = sites.get( url );
             setCode( key, -1 );
         }
-        /*
-        current.site = sites.get( url );
-        while( !current.site ) {
-            const arr = st.Getsite( new Map( simpread.sites ), url );
-            if ( arr ) {
-                current.site = arr[0];
-                current.url  = arr[1];
-                setCode( key, 1 );
-            } else {
-                sites.set( url, clone( site ));
-                current.site = sites.get( url );
-                setCode( key, -1 );
-            }
-            //simpread[key].sites.push([ current.url, current.site ]);
-        }
-        */
         curori      = { ...current };
         curori.site = { ...current.site };
         console.log( "current site object is ", current )
