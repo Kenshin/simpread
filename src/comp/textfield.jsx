@@ -253,10 +253,6 @@ export default class TextField extends React.Component {
         for( const key of Object.keys(this.props) ) {
             if ( this.props[key] != nextProps[key] ) {
                 switch (key) {
-                    /*case "errortext":
-                        setjQueryObj( this.refs );
-                        changeState( styles.get(this.state.id), nextProps.errortext );
-                        break;*/
                     case "value":
                         this.refs.target.value = nextProps.value;
                         break;
@@ -264,18 +260,6 @@ export default class TextField extends React.Component {
             }
         }
     }
-
-    /*
-    componentDidUpdate( prevProps, prevState ) {
-        setjQueryObj( this.refs );
-        style = styles.get(this.state.id);
-        if ( this.props.errortext != "" ) {
-            $error.parent().height( Number.parseInt(style.root.height) + $error.height() );
-        } else if ( this.props.errortext == "" ) {
-            $error.parent().height( style.root.height );
-        }
-    }
-    */
 
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
@@ -285,9 +269,7 @@ export default class TextField extends React.Component {
             const rows        = this.props.rows - MIN_ROWS,
                   txheight    = Number.parseInt(style.textarea.height),
                   inheight    = Number.parseInt(style.input.height);
-                  //parheight   = Number.parseInt(style.root.height);
              style.textarea.height = `${txheight + rows * steps}px`;
-             //style.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
         }
         style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
         style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
