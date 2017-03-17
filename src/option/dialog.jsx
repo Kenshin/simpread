@@ -36,10 +36,13 @@ export default class Dialog extends React.Component {
     // save dialog focus option
     save() {
         console.log( "dialog click submit button.", storage.current )
-        storage.Set( storage.current.mode );
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
-        if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
-        new Notify().Render( 0, "更新成功！" );
+        if ( storage.Set( storage.current.mode ) != 0 ) {
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
+            if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
+            new Notify().Render( 0, "更新成功！" );
+        } else {
+            new Notify().Render( 0, "没有改变任何内容。" );
+        }
         this.close( false );
     }
 
