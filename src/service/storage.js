@@ -142,7 +142,6 @@ class Storage {
             swap( current, simpread[key] );
             save();
         }
-        console.log( simpread[key] )
         return code;
     }
 
@@ -305,7 +304,7 @@ function compare() {
         }
     }
     site_changed && ( code = code + 2 );
-    console.log( code, changed );
+    console.log( "current changed state is ", code, changed );
     return { code, changed };
 }
 const storage = new Storage();
