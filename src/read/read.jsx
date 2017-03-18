@@ -245,9 +245,8 @@ async function commbeautify( $target ) {
               cnbeta  = $target.attr( "original" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
-                  console.log($img[0].clientHeight )
                   if ( $img[0].clientWidth > 1000 ) {
-                      $img.css( "zoom",  "0.6" );
+                      $img.css( "zoom", "0.6" );
                   }
                   else if ( $img[0].clientHeight > 620 ) {
                       $img.attr( "height", 620 );
