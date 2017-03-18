@@ -15,6 +15,11 @@ const items = {
         "icon" : ss.IconPath("setting_icon"),
         "color": "#03A9F4",
     },
+    "send" : {
+        "name" : "发送到 Pocket",
+        "icon" : ss.IconPath("send_icon"),
+        "color": "#4CAF50",
+    },
     "layout" : {
         "name" : "版面布局",
         "icon" : ss.IconPath("layout_icon"),
