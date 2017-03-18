@@ -124,7 +124,7 @@ function specAction( content ) {
             type       = 1;
             break;
         case "/":
-            content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "" ).replace( /'/g, '"' );
+            content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "\\" ).replace( /'/g, '"' );
             type       = 2;
             break;
         case "[":
