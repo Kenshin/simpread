@@ -18,7 +18,7 @@ const items = {
     "save" : {
         "name" : "暂存",
         "icon" : ss.IconPath("save_icon"),
-        "color": "#8BC34A",
+        "color": "#FF5722",
     },
     "send" : {
         "name" : "发送到 Pocket",
@@ -29,28 +29,6 @@ const items = {
         "name" : "共享",
         "icon" : ss.IconPath("share_icon"),
         "color": "#8BC34A",
-    },
-    "layout" : {
-        "name" : "版面布局",
-        "icon" : ss.IconPath("layout_icon"),
-        "color": "#FFEB3B",
-        "items": {
-            "wightlarge" : {
-                "name" : "加宽",
-                "icon" : ss.IconPath("layout_large_icon"),
-                "color": "#FFEB3B",
-            },
-            "wightnormal" : {
-                "name" : "正常",
-                "icon" : ss.IconPath("layout_normal_icon"),
-                "color": "#FFEB3B",
-            },
-            "wightsmall" : {
-                "name" : "窄",
-                "icon" : ss.IconPath("layout_small_icon"),
-                "color": "#FFEB3B",
-            },
-        },
     },
     "down" : {
         "name" : "向下滚动 ↓",
@@ -78,6 +56,33 @@ const items = {
                 "color": "#9E9E9E",
             },
         },
+    },
+    "layout" : {
+        "name" : "版面布局",
+        "icon" : ss.IconPath("layout_icon"),
+        "color": "#FFEB3B",
+        "items": {
+            "wightlarge" : {
+                "name" : "加宽",
+                "icon" : ss.IconPath("layout_large_icon"),
+                "color": "#FFEB3B",
+            },
+            "wightnormal" : {
+                "name" : "正常",
+                "icon" : ss.IconPath("layout_normal_icon"),
+                "color": "#FFEB3B",
+            },
+            "wightsmall" : {
+                "name" : "窄",
+                "icon" : ss.IconPath("layout_small_icon"),
+                "color": "#FFEB3B",
+            },
+        },
+    },
+    "theme" : {
+        "name" : "主题",
+        "icon" : ss.IconPath("theme_icon"),
+        "color": "#FFEB3B",
     },
 },
     tooltip_options = {
