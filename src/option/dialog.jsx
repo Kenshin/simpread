@@ -1,15 +1,18 @@
 console.log( "=== simpread option dialog ===" )
 
-import Notify    from 'notify';
-import FocusOpt  from 'focusopt';
-import ReadOpt   from 'readopt';
+import FocusOpt     from 'focusopt';
+import ReadOpt      from 'readopt';
+
 import { storage, STORAGE_MODE } from 'storage';
-import * as msg  from 'message';
-import {browser} from 'browser';
-import th        from 'theme';
-import Button    from 'button';
+import * as msg     from 'message';
+import {browser}    from 'browser';
+import th           from 'theme';
+import Notify       from 'notify';
+import * as ss      from 'stylesheet';
+
+import Button       from 'button';
 import * as tooltip from 'tooltip';
-import * as waves   from  'waves';
+import * as waves   from 'waves';
 
 const optbgcls   = "simpread-option-root",
       optbgclsjq = `.${optbgcls}`,
@@ -33,10 +36,14 @@ export default class Dialog extends React.Component {
     // save dialog focus option
     save() {
         console.log( "dialog click submit button.", storage.current )
-        storage.Set( storage.current.mode );
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
-        if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
-        new Notify().Render( 0, "更新成功！" );
+        const code = storage.Set( storage.current.mode );
+        if ( code != 0 ) {
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
+            if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
+            code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，重新进入后生效！" )
+        } else {
+            new Notify().Render( 0, "没有改变任何内容。" );
+        }
         this.close( false );
     }
 
@@ -75,7 +82,12 @@ export default class Dialog extends React.Component {
 function rollback() {
     storage.Restore( storage.current.mode );
     if ( storage.current.mode == STORAGE_MODE.focus ) $( ".simpread-focus-root" ).css({ "background-color" : storage.current.bgcolor });
-    if ( storage.current.mode == STORAGE_MODE.read && th.theme != storage.current.theme ) th.Change( storage.current.theme );
+    if ( storage.current.mode == STORAGE_MODE.read ) {
+        th.theme != storage.current.theme && th.Change( storage.current.theme );
+        ss.FontFamily( storage.current.fontfamily );
+        ss.FontSize( storage.current.fontsize );
+        ss.Layout( storage.current.layout );
+    }
 }
 
 /**

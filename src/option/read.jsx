@@ -24,7 +24,7 @@ const fontfamily = [{
                 text: { fontFamily: "PingFang SC" }
             }
         },{
-            value : "冬青黑体",
+            value : "Hiragino Sans GB",
             name  : "冬青黑体",
             info  : "F + 3",
             style : {
@@ -46,31 +46,37 @@ const fontfamily = [{
             }
       }],
       fontsize = [{
-            value : "70%",
-            name  : "增大",
-            info  : "S + 1",
-        },{
             value : "62.5%",
             name  : "正常",
             info  : "S + 2",
+        },{
+            value : "70%",
+            name  : "增大",
+            info  : "S + 1",
         },{
             value : "58%",
             name  : "减小",
             info  : "S + 3",
       }],
       layout = [{
-            value : "15%",
-            name  : "宽栏",
-            info  : "W + 1",
-        },{
             value : "20%",
             name  : "正常",
             info  : "W + 2",
+        },{
+            value : "15%",
+            name  : "宽栏",
+            info  : "W + 1",
         },{
             value : "25%",
             name  : "窄栏",
             info  : "W + 3",
 }],
+getName = ( value, items ) => {
+    for ( const item of items ) {
+        if ( value == "" ) return item.name;
+        else if ( item.value == value ) return item.name;
+    }
+},
 labels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
 
 export default class ReadOpt extends React.Component {
@@ -92,18 +98,21 @@ export default class ReadOpt extends React.Component {
     }
 
     changeFontfamily( value, name ) {
-        console.log( "this.props.option.fontfamily = ", value, name )
         ss.FontFamily( value );
+        this.props.option.fontfamily = value;
+        console.log( "this.props.option.fontfamily = ", value, name )
     }
 
     changeFontsize( value, name ) {
-        console.log( "this.props.option.fontsize = ", value, name )
         ss.FontSize( value );
+        this.props.option.fontsize = value;
+        console.log( "this.props.option.fontsize = ", value, name )
     }
 
     changeLayout( value, name ) {
-        console.log( "this.props.option.layout = ", value, name )
         ss.Layout( value );
+        this.props.option.layout = value;
+        console.log( "this.props.option.layout = ", value, name )
     }
 
     changeTitle() {
@@ -147,13 +156,25 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ fontfamily } floatingtext="字体类型" placeholder="默认为 系统类型" onChange={ (v,n)=>this.changeFontfamily(v,n) } />
+                    <SelectField waves="sr-selectfield waves-effect waves-button"
+                        name={ getName( this.props.option.fontfamily, fontfamily )} items={ fontfamily }
+                        floatingtext="字体类型" placeholder="默认为 系统类型"
+                        onChange={ (v,n)=>this.changeFontfamily(v,n) }
+                    />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ fontsize } floatingtext="字体大小" placeholder="默认为 正常" onChange={ (v,n)=>this.changeFontsize(v,n) } />
+                    <SelectField waves="sr-selectfield waves-effect waves-button"
+                        name={ getName( this.props.option.fontsize, fontsize )} items={ fontsize }
+                        floatingtext="字体大小" placeholder="默认为 正常"
+                        onChange={ (v,n)=>this.changeFontsize(v,n) }
+                    />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button" items={ layout } floatingtext="版面布局" placeholder="默认为 正常" onChange={ (v,n)=>this.changeLayout(v,n) } />
+                    <SelectField waves="sr-selectfield waves-effect waves-button"
+                        name={ getName( this.props.option.layout, layout )} items={ layout }
+                        floatingtext="版面布局" placeholder="默认为 正常"
+                        onChange={ (v,n)=>this.changeLayout(v,n) }
+                    />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <TextField 

@@ -30,7 +30,6 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 padding: 0,
 
                 width,
-                height: '45px',
                 lineHeight: 1,
             },
 
@@ -164,20 +163,21 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
 
             error : {
                 display,
-                position: 'absolute',
+                position: 'relative',
 
                 margin,
-                width: '110%',
+                maxWidth: '428px',
 
                 fontSize: medium,
                 fontWeight,
                 lineHeight,
                 textAlign: 'initial',
+                wordWrap: 'break-word',
 
                 userSelect: 'none',
 
                 color: error_color,
-                transform: 'scale(0.75) translate( -80px, 0 )',
+                transform: 'scale(0.75) translate( -73px, 0 )',
             },
 
         };
@@ -201,10 +201,11 @@ export default class TextField extends React.Component {
         rows        : MIN_ROWS + 1,
         password    : false,
         value       : "",
+        override    : false,
         placeholder : "",
         floatingtext: "",
         errortext   : "",
-        tooltip      : {},
+        tooltip     : {},
     };
 
     static propTypes = {
@@ -212,6 +213,7 @@ export default class TextField extends React.Component {
         rows        : React.PropTypes.number,
         password    : React.PropTypes.bool,
         value       : React.PropTypes.string,
+        override    : React.PropTypes.bool,
         placeholder : React.PropTypes.string,
         floatingtext: React.PropTypes.string,
         errortext   : React.PropTypes.string,
@@ -258,20 +260,10 @@ export default class TextField extends React.Component {
                         changeState( styles.get(this.state.id), nextProps.errortext );
                         break;
                     case "value":
-                        this.refs.target.value = nextProps.value;
+                        nextProps.override && ( this.refs.target.value = nextProps.value );
                         break;
                 }
             }
-        }
-    }
-
-    componentDidUpdate( prevProps, prevState ) {
-        setjQueryObj( this.refs );
-        style = styles.get(this.state.id);
-        if ( this.props.errortext != "" ) {
-            $error.parent().height( Number.parseInt(style.root.height) + $error.height() );
-        } else if ( this.props.errortext == "" ) {
-            $error.parent().height( style.root.height );
         }
     }
 
@@ -282,10 +274,8 @@ export default class TextField extends React.Component {
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows        = this.props.rows - MIN_ROWS,
                   txheight    = Number.parseInt(style.textarea.height),
-                  inheight    = Number.parseInt(style.input.height),
-                  parheight   = Number.parseInt(style.root.height);
+                  inheight    = Number.parseInt(style.input.height);
              style.textarea.height = `${txheight + rows * steps}px`;
-             style.root.height     = `${parheight - inheight + txheight + rows * steps}px`;
         }
         style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
         style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
@@ -304,6 +294,7 @@ export default class TextField extends React.Component {
             onKeyDown: ()=>this.changeKeyDown(),
         },
         tooltip = this.props.tooltip;
+        style = styles.get(this.state.id);
 
         element = this.props.multi ? (
             <textarea ref="target" 

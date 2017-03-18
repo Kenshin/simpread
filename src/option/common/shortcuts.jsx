@@ -39,7 +39,7 @@ export default class Shortcuts extends React.Component {
     render() {
         return (
             <TextField 
-                multi={ false } 
+                multi={ false } override="true"
                 floatingtext="快捷键" 
                 value={ this.state.value }
                 errortext={ this.state.error }

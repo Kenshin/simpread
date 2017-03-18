@@ -3,12 +3,14 @@ console.log( "=== simpread read load ===" )
 import pangu       from 'pangu';
 import ProgressBar from 'readschedule';
 import Footer      from 'readfooter';
-
 import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
+
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
+import * as ss            from 'stylesheet';
+
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
 
@@ -41,6 +43,10 @@ class Read extends React.Component {
                 .addClass( theme )
                 .velocity( { opacity: 1 }, { delay: 100 })
                 .addClass( "simpread-read-root-show" );
+
+        this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
+        this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
+        this.props.read.layout     && ss.Layout( this.props.read.layout );
 
         if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
         if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
@@ -239,9 +245,8 @@ async function commbeautify( $target ) {
               cnbeta  = $target.attr( "original" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
-                  console.log($img[0].clientHeight )
                   if ( $img[0].clientWidth > 1000 ) {
-                      $img.css( "zoom",  "0.6" );
+                      $img.css( "zoom", "0.6" );
                   }
                   else if ( $img[0].clientHeight > 620 ) {
                       $img.attr( "height", 620 );

@@ -89,7 +89,7 @@ function fontFamily( family ) {
  * @param {string} font size, e.g. 70% 62.5%
  */
 function fontSize( value ) {
-    $( "html" ).attr( "style", `font-size: ${value}!important` );
+    value ? $( "html" ).attr( "style", `font-size: ${value}!important` ) : $( "html" ).css( "font-size", "" );
 }
 
 /**
@@ -98,7 +98,7 @@ function fontSize( value ) {
  * @param {string} layout width
  */
 function layout( width ) {
-    $( "sr-read" ).css( "margin", `20px ${width}` );
+    $( "sr-read" ).css( "margin", width ? `20px ${width}` : "" );
 }
 
 export {
