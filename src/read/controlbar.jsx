@@ -25,6 +25,11 @@ const items = {
         "icon" : ss.IconPath("send_icon"),
         "color": "#4CAF50",
     },
+    "share" : {
+        "name" : "共享",
+        "icon" : ss.IconPath("share_icon"),
+        "color": "#8BC34A",
+    },
     "layout" : {
         "name" : "版面布局",
         "icon" : ss.IconPath("layout_icon"),
@@ -73,11 +78,6 @@ const items = {
                 "color": "#9E9E9E",
             },
         },
-    },
-    "share" : {
-        "name" : "共享",
-        "icon" : ss.IconPath("share_icon"),
-        "color": "#8BC34A",
     },
 },
     tooltip_options = {
