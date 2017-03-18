@@ -82,7 +82,19 @@ const items = {
     "theme" : {
         "name" : "主题",
         "icon" : ss.IconPath("theme_icon"),
-        "color": "#FFEB3B",
+        "color": "#FB8C00",
+        "items": {
+            "themeprev" : {
+                "name" : "前一个主题",
+                "icon" : ss.IconPath("theme_prev_icon"),
+                "color": "#FB8C00",
+            },
+            "themenext" : {
+                "name" : "后一个主题",
+                "icon" : ss.IconPath("theme_next_icon"),
+                "color": "#FB8C00",
+            },
+        },
     },
 },
     tooltip_options = {
