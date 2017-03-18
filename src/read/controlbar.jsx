@@ -37,6 +37,16 @@ const items = {
             },
         },
     },
+    "down" : {
+        "name" : "向下滚动 ↓",
+        "icon" : ss.IconPath("down_icon"),
+        "color": "#00BCD4",
+    },
+    "up" : {
+        "name" : "向上滚动 ↑",
+        "icon" : ss.IconPath("up_icon"),
+        "color": "#00BCD4",
+    },
     "fontsize" : {
         "name" : "字体大小",
         "icon" : ss.IconPath("fontsize_icon"),
