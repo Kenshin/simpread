@@ -45,12 +45,17 @@ const items = {
         "icon" : ss.IconPath("fontsize_icon"),
         "color": "#9E9E9E",
         "items": {
-            "fontsizeup" : {
+            "fontsizelarge" : {
                 "name" : "增大",
                 "icon" : ss.IconPath("fontsize_large_icon"),
                 "color": "#9E9E9E",
             },
-            "fontsizedown" : {
+            "fontsizenormal" : {
+                "name" : "正常",
+                "icon" : ss.IconPath("fontsize_normal_icon"),
+                "color": "#9E9E9E",
+            },
+            "fontsizesmall" : {
                 "name" : "减小",
                 "icon" : ss.IconPath("fontsize_small_icon"),
                 "color": "#9E9E9E",
