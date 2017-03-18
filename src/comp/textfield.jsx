@@ -201,10 +201,11 @@ export default class TextField extends React.Component {
         rows        : MIN_ROWS + 1,
         password    : false,
         value       : "",
+        override    : false,
         placeholder : "",
         floatingtext: "",
         errortext   : "",
-        tooltip      : {},
+        tooltip     : {},
     };
 
     static propTypes = {
@@ -212,6 +213,7 @@ export default class TextField extends React.Component {
         rows        : React.PropTypes.number,
         password    : React.PropTypes.bool,
         value       : React.PropTypes.string,
+        override    : React.PropTypes.bool,
         placeholder : React.PropTypes.string,
         floatingtext: React.PropTypes.string,
         errortext   : React.PropTypes.string,
@@ -249,19 +251,21 @@ export default class TextField extends React.Component {
         if ( this.props.onKeyDown ) this.props.onKeyDown( event );
     }
 
-    /*
     componentWillUpdate( nextProps ) {
         for( const key of Object.keys(this.props) ) {
             if ( this.props[key] != nextProps[key] ) {
                 switch (key) {
+                    case "errortext":
+                        setjQueryObj( this.refs );
+                        changeState( styles.get(this.state.id), nextProps.errortext );
+                        break;
                     case "value":
-                        this.refs.target.value = nextProps.value;
+                        nextProps.override && ( this.refs.target.value = nextProps.value );
                         break;
                 }
             }
         }
     }
-    */
 
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
@@ -279,19 +283,6 @@ export default class TextField extends React.Component {
 
     componentDidMount() {
         this.refs.target.value = this.props.value;
-    }
-
-    componentWillUpdate( nextProps ) {
-        for( const key of Object.keys(this.props) ) {
-            if ( this.props[key] != nextProps[key] ) {
-                switch (key) {
-                    case "errortext":
-                        setjQueryObj( this.refs );
-                        changeState( styles.get(this.state.id), nextProps.errortext );
-                        break;
-                }
-            }
-        }
     }
 
     render() {
