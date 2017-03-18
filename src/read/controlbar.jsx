@@ -20,6 +20,11 @@ const items = {
         "icon" : ss.IconPath("save_icon"),
         "color": "#FF5722",
     },
+    "download" : {
+        "name" : "导出",
+        "icon" : ss.IconPath("download_icon"),
+        "color": "#673AB7",
+    },
     "send" : {
         "name" : "发送到 Pocket",
         "icon" : ss.IconPath("send_icon"),
