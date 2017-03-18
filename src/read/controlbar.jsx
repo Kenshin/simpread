@@ -15,24 +15,24 @@ const items = {
         "icon" : ss.IconPath("setting_icon"),
         "color": "#03A9F4",
     },
-    "weight" : {
+    "layout" : {
         "name" : "版面布局",
-        "icon" : ss.IconPath("weight_icon"),
+        "icon" : ss.IconPath("layout_icon"),
         "color": "#FFEB3B",
         "items": {
             "wightlarge" : {
                 "name" : "加宽",
-                "icon" : ss.IconPath("weight_large_icon"),
+                "icon" : ss.IconPath("layout_large_icon"),
                 "color": "#FFEB3B",
             },
             "wightnormal" : {
                 "name" : "正常",
-                "icon" : ss.IconPath("weight_normal_icon"),
+                "icon" : ss.IconPath("layout_normal_icon"),
                 "color": "#FFEB3B",
             },
             "wightsmall" : {
                 "name" : "窄",
-                "icon" : ss.IconPath("weight_small_icon"),
+                "icon" : ss.IconPath("layout_small_icon"),
                 "color": "#FFEB3B",
             },
         },
