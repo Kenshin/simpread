@@ -45,6 +45,38 @@ const items = {
         "icon" : ss.IconPath("up_icon"),
         "color": "#00BCD4",
     },
+    "fontfamil" : {
+        "name" : "字体样式",
+        "icon" : ss.IconPath("fontfamily_icon"),
+        "color": "#9C27B0",
+        "items": {
+            "fontfamily_default" : {
+                "name" : "系统默认",
+                "icon" : ss.IconPath("fontfamily_default_icon"),
+                "color": "#9C27B0",
+            },
+            "fontfamily_hansans" : {
+                "name" : "思源黑体",
+                "icon" : ss.IconPath("fontfamily_hansans_icon"),
+                "color": "#9C27B0",
+            },
+            "fontfamily_yahei" : {
+                "name" : "微软雅黑",
+                "icon" : ss.IconPath("fontfamily_yahei_icon"),
+                "color": "#9C27B0",
+            },
+            "fontfamily_pingfang" : {
+                "name" : "苹方",
+                "icon" : ss.IconPath("fontfamily_pingfang_icon"),
+                "color": "#9C27B0",
+            },
+            "fontfamily_hiragino" : {
+                "name" : "冬青黑体",
+                "icon" : ss.IconPath("fontfamily_hiragino_icon"),
+                "color": "#9C27B0",
+            },
+        },
+    },
     "fontsize" : {
         "name" : "字体大小",
         "icon" : ss.IconPath("fontsize_icon"),
