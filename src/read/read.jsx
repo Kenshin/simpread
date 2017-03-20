@@ -67,6 +67,19 @@ class Read extends React.Component {
         tooltip.Exit( "sr-read" );
     }
 
+    /**
+     * Controlbar action event
+     * @param {string} type, include: scroll, option
+     * @param {string} value 
+     */
+    onAction( type, value ) {
+        switch ( type ) {
+            case "scroll":
+                $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
+                break;
+        }
+    }
+
    // exit read mode
    exit() {
         $( rdclsjq ).velocity( { opacity: 0 }, {
@@ -85,7 +98,7 @@ class Read extends React.Component {
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
                 <Footer />
-                <ReadCtlbar exit={ ()=> this.exit() } />
+                <ReadCtlbar exit={ ()=> this.exit() } onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
         )
     }
