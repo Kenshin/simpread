@@ -36,12 +36,12 @@ const items = {
         "color": "#8BC34A",
     },
     "down" : {
-        "name" : "向下滚动 ↓",
+        "name" : "向下滚动",
         "icon" : ss.IconPath("down_icon"),
         "color": "#00BCD4",
     },
     "up" : {
-        "name" : "向上滚动 ↑",
+        "name" : "向上滚动",
         "icon" : ss.IconPath("up_icon"),
         "color": "#00BCD4",
     },
