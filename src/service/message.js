@@ -6,6 +6,7 @@ const action = {
     shortcuts      : "shortcuts",
     browser_action : "browser_action",
     tab_selected   : "tab_selected",
+    new_tab        : "new_tab",
 };
 
 /**
