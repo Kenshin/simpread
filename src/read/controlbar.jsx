@@ -198,7 +198,6 @@ export default class ReadCtlbar extends React.Component {
                         url = `http://service.weibo.com/share/share.php?url=${ this.props.site.url }&title=${ this.props.site.title }`;
                         break;
                 }
-                console.log( url )
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
                 break;
             case [ "exit", "setting", "save" ].includes( type ):
