@@ -45,7 +45,7 @@ const items = {
         "icon" : ss.IconPath("up_icon"),
         "color": "#00BCD4",
     },
-    "fontfamil" : {
+    "fontfamily" : {
         "name" : "字体样式",
         "icon" : ss.IconPath("fontfamily_icon"),
         "color": "#9C27B0",
@@ -152,6 +152,10 @@ const items = {
  */
 class ReadCtlbar extends React.Component {
 
+    static propTypes = {
+        onAction: React.PropTypes.func,
+    }
+
     open() {
         setting.Render();
     }
@@ -164,6 +168,10 @@ class ReadCtlbar extends React.Component {
                 break;
             case type == "setting":
                 action();
+                break;
+            case [ "fontfamily", "fontsize", "layout", "theme" ].includes( type ):
+                console.log("adfadfadfasdasdf")
+                this.props.onAction && this.props.onAction( type );
                 break;
         }
     }
