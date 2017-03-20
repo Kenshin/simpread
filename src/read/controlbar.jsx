@@ -2,7 +2,6 @@ console.log( "=== simpread read controlbar load ===" )
 
 import * as ss from 'stylesheet';
 
-//import setting from 'readsetting';
 import Fab     from 'fab';
 
 const items = {
@@ -150,7 +149,7 @@ const items = {
  * 
  * @class
  */
-class ReadCtlbar extends React.Component {
+export default class ReadCtlbar extends React.Component {
 
     static propTypes = {
         onAction: React.PropTypes.func,
@@ -162,9 +161,6 @@ class ReadCtlbar extends React.Component {
             case ["exit", "setting" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
                 break;
-            /*case type == "setting":
-                action();
-                break;*/
             case [ "up", "down" ].includes( type ):
                 this.props.onAction && this.props.onAction( "scroll", type == "up" ? -200 : 200 );
                 break;
@@ -179,18 +175,4 @@ class ReadCtlbar extends React.Component {
             <Fab items={ items } tooltip={ tooltip_options } waves="sr-fab waves-circle waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
-}
-
-/**
- * Call setting adaper
- */
-/*
-function action( type ) {
-    setting.Render();
-}
-*/
-
-export {
-    ReadCtlbar,
-    //action as ReadCtlAdapter,
 }
