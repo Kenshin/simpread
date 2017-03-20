@@ -180,6 +180,24 @@ export default class ReadCtlbar extends React.Component {
     onAction( event, type ) {
         console.log( "fab type is =", type )
         switch ( true ) {
+            case type.startsWith( "share" ):
+                let url = "";
+                switch ( type.split("_")[1] ) {
+                    case "facebook":
+                        url = `https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=${ this.props.site.url }`;
+                        break;
+                    case "twitter":
+                        url = `https://twitter.com/intent/tweet?&text=${ this.props.site.title }&url=${ this.props.site.url }`;
+                        break;
+                    case "gplus":
+                        url = `https://plus.google.com/share?url=${ this.props.site.url }`;
+                        break;
+                    case "weibo":
+                        url = `http://service.weibo.com/share/share.php?url=${ this.props.site.url }&title=${ this.props.site.title }`;
+                        break;
+                }
+                console.log( url )
+                break;
             case [ "exit", "setting", "save" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
                 break;
