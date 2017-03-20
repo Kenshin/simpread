@@ -153,11 +153,8 @@ const items = {
 class ReadCtlbar extends React.Component {
 
     static propTypes = {
+        exit    : React.propTypes.func,
         onAction: React.PropTypes.func,
-    }
-
-    open() {
-        setting.Render();
     }
 
     onAction( event, type ) {
@@ -170,7 +167,6 @@ class ReadCtlbar extends React.Component {
                 action();
                 break;
             case [ "fontfamily", "fontsize", "layout", "theme" ].includes( type ):
-                console.log("adfadfadfasdasdf")
                 this.props.onAction && this.props.onAction( type );
                 break;
         }
