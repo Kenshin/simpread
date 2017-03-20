@@ -158,12 +158,12 @@ class ReadCtlbar extends React.Component {
 
     onAction( event, type ) {
         console.log( "fab type is =", type )
-        switch ( type ) {
-            case "exit":
+        switch ( true ) {
+            case type == "exit":
                 this.props.exit();
                 break;
-            case "setting":
-                action( type );
+            case type == "setting":
+                action();
                 break;
         }
     }
@@ -177,13 +177,9 @@ class ReadCtlbar extends React.Component {
 
 /**
  * Call setting adaper
- * 
- * @param {string} type, include: 'setting'
  */
 function action( type ) {
-    if ( type == "setting" ) {
-        setting.Render();
-    }
+    setting.Render();
 }
 
 export {
