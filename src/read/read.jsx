@@ -87,6 +87,11 @@ class Read extends React.Component {
             case "scroll":
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
                 break;
+            case "fontfamily":
+            case "fontsize":
+            case "layout":
+                storage.current[type]=value;
+                break;
         }
     }
 

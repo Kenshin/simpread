@@ -206,8 +206,9 @@ export default class ReadCtlbar extends React.Component {
             case [ "up", "down" ].includes( type ):
                 this.props.onAction && this.props.onAction( "scroll", type == "up" ? -200 : 200 );
                 break;
-            case [ "fontfamily", "fontsize", "layout", "theme" ].includes( type ):
-                this.props.onAction && this.props.onAction( type );
+            case type.startsWith( "fontfamily" ) || type.startsWith( "fontsize" ) || type.startsWith( "layout" ):
+                const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
+                this.props.onAction && this.props.onAction( key, value );
                 break;
         }
     }
