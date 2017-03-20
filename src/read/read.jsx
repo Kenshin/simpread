@@ -4,6 +4,7 @@ import pangu       from 'pangu';
 import ProgressBar from 'readschedule';
 import Footer      from 'readfooter';
 import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
+import setting     from 'readsetting';
 
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -69,13 +70,16 @@ class Read extends React.Component {
 
     /**
      * Controlbar action event
-     * @param {string} type, include: exit, scroll, option
+     * @param {string} type, include: exit, setting, scroll, option
      * @param {string} value 
      */
     onAction( type, value ) {
         switch ( type ) {
             case "exit":
                 this.exit();
+                break;
+            case "setting":
+                setting.Render();
                 break;
             case "scroll":
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
@@ -135,7 +139,8 @@ function getReadRoot() {
  */
 function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        if (action) ReadCtlAdapter( "setting" );
+        //if (action) ReadCtlAdapter( "setting" );
+        setting.Render();
         return true;
     } else {
         return false;

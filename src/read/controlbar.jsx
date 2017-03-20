@@ -2,7 +2,7 @@ console.log( "=== simpread read controlbar load ===" )
 
 import * as ss from 'stylesheet';
 
-import setting from 'readsetting';
+//import setting from 'readsetting';
 import Fab     from 'fab';
 
 const items = {
@@ -159,12 +159,12 @@ class ReadCtlbar extends React.Component {
     onAction( event, type ) {
         console.log( "fab type is =", type )
         switch ( true ) {
-            case type == "exit":
+            case ["exit", "setting" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
                 break;
-            case type == "setting":
+            /*case type == "setting":
                 action();
-                break;
+                break;*/
             case [ "up", "down" ].includes( type ):
                 this.props.onAction && this.props.onAction( "scroll", type == "up" ? -200 : 200 );
                 break;
@@ -184,11 +184,13 @@ class ReadCtlbar extends React.Component {
 /**
  * Call setting adaper
  */
+/*
 function action( type ) {
     setting.Render();
 }
+*/
 
 export {
     ReadCtlbar,
-    action as ReadCtlAdapter,
+    //action as ReadCtlAdapter,
 }
