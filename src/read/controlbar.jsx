@@ -33,6 +33,28 @@ const items = {
         "name" : "共享",
         "icon" : ss.IconPath("share_icon"),
         "color": "#8BC34A",
+        "items": {
+            "share_facebook" : {
+                "name" : "Facebook",
+                "icon" : ss.IconPath("share_facebook_icon"),
+                "color": "#8BC34A",
+            },
+            "share_twitter" : {
+                "name" : "Twitter",
+                "icon" : ss.IconPath("share_twitter_icon"),
+                "color": "#8BC34A",
+            },
+            "share_gplus" : {
+                "name" : "Google G+",
+                "icon" : ss.IconPath("share_gplus_icon"),
+                "color": "#8BC34A",
+            },
+            "share_weibo" : {
+                "name" : "新浪微博",
+                "icon" : ss.IconPath("share_weibo_icon"),
+                "color": "#8BC34A",
+            },
+        },
     },
     "down" : {
         "name" : "向下滚动",
