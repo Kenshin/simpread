@@ -166,6 +166,10 @@ class ReadCtlbar extends React.Component {
             case type == "setting":
                 action();
                 break;
+            case [ "up", "down" ].includes( type ):
+                //const offset = $( "body" ).scrollTop() + ( type == "up" ? -200 : 200 );
+                //$( "sr-read" ).velocity( "scroll", { offset });
+                break;
             case [ "fontfamily", "fontsize", "layout", "theme" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
                 break;
