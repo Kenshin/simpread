@@ -55,24 +55,24 @@ const items = {
                 "icon" : ss.IconPath("fontfamily_default_icon"),
                 "color": "#9C27B0",
             },
-            "fontfamily_hansans" : {
-                "name" : "思源黑体",
-                "icon" : ss.IconPath("fontfamily_hansans_icon"),
-                "color": "#9C27B0",
-            },
-            "fontfamily_yahei" : {
-                "name" : "微软雅黑",
-                "icon" : ss.IconPath("fontfamily_yahei_icon"),
-                "color": "#9C27B0",
-            },
-            "fontfamily_pingfang" : {
+            "fontfamily_PingFang SC" : {
                 "name" : "苹方",
                 "icon" : ss.IconPath("fontfamily_pingfang_icon"),
                 "color": "#9C27B0",
             },
-            "fontfamily_hiragino" : {
+            "fontfamily_Hiragino Sans GB" : {
                 "name" : "冬青黑体",
                 "icon" : ss.IconPath("fontfamily_hiragino_icon"),
+                "color": "#9C27B0",
+            },
+            "fontfamily_Microsoft Yahei" : {
+                "name" : "微软雅黑",
+                "icon" : ss.IconPath("fontfamily_yahei_icon"),
+                "color": "#9C27B0",
+            },
+            "fontfamily_Source Han Sans CN" : {
+                "name" : "思源黑体",
+                "icon" : ss.IconPath("fontfamily_hansans_icon"),
                 "color": "#9C27B0",
             },
         },
@@ -82,17 +82,17 @@ const items = {
         "icon" : ss.IconPath("fontsize_icon"),
         "color": "#9E9E9E",
         "items": {
-            "fontsizelarge" : {
+            "fontsize_70%" : {
                 "name" : "增大",
                 "icon" : ss.IconPath("fontsize_large_icon"),
                 "color": "#9E9E9E",
             },
-            "fontsizenormal" : {
+            "fontsize_62.5%" : {
                 "name" : "正常",
                 "icon" : ss.IconPath("fontsize_normal_icon"),
                 "color": "#9E9E9E",
             },
-            "fontsizesmall" : {
+            "fontsize_58%" : {
                 "name" : "减小",
                 "icon" : ss.IconPath("fontsize_small_icon"),
                 "color": "#9E9E9E",
@@ -104,18 +104,18 @@ const items = {
         "icon" : ss.IconPath("layout_icon"),
         "color": "#FFEB3B",
         "items": {
-            "wightlarge" : {
-                "name" : "加宽",
+            "layout_15%" : {
+                "name" : "宽栏",
                 "icon" : ss.IconPath("layout_large_icon"),
                 "color": "#FFEB3B",
             },
-            "wightnormal" : {
+            "layout_20%" : {
                 "name" : "正常",
                 "icon" : ss.IconPath("layout_normal_icon"),
                 "color": "#FFEB3B",
             },
-            "wightsmall" : {
-                "name" : "窄",
+            "layout_25%" : {
+                "name" : "窄栏",
                 "icon" : ss.IconPath("layout_small_icon"),
                 "color": "#FFEB3B",
             },
