@@ -158,7 +158,7 @@ export default class ReadCtlbar extends React.Component {
     onAction( event, type ) {
         console.log( "fab type is =", type )
         switch ( true ) {
-            case ["exit", "setting" ].includes( type ):
+            case [ "exit", "setting", "save" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
                 break;
             case [ "up", "down" ].includes( type ):

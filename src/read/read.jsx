@@ -70,7 +70,7 @@ class Read extends React.Component {
 
     /**
      * Controlbar action event
-     * @param {string} type, include: exit, setting, scroll, option
+     * @param {string} type, include: exit, setting, save, scroll, option
      * @param {string} value 
      */
     onAction( type, value ) {
@@ -80,6 +80,9 @@ class Read extends React.Component {
                 break;
             case "setting":
                 setting.Render();
+                break;
+            case "save":
+                //storage.SaveLater();
                 break;
             case "scroll":
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
