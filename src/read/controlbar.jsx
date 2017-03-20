@@ -153,7 +153,6 @@ const items = {
 class ReadCtlbar extends React.Component {
 
     static propTypes = {
-        exit    : React.PropTypes.func,
         onAction: React.PropTypes.func,
     }
 
@@ -161,7 +160,7 @@ class ReadCtlbar extends React.Component {
         console.log( "fab type is =", type )
         switch ( true ) {
             case type == "exit":
-                this.props.exit();
+                this.props.onAction && this.props.onAction( type );
                 break;
             case type == "setting":
                 action();
