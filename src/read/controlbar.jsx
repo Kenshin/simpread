@@ -153,7 +153,7 @@ const items = {
 class ReadCtlbar extends React.Component {
 
     static propTypes = {
-        exit    : React.propTypes.func,
+        exit    : React.PropTypes.func,
         onAction: React.PropTypes.func,
     }
 
