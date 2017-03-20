@@ -1,8 +1,10 @@
 console.log( "=== simpread read controlbar load ===" )
 
-import * as ss from 'stylesheet';
+import * as ss   from 'stylesheet';
+import {browser} from 'browser';
+import * as msg  from 'message';
 
-import Fab     from 'fab';
+import Fab       from 'fab';
 
 const items = {
     "exit" : {
@@ -197,6 +199,7 @@ export default class ReadCtlbar extends React.Component {
                         break;
                 }
                 console.log( url )
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
                 break;
             case [ "exit", "setting", "save" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
