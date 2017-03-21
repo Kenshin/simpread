@@ -183,7 +183,7 @@ export default class ReadCtlbar extends React.Component {
     onAction( event, type ) {
         console.log( "fab type is =", type )
         switch ( true ) {
-            case type.startsWith( "share" ):
+            case type.indexOf( "_" ) > 0 && type.startsWith( "share" ):
                 let url = "";
                 switch ( type.split("_")[1] ) {
                     case "facebook":
@@ -207,7 +207,7 @@ export default class ReadCtlbar extends React.Component {
             case [ "up", "down" ].includes( type ):
                 this.props.onAction && this.props.onAction( "scroll", type == "up" ? -200 : 200 );
                 break;
-            case type.startsWith( "fontfamily" ) || type.startsWith( "fontsize" ) || type.startsWith( "layout" ):
+            case type.indexOf( "_" ) > 0 && ( type.startsWith( "fontfamily" ) || type.startsWith( "fontsize" ) || type.startsWith( "layout" )):
                 const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
                 Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
                 this.props.onAction && this.props.onAction( key, value );
