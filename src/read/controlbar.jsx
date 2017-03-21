@@ -4,6 +4,7 @@ import * as ss   from 'stylesheet';
 import {browser} from 'browser';
 import * as msg  from 'message';
 import th        from 'theme';
+import * as config from 'config';
 
 import Fab       from 'fab';
 
@@ -221,6 +222,31 @@ export default class ReadCtlbar extends React.Component {
                 this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
                 break;
         }
+    }
+
+    bindShortcuts() {
+        const bindOpt = ( name ) => {
+            const ffkey  = config.Shortcuts[name].key.toLowerCase(),
+                  ffkeys = config.Shortcuts[name].value.map( (key) => ffkey + " " + key );
+            Mousetrap.bind( ffkeys, ( event, combo ) => {
+                Object.keys( config.Shortcuts ).forEach( name=> {
+                    if ( config.Shortcuts[name].key.toLowerCase() == combo.split( " " )[0] ) {
+                       const idx = config.Shortcuts[name].value.indexOf( combo.split( " " )[1] );
+                       this.onAction( undefined, name + "_" + config.Shortcuts[name].name[idx] );
+                    }
+                });
+            });
+        };
+        Object.keys( config.Shortcuts ).forEach( name => bindOpt( name ) );
+        Mousetrap.bind( [ "up", "down" ], event => this.onAction( undefined, event.code.toLowerCase().replace( "arrow", "" ) ) );
+        Mousetrap.bind( [ "shift+left", "shift+right" ], ( event, combo ) => {
+            this.onAction( undefined, "theme_" + ( combo.split("+")[1] == "left" ? "prev" : "next" ));
+        });
+    }
+
+    constructor( props ) {
+        super( props );
+        this.bindShortcuts();
     }
 
     render() {

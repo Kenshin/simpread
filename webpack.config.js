@@ -152,6 +152,7 @@ const webpack = require( 'webpack' ),
           browser    : __dirname + '/src/service/browser.js',
           theme      : __dirname + '/src/service/theme.js',
           stylesheet : __dirname + '/src/service/stylesheet.js',
+          config     : __dirname + '/src/service/config.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
