@@ -91,6 +91,7 @@ class Read extends React.Component {
             case "fontsize":
             case "layout":
                 storage.current[type]=value;
+                storage.Set( storage.current.mode );
                 break;
         }
     }

@@ -208,6 +208,7 @@ export default class ReadCtlbar extends React.Component {
                 break;
             case type.startsWith( "fontfamily" ) || type.startsWith( "fontsize" ) || type.startsWith( "layout" ):
                 const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
+                Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
                 this.props.onAction && this.props.onAction( key, value );
                 break;
         }
