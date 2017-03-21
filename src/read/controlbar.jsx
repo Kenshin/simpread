@@ -212,7 +212,7 @@ export default class ReadCtlbar extends React.Component {
                 Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
                 this.props.onAction && this.props.onAction( key, value );
                 break;
-            case type.startsWith( "theme" ):
+            case type.indexOf( "_" ) > 0 && type.startsWith( "theme" ):
                 let i = th.names.indexOf( th.theme );
                 i = type.endsWith( "prev" ) ? --i : ++i;
                 i >= th.names.length && ( i = 0 );
