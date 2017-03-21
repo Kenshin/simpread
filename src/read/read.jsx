@@ -90,6 +90,7 @@ class Read extends React.Component {
             case "fontfamily":
             case "fontsize":
             case "layout":
+            case "theme":
                 storage.current[type]=value;
                 storage.Set( storage.current.mode );
                 break;

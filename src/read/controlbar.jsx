@@ -3,6 +3,7 @@ console.log( "=== simpread read controlbar load ===" )
 import * as ss   from 'stylesheet';
 import {browser} from 'browser';
 import * as msg  from 'message';
+import th        from 'theme';
 
 import Fab       from 'fab';
 
@@ -149,12 +150,12 @@ const items = {
         "icon" : ss.IconPath("theme_icon"),
         "color": "#FB8C00",
         "items": {
-            "themeprev" : {
+            "theme_prev" : {
                 "name" : "前一个主题",
                 "icon" : ss.IconPath("theme_prev_icon"),
                 "color": "#FB8C00",
             },
-            "themenext" : {
+            "theme_next" : {
                 "name" : "后一个主题",
                 "icon" : ss.IconPath("theme_next_icon"),
                 "color": "#FB8C00",
@@ -210,6 +211,14 @@ export default class ReadCtlbar extends React.Component {
                 const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
                 Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
                 this.props.onAction && this.props.onAction( key, value );
+                break;
+            case type.startsWith( "theme" ):
+                let i = th.names.indexOf( th.theme );
+                i = type.endsWith( "prev" ) ? --i : ++i;
+                i >= th.names.length && ( i = 0 );
+                i < 0 && ( i = th.names.length - 1 );
+                th.Change( th.names[i] );
+                this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
                 break;
         }
     }
