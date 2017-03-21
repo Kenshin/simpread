@@ -242,6 +242,7 @@ export default class ReadCtlbar extends React.Component {
         Mousetrap.bind( [ "shift+left", "shift+right" ], ( event, combo ) => {
             this.onAction( undefined, "theme_" + ( combo.split("+")[1] == "left" ? "prev" : "next" ));
         });
+        Mousetrap.bind( [ "c c" ], ( event, combo ) => this.onAction( undefined, "exit" ) );
     }
 
     constructor( props ) {
