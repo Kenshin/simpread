@@ -1,12 +1,12 @@
 console.log( "=== simpread read controlbar load ===" )
 
-import * as ss   from 'stylesheet';
-import {browser} from 'browser';
-import * as msg  from 'message';
-import th        from 'theme';
+import * as ss     from 'stylesheet';
+import {browser}   from 'browser';
+import * as msg    from 'message';
+import th          from 'theme';
 import * as config from 'config';
 
-import Fab       from 'fab';
+import Fab         from 'fab';
 
 const items = {
     "exit" : {
