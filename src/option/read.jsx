@@ -52,11 +52,11 @@ const fontfamily = [{
         },{
             value : "70%",
             name  : "增大",
-            info  : "S + 1",
+            info  : "S + 3",
         },{
             value : "58%",
             name  : "减小",
-            info  : "S + 3",
+            info  : "S + 1",
       }],
       layout = [{
             value : "20%",
@@ -65,11 +65,11 @@ const fontfamily = [{
         },{
             value : "15%",
             name  : "宽栏",
-            info  : "W + 1",
+            info  : "W + 3",
         },{
             value : "25%",
             name  : "窄栏",
-            info  : "W + 3",
+            info  : "W + 1",
 }],
 getName = ( value, items ) => {
     for ( const item of items ) {

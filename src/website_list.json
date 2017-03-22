@@ -316,13 +316,16 @@
         ]
     },{
         "name"    : "appinn.com",
+        "override": true,
         "url"     : "http://www.appinn.com/",
         "title"   : "<h2 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
         "exclude" : [
             "<div class='open_social_box share_box'>",
-            "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]"
+            "<div class='os-share-box'>",
+            "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]",
+            "[[/src=\\S+(down)\\S+'/]]"
         ]
     },{
         "name"    : "apprcn.com",

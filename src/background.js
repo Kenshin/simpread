@@ -53,6 +53,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 }
             });
             break;
+        case msg.MESSAGE_ACTION.new_tab:
+            browser.tabs.create({ url: request.value.url });
+            break;
     }
 });
 

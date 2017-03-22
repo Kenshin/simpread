@@ -3,7 +3,8 @@ console.log( "=== simpread read load ===" )
 import pangu       from 'pangu';
 import ProgressBar from 'readschedule';
 import Footer      from 'readfooter';
-import { ReadCtlbar, ReadCtlAdapter } from 'readctlbar';
+import ReadCtlbar  from 'readctlbar';
+import setting     from 'readsetting';
 
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -67,6 +68,35 @@ class Read extends React.Component {
         tooltip.Exit( "sr-read" );
     }
 
+    /**
+     * Controlbar action event
+     * @param {string} type, include: exit, setting, save, scroll, option
+     * @param {string} value 
+     */
+    onAction( type, value ) {
+        switch ( type ) {
+            case "exit":
+                this.exit();
+                break;
+            case "setting":
+                setting.Render();
+                break;
+            case "save":
+                //storage.SaveLater();
+                break;
+            case "scroll":
+                $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
+                break;
+            case "fontfamily":
+            case "fontsize":
+            case "layout":
+            case "theme":
+                storage.current[type]=value;
+                storage.Set( storage.current.mode );
+                break;
+        }
+    }
+
    // exit read mode
    exit() {
         $( rdclsjq ).velocity( { opacity: 0 }, {
@@ -85,7 +115,7 @@ class Read extends React.Component {
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
                 <Footer />
-                <ReadCtlbar exit={ ()=> this.exit() } />
+                <ReadCtlbar site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
         )
     }
@@ -119,7 +149,7 @@ function getReadRoot() {
  */
 function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        if (action) ReadCtlAdapter( "setting" );
+        setting.Render();
         return true;
     } else {
         return false;
