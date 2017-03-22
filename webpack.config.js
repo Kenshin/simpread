@@ -47,7 +47,6 @@ const webpack = require( 'webpack' ),
             { from   : "src/manifest.json" ,              to : '../' },
             { from   : "src/website_list.json" ,          to : '../' },
             { from   : 'src/optionspage/options.html',    to : '../optionspage/' },
-            { from   : 'src/assets/css/options.css',      to : '../assets/css/' },
             { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
           ])
         );
