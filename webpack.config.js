@@ -44,9 +44,11 @@ const webpack = require( 'webpack' ),
         // copy files
         plugins.push(
           new CopyWebpackPlugin([
-            { from : "src/manifest.json" , to :'../' },
-            { from : "src/website_list.json" , to :'../' },
-            { context: 'src/assets/images/', from : "*" , to :'../assets/images' }
+            { from   : "src/manifest.json" ,              to : '../' },
+            { from   : "src/website_list.json" ,          to : '../' },
+            { from   : 'src/optionspage/options.html',    to : '../optionspage/' },
+            { from   : 'src/assets/css/options.css',      to : '../assets/css/' },
+            { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
           ])
         );
 
@@ -98,6 +100,7 @@ const webpack = require( 'webpack' ),
         ],
         contentscripts : './src/contentscripts.js',
         background     : './src/background.js',
+        options        : './src/optionspage/options.js',
       },
 
       output: {
@@ -121,7 +124,7 @@ const webpack = require( 'webpack' ),
               presets: [ 'es2015', 'stage-0', 'react' ]
             }
         },
-        { test: /\.css$/,       loader: 'style!css'      },
+        { test: /\.css$/,           loader: 'style!css'       },
         { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288' },
         {
           test  : require.resolve( './src/vender/jquery-2.1.1.min.js' ),
