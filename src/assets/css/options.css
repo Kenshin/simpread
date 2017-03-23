@@ -10,6 +10,7 @@
 
 html {
     font: 300 16px/1.8 -apple-system, PingFang SC, Microsoft Yahei, Lantinghei SC, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+    font-size: 62.5%;
 
     color: var(--text-color);
     background: var(--background-color);
@@ -20,10 +21,8 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 0;
-
-  font-size: 62.5%;
+    margin: 0;
+    padding: 0;
 }
 
 .top {
@@ -77,7 +76,7 @@ body {
 
 tabs {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: flex-end;
 
     width: 100%;
@@ -85,8 +84,9 @@ tabs {
 }
 
 tab {
-    margin: auto;
-    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+
     padding: 0 24px;
 
     height: 48px;
@@ -106,6 +106,6 @@ tab a {
 }
 
 .tabactive {
-    border-bottom: 2px solid #EEFF41;
+    border-bottom: 4px solid #EEFF41;
     color: rgba(255, 255, 255, 1);
 }
