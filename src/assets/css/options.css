@@ -1,13 +1,14 @@
 
 :root {
   --text-color: #333;
+  --background-color: #fff;
 }
 
 html {
     font: 300 16px/1.8 -apple-system, PingFang SC, Microsoft Yahei, Lantinghei SC, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
 
     color: var(--text-color);
-    background: #fff;
+    background: var(--background-color);
 
     text-rendering: optimizelegibility;
     -webkit-text-size-adjust: 100%;
@@ -17,4 +18,76 @@ html {
 body {
   margin: 0;
   padding: 0;
+
+  font-size: 62.5%;
+}
+
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 310px;
+
+    background-color: #2196f3;
+
+    overflow: hidden;
+}
+
+.main {
+    position: relative;
+
+    top: 200px;
+
+    margin: 0 auto;
+    margin-bottom: 24px;
+    padding: 0;
+
+    max-width: 728px;
+    width: 728px;
+    height: 100%;
+
+    background-color: var(--background-color);
+
+    text-align: center;
+
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.26);
+}
+
+.banner {
+    width: 100%;
+    height: 200px;
+
+    background-image: url( '../images/banner-1.png' );
+}
+
+.tabscontainer {
+    width: 100%;
+    height: 70px;
+
+    color: inherit;
+    background-color: rgb(153,204,255);
+}
+
+tabs {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+tab {
+    margin: auto;
+    padding: 0 24px;
+
+    height: 48px;
+
+    color: rgba(255, 255, 255, 1);
+    background-color: transparent;
+
+    font-size: 1.6rem;
+    text-transform: uppercase;
 }
