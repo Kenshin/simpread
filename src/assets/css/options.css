@@ -1,8 +1,12 @@
 
+:root {
+  --text-color: #333;
+}
+
 html {
     font: 300 16px/1.8 -apple-system, PingFang SC, Microsoft Yahei, Lantinghei SC, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
 
-    color:#333;
+    color: var(--text-color);
     background: #fff;
 
     text-rendering: optimizelegibility;
