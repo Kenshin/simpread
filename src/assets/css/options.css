@@ -1,7 +1,7 @@
 
 :root {
   --text-color: #333;
-  --secorndary-color: color(#333 alpha(-30%));
+  --secondary-color: color(#333 alpha(-30%));
   --background-color: #fff;
   --width: 728px;
 }
@@ -92,7 +92,7 @@ a {
     width: var(--width);
     height: 100px;
 
-    color: var(--secorndary-color);
+    color: var(--secondary-color);
 
     font-size: 1.3rem;
 
