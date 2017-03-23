@@ -18,6 +18,7 @@ const webpack = require( 'webpack' ),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify( 'production' ) // or development
       }),
+
     ],
 
     // conditions environment
@@ -123,8 +124,8 @@ const webpack = require( 'webpack' ),
               presets: [ 'es2015', 'stage-0', 'react' ]
             }
         },
-        { test: /\.css$/,           loader: 'style!css'       },
-        { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288' },
+        { test: /\.css$/,           loader: 'style!css!postcss' },
+        { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288'   },
         {
           test  : require.resolve( './src/vender/jquery-2.1.1.min.js' ),
           loader: 'expose?jQuery!expose?$'
@@ -133,6 +134,12 @@ const webpack = require( 'webpack' ),
           test  : require.resolve( './src/vender/mousetrap.min.js' ),
           loader: 'expose?Mousetrap'
         }
+        ]
+      },
+
+      postcss: function () {
+        return [
+          require( 'postcss-cssnext' )()
         ]
       },
 
