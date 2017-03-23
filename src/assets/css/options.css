@@ -1,7 +1,9 @@
 
 :root {
   --text-color: #333;
+  --secorndary-color: color(#333 alpha(-30%));
   --background-color: #fff;
+  --width: 728px;
 }
 
 * {
@@ -23,6 +25,11 @@ html {
 body {
     margin: 0;
     padding: 0;
+}
+
+a {
+    color: #4285f4;
+    text-decoration: none;
 }
 
 .top {
@@ -47,8 +54,8 @@ body {
     margin-bottom: 24px;
     padding: 0;
 
-    max-width: 728px;
-    width: 728px;
+    max-width: var(--width);
+    width: var(--width);
     height: 100%;
 
     background-color: var(--background-color);
@@ -72,6 +79,24 @@ body {
 
     color: inherit;
     background-color: rgb(153,204,255);
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 80px auto 0;
+
+    max-width: var(--width);
+    width: var(--width);
+    height: 100px;
+
+    color: var(--secorndary-color);
+
+    font-size: 1.3rem;
+
+    border-top: 1px solid rgba(0,0,0,0.12);
 }
 
 tabs {
