@@ -4,6 +4,10 @@
   --background-color: #fff;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     font: 300 16px/1.8 -apple-system, PingFang SC, Microsoft Yahei, Lantinghei SC, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
 
@@ -74,6 +78,7 @@ body {
 tabs {
     display: flex;
     justify-content: center;
+    align-items: flex-end;
 
     width: 100%;
     height: 100%;
@@ -81,13 +86,26 @@ tabs {
 
 tab {
     margin: auto;
+    margin-bottom: 0;
     padding: 0 24px;
 
     height: 48px;
 
-    color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, .7);
     background-color: transparent;
 
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     text-transform: uppercase;
+}
+
+tab a {
+    color: inherit;
+    background-color: transparent;
+
+    text-decoration: none;
+}
+
+.tabactive {
+    border-bottom: 2px solid #EEFF41;
+    color: rgba(255, 255, 255, 1);
 }
