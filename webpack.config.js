@@ -186,6 +186,7 @@ const webpack = require( 'webpack' ),
           button     : __dirname + '/src/comp/button.jsx',
           selectfield: __dirname + '/src/comp/selectfield.jsx',
           switch     : __dirname + '/src/comp/switch.jsx',
+          tabs       : __dirname + '/src/comp/tabs.jsx',
           tooltip    : __dirname + '/src/comp/tooltip.jsx',
           waves      : __dirname + '/src/comp/waves.js',
 
