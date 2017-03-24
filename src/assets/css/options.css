@@ -103,13 +103,6 @@ tabs {
     width: 100%;
 }
 
-tab a {
-    color: inherit;
-    background-color: transparent;
-
-    text-decoration: none;
-}
-
 tab-header {
     display: flex;
     justify-content: space-around;
@@ -122,7 +115,7 @@ tab-header {
     background-color: rgb(153,204,255);
 }
 
-tab {
+tab-label {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,8 +134,11 @@ tab {
     text-transform: uppercase;
 }
 
-.tabactive {
-    color: rgba(255, 255, 255, 1);
+tab-label a {
+    color: inherit;
+    background-color: transparent;
+
+    text-decoration: none;
 }
 
 tab-border {
@@ -160,10 +156,6 @@ tab-border {
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
-.borderactive {
-    transform: scaleX(1);
-}
-
 tab-shadow {
     display: block;
     position: absolute;
@@ -175,6 +167,14 @@ tab-shadow {
     height: 4px;
 
     box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .26);
+}
+
+.tabactive {
+    color: rgba(255, 255, 255, 1);
+}
+
+.borderactive {
+    transform: scaleX(1);
 }
 
 tab-groups {
