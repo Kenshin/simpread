@@ -48,7 +48,7 @@ a {
 .main {
     position: relative;
 
-    top: 40px;
+    top: 62px;
 
     margin: 0 auto;
     margin-bottom: 24px;
@@ -75,10 +75,8 @@ a {
 
 .tabscontainer {
     width: 100%;
-    height: 70px;
 
     color: inherit;
-    background-color: rgb(153,204,255);
 }
 
 .bottom {
@@ -100,6 +98,19 @@ a {
 }
 
 tabs {
+    display: block;
+
+    width: 100%;
+}
+
+tab a {
+    color: inherit;
+    background-color: transparent;
+
+    text-decoration: none;
+}
+
+tab-header {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
@@ -107,7 +118,8 @@ tabs {
     position: relative;
 
     width: 100%;
-    height: 100%;
+
+    background-color: rgb(153,204,255);
 }
 
 tab {
@@ -131,13 +143,6 @@ tab {
 
 .tabactive {
     color: rgba(255, 255, 255, 1);
-}
-
-tab a {
-    color: inherit;
-    background-color: transparent;
-
-    text-decoration: none;
 }
 
 tab-border {
@@ -170,4 +175,18 @@ tab-shadow {
     height: 4px;
 
     box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .26);
+}
+
+tab-groups {
+    display: block;
+
+    width: 100%;
+}
+
+tab-group {
+    display: none;
+}
+
+.groupactive {
+    display: block;
 }
