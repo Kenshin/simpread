@@ -2,9 +2,10 @@ console.log( "==== simpread component: Tabs ====" )
 
 let styles = new Map();
 
-const color         = 'rgba(255, 255, 255, .7)',
-      active_color  = 'rgba(255, 255, 255, 1)',
-      header_corlor = 'transparent';
+const color           = 'rgba(255, 255, 255, .7)',
+      secondary_color = "rgba(204, 204, 204, 1)",
+      active_color    = 'rgba(255, 255, 255, 1)',
+      header_corlor   = 'transparent';
 
 const cssinjs = () => {
     const styles = {
@@ -56,6 +57,11 @@ const cssinjs = () => {
             backgroundColor: 'transparent',
 
             textDecoration: 'none',
+        },
+
+        link_disable: {
+            color: secondary_color,
+            cursor: 'not-allowed',
         },
 
         border: {
@@ -129,8 +135,9 @@ const TabLabel = ( props ) => {
           disable   = props.disable ? true : false,
           tooltip   = props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ],
           style     = props.style;
-    props.active && ( style.label  = { ...style.label, ...style.label_active } );
-    props.active && ( style.border = { ...style.border, ...style.border_active } );
+    props.active  && ( style.label  = { ...style.label, ...style.label_active } );
+    props.active  && ( style.border = { ...style.border, ...style.border_active } );
+    props.disable && ( style.link   = { ...style.link, ...style.link_disable } );
     return (
         <tab-label style={ style.label } active={ props.active } >
             <a style={ style.link } className={ props.waves }
@@ -138,7 +145,7 @@ const TabLabel = ( props ) => {
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
                disabled={ disable }
-               onClick={ ()=>props.onClick() }>{ props.name }</a>
+               onClick={ !disable && ( ()=>props.onClick() )}>{ props.name }</a>
             <tab-border style={ style.border }></tab-border>
         </tab-label>
     );
@@ -237,6 +244,7 @@ export default class Tabs extends React.Component {
                     label        : style.label,
                     border       : style.border,
                     link         : style.link,
+                    link_disable : style.link_disable,
                     label_active : style.label_active,
                     border_active: style.border_active,
                   };
