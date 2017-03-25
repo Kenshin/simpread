@@ -2,7 +2,8 @@ console.log( "==== simpread options page load ====" )
 
 import '../assets/css/options.css';
 
-import Tabs from 'tabs';
+import Tabs       from 'tabs';
+import * as waves from 'waves';
 
 const tabsitem = [{
         name: "共通",
@@ -33,6 +34,11 @@ $( window ).scroll( (event) => {
 });
 
 /**
+ * Waves render
+ */
+waves.Render({ root: "main", name: "sr-tabs" });
+
+/**
  * Tabs onChange event handler
  * 
  * @param {jquery} prev jquery object
@@ -43,10 +49,11 @@ function tabsOnChange( $prev, event ) {
 }
 
 /**
- * Render Tabs
+ * Tabs render
  */
 const tabs =
-    <Tabs items={ tabsitem } bgColor="rgb(153,204,255)" onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
+    <Tabs waves="sr-tabs waves-effect waves-light"
+        items={ tabsitem } bgColor="rgb(153,204,255)" onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
         <div>aaa</div>
         <div>bbb</div>
         <div>ccc</div>
