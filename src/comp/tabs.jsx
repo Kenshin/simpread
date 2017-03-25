@@ -1,9 +1,107 @@
 console.log( "==== simpread component: Tabs ====" )
 
-let style, styles = new Map();
+let styles = new Map();
+
+const color         = 'rgba(255, 255, 255, .7)',
+      active_color  = 'rgba(255, 255, 255, 1)',
+      header_corlor = 'transparent';
 
 const cssinjs = () => {
     const styles = {
+
+        root: {
+            display: 'block',
+            width: '100%',
+        },
+
+        header: {
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'flex-end',
+
+            position: 'relative',
+
+            width: '100%',
+
+            backgroundColor: header_corlor,
+        },
+
+        label: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+
+            position: 'relative',
+
+            padding: '0 24px',
+
+            width: '100%',
+            height: '48px',
+
+            color,
+            backgroundColor: 'transparent',
+
+            fontSize: '1.4rem',
+            textTransform: 'uppercase',
+
+        },
+
+        label_active: {
+            color: active_color,
+            fontWeight: 500,
+        },
+
+        link: {
+            color: 'inherit',
+            backgroundColor: 'transparent',
+
+            textDecoration: 'none',
+        },
+
+        border: {
+            display: 'block',
+            position: 'absolute',
+
+            bottom: 0,
+
+            width: '100%',
+            height: '4px',
+
+            borderBottom: '4px solid #EEFF41',
+
+            transform: 'scaleX(0)',
+            transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+        },
+
+        border_active: {
+            transform: 'scaleX(1)',
+        },
+
+        shadow: {
+            display: 'block',
+            position: 'absolute',
+
+            left: 0,
+            bottom: 0,
+
+            width: '100%',
+            height: '4px',
+
+            boxShadow: '0 1px 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .26)',
+        },
+
+        groups: {
+            display: 'block',
+            width: '100%',
+        },
+
+        group: {
+            display: 'none',
+        },
+
+        group_active: {
+            display: 'block',
+        }
 
     };
     
@@ -14,30 +112,32 @@ const cssinjs = () => {
  * TabLabel react stateless component
  * 
  * @param {object} props, include:
- *   - color           : [PropTypes.string] text color
  *   - name            : [PropTypes.string] name
  *   - value           : [PropTypes.string] value
  *   - icon            : [PropTypes.string] icon path
  *   - active          : [PropTypes.bool]   active
+ *   - route           : [PropTypes.string] <a> href value
  *   - disable         : [PropTypes.string] disable
+ *   - style           : [PropTypes.object] tab-label style, include: label, border, link, label_active, border_active
  *   - waves           : [PropTypes.string] material waves effect
  *   - tooltip         : [PropTypes.string] tooltip
  */
 const TabLabel = ( props ) => {
     const route     = !props.route || props.route == "" ? "#" : props.route,
-          tabactive = props.active  ? "tabactive"    : "",
-          bdactive  = props.active  ? "borderactive" : "",
           disable   = props.disable ? true : false,
-          tooltip   = props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ];
+          tooltip   = props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ],
+          style     = props.style;
+    props.active && ( style.label  = { ...style.label, ...style.label_active } );
+    props.active && ( style.border = { ...style.border, ...style.border_active } );
     return (
-        <tab-label class={ tabactive }>
-            <a id={ props.id } className={ props.waves }
-               href={ route }
+        <tab-label style={ style.label }>
+            <a style={ style.link } className={ props.waves }
+               id={ props.id } href={ route }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
                disabled={ disable }
                onClick={ ()=>props.onClick() }>{ props.name }</a>
-            <tab-border class={ bdactive }></tab-border>
+            <tab-border style={ style.border }></tab-border>
         </tab-label>
     );
 }
@@ -78,6 +178,7 @@ export default class Tabs extends React.Component {
     static defaultProps = {
         items    : [],
         color    : "",
+        activeColor: "",
         bgColor  : "",
         waves    : "",
         tooltip  : "",
@@ -86,6 +187,7 @@ export default class Tabs extends React.Component {
     static propTypes = {
         items    : React.PropTypes.array,
         color    : React.PropTypes.string,
+        activeColor : React.PropTypes.string,
         bgColor  : React.PropTypes.string,
         waves    : React.PropTypes.string,
         tooltip  : React.PropTypes.string,
@@ -111,22 +213,38 @@ export default class Tabs extends React.Component {
     }
 
     render() {
+        const style = { ...cssinjs() };
+        styles.set( this.state.id, style );
 
-        const { items, bgColor, children, ...others } = this.props;
+        const { items, color, activeColor, bgColor, children, ...others } = this.props;
+
+        color       && ( style.label.color = color );
+        bgColor     && ( style.header.backgroundColor = bgColor );
+        activeColor && ( style.label_active.color = activeColor );
 
         const tabLabel  = items && items.map( ( item, idx ) => {
-                  return <TabLabel id={ idx } { ...item } { ...others } onClick={ ()=> this.tabLabelOnClick() } />;
+                  const label_style = {
+                    label        : style.label,
+                    border       : style.border,
+                    link         : style.link,
+                    label_active : style.label_active,
+                    border_active: style.border_active,
+                  };
+                  return <TabLabel id={ idx }
+                                   { ...item } { ...others }
+                                   style={ label_style }
+                                   onClick={ ()=> this.tabLabelOnClick() } />;
               }),
-              tabHeader = tabLabel && <tab-header>{ tabLabel }<tab-shadow></tab-shadow></tab-header>;
+              tabHeader = tabLabel && <tab-header style={ style.header }>{ tabLabel }<tab-shadow style={ style.shadow }></tab-shadow></tab-header>;
 
         const activeIdx = items.findIndex( item=>item.active),
               tabGroup  = children && children.map( ( item, idx ) => {
-                  return <tab-group class={ activeIdx == idx ? "groupactive" : "" }>{ item }</tab-group>
+                  return <tab-group style={ style.group } class={ activeIdx == idx ? "groupactive" : "" }>{ item }</tab-group>
               }),
-              tabGroups = tabGroup && <tab-groups>{ tabGroup }</tab-groups>;
+              tabGroups = tabGroup && <tab-groups style={ style.groups }>{ tabGroup }</tab-groups>;
 
         return (
-            <tabs>
+            <tabs style={ style.root }>
                 { tabHeader }
                 { tabGroups }
             </tabs>
