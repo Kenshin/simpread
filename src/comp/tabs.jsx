@@ -90,10 +90,10 @@ export default class Tabs extends React.Component {
 
     render() {
 
-        const { items, color, bgColor, children } = this.props;
+        const { items, bgColor, children, ...others } = this.props;
 
         const tabLabel  = items && items.map( item=>{
-                  return <TabLabel { ...item } />;
+                  return <TabLabel { ...item } { ...others } />;
               }),
               tabHeader = tabLabel && <tab-header>{ tabLabel }<tab-shadow></tab-shadow></tab-header>;
 
