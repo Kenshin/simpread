@@ -9,29 +9,18 @@ const tabsitem = [{
         value: "common",
         icon : "",
         active : true,
-        disable: false,
-        route: ""
     },{
         name: "聚焦模式",
         value: "focus",
         icon : "",
-        active : false,
-        disable: false,
-        route: ""
     },{
         name: "阅读模式",
         value: "read",
         icon : "",
-        active : false,
-        disable: false,
-        route: ""
     },{
         name: "稍后读",
         value: "later",
         icon : "",
-        active : false,
-        disable: false,
-        route: ""
 }];
 
 /**
@@ -56,7 +45,7 @@ function tabsOnChange( $prev, event ) {
 /**
  * Render Tabs
  */
-const tabs = 
+const tabs =
     <Tabs items={ tabsitem } bgColor="rgb(153,204,255)" onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
         <div>aaa</div>
         <div>bbb</div>
