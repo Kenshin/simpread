@@ -27,8 +27,8 @@ const TabLabel = ( props ) => {
           tabactive = props.active ? "tabactive"    : "",
           bdactive  = props.active ? "borderactive" : "";
     return (
-        <tab-label class={ tabactive } value={ props.value }>
-            <a href={ route }>{ props.name }</a>
+        <tab-label class={ tabactive }>
+            <a href={ route } value={ props.value } onClick={ ()=>props.onClick() }>{ props.name }</a>
             <tab-border class={ bdactive }></tab-border>
         </tab-label>
     );
@@ -88,17 +88,23 @@ export default class Tabs extends React.Component {
         id : Math.round(+new Date()),
     }
 
+    tabLabelOnClick() {
+        console.log("asdfasdfasdfasdf", $( event.target ).text() , $( event.target ).attr("value") )
+    }
+
     render() {
 
         const { items, bgColor, children, ...others } = this.props;
 
-        const tabLabel  = items && items.map( item=>{
-                  return <TabLabel { ...item } { ...others } />;
+        const tabLabel  = items && items.map( item => {
+                  return <TabLabel { ...item } { ...others } onClick={ ()=> this.tabLabelOnClick() } />;
               }),
               tabHeader = tabLabel && <tab-header>{ tabLabel }<tab-shadow></tab-shadow></tab-header>;
 
         const activeIdx = items.findIndex( item=>item.active),
-              tabGroup  = children && children.map( (item, idx)=><tab-group class={ activeIdx == idx ? "groupactive" : "" }>{ item }</tab-group> ),
+              tabGroup  = children && children.map( ( item, idx ) => {
+                  return <tab-group class={ activeIdx == idx ? "groupactive" : "" }>{ item }</tab-group>
+              }),
               tabGroups = tabGroup && <tab-groups>{ tabGroup }</tab-groups>;
 
         return (
