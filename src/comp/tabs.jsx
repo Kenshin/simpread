@@ -15,21 +15,24 @@ const cssinjs = () => {
  * 
  * @param {object} props, include:
  *   - color           : [PropTypes.string] text color
- *   - bgColor         : [PropTypes.string] <tab-label> background color
  *   - name            : [PropTypes.string] name
- *   - value           : [PropTypes.string]  value
+ *   - value           : [PropTypes.string] value
  *   - icon            : [PropTypes.string] icon path
- *   - active          : [PropTypes.bool] active
+ *   - active          : [PropTypes.bool]   active
  *   - disable         : [PropTypes.string] disable
+ *   - waves           : [PropTypes.string] material waves effect
+ *   - tooltip         : [PropTypes.string] tooltip
  */
 const TabLabel = ( props ) => {
     const route     = !props.route || props.route == "" ? "#" : props.route,
           tabactive = props.active  ? "tabactive"    : "",
           bdactive  = props.active  ? "borderactive" : "",
-          disable   = props.disable ? true : false;
+          disable   = props.disable ? true : false,
+          tooltip   = props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ];
     return (
         <tab-label class={ tabactive }>
-            <a href={ route }
+            <a href={ route } className={ props.waves }
+               data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
                disabled={ disable }
                onClick={ ()=>props.onClick() }>{ props.name }</a>
@@ -76,7 +79,7 @@ export default class Tabs extends React.Component {
         color    : "",
         bgColor  : "",
         waves    : "",
-        tooltips : "",
+        tooltip  : "",
     };
 
     static propTypes = {
@@ -84,7 +87,7 @@ export default class Tabs extends React.Component {
         color    : React.PropTypes.string,
         bgColor  : React.PropTypes.string,
         waves    : React.PropTypes.string,
-        tooltips : React.PropTypes.string,
+        tooltip  : React.PropTypes.string,
         onChange : React.PropTypes.func,
     };
 
