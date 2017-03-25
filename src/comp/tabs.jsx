@@ -92,14 +92,13 @@ export default class Tabs extends React.Component {
 
         const { items, color, bgColor, children } = this.props;
 
-        const activeIdx = items.findIndex( item=>item.active) ;
-
         const tabLabel  = items && items.map( item=>{
                   return <TabLabel { ...item } />;
               }),
               tabHeader = tabLabel && <tab-header>{ tabLabel }<tab-shadow></tab-shadow></tab-header>;
 
-        const tabGroup  = children && children.map( (item, idx)=><tab-group class={ activeIdx == idx ? "groupactive" : "" }>{ item }</tab-group> ),
+        const activeIdx = items.findIndex( item=>item.active),
+              tabGroup  = children && children.map( (item, idx)=><tab-group class={ activeIdx == idx ? "groupactive" : "" }>{ item }</tab-group> ),
               tabGroups = tabGroup && <tab-groups>{ tabGroup }</tab-groups>;
 
         return (
