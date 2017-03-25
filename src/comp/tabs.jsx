@@ -139,8 +139,8 @@ const TabLabel = ( props ) => {
     props.active  && ( style.border = { ...style.border, ...style.border_active } );
     props.disable && ( style.link   = { ...style.link, ...style.link_disable } );
     return (
-        <tab-label style={ style.label } active={ props.active } >
-            <a style={ style.link } className={ props.waves }
+        <tab-label style={ style.label } class={ props.waves } active={ props.active } >
+            <a style={ style.link }
                id={ props.idx } href={ route }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
