@@ -112,6 +112,7 @@ const cssinjs = () => {
  * TabLabel react stateless component
  * 
  * @param {object} props, include:
+ *   - idx             : [PropTypes.number] index
  *   - name            : [PropTypes.string] name
  *   - value           : [PropTypes.string] value
  *   - icon            : [PropTypes.string] icon path
@@ -121,6 +122,7 @@ const cssinjs = () => {
  *   - style           : [PropTypes.object] tab-label style, include: label, border, link, label_active, border_active
  *   - waves           : [PropTypes.string] material waves effect
  *   - tooltip         : [PropTypes.string] tooltip
+ *   - onClick         : [PropTypes.func]   onClick event
  */
 const TabLabel = ( props ) => {
     const route     = !props.route || props.route == "" ? "#" : props.route,
@@ -132,7 +134,7 @@ const TabLabel = ( props ) => {
     return (
         <tab-label style={ style.label }>
             <a style={ style.link } className={ props.waves }
-               id={ props.id } href={ route }
+               id={ props.idx } href={ route }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
                disabled={ disable }
@@ -230,7 +232,7 @@ export default class Tabs extends React.Component {
                     label_active : style.label_active,
                     border_active: style.border_active,
                   };
-                  return <TabLabel id={ idx }
+                  return <TabLabel idx={ idx }
                                    { ...item } { ...others }
                                    style={ label_style }
                                    onClick={ ()=> this.tabLabelOnClick() } />;
