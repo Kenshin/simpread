@@ -46,4 +46,11 @@ $( window ).scroll( (event) => {
 /**
  * Render Tabs
  */
-ReactDOM.render( <Tabs items={ tabsitem } bgColor="rgb(153,204,255)" />, $( ".tabscontainer" )[0] );
+const tabs = 
+    <Tabs items={ tabsitem } bgColor="rgb(153,204,255)">
+        <div>aaa</div>
+        <div>bbb</div>
+        <div>ccc</div>
+        <div>ddd</div>
+    </Tabs>;
+ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
