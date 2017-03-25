@@ -132,7 +132,7 @@ const TabLabel = ( props ) => {
     props.active && ( style.label  = { ...style.label, ...style.label_active } );
     props.active && ( style.border = { ...style.border, ...style.border_active } );
     return (
-        <tab-label style={ style.label }>
+        <tab-label style={ style.label } active={ props.active } >
             <a style={ style.link } className={ props.waves }
                id={ props.idx } href={ route }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
@@ -201,16 +201,24 @@ export default class Tabs extends React.Component {
     }
 
     tabLabelOnClick() {
-        const $target = $( event.target ),
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target ),
               idx     = $target.attr( "id" ),
               value   = $target.attr( "value" ),
               name    = $target.text(),
-              $prev   = $( "tab-header" ).find( ".tabactive" );
-        $( "tab-label" ).removeClass(  "tabactive"    );
-        $( "tab-border" ).removeClass( "borderactive" );
-        $( "tab-group" ).removeClass(  "groupactive"  );
-        $target.parent().addClass( "tabactive" ).find( "tab-border" ).addClass( "borderactive" );
-        $($( "tab-group" )[idx]).addClass( "groupactive" );
+              $prev   = $( "tab-label[active=true]" );
+
+        $( "tab-label[active=true]" )
+            .attr( "active", false ).css({ ...style.label })
+            .find( "tab-border" ).css({ ...style.border });
+
+        $target.parent().attr( "active", true )
+            .css({ ...style.label, ...style.label_active })
+            .find( "tab-border" ).css({ ...style.border, ...style.border_active });
+
+        $( "tab-group[active=true]" ).attr( "active", false ).css({ ...style.group });
+        $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
+
         this.props.onChange && this.props.onChange( $prev, event );
     }
 
@@ -241,7 +249,8 @@ export default class Tabs extends React.Component {
 
         const activeIdx = items.findIndex( item=>item.active),
               tabGroup  = children && children.map( ( item, idx ) => {
-                  return <tab-group style={ style.group } class={ activeIdx == idx ? "groupactive" : "" }>{ item }</tab-group>
+                  const group_style = activeIdx == idx ? { ...style.group, ...style.group_active } : { ...style.group };
+                  return <tab-group style={ group_style } active={ activeIdx == idx }>{ item }</tab-group>
               }),
               tabGroups = tabGroup && <tab-groups style={ style.groups }>{ tabGroup }</tab-groups>;
 
