@@ -24,11 +24,15 @@ const cssinjs = () => {
  */
 const TabLabel = ( props ) => {
     const route     = !props.route || props.route == "" ? "#" : props.route,
-          tabactive = props.active ? "tabactive"    : "",
-          bdactive  = props.active ? "borderactive" : "";
+          tabactive = props.active  ? "tabactive"    : "",
+          bdactive  = props.active  ? "borderactive" : "",
+          disable   = props.disable ? true : false;
     return (
         <tab-label class={ tabactive }>
-            <a href={ route } value={ props.value } onClick={ ()=>props.onClick() }>{ props.name }</a>
+            <a href={ route }
+               value={ props.value }
+               disabled={ disable }
+               onClick={ ()=>props.onClick() }>{ props.name }</a>
             <tab-border class={ bdactive }></tab-border>
         </tab-label>
     );
