@@ -31,7 +31,8 @@ const TabLabel = ( props ) => {
           tooltip   = props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ];
     return (
         <tab-label class={ tabactive }>
-            <a href={ route } className={ props.waves }
+            <a id={ props.id } className={ props.waves }
+               href={ route }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
                disabled={ disable }
@@ -96,15 +97,25 @@ export default class Tabs extends React.Component {
     }
 
     tabLabelOnClick() {
-        console.log("asdfasdfasdfasdf", $( event.target ).text() , $( event.target ).attr("value") )
+        const $target = $( event.target ),
+              idx     = $target.attr( "id" ),
+              value   = $target.attr( "value" ),
+              name    = $target.text(),
+              $prev   = $( "tab-header" ).find( ".tabactive" );
+        $( "tab-label" ).removeClass(  "tabactive"    );
+        $( "tab-border" ).removeClass( "borderactive" );
+        $( "tab-group" ).removeClass(  "groupactive"  );
+        $target.parent().addClass( "tabactive" ).find( "tab-border" ).addClass( "borderactive" );
+        $($( "tab-group" )[idx]).addClass( "groupactive" );
+        this.props.onChange && this.props.onChange( $prev, event );
     }
 
     render() {
 
         const { items, bgColor, children, ...others } = this.props;
 
-        const tabLabel  = items && items.map( item => {
-                  return <TabLabel { ...item } { ...others } onClick={ ()=> this.tabLabelOnClick() } />;
+        const tabLabel  = items && items.map( ( item, idx ) => {
+                  return <TabLabel id={ idx } { ...item } { ...others } onClick={ ()=> this.tabLabelOnClick() } />;
               }),
               tabHeader = tabLabel && <tab-header>{ tabLabel }<tab-shadow></tab-shadow></tab-header>;
 

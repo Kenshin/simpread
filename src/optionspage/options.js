@@ -44,10 +44,20 @@ $( window ).scroll( (event) => {
 });
 
 /**
+ * Tabs onChange event handler
+ * 
+ * @param {jquery} prev jquery object
+ * @param {event} current event 
+ */
+function tabsOnChange( $prev, event ) {
+    console.log( $prev, event )
+}
+
+/**
  * Render Tabs
  */
 const tabs = 
-    <Tabs items={ tabsitem } bgColor="rgb(153,204,255)">
+    <Tabs items={ tabsitem } bgColor="rgb(153,204,255)" onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
         <div>aaa</div>
         <div>bbb</div>
         <div>ccc</div>
