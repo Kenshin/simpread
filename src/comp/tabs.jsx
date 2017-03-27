@@ -160,6 +160,7 @@ const TabLabel = ( props ) => {
     props.active  && ( style.border = { ...style.border, ...style.border_active } );
     props.disable && ( style.link   = { ...style.link, ...style.link_disable } );
     if ( props.icon && props.icon != "" ) {
+        style.icon.display = "block";
         style.icon.backgroundImage = `url(${props.icon})`;
         style.link = { ...style.link, ...style.link_icon };
     } else {
