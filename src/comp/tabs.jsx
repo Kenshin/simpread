@@ -56,6 +56,9 @@ const cssinjs = () => {
             color: 'inherit',
             backgroundColor: 'transparent',
 
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
             textDecoration: 'none',
         },
 
