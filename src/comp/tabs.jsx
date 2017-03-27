@@ -260,7 +260,7 @@ export default class Tabs extends React.Component {
             .velocity({ opacity: 0 }, { complete: ( target )=> {
                 $(target).css({ ...style.group });
                 $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
-            }});
+        }});
 
         this.props.onChange && this.props.onChange( $prev, event );
     }
