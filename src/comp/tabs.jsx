@@ -236,8 +236,11 @@ export default class Tabs extends React.Component {
     }
 
     tabLabelOnClick() {
+        let $target   = $( event.target );
+        while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
+        $target       = $target.find( "a" );
+
         const style   = styles.get( this.state.id ),
-              $target = !$( event.target ).is( "tab-label" ) ? $( event.target ).parent() : $( event.target ).find( "a" ),
               idx     = $target.attr( "id" ),
               value   = $target.attr( "value" ),
               name    = $target.text(),
@@ -247,7 +250,7 @@ export default class Tabs extends React.Component {
             .attr( "active", false ).css({ ...style.label })
             .find( "tab-border" ).css({ ...style.border });
 
-        $target.parent().attr( "active", true )
+        $target.attr( "active", true )
             .css({ ...style.label, ...style.label_active })
             .find( "tab-border" ).css({ ...style.border, ...style.border_active });
 
