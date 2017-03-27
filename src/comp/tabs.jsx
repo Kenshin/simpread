@@ -93,7 +93,7 @@ const cssinjs = () => {
             width: '100%',
             height: '4px',
 
-            borderBottom: '4px solid #EEFF41',
+            backgroundColor: '#EEFF41',
 
             transform: 'scaleX(0)',
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
@@ -220,6 +220,7 @@ export default class Tabs extends React.Component {
         bgColor    : "",
         headerStyle: undefined,
         groupsStyle: undefined,
+        borderStyle: undefined,
         waves    : "",
         tooltip  : "",
     };
@@ -231,6 +232,7 @@ export default class Tabs extends React.Component {
         bgColor     : React.PropTypes.string,
         headerStyle : React.PropTypes.object,
         groupsStyle : React.PropTypes.object,
+        borderStyle : React.PropTypes.object,
         waves    : React.PropTypes.string,
         tooltip  : React.PropTypes.string,
         onChange : React.PropTypes.func,
@@ -273,7 +275,7 @@ export default class Tabs extends React.Component {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
 
-        const { items, color, activeColor, bgColor, headerStyle, groupsStyle, children, ...others } = this.props;
+        const { items, color, activeColor, bgColor, headerStyle, groupsStyle, borderStyle, children, ...others } = this.props;
 
         color       && ( style.label.color = color );
         bgColor     && ( style.header.backgroundColor = bgColor );
@@ -281,6 +283,7 @@ export default class Tabs extends React.Component {
 
         headerStyle && ( style.header = { ...style.header, ...headerStyle } );
         groupsStyle && ( style.groups = { ...style.groups, ...groupsStyle } );
+        borderStyle && ( style.border = { ...style.border, ...borderStyle } );
 
         const tabLabel  = items && items.map( ( item, idx ) => {
                   const label_style = {
