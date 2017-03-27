@@ -7,7 +7,7 @@ import Velocity   from 'velocity';
 import Tabs       from 'tabs';
 import * as waves from 'waves';
 
-let bgidx = 0;
+let tabsitemid = 0;
 
 const tabsitem = [{
         name: "共通",
@@ -27,11 +27,11 @@ const tabsitem = [{
         value: "later",
         route: "#later",
 }],
-bgColors = [
-    "rgba(153, 204, 255, 1)",
-    "rgba(204, 204, 255, 1)",
-    "rgba(255, 153, 204, 1)",
-    "rgba(204, 255, 0, 1)"
+    bgColors = [
+        "rgba(153, 204, 255, 1)",
+        "rgba(204, 204, 255, 1)",
+        "rgba(255, 153, 204, 1)",
+        "rgba(204, 255, 0, 1)"
 ];
 
 /**
@@ -96,12 +96,12 @@ function Render( idx ) {
 }
 
 /**
- * Get bgidx from window.location.hash exist
+ * Get tabsitemid from window.location.hash exist
  */
-window.location.hash && ( bgidx = tabsitem.findIndex( item => item.route == window.location.hash ) );
-bgidx == -1 || bgidx == 0 ? bgidx = 0 : tabsitem.forEach( ( item, index ) => item.active = bgidx == index ? true : false );
+window.location.hash && ( tabsitemid = tabsitem.findIndex( item => item.route == window.location.hash ) );
+tabsitemid == -1 || tabsitemid == 0 ? tabsitemid = 0 : tabsitem.forEach( ( item, index ) => item.active = tabsitemid == index ? true : false );
 
 /**
- * Render
+ * Entry Render
  */
-Render( bgidx );
+Render( tabsitemid );
