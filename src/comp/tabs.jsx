@@ -127,6 +127,7 @@ const cssinjs = () => {
 
         group_active: {
             display: 'block',
+            opacity: 1,
         }
 
     };
@@ -254,8 +255,12 @@ export default class Tabs extends React.Component {
             .css({ ...style.label, ...style.label_active })
             .find( "tab-border" ).css({ ...style.border, ...style.border_active });
 
-        $( "tab-group[active=true]" ).attr( "active", false ).css({ ...style.group });
-        $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
+        $( "tab-group[active=true]" )
+            .attr( "active", false )
+            .velocity({ opacity: 0 }, { complete: ( target )=> {
+                $(target).css({ ...style.group });
+                $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
+            }});
 
         this.props.onChange && this.props.onChange( $prev, event );
     }
