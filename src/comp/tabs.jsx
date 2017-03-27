@@ -217,7 +217,9 @@ export default class Tabs extends React.Component {
         items    : [],
         color    : "",
         activeColor: "",
-        bgColor  : "",
+        bgColor    : "",
+        headerStyle: undefined,
+        groupsStyle: undefined,
         waves    : "",
         tooltip  : "",
     };
@@ -226,7 +228,9 @@ export default class Tabs extends React.Component {
         items    : React.PropTypes.array,
         color    : React.PropTypes.string,
         activeColor : React.PropTypes.string,
-        bgColor  : React.PropTypes.string,
+        bgColor     : React.PropTypes.string,
+        headerStyle : React.PropTypes.object,
+        groupsStyle : React.PropTypes.object,
         waves    : React.PropTypes.string,
         tooltip  : React.PropTypes.string,
         onChange : React.PropTypes.func,
@@ -269,11 +273,14 @@ export default class Tabs extends React.Component {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
 
-        const { items, color, activeColor, bgColor, children, ...others } = this.props;
+        const { items, color, activeColor, bgColor, headerStyle, groupsStyle, children, ...others } = this.props;
 
         color       && ( style.label.color = color );
         bgColor     && ( style.header.backgroundColor = bgColor );
         activeColor && ( style.label_active.color = activeColor );
+
+        headerStyle && ( style.header = { ...style.header, ...headerStyle } );
+        groupsStyle && ( style.groups = { ...style.groups, ...groupsStyle } );
 
         const tabLabel  = items && items.map( ( item, idx ) => {
                   const label_style = {
