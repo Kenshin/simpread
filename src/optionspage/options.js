@@ -6,6 +6,7 @@ import Velocity   from 'velocity';
 
 import Tabs       from 'tabs';
 import * as waves from 'waves';
+import { storage, STORAGE_MODE as mode } from 'storage';
 
 let tabsItemID = 0;
 
@@ -33,6 +34,13 @@ const tabsItem = [{
         "rgba(255, 153, 204, 1)",
         "rgba(204, 255, 0, 1)"
 ];
+
+/**
+ * Sevice: storage Get data form chrome storage
+ */
+storage.Get( function() {
+    console.log( "simpread storage get success!", storage.focus, storage.read );
+});
 
 /**
  * Add parallax scroll
