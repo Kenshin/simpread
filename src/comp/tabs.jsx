@@ -237,7 +237,7 @@ export default class Tabs extends React.Component {
 
     tabLabelOnClick() {
         const style   = styles.get( this.state.id ),
-              $target = $( event.target ).is( "tab-label" ) ? $( event.target ).find( "a" ) : $( event.target ),
+              $target = !$( event.target ).is( "tab-label" ) ? $( event.target ).parent() : $( event.target ).find( "a" ),
               idx     = $target.attr( "id" ),
               value   = $target.attr( "value" ),
               name    = $target.text(),
