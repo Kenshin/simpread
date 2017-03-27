@@ -64,6 +64,23 @@ const cssinjs = () => {
             cursor: 'not-allowed',
         },
 
+        link_icon: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+        },
+
+        icon: {
+            display: 'block',
+
+            width: '24px',
+            height: '24px',
+
+            border: 'none',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+        },
+
         border: {
             display: 'block',
             position: 'absolute',
@@ -138,13 +155,22 @@ const TabLabel = ( props ) => {
     props.active  && ( style.label  = { ...style.label, ...style.label_active } );
     props.active  && ( style.border = { ...style.border, ...style.border_active } );
     props.disable && ( style.link   = { ...style.link, ...style.link_disable } );
+    if ( props.icon && props.icon != "" ) {
+        style.icon.backgroundImage = `url(${props.icon})`;
+        style.link = { ...style.link, ...style.link_icon };
+    } else {
+        style.icon.display = "none";
+    }
     return (
         <tab-label style={ style.label } class={ props.waves } active={ props.active } onClick={ !disable && ( ()=>props.onClick() )}>
             <a style={ style.link }
                id={ props.idx } href={ route }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
-               disabled={ disable }>{ props.name }</a>
+               disabled={ disable }>
+               <tab-icon style={ style.icon }></tab-icon>
+               { props.name }
+               </a>
             <tab-border style={ style.border }></tab-border>
         </tab-label>
     );
@@ -243,6 +269,8 @@ export default class Tabs extends React.Component {
                     label        : style.label,
                     border       : style.border,
                     link         : style.link,
+                    link_icon    : style.link_icon,
+                    icon         : style.icon,
                     link_disable : style.link_disable,
                     label_active : style.label_active,
                     border_active: style.border_active,
