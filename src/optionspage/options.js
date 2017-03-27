@@ -7,9 +7,9 @@ import Velocity   from 'velocity';
 import Tabs       from 'tabs';
 import * as waves from 'waves';
 
-let tabsitemid = 0;
+let tabsItemID = 0;
 
-const tabsitem = [{
+const tabsItem = [{
         name: "共通",
         value: "common",
         active : true,
@@ -75,7 +75,7 @@ function tabsRender( color ) {
     const tabs = <Tabs waves="sr-tabs waves-effect waves-light"
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
-                    items={ tabsitem }
+                    items={ tabsItem }
                     onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
                     <div>aaa</div>
                     <div>bbb</div>
@@ -96,12 +96,12 @@ function Render( idx ) {
 }
 
 /**
- * Get tabsitemid from window.location.hash exist
+ * Get tabsItemID from window.location.hash exist
  */
-window.location.hash && ( tabsitemid = tabsitem.findIndex( item => item.route == window.location.hash ) );
-tabsitemid == -1 || tabsitemid == 0 ? tabsitemid = 0 : tabsitem.forEach( ( item, index ) => item.active = tabsitemid == index ? true : false );
+window.location.hash && ( tabsItemID = tabsItem.findIndex( item => item.route == window.location.hash ) );
+tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
 
 /**
  * Entry Render
  */
-Render( tabsitemid );
+Render( tabsItemID );
