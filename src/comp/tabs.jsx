@@ -250,7 +250,7 @@ export default class Tabs extends React.Component {
             .attr( "active", false ).css({ ...style.label })
             .find( "tab-border" ).css({ ...style.border });
 
-        $target.attr( "active", true )
+        $target.parent().attr( "active", true )
             .css({ ...style.label, ...style.label_active })
             .find( "tab-border" ).css({ ...style.border, ...style.border_active });
 
