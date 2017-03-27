@@ -2,6 +2,8 @@ console.log( "==== simpread options page load ====" )
 
 import '../assets/css/options.css';
 
+import Velocity   from 'velocity';
+
 import Tabs       from 'tabs';
 import * as waves from 'waves';
 
