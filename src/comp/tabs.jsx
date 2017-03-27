@@ -152,7 +152,7 @@ const cssinjs = () => {
  *   - onClick         : [PropTypes.func]   onClick event
  */
 const TabLabel = ( props ) => {
-    const route     = `#${ !props.route || props.route == "" ? "" : props.route }`,
+    const route     = !props.route || props.route == "" ? "#" : props.route,
           disable   = props.disable ? true : false,
           tooltip   = props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ],
           style     = props.style;
