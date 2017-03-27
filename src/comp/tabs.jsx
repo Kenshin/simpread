@@ -139,13 +139,12 @@ const TabLabel = ( props ) => {
     props.active  && ( style.border = { ...style.border, ...style.border_active } );
     props.disable && ( style.link   = { ...style.link, ...style.link_disable } );
     return (
-        <tab-label style={ style.label } class={ props.waves } active={ props.active } >
+        <tab-label style={ style.label } class={ props.waves } active={ props.active } onClick={ !disable && ( ()=>props.onClick() )}>
             <a style={ style.link }
                id={ props.idx } href={ route }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
-               disabled={ disable }
-               onClick={ !disable && ( ()=>props.onClick() )}>{ props.name }</a>
+               disabled={ disable }>{ props.name }</a>
             <tab-border style={ style.border }></tab-border>
         </tab-label>
     );
@@ -209,7 +208,7 @@ export default class Tabs extends React.Component {
 
     tabLabelOnClick() {
         const style   = styles.get( this.state.id ),
-              $target = $( event.target ),
+              $target = $( event.target ).is( "tab-label" ) ? $( event.target ).find( "a" ) : $( event.target ),
               idx     = $target.attr( "id" ),
               value   = $target.attr( "value" ),
               name    = $target.text(),
