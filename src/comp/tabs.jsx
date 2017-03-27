@@ -243,32 +243,34 @@ export default class Tabs extends React.Component {
     }
 
     tabLabelOnClick() {
-        let $target   = $( event.target );
-        while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-        $target       = $target.find( "a" );
+        let $target = $( event.target );
+        if ( !$target.is( "a" ) ) {
+            while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
+            $target.find( "a" )[0].click();
+        } else {
+            const style   = styles.get( this.state.id ),
+                  idx     = $target.attr( "id" ),
+                  value   = $target.attr( "value" ),
+                  name    = $target.text(),
+                  $prev   = $( "tab-label[active=true]" );
 
-        const style   = styles.get( this.state.id ),
-              idx     = $target.attr( "id" ),
-              value   = $target.attr( "value" ),
-              name    = $target.text(),
-              $prev   = $( "tab-label[active=true]" );
+            $( "tab-label[active=true]" )
+                .attr( "active", false ).css({ ...style.label })
+                .find( "tab-border" ).css({ ...style.border });
 
-        $( "tab-label[active=true]" )
-            .attr( "active", false ).css({ ...style.label })
-            .find( "tab-border" ).css({ ...style.border });
+            $target.parent().attr( "active", true )
+                .css({ ...style.label, ...style.label_active })
+                .find( "tab-border" ).css({ ...style.border, ...style.border_active });
 
-        $target.parent().attr( "active", true )
-            .css({ ...style.label, ...style.label_active })
-            .find( "tab-border" ).css({ ...style.border, ...style.border_active });
+            $( "tab-group[active=true]" )
+                .attr( "active", false )
+                .velocity({ opacity: 0 }, { complete: target => {
+                    $(target).css({ ...style.group });
+                    $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
+            }});
 
-        $( "tab-group[active=true]" )
-            .attr( "active", false )
-            .velocity({ opacity: 0 }, { complete: target => {
-                $(target).css({ ...style.group });
-                $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
-        }});
-
-        this.props.onChange && this.props.onChange( $prev, event );
+            this.props.onChange && this.props.onChange( $prev, event );
+        }
     }
 
     render() {
