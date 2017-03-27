@@ -69,8 +69,6 @@ a {
 .banner {
     width: 100%;
     height: 200px;
-
-    background-image: url( '../images/banner-0.png' );
 }
 
 .tabscontainer {
