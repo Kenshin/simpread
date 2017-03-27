@@ -7,22 +7,27 @@ import Velocity   from 'velocity';
 import Tabs       from 'tabs';
 import * as waves from 'waves';
 
+let bgidx = 0;
+
 const tabsitem = [{
         name: "共通",
         value: "common",
         active : true,
+        route: "#common",
     },{
         name: "聚焦模式",
         value: "focus",
+        route: "#focus",
     },{
         name: "阅读模式",
         value: "read",
+        route: "#read",
     },{
         name: "稍后读",
         value: "later",
-}];
-
-const bgColors = [
+        route: "#later",
+}],
+bgColors = [
     "rgba(153, 204, 255, 1)",
     "rgba(204, 204, 255, 1)",
     "rgba(255, 153, 204, 1)",
@@ -58,12 +63,13 @@ function tabsOnChange( $prev, event ) {
           value = $target.attr( "value" ),
           name  = $target.text();
 
-    $( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
-    tabsRender( bgColors[idx] );
+    Render( idx );
 }
 
 /**
  * Tabs render
+ * 
+ * @param {string} header background color
  */
 function tabsRender( color ) {
     const tabs = <Tabs waves="sr-tabs waves-effect waves-light"
@@ -79,4 +85,23 @@ function tabsRender( color ) {
     ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
 }
 
-tabsRender( bgColors[0] );
+/**
+ * Set banner and tabs.Render()
+ *
+ * @param {number} bgColors index
+ */
+function Render( idx ) {
+    $( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
+    tabsRender( bgColors[ idx ] );
+}
+
+/**
+ * Get bgidx from window.location.hash exist
+ */
+window.location.hash && ( bgidx = tabsitem.findIndex( item => item.route == window.location.hash ) );
+bgidx == -1 || bgidx == 0 ? bgidx = 0 : tabsitem.forEach( ( item, index ) => item.active = bgidx == index ? true : false );
+
+/**
+ * Render
+ */
+Render( bgidx );
