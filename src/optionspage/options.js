@@ -8,20 +8,16 @@ import * as waves from 'waves';
 const tabsitem = [{
         name: "共通",
         value: "common",
-        icon : "",
         active : true,
     },{
         name: "聚焦模式",
         value: "focus",
-        icon : "",
     },{
         name: "阅读模式",
         value: "read",
-        icon : "",
     },{
         name: "稍后读",
         value: "later",
-        icon : "",
 }];
 
 /**
