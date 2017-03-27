@@ -22,6 +22,13 @@ const tabsitem = [{
         value: "later",
 }];
 
+const bgColors = [
+    "rgba(153, 204, 255, 1)",
+    "rgba(204, 204, 255, 1)",
+    "rgba(255, 153, 204, 1)",
+    "rgba(204, 255, 0, 1)"
+];
+
 /**
  * Add parallax scroll
  */
@@ -43,18 +50,33 @@ waves.Render({ root: "main", name: "sr-tabs" });
  * @param {event} current event 
  */
 function tabsOnChange( $prev, event ) {
-    console.log( $prev, event )
+    let $target = $( event.target );
+    while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
+    $target     = $target.find( "a" );
+
+    const idx   = $target.attr( "id" ),
+          value = $target.attr( "value" ),
+          name  = $target.text();
+
+    $( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
+    tabsRender( bgColors[idx] );
 }
 
 /**
  * Tabs render
  */
-const tabs =
-    <Tabs waves="sr-tabs waves-effect waves-light"
-        items={ tabsitem } bgColor="rgb(153,204,255)" onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
-        <div>aaa</div>
-        <div>bbb</div>
-        <div>ccc</div>
-        <div>ddd</div>
-    </Tabs>;
-ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
+function tabsRender( color ) {
+    const tabs = <Tabs waves="sr-tabs waves-effect waves-light"
+                    headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
+                    bgColor={ color }
+                    items={ tabsitem }
+                    onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
+                    <div>aaa</div>
+                    <div>bbb</div>
+                    <div>ccc</div>
+                    <div>ddd</div>
+                </Tabs>;
+    ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
+}
+
+tabsRender( bgColors[0] );
