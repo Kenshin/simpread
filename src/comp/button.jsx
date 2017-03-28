@@ -133,6 +133,7 @@ export default class Button extends React.Component {
         type    : "flat",
         mode    : "primary",
         color   : "",
+        width   : undefined,
         backgroundColor : "",
         hoverColor : "",
         tooltip : {},
@@ -148,6 +149,7 @@ export default class Button extends React.Component {
         order   : React.PropTypes.oneOf([ "before", "after" ]),
         type    : React.PropTypes.oneOf([ "flat", "raised" ]),
         mode    : React.PropTypes.oneOf([ "primary", "secondary" ]),
+        width   : React.PropTypes.string,
         color   : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
         hoverColor : React.PropTypes.string,
@@ -206,6 +208,7 @@ export default class Button extends React.Component {
         this.props.text  == "" && ( style.text.display = "none" );
         this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
         this.props.order == "after" && ( style.icon.order = 1 );
+        this.props.width && ( style.root.width = this.props.width );
 
         const events = this.props.disable ? {} : {
                 onMouseOver : ()=>this.onMouseOver(),
