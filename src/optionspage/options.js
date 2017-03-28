@@ -1,12 +1,17 @@
 console.log( "==== simpread options page load ====" )
 
-import '../assets/css/options.css';
+import '../assets/css/options_page.css';
+import '../assets/css/option.css';
 
 import Velocity   from 'velocity';
 
 import Tabs       from 'tabs';
 import * as waves from 'waves';
+import * as tt    from 'tooltip';
 import { storage, STORAGE_MODE as mode } from 'storage';
+
+import FocusOpt   from 'focusopt';
+import ReadOpt    from 'readopt';
 
 let tabsItemID = 0;
 
@@ -36,13 +41,6 @@ const tabsItem = [{
 ];
 
 /**
- * Sevice: storage Get data form chrome storage
- */
-storage.Get( function() {
-    console.log( "simpread storage get success!", storage.focus, storage.read );
-});
-
-/**
  * Add parallax scroll
  */
 $( window ).scroll( (event) => {
@@ -50,11 +48,6 @@ $( window ).scroll( (event) => {
           offset  = ( 0 - $target.scrollTop() ) / 2;
     $( ".top" ).css( "transform", `translate3d(0px, ${offset}px, 0px)` )
 });
-
-/**
- * Waves render
- */
-waves.Render({ root: "main", name: "sr-tabs" });
 
 /**
  * Tabs onChange event handler
@@ -85,10 +78,14 @@ function tabsRender( color ) {
                     bgColor={ color }
                     items={ tabsItem }
                     onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
-                    <div>aaa</div>
-                    <div>bbb</div>
-                    <div>ccc</div>
-                    <div>ddd</div>
+                    <section>aaa</section>
+                    <section>
+                        <FocusOpt option={ storage.focus } />
+                    </section>
+                    <section>
+                        <ReadOpt option={ storage.read } />
+                    </section>
+                    <section>ddd</section>
                 </Tabs>;
     ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
 }
@@ -110,6 +107,14 @@ window.location.hash && ( tabsItemID = tabsItem.findIndex( item => item.route ==
 tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
 
 /**
- * Entry Render
+ * Entry:
+ * - get data from chrome storage
+ * - waves.Render()
+ * - tooltip.Render()
  */
-Render( tabsItemID );
+storage.Get( function() {
+    console.log( "simpread storage get success!", storage.focus, storage.read );
+    Render( tabsItemID );
+    tt.Render( "body" );
+    waves.Render({ root: "main", name: "sr-tabs" });
+});
