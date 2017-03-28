@@ -40,7 +40,8 @@ a {
     left: 0;
 
     width: 100%;
-    height: 310px;
+    /*height: 310px;*/
+    height: 249px;
 
     background-color: #2196f3;
 
@@ -50,7 +51,8 @@ a {
 .main {
     position: relative;
 
-    top: 62px;
+    /*top: 62px;*/
+    top: 200px;
 
     margin: 0 auto;
     margin-bottom: 24px;
@@ -69,6 +71,7 @@ a {
 }
 
 .banner {
+    display: none;
     width: 100%;
     height: 200px;
 }
@@ -99,7 +102,8 @@ a {
 
     max-width: var(--width);
     width: var(--width);
-    height: 100px;
+    /*height: 100px;*/
+    height: 400px;
 
     color: var(--secondary-color);
 
