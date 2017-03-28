@@ -4,10 +4,13 @@ import '../assets/css/options_page.css';
 import '../assets/css/option.css';
 
 import Velocity   from 'velocity';
+import Notify     from 'notify';
 
 import Tabs       from 'tabs';
 import * as waves from 'waves';
 import * as tt    from 'tooltip';
+import Button     from 'button';
+
 import { storage, STORAGE_MODE as mode } from 'storage';
 
 import FocusOpt   from 'focusopt';
@@ -50,10 +53,21 @@ $( window ).scroll( (event) => {
 });
 
 /**
+ * Save simpread data
+ * 
+ * @param {string} simpread mode
+ */
+function save( mode ) {
+    storage.Write( ()=> {
+        new Notify().Render( 0, "保存成功！" );
+    });
+}
+
+/**
  * Tabs onChange event handler
  * 
  * @param {jquery} prev jquery object
- * @param {event} current event 
+ * @param {event} current event
  */
 function tabsOnChange( $prev, event ) {
     let $target = $( event.target );
@@ -81,9 +95,11 @@ function tabsRender( color ) {
                     <section>aaa</section>
                     <section>
                         <FocusOpt option={ storage.focus } />
+                        <Button type="raised" backgroundColor="#FF5722" href="#" target="_self" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.focus ) } />
                     </section>
                     <section>
                         <ReadOpt option={ storage.read } />
+                        <Button type="raised" backgroundColor="#FF5722" href="#" target="_self" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.read ) } />
                     </section>
                     <section>ddd</section>
                 </Tabs>;
