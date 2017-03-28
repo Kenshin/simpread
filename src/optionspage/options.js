@@ -96,11 +96,11 @@ function tabsRender( color ) {
                     <section>aaa</section>
                     <section>
                         <FocusOpt option={ storage.focus } />
-                        <Button type="raised" backgroundColor="#FF5722" href="#" target="_self" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.focus ) } />
+                        <Button type="raised" backgroundColor="#FF5722" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.focus ) } />
                     </section>
                     <section>
                         <ReadOpt option={ storage.read } />
-                        <Button type="raised" backgroundColor="#FF5722" href="#" target="_self" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.read ) } />
+                        <Button type="raised" backgroundColor="#FF5722" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.read ) } />
                     </section>
                     <section>ddd</section>
                 </Tabs>;
