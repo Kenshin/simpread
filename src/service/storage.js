@@ -162,6 +162,15 @@ class Storage {
     }
 
     /**
+     * Set simpread object to chrome storage
+     * 
+     * @param {function} callback
+     */
+    Write( callback ) {
+        save( callback );
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
      * @param {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
@@ -263,12 +272,13 @@ function addsites( sites ) {
 /**
  * Call chrome storage set
  */
-function save() {
+function save( callback ) {
     browser.storage.local.set( { [name] : simpread }, function() {
         console.log( "chrome storage save success!", simpread );
         origin      = clone( simpread );
         curori      = { ...current };
         curori.site = { ...current.site };
+        callback && callback();
     });
 }
 
