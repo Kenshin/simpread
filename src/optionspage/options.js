@@ -2,6 +2,7 @@ console.log( "==== simpread options page load ====" )
 
 import '../assets/css/options_page.css';
 import '../assets/css/option.css';
+import '../vender/notify/notify.css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
@@ -59,7 +60,7 @@ $( window ).scroll( (event) => {
  */
 function save( mode ) {
     storage.Write( ()=> {
-        new Notify().Render( 0, "保存成功！" );
+        new Notify().Render( 0, "保存成功，页面刷新后生效！" );
     });
 }
 
