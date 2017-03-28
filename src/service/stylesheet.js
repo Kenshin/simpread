@@ -5,6 +5,14 @@ import {browser} from 'browser';
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ];
 
 /**
+ * Get chrome extension icon path
+ * @param {string} icon name
+ */
+function iconPath( name ) {
+    return browser.extension.getURL( `assets/images/${name}.png` )
+}
+
+/**
  * Get background opacity value
  * 
  * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
@@ -18,14 +26,6 @@ const getOpacity = value => {
         return 1;
     }
 };
-
-/**
- * Get chrome extension icon path
- * @param {string} icon name
- */
-function iconPath( name ) {
-    return browser.extension.getURL( `assets/images/${name}.png` )
-}
 
 /**
  * Get background color value
