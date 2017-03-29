@@ -79,13 +79,8 @@ function save( mode ) {
 function tabsOnChange( $prev, event ) {
     let $target = $( event.target );
     while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-    $target     = $target.find( "a" );
-
-    const idx   = $target.attr( "id" ),
-          value = $target.attr( "value" ),
-          name  = $target.text();
-
-    Render( idx );
+    $target = $target.find( "a" );
+    Render( $target.attr( "id" ) );
 }
 
 /**
@@ -102,11 +97,11 @@ function tabsRender( color ) {
                     <section>aaa</section>
                     <section>
                         <FocusOpt option={ storage.focus } />
-                        <Button type="raised" backgroundColor="#FF5722" width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.focus ) } />
+                        <Button type="raised" backgroundColor={ topColors[1] } width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.focus ) } />
                     </section>
                     <section>
                         <ReadOpt option={ storage.read } />
-                        <Button type="raised" backgroundColor="#FF5722" width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.read ) } />
+                        <Button type="raised" backgroundColor={ topColors[2] } width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.read ) } />
                     </section>
                     <section>ddd</section>
                 </Tabs>;
