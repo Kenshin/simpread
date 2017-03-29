@@ -112,12 +112,11 @@ function tabsRender( color ) {
 }
 
 /**
- * Set banner and tabs.Render()
+ * Set options page style and tabs.Render()
  *
  * @param {number} headerColors index
  */
 function Render( idx ) {
-    //$( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
     $( ".top" ).css( "background-color", topColors[idx] );
     $( ".header" ).css( "background-color", topColors[idx] ).find( ".title" ).text( tabsItem[idx].name );
     tabsRender( headerColors[ idx ] );
