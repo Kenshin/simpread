@@ -114,7 +114,7 @@ function tabsRender( color ) {
  * @param {number} headerColors index
  */
 function Render( idx ) {
-    $( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
+    //$( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
     $( ".top" ).css( "background-color", topColors[idx] );
     tabsRender( headerColors[ idx ] );
 }
