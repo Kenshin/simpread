@@ -101,17 +101,18 @@ a {
     align-items: center;
 
     margin: 80px auto 0;
+    padding: 200px 0 50px 0;
 
     max-width: var(--width);
     width: var(--width);
-    /*height: 100px;*/
-    height: 400px;
+    /*height: 100px;
+    height: 400px;*/
 
     color: var(--secondary-color);
 
     font-size: 1.3rem;
 
-    border-top: 1px solid rgba(0,0,0,0.12);
+    /*border-top: 1px solid rgba(0,0,0,0.12);*/
 }
 
 /*
