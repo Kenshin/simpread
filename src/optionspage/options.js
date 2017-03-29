@@ -55,8 +55,11 @@ const tabsItem = [{
  */
 $( window ).scroll( (event) => {
     const $target = $( event.target ),
-          offset  = ( 0 - $target.scrollTop() ) / 2;
-    $( ".top" ).css( "transform", `translate3d(0px, ${offset}px, 0px)` )
+          scroll  = $target.scrollTop(),
+          offset  = ( 0 - scroll ) / 2;
+    scroll >  200 && ( $( ".header" ).css( "opacity", 1 ) );
+    scroll <= 200 && ( $( ".header" ).css( "opacity", 0 ) );
+    $( ".top" ).css( "transform", `translate3d(0px, ${offset}px, 0px)` );
 });
 
 /**
@@ -116,6 +119,7 @@ function tabsRender( color ) {
 function Render( idx ) {
     //$( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
     $( ".top" ).css( "background-color", topColors[idx] );
+    $( ".header" ).css( "background-color", topColors[idx] ).find( ".title" ).text( tabsItem[idx].name );
     tabsRender( headerColors[ idx ] );
 }
 
