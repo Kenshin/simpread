@@ -37,11 +37,17 @@ const tabsItem = [{
         value: "later",
         route: "#later",
 }],
-    bgColors = [
-        "rgba(153, 204, 255, 1)",
-        "rgba(204, 204, 255, 1)",
-        "rgba(255, 153, 204, 1)",
-        "rgba(204, 255, 0, 1)"
+    headerColors = [
+        "#64B5F6",
+        "#81C784",
+        "#9575CD",
+        "#BA68C8"
+],
+    topColors = [
+        "#2196F3",
+        "#4CAF50",
+        "#673AB7",
+        "#9C27B0"
 ];
 
 /**
@@ -110,11 +116,12 @@ function tabsRender( color ) {
 /**
  * Set banner and tabs.Render()
  *
- * @param {number} bgColors index
+ * @param {number} headerColors index
  */
 function Render( idx ) {
     $( ".banner" ).css( "background-image", `url(../assets/images/banner-${idx}.png)` );
-    tabsRender( bgColors[ idx ] );
+    $( ".top" ).css( "background-color", topColors[idx] );
+    tabsRender( headerColors[ idx ] );
 }
 
 /**
