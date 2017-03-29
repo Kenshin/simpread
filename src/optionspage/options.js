@@ -13,6 +13,7 @@ import * as tt    from 'tooltip';
 import Button     from 'button';
 
 import { storage, STORAGE_MODE as mode } from 'storage';
+import * as ss    from 'stylesheet';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -112,6 +113,17 @@ function tabsRender( color ) {
 }
 
 /**
+ * navigation Render
+ */
+function navRender() {
+    const navClick = () => {
+        console.log("adfasdfadfadf")
+    };
+    const button = <Button waves="sr-tabs waves-effect waves-circle" hoverColor="transparent" icon={ ss.IconPath( "sidebar_icon" ) } onClick={ ()=>navClick() } />;
+    ReactDOM.render( button, $( ".header .nav" )[0] );
+}
+
+/**
  * Set options page style and tabs.Render()
  *
  * @param {number} headerColors index
@@ -136,6 +148,7 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item,
  */
 storage.Get( function() {
     console.log( "simpread storage get success!", storage.focus, storage.read );
+    navRender();
     Render( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "main", name: "sr-tabs" });
