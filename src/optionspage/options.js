@@ -11,6 +11,7 @@ import Tabs       from 'tabs';
 import * as waves from 'waves';
 import * as tt    from 'tooltip';
 import Button     from 'button';
+import Sidebar    from 'sidebar';
 
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
@@ -124,6 +125,14 @@ function navRender() {
 }
 
 /**
+ * sidebar Render
+ */
+function sidebarRender() {
+    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦"/>;
+    ReactDOM.render( sidebar, $( ".sidebar" )[0] );
+}
+
+/**
  * Set options page style and tabs.Render()
  *
  * @param {number} headerColors index
@@ -148,6 +157,7 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item,
  */
 storage.Get( function() {
     console.log( "simpread storage get success!", storage.focus, storage.read );
+    sidebarRender();
     navRender();
     Render( tabsItemID );
     tt.Render( "body" );
