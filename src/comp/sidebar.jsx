@@ -133,7 +133,7 @@ const cssinjs = () => {
 const Item = ( props ) => {
     !props.icon && ( props.style.icon.display = "none" );
     return (
-        <a style={ props.style.link } href="#" value={ props.value } onClick={ ()=>props.onClick() } >
+        <a style={ props.style.link } href={ props.route } value={ props.value } onClick={ ()=>props.onClick() } >
             <icon style={ props.style.icon }></icon>
             <text style={ props.style.text }>{ props.name }</text>
         </a>
@@ -182,6 +182,7 @@ export default class Sidebar extends React.Component {
     onClick() {
         let $target = $( event.target );
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
+        console.log( $target[0] )
         this.props.onClick && this.props.onClick( $target, $target.attr( "value" ), $target.text() );
     }
 
@@ -205,7 +206,7 @@ export default class Sidebar extends React.Component {
             return (
                 <li style={ style.li }>
                     <Item style={ style }
-                          icon={ item.icon } name={ item.name } value={ item.value }
+                          icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
                           onClick={ ()=>this.onClick() } />
                 </li>
             )
