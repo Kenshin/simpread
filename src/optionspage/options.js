@@ -119,6 +119,7 @@ function tabsRender( color ) {
 function navRender() {
     const navClick = () => {
         console.log("adfasdfadfadf")
+        sidebarRender();
     };
     const button = <Button waves="sr-tabs waves-effect waves-circle" hoverColor="transparent" icon={ ss.IconPath( "sidebar_icon" ) } onClick={ ()=>navClick() } />;
     ReactDOM.render( button, $( ".header .nav" )[0] );
@@ -162,7 +163,6 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item,
  */
 storage.Get( function() {
     console.log( "simpread storage get success!", storage.focus, storage.read );
-    sidebarRender();
     navRender();
     Render( tabsItemID );
     tt.Render( "body" );
