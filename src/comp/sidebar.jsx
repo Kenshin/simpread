@@ -175,6 +175,7 @@ export default class Sidebar extends React.Component {
         waves      : React.PropTypes.string,
         tooltip    : React.PropTypes.string,
         onClick    : React.PropTypes.func,
+        onExit     : React.PropTypes.func,
     };
 
     state = {
@@ -186,6 +187,20 @@ export default class Sidebar extends React.Component {
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
         const [ name, value, href ] = [ $target.text(), $target.attr( "value" ), $target.attr( "href" ) ];
         this.props.onClick && this.props.onClick( $target, { name, value, href } );
+        this.maskOnClick();
+    }
+
+    maskOnClick() {
+        $( "side" ).velocity( { width: 0 }, {
+            progress: ( elements, complete ) => {
+                $( "side" ).css( "opacity", 1 - complete );
+                $( "mask" ).css( "opacity", 1 - complete );
+            },
+            complete: () => {
+                $( "sidebar" ).remove();
+                this.props.onExit && this.props.onExit();
+            }
+        });
     }
 
     render() {
@@ -231,7 +246,7 @@ export default class Sidebar extends React.Component {
                     </footer>
                     }
                 </side>
-                <mask style={ style.mask }></mask>
+                <mask style={ style.mask } onClick={ ()=>this.maskOnClick() }></mask>
             </sidebar>
         )
     }
