@@ -133,7 +133,9 @@ const cssinjs = () => {
 const Item = ( props ) => {
     !props.icon && ( props.style.icon.display = "none" );
     return (
-        <a style={ props.style.link } href={ props.route } value={ props.value } onClick={ ()=>props.onClick() } >
+        <a style={ props.style.link }
+           href={ props.route } value={ props.value }
+           onClick={ props.route && ( ()=>props.onClick()) } >
             <icon style={ props.style.icon }></icon>
             <text style={ props.style.text }>{ props.name }</text>
         </a>
