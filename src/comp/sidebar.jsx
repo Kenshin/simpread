@@ -133,7 +133,7 @@ const cssinjs = () => {
 const Item = ( props ) => {
     !props.icon && ( props.style.icon.display = "none" );
     return (
-        <a style={ props.style.link } href="#" name={ props.name } onClick={ ()=>props.onClick() } >
+        <a style={ props.style.link } href="#" value={ props.value } onClick={ ()=>props.onClick() } >
             <icon style={ props.style.icon }></icon>
             <text style={ props.style.text }>{ props.name }</text>
         </a>
@@ -172,6 +172,7 @@ export default class Sidebar extends React.Component {
         maskStyle  : React.PropTypes.object,
         waves      : React.PropTypes.string,
         tooltip    : React.PropTypes.string,
+        onClick    : React.PropTypes.func,
     };
 
     state = {
@@ -179,7 +180,9 @@ export default class Sidebar extends React.Component {
     }
 
     onClick() {
-        console.log( event.target )
+        let $target = $( event.target );
+        while ( !$target.is( "a" ) ) { $target = $target.parent(); }
+        this.props.onClick && this.props.onClick( $target, $target.attr( "value" ), $target.text() );
     }
 
     render() {
