@@ -128,7 +128,10 @@ function navRender() {
  * sidebar Render
  */
 function sidebarRender() {
-    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦"/>;
+    const sidebarClick = ( $target, value, name ) => {
+        console.log("adfasdfadfadf", $target, name, value )
+    };
+    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦" onClick={ ($t, v, n)=>sidebarClick($t, v, n) }/>;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
 
