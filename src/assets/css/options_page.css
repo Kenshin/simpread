@@ -132,11 +132,7 @@ a {
     font-size: 1.3rem;
 }
 
-.sidebar {
-    font-size: 1.4rem;
-    color: var(--text-color);
-}
-
+/*
 .sidebar .bar {
     display: flex;
     flex-direction: column;
@@ -149,6 +145,10 @@ a {
     width: 256px;
     height: 100%;
 
+    font-size: 1.4rem;
+    font-weight: 500;
+
+    color: var(--text-color);
     background-color: var(--background-color);
 
     z-index: 2001;
@@ -180,6 +180,20 @@ a {
     height: 100%;
 }
 
+.sidebar .bar .content ul {
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+}
+
+.sidebar .bar .content li {
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+}
+
 .sidebar .bar .footer {
     display: flex;
     align-items: center;
@@ -204,3 +218,4 @@ a {
 
     z-index: 2000;
 }
+*/
