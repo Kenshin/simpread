@@ -184,8 +184,8 @@ export default class Sidebar extends React.Component {
     onClick() {
         let $target = $( event.target );
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
-        console.log( $target[0] )
-        this.props.onClick && this.props.onClick( $target, $target.attr( "value" ), $target.text() );
+        const [ name, value, href ] = [ $target.text(), $target.attr( "value" ), $target.attr( "href" ) ];
+        this.props.onClick && this.props.onClick( $target, { name, value, href } );
     }
 
     render() {
