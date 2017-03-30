@@ -129,12 +129,11 @@ function navRender() {
  */
 function sidebarRender() {
     const sidebarClick = ( $target, items ) => {
-        console.log("adfasdfadfadf", $target, items )
         const idx = tabsItem.findIndex( item => item.value == items.value );
         tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
         Render( idx );
     };
-    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) }/>;
+    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
 
