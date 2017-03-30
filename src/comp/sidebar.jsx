@@ -153,6 +153,7 @@ export default class Sidebar extends React.Component {
         headerStyle: undefined,
         contentStyle: undefined,
         footerStyle: undefined,
+        maskStyle  : undefined,
         waves      : "",
         tooltip    : "",
     };
@@ -168,6 +169,7 @@ export default class Sidebar extends React.Component {
         headerStyle: React.PropTypes.object,
         contentStyle: React.PropTypes.object,
         footerStyle: React.PropTypes.object,
+        maskStyle  : React.PropTypes.object,
         waves      : React.PropTypes.string,
         tooltip    : React.PropTypes.string,
     };
@@ -186,7 +188,7 @@ export default class Sidebar extends React.Component {
 
         let menu = [];
 
-        const { items, header, icon, footer, color, bgColor, headerStyle, contentStyle, footerStyle } = this.props;
+        const { items, header, icon, footer, color, bgColor, headerStyle, contentStyle, footerStyle, maskStyle } = this.props;
 
         color   && ( style.text.color = color );
         bgColor && ( style.root.backgroundColor = bgColor );
@@ -194,6 +196,7 @@ export default class Sidebar extends React.Component {
         headerStyle  && ( style.header  = { ...style.header , ...headerStyle  });
         contentStyle && ( style.content = { ...style.content, ...contentStyle });
         footerStyle  && ( style.footer  = { ...style.footer , ...footerStyle  });
+        maskStyle    && ( style.mask    = { ...style.mask,     ...maskStyle    });
 
         items && ( menu = items.map( ( item, index ) => {
             return (
