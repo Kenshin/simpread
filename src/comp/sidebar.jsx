@@ -21,7 +21,7 @@ const cssinjs = () => {
             top: 0,
             left: 0,
 
-            width: '256px',
+            width: 0,
             height: '100%',
 
             fontSize: '1.4rem',
@@ -29,6 +29,10 @@ const cssinjs = () => {
 
             color,
             backgroundColor: background_color,
+
+            opacity: 0,
+
+            transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
 
             zIndex: 2001,
         },
@@ -119,6 +123,7 @@ const cssinjs = () => {
             width: '100%',
             height: '100%',
 
+            opacity: 0,
             filter: 'alpha(Opacity=50)',
             backgroundColor: 'rgba(0, 0, 0, .5)',
 
@@ -199,6 +204,15 @@ export default class Sidebar extends React.Component {
             complete: () => {
                 $( "sidebar" ).remove();
                 this.props.onExit && this.props.onExit();
+            }
+        });
+    }
+
+    componentDidMount() {
+        $( "side" ).velocity( { width: 256 }, {
+            progress: ( elements, complete ) => {
+                $( "side" ).css( "opacity", complete );
+                $( "mask" ).css( "opacity", complete );
             }
         });
     }
