@@ -128,10 +128,13 @@ function navRender() {
  * sidebar Render
  */
 function sidebarRender() {
-    const sidebarClick = ( $target, value, name ) => {
-        console.log("adfasdfadfadf", $target, name, value )
+    const sidebarClick = ( $target, items ) => {
+        console.log("adfasdfadfadf", $target, items )
+        const idx = tabsItem.findIndex( item => item.value == items.value );
+        tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+        Render( idx );
     };
-    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦" onClick={ ($t, v, n)=>sidebarClick($t, v, n) }/>;
+    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) }/>;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
 
