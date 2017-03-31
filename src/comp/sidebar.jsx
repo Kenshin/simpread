@@ -253,10 +253,10 @@ class Sidebar extends React.Component {
     }
 
     liOnClick() {
-        console.log( event.target )
         let $target = $( event.target );
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
-        $target = $target.parent();
+
+        $target     = $target.parent();
         const style = styles.get( this.state.id ),
               state = $target.find( "dropdown" ).attr( "data-state" );
         if ( state == "down" ) {
