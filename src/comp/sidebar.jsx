@@ -87,9 +87,26 @@ const cssinjs = () => {
             listStyleType: 'none',
         },
 
+        ul_sub: {
+            position: 'absolute',
+
+            opacity: 0,
+            transform: 'scaleY(0)',
+            transformOrigin: 'left top 0px',
+            transition : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+        },
+
+        ul_sub_acitve: {
+            position: 'relative',
+
+            opacity: 1,
+            transform: 'scaleY(1)',
+        },
+
         li: {
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'flex-start',
+            flexDirection: 'column',
 
             position: 'relative',
 
@@ -103,7 +120,7 @@ const cssinjs = () => {
             width: '24px',
             height: '24px',
 
-            top: '6px',
+            top: '13px',
             right: 0,
 
             border: 'none',
@@ -128,7 +145,7 @@ const cssinjs = () => {
         icon: {
             display: 'block',
 
-            paddingRight: paddingLeft,
+            marginRight: paddingLeft,
 
             width: '24px',
             height: '24px',
@@ -136,6 +153,8 @@ const cssinjs = () => {
             border: 'none',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
+
+            backgroundColor: 'black',
         },
 
         text: {
@@ -165,13 +184,18 @@ const cssinjs = () => {
 }
 
 const Item = ( props ) => {
-    !props.icon && ( props.style.icon.display = "none" );
+    if ( props.icon ) {
+        props.style.icon.display = "block";
+        props.style.icon.backgroundImage = `url(${props.icon })`;
+    } else {
+        props.style.icon.display = "none";
+    }
     const tooltip = props.tooltip;
     return (
         <a style={ props.style.link } className={ props.waves }
            href={ props.route } value={ props.value }
            data-tooltip={ tooltip.text ? tooltip.text : props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
-           onClick={ props.route && ( ()=>props.onClick()) } >
+           onClick={ props.route && props.onClick && ( ()=>props.onClick()) } >
             <icon style={ props.style.icon }></icon>
             <text style={ props.style.text }>{ props.name }</text>
         </a>
@@ -228,6 +252,26 @@ class Sidebar extends React.Component {
         this.maskOnClick();
     }
 
+    liOnClick() {
+        console.log( event.target )
+        let $target = $( event.target );
+        while ( !$target.is( "a" ) ) { $target = $target.parent(); }
+        $target = $target.parent();
+        const style = styles.get( this.state.id ),
+              state = $target.find( "dropdown" ).attr( "data-state" );
+        if ( state == "down" ) {
+            $target.find( "dropdown" )
+                .attr( "data-state", "up" )
+                .css({ ...style.dropdown, ...style.dropup });
+            $target.find( "ul" ).css({ ...style.ul, ...style.ul_sub, ...style.ul_sub_acitve });
+        } else {
+            $target.find( "dropdown" )
+                .attr( "data-state", "down" )
+                .css({ ...style.dropdown });
+            $target.find( "ul" ).css({ ...style.ul, ...style.ul_sub });
+        }
+    }
+
     maskOnClick() {
         $( "side" ).velocity( { left: 0 - Number.parseInt( $( "side" ).width() ) }, {
             progress: ( elements, complete ) => {
@@ -263,14 +307,40 @@ class Sidebar extends React.Component {
         footerStyle  && ( style.footer  = { ...style.footer , ...footerStyle  });
         maskStyle    && ( style.mask    = { ...style.mask,     ...maskStyle   });
 
+        const submenu = ( items ) => {
+            return items.map( item => {
+                return (
+                    <li style={ style.li }>
+                        <Item style={ style }
+                            waves={ this.props.waves } tooltip={ this.props.tooltip }
+                            icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
+                            onClick={ ()=>this.onClick() } />
+                        {
+                            ( item.items && item.items.length > 0 ) &&
+                                <dropdown style={ style.dropdown }></dropdown>
+                        }
+                        {
+                            ( item.items && item.items.length > 0 ) && submenu( item.items )
+                        }
+                    </li>
+                )
+            } )
+        }
+
         items && ( menu = items.map( ( item, index ) => {
             return (
-                <li style={ style.li }>
+                <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
                     <Item style={ style }
                           waves={ this.props.waves } tooltip={ this.props.tooltip }
                           icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
-                          onClick={ ()=>this.onClick() } />
-                    <dropdown style={ style.dropdown }></dropdown>
+                          onClick={ !item.items && ( ()=>this.onClick() ) } />
+                    {
+                        ( item.items && item.items.length > 0 ) &&
+                            <dropdown style={ style.dropdown } data-state="down"></dropdown>
+                    }
+                    {
+                        ( item.items && item.items.length > 0 ) && <ul style={{ ...style.ul, ...style.ul_sub }}>{ submenu( item.items ) }</ul>
+                    }
                 </li>
             )
         }) );
