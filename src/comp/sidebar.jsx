@@ -309,33 +309,13 @@ class Sidebar extends React.Component {
         footerStyle  && ( style.footer  = { ...style.footer , ...footerStyle  });
         maskStyle    && ( style.mask    = { ...style.mask,     ...maskStyle   });
 
-        const submenu = ( items ) => {
-            return items.map( item => {
-                return (
-                    <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
-                        <Item style={ style }
-                            waves={ this.props.waves } tooltip={ this.props.tooltip }
-                            icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
-                            onClick={ !item.items && ( ()=>this.onClick() ) } />
-                        {
-                            ( item.items && item.items.length > 0 ) &&
-                                <dropdown style={ style.dropdown } data-state="down"></dropdown>
-                        }
-                        {
-                            ( item.items && item.items.length > 0 ) && <ul style={{ ...style.ul, ...style.ul_sub }}>{ submenu( item.items ) }</ul>
-                        }
-                    </li>
-                )
-            } )
-        }
-
-        items && ( menu = items.map( ( item, index ) => {
+        const list = item => {
             return (
                 <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
                     <Item style={ style }
-                          waves={ this.props.waves } tooltip={ this.props.tooltip }
-                          icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
-                          onClick={ !item.items && ( ()=>this.onClick() ) } />
+                        waves={ this.props.waves } tooltip={ this.props.tooltip }
+                        icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
+                        onClick={ !item.items && ( ()=>this.onClick() ) } />
                     {
                         ( item.items && item.items.length > 0 ) &&
                             <dropdown style={ style.dropdown } data-state="down"></dropdown>
@@ -345,7 +325,11 @@ class Sidebar extends React.Component {
                     }
                 </li>
             )
-        }) );
+        };
+
+        const submenu = ( items ) => items.map( item => list( item ) );
+
+        items && ( menu = items.map( item => list( item ) ) );
 
         return (
             <sidebar>
