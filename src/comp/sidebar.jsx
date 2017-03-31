@@ -84,6 +84,8 @@ const cssinjs = () => {
             margin: 0,
             padding: 0,
 
+            width: '100%',
+
             listStyleType: 'none',
         },
 
@@ -310,17 +312,17 @@ class Sidebar extends React.Component {
         const submenu = ( items ) => {
             return items.map( item => {
                 return (
-                    <li style={ style.li }>
+                    <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
                         <Item style={ style }
                             waves={ this.props.waves } tooltip={ this.props.tooltip }
                             icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
-                            onClick={ ()=>this.onClick() } />
+                            onClick={ !item.items && ( ()=>this.onClick() ) } />
                         {
                             ( item.items && item.items.length > 0 ) &&
-                                <dropdown style={ style.dropdown }></dropdown>
+                                <dropdown style={ style.dropdown } data-state="down"></dropdown>
                         }
                         {
-                            ( item.items && item.items.length > 0 ) && submenu( item.items )
+                            ( item.items && item.items.length > 0 ) && <ul style={{ ...style.ul, ...style.ul_sub }}>{ submenu( item.items ) }</ul>
                         }
                     </li>
                 )
