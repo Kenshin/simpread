@@ -321,13 +321,13 @@ class Sidebar extends React.Component {
                             <dropdown style={ style.dropdown } data-state="down"></dropdown>
                     }
                     {
-                        ( item.items && item.items.length > 0 ) && <ul style={{ ...style.ul, ...style.ul_sub }}>{ submenu( item.items ) }</ul>
+                        ( item.items && item.items.length > 0 ) && <ul style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul>
                     }
                 </li>
             )
         };
 
-        const submenu = ( items ) => items.map( item => list( item ) );
+        const subMenu = ( items ) => items.map( item => list( item ) );
 
         items && ( menu = items.map( item => list( item ) ) );
 
