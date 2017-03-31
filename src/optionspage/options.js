@@ -11,7 +11,7 @@ import Tabs       from 'tabs';
 import * as waves from 'waves';
 import * as tt    from 'tooltip';
 import Button     from 'button';
-import Sidebar    from 'sidebar';
+import * as side  from 'sidebar';
 
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
@@ -50,7 +50,12 @@ const tabsItem = [{
         "#4CAF50",
         "#673AB7",
         "#9C27B0"
-];
+],
+    tooltip_options = {
+        target   : "name",
+        position : "bottom",
+        delay    : 50,
+};
 
 /**
  * Add parallax scroll
@@ -118,8 +123,7 @@ function tabsRender( color ) {
  */
 function navRender() {
     const navClick = () => {
-        console.log("adfasdfadfadf")
-        sidebarRender();
+        side.Open();
     };
     const button = <Button waves="sr-tabs waves-effect waves-circle" hoverColor="transparent" icon={ ss.IconPath( "sidebar_icon" ) } onClick={ ()=>navClick() } />;
     ReactDOM.render( button, $( ".header .nav" )[0] );
@@ -134,7 +138,10 @@ function sidebarRender() {
         tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
         Render( idx );
     };
-    const sidebar = <Sidebar items={ tabsItem } header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) } />;
+    const sidebar = <side.Sidebar items={ tabsItem }
+                             waves="sr-tabs waves-effect waves-button"
+                             tooltip={ tooltip_options }
+                             header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
 
@@ -163,8 +170,9 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item,
  */
 storage.Get( function() {
     console.log( "simpread storage get success!", storage.focus, storage.read );
+    sidebarRender();
     navRender();
     Render( tabsItemID );
     tt.Render( "body" );
-    waves.Render({ root: "main", name: "sr-tabs" });
+    waves.Render({ root: "simpread-font", name: "sr-tabs" });
 });
