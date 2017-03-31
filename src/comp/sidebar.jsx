@@ -43,6 +43,7 @@ const cssinjs = () => {
             alignItems: 'center',
 
             paddingLeft,
+            paddingRight: paddingLeft,
 
             width: '100%',
             height,
@@ -55,7 +56,9 @@ const cssinjs = () => {
 
         content: {
             display: 'block',
+
             marginTop: '8px',
+            paddingRight: paddingLeft,
             paddingLeft,
 
             width: '100%',
@@ -68,6 +71,7 @@ const cssinjs = () => {
 
             marginTop: '8px',
             paddingLeft,
+            paddingRight: paddingLeft,
 
             width: '100%',
             height,
@@ -138,9 +142,11 @@ const cssinjs = () => {
 
 const Item = ( props ) => {
     !props.icon && ( props.style.icon.display = "none" );
+    const tooltip = props.tooltip;
     return (
-        <a style={ props.style.link }
+        <a style={ props.style.link } className={ props.waves }
            href={ props.route } value={ props.value }
+           data-tooltip={ tooltip.text ? tooltip.text : props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
            onClick={ props.route && ( ()=>props.onClick()) } >
             <icon style={ props.style.icon }></icon>
             <text style={ props.style.text }>{ props.name }</text>
@@ -164,7 +170,7 @@ export default class Sidebar extends React.Component {
         footerStyle: undefined,
         maskStyle  : undefined,
         waves      : "",
-        tooltip    : "",
+        tooltip    : {},
     };
 
     static propTypes = {
@@ -181,7 +187,7 @@ export default class Sidebar extends React.Component {
         footerStyle: React.PropTypes.object,
         maskStyle  : React.PropTypes.object,
         waves      : React.PropTypes.string,
-        tooltip    : React.PropTypes.string,
+        tooltip    : React.PropTypes.object,
         onClick    : React.PropTypes.func,
         onExit     : React.PropTypes.func,
     };
@@ -245,6 +251,7 @@ export default class Sidebar extends React.Component {
             return (
                 <li style={ style.li }>
                     <Item style={ style }
+                          waves={ this.props.waves } tooltip={ this.props.tooltip }
                           icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
                           onClick={ ()=>this.onClick() } />
                 </li>
@@ -256,7 +263,9 @@ export default class Sidebar extends React.Component {
                 <side style={ style.root }>
                     { header &&
                     <header style={ style.header }>
-                        <Item style={ style } icon={ icon } name={ header } onClick={ ()=>this.onClick() }/>
+                        <Item style={ style } icon={ icon } name={ header }
+                              waves={ this.props.waves } tooltip={ this.props.tooltip }
+                              onClick={ ()=>this.onClick() }/>
                     </header>
                     }
                     <content style={ style.content }>
@@ -264,7 +273,9 @@ export default class Sidebar extends React.Component {
                     </content>
                     { footer &&
                     <footer style={ style.footer }>
-                        <Item style={ style } name={ footer } onClick={ ()=>this.onClick() }/>
+                        <Item style={ style } name={ footer }
+                              waves={ this.props.waves } tooltip={ this.props.tooltip }
+                              onClick={ ()=>this.onClick() }/>
                     </footer>
                     }
                 </side>
