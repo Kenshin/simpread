@@ -279,6 +279,9 @@ class Sidebar extends React.Component {
 
 }
 
+/**
+ * Open sidebar
+ */
 function Open() {
     $( "side" ).velocity( { left: 0 }, {
         progress: ( elements, complete ) => {
