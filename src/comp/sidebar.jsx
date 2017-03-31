@@ -120,6 +120,7 @@ const cssinjs = () => {
         },
 
         mask: {
+            display: 'none',
             position: 'fixed',
 
             top: 0,
@@ -154,7 +155,7 @@ const Item = ( props ) => {
     );
 };
 
-export default class Sidebar extends React.Component {
+class Sidebar extends React.Component {
 
     static defaultProps = {
         icon       : undefined,
@@ -205,23 +206,15 @@ export default class Sidebar extends React.Component {
     }
 
     maskOnClick() {
-        $( "side" ).velocity( { left: 0 - Number.parseInt( $( "side" ).width ) }, {
+        $( "side" ).velocity( { left: 0 - Number.parseInt( $( "side" ).width() ) }, {
             progress: ( elements, complete ) => {
                 $( "side" ).css( "opacity", 1 - complete );
                 $( "mask" ).css( "opacity", 1 - complete );
             },
             complete: () => {
-                $( "sidebar" ).remove();
+                $( "sidebar" ).css( "left", 0 - Number.parseInt( $( "side" ).width() ));
+                $( "mask" ).css( "display", "none" );
                 this.props.onExit && this.props.onExit();
-            }
-        });
-    }
-
-    componentDidMount() {
-        $( "side" ).velocity( { left: 0 }, {
-            progress: ( elements, complete ) => {
-                $( "side" ).css( "opacity", complete );
-                $( "mask" ).css( "opacity", complete );
             }
         });
     }
@@ -284,4 +277,18 @@ export default class Sidebar extends React.Component {
         )
     }
 
+}
+
+function Open() {
+    $( "side" ).velocity( { left: 0 }, {
+        progress: ( elements, complete ) => {
+            $( "side" ).css( "opacity", complete );
+            $( "mask" ).css( "opacity", complete ).css( "display", "block" );
+        }
+    });
+}
+
+export {
+    Sidebar,
+    Open
 }
