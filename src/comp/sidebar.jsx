@@ -56,6 +56,7 @@ const cssinjs = () => {
 
         content: {
             display: 'block',
+            position: 'relative',
 
             marginTop: '8px',
             paddingRight: paddingLeft,
@@ -90,7 +91,29 @@ const cssinjs = () => {
             display: 'flex',
             alignItems: 'center',
 
+            position: 'relative',
+
             minHeight: '40px',
+        },
+
+        dropdown: {
+            display: 'block',
+            position: 'absolute',
+
+            width: '24px',
+            height: '24px',
+
+            top: '6px',
+            right: 0,
+
+            border: 'none',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAJUlEQVR4AWMYoWAUNDD8R4MNpGlpIM2WBtIc1kCSX4BwOIFRAACnLhjt0YEV0gAAAABJRU5ErkJggg==)',
+        },
+
+        dropup: {
+            backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAJklEQVR4AWMYXmAUNAAhScr/A2EDScohWkhRjtBCWDmalhEJRgEAy9UY7SHyyJcAAAAASUVORK5CYII=)'
         },
 
         link: {
@@ -247,6 +270,7 @@ class Sidebar extends React.Component {
                           waves={ this.props.waves } tooltip={ this.props.tooltip }
                           icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
                           onClick={ ()=>this.onClick() } />
+                    <dropdown style={ style.dropdown }></dropdown>
                 </li>
             )
         }) );
