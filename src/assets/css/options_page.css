@@ -56,13 +56,16 @@ a {
     z-index: 1000;
 }
 
-.header .title {
-    padding-left: 70px;
 
+.header .title {
     color: var(--background-color);
+
+    height: 48px;
 
     font-size: 2rem;
     font-weight: 700;
+
+    line-height: 42px;
 }
 
 .top {
