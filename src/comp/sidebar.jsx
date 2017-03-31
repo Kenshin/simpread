@@ -9,6 +9,7 @@ const color           = "#333",
 const cssinjs = () => {
     const paddingLeft = '24px',
           height      = '65px',
+          width       = 256,
           borderStyle = '1px solid #e0e0e0',
           styles      = {
 
@@ -19,9 +20,9 @@ const cssinjs = () => {
             position: 'fixed',
 
             top: 0,
-            left: 0,
+            left: 0 - width,
 
-            width: 0,
+            width: `${width}px`,
             height: '100%',
 
             fontSize: '1.4rem',
@@ -196,7 +197,7 @@ export default class Sidebar extends React.Component {
     }
 
     maskOnClick() {
-        $( "side" ).velocity( { width: 0 }, {
+        $( "side" ).velocity( { left: 0 - Number.parseInt( $( "side" ).width ) }, {
             progress: ( elements, complete ) => {
                 $( "side" ).css( "opacity", 1 - complete );
                 $( "mask" ).css( "opacity", 1 - complete );
@@ -209,7 +210,7 @@ export default class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        $( "side" ).velocity( { width: 256 }, {
+        $( "side" ).velocity( { left: 0 }, {
             progress: ( elements, complete ) => {
                 $( "side" ).css( "opacity", complete );
                 $( "mask" ).css( "opacity", complete );
