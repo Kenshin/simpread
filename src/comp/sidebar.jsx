@@ -154,6 +154,7 @@ export default class Sidebar extends React.Component {
         icon       : undefined,
         header     : undefined,
         footer     : undefined,
+        width      : "",
         items      : [],
         position   : "left",
         color      : undefined,
@@ -170,6 +171,7 @@ export default class Sidebar extends React.Component {
         icon       : React.PropTypes.string,
         header     : React.PropTypes.string,
         footer     : React.PropTypes.string,
+        width      : React.PropTypes.string,
         items      : React.PropTypes.array,
         position   : React.PropTypes.oneOf([ "left", "right" ]),
         color      : React.PropTypes.string,
@@ -224,8 +226,13 @@ export default class Sidebar extends React.Component {
 
         let menu = [];
 
-        const { items, header, icon, footer, color, bgColor, headerStyle, contentStyle, footerStyle, maskStyle } = this.props;
+        const { items, width,
+                header, icon, footer,
+                color, bgColor,
+                headerStyle, contentStyle, footerStyle, maskStyle } = this.props;
 
+        width   && ( style.root.width = width );
+        width   && ( style.root.left  = 0 - Number.parseInt( width ) );
         color   && ( style.text.color = color );
         bgColor && ( style.root.backgroundColor = bgColor );
 
