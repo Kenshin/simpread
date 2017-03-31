@@ -55,7 +55,32 @@ const tabsItem = [{
         target   : "name",
         position : "bottom",
         delay    : 50,
-};
+},
+    menuItem = tabsItem.map( ( item, idx ) => {
+       const menu = { ...item };
+       switch ( idx ) {
+            case 0:
+                delete menu.active;
+                break;
+            case 1:
+                menu.icon = ss.IconPath( "fontfamily_icon" );
+                break;
+            case 2:
+                menu.icon = ss.IconPath( "layout_icon" );
+                menu.items = [
+                    { name: "AAA", value: "AAA" },
+                    { name: "BBB", value: "BBB" },
+                    { name: "CCC", value: "CCC" }
+                ]
+                break;
+            case 3:
+                menu.icon = ss.IconPath( "share_icon" );
+                break;
+       }
+       return menu;
+});
+
+console.log( menuItem );
 
 /**
  * Add parallax scroll
@@ -138,7 +163,7 @@ function sidebarRender() {
         tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
         Render( idx );
     };
-    const sidebar = <side.Sidebar items={ tabsItem }
+    const sidebar = <side.Sidebar items={ menuItem }
                              waves="sr-tabs waves-effect waves-button"
                              tooltip={ tooltip_options }
                              header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) } />;
