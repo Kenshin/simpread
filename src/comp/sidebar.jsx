@@ -239,7 +239,7 @@ export default class Sidebar extends React.Component {
         headerStyle  && ( style.header  = { ...style.header , ...headerStyle  });
         contentStyle && ( style.content = { ...style.content, ...contentStyle });
         footerStyle  && ( style.footer  = { ...style.footer , ...footerStyle  });
-        maskStyle    && ( style.mask    = { ...style.mask,     ...maskStyle    });
+        maskStyle    && ( style.mask    = { ...style.mask,     ...maskStyle   });
 
         items && ( menu = items.map( ( item, index ) => {
             return (
