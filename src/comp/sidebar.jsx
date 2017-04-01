@@ -306,28 +306,25 @@ class Sidebar extends React.Component {
         footerStyle  && ( style.footer  = { ...style.footer , ...footerStyle  });
         maskStyle    && ( style.mask    = { ...style.mask,     ...maskStyle   });
 
-        const list = item => {
-            item.items && item.items.length > 0 &&
-                ( style.ul_sub.marginTop = 0 - item.items.length * Number.parseInt( style.li.minHeight ));
-            return (
-                <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
-                    <Item style={ style }
-                        waves={ this.props.waves } tooltip={ this.props.tooltip }
-                        icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
-                        onClick={ !item.items && ( ()=>this.onClick() ) } />
-                    {
-                        ( item.items && item.items.length > 0 ) &&
-                            <dropdown style={ style.dropdown } data-state="down"></dropdown>
-                    }
-                    {
-                        ( item.items && item.items.length > 0 ) &&
-                        <sub-menu style={ style.sub_menu }><ul data-margin-top={ style.ul_sub.marginTop } style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul></sub-menu>
-                    }
-                </li>
-            )
+        const subMenu = items => items.map( item => list( item ) ),
+              list    = item  => {
+                item.items && item.items.length > 0 &&
+                    ( style.ul_sub.marginTop = 0 - item.items.length * Number.parseInt( style.li.minHeight ));
+                return (
+                    <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
+                        <Item style={ style }
+                            waves={ this.props.waves } tooltip={ this.props.tooltip }
+                            icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
+                            onClick={ !item.items && ( ()=>this.onClick() ) } />
+                        { item.items && item.items.length > 0 &&
+                                <sub-menu style={ style.sub_menu }>
+                                    <dropdown style={ style.dropdown } data-state="down"></dropdown>
+                                    <ul data-margin-top={ style.ul_sub.marginTop } 
+                                        style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul>
+                                </sub-menu> }
+                    </li>
+                )
         };
-
-        const subMenu = ( items ) => items.map( item => list( item ) );
 
         items && ( menu = items.map( item => list( item ) ) );
 
