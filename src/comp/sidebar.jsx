@@ -2,7 +2,7 @@ console.log( "==== simpread component: Sidebar ====" )
 
 let styles = new Map();
 
-const color           = "#333",
+const color           = "rgb(90, 90, 90)",
       secondary_color = "rgba(204, 204, 204, 1)",
       background_color= "#fff";
 
@@ -10,7 +10,7 @@ const cssinjs = () => {
     const paddingLeft = '24px',
           height      = '65px',
           width       = 256,
-          borderStyle = '1px solid #e0e0e0',
+          borderStyle = '1px solid rgba(0, 0, 0, 0.06)',
           styles      = {
 
         root: {
@@ -107,8 +107,9 @@ const cssinjs = () => {
 
         li: {
             display: 'flex',
-            alignItems: 'flex-start',
             flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
 
             position: 'relative',
 
@@ -119,20 +120,20 @@ const cssinjs = () => {
             display: 'block',
             position: 'absolute',
 
-            width: '24px',
-            height: '24px',
+            width: '20px',
+            height: '20px',
 
-            top: '13px',
+            top: '10px',
             right: 0,
 
             border: 'none',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAJUlEQVR4AWMYoWAUNDD8R4MNpGlpIM2WBtIc1kCSX4BwOIFRAACnLhjt0YEV0gAAAABJRU5ErkJggg==)',
+            backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAeklEQVQ4T2NkoAAwUqCXYThojoyMDGBkZNTHFQ7///+/uHz58g0weRQ/R0ZGTmBkZMzHE4iNy5Yta8CqGSQYGRm5gJGRMR7dgP///y9cvnx5ArI41tBGNwCbRpAhOKMKZgAujXg1gyQjIiIcVqxYcQBXGAyHREJqJgEA2HcpEMZShNsAAAAASUVORK5CYII=)',
         },
 
         dropup: {
-            backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAJklEQVR4AWMYXmAUNAAhScr/A2EDScohWkhRjtBCWDmalhEJRgEAy9UY7SHyyJcAAAAASUVORK5CYII=)'
+            backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAwklEQVQ4T82SPQrCQBCF523ASjxB+nTpFSwFwXqLZQ+hR9gj6CGWLbYWBEsh9unS5wRiJWRHLALmjxRpMu28782bYUATChNYmikspVx6799Dqw3GVkqlAK7MfHDO5X0GvbDWOmbmJxHFRFQCWFtry7ZBB9Zar0IIDwBpLWbmXAixtda+/g0asDFGFEVxA7BrT2Hme5Ike2NMqHsNWCl1BnAcOhAzX5xzpw4spVxEUbQZe5qqqjLv/eenm+mTjK0wKfYXTFs9EN0Ulr4AAAAASUVORK5CYII=)'
         },
 
         link: {
