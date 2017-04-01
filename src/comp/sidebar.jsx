@@ -91,10 +91,6 @@ const cssinjs = () => {
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
-        sub_menu: {
-            overflow: 'hidden',
-        },
-
         ul_sub: {
             marginTop: '-200px',
         },
@@ -108,6 +104,10 @@ const cssinjs = () => {
             position: 'relative',
 
             minHeight: itemHeight,
+        },
+
+        sub_menu: {
+            overflow: 'hidden',
         },
 
         dropdown: {
@@ -254,18 +254,20 @@ class Sidebar extends React.Component {
 
         $target     = $target.parent();
         const style = styles.get( this.state.id ),
+              $ul   = $target.find( "ul" ),
               state = $target.find( "dropdown" ).attr( "data-state" );
 
         if ( state == "down" ) {
             $target.find( "dropdown" )
                 .attr( "data-state", "up" )
                 .css({ ...style.dropdown, ...style.dropup });
-            $target.find( "ul" ).css({ ...style.ul });
+            $ul.css({ ...style.ul });
         } else {
             $target.find( "dropdown" )
                 .attr( "data-state", "down" )
                 .css({ ...style.dropdown });
-            $target.find( "ul" ).css({ ...style.ul, ...style.ul_sub });
+            style.ul_sub.marginTop = $ul.attr( "data-margin-top" );
+            $ul.css({ ...style.ul, ...style.ul_sub });
         }
     }
 
@@ -305,6 +307,8 @@ class Sidebar extends React.Component {
         maskStyle    && ( style.mask    = { ...style.mask,     ...maskStyle   });
 
         const list = item => {
+            item.items && item.items.length > 0 &&
+                ( style.ul_sub.marginTop = 0 - item.items.length * Number.parseInt( style.li.minHeight ));
             return (
                 <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
                     <Item style={ style }
@@ -317,7 +321,7 @@ class Sidebar extends React.Component {
                     }
                     {
                         ( item.items && item.items.length > 0 ) &&
-                        <sub-menu style={ style.sub_menu }><ul style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul></sub-menu>
+                        <sub-menu style={ style.sub_menu }><ul data-margin-top={ style.ul_sub.marginTop } style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul></sub-menu>
                     }
                 </li>
             )
