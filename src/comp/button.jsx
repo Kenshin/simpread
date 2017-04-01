@@ -197,6 +197,8 @@ export default class Button extends React.Component {
         current.color = this.state.color;
         current.backgroundColor = this.state.backgroundColor;
 
+        this.props.text == "" && this.props.icon != "" && ( delete style.normal_root.minWidth );
+
         this.props.mode == "secondary" && 
             Object.keys( secondary ).forEach( ( key) => {current[ key ] = secondary[ key ]});
 
