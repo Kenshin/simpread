@@ -149,14 +149,12 @@ const cssinjs = () => {
 
             marginRight: paddingLeft,
 
-            width: '24px',
-            height: '24px',
+            width: '21px',
+            height: '21px',
 
             border: 'none',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-
-            backgroundColor: 'black',
         },
 
         text: {

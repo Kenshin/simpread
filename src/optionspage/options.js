@@ -61,12 +61,13 @@ const tabsItem = [{
        switch ( idx ) {
             case 0:
                 delete menu.active;
+                menu.icon = ss.IconPath( "common_icon" );
                 break;
             case 1:
-                menu.icon = ss.IconPath( "fontfamily_icon" );
+                menu.icon = ss.IconPath( "focus_mode_icon" );
                 break;
             case 2:
-                menu.icon = ss.IconPath( "layout_icon" );
+                menu.icon = ss.IconPath( "read_mode_icon" );
                 menu.items = [
                     { name: "AAA", value: "AAA" },
                     { name: "BBB", value: "BBB" },
@@ -74,7 +75,7 @@ const tabsItem = [{
                 ]
                 break;
             case 3:
-                menu.icon = ss.IconPath( "share_icon" );
+                menu.icon = ss.IconPath( "read_later_icon" );
                 break;
        }
        return menu;
@@ -164,7 +165,7 @@ function sidebarRender() {
         Render( idx );
     };
     const sidebar = <side.Sidebar items={ menuItem }
-                             waves="sr-tabs waves-effect waves-button"
+                             waves="sr-tabs waves-effect waves-button" 
                              tooltip={ tooltip_options }
                              header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
