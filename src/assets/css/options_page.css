@@ -56,6 +56,10 @@ a {
     z-index: 1000;
 }
 
+.header .nav,
+.header .title {
+    margin-left: 12px;
+}
 
 .header .title {
     color: var(--background-color);
