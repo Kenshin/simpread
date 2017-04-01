@@ -88,22 +88,15 @@ const cssinjs = () => {
             width: '100%',
 
             listStyleType: 'none',
+            transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+        },
+
+        sub_menu: {
+            overflow: 'hidden',
         },
 
         ul_sub: {
-            position: 'absolute',
-
-            opacity: 0,
-            transform: 'scaleY(0)',
-            transformOrigin: 'left top 0px',
-            transition : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-        },
-
-        ul_sub_acitve: {
-            position: 'relative',
-
-            opacity: 1,
-            transform: 'scaleY(1)',
+            marginTop: '-200px',
         },
 
         li: {
@@ -262,11 +255,12 @@ class Sidebar extends React.Component {
         $target     = $target.parent();
         const style = styles.get( this.state.id ),
               state = $target.find( "dropdown" ).attr( "data-state" );
+
         if ( state == "down" ) {
             $target.find( "dropdown" )
                 .attr( "data-state", "up" )
                 .css({ ...style.dropdown, ...style.dropup });
-            $target.find( "ul" ).css({ ...style.ul, ...style.ul_sub, ...style.ul_sub_acitve });
+            $target.find( "ul" ).css({ ...style.ul });
         } else {
             $target.find( "dropdown" )
                 .attr( "data-state", "down" )
@@ -322,7 +316,8 @@ class Sidebar extends React.Component {
                             <dropdown style={ style.dropdown } data-state="down"></dropdown>
                     }
                     {
-                        ( item.items && item.items.length > 0 ) && <ul style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul>
+                        ( item.items && item.items.length > 0 ) &&
+                        <sub-menu style={ style.sub_menu }><ul style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul></sub-menu>
                     }
                 </li>
             )
