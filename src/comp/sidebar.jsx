@@ -10,6 +10,7 @@ const cssinjs = () => {
     const paddingLeft = '24px',
           height      = '65px',
           width       = 256,
+          itemHeight  = '40px',
           borderStyle = '1px solid rgba(0, 0, 0, 0.06)',
           styles      = {
 
@@ -113,7 +114,7 @@ const cssinjs = () => {
 
             position: 'relative',
 
-            minHeight: '40px',
+            minHeight: itemHeight,
         },
 
         dropdown: {
@@ -141,6 +142,7 @@ const cssinjs = () => {
             alignItems: 'center',
 
             width: '100%',
+            minHeight: itemHeight,
 
             color,
         },
