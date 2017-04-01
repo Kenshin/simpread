@@ -107,6 +107,7 @@ const cssinjs = () => {
         },
 
         sub_menu: {
+            width: '100%',
             overflow: 'hidden',
         },
 
@@ -133,6 +134,9 @@ const cssinjs = () => {
         link: {
             display: 'flex',
             alignItems: 'center',
+
+            margin: 0,
+            padding: 0,
 
             width: '100%',
             minHeight: itemHeight,
@@ -188,7 +192,7 @@ const Item = ( props ) => {
     }
     const tooltip = props.tooltip;
     return (
-        <a style={ props.style.link } className={ props.waves }
+        <a style={ props.style.link } className={  props.route && props.waves }
            href={ props.route } value={ props.value }
            data-tooltip={ tooltip.text ? tooltip.text : props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
            onClick={ props.route && props.onClick && ( ()=>props.onClick()) } >
