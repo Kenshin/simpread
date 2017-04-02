@@ -18,6 +18,7 @@ import * as ss    from 'stylesheet';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
+import CommonOpt  from 'commonopt';
 
 let tabsItemID = 0;
 
@@ -135,14 +136,24 @@ function tabsRender( color ) {
                     bgColor={ color }
                     items={ tabsItem }
                     onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
-                    <section>Common</section>
+                    <section>
+                        <CommonOpt backgroundColor={ topColors[0] } />
+                    </section>
                     <section>
                         <FocusOpt option={ storage.focus } />
-                        <Button type="raised" backgroundColor={ topColors[1] } width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.focus ) } />
+                        <Button type="raised" width="100%" text="保 存"
+                                color="#fff" backgroundColor={ topColors[1] }
+                                icon={ ss.IconPath( "save_icon" ) }
+                                waves="sr-button waves-effect waves-button" 
+                                onClick={ ()=>save( mode.focus ) } />
                     </section>
                     <section>
                         <ReadOpt option={ storage.read } />
-                        <Button type="raised" backgroundColor={ topColors[2] } width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.read ) } />
+                        <Button type="raised" width="100%" text="保 存"
+                                color="#fff" backgroundColor={ topColors[2] }
+                                icon={ ss.IconPath( "save_icon" ) }
+                                waves="sr-button waves-effect waves-button" 
+                                onClick={ ()=>save( mode.read ) } />
                     </section>
                     <section>Later</section>
                     <section>About</section>
