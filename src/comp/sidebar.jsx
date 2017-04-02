@@ -65,6 +65,8 @@ const cssinjs = () => {
 
             width: '100%',
             height: '100%',
+
+            fontSize: '1.3rem',
         },
 
         footer: {
@@ -147,6 +149,7 @@ const cssinjs = () => {
         icon: {
             display: 'block',
 
+            marginLeft: '2px',
             marginRight: paddingLeft,
 
             width: '21px',
