@@ -115,8 +115,9 @@ function save( mode ) {
 function tabsOnChange( $prev, event ) {
     let $target = $( event.target );
     while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-    $target = $target.find( "a" );
-    Render( $target.attr( "id" ) );
+    const idx = $target.find( "a" ).attr( "id" );
+    Render( idx );
+    tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
 }
 
 /**
