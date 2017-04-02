@@ -38,18 +38,24 @@ const tabsItem = [{
         name: "稍后读",
         value: "later",
         route: "#later",
+    },{
+        name: "关于",
+        value: "about",
+        route: "#about",
 }],
     headerColors = [
         "#64B5F6",
         "#81C784",
         "#9575CD",
-        "#BA68C8"
+        "#BA68C8",
+        "#4DB6AC"
 ],
     topColors = [
         "#2196F3",
         "#4CAF50",
         "#673AB7",
-        "#9C27B0"
+        "#9C27B0",
+        "#009688"
 ],
     tooltip_options = {
         target   : "name",
@@ -68,14 +74,12 @@ const tabsItem = [{
                 break;
             case 2:
                 menu.icon = ss.IconPath( "read_mode_icon" );
-                menu.items = [
-                    { name: "AAA", value: "AAA" },
-                    { name: "BBB", value: "BBB" },
-                    { name: "CCC", value: "CCC" }
-                ]
                 break;
             case 3:
                 menu.icon = ss.IconPath( "read_later_icon" );
+                break;
+            case 4:
+                menu.icon = ss.IconPath( "about_icon" );
                 break;
        }
        return menu;
@@ -131,7 +135,7 @@ function tabsRender( color ) {
                     bgColor={ color }
                     items={ tabsItem }
                     onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
-                    <section>aaa</section>
+                    <section>Common</section>
                     <section>
                         <FocusOpt option={ storage.focus } />
                         <Button type="raised" backgroundColor={ topColors[1] } width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.focus ) } />
@@ -140,7 +144,8 @@ function tabsRender( color ) {
                         <ReadOpt option={ storage.read } />
                         <Button type="raised" backgroundColor={ topColors[2] } width="100%" waves="sr-button waves-effect waves-button" text="保 存" onClick={ ()=>save( mode.read ) } />
                     </section>
-                    <section>ddd</section>
+                    <section>Later</section>
+                    <section>About</section>
                 </Tabs>;
     ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
 }
@@ -168,7 +173,7 @@ function sidebarRender() {
     const sidebar = <side.Sidebar items={ menuItem }
                              waves="sr-tabs waves-effect waves-button" 
                              tooltip={ tooltip_options }
-                             header="设定" footer="关于 简悦" onClick={ ($t,o)=>sidebarClick($t,o) } />;
+                             header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
 
