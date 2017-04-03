@@ -61,6 +61,15 @@ let current  = {},
 class Storage {
 
     /**
+     * Get simpread.option data structure
+     * 
+     * @return {object} simpread["option"]
+     */
+    get option() {
+        return simpread[ mode.option ];
+    }
+
+    /**
      * Get simpread.focus data structure
      * 
      * @return {object} simpread["focus"]
