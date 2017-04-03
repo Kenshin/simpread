@@ -162,17 +162,24 @@ class Storage {
     /**
      * Sync simpread data structure
      * 
+     * @param {string} include set, get
      * @param {function} callback
      */
-    Sync( callback ) {
-        sync = { ...simpread };
-        delete sync.sites;
-        browser.storage.sync.set( { [name] : sync }, () => {
-            console.log( "chrome storage sync success!" )
-            sync.option.update     = now();
-            simpread.option.update = sync.option.update;
-            save( callback( sync.option.update ));
-        });
+    Sync( state, callback ) {
+        if ( state == "set" ) {
+            sync = { ...simpread };
+            delete sync.sites;
+            browser.storage.sync.set( { [name] : sync }, () => {
+                console.log( "chrome storage sync[set] success!" )
+                sync.option.update     = now();
+                simpread.option.update = sync.option.update;
+                save( callback( sync.option.update ));
+            });
+        } else {
+            browser.storage.sync.set( [name] , result => {
+                console.log( "chrome storage sync[read] success!", result )
+            });
+        }
     }
 
     /**
