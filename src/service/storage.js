@@ -162,7 +162,7 @@ class Storage {
             console.log( "chrome storage sync success!" )
             sync.option.update     = now();
             simpread.option.update = sync.option.update;
-            callback();
+            callback( sync.option.update );
         });
     }
 
@@ -342,12 +342,12 @@ function compare() {
 /**
  * Get now time
  * 
- * @return {string} return now, e.g. 2017-04-03-11-43-53
+ * @return {string} return now, e.g. 2017年04月03日 11:43:53
  */
 function now() {
     const date   = new Date(),
           format = value => value = value < 10 ? "0" + value : value;
-    return date.getFullYear() + "-" + format( date.getUTCMonth() + 1 ) + "-" + format( date.getUTCDate() ) + "-" + format( date.getHours() ) + "-" + format( date.getMinutes() ) + "-" + format( date.getSeconds() );
+    return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + ":" + format( date.getMinutes() ) + ":" + format( date.getSeconds() );
 }
 
 const storage = new Storage();
