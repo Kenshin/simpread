@@ -93,14 +93,28 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item,
  * - waves.Render()
  * - tooltip.Render()
  */
-storage.Get( function() {
-    console.log( "simpread storage get success!", storage.focus, storage.read );
+storage.Get( first => {
+    console.log( "simpread storage get success!", storage.focus, storage.read, first );
+    firstLoad( first );
     sidebarRender();
     navRender();
     Render( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "simpread-font", name: "sr-tabs" });
 });
+
+/**
+ * First load call remote simpread data structure( usage storage.Sync() )
+ * 
+ * @param {bool} is first load
+ */
+function firstLoad( first ) {
+    window.location.hash && window.location.hash == "#firstload" && first && 
+        storage.Sync( "get", success => {
+            success && new Notify().Render( 0, "数据恢复成功！" );
+            success && Render( tabsItemID );
+        });
+}
 
 /**
  * Save simpread data
@@ -140,6 +154,7 @@ function tabsOnChange( $prev, event ) {
  * @param {string} header background color
  */
 function tabsRender( color ) {
+    console.log( storage.focus, storage.read )
     const tabs = <Tabs waves="sr-tabs waves-effect waves-light"
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
