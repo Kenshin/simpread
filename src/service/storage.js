@@ -42,7 +42,7 @@ const name = "simpread",
         sites     : []   // e.g. [ "<url>", site ]
     },
     option = {
-        version   : "2017-03-04",
+        version   : "2017-04-03",
         update    : "",
     };
 
