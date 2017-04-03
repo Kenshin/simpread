@@ -1,13 +1,18 @@
 console.log( "===== simpread option common load =====" )
 
-import Button  from 'button'; 
+import Button      from 'button'; 
+import Notify      from 'notify';
 
-import * as ss from 'stylesheet';
+import * as ss     from 'stylesheet';
+import { storage } from 'storage';
 
 export default class CommonOpt extends React.Component {
 
     sync() {
-        console.log( "sync" )
+        storage.Sync( () => {
+            new Notify().Render( 0, "数据同步成功。" );
+            // update tooltip
+        });
     }
 
     import() {
