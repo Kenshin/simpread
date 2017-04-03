@@ -82,6 +82,27 @@ $( window ).scroll( (event) => {
 });
 
 /**
+ * Get tabsItemID from window.location.hash exist
+ */
+window.location.hash && ( tabsItemID = tabsItem.findIndex( item => item.route == window.location.hash ) );
+tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
+
+/**
+ * Entry:
+ * - get data from chrome storage
+ * - waves.Render()
+ * - tooltip.Render()
+ */
+storage.Get( function() {
+    console.log( "simpread storage get success!", storage.focus, storage.read );
+    sidebarRender();
+    navRender();
+    Render( tabsItemID );
+    tt.Render( "body" );
+    waves.Render({ root: "simpread-font", name: "sr-tabs" });
+});
+
+/**
  * Save simpread data
  * 
  * @param {string} simpread mode
@@ -185,24 +206,3 @@ function Render( idx ) {
     $( ".header" ).css( "background-color", topColors[idx] ).find( ".title" ).text( tabsItem[idx].name );
     tabsRender( headerColors[ idx ] );
 }
-
-/**
- * Get tabsItemID from window.location.hash exist
- */
-window.location.hash && ( tabsItemID = tabsItem.findIndex( item => item.route == window.location.hash ) );
-tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
-
-/**
- * Entry:
- * - get data from chrome storage
- * - waves.Render()
- * - tooltip.Render()
- */
-storage.Get( function() {
-    console.log( "simpread storage get success!", storage.focus, storage.read );
-    sidebarRender();
-    navRender();
-    Render( tabsItemID );
-    tt.Render( "body" );
-    waves.Render({ root: "simpread-font", name: "sr-tabs" });
-});
