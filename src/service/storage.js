@@ -40,16 +40,21 @@ const name = "simpread",
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
         sites     : []   // e.g. [ "<url>", site ]
+    },
+    option = {
+        version   : "2017-03-04",
+        update    : "",
     };
 
 let current  = {},
     curori   = {},
     origin   = {},
+    sync     = {},
     simpread = {
+        option,
         focus,
         read,
         sites  : [],
-        option : {},
     },
     rdstcode = -1;
 
@@ -143,6 +148,22 @@ class Storage {
             save();
         }
         return code;
+    }
+
+    /**
+     * Sync simpread data structure
+     * 
+     * @param {function} callback
+     */
+    Sync( callback ) {
+        sync = { ...simpread };
+        delete sync.sites;
+        browser.storage.sync.set( { [name] : sync }, () => {
+            console.log( "chrome storage sync success!" )
+            sync.option.update     = now();
+            simpread.option.update = sync.option.update;
+            callback();
+        });
     }
 
     /**
@@ -317,6 +338,18 @@ function compare() {
     console.log( "current changed state is ", code, changed );
     return { code, changed };
 }
+
+/**
+ * Get now time
+ * 
+ * @return {string} return now, e.g. 2017-04-03-11-43-53
+ */
+function now() {
+    const date   = new Date(),
+          format = value => value = value < 10 ? "0" + value : value;
+    return date.getFullYear() + "-" + format( date.getUTCMonth() + 1 ) + "-" + format( date.getUTCDate() ) + "-" + format( date.getHours() ) + "-" + format( date.getMinutes() ) + "-" + format( date.getSeconds() );
+}
+
 const storage = new Storage();
 
 export {
