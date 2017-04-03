@@ -11,6 +11,7 @@ import {browser}   from 'browser';
 storage.Get( function() {
     if ( local.Firstload() ) {
         storage.GetNewsites( "local"  );
+        browser.tabs.create({ url: browser.extension.getURL( "optionspage/options.html#firstload" ) });
     }
     else if( !local.Count() ) storage.GetNewsites( "remote" );
 });
