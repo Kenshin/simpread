@@ -8,6 +8,10 @@ import { storage } from 'storage';
 
 export default class CommonOpt extends React.Component {
 
+    static propTypes = {
+        sync : React.PropTypes.func,
+    }
+
     state = {
         update: ( update => !update ? "从未同步过，建议同步一次！" : `上次同步时间： ${ update }` ) ( storage.option.update )
     };
@@ -15,9 +19,8 @@ export default class CommonOpt extends React.Component {
     sync() {
         storage.Sync( time => {
             new Notify().Render( 0, "数据同步成功。" );
-            this.setState({
-                update: `上次同步时间： ${ time }`
-            });
+            this.setState({ update: `上次同步时间： ${ time }` });
+            this.props.sync && this.props.sync();
         });
     }
 
