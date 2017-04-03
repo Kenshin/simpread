@@ -8,10 +8,16 @@ import { storage } from 'storage';
 
 export default class CommonOpt extends React.Component {
 
+    state = {
+        update: ( update => !update ? "从未同步过，建议同步一次！" : `上次同步时间： ${ update }` ) ( storage.option.update )
+    };
+
     sync() {
-        storage.Sync( () => {
+        storage.Sync( time => {
             new Notify().Render( 0, "数据同步成功。" );
-            // update tooltip
+            this.setState({
+                update: `上次同步时间： ${ time }`
+            });
         });
     }
 
@@ -31,7 +37,7 @@ export default class CommonOpt extends React.Component {
                         icon={ ss.IconPath( "sync_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="sr-button waves-effect waves-button" 
-                        tooltip={{ text: "从未同步过，建议同步一次！" }}
+                        tooltip={{ text: this.state.update }}
                         onClick={ ()=>this.sync() } />
                 <div style={{ display: 'inline-flex', width: '100%' }}>
                     <Button type="raised" text="从本地上传配置文件" width="100%" 
