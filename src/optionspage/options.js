@@ -112,6 +112,13 @@ function save( mode ) {
 }
 
 /**
+ * Refresh tooltip
+ */
+function refresh() {
+    tt.Render( "body" );
+}
+
+/**
  * Tabs onChange event handler
  * 
  * @param {jquery} prev jquery object
@@ -137,7 +144,7 @@ function tabsRender( color ) {
                     items={ tabsItem }
                     onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
                     <section>
-                        <CommonOpt backgroundColor={ topColors[0] } />
+                        <CommonOpt backgroundColor={ topColors[0] } sync={ ()=> refresh() } />
                     </section>
                     <section>
                         <FocusOpt option={ storage.focus } />
