@@ -44,26 +44,9 @@ const tabsItem = [{
         value: "about",
         route: "#about",
 }],
-    headerColors = [
-        "#64B5F6",
-        "#81C784",
-        "#9575CD",
-        "#BA68C8",
-        "#4DB6AC"
-],
-    topColors = [
-        "#2196F3",
-        "#4CAF50",
-        "#673AB7",
-        "#9C27B0",
-        "#009688"
-],
-    tooltip_options = {
-        target   : "name",
-        position : "bottom",
-        delay    : 50,
-},
-    menuItem = tabsItem.map( ( item, idx ) => {
+    headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#BA68C8", "#4DB6AC" ],
+    topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#9C27B0", "#009688" ],
+    menuItem      = tabsItem.map( ( item, idx ) => {
        const menu = { ...item };
        switch ( idx ) {
             case 0:
@@ -188,7 +171,6 @@ function sidebarRender() {
     };
     const sidebar = <side.Sidebar items={ menuItem }
                              waves="sr-tabs waves-effect waves-button" 
-                             tooltip={ tooltip_options }
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
