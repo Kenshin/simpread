@@ -1,3 +1,4 @@
+console.log( "=== simpread background load ===" )
 
 import local       from 'local';
 import { storage } from 'storage';
@@ -8,7 +9,9 @@ import {browser}   from 'browser';
  * Save local/remote website_list.json to chrome storage
  */
 storage.Get( function() {
-    if ( local.Firstload() )  storage.GetNewsites( "local"  );
+    if ( local.Firstload() ) {
+        storage.GetNewsites( "local"  );
+    }
     else if( !local.Count() ) storage.GetNewsites( "remote" );
 });
 
