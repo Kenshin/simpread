@@ -162,7 +162,7 @@ class Storage {
             console.log( "chrome storage sync success!" )
             sync.option.update     = now();
             simpread.option.update = sync.option.update;
-            callback( sync.option.update );
+            save( callback( sync.option.update ));
         });
     }
 
