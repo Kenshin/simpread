@@ -186,6 +186,19 @@ const cssinjs = () => {
     return styles;
 }
 
+/**
+ * React stateless component
+ * 
+ * @param {object} react props, include:
+ *   - name         : [PropTypes.string] <a> text
+ *   - value        : [PropTypes.string] <a> value
+ *   - route        : [PropTypes.string] <a> href
+ *   - icon         : [PropTypes.string] icon
+ *   - style        : [PropTypes.object] include: icon link text
+ *   - tooltip      : [PropTypes.string] tooltip
+ *   - waves        : [PropTypes.string] waves
+ *   - onClick      : [PropTypes.func]   event handler
+ */
 const Item = ( props ) => {
     if ( props.icon ) {
         props.style.icon.display = "block";
@@ -205,6 +218,15 @@ const Item = ( props ) => {
     );
 };
 
+/**
+ * Custom component: Sidebar
+ * 
+ * Reference:
+ * - chrome://md-settings/
+ * - https://material.io/guidelines/
+ * 
+ * @class
+ */
 class Sidebar extends React.Component {
 
     static defaultProps = {
