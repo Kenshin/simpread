@@ -86,8 +86,6 @@ const tabsItem = [{
        return menu;
 });
 
-console.log( menuItem );
-
 /**
  * Add parallax scroll
  */
