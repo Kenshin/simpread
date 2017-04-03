@@ -162,7 +162,7 @@ class Storage {
     /**
      * Sync simpread data structure
      * 
-     * @param {string} include set, get
+     * @param {string} include: set, get
      * @param {function} callback
      */
     Sync( state, callback ) {
@@ -176,8 +176,16 @@ class Storage {
                 save( callback( sync.option.update ));
             });
         } else {
-            browser.storage.sync.set( [name] , result => {
-                console.log( "chrome storage sync[read] success!", result )
+            browser.storage.sync.get( [name] , result => {
+                console.log( "chrome storage sync[get] success!", result, simpread )
+                let success = false;
+                if ( result && !$.isEmptyObject( result )) {
+                    success = true;
+                    Object.keys( mode ).forEach( key => {
+                        simpread[ key ] = result[ name ][ key ];
+                    });
+                }
+                save( callback( success ) );
             });
         }
     }
@@ -189,11 +197,13 @@ class Storage {
      */
     Get ( callback ) {
         browser.storage.local.get( [name], function( result ) {
+            let firstload = true;
             if ( result && !$.isEmptyObject( result )) {
-                simpread = result[name];
+                simpread  = result[name];
+                firstload = false;
             }
-            origin   = clone( simpread );
-            callback();
+            origin = clone( simpread );
+            callback( firstload );
             console.log( "chrome storage read success!", simpread, origin, result );
         });
     }
