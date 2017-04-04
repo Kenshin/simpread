@@ -243,6 +243,10 @@ export default class Tabs extends React.Component {
         id : Math.round(+new Date()),
     }
 
+    componentWillUnmount() {
+        $( "tabs" ).remove();
+    }
+
     tabLabelOnClick() {
         let $target = $( event.target );
         if ( !$target.is( "a" ) ) {
