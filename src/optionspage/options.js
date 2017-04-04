@@ -98,7 +98,7 @@ storage.Get( first => {
     firstLoad( first );
     sidebarRender();
     navRender();
-    Render( tabsItemID );
+    mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "simpread-font", name: "sr-tabs" });
 });
@@ -114,9 +114,20 @@ function firstLoad( first ) {
         storage.Sync( "get", success => {
             success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
             success && new Notify().Render( 0, "数据恢复成功！" );
-            success && Render( tabsItemID );
+            success && mainRender( tabsItemID );
         });
     }
+}
+
+/**
+ * Set options page style and tabs.Render()
+ *
+ * @param {number} headerColors index
+ */
+function mainRender( idx ) {
+    $( ".top" ).css( "background-color", topColors[idx] );
+    $( ".header" ).css( "background-color", topColors[idx] ).find( ".title" ).text( tabsItem[idx].name );
+    tabsRender( headerColors[ idx ] );
 }
 
 /**
@@ -156,7 +167,7 @@ function tabsRender( color ) {
                 let $target = $( event.target );
                 while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
                 const idx = $target.find( "a" ).attr( "id" );
-                Render( idx );
+                mainRender( idx );
                 tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
           },
           refresh = () => {
@@ -188,21 +199,10 @@ function sidebarRender() {
     const sidebarClick = ( $target, items ) => {
         const idx = tabsItem.findIndex( item => item.value == items.value );
         tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-        Render( idx );
+        mainRender( idx );
     };
     const sidebar = <side.Sidebar items={ menuItem }
                              waves="sr-tabs waves-effect waves-button" 
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
-}
-
-/**
- * Set options page style and tabs.Render()
- *
- * @param {number} headerColors index
- */
-function Render( idx ) {
-    $( ".top" ).css( "background-color", topColors[idx] );
-    $( ".header" ).css( "background-color", topColors[idx] ).find( ".title" ).text( tabsItem[idx].name );
-    tabsRender( headerColors[ idx ] );
 }
