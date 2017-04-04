@@ -8,9 +8,8 @@ import {browser}   from 'browser';
 /**
  * Save local/remote website_list.json to chrome storage
  */
-storage.Get( function() {
+storage.Get( () => {
     if ( local.Firstload() ) {
-        storage.GetNewsites( "local"  );
         browser.tabs.create({ url: browser.extension.getURL( "optionspage/options.html#firstload" ) });
     }
     else if( !local.Count() ) storage.GetNewsites( "remote" );
