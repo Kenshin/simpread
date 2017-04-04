@@ -33,10 +33,14 @@ export default class CommonOpt extends React.Component {
     }
 
     getnewsites() {
-        storage.GetNewsites( "remote", ( count, error ) => {
+        storage.GetNewsites( "remote", ( { count, forced }, error ) => {
             if ( !error ) {
-                const msg = count > 0 ? `同步更新成功，新更新 ${ count } 个站点。` : "暂无更新。";
-                new Notify().Render( 0, msg );
+                //let [ msg, msg1, msg2 ] = [ "", "", "。" ];
+                //msg = msg1 + msg2;
+                //msg == "。" && ( msg = "暂无更新。" );
+                count  > 0 && new Notify().Render( 0, `同步更新成功，新更新 ${ count } 个站点。` );
+                forced > 0 && new Notify().Render( 0, `同步更新成功，强制更新 ${forced } 个站点。` );
+                count == 0 && forced == 0 && new Notify().Render( 0, "暂无更新。" );
             }
         });
     }
