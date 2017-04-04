@@ -220,22 +220,27 @@ class Storage {
     /**
      * Get local/remote JSON usage async
      * 
-     * @param {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     * @return {function} callback, param1: update count; param2: error
      */
-    async GetNewsites( type ) {
+    async GetNewsites( type, callback ) {
         try {
             const url    = type === "remote" ? remote : local,
                 response = await fetch( url + "?_=" + Math.round(+new Date()) ),
                 sites    = await response.json(),
                 len      = simpread.sites.length;
+            let count    = 0;
             if ( len == 0 ) {
                 simpread.sites = formatSites( sites );
+                count          = simpread.sites.length;
             }
-            if ( len == 0 || addsites( formatSites( sites )) ) {
+            else if ( count = addsites( formatSites( sites )), count > 0 ) {
                 save();
             }
+            callback && callback( count, undefined );
         } catch ( error ) {
             console.error( error );
+            callback && callback( count, error );
         }
     }
 
@@ -297,23 +302,23 @@ function formatSites( result ) {
  * Add new sites to old sites
  * 
  * @param  {array} new sites from local or remote
- * @return {boolean} true: update; false:not update
+ * @return {number} 0: not update; more: update count
  */
 function addsites( sites ) {
     const update   = new Map( simpread.sites ),
           urls     = [ ...update.keys() ];
-    let   isupdate = false;
+    let   updatecount = 0;
     sites.map( ( site ) => {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
-            isupdate = true;
+            updatecount++;
         } else if ( urls.includes( site[0] ) && site[1].override ) {
             update.set( site[0], site[1] );
             simpread.sites = [ ...update ];
-            isupdate = true;
+            updatecount++;
         }
     });
-    return isupdate;
+    return updatecount;
 }
 
 /**
