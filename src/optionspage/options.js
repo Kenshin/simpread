@@ -120,38 +120,6 @@ function firstLoad( first ) {
 }
 
 /**
- * Save simpread data
- * 
- * @param {string} simpread mode
- */
-function save( mode ) {
-    storage.Write( ()=> {
-        new Notify().Render( 0, "保存成功，页面刷新后生效！" );
-    });
-}
-
-/**
- * Refresh tooltip
- */
-function refresh() {
-    tt.Render( "body" );
-}
-
-/**
- * Tabs onChange event handler
- * 
- * @param {jquery} prev jquery object
- * @param {event} current event
- */
-function tabsOnChange( $prev, event ) {
-    let $target = $( event.target );
-    while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-    const idx = $target.find( "a" ).attr( "id" );
-    Render( idx );
-    tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-}
-
-/**
  * Tabs render
  * 
  * @param {string} header background color
@@ -183,7 +151,22 @@ function tabsRender( color ) {
                     </section>
                     <section>Later</section>
                     <section>About</section>
-                </Tabs>;
+                </Tabs>,
+          tabsOnChange = ( $prev, event ) => {
+                let $target = $( event.target );
+                while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
+                const idx = $target.find( "a" ).attr( "id" );
+                Render( idx );
+                tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+          },
+          refresh = () => {
+                tt.Render( "body" );
+          },
+          save = mode => {
+                storage.Write( ()=> {
+                    new Notify().Render( 0, "保存成功，页面刷新后生效！" );
+                });
+          };
     ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
 }
 
