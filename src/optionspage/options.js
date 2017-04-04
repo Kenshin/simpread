@@ -109,11 +109,13 @@ storage.Get( first => {
  * @param {bool} is first load
  */
 function firstLoad( first ) {
-    window.location.hash && window.location.hash == "#firstload" && first && 
+    if ( window.location.hash && window.location.hash == "#firstload" && first ) {
+        storage.GetNewsites( "local" );
         storage.Sync( "get", success => {
             success && new Notify().Render( 0, "数据恢复成功！" );
             success && Render( tabsItemID );
         });
+    }
 }
 
 /**
