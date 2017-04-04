@@ -112,6 +112,7 @@ function firstLoad( first ) {
     if ( window.location.hash && window.location.hash == "#firstload" && first ) {
         storage.GetNewsites( "local" );
         storage.Sync( "get", success => {
+            success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
             success && new Notify().Render( 0, "数据恢复成功！" );
             success && Render( tabsItemID );
         });
@@ -156,7 +157,6 @@ function tabsOnChange( $prev, event ) {
  * @param {string} header background color
  */
 function tabsRender( color ) {
-    console.log( storage.focus, storage.read )
     const tabs = <Tabs waves="sr-tabs waves-effect waves-light"
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
