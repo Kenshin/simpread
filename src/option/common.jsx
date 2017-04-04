@@ -43,7 +43,13 @@ export default class CommonOpt extends React.Component {
     }
 
     clear() {
-        console.log( "clear" )
+        new Notify().Render( "snackbar", "是否清除掉包括本地与网络账户的全部配置文件？", "同意 ", ()=>{
+            storage.Clear( "all", () => {
+                new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
+                    window.location.reload();
+                });
+            });
+        });
     }
 
     render() {
