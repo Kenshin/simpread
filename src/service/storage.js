@@ -246,6 +246,20 @@ class Storage {
     }
 
     /**
+     * Clear simpread data structure
+     * 
+     * @param {string}   include: local remote all
+     * @param {function} callback
+     */
+    Clear( state, callback ) {
+        let code = 2;
+        state == "local"  && ( code = 0 );
+        state == "remote" && ( code = 1 );
+        ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
+        ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
+    }
+
+    /**
      * Verity current changed
      * 
      * @param {string} @see mode
@@ -284,7 +298,7 @@ function clone( target ) {
 }
 
 /**
- * Format sites object from loacal or remote json file
+ * Format sites object from local or remote json file
  * 
  * @param  {object} sites.[array]
  * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
