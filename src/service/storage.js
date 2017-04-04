@@ -168,10 +168,10 @@ class Storage {
     Sync( state, callback ) {
         if ( state == "set" ) {
             sync = { ...simpread };
+            sync.option.update = now();
             delete sync.sites;
             browser.storage.sync.set( { [name] : sync }, () => {
                 console.log( "chrome storage sync[set] success!" )
-                sync.option.update     = now();
                 simpread.option.update = sync.option.update;
                 save( callback( sync.option.update ));
             });
