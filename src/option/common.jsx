@@ -42,8 +42,11 @@ export default class CommonOpt extends React.Component {
         });
     }
 
-    render() {
+    clear() {
+        console.log( "clear" )
+    }
 
+    render() {
         return(
             <div style={{ width: '100%' }}>
                 <Button type="raised" text="与 Google 账户进行同步"
@@ -71,6 +74,12 @@ export default class CommonOpt extends React.Component {
                             color="#fff" backgroundColor="#2196F3"
                             waves="sr-button waves-effect waves-button" 
                             onClick={ ()=>this.newsites() } />
+                    <Button type="raised" text="清除全部数据" width="100%" 
+                            icon={ ss.IconPath( "clear_icon" ) }
+                            tooltip={{ text: "清除掉包括本地与网络账户的全部配置文件，需谨慎！" }}
+                            color="#fff" backgroundColor="#757575"
+                            waves="sr-button waves-effect waves-button" 
+                            onClick={ ()=>this.clear() } />
                 </div>
             </div>
         )
