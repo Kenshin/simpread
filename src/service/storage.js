@@ -221,7 +221,7 @@ class Storage {
      * Get local/remote JSON usage async
      * 
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
-     * @return {function} callback, param1: update count; param2: error
+     * @return {function} callback, param1: object; param2: error
      */
     async GetNewsites( type, callback ) {
         try {
@@ -229,18 +229,19 @@ class Storage {
                 response = await fetch( url + "?_=" + Math.round(+new Date()) ),
                 sites    = await response.json(),
                 len      = simpread.sites.length;
-            let count    = 0;
+            let [ count, forced ] = [ 0, 0 ];
             if ( len == 0 ) {
                 simpread.sites = formatSites( sites );
                 count          = simpread.sites.length;
-            }
-            else if ( count = addsites( formatSites( sites )), count > 0 ) {
                 save();
             }
-            callback && callback( count, undefined );
+            else if ( { count, forced } = addsites( formatSites( sites )), count > 0 || forced > 0 ) {
+                save();
+            }
+            callback && callback( { count, forced }, undefined );
         } catch ( error ) {
             console.error( error );
-            callback && callback( count, error );
+            callback && callback( undefined, error );
         }
     }
 
@@ -301,24 +302,24 @@ function formatSites( result ) {
 /**
  * Add new sites to old sites
  * 
- * @param  {array} new sites from local or remote
- * @return {number} 0: not update; more: update count
+ * @param  {array}  new sites from local or remote
+ * @return {object} count: new sites; forced: update sites
  */
 function addsites( sites ) {
     const update   = new Map( simpread.sites ),
           urls     = [ ...update.keys() ];
-    let   updatecount = 0;
+    let   [ count, forced ] = [ 0, 0 ];
     sites.map( ( site ) => {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
-            updatecount++;
+            count++;
         } else if ( urls.includes( site[0] ) && site[1].override ) {
             update.set( site[0], site[1] );
             simpread.sites = [ ...update ];
-            updatecount++;
+            forced++;
         }
     });
-    return updatecount;
+    return { count, forced };
 }
 
 /**
