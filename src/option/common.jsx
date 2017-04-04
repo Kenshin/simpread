@@ -32,7 +32,7 @@ export default class CommonOpt extends React.Component {
         console.log( "export" )
     }
 
-    getnewsites() {
+    newsites() {
         storage.GetNewsites( "remote", ( { count, forced }, error ) => {
             if ( !error ) {
                 count  > 0 && new Notify().Render( 0, `同步更新成功，新更新 ${ count } 个站点。` );
@@ -70,7 +70,7 @@ export default class CommonOpt extends React.Component {
                             icon={ ss.IconPath( "website_icon" ) }
                             color="#fff" backgroundColor="#2196F3"
                             waves="sr-button waves-effect waves-button" 
-                            onClick={ ()=>this.getnewsites() } />
+                            onClick={ ()=>this.newsites() } />
                 </div>
             </div>
         )
