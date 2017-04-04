@@ -32,6 +32,15 @@ export default class CommonOpt extends React.Component {
         console.log( "export" )
     }
 
+    getnewsites() {
+        storage.GetNewsites( "remote", ( count, error ) => {
+            if ( !error ) {
+                const msg = count > 0 ? `同步更新成功，新更新 ${ count } 个站点。` : "暂无更新。";
+                new Notify().Render( 0, msg );
+            }
+        });
+    }
+
     render() {
 
         return(
@@ -54,6 +63,13 @@ export default class CommonOpt extends React.Component {
                             color="#fff" backgroundColor="#2196F3"
                             waves="sr-button waves-effect waves-button" 
                             onClick={ ()=>this.export() } />
+                </div>
+                <div style={{ display: 'inline-flex', width: '100%' }}>
+                    <Button type="raised" text="手动同步适配列表" width="100%" 
+                            icon={ ss.IconPath( "website_icon" ) }
+                            color="#fff" backgroundColor="#2196F3"
+                            waves="sr-button waves-effect waves-button" 
+                            onClick={ ()=>this.getnewsites() } />
                 </div>
             </div>
         )
