@@ -401,5 +401,6 @@ const storage = new Storage();
 export {
     storage,
     mode  as STORAGE_MODE,
-    clone as Clone
+    clone as Clone,
+    now   as Now,
 };
