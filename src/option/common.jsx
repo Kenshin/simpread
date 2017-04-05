@@ -4,7 +4,7 @@ import Button      from 'button';
 import Notify      from 'notify';
 
 import * as ss     from 'stylesheet';
-import { storage } from 'storage';
+import { storage, Now } from 'storage';
 
 export default class CommonOpt extends React.Component {
 
@@ -29,7 +29,14 @@ export default class CommonOpt extends React.Component {
     }
 
     export() {
-        console.log( "export" )
+        const download = {
+                focus: { ...storage.focus },
+                read : { ...storage.read  }
+            },
+            data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) ),
+            $a   = $( `<a style="display:none" href=${data} download="simpread-config-${Now()}.json"></a>` ).appendTo( "body" );
+        $a[0].click();
+        $a.remove();
     }
 
     newsites() {
