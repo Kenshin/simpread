@@ -211,9 +211,11 @@ class Storage {
     /**
      * Set simpread object to chrome storage
      * 
+     * @param {object} new simpread data structure
      * @param {function} callback
      */
-    Write( callback ) {
+    Write( new_val = undefined, callback ) {
+        new_val && Object.keys( new_val ).forEach( key => simpread[ key ] = new_val[key] );
         save( callback );
     }
 
