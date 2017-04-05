@@ -29,7 +29,8 @@ export default class CommonOpt extends React.Component {
               $input = $(input),
               onload = event => {
                 if ( event && event.target && event.target.result ) {
-                    const json = JSON.parse( event.target.result );
+                    const json   = JSON.parse( event.target.result ),
+                          result = storage.Verify( json );
                     storage.Write( json, ()=> {
                         new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
                             window.location.reload();
