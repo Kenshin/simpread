@@ -31,11 +31,15 @@ export default class CommonOpt extends React.Component {
                 if ( event && event.target && event.target.result ) {
                     const json   = JSON.parse( event.target.result ),
                           result = storage.Verify( json );
-                    storage.Write( json, ()=> {
-                        new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
-                            window.location.reload();
+                    if ( !result.focus || !result.read ) {
+                        new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
+                    } else {
+                        storage.Write( json, ()=> {
+                            new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
+                                window.location.reload();
+                            });
                         });
-                    });
+                    }
                 }
               };
         $input.attr({ type : "file", multiple : "false" })
