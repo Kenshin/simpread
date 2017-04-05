@@ -106,6 +106,20 @@ class Storage {
     }
 
     /**
+     * Verify simpread data structure
+     * 
+     * @param  {object} verify simpread data structure, when undefined, verify self
+     * @return {object} { focus: true|false; read:true|false }
+     */
+    Verify( data = undefined ) {
+        const pendding = data ? { ...data } : { simpread };
+        return {
+            focus: Object.keys( pendding.focus ).findIndex( (item, key) => Object.keys( focus ).includes( key )) == -1 ? true: false,
+            read:  Object.keys( pendding.read  ).findIndex( (item, key) => Object.keys( read  ).includes( key )) == -1 ? true: false,
+        };
+    }
+
+    /**
      * Restore simpread[key]
      * 
      * @param {string} @see mode
