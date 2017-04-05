@@ -76,8 +76,8 @@ $( window ).scroll( (event) => {
     const $target = $( event.target ),
           scroll  = $target.scrollTop(),
           offset  = ( 0 - scroll ) / 2;
-    scroll >  200 && ( $( ".header" ).css( "opacity", 1 ) );
-    scroll <= 200 && ( $( ".header" ).css( "opacity", 0 ) );
+    scroll >  200 && ( $( ".header" ).css({ opacity: 1, visibility: "visible" }) );
+    scroll <= 200 && ( $( ".header" ).css({ opacity: 0, visibility: "hidden"  }) );
     $( ".top" ).css( "transform", `translate3d(0px, ${offset}px, 0px)` );
 });
 
