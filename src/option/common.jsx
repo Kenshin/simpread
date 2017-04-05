@@ -25,13 +25,31 @@ export default class CommonOpt extends React.Component {
     }
 
     import() {
-        console.log( "import" )
+        const input  = document.createElement( "input" ),
+              $input = $(input),
+              onload = event => {
+                if ( event && event.target && event.target.result ) {
+                    const json = JSON.parse( event.target.result );
+                    storage.Write( json, ()=> {
+                        new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
+                            window.location.reload();
+                        });
+                    });
+                }
+              };
+        $input.attr({ type : "file", multiple : "false" })
+              .one( "change", event => {
+                    const reader  = new FileReader();
+                    reader.onload = onload;
+                    reader.readAsText( event.target.files[0] );
+        });
+        $input.trigger( "click" );
     }
 
     export() {
         const download = {
                 focus: { ...storage.focus },
-                read : { ...storage.read  }
+                read : { ...storage.read  },
             },
             data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) ),
             $a   = $( `<a style="display:none" href=${data} download="simpread-config-${Now()}.json"></a>` ).appendTo( "body" );
