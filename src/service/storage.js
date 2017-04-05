@@ -114,8 +114,8 @@ class Storage {
     Verify( data = undefined ) {
         const pendding = data ? { ...data } : { simpread };
         return {
-            focus: Object.keys( pendding.focus ).findIndex( (item, key) => Object.keys( focus ).includes( key )) == -1 ? true: false,
-            read:  Object.keys( pendding.read  ).findIndex( (item, key) => Object.keys( read  ).includes( key )) == -1 ? true: false,
+            focus: Object.keys( pendding.focus ).findIndex( key => !Object.keys( focus ).includes( key )) == -1 ? true: false,
+            read:  Object.keys( pendding.read  ).findIndex( key => !Object.keys( read  ).includes( key )) == -1 ? true: false,
         };
     }
 
