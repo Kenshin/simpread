@@ -155,7 +155,8 @@ const TabLabel = ( props ) => {
     const route     = !props.route || props.route == "" ? "#" : props.route,
           disable   = props.disable ? true : false,
           tooltip   = props.tooltip.text ? props.tooltip.text : props[ props.tooltip.target ],
-          style     = props.style;
+          style     = props.style,
+          target    = !route.startsWith( "#" ) ? "_blank" : undefined;
     props.active  && ( style.label  = { ...style.label, ...style.label_active } );
     props.active  && ( style.border = { ...style.border, ...style.border_active } );
     props.disable && ( style.link   = { ...style.link, ...style.link_disable } );
@@ -169,7 +170,7 @@ const TabLabel = ( props ) => {
     return (
         <tab-label style={ style.label } class={ props.waves } active={ props.active } onClick={ !disable && ( ()=>props.onClick() )}>
             <a style={ style.link }
-               id={ props.idx } href={ route }
+               id={ props.idx } href={ route } target={ target }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
                value={ props.value }
                disabled={ disable }>
@@ -251,7 +252,9 @@ export default class Tabs extends React.Component {
         let $target = $( event.target );
         if ( !$target.is( "a" ) ) {
             while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-            $target.find( "a" )[0].click();
+            const $a   = $target.find( "a" ),
+                  href = $a.attr( "href" );
+            href.startsWith( "#" ) && $a[0].click();
         } else {
             const style   = styles.get( this.state.id ),
                   idx     = $target.attr( "id" ),
