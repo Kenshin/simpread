@@ -47,6 +47,10 @@ const tabsItem = [{
         name: "关于",
         value: "about",
         route: "#about",
+    },{
+        name: "帮助",
+        value: "help",
+        route: "https://github.com/kenshin/simpread/wiki",
 }],
     headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#BA68C8", "#4DB6AC" ],
     topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#9C27B0", "#009688" ],
