@@ -15,59 +15,13 @@ import * as side  from 'sidebar';
 
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
+import * as conf  from 'config';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
 
 let tabsItemID = 0;
-
-const tabsItem = [{
-        name: "共通",
-        value: "common",
-        active : true,
-        route: "#common",
-    },{
-        name: "聚焦模式",
-        value: "focus",
-        route: "#focus",
-    },{
-        name: "阅读模式",
-        value: "read",
-        route: "#read",
-    },{
-        name: "稍后读",
-        value: "later",
-        route: "#later",
-    },{
-        name: "关于",
-        value: "about",
-        route: "#about",
-}],
-    headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#BA68C8", "#4DB6AC" ],
-    topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#9C27B0", "#009688" ],
-    menuItem      = tabsItem.map( ( item, idx ) => {
-       const menu = { ...item };
-       switch ( idx ) {
-            case 0:
-                delete menu.active;
-                menu.icon = ss.IconPath( "common_icon" );
-                break;
-            case 1:
-                menu.icon = ss.IconPath( "focus_mode_icon" );
-                break;
-            case 2:
-                menu.icon = ss.IconPath( "read_mode_icon" );
-                break;
-            case 3:
-                menu.icon = ss.IconPath( "read_later_icon" );
-                break;
-            case 4:
-                menu.icon = ss.IconPath( "about_icon" );
-                break;
-       }
-       return menu;
-});
 
 /**
  * Add parallax scroll
@@ -84,8 +38,8 @@ $( window ).scroll( (event) => {
 /**
  * Get tabsItemID from window.location.hash exist
  */
-window.location.hash && ( tabsItemID = tabsItem.findIndex( item => item.route == window.location.hash ) );
-tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
+window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => item.route == window.location.hash ) );
+tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
 
 /**
  * Entry:
@@ -123,12 +77,12 @@ function firstLoad( first ) {
 /**
  * Set options page style and tabs.Render()
  *
- * @param {number} headerColors index
+ * @param {number} conf.headerColors index
  */
 function mainRender( idx ) {
-    $( ".top" ).css( "background-color", topColors[idx] );
-    $( ".header" ).css( "background-color", topColors[idx] ).find( ".title" ).text( tabsItem[idx].name );
-    tabsRender( headerColors[ idx ] );
+    $( ".top" ).css( "background-color", conf.topColors[idx] );
+    $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
+    tabsRender( conf.headerColors[ idx ] );
 }
 
 /**
@@ -140,15 +94,15 @@ function tabsRender( color ) {
     const tabs = <Tabs waves="sr-tabs waves-effect waves-light"
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
-                    items={ tabsItem }
+                    items={ conf.tabsItem }
                     onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
                     <section>
-                        <CommonOpt backgroundColor={ topColors[0] } sync={ ()=> refresh() } />
+                        <CommonOpt backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
                     <section>
                         <FocusOpt option={ storage.focus } />
                         <Button type="raised" width="100%" text="保 存"
-                                color="#fff" backgroundColor={ topColors[1] }
+                                color="#fff" backgroundColor={ conf.topColors[1] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="sr-button waves-effect waves-button" 
                                 onClick={ ()=>save( mode.focus ) } />
@@ -156,7 +110,7 @@ function tabsRender( color ) {
                     <section>
                         <ReadOpt option={ storage.read } />
                         <Button type="raised" width="100%" text="保 存"
-                                color="#fff" backgroundColor={ topColors[2] }
+                                color="#fff" backgroundColor={ conf.topColors[2] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="sr-button waves-effect waves-button" 
                                 onClick={ ()=>save( mode.read ) } />
@@ -169,7 +123,7 @@ function tabsRender( color ) {
                 while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
                 const idx = $target.find( "a" ).attr( "id" );
                 mainRender( idx );
-                tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+                conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
           },
           refresh = () => {
                 tt.Render( "body" );
@@ -198,11 +152,11 @@ function navRender() {
  */
 function sidebarRender() {
     const sidebarClick = ( $target, items ) => {
-        const idx = tabsItem.findIndex( item => item.value == items.value );
-        tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+        const idx = conf.tabsItem.findIndex( item => item.value == items.value );
+        conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
         mainRender( idx );
     };
-    const sidebar = <side.Sidebar items={ menuItem }
+    const sidebar = <side.Sidebar items={ conf.menuItem }
                              waves="sr-tabs waves-effect waves-button" 
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
