@@ -20,6 +20,7 @@ import * as conf  from 'config';
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
+import About      from 'about';
 
 let tabsItemID = 0;
 
@@ -116,7 +117,7 @@ function tabsRender( color ) {
                                 onClick={ ()=>save( mode.read ) } />
                     </section>
                     <section>Later</section>
-                    <section>About</section>
+                    <section><About /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, event ) => {
                 let $target = $( event.target );
