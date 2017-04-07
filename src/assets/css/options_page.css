@@ -138,3 +138,68 @@ a {
     color: var(--secondary-color);
     font-size: 1.3rem;
 }
+
+.about {
+    font-size: 1.6rem;
+    color: rgba(51, 51, 51, 0.87);
+}
+
+.about .title {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.about .badges {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin: 1.2em 0;
+}
+
+.about .badges img {
+    padding: 5px;
+}
+
+.about .desc .stat {
+    color: #ff3f80;
+    font-weight: 600;
+}
+
+.about .desc a {
+    border-bottom: 1px solid #4285f4;
+}
+
+.about .share {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin: 1.2em 0;
+
+    zoom: .7;
+}
+
+.about .share a {
+    margin: 10px;
+}
+
+.about .share span {
+    display: block;
+
+    margin: 5px;
+    
+    width: 48px;
+    height: 48px;
+    
+    opacity: .3;
+
+    transition : all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.about .share span:hover {
+    opacity: .54;
+}
