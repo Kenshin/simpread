@@ -31,7 +31,7 @@ export default class CommonOpt extends React.Component {
                 if ( event && event.target && event.target.result ) {
                     const json   = JSON.parse( event.target.result ),
                           result = storage.Verify( json );
-                    if ( !result.focus || !result.read ) {
+                    if ( !result.focus || !result.read || !result.option ) {
                         new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
                     } else {
                         storage.Write( ()=> {
@@ -53,8 +53,9 @@ export default class CommonOpt extends React.Component {
 
     export() {
         const download = {
-                focus: { ...storage.focus },
-                read : { ...storage.read  },
+                option: { ...storage.option },
+                focus : { ...storage.focus },
+                read  : { ...storage.read  },
             },
             data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) ),
             $a   = $( `<a style="display:none" href=${data} download="simpread-config-${Now()}.json"></a>` ).appendTo( "body" );

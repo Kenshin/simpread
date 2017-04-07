@@ -112,15 +112,17 @@ class Storage {
      * Verify simpread data structure
      * 
      * @param  {object} verify simpread data structure, when undefined, verify self
-     * @return {object} { focus: true|false; read: true|false }
+     * @return {object} { option: true|false; focus: true|false; read: true|false }
      */
     Verify( data = undefined ) {
         const pendding = data ? { ...data } : { simpread };
         return {
-            focus: Object.keys( pendding.focus ).length == Object.keys( focus ).length &&
-                   Object.keys( pendding.focus ).findIndex( key => !Object.keys( focus ).includes( key ) || !pendding.focus[key] ) == -1 ? true: false,
-            read:  Object.keys( pendding.read  ).length == Object.keys( read  ).length &&
-                   Object.keys( pendding.read  ).findIndex( key => !Object.keys( read  ).includes( key ) || !pendding.read[key]  ) == -1 ? true: false,
+            option: Object.keys( pendding.option ).length == Object.keys( option ).length &&
+                    Object.keys( pendding.option ).findIndex( key => !Object.keys( option ).includes( key )) == -1 ? true: false,
+            focus : Object.keys( pendding.focus ).length == Object.keys( focus ).length &&
+                    Object.keys( pendding.focus ).findIndex( key => !Object.keys( focus ).includes( key ) || !pendding.focus[key] ) == -1 ? true: false,
+            read :  Object.keys( pendding.read  ).length == Object.keys( read  ).length &&
+                    Object.keys( pendding.read  ).findIndex( key => !Object.keys( read  ).includes( key ) || !pendding.read[key]  ) == -1 ? true: false,
         };
     }
 
