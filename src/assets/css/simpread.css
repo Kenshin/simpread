@@ -259,6 +259,7 @@ sr-rd-footer-copywrite a:link {
     font-size: 17px;
     line-height: initial;
     text-decoration: none;
+    vertical-align: initial;
 
     box-sizing: border-box;
 }
