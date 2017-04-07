@@ -10,6 +10,7 @@ import {browser}   from 'browser';
  */
 storage.Get( () => {
     if ( local.Firstload() ) {
+        storage.Statistics( "create" );
         browser.tabs.create({ url: browser.extension.getURL( "optionspage/options.html#firstload" ) });
     }
     else if( !local.Count() ) storage.GetNewsites( "remote" );

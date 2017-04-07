@@ -64,6 +64,7 @@ function focuseMode() {
 
     const $focus = focus.GetFocus( storage.current.site.include );
     if ( $focus ) {
+        storage.Statistics( mode.focus );
         focus.Render( $focus, storage.current.site.exclude, storage.current.bgcolor );
     } else {
         new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
@@ -81,6 +82,7 @@ function readMode() {
 
     switch ( st.Verify( storage.current.site.name ) ) {
         case 0:
+            storage.Statistics( mode.read );
             read.Render();
             break;
         case -1:
