@@ -43,7 +43,10 @@ const name = "simpread",
     },
     option = {
         version   : "2017-04-03",
+        create    : "",
         update    : "",
+        focus     : 0,
+        read      : 0,
     };
 
 let current  = {},
@@ -288,6 +291,19 @@ class Storage {
                $.isEmptyObject( current );
     }
 
+    /**
+     * Statistics simpread same info
+     * 
+     * @param {string} include: create, focus, read
+     */
+    Statistics( type ) {
+        if ( type == "create" ) {
+            simpread.option.create = now();
+        } else {
+            simpread.option[ type ] = simpread.option[ type ] + 1;
+        }
+        save();
+    }
 }
 
 /**
