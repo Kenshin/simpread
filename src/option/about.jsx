@@ -43,7 +43,7 @@ const style = {
     },
 
     href: {
-        version: "#",
+        version: "https://github.com/Kenshin/simpread/releases",
         website: "http://ksria.com/simpread",
         githubstar: "https://github.com/Kenshin/simpread",
         githubfollow: "https://github.com/Kenshin/simpread",
@@ -65,7 +65,7 @@ export default class About extends React.Component {
                 <div className="title">简悦（ SimpRead ）</div>
                 <div className="sub">让你瞬间进入沉浸式阅读的 Chrome 扩展</div>
                 <div className="badges">
-                    <a href={ style.href.version      }><img src={ style.badges.version }/></a>
+                    <a href={ style.href.version      } target="_blank"><img src={ style.badges.version }/></a>
                     <a href={ style.href.website      } target="_blank"><img src={ style.badges.website }/></a>
                     <a href={ style.href.githubstar   } target="_blank"><img src={ style.badges.githubstar }/></a>
                     <a href={ style.href.githubfollow } target="_blank"><img src={ style.badges.githubfollow }/></a>
