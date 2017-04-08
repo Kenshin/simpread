@@ -16,6 +16,14 @@ const style = {
 
     stat: {},
 
+    share: {
+        weibo: "http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png",
+        douban: "https://www.douban.com/share/service?href=http://ksria.com/simpread&name=简阅（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展",
+        twitter: "https://twitter.com/intent/tweet?via=wanglei001&amp;text=简阅（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展&amp;url=http://ksria.com/simpread",
+        facebook: "https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread",
+        gplus: "https://plus.google.com/share?url=http://ksria.com/simpread",
+    },
+
     icon: {
         weibo: {
             backgroundImage: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD4ElEQVRoQ+2Yj5FMQRDG+yJABIgAESACRIAIEAEiQASIABEgAkSADIiA+l1Nb/Xr7Z6eeee82qqdqq2629cz7/u6v/4zeyIHvk4OHL8cCWwdwWMEjhE4owe2lNAVEbkvIrcchx8i8klEPojIr4rfVgQA/0VELnYAAv6liLzqEdmKwGMReVF5tz0nIg9bVPa2bEUAzyOTayLyuf19XUT4XE6I3ROR9/7ZVgR6zocEESI/7EJSt0Xkq/3yXxG405KRl7Pwble7A/LhLM65YGz5HxK7dRYCyOBR81aUjHjqRgFUK5GasYfqoysiwZm7KKwlcFdEXhdVBBB4C69li2c33UPAsU9LKGX2o7EhskjsdM0SwNNUjwcDEsDkuYg869hyjj1LyfjoUYk0uUn6Xe+YIQB4PKE6H+HwpNXyEVtsiOy7ZmyrDv0AubJWEQA0B6PZmaUSgjyJDkC8pzmDZyFpy6PKykaPKD5tL2bP1RkJAR7P97pmRkqBAby3Im9bAjYy36wKKgmtkc1MhNTWygLSRCuLwFubNz0C/wu81zXepsrw0XKppLBd5FWPAGVytNqs8brds/BqcNgf892iNGcErOZ64H62Ok9i6cfak7DVjIN91S80iRcViI0RAaTzvZO0gCaklDZAj65sxmH/mzZ6LOackYMjArZk2TN+N9AALy8anZdDBMBMon5BAI33uvdijyeQeZ/SRT54D2FP91SpcLjeqNB1b0VjhNoz/0OyXJ4AIEleuwAPQO91xl2ikfUHiFDfM1mwDxs7bep7eRdDWylRT8CWKz1sMf21LyOikbcAQtfMJJfJlbMWQ1sWCk+A5LXjQlTeeI7d6OqVSD9p2jP3Kk70Qk/A1lvso/KGNv1tSc8GLGHXuUVzYje7OBAkNJf7aK0igF5tdbgUhN9GiTCzByBMi8iNv30eZf2mF4GquZ2S9gd770b61yj5Ubmn54yAHZN9FMJLvDeqqlBUzpSAj06W2JkUeg2TnjM0/UaesbefvUt00zi3I0uOxGbkju4L2ZjA/SIbs4e8H0mI7/wc5KVin2vHRPeRx7KG1BsUh7SvUsq06XPBA0EuaD77EYp5CRs/EkAS8Jnnp8BnEVByngRNjmjY7ggQvK+XbABTlfZ+QWult9e5qx8Awlpb3cgACBFt93RUwGn5rJoZ5LhdEY3sPp1Fqzo7LKPRJsKuNyQ7t0AGb0cyATiAez8CMGMRkaGhbXSUqFjjSeRCZKIhrNqvdwlAT8/+I6NEBcA+x7t628q8rVECLJ9yupwBUCXx7Fmb2FdJvAmomZceCcx46zxsjxE4D6/OnHnwEfgL4tbYMcQgCeMAAAAASUVORK5CYII=)"
@@ -70,11 +78,11 @@ export default class About extends React.Component {
                     如果觉得它还不错，希望可以给我 <a href="https://github.com/Kenshin/simpread" target="_blank">投票</a>，这是对 简悦 的最大鼓励，或者通过下方的分享，让更多人知道 <a href="http://ksria.com/simpread">简悦</a> 的存在。
                 </div>
                 <div className="share">
-                    <a target="_blank" href="http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png" title="分享到 微博"><span style={ style.icon.weibo }></span></a>
-                    <a target="_blank" href="https://www.douban.com/share/service?href=http://ksria.com/simpread&name=简阅（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展"><span style={ style.icon.douban }></span></a>
-                    <a target="_blank" href="https://twitter.com/intent/tweet?via=wanglei001&amp;text=简阅（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展&amp;url=http://ksria.com/simpread"><span style={ style.icon.twitter }></span></a>
-                    <a target="_blank" href="https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread"><span style={ style.icon.facebook }></span></a>
-                    <a target="_blank" href="https://plus.google.com/share?url=http://ksria.com/simpread"><span style={ style.icon.gplus }></span></a>
+                    <a target="_blank" href={ style.share.weibo    } title="分享到 微博"><span style={ style.icon.weibo }></span></a>
+                    <a target="_blank" href={ style.share.douban   } title="分享到 豆瓣"><span style={ style.icon.douban }></span></a>
+                    <a target="_blank" href={ style.share.twitter  } title="分享到 twitter"><span style={ style.icon.twitter }></span></a>
+                    <a target="_blank" href={ style.share.facebook } title="分享到 facebook"><span style={ style.icon.facebook }></span></a>
+                    <a target="_blank" href={ style.share.gplus    } title="分享到 google puls"><span style={ style.icon.gplus }></span></a>
                 </div>
             </div>
         )
