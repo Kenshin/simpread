@@ -82,7 +82,7 @@ export default class About extends React.Component {
                     <a href={ style.href.issues       } target="_blank"><img src={ style.badges.issues }/></a>
                 </div>
                 <div className="desc">
-                    <a href="http://ksria.com/simpread">简悦</a> 的目标：还原一个干净的阅读空间，提升你的阅读体验。
+                    <a href="http://ksria.com/simpread">简悦</a> 的初衷：还原一个干净的阅读空间，提升你的阅读体验。
                     <br/>
                     自从 <span className="stat">{ this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <span className="stat">{ this.props.option.focus }次</span> 阅读模式，以及 <span className="stat">{ this.props.option.read }次</span> 聚焦模式。
                     <br/>
