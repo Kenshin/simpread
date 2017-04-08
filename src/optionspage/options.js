@@ -117,7 +117,7 @@ function tabsRender( color ) {
                                 onClick={ ()=>save( mode.read ) } />
                     </section>
                     <section>Later</section>
-                    <section><About /></section>
+                    <section><About option={ storage.option } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, event ) => {
                 let $target = $( event.target );
