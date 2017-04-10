@@ -39,7 +39,6 @@ export default class Shortcuts extends React.Component {
     componentDidMount() {
         prevShortcuts = this.state.value;
         shortcuts[ this.state.id ] = prevShortcuts;
-        console.log( "asdfasdfasdf", shortcuts )
     }
 
     render() {
