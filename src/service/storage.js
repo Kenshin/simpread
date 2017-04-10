@@ -173,7 +173,11 @@ class Storage {
     Set( key ) {
         const { code } = compare();
         if ( code != 0 ) {
-            ( code == 2 || code == 3 ) && simpread[key].sites.push([ current.url, current.site ]);
+            if ( [ 2, 3 ].includes( code ) ) {
+                let idx = simpread[key].sites.findIndex( item => item[0] == current.url );
+                idx == -1 && ( idx = simpread[key].sites.length );
+                simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+            }
             swap( current, simpread[key] );
             save();
         }
