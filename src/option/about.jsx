@@ -84,7 +84,7 @@ export default class About extends React.Component {
                 <div className="desc">
                     <a href="http://ksria.com/simpread">简悦</a> 的初衷：还原一个干净的阅读空间，提升你的阅读体验。
                     <br/>
-                    自从 <span className="stat">{ this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <span className="stat">{ this.props.option.focus }次</span> 阅读模式，以及 <span className="stat">{ this.props.option.read }次</span> 聚焦模式。
+                    自从 <span className="stat">{ this.props.option.create && this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <span className="stat">{ this.props.option.focus }次</span> 阅读模式，以及 <span className="stat">{ this.props.option.read }次</span> 聚焦模式。
                     <br/>
                     如果觉得它还不错，希望可以给我 <a href="https://github.com/Kenshin/simpread" target="_blank">投票</a>，这是对 简悦 的最大鼓励，或者通过下方的分享，让更多人知道 <a href="http://ksria.com/simpread">简悦</a> 的存在。
                 </div>
