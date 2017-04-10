@@ -316,7 +316,6 @@
         ]
     },{
         "name"    : "appinn.com",
-        "override": true,
         "url"     : "http://www.appinn.com/",
         "title"   : "<h2 class='entry-title'>",
         "desc"    : "",
