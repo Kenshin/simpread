@@ -26,24 +26,28 @@ export default class CommonOpt extends React.Component {
 
     import() {
         const input  = document.createElement( "input" ),
-              $input = $(input),
-              onload = event => {
+            $input = $(input),
+            onload = event => {
                 if ( event && event.target && event.target.result ) {
-                    const json   = JSON.parse( event.target.result ),
-                          result = storage.Verify( json );
-                    if ( !result.focus || !result.read || !result.option ) {
-                        new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
-                    } else {
-                        storage.Write( ()=> {
-                            new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
-                                window.location.reload();
-                            });
-                        }, json );
+                    try {
+                        const json   = JSON.parse( event.target.result ),
+                            result = storage.Verify( json );
+                        if ( !result.focus || !result.read || !result.option ) {
+                            new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
+                        } else {
+                            storage.Write( ()=> {
+                                new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
+                                    window.location.reload();
+                                });
+                            }, json );
+                        }
+                    } catch ( error ) {
+                        new Notify().Render( 2, "上传失败，配置文件解析失败，请重新确认。" );
                     }
                 }
-              };
+            };
         $input.attr({ type : "file", multiple : "false" })
-              .one( "change", event => {
+            .one( "change", event => {
                     const reader  = new FileReader();
                     reader.onload = onload;
                     reader.readAsText( event.target.files[0] );
