@@ -210,7 +210,7 @@ class Storage {
                         simpread[ key ] = result[ name ][ key ];
                     });
                 }
-                save( callback( success ) );
+                callback( success );
             });
         }
     }
