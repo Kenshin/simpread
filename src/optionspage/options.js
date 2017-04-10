@@ -71,8 +71,10 @@ function firstLoad( first ) {
     window.location.hash && window.location.hash == "#firstload" && first &&
         storage.Sync( "get", success => {
             success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
-            success && new Notify().Render( 0, "数据恢复成功！" );
             success && mainRender( tabsItemID );
+            success && storage.Write( ()=> {
+                new Notify().Render( 0, "数据恢复成功！" );
+            });
     });
 }
 
