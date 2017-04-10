@@ -2,11 +2,12 @@ console.log( "===== simpread option common: Shortcuts =====" )
 
 import TextField from 'textfield';
 
-let [ prevShortcuts, keyword ] = [ null, null ];
+let [ shortcuts, prevShortcuts, keyword ] = [ [], null, null ];
 
 export default class Shortcuts extends React.Component {
 
     state = {
+        id    : Math.round(+new Date()),
         error : "",
         value : this.props.shortcuts,
     };
@@ -16,7 +17,8 @@ export default class Shortcuts extends React.Component {
             const key = fixKey( event );
             keyword   =  key == "control" ? "ctrl" : key;
             if ( verifyShortkey( keyword )) {
-                prevShortcuts = updateShortcuts();
+                prevShortcuts = updateShortcuts( this.state.id );
+                shortcuts[ this.state.id ] = prevShortcuts;
                 this.setState({ error : "" });
                 this.props.changeShortcuts( prevShortcuts );
             } else if ( keyword.length == 0 || !/^[0-9a-z]{1}$/ig.test( keyword )) {
@@ -24,16 +26,20 @@ export default class Shortcuts extends React.Component {
             }
         } else {
             if ( /^[0-9a-z]{1}$/ig.test( keyword ) ) {
-                prevShortcuts = updateShortcuts();
+                prevShortcuts = updateShortcuts( this.state.id );
+                shortcuts[ this.state.id ] = prevShortcuts;
                 this.setState({ error : "" });
                 this.props.changeShortcuts( prevShortcuts );
             }
         }
+        prevShortcuts = shortcuts[ this.state.id ];
         this.setState({ value: prevShortcuts });
     }
 
     componentDidMount() {
         prevShortcuts = this.state.value;
+        shortcuts[ this.state.id ] = prevShortcuts;
+        console.log( "asdfasdfasdf", shortcuts )
     }
 
     render() {
@@ -53,24 +59,26 @@ export default class Shortcuts extends React.Component {
 /**
  * Update new shortcuts
  * 
+ * @param  {number} this state id
  * @return {string} new shortcuts, e.g. [a s]
  */
-function updateShortcuts() {
+function updateShortcuts( id ) {
+    prevShortcuts = shortcuts[ id ];
     const arr     = prevShortcuts.toLowerCase().trim().split(" ");
-    let shortcuts = null;
+    let newshort  = null;
     switch ( arr.length ) {
         case 1:
-            shortcuts = `${arr[0]} ${keyword}`;
+            newshort = `${arr[0]} ${keyword}`;
             break;
         case 2:
-            shortcuts = keyword;
+            newshort = keyword;
             break;
         default:
             console.log( "发生了一些错误。", prevShortcuts, keyword )
-            shortcuts = prevShortcuts;
+            newshort = prevShortcuts;
             break;
     }
-    return shortcuts;
+    return newshort;
 }
 
 /**
