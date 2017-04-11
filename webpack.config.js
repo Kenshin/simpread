@@ -5,7 +5,8 @@ const webpack = require( 'webpack' ),
       // public reqire( xxx )
       new webpack.ProvidePlugin({
         React    : 'react',
-        ReactDOM : 'react-dom'
+        ReactDOM : 'react-dom',
+        Notify   : 'notify',
       }),
 
       // chunk files
@@ -178,6 +179,7 @@ const webpack = require( 'webpack' ),
           readopt    : __dirname + '/src/option/read.jsx',
           commonopt  : __dirname + '/src/option/common.jsx',
           about      : __dirname + '/src/option/about.jsx',
+          unrdist    : __dirname + '/src/option/unrdist.jsx',
           themesel   : __dirname + '/src/option/common/theme.jsx',
           shortcuts  : __dirname + '/src/option/common/shortcuts.jsx',
           include    : __dirname + '/src/option/common/include.jsx',
@@ -190,6 +192,7 @@ const webpack = require( 'webpack' ),
           switch     : __dirname + '/src/comp/switch.jsx',
           tabs       : __dirname + '/src/comp/tabs.jsx',
           sidebar    : __dirname + '/src/comp/sidebar.jsx',
+          list       : __dirname + '/src/comp/list.jsx',
           tooltip    : __dirname + '/src/comp/tooltip.jsx',
           waves      : __dirname + '/src/comp/waves.js',
 

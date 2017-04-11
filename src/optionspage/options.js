@@ -21,6 +21,7 @@ import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
 import About      from 'about';
+import Unrdist    from 'unrdist';
 
 let tabsItemID = 0;
 
@@ -119,7 +120,7 @@ function tabsRender( color ) {
                                 waves="sr-button waves-effect waves-button" 
                                 onClick={ ()=>save( mode.read ) } />
                     </section>
-                    <section>Later</section>
+                    <section><Unrdist /></section>
                     <section><About option={ storage.option } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, event ) => {
