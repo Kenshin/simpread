@@ -82,7 +82,10 @@ class Read extends React.Component {
                 setting.Render();
                 break;
             case "save":
-                //storage.SaveLater();
+                const [ url, title, desc ] = [ window.location.href, $("sr-rd-title").text(), $("sr-rd-desc").text() ];
+                storage.UnRead( "add", { url, title, desc }, () => {
+                    new Notify().Render( 0, "已加入未读列表。" );
+                });
                 break;
             case "scroll":
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
