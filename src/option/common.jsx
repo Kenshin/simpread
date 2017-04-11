@@ -32,7 +32,7 @@ export default class CommonOpt extends React.Component {
                     try {
                         const json   = JSON.parse( event.target.result ),
                             result = storage.Verify( json );
-                        if ( !result.focus || !result.read || !result.option ) {
+                        if ( result.option.code != 0 || result.focus.code != 0 || result.read.code != 0 ) {
                             new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
                         } else {
                             storage.Write( ()=> {
