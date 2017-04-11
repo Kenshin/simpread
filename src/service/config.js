@@ -73,6 +73,9 @@ const tabsItem = [{
             case 4:
                 menu.icon = ss.IconPath( "about_icon" );
                 break;
+            case 5:
+                menu.icon = ss.IconPath( "help_icon" );
+                break;
        }
        return menu;
 });
