@@ -23,7 +23,7 @@ export default class FocusOpt extends React.Component {
 
     changeBgColor( bgcolor, $target ) {
         bgcolor = $target.css( "background-color" );
-        this.props.option.bgcolor = ss.BackgroundColor( bgcolor );
+        this.props.option.bgcolor = ss.BackgroundColor( bgcolor, this.props.option.opacity );
         console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
     }
 
@@ -73,12 +73,16 @@ export default class FocusOpt extends React.Component {
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
-                <sr-opt-gp>
-                    <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
-                </sr-opt-gp>
-                <sr-opt-gp>
-                    <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
-                </sr-opt-gp>
+                { this.props.option.site &&
+                <sr-opt-items>
+                    <sr-opt-gp>
+                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
+                    </sr-opt-gp>
+                    <sr-opt-gp>
+                        { this.props.option.site && <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />}
+                    </sr-opt-gp>
+                </sr-opt-items>
+                }
             </sr-opt-focus>
         )
     }

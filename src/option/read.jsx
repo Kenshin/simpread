@@ -176,31 +176,35 @@ export default class ReadOpt extends React.Component {
                         onChange={ (v,n)=>this.changeLayout(v,n) }
                     />
                 </sr-opt-gp>
-                <sr-opt-gp>
-                    <TextField 
-                        multi={ false } 
-                        floatingtext="标题" 
-                        value={ this.props.option.site.title }
-                        errortext={ this.state.errtitle }
-                        onChange={ ()=>this.changeTitle() }
-                    />
-                </sr-opt-gp>
-                <sr-opt-gp>
-                    <TextField 
-                            multi={ false } 
-                            placeholder="默认为空。" 
-                            floatingtext="描述" 
-                            value={ this.props.option.site.desc }
-                            errortext={ this.state.errdesc }
-                            onChange={ ()=>this.changeDesc() }
-                    />
-                </sr-opt-gp>
-                <sr-opt-gp>
-                    <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
-                </sr-opt-gp>
-                <sr-opt-gp>
-                    <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
-                </sr-opt-gp>
+                { this.props.option.site &&
+                <sr-opt-items>
+                    <sr-opt-gp>
+                        <TextField 
+                            multi={ false }
+                            floatingtext="标题"
+                            value={ this.props.option.site.title }
+                            errortext={ this.state.errtitle }
+                            onChange={ ()=>this.changeTitle() }
+                        />
+                    </sr-opt-gp>
+                    <sr-opt-gp>
+                        <TextField 
+                                multi={ false }
+                                placeholder="默认为空。"
+                                floatingtext="描述"
+                                value={ this.props.option.site.desc }
+                                errortext={ this.state.errdesc }
+                                onChange={ ()=>this.changeDesc() }
+                        />
+                    </sr-opt-gp>
+                    <sr-opt-gp>
+                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
+                    </sr-opt-gp>
+                    <sr-opt-gp>
+                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
+                    </sr-opt-gp>
+                </sr-opt-items>
+                }
             </sr-opt-read>
         )
     }

@@ -18,6 +18,7 @@ const webpack = require( 'webpack' ),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify( 'production' ) // or development
       }),
+
     ],
 
     // conditions environment
@@ -44,9 +45,10 @@ const webpack = require( 'webpack' ),
         // copy files
         plugins.push(
           new CopyWebpackPlugin([
-            { from : "src/manifest.json" , to :'../' },
-            { from : "src/website_list.json" , to :'../' },
-            { context: 'src/assets/images/', from : "*" , to :'../assets/images' }
+            { from   : "src/manifest.json" ,              to : '../' },
+            { from   : "src/website_list.json" ,          to : '../' },
+            { from   : 'src/optionspage/options.html',    to : '../optionspage/' },
+            { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
           ])
         );
 
@@ -98,6 +100,7 @@ const webpack = require( 'webpack' ),
         ],
         contentscripts : './src/contentscripts.js',
         background     : './src/background.js',
+        options        : './src/optionspage/options.js',
       },
 
       output: {
@@ -121,8 +124,8 @@ const webpack = require( 'webpack' ),
               presets: [ 'es2015', 'stage-0', 'react' ]
             }
         },
-        { test: /\.css$/,       loader: 'style!css'      },
-        { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288' },
+        { test: /\.css$/,           loader: 'style!css!postcss' },
+        { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288'   },
         {
           test  : require.resolve( './src/vender/jquery-2.1.1.min.js' ),
           loader: 'expose?jQuery!expose?$'
@@ -131,6 +134,12 @@ const webpack = require( 'webpack' ),
           test  : require.resolve( './src/vender/mousetrap.min.js' ),
           loader: 'expose?Mousetrap'
         }
+        ]
+      },
+
+      postcss: function () {
+        return [
+          require( 'postcss-cssnext' )()
         ]
       },
 
@@ -167,6 +176,8 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/option/dialog.jsx',
           focusopt   : __dirname + '/src/option/focus.jsx',
           readopt    : __dirname + '/src/option/read.jsx',
+          commonopt  : __dirname + '/src/option/common.jsx',
+          about      : __dirname + '/src/option/about.jsx',
           themesel   : __dirname + '/src/option/common/theme.jsx',
           shortcuts  : __dirname + '/src/option/common/shortcuts.jsx',
           include    : __dirname + '/src/option/common/include.jsx',
@@ -177,6 +188,8 @@ const webpack = require( 'webpack' ),
           button     : __dirname + '/src/comp/button.jsx',
           selectfield: __dirname + '/src/comp/selectfield.jsx',
           switch     : __dirname + '/src/comp/switch.jsx',
+          tabs       : __dirname + '/src/comp/tabs.jsx',
+          sidebar    : __dirname + '/src/comp/sidebar.jsx',
           tooltip    : __dirname + '/src/comp/tooltip.jsx',
           waves      : __dirname + '/src/comp/waves.js',
 

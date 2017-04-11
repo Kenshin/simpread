@@ -1,0 +1,140 @@
+
+:root {
+  --text-color: #333;
+  --secondary-color: color(#333 alpha(-30%));
+  --background-color: #fff;
+  --width: 700px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font: 300 16px/1.8 -apple-system, PingFang SC, Microsoft Yahei, Lantinghei SC, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+    font-size: 62.5%;
+
+    color: var(--text-color);
+    background: var(--background-color);
+
+    text-rendering: optimizelegibility;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: #fafafa;
+}
+
+a {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 65px;
+
+    background-color: black;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+
+    opacity: 0;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
+    z-index: 1000;
+}
+
+.header .nav,
+.header .title {
+    margin-left: 12px;
+}
+
+.header .title {
+    color: var(--background-color);
+
+    height: 48px;
+
+    font-size: 2rem;
+    font-weight: 700;
+
+    line-height: 48px;
+}
+
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 249px;
+
+    background-color: #2196f3;
+
+    overflow: hidden;
+
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.main {
+    position: relative;
+
+    top: 200px;
+
+    margin: 0 auto;
+    margin-bottom: 24px;
+    padding: 0;
+
+    max-width: var(--width);
+    width: var(--width);
+
+    background-color: var(--background-color);
+
+    text-align: center;
+
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.26);
+}
+
+.tabscontainer {
+    width: 100%;
+
+    color: inherit;
+}
+
+.tabscontainer section {
+    display: -webkit-flex;
+    flex-direction:column;
+    align-items: center;
+
+    padding: 50px;
+
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 80px auto 0;
+    padding: 200px 0 50px 0;
+
+    max-width: var(--width);
+    width: var(--width);
+
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+}

@@ -40,20 +40,37 @@ const name = "simpread",
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
         sites     : []   // e.g. [ "<url>", site ]
+    },
+    option = {
+        version   : "2017-04-03",
+        create    : "",
+        update    : "",
+        focus     : 0,
+        read      : 0,
     };
 
 let current  = {},
     curori   = {},
     origin   = {},
+    sync     = {},
     simpread = {
+        option,
         focus,
         read,
         sites  : [],
-        option : {},
     },
     rdstcode = -1;
 
 class Storage {
+
+    /**
+     * Get simpread.option data structure
+     * 
+     * @return {object} simpread["option"]
+     */
+    get option() {
+        return simpread[ mode.option ];
+    }
 
     /**
      * Get simpread.focus data structure
@@ -89,6 +106,50 @@ class Storage {
      */
     get rdstcode() {
         return rdstcode;
+    }
+
+    /**
+     * Verify simpread data structure
+     * 
+     * @param  {object} verify simpread data structure, when undefined, verify self
+     * @return {object} option: { code: 0|-1|-2, keys: [ "bgcolor", "layout" ] }
+     *         code: 0: valid success; -1: field name failed; -2: site field name failed;
+     */
+    Verify( data = undefined ) {
+        const pendding = data ? { ...data } : { simpread },
+              valid    = ( value, source ) => {
+            let result = { code: 0, keys: [] }, target = pendding[ value ];
+            if ( Object.keys( target ).length !== Object.keys( source ).length ) {
+                result.code = -1;
+            } else {
+                Object.keys( target ).forEach( key => {
+                    if ( !Object.keys( source ).includes( key ) ||
+                       ( key != "sites" && value != "option" && target[key] == "" )) {
+                        result.keys.push( key );
+                    }
+                    if ( key == "sites" ) {
+                        target.sites.forEach( items => {
+                            if ( Object.keys( items[1] ).length != Object.keys( site ).length ) {
+                                result.code = -2;
+                            } else {
+                                Object.keys( items[1] ).forEach( key => {
+                                    ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
+                                });
+                            }
+                        });
+                    }
+                });
+                result.keys.length > 0 && result.code == 0 && ( result.code = -3 );
+            }
+            return result;
+        }
+
+        let opt  = valid( "option", option ),
+            focu = valid( "focus",  focus ),
+            rd   = valid( "read",   read );
+
+        console.log( "storage.Verify() result ", opt, focu, rd )
+        return { option: opt, focus: focu, read: rd };
     }
 
     /**
@@ -138,11 +199,46 @@ class Storage {
     Set( key ) {
         const { code } = compare();
         if ( code != 0 ) {
-            ( code == 2 || code == 3 ) && simpread[key].sites.push([ current.url, current.site ]);
+            if ( [ 2, 3 ].includes( code ) ) {
+                let idx = simpread[key].sites.findIndex( item => item[0] == current.url );
+                idx == -1 && ( idx = simpread[key].sites.length );
+                simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+            }
             swap( current, simpread[key] );
             save();
         }
         return code;
+    }
+
+    /**
+     * Sync simpread data structure
+     * 
+     * @param {string} include: set, get
+     * @param {function} callback
+     */
+    Sync( state, callback ) {
+        if ( state == "set" ) {
+            sync = { ...simpread };
+            sync.option.update = now();
+            delete sync.sites;
+            browser.storage.sync.set( { [name] : sync }, () => {
+                console.log( "chrome storage sync[set] success!" )
+                simpread.option.update = sync.option.update;
+                save( callback( sync.option.update ));
+            });
+        } else {
+            browser.storage.sync.get( [name] , result => {
+                console.log( "chrome storage sync[get] success!", result, simpread )
+                let success = false;
+                if ( result && !$.isEmptyObject( result )) {
+                    success = true;
+                    Object.keys( mode ).forEach( key => {
+                        simpread[ key ] = result[ name ][ key ];
+                    });
+                }
+                callback( success );
+            });
+        }
     }
 
     /**
@@ -152,35 +248,68 @@ class Storage {
      */
     Get ( callback ) {
         browser.storage.local.get( [name], function( result ) {
+            let firstload = true;
             if ( result && !$.isEmptyObject( result )) {
-                simpread = result[name];
+                simpread  = result[name];
+                firstload = false;
             }
-            origin   = clone( simpread );
-            callback();
+            origin = clone( simpread );
+            callback( firstload );
             console.log( "chrome storage read success!", simpread, origin, result );
         });
     }
 
     /**
+     * Set simpread object to chrome storage
+     * 
+     * @param {function} callback
+     * @param {object}   new simpread data structure
+     */
+    Write( callback, new_val = undefined ) {
+        new_val && Object.keys( new_val ).forEach( key => simpread[ key ] = new_val[key] );
+        save( callback );
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
-     * @param {string} url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     * @return {function} callback, param1: object; param2: error
      */
-    async GetNewsites( type ) {
+    async GetNewsites( type, callback ) {
         try {
             const url    = type === "remote" ? remote : local,
                 response = await fetch( url + "?_=" + Math.round(+new Date()) ),
                 sites    = await response.json(),
                 len      = simpread.sites.length;
+            let [ count, forced ] = [ 0, 0 ];
             if ( len == 0 ) {
                 simpread.sites = formatSites( sites );
-            }
-            if ( len == 0 || addsites( formatSites( sites )) ) {
+                count          = simpread.sites.length;
                 save();
             }
+            else if ( { count, forced } = addsites( formatSites( sites )), count > 0 || forced > 0 ) {
+                save();
+            }
+            callback && callback( { count, forced }, undefined );
         } catch ( error ) {
             console.error( error );
+            callback && callback( undefined, error );
         }
+    }
+
+    /**
+     * Clear simpread data structure
+     * 
+     * @param {string}   include: local remote all
+     * @param {function} callback
+     */
+    Clear( state, callback ) {
+        let code = 2;
+        state == "local"  && ( code = 0 );
+        state == "remote" && ( code = 1 );
+        ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
+        ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
     }
 
     /**
@@ -194,6 +323,19 @@ class Storage {
                $.isEmptyObject( current );
     }
 
+    /**
+     * Statistics simpread same info
+     * 
+     * @param {string} include: create, focus, read
+     */
+    Statistics( type ) {
+        if ( type == "create" ) {
+            simpread.option.create = now();
+        } else {
+            simpread.option[ type ] = simpread.option[ type ] + 1;
+        }
+        save();
+    }
 }
 
 /**
@@ -222,7 +364,7 @@ function clone( target ) {
 }
 
 /**
- * Format sites object from loacal or remote json file
+ * Format sites object from local or remote json file
  * 
  * @param  {object} sites.[array]
  * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
@@ -240,35 +382,36 @@ function formatSites( result ) {
 /**
  * Add new sites to old sites
  * 
- * @param  {array} new sites from local or remote
- * @return {boolean} true: update; false:not update
+ * @param  {array}  new sites from local or remote
+ * @return {object} count: new sites; forced: update sites
  */
 function addsites( sites ) {
     const update   = new Map( simpread.sites ),
           urls     = [ ...update.keys() ];
-    let   isupdate = false;
+    let   [ count, forced ] = [ 0, 0 ];
     sites.map( ( site ) => {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
-            isupdate = true;
+            count++;
         } else if ( urls.includes( site[0] ) && site[1].override ) {
             update.set( site[0], site[1] );
             simpread.sites = [ ...update ];
-            isupdate = true;
+            forced++;
         }
     });
-    return isupdate;
+    return { count, forced };
 }
 
 /**
  * Call chrome storage set
  */
-function save() {
+function save( callback ) {
     browser.storage.local.set( { [name] : simpread }, function() {
         console.log( "chrome storage save success!", simpread );
         origin      = clone( simpread );
         curori      = { ...current };
         curori.site = { ...current.site };
+        callback && callback();
     });
 }
 
@@ -307,10 +450,23 @@ function compare() {
     console.log( "current changed state is ", code, changed );
     return { code, changed };
 }
+
+/**
+ * Get now time
+ * 
+ * @return {string} return now, e.g. 2017年04月03日 11:43:53
+ */
+function now() {
+    const date   = new Date(),
+          format = value => value = value < 10 ? "0" + value : value;
+    return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + ":" + format( date.getMinutes() ) + ":" + format( date.getSeconds() );
+}
+
 const storage = new Storage();
 
 export {
     storage,
     mode  as STORAGE_MODE,
-    clone as Clone
+    clone as Clone,
+    now   as Now,
 };
