@@ -112,18 +112,44 @@ class Storage {
      * Verify simpread data structure
      * 
      * @param  {object} verify simpread data structure, when undefined, verify self
-     * @return {object} { option: true|false; focus: true|false; read: true|false }
+     * @return {object} option: { code: 0|-1|-2, keys: [ "bgcolor", "layout" ] }
+     *         code: 0: valid success; -1: field name failed; -2: site field name failed;
      */
     Verify( data = undefined ) {
-        const pendding = data ? { ...data } : { simpread };
-        return {
-            option: Object.keys( pendding.option ).length == Object.keys( option ).length &&
-                    Object.keys( pendding.option ).findIndex( key => !Object.keys( option ).includes( key )) == -1 ? true: false,
-            focus : Object.keys( pendding.focus ).length == Object.keys( focus ).length &&
-                    Object.keys( pendding.focus ).findIndex( key => !Object.keys( focus ).includes( key ) || !pendding.focus[key] ) == -1 ? true: false,
-            read :  Object.keys( pendding.read  ).length == Object.keys( read  ).length &&
-                    Object.keys( pendding.read  ).findIndex( key => !Object.keys( read  ).includes( key ) || !pendding.read[key]  ) == -1 ? true: false,
-        };
+        const pendding = data ? { ...data } : { simpread },
+              valid    = ( value, source ) => {
+            let result = { code: 0, keys: [] }, target = pendding[ value ];
+            if ( Object.keys( target ).length !== Object.keys( source ).length ) {
+                result.code = -1;
+            } else {
+                Object.keys( target ).forEach( key => {
+                    if ( !Object.keys( source ).includes( key ) ||
+                       ( key != "sites" && value != "option" && target[key] == "" )) {
+                        result.keys.push( key );
+                    }
+                    if ( key == "sites" ) {
+                        target.sites.forEach( items => {
+                            if ( Object.keys( items[1] ).length != Object.keys( site ).length ) {
+                                result.code = -2;
+                            } else {
+                                Object.keys( items[1] ).forEach( key => {
+                                    ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
+                                });
+                            }
+                        });
+                    }
+                });
+                result.keys.length > 0 && result.code == 0 && ( result.code = -3 );
+            }
+            return result;
+        }
+
+        let opt  = valid( "option", option ),
+            focu = valid( "focus",  focus ),
+            rd   = valid( "read",   read );
+
+        console.log( "storage.Verify() result ", opt, focu, rd )
+        return { option: opt, focus: focu, read: rd };
     }
 
     /**
