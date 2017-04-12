@@ -98,8 +98,7 @@ export default class List extends React.Component {
         const $target = $( event.target ),
               id      = $target.attr( "id" ),
               title   = $target.text();
-        console.log( "asdfasdfasf", id, title, data )
-        //this.props.onAction && this.props.onAction( event )
+        this.props.onAction && this.props.onAction( event, id, title, data )
     }
 
     actionItemMouseOver() {

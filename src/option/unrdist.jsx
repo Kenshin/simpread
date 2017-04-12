@@ -21,13 +21,13 @@ const actionItems = [
 
 export default class Unrdist extends React.Component {
 
-    onAction( type, data ) {
-        console.log( type, data )
+    onAction( event, ...rests ) {
+        console.log( event, rests )
     }
 
     render() {
         return (
-            <List items={ this.props.list } title={ "未读列表：100 条" } actionItems={ actionItems } onAction={ (t,d)=>this.onAction(t,d) } />
+            <List items={ this.props.list } title={ "未读列表：100 条" } actionItems={ actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
         )
     }
 }
