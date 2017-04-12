@@ -2,37 +2,32 @@ console.log( "===== simpread option unread list load =====" )
 
 import List from 'list';
 
+const actionItems = [
+    {
+        id: "pocket",
+        title: "发送到 Pocket",
+        icon: "",
+        disable: false,
+        hr: true,
+    },
+    {
+        id: "remove",
+        title: "删除",
+        icon: "",
+        disable: false,
+        hr: false,
+    }
+];
+
 export default class Unrdist extends React.Component {
+
+    onAction( type, data ) {
+        console.log( type, data )
+    }
+
     render() {
         return (
-            <list>
-                <list-header>未读列表：100 条</list-header>
-                <list-item>
-                    <avatar>G</avatar>
-                    <content>
-                        <a href="http://www.ifanr.com/817218" target="_blank">Google 要学 Pinterest，让你边搜索图片边剁手 | 爱范儿</a>
-                    </content>
-                    <icon>15 mins</icon>
-                    <action>
-                        <action-icon></action-icon>
-                    </action>
-                </list-item>
-                <list-item>
-                    <avatar>换</avatar>
-                    <content>
-                        <a href="http://www.cnbeta.com/articles/tech/601485.htm" target="_blank">换壳为本？Nokia 6 银白色版 1499 元起正式开卖</a>
-                        <subtitle>4 月 4 日的时候，诺基亚官方宣传，将于在 4 月 11 日正式发售全新配色的 Nokia 6 智能手机，即银白色版本，并且从那时起已经正式提供预约服务4 月 4 日的时候，诺基亚官方宣传，将于在 4 月 11 日正式发售全新配色的 Nokia 6 智能手机，即银白色版本，并且从那时起已经正式提供预约服务</subtitle>
-                    </content>
-                    <icon>2 days</icon>
-                    <action>
-                        <action-icon></action-icon>
-                        <action-items>
-                            <action-item>发送到 Pocket</action-item>
-                            <action-item>删除</action-item>
-                        </action-items>
-                    </action>
-                </list-item>
-            </list>
+            <List items={ this.props.list } title={ "未读列表：100 条" } actionItems={ actionItems } onAction={ (t,d)=>this.onAction(t,d) } />
         )
     }
 }
