@@ -23,13 +23,19 @@ const cssinjs = () => {
  *   - title           : [PropTypes.string] title
  *   - desc            : [PropTypes.string] subtitle
  *   - action          : [PropTypes.array]  include: id, title, icon, disable, hr
- *   - actionIconOnClick   : [PropTypes.func]   onClick event
+ *   - actionIconOnClick   : [PropTypes.func] action icon onClick event
+ *   - actionItemOnClick   : [PropTypes.func] action item onClick event
+ *   - actionItemMouseOver : [PropTypes.func] action item onClick event
  */
 const ListItem = props => {
     const { idx, url, title, desc, action } = props;
     const avatar      = title.substr( 0, 1 ),
           actionItems = action ? action.map( item => {
-            return <action-item id={ item.id }>{ item.title }</action-item>
+            return <action-item id={ item.id }
+                                onClick={ (e,d)=>props.actionItemOnClick( event, props ) }
+                                onMouseOver={ ()=>props.actionItemMouseOver() }>
+                                { item.title }
+                    </action-item>
           }) : undefined;
     return (
         <list-item idx={ idx }>
@@ -88,11 +94,29 @@ export default class List extends React.Component {
         $( event.target ).next().addClass( "action_items_active" );
     }
 
+    actionItemOnClick( event, data ) {
+        const $target = $( event.target ),
+              id      = $target.attr( "id" ),
+              title   = $target.text();
+        console.log( "asdfasdfasf", id, title, data )
+        //this.props.onAction && this.props.onAction( event )
+    }
+
+    actionItemMouseOver() {
+        const $target = $( event.target );
+        if ( $target.is( "action-item" ) ) {
+            $( "action-item[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
+            $target.attr( "active", true ).css( "background-color", "rgb(238, 238, 238)" );
+        }
+    }
+
     render() {
         const { items, title, actionItems } = this.props;
         const list = items.map( item => {
             const events = {
-                actionIconOnClick: () => this.actionIconOnClick()
+                actionIconOnClick: () => this.actionIconOnClick(),
+                actionItemOnClick: ( e, d ) => this.actionItemOnClick( e, d ),
+                actionItemMouseOver: () => this.actionItemMouseOver(),
             };
             return <ListItem { ...item } action={ actionItems } { ...events } />
         });

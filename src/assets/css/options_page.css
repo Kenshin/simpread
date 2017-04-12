@@ -275,6 +275,11 @@ list-item .action_items_active {
     z-index: 100;
 }
 
+list-item .action_items_over {
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    background-color: rgb(238, 238, 238);
+}
+
 list-item action action-item {
     display: -webkit-box;
 
@@ -296,4 +301,6 @@ list-item action action-item {
     text-align: left;
 
     cursor: pointer;
+
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
