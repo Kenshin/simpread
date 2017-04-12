@@ -50,6 +50,7 @@ const ListItem = props => {
                 <action-items>
                     { actionItems }
                 </action-items>
+                <action-bg onClick={ ()=>props.actionBgOnClick() }></action-bg>
             </action>
         </list-item>
     );
@@ -73,6 +74,7 @@ const ListItem = props => {
                     <action-item>发送到 Pocket</action-item>
                     <action-item>删除</action-item>
                 </action-items>
+                <action-bg></action-bg>
             </action>
         </list-item>
     </list>
@@ -92,13 +94,22 @@ export default class List extends React.Component {
 
     actionIconOnClick() {
         $( event.target ).next().addClass( "action_items_active" );
+        $( event.target ).parent().find( "action-bg" ).css( "display", "block" );
+    }
+
+    actionBgOnClick() {
+        $( event.target )
+            .css( "display", "none" )
+            .prev().removeClass( "action_items_active" );
     }
 
     actionItemOnClick( event, data ) {
         const $target = $( event.target ),
               id      = $target.attr( "id" ),
               title   = $target.text();
-        $target.parent().removeClass( "action_items_active" );
+        $target.parent()
+            .removeClass( "action_items_active" )
+            .next().css( "display", "none" );
         this.props.onAction && this.props.onAction( event, id, title, data )
     }
 
@@ -116,8 +127,9 @@ export default class List extends React.Component {
         const { items, title, actionItems } = this.props;
         const list = items.map( item => {
             const events = {
-                actionIconOnClick: () => this.actionIconOnClick(),
-                actionItemOnClick: ( e, d ) => this.actionItemOnClick( e, d ),
+                actionIconOnClick  : () => this.actionIconOnClick(),
+                actionBgOnClick    : () => this.actionBgOnClick(),
+                actionItemOnClick  : ( e, d ) => this.actionItemOnClick( e, d ),
                 actionItemMouseOver: () => this.actionItemMouseOver(),
             };
             return <ListItem { ...item } action={ actionItems } { ...events } />

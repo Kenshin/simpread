@@ -280,6 +280,17 @@ list-item .action_items_over {
     background-color: rgb(238, 238, 238);
 }
 
+list-item action action-bg {
+    display: none;
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
 list-item action action-item {
     display: -webkit-box;
 
