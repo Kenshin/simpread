@@ -10,7 +10,6 @@ export default class Unrdist extends React.Component {
                     <avatar>G</avatar>
                     <content>
                         <a href="http://www.ifanr.com/817218" target="_blank">Google 要学 Pinterest，让你边搜索图片边剁手 | 爱范儿</a>
-                        <subtitle>fasfafadfadf</subtitle>
                     </content>
                     <icon>15 mins</icon>
                 </list-item>
