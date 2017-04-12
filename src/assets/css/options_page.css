@@ -177,7 +177,14 @@ list-item content {
 }
 
 list-item content a {
-    display: block;
+    display: -webkit-box;
+
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
 
     font-size: 1.6rem;
     color: inherit;
@@ -185,10 +192,13 @@ list-item content a {
 
 list-item content subtitle {
     display: -webkit-box;
+
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: left;
 }
 
 list-item icon {
