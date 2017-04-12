@@ -218,3 +218,68 @@ list-item icon {
 
     margin: 0 16px;
 }
+
+list-item action {
+    display: block;
+    position: relative;
+
+    margin: 0 16px 0 0 ;
+    padding: 0;
+}
+
+list-item action action-icon {
+    display: block;
+
+    width: 21px;
+    height: 21px;
+
+    line-height: 21px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBAwKJDqU6cY9AAAAgElEQVQ4y+3PsQnCYBRF4U+xcQYRHEcdwLhASOE8avEjSsApBIOWOoFYSRZxgBh8WueU73Lu49Lxnd7ncxrKvPKqmfRbip72zmkZF0ZgGhd2YN0MBi3CykWd33/ZUKpSFhfGYBYXDmAT31A4qfNb/MPD0TUt4sIEzONCCbY6/uIN+soX7VMadxMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTctMDQtMTJUMTA6MzY6NTgrMDg6MDBBhh2RAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE3LTA0LTEyVDEwOjM2OjU4KzA4OjAwMNulLQAAAABJRU5ErkJggg==);
+}
+
+list-item action action-items {
+    display: block;
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    margin: 0;
+    padding: 8px 0;
+
+    min-width: 150px;
+
+    background-color: #fff;
+
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
+
+list-item action action-item {
+    display: -webkit-box;
+
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    margin: 0;
+    padding: 0 24px;
+
+    height: 32px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+
+    line-height: 32px;
+    font-size: 1.4rem;
+
+    text-align: left;
+
+    cursor: pointer;
+}

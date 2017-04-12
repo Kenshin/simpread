@@ -13,6 +13,9 @@ export default class Unrdist extends React.Component {
                         <a href="http://www.ifanr.com/817218" target="_blank">Google 要学 Pinterest，让你边搜索图片边剁手 | 爱范儿</a>
                     </content>
                     <icon>15 mins</icon>
+                    <action>
+                        <action-icon></action-icon>
+                    </action>
                 </list-item>
                 <list-item>
                     <avatar>换</avatar>
@@ -21,6 +24,13 @@ export default class Unrdist extends React.Component {
                         <subtitle>4 月 4 日的时候，诺基亚官方宣传，将于在 4 月 11 日正式发售全新配色的 Nokia 6 智能手机，即银白色版本，并且从那时起已经正式提供预约服务4 月 4 日的时候，诺基亚官方宣传，将于在 4 月 11 日正式发售全新配色的 Nokia 6 智能手机，即银白色版本，并且从那时起已经正式提供预约服务</subtitle>
                     </content>
                     <icon>2 days</icon>
+                    <action>
+                        <action-icon></action-icon>
+                        <action-items>
+                            <action-item>发送到 Pocket</action-item>
+                            <action-item>删除</action-item>
+                        </action-items>
+                    </action>
                 </list-item>
             </list>
         )
