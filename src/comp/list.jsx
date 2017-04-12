@@ -23,17 +23,19 @@ const cssinjs = () => {
  *   - title           : [PropTypes.string] title
  *   - desc            : [PropTypes.string] subtitle
  *   - action          : [PropTypes.array]  include: id, title, icon, disable, hr
- *   - actionIconOnClick   : [PropTypes.func] action icon onClick event
- *   - actionItemOnClick   : [PropTypes.func] action item onClick event
- *   - actionItemMouseOver : [PropTypes.func] action item onClick event
+ *   - ac_evt          : [PropTypes.object] action events, include:
+ *     - iconOnClick   : [PropTypes.func] action icon onClick event
+ *     - bgOnClick     : [PropTypes.func] action bg   onClick event
+ *     - itemOnClick   : [PropTypes.func] action item onClick event
+ *     - itemMouseOver : [PropTypes.func] action item mouse over event
  */
 const ListItem = props => {
-    const { idx, url, title, desc, action } = props;
+    const { idx, url, title, desc, action, ac_evt } = props;
     const avatar      = title.substr( 0, 1 ),
           actionItems = action ? action.map( item => {
             return <action-item id={ item.id }
-                                onClick={ (e,d)=>props.actionItemOnClick( event, props ) }
-                                onMouseOver={ ()=>props.actionItemMouseOver() }>
+                                onClick={ (e,d)=>ac_evt.itemOnClick( event, props ) }
+                                onMouseOver={ ()=>ac_evt.itemMouseOver() }>
                                 { item.title }
                     </action-item>
           }) : undefined;
@@ -46,11 +48,11 @@ const ListItem = props => {
             </content>
             <icon>2 days</icon>
             <action>
-                <action-icon onClick={ ()=>props.actionIconOnClick() }></action-icon>
+                <action-icon onClick={ ()=>ac_evt.iconOnClick() }></action-icon>
                 <action-items>
                     { actionItems }
                 </action-items>
-                <action-bg onClick={ ()=>props.actionBgOnClick() }></action-bg>
+                <action-bg onClick={ ()=>ac_evt.bgOnClick() }></action-bg>
             </action>
         </list-item>
     );
@@ -92,18 +94,18 @@ export default class List extends React.Component {
         id : Math.round(+new Date()),
     }
 
-    actionIconOnClick() {
+    acIconOnClick() {
         $( event.target ).next().addClass( "action_items_active" );
         $( event.target ).parent().find( "action-bg" ).css( "display", "block" );
     }
 
-    actionBgOnClick() {
+    acBgOnClick() {
         $( event.target )
             .css( "display", "none" )
             .prev().removeClass( "action_items_active" );
     }
 
-    actionItemOnClick( event, data ) {
+    acItemOnClick( event, data ) {
         const $target = $( event.target ),
               id      = $target.attr( "id" ),
               title   = $target.text();
@@ -113,7 +115,7 @@ export default class List extends React.Component {
         this.props.onAction && this.props.onAction( event, id, title, data )
     }
 
-    actionItemMouseOver() {
+    acItemMouseOver() {
         const $target = $( event.target );
         if ( $target.is( "action-item" ) ) {
             $( "action-item[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
@@ -127,12 +129,12 @@ export default class List extends React.Component {
         const { items, title, actionItems } = this.props;
         const list = items.map( item => {
             const events = {
-                actionIconOnClick  : () => this.actionIconOnClick(),
-                actionBgOnClick    : () => this.actionBgOnClick(),
-                actionItemOnClick  : ( e, d ) => this.actionItemOnClick( e, d ),
-                actionItemMouseOver: () => this.actionItemMouseOver(),
+                iconOnClick  : () => this.acIconOnClick(),
+                bgOnClick    : () => this.acBgOnClick(),
+                itemOnClick  : ( e, d ) => this.acItemOnClick( e, d ),
+                itemMouseOver: () => this.acItemMouseOver(),
             };
-            return <ListItem { ...item } action={ actionItems } { ...events } />
+            return <ListItem { ...item } action={ actionItems } ac_evt={ events } />
         });
         return (
             <list>
