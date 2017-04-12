@@ -23,7 +23,7 @@ const cssinjs = () => {
  *   - title           : [PropTypes.string] title
  *   - desc            : [PropTypes.string] subtitle
  *   - action          : [PropTypes.array]  include: id, title, icon, disable, hr
- *   - actionOnClick   : [PropTypes.func]   onClick event
+ *   - actionIconOnClick   : [PropTypes.func]   onClick event
  */
 const ListItem = props => {
     const { idx, url, title, desc, action } = props;
@@ -40,7 +40,7 @@ const ListItem = props => {
             </content>
             <icon>2 days</icon>
             <action>
-                <action-icon onClick={ ()=>props.actionOnClick() }></action-icon>
+                <action-icon onClick={ ()=>props.actionIconOnClick() }></action-icon>
                 <action-items>
                     { actionItems }
                 </action-items>
@@ -84,7 +84,7 @@ export default class List extends React.Component {
         id : Math.round(+new Date()),
     }
 
-    actionOnClick() {
+    actionIconOnClick() {
         $( event.target ).next().addClass( "action_items_active" );
     }
 
@@ -92,7 +92,7 @@ export default class List extends React.Component {
         const { items, title, actionItems } = this.props;
         const list = items.map( item => {
             const events = {
-                actionOnClick: () => this.actionOnClick()
+                actionIconOnClick: () => this.actionIconOnClick()
             };
             return <ListItem { ...item } action={ actionItems } { ...events } />
         });
