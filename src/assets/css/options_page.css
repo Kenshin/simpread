@@ -144,6 +144,15 @@ list {
     flex-direction: column;
 }
 
+list-header {
+    display: block;
+
+    padding-left: 72px;
+
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
 
 list-item {
     display: flex;
@@ -163,6 +172,7 @@ list-item avatar {
     padding: 0;
 
     line-height: 40px;
+    font-weight: 600;
 
     border-radius: 50%;
 
@@ -199,6 +209,8 @@ list-item content subtitle {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
+
+    color: rgba(0, 0, 0, 0.541176);
 }
 
 list-item icon {

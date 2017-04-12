@@ -6,6 +6,7 @@ export default class Unrdist extends React.Component {
     render() {
         return (
             <list>
+                <list-header>未读列表：100 条</list-header>
                 <list-item>
                     <avatar>G</avatar>
                     <content>
