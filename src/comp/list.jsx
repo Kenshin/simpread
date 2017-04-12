@@ -98,6 +98,7 @@ export default class List extends React.Component {
         const $target = $( event.target ),
               id      = $target.attr( "id" ),
               title   = $target.text();
+        $target.parent().removeClass( "action_items_active" );
         this.props.onAction && this.props.onAction( event, id, title, data )
     }
 
@@ -105,7 +106,9 @@ export default class List extends React.Component {
         const $target = $( event.target );
         if ( $target.is( "action-item" ) ) {
             $( "action-item[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
-            $target.attr( "active", true ).css( "background-color", "rgb(238, 238, 238)" );
+            $target
+                .attr( "active", true )
+                .css( "background-color", "rgb(238, 238, 238)" );
         }
     }
 
