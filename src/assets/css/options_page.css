@@ -317,6 +317,7 @@ list-item action action-item {
 }
 
 list-item action hr {
+    margin: 8px 0;
     height: 1px;
     border: none;
     background-color: rgb(224, 224, 224);
