@@ -34,10 +34,8 @@ const ListItem = props => {
     const avatar      = title.substr( 0, 1 ),
           actionItems = action ? action.map( item => {
             const { id, title, disable, hr } = item;
-            let cls = hr ?  "hr" : "";
-            disable && ( cls = cls + " disable" );
             return <action-group>
-                        <action-item id={ id } class={ cls }
+                        <action-item id={ id } class={ disable && "disable" }
                                         onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
                                         onMouseOver={ ()=>ac_evt.itemMouseOver() }>
                                         { title }
