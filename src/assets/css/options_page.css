@@ -315,3 +315,12 @@ list-item action action-item {
 
     transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
+
+list-item action .hr {
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+list-item action .disable {
+    color: rgba(204, 204, 204, 1);
+    cursor: not-allowed;
+}

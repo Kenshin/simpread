@@ -24,19 +24,22 @@ const cssinjs = () => {
  *   - desc            : [PropTypes.string] subtitle
  *   - action          : [PropTypes.array]  include: id, title, icon, disable, hr
  *   - ac_evt          : [PropTypes.object] action events, include:
- *     - iconOnClick   : [PropTypes.func] action icon onClick event
- *     - bgOnClick     : [PropTypes.func] action bg   onClick event
- *     - itemOnClick   : [PropTypes.func] action item onClick event
- *     - itemMouseOver : [PropTypes.func] action item mouse over event
+ *     - iconOnClick   : [PropTypes.func]   action icon onClick event
+ *     - bgOnClick     : [PropTypes.func]   action bg   onClick event
+ *     - itemOnClick   : [PropTypes.func]   action item onClick event
+ *     - itemMouseOver : [PropTypes.func]   action item mouse over event
  */
 const ListItem = props => {
     const { idx, url, title, desc, action, ac_evt } = props;
     const avatar      = title.substr( 0, 1 ),
           actionItems = action ? action.map( item => {
-            return <action-item id={ item.id }
-                                onClick={ (e,d)=>ac_evt.itemOnClick( event, props ) }
+            const { id, title, disable, hr } = item;
+            let cls = hr ?  "hr" : "";
+            disable && ( cls = cls + " disable" );
+            return <action-item id={ id } class={ cls }
+                                onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
                                 onMouseOver={ ()=>ac_evt.itemMouseOver() }>
-                                { item.title }
+                                { title }
                     </action-item>
           }) : undefined;
     return (
