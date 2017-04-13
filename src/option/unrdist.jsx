@@ -24,7 +24,8 @@ const actionItems = [
 export default class Unrdist extends React.Component {
 
     state = {
-        item: this.props.list,
+        item : this.props.list,
+        title: `未读列表：${ storage.unrdist.length } 条`
     }
 
     onAction( event, ...rests ) {
@@ -34,7 +35,8 @@ export default class Unrdist extends React.Component {
             storage.UnRead( id, data.idx, success => {
                 success && new Notify().Render( 0, "删除成功" );
                 success && this.setState({
-                    item: storage.unrdist
+                    item : storage.unrdist,
+                    title: `未读列表：${ storage.unrdist.length } 条`
                 });
             });
         }
@@ -42,7 +44,7 @@ export default class Unrdist extends React.Component {
 
     render() {
         return (
-            <List items={ this.state.item } title={ "未读列表：100 条" } actionItems={ actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
+            <List items={ this.state.item } title={ this.state.title } actionItems={ actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
         )
     }
 }
