@@ -49,7 +49,7 @@ export default class Unrdist extends React.Component {
     }
 
     onAction( event, ...rests ) {
-        const [ id ] = rests;
+        const [ id, _, data ] = rests;
         if ( id == "remove" ) {
             storage.UnRead( id, data.idx, success => {
                 success && new Notify().Render( 0, "删除成功" );
