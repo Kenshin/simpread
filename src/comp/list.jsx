@@ -36,11 +36,14 @@ const ListItem = props => {
             const { id, title, disable, hr } = item;
             let cls = hr ?  "hr" : "";
             disable && ( cls = cls + " disable" );
-            return <action-item id={ id } class={ cls }
-                                onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
-                                onMouseOver={ ()=>ac_evt.itemMouseOver() }>
-                                { title }
-                    </action-item>
+            return <action-group>
+                        <action-item id={ id } class={ cls }
+                                        onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
+                                        onMouseOver={ ()=>ac_evt.itemMouseOver() }>
+                                        { title }
+                        </action-item>
+                        { hr && <hr/> }
+                   </action-group>
           }) : undefined;
     return (
         <list-item idx={ idx }>
@@ -112,7 +115,7 @@ export default class List extends React.Component {
         const $target = $( event.target ),
               id      = $target.attr( "id" ),
               title   = $target.text();
-        $target.parent()
+        $target.parent().parent()
             .removeClass( "action_items_active" )
             .next().css( "display", "none" );
         this.props.onAction && this.props.onAction( event, id, title, data )
