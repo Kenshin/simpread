@@ -83,8 +83,9 @@ class Read extends React.Component {
                 break;
             case "save":
                 const [ url, title, desc ] = [ window.location.href, $("sr-rd-title").text(), $("sr-rd-desc").text() ];
-                storage.UnRead( "add", { url, title, desc }, () => {
-                    new Notify().Render( 0, "已加入未读列表。" );
+                storage.UnRead( "add", { url, title, desc }, success => {
+                    success  && new Notify().Render( 0, "成功加入未读列表。" );
+                    !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
                 });
                 break;
             case "scroll":
