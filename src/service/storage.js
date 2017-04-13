@@ -368,7 +368,8 @@ class Storage {
                 const len = simpread.unrdist.length;
                 args.create = now();
                 args.idx = len > 0 ? simpread.unrdist[ len - 1 ].idx + 1 : 0;
-                simpread.unrdist.push( args );
+                simpread.unrdist.findIndex( item => item.url == args.url ) == -1 ?
+                    simpread.unrdist.push( args ) : success = false;
                 break;
             case "remove":
                 const idx = simpread.unrdist.findIndex( item => item.idx == args );
