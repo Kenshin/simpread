@@ -122,7 +122,7 @@ class Storage {
      * @return {array} unread list
      */
     get unrdist() {
-        return simpread.unrdist;
+        return simpread.unrdist.sort( ( a, b ) => b.idx - a.idx );
     }
 
     /**
