@@ -367,7 +367,7 @@ class Storage {
             case "add":
                 const len = simpread.unrdist.length;
                 args.create = now();
-                args.idx = len > 0 ? simpread.unrdist[ len - 1 ].idx + 1 : 0;
+                args.idx = len > 0 ? simpread.unrdist[0].idx + 1 : 0;
                 simpread.unrdist.findIndex( item => item.url == args.url ) == -1 ?
                     simpread.unrdist.splice( 0, 0, args ) : success = false;
                 break;
