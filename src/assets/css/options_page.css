@@ -214,9 +214,16 @@ list-item content subtitle {
 }
 
 list-item icon {
-    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 
     margin: 0 16px;
+
+    min-width: 50px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 list-item action {
