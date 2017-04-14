@@ -122,7 +122,7 @@ class Storage {
      * @return {array} unread list
      */
     get unrdist() {
-        return simpread.unrdist.sort( ( a, b ) => b.idx - a.idx );
+        return simpread.unrdist;
     }
 
     /**
@@ -369,7 +369,7 @@ class Storage {
                 args.create = now();
                 args.idx = len > 0 ? simpread.unrdist[ len - 1 ].idx + 1 : 0;
                 simpread.unrdist.findIndex( item => item.url == args.url ) == -1 ?
-                    simpread.unrdist.push( args ) : success = false;
+                    simpread.unrdist.splice( 0, 0, args ) : success = false;
                 break;
             case "remove":
                 const idx = simpread.unrdist.findIndex( item => item.idx == args );
