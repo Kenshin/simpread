@@ -93,7 +93,7 @@ export default class Unrdist extends React.Component {
         const content = this.state.items && this.state.items.length > 0 ?
             <div>
                 <List items={ this.state.items } title={ this.state.title } actionItems={ actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
-                <Button ref="load" type="raised" width="100%"
+                <Button type="raised" width="100%"
                         text={ this.state.loading_text } disable={ this.state.loading_disable }
                         color="#fff" backgroundColor="rgb(156, 39, 176)"
                         waves="sr-button waves-effect waves-button"
