@@ -1,9 +1,11 @@
 console.log( "===== simpread option unread list load =====" )
 
-import List     from 'list';
-import Button   from 'button';
+import List      from 'list';
+import Button    from 'button';
 
 import {storage} from 'storage';
+
+import timeago   from 'timeago';
 
 const actionItems = [
     {
@@ -39,7 +41,8 @@ const actionItems = [
             backgroundRepeat: 'no-repeat',
             backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBA0LLBOn/NkLAAABtklEQVRYw+2YPyxDURTGf5WOGCwiETH7s4kaDJo2FokYMBglZ66lOtGEqWIQm9zdoJouGERIEwNlE4NE4i0iBoO0CxIMvW1f26evvJY86Tfdc3LP99137vvuTa6HqlAwzxI9X064ISrxagweE5mfOXp18CHjoCDJFHbYlBCAOiywGWzLSYmAauUIn6koI+2g/Bzb0gMMyDWoZ9pNuTQByUKLbkSyhD6PyZroYcwiN0xSoQUYJGhZ+FKjwKtlNsggeAEIFJIbnJqm7BKpSeAIgHkdjbKgRwGucgIdOrEuYXOdXKo1Fm3pF+QOQBI6Tqg3wnleb8nUVHmtRNQBQueX5AZbclmRTVFYqBcbSKpS9jtocVLcFGgK/I6AhQ/UEPHCsf09GMyU287KaBc/Xm4vF+YbBv5oDzYd8FXUWrRIQoQa+wV1hfsFmj6whTt9IPvFRv3L39Q51AR7AKzKctMHtnCnD2wE6oAbpgF4bJCA3HKbH7vcaCsSdf9ZVCrQVyfW/uIwtwdZHcXUEzuSccKt2pglpoOsfkpQPs4a0p8ROc+1KI3RAHqDdPExpIv78nPQId7plgf4BCjPbVayklPeAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTEzVDExOjQ0OjE5KzA4OjAwPYuVdQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0xM1QxMTo0NDoxOSswODowMEzWLckAAAAASUVORK5CYII= )',
         }
-};
+},
+    ago = timeago();
 
 export default class Unrdist extends React.Component {
 
@@ -56,7 +59,10 @@ export default class Unrdist extends React.Component {
 
     state = {
         title: `未读列表：${ this.props.list.length } 条`,
-        items: this.props.list.slice( 0, 1 * this.props.step ),
+        items: this.props.list.map( item => {
+            item.create = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" );
+            return item;
+        }).slice( 0, 1 * this.props.step ),
 
         total: Math.ceil( this.props.list.length / this.props.step ),
         page : 1,
@@ -66,12 +72,13 @@ export default class Unrdist extends React.Component {
         const [ id, _, data ] = rests;
         id == "remove" &&
             storage.UnRead( id, data.idx, success => {
-                success && new Notify().Render( 0, "删除成功" );
+                success && this.props.list.splice( this.props.list.findIndex( item => item.idx == data.idx ), 1 );
                 success && this.setState({
                     items: this.props.list.slice( 0, this.state.page * this.props.step ),
                     title: `未读列表：${ this.props.list.length } 条`,
                     total: Math.ceil( this.props.list.length / this.props.step ),
                 });
+                success && new Notify().Render( 0, "删除成功" );
             });
     }
 

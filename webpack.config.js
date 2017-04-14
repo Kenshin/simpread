@@ -151,6 +151,7 @@ const webpack = require( 'webpack' ),
           pangu      : __dirname + '/src/vender/pangu.min.js',
           progressbar: __dirname + '/src/vender/progressbar.min.js',
           velocity   : __dirname + '/src/vender/velocity.min.js',
+          timeago    : __dirname + '/src/vender/timeago.min.js',
 
           notify     : __dirname + '/src/vender/notify/notify.js',
 

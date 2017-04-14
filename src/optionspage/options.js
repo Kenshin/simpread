@@ -120,7 +120,7 @@ function tabsRender( color ) {
                                 waves="sr-button waves-effect waves-button" 
                                 onClick={ ()=>save( mode.read ) } />
                     </section>
-                    <section><Unrdist list={ storage.unrdist } /></section>
+                    <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section><About option={ storage.option } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, event ) => {
