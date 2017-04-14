@@ -30,7 +30,7 @@ const cssinjs = () => {
  *     - itemMouseOver : [PropTypes.func]   action item mouse over event
  */
 const ListItem = props => {
-    const { idx, url, title, desc, action, ac_evt } = props;
+    const { idx, url, title, desc, action, ac_evt, create } = props;
     const avatar      = title.substr( 0, 1 ),
           actionItems = action ? action.map( item => {
             const { id, title, disable, hr } = item;
@@ -50,7 +50,7 @@ const ListItem = props => {
                 <a href={ url } target="_blank">{ title }</a>
                 <subtitle>{ desc }</subtitle>
             </content>
-            <icon>2 days</icon>
+            <icon>{ create }</icon>
             <action>
                 <action-icon onClick={ ()=>ac_evt.iconOnClick() }></action-icon>
                 <action-items>
