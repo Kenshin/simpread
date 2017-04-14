@@ -46,7 +46,6 @@ export default class Unrdist extends React.Component {
     static defaultProps = {
         list: [],
         step: 5,
-        page: 0,
     };
 
     static propsType = {
@@ -57,13 +56,10 @@ export default class Unrdist extends React.Component {
 
     state = {
         title: `未读列表：${ this.props.list.length } 条`,
-        items: this.props.list.slice( this.props.page * this.props.step ).slice( 0, this.props.step ),
+        items: this.props.list.slice( 0, 1 * this.props.step ),
 
         total: Math.ceil( this.props.list.length / this.props.step ),
-        page : this.props.page,
-
-        loading_text   : "加载更多",
-        loading_disable: false,
+        page : 1,
     };
 
     onAction( event, ...rests ) {
@@ -72,29 +68,26 @@ export default class Unrdist extends React.Component {
             storage.UnRead( id, data.idx, success => {
                 success && new Notify().Render( 0, "删除成功" );
                 success && this.setState({
-                    items: storage.unrdist,
-                    title: `未读列表：${ this.props.list.length } 条`
+                    items: this.props.list.slice( 0, this.state.page * this.props.step ),
+                    title: `未读列表：${ this.props.list.length } 条`,
+                    total: Math.ceil( this.props.list.length / this.props.step ),
                 });
             });
     }
 
     onClick() {
         const page  = this.state.page + 1,
-              items = this.state.items.concat( this.props.list.slice( page * this.props.step ).slice( 0, this.props.step ));
+              items = this.props.list.slice( 0, page * this.props.step );
         this.setState({ page, items });
-        page >= this.state.total - 1 &&
-            this.setState({
-                loading_text   : "加载完毕",
-                loading_disable: true,
-            });
     }
 
     render() {
-        const content = this.state.items && this.state.items.length > 0 ?
+        const disable = this.state.page >= this.state.total ? true : false,
+              content = this.state.items && this.state.items.length > 0 ?
             <div>
                 <List items={ this.state.items } title={ this.state.title } actionItems={ actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
                 <Button type="raised" width="100%"
-                        text={ this.state.loading_text } disable={ this.state.loading_disable }
+                        text={ disable ? "加载完毕" : "加载更多" } disable={ disable }
                         color="#fff" backgroundColor="rgb(156, 39, 176)"
                         waves="sr-button waves-effect waves-button"
                         onClick={ ()=>this.onClick() } />
