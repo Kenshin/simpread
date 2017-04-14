@@ -43,33 +43,58 @@ const actionItems = [
 
 export default class Unrdist extends React.Component {
 
+    static defaultProps = {
+        list: [],
+        step: 5,
+        page: 0,
+    };
+
+    static propsType = {
+        list: React.PropTypes.array,
+        step: React.PropTypes.number,
+        page: React.PropTypes.number,
+    };
+
     state = {
-        items: this.props.list,
-        title: `未读列表：${ storage.unrdist.length } 条`
-    }
+        title: `未读列表：${ this.props.list.length } 条`,
+        items: this.props.list.slice( this.props.page * this.props.step ).slice( 0, this.props.step ),
+
+        total: Math.ceil( this.props.list.length / this.props.step ),
+        page : this.props.page,
+
+        loading_text   : "加载更多",
+        loading_disable: false,
+    };
 
     onAction( event, ...rests ) {
         const [ id, _, data ] = rests;
-        if ( id == "remove" ) {
+        id == "remove" &&
             storage.UnRead( id, data.idx, success => {
                 success && new Notify().Render( 0, "删除成功" );
                 success && this.setState({
                     items: storage.unrdist,
-                    title: `未读列表：${ storage.unrdist.length } 条`
+                    title: `未读列表：${ this.props.list.length } 条`
                 });
             });
-        }
     }
 
     onClick() {
-        console.log( "Add more storage.unrdist" )
+        const page  = this.state.page + 1,
+              items = this.state.items.concat( this.props.list.slice( page * this.props.step ).slice( 0, this.props.step ));
+        this.setState({ page, items });
+        page >= this.state.total - 1 &&
+            this.setState({
+                loading_text   : "加载完毕",
+                loading_disable: true,
+            });
     }
 
     render() {
         const content = this.state.items && this.state.items.length > 0 ?
             <div>
                 <List items={ this.state.items } title={ this.state.title } actionItems={ actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
-                <Button type="raised" width="100%" text="加载更多"
+                <Button ref="load" type="raised" width="100%"
+                        text={ this.state.loading_text } disable={ this.state.loading_disable }
                         color="#fff" backgroundColor="rgb(156, 39, 176)"
                         waves="sr-button waves-effect waves-button"
                         onClick={ ()=>this.onClick() } />
