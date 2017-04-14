@@ -80,10 +80,31 @@ const tabsItem = [{
        return menu;
 });
 
+/**
+ * Unread list
+ */
+const actionItems = [
+    {
+        id: "pocket",
+        title: "发送到 Pocket",
+        icon: "",
+        disable: false,
+        hr: true,
+    },
+    {
+        id: "remove",
+        title: "删除",
+        icon: "",
+        disable: false,
+        hr: false,
+    }
+];
+
 export {
     shortcuts as Shortcuts,
     tabsItem,
     headerColors,
     topColors,
     menuItem,
+    actionItems,
 }

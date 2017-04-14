@@ -4,26 +4,11 @@ import List      from 'list';
 import Button    from 'button';
 
 import {storage} from 'storage';
+import * as conf from 'config';
 
 import timeago   from 'timeago';
 
-const actionItems = [
-    {
-        id: "pocket",
-        title: "发送到 Pocket",
-        icon: "",
-        disable: false,
-        hr: true,
-    },
-    {
-        id: "remove",
-        title: "删除",
-        icon: "",
-        disable: false,
-        hr: false,
-    }
-],
-    style = {
+const style = {
         root: {
             display: 'flex',
             flexDirection: 'column',
@@ -92,7 +77,7 @@ export default class Unrdist extends React.Component {
         const disable = this.state.page >= this.state.total ? true : false,
               content = this.state.items && this.state.items.length > 0 ?
             <div>
-                <List items={ this.state.items } title={ this.state.title } actionItems={ actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
+                <List items={ this.state.items } title={ this.state.title } actionItems={ conf.actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
                 <Button type="raised" width="100%"
                         text={ disable ? "加载完毕" : "加载更多" } disable={ disable }
                         color="#fff" backgroundColor="rgb(156, 39, 176)"
