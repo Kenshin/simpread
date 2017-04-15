@@ -77,8 +77,13 @@ const ListItem = props => {
             <action>
                 <action-icon></action-icon>
                 <action-items>
-                    <action-item>发送到 Pocket</action-item>
-                    <action-item>删除</action-item>
+                    <action-group>
+                        <action-item>发送到 Pocket</action-item>
+                        <hr>
+                    </action-group>
+                    <action-group>
+                        <action-item>删除</action-item>
+                    </action-group>
                 </action-items>
                 <action-bg></action-bg>
             </action>
