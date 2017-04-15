@@ -287,7 +287,8 @@ const cssinjs = () => {
 const ListItem = props => {
     const { idx, url, title, desc, style,
             priType, priValue, secType, secValue,
-            action, events, create } = props;
+            action, events, create } = props,
+        content_style = props.contentStyle ? { ...props.contentStyle } : { ...style.content };
 
     let pri_style = priType == "text" ? { ...style[ `pri_item_${ priType }` ] } : { ...style[ `state_${ priType }` ] },
         sec_style = secType == "text" ? { ...style[ `sec_item_${ secType }` ] } : { ...style[ `state_${ secType }` ] },
@@ -314,7 +315,7 @@ const ListItem = props => {
     return (
         <list-item idx={ idx } style={ style.list_item }>
             <pri-item style={ pri_style } onClick={ (e,d)=>events.priOnClick( event, props ) }>{ pri_value }</pri-item>
-            <content style={ style.content }>
+            <content style={ content_style }>
                 <a style={ style.link } href={ url } target="_blank">{ title }</a>
                 <subtitle style={ style.subtitle }>{ desc }</subtitle>
             </content>
@@ -419,7 +420,7 @@ export default class List extends React.Component {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
 
-        const { items, title, actionItems } = this.props,
+        const { items, title, actionItems, contentStyle } = this.props,
               list = items.map( item => {
             const events = {
                 iconOnClick  : () => this.acIconOnClick(),
@@ -429,7 +430,7 @@ export default class List extends React.Component {
                 priOnClick   : ( e, d ) => this.priOnClick( e, d ),
                 secOnClick   : ( e, d ) => this.secOnClick( e, d ),
             };
-            return <ListItem { ...item } action={ actionItems } events={ events } style={{ ...style }} />
+            return <ListItem { ...item } contentStyle={ contentStyle } action={ actionItems } events={ events } style={{ ...style }} />
         });
         return (
             <list style={ style.root }>
