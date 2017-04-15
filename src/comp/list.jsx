@@ -149,6 +149,7 @@ const cssinjs = () => {
 
             backgroundColor: '#fff',
 
+            borderRadius: '2px',
             boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
 
             opacity: 0,
@@ -266,8 +267,9 @@ const ListItem = props => {
     };
     const actionItems = action ? action.map( item => {
             const { id, title, disable, hr } = item;
+            const root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
             return <action-group>
-                        <action-item style={ style.action_item } id={ id } class={ disable && "disable" }
+                        <action-item style={ root } id={ id }
                                         onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
                                         onMouseOver={ ()=>ac_evt.itemMouseOver() }>
                                         { title }
