@@ -154,10 +154,10 @@ const cssinjs = () => {
         action_icon: {
             display: 'block',
 
-            width: '21px',
-            height: '21px',
+            width: '27px',
+            height: '27px',
 
-            lineHeight: '21px',
+            lineHeight: '27px',
 
             borderRadius: '50%',
 
@@ -286,6 +286,7 @@ const cssinjs = () => {
  */
 const ListItem = props => {
     const { idx, url, title, desc, style,
+            acIconWaves, acItemWaves,
             priType, priValue, secType, secValue,
             action, events, create } = props,
         content_style = props.contentStyle ? { ...props.contentStyle } : { ...style.content };
@@ -304,10 +305,10 @@ const ListItem = props => {
         const { id, title, disable, hr } = item,
                 root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
         return <action-group>
-                    <action-item style={ root } id={ id }
-                                    onClick={ !disable && ( (e,d)=>events.itemOnClick( event, props )) }
-                                    onMouseOver={ ()=>events.itemMouseOver() }>
-                                    { title }
+                    <action-item style={ root } id={ id } class={ acItemWaves }
+                                 onClick={ !disable && ( (e,d)=>events.itemOnClick( event, props )) }
+                                 onMouseOver={ ()=>events.itemMouseOver() }>
+                                 { title }
                     </action-item>
                     { hr && <hr style={ style.hr }/> }
                 </action-group>
@@ -321,7 +322,7 @@ const ListItem = props => {
             </content>
             <sec-item style={ sec_style } onClick={ (e,d)=>events.secOnClick( event, props ) }>{ sec_value }</sec-item>
             <action style={ style.action }>
-                <action-icon style={ style.action_icon } onClick={ ()=>events.iconOnClick() }></action-icon>
+                <action-icon style={ style.action_icon } class={ acIconWaves } onClick={ ()=>events.iconOnClick() }></action-icon>
                 <action-items style={ style.action_items }>
                     { actionItems }
                 </action-items>
@@ -420,7 +421,7 @@ export default class List extends React.Component {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
 
-        const { items, title, actionItems, contentStyle } = this.props,
+        const { items, title, actionItems, contentStyle, ...others } = this.props,
               list = items.map( item => {
             const events = {
                 iconOnClick  : () => this.acIconOnClick(),
@@ -430,7 +431,7 @@ export default class List extends React.Component {
                 priOnClick   : ( e, d ) => this.priOnClick( e, d ),
                 secOnClick   : ( e, d ) => this.secOnClick( e, d ),
             };
-            return <ListItem { ...item } contentStyle={ contentStyle } action={ actionItems } events={ events } style={{ ...style }} />
+            return <ListItem { ...item } { ...others } contentStyle={ contentStyle } action={ actionItems } events={ events } style={{ ...style }} />
         });
         return (
             <list style={ style.root }>
