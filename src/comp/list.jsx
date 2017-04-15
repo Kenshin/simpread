@@ -33,9 +33,7 @@ const cssinjs = () => {
             height: '56px',
         },
 
-        pri_item: {
-
-        },
+        pri_item: {},
 
         pri_item_text: {
             display: 'block',
@@ -54,7 +52,30 @@ const cssinjs = () => {
             backgroundColor: '#E57373',
         },
 
-        pri_item_avatar: {
+        sec_item: {},
+
+        sec_item_text: {
+            display: '-webkit-box',
+
+            WebkitLineClamp: 1,
+            '-webkit-box-orient': 'vertical',
+
+            margin: '0 16px',
+
+            minWidth: '50px',
+
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+        },
+
+        state_none: {
+            width: 0,
+            opacity: 0,
+            visibility: 'hidden',
+            paddingLeft: '72px',
+        },
+
+        state_avatar: {
             display: 'block',
 
             minWidth: '40px',
@@ -70,7 +91,7 @@ const cssinjs = () => {
             backgroundRepeat: 'no-repeat',
         },
 
-        pri_item_icon: {
+        state_icon: {
             display: 'block',
 
             minWidth: '24px',
@@ -85,7 +106,8 @@ const cssinjs = () => {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         },
-        pri_item_action: {},
+
+        state_action: {},
 
         content: {
             display: 'flex',
@@ -120,24 +142,6 @@ const cssinjs = () => {
 
             color: 'rgba(0, 0, 0, 0.541176)',
         },
-
-        sec_item: {},
-
-        sec_item_text: {
-            display: '-webkit-box',
-
-            WebkitLineClamp: 1,
-            '-webkit-box-orient': 'vertical',
-
-            margin: '0 16px',
-
-            minWidth: '50px',
-
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-        },
-        sec_item_icon: {},
-        sec_item_action: {},
 
         action: {
             display: 'block',
@@ -264,8 +268,8 @@ const cssinjs = () => {
  * 
  *   - style           : [PropTypes.object] style
  * 
- *   - priType         : [PropTypes.string] primary   type, include: text, icon, action, avatar
- *   - secType         : [PropTypes.string] Secondary type, include: text, icon, action
+ *   - priType         : [PropTypes.string] primary   type, include: text, icon, avatar, action, none
+ *   - secType         : [PropTypes.string] Secondary type, include: text, icon, avatar, action, none
  *   - priValue        : [PropTypes.any]    primary   value, value tyupe include: string, any
  *   - secValue        : [PropTypes.any]    Secondary value, value tyupe include: string, any
  * 
@@ -279,25 +283,30 @@ const cssinjs = () => {
 const ListItem = props => {
     const { idx, url, title, desc, style,
             priType, priValue, secType, secValue,
-            action, ac_evt, create } = props,
-          pri_style   = { ...style[ `pri_item_${ priType }` ] },
-          sec_style   = { ...style[ `sec_item_${ secType }` ] },
-          pri_value   = [ "avatar", "icon" ].includes( priType ) ? "" : priValue,
-          sec_value   = [ "icon" ].includes( secType )           ? "" : secValue;
-          [ "avatar", "icon" ].includes( priType ) && ( pri_style.backgroundImage = `url(${priValue})` );
-          [ "icon" ].includes( secType ) && ( sec_style.backgroundImage = `url(${secValue})` );
-          const actionItems = action ? action.map( item => {
-            const { id, title, disable, hr } = item,
-                  root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
-            return <action-group>
-                        <action-item style={ root } id={ id }
-                                        onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
-                                        onMouseOver={ ()=>ac_evt.itemMouseOver() }>
-                                        { title }
-                        </action-item>
-                        { hr && <hr style={ style.hr }/> }
-                   </action-group>
-          }) : undefined;
+            action, ac_evt, create } = props;
+
+    let pri_style = priType == "text" ? { ...style[ `pri_item_${ priType }` ] } : { ...style[ `state_${ priType }` ] },
+        sec_style = secType == "text" ? { ...style[ `sec_item_${ secType }` ] } : { ...style[ `state_${ secType }` ] },
+        pri_value = [ "avatar", "icon" ].includes( priType ) ? "" : priValue,
+        sec_value = [ "avatar", "icon" ].includes( secType ) ? "" : secValue;
+
+    [ "avatar", "icon" ].includes( priType ) && ( pri_style.backgroundImage = `url(${priValue})` );
+    [ "avatar", "icon" ].includes( secType ) && ( sec_style.backgroundImage = `url(${secValue})` );
+    priType == "none" && ( pri_style = { ...pri_style, ...style.state_none } );
+    secType == "none" && ( sec_style = { ...sec_style, ...style.state_none } );
+
+    const actionItems = action ? action.map( item => {
+        const { id, title, disable, hr } = item,
+                root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
+        return <action-group>
+                    <action-item style={ root } id={ id }
+                                    onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
+                                    onMouseOver={ ()=>ac_evt.itemMouseOver() }>
+                                    { title }
+                    </action-item>
+                    { hr && <hr style={ style.hr }/> }
+                </action-group>
+        }) : undefined;
     return (
         <list-item idx={ idx } style={ style.list_item }>
             <pri-item style={ pri_style }>{ pri_value }</pri-item>
