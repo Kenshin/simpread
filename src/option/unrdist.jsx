@@ -45,7 +45,10 @@ export default class Unrdist extends React.Component {
     state = {
         title: `未读列表：${ this.props.list.length } 条`,
         items: this.props.list.map( item => {
-            item.create = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" );
+            item.priType  = "text";
+            item.secType  = "text";
+            item.priValue = item.title.substr( 0, 1 );
+            item.secValue = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" )
             return item;
         }).slice( 0, 1 * this.props.step ),
 
