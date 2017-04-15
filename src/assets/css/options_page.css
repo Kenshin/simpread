@@ -139,6 +139,7 @@ a {
     font-size: 1.3rem;
 }
 
+/*
 list {
     display: flex;
     flex-direction: column;
@@ -334,3 +335,4 @@ list-item action .disable {
     color: rgba(204, 204, 204, 1);
     cursor: not-allowed;
 }
+*/
