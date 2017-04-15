@@ -22,6 +22,12 @@ const cssinjs = () => {
  *   - url             : [PropTypes.string] url
  *   - title           : [PropTypes.string] title
  *   - desc            : [PropTypes.string] subtitle
+ * 
+ *   - priType         : [PropTypes.string] primary   type, include: text, icon, action, avatar
+ *   - secType         : [PropTypes.string] Secondary type, include: text, icon, action
+ *   - priValue        : [PropTypes.any]    primary   value, value tyupe include: string, any
+ *   - secValue        : [PropTypes.any]    Secondary value, value tyupe include: string, any
+ * 
  *   - action          : [PropTypes.array]  include: id, title, icon, disable, hr
  *   - ac_evt          : [PropTypes.object] action events, include:
  *     - iconOnClick   : [PropTypes.func]   action icon onClick event
@@ -30,9 +36,24 @@ const cssinjs = () => {
  *     - itemMouseOver : [PropTypes.func]   action item mouse over event
  */
 const ListItem = props => {
-    const { idx, url, title, desc, action, ac_evt, create } = props;
-    const avatar      = title.substr( 0, 1 ),
-          actionItems = action ? action.map( item => {
+    const { idx, url, title, desc,
+            priType, priValue, secType, secValue,
+            action, ac_evt, create } = props;
+    const state = type => {
+        let style = {};
+        switch ( type ) {
+            case "text":
+                break;
+            case "avatar":
+                break;
+            case "icon":
+                break;
+            case "action":
+                break;
+        }
+        return style;
+    };
+    const actionItems = action ? action.map( item => {
             const { id, title, disable, hr } = item;
             return <action-group>
                         <action-item id={ id } class={ disable && "disable" }
@@ -45,12 +66,12 @@ const ListItem = props => {
           }) : undefined;
     return (
         <list-item idx={ idx }>
-            <avatar>{ avatar }</avatar>
+            <pri-item>{ priValue }</pri-item>
             <content>
                 <a href={ url } target="_blank">{ title }</a>
                 <subtitle>{ desc }</subtitle>
             </content>
-            <icon>{ create }</icon>
+            <sec-item>{ secValue }</sec-item>
             <action>
                 <action-icon onClick={ ()=>ac_evt.iconOnClick() }></action-icon>
                 <action-items>

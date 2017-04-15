@@ -162,7 +162,7 @@ list-item {
     height: 56px;
 }
 
-list-item avatar {
+list-item pri-item {
     display: block;
 
     min-width: 40px;
@@ -213,7 +213,7 @@ list-item content subtitle {
     color: rgba(0, 0, 0, 0.541176);
 }
 
-list-item icon {
+list-item sec-item {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
