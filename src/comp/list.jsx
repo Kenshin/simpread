@@ -363,8 +363,8 @@ export default class List extends React.Component {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
 
-        const { items, title, actionItems } = this.props;
-        const list = items.map( item => {
+        const { items, title, actionItems } = this.props,
+              list = items.map( item => {
             const events = {
                 iconOnClick  : () => this.acIconOnClick(),
                 bgOnClick    : () => this.acBgOnClick(),
