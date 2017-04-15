@@ -54,8 +54,37 @@ const cssinjs = () => {
             backgroundColor: '#E57373',
         },
 
-        pri_item_avatar: {},
-        pri_item_icon: {},
+        pri_item_avatar: {
+            display: 'block',
+
+            minWidth: '40px',
+            minHeight: '40px',
+
+            margin: '0 16px',
+            padding: 0,
+
+            lineHeight: '40px',
+
+            borderRadius: '50%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+        },
+
+        pri_item_icon: {
+            display: 'block',
+
+            minWidth: '24px',
+            minHeight: '24px',
+
+            margin: '8px 24px',
+            padding: 0,
+
+            lineHeight: '24px',
+
+            borderRadius: '50%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+        },
         pri_item_action: {},
 
         content: {
@@ -253,7 +282,11 @@ const ListItem = props => {
             action, ac_evt, create } = props,
           pri_style   = { ...style[ `pri_item_${ priType }` ] },
           sec_style   = { ...style[ `sec_item_${ secType }` ] },
-          actionItems = action ? action.map( item => {
+          pri_value   = [ "avatar", "icon" ].includes( priType ) ? "" : priValue,
+          sec_value   = [ "icon" ].includes( secType )           ? "" : secValue;
+          [ "avatar", "icon" ].includes( priType ) && ( pri_style.backgroundImage = `url(${priValue})` );
+          [ "icon" ].includes( secType ) && ( sec_style.backgroundImage = `url(${secValue})` );
+          const actionItems = action ? action.map( item => {
             const { id, title, disable, hr } = item,
                   root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
             return <action-group>
@@ -267,12 +300,12 @@ const ListItem = props => {
           }) : undefined;
     return (
         <list-item idx={ idx } style={ style.list_item }>
-            <pri-item style={ pri_style }>{ priValue }</pri-item>
+            <pri-item style={ pri_style }>{ pri_value }</pri-item>
             <content style={ style.content }>
                 <a style={ style.link } href={ url } target="_blank">{ title }</a>
                 <subtitle style={ style.subtitle }>{ desc }</subtitle>
             </content>
-            <sec-item style={ sec_style }>{ secValue }</sec-item>
+            <sec-item style={ sec_style }>{ sec_value }</sec-item>
             <action style={ style.action }>
                 <action-icon style={ style.action_icon } onClick={ ()=>ac_evt.iconOnClick() }></action-icon>
                 <action-items style={ style.action_items }>

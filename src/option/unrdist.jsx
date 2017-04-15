@@ -49,6 +49,17 @@ export default class Unrdist extends React.Component {
             item.secType  = "text";
             item.priValue = item.title.substr( 0, 1 );
             item.secValue = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" )
+
+            if ( item.idx == 20 ) {
+                item.priType  = "avatar";
+                item.priValue = "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/avatar.png";
+            }
+
+            if ( item.idx == 27 ) {
+                item.priType  = "icon";
+                item.priValue = "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/focus_mode_icon.png";
+            }
+
             return item;
         }).slice( 0, 1 * this.props.step ),
 
