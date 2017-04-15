@@ -49,17 +49,6 @@ export default class Unrdist extends React.Component {
             item.secType  = "text";
             item.priValue = item.title.substr( 0, 1 );
             item.secValue = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" )
-
-            if ( item.idx == 20 ) {
-                item.priType  = "avatar";
-                item.priValue = "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/avatar.png";
-            }
-
-            if ( item.idx == 27 ) {
-                item.priType  = "icon";
-                item.priValue = "chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/focus_mode_icon.png";
-            }
-
             return item;
         }).slice( 0, 1 * this.props.step ),
 
@@ -88,10 +77,20 @@ export default class Unrdist extends React.Component {
     }
 
     render() {
+        const content_style = {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            width: '100%',
+        };
         const disable = this.state.page >= this.state.total ? true : false,
               content = this.state.items && this.state.items.length > 0 ?
             <div>
-                <List items={ this.state.items } title={ this.state.title } actionItems={ conf.actionItems } onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
+                <List acIconWaves="sr-button waves-effect waves-circle"
+                      acItemWaves="sr-button waves-effect waves-button"
+                      title={ this.state.title } contentStyle={ content_style }
+                      items={ this.state.items } actionItems={ conf.actionItems }
+                      onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
                 <Button type="raised" width="100%"
                         text={ disable ? "加载完毕" : "加载更多" } disable={ disable }
                         color="#fff" backgroundColor="rgb(156, 39, 176)"
