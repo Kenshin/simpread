@@ -89,12 +89,12 @@ const ListItem = props => {
     <list>
         <list-header>未读列表：100 条</list-header>
         <list-item>
-            <avatar>换</avatar>
+            <pri-item>换</pri-item>
             <content>
                 <a href="http://www.cnbeta.com/articles/tech/601485.htm" target="_blank">换壳为本？Nokia 6 银白色版 1499 元起正式开卖</a>
                 <subtitle>4 月 4 日的时候，诺基亚官方宣传，将于在 4 月 11 日正式发售全新配色的 Nokia 6 智能手机，即银白色版本，并且从那时起已经正式提供预约服务4 月 4 日的时候，诺基亚官方宣传，将于在 4 月 11 日正式发售全新配色的 Nokia 6 智能手机，即银白色版本，并且从那时起已经正式提供预约服务</subtitle>
             </content>
-            <icon>2 days</icon>
+            <sec-item>2 days</sec-item>
             <action>
                 <action-icon></action-icon>
                 <action-items>
