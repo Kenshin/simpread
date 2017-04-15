@@ -254,8 +254,8 @@ const ListItem = props => {
           pri_style   = { ...style[ `pri_item_${ priType }` ] },
           sec_style   = { ...style[ `sec_item_${ secType }` ] },
           actionItems = action ? action.map( item => {
-            const { id, title, disable, hr } = item;
-            const root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
+            const { id, title, disable, hr } = item,
+                  root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
             return <action-group>
                         <action-item style={ root } id={ id }
                                         onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
