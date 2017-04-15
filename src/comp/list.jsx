@@ -250,22 +250,10 @@ const cssinjs = () => {
 const ListItem = props => {
     const { idx, url, title, desc, style,
             priType, priValue, secType, secValue,
-            action, ac_evt, create } = props;
-    const state = type => {
-        let style = {};
-        switch ( type ) {
-            case "text":
-                break;
-            case "avatar":
-                break;
-            case "icon":
-                break;
-            case "action":
-                break;
-        }
-        return style;
-    };
-    const actionItems = action ? action.map( item => {
+            action, ac_evt, create } = props,
+          pri_style   = { ...style[ `pri_item_${ priType }` ] },
+          sec_style   = { ...style[ `sec_item_${ secType }` ] },
+          actionItems = action ? action.map( item => {
             const { id, title, disable, hr } = item;
             const root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
             return <action-group>
@@ -279,12 +267,12 @@ const ListItem = props => {
           }) : undefined;
     return (
         <list-item idx={ idx } style={ style.list_item }>
-            <pri-item style={ style.pri_item_text }>{ priValue }</pri-item>
+            <pri-item style={ pri_style }>{ priValue }</pri-item>
             <content style={ style.content }>
                 <a style={ style.link } href={ url } target="_blank">{ title }</a>
                 <subtitle style={ style.subtitle }>{ desc }</subtitle>
             </content>
-            <sec-item style={ style.sec_item_text }>{ secValue }</sec-item>
+            <sec-item style={ sec_style }>{ secValue }</sec-item>
             <action style={ style.action }>
                 <action-icon style={ style.action_icon } onClick={ ()=>ac_evt.iconOnClick() }></action-icon>
                 <action-items style={ style.action_items }>
