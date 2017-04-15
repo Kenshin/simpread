@@ -49,7 +49,7 @@ const cssinjs = () => {
 
             borderRadius: '50%',
 
-            backgroundColor: '#E57373',
+            backgroundColor: '#E1BEE7',
         },
 
         sec_item: {},
