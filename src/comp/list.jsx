@@ -273,17 +273,21 @@ const cssinjs = () => {
  *   - priValue        : [PropTypes.any]    primary   value, value tyupe include: string, any
  *   - secValue        : [PropTypes.any]    Secondary value, value tyupe include: string, any
  * 
- *   - action          : [PropTypes.array]  include: id, title, icon, disable, hr
- *   - ac_evt          : [PropTypes.object] action events, include:
+ *   - events          : [PropTypes.object] events, include:
+ *     - priOnClick    : [PropTypes.func]   list item primary onClick event
+ *     - secOnClick    : [PropTypes.func]   list item secondary onClick event
+ * 
  *     - iconOnClick   : [PropTypes.func]   action icon onClick event
  *     - bgOnClick     : [PropTypes.func]   action bg   onClick event
  *     - itemOnClick   : [PropTypes.func]   action item onClick event
  *     - itemMouseOver : [PropTypes.func]   action item mouse over event
+ * 
+ *   - action          : [PropTypes.array]  include: id, title, icon, disable, hr
  */
 const ListItem = props => {
     const { idx, url, title, desc, style,
             priType, priValue, secType, secValue,
-            action, ac_evt, create } = props;
+            action, events, create } = props;
 
     let pri_style = priType == "text" ? { ...style[ `pri_item_${ priType }` ] } : { ...style[ `state_${ priType }` ] },
         sec_style = secType == "text" ? { ...style[ `sec_item_${ secType }` ] } : { ...style[ `state_${ secType }` ] },
@@ -300,8 +304,8 @@ const ListItem = props => {
                 root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
         return <action-group>
                     <action-item style={ root } id={ id }
-                                    onClick={ !disable && ( (e,d)=>ac_evt.itemOnClick( event, props )) }
-                                    onMouseOver={ ()=>ac_evt.itemMouseOver() }>
+                                    onClick={ !disable && ( (e,d)=>events.itemOnClick( event, props )) }
+                                    onMouseOver={ ()=>events.itemMouseOver() }>
                                     { title }
                     </action-item>
                     { hr && <hr style={ style.hr }/> }
@@ -309,18 +313,18 @@ const ListItem = props => {
         }) : undefined;
     return (
         <list-item idx={ idx } style={ style.list_item }>
-            <pri-item style={ pri_style }>{ pri_value }</pri-item>
+            <pri-item style={ pri_style } onClick={ (e,d)=>events.priOnClick( event, props ) }>{ pri_value }</pri-item>
             <content style={ style.content }>
                 <a style={ style.link } href={ url } target="_blank">{ title }</a>
                 <subtitle style={ style.subtitle }>{ desc }</subtitle>
             </content>
-            <sec-item style={ sec_style }>{ sec_value }</sec-item>
+            <sec-item style={ sec_style } onClick={ (e,d)=>events.secOnClick( event, props ) }>{ sec_value }</sec-item>
             <action style={ style.action }>
-                <action-icon style={ style.action_icon } onClick={ ()=>ac_evt.iconOnClick() }></action-icon>
+                <action-icon style={ style.action_icon } onClick={ ()=>events.iconOnClick() }></action-icon>
                 <action-items style={ style.action_items }>
                     { actionItems }
                 </action-items>
-                <action-bg style={ style.action_bg } onClick={ ()=>ac_evt.bgOnClick() }></action-bg>
+                <action-bg style={ style.action_bg } onClick={ ()=>events.bgOnClick() }></action-bg>
             </action>
         </list-item>
     );
@@ -401,6 +405,16 @@ export default class List extends React.Component {
         }
     }
 
+    priOnClick( event, data ) {
+        console.log( "priOnClick", event, data )
+        this.props.priOnClick && this.props.priOnClick( event, data );
+    }
+
+    secOnClick( event, data ) {
+        console.log( "secOnClick", event, data )
+        this.props.secOnClick && this.props.secOnClick( event, data );
+    }
+
     render() {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
@@ -412,8 +426,10 @@ export default class List extends React.Component {
                 bgOnClick    : () => this.acBgOnClick(),
                 itemOnClick  : ( e, d ) => this.acItemOnClick( e, d ),
                 itemMouseOver: () => this.acItemMouseOver(),
+                priOnClick   : ( e, d ) => this.priOnClick( e, d ),
+                secOnClick   : ( e, d ) => this.secOnClick( e, d ),
             };
-            return <ListItem { ...item } action={ actionItems } ac_evt={ events } style={{ ...style }} />
+            return <ListItem { ...item } action={ actionItems } events={ events } style={{ ...style }} />
         });
         return (
             <list style={ style.root }>
