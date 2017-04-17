@@ -476,7 +476,7 @@ export default class List extends React.Component {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
 
-        const { items, title, actionItems, contentStyle, ...others } = this.props,
+        const { items, title, actionItems, ...others } = this.props,
               list = items.map( item => {
             const events = {
                 iconOnClick  : () => this.acIconOnClick(),
@@ -486,7 +486,7 @@ export default class List extends React.Component {
                 priOnClick   : ( e, d ) => this.priOnClick( e, d ),
                 secOnClick   : ( e, d ) => this.secOnClick( e, d ),
             };
-            return <ListItem { ...item } { ...others } contentStyle={ contentStyle } action={ actionItems } events={ events } style={{ ...style }} />
+            return <ListItem { ...item } { ...others } action={ actionItems } events={ events } style={{ ...style }} />
         });
         return (
             <list style={ style.root }>
