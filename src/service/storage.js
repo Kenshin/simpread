@@ -17,6 +17,7 @@ const name = "simpread",
         focus     : "focus",
         read      : "read",
         option    : "option",
+        unrdist   : "unrdist",
     },
     site   = {
         name      : "",   // only read mode
@@ -122,7 +123,7 @@ class Storage {
      * @return {array} unread list
      */
     get unrdist() {
-        return simpread.unrdist;
+        return simpread[ mode.unrdist ];
     }
 
     /**
@@ -326,7 +327,7 @@ class Storage {
         state == "local"  && ( code = 0 );
         state == "remote" && ( code = 1 );
         ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
-        ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
+        //( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
     }
 
     /**
