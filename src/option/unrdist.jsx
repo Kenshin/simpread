@@ -87,6 +87,7 @@ export default class Unrdist extends React.Component {
                       acItemWaves="sr-button waves-effect waves-button"
                       title={ this.state.title } contentStyle={ content_style }
                       items={ items } actionItems={ conf.actionItems }
+                      priBgColor ="#E1BEE7"
                       onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
                 <Button type="raised" width="100%"
                         text={ disable ? "加载完毕" : "加载更多" } disable={ disable }
