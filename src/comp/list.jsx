@@ -127,6 +127,7 @@ const cssinjs = () => {
 
         link: {
             display: '-webkit-box',
+            flexShrink: 1,
 
             WebkitLineClamp: 1,
             '-webkit-box-orient': 'vertical',
@@ -141,6 +142,7 @@ const cssinjs = () => {
 
         subtitle: {
             display: '-webkit-box',
+            flexShrink: 2,
 
             WebkitLineClamp: 1,
             '-webkit-box-orient': 'vertical',
