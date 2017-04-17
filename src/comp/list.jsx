@@ -369,9 +369,28 @@ const ListItem = props => {
  */
 export default class List extends React.Component {
 
+    static defaultProps = {
+        title       : "",
+        contentStyle: {},
+        items       : [],
+        actionItems : [],
+        acIconWaves : "",
+        acItemWaves : "",
+    };
+
+    static PropTypes = {
+       title       : React.PropTypes.string,
+       contentStyle: React.PropTypes.object,
+       items       : React.PropTypes.array,
+       actionItems : React.PropTypes.array,
+       onAction    : React.PropTypes.func,
+       acIconWaves : React.PropTypes.string,
+       acItemWaves : React.PropTypes.string,
+    };
+
     state = {
         id : Math.round(+new Date()),
-    }
+    };
 
     acIconOnClick() {
         const style = styles.get( this.state.id );
