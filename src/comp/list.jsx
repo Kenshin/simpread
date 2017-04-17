@@ -298,6 +298,9 @@ const ListItem = props => {
         pri_value = [ "avatar", "icon" ].includes( priType ) ? "" : priValue,
         sec_value = [ "avatar", "icon" ].includes( secType ) ? "" : secValue;
 
+    props.priStyle && ( pri_style = { ...props.priStyle } );
+    props.secStyle && ( sec_style = { ...props.secStyle } );
+
     [ "avatar", "icon" ].includes( priType ) && ( pri_style.backgroundImage = `url(${priValue})` );
     [ "avatar", "icon" ].includes( secType ) && ( sec_style.backgroundImage = `url(${secValue})` );
     priType == "none" && ( pri_style = { ...pri_style, ...style.state_none } );
@@ -383,10 +386,13 @@ export default class List extends React.Component {
         acIconWaves : "",
         acItemWaves : "",
 
-        contentStyle: {},
+        priStyle    : undefined,
+        secStyle    : undefined,
+        contentStyle: undefined,
 
         priBgColor  : "",
         secBgColor  : "",
+
     };
 
     static PropTypes = {
@@ -400,6 +406,8 @@ export default class List extends React.Component {
        acIconWaves : React.PropTypes.string,
        acItemWaves : React.PropTypes.string,
 
+       priStyle    : React.PropTypes.object,
+       secStyle    : React.PropTypes.object,
        contentStyle: React.PropTypes.object,
 
        priBgColor  : React.PropTypes.string,
