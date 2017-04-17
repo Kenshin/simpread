@@ -49,7 +49,7 @@ const cssinjs = () => {
 
             borderRadius: '50%',
 
-            backgroundColor: '#E1BEE7',
+            backgroundColor: header_corlor,
         },
 
         sec_item: {},
@@ -66,6 +66,8 @@ const cssinjs = () => {
 
             overflow: 'hidden',
             textOverflow: 'ellipsis',
+
+            backgroundColor: header_corlor,
         },
 
         state_none: {
@@ -288,7 +290,7 @@ const ListItem = props => {
     const { idx, url, title, desc, style,
             acIconWaves, acItemWaves,
             priType, priValue, secType, secValue,
-            action, events, create } = props,
+            action, events } = props,
         content_style = props.contentStyle ? { ...props.contentStyle } : { ...style.content };
 
     let pri_style = priType == "text" ? { ...style[ `pri_item_${ priType }` ] } : { ...style[ `state_${ priType }` ] },
@@ -300,6 +302,9 @@ const ListItem = props => {
     [ "avatar", "icon" ].includes( secType ) && ( sec_style.backgroundImage = `url(${secValue})` );
     priType == "none" && ( pri_style = { ...pri_style, ...style.state_none } );
     secType == "none" && ( sec_style = { ...sec_style, ...style.state_none } );
+
+    props.priBgColor && ( pri_style.backgroundColor = props.priBgColor );
+    props.secBgColor && ( sec_style.backgroundColor = props.secBgColor );
 
     const actionItems = action ? action.map( item => {
         const { id, title, disable, hr } = item,
@@ -371,21 +376,34 @@ export default class List extends React.Component {
 
     static defaultProps = {
         title       : "",
-        contentStyle: {},
+
         items       : [],
         actionItems : [],
+
         acIconWaves : "",
         acItemWaves : "",
+
+        contentStyle: {},
+
+        priBgColor  : "",
+        secBgColor  : "",
     };
 
     static PropTypes = {
        title       : React.PropTypes.string,
-       contentStyle: React.PropTypes.object,
+
        items       : React.PropTypes.array,
        actionItems : React.PropTypes.array,
+
        onAction    : React.PropTypes.func,
+
        acIconWaves : React.PropTypes.string,
        acItemWaves : React.PropTypes.string,
+
+       contentStyle: React.PropTypes.object,
+
+       priBgColor  : React.PropTypes.string,
+       secBgColor  : React.PropTypes.string,
     };
 
     state = {
