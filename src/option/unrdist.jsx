@@ -39,7 +39,6 @@ export default class Unrdist extends React.Component {
     static propsType = {
         list: React.PropTypes.array,
         step: React.PropTypes.number,
-        page: React.PropTypes.number,
     };
 
     state = {
@@ -50,7 +49,7 @@ export default class Unrdist extends React.Component {
             item.priValue = item.title.substr( 0, 1 );
             item.secValue = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" )
             return item;
-        }).slice( 0, 1 * this.props.step ),
+        }),
 
         total: Math.ceil( this.props.list.length / this.props.step ),
         page : 1,
@@ -60,20 +59,17 @@ export default class Unrdist extends React.Component {
         const [ id, _, data ] = rests;
         id == "remove" &&
             storage.UnRead( id, data.idx, success => {
-                success && this.props.list.splice( this.props.list.findIndex( item => item.idx == data.idx ), 1 );
+                success && this.state.items.splice( this.state.items.findIndex( item => item.idx == data.idx ), 1 );
                 success && this.setState({
-                    items: this.props.list.slice( 0, this.state.page * this.props.step ),
-                    title: `未读列表：${ this.props.list.length } 条`,
-                    total: Math.ceil( this.props.list.length / this.props.step ),
+                    title: `未读列表：${ this.state.items.length } 条`,
+                    total: Math.ceil( this.state.items.length / this.props.step ),
                 });
                 success && new Notify().Render( 0, "删除成功" );
             });
     }
 
     onClick() {
-        const page  = this.state.page + 1,
-              items = this.props.list.slice( 0, page * this.props.step );
-        this.setState({ page, items });
+        this.setState({ page: this.state.page + 1 });
     }
 
     render() {
@@ -84,12 +80,13 @@ export default class Unrdist extends React.Component {
             width: '100%',
         };
         const disable = this.state.page >= this.state.total ? true : false,
+              items    = this.state.items.slice( 0, this.state.page * this.props.step ),
               content = this.state.items && this.state.items.length > 0 ?
             <div>
                 <List acIconWaves="sr-button waves-effect waves-circle"
                       acItemWaves="sr-button waves-effect waves-button"
                       title={ this.state.title } contentStyle={ content_style }
-                      items={ this.state.items } actionItems={ conf.actionItems }
+                      items={ items } actionItems={ conf.actionItems }
                       onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
                 <Button type="raised" width="100%"
                         text={ disable ? "加载完毕" : "加载更多" } disable={ disable }
