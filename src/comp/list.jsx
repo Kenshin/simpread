@@ -54,6 +54,7 @@ const cssinjs = () => {
 
             borderRadius: '50%',
 
+            color,
             backgroundColor: transparent_color,
         },
 
@@ -72,6 +73,7 @@ const cssinjs = () => {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
 
+            color,
             backgroundColor: transparent_color,
         },
 
