@@ -2,10 +2,13 @@ console.log( "==== simpread component: List ====" )
 
 let styles = new Map();
 
-const color           = 'rgba(255, 255, 255, .7)',
-      secondary_color = "rgba(204, 204, 204, 1)",
-      active_color    = 'rgba(255, 255, 255, 1)',
-      header_corlor   = 'transparent';
+const color            = "rgba( 51, 51, 51, .87 )",
+      secondary_color  = "rgba( 51, 51, 51, .54 )",
+      disable_color    = "rgba( 51, 51, 51, .38 )",
+      hover_color      = "rgba( 238, 238, 238, 1 )",
+      border_color     = "rgba( 224, 224, 224, 1 )",
+      transparent_color= "transparent",
+      background_color = "rgba( 255, 255, 255, 1 )";
 
 const cssinjs = () => {
     const styles = {
@@ -21,6 +24,8 @@ const cssinjs = () => {
             paddingLeft: '72px',
 
             textAlign: 'left',
+
+            color,
             fontSize: '1.5rem',
             fontWeight: 700,
         },
@@ -49,7 +54,7 @@ const cssinjs = () => {
 
             borderRadius: '50%',
 
-            backgroundColor: header_corlor,
+            backgroundColor: transparent_color,
         },
 
         sec_item: {},
@@ -67,7 +72,7 @@ const cssinjs = () => {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
 
-            backgroundColor: header_corlor,
+            backgroundColor: transparent_color,
         },
 
         state_none: {
@@ -129,7 +134,7 @@ const cssinjs = () => {
             textAlign: 'left',
 
             fontSize: '1.6rem',
-            color: 'inherit',
+            color,
         },
 
         subtitle: {
@@ -142,7 +147,7 @@ const cssinjs = () => {
             textOverflow: 'ellipsis',
             textAlign: 'left',
 
-            color: 'rgba(0, 0, 0, 0.541176)',
+            color: secondary_color,
         },
 
         action: {
@@ -182,7 +187,7 @@ const cssinjs = () => {
 
             minWidth: '150px',
 
-            backgroundColor: '#fff',
+            backgroundColor: background_color,
 
             borderRadius: '2px',
             boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
@@ -203,7 +208,7 @@ const cssinjs = () => {
         },
 
         action_items_over: {
-            backgroundColor: 'rgb(238, 238, 238)',
+            backgroundColor: hover_color,
             transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
         },
 
@@ -231,12 +236,13 @@ const cssinjs = () => {
 
             height: '32px',
 
+            color,
+            fontSize: '1.6rem',
+
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             textAlign: 'left',
-
             lineHeight: '32px',
-            fontSize: '1.6rem',
 
             cursor: 'pointer',
 
@@ -247,11 +253,11 @@ const cssinjs = () => {
             margin: '8px 0',
             height: '1px',
             border: 'none',
-            backgroundColor: 'rgb(224, 224, 224)',
+            backgroundColor: border_color,
         },
 
         disable: {
-            color: secondary_color,
+            color: disable_color,
             cursor: 'not-allowed',
         },
 
