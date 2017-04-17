@@ -80,7 +80,7 @@ export default class Unrdist extends React.Component {
             width: '100%',
         };
         const disable = this.state.page >= this.state.total ? true : false,
-              items    = this.state.items.slice( 0, this.state.page * this.props.step ),
+              items   = this.state.items.slice( 0, this.state.page * this.props.step ),
               content = this.state.items && this.state.items.length > 0 ?
             <div>
                 <List acIconWaves="sr-button waves-effect waves-circle"
