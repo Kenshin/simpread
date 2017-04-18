@@ -327,7 +327,7 @@ class Storage {
         state == "local"  && ( code = 0 );
         state == "remote" && ( code = 1 );
         ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
-        //( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
+        ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
     }
 
     /**
