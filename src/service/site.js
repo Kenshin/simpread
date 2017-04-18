@@ -115,10 +115,9 @@ function verify( name ) {
 async function specbeautify( name, $target ) {
     switch ( name ) {
         case "sspai.com":
-            $target.find( ".relation-apps" ).map( (index, item) => {
-                // TO-DO
-                $(item).remove();
-            });
+            //TO-DO
+            $target.find( ".relation-apps" ).remove();
+            $target.find( ".ss-app-card"   ).remove();
             break;
         case "post.smzdm.com":
             $target.find( "img.face" ).addClass( "sr-rd-content-nobeautify" );
