@@ -77,6 +77,16 @@
             ""
         ]
     },{
+        "name"    : "minapp.com",
+        "url"     : "https://minapp.com/article/",
+        "title"   : "<h1 class='article-header-title'>",
+        "desc"    : "",
+        "include" : "<div class='origin-content'>",
+        "exclude" : [
+            "[['<strong>本文由知晓程序</strong>']]",
+            "[[/src=\\S+(zxcx_0208)\\S+'/]]"
+        ]
+    },{
         "name"    : "minapp.ifanr.com",
         "url"     : "http://www.ifanr.com/minapp/",
         "title"   : "<h1 class='c-single-normal__title'>",
@@ -361,6 +371,16 @@
         "title"   : "<h2 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "weibo.com",
+        "override": true,
+        "url"     : "http://weibo.com/ttarticle/p/",
+        "title"   : "[[{$('.main_editor ').find('.title').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='WB_editor_iframe'>",
         "exclude" : [
             ""
         ]
@@ -783,6 +803,25 @@
         "include" : "[[{$($('.ui-content')[0]).html()}]]",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "ctolib.com",
+        "url"     : "http://www.ctolib.com/",
+        "title"   : "<h3 class='m-t-xs'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "zuojj.com",
+        "url"     : "http://www.zuojj.com/archives/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<article class='article-content'>",
+        "exclude" : [
+            "<div class='copyright_con'>",
+            "<div class='article-social'>"
         ]
     },{
         "name"    : "wkee.net",

@@ -262,6 +262,9 @@ async function specbeautify( name, $target ) {
         case "w3cplus.com":
             $target.find( "iframe" ).addClass( "sr-rd-content-nobeautify" );
             break;
+        case "zuojj.com":
+            $target.find( ".syntaxhighlighter .Brush" ).attr( "style", "font-size: .7em !important;" )
+            break;
         case "aotu.io":
             $target.find( ".highlight table" ).map( ( index, item ) => {
                 const $target = $(item),
