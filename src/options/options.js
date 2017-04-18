@@ -45,11 +45,11 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
 
 /**
  * Entry:
- * - get data from chrome storage
+ * - storage get data form chrome storage
  * - waves.Render()
  * - tooltip.Render()
  */
-storage.Get( first => {
+storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
     firstLoad( first );
     sidebarRender();

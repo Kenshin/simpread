@@ -20,7 +20,7 @@ import {browser} from 'browser';
 /**
  * Sevice: storage Get data form chrome storage
  */
-storage.Get( function() {
+storage.Read( () => {
     bindShortcuts();
     getCurrent( mode.read );
 });

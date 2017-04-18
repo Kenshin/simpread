@@ -6,9 +6,9 @@ import * as msg    from 'message';
 import {browser}   from 'browser';
 
 /**
- * Save local/remote website_list.json to chrome storage
+ * Sevice: storage Get data form chrome storage
  */
-storage.Get( () => {
+storage.Read( () => {
     if ( local.Firstload() ) {
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload" ) });
     }

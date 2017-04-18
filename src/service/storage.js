@@ -264,7 +264,7 @@ class Storage {
      * 
      * @param {function} callback
      */
-    Get ( callback ) {
+    Read( callback ) {
         browser.storage.local.get( [name], function( result ) {
             let firstload = true;
             if ( result && !$.isEmptyObject( result )) {
