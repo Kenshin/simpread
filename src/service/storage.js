@@ -17,6 +17,7 @@ const name = "simpread",
         focus     : "focus",
         read      : "read",
         option    : "option",
+        unrdist   : "unrdist",
     },
     site   = {
         name      : "",   // only read mode
@@ -47,6 +48,13 @@ const name = "simpread",
         update    : "",
         focus     : 0,
         read      : 0,
+    },
+    unread = {
+        idx       : 0,
+        create    : "",
+        url       : "",
+        title     : "",
+        desc      : "",
     };
 
 let current  = {},
@@ -57,7 +65,8 @@ let current  = {},
         option,
         focus,
         read,
-        sites  : [],
+        unrdist : [],
+        sites   : [],
     },
     rdstcode = -1;
 
@@ -106,6 +115,15 @@ class Storage {
      */
     get rdstcode() {
         return rdstcode;
+    }
+
+    /**
+     * Get unread list
+     * 
+     * @return {array} unread list
+     */
+    get unrdist() {
+        return simpread[ mode.unrdist ];
     }
 
     /**
@@ -335,6 +353,32 @@ class Storage {
             simpread.option[ type ] = simpread.option[ type ] + 1;
         }
         save();
+    }
+
+    /**
+     * Unread list
+     * 
+     * @param {type} include: add remove
+     * @param {any} include: object( @see unread ) or index
+     * @param {function} callback
+     */
+    UnRead( type, args, callback ) {
+        let success = true;
+        switch ( type ) {
+            case "add":
+                const len = simpread.unrdist.length;
+                args.create = now();
+                args.idx = len > 0 ? simpread.unrdist[0].idx + 1 : 0;
+                simpread.unrdist.findIndex( item => item.url == args.url ) == -1 ?
+                    simpread.unrdist.splice( 0, 0, args ) : success = false;
+                break;
+            case "remove":
+                const idx = simpread.unrdist.findIndex( item => item.idx == args );
+                idx != -1 && simpread.unrdist.splice( idx, 1 );
+                idx == -1 && ( success = false );
+                break;
+        }
+        callback && save( callback( success ) );
     }
 }
 

@@ -175,7 +175,7 @@ export default class Button extends React.Component {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
         current.color = this.state.color;
-        current.backgroundColor = this.state.backgroundColor;
+        current.backgroundColor = "transparent";
         $mask.css({ ...style.mask, ...current });
     }
 
@@ -204,10 +204,10 @@ export default class Button extends React.Component {
         }
 
         this.props.mode == "secondary" && 
-            Object.keys( secondary ).forEach( ( key) => {current[ key ] = secondary[ key ]});
+            Object.keys( secondary ).forEach( key => current[ key ] = secondary[ key ] );
 
         this.props.disable &&
-            Object.keys( disable[ this.props.type ] ).forEach( ( key) => {current[ key ] = disable[ this.props.type ][ key ]});
+            Object.keys( disable[ this.props.type ] ).forEach( key => current[ key ] = disable[ this.props.type ][ key ] );
 
         style.root = { ...style.normal_root, ...current };
 
