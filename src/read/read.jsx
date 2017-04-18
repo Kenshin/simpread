@@ -96,7 +96,7 @@ class Read extends React.Component {
             case "layout":
             case "theme":
                 storage.current[type]=value;
-                storage.Set( storage.current.mode );
+                storage.Setcur( storage.current.mode );
                 break;
         }
     }

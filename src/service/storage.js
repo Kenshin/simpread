@@ -181,7 +181,7 @@ class Storage {
     }
 
     /**
-     * Set current object, current object structure include:
+     * Get current object, current object structure include:
      * 
      * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
      * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
@@ -210,11 +210,11 @@ class Storage {
     }
 
     /**
-     * Save simpread to chrome storage
+     * Set current to chrome storage and save
      * 
      * @param {string} @see mode
      */
-    Set( key ) {
+    Setcur( key ) {
         const { code } = compare();
         if ( code != 0 ) {
             if ( [ 2, 3 ].includes( code ) ) {
