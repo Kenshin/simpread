@@ -127,6 +127,193 @@ class Storage {
     }
 
     /**
+     * Get simpread object from chrome storage
+     * 
+     * @param {function} callback
+     */
+    Read( callback ) {
+        browser.storage.local.get( [name], function( result ) {
+            let firstload = true;
+            if ( result && !$.isEmptyObject( result )) {
+                simpread  = result[name];
+                firstload = false;
+            }
+            origin = clone( simpread );
+            callback( firstload );
+            console.log( "chrome storage read success!", simpread, origin, result );
+        });
+    }
+
+    /**
+     * Set simpread object to chrome storage
+     * 
+     * @param {function} callback
+     * @param {object}   new simpread data structure
+     */
+    Write( callback, new_val = undefined ) {
+        new_val && Object.keys( new_val ).forEach( key => simpread[ key ] = new_val[key] );
+        save( callback );
+    }
+
+    /**
+     * Get current object, current object structure include:
+     * 
+     * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
+     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
+     * 
+     * @param {string} @see mode
+     */
+    Getcur( key ) {
+        const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
+        current      = swap( simpread[key], {} );
+        current.url  = url;
+        current.mode = key;
+        let arr = st.Getsite( new Map( simpread[key].sites ), url );
+        arr  ? setCode( key, 0 ) : setCode( key, 1 );
+        !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
+        if ( arr ) {
+            current.site = arr[0];
+            current.url  = arr[1];
+        } else {
+            sites.set( url, clone( site ));
+            current.site = sites.get( url );
+            setCode( key, -1 );
+        }
+        curori      = { ...current };
+        curori.site = { ...current.site };
+        console.log( "current site object is ", current )
+    }
+
+    /**
+     * Set current to chrome storage and save
+     * 
+     * @param {string} @see mode
+     */
+    Setcur( key ) {
+        const { code } = compare();
+        if ( code != 0 ) {
+            if ( [ 2, 3 ].includes( code ) ) {
+                let idx = simpread[key].sites.findIndex( item => item[0] == current.url );
+                idx == -1 && ( idx = simpread[key].sites.length );
+                simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+            }
+            swap( current, simpread[key] );
+            save();
+        }
+        return code;
+    }
+
+    /**
+     * Verity current changed
+     * 
+     * @param {string} @see mode
+     */
+    VerifyCur( type ) {
+        return ( current.mode && current.mode != type ) ||
+               ( current.url  && current.url != st.GetURI() ) ||
+               $.isEmptyObject( current );
+    }
+
+    /**
+     * Get local/remote JSON usage async
+     * 
+     * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
+     * @return {function} callback, param1: object; param2: error
+     */
+    async GetNewsites( type, callback ) {
+        try {
+            const url    = type === "remote" ? remote : local,
+                response = await fetch( url + "?_=" + Math.round(+new Date()) ),
+                sites    = await response.json(),
+                len      = simpread.sites.length;
+            let [ count, forced ] = [ 0, 0 ];
+            if ( len == 0 ) {
+                simpread.sites = formatSites( sites );
+                count          = simpread.sites.length;
+                save();
+            }
+            else if ( { count, forced } = addsites( formatSites( sites )), count > 0 || forced > 0 ) {
+                save();
+            }
+            callback && callback( { count, forced }, undefined );
+        } catch ( error ) {
+            console.error( error );
+            callback && callback( undefined, error );
+        }
+    }
+
+    /**
+     * Sync simpread data structure
+     * 
+     * @param {string} include: set, get
+     * @param {function} callback
+     */
+    Sync( state, callback ) {
+        if ( state == "set" ) {
+            sync = { ...simpread };
+            sync.option.update = now();
+            delete sync.sites;
+            browser.storage.sync.set( { [name] : sync }, () => {
+                console.log( "chrome storage sync[set] success!" )
+                simpread.option.update = sync.option.update;
+                save( callback( sync.option.update ));
+            });
+        } else {
+            browser.storage.sync.get( [name] , result => {
+                console.log( "chrome storage sync[get] success!", result, simpread )
+                let success = false;
+                if ( result && !$.isEmptyObject( result )) {
+                    success = true;
+                    Object.keys( mode ).forEach( key => {
+                        simpread[ key ] = result[ name ][ key ];
+                    });
+                }
+                callback( success );
+            });
+        }
+    }
+
+    /**
+     * Statistics simpread same info
+     * 
+     * @param {string} include: create, focus, read
+     */
+    Statistics( type ) {
+        if ( type == "create" ) {
+            simpread.option.create = now();
+        } else {
+            simpread.option[ type ] = simpread.option[ type ] + 1;
+        }
+        save();
+    }
+
+    /**
+     * Unread list
+     * 
+     * @param {type} include: add remove
+     * @param {any} include: object( @see unread ) or index
+     * @param {function} callback
+     */
+    UnRead( type, args, callback ) {
+        let success = true;
+        switch ( type ) {
+            case "add":
+                const len = simpread.unrdist.length;
+                args.create = now();
+                args.idx = len > 0 ? simpread.unrdist[0].idx + 1 : 0;
+                simpread.unrdist.findIndex( item => item.url == args.url ) == -1 ?
+                    simpread.unrdist.splice( 0, 0, args ) : success = false;
+                break;
+            case "remove":
+                const idx = simpread.unrdist.findIndex( item => item.idx == args );
+                idx != -1 && simpread.unrdist.splice( idx, 1 );
+                idx == -1 && ( success = false );
+                break;
+        }
+        callback && save( callback( success ) );
+    }
+
+    /**
      * Verify simpread data structure
      * 
      * @param  {object} verify simpread data structure, when undefined, verify self
@@ -181,142 +368,6 @@ class Storage {
     }
 
     /**
-     * Get current object, current object structure include:
-     * 
-     * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
-     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
-     * 
-     * @param {string} @see mode
-     */
-    Getcur( key ) {
-        const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
-        current      = swap( simpread[key], {} );
-        current.url  = url;
-        current.mode = key;
-        let arr = st.Getsite( new Map( simpread[key].sites ), url );
-        arr  ? setCode( key, 0 ) : setCode( key, 1 );
-        !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
-        if ( arr ) {
-            current.site = arr[0];
-            current.url  = arr[1];
-        } else {
-            sites.set( url, clone( site ));
-            current.site = sites.get( url );
-            setCode( key, -1 );
-        }
-        curori      = { ...current };
-        curori.site = { ...current.site };
-        console.log( "current site object is ", current )
-    }
-
-    /**
-     * Set current to chrome storage and save
-     * 
-     * @param {string} @see mode
-     */
-    Setcur( key ) {
-        const { code } = compare();
-        if ( code != 0 ) {
-            if ( [ 2, 3 ].includes( code ) ) {
-                let idx = simpread[key].sites.findIndex( item => item[0] == current.url );
-                idx == -1 && ( idx = simpread[key].sites.length );
-                simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
-            }
-            swap( current, simpread[key] );
-            save();
-        }
-        return code;
-    }
-
-    /**
-     * Sync simpread data structure
-     * 
-     * @param {string} include: set, get
-     * @param {function} callback
-     */
-    Sync( state, callback ) {
-        if ( state == "set" ) {
-            sync = { ...simpread };
-            sync.option.update = now();
-            delete sync.sites;
-            browser.storage.sync.set( { [name] : sync }, () => {
-                console.log( "chrome storage sync[set] success!" )
-                simpread.option.update = sync.option.update;
-                save( callback( sync.option.update ));
-            });
-        } else {
-            browser.storage.sync.get( [name] , result => {
-                console.log( "chrome storage sync[get] success!", result, simpread )
-                let success = false;
-                if ( result && !$.isEmptyObject( result )) {
-                    success = true;
-                    Object.keys( mode ).forEach( key => {
-                        simpread[ key ] = result[ name ][ key ];
-                    });
-                }
-                callback( success );
-            });
-        }
-    }
-
-    /**
-     * Get simpread object from chrome storage
-     * 
-     * @param {function} callback
-     */
-    Read( callback ) {
-        browser.storage.local.get( [name], function( result ) {
-            let firstload = true;
-            if ( result && !$.isEmptyObject( result )) {
-                simpread  = result[name];
-                firstload = false;
-            }
-            origin = clone( simpread );
-            callback( firstload );
-            console.log( "chrome storage read success!", simpread, origin, result );
-        });
-    }
-
-    /**
-     * Set simpread object to chrome storage
-     * 
-     * @param {function} callback
-     * @param {object}   new simpread data structure
-     */
-    Write( callback, new_val = undefined ) {
-        new_val && Object.keys( new_val ).forEach( key => simpread[ key ] = new_val[key] );
-        save( callback );
-    }
-
-    /**
-     * Get local/remote JSON usage async
-     * 
-     * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
-     * @return {function} callback, param1: object; param2: error
-     */
-    async GetNewsites( type, callback ) {
-        try {
-            const url    = type === "remote" ? remote : local,
-                response = await fetch( url + "?_=" + Math.round(+new Date()) ),
-                sites    = await response.json(),
-                len      = simpread.sites.length;
-            let [ count, forced ] = [ 0, 0 ];
-            if ( len == 0 ) {
-                simpread.sites = formatSites( sites );
-                count          = simpread.sites.length;
-                save();
-            }
-            else if ( { count, forced } = addsites( formatSites( sites )), count > 0 || forced > 0 ) {
-                save();
-            }
-            callback && callback( { count, forced }, undefined );
-        } catch ( error ) {
-            console.error( error );
-            callback && callback( undefined, error );
-        }
-    }
-
-    /**
      * Clear simpread data structure
      * 
      * @param {string}   include: local remote all
@@ -330,56 +381,6 @@ class Storage {
         ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
     }
 
-    /**
-     * Verity current changed
-     * 
-     * @param {string} @see mode
-     */
-    VerifyCur( type ) {
-        return ( current.mode && current.mode != type ) ||
-               ( current.url  && current.url != st.GetURI() ) ||
-               $.isEmptyObject( current );
-    }
-
-    /**
-     * Statistics simpread same info
-     * 
-     * @param {string} include: create, focus, read
-     */
-    Statistics( type ) {
-        if ( type == "create" ) {
-            simpread.option.create = now();
-        } else {
-            simpread.option[ type ] = simpread.option[ type ] + 1;
-        }
-        save();
-    }
-
-    /**
-     * Unread list
-     * 
-     * @param {type} include: add remove
-     * @param {any} include: object( @see unread ) or index
-     * @param {function} callback
-     */
-    UnRead( type, args, callback ) {
-        let success = true;
-        switch ( type ) {
-            case "add":
-                const len = simpread.unrdist.length;
-                args.create = now();
-                args.idx = len > 0 ? simpread.unrdist[0].idx + 1 : 0;
-                simpread.unrdist.findIndex( item => item.url == args.url ) == -1 ?
-                    simpread.unrdist.splice( 0, 0, args ) : success = false;
-                break;
-            case "remove":
-                const idx = simpread.unrdist.findIndex( item => item.idx == args );
-                idx != -1 && simpread.unrdist.splice( idx, 1 );
-                idx == -1 && ( success = false );
-                break;
-        }
-        callback && save( callback( success ) );
-    }
 }
 
 /**
