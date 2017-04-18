@@ -31,7 +31,7 @@
       "32": "assets/images/icon72-disable.png"
     }
   },
-  "options_page": "optionspage/options.html",
+  "options_page": "options/options.html",
   "web_accessible_resources": [
     "/assets/images/*",
     "website_list.json"
