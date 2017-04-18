@@ -1,31 +1,16 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-import * as ss   from 'stylesheet';
-
 import setting   from 'foucsetting';
+import * as conf from 'config';
+
 import Fab       from 'fab';
 
 let timer, $root;
-const items = {
-    "exit" : {
-        "name" : "关闭",
-        "icon" : ss.IconPath("exit_icon"),
-    },
-    "setting" : {
-        "name" : "设定",
-        "icon" : ss.IconPath("setting_icon"),
-        "color": "#f87f76",
-    },
-    "top" : {
-        "name" : "返回顶部",
-        "icon" : ss.IconPath("top_icon"),
-        "color": "#f99d97",
-    },
-},
-    tooltip_options = {
-        target   : "name",
-        position : "bottom",
-        delay    : 50,
+
+const tooltip_options = {
+    target   : "name",
+    position : "bottom",
+    delay    : 50,
 };
 
 class FControl extends React.Component {
@@ -52,7 +37,7 @@ class FControl extends React.Component {
 
     render() {
         return (
-            <Fab ref="target" tooltip={ tooltip_options } waves="sr-fab waves-circle waves-float" items={ items } onAction={ (event, type)=>this.onAction(event, type ) } />
+            <Fab ref="target" tooltip={ tooltip_options } waves="sr-fab waves-circle waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
         )
     }
 }

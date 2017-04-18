@@ -24,6 +24,26 @@ const shortcuts = {
 };
 
 /**
+ * Focus controlbar items
+ */
+const focusItems = {
+    "exit" : {
+        "name" : "关闭",
+        "icon" : ss.IconPath("exit_icon"),
+    },
+    "setting" : {
+        "name" : "设定",
+        "icon" : ss.IconPath("setting_icon"),
+        "color": "#f87f76",
+    },
+    "top" : {
+        "name" : "返回顶部",
+        "icon" : ss.IconPath("top_icon"),
+        "color": "#f99d97",
+    },
+};
+
+/**
  * Read controlbar items
  */
 const readItems = {
@@ -256,6 +276,7 @@ const actionItems = [
 
 export {
     shortcuts as Shortcuts,
+    focusItems,
     readItems,
     tabsItem,
     headerColors,
