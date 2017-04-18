@@ -121,6 +121,6 @@ function entry( current, other, ...str ) {
  * @param {boolean} when true, push message
  */
 function getCurrent( mode = undefined, upicon = true ) {
-    if ( mode && storage.VerifyCur( mode ) )  storage.Setcur( mode );
+    if ( mode && storage.VerifyCur( mode ) ) storage.Getcur( mode );
     if ( upicon ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }

@@ -177,7 +177,7 @@ class Storage {
      */
     Restore( key ) {
         simpread[key] = clone( origin[key] );
-        this.Setcur( key );
+        this.Getcur( key );
     }
 
     /**
@@ -188,7 +188,7 @@ class Storage {
      * 
      * @param {string} @see mode
      */
-    Setcur( key ) {
+    Getcur( key ) {
         const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
         current      = swap( simpread[key], {} );
         current.url  = url;
