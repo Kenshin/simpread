@@ -56,7 +56,7 @@ storage.Read( first => {
     navRender();
     mainRender( tabsItemID );
     tt.Render( "body" );
-    waves.Render({ root: "simpread-font", name: "sr-tabs" });
+    waves.Render({ root: "simpread-font" });
 });
 
 /**
@@ -96,7 +96,7 @@ function mainRender( idx ) {
  * @param {string} header background color
  */
 function tabsRender( color ) {
-    const tabs = <Tabs waves="sr-tabs waves-effect waves-light"
+    const tabs = <Tabs waves="waves-effect waves-light"
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
                     items={ conf.tabsItem }
@@ -109,7 +109,7 @@ function tabsRender( color ) {
                         <Button type="raised" width="100%" text="保 存"
                                 color="#fff" backgroundColor={ conf.topColors[1] }
                                 icon={ ss.IconPath( "save_icon" ) }
-                                waves="sr-button waves-effect waves-button" 
+                                waves="waves-effect waves-button"
                                 onClick={ ()=>save( mode.focus ) } />
                     </section>
                     <section>
@@ -117,7 +117,7 @@ function tabsRender( color ) {
                         <Button type="raised" width="100%" text="保 存"
                                 color="#fff" backgroundColor={ conf.topColors[2] }
                                 icon={ ss.IconPath( "save_icon" ) }
-                                waves="sr-button waves-effect waves-button" 
+                                waves="waves-effect waves-button"
                                 onClick={ ()=>save( mode.read ) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
@@ -148,7 +148,7 @@ function navRender() {
     const navClick = () => {
         side.Open();
     };
-    const button = <Button waves="sr-tabs waves-effect waves-circle" hoverColor="transparent" icon={ ss.IconPath( "sidebar_icon" ) } onClick={ ()=>navClick() } />;
+    const button = <Button waves="waves-effect waves-circle" hoverColor="transparent" icon={ ss.IconPath( "sidebar_icon" ) } onClick={ ()=>navClick() } />;
     ReactDOM.render( button, $( ".header .nav" )[0] );
 }
 
@@ -162,7 +162,7 @@ function sidebarRender() {
         mainRender( idx );
     };
     const sidebar = <side.Sidebar items={ conf.menuItem }
-                             waves="sr-tabs waves-effect waves-button" 
+                             waves="waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
