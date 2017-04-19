@@ -68,8 +68,8 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <Button text="取 消" mode="secondary" waves="waves-effect" onClick={ ()=>this.close() } />
-                    <Button text="确 认" waves="waves-effect" onClick={ ()=>this.save() } />
+                    <Button text="取 消" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
+                    <Button text="确 认" waves="md-waves-effect" onClick={ ()=>this.save() } />
                 </sr-dialog-footer>
             </sr-dialog>
         )

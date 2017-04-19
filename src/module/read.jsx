@@ -156,21 +156,21 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="waves-effect"
+                    <SelectField waves="md-waves-effect"
                         name={ getName( this.props.option.fontfamily, fontfamily )} items={ fontfamily }
                         floatingtext="字体类型" placeholder="默认为 系统类型"
                         onChange={ (v,n)=>this.changeFontfamily(v,n) }
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="waves-effect"
+                    <SelectField waves="md-waves-effect"
                         name={ getName( this.props.option.fontsize, fontsize )} items={ fontsize }
                         floatingtext="字体大小" placeholder="默认为 正常"
                         onChange={ (v,n)=>this.changeFontsize(v,n) }
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="waves-effect"
+                    <SelectField waves="md-waves-effect"
                         name={ getName( this.props.option.layout, layout )} items={ layout }
                         floatingtext="版面布局" placeholder="默认为 正常"
                         onChange={ (v,n)=>this.changeLayout(v,n) }
