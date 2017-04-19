@@ -52,7 +52,7 @@ export default class Dialog extends React.Component {
     }
 
     componentDidMount() {
-        waves.Render({ root: optbgcls, name: "sr-button" });
+        waves.Render({ root: optbgcls });
         tooltip.Render( optbgclsjq );
         $( optbgclsjq )
             .velocity({ opacity: 1 })
@@ -68,8 +68,8 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <Button text="取 消" mode="secondary" waves="sr-button waves-effect waves-button" onClick={ ()=>this.close() } />
-                    <Button text="确 认" waves="sr-button waves-effect waves-button" onClick={ ()=>this.save() } />
+                    <Button text="取 消" mode="secondary" waves="waves-effect" onClick={ ()=>this.close() } />
+                    <Button text="确 认" waves="waves-effect" onClick={ ()=>this.save() } />
                 </sr-dialog-footer>
             </sr-dialog>
         )
