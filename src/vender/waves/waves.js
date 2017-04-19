@@ -117,7 +117,7 @@
 
             // Create ripple
             var ripple = document.createElement('div');
-            ripple.className = 'waves-ripple waves-rippling';
+            ripple.className = 'md-waves-ripple md-waves-rippling';
             element.appendChild(ripple);
 
             // Get click coordinate and element width
@@ -158,9 +158,9 @@
                 left: relativeX + 'px'
             };
 
-            ripple.classList.add('waves-notransition');
+            ripple.classList.add('md-waves-notransition');
             ripple.setAttribute('style', convertStyle(rippleStyle));
-            ripple.classList.remove('waves-notransition');
+            ripple.classList.remove('md-waves-notransition');
 
             // Scale the ripple
             rippleStyle['-webkit-transform'] = scale + ' ' + translate;
@@ -182,7 +182,7 @@
         hide: function(e, element) {
             element = element || this;
 
-            var ripples = element.getElementsByClassName('waves-rippling');
+            var ripples = element.getElementsByClassName('md-waves-rippling');
 
             for (var i = 0, len = ripples.length; i < len; i++) {
                 removeRipple(e, element, ripples[i]);
@@ -202,14 +202,14 @@
             var parent = element.parentNode;
 
             // If input already have parent just pass through
-            if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('waves-effect')) {
+            if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('md-waves-effect')) {
                 return;
             }
 
             // Put element class and style to the specified parent
             var wrapper       = document.createElement('i');
-            wrapper.className = element.className + ' waves-input-wrapper';
-            element.className = 'waves-button-input';
+            wrapper.className = element.className + ' md-waves-input-wrapper';
+            element.className = 'md-waves-button-input';
 
             // Put element as child
             parent.replaceChild(wrapper, element);
@@ -231,7 +231,7 @@
             var parent = element.parentNode;
 
             // If input already have parent just pass through
-            if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('waves-effect')) {
+            if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('md-waves-effect')) {
                 return;
             }
 
@@ -254,7 +254,7 @@
             return;
         }
 
-        ripple.classList.remove('waves-rippling');
+        ripple.classList.remove('md-waves-rippling');
 
         var relativeX = ripple.getAttribute('data-x');
         var relativeY = ripple.getAttribute('data-y');
@@ -351,8 +351,8 @@
 
 
     /**
-     * Delegated click handler for .waves-effect element.
-     * returns null when .waves-effect element not in "click tree"
+     * Delegated click handler for .md-waves-effect element.
+     * returns null when .md-waves-effect element not in "click tree"
      */
     function getWavesEffectElement(e) {
 
@@ -364,7 +364,7 @@
         var target = e.target || e.srcElement;
 
         while (target.parentElement !== null) {
-            if (target.classList.contains('waves-effect') && (!(target instanceof SVGElement))) {
+            if (target.classList.contains('md-waves-effect') && (!(target instanceof SVGElement))) {
                 element = target;
                 break;
             }
@@ -375,7 +375,7 @@
     }
 
     /**
-     * Bubble the click and show effect if .waves-effect elem was found
+     * Bubble the click and show effect if .md-waves-effect elem was found
      */
     function showEffect(e) {
 
@@ -474,7 +474,7 @@
 
 
     /**
-     * Attach Waves to dynamically loaded inputs, or add .waves-effect and other
+     * Attach Waves to dynamically loaded inputs, or add .md-waves-effect and other
      * waves classes to a set of elements. Set drag to true if the ripple mouseover
      * or skimming effect should be applied to the elements.
      */
@@ -500,8 +500,8 @@
                 element = element.parentElement;
             }
 
-            if (element.className.indexOf('waves-effect') === -1) {
-                element.className += ' waves-effect' + classes;
+            if (element.className.indexOf('md-waves-effect') === -1) {
+                element.className += ' md-waves-effect' + classes;
             }
         }
     };
