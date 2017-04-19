@@ -20,6 +20,7 @@ const wavesopts = {
 export function Render( options ) {
     if ( options && options.root ) {
         const ops = { ...wavesopts, ...options };
+        ops.root  = $( ops.root )[0];
         Waves.init( ops );
     } else {
         console.error( "options param error" );

@@ -460,7 +460,7 @@
         }
 
         if ( 'root' in options ) {
-            body = document.getElementsByClassName( options.root )[0];
+            body = options.root;
         }
 
         if (isTouchAvailable) {
