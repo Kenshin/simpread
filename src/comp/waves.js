@@ -5,25 +5,23 @@ import Waves from '../vender/waves/waves.js';
 
 const wavesopts = {
     root     : undefined,
-    name     : undefined,
     duration : 500,
     delay    : 200,
-    classes  : [ "waves-button" ],
 };
 
 /**
- * Waves 
+ * Waves
  * 
  * External library:
  * - http://fian.my.id/Waves/
  * 
- * @param {...rest} multi option
+ * @param {object} option object
  */
-export function Render( ...options ) {
-    for ( let option of options ) {
-        if ( !option.root || !option.name ) return;
-        const ops = { ...wavesopts, ...option };
+export function Render( options ) {
+    if ( options && options.root ) {
+        const ops = { ...wavesopts, ...options };
         Waves.init( ops );
-        Waves.attach( `.${ ops.name }` , ops.classes );
+    } else {
+        console.error( "options param error" );
     }
 }
