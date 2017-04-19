@@ -56,7 +56,7 @@ storage.Read( first => {
     navRender();
     mainRender( tabsItemID );
     tt.Render( "body" );
-    waves.Render({ root: "simpread-font" });
+    waves.Render({ root: "body" });
 });
 
 /**

@@ -58,7 +58,7 @@ class Read extends React.Component {
         await commbeautify( $( "sr-rd-content" ));
         pangu.spacingElementByClassName( rdcls );
         tooltip.Render( "sr-read" );
-        waves.Render({ root: rdcls });
+        waves.Render({ root: rdclsjq });
     }
 
     componentWillUnmount() {

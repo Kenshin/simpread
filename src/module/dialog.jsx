@@ -52,7 +52,7 @@ export default class Dialog extends React.Component {
     }
 
     componentDidMount() {
-        waves.Render({ root: optbgcls });
+        waves.Render({ root: optbgclsjq });
         tooltip.Render( optbgclsjq );
         $( optbgclsjq )
             .velocity({ opacity: 1 })
