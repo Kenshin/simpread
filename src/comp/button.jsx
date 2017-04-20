@@ -13,7 +13,12 @@ const raisedstyle = {
         hoverColor      : "rgba( 153, 153, 153, .4)"
     },
     secondary = {
-        opacity: 0.6
+        flat: {
+            opacity: 0.6,
+        },
+        raised: {
+            backgroundColor: "rgba( 153, 153, 153, .2)",
+        }
     },
     disable = {
         flat: {
@@ -65,6 +70,8 @@ const cssinjs = () => {
             borderRadius: '2px',
             boxSizing: 'border-box',
             transition: 'all .5s ease-in-out',
+
+            backgroundColor: 'transparent',
         },
 
         raised: {
@@ -167,16 +174,12 @@ export default class Button extends React.Component {
 
     onMouseOver() {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
-        current = { backgroundColor : this.state.hoverColor };
-        $mask.css({ ...style.mask, ...current });
+        $mask.css( "background-color", this.state.hoverColor );
     }
 
     onMouseOut() {
         [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
-        current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
-        current.color = this.state.color;
-        current.backgroundColor = "transparent";
-        $mask.css({ ...style.mask, ...current });
+        $mask.css({ ...style.mask });
     }
 
     onClick() {
@@ -190,7 +193,7 @@ export default class Button extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, cssinjs() );
+        styles.set( this.state.id, { ...cssinjs() } );
         style = styles.get( this.state.id );
 
         current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
@@ -203,8 +206,8 @@ export default class Button extends React.Component {
             style.normal_root.width = style.normal_root.height;
         }
 
-        this.props.mode == "secondary" && 
-            Object.keys( secondary ).forEach( key => current[ key ] = secondary[ key ] );
+        this.props.mode == "secondary" &&
+            Object.keys( secondary[ this.props.type ] ).forEach( key => style.mask[ key ] = secondary[ this.props.type ][ key ] );
 
         this.props.disable &&
             Object.keys( disable[ this.props.type ] ).forEach( key => current[ key ] = disable[ this.props.type ][ key ] );
@@ -229,12 +232,12 @@ export default class Button extends React.Component {
                 type={ this.props.type } mode={ this.props.mode } 
                 data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
                 { ...events }>
-                <button-div ref="mask" style={ style.mask }>
+                <button-mask ref="mask" style={ style.mask }>
                     <button-span style={ style.span }>
                         <button-icon style={ style.icon }></button-icon>
                         <button-text style={ style.text }>{ this.props.text }</button-text>
                     </button-span>
-                </button-div>
+                </button-mask>
             </a>
         )
     }
