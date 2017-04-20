@@ -993,6 +993,15 @@
             ""
         ]
     },{
+        "name"    : "tech.sina.com.cn",
+        "url"     : "http://tech.sina.com.cn/*",
+        "title"   : "<h1 id='main_title'>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "news.163.com",
         "url"     : "http://news.163.com/*",
         "title"   : "<title>",
@@ -1002,6 +1011,65 @@
             "<div class='ep-source'>"
         ]
     },{
+        "name"    : "tech.163.com",
+        "override": true,
+        "url"     : "http://tech.163.com/*",
+        "title"   : "[[{$('.post_content_main').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='post_text'>",
+        "exclude" : [
+            "<div class='ep-source cDGray'>"
+        ]
+    },{
+        "name"    : "mi.techweb.com.cn",
+        "url"     : "http://mi.techweb.com.cn/*",
+        "title"   : "[[{$('.title').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='content_txt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "techweb.com.cn",
+        "url"     : "http://www.techweb.com.cn/*",
+        "title"   : "[[{$('.title').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='content_txt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "donews.com",
+        "override": true,
+        "url"     : "http://www.donews.com/*",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "[[{$($('.article-con')[0]).html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "newseed.pedaily.cn",
+        "url"     : "http://newseed.pedaily.cn/news/*",
+        "title"   : "<h1>",
+        "desc"    : "<div class='subject'>",
+        "include" : "<div id='news-content' class='news-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "digi.tech.qq.com",
+        "override": true,
+        "url"     : "http://digi.tech.qq.com/*",
+        "title"   : "[[{$('.hd').find('h1').text()}]]",
+        "desc"    : "<p class='titdd-Article'>",
+        "include" : "<div class='Cnt-Main-Article-QQ'>",
+        "exclude" : [
+            "<p class='titdd-Article'>",
+            "<div class='wxdigi'>",
+            "<a id='backqqcom'>"
+        ]
+    },{
         "name"    : "qq.com",
         "url"     : "http://www.qq.com/*",
         "title"   : "[[{$('.hd h1').text()}]]",
@@ -1009,6 +1077,36 @@
         "include" : "<div id='Cnt-Main-Article-QQ'>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "zhidx.com",
+        "override": true,
+        "url"     : "http://zhidx.com/p/*",
+        "title"   : "[[{$('.finTit').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='finCnt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "baijia.baidu.com",
+        "override": true,
+        "url"     : "http://baijia.baidu.com/article/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='article-detail'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.iresearch.cn",
+        "override": true,
+        "url"     : "http://news.iresearch.cn/*",
+        "title"   : "[[{$('.title').find('h1').text()}]]",
+        "desc"    : "<div class='review'>",
+        "include" : "<div class='m-article'>",
+        "exclude" : [
+            "<div class='review'>"
         ]
     },{
         "name"    : "timetimetime.net",
