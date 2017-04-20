@@ -1039,7 +1039,7 @@
     },{
         "name"    : "donews.com",
         "url"     : "http://www.donews.com/*",
-        "title"   : "<h2>",
+        "title"   : "[[{$($('.contentbox').find('h2')[0]).text()}]]",
         "desc"    : "",
         "include" : "[[{$($('.article-con')[0]).html()}]]",
         "exclude" : [
