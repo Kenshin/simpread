@@ -376,7 +376,6 @@
         ]
     },{
         "name"    : "weibo.com",
-        "override": true,
         "url"     : "http://weibo.com/ttarticle/p/",
         "title"   : "[[{$('.main_editor ').find('.title').text()}]]",
         "desc"    : "",
@@ -1012,7 +1011,6 @@
         ]
     },{
         "name"    : "tech.163.com",
-        "override": true,
         "url"     : "http://tech.163.com/*",
         "title"   : "[[{$('.post_content_main').find('h1').text()}]]",
         "desc"    : "",
@@ -1040,7 +1038,6 @@
         ]
     },{
         "name"    : "donews.com",
-        "override": true,
         "url"     : "http://www.donews.com/*",
         "title"   : "<h2>",
         "desc"    : "",
@@ -1059,7 +1056,6 @@
         ]
     },{
         "name"    : "digi.tech.qq.com",
-        "override": true,
         "url"     : "http://digi.tech.qq.com/*",
         "title"   : "[[{$('.hd').find('h1').text()}]]",
         "desc"    : "<p class='titdd-Article'>",
@@ -1080,17 +1076,30 @@
         ]
     },{
         "name"    : "zhidx.com",
-        "override": true,
-        "url"     : "http://zhidx.com/p/*",
+        "url"     : "http://zhidx.com/p/",
         "title"   : "[[{$('.finTit').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='finCnt'>",
         "exclude" : [
-            ""
+            "[[/src=\\S+(ZDX-Card-for-PC-e1466578693228)\\S+'/]]"
+        ]
+    },{
+        "name"    : "iheima.com",
+        "url"     : "http://www.iheima.com/*",
+        "title"   : "<div class='title'>",
+        "desc"    : "<div class='outline'>",
+        "include" : "<div class='main-content'>",
+        "exclude" : [
+            "<div class='title'>",
+            "<div class='outline'>",
+            "<div class='author'>",
+            "<div class='copyright'>",
+            "<div class='mesinfo'>",
+            "<div class='article-list'>",
+            "<div class='mobile-common'>"
         ]
     },{
         "name"    : "baijia.baidu.com",
-        "override": true,
         "url"     : "http://baijia.baidu.com/article/",
         "title"   : "<h1>",
         "desc"    : "",
@@ -1100,7 +1109,6 @@
         ]
     },{
         "name"    : "news.iresearch.cn",
-        "override": true,
         "url"     : "http://news.iresearch.cn/*",
         "title"   : "[[{$('.title').find('h1').text()}]]",
         "desc"    : "<div class='review'>",
