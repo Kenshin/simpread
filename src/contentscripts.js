@@ -23,6 +23,7 @@ import {browser} from 'browser';
 storage.Read( () => {
     bindShortcuts();
     getCurrent( mode.read );
+    window.location.search.includes( "simpread_mode=read" ) && readMode();
 });
 
 /**

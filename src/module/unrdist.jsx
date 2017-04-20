@@ -48,6 +48,7 @@ export default class Unrdist extends React.Component {
             item.secType  = "text";
             item.priValue = item.title.substr( 0, 1 );
             item.secValue = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" )
+            item.url      = item.url + ( window.location.search ? "&" : "?" ) + "simpread_mode=read";
             return item;
         }),
 
