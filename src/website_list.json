@@ -1108,6 +1108,15 @@
             ""
         ]
     },{
+        "name"    : "tech2ipo.com",
+        "url"     : "http://tech2ipo.com/",
+        "title"   : "[[{$('.title').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "column.iresearch.cn",
         "url"     : "http://column.iresearch.cn/*",
         "title"   : "[[{$('.title').find('h1').text()}]]",
