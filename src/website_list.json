@@ -1214,7 +1214,7 @@
         ]
     },{
         "name"    : "tieba.baidu.com",
-        "url"     : "http://tieba.baidu.com/p/",
+        "url"     : "https://tieba.baidu.com/p/",
         "title"   : "[[{$('.core_title_txt').text()}]]",
         "desc"    : "",
         "include" : "<div class='d_post_content'>",
