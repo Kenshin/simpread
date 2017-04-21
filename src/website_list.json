@@ -172,9 +172,9 @@
     },{
         "name"    : "question.zhihu.com",
         "url"     : "https://www.zhihu.com/question/",
-        "title"   : "[[{$('span.zm-editable-content').text().replace('修改','')}]]",
+        "title"   : "[[{$($('.QuestionHeader-main').find('h1')[0]).text()}]]",
         "desc"    : "",
-        "include" : "<div class='zm-editable-content'>",
+        "include" : "[[{$($('.RichContent-inner')[0]).html()}]]",
         "exclude" : [
             ""
         ]
