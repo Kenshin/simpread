@@ -120,6 +120,15 @@
             ""
         ]
     },{
+        "name"    : "data.ifanr.com",
+        "url"     : "http://www.ifanr.com/data/",
+        "title"   : "<p class='c-single-data__desc'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "sspai.com",
         "url"     : "https://sspai.com/post/",
         "title"   : "<h1 class='title'>",
@@ -382,6 +391,16 @@
         "include" : "<div class='WB_editor_iframe'>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "leikeji.com",
+        "url"     : "http://www.leikeji.com/article/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='article-body'>",
+        "exclude" : [
+            "<div class='signature-qr'>",
+            "<ul class='tag-list'>"
         ]
     },{
         "name"    : "blog.jobbole.com",
@@ -1193,6 +1212,16 @@
             "[[/src=\\S+(2017013185214858280529103)\\S+'/]]",
             "[['<span>百人讲新年纳新 588份精华课件免费赠</span>']]",
             "[['<p>【版权提示】亿邦动力网倡导尊重与保护知识产权。</p>']]"
+        ]
+    },{
+        "name"    : "view.inews.qq.com",
+        "url"     : "http://view.inews.qq.com/a/",
+        "title"   : "<p class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<p class='title'>",
+            "<div class='src'>"
         ]
     },{
         "name"    : "baijia.baidu.com",
