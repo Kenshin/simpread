@@ -24,20 +24,27 @@ const menu = {
         "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ]
     },
     foucsmenu = {},
-    readmenu  = {};
+    readmenu  = {},
+    linkmenu  = {};
 
 Object.assign( foucsmenu, menu, { id: "focus", "title" : "聚焦模式" });
 Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
+Object.assign( linkmenu,  menu, { id: "link",  "title" : "打开链接后，直接进入阅读模式" });
 
 browser.contextMenus.create( foucsmenu );
-let rdmenuid = browser.contextMenus.create( readmenu  );
+let rdmenuid = browser.contextMenus.create( readmenu );
+browser.contextMenus.create( linkmenu );
 
 /**
  * Listen contextMenus message
  */
 browser.contextMenus.onClicked.addListener( function( info, tab ) {
     console.log( "background contentmenu Listener", info, tab );
-    if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
+    if ( info.menuItemId == "link" ) {
+        info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
+    } else {
+        if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
+    }
 });
 
 /**
