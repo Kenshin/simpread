@@ -1224,6 +1224,15 @@
             "<div class='src'>"
         ]
     },{
+        "name"    : "chinaventure.com.cn",
+        "url"     : "https://www.chinaventure.com.cn/cmsmodel/news/detail/",
+        "title"   : "<h1 class='h1_01'>",
+        "desc"    : "",
+        "include" : "<div class='content_01'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "baijia.baidu.com",
         "url"     : "http://baijia.baidu.com/article/",
         "title"   : "<h1>",
