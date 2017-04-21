@@ -90,7 +90,10 @@ function readMode() {
             new Notify().Render( 2, "当前页面没有适配，如需要请自行添加。" );
             break;
         case -2:
-            new Notify().Render( 2, "只有选中【只看楼主】后，才能进入阅读模式。" );
+            new Notify().Render( "只有选中【只看楼主】后，才能进入阅读模式。" );
+            new Notify().Render( "是否直接进入阅读模式？", "直接进入", ()=>{
+                document.location = document.location.href + "?see_lz=1&simpread_mode=read";
+            });
             break;
         case -3:
             new Notify().Render( 2, "只有选中【只看该作者】后，才能进入阅读模式。" );
