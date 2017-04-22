@@ -44,6 +44,21 @@ const focusItems = {
 };
 
 /**
+ * Focus options themes
+ */
+const focusThemes = [
+    "235, 235, 235, 0.9",
+    "216, 216, 216, 0.9",
+    "229, 221, 208, 0.9",
+    "243, 234, 203, 0.9",
+    "176, 192, 182, 0.9",
+    "28, 31, 43, 0.9",
+    "61, 66, 70, 0.9",
+    "17, 18, 20, 0.9"
+],
+focusLabels = [ "白练", "灰青", "素色", "鸟之子色", "青磁鼠", "焦茶", "御纳戸色", "黒鸢" ];
+
+/**
  * Read controlbar items
  */
 const readItems = {
@@ -276,11 +291,17 @@ const actionItems = [
 
 export {
     shortcuts as Shortcuts,
+
     focusItems,
+    focusThemes,
+    focusLabels,
+
     readItems,
+
     tabsItem,
     headerColors,
     topColors,
     menuItem,
+
     actionItems,
 }
