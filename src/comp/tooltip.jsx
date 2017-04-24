@@ -164,8 +164,8 @@ class ToolTip extends React.Component {
             });
 
             $target.css({
-                top: targetTop,
-                left: targetLeft
+                top:  targetTop  + $( "body" ).scrollTop(),
+                left: targetLeft + $( "body" ).scrollLeft(),
             });
 
             scaleXFactor = Math.SQRT2 * tooltipWidth  / parseInt( backWidth  );
@@ -231,15 +231,17 @@ class ToolTip extends React.Component {
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
  */
 function Render( root ) {
-    const $root   = $( root );
-    $root.find("[data-tooltip]").map( ( idx, item )=>{
-        const $item = $(item),
-              position = $item.attr( "data-tooltip-position" ),
-              delay    = $item.attr( "data-tooltip-delay" ),
-              text     = $item.attr( "data-tooltip" );
-        text && text != "" && 
-            ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
-    });
+    setTimeout( () => {
+        const $root        = $( root );
+        $root.find( "[data-tooltip]" ).map( ( idx, item )=>{
+            const $item    = $(item),
+                position = $item.attr( "data-tooltip-position" ),
+                delay    = $item.attr( "data-tooltip-delay" ),
+                text     = $item.attr( "data-tooltip" );
+            text && text != "" && 
+                ReactDOM.render( <ToolTip text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
+        });
+    }, 1000 );
 }
 
 /**
