@@ -29,7 +29,7 @@ const menu = {
 
 Object.assign( foucsmenu, menu, { id: "focus", "title" : "聚焦模式" });
 Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
-Object.assign( linkmenu,  menu, { id: "link",  "title" : "打开链接后，直接进入阅读模式" });
+Object.assign( linkmenu,  menu, { id: "link",  "title" : "使用阅读模式打开此链接" });
 
 browser.contextMenus.create( foucsmenu );
 let rdmenuid = browser.contextMenus.create( readmenu );
