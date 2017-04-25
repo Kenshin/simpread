@@ -42,12 +42,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            getCurrent();
+            getCurrent( mode.read );
     }
 });
 
 /**
- * Keyboard event handler 
+ * Keyboard event handler
  */
 function bindShortcuts() {
     Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
