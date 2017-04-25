@@ -153,7 +153,7 @@ function getReadRoot() {
  */
 function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        setting.Render();
+        action && setting.Render();
         return true;
     } else {
         return false;
