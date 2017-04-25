@@ -91,6 +91,7 @@ const cssinjs = () => {
 class ToolTip extends React.Component {
 
     static defaultProps = {
+        root     : "",
         text     : "",
         position : "bottom",
         delay    : 350,
@@ -98,6 +99,7 @@ class ToolTip extends React.Component {
     }
 
     static propTypes = {
+        root     : React.PropTypes.string,
         text     : React.PropTypes.string,
         position : React.PropTypes.oneOf([ "bottom", "top", "left", "right" ]),
         delay    : React.PropTypes.number,
@@ -164,8 +166,8 @@ class ToolTip extends React.Component {
             });
 
             $target.css({
-                top:  targetTop  + $( "body" ).scrollTop(),
-                left: targetLeft + $( "body" ).scrollLeft(),
+                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollTop() : 0 ),
+                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollLeft(): 0 ),
             });
 
             scaleXFactor = Math.SQRT2 * tooltipWidth  / parseInt( backWidth  );
@@ -239,7 +241,7 @@ function Render( root ) {
                 delay    = $item.attr( "data-tooltip-delay" ),
                 text     = $item.attr( "data-tooltip" );
             text && text != "" && 
-                ReactDOM.render( <ToolTip text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
+                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
         });
     }, 1000 );
 }
