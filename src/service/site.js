@@ -41,7 +41,7 @@ function findSitebyURL( sites, url ) {
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
-        if ( name == "baijia.baidu.com" ) {
+        if ( name == "baijia.baidu.com" && url.includes(name) ) {
             found = cur;
             break;
         } else if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
