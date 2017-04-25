@@ -23,7 +23,7 @@ import {browser} from 'browser';
 storage.Read( () => {
     bindShortcuts();
     getCurrent( mode.read );
-    window.location.search.includes( "simpread_mode=read" ) && readMode();
+    autoOpen();
 });
 
 /**
@@ -97,6 +97,24 @@ function readMode() {
             break;
         case -3:
             new Notify().Render( 2, "只有选中【只看该作者】后，才能进入阅读模式。" );
+            break;
+    }
+}
+
+/**
+ * Auto open read mode
+ */
+function autoOpen() {
+    if ( !window.location.search.includes( "simpread_mode=read" ) ) return;
+    switch ( storage.current.site.name ) {
+        case "36kr.com":
+            $( () => readMode() );
+            break;
+        case "sspai.com":
+            setTimeout( ()=>readMode(), 500 );
+            break;
+        default:
+            readMode();
             break;
     }
 }
