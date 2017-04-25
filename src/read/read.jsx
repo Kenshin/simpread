@@ -57,7 +57,7 @@ class Read extends React.Component {
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         pangu.spacingElementByClassName( rdcls );
-        tooltip.Render( "sr-read" );
+        tooltip.Render( rdclsjq );
         waves.Render({ root: rdclsjq });
     }
 
@@ -65,7 +65,7 @@ class Read extends React.Component {
         $root.removeClass( theme );
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
-        tooltip.Exit( "sr-read" );
+        tooltip.Exit( rdclsjq );
     }
 
     /**
