@@ -82,27 +82,57 @@ const webpack = require( 'webpack' ),
     config = {
       entry: {
 
+        common : [
+          'babel-polyfill',
+
+          'jquery',
+
+          'browser',
+          'message',
+          'storage',
+          'site',
+        ],
+
         vendors : [
+
+          // react
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
-          './src/vender/pangu.min.js',
-          './src/vender/mousetrap.min.js',
-          './src/vender/progressbar.min.js',
-          './src/vender/velocity.min.js',
-          './src/vender/timeago.min.js',
+          // vendors
+          'pangu',
+          'mousetrap',
+          'progressbar',
+          'velocity',
+          'timeago',
 
-          './src/vender/waves/waves.js',
-          './src/vender/notify/notify.js'
-        ],
+          'wavess',
+          'notify',
 
-        common : [
-          'babel-polyfill',
-          './src/service/browser.js',
-          './src/service/message.js',
-          './src/service/storage.js',
-          './src/service/site.js',
-          './src/vender/jquery-2.1.1.min.js',
+          // service
+          'theme',
+          'stylesheet',
+          'config',
+
+          // module
+          'focusopt',
+          'readopt',
+          'themesel',
+          'shortcuts',
+          'include',
+          'exclude',
+
+          // component
+          'textfield',
+          'fab',
+          'button',
+          'selectfield',
+          'switch',
+          'tabs',
+          'sidebar',
+          'list',
+          'tooltip',
+          'waves'
         ],
 
         contentscripts : './src/contentscripts.js',
@@ -159,11 +189,12 @@ const webpack = require( 'webpack' ),
           velocity   : __dirname + '/src/vender/velocity.min.js',
           timeago    : __dirname + '/src/vender/timeago.min.js',
 
+          wavess     : __dirname + '/src/vender/waves/waves.js',
           notify     : __dirname + '/src/vender/notify/notify.js',
 
           util       : __dirname + '/src/service/util.js',
-          storage    : __dirname + '/src/service/storage.js',
           local      : __dirname + '/src/service/local.js',
+          storage    : __dirname + '/src/service/storage.js',
           site       : __dirname + '/src/service/site.js',
           message    : __dirname + '/src/service/message.js',
           browser    : __dirname + '/src/service/browser.js',
