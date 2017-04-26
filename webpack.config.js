@@ -48,7 +48,7 @@ const webpack = require( 'webpack' ),
           new CopyWebpackPlugin([
             { from   : "src/manifest.json" ,              to : '../' },
             { from   : "src/website_list.json" ,          to : '../' },
-            { from   : 'src/options/options.html',    to : '../options/' },
+            { from   : 'src/options/options.html',        to : '../options/' },
             { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
           ])
         );
@@ -101,6 +101,7 @@ const webpack = require( 'webpack' ),
           './src/service/browser.js',
           './src/service/message.js',
           './src/service/storage.js',
+          './src/service/site.js',
           './src/vender/jquery-2.1.1.min.js',
         ],
 
