@@ -81,6 +81,7 @@ const webpack = require( 'webpack' ),
     // webpack config
     config = {
       entry: {
+
         vendors : [
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
@@ -89,9 +90,12 @@ const webpack = require( 'webpack' ),
           './src/vender/mousetrap.min.js',
           './src/vender/progressbar.min.js',
           './src/vender/velocity.min.js',
+          './src/vender/timeago.min.js',
 
+          './src/vender/waves/waves.js',
           './src/vender/notify/notify.js'
         ],
+
         common : [
           'babel-polyfill',
           './src/service/browser.js',
@@ -99,6 +103,7 @@ const webpack = require( 'webpack' ),
           './src/service/storage.js',
           './src/vender/jquery-2.1.1.min.js',
         ],
+
         contentscripts : './src/contentscripts.js',
         background     : './src/background.js',
         options        : './src/options/options.js',
