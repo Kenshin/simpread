@@ -110,6 +110,7 @@ const webpack = require( 'webpack' ),
           'notify',
 
           // service
+          'util',
           'theme',
           'stylesheet',
           'config',
