@@ -33,7 +33,6 @@
         var scrollingTimeout = null;
         var tweenedOpacity, zTranslation;
 
-
         // Initialize
         var view = $(this);
         var showIndicators = view.attr('data-indicators') || options.indicators;
@@ -66,7 +65,6 @@
           }
         }
 
-
         // Don't double initialize.
         if (view.hasClass('initialized')) {
           // Recalculate variables
@@ -76,7 +74,6 @@
           $(this).trigger('carouselNext', [0.000001]);
           return true;
         }
-
 
         view.addClass('initialized');
         pressed = false;
@@ -495,14 +492,15 @@
 
   };
 
-    $.fn.carousel = function(methodOrOptions) {
-      if ( methods[methodOrOptions] ) {
-        return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-      } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
-        // Default to "init"
-        return methods.init.apply( this, arguments );
-      } else {
-        $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.carousel' );
-      }
-    }; // Plugin end
+  $.fn.carousel = function(methodOrOptions) {
+    if ( methods[methodOrOptions] ) {
+      return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
+      // Default to "init"
+      return methods.init.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.carousel' );
+    }
+  };
+
 }( jQuery ));
