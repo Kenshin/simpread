@@ -11,22 +11,21 @@
 
     init : function(options) {
       var defaults = {
-        duration: 200, // ms
-        dist: -100, // zoom scale TODO: make this more intuitive as an option
-        shift: 0, // spacing for center image
-        padding: 0, // Padding between non center items
-        fullWidth: false, // Change to full width styles
-        indicators: false, // Toggle indicators
-        noWrap: false, // Don't wrap around and cycle through items.
-        onCycleTo: null, // Callback for when a new slide is cycled to.
-        onActived: null,
+        duration  : 200,    // ms
+        dist      : -100,   // zoom scale TODO: make this more intuitive as an option
+        shift     : 0,      // spacing for center image
+        padding   : 0,      // Padding between non center items
+        fullWidth : false,  // Change to full width styles
+        indicators: false,  // Toggle indicators
+        noWrap    : false,  // Don't wrap around and cycle through items.
+        onCycleTo : null,   // Callback for when a new slide is cycled to.
+        onActived : null,   // Callback for when a new slide actived.
       };
+
       options = $.extend(defaults, options);
-      //var namespace = Materialize.objectSelectorString($(this));
 
       return this.each(function(i) {
 
-        //var uniqueNamespace = namespace+i;
         var images, item_width, item_height, offset, center, pressed, dim, count,
             reference, referenceY, amplitude, target, velocity, scrolling,
             xform, frame, timestamp, ticker, dragged, vertical_dragged;
@@ -163,7 +162,8 @@
           scrollingTimeout = window.setTimeout(function() {
             scrolling = false;
             view.removeClass('scrolling');
-            scrollingTimeout != 1 && options.onActived && options.onActived.call(this);
+            var $curr_item = view.find('.carousel-item').eq(wrap(center));
+            scrollingTimeout != 1 && options.onActived && options.onActived.call(this, $(".carousel .indicators").find( ".active").index() );
           }, options.duration);
 
           // Start actual scroll
@@ -443,21 +443,6 @@
           return true;
         });
 
-
-        /*
-        $(window).off('resize.carousel-'+uniqueNamespace).on('resize.carousel-'+uniqueNamespace, function() {
-          if (options.fullWidth) {
-            item_width = view.find('.carousel-item').first().innerWidth();
-            item_height = view.find('.carousel-item').first().innerHeight();
-            dim = item_width * 2 + options.padding;
-            offset = center * 2 * item_width;
-            target = offset;
-          } else {
-            scroll();
-          }
-        });
-        */
-
         setupEvents();
         scroll(offset);
 
@@ -494,20 +479,21 @@
 
       });
 
-
-
     },
+
     next : function(n) {
       $(this).trigger('carouselNext', [n]);
     },
+
     prev : function(n) {
       $(this).trigger('carouselPrev', [n]);
     },
+
     set : function(n) {
       $(this).trigger('carouselSet', [n]);
     }
-  };
 
+  };
 
     $.fn.carousel = function(methodOrOptions) {
       if ( methods[methodOrOptions] ) {
