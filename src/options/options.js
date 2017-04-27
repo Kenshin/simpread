@@ -22,6 +22,7 @@ import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
+import * as welc  from 'welcome';
 
 let tabsItemID = 0;
 
@@ -65,6 +66,7 @@ storage.Read( first => {
  * @param {bool} is first load
  */
 function firstLoad( first ) {
+    welcomeRender();
     first && storage.GetNewsites( "local", ( _, error ) => {
         error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
         !error && storage.Statistics( "create" );
@@ -77,6 +79,13 @@ function firstLoad( first ) {
                 new Notify().Render( 0, "数据恢复成功！" );
             });
     });
+}
+
+/**
+ * Welcome page render()
+ */
+function welcomeRender() {
+    welc.Render( "body" );
 }
 
 /**

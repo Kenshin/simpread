@@ -138,3 +138,33 @@ a {
     color: var(--secondary-color);
     font-size: 1.3rem;
 }
+
+.welcome-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 3000;
+}
+
+welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 400px;
+    min-height: 400px;
+
+    background-color: var(--background-color);
+
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, .247059) 0px 14px 45px;
+}
