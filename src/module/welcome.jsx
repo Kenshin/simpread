@@ -13,11 +13,8 @@ class Welcome extends React.Component {
     componentDidMount() {
         $( '.carousel.carousel-slider' ).carousel({
             fullWidth: true,
-            onCycleTo: () => {
-                console.log("weeeeeee")
-            },
             onActived: () => {
-                console.log("weeeeee33e")
+                console.log("onActived")
             }
         });
     }
@@ -25,22 +22,22 @@ class Welcome extends React.Component {
     render() {
         return (
             <welcome>
-                <div className="carousel carousel-slider center" data-indicators="true">
-                    <div className="carousel-item red white-text" href="#one!">
+                <div className="carousel carousel-slider" data-indicators="true">
+                    <div className="carousel-item">
                         <h2>First Panel</h2>
-                        <p className="white-text">This is your first panel</p>
+                        <div className="desc">This is your first panel</div>
                     </div>
-                    <div className="carousel-item amber white-text" href="#two!">
+                    <div className="carousel-item">
                         <h2>Second Panel</h2>
-                        <p className="white-text">This is your second panel</p>
+                        <div className="desc">This is your second panel</div>
                     </div>
-                    <div className="carousel-item green white-text" href="#three!">
+                    <div className="carousel-item">
                         <h2>Third Panel</h2>
-                        <p className="white-text">This is your third panel</p>
+                        <div className="desc">This is your third panel</div>
                     </div>
-                    <div className="carousel-item blue white-text" href="#four!">
+                    <div className="carousel-item">
                         <h2>Fourth Panel</h2>
-                        <p className="white-text">This is your fourth panel</p>
+                        <div className="desc">This is your fourth panel</div>
                     </div>
                 </div>
             </welcome>

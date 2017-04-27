@@ -170,3 +170,23 @@ welcome {
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, .247059) 0px 14px 45px;
 }
+
+welcome h2 {
+    color: inherit;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    line-height: 32px;
+    text-align: center;
+}
+
+welcome .desc {
+    color: var(--secondary-color);
+
+    font-size: 18px;
+    font-weight: 500;
+
+    line-height: 32px;
+    text-align: center;
+}
