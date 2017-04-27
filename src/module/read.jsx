@@ -3,6 +3,7 @@ console.log( "===== simpread option read mode load =====" )
 import { verifyHtml } from 'util';
 import th             from 'theme';
 import * as ss        from 'stylesheet';
+import * as conf      from 'config';
 
 import TextField      from 'textfield';
 import SelectField    from 'selectfield';
@@ -12,72 +13,12 @@ import Shortcuts      from 'shortcuts';
 import Include        from 'include';
 import Exclude        from 'exclude';
 
-const fontfamily = [{
-            value : "default",
-            name  : "系统默认",
-            info  : "F + 1",
-        },{
-            value : "PingFang SC",
-            name  : "苹方字体",
-            info  : "F + 2",
-            style : {
-                text: { fontFamily: "PingFang SC" }
-            }
-        },{
-            value : "Hiragino Sans GB",
-            name  : "冬青黑体",
-            info  : "F + 3",
-            style : {
-                text: { fontFamily: "Hiragino Sans GB" }
-            }
-      },{
-            value : "Microsoft Yahei",
-            name  : "微软雅黑",
-            info  : "F + 4",
-            style : {
-                text: { fontFamily: "Microsoft Yahei" }
-            }
-      },{
-            value : "Source Han Sans CN",
-            name  : "思源黑体",
-            info  : "F + 5",
-            style : {
-                text: { fontFamily: "Source Han Sans CN" }
-            }
-      }],
-      fontsize = [{
-            value : "62.5%",
-            name  : "正常",
-            info  : "S + 2",
-        },{
-            value : "70%",
-            name  : "增大",
-            info  : "S + 3",
-        },{
-            value : "58%",
-            name  : "减小",
-            info  : "S + 1",
-      }],
-      layout = [{
-            value : "20%",
-            name  : "正常",
-            info  : "W + 2",
-        },{
-            value : "15%",
-            name  : "宽栏",
-            info  : "W + 3",
-        },{
-            value : "25%",
-            name  : "窄栏",
-            info  : "W + 1",
-}],
-getName = ( value, items ) => {
+const getName = ( value, items ) => {
     for ( const item of items ) {
         if ( value == "" ) return item.name;
         else if ( item.value == value ) return item.name;
     }
-},
-labels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
+};
 
 export default class ReadOpt extends React.Component {
 
@@ -150,28 +91,28 @@ export default class ReadOpt extends React.Component {
             <sr-opt-read>
                 <sr-opt-gp>
                     <sr-opt-label>主题色</sr-opt-label>
-                    <ThemeSel themes={ th.colors } names={ th.names } labels={ labels } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
+                    <ThemeSel themes={ th.colors } names={ th.names } labels={ conf.readLabels } theme={ this.props.option.theme } changeBgColor={ val=>this.changeBgColor(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button"
-                        name={ getName( this.props.option.fontfamily, fontfamily )} items={ fontfamily }
+                    <SelectField waves="md-waves-effect"
+                        name={ getName( this.props.option.fontfamily, conf.fontfamily )} items={ conf.fontfamily }
                         floatingtext="字体类型" placeholder="默认为 系统类型"
                         onChange={ (v,n)=>this.changeFontfamily(v,n) }
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button"
-                        name={ getName( this.props.option.fontsize, fontsize )} items={ fontsize }
+                    <SelectField waves="md-waves-effect"
+                        name={ getName( this.props.option.fontsize, conf.fontsize )} items={ conf.fontsize }
                         floatingtext="字体大小" placeholder="默认为 正常"
                         onChange={ (v,n)=>this.changeFontsize(v,n) }
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="sr-selectfield waves-effect waves-button"
-                        name={ getName( this.props.option.layout, layout )} items={ layout }
+                    <SelectField waves="md-waves-effect"
+                        name={ getName( this.props.option.layout, conf.layout )} items={ conf.layout }
                         floatingtext="版面布局" placeholder="默认为 正常"
                         onChange={ (v,n)=>this.changeLayout(v,n) }
                     />

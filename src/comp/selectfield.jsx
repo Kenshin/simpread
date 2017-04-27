@@ -150,6 +150,17 @@ const cssinjs = () => {
                 backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNXG14zYAAABqSURBVEiJ7dQxCsAgDIXhZ8ktgmetVw31GIF06lI0yeIWJyH4f4hgMzOcXNfRegEFFAAAoGA+ROR2A0STmftu7t5ARAYRTS+uqtt4CACAqvYVkomngBWSjQPxG/yR59tnz7X6rgso4DzwAnJQKlbAmFdgAAAAAElFTkSuQmCC)',
             },
 
+            bg: {
+                display: 'none',
+                position: 'fixed',
+
+                top: 0,
+                left: 0,
+
+                width: '100%',
+                height: '100%',
+            },
+
         };
 
     return styles;
@@ -358,6 +369,12 @@ export default class SelectField extends React.Component {
 
     onClick() {
         !this.props.disable && this.props.items.length > 0 && this.setState({ items: this.props.items });
+        !this.props.disable && this.props.items.length > 0 && $( this.refs.bg ).css( "display", "block" );
+    }
+
+    bgOnClick() {
+        $( this.refs.bg ).css( "display", "none" );
+        this.setState({ items : [] });
     }
 
     onChange( value, name ) {
@@ -366,6 +383,7 @@ export default class SelectField extends React.Component {
             items : [],
             name,
         });
+        $( this.refs.bg ).css( "display", "none" );
     }
 
     componentDidMount() {
@@ -401,6 +419,7 @@ export default class SelectField extends React.Component {
                 <select-border style={ style.border }></select-border>
                 <select-field-error ref="error" style={ style.error }>{ this.props.errortext }</select-field-error>
                 <ListView waves={ this.props.waves } active={ this.state.name } items={ this.state.items } onChange={ (v,n)=>this.onChange(v,n) } />
+                <list-bg ref="bg" style={ style.bg } onClick={ ()=>this.bgOnClick() }></list-bg>
             </select-field>
         )
 

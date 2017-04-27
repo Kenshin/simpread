@@ -48,6 +48,7 @@ export default class Unrdist extends React.Component {
             item.secType  = "text";
             item.priValue = item.title.substr( 0, 1 );
             item.secValue = ago.format( item.create.replace( /(年|月)/g, "-" ).replace( "日", "" ), "zh_CN" )
+            item.url      = item.url + ( window.location.search ? "&" : "?" ) + "simpread_mode=read";
             return item;
         }),
 
@@ -83,8 +84,8 @@ export default class Unrdist extends React.Component {
               items   = this.state.items.slice( 0, this.state.page * this.props.step ),
               content = this.state.items && this.state.items.length > 0 ?
             <div>
-                <List acIconWaves="sr-button waves-effect waves-circle"
-                      acItemWaves="sr-button waves-effect waves-button"
+                <List acIconWaves="md-waves-effect md-waves-circle"
+                      acItemWaves="md-waves-effect"
                       title={ this.state.title } contentStyle={ content_style }
                       items={ items } actionItems={ conf.actionItems }
                       priBgColor ="#E1BEE7"
@@ -92,7 +93,7 @@ export default class Unrdist extends React.Component {
                 <Button type="raised" width="100%"
                         text={ disable ? "加载完毕" : "加载更多" } disable={ disable }
                         color="#fff" backgroundColor="rgb(156, 39, 176)"
-                        waves="sr-button waves-effect waves-button"
+                        waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.onClick() } />
             </div>
             : <div style={ style.root }>

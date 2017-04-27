@@ -56,6 +56,7 @@ sr-rd-content sr-blockquote {
 
 sr-rd-content a {
     padding: 0 5px;
+    vertical-align: initial;
 }
 
 sr-rd-content a:hover {

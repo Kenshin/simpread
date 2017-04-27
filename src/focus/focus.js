@@ -57,7 +57,7 @@ var util     = require( "util" ),
 
         // add tooltip and waves
         tooltip.Render( bgclsjq );
-        waves.Render({ root: bgcls, name: "sr-fab" });
+        waves.Render({ root: bgclsjq });
 
         // click mask remove it
         $( bgclsjq ).on( "click", function( event ) {

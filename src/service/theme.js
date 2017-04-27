@@ -66,8 +66,9 @@ class Theme {
     }
 
     constructor() {
-        for ( const name of names ) { require( `../assets/css/theme_${name}.css` ); }
-        findThemeStyle( function( name, content ) { themes[name] = content; });
+        require( `../assets/css/theme_common.css` );
+        names.forEach( name => require( `../assets/css/theme_${name}.css` ) );
+        findThemeStyle( ( name, content ) => themes[name] = content );
     }
 }
 

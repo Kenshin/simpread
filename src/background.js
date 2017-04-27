@@ -6,11 +6,11 @@ import * as msg    from 'message';
 import {browser}   from 'browser';
 
 /**
- * Save local/remote website_list.json to chrome storage
+ * Sevice: storage Get data form chrome storage
  */
-storage.Get( () => {
+storage.Read( () => {
     if ( local.Firstload() ) {
-        browser.tabs.create({ url: browser.extension.getURL( "optionspage/options.html#firstload" ) });
+        browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload" ) });
     }
     else if( !local.Count() ) storage.GetNewsites( "remote" );
 });
@@ -24,20 +24,27 @@ const menu = {
         "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ]
     },
     foucsmenu = {},
-    readmenu  = {};
+    readmenu  = {},
+    linkmenu  = {};
 
 Object.assign( foucsmenu, menu, { id: "focus", "title" : "聚焦模式" });
 Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
+Object.assign( linkmenu,  menu, { id: "link",  "title" : "使用阅读模式打开此链接" });
 
 browser.contextMenus.create( foucsmenu );
-let rdmenuid = browser.contextMenus.create( readmenu  );
+let rdmenuid = browser.contextMenus.create( readmenu );
+browser.contextMenus.create( linkmenu );
 
 /**
  * Listen contextMenus message
  */
 browser.contextMenus.onClicked.addListener( function( info, tab ) {
     console.log( "background contentmenu Listener", info, tab );
-    if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
+    if ( info.menuItemId == "link" ) {
+        info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
+    } else {
+        if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
+    }
 });
 
 /**

@@ -1,7 +1,7 @@
 {
-  "name": "简阅（SimpRead）",
+  "name": "简悦（SimpRead）",
   "version": "0.1",
-  "description" : "简阅（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
+  "description" : "简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
   "homepage_url" : "https://github.com/kenshin/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
   "icons" : {
@@ -31,7 +31,7 @@
       "32": "assets/images/icon72-disable.png"
     }
   },
-  "options_page": "optionspage/options.html",
+  "options_page": "options/options.html",
   "web_accessible_resources": [
     "/assets/images/*",
     "website_list.json"

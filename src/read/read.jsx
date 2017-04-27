@@ -23,7 +23,7 @@ const rdcls   = "simpread-read-root",
 
 const errorpage = `
         <sr-rd-content-error>
-            <p>当前页面解析后 <b style="color: #E57373;">无法正常显示</b>，您可能需要 <b style="color: #E57373;">手动添加</b>，请使用 <span style="color: #4183c4;">快捷键</span> 或 <span style="color: #4183c4;">侧栏手动</span> 打开 <span style="color: #4183c4;">选项页面</span>。</p>
+            <p>当前页面解析后 <b style="color: #E57373;">无法正常显示</b>，您可能需要 <b style="color: #E57373;">手动添加</b>，请使用 <span style="color: #4183c4;">快捷键</span> 或 <span style="color: #4183c4;">控制栏</span> 手动打开 <span style="color: #4183c4;">设定页面</span>。</p>
             <p>
                 或者 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">报告此页面</a> 以便让 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 变得更加出色，谢谢。
             </p>
@@ -57,15 +57,15 @@ class Read extends React.Component {
         await htmlbeautify( $( "sr-rd-content" ));
         await commbeautify( $( "sr-rd-content" ));
         pangu.spacingElementByClassName( rdcls );
-        tooltip.Render( "sr-read" );
-        waves.Render({ root: rdcls, name: "sr-fab" });
+        tooltip.Render( rdclsjq );
+        waves.Render({ root: rdclsjq });
     }
 
     componentWillUnmount() {
         $root.removeClass( theme );
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
-        tooltip.Exit( "sr-read" );
+        tooltip.Exit( rdclsjq );
     }
 
     /**
@@ -82,7 +82,7 @@ class Read extends React.Component {
                 setting.Render();
                 break;
             case "save":
-                const [ url, title, desc ] = [ window.location.href, $("sr-rd-title").text().trim(), $("sr-rd-desc").text().trim() ];
+                const [ url, title, desc ] = [ window.location.href.replace( /(\?|&)simpread_mode=read/, "" ), $("sr-rd-title").text().trim(), $("sr-rd-desc").text().trim() ];
                 storage.UnRead( "add", { url, title, desc }, success => {
                     success  && new Notify().Render( 0, "成功加入未读列表。" );
                     !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
@@ -96,7 +96,7 @@ class Read extends React.Component {
             case "layout":
             case "theme":
                 storage.current[type]=value;
-                storage.Set( storage.current.mode );
+                storage.Setcur( storage.current.mode );
                 break;
         }
     }
@@ -153,7 +153,7 @@ function getReadRoot() {
  */
 function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        setting.Render();
+        action && setting.Render();
         return true;
     } else {
         return false;

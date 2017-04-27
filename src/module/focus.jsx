@@ -6,18 +6,7 @@ import Include   from 'include';
 import Exclude   from 'exclude';
 
 import * as ss   from 'stylesheet';
-
-const themes = [
-        "235, 235, 235, 0.9",
-        "216, 216, 216, 0.9",
-        "229, 221, 208, 0.9",
-        "243, 234, 203, 0.9",
-        "176, 192, 182, 0.9",
-        "28, 31, 43, 0.9",
-        "61, 66, 70, 0.9",
-        "17, 18, 20, 0.9"
-    ],
-    labels = [ "白练", "灰青", "素色", "鸟之子色", "青磁鼠", "焦茶", "御纳戸色", "黒鸢" ];
+import * as conf from 'config';
 
 export default class FocusOpt extends React.Component {
 
@@ -59,7 +48,7 @@ export default class FocusOpt extends React.Component {
             <sr-opt-focus>
                 <sr-opt-gp>
                     <sr-opt-label>主题色</sr-opt-label>
-                    <ThemeSel themes={ themes } names={ themes } labels={ labels } theme={ ss.GetColor(this.props.option.bgcolor) + ", 0.9" } changeBgColor={ (val,target)=>this.changeBgColor(val,target) } />
+                    <ThemeSel themes={ conf.focusThemes } names={ conf.focusThemes } labels={ conf.focusLabels } theme={ ss.GetColor(this.props.option.bgcolor) + ", 0.9" } changeBgColor={ (val,target)=>this.changeBgColor(val,target) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度</sr-opt-label>

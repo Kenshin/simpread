@@ -48,7 +48,7 @@ const webpack = require( 'webpack' ),
           new CopyWebpackPlugin([
             { from   : "src/manifest.json" ,              to : '../' },
             { from   : "src/website_list.json" ,          to : '../' },
-            { from   : 'src/optionspage/options.html',    to : '../optionspage/' },
+            { from   : 'src/options/options.html',        to : '../options/' },
             { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
           ])
         );
@@ -81,27 +81,64 @@ const webpack = require( 'webpack' ),
     // webpack config
     config = {
       entry: {
+
+        common : [
+          'babel-polyfill',
+
+          'jquery',
+
+          'browser',
+          'message',
+          'storage',
+          'site',
+        ],
+
         vendors : [
+
+          // react
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
-          './src/vender/pangu.min.js',
-          './src/vender/mousetrap.min.js',
-          './src/vender/progressbar.min.js',
-          './src/vender/velocity.min.js',
+          // vendors
+          'pangu',
+          'mousetrap',
+          'progressbar',
+          'velocity',
+          'timeago',
 
-          './src/vender/notify/notify.js'
+          'wavess',
+          'notify',
+
+          // service
+          'util',
+          'theme',
+          'stylesheet',
+          'config',
+
+          // module
+          'focusopt',
+          'readopt',
+          'themesel',
+          'shortcuts',
+          'include',
+          'exclude',
+
+          // component
+          'textfield',
+          'fab',
+          'button',
+          'selectfield',
+          'switch',
+          'tabs',
+          'sidebar',
+          'list',
+          'tooltip',
+          'waves'
         ],
-        common : [
-          'babel-polyfill',
-          './src/service/browser.js',
-          './src/service/message.js',
-          './src/service/storage.js',
-          './src/vender/jquery-2.1.1.min.js',
-        ],
+
         contentscripts : './src/contentscripts.js',
         background     : './src/background.js',
-        options        : './src/optionspage/options.js',
+        options        : './src/options/options.js',
       },
 
       output: {
@@ -153,11 +190,12 @@ const webpack = require( 'webpack' ),
           velocity   : __dirname + '/src/vender/velocity.min.js',
           timeago    : __dirname + '/src/vender/timeago.min.js',
 
+          wavess     : __dirname + '/src/vender/waves/waves.js',
           notify     : __dirname + '/src/vender/notify/notify.js',
 
           util       : __dirname + '/src/service/util.js',
-          storage    : __dirname + '/src/service/storage.js',
           local      : __dirname + '/src/service/local.js',
+          storage    : __dirname + '/src/service/storage.js',
           site       : __dirname + '/src/service/site.js',
           message    : __dirname + '/src/service/message.js',
           browser    : __dirname + '/src/service/browser.js',
@@ -172,19 +210,19 @@ const webpack = require( 'webpack' ),
           read       : __dirname + '/src/read/read.jsx',
           readctlbar : __dirname + '/src/read/controlbar.jsx',
           readsetting: __dirname + '/src/read/setting.js',
-          readschedule: __dirname + '/src/read/component/progressbar.jsx',
+          readschedule: __dirname+ '/src/read/component/progressbar.jsx',
           readfooter : __dirname + '/src/read/component/footer.jsx',
 
-          dialog     : __dirname + '/src/option/dialog.jsx',
-          focusopt   : __dirname + '/src/option/focus.jsx',
-          readopt    : __dirname + '/src/option/read.jsx',
-          commonopt  : __dirname + '/src/option/common.jsx',
-          about      : __dirname + '/src/option/about.jsx',
-          unrdist    : __dirname + '/src/option/unrdist.jsx',
-          themesel   : __dirname + '/src/option/common/theme.jsx',
-          shortcuts  : __dirname + '/src/option/common/shortcuts.jsx',
-          include    : __dirname + '/src/option/common/include.jsx',
-          exclude    : __dirname + '/src/option/common/exclude.jsx',
+          dialog     : __dirname + '/src/module/dialog.jsx',
+          focusopt   : __dirname + '/src/module/focus.jsx',
+          readopt    : __dirname + '/src/module/read.jsx',
+          commonopt  : __dirname + '/src/module/common.jsx',
+          about      : __dirname + '/src/module/about.jsx',
+          unrdist    : __dirname + '/src/module/unrdist.jsx',
+          themesel   : __dirname + '/src/module/common/theme.jsx',
+          shortcuts  : __dirname + '/src/module/common/shortcuts.jsx',
+          include    : __dirname + '/src/module/common/include.jsx',
+          exclude    : __dirname + '/src/module/common/exclude.jsx',
 
           textfield  : __dirname + '/src/comp/textfield.jsx',
           fab        : __dirname + '/src/comp/fab.jsx',

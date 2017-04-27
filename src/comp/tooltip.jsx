@@ -91,6 +91,7 @@ const cssinjs = () => {
 class ToolTip extends React.Component {
 
     static defaultProps = {
+        root     : "",
         text     : "",
         position : "bottom",
         delay    : 350,
@@ -98,6 +99,7 @@ class ToolTip extends React.Component {
     }
 
     static propTypes = {
+        root     : React.PropTypes.string,
         text     : React.PropTypes.string,
         position : React.PropTypes.oneOf([ "bottom", "top", "left", "right" ]),
         delay    : React.PropTypes.number,
@@ -164,8 +166,8 @@ class ToolTip extends React.Component {
             });
 
             $target.css({
-                top: targetTop,
-                left: targetLeft
+                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollTop() : 0 ),
+                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollLeft(): 0 ),
             });
 
             scaleXFactor = Math.SQRT2 * tooltipWidth  / parseInt( backWidth  );
@@ -231,15 +233,17 @@ class ToolTip extends React.Component {
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
  */
 function Render( root ) {
-    const $root   = $( root );
-    $root.find("[data-tooltip]").map( ( idx, item )=>{
-        const $item = $(item),
-              position = $item.attr( "data-tooltip-position" ),
-              delay    = $item.attr( "data-tooltip-delay" ),
-              text     = $item.attr( "data-tooltip" );
-        text && text != "" && 
-            ReactDOM.render( <ToolTip text={ text } position={ position} delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
-    });
+    setTimeout( () => {
+        const $root        = $( root );
+        $root.find( "[data-tooltip]" ).map( ( idx, item )=>{
+            const $item    = $(item),
+                position = $item.attr( "data-tooltip-position" ),
+                delay    = $item.attr( "data-tooltip-delay" ),
+                text     = $item.attr( "data-tooltip" );
+            text && text != "" && 
+                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
+        });
+    }, 1000 );
 }
 
 /**

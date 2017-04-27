@@ -2,7 +2,6 @@ console.log( "=== simpread contentscripts load ===" )
 
 import './assets/css/simpread.css';
 import './assets/css/option.css';
-import './assets/css/theme_common.css';
 import './vender/notify/notify.css';
 
 import Mousetrap from 'mousetrap';
@@ -20,9 +19,10 @@ import {browser} from 'browser';
 /**
  * Sevice: storage Get data form chrome storage
  */
-storage.Get( function() {
+storage.Read( () => {
     bindShortcuts();
     getCurrent( mode.read );
+    autoOpen();
 });
 
 /**
@@ -41,12 +41,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            getCurrent();
+            getCurrent( mode.read );
     }
 });
 
 /**
- * Keyboard event handler 
+ * Keyboard event handler
  */
 function bindShortcuts() {
     Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
@@ -89,10 +89,31 @@ function readMode() {
             new Notify().Render( 2, "当前页面没有适配，如需要请自行添加。" );
             break;
         case -2:
-            new Notify().Render( 2, "只有选中【只看楼主】后，才能进入阅读模式。" );
+            new Notify().Render( "只有选中【只看楼主】后，才能进入阅读模式。" );
+            new Notify().Render( "是否直接进入阅读模式？", "直接进入", ()=>{
+                document.location = document.location.href + "?see_lz=1&simpread_mode=read";
+            });
             break;
         case -3:
             new Notify().Render( 2, "只有选中【只看该作者】后，才能进入阅读模式。" );
+            break;
+    }
+}
+
+/**
+ * Auto open read mode
+ */
+function autoOpen() {
+    if ( !window.location.search.includes( "simpread_mode=read" ) ) return;
+    switch ( storage.current.site.name ) {
+        case "36kr.com":
+            $( () => readMode() );
+            break;
+        case "sspai.com":
+            setTimeout( ()=>readMode(), 500 );
+            break;
+        default:
+            readMode();
             break;
     }
 }
@@ -121,6 +142,6 @@ function entry( current, other, ...str ) {
  * @param {boolean} when true, push message
  */
 function getCurrent( mode = undefined, upicon = true ) {
-    if ( mode && storage.VerifyCur( mode ) )  storage.Setcur( mode );
+    if ( mode && storage.VerifyCur( mode ) ) storage.Getcur( mode );
     if ( upicon ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }

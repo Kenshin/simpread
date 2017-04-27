@@ -41,7 +41,10 @@ function findSitebyURL( sites, url ) {
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
-        if ( !isroot() && !cur.endsWith( "*" ) && cur == url ) {
+        if ( name == "baijia.baidu.com" && url.includes(name) ) {
+            found = cur;
+            break;
+        } else if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
             found = cur;
             break;
         }
@@ -115,10 +118,9 @@ function verify( name ) {
 async function specbeautify( name, $target ) {
     switch ( name ) {
         case "sspai.com":
-            $target.find( ".relation-apps" ).map( (index, item) => {
-                // TO-DO
-                $(item).remove();
-            });
+            //TO-DO
+            $target.find( ".relation-apps" ).remove();
+            $target.find( ".ss-app-card"   ).remove();
             break;
         case "post.smzdm.com":
             $target.find( "img.face" ).addClass( "sr-rd-content-nobeautify" );
@@ -261,6 +263,9 @@ async function specbeautify( name, $target ) {
             break;
         case "w3cplus.com":
             $target.find( "iframe" ).addClass( "sr-rd-content-nobeautify" );
+            break;
+        case "zuojj.com":
+            $target.find( ".syntaxhighlighter .Brush" ).attr( "style", "font-size: .7em !important;" )
             break;
         case "aotu.io":
             $target.find( ".highlight table" ).map( ( index, item ) => {

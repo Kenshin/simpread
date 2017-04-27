@@ -36,7 +36,7 @@ export default class Dialog extends React.Component {
     // save dialog focus option
     save() {
         console.log( "dialog click submit button.", storage.current )
-        const code = storage.Set( storage.current.mode );
+        const code = storage.Setcur( storage.current.mode );
         if ( code != 0 ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
             if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
@@ -52,7 +52,7 @@ export default class Dialog extends React.Component {
     }
 
     componentDidMount() {
-        waves.Render({ root: optbgcls, name: "sr-button" });
+        waves.Render({ root: optbgclsjq });
         tooltip.Render( optbgclsjq );
         $( optbgclsjq )
             .velocity({ opacity: 1 })
@@ -68,8 +68,8 @@ export default class Dialog extends React.Component {
                     <Option option={ storage.current } />
                 </sr-dialog-content>
                 <sr-dialog-footer>
-                    <Button text="取 消" mode="secondary" waves="sr-button waves-effect waves-button" onClick={ ()=>this.close() } />
-                    <Button text="确 认" waves="sr-button waves-effect waves-button" onClick={ ()=>this.save() } />
+                    <Button text="取 消" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
+                    <Button text="确 认" waves="md-waves-effect" onClick={ ()=>this.save() } />
                 </sr-dialog-footer>
             </sr-dialog>
         )

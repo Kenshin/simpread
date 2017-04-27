@@ -1,3 +1,4 @@
+console.log( "=== simpread local load ===" )
 
 const id    = "simpread",
       NAMES = {
