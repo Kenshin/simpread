@@ -1,7 +1,6 @@
 console.log( "===== simpread option welcome page load =====" )
 
 import '../vender/carousel/carousel.css';
-
 import 'carousel';
 
 const welcbgcls   = "welcome-bg",
