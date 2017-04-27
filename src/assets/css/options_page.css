@@ -159,6 +159,7 @@ a {
 
 welcome {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -189,4 +190,10 @@ welcome .desc {
 
     line-height: 32px;
     text-align: center;
+}
+
+welcome footer {
+    display: block;
+
+    margin-bottom: 24px;
 }

@@ -39,6 +39,9 @@ class Welcome extends React.Component {
                         <div className="desc">This is your fourth panel</div>
                     </div>
                 </div>
+                <footer>
+                    Footer
+                </footer>
             </welcome>
         )
     }
