@@ -3,11 +3,23 @@ console.log( "===== simpread option welcome page load =====" )
 import '../vender/carousel/carousel.css';
 import 'carousel';
 
+import Button  from 'button';
+
+import * as ss from 'stylesheet';
+
 const welcbgcls   = "welcome-bg",
       welcbgclsjq = `.${welcbgcls}`,
       welcbg      = `<div class="${ welcbgcls }"></div>`;
 
 class Welcome extends React.Component {
+
+    prevClick() {
+        console.log( "prev click" )
+    }
+
+    nextClick() {
+        console.log( "next click" )
+    }
 
     componentDidMount() {
         $( '.carousel.carousel-slider' ).carousel({
@@ -40,7 +52,18 @@ class Welcome extends React.Component {
                     </div>
                 </div>
                 <footer>
-                    Footer
+                    <Button
+                        shape="circle" width="45px"
+                        color="#fff" backgroundColor="#4CAF50"
+                        icon={ ss.IconPath( "prev_icon" ) }
+                        waves="md-waves-effect md-waves-button"
+                        onClick={ ()=>this.prevClick() } />
+                    <Button
+                        shape="circle" width="45px"
+                        color="#fff" backgroundColor="#4CAF50"
+                        icon={ ss.IconPath( "next_icon" ) }
+                        waves="md-waves-effect md-waves-button"
+                        onClick={ ()=>this.nextClick() } />
                 </footer>
             </welcome>
         )

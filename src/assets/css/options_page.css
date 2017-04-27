@@ -193,7 +193,8 @@ welcome .desc {
 }
 
 welcome footer {
-    display: block;
+    display: flex;
+    flex-direction: row;
 
     margin-bottom: 24px;
 }
