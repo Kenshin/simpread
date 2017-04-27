@@ -2,7 +2,6 @@ console.log( "=== simpread contentscripts load ===" )
 
 import './assets/css/simpread.css';
 import './assets/css/option.css';
-import './assets/css/theme_common.css';
 import './vender/notify/notify.css';
 
 import Mousetrap from 'mousetrap';
