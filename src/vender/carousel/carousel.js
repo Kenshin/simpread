@@ -1,3 +1,10 @@
+/*
+ * Carousel
+ * http://materializecss.com/carousel.html
+ * 
+ * https://github.com/Dogfalo/materialize/blob/master/LICENSE
+ */
+
 (function ($) {
 
   var methods = {
