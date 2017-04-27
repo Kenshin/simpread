@@ -111,6 +111,11 @@ const cssinjs = () => {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         },
+
+        circle: {
+            borderRadius: '50%',
+        },
+
     }
 
     return  styles;
@@ -139,6 +144,7 @@ export default class Button extends React.Component {
         order   : "before",
         type    : "flat",
         mode    : "primary",
+        shape   : "rect",
         color   : "",
         width   : undefined,
         backgroundColor : "",
@@ -156,6 +162,7 @@ export default class Button extends React.Component {
         order   : React.PropTypes.oneOf([ "before", "after" ]),
         type    : React.PropTypes.oneOf([ "flat", "raised" ]),
         mode    : React.PropTypes.oneOf([ "primary", "secondary" ]),
+        shape   : React.PropTypes.oneOf([ "rect", "circle" ]),
         width   : React.PropTypes.string,
         color   : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
@@ -205,6 +212,12 @@ export default class Button extends React.Component {
             delete style.normal_root.borderRadius;
             style.normal_root.width = style.normal_root.height;
         }
+
+        this.props.shape == "circle" &&
+            ( current = { ...current, ...style.circle } );
+
+        this.props.shape == "circle" && this.props.width &&
+            ( current.height = this.props.width );
 
         this.props.mode == "secondary" &&
             Object.keys( secondary[ this.props.type ] ).forEach( key => style.mask[ key ] = secondary[ this.props.type ][ key ] );
