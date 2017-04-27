@@ -189,6 +189,7 @@ const webpack = require( 'webpack' ),
           progressbar: __dirname + '/src/vender/progressbar.min.js',
           velocity   : __dirname + '/src/vender/velocity.min.js',
           timeago    : __dirname + '/src/vender/timeago.min.js',
+          carousel    : __dirname + '/src/vender/carousel/carousel.js',
 
           wavess     : __dirname + '/src/vender/waves/waves.js',
           notify     : __dirname + '/src/vender/notify/notify.js',
