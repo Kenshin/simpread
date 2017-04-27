@@ -13,8 +13,8 @@ class Welcome extends React.Component {
     componentDidMount() {
         $( '.carousel.carousel-slider' ).carousel({
             fullWidth: true,
-            onActived: () => {
-                console.log("onActived")
+            onActived: idx => {
+                console.log( "onActived", idx )
             }
         });
     }
