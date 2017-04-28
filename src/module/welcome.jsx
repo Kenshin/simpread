@@ -27,7 +27,9 @@ class Welcome extends React.Component {
         if ( curidx != max ) {
             $( '.carousel.carousel-slider' ).carousel( "next" );
         } else {
-            ReactDOM.unmountComponentAtNode( $(welcbgclsjq)[0] );
+            $(welcbgclsjq).velocity({ opacity: 0 }, { complete: ()=>{
+                ReactDOM.unmountComponentAtNode( $(welcbgclsjq)[0] );
+            }});
         }
     }
 
