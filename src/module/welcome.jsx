@@ -107,7 +107,7 @@ class Welcome extends React.Component {
                     <div className="carousel-item">
                         <section>
                             <img src="chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/welcome-0.png"/>
-                            <h2>更多功能等你发现！</h2>
+                            <h2>更多功能 等你发现！</h2>
                         </section>
                     </div>
                 </div>
