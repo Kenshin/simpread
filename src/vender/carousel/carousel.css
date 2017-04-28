@@ -74,10 +74,10 @@
 
     margin: 24px 4px;
 
-    height: 15px;
-    width: 15px;
+    height: 10px;
+    width: 10px;
 
-    background-color: #81C784;
+    background-color: #E0E0E0;
 
     transition: background-color .3s;
     border-radius: 50%;
