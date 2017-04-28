@@ -152,7 +152,7 @@ a {
     width: 100%;
     height: 100%;
 
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba( 51, 51, 51, .8 );
 
     z-index: 3;
 }
@@ -166,12 +166,19 @@ welcome {
     min-width: 400px;
     min-height: 400px;
 
+    width: 650px;
+    height: 630px;
+
     background-color: var(--background-color);
 
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, .247059) 0px 14px 45px;
 
     user-select: none;
+}
+
+welcome section {
+    text-align: center;
 }
 
 welcome h2 {
