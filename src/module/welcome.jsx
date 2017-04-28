@@ -33,6 +33,10 @@ class Welcome extends React.Component {
         }
     }
 
+    closeClick() {
+
+    }
+
     componentDidMount() {
         max = $( ".carousel-item" ).length - 1;
         $( '.carousel.carousel-slider' ).carousel({
@@ -125,6 +129,14 @@ class Welcome extends React.Component {
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.nextClick() } />
                 </footer>
+                <div className="close">
+                    <Button
+                        shape="circle" width="36px"
+                        color="#fff" backgroundColor="black"
+                        icon={ ss.IconPath( "close_icon" ) }
+                        waves="md-waves-effect md-waves-button"
+                        onClick={ ()=>this.closeClick() } />
+                </div>
             </welcome>
         )
     }
