@@ -362,7 +362,7 @@
         }
 
         function drag(e) {
-          var x, delta, deltaY;
+          var x, y, delta, deltaY;
           if (pressed) {
             x = xpos(e);
             y = ypos(e);
