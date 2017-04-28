@@ -145,6 +145,7 @@ export default class Button extends React.Component {
         type    : "flat",
         mode    : "primary",
         shape   : "rect",
+        style   : undefined,
         color   : "",
         width   : undefined,
         backgroundColor : "",
@@ -163,6 +164,7 @@ export default class Button extends React.Component {
         type    : React.PropTypes.oneOf([ "flat", "raised" ]),
         mode    : React.PropTypes.oneOf([ "primary", "secondary" ]),
         shape   : React.PropTypes.oneOf([ "rect", "circle" ]),
+        style   : React.PropTypes.object,
         width   : React.PropTypes.string,
         color   : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
@@ -226,6 +228,9 @@ export default class Button extends React.Component {
             Object.keys( disable[ this.props.type ] ).forEach( key => current[ key ] = disable[ this.props.type ][ key ] );
 
         style.root = { ...style.normal_root, ...current };
+
+        this.props.style &&
+            ( style.root = { ...style.root, ...this.props.style } );
 
         this.props.text  == "" && ( style.text.display = "none" );
         this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
