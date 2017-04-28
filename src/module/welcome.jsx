@@ -10,22 +10,43 @@ import * as ss from 'stylesheet';
 const welcbgcls   = "welcome-bg",
       welcbgclsjq = `.${welcbgcls}`,
       welcbg      = `<div class="${ welcbgcls }"></div>`;
+let   curidx, max = [ 0, 0 ];
 
 class Welcome extends React.Component {
 
+    state = {
+        style: { display: "none" },
+        state: "next_icon",
+    }
+
     prevClick() {
-        console.log( "prev click" )
+        $( '.carousel.carousel-slider' ).carousel( "prev" );
     }
 
     nextClick() {
-        console.log( "next click" )
+        $( '.carousel.carousel-slider' ).carousel( "next" );
     }
 
     componentDidMount() {
+        max = $( ".carousel-item" ).length - 1;
         $( '.carousel.carousel-slider' ).carousel({
             fullWidth: true,
-            onActived: idx => {
-                console.log( "onActived", idx )
+            onCycleTo: idx => {
+                curidx = idx;
+                if ( curidx == max ) {
+                    this.setState({
+                        style: { display: "block" },
+                        state: "right_icon",
+                    });
+                } else if ( curidx == 0 ) {
+                    this.setState({
+                        style: { display: "none" },
+                        state: "next_icon",
+                    });
+                } else {
+                    this.state.style.display != "block" && this.setState({ style: { display: "block" } });
+                    this.state.state != "next_icon"     && this.setState({ state: "next_icon" });
+                }
             }
         });
     }
@@ -52,16 +73,16 @@ class Welcome extends React.Component {
                     </div>
                 </div>
                 <footer>
-                    <Button
-                        shape="circle" width="45px"
-                        color="#fff" backgroundColor="#4CAF50"
+                    <Button style={ this.state.style }
+                        shape="circle" width="40px"
+                        color="#fff" backgroundColor="#C8E6C9"
                         icon={ ss.IconPath( "prev_icon" ) }
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.prevClick() } />
                     <Button
-                        shape="circle" width="45px"
+                        shape="circle" width="40px"
                         color="#fff" backgroundColor="#4CAF50"
-                        icon={ ss.IconPath( "next_icon" ) }
+                        icon={ ss.IconPath( this.state.state ) }
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.nextClick() } />
                 </footer>
