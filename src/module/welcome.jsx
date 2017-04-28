@@ -24,7 +24,11 @@ class Welcome extends React.Component {
     }
 
     nextClick() {
-        $( '.carousel.carousel-slider' ).carousel( "next" );
+        if ( curidx != max ) {
+            $( '.carousel.carousel-slider' ).carousel( "next" );
+        } else {
+            ReactDOM.unmountComponentAtNode( $(welcbgclsjq)[0] );
+        }
     }
 
     componentDidMount() {
@@ -49,6 +53,10 @@ class Welcome extends React.Component {
                 }
             }
         });
+    }
+
+    componentWillUnmount() {
+        $( welcbgclsjq ).remove();
     }
 
     render() {
