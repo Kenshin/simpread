@@ -57,7 +57,7 @@
 
         if (options.fullWidth) {
           options.dist = 0;
-          setCarouselHeight();
+          //setCarouselHeight();
 
           // Offset fixed items when indicators.
           if (showIndicators) {
