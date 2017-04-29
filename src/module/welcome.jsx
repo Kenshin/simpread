@@ -27,14 +27,12 @@ class Welcome extends React.Component {
         if ( curidx != max ) {
             $( '.carousel.carousel-slider' ).carousel( "next" );
         } else {
-            $(welcbgclsjq).velocity({ opacity: 0 }, { complete: ()=>{
-                ReactDOM.unmountComponentAtNode( $(welcbgclsjq)[0] );
-            }});
+            exit();
         }
     }
 
     closeClick() {
-
+        exit();
     }
 
     componentDidMount() {
@@ -132,14 +130,23 @@ class Welcome extends React.Component {
                 <div className="close">
                     <Button
                         shape="circle" width="36px"
-                        color="#fff" backgroundColor="black"
+                        color="#fff" backgroundColor="transparent" hoverColor="transparent"
                         icon={ ss.IconPath( "close_icon" ) }
-                        waves="md-waves-effect md-waves-button"
+                        tooltip={{ text: "关闭用户向导" }}
                         onClick={ ()=>this.closeClick() } />
                 </div>
             </welcome>
         )
     }
+}
+
+/**
+ * Exit()
+ */
+function exit() {
+    $( welcbgclsjq ).velocity({ opacity: 0 }, { complete: ()=>{
+        ReactDOM.unmountComponentAtNode( $(welcbgclsjq)[0] );
+    }});
 }
 
 /**
