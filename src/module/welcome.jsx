@@ -79,7 +79,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="carousel-item">
                         <section>
-                            <img src="chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/welcome-0.png"/>
+                            <img src="chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/welcome-1.png"/>
                             <h2>阅读模式</h2>
                             <div className="desc">
                                 自动提取适配页面的标题、描述、正文、媒体 （ 图片/视频 ） 等资源。<br/>
@@ -89,7 +89,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="carousel-item">
                         <section>
-                            <img src="chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/welcome-0.png"/>
+                            <img src="chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/welcome-2.png"/>
                             <h2>聚焦模式</h2>
                             <div className="desc">
                                 自动高亮鼠标所在的文章段落，不改变当前页面的结构，适合未适配的网站。
