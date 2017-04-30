@@ -98,7 +98,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="carousel-item">
                         <section>
-                            <img src="chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/welcome-0.png"/>
+                            <img src="chrome-extension://ljmlbfffbjjoeknbipaiilcijbbdchne/assets/images/welcome-3.png"/>
                             <h2>高度定制化</h2>
                             <div className="desc">
                                 字体样式/大小、版本设计、主题均可设定。<br/>
