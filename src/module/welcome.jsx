@@ -69,7 +69,7 @@ class Welcome extends React.Component {
                 <div className="carousel carousel-slider" data-indicators="true">
                     <div className="carousel-item">
                         <section>
-                            <img src={ ss.IconPath( "welcome-0" )}/>
+                            <img src={ ss.IconPath( "welcome" )}/>
                             <h2>欢迎使用 简悦</h2>
                             <div className="desc">
                                 去掉干扰元素，提升阅读体验，<strong>简</strong>单阅读，<strong>愉</strong>悦心情。<br/>
@@ -79,7 +79,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="carousel-item">
                         <section>
-                            <img src={ ss.IconPath( "welcome-1" )}/>
+                            <img src={ ss.IconPath( "welcome-read" )}/>
                             <h2>阅读模式</h2>
                             <div className="desc">
                                 自动提取适配页面的标题、描述、正文、媒体 （ 图片/视频 ） 等资源。<br/>
@@ -89,7 +89,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="carousel-item">
                         <section>
-                            <img src={ ss.IconPath( "welcome-2" )}/>
+                            <img src={ ss.IconPath( "welcome-focus" )}/>
                             <h2>聚焦模式</h2>
                             <div className="desc">
                                 自动高亮鼠标所在的文章段落，不改变当前页面的结构，适合未适配的网站。
@@ -98,7 +98,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="carousel-item">
                         <section>
-                            <img src={ ss.IconPath( "welcome-3" )}/>
+                            <img src={ ss.IconPath( "welcome-setting" )}/>
                             <h2>高度定制化</h2>
                             <div className="desc">
                                 字体样式/大小、版本设计、主题均可设定。<br/>
@@ -108,7 +108,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="carousel-item">
                         <section>
-                            <img src={ ss.IconPath( "welcome-0" )}/>
+                            <img src={ ss.IconPath( "welcome-others" )}/>
                             <h2>更多功能 等你发现！</h2>
                         </section>
                     </div>
@@ -132,7 +132,6 @@ class Welcome extends React.Component {
                         shape="circle" width="36px"
                         color="#fff" backgroundColor="transparent" hoverColor="transparent"
                         icon={ ss.IconPath( "close_icon" ) }
-                        tooltip={{ text: "关闭用户向导" }}
                         onClick={ ()=>this.closeClick() } />
                 </div>
             </welcome>
