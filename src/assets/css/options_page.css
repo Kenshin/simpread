@@ -205,6 +205,11 @@ welcome .desc {
     text-align: center;
 }
 
+welcome strong {
+    font-weight: normal;
+    color: #3f51b5;
+}
+
 welcome footer {
     display: flex;
     flex-direction: row;
