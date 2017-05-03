@@ -57,10 +57,11 @@ export default class CommonOpt extends React.Component {
 
     export() {
         const download = {
-                option: { ...storage.option },
-                focus : { ...storage.focus  },
-                read  : { ...storage.read   },
-                unrdist : storage.unrdist,
+                verison: storage.version,
+                option : { ...storage.option },
+                focus  : { ...storage.focus  },
+                read   : { ...storage.read   },
+                unrdist: storage.unrdist,
             },
             data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) ),
             $a   = $( `<a style="display:none" href=${data} download="simpread-config-${Now()}.json"></a>` ).appendTo( "body" );
