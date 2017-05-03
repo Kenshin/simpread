@@ -1,0 +1,94 @@
+/*
+ * Carousel
+ * http://materializecss.com/carousel.html
+ * 
+ * https://github.com/Dogfalo/materialize/blob/master/LICENSE
+ */
+
+.carousel {
+    position: relative;
+
+    width: 100%;
+    height: 400px;
+
+    -webkit-perspective: 500px;
+    perspective: 500px;
+
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+
+    overflow: hidden;
+}
+
+.carousel.carousel-slider {
+    top: 0;
+    left: 0;
+
+    height: 100%
+}
+
+.carousel.carousel-slider .carousel-item {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+
+.carousel .carousel-item {
+    display: none;
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 200px;
+    height: 200px;
+}
+
+.carousel .carousel-item>img {
+    width: 100%
+}
+
+.carousel .indicators {
+    position: absolute;
+
+    margin: 0;
+    padding: 0;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    text-align: center;
+}
+
+.carousel .indicators .indicator-item {
+    display: inline-block;
+    position: relative;
+
+    margin: 24px 4px;
+
+    height: 10px;
+    width: 10px;
+
+    background-color: #E0E0E0;
+
+    transition: background-color .3s;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.carousel .indicators .indicator-item.active {
+    background-color: #4CAF50
+}
+
+.carousel.scrolling .carousel-item .materialboxed,.carousel .carousel-item:not(.active) .materialboxed {
+    pointer-events: none
+}
