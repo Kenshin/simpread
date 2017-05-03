@@ -63,7 +63,7 @@ let current  = {},
     origin   = {},
     sync     = {},
     simpread = {
-        version: version,
+        version,
         option,
         focus,
         read,
@@ -126,6 +126,24 @@ class Storage {
      */
     get unrdist() {
         return simpread[ mode.unrdist ];
+    }
+
+    /**
+     * Get version
+     * 
+     * @return {string} version
+     */
+    get version() {
+        return simpread.version;
+    }
+
+    /**
+     * Get simpread data structure clone
+     * 
+     * @return {string} version
+     */
+    get simpread() {
+        return { ...simpread };
     }
 
     /**
