@@ -4,15 +4,23 @@ import local       from 'local';
 import { storage } from 'storage';
 import * as msg    from 'message';
 import {browser}   from 'browser';
+import * as ver    from 'version';
 
 /**
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
     if ( local.Firstload() ) {
+        local.Version( ver.version );
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload" ) });
     }
-    else if( !local.Count() ) storage.GetNewsites( "remote" );
+    else {
+        !local.Count() && storage.GetNewsites( "remote" );
+        ver.version != storage.version && storage.Write( () => {
+                local.Version( ver.version );
+                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update" ) });
+            }, ver.Verify( storage.version, storage.simpread ) );
+    }
 });
 
 /**
