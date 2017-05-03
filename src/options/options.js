@@ -66,7 +66,7 @@ storage.Read( first => {
  * @param {bool} is first load
  */
 function firstLoad( first ) {
-    welcomeRender();
+    first && welcomeRender();
     first && storage.GetNewsites( "local", ( _, error ) => {
         error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
         !error && storage.Statistics( "create" );
