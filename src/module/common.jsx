@@ -5,6 +5,7 @@ import Notify      from 'notify';
 
 import * as ss     from 'stylesheet';
 import { storage, Now } from 'storage';
+import * as ver    from 'version';
 
 export default class CommonOpt extends React.Component {
 
@@ -30,11 +31,12 @@ export default class CommonOpt extends React.Component {
             onload = event => {
                 if ( event && event.target && event.target.result ) {
                     try {
-                        const json = JSON.parse( event.target.result ),
+                        let json = JSON.parse( event.target.result ),
                             result = storage.Verify( json );
                         if ( result.option.code != 0 || result.focus.code != 0 || result.read.code != 0 ) {
                             new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
                         } else {
+                            ver.version != json.version && ( json = ver.Verify( json.version, json ));
                             storage.Write( ()=> {
                                 new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
                                     window.location.reload();
@@ -57,7 +59,7 @@ export default class CommonOpt extends React.Component {
 
     export() {
         const download = {
-                verison: storage.version,
+                version: storage.version,
                 option : { ...storage.option },
                 focus  : { ...storage.focus  },
                 read   : { ...storage.read   },
