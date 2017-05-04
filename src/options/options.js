@@ -54,8 +54,8 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
     hashnotify();
-    firstLoad( first );
     vernotify();
+    firstLoad( first );
     sidebarRender();
     navRender();
     mainRender( tabsItemID );
@@ -94,7 +94,6 @@ function vernotify() {
               version = hash.match( /[0-9\.]+/ )[0],
               msg     = ver.Notify( prefix, version );
         new Notify().Render( "简悦 版本提示", msg );
-        history.pushState( "", "", "/options/options.html" );
     }
 }
 
