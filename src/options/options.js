@@ -53,6 +53,7 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
+    hashnotify();
     vernotify();
     firstLoad( first );
     sidebarRender();
@@ -61,6 +62,27 @@ storage.Read( first => {
     tt.Render( "body" );
     waves.Render({ root: "body" });
 });
+
+/**
+ * Hash notify
+ */
+function hashnotify() {
+    const search = location.search,
+          prefix = "?simpread_mode=";
+    if ( search.startsWith( prefix ) ) {
+        switch ( search.replace( prefix, "" ) ) {
+            case "reload":
+                new Notify().Render( 0, "数据恢复成功！" );
+                break;
+            case "clear":
+                new Notify().Render( 0, "数据清除成功！" );
+                break;
+            default:
+                // TO-DO
+        }
+        history.pushState( "", "", "/options/options.html" );
+    }
+}
 
 /**
  * Version update notify
