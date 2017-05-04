@@ -39,7 +39,7 @@ export default class CommonOpt extends React.Component {
                             ver.version != json.version && ( json = ver.Verify( json.version, json ));
                             storage.Write( ()=> {
                                 new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
-                                    window.location.reload();
+                                    location.href = location.origin + location.pathname;
                                 });
                             }, json );
                         }
@@ -85,7 +85,7 @@ export default class CommonOpt extends React.Component {
         new Notify().Render( "snackbar", "是否清除掉包括本地与网络账户的全部配置文件？", "同意 ", ()=>{
             storage.Clear( "all", () => {
                 new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
-                    window.location.reload();
+                    location.href = location.origin + location.pathname;
                 });
             });
         });
