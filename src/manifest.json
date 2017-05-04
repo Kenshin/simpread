@@ -36,5 +36,6 @@
     "/assets/images/*",
     "website_list.json"
   ],
+  "update_url": "http://k-zone.cn/simpread/updates.xml",
   "manifest_version": 2
 }
