@@ -12,13 +12,13 @@ import * as ver    from 'version';
 storage.Read( () => {
     if ( local.Firstload() ) {
         local.Version( ver.version );
-        browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload" ) });
+        browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
     }
     else {
         !local.Count() && storage.GetNewsites( "remote" );
         ver.version != storage.version && storage.Write( () => {
                 local.Version( ver.version );
-                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update" ) });
+                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
             }, ver.Verify( storage.version, storage.simpread ) );
     }
 });
