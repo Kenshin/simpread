@@ -31,7 +31,19 @@ function Verify( curver, data ) {
     return data;
 }
 
+/**
+ * Notify with type and version
+ * 
+ * @param {string} type, include: firstload, update
+ * @param {string} ver, e.g. 1.0.0, 1.0.1 
+ */
+function Notify( type, ver ) {
+    let str = type == "firstload" ? "安装" : "更新";
+    return `${str} 到最新版本 ${ver} ，详细请看 <a href="http://ksria.com/simpread/CHANGELOG.md">更新日志</a>`;
+}
+
 export {
     version,
-    Verify
+    Verify,
+    Notify,
 }
