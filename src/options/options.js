@@ -16,6 +16,7 @@ import * as side  from 'sidebar';
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
 import * as conf  from 'config';
+import * as ver   from 'version';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -52,6 +53,7 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
+    vernotify();
     firstLoad( first );
     sidebarRender();
     navRender();
@@ -59,6 +61,19 @@ storage.Read( first => {
     tt.Render( "body" );
     waves.Render({ root: "body" });
 });
+
+/**
+ * Version update notify
+ */
+function vernotify() {
+    const hash = location.hash;
+    if ( hash.startsWith( "#firstload?ver=" ) || hash.startsWith( "#update?ver=" ) ) {
+        const prefix  = hash.match( /\w+/      )[0],
+              version = hash.match( /[0-9\.]+/ )[0],
+              msg     = ver.Notify( prefix, version );
+        new Notify().Render( "简悦 版本提示", msg );
+    }
+}
 
 /**
  * First load call remote simpread data structure( usage storage.Sync() )
