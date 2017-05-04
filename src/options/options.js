@@ -81,12 +81,12 @@ function vernotify() {
  * @param {bool} is first load
  */
 function firstLoad( first ) {
-    first && welcomeRender();
     first && storage.GetNewsites( "local", ( _, error ) => {
         error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
         !error && storage.Statistics( "create" );
     });
-    window.location.hash && window.location.hash == "#firstload" && first &&
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first &&
         storage.Sync( "get", success => {
             success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
             success && mainRender( tabsItemID );
