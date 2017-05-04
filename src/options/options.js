@@ -72,7 +72,7 @@ function hashnotify() {
     if ( search.startsWith( prefix ) ) {
         switch ( search.replace( prefix, "" ) ) {
             case "reload":
-                new Notify().Render( 0, "数据恢复成功！" );
+                new Notify().Render( 0, "数据导入成功！" );
                 break;
             case "clear":
                 new Notify().Render( 0, "数据清除成功！" );
