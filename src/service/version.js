@@ -15,12 +15,12 @@ const version = browser.runtime.getManifest().version;
  */
 function Verify( curver, data ) {
 
+    /*
     if ( curver == "1.0.0" ) {
         data.option.pocket = { "consumer": "", "access": "" };
         curver = "1.0.1";
     }
 
-    /*
     if ( curver == "1.0.1" ) {
         data.read.custom = "";
         curver = "2.0.0";
