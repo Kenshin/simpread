@@ -94,6 +94,7 @@ function vernotify() {
               version = hash.match( /[0-9\.]+/ )[0],
               msg     = ver.Notify( prefix, version );
         new Notify().Render( "简悦 版本提示", msg );
+        history.pushState( "", "", "/options/options.html" );
     }
 }
 
