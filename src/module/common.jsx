@@ -5,6 +5,7 @@ import Notify      from 'notify';
 
 import * as ss     from 'stylesheet';
 import { storage, Now } from 'storage';
+import * as ver    from 'version';
 
 export default class CommonOpt extends React.Component {
 
@@ -30,14 +31,15 @@ export default class CommonOpt extends React.Component {
             onload = event => {
                 if ( event && event.target && event.target.result ) {
                     try {
-                        const json = JSON.parse( event.target.result ),
+                        let json = JSON.parse( event.target.result ),
                             result = storage.Verify( json );
                         if ( result.option.code != 0 || result.focus.code != 0 || result.read.code != 0 ) {
                             new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
                         } else {
+                            ver.version != json.version && ( json = ver.Verify( json.version, json ));
                             storage.Write( ()=> {
                                 new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
-                                    window.location.reload();
+                                    location.href = location.origin + location.pathname + "?simpread_mode=reload";
                                 });
                             }, json );
                         }
@@ -57,10 +59,11 @@ export default class CommonOpt extends React.Component {
 
     export() {
         const download = {
-                option: { ...storage.option },
-                focus : { ...storage.focus  },
-                read  : { ...storage.read   },
-                unrdist : storage.unrdist,
+                version: storage.version,
+                option : { ...storage.option },
+                focus  : { ...storage.focus  },
+                read   : { ...storage.read   },
+                unrdist: storage.unrdist,
             },
             data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) ),
             $a   = $( `<a style="display:none" href=${data} download="simpread-config-${Now()}.json"></a>` ).appendTo( "body" );
@@ -82,7 +85,7 @@ export default class CommonOpt extends React.Component {
         new Notify().Render( "snackbar", "是否清除掉包括本地与网络账户的全部配置文件？", "同意 ", ()=>{
             storage.Clear( "all", () => {
                 new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
-                    window.location.reload();
+                    location.href = location.origin + location.pathname + "?simpread_mode=clear";
                 });
             });
         });

@@ -91,6 +91,7 @@ const webpack = require( 'webpack' ),
           'message',
           'storage',
           'site',
+          'version'
         ],
 
         vendors : [
@@ -203,6 +204,7 @@ const webpack = require( 'webpack' ),
           theme      : __dirname + '/src/service/theme.js',
           stylesheet : __dirname + '/src/service/stylesheet.js',
           config     : __dirname + '/src/service/config.js',
+          version    : __dirname + '/src/service/version.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',

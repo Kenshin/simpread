@@ -2,6 +2,7 @@ console.log( "=== simpread local load ===" )
 
 const id    = "simpread",
       NAMES = {
+        VER   : "version",
         COUNT : "count",
         FIRST : "firstload",
       },
@@ -50,6 +51,15 @@ class Local {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Save manifest.json version to local storage
+     * 
+     * @param {string} version
+     */
+    Version( version ) {
+        set( NAMES.VER, version );
     }
 
 }

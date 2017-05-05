@@ -1,6 +1,6 @@
 {
   "name": "简悦（SimpRead）",
-  "version": "0.1",
+  "version": "1.0.0",
   "description" : "简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
   "homepage_url" : "https://github.com/kenshin/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
@@ -36,5 +36,6 @@
     "/assets/images/*",
     "website_list.json"
   ],
+  "update_url": "http://k-zone.cn/simpread/updates.xml",
   "manifest_version": 2
 }

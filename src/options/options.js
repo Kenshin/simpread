@@ -16,6 +16,7 @@ import * as side  from 'sidebar';
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
 import * as conf  from 'config';
+import * as ver   from 'version';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -52,6 +53,8 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
+    hashnotify();
+    vernotify();
     firstLoad( first );
     sidebarRender();
     navRender();
@@ -61,17 +64,51 @@ storage.Read( first => {
 });
 
 /**
+ * Hash notify
+ */
+function hashnotify() {
+    const search = location.search,
+          prefix = "?simpread_mode=";
+    if ( search.startsWith( prefix ) ) {
+        switch ( search.replace( prefix, "" ) ) {
+            case "reload":
+                new Notify().Render( 0, "数据导入成功！" );
+                break;
+            case "clear":
+                new Notify().Render( 0, "数据清除成功！" );
+                break;
+            default:
+                // TO-DO
+        }
+        history.pushState( "", "", "/options/options.html" );
+    }
+}
+
+/**
+ * Version update notify
+ */
+function vernotify() {
+    const hash = location.hash;
+    if ( hash.startsWith( "#firstload?ver=" ) || hash.startsWith( "#update?ver=" ) ) {
+        const prefix  = hash.match( /\w+/      )[0],
+              version = hash.match( /[0-9\.]+/ )[0],
+              msg     = ver.Notify( prefix, version );
+        new Notify().Render( "简悦 版本提示", msg );
+    }
+}
+
+/**
  * First load call remote simpread data structure( usage storage.Sync() )
  * 
  * @param {bool} is first load
  */
 function firstLoad( first ) {
-    first && welcomeRender();
     first && storage.GetNewsites( "local", ( _, error ) => {
         error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
         !error && storage.Statistics( "create" );
     });
-    window.location.hash && window.location.hash == "#firstload" && first &&
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first &&
         storage.Sync( "get", success => {
             success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
             success && mainRender( tabsItemID );

@@ -3,6 +3,7 @@ console.log( "=== simpread storage load ===" )
 import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
+import {version} from 'version';
 
 /**
  * Read and Write Chrome storage
@@ -62,6 +63,7 @@ let current  = {},
     origin   = {},
     sync     = {},
     simpread = {
+        version,
         option,
         focus,
         read,
@@ -124,6 +126,24 @@ class Storage {
      */
     get unrdist() {
         return simpread[ mode.unrdist ];
+    }
+
+    /**
+     * Get version
+     * 
+     * @return {string} version
+     */
+    get version() {
+        return simpread.version;
+    }
+
+    /**
+     * Get simpread data structure clone
+     * 
+     * @return {string} version
+     */
+    get simpread() {
+        return { ...simpread };
     }
 
     /**
