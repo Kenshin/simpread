@@ -236,7 +236,7 @@ export default class Fab extends React.Component {
             $target.parent().css({ ...style.normal, ...style.normal_focus });
             if ( $target.parent().next() && $target.parent().next().is( "ul" ) ) {
                 $target.parent().next().css( "opacity", 1 ).attr( "current", true ).css( "visibility", "visible" );
-                $target.parent().parent().parent().find("ul[current!=true]").css( "opacity", 0 ).css( "visibility", "hidden" );
+                $target.parent().parent().find("ul[current!=true]").css( "opacity", 0 ).css( "visibility", "hidden" );
                 $target.parent().next().removeAttr( "current" );
             }
         }
