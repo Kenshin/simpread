@@ -62,13 +62,13 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
     console.log( "background runtime Listener", request );
     switch ( request.type ) {
         case  msg.MESSAGE_ACTION.shortcuts:
-            getCurTab( function( tabs ) { browser.tabs.sendMessage( tabs[0].id, msg.Add( msg.MESSAGE_ACTION.shortcuts )); });
+            getCurTab( { "active": true, "currentWindow": true }, tabs => { browser.tabs.sendMessage( tabs[0].id, msg.Add( msg.MESSAGE_ACTION.shortcuts )); });
             break;
         case  msg.MESSAGE_ACTION.browser_action:
-            getCurTab( tabs => {
-                if ( tabs[0].url == request.value.url ) {
+            getCurTab( { url: request.value.url }, tabs => {
+                if ( tabs && tabs.length > 0 && tabs[0].url == request.value.url ) {
                     setMenuAndIcon( tabs[0].id, request.value.code );
-                }
+                } else console.error( request );
             });
             break;
         case msg.MESSAGE_ACTION.new_tab:
@@ -81,10 +81,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  * Listen chrome tab active message, include: `tab_selected`
  */
 browser.tabs.onActivated.addListener( function( active ) {
-    getCurTab( (tabs) => {
+    getCurTab( { "active": true, "currentWindow": true }, tabs => {
         if ( tabs[0].status == "complete" ) {
             console.log( "background tabs Listener:active", active );
-            if ( !tabs[0].url.startsWith( "chrome://" ) ) {
+            if ( tabs && tabs.length > 0 && !tabs[0].url.startsWith( "chrome://" ) ) {
                 browser.tabs.sendMessage( tabs[0].id, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
             } else {
                 setMenuAndIcon( tabs[0].id, -1 );
@@ -117,10 +117,11 @@ browser.pageAction.onClicked.addListener( function( tab ) {
 /**
  * Get current tab object
  * 
+ * @param {object}   query
  * @param {function} callback
  */
-function getCurTab( callback ) {
-    browser.tabs.query({ "active": true, "currentWindow": true }, function( tabs ) { callback( tabs ); });
+function getCurTab( query, callback ) {
+    browser.tabs.query( query, function( tabs ) { callback( tabs ); });
 }
 
 /**
