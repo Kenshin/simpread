@@ -5,6 +5,7 @@
   "homepage_url" : "https://github.com/kenshin/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
   "icons" : {
+    "16" : "assets/images/icon16.png",
     "48" : "assets/images/icon48.png",
     "128" : "assets/images/icon128.png"
   },
