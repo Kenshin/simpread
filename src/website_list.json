@@ -852,6 +852,16 @@
             "<div class='sharebar'>"
         ]
     },{
+        "name"    : "xituqu.com",
+        "url"     : "https://xituqu.com/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div class='post-content'>",
+        "exclude" : [
+            "[['<h2>关注稀土区微信公众号，获取一手资源</h2>']]",
+            "[[/src=\\S+(006tNc79gw1f6gzqizciyj3076076aai)\\S+'/]]"
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/*",
         "title"   : "<h1 class='title'>",
