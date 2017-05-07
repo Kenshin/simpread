@@ -145,5 +145,5 @@ function setMenuAndIcon( id, code ) {
             rdmenuid = browser.contextMenus.create( readmenu );
         }
     }
-    browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/icon72${icon}.png` ) });
+    browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/browser_icon${icon}.png` ) });
 }

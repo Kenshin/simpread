@@ -30,7 +30,7 @@
   ],
   "page_action": {
     "default_icon": {
-      "32": "assets/images/icon72-disable.png"
+      "32": "assets/images/browser_icon-disable.png"
     }
   },
   "options_page": "options/options.html",
