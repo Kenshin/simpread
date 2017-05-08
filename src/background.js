@@ -123,7 +123,9 @@ browser.pageAction.onClicked.addListener( function( tab ) {
  * @param {function} callback
  */
 function getCurTab( query, callback ) {
-    browser.tabs.query( query, function( tabs ) { callback( tabs ); });
+    if ( query.url && query.url.includes( "#" ) ) {
+        browser.tabs.query( {}, tabs => callback( tabs.filter( tab => tab.url == query.url ) ) );
+    } else browser.tabs.query( query, function( tabs ) { callback( tabs ); });
 }
 
 /**
