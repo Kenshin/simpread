@@ -84,14 +84,14 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  */
 browser.tabs.onActivated.addListener( function( active ) {
     getCurTab( { "active": true, "currentWindow": true }, tabs => {
-        if ( tabs[0].status == "complete" ) {
+        if ( tabs && tabs.length > 0 && tabs[0].status == "complete" ) {
             console.log( "background tabs Listener:active", active );
             if ( tabs && tabs.length > 0 && !tabs[0].url.startsWith( "chrome://" ) ) {
                 browser.tabs.sendMessage( tabs[0].id, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
             } else {
                 setMenuAndIcon( tabs[0].id, -1 );
             }
-        }
+        } else console.error( "onActivated.addListener error" );
     });
 });
 
