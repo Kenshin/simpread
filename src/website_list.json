@@ -1224,6 +1224,24 @@
             "[['<p>【版权提示】亿邦动力网倡导尊重与保护知识产权。</p>']]"
         ]
     },{
+        "name"    : "cokeji.com",
+        "url"     : "http://www.cokeji.com/",
+        "title"   : "[[{$('.single-header').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='single-main'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "199it.com",
+        "url"     : "http://www.199it.com/archives/",
+        "title"   : "<h1 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "view.inews.qq.com",
         "url"     : "http://view.inews.qq.com/a/",
         "title"   : "<p class='title'>",
