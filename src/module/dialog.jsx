@@ -38,7 +38,7 @@ export default class Dialog extends React.Component {
         console.log( "dialog click submit button.", storage.current )
         const code = storage.Setcur( storage.current.mode );
         if ( code != 0 ) {
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
             if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
             code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，重新进入后生效！" )
         } else {
