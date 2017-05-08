@@ -124,7 +124,7 @@ browser.pageAction.onClicked.addListener( function( tab ) {
  */
 function getCurTab( query, callback ) {
     if ( query.url && query.url.includes( "#" ) ) {
-        browser.tabs.query( {}, tabs => callback( tabs.filter( tab => tab.url == query.url ) ) );
+        browser.tabs.query( {}, tabs => callback( tabs.filter( tab => tab.url == query.url && tab.active ) ) );
     } else browser.tabs.query( query, function( tabs ) { callback( tabs ); });
 }
 
