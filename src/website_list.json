@@ -1242,6 +1242,15 @@
             ""
         ]
     },{
+        "name"    : "aliresearch.com",
+        "url"     : "http://www.aliresearch.com/blog/article/detail/id/",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<section id='contents'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "view.inews.qq.com",
         "url"     : "http://view.inews.qq.com/a/",
         "title"   : "<p class='title'>",
