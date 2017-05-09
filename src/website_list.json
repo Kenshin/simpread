@@ -1251,6 +1251,15 @@
             ""
         ]
     },{
+        "name"    : "cn.engadget.com",
+        "url"     : "http://cn.engadget.com/*",
+        "title"   : "[[{$('head').find('title').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='article-text'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "view.inews.qq.com",
         "url"     : "http://view.inews.qq.com/a/",
         "title"   : "<p class='title'>",
