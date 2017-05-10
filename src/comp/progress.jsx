@@ -23,12 +23,14 @@ export default class Progress extends React.Component {
         type     : "line",
         options  : {},
         progress : 0,
+        text     : undefined,
     }
 
     static propTypes = {
         type     : React.PropTypes.oneOf([ "line", "circle", "semicircle", "custom" ]),
         options  : React.PropTypes.object,
         progress : React.PropTypes.number,
+        text     : React.PropTypes.string,
     }
 
     componentDidMount() {
@@ -39,6 +41,8 @@ export default class Progress extends React.Component {
         );
 
         shape.animate( this.props.progress );
+
+        this.props.text && shape.setText( this.props.text );
     }
 
     shouldComponentUpdate() {
