@@ -33,12 +33,12 @@ export default class ProcessBar extends React.Component {
 
     componentDidMount() {
         setTimeout( ()=>{
-            $( document ).on( "scroll", ()=>this.scrollEventHandle() );            
+            $( document ).on( "scroll", ()=>this.scrollEventHandle() );
         }, 1000 );
     }
 
     componentWillUnmount() {
-        $( document ).off( "scroll", ()=>this.scrollEventHandle() );
+        $( document ).off( "scroll", this.scrollEventHandle() );
     }
 
     scrollEventHandle() {
