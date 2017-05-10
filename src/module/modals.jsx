@@ -99,10 +99,13 @@ function rollback() {
  * @return {jquery} simpread-option-root jquery object
  */
 export function getDialogBackground( target = "body" ) {
+    return dia.Background( $(target), optbgcls );
+    /*
     if ( $(target).find( "." + optbgcls ).length == 0 ) {
         $(target).append( optbg );
     }
     return $( "." + optbgcls )[0];
+    */
 }
 
 /**
