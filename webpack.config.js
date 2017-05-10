@@ -133,6 +133,7 @@ const webpack = require( 'webpack' ),
           'tabs',
           'sidebar',
           'list',
+          'progress',
           'tooltip',
           'waves'
         ],
