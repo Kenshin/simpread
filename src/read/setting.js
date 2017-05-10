@@ -1,6 +1,6 @@
 console.log( "==== simpread read setting load ====" )
 
-import Dialog, { getDialogBackground, isPopup } from 'dialog';
+import Dialog, { getDialogBackground, isPopup } from 'modals';
 
 /**
  * Setting Render

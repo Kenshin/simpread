@@ -217,7 +217,7 @@ const webpack = require( 'webpack' ),
           readschedule: __dirname+ '/src/read/component/progressbar.jsx',
           readfooter : __dirname + '/src/read/component/footer.jsx',
 
-          dialog     : __dirname + '/src/module/dialog.jsx',
+          modals     : __dirname + '/src/module/modals.jsx',
           focusopt   : __dirname + '/src/module/focus.jsx',
           readopt    : __dirname + '/src/module/read.jsx',
           commonopt  : __dirname + '/src/module/common.jsx',
