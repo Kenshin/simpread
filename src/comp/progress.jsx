@@ -41,8 +41,9 @@ export default class Progress extends React.Component {
         shape.animate( this.props.progress );
     }
 
-    componentWillUpdate() {
+    shouldComponentUpdate() {
         shape.animate( this.props.progress );
+        return false;
     }
 
     componentWillUnmount() {
