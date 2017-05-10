@@ -14,6 +14,28 @@ console.log( "==== simpread component: Dialog ====" )
 
 const style = {
 
+    bg: {
+        display: '-webkit-flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        position: 'fixed',
+
+        top: '-100px',
+        left: 0,
+        width: '100%',
+        height: '100%',
+
+        color: '#fff',
+
+        textShadow: '0 1px rgba(0,0,0,0.3)',
+
+        opacity: 0,
+        transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+
+        zIndex: 2147483647,
+    },
+
     root: {
         display: '-webkit-flex',
         flexDirection: 'column',
@@ -103,8 +125,17 @@ class Dialog extends React.Component {
 const Content = props => <dialog-content style={ style.content }>{ props.children }</dialog-content>,
       Footer  = props => <dialog-footer  style={ style.footer  }>{ props.children }</dialog-footer>;
 
+function Background( $target, cls ) {
+    if ( $target.find( "." + cls ).length == 0 ) {
+        $target.append( `<div class="${ cls }"></div>` );
+    }
+    Object.keys( style.bg ).forEach( key => $( "." + cls )[0].style[ key ] = style.bg[ key ] );
+    return $( "." + cls )[0];
+}
+
 export {
     Dialog,
     Content,
     Footer,
+    Background,
 }
