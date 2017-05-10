@@ -13,6 +13,7 @@ import * as ss      from 'stylesheet';
 import Button       from 'button';
 import * as tooltip from 'tooltip';
 import * as waves   from 'waves';
+import * as dia     from 'dialog';
 
 const optbgcls   = "simpread-option-root",
       optbgclsjq = `.${optbgcls}`,
@@ -57,22 +58,24 @@ export default class Dialog extends React.Component {
         $( optbgclsjq )
             .velocity({ opacity: 1 })
             .addClass( "simpread-option-root-show" );
-        $( "sr-dialog-content" ).height() < 585 && $( "sr-dialog-footer" ).css( "border-top", "none" );
+        $( "dialog-content" ).height() < 585 && $( "dialog-footer" ).css( "border-top", "none" );
     }
 
     render() {
         const Option = storage.current.mode == STORAGE_MODE.focus ? FocusOpt : ReadOpt;
+
         return (
-            <sr-dialog>
-                <sr-dialog-content>
+            <dia.Dialog>
+                <dia.Content>
                     <Option option={ storage.current } />
-                </sr-dialog-content>
-                <sr-dialog-footer>
+                </dia.Content>
+                <dia.Footer>
                     <Button text="取 消" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
                     <Button text="确 认" waves="md-waves-effect" onClick={ ()=>this.save() } />
-                </sr-dialog-footer>
-            </sr-dialog>
+                </dia.Footer>
+            </dia.Dialog>
         )
+
     }
 }
 
