@@ -31,6 +31,7 @@ export default class Progress extends React.Component {
         options  : React.PropTypes.object,
         progress : React.PropTypes.number,
         text     : React.PropTypes.string,
+        onChanged: React.PropTypes.func,
     }
 
     componentDidMount() {
@@ -46,7 +47,9 @@ export default class Progress extends React.Component {
     }
 
     shouldComponentUpdate() {
-        shape.animate( this.props.progress );
+        shape.animate( this.props.progress, () => {
+            this.props.onChanged && this.props.onChanged( shape.value() );
+        });
         return false;
     }
 
