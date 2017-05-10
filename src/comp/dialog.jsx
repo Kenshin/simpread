@@ -70,6 +70,10 @@ const style = {
  */
 class Dialog extends React.Component {
 
+    componentDidMount() {
+        $( "dialog-content" ).height() < 585 && $( "dialog-footer" ).css( "border-top", "none" );
+    }
+
     render() {
 
         let content, footer;
