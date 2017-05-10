@@ -24,7 +24,7 @@ const options = {
 export default class ProcessBar extends React.Component {
 
     static defaultProps = {
-        offset : document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight )
+        offset: document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight )
     }
 
     state = {
@@ -42,7 +42,7 @@ export default class ProcessBar extends React.Component {
     }
 
     scrollEventHandle() {
-        const offset  = document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight );
+        const offset = document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight );
         this.setState({ progress: offset });
     }
 
