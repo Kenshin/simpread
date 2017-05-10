@@ -238,6 +238,7 @@ const webpack = require( 'webpack' ),
           progress   : __dirname + '/src/comp/progress.jsx',
           sidebar    : __dirname + '/src/comp/sidebar.jsx',
           list       : __dirname + '/src/comp/list.jsx',
+          dialog     : __dirname + '/src/comp/dialog.jsx',
           tooltip    : __dirname + '/src/comp/tooltip.jsx',
           waves      : __dirname + '/src/comp/waves.js',
 
