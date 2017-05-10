@@ -32,7 +32,9 @@ export default class ProcessBar extends React.Component {
     }
 
     componentDidMount() {
-        $( document ).on( "scroll", ()=>this.scrollEventHandle() );
+        setTimeout( ()=>{
+            $( document ).on( "scroll", ()=>this.scrollEventHandle() );            
+        }, 1000 );
     }
 
     componentWillUnmount() {
@@ -40,7 +42,7 @@ export default class ProcessBar extends React.Component {
     }
 
     scrollEventHandle() {
-        const offset  = document.body.scrollTop / ( document.body.scrollHeight - document.body.clientHeight );
+        const offset  = document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight );
         this.setState({ progress: offset });
     }
 
