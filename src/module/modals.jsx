@@ -26,12 +26,15 @@ export default class Dialog extends React.Component {
 
     // close dialog
     close( restore = rollback() ) {
+        dia.Close();
+        /*
         $( optbgclsjq )
             .addClass( "simpread-option-root-hide" )
             .velocity({ opacity: 0 }, { complete: ()=>{
                 tooltip.Exit( optbgclsjq );
                 $( optbgclsjq ).remove();
             }});
+        */
     }
 
     // save dialog focus option
