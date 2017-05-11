@@ -166,10 +166,21 @@ function Close() {
         }});
 }
 
+/**
+ * Verify dialog is popup
+ * 
+ * @param  {string} jquery selector
+ * @return {boolean}
+ */
+function Popup( cls ) {
+    return $( cls ).children().length == 0 ? false : true;
+}
+
 export {
     Dialog,
     Content,
     Footer,
     Background,
     Close,
+    Popup,
 }
