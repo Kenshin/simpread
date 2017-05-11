@@ -134,6 +134,7 @@ const webpack = require( 'webpack' ),
           'sidebar',
           'list',
           'progress',
+          'dialog',
           'tooltip',
           'waves'
         ],
