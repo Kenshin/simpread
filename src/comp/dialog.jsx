@@ -93,9 +93,21 @@ const style = {
  */
 class Dialog extends React.Component {
 
+    static defaultProps = {
+        onClose: undefined,
+    }
+
+    static propTypes = {
+        onClose: React.PropTypes.func,
+    }
+
     componentDidMount() {
         $( "dialog-content" ).height() < 585 && $( "dialog-footer" ).css( "border-top", "none" );
         $( `.${root}` ).css({ opacity: 1, top: 0 });
+    }
+
+    componentWillUnmount() {
+        this.props.onClose && this.props.onClose();
     }
 
     render() {
