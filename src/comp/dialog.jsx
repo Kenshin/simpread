@@ -103,7 +103,7 @@ class Dialog extends React.Component {
 
     componentDidMount() {
         $( "dialog-content" ).height() < 585 && $( "dialog-footer" ).css( "border-top", "none" );
-        $( `.${root}` ).css({ opacity: 1, top: 0 });
+        $( rootbg ).css({ opacity: 1, top: 0 });
     }
 
     componentWillUnmount() {
