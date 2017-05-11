@@ -4,7 +4,8 @@ import pangu       from 'pangu';
 import ProgressBar from 'readschedule';
 import Footer      from 'readfooter';
 import ReadCtlbar  from 'readctlbar';
-import setting     from 'readsetting';
+//import setting     from 'readsetting';
+import * as modals from 'modals';
 
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -79,7 +80,8 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                setting.Render();
+                //setting.Render();
+                modals.Render();
                 break;
             case "save":
                 const [ url, title, desc ] = [ window.location.href.replace( /(\?|&)simpread_mode=read/, "" ), $("sr-rd-title").text().trim(), $("sr-rd-desc").text().trim() ];
@@ -153,7 +155,8 @@ function getReadRoot() {
  */
 function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        action && setting.Render();
+        //action && setting.Render();
+        action && modals.Render();
         return true;
     } else {
         return false;
