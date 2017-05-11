@@ -114,9 +114,12 @@ export function getModalsBackground( target = "body" ) {
  * @return {boolean}
  */
 export function isPopup() {
+    return dia.Popup( optbgclsjq );
+    /*
      if ( $("." + optbgcls ).children().length == 0 ) {
          return false;
      } else {
          return true;
      }
+     */
 }
