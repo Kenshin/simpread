@@ -1,8 +1,7 @@
 console.log( "=== simpread read load ===" )
 
 import pangu       from 'pangu';
-import ProgressBar from 'readschedule';
-import Footer      from 'readfooter';
+import ProgressBar from 'schedule';
 import ReadCtlbar  from 'readctlbar';
 import * as modals from 'modals';
 
@@ -28,6 +27,15 @@ const errorpage = `
                 或者 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">报告此页面</a> 以便让 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 变得更加出色，谢谢。
             </p>
         </sr-rd-content-error>`;
+
+const Footer = () => {
+    return (
+        <sr-rd-footer>
+            <sr-rd-footer-text>全文完</sr-rd-footer-text>
+            <sr-rd-footer-copywrite>本文由 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 优化，用以提升阅读体验。</sr-rd-footer-copywrite>
+        </sr-rd-footer>
+    )
+}
 
 class Read extends React.Component {
 
