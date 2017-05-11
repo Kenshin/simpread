@@ -4,7 +4,6 @@ import pangu       from 'pangu';
 import ProgressBar from 'readschedule';
 import Footer      from 'readfooter';
 import ReadCtlbar  from 'readctlbar';
-//import setting     from 'readsetting';
 import * as modals from 'modals';
 
 import { storage, Clone } from 'storage';
@@ -80,7 +79,6 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                //setting.Render();
                 modals.Render();
                 break;
             case "save":
@@ -155,7 +153,6 @@ function getReadRoot() {
  */
 function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        //action && setting.Render();
         action && modals.Render();
         return true;
     } else {

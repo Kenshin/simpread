@@ -1,6 +1,5 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-//import setting   from 'foucsetting';
 import * as modals from 'modals';
 import * as conf   from 'config';
 
@@ -26,7 +25,6 @@ class FControl extends React.Component {
                 moveTop();
                 break;
             case "setting":
-                //setting.Render();
                 modals.Render();
                 break;
         }

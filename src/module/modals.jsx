@@ -22,19 +22,11 @@ const optbgcls   = "simpread-option-root",
 /**
  * Modals Rect component
  */
-export default class Modals extends React.Component {
+class Modals extends React.Component {
 
     // close modals
     close( restore = rollback() ) {
         dia.Close();
-        /*
-        $( optbgclsjq )
-            .addClass( "simpread-option-root-hide" )
-            .velocity({ opacity: 0 }, { complete: ()=>{
-                tooltip.Exit( optbgclsjq );
-                $( optbgclsjq ).remove();
-            }});
-        */
     }
 
     // save modals focus option
@@ -92,38 +84,11 @@ function rollback() {
     }
 }
 
-export function Render() {
+/**
+ * Modals Render
+ */
+function Render() {
     !dia.Popup( optbgclsjq ) && ReactDOM.render( <Modals />, dia.Background( $( "html" ), optbgcls ) );
 }
 
-/**
- * get modals background document
- * 
- * @param  {string} target include: body and html
- * @return {jquery} simpread-option-root jquery object
- */
-export function getModalsBackground( target = "body" ) {
-    return dia.Background( $(target), optbgcls );
-    /*
-    if ( $(target).find( "." + optbgcls ).length == 0 ) {
-        $(target).append( optbg );
-    }
-    return $( "." + optbgcls )[0];
-    */
-}
-
-/**
- * Verify modals is popup
- * 
- * @return {boolean}
- */
-export function isPopup() {
-    return dia.Popup( optbgclsjq );
-    /*
-     if ( $("." + optbgcls ).children().length == 0 ) {
-         return false;
-     } else {
-         return true;
-     }
-     */
-}
+export{ Render }
