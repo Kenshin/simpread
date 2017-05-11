@@ -140,14 +140,14 @@ const Content = props => <dialog-content style={ style.content }>{ props.childre
       Footer  = props => <dialog-footer  style={ style.footer  }>{ props.children }</dialog-footer>;
 
 /**
- * Open
+ * get Dialog root html element
  * 
- * @param {jquery} jquery query root
+ * @param {jquery} jquery query selector
  * @param {string} class name
  * 
  * @return {elem} html element
  */
-function Background( $target, cls ) {
+function getRoot( $target, cls ) {
     [ root, rootjq ] = [ cls, `.${cls}` ];
     $target.find( rootjq ).length == 0 && $target.append( `<div class="${ root }"></div>` );
     Object.keys( style.bg ).forEach( key => $( rootjq )[0].style[ key ] = style.bg[ key ] );
@@ -155,7 +155,18 @@ function Background( $target, cls ) {
 }
 
 /**
- * Close
+ * Open Dialog
+ * 
+ * @param {react}  react dom
+ * @param {string} dialog background class name
+ * @param {jquery} jquery query selector
+ */
+function Open( reactDom, cls, $target = $("html") ) {
+    ReactDOM.render( reactDom, getRoot( $target, cls ) );
+}
+
+/**
+ * Close Dialog
  */
 function Close() {
     $( rootjq )
@@ -180,7 +191,7 @@ export {
     Dialog,
     Content,
     Footer,
-    Background,
+    Open,
     Close,
     Popup,
 }
