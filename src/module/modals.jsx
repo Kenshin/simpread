@@ -15,9 +15,8 @@ import * as tooltip from 'tooltip';
 import * as waves   from 'waves';
 import * as dia     from 'dialog';
 
-const optbgcls   = "simpread-option-root",
-      optbgclsjq = `.${optbgcls}`,
-      optbg      = `<div class="${ optbgcls } simpread-font"></div>`;
+const root   = "simpread-option-root",
+      rootjq = `.${root}`;
 
 /**
  * Modals Rect component
@@ -48,8 +47,8 @@ class Modals extends React.Component {
     }
 
     componentDidMount() {
-        waves.Render({ root: optbgclsjq });
-        tooltip.Render( optbgclsjq );
+        waves.Render({ root: rootjq });
+        tooltip.Render( rootjq );
     }
 
     render() {
@@ -88,7 +87,7 @@ function rollback() {
  * Modals Render
  */
 function Render() {
-    !dia.Popup( optbgclsjq ) && ReactDOM.render( <Modals />, dia.Background( $( "html" ), optbgcls ) );
+    !dia.Popup( rootjq ) && ReactDOM.render( <Modals />, dia.Background( $( "html" ), root ) );
 }
 
 export{ Render }
