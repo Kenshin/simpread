@@ -172,8 +172,8 @@ function Close() {
  * @param  {string} jquery selector
  * @return {boolean}
  */
-function Popup( cls ) {
-    return $( cls ).children().length == 0 ? false : true;
+function Popup( clsjq ) {
+    return $( clsjq ).children().length == 0 ? false : true;
 }
 
 export {
