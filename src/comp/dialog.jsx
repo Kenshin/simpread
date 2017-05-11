@@ -12,7 +12,7 @@
 
 console.log( "==== simpread component: Dialog ====" )
 
-let   root, rootbg;
+let   root, rootjq;
 const style = {
 
     bg: {
@@ -103,7 +103,7 @@ class Dialog extends React.Component {
 
     componentDidMount() {
         $( "dialog-content" ).height() < 585 && $( "dialog-footer" ).css( "border-top", "none" );
-        $( rootbg ).css({ opacity: 1, top: 0 });
+        $( rootjq ).css({ opacity: 1, top: 0 });
     }
 
     componentWillUnmount() {
@@ -148,21 +148,21 @@ const Content = props => <dialog-content style={ style.content }>{ props.childre
  * @return {elem} html element
  */
 function Background( $target, cls ) {
-    [ root, rootbg ] = [ cls, `.${cls}` ];
-    $target.find( rootbg ).length == 0 && $target.append( `<div class="${ root }"></div>` );
-    Object.keys( style.bg ).forEach( key => $( rootbg )[0].style[ key ] = style.bg[ key ] );
-    return $( rootbg )[0];
+    [ root, rootjq ] = [ cls, `.${cls}` ];
+    $target.find( rootjq ).length == 0 && $target.append( `<div class="${ root }"></div>` );
+    Object.keys( style.bg ).forEach( key => $( rootjq )[0].style[ key ] = style.bg[ key ] );
+    return $( rootjq )[0];
 }
 
 /**
  * Close
  */
 function Close() {
-    $( rootbg )
+    $( rootjq )
         .css({ top: "-100px" })
         .velocity({ opacity: 0 }, { complete: ()=>{
-            ReactDOM.unmountComponentAtNode( $( rootbg )[0] );
-            $( rootbg ).remove();
+            ReactDOM.unmountComponentAtNode( $( rootjq )[0] );
+            $( rootjq ).remove();
         }});
 }
 
