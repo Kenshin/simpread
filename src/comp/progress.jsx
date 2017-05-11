@@ -2,7 +2,7 @@
  * React Material Design: Progress
  * 
  * @version : 0.0.1
- * @update  : 2017/05/09
+ * @update  : 2017/05/10
  * @homepage: https://github.com/kenshin/react-md-ui
  * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -17,6 +17,14 @@ import ProgressBar from 'progressbar';
 
 let Shape, shape;
 
+/**
+ * Custom component: Progress
+ * 
+ * Reference:
+ * - https://material.io/guidelines/components/progress-activity.html
+ * 
+ * @class
+ */
 export default class Progress extends React.Component {
 
     static defaultProps = {
