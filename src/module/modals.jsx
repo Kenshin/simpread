@@ -1,4 +1,4 @@
-console.log( "=== simpread option dialog ===" )
+console.log( "=== simpread option modals ===" )
 
 import FocusOpt     from 'focusopt';
 import ReadOpt      from 'readopt';
@@ -20,11 +20,11 @@ const optbgcls   = "simpread-option-root",
       optbg      = `<div class="${ optbgcls } simpread-font"></div>`;
 
 /**
- * Dialog Rect component
+ * Modals Rect component
  */
-export default class Dialog extends React.Component {
+export default class Modals extends React.Component {
 
-    // close dialog
+    // close modals
     close( restore = rollback() ) {
         dia.Close();
         /*
@@ -37,9 +37,9 @@ export default class Dialog extends React.Component {
         */
     }
 
-    // save dialog focus option
+    // save modals focus option
     save() {
-        console.log( "dialog click submit button.", storage.current )
+        console.log( "modals click submit button.", storage.current )
         const code = storage.Setcur( storage.current.mode );
         if ( code != 0 ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
@@ -93,12 +93,12 @@ function rollback() {
 }
 
 /**
- * get Dialog background document
+ * get modals background document
  * 
  * @param  {string} target include: body and html
  * @return {jquery} simpread-option-root jquery object
  */
-export function getDialogBackground( target = "body" ) {
+export function getModalsBackground( target = "body" ) {
     return dia.Background( $(target), optbgcls );
     /*
     if ( $(target).find( "." + optbgcls ).length == 0 ) {
@@ -109,7 +109,7 @@ export function getDialogBackground( target = "body" ) {
 }
 
 /**
- * Verify dialog is popup
+ * Verify modals is popup
  * 
  * @return {boolean}
  */
