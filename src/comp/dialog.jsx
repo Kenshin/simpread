@@ -85,7 +85,7 @@ const style = {
 /**
  * Custom component: Dialog
  * 
- * Reference: 
+ * Reference:
  * - https://material.io/guidelines/components/dialogs.html
  * - http://www.material-ui.com/#/components/dialog
  * 
@@ -142,9 +142,22 @@ function Background( $target, cls ) {
     return $( rootbg )[0];
 }
 
+/**
+ * Close
+ */
+function Close() {
+    $( rootbg )
+        .css({ top: "-100px" })
+        .velocity({ opacity: 0 }, { complete: ()=>{
+            ReactDOM.unmountComponentAtNode( $( rootbg )[0] );
+            $( rootbg ).remove();
+        }});
+}
+
 export {
     Dialog,
     Content,
     Footer,
     Background,
+    Close,
 }
