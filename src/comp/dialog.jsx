@@ -12,6 +12,7 @@
 
 console.log( "==== simpread component: Dialog ====" )
 
+let   root, rootbg;
 const style = {
 
     bg: {
@@ -94,6 +95,7 @@ class Dialog extends React.Component {
 
     componentDidMount() {
         $( "dialog-content" ).height() < 585 && $( "dialog-footer" ).css( "border-top", "none" );
+        $( `.${root}` ).css({ opacity: 1, top: 0 });
     }
 
     render() {
@@ -125,12 +127,19 @@ class Dialog extends React.Component {
 const Content = props => <dialog-content style={ style.content }>{ props.children }</dialog-content>,
       Footer  = props => <dialog-footer  style={ style.footer  }>{ props.children }</dialog-footer>;
 
+/**
+ * Open
+ * 
+ * @param {jquery} jquery query root
+ * @param {string} class name
+ * 
+ * @return {elem} html element
+ */
 function Background( $target, cls ) {
-    if ( $target.find( "." + cls ).length == 0 ) {
-        $target.append( `<div class="${ cls }"></div>` );
-    }
-    Object.keys( style.bg ).forEach( key => $( "." + cls )[0].style[ key ] = style.bg[ key ] );
-    return $( "." + cls )[0];
+    [ root, rootbg ] = [ cls, `.${cls}` ];
+    $target.find( rootbg ).length == 0 && $target.append( `<div class="${ root }"></div>` );
+    Object.keys( style.bg ).forEach( key => $( rootbg )[0].style[ key ] = style.bg[ key ] );
+    return $( rootbg )[0];
 }
 
 export {
