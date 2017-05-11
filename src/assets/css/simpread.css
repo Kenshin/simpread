@@ -46,39 +46,6 @@
 }
 
 /**
- *  Option: background( root ) style
- */
-.simpread-option-root {
-    display: -webkit-flex;
-    justify-content:center;
-    align-items:center;
-
-    position: fixed;
-
-    top: -100px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    color: #fff;
-
-    text-shadow: 0 1px rgba(0,0,0,0.3);
-
-    opacity: 0;
-    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-
-    z-index: 2147483647;
-}
-
-.simpread-option-root-show {
-    top: 0;
-}
-
-.simpread-option-root-hide {
-    top: -100px;
-}
-
-/**
  * Dialog: style
 */
 
