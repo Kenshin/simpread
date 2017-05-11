@@ -209,11 +209,9 @@ const webpack = require( 'webpack' ),
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
-          foucsetting: __dirname + '/src/focus/setting.js',
 
           read       : __dirname + '/src/read/read.jsx',
           readctlbar : __dirname + '/src/read/controlbar.jsx',
-          readsetting: __dirname + '/src/read/setting.js',
           readschedule: __dirname+ '/src/read/component/progressbar.jsx',
           readfooter : __dirname + '/src/read/component/footer.jsx',
 
