@@ -92,6 +92,10 @@ function rollback() {
     }
 }
 
+export function Render() {
+    !dia.Popup( optbgclsjq ) && ReactDOM.render( <Modals />, dia.Background( $( "html" ), optbgcls ) );
+}
+
 /**
  * get modals background document
  * 
