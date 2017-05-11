@@ -87,7 +87,7 @@ function rollback() {
  * Modals Render
  */
 function Render() {
-    !dia.Popup( rootjq ) && ReactDOM.render( <Modals />, dia.Background( $( "html" ), root ) );
+    !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
 }
 
 export{ Render }
