@@ -129,6 +129,15 @@
             ""
         ]
     },{
+        "name"    : "weizhizao.ifanr.com",
+        "url"     : "http://www.ifanr.com/weizhizao/",
+        "title"   : "<h1 class='c-single-normal__title'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "sspai.com",
         "url"     : "https://sspai.com/post/",
         "title"   : "<h1 class='title'>",
