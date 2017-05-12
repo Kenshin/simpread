@@ -46,90 +46,16 @@
 }
 
 /**
- *  Option: background( root ) style
- */
-.simpread-option-root {
-    display: -webkit-flex;
-    justify-content:center;
-    align-items:center;
-
-    position: fixed;
-
-    top: -100px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    color: #fff;
-
-    text-shadow: 0 1px rgba(0,0,0,0.3);
-
-    opacity: 0;
-    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-
-    z-index: 2147483647;
-}
-
-.simpread-option-root-show {
-    top: 0;
-}
-
-.simpread-option-root-hide {
-    top: -100px;
-}
-
-/**
  * Dialog: style
 */
-sr-dialog {
-    display: -webkit-flex;
-    flex-direction:column;
-
-    min-width: 480px;
-    min-height: 300px;
-
-    margin: 0;
-    padding: 0;
-
-    color: rgba(0, 0, 0, 0.870588);
-    background-color: rgb(255, 255, 255);
-
-    border-radius: 3px;
-
-    box-sizing: border-box;
-    box-shadow: rgba(0, 0, 0, 0.247059) 0px 14px 45px, rgba(0, 0, 0, 0.219608) 0px 10px 18px;
-
-}
-
-sr-dialog sr-dialog-content {
-    width: 100%;
-    height: 100%;
-
-    min-height: 244px;
-
-    padding: 39px 24px 0;
-
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
-sr-dialog sr-dialog-footer {
-    display: -webkit-flex;
-    flex-flow:row nowrap;
-    justify-content:flex-end;
-
-    width: 100%;
-
-    box-sizing: border-box;
-}
 
 @media all and ( max-height: 783px ) {
 
-    sr-dialog sr-dialog-content {
+    dialog-gp dialog-content {
         max-height: 625px;
     }
 
-    sr-dialog sr-dialog-footer {
+    dialog-gp dialog-footer {
         border-top: 1px solid rgba(224, 224, 224, 1);
     }
 

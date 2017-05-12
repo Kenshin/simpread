@@ -258,7 +258,7 @@ class Storage {
             callback && callback( { count, forced }, undefined );
         } catch ( error ) {
             console.error( error );
-            callback && callback( undefined, error );
+            callback && callback( {}, error );
         }
     }
 

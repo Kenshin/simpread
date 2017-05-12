@@ -5,7 +5,9 @@
   "homepage_url" : "https://github.com/kenshin/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
   "icons" : {
-    "128" : "assets/images/icon72.png"
+    "16" : "assets/images/icon16.png",
+    "48" : "assets/images/icon48.png",
+    "128" : "assets/images/icon128.png"
   },
   "permissions": [
     "contextMenus",
@@ -28,7 +30,7 @@
   ],
   "page_action": {
     "default_icon": {
-      "32": "assets/images/icon72-disable.png"
+      "32": "assets/images/browser_icon-disable.png"
     }
   },
   "options_page": "options/options.html",

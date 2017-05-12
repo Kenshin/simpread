@@ -1,3 +1,15 @@
+/*!
+ * React Material Design: FAB( Floating Action Button )
+ * 
+ * @version : 0.0.1
+ * @update  : 2017/05/07
+ * @homepage: https://github.com/kenshin/react-md-ui
+ * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
+ * @author  : Kenshin Wang <kenshin@ksria.com>
+ * 
+ * @copyright 2017
+ */
+
 console.log( "==== simpread component: Floating Action Button ====" )
 
 let $target, type,
@@ -236,7 +248,7 @@ export default class Fab extends React.Component {
             $target.parent().css({ ...style.normal, ...style.normal_focus });
             if ( $target.parent().next() && $target.parent().next().is( "ul" ) ) {
                 $target.parent().next().css( "opacity", 1 ).attr( "current", true ).css( "visibility", "visible" );
-                $target.parent().parent().parent().find("ul[current!=true]").css( "opacity", 0 ).css( "visibility", "hidden" );
+                $target.parent().parent().find("ul[current!=true]").css( "opacity", 0 ).css( "visibility", "hidden" );
                 $target.parent().next().removeAttr( "current" );
             }
         }

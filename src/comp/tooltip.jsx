@@ -1,17 +1,20 @@
-console.log( "==== simpread component: ToolTip ====" )
-
-/*
- * Tooltip
+/*!
+ * React Material Design: Tooltip
  * 
- * Reference:
+ * @version : 0.0.1
+ * @update  : 2017/04/25
+ * @homepage: https://github.com/kenshin/react-md-ui
+ * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
+ * @author  : Kenshin Wang <kenshin@ksria.com>
+
+ * @reference:
  * - https://material.io/guidelines/components/tooltips.html
  * - http://materializecss.com/dialogs.html
- *
- * Author      Alvin Wang( alvin7@gmail.com ) https://github.com/Dogfalo
- * Materialize http://materializecss.com/
- * Tooltip     https://github.com/Dogfalo/materialize/blob/master/js/tooltip.js
- *
+ * 
+ * @copyright 2017
  */
+
+console.log( "==== simpread component: ToolTip ====" )
 
 let started = false, timeout, $target, $back, style, styles = new Map();
 const cssinjs = () => {

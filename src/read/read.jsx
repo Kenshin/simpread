@@ -1,10 +1,9 @@
 console.log( "=== simpread read load ===" )
 
 import pangu       from 'pangu';
-import ProgressBar from 'readschedule';
-import Footer      from 'readfooter';
+import ProgressBar from 'schedule';
 import ReadCtlbar  from 'readctlbar';
-import setting     from 'readsetting';
+import * as modals from 'modals';
 
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -28,6 +27,15 @@ const errorpage = `
                 或者 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">报告此页面</a> 以便让 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 变得更加出色，谢谢。
             </p>
         </sr-rd-content-error>`;
+
+const Footer = () => {
+    return (
+        <sr-rd-footer>
+            <sr-rd-footer-text>全文完</sr-rd-footer-text>
+            <sr-rd-footer-copywrite>本文由 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 优化，用以提升阅读体验。</sr-rd-footer-copywrite>
+        </sr-rd-footer>
+    )
+}
 
 class Read extends React.Component {
 
@@ -79,7 +87,7 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                setting.Render();
+                modals.Render();
                 break;
             case "save":
                 const [ url, title, desc ] = [ window.location.href.replace( /(\?|&)simpread_mode=read/, "" ), $("sr-rd-title").text().trim(), $("sr-rd-desc").text().trim() ];
@@ -153,7 +161,7 @@ function getReadRoot() {
  */
 function Exist( action = true ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        action && setting.Render();
+        action && modals.Render();
         return true;
     } else {
         return false;

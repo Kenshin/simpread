@@ -1,3 +1,15 @@
+/*!
+ * React Material Design: Switch
+ * 
+ * @version : 0.0.1
+ * @update  : 2017/03/13
+ * @homepage: https://github.com/kenshin/react-md-ui
+ * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
+ * @author  : Kenshin Wang <kenshin@ksria.com>
+ * 
+ * @copyright 2017
+ */
+
 console.log( "==== simpread component: Switch ====" )
 
 let style, styles = new Map();

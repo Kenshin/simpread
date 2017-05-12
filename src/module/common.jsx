@@ -77,6 +77,8 @@ export default class CommonOpt extends React.Component {
                 count  > 0 && new Notify().Render( 0, `同步更新成功，新更新 ${ count } 个站点。` );
                 forced > 0 && new Notify().Render( 0, `同步更新成功，强制更新 ${forced } 个站点。` );
                 count == 0 && forced == 0 && new Notify().Render( 0, "暂无更新。" );
+            } else {
+                new Notify().Render( 3, `同步时发生了一些问题，并不会影响本地配置文件，请稍后再试！` );
             }
         });
     }

@@ -1,4 +1,4 @@
-console.log( "=== simpread option dialog ===" )
+console.log( "=== simpread option modals ===" )
 
 import FocusOpt     from 'focusopt';
 import ReadOpt      from 'readopt';
@@ -13,32 +13,27 @@ import * as ss      from 'stylesheet';
 import Button       from 'button';
 import * as tooltip from 'tooltip';
 import * as waves   from 'waves';
+import * as dia     from 'dialog';
 
-const optbgcls   = "simpread-option-root",
-      optbgclsjq = `.${optbgcls}`,
-      optbg      = `<div class="${ optbgcls } simpread-font"></div>`;
+const root   = "simpread-option-root",
+      rootjq = `.${root}`;
 
 /**
- * Dialog Rect component
+ * Modals Rect component
  */
-export default class Dialog extends React.Component {
+class Modals extends React.Component {
 
-    // close dialog
+    // close modals
     close( restore = rollback() ) {
-        $( optbgclsjq )
-            .addClass( "simpread-option-root-hide" )
-            .velocity({ opacity: 0 }, { complete: ()=>{
-                tooltip.Exit( optbgclsjq );
-                $( optbgclsjq ).remove();
-            }});
+        dia.Close();
     }
 
-    // save dialog focus option
+    // save modals focus option
     save() {
-        console.log( "dialog click submit button.", storage.current )
+        console.log( "modals click submit button.", storage.current )
         const code = storage.Setcur( storage.current.mode );
         if ( code != 0 ) {
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts ));
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
             if ( storage.current.mode == STORAGE_MODE.read ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href }));
             code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，重新进入后生效！" )
         } else {
@@ -52,27 +47,25 @@ export default class Dialog extends React.Component {
     }
 
     componentDidMount() {
-        waves.Render({ root: optbgclsjq });
-        tooltip.Render( optbgclsjq );
-        $( optbgclsjq )
-            .velocity({ opacity: 1 })
-            .addClass( "simpread-option-root-show" );
-        $( "sr-dialog-content" ).height() < 585 && $( "sr-dialog-footer" ).css( "border-top", "none" );
+        waves.Render({ root: rootjq });
+        tooltip.Render( rootjq );
     }
 
     render() {
         const Option = storage.current.mode == STORAGE_MODE.focus ? FocusOpt : ReadOpt;
+
         return (
-            <sr-dialog>
-                <sr-dialog-content>
+            <dia.Dialog>
+                <dia.Content>
                     <Option option={ storage.current } />
-                </sr-dialog-content>
-                <sr-dialog-footer>
+                </dia.Content>
+                <dia.Footer>
                     <Button text="取 消" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
                     <Button text="确 认" waves="md-waves-effect" onClick={ ()=>this.save() } />
-                </sr-dialog-footer>
-            </sr-dialog>
+                </dia.Footer>
+            </dia.Dialog>
         )
+
     }
 }
 
@@ -91,27 +84,10 @@ function rollback() {
 }
 
 /**
- * get Dialog background document
- * 
- * @param  {string} target include: body and html
- * @return {jquery} simpread-option-root jquery object
+ * Modals Render
  */
-export function getDialogBackground( target = "body" ) {
-    if ( $(target).find( "." + optbgcls ).length == 0 ) {
-        $(target).append( optbg );
-    }
-    return $( "." + optbgcls )[0];
+function Render() {
+    !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
 }
 
-/**
- * Verify dialog is popup
- * 
- * @return {boolean}
- */
-export function isPopup() {
-     if ( $("." + optbgcls ).children().length == 0 ) {
-         return false;
-     } else {
-         return true;
-     }
-}
+export{ Render }

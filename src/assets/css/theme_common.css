@@ -119,6 +119,7 @@ sr-rd-content ol {
 }
 
 sr-rd-content ul li, sr-rd-content ol li {
+    font-size: inherit;
     list-style: disc;
     margin: 0 0 1.2em 0;
 }

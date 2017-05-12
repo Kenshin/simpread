@@ -1,9 +1,9 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-import setting   from 'foucsetting';
-import * as conf from 'config';
+import * as modals from 'modals';
+import * as conf   from 'config';
 
-import Fab       from 'fab';
+import Fab         from 'fab';
 
 let timer, $root;
 
@@ -25,7 +25,7 @@ class FControl extends React.Component {
                 moveTop();
                 break;
             case "setting":
-                setting.Render();
+                modals.Render();
                 break;
         }
     }

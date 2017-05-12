@@ -104,7 +104,7 @@ function readMode() {
  * Auto open read mode
  */
 function autoOpen() {
-    if ( !window.location.search.includes( "simpread_mode=read" ) ) return;
+    if ( !window.location.href.includes( "simpread_mode=read" ) ) return;
     switch ( storage.current.site.name ) {
         case "36kr.com":
             $( () => readMode() );
