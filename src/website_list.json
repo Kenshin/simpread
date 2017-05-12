@@ -295,7 +295,8 @@
         "desc"    : "",
         "include" : "<div class='lph-article-comView'>",
         "exclude" : [
-            ""
+            "[['<span>公众号：雷锋网</span>']]",
+            "[['<p>未经授权禁止转载</p>']]"
         ]
     },{
         "name"    : "tmtpost.com",
