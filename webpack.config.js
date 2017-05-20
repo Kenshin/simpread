@@ -22,8 +22,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template: './src/index.html',
-        hash    : true,
-        inject  : true,
+        inject  : false,
       }),
 
       // webpack-dev-server --hot
@@ -107,7 +106,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       output: {
         path      : isProduction() ? './publish/bundle' : './bundle',
         filename  : '[name].js',
-        publicPath: '/',
+        publicPath: '/bundle',
       },
 
       plugins: plugins,

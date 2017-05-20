@@ -19,7 +19,7 @@
   "scripts": {
     "develop": "NODE_ENV=development webpack --devtool=source-map --progress --colors --watch",
     "publish": "NODE_ENV=production  webpack -p --progress --colors",
-    "server": "NODE_ENV=development  webpack-dev-server --progress --colors --devtool=source-map"
+    "server": "NODE_ENV=development  webpack-dev-server --content-base src --progress --colors"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",

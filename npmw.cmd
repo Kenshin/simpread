@@ -48,9 +48,9 @@ goto quit
 :: server : Website
 ::===========================================================
 :server
-@echo webpack-dev-server --hot --inline --progress --colors --devtool=source-map
+@echo webpack-dev-server --content-base src --hot --inline --progress --colors --devtool=source-map
 set NODE_ENV=development
-webpack-dev-server --progress --colors --devtool=source-map
+webpack-dev-server --content-base src --progress --colors --devtool=source-map
 goto quit
 
 ::===========================================================
