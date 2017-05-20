@@ -23,11 +23,56 @@ html {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-
     margin: 0;
     padding: 0;
 
+    text-align: center;
+
+    color: var(--text-color);
     background-color: var(--background-color);
+}
+
+
+.top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    height: 100px;
+}
+
+.top ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-right: 25px;
+
+    width: 100%;
+
+    list-style: none;
+}
+
+.top ul li {
+    margin: 0 25px;
+}
+
+.top ul li a {
+    padding-bottom: 5px;
+
+    font-size: 1.3rem;
+    font-weight: 500;
+
+    color: var(--text-color);
+    text-decoration: none;
+
+    transition: border-color .5s;
+    border-bottom: 2px solid transparent;
+}
+
+.top ul li a:hover {
+    color: color( var(--secondary-color) alpha(-10%));
+    border-bottom: 2px solid var(--secondary-color);
 }
