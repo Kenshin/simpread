@@ -17,9 +17,8 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "develop": "NODE_ENV=development webpack --devtool=source-map --progress --colors --watch",
     "publish": "NODE_ENV=production  webpack -p --progress --colors",
-    "server": "NODE_ENV=development  webpack-dev-server --content-base src --progress --colors"
+    "develop": "NODE_ENV=development webpack-dev-server --content-base src --progress --colors --devtool=source-map"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
