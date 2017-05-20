@@ -18,13 +18,6 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       // extract text plugin
       new ExtractTextPlugin( '[name].css' ),
 
-      // html plugin
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: './src/index.html',
-        inject  : false,
-      }),
-
       // webpack-dev-server --hot
       new webpack.HotModuleReplacementPlugin(),
 
@@ -34,6 +27,17 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
     isProduction = function () {
       return process.env.NODE_ENV === 'production';
     },
+
+    // html plugin
+    hmr = ( function () {
+      !isProduction() && plugins.push(
+        new HtmlWebpackPlugin({
+          filename: 'index.html',
+          template: './src/index.html',
+          inject  : false,
+        })
+      );
+    })(),
 
     // only when environment variable is 'production' call
     deploy = ( function () {
