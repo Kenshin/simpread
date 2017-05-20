@@ -1,5 +1,6 @@
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin"),
+const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
+      HtmlWebpackPlugin = require( 'html-webpack-plugin' )
       webpack           = require( 'webpack' ),
       plugins           = [
 
@@ -16,6 +17,14 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
 
       // extract text plugin
       new ExtractTextPlugin( '[name].css' ),
+
+      // html plugin
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: './src/index.html',
+        hash    : true,
+        inject  : true,
+      }),
 
       // webpack-dev-server --hot
       new webpack.HotModuleReplacementPlugin(),
@@ -96,9 +105,9 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
       },
 
       output: {
-        path      : isProduction() ? './publish/bundle' : './src/bundle',
+        path      : isProduction() ? './publish/bundle' : './bundle',
         filename  : '[name].js',
-        publicPath: '/bundle/',
+        publicPath: '/',
       },
 
       plugins: plugins,
