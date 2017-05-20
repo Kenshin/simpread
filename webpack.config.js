@@ -93,11 +93,14 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
           'jquery'
         ],
 
-        bundle: [
-          'webpack/hot/dev-server',
-          'webpack-dev-server/client?http://localhost:8080',
-          './src/index.js'
-        ],
+        bundle: ( function() {
+          const arr = [ './src/index.js' ];
+          !isProduction() && arr.push(
+            'webpack/hot/dev-server',
+            'webpack-dev-server/client?http://localhost:8080'
+          );
+          return arr;
+        })(),
 
         style: './src/assets/css/main.css',
 
