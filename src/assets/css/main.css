@@ -230,12 +230,9 @@ body {
  */
 .footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-
-    padding-bottom: var(--padding-bottom);
-
-    height: 300px;
 
     color: var(--text-secondary-color);
     background-color: #37474F;
@@ -245,6 +242,34 @@ body {
     @apply --white-link;
 }
 
-.footer a:hover {
+.footer .copywrite {
+    padding-bottom: var(--padding-bottom);
+
+    width: 100%;
+    text-align: center;
+}
+
+.footer .groups {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    padding-bottom: var(--padding-bottom);
+
+    width: 100%;
+}
+
+.footer .groups .links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer .groups .links a:hover {
+    color: color( var(--text-secondary-color) alpha(-10%));
+    text-decoration: none;
+}
+
+.footer .copywrite a:hover {
     @apply --white-link-hover;
 }
