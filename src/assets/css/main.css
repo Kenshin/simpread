@@ -270,6 +270,49 @@ body {
     text-decoration: none;
 }
 
+.footer .groups .links ul {
+    display: flex;
+    flex-direction: row;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer .groups .links ul li .icon {
+    display: block;
+
+    width: 30px;
+    height: 30px;
+
+    padding: 20px;
+
+    opacity: .4;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.footer .groups .links ul li .weibo {
+    background-image: url( '../images/weibo.png' );
+}
+
+.footer .groups .links ul li .douban {
+    background-image: url( '../images/douban.png' );
+}
+
+.footer .groups .links ul li .twitter {
+    background-image: url( '../images/twitter.png' );
+}
+
+.footer .groups .links ul li .facebook {
+    background-image: url( '../images/facebook.png' );
+}
+
+.footer .groups .links ul li .gplus {
+    background-image: url( '../images/gplus.png' );
+}
+
 .footer .copywrite a:hover {
     @apply --white-link-hover;
 }
