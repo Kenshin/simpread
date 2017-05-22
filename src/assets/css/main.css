@@ -1,4 +1,7 @@
 
+/**
+ *  root
+ */
 :root {
     --text-color: #333;
     --text-secondary-color: #fff;
@@ -31,6 +34,9 @@
     box-sizing: border-box;
 }
 
+/**
+ *  golbal
+ */
 html {
     font: 300 16px/1.8 -apple-system, PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
     font-size: 62.5%;
@@ -53,7 +59,9 @@ body {
     background-color: var(--background-color);
 }
 
-
+/**
+ *  top
+ */
 .top {
     display: flex;
     flex-direction: row;
@@ -90,6 +98,9 @@ body {
     @apply --white-link-hover;
 }
 
+/**
+ *  header
+ */
 .header {
     height: 653px;
 
@@ -169,6 +180,9 @@ body {
     max-width: 800px;
 }
 
+/**
+ *  main
+ */
 .main .feature {
     display: flex;
     flex-direction: row;
@@ -211,6 +225,9 @@ body {
     }
 }
 
+/**
+ *  footer
+ */
 .footer {
     display: flex;
     justify-content: center;
