@@ -1,9 +1,28 @@
 
 :root {
-  --text-color: #333;
-  --secondary-color: color(#333 alpha(-30%));
-  --background-color: #fafafa;
-  --width: 700px;
+    --text-color: #333;
+    --text-secondary-color: #fff;
+    --secondary-color: color(#333 alpha(-30%));
+    --background-color: #fafafa;
+    --width: 700px;
+
+    --white-link: {
+        padding-bottom: 5px;
+
+        font-size: 1.3rem;
+        font-weight: 500;
+
+        color: var(--text-secondary-color);
+        text-decoration: none;
+
+        transition: border-color .5s;
+        border-bottom: 2px solid transparent;
+    }
+
+    --white-link-hover: {
+        color: color( var(--text-secondary-color) alpha(-10%));
+        border-bottom: 2px solid var(--text-secondary-color);
+    }
 }
 
 * {
@@ -62,27 +81,17 @@ body {
 }
 
 .top ul li a {
-    padding-bottom: 5px;
-
-    font-size: 1.3rem;
-    font-weight: 500;
-
-    color: #fff;
-    text-decoration: none;
-
-    transition: border-color .5s;
-    border-bottom: 2px solid transparent;
+    @apply --white-link;
 }
 
 .top ul li a:hover {
-    color: color( #fff alpha(-10%));
-    border-bottom: 2px solid #fff;
+    @apply --white-link-hover;
 }
 
 .header {
     height: 800px;
 
-    color: #fff;
+    color: var(--text-secondary-color);
     background: linear-gradient(to bottom, #1976D2 0, #2196F3 100%);
 }
 
@@ -136,7 +145,7 @@ body {
 }
 
 .header .download .online span {
-    color: #fff;
+    color: var(--text-secondary-color);
     font-size: 2.4rem;
 }
 
@@ -145,6 +154,8 @@ body {
 }
 
 .header .download .offline a {
-    color: inherit;
-    text-decoration: none;
+    @apply --white-link;
+}
+.header .download .offline a:hover {
+    @apply --white-link-hover;
 }
