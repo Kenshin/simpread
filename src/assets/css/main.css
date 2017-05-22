@@ -233,5 +233,18 @@ body {
     justify-content: center;
     align-items: flex-end;
 
+    padding-bottom: var(--padding-bottom);
+
     height: 300px;
+
+    color: var(--text-secondary-color);
+    background-color: #37474F;
+}
+
+.footer a {
+    @apply --white-link;
+}
+
+.footer a:hover {
+    @apply --white-link-hover;
 }
