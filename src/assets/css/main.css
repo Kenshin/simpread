@@ -169,7 +169,52 @@ body {
     max-width: 800px;
 }
 
+.main .feature {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-.main {
-    height: 500px;
+    padding: 50px 0;
+
+    color: var(--text-color);
+    
+    width: 100%;
+}
+
+.main .feature img {
+    zoom: .8;
+}
+
+.main .feature.read,
+.main .feature.theme {
+    background: #fff;
+}
+
+.main .feature .intro .desc span {
+    padding: 5px;
+    border-radius: 3px;
+    background-color: rgba(27,31,35,0.05);
+}
+
+.main .feature .intro {
+    width: 100%;
+
+    & .title {
+        padding: 40px 0;
+        font-size: 2.4rem;
+    }
+
+
+    & .desc {
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    height: 300px;
 }
