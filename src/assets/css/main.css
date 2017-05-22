@@ -11,7 +11,7 @@
 }
 
 html {
-    font: 300 16px/1.8 -apple-system, PingFang SC, Microsoft Yahei, Lantinghei SC, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+    font: 300 16px/1.8 -apple-system, PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
     font-size: 62.5%;
 
     color: var(--text-color);
@@ -88,22 +88,28 @@ body {
 
 .header .title {
     font-size: 3rem;
-    font-weight: bold;
+    font-weight: 500;
+    letter-spacing: 2px;
 
     padding: 40px 0 10px 0;
 }
 
 .header .desc {
     font-size: 2.4rem;
+    font-weight: 100;
+    letter-spacing: 1px;
+    
     padding-bottom: 10px;
 }
 
 .header .download {
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: flex-end;
 }
 
-.header .download a {
+.header .download .online {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,20 +122,29 @@ body {
     min-width: 88px;
     min-height: 36px;
 
+    line-height: 48px;
     text-decoration: none;
 
-    background-color: #FF5252;
+    background-color: #F44336;
     border-radius: 2px;
     box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
-.header .download a:hover {
-    color: #EF9A9A;
+.header .download .online:hover {
+    background-color: #E53935;
 }
 
 .header .download .online span {
     color: #fff;
     font-size: 2.4rem;
+}
 
+.header .download .offline {
+    font-size: 1.4rem;
+}
+
+.header .download .offline a {
+    color: inherit;
+    text-decoration: none;
 }
