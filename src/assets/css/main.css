@@ -117,7 +117,7 @@ body {
  *  header
  */
 .header {
-    height: 653px;
+    height: 706px;
 
     color: var(--text-secondary-color);
     background: linear-gradient(to bottom, #1976D2 0, #2196F3 100%);
@@ -193,6 +193,7 @@ body {
 }
 
 .header .introduce img {
+    padding-top: 40px;
     max-width: 800px;
 }
 
