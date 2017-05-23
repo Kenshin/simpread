@@ -67,7 +67,7 @@ body {
 
     background-repeat: no-repeat;
     background-position: center center;
-    background-image: url( '../images/logo.png' );
+    background-image: url( '../icons/logo.png' );
 }
 
 /**
@@ -311,23 +311,23 @@ body {
 }
 
 .footer .groups .links ul li .weibo {
-    background-image: url( '../images/weibo.png' );
+    background-image: url( '../icons/weibo.png' );
 }
 
 .footer .groups .links ul li .douban {
-    background-image: url( '../images/douban.png' );
+    background-image: url( '../icons/douban.png' );
 }
 
 .footer .groups .links ul li .twitter {
-    background-image: url( '../images/twitter.png' );
+    background-image: url( '../icons/twitter.png' );
 }
 
 .footer .groups .links ul li .facebook {
-    background-image: url( '../images/facebook.png' );
+    background-image: url( '../icons/facebook.png' );
 }
 
 .footer .groups .links ul li .gplus {
-    background-image: url( '../images/gplus.png' );
+    background-image: url( '../icons/gplus.png' );
 }
 
 .footer .groups .links .logo {
