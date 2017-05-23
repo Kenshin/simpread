@@ -59,6 +59,17 @@ body {
     background-color: var(--background-color);
 }
 
+.logo span {
+    display: block;
+
+    width: 113px;
+    height: 41px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url( '../images/logo.png' );
+}
+
 /**
  *  top
  */
@@ -71,6 +82,10 @@ body {
     height: 100px;
 
     background-color: #1976D2;
+}
+
+.top .logo {
+    padding-left: 40px;
 }
 
 .top ul {
@@ -277,6 +292,8 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
+
+    zoom: .9;
 }
 
 .footer .groups .links ul li .icon {
@@ -311,6 +328,17 @@ body {
 
 .footer .groups .links ul li .gplus {
     background-image: url( '../images/gplus.png' );
+}
+
+.footer .groups .links .logo {
+    display: flex;
+    justify-content: center;
+
+    padding: 20px 0;
+    width: 100%;
+
+    opacity: .8;
+    zoom: .8;
 }
 
 .footer .copywrite a:hover {
