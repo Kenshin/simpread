@@ -173,6 +173,7 @@ body {
 
 .header .download .online:hover {
     background-color: #E53935;
+    box-shadow: rgba(0, 0, 0, .3) 0px 5px 5px, rgba(0, 0, 0, .3) 0px 5px 5px;
 }
 
 .header .download .online span {
