@@ -1,8 +1,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Kenshin"/>
 
     <meta name="description" content="简悦 - 让你瞬间进入沉浸式阅读的 Chrome extension" />
@@ -25,13 +23,30 @@
 
     <title>SimpRead 简悦（SimpRead） </title>
 
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="stylesheet" href="./bundle/style.css">
 
 </head>
 <body>
     <div class="top">
-        <a href="http://ksria.com/simpread"></a>
+        <a href="http://ksria.com/simpread" target="_blank" class="logo"><span></span></a>
         <ul>
             <li><a href="">功能</a></li>
             <li><a href="">开发日志</a></li>
@@ -90,7 +105,7 @@
                 <div class="title">高度定制化，可编程</div>
                 <div class="desc">
                     <p>有不想显示的图片？没问题！页面任意元素，均可隐藏，可编程，支持：</p>
-                    <span>HTML 节点</span>&nbsp;/&nbsp;<span>jQuery 语句</span>&nbsp;/&nbsp;<span>正则表达式</span>&nbsp;/&nbsp;<span>任意段落</span>
+                    <span>HTML 节点</span>&nbsp;<span>jQuery 语句</span>&nbsp;<span>正则表达式</span>&nbsp;<span>任意段落</span>
                 </div>
             </div>
             <img src="./assets/images/focus_mode.png" alt="">
@@ -98,9 +113,18 @@
     </div>
     <div class="footer">
         <div class="groups">
-            <div class="logo"></div>
             <div class="links">
-                <h1>链接</h1>
+                <a href="http://ksria.com/simpread" target="_blank" class="logo"><span></span></a>
+                <ul>
+                    <li><a target="_blank" href="http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png"><span class="icon weibo"></span></a></li>
+                    <li><a target="_blank" href="https://www.douban.com/share/service?href=http://ksria.com/simpread&name=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95"><span class="icon douban"></span></a></li>
+                    <li><a target="_blank" href="https://twitter.com/intent/tweet?via=wanglei001&amp;text=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&amp;url=http://ksria.com/simpread"><span class="icon twitter"></span></a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread"><span class="icon facebook"></span></a></li>
+                    <li><a target="_blank" href="https://plus.google.com/share?url=http://ksria.com/simpread"><span class="icon gplus"></span></a></li>
+                </ul>
+            </div>
+            <div class="links">
+                <h1>支持</h1>
                 <a href="http://ksria.com/simpread/CHANGELOG.md" target="_blank">更新日志</a>
                 <a href="https://github.com/kenshin/simpread/wiki" target="_blank">Wiki</a>
                 <a href="https://github.com/kenshin/simpread/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" target="_blank">常见问题</a>
@@ -110,6 +134,7 @@
                 <h1>关于</h1>
                 <a href="http://kenshin.wang" target="_blank">关于作者</a>
                 <a href="http://weibo.com/23784148" target="_blank">微博</a>
+                <a href="https://opensource.org/licenses/MIT" target="_blank">MIT Licenses</a>
             </div>
             <div class="links">
                 <h1>产品</h1>
