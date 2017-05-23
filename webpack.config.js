@@ -58,9 +58,9 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         // copy files
         plugins.push(
           new CopyWebpackPlugin([
-            { from   : "src/favicon.ico" ,   to : '../' },
-            { from   : 'src/index.html',     to : '../' },
-            { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
+            { from   : 'src/index.html',      to   : '../' },
+            { context: 'src/assets/favicon/', from : "*" , to : '../assets/favicon' },
+            { context: 'src/assets/images/',  from : "*" , to : '../assets/images' },
           ])
         );
 
