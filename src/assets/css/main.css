@@ -213,7 +213,6 @@ body {
 }
 
 .main .feature img {
-    /*zoom: .8;*/
     max-width: 600px;
 }
 
@@ -229,6 +228,7 @@ body {
 }
 
 .main .feature .intro {
+    padding: 10px;
     width: 100%;
 
     & .title {
