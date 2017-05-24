@@ -212,11 +212,10 @@ body {
     width: 100%;
 }
 
-/*
 .main .feature img {
-    zoom: .8;
+    /*zoom: .8;*/
+    max-width: 600px;
 }
-*/
 
 .main .feature.read,
 .main .feature.theme {
