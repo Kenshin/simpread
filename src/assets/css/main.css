@@ -288,6 +288,10 @@ body {
     text-decoration: none;
 }
 
+.footer .groups .links:nth-of-type(1) {
+    justify-content: center;
+}
+
 .footer .groups .links ul {
     display: flex;
     flex-direction: row;
