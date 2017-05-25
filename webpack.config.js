@@ -146,7 +146,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         return [
           require( 'postcss-cssnext' )(),
           require( 'autoprefixer'    )({
-            browsers: [ 'last 2 versions', '> 5%' ]
+            browsers: [ 'last 5 versions', '> 5%' ]
           })
         ]
       },
