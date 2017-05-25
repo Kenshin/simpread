@@ -221,6 +221,11 @@ body {
     background: #fff;
 }
 
+.main .feature.focus,
+.main .feature.custom {
+    justify-content: flex-end;
+}
+
 .main .feature .intro .desc span {
     padding: 5px;
     border-radius: 3px;
@@ -229,7 +234,6 @@ body {
 
 .main .feature .intro {
     padding: 10px;
-    width: 100%;
 
     & .title {
         padding: 40px 0;
