@@ -208,7 +208,8 @@ body {
     padding: 50px 0;
 
     color: var(--text-color);
-    
+    text-align: left;
+
     width: 100%;
 }
 
