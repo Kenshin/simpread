@@ -356,3 +356,33 @@ body {
 .footer .copywrite a:hover {
     @apply --white-link-hover;
 }
+
+@media all and ( min-width: 2000px) {
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main .feature.read,
+    .main .feature.focus,
+    .main .feature.theme,
+    .main .feature.custom {
+        justify-content: center;
+
+        margin: 20px;
+
+        width: 1035px;
+
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 10px 25px 0 rgba(49,49,93,0.1);
+    }
+
+    .footer {
+        margin-top: 20px;
+    }
+
+}
