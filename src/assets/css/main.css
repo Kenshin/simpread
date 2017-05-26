@@ -357,7 +357,7 @@ body {
     @apply --white-link-hover;
 }
 
-@media all and ( min-width: 2000px) {
+@media all and ( min-width: 2000px ) {
 
     .main {
         display: flex;
@@ -387,8 +387,9 @@ body {
 
 }
 
-
-
+/**
+ *  changelog
+ */
 .container {
     margin: 0 auto;
     padding: 40px 0;
@@ -512,4 +513,11 @@ body {
 
 .version .type.complete {
     background-color: #03A9F4;
+}
+
+@media all and ( min-width: 980px ) {
+
+    .container {
+        max-width: 700px;
+    }
 }
