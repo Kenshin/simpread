@@ -386,3 +386,130 @@ body {
     }
 
 }
+
+
+
+.container {
+    margin: 0 auto;
+    padding: 40px 0;
+
+    width: 100%;
+    max-width: 1024px;
+
+    text-align: left;
+}
+
+.container .title {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.container .desc {
+    padding-bottom: 20px;
+
+    font-size: 1.6rem;
+    border-bottom: 1px solid color(#333 alpha(-88%));
+}
+
+.versions {
+    position: relative;
+
+    margin-top: 20px;
+    padding: 10px;
+
+    min-height: 500px;
+
+    font-size: 1.4rem;
+}
+
+.versions:after {
+    position: absolute;
+    content: "";
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 2px;
+    background-image: linear-gradient(to bottom, transparent 0, #2196F3 100% );
+}
+
+.version {
+    margin: 0 0 40px 10px;
+}
+
+.version .data {
+    position: relative;
+
+    left: -84px;
+    top: 34px;
+}
+
+.version .data .year {
+    padding-left: 21px;
+
+    line-height: 1px;
+    font-size: 1.4rem;
+}
+
+.version .data .day {
+    font-size: 2rem;
+}
+
+.versions .point {
+    position: absolute;
+
+    left: -17px;
+
+    margin: 10px;
+
+    width: 15px;
+    height: 15px;
+
+    text-align: start;
+
+    background-color: var(--text-secondary-color);
+    border-radius: 50%;
+    border: 2px solid #007aff;
+
+    z-index: 10;
+}
+
+.version .num {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.version .details ul {
+    list-style: none;
+    line-height: 35px;
+
+    margin: 0;
+    padding: 0;
+}
+
+.version .type {
+    margin-right: 5px;
+    padding: 3px 10px;
+
+    color: var(--text-secondary-color);
+    font-weight: 500;
+
+    border-radius: 2px;
+}
+
+.version .type.add {
+    background-color: #4CAF50;
+}
+
+.version .type.fix {
+    background-color: #F44336;
+}
+
+.version .type.change {
+    background-color: #FFC107;
+}
+
+.version .type.complete {
+    background-color: #03A9F4;
+}

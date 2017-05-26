@@ -37,6 +37,13 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
           inject  : false,
         })
       );
+      !isProduction() && plugins.push(
+        new HtmlWebpackPlugin({
+          filename: 'changelog.html',
+          template: './src/changelog.html',
+          inject  : false,
+        })
+      );
     })(),
 
     // only when environment variable is 'production' call
