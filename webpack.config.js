@@ -66,6 +66,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         plugins.push(
           new CopyWebpackPlugin([
             { from   : 'src/index.html',      to   : '../' },
+            { from   : 'src/changelog.html',  to   : '../' },
             { context: 'src/assets/favicon/', from : "*" , to : '../assets/favicon' },
             { context: 'src/assets/images/',  from : "*" , to : '../assets/images' },
           ])
