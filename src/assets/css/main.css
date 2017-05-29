@@ -271,6 +271,50 @@ body {
     }
 }
 
+.main .feature.every {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    margin: 0 auto;
+
+    max-width: 1024px;
+}
+
+.main .feature.every .only {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 20px;
+
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.main .feature.every .only .icon {
+    display: block;
+
+    width: 96px;
+    height: 96px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &.style {
+        background-image: url( '../icons/feature_style.png' );
+    }
+
+    &.layout {
+        background-image: url( '../icons/feature_layout.png' );
+    }
+
+    &.fontfamily {
+        background-image: url( '../icons/feature_fontfamily.png' );
+    }
+}
+
 /**
  *  footer
  */
