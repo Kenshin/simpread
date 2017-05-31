@@ -286,7 +286,7 @@ body {
     flex-direction: column;
     justify-content: center;
 
-    padding: 20px;
+    padding: 40px;
 
     text-align: center;
     font-size: 1.6rem;
@@ -296,8 +296,10 @@ body {
 .main .feature.every .only .icon {
     display: block;
 
-    width: 96px;
-    height: 96px;
+    width: 75px;
+    height: 75px;
+
+    border-radius: 25px;
 
     background-repeat: no-repeat;
     background-position: center center;
@@ -312,6 +314,42 @@ body {
 
     &.fontfamily {
         background-image: url( '../icons/feature_fontfamily.png' );
+    }
+
+    &.fontsize {
+        background-image: url( '../icons/feature_fontsize.png' );
+    }
+
+    &.share {
+        background-image: url( '../icons/feature_share.png' );
+    }
+
+    &.shortcuts {
+        background-image: url( '../icons/feature_shortcuts.png' );
+    }
+
+    &.custom {
+        background-image: url( '../icons/feature_custom.png' );
+    }
+
+    &.opacity {
+        background-image: url( '../icons/feature_opacity.png' );
+    }
+
+    &.sync {
+        background-image: url( '../icons/feature_sync.png' );
+    }
+
+    &.import {
+        background-image: url( '../icons/feature_import.png' );
+    }
+
+    &.export {
+        background-image: url( '../icons/feature_export.png' );
+    }
+
+    &.clear {
+        background-image: url( '../icons/feature_clear.png' );
     }
 }
 
