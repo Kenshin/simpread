@@ -284,6 +284,7 @@ body {
 
     padding: 40px;
 
+    color: var(--secondary-color);
     text-align: center;
     font-size: 1.6rem;
     font-weight: 400;
