@@ -349,31 +349,6 @@ body {
     }
 }
 
-/*
-.main .feature.all {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    background-color: #FCFCFC;
-
-    & .title {
-        padding: 40px 0;
-        font-size: 2.4rem;
-    }
-
-    & a {
-        text-align: center;
-    }
-
-    & img {
-        max-width: initial;
-        width: 90%;
-    }
-}
-*/
-
 /**
  *  footer
  */
