@@ -257,6 +257,12 @@ body {
     & .title {
         padding: 40px 0;
         font-size: 2.4rem;
+
+        & a {
+            color: inherit;
+            text-decoration: none;
+            cursor: help;
+        }
     }
 }
 
@@ -268,6 +274,7 @@ body {
     margin: 0 auto;
 
     max-width: 1024px;
+
 }
 
 .main .feature.all section .only {
