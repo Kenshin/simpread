@@ -1,6 +1,8 @@
-简悦（ SimpRead ） - 让你瞬间进入沉浸式阅读的 Chrome extension
+简悦（ SimpRead ） - 让你瞬间进入沉浸式阅读的 Chrome 扩展
 =======
-### 为了达到完美的阅读模式这个小目标 ，我适配了 120+ 个网站，因此诞生了它。还原阅读的本质，提升你的阅读体验。
+为了达到完美的阅读模式这个小目标 ，我适配了 120+ 个网站，因此诞生了简悦。还原阅读的本质，提升你的阅读体验。
+=======
+
 [![Version][version-badge]][version-link]
 
 #### 下载：
@@ -54,9 +56,9 @@
 - [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
-- Icon <http://iconfont.cn>
-- Mockup Design <http://magicmockups.com/>
-- Material Design <https://material.io/guidelines/>
+- Icon from <http://iconfont.cn>
+- Mockup Design usage <http://magicmockups.com/>
+- Material Design usage <https://material.io/guidelines/>
 
 #### 许可：
 [![license-badge]][license-link]
