@@ -100,7 +100,7 @@ urls = {
         website: "http://ksria.com/simpread",
         githubstar: "https://github.com/Kenshin/simpread",
         githubfollow: "https://github.com/Kenshin/simpread",
-        changelog: "http://ksria.com/simpread/CHANGELOG.md",
+        changelog: "http://ksria.com/simpread/changelog.html",
         feedback: "https://github.com/kenshin/simpread/issues",
         issues: "https://github.com/kenshin/simpread/issues",
     },

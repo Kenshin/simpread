@@ -39,7 +39,7 @@ function Verify( curver, data ) {
  */
 function Notify( type, ver ) {
     let str = type == "firstload" ? "安装" : "更新";
-    return `${str} 到最新版本 ${ver} ，详细请看 <a href="http://ksria.com/simpread/CHANGELOG.md">更新日志</a>`;
+    return `${str} 到最新版本 ${ver} ，详细请看 <a href="http://ksria.com/simpread/changelog.html">更新日志</a>`;
 }
 
 export {
