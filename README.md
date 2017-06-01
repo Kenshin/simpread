@@ -31,7 +31,7 @@
 ![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature.png)
 
 #### 投票：
-* 如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/hddodoenogpbchankicchhlgaegfphfp)
+* 如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll)
 
 #### 下一步：
 - [ ] 稍后读可以直接发送到 `Pocket`；  
@@ -68,7 +68,7 @@
 [version-badge]:    https://img.shields.io/badge/lastest_version-1.0.0-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
-[chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/hddodoenogpbchankicchhlgaegfphfp
+[chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
 [offline-link]:     http://ksria.com/simpread/crx/1.0.0/simpread.crx
 [license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
