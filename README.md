@@ -1,6 +1,7 @@
 简悦 SimpRead - 让你瞬间进入沉浸式阅读的 Chrome 扩展
 =======
 为了达到完美的阅读模式这个小目标 ，我适配了 120+ 个网站，因此诞生了简悦。还原阅读的本质，提升你的阅读体验。
+想了解简悦背后的故事，[猛击这里](http://www.jianshu.com/p/2917e4e0169d) ~
 
 [![Version][version-badge]][version-link]
 
