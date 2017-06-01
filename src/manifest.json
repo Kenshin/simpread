@@ -2,7 +2,7 @@
   "name": "简悦（SimpRead）",
   "version": "1.0.0",
   "description" : "简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
-  "homepage_url" : "https://github.com/kenshin/simpread",
+  "homepage_url" : "http://ksria.com/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
   "icons" : {
     "16" : "assets/images/icon16.png",
@@ -38,6 +38,6 @@
     "/assets/images/*",
     "website_list.json"
   ],
-  "update_url": "http://k-zone.cn/simpread/updates.xml",
+  "update_url": "https://clients2.google.com/service/update2/crx",
   "manifest_version": 2
 }
