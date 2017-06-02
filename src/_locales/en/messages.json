@@ -1,0 +1,12 @@
+{
+    "extension_name": {
+        "message": "SimpRead - Reader View",
+        "description": "similar to Safari reading mode, read mode, reader view module, named simpread."
+    },
+
+    "extension_desc": {
+        "message": "Immersion-reading mode of Chrome extensions, similar to Safari read mode.",
+        "description": "similar to Safari reading mode, read mode, reader view module, named simpread."
+    }
+
+}

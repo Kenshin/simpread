@@ -1,8 +1,9 @@
 {
-  "name": "简悦 - SimpRead",
-  "short_name": "SimpRead",
+  "name": "__MSG_extension_name__",
+  "default_locale"  : "en",
   "version": "1.0.0",
-  "description" : "简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
+  "short_name": "SimpRead",
+  "description" : "__MSG_extension_desc__",
   "homepage_url" : "http://ksria.com/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
   "icons" : {

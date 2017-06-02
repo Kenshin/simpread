@@ -50,6 +50,7 @@ const webpack = require( 'webpack' ),
             { from   : "src/website_list.json" ,          to : '../' },
             { from   : 'src/options/options.html',        to : '../options/' },
             { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
+            { context: 'src/_locales/',    from : "*/*" , to : '../_locales/' },
           ])
         );
 
