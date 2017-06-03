@@ -11,6 +11,9 @@
 #### 主页：
 [![Website][www-badge]][www-link]
 
+#### 照片集：
+* <http://ksria.com/simpread/gallery/>
+
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/visual%20effect.jpg)
 ![简悦 - 阅读模式](http://ojec5ddd5.bkt.clouddn.com/read%20mode.png)  
