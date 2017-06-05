@@ -872,6 +872,43 @@
             "[[/src=\\S+(006tNc79gw1f6gzqizciyj3076076aai)\\S+'/]]"
         ]
     },{
+        "name"    : "linuxsight.com",
+        "url"     : "http://www.linuxsight.com/blog/",
+        "title"   : "<h1 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='single-content'>",
+        "exclude" : [
+            "<div class='ad-site'>"
+        ]
+    },{
+        "name"    : "coyee.com",
+        "url"     : "https://coyee.com/article/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='sections'>",
+        "exclude" : [
+            "<div class='section_side_bar'>"
+        ]
+    },{
+        "name"    : "36dsj.com",
+        "url"     : "http://www.36dsj.com/archives/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<article class='article-content'>",
+        "exclude" : [
+            "[['<p>转载请注明来自</p>']]",
+			"[['<p>End.</p>']]"
+        ]
+    },{
+        "name"    : "cocoachina.com",
+        "url"     : "http://www.cocoachina.com/*",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<div id='detailbody'>",
+        "exclude" : [
+            "<td class='gutter'>"
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/*",
         "title"   : "<h1 class='title'>",
