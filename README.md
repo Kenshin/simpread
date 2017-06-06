@@ -4,8 +4,8 @@
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 120+ 个网站，因此诞生了简悦。</p>
 <p align="center">
    <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.0.0-blue.svg"></a>
-   <a href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
-   <a href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
+   <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
+   <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
    <a href="http://ksria.com/simpread/crx/1.0.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
 
 </p>
