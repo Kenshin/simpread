@@ -103,13 +103,13 @@ export default class CommonOpt extends React.Component {
                         tooltip={{ text: this.state.update }}
                         onClick={ ()=>this.sync() } />
                 <div style={{ display: 'inline-flex', width: '100%' }}>
-                    <Button type="raised" text="从本地上传配置文件" width="100%"
+                    <Button type="raised" text="从本地导入配置文件" width="100%"
                             icon={ ss.IconPath( "import_icon" ) }
                             color="#fff" backgroundColor="#FF5252"
                             waves="md-waves-effect md-waves-button"
                             tooltip={{ text: "上传后的配置将覆盖掉当前，请注意确认！" }}
                             onClick={ ()=>this.import() } />
-                    <Button type="raised" text="保存配置文件到本地" width="100%"
+                    <Button type="raised" text="导出配置文件到本地" width="100%"
                             icon={ ss.IconPath( "export_icon" ) }
                             color="#fff" backgroundColor="#2196F3"
                             waves="md-waves-effect md-waves-button"
