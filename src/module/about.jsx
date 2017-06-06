@@ -151,7 +151,7 @@ export default class About extends React.Component {
                     <br/>
                     自从 <span style={ style.stat }>{ this.props.option.create && this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <span style={ style.stat }>{ this.props.option.focus }次</span> 聚焦模式，以及 <span style={ style.stat }>{ this.props.option.read }次</span> 阅读模式。
                     <br/>
-                    如果觉得它还不错，希望可以给我 <a style={ style.link } href="https://github.com/Kenshin/simpread" target="_blank">投票</a>，这是对 简悦 的最大鼓励，或者通过下方的分享，让更多人知道 <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的存在。
+                    如果觉得它还不错，希望可以给我 <a style={ style.link } href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll" target="_blank">投票</a>，这是对 简悦 的最大鼓励，或者通过下方的分享，让更多人知道 <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的存在。
                 </div>
                 <div style={ style.share }>
                     <a style={ style.share_link } target="_blank" href={ urls.share.weibo    } title="分享到 微博"><span style={{ ...style.share_icon, ...urls.icon.weibo }} { ...events } ></span></a>
