@@ -1,18 +1,24 @@
-简悦 SimpRead - 让你瞬间进入沉浸式阅读的 Chrome 扩展
-=======
-为了达到完美的阅读模式这个小目标 ，我适配了 120+ 个网站，因此诞生了简悦。还原阅读的本质，提升你的阅读体验。
+<p align="center"><img src="http://ojec5ddd5.bkt.clouddn.com/logo%20bigger.png" /></p>
+<h1 align="center">简悦 - SimpRead</h1>
+<p align="center">让你瞬间进入沉浸式阅读的 Chrome 扩展，还原阅读的本质，提升你的阅读体验。</p>
+<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 120+ 个网站，因此诞生了简悦。</p>
+<p align="center">
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.0.0-blue.svg"></a>
+   <a href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
+   <a href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
+   <a href="http://ksria.com/simpread/crx/1.0.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
 
-[![Version][version-badge]][version-link]
+</p>
 
-#### 下载：
-[![Chrome][chrome-badge]][chrome-link]
-[![Offline][offline-badge]][offline-link]
+***
 
-#### 主页：
-[![Website][www-badge]][www-link]
-
-#### 照片集：
-* <http://ksria.com/simpread/gallery/>
+#### 主要功能一览：
+- 阅读模式； `逐一适配了 120+ 个网站，并提取 标题  描述 正文 媒体资源（ 图片/ 视频 ） 等，生成 符合中文阅读 的页面`
+- 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
+- 站点编辑器； `可编程，定制化`
+- 多种主题； `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢`
+- 同步、上传/下载 配置、同步适配列表等；
+- 稍后读；
 
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/visual%20effect.jpg)
@@ -22,13 +28,8 @@
 ![简悦 - 设置界面](http://ojec5ddd5.bkt.clouddn.com/option.png)  
 ![简悦 - 稍后读](http://ojec5ddd5.bkt.clouddn.com/unread%20list.png)  
 
-#### 主要功能一览：
-- 阅读模式； `逐一适配了 120+ 个网站，并提取 标题  描述 正文 媒体资源（ 图片/ 视频 ） 等，生成 符合中文阅读 的页面`
-- 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
-- 站点编辑器； `可编程，定制化`
-- 多种主题； `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢`
-- 同步、上传/下载 配置、同步适配列表等；
-- 稍后读；
+#### 照片集：
+* <http://ksria.com/simpread/gallery/>
 
 #### 详细功能：
 ![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature.png)
