@@ -47,8 +47,9 @@ export default class ProcessBar extends React.Component {
     }
 
     render() {
+        const progress = !Number.isFinite( this.state.progress ) ? 0 : this.state.progress;
         return (
-            <Progress type="line" progress={ this.state.progress } options={ options }>
+            <Progress type="line" progress={ progress } options={ options }>
                 <read-process></read-process>
             </Progress>
         )
