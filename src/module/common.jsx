@@ -96,7 +96,7 @@ export default class CommonOpt extends React.Component {
     render() {
         return(
             <div style={{ width: '100%' }}>
-                <Button type="raised" text="与 Google 账户进行同步"
+                <Button type="raised" text="同步到你的 Google 账户"
                         icon={ ss.IconPath( "sync_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="md-waves-effect md-waves-button"
