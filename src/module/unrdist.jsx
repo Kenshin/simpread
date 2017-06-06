@@ -58,6 +58,7 @@ export default class Unrdist extends React.Component {
 
     onAction( event, ...rests ) {
         const [ id, _, data ] = rests;
+        id == "pocket" && new Notify().Render( 2, "下个版本将会提供保存到 Pocket 服务，敬请期待。" );
         id == "remove" &&
             storage.UnRead( id, data.idx, success => {
                 success && this.state.items.splice( this.state.items.findIndex( item => item.idx == data.idx ), 1 );
