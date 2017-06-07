@@ -133,6 +133,7 @@ export default class ReadOpt extends React.Component {
                         <TextField 
                             multi={ false }
                             floatingtext="标题"
+                            placeholder="必填，不可为空。"
                             value={ this.props.option.site.title }
                             errortext={ this.state.errtitle }
                             onChange={ ()=>this.changeTitle() }
