@@ -10,7 +10,10 @@ export default class Include extends React.Component {
     };
 
     changeInclude() {
-        if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
+        if ( event.target.value.trim() == "" ) {
+            this.setState({ error : "当前输入不能为空。" });
+        }
+        else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
             this.setState({ error : "" });
             this.props.changeInclude( event.target.value.trim() );
         } else {

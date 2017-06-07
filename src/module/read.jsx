@@ -57,7 +57,10 @@ export default class ReadOpt extends React.Component {
     }
 
     changeTitle() {
-        if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
+        if ( event.target.value.trim() == "" ) {
+            this.setState({ errtitle : "当前输入不能为空。" });
+        }
+        else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
             this.setState({ errtitle : "" });
             this.props.option.site.title = event.target.value.trim();
             console.log( "this.props.option.site.title = ", this.props.option.site.title )
