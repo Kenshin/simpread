@@ -6,8 +6,8 @@
         "desc"    : "[[{$('.article-summary').text()}]]",
         "include" : "<div class='article-content'>",
         "exclude" : [
-            "<div class='clearfix' style='margin:0 10px;'>",
-            "<div class='rating_box clearfix'>",
+            "<div class='clearfix'>",
+            "<div class='rating_box'>",
             "[['<strong>[广告]活动入口:</strong>']]"
         ]
     },{
@@ -17,7 +17,7 @@
         "desc"    : "<p class='excerpt'>",
         "include" : "<div class='article-detail-bd'>",
         "exclude" : [
-            "<div class='author-share clearfix'>",
+            "<div class='author-share'>",
             "<div class='embed-control'>"
         ]
     },{
@@ -47,9 +47,9 @@
         "url"     : "http://www.jiemian.com/article/",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='article-main' style=''>",
+        "include" : "<div class='article-main'>",
         "exclude" : [
-            "<div class='share-view' style='top: 1544px;'>",
+            "<div class='share-view'>",
             "[[[$('.article-btn')]]]",
             "<div class='article-footer'>",
             "<p class='report-view'>",
@@ -219,7 +219,7 @@
         "url"     : "http://www.waerfa.com/",
         "title"   : "<h1 class='Article__title'>",
         "desc"    : "",
-        "include" : "<div class='Article__content Content'>",
+        "include" : "<div class='Article__content'>",
         "exclude" : [
             "<div class='u-post-share-wrap'>"
         ]
@@ -247,7 +247,7 @@
         "url"     : "http://www.guokr.com/post/",
         "title"   : "<h1 id='articleTitle'>",
         "desc"    : "",
-        "include" : "<div id='articleContent' >",
+        "include" : "<div id='articleContent'>",
         "exclude" : [
             ""
         ]
@@ -350,7 +350,7 @@
         "desc"    : "",
         "include" : "<div class='entry-content'>",
         "exclude" : [
-            "<div class='open_social_box share_box'>",
+            "<div class='open_social_box'>",
             "<div class='os-share-box'>",
             "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]",
             "[[/src=\\S+(down)\\S+'/]]"
@@ -950,7 +950,7 @@
         "url"     : "http://www.thepaper.cn/",
         "title"   : "<h1 class='news_title'>",
         "desc"    : "",
-        "include" : "<div class='news_txt' data-size='standard' style=''>",
+        "include" : "<div class='news_txt'>",
         "exclude" : [
             ""
         ]
@@ -1153,7 +1153,7 @@
         "url"     : "http://newseed.pedaily.cn/news/*",
         "title"   : "<h1>",
         "desc"    : "<div class='subject'>",
-        "include" : "<div id='news-content' class='news-content'>",
+        "include" : "<div id='news-content'>",
         "exclude" : [
             ""
         ]
