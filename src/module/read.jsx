@@ -142,7 +142,7 @@ export default class ReadOpt extends React.Component {
                         />
                     </sr-opt-gp>
                     <sr-opt-gp>
-                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
+                        <Include mode="read" include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />

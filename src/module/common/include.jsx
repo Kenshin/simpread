@@ -5,12 +5,20 @@ import TextField      from 'textfield';
 
 export default class Include extends React.Component {
 
+    static defaultProps = {
+        mode: "",
+    }
+
+    static propType = {
+        mode : React.PropTypes.oneOf([ "focus", "read" ]),
+    }
+
     state = {
         error : ""
     };
 
     changeInclude() {
-        if ( event.target.value.trim() == "" ) {
+        if ( this.props.mode == "read" && event.target.value.trim() == "" ) {
             this.setState({ error : "当前输入不能为空。" });
         }
         else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
