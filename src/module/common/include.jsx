@@ -7,10 +7,12 @@ export default class Include extends React.Component {
 
     static defaultProps = {
         mode: "",
+        flag: {},
     }
 
     static propType = {
         mode : React.PropTypes.oneOf([ "focus", "read" ]),
+        flag : React.PropTypes.object,
     }
 
     state = {
@@ -18,15 +20,18 @@ export default class Include extends React.Component {
     };
 
     changeInclude() {
+        let code = 0;
         if ( this.props.mode == "read" && event.target.value.trim() == "" ) {
+            code = -2;
             this.setState({ error : "当前输入不能为空。" });
         }
         else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
             this.setState({ error : "" });
-            this.props.changeInclude( event.target.value.trim() );
         } else {
+            code = -1;
             this.setState({ error : "当前输入为非法。" });
         }
+        this.props.changeInclude( event.target.value.trim(), code );
     }
 
     render() {
