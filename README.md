@@ -45,7 +45,7 @@
 - 快捷键；（默认为 `双击 A` )
 
 #### 投票：
-* 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 。这样让更多人使用 `简悦` 带来的便利，你的认可是对我最大的鼓励。
+简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
 #### 下一步：
 - [ ] 稍后读可以直接发送到 `Pocket`；  
