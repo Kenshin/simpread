@@ -34,6 +34,16 @@
 #### 详细功能：
 ![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature.png)
 
+#### 如何使用：
+
+`简悦`会自动检测当前页面是否已经适配 `阅读模式` ，如适配则在浏览器右上角显示 ![Imgur](http://i.imgur.com/dyROEBi.png) （`聚焦模式` 会自动获取当前鼠标所在的段落并高亮，适合任意页面。）
+
+- 点击浏览器右上角 `红色icon`；
+
+- 右键选择 `简悦 - SimpRead` → `阅读模式`；
+
+- 快捷键；（默认为 `双击 A` )
+
 #### 投票：
 * 如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll)
 
