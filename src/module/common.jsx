@@ -19,6 +19,7 @@ export default class CommonOpt extends React.Component {
 
     sync() {
         storage.Sync( "set", time => {
+            new Notify().Render( 2, "注意：这是实验性功能，最好采用保存配置文件到本地的方式。" );
             new Notify().Render( 0, "数据同步成功。" );
             this.setState({ update: `上次同步时间： ${ time }` });
             this.props.sync && this.props.sync();
