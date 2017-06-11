@@ -1,0 +1,7 @@
+#ignore node_modules
+node_modules/**
+src/bundle/**
+publish/**
+
+# for mac
+**/.DS_Store

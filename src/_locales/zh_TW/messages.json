@@ -1,0 +1,12 @@
+{
+    "extension_name": {
+        "message": "簡悅 - SimpRead",
+        "description": "類似 Safari 閱讀模式的 Chrome 擴展，閱讀模式，閱讀器，閱讀，命名為 簡悅，即：簡單閱讀，愉悅心情之意。"
+    },
+
+    "extension_desc": {
+        "message": "讓你瞬間進入沉浸式閱讀的 Chrome 擴展，提供與 Safari 類似的 read mode。",
+        "description": "類似 Safari 閱讀模式的 Chrome 擴展，閱讀模式，閱讀器，閱讀，命名為 簡悅，即：簡單閱讀，愉悅心情之意。"
+    }
+
+}

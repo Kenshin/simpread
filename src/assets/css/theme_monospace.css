@@ -1,0 +1,87 @@
+sr-rd-theme-monospace{display:none;}
+
+/**
+ * Monospace style
+ */
+
+/**
+ * Common style, include: h1 ~ h6; ol ul; code pre; table; sr-blockquote
+ */
+
+sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5,sr-rd-content h6{font-weight:700;color:#6363ac}sr-rd-content h1{font-size:2.2rem}sr-rd-content h2{font-size:2rem}sr-rd-content h3{font-size:1.8rem}sr-rd-content h4{font-size:1.6rem}sr-rd-content h5{font-size:1.4rem}sr-rd-content h6{font-size:1.3rem}
+sr-rd-content strong{color:#b5302e}sr-rd-content em{font-style:italic;color:#400469}
+sr-rd-content ol,sr-rd-content ul{list-style-type:none}sr-rd-content ol li,sr-rd-content ul li{margin:0}
+sr-rd-content table{line-height:1.6rem;border-collapse:collapse;border-spacing:0;empty-cells:show;border:1px solid #cbcbcb}sr-rd-content thead{background-color:#e0e0e0;color:#000;text-align:left;vertical-align:bottom}sr-rd-content td,sr-rd-content th{border-left:1px solid #cbcbcb;border-width:0 0 0 1px;margin:0;overflow:visible;padding:.5em 1em}
+sr-rd-content sr-blockquote {
+    background-color: rgba(128, 128, 128, 0.05);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 8px solid #979797;
+    line-height: 2;
+}
+
+sr-rd-content sr-blockquote * {
+    line-height: inherit;
+}
+
+/**
+ * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
+ */
+
+.simpread-theme-root {
+    color: #333333;
+    background: white;
+}
+
+sr-rd-title {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #6363ac;
+}
+
+sr-rd-desc {
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.05);
+    font-size: 1.8rem;
+    text-align: center;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 8px solid #979797;
+}
+
+sr-rd-content {
+    color: #333333;
+    line-height: 1.7;
+}
+
+sr-rd-content *,
+sr-rd-content p,
+sr-rd-content div {
+    line-height: 1.7;
+}
+
+sr-rd-content a,
+sr-rd-content a:link {
+    color: #005dad;
+    text-decoration: underline;
+}
+
+sr-rd-content a:hover,
+sr-rd-content a:focus,
+sr-rd-content a:active {
+    color: white;
+    background-color: #2a6496;
+    text-decoration: none;
+}
+
+sr-rd-content pre {
+    color: #e9eded;
+    background-color: #263238;
+}
+
+sr-rd-content li code,
+sr-rd-content p code {
+    color: #949415;
+    background-color: transparent;
+}
