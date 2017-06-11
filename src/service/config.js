@@ -260,11 +260,11 @@ const fontfamily = [{
         info  : "S + 2",
     },{
         value : "70%",
-        name  : "增大",
+        name  : "大号",
         info  : "S + 3",
     },{
         value : "58%",
-        name  : "减小",
+        name  : "小号",
         info  : "S + 1",
     }],
     layout = [{

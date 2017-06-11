@@ -5,13 +5,21 @@ import TextField      from 'textfield';
 
 export default class Exclude extends React.Component {
 
+    static defaultProps = {
+        flag: {},
+    }
+
+    static propType = {
+        flag : React.PropTypes.object,
+    }
+
     state = {
         error : ""
     };
 
     changeExclude() {
         const { good, bad } = getExclude( event.target.value );
-        this.props.changeExclude( good );
+        this.props.changeExclude( good, bad.length > 0 ? -1 : 0 );
         if ( bad.length > 0 ) {
             this.setState({ error: `格式错误：${bad.join(", ")}` });
         } else {
@@ -24,7 +32,7 @@ export default class Exclude extends React.Component {
             <TextField 
                 multi={ true } 
                 rows={ this.props.rows }
-                placeholder="默认为空，每行一个，例如：<div class='xxxx'></div>" 
+                placeholder="默认为空，每行一个，支持： Html标签, {}, '', //, [] 等，详细请看站点编辑器。" 
                 floatingtext="隐藏列表" 
                 value={ this.props.exclude.join( "\n" ) }
                 errortext={ this.state.error }

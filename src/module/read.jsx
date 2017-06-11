@@ -57,11 +57,17 @@ export default class ReadOpt extends React.Component {
     }
 
     changeTitle() {
-        if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
+        if ( event.target.value.trim() == "" ) {
+            this.props.flag.title = -2;
+            this.setState({ errtitle : "当前输入不能为空。" });
+        }
+        else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
             this.setState({ errtitle : "" });
             this.props.option.site.title = event.target.value.trim();
+            this.props.flag.title = 0;
             console.log( "this.props.option.site.title = ", this.props.option.site.title )
         } else {
+            this.props.flag.title = -1;
             this.setState({ errtitle : "当前输入为非法。" });
         }
     }
@@ -70,19 +76,23 @@ export default class ReadOpt extends React.Component {
         if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
             this.setState({ errdesc : "" });
             this.props.option.site.desc = event.target.value.trim();
+            this.props.flag.desc = 0;
             console.log( "this.props.option.site.desc = ", this.props.option.site.desc )
         } else {
+            this.props.flag.desc = -1;
             this.setState({ errdesc : "当前输入为非法。" });
         }
     }
 
-    changeInclude( value ) {
+    changeInclude( value, code ) {
         this.props.option.site.include = value;
+        this.props.flag.include        = code;
         console.log( "this.props.option.site.include = ", this.props.option.site.include )
     }
 
-    changeExclude( value ) {
+    changeExclude( value, code ) {
         this.props.option.site.exclude = value;
+        this.props.flag.exclude        = code;
         console.log( "this.props.option.site.exclude = ", this.props.option.site.exclude )
     }
 
@@ -123,6 +133,7 @@ export default class ReadOpt extends React.Component {
                         <TextField 
                             multi={ false }
                             floatingtext="标题"
+                            placeholder="必填，不可为空。"
                             value={ this.props.option.site.title }
                             errortext={ this.state.errtitle }
                             onChange={ ()=>this.changeTitle() }
@@ -139,10 +150,10 @@ export default class ReadOpt extends React.Component {
                         />
                     </sr-opt-gp>
                     <sr-opt-gp>
-                        <Include include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
+                        <Include mode="read" include={ this.props.option.site.include } changeInclude={ (v,c)=>this.changeInclude(v,c) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
-                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ val=>this.changeExclude(val) } />
+                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ (v,c)=>this.changeExclude(v,c) } />
                     </sr-opt-gp>
                 </sr-opt-items>
                 }

@@ -22,10 +22,9 @@ const rdcls   = "simpread-read-root",
 
 const errorpage = `
         <sr-rd-content-error>
-            <p>当前页面解析后 <b style="color: #E57373;">无法正常显示</b>，您可能需要 <b style="color: #E57373;">手动添加</b>，请使用 <span style="color: #4183c4;">快捷键</span> 或 <span style="color: #4183c4;">控制栏</span> 手动打开 <span style="color: #4183c4;">设定页面</span>。</p>
-            <p>
-                或者 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">报告此页面</a> 以便让 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 变得更加出色，谢谢。
-            </p>
+            <p>当前页面使用 <span style="color: #4183c4;">阅读模式</span> 解析后 <b style="color: #E57373;">无法正常显示</b>，暂时不支持 <b style="color: #E57373;">手动添加</b>，请换用 <span style="color: #4183c4;">聚焦模式</span>。
+  </p>
+            <p>或者<a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">报告此页面</a> 以便让 <a href="http://ksria.com/simpread" target="_blank">简悦 - SimpRead</a> 变得更加出色，谢谢。</p>
         </sr-rd-content-error>`;
 
 const Footer = () => {

@@ -137,18 +137,18 @@ function getCurTab( query, callback ) {
 function setMenuAndIcon( id, code ) {
     let icon = "";
     if ( code == -1 ) {
-        icon = "-disable";
         browser.pageAction.hide( id );
         if ( rdmenuid ) {
             browser.contextMenus.remove( rdmenuid );
             rdmenuid = undefined;
         }
     } else {
+        icon = "-enable";
         browser.pageAction.show( id );
         if ( !rdmenuid ) {
             delete readmenu.generatedId;
             rdmenuid = browser.contextMenus.create( readmenu );
         }
     }
-    browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/browser_icon${icon}.png` ) });
+    browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/icon16${icon}.png` ) });
 }

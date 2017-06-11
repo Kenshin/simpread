@@ -1,8 +1,10 @@
 {
-  "name": "简悦（SimpRead）",
+  "name": "__MSG_extension_name__",
+  "default_locale"  : "en",
   "version": "1.0.0",
-  "description" : "简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。",
-  "homepage_url" : "https://github.com/kenshin/simpread",
+  "short_name": "SimpRead",
+  "description" : "__MSG_extension_desc__",
+  "homepage_url" : "http://ksria.com/simpread",
   "author" : "Kenshin Wang <kenshin@ksria.com>",
   "icons" : {
     "16" : "assets/images/icon16.png",
@@ -30,7 +32,7 @@
   ],
   "page_action": {
     "default_icon": {
-      "32": "assets/images/browser_icon-disable.png"
+      "16": "assets/images/icon16.png"
     }
   },
   "options_page": "options/options.html",
@@ -38,6 +40,7 @@
     "/assets/images/*",
     "website_list.json"
   ],
-  "update_url": "http://k-zone.cn/simpread/updates.xml",
+  "offline_enabled": true,
+  "update_url": "https://clients2.google.com/service/update2/crx",
   "manifest_version": 2
 }

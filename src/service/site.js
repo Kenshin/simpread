@@ -294,6 +294,17 @@ async function specbeautify( name, $target ) {
         case "wkee.net":
             $target.find( "script" ).remove();
             break;
+        case "linux.cn":
+            $target.find( "pre" ).attr(  "style", "background-color: #161b20; background-image: none;" );
+            $target.find( "code" ).attr( "style", "background-color: transparent; background-image: none;" );
+            break;
+        case "zhuanlan.zhihu.com":
+            $target.find( "div[data-src]" ).map( ( index, item ) => {
+                const $target = $(item),
+                      src     = $target.attr( "data-src" );
+                $target.replaceWith( `<div class="sr-rd-content-center"><img src="${ src }"></div>` );
+            });
+            break;
     }
 }
 

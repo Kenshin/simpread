@@ -78,6 +78,10 @@ sr-rd-content a:active {
     text-decoration: underline;
 }
 
+sr-rd-content sr-blockquote code {
+    font-size: inherit;
+}
+
 sr-rd-content pre {
     color: rgb(122, 122, 122);
     background-color: transparent;

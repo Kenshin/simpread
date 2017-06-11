@@ -70,10 +70,10 @@ const style = {
 },
 urls = {
     share: {
-        weibo: "http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png",
+        weibo: "http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png",
         douban: "https://www.douban.com/share/service?href=http://ksria.com/simpread&name=简悦（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展",
         twitter: "https://twitter.com/intent/tweet?via=wanglei001&amp;text=简悦（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展&amp;url=http://ksria.com/simpread",
-        facebook: "https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E9%98%85%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread",
+        facebook: "https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread",
         gplus: "https://plus.google.com/share?url=http://ksria.com/simpread",
     },
 
@@ -100,7 +100,7 @@ urls = {
         website: "http://ksria.com/simpread",
         githubstar: "https://github.com/Kenshin/simpread",
         githubfollow: "https://github.com/Kenshin/simpread",
-        changelog: "http://ksria.com/simpread/CHANGELOG.md",
+        changelog: "http://ksria.com/simpread/changelog.html",
         feedback: "https://github.com/kenshin/simpread/issues",
         issues: "https://github.com/kenshin/simpread/issues",
     },
@@ -151,7 +151,7 @@ export default class About extends React.Component {
                     <br/>
                     自从 <span style={ style.stat }>{ this.props.option.create && this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <span style={ style.stat }>{ this.props.option.focus }次</span> 聚焦模式，以及 <span style={ style.stat }>{ this.props.option.read }次</span> 阅读模式。
                     <br/>
-                    如果觉得它还不错，希望可以给我 <a style={ style.link } href="https://github.com/Kenshin/simpread" target="_blank">投票</a>，这是对 简悦 的最大鼓励，或者通过下方的分享，让更多人知道 <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的存在。
+                    如果觉得它还不错，希望可以给我 <a style={ style.link } href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll" target="_blank">投票</a>，这是对 简悦 的最大鼓励，或者通过下方的分享，让更多人知道 <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的存在。
                 </div>
                 <div style={ style.share }>
                     <a style={ style.share_link } target="_blank" href={ urls.share.weibo    } title="分享到 微博"><span style={{ ...style.share_icon, ...urls.icon.weibo }} { ...events } ></span></a>
