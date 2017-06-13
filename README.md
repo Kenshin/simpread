@@ -12,6 +12,9 @@
 
 ***
 
+#### 马上使用：
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.0.0/simpread.crx)
+
 #### 主要功能一览：
 - 阅读模式； `逐一适配了 120+ 个网站，并提取 标题  描述 正文 媒体资源（ 图片/ 视频 ） 等，生成 符合中文阅读 的页面`
 - 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
