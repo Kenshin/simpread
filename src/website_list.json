@@ -604,6 +604,25 @@
             "[[/src=\\S+(ifeve500X150)\\S+'/]]"
         ]
     },{
+        "name"    : "code.oschina.net",
+        "url"     : "https://www.oschina.net/code/",
+        "title"   : "[[{$('.QTitle').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='Body'>",
+        "exclude" : [
+            "<div class='Title'>",
+            "<div id='toolbar_wrapper'>",
+            "[[[$('.code_pieces').find('h2')]]]",
+            "<div class='toolbar'>",
+            "<div class='QuestionRelations'>",
+            "<div id='related_codes'>",
+            "<div class='code_comments'>",
+            "<div class='CommentForm'>",
+            "[['<p>开源中国-程序员在线工具</p>']]",
+            "<i class='jump_to_code'>",
+            "<div class='code_report'>"
+        ]
+    },{
         "name"    : "translate.oschina.net",
         "url"     : "https://www.oschina.net/translate/",
         "title"   : "<title>",
