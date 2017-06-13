@@ -413,6 +413,16 @@
             "<ul class='tag-list'>"
         ]
     },{
+        "name"    : "xueqiu.com",
+        "url"     : "https://xueqiu.com/*",
+        "title"   : "<h1 class='status-title'>",
+        "desc"    : "",
+        "include" : "[[[$('.status-content').find('.detail')]]]",
+        "exclude" : [
+            "<script class='single-description'>",
+            "<a class='ke_img_link'>"
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/",
         "title"   : "<title>",
