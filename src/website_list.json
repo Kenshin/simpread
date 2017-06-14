@@ -1101,7 +1101,7 @@
         "url"     : "http://www.ithome.com/*",
         "title"   : "<h1>",
         "desc"    : "",
-        "include" : "<div id='paragraph'> ",
+        "include" : "<div id='paragraph'>",
         "exclude" : [
             ""
         ]
