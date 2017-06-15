@@ -247,14 +247,7 @@ class Storage {
                 sites = await response.json(),
                 len = simpread.sites.length;
             let [count, forced] = [0, 0];
-            sites.sites.push({
-                "name": "github.issue",
-                "url": "https://github.com/*/*/issues/*",
-                "title": "[[{$('h1.gh-header-title .js-issue-title').text()}]]",
-                "desc": "",
-                "include": "[[{$('#discussion_bucket table td.js-comment-body').html()}]]",
-                "exclude": ""
-            })
+            
             if (len == 0) {
                 simpread.sites = formatSites(sites);
                 count = simpread.sites.length;
