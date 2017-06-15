@@ -196,3 +196,13 @@ sr-rd-footer a:active {
     color: #787878;
     text-decoration: underline;
 }
+sr-rd-markdown{
+    width: 100%;
+    display: none;
+}
+sr-rd-markdown textarea{
+    font-size: 16px;
+    min-width: 800px;
+    height: 650px;
+    border: 1px solid #ccc;
+}

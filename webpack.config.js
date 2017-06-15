@@ -101,6 +101,11 @@ const webpack = require( 'webpack' ),
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
+          //minimatch
+          './node_modules/minimatch/minimatch.js',
+          //to markdown
+          './node_modules/to-markdown/dist/to-markdown.js',
+
           // vendors
           'pangu',
           'mousetrap',
@@ -187,6 +192,8 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
+          minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
+          'to-markdown'  : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           pangu      : __dirname + '/src/vender/pangu.min.js',

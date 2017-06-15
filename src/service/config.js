@@ -66,6 +66,11 @@ const readItems = {
         "name" : "关闭",
         "icon" : ss.IconPath("exit_icon"),
     },
+    "markdown" : {
+        "name" : "markdown",
+        "icon" : ss.IconPath("markdown_icon"),
+        "color": "#D4237A",
+    },
     "setting" : {
         "name" : "设定",
         "icon" : ss.IconPath("setting_icon"),
