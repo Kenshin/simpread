@@ -76,7 +76,8 @@ class Read extends React.Component {
     }
 
     componentWillUnmount() {
-        $root.removeClass( theme );
+        $root.removeClass( theme )
+             .removeClass( "simpread-font" )
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
         tooltip.Exit( rdclsjq );
@@ -142,6 +143,7 @@ class Read extends React.Component {
                 ReactDOM.unmountComponentAtNode( getReadRoot() );
             }
         }).addClass( "simpread-read-root-hide" );
+        
     }
 
     render() {
