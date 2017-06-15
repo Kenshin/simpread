@@ -79,7 +79,6 @@ function readMode() {
 
     if ( !entry( read, focus, "聚焦", "阅读" )) return;
     getCurrent( mode.read );
-
     switch ( st.Verify( storage.current.site.name ) ) {
         case 0:
             storage.Statistics( mode.read );
@@ -142,6 +141,8 @@ function entry( current, other, ...str ) {
  * @param {boolean} when true, push message
  */
 function getCurrent( mode = undefined, upicon = true ) {
-    if ( mode && storage.VerifyCur( mode ) ) storage.Getcur( mode );
+    if ( mode && storage.VerifyCur( mode ) ) {
+        storage.Getcur( mode );
+    }
     if ( upicon ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }
