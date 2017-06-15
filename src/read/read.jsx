@@ -46,8 +46,13 @@ class Read extends React.Component {
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
         let {include} = this.props.wrapper;
-        //转换为markdown
-        this.props.markdown = toMarkdown(include, { gfm: true });
+        try{
+            //转换为markdown
+            this.props.markdown = toMarkdown(include, { gfm: true });
+        }catch(e){
+            this.props.markdown = false;
+        }
+        
     }
 
     async componentDidMount() {

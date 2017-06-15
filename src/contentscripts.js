@@ -32,7 +32,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
     console.log( "contentscripts runtime Listener", request );
     switch ( request.type ) {
         case msg.MESSAGE_ACTION.focus_mode:
-            focuseMode();
+            focusMode();
             break;
         case msg.MESSAGE_ACTION.read_mode:
             readMode();
@@ -49,14 +49,14 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
+    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
     Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
 }
 
 /**
  * Focus mode
  */
-function focuseMode() {
+function focusMode() {
     console.log( "=== simpread focus mode active ===" )
 
     if ( !entry( focus, read, "阅读", "聚焦" )) return;

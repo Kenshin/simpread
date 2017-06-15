@@ -247,7 +247,6 @@ class Storage {
                 sites = await response.json(),
                 len = simpread.sites.length;
             let [count, forced] = [0, 0];
-            
             if (len == 0) {
                 simpread.sites = formatSites(sites);
                 count = simpread.sites.length;
