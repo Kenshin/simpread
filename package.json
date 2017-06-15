@@ -38,6 +38,7 @@
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "style-loader": "^0.13.1",
+    "to-markdown": "^3.0.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"

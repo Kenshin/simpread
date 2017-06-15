@@ -1,5 +1,5 @@
 console.log( "=== simpread read load ===" )
-
+import toMarkdown  from 'to-markdown';
 import pangu       from 'pangu';
 import ProgressBar from 'schedule';
 import ReadCtlbar  from 'readctlbar';
@@ -36,11 +36,18 @@ const Footer = () => {
     )
 }
 
-class Read extends React.Component {
 
+class Read extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isShowMarkdown: false};
+    }
     componentWillMount() {
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
+        let {include} = this.props.wrapper;
+        //转换为markdown
+        this.props.markdown = toMarkdown(include, { gfm: true });
     }
 
     async componentDidMount() {
@@ -105,6 +112,25 @@ class Read extends React.Component {
                 storage.current[type]=value;
                 storage.Setcur( storage.current.mode );
                 break;
+            case "markdown":
+                if(this.props.markdown){
+                    if(!this.state.isShowMarkdown){
+                        this.setState({
+                            isShowMarkdown: true
+                        })
+                        $('sr-rd-content,sr-rd-footer').hide();
+                        $('sr-rd-markdown textarea').val(this.props.markdown).show();
+                    }else{
+                        this.setState({
+                            isShowMarkdown: false
+                        })
+                        $('sr-rd-content,sr-rd-footer').show();
+                        $('sr-rd-markdown textarea').hide();
+                    }
+                }else{
+                    new Notify().Render( 1, '转换markdown失败！' );
+                }
+                break;            
         }
     }
 
@@ -125,6 +151,9 @@ class Read extends React.Component {
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
+                <sr-rd-markdown>
+                    <textarea class="sr-rd-markdown"></textarea>
+                </sr-rd-markdown>
                 <Footer />
                 <ReadCtlbar site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
