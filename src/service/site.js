@@ -1,5 +1,7 @@
 console.log( "=== simpread site load ===" )
 
+import minimatch from 'minimatch';
+
 /**
  * Get URI
  * 
@@ -47,11 +49,13 @@ function findSitebyURL( sites, url ) {
         } else if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
             found = cur;
             break;
-        }
-        else if ( !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
+        } else if ( !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
             //    if    ( suffix != url ) return undefined;
             //} else if ( suffix == url ) return undefined;
+            found = cur;
+            break;
+        } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
             found = cur;
             break;
         }

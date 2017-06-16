@@ -32,7 +32,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
     console.log( "contentscripts runtime Listener", request );
     switch ( request.type ) {
         case msg.MESSAGE_ACTION.focus_mode:
-            focuseMode();
+            focusMode();
             break;
         case msg.MESSAGE_ACTION.read_mode:
             readMode();
@@ -49,14 +49,14 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focuseMode );
+    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
     Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
 }
 
 /**
  * Focus mode
  */
-function focuseMode() {
+function focusMode() {
     console.log( "=== simpread focus mode active ===" )
 
     if ( !entry( focus, read, "阅读", "聚焦" )) return;
@@ -79,7 +79,6 @@ function readMode() {
 
     if ( !entry( read, focus, "聚焦", "阅读" )) return;
     getCurrent( mode.read );
-
     switch ( st.Verify( storage.current.site.name ) ) {
         case 0:
             storage.Statistics( mode.read );
@@ -142,6 +141,8 @@ function entry( current, other, ...str ) {
  * @param {boolean} when true, push message
  */
 function getCurrent( mode = undefined, upicon = true ) {
-    if ( mode && storage.VerifyCur( mode ) ) storage.Getcur( mode );
+    if ( mode && storage.VerifyCur( mode ) ) {
+        storage.Getcur( mode );
+    }
     if ( upicon ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
 }

@@ -76,6 +76,11 @@ const readItems = {
         "icon" : ss.IconPath("save_icon"),
         "color": "#FF5722",
     },
+    "markdown" : {
+        "name" : "导出为 MD",
+        "icon" : ss.IconPath("markdown_icon"),
+        "color": "#D4237A",
+    },
     /*"download" : {
         "name" : "导出",
         "icon" : ss.IconPath("download_icon"),

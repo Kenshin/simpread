@@ -1417,5 +1417,24 @@
         "exclude" : [
             "<i class='pstatus'>"
         ]
+    },{
+        "name"    : "issue.github.com",
+        "url"     : "https://github.com/*/*/issues/*",
+        "title"   : "[[{$('h1.gh-header-title .js-issue-title').text()}]]",
+        "desc"    : "",
+        "include" : "[[{$('#discussion_bucket table td.js-comment-body').html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "readme.github.com",
+        "override": true,
+        "url"     : "https://github.com/**/*/README.md",
+        "title"   : "[[{$('title').text()}]]",
+        "desc"    : "",
+        "include" : "<article class='markdown-body'>",
+        "exclude" : [
+            "<a class='anchor'>"
+        ]
     }]
 }

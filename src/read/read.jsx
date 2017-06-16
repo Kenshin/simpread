@@ -1,6 +1,8 @@
 console.log( "=== simpread read load ===" )
 
+import toMarkdown  from 'to-markdown';
 import pangu       from 'pangu';
+
 import ProgressBar from 'schedule';
 import ReadCtlbar  from 'readctlbar';
 import * as modals from 'modals';
@@ -69,7 +71,8 @@ class Read extends React.Component {
     }
 
     componentWillUnmount() {
-        $root.removeClass( theme );
+        $root.removeClass( theme )
+             .removeClass( "simpread-font" );
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
         tooltip.Exit( rdclsjq );
@@ -104,6 +107,19 @@ class Read extends React.Component {
             case "theme":
                 storage.current[type]=value;
                 storage.Setcur( storage.current.mode );
+                break;
+            case "markdown":
+                new Notify().Render( "请注意，这是一个实验性功能，不一定能导出成功。" );
+                const { include } = this.props.wrapper;
+                try {
+                    const md   = toMarkdown( include, { gfm: true }),
+                          data = "data:text/plain;charset=utf-8," + encodeURIComponent( md ),
+                          $a   = $( `<a style="display:none" href=${data} download="simpread-${ this.props.wrapper.title.trim() }.md"></a>` ).appendTo( "body" );
+                    $a[0].click();
+                    $a.remove();
+                } catch( e ) {
+                    new Notify().Render( 1, "转换 Markdown 格式失败！" );
+                }
                 break;
         }
     }
