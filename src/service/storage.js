@@ -350,7 +350,7 @@ class Storage {
             } else {
                 Object.keys( target ).forEach( key => {
                     if ( !Object.keys( source ).includes( key ) ||
-                       ( key != "sites" && value != "option" && target[key] == "" )) {
+                       ( key != "sites" && value != "option" && typeof target == "string" && target[key] == "" )) {
                         result.keys.push( key );
                     }
                     if ( key == "sites" ) {
