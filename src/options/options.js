@@ -21,6 +21,7 @@ import * as ver   from 'version';
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
+import LabsOpt    from 'labsopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
@@ -166,6 +167,7 @@ function tabsRender( color ) {
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>save( mode.read ) } />
                     </section>
+                    <section><LabsOpt /></section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section><About option={ storage.option } /></section>
                 </Tabs>,
