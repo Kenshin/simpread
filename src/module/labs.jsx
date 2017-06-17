@@ -3,14 +3,35 @@ console.log( "===== simpread option labs load =====" )
 import Switch from 'switch';
 
 export default class LabsOpt extends React.Component {
+
+    static defaultProps = {
+        option : {},
+        read   : {},
+        focus  : {},
+    }
+
+    static propTypes = {
+        option : React.PropTypes.object,
+        read   : React.PropTypes.object,
+        focus  : React.PropTypes.object,
+        onChange : React.PropTypes.func,
+    }
+
+    onChange( value, model, state ) {
+        this.props[model][state]=value;
+        this.props.onChange && this.props.onChange();
+    }
+
     render() {
+        console.log( this.props )
         return (
             <div id="labs" style={{ width: '80%' }}>
                 <div>
                     <div className="label">阅读模式</div>
-                    <Switch width="100%"
+                    <Switch width="100%" checked={ this.props.read.progress }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                            label="是否隐藏阅读进度？" />
+                            label="是否显示阅读进度？"
+                            onChange={ (s)=>this.onChange(s, "read", "progress") } />
                     <Switch width="100%" checked="true" 
                             thumbedColor="#3F51B5" trackedColor="#7986CB"  waves="md-waves-effect"
                             label="是否一直显示右下角的控制栏？"/>

@@ -167,7 +167,9 @@ function tabsRender( color ) {
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>save( mode.read ) } />
                     </section>
-                    <section><LabsOpt /></section>
+                    <section>
+                        <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ ()=>save() } />
+                    </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section><About option={ storage.option } /></section>
                 </Tabs>,

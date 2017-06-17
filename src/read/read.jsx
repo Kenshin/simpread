@@ -137,7 +137,7 @@ class Read extends React.Component {
     render() {
         return(
             <sr-read>
-                <ProgressBar />
+                <ProgressBar show={ this.props.read.progress } />
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>

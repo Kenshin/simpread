@@ -36,6 +36,7 @@ const name = "simpread",
     },
     read   = {
         version   : "2017-03-16",
+        progress  : true,
         shortcuts : "A A",
         theme     : "github",
         fontfamily: "default",
