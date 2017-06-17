@@ -17,6 +17,7 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.0" ) {
         data.read.progress = true;
+        data.read.auto     = false;
         curver = "1.0.1";
     }
 
