@@ -23,7 +23,6 @@ export default class LabsOpt extends React.Component {
     }
 
     render() {
-        console.log( this.props )
         return (
             <div id="labs" style={{ width: '80%' }}>
                 <div>
@@ -32,9 +31,11 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示阅读进度？"
                             onChange={ (s)=>this.onChange(s, "read", "progress") } />
-                    <Switch width="100%" checked="true"
+                    <Switch width="100%" checked={ this.props.read.controlbar }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                            label="是否一直显示右下角的控制栏？"/>
+                            tooltip={{ text: "选择隐藏意味着鼠标移上时才显示。" }}
+                            label="是否一直显示右下角的控制栏？"
+                            onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="如果当前页面适配阅读模式，是否自动进入阅读模式？"

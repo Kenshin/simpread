@@ -142,7 +142,7 @@ class Read extends React.Component {
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
                 <Footer />
-                <ReadCtlbar site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
+                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
         )
     }
