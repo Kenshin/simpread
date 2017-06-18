@@ -1,6 +1,7 @@
 console.log( "=== simpread focus load ===" );
 
-var util     = require( "util" ),
+var storage  = require( "storage" ).storage,
+    util     = require( "util" ),
     fcontrol = require( "controlbar" ),
     tooltip  = require( "tooltip" ),
     waves    = require( "waves" ),
@@ -60,8 +61,8 @@ var util     = require( "util" ),
         waves.Render({ root: bgclsjq });
 
         // click mask remove it
-        $( bgclsjq ).on( "click", function( event ) {
-            if ( $( event.target ).attr("class") != bgcls ) return;
+        $( bgclsjq ).on( "click", function( event, data ) {
+            if ( $( event.target ).attr("class") != bgcls || ( !storage.current.mask && !data )) return;
              $( bgclsjq ).velocity({ opacity: 0 }, {
                  complete: ()=> {
                     includeStyle( $target, focusstyle, focuscls, "delete" );

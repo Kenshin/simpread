@@ -33,7 +33,7 @@ class FControl extends React.Component {
 
     componentWillUnmount() {
         $(this.refs.target).remove();
-        $root.click();
+        $root.trigger( "click", "okay" );
     }
 
     render() {

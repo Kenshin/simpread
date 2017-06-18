@@ -17,6 +17,7 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.0" ) {
         data.focus.controlbar= true;
+        data.focus.mask      = true;
         data.read.progress   = true;
         data.read.auto       = false;
         data.read.controlbar = true;

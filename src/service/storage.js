@@ -31,6 +31,7 @@ const name = "simpread",
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         controlbar: true,
+        mask      : true,
         opacity   : 90,
         shortcuts : "A S",
         sites     : [],    // e.g. [ "<url>", site ]

@@ -44,9 +44,10 @@ export default class LabsOpt extends React.Component {
 
                 <div style={{ padding: '21px 0;' }}>
                     <div className="label">聚焦模式</div>
-                    <Switch width="100%"
+                    <Switch width="100%" checked={ this.props.focus.mask }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                            label="聚焦模式是否启用点击遮罩退出功能？" />
+                            label="是否启用点击空白（遮罩）退出功能？"
+                            onChange={ (s)=>this.onChange(s, "focus", "mask") } />
                     <Switch width="100%" checked={ this.props.focus.controlbar }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             tooltip={{ text: "选择隐藏意味着鼠标移上时才显示。" }}
