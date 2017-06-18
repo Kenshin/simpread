@@ -197,7 +197,10 @@ sr-rd-footer a:active {
     text-decoration: underline;
 }
 
-sr-read .controlbar {
+/**
+ * Controlbar: focus mode and read mode
+ */
+sr-rd-crlbar.controlbar {
     position: fixed;
 
     right: 0;
@@ -210,6 +213,6 @@ sr-read .controlbar {
     transition: opacity .5s ease;
 }
 
-sr-read .controlbar:hover {
+sr-rd-crlbar.controlbar:hover {
     opacity: 1;
 }
