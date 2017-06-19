@@ -16,6 +16,7 @@ const version = browser.runtime.getManifest().version;
 function Verify( curver, data ) {
 
     if ( curver == "1.0.0" ) {
+        data.option.esc      = true;
         data.focus.controlbar= true;
         data.focus.mask      = true;
         data.read.progress   = true;

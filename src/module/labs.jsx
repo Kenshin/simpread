@@ -57,9 +57,11 @@ export default class LabsOpt extends React.Component {
 
                 <div>
                     <div className="label">杂项</div>
-                    <Switch width="100%"
+                    <Switch width="100%" checked={ this.props.option.esc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                            label="是否启用 「ESC」 退出方式？" />
+                            tooltip={{ text: "包括：聚焦模式与阅读模式。" }}
+                            label="是否启用 「ESC」 退出方式？"
+                            onChange={ (s)=>this.onChange(s, "option", "esc") } />
                     <Switch width="100%" checked="true"
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示右键菜单？" />

@@ -54,6 +54,7 @@ const name = "simpread",
         update    : "",
         focus     : 0,
         read      : 0,
+        esc       : true,
     },
     unread = {
         idx       : 0,
