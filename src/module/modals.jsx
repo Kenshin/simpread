@@ -96,4 +96,21 @@ function Render() {
     !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
 }
 
-export{ Render }
+/**
+ * Exist
+ * 
+ * @return {boolean}
+ */
+function Exist() {
+    return dia.Popup( rootjq );
+}
+
+/**
+ * Exit, like close button click
+ */
+function Exit() {
+    dia.Popup( rootjq ) && rollback();
+    dia.Popup( rootjq ) && dia.Close();
+}
+
+export{ Render, Exist, Exit }

@@ -126,12 +126,7 @@ class Read extends React.Component {
 
    // exit read mode
    exit() {
-        $( rdclsjq ).velocity( { opacity: 0 }, {
-            delay: 100,
-            complete: ( elements ) => {
-                ReactDOM.unmountComponentAtNode( getReadRoot() );
-            }
-        }).addClass( "simpread-read-root-hide" );
+        Exit();
     }
 
     render() {
@@ -172,15 +167,28 @@ function getReadRoot() {
 /**
  * Verify simpread-read-root tag exit
  * 
+ * @param  {boolean}
  * @return {boolean}
  */
-function Exist( action = true ) {
+function Exist( action ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
         action && modals.Render();
         return true;
     } else {
         return false;
     }
+}
+
+/**
+ * Exit
+ */
+function Exit() {
+    $( rdclsjq ).velocity( { opacity: 0 }, {
+        delay: 100,
+        complete: ( elements ) => {
+            ReactDOM.unmountComponentAtNode( getReadRoot() );
+        }
+    }).addClass( "simpread-read-root-hide" );
 }
 
 /**
@@ -375,4 +383,4 @@ async function commbeautify( $target ) {
     $target.find( "a" ).removeAttr( "style" );
 }
 
-export { Render, Exist };
+export { Render, Exist, Exit };

@@ -88,7 +88,7 @@ var storage  = require( "storage" ).storage,
     }
 
     /**
-     * Verify exit
+     * Verify exist
      * 
      * @param  {boolean} when true, call fcontrol.Click()
      * @return {boolen} true: exist; false: not exist
@@ -138,6 +138,13 @@ var storage  = require( "storage" ).storage,
             }
         }
         return fixFocus( $focus );
+    }
+
+    /**
+     * Exit
+     */
+    Focus.prototype.Exit = function() {
+        $( bgclsjq ).trigger( "click", "okay" );
     }
 
     return new Focus();
