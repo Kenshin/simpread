@@ -88,21 +88,6 @@ var storage  = require( "storage" ).storage,
     }
 
     /**
-     * Verify exist
-     * 
-     * @param  {boolean} when true, call fcontrol.Click()
-     * @return {boolen} true: exist; false: not exist
-     */
-    Focus.prototype.Exist = function( action ) {
-        if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
-            if (action) fcontrol.elem.onAction( undefined, "setting" );
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Get focus
      * 
      * @param {string} storage.current.site.include
@@ -138,6 +123,21 @@ var storage  = require( "storage" ).storage,
             }
         }
         return fixFocus( $focus );
+    }
+
+    /**
+     * Exist
+     * 
+     * @param  {boolean} when true, call fcontrol.Click()
+     * @return {boolen} true: exist; false: not exist
+     */
+    Focus.prototype.Exist = function( action ) {
+        if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
+            if (action) fcontrol.elem.onAction( undefined, "setting" );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -153,18 +153,6 @@ function Render() {
 }
 
 /**
- * Get read root
- * 
- * @return {jquery} read root jquery object
- */
-function getReadRoot() {
-    if ( $root.find( rdclsjq ).length == 0 ) {
-        $root.append( bgtmpl );
-    }
-    return $( rdclsjq )[0];
-}
-
-/**
  * Verify simpread-read-root tag exit
  * 
  * @param  {boolean}
@@ -189,6 +177,18 @@ function Exit() {
             ReactDOM.unmountComponentAtNode( getReadRoot() );
         }
     }).addClass( "simpread-read-root-hide" );
+}
+
+/**
+ * Get read root
+ * 
+ * @return {jquery} read root jquery object
+ */
+function getReadRoot() {
+    if ( $root.find( rdclsjq ).length == 0 ) {
+        $root.append( bgtmpl );
+    }
+    return $( rdclsjq )[0];
 }
 
 /**

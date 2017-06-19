@@ -106,11 +106,11 @@ function Exist() {
 }
 
 /**
- * Exit, like close button click
+ * Exit
  */
 function Exit() {
-    dia.Popup( rootjq ) && rollback();
-    dia.Popup( rootjq ) && dia.Close();
+    rollback();
+    dia.Close();
 }
 
 export{ Render, Exist, Exit }
