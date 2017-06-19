@@ -55,6 +55,11 @@ const name = "simpread",
         focus     : 0,
         read      : 0,
         esc       : true,
+        menu      : {
+            focus : true,
+            read  : true,
+            link  : true,
+        },
     },
     unread = {
         idx       : 0,

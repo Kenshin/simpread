@@ -92,7 +92,8 @@ const webpack = require( 'webpack' ),
           'message',
           'storage',
           'site',
-          'version'
+          'version',
+          'menu'
         ],
 
         vendors : [
@@ -215,6 +216,7 @@ const webpack = require( 'webpack' ),
           stylesheet : __dirname + '/src/service/stylesheet.js',
           config     : __dirname + '/src/service/config.js',
           version    : __dirname + '/src/service/version.js',
+          menu       : __dirname + '/src/service/menu.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',

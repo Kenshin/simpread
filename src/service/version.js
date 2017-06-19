@@ -17,6 +17,7 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.0" ) {
         data.option.esc      = true;
+        data.option.menu     = { focus: true, read: true, link: true };
         data.focus.controlbar= true;
         data.focus.mask      = true;
         data.read.progress   = true;

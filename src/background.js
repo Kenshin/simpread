@@ -5,11 +5,13 @@ import { storage } from 'storage';
 import * as msg    from 'message';
 import {browser}   from 'browser';
 import * as ver    from 'version';
+import * as menu   from 'menu';
 
 /**
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
+    menu.CreateAll();
     if ( local.Firstload() ) {
         local.Version( ver.version );
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
@@ -24,29 +26,9 @@ storage.Read( () => {
 });
 
 /**
- * Create context menus
-*/
-const menu = {
-        "type"     : "normal",
-        "contexts" :  [ "all" ],
-        "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ]
-    },
-    foucsmenu = {},
-    readmenu  = {},
-    linkmenu  = {};
-
-Object.assign( foucsmenu, menu, { id: "focus", "title" : "聚焦模式" });
-Object.assign( readmenu,  menu, { id: "read",  "title" : "阅读模式" });
-Object.assign( linkmenu,  menu, { id: "link",  "title" : "使用阅读模式打开此链接" });
-
-browser.contextMenus.create( foucsmenu );
-let rdmenuid = browser.contextMenus.create( readmenu );
-browser.contextMenus.create( linkmenu );
-
-/**
- * Listen contextMenus message
+ * Listen menu event handler
  */
-browser.contextMenus.onClicked.addListener( function( info, tab ) {
+menu.OnClicked( ( info, tab ) => {
     console.log( "background contentmenu Listener", info, tab );
     if ( info.menuItemId == "link" ) {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
@@ -138,17 +120,11 @@ function setMenuAndIcon( id, code ) {
     let icon = "";
     if ( code == -1 ) {
         browser.pageAction.hide( id );
-        if ( rdmenuid ) {
-            browser.contextMenus.remove( rdmenuid );
-            rdmenuid = undefined;
-        }
+        menu.Remove( "read" );
     } else {
         icon = "-enable";
         browser.pageAction.show( id );
-        if ( !rdmenuid ) {
-            delete readmenu.generatedId;
-            rdmenuid = browser.contextMenus.create( readmenu );
-        }
+        menu.Create( "read" );
     }
     browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/icon16${icon}.png` ) });
 }
