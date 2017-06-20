@@ -48,7 +48,7 @@ function createAll() {
  * @param {string} include: foucs read link
  */
 function create( type ) {
-    if ( !context[type].id && storage.option.menu[type] === true ) {
+    if ( !context[type].id ) {
         delete context[type].menu.generatedId;
         context[type].id = browser.contextMenus.create( context[type].menu );
     }

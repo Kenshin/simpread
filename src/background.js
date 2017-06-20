@@ -43,12 +43,12 @@ menu.OnClicked( ( info, tab ) => {
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "background runtime Listener", request );
     switch ( request.type ) {
-        case  msg.MESSAGE_ACTION.shortcuts:
+        case msg.MESSAGE_ACTION.shortcuts:
             getCurTab( { url: request.value.url }, tabs => {
                 browser.tabs.sendMessage( tabs[0].id, msg.Add( msg.MESSAGE_ACTION.shortcuts ));
             });
             break;
-        case  msg.MESSAGE_ACTION.browser_action:
+        case msg.MESSAGE_ACTION.browser_action:
             getCurTab( { url: request.value.url }, tabs => {
                 if ( tabs && tabs.length > 0 && tabs[0].url == request.value.url ) {
                     setMenuAndIcon( tabs[0].id, request.value.code );
@@ -57,6 +57,11 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             break;
         case msg.MESSAGE_ACTION.new_tab:
             browser.tabs.create({ url: request.value.url });
+            break;
+        case msg.MESSAGE_ACTION.menu:
+            const { id, value } = request.value;
+            storage.option.menu[id] = value;
+            value === true ? menu.Create( id ) : menu.Remove( id );
             break;
     }
 });
@@ -124,7 +129,7 @@ function setMenuAndIcon( id, code ) {
     } else {
         icon = "-enable";
         browser.pageAction.show( id );
-        menu.Create( "read" );
+        storage.option.menu.read === true && menu.Create( "read" );
     }
     browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/icon16${icon}.png` ) });
 }

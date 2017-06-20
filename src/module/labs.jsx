@@ -1,6 +1,9 @@
 console.log( "===== simpread option labs load =====" )
 
-import Switch from 'switch';
+import * as msg  from 'message';
+import {browser} from 'browser';
+
+import Switch    from 'switch';
 
 export default class LabsOpt extends React.Component {
 
@@ -20,6 +23,7 @@ export default class LabsOpt extends React.Component {
     onChange( value, model, state, child ) {
         !child && ( this.props[model][state]=value );
         child  && ( this.props[model][state][child]=value );
+        child  && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.menu, { id: child, value: value } ));
         this.props.onChange && this.props.onChange();
     }
 
