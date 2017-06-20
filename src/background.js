@@ -11,7 +11,6 @@ import * as menu   from 'menu';
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
-    menu.CreateAll();
     if ( local.Firstload() ) {
         local.Version( ver.version );
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
@@ -23,6 +22,7 @@ storage.Read( () => {
                 browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
             }, ver.Verify( storage.version, storage.simpread ) );
     }
+    menu.CreateAll();
 });
 
 /**
