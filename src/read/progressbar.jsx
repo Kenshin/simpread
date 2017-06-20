@@ -24,6 +24,7 @@ const options = {
 export default class ProcessBar extends React.Component {
 
     static defaultProps = {
+        show  : true,
         offset: document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight ) || 0
     }
 
@@ -49,7 +50,7 @@ export default class ProcessBar extends React.Component {
     render() {
         const progress = !Number.isFinite( this.state.progress ) ? 0 : this.state.progress;
         return (
-            <Progress type="line" progress={ progress } options={ options }>
+            this.props.show && <Progress type="line" progress={ progress } options={ options }>
                 <read-process></read-process>
             </Progress>
         )

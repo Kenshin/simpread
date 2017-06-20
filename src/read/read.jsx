@@ -126,23 +126,18 @@ class Read extends React.Component {
 
    // exit read mode
    exit() {
-        $( rdclsjq ).velocity( { opacity: 0 }, {
-            delay: 100,
-            complete: ( elements ) => {
-                ReactDOM.unmountComponentAtNode( getReadRoot() );
-            }
-        }).addClass( "simpread-read-root-hide" );
+        Exit();
     }
 
     render() {
         return(
             <sr-read>
-                <ProgressBar />
+                <ProgressBar show={ this.props.read.progress } />
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
                 <Footer />
-                <ReadCtlbar site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
+                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
         )
     }
@@ -158,6 +153,33 @@ function Render() {
 }
 
 /**
+ * Verify simpread-read-root tag exit
+ * 
+ * @param  {boolean}
+ * @return {boolean}
+ */
+function Exist( action ) {
+    if ( $root.find( rdclsjq ).length > 0 ) {
+        action && modals.Render();
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Exit
+ */
+function Exit() {
+    $( rdclsjq ).velocity( { opacity: 0 }, {
+        delay: 100,
+        complete: ( elements ) => {
+            ReactDOM.unmountComponentAtNode( getReadRoot() );
+        }
+    }).addClass( "simpread-read-root-hide" );
+}
+
+/**
  * Get read root
  * 
  * @return {jquery} read root jquery object
@@ -167,20 +189,6 @@ function getReadRoot() {
         $root.append( bgtmpl );
     }
     return $( rdclsjq )[0];
-}
-
-/**
- * Verify simpread-read-root tag exit
- * 
- * @return {boolean}
- */
-function Exist( action = true ) {
-    if ( $root.find( rdclsjq ).length > 0 ) {
-        action && modals.Render();
-        return true;
-    } else {
-        return false;
-    }
 }
 
 /**
@@ -375,4 +383,4 @@ async function commbeautify( $target ) {
     $target.find( "a" ).removeAttr( "style" );
 }
 
-export { Render, Exist };
+export { Render, Exist, Exit };

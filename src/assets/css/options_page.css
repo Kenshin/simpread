@@ -3,7 +3,7 @@
   --text-color: #333;
   --secondary-color: color(#333 alpha(-30%));
   --background-color: #fff;
-  --width: 700px;
+  --width: 740px;
 }
 
 * {
@@ -155,4 +155,16 @@ a {
     background-color: rgba( 51, 51, 51, .8 );
 
     z-index: 3;
+}
+
+#labs .label {
+    height: 56px;
+    line-height: 56px;
+
+    text-align: left;
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
 }

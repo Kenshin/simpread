@@ -1,6 +1,7 @@
 console.log( "=== simpread focus load ===" );
 
-var util     = require( "util" ),
+var storage  = require( "storage" ).storage,
+    util     = require( "util" ),
     fcontrol = require( "controlbar" ),
     tooltip  = require( "tooltip" ),
     waves    = require( "waves" ),
@@ -60,8 +61,8 @@ var util     = require( "util" ),
         waves.Render({ root: bgclsjq });
 
         // click mask remove it
-        $( bgclsjq ).on( "click", function( event ) {
-            if ( $( event.target ).attr("class") != bgcls ) return;
+        $( bgclsjq ).on( "click", function( event, data ) {
+            if ( $( event.target ).attr("class") != bgcls || ( !storage.current.mask && !data )) return;
              $( bgclsjq ).velocity({ opacity: 0 }, {
                  complete: ()=> {
                     includeStyle( $target, focusstyle, focuscls, "delete" );
@@ -84,21 +85,6 @@ var util     = require( "util" ),
             console.log( "=== simpread focus remove ===" );
         });
 
-    }
-
-    /**
-     * Verify exit
-     * 
-     * @param  {boolean} when true, call fcontrol.Click()
-     * @return {boolen} true: exist; false: not exist
-     */
-    Focus.prototype.Exist = function( action ) {
-        if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
-            if (action) fcontrol.elem.onAction( undefined, "setting" );
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -137,6 +123,28 @@ var util     = require( "util" ),
             }
         }
         return fixFocus( $focus );
+    }
+
+    /**
+     * Exist
+     * 
+     * @param  {boolean} when true, call fcontrol.Click()
+     * @return {boolen} true: exist; false: not exist
+     */
+    Focus.prototype.Exist = function( action ) {
+        if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
+            if (action) fcontrol.elem.onAction( undefined, "setting" );
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Exit
+     */
+    Focus.prototype.Exit = function() {
+        $( bgclsjq ).trigger( "click", "okay" );
     }
 
     return new Focus();

@@ -92,7 +92,8 @@ const webpack = require( 'webpack' ),
           'message',
           'storage',
           'site',
-          'version'
+          'version',
+          'menu'
         ],
 
         vendors : [
@@ -215,6 +216,7 @@ const webpack = require( 'webpack' ),
           stylesheet : __dirname + '/src/service/stylesheet.js',
           config     : __dirname + '/src/service/config.js',
           version    : __dirname + '/src/service/version.js',
+          menu       : __dirname + '/src/service/menu.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
@@ -227,6 +229,7 @@ const webpack = require( 'webpack' ),
           focusopt   : __dirname + '/src/module/focus.jsx',
           readopt    : __dirname + '/src/module/read.jsx',
           commonopt  : __dirname + '/src/module/common.jsx',
+          labsopt    : __dirname + '/src/module/labs.jsx',
           about      : __dirname + '/src/module/about.jsx',
           unrdist    : __dirname + '/src/module/unrdist.jsx',
           welcome    : __dirname + '/src/module/welcome.jsx',

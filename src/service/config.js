@@ -304,6 +304,10 @@ const tabsItem = [{
         value: "read",
         route: "#read",
     },{
+        name: "高级设定",
+        value: "labs",
+        route: "#labs",
+    },{
         name: "稍后读",
         value: "later",
         route: "#later",
@@ -316,8 +320,8 @@ const tabsItem = [{
         value: "help",
         route: "https://github.com/kenshin/simpread/wiki",
 }],
-    headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#BA68C8", "#4DB6AC" ],
-    topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#9C27B0", "#009688" ],
+    headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#7986CB", "#BA68C8", "#4DB6AC" ],
+    topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#3F51B5", "#9C27B0", "#009688" ],
     menuItem      = tabsItem.map( ( item, idx ) => {
        const menu = { ...item };
        switch ( idx ) {
@@ -332,12 +336,15 @@ const tabsItem = [{
                 menu.icon = ss.IconPath( "read_mode_icon" );
                 break;
             case 3:
-                menu.icon = ss.IconPath( "read_later_icon" );
+                menu.icon = ss.IconPath( "labs_icon" );
                 break;
             case 4:
-                menu.icon = ss.IconPath( "about_icon" );
+                menu.icon = ss.IconPath( "read_later_icon" );
                 break;
             case 5:
+                menu.icon = ss.IconPath( "about_icon" );
+                break;
+            case 6:
                 menu.icon = ss.IconPath( "help_icon" );
                 break;
        }

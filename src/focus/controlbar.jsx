@@ -2,6 +2,7 @@ console.log( "=== simpread focus controlbar load ===" )
 
 import * as modals from 'modals';
 import * as conf   from 'config';
+import { storage } from 'storage';
 
 import Fab         from 'fab';
 
@@ -32,12 +33,14 @@ class FControl extends React.Component {
 
     componentWillUnmount() {
         $(this.refs.target).remove();
-        $root.click();
+        $root.trigger( "click", "okay" );
     }
 
     render() {
         return (
-            <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
+            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" }>
+                <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
+            </sr-rd-crlbar>
         )
     }
 }
@@ -64,7 +67,7 @@ function moveTop() {
  */
 function Render( root ) {
     $root = $(root);
-    ReactDOM.render( <FControl />, getRoot() );
+    ReactDOM.render( <FControl show={ storage.current.controlbar } />, getRoot() );
 }
 
 /**

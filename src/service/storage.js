@@ -30,12 +30,17 @@ const name = "simpread",
     focus  = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
+        controlbar: true,
+        mask      : true,
         opacity   : 90,
         shortcuts : "A S",
         sites     : [],    // e.g. [ "<url>", site ]
     },
     read   = {
         version   : "2017-03-16",
+        progress  : true,
+        auto      : false,
+        controlbar: true,
         shortcuts : "A A",
         theme     : "github",
         fontfamily: "default",
@@ -49,6 +54,12 @@ const name = "simpread",
         update    : "",
         focus     : 0,
         read      : 0,
+        esc       : true,
+        menu      : {
+            focus : true,
+            read  : true,
+            link  : true,
+        },
     },
     unread = {
         idx       : 0,
@@ -349,7 +360,7 @@ class Storage {
             } else {
                 Object.keys( target ).forEach( key => {
                     if ( !Object.keys( source ).includes( key ) ||
-                       ( key != "sites" && value != "option" && target[key] == "" )) {
+                       ( key != "sites" && value != "option" && typeof target == "string" && target[key] == "" )) {
                         result.keys.push( key );
                     }
                     if ( key == "sites" ) {

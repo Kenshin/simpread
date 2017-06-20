@@ -10,6 +10,7 @@ import Notify    from 'notify';
 
 import {focus}   from 'focus';
 import * as read from 'read';
+import * as modals from 'modals';
 
 import * as st   from 'site';
 import { storage, STORAGE_MODE as mode } from 'storage';
@@ -51,6 +52,13 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 function bindShortcuts() {
     Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
     Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
+    Mousetrap.bind( "esc", () => {
+        if ( storage.option.esc ) {
+            modals.Exist()  && modals.Exit();
+            !modals.Exist() && focus.Exist() && focus.Exit();
+            !modals.Exist() && read.Exist()  && read.Exit();
+        }
+    })
 }
 
 /**
@@ -103,7 +111,7 @@ function readMode() {
  * Auto open read mode
  */
 function autoOpen() {
-    if ( !window.location.href.includes( "simpread_mode=read" ) ) return;
+    if ( !window.location.href.includes( "simpread_mode=read" ) && !storage.current.auto ) return;
     switch ( storage.current.site.name ) {
         case "36kr.com":
             $( () => readMode() );
@@ -112,7 +120,7 @@ function autoOpen() {
             setTimeout( ()=>readMode(), 500 );
             break;
         default:
-            readMode();
+            storage.current.site.name != "" && readMode();
             break;
     }
 }
