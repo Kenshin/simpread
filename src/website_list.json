@@ -1437,5 +1437,14 @@
         "exclude" : [
             "<a class='anchor'>"
         ]
+    },{
+        "name"    : "msdn.microsoft.com",
+        "url"     : "https://msdn.microsoft.com/en-us/library/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<div id='navigationButtons'>"
+        ]
     }]
 }
