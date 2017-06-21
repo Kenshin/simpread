@@ -263,35 +263,43 @@ export default class Tabs extends React.Component {
 
     tabLabelOnClick() {
         let $target = $( event.target );
-        if ( !$target.is( "a" ) ) {
-            while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-            const $a   = $target.find( "a" ),
-                  href = $a.attr( "href" );
-            href.startsWith( "#" ) && $a[0].click();
-        } else {
-            const style   = styles.get( this.state.id ),
-                  idx     = $target.attr( "id" ),
-                  value   = $target.attr( "value" ),
-                  name    = $target.text(),
-                  $prev   = $( "tab-label[active=true]" );
 
-            $( "tab-label[active=true]" )
-                .attr( "active", false ).css({ ...style.label })
-                .find( "tab-border" ).css({ ...style.border });
+        //点击的是最外层的 label，需要触发 a 的点击
+        if($target.is("tab-label")) {
+            const $a = $target.find( "a" );
+            $a[0] && $a[0].click();
+            return;
+        }
 
-            $target.parent().attr( "active", true )
-                .css({ ...style.label, ...style.label_active })
-                .find( "tab-border" ).css({ ...style.border, ...style.border_active });
+        //点击的是 a 中的子项（这里如果 dom 结构发生改变的话会有问题）
+        if(!$target.is('a')) { $target = $target.parent(); }
 
-            $( "tab-group[active=true]" )
-                .attr( "active", false )
-                .velocity({ opacity: 0 }, { complete: target => {
-                    $(target).css({ ...style.group });
-                    $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
+        //处理 a 的情况
+        const href = $target.attr('href');
+        if(!href.startsWith( "#" )) { return; }
+
+        const style   = styles.get( this.state.id ),
+            idx     = $target.attr( "id" ),
+            value   = $target.attr( "value" ),
+            name    = $target.text(),
+            $prev   = $( "tab-label[active=true]" );
+
+        $( "tab-label[active=true]" )
+            .attr( "active", false ).css({ ...style.label })
+            .find( "tab-border" ).css({ ...style.border });
+
+        $target.parent().attr( "active", true )
+            .css({ ...style.label, ...style.label_active })
+            .find( "tab-border" ).css({ ...style.border, ...style.border_active });
+
+        $( "tab-group[active=true]" )
+            .attr( "active", false )
+            .velocity({ opacity: 0 }, { complete: target => {
+                $(target).css({ ...style.group });
+                $($( "tab-group" )[idx]).attr( "active", true ).css({ ...style.group, ...style.group_active })
             }});
 
-            this.props.onChange && this.props.onChange( $prev, event );
-        }
+        this.props.onChange && this.props.onChange( $prev, $target );
     }
 
     render() {
