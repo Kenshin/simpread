@@ -2,6 +2,7 @@ console.log( "=== simpread menu load ===" )
 
 import {storage} from 'storage';
 import {browser} from 'browser';
+import * as msg  from 'message';
 
 /**
  * Create context menus
@@ -66,9 +67,21 @@ function remove( type ) {
     }
 }
 
+/**
+ * Refresh menu ( Enforcement fresh )
+ * 
+ * @param {object} new menu object 
+ */
+function refresh( cur ) {
+    Object.keys( cur ).forEach( item => {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.menu, { id: item, value: cur[item] } ));
+    });
+}
+
 export {
     createAll as CreateAll,
     create    as Create,
     remove    as Remove,
+    refresh   as Refresh,
     onClicked as OnClicked,
 }
