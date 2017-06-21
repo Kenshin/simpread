@@ -116,6 +116,10 @@ function autoOpen() {
         case "36kr.com":
             $( () => readMode() );
             break;
+        case "post.juejin.im":
+        case "entry.juejin.im":
+            setTimeout( ()=>readMode(), 2500 );
+            break;
         case "sspai.com":
             setTimeout( ()=>readMode(), 500 );
             break;
