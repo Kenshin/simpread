@@ -60,6 +60,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             break;
         case msg.MESSAGE_ACTION.menu:
             const { id, value } = request.value;
+            // hack code refresh options menu changed, and not saved storage
             storage.option.menu[id] = value;
             value === true ? menu.Create( id ) : menu.Remove( id );
             break;
