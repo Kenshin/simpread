@@ -147,7 +147,7 @@ function tabsRender( color ) {
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
                     items={ conf.tabsItem }
-                    onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
+                    onChange={ ( $p, $t, evt )=>tabsOnChange( $p, $t, evt ) }>
                     <section>
                         <CommonOpt backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
@@ -173,7 +173,7 @@ function tabsRender( color ) {
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section><About option={ storage.option } /></section>
                 </Tabs>,
-          tabsOnChange = ( $prev, $target ) => {
+          tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );
                 mainRender( idx );
                 conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
