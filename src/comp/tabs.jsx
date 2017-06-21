@@ -264,17 +264,14 @@ export default class Tabs extends React.Component {
     tabLabelOnClick() {
         let $target = $( event.target );
 
-        //点击的是最外层的 label，需要触发 a 的点击
         if($target.is("tab-label")) {
             const $a = $target.find( "a" );
             $a[0] && $a[0].click();
             return;
         }
 
-        //点击的是 a 中的子项（这里如果 dom 结构发生改变的话会有问题）
         if(!$target.is('a')) { $target = $target.parent(); }
 
-        //处理 a 的情况
         const href = $target.attr('href');
         if(!href.startsWith( "#" )) { return; }
 

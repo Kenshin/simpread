@@ -174,7 +174,6 @@ function tabsRender( color ) {
                     <section><About option={ storage.option } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target ) => {
-                //这里已经找到 target，所以直接传过来
                 const idx = $target.attr( "id" );
                 mainRender( idx );
                 conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
