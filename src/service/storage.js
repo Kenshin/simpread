@@ -255,18 +255,18 @@ class Storage {
         try {
             const url    = type === "remote" ? remote : local,
                 response = await fetch( url + "?_=" + Math.round(+new Date()) ),
-                sites    = await response.json(),
+                newsites = await response.json(),
                 len      = simpread.sites.length;
-            let [ count, forced ] = [ 0, 0 ];
+            let count    = 0;
             if ( len == 0 ) {
-                simpread.sites = formatSites( sites );
+                simpread.sites = formatSites( newsites );
                 count          = simpread.sites.length;
                 save();
             }
-            else if ( { count, forced } = addsites( formatSites( sites )), count > 0 || forced > 0 ) {
+            else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
                 save();
             }
-            callback && callback( { count, forced }, undefined );
+            callback && callback( { count }, undefined );
         } catch ( error ) {
             console.error( error );
             callback && callback( {}, error );
@@ -459,7 +459,7 @@ function formatSites( result ) {
  * Add new sites to old sites
  * 
  * @param  {array}  new sites from local or remote
- * @return {object} count: new sites; forced: update sites
+ * @return {object} count: new sites; forced: update sites( discard, all site must be forced update)
  */
 function addsites( sites ) {
     const update   = new Map( simpread.sites ),
@@ -469,7 +469,7 @@ function addsites( sites ) {
         if ( !urls.includes( site[0] ) ) {
             simpread.sites.push([ site[0], site[1] ]);
             count++;
-        } else if ( urls.includes( site[0] ) && site[1].override ) {
+        } else if ( urls.includes( site[0] )) {
             update.set( site[0], site[1] );
             simpread.sites = [ ...update ];
             forced++;
