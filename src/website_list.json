@@ -1232,10 +1232,11 @@
         ]
     },{
         "name"    : "pintu360.com",
+        "override": true,
         "url"     : "http://www.pintu360.com/article/",
         "title"   : "<h1 class='title'>",
         "desc"    : "<div class='article-note'>",
-        "include" : "[[{$('.article-content').find('.text').html()}]]",
+        "include" : "[[[$('.article-content').find('.text')]]]",
         "exclude" : [
             ""
         ]
@@ -1435,6 +1436,15 @@
         "include" : "<article class='markdown-body'>",
         "exclude" : [
             "<a class='anchor'>"
+        ]
+    },{
+        "name"    : "msdn.microsoft.com",
+        "url"     : "https://msdn.microsoft.com/en-us/library/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<div id='navigationButtons'>"
         ]
     }]
 }

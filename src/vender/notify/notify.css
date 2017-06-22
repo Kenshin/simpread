@@ -69,6 +69,31 @@ notify-gp notify-content {
     white-space: nowrap;
 }
 
+notify-gp notify-content a,
+notify-gp notify-content a:link,
+notify-gp notify-content a:visited,
+notify-gp notify-content a:active {
+    margin: inherit;
+    padding-bottom: 5px;
+
+    color: #fff;
+    font-size: inherit;
+
+    text-decoration: none;
+
+    transition: color .5s;
+}
+
+notify-gp notify-content a:hover {
+    margin: initial;
+    padding: initial;
+
+    color: inherit;
+    font-size: inherit;
+
+    text-decoration: none;
+}
+
 notify-gp notify-i {
     display: none;
 

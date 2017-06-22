@@ -98,11 +98,20 @@ var storage  = require( "storage" ).storage,
             sel, range, node, tag,
             target;
         target = util.selector( include );
-        if ( util.specTest( target) ) {
-            var value = util.specAction( include )[0];
-            $focus = $( "body" ).find( value );
-        } else if ( target ) {
-            $focus = $( "body" ).find( target );
+        try {
+            if ( util.specTest( target ) ) {
+                const [ value, state ] = util.specAction( include );
+                if ( state == 0 ) {
+                    include = include.replace( /\[\[{\$\(|}\]\]|\).html\(\)/g, "" );
+                    $focus  = $( util.specAction( `[[[${include}]]]` )[0] );
+                } else if ( state == 3 ) {
+                    $focus  = value;
+                }
+            } else if ( target ) {
+                $focus = $( "body" ).find( target );
+            }
+        } catch ( error ) {
+            console.error( "Get $focus failed", error )
         }
         while ( $focus.length == 0 ) {
             if ( $( "body" ).find( "article" ).length > 0 ) {

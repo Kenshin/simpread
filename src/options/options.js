@@ -100,7 +100,7 @@ function vernotify() {
 
 /**
  * First load call remote simpread data structure( usage storage.Sync() )
- * 
+ *
  * @param {bool} is first load
  */
 function firstLoad( first ) {
@@ -139,7 +139,7 @@ function mainRender( idx ) {
 
 /**
  * Tabs render
- * 
+ *
  * @param {string} header background color
  */
 function tabsRender( color ) {
@@ -147,7 +147,7 @@ function tabsRender( color ) {
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
                     items={ conf.tabsItem }
-                    onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
+                    onChange={ ( $p, $t, evt )=>tabsOnChange( $p, $t, evt ) }>
                     <section>
                         <CommonOpt backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
@@ -173,10 +173,8 @@ function tabsRender( color ) {
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section><About option={ storage.option } /></section>
                 </Tabs>,
-          tabsOnChange = ( $prev, event ) => {
-                let $target = $( event.target );
-                while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-                const idx = $target.find( "a" ).attr( "id" );
+          tabsOnChange = ( $prev, $target, event ) => {
+                const idx = $target.attr( "id" );
                 mainRender( idx );
                 conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
           },
