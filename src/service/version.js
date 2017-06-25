@@ -9,6 +9,10 @@ const version  = browser.runtime.getManifest().version,
       versions = new Map([
           [ "1.0.0", "Sun Jun 11 2017 12:30:00 GMT+0800 (CST)" ],
           [ "1.0.1", "Thu Jun 29 2017 15:48:15 GMT+0800 (CST)" ],
+      ]),
+      details = new Map([
+          [ "1.0.0", "" ],
+          [ "1.0.1", "新增「高级设定」选项页，" ],
     ]);
 
 /**
@@ -49,8 +53,9 @@ function Verify( curver, data ) {
  * @param {string} ver, e.g. 1.0.0, 1.0.1
  */
 function Notify( type, ver ) {
-    let str = type == "firstload" ? "安装" : "更新";
-    return `${str} 到最新版本 ${ver} ，详细请看 <a href="http://ksria.com/simpread/changelog.html" target="_blank">更新日志</a>`;
+    const str    = type == "firstload" ? "安装" : "更新",
+          detail = type == "firstload" ? "" : details.get(ver);
+    return `${str} 到最新版本 ${ver} ，${detail}详细请看 <a href="http://ksria.com/simpread/changelog.html#${ver}" target="_blank">更新日志</a>`;
 }
 
 /**
