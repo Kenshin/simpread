@@ -73,7 +73,7 @@ function focusMode() {
 
     watch.Verify( result => {
         if ( result.site ) {
-            new Notify().Render( 2, "由于适配列表已更新，为保数据的准确性，请刷新当前页面后才能生效。" );
+            new Notify().Render( "适配列表已更新，请刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.focus, false );
             const $focus = focus.GetFocus( storage.current.site.include );
@@ -97,7 +97,7 @@ function readMode() {
 
     watch.Verify( result => {
         if ( result.site ) {
-            new Notify().Render( 2, "由于适配列表已更新，为保数据的准确性，请刷新当前页面后才能生效。" );
+            new Notify().Render( "适配列表已更新，请刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.read );
             switch ( st.Verify( storage.current.site.name ) ) {
