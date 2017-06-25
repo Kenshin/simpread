@@ -32,7 +32,7 @@ storage.Read( () => {
  * @param {object} count: update site cou
  */
 function getNewsitesHandler( result ) {
-    result.count > 0 && watch.Push( "site", true );
+    watch.Push( "site", true );
 }
 
 /**
