@@ -1232,10 +1232,11 @@
         ]
     },{
         "name"    : "pintu360.com",
+        "override": true,
         "url"     : "http://www.pintu360.com/article/",
         "title"   : "<h1 class='title'>",
         "desc"    : "<div class='article-note'>",
-        "include" : "[[{$('.article-content').find('.text').html()}]]",
+        "include" : "[[[$('.article-content').find('.text')]]]",
         "exclude" : [
             ""
         ]
@@ -1416,6 +1417,34 @@
         "include" : "<td class='t_f'>",
         "exclude" : [
             "<i class='pstatus'>"
+        ]
+    },{
+        "name"    : "issue.github.com",
+        "url"     : "https://github.com/*/*/issues/*",
+        "title"   : "[[{$('h1.gh-header-title .js-issue-title').text()}]]",
+        "desc"    : "",
+        "include" : "[[{$('#discussion_bucket table td.js-comment-body').html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "readme.github.com",
+        "override": true,
+        "url"     : "https://github.com/**/*/README.md",
+        "title"   : "[[{$('title').text()}]]",
+        "desc"    : "",
+        "include" : "<article class='markdown-body'>",
+        "exclude" : [
+            "<a class='anchor'>"
+        ]
+    },{
+        "name"    : "msdn.microsoft.com",
+        "url"     : "https://msdn.microsoft.com/en-us/library/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<div id='navigationButtons'>"
         ]
     }]
 }
