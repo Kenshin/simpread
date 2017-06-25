@@ -6,6 +6,7 @@ import * as msg    from 'message';
 import {browser}   from 'browser';
 import * as ver    from 'version';
 import * as menu   from 'menu';
+import * as watch  from 'watch';
 
 /**
  * Sevice: storage Get data form chrome storage
@@ -16,8 +17,8 @@ storage.Read( () => {
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
     }
     else {
-        !local.Count() && storage.GetNewsites( "remote" );
-        ver.version != storage.version && storage.GetNewsites( "local" );
+        !local.Count() && storage.GetNewsites( "remote", getNewsitesHandler );
+        ver.version != storage.version && storage.GetNewsites( "local", getNewsitesHandler );
         ver.version != storage.version && storage.Write( () => {
                 local.Version( ver.version );
                 browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
@@ -25,6 +26,14 @@ storage.Read( () => {
     }
     menu.CreateAll();
 });
+
+/**
+ * Get newsites handler
+ * @param {object} count: update site cou
+ */
+function getNewsitesHandler( result ) {
+    result.count > 0 && watch.Push( "site", true );
+}
 
 /**
  * Listen menu event handler
@@ -65,6 +74,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             storage.option.menu[id] = value;
             value === true ? menu.Create( id ) : menu.Remove( id );
             break;
+        case msg.MESSAGE_ACTION.updated:
+            watch.Push( request.value.type, request.value.value );
+            break;
+        case msg.MESSAGE_ACTION.save_verify:
+            sendResponse( watch.Lock( request.value.url ));
+            break;
     }
 });
 
@@ -90,6 +105,7 @@ browser.tabs.onActivated.addListener( function( active ) {
 browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
     if ( changeInfo.status == "complete" ) {
         console.log( "background tabs Listener:update", tabId, changeInfo, tab );
+        watch.Pull( tabId );
         if ( !tab.url.startsWith( "chrome://" ) ) {
             browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
         } else {
@@ -97,6 +113,11 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
         }
     }
 });
+
+/**
+ * Listen chrome tab remove message
+ */
+browser.tabs.onRemoved.addListener( tabId => watch.Pull( tabId ));
 
 /**
  * Listen chrome page, include: `read`

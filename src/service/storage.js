@@ -12,7 +12,7 @@ import {version} from 'version';
  */
 
 const name = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_new.json",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v2.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
