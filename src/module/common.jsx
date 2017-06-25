@@ -34,12 +34,22 @@ export default class CommonOpt extends React.Component {
             onload = event => {
                 if ( event && event.target && event.target.result ) {
                     try {
-                        let json = JSON.parse( event.target.result ),
-                            result = storage.Verify( json );
-                        if ( result.option.code != 0 || result.focus.code != 0 || result.read.code != 0 ) {
-                            new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
+                        let json     = JSON.parse( event.target.result );
+                        const result = ver.Compare( json.version );
+                        if ( result < 0 ) {
+                            result == -1 && new Notify().Render( 2, "上传失败，当前版本太低，请升级简悦。" );
+                            result == -2 && new Notify().Render( 2, "上传失败，配置文件版本不存在。" );
                         } else {
-                            ver.version != json.version && ( json = ver.Verify( json.version, json ));
+                            if ( result == 0 ) {
+                                const obj = storage.Verify( json );
+                                if ( obj.option.code != 0 || obj.focus.code != 0 || obj.read.code != 0 ) {
+                                    new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
+                                    return;
+                                }
+                            } else if ( result == 1 ) {
+                                new Notify().Render( 1, "上传版本太低，已自动升级为最新版本。" );
+                                json = ver.Verify( json.version, json );
+                            }
                             menu.Refresh( json.option.menu );
                             storage.Write( ()=> {
                                 new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
