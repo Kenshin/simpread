@@ -23,7 +23,6 @@ import * as watch from 'watch';
  */
 storage.Read( () => {
     bindShortcuts();
-    browserAction();
     autoOpen();
 });
 
@@ -179,5 +178,5 @@ function getCurrent( mode ) {
  */
 function browserAction() {
     storage.FindSite();
-    storage.stcode > 0 && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
 }
