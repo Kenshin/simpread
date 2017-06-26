@@ -72,8 +72,9 @@ function focusMode() {
     if ( !entry( focus, read, "阅读", "聚焦" )) return;
 
     watch.Verify( result => {
-        if ( result.site ) {
-            new Notify().Render( "适配列表已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+        if ( result.site || result.import ) {
+            result.site   && new Notify().Render( "适配列表已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+            result.import && new Notify().Render( "已导入新的配置文件，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.focus, false );
             const $focus = focus.GetFocus( storage.current.site.include );
@@ -96,8 +97,9 @@ function readMode() {
     if ( !entry( read, focus, "聚焦", "阅读" )) return;
 
     watch.Verify( result => {
-        if ( result.site ) {
-            new Notify().Render( "适配列表已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href + "?simpread_mode=read" );
+        if ( result.site || result.import ) {
+            result.site   && new Notify().Render( "适配列表已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href + "?simpread_mode=read" );
+            result.import && new Notify().Render( "已导入新的配置文件，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href + "?simpread_mode=read" );
         } else {
             getCurrent( mode.read );
             switch ( st.Verify( storage.current.site.name ) ) {
