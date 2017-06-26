@@ -965,6 +965,25 @@
             ""
         ]
     },{
+        "name"    : "article.ituring.com.cn",
+        "url"     : "http://www.ituring.com.cn/article/",
+        "title"   : "[[{$('.article-title').find('h2').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='article'>",
+        "exclude" : [
+            "[['<h2>加入图灵访谈微信</h2>']]",
+            "[[/src=\\S+(01YrJhnWRMld)\\S+'/]]"
+        ]
+    },{
+        "name"    : "book.ituring.com.cn",
+        "url"     : "http://www.ituring.com.cn/book/tupubarticle/",
+        "title"   : "[[{$('.online-book-title').find('h3').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='article-detail'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/*",
         "title"   : "<h1 class='title'>",
