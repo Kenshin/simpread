@@ -23,7 +23,7 @@ import * as watch from 'watch';
  */
 storage.Read( () => {
     bindShortcuts();
-    getCurrent( mode.read );
+    browserAction();
     autoOpen();
 });
 
@@ -43,7 +43,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            getCurrent( mode.read );
+            browserAction();
             break;
     }
 });
@@ -76,7 +76,7 @@ function focusMode() {
             result.site   && new Notify().Render( "适配列表已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
             result.import && new Notify().Render( "已导入新的配置文件，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
-            getCurrent( mode.focus, false );
+            getCurrent( mode.focus );
             const $focus = focus.GetFocus( storage.current.site.include );
             if ( $focus ) {
                 storage.Statistics( mode.focus );
@@ -166,12 +166,18 @@ function entry( current, other, ...str ) {
 /**
  * Get storage.current
  * 
- * @param {string}  value is mode.focus or mode.read or undefined
- * @param {boolean} when true, push message
+ * @param {string} value is mode.focus or mode.read or undefined
  */
-function getCurrent( mode = undefined, upicon = true ) {
+function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
         storage.Getcur( mode );
     }
-    if ( upicon ) browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.rdstcode, url: window.location.href } ));
+}
+
+/**
+ * Browser action
+ */
+function browserAction() {
+    storage.FindSite();
+    storage.stcode > 0 && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
 }
