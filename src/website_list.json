@@ -1464,5 +1464,52 @@
         "exclude" : [
             "<div id='navigationButtons'>"
         ]
+    },{
+        "name"    : "qu.la",
+        "url"     : "http://www.qu.la/book/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "[['<a>章节错误,点此举报</a>']]"
+        ]
+    },{
+        "name"    : "biquge.com.tw",
+        "url"     : "http://www.biquge.com.tw/*",
+        "title"   : "[[{$('.bookname').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "xxbiquge.com",
+        "url"     : "http://www.xxbiquge.com/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "[['<a>章节错误,点此举报</a>']]"
+        ]
+    },{
+        "name"    : "biquge5200.com",
+        "url"     : "http://www.biquge5200.com/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "piaotian.com",
+        "url"     : "http://www.piaotian.com/html/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<h1>",
+            "<div class='toplink'>",
+            "<table>"
+        ]
     }]
 }
