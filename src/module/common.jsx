@@ -52,6 +52,7 @@ export default class CommonOpt extends React.Component {
                             }
                             menu.Refresh( json.option.menu );
                             storage.Write( ()=> {
+                                watch.SendMessage( "import", true );
                                 new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
                                     location.href = location.origin + location.pathname + "?simpread_mode=reload";
                                 });
