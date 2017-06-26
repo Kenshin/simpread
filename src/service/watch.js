@@ -4,9 +4,9 @@ import * as msg    from 'message';
 import {browser}   from 'browser';
 
 const watcher = {
-        site : false,
-    },
-    tabs = new Map();
+        site  : new Map(),
+        import: new Map(),
+    };
 
 /**
  * Message watcher push
@@ -26,7 +26,6 @@ function message( type, value ) {
  */
 function push( type, value ) {
     getCurAllTabs( type );
-    watcher[type] = value;
 }
 
 /**
@@ -35,21 +34,25 @@ function push( type, value ) {
  * @param {string} tab id
  */
 function pull( tabid ) {
-    tabs.delete( tabid );
+    watcher.site.delete( tabid );
+    watcher.import.delete( tabid );
 }
 
 /**
  * Lock
  * 
  * @param  {string} url
- * @return {boolen} when url exist tabs status is lock( true ), else is unlock( false )
+ * @return {object} return wacher item, when url exist tabs status is lock( true ), else is unlock( false )
  */
 function lock( url ) {
     try {
-        return { site: [ ...tabs.values()].includes( url ) };
+        return {
+            site  : [ ...watcher.site.values()].includes( url ),
+            import: [ ...watcher.import.values()].includes( url ),
+        };
     } catch( error ) {
         console.error( "watch.Lock has same failed, ", error );
-        return false;
+        return { site: false, import: false };
     }
 }
 
@@ -71,7 +74,7 @@ function verify( callback ) {
  */
 function getCurAllTabs( type ) {
     browser.tabs.query( {}, result => {
-        result.forEach( tab => tabs.set( tab.id, tab.url ));
+        result.forEach( tab => watcher[type].set( tab.id, tab.url ));
     });
 }
 
