@@ -482,15 +482,14 @@ function addsites( sites ) {
           urls     = [ ...update.keys() ];
     let   [ count, forced ] = [ 0, 0 ];
     sites.map( ( site ) => {
+        update.set( site[0], site[1] );
         if ( !urls.includes( site[0] ) ) {
-            simpread.sites.push([ site[0], site[1] ]);
             count++;
         } else if ( urls.includes( site[0] )) {
-            update.set( site[0], site[1] );
-            simpread.sites = [ ...update ];
             forced++;
         }
     });
+    simpread.sites = [ ...update ];
     return { count, forced };
 }
 
