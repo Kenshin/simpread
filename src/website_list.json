@@ -1232,7 +1232,6 @@
         ]
     },{
         "name"    : "pintu360.com",
-        "override": true,
         "url"     : "http://www.pintu360.com/article/",
         "title"   : "<h1 class='title'>",
         "desc"    : "<div class='article-note'>",
