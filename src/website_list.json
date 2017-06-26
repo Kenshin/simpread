@@ -1511,5 +1511,15 @@
             "<div class='toplink'>",
             "<table>"
         ]
+    },{
+        "name"    : "zanghaihua.org",
+        "url"     : "http://www.zanghaihua.org/",
+        "title"   : "[[{$('.chaptertitle').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='bookcontent'>",
+        "exclude" : [
+            "<script>",
+            "<a>"
+        ]
     }]
 }
