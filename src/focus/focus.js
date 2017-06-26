@@ -62,7 +62,9 @@ var storage  = require( "storage" ).storage,
 
         // click mask remove it
         $( bgclsjq ).on( "click", function( event, data ) {
-            if ( $( event.target ).attr("class") != bgcls || ( !storage.current.mask && !data )) return;
+            if ( ( event.target.tagName.toLowerCase() == "i" && event.target.id !="exit" ) ||
+                $( event.currentTarget ).attr("class") != bgcls ||
+                ( !storage.current.mask && !data )) return;
              $( bgclsjq ).velocity({ opacity: 0 }, {
                  complete: ()=> {
                     includeStyle( $target, focusstyle, focuscls, "delete" );
