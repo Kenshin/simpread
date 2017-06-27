@@ -4,8 +4,9 @@ import * as msg    from 'message';
 import {browser}   from 'browser';
 
 const watcher = {
-        site  : new Map(),
-        import: new Map(),
+        site   : new Map(),
+        import : new Map(),
+        version: new Map(),
     };
 
 /**
@@ -47,8 +48,9 @@ function pull( tabid ) {
 function lock( url ) {
     try {
         return {
-            site  : [ ...watcher.site.values()].includes( url ),
-            import: [ ...watcher.import.values()].includes( url ),
+            site   : [ ...watcher.site.values()   ].includes( url ),
+            import : [ ...watcher.import.values() ].includes( url ),
+            version: [ ...watcher.version.values()].includes( url ),
         };
     } catch( error ) {
         console.error( "watch.Lock has same failed, ", error );
