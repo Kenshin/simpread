@@ -651,7 +651,7 @@
         ]
     },{
         "name"    : "my.oschina.net",
-        "url"     : "https://my.oschina.net/u/*/blog/*",
+        "url"     : "https://my.oschina.net/**/*/blog/*",
         "title"   : "<title>",
         "desc"    : "<div class='blog-abstract'>",
         "include" : "<div class='BlogContent'>",
