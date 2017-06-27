@@ -684,7 +684,7 @@
         ]
     },{
         "name"    : "blog.csdn.net",
-        "url"     : "http://blog.csdn.net/*",
+        "url"     : "http://blog.csdn.net/*/article/details/*",
         "title"   : "<span class='link_title'>",
         "desc"    : "",
         "include" : "<div id='article_content'>",
@@ -693,7 +693,7 @@
         ]
     },{
         "name"    : "lib.csdn.net",
-        "url"     : "http://lib.csdn.net/*",
+        "url"     : "http://lib.csdn.net/article/*/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='divtexts'>",
@@ -711,7 +711,7 @@
         ]
     },{
         "name"    : "freebuf.com",
-        "url"     : "http://www.freebuf.com/*",
+        "url"     : "http://www.freebuf.com/**/*/*.html",
         "title"   : "[[{$('.title h2').text()}]]",
         "desc"    : "",
         "include" : "<div id='contenttxt'>",
@@ -720,7 +720,7 @@
         ]
     },{
         "name"    : "ruanyifeng.com",
-        "url"     : "http://www.ruanyifeng.com/blog/*",
+        "url"     : "http://www.ruanyifeng.com/blog/**/*/*.html",
         "title"   : "<h1 id='page-title'>",
         "desc"    : "",
         "include" : "<div id='main-content'>",
@@ -747,7 +747,7 @@
         ]
     },{
         "name"    : "cnblogs.com",
-        "url"     : "http://www.cnblogs.com/*",
+        "url"     : "http://www.cnblogs.com/**/*/*.html",
         "title"   : "<a id='cb_post_title_url'>",
         "desc"    : "",
         "include" : "<div id='cnblogs_post_body'>",
@@ -788,7 +788,7 @@
         ]
     },{
         "name"    : "open-open.com",
-        "url"     : "http://www.open-open.com/*",
+        "url"     : "http://www.open-open.com/lib/*/*.html",
         "title"   : "<h1 id='articleTitle'>",
         "desc"    : "",
         "include" : "<article>",
@@ -797,7 +797,7 @@
         ]
     },{
         "name"    : "colobu.com",
-        "url"     : "http://colobu.com/*",
+        "url"     : "http://colobu.com/**/*/",
         "title"   : "<h1 class='article-title'>",
         "desc"    : "",
         "include" : "<div class='article-entry'>",
@@ -939,7 +939,7 @@
         ]
     },{
         "name"    : "cocoachina.com",
-        "url"     : "http://www.cocoachina.com/*",
+        "url"     : "http://www.cocoachina.com/*/*/*.html",
         "title"   : "<h2>",
         "desc"    : "",
         "include" : "<div id='detailbody'>",
@@ -994,7 +994,7 @@
         ]
     },{
         "name"    : "voidcn.com",
-        "url"     : "http://www.voidcn.com/blog/*",
+        "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
         "include" : "<div class='post-content'>",
@@ -1025,7 +1025,7 @@
         ]
     },{
         "name"    : "jandan.net",
-        "url"     : "http://jandan.net/*",
+        "url"     : "http://jandan.net/**/*/*.html",
         "title"   : "[[{$('.post h1').text()}]]",
         "desc"    : "",
         "include" : "[[{$($('.post')[0]).html()}]]",
@@ -1050,7 +1050,7 @@
         ]
     },{
         "name"    : "news.mydrivers.com",
-        "url"     : "http://news.mydrivers.com/*",
+        "url"     : "http://news.mydrivers.com/*/*/*.htm",
         "title"   : "<div id='thread_subject'>",
         "desc"    : "",
         "include" : "<div class='news_info'>",
