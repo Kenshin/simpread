@@ -965,6 +965,25 @@
             ""
         ]
     },{
+        "name"    : "article.ituring.com.cn",
+        "url"     : "http://www.ituring.com.cn/article/",
+        "title"   : "[[{$('.article-title').find('h2').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='article'>",
+        "exclude" : [
+            "[['<h2>加入图灵访谈微信</h2>']]",
+            "[[/src=\\S+(01YrJhnWRMld)\\S+'/]]"
+        ]
+    },{
+        "name"    : "book.ituring.com.cn",
+        "url"     : "http://www.ituring.com.cn/book/tupubarticle/",
+        "title"   : "[[{$('.online-book-title').find('h3').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='article-detail'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/*",
         "title"   : "<h1 class='title'>",
@@ -1232,7 +1251,6 @@
         ]
     },{
         "name"    : "pintu360.com",
-        "override": true,
         "url"     : "http://www.pintu360.com/article/",
         "title"   : "<h1 class='title'>",
         "desc"    : "<div class='article-note'>",
@@ -1445,6 +1463,63 @@
         "include" : "<div id='content'>",
         "exclude" : [
             "<div id='navigationButtons'>"
+        ]
+    },{
+        "name"    : "qu.la",
+        "url"     : "http://www.qu.la/book/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "[['<a>章节错误,点此举报</a>']]"
+        ]
+    },{
+        "name"    : "biquge.com.tw",
+        "url"     : "http://www.biquge.com.tw/*",
+        "title"   : "[[{$('.bookname').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "xxbiquge.com",
+        "url"     : "http://www.xxbiquge.com/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "[['<a>章节错误,点此举报</a>']]"
+        ]
+    },{
+        "name"    : "biquge5200.com",
+        "url"     : "http://www.biquge5200.com/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "piaotian.com",
+        "url"     : "http://www.piaotian.com/html/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<h1>",
+            "<div class='toplink'>",
+            "<table>"
+        ]
+    },{
+        "name"    : "zanghaihua.org",
+        "url"     : "http://www.zanghaihua.org/",
+        "title"   : "[[{$('.chaptertitle').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='bookcontent'>",
+        "exclude" : [
+            "<script>",
+            "<a>"
         ]
     }]
 }

@@ -12,7 +12,7 @@ import {version} from 'version';
  */
 
 const name = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v2.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
@@ -81,7 +81,7 @@ let current  = {},
         unrdist : [],
         sites   : [],
     },
-    rdstcode = -1;
+    stcode = -1;
 
 class Storage {
 
@@ -122,12 +122,12 @@ class Storage {
     }
 
     /**
-     * Get read site code
+     * Get read site code, include: simpread.sites and simpread.read.sites
      * 
-     * @return {int} @see setCode
+     * @return {int} @see FindSite
      */
-    get rdstcode() {
-        return rdstcode;
+    get stcode() {
+        return stcode;
     }
 
     /**
@@ -200,7 +200,6 @@ class Storage {
         current.url  = url;
         current.mode = key;
         let arr = st.Getsite( new Map( simpread[key].sites ), url );
-        arr  ? setCode( key, 0 ) : setCode( key, 1 );
         !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
         if ( arr ) {
             current.site = arr[0];
@@ -208,7 +207,6 @@ class Storage {
         } else {
             sites.set( url, clone( site ));
             current.site = sites.get( url );
-            setCode( key, -1 );
         }
         curori      = { ...current };
         curori.site = { ...current.site };
@@ -246,6 +244,24 @@ class Storage {
     }
 
     /**
+     * Find site
+     * 
+     * @return {object} code: -1: not found; 1: simpread.site found; 2:simpread.read.site found;
+     *                  site: array, include: site object, url
+     */
+    FindSite() {
+        const url = st.GetURI();
+        let   arr = st.Getsite( new Map( simpread.sites ), url );
+        if ( arr ) {
+            stcode = 1;
+        } else {
+            arr = st.Getsite( new Map( simpread.read.sites ), url );
+            arr && ( stcode = 2 );
+        }
+        return { code: stcode, site: arr };
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
@@ -255,18 +271,18 @@ class Storage {
         try {
             const url    = type === "remote" ? remote : local,
                 response = await fetch( url + "?_=" + Math.round(+new Date()) ),
-                sites    = await response.json(),
+                newsites = await response.json(),
                 len      = simpread.sites.length;
-            let [ count, forced ] = [ 0, 0 ];
+            let count    = 0;
             if ( len == 0 ) {
-                simpread.sites = formatSites( sites );
+                simpread.sites = formatSites( newsites );
                 count          = simpread.sites.length;
                 save();
             }
-            else if ( { count, forced } = addsites( formatSites( sites )), count > 0 || forced > 0 ) {
+            else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
                 save();
             }
-            callback && callback( { count, forced }, undefined );
+            callback && callback( { count }, undefined );
         } catch ( error ) {
             console.error( error );
             callback && callback( {}, error );
@@ -459,22 +475,20 @@ function formatSites( result ) {
  * Add new sites to old sites
  * 
  * @param  {array}  new sites from local or remote
- * @return {object} count: new sites; forced: update sites
+ * @return {object} count: new sites; forced: update sites( discard, all site must be forced update)
  */
-function addsites( sites ) {
-    const update   = new Map( simpread.sites ),
-          urls     = [ ...update.keys() ];
+function addsites( newsites ) {
+    const oldsites = new Map( simpread.sites ),
+          urls     = [ ...oldsites.keys() ];
     let   [ count, forced ] = [ 0, 0 ];
-    sites.map( ( site ) => {
+    newsites.map( site => {
         if ( !urls.includes( site[0] ) ) {
-            simpread.sites.push([ site[0], site[1] ]);
             count++;
-        } else if ( urls.includes( site[0] ) && site[1].override ) {
-            update.set( site[0], site[1] );
-            simpread.sites = [ ...update ];
+        } else if ( urls.includes( site[0] )) {
             forced++;
         }
     });
+    simpread.sites = newsites;
     return { count, forced };
 }
 
@@ -489,16 +503,6 @@ function save( callback ) {
         curori.site = { ...current.site };
         callback && callback();
     });
-}
-
-/**
- * Set read site code
- * 
- * @param {string} mode type
- * @param {int}    -1: not found; 0: simpread.read.sites; 1: simpread.sites
- */
-function setCode( type, value ) {
-    if ( type == mode.read ) rdstcode = value;
 }
 
 /**

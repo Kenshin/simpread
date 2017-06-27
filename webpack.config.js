@@ -93,7 +93,8 @@ const webpack = require( 'webpack' ),
           'storage',
           'site',
           'version',
-          'menu'
+          'menu',
+          'watch'
         ],
 
         vendors : [
@@ -217,6 +218,7 @@ const webpack = require( 'webpack' ),
           config     : __dirname + '/src/service/config.js',
           version    : __dirname + '/src/service/version.js',
           menu       : __dirname + '/src/service/menu.js',
+          watch      : __dirname + '/src/service/watch.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',

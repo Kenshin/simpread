@@ -1,46 +1,46 @@
 {
-  "name": "__MSG_extension_name__",
+  "name"            : "__MSG_extension_name__",
   "default_locale"  : "en",
-  "version": "1.0.1",
-  "short_name": "SimpRead",
-  "description" : "__MSG_extension_desc__",
-  "homepage_url" : "http://ksria.com/simpread",
-  "author" : "Kenshin Wang <kenshin@ksria.com>",
+  "version"         : "1.0.1",
+  "short_name"      : "SimpRead",
+  "description"     : "__MSG_extension_desc__",
+  "homepage_url"    : "http://ksria.com/simpread",
+  "author"          : "Kenshin Wang <kenshin@ksria.com>",
   "icons" : {
-    "16" : "assets/images/icon16.png",
-    "48" : "assets/images/icon48.png",
-    "128" : "assets/images/icon128.png"
+    "16"            : "assets/images/icon16.png",
+    "48"            : "assets/images/icon48.png",
+    "128"           : "assets/images/icon128.png"
   },
-  "permissions": [
+  "permissions"     : [
     "contextMenus",
     "tabs",
     "storage"
   ],
   "background": {
-    "scripts": [ "/bundle/common.js", "/bundle/background.js" ]
+    "scripts"       : [ "/bundle/common.js", "/bundle/background.js" ]
   },
-  "content_scripts": [
+  "content_scripts" : [
     {
-      "matches" : [ "http://*/*", "https://*/*" ],
-      "js"      : [ 
+      "matches"     : [ "http://*/*", "https://*/*" ],
+      "js"          : [
         "/bundle/common.js",
         "/bundle/vendors.js",
         "/bundle/contentscripts.js"
        ],
-      "run_at"  : "document_end"
+      "run_at"      : "document_end"
     }
   ],
-  "page_action": {
-    "default_icon": {
-      "16": "assets/images/icon16.png"
+  "page_action"     : {
+    "default_icon"  : {
+      "16"          : "assets/images/icon16.png"
     }
   },
-  "options_page": "options/options.html",
+  "options_page"    : "options/options.html",
   "web_accessible_resources": [
     "/assets/images/*",
     "website_list.json"
   ],
-  "offline_enabled": true,
-  "update_url": "https://clients2.google.com/service/update2/crx",
+  "offline_enabled" : true,
+  "update_url"      : "https://clients2.google.com/service/update2/crx",
   "manifest_version": 2
 }
