@@ -43,8 +43,6 @@ function Verify( curver, data ) {
     }
     */
 
-    console.log( "33333", data.read.sites )
-
     data.version = version;
     return data;
 }
