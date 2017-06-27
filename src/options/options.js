@@ -94,7 +94,16 @@ function vernotify() {
         const prefix  = hash.match( /\w+/      )[0],
               version = hash.match( /[0-9\.]+/ )[0],
               msg     = ver.Notify( prefix, version );
+
         new Notify().Render( "简悦 版本提示", msg );
+
+        if ( hash.startsWith( "#update?ver=" ) && version == "1.0.1" ) {
+            storage.read.sites = storage.Fix( storage.read.sites, storage.version );
+            storage.Write( ()=> {
+                console.log( "站点编辑器升级完毕！" )
+            });
+        }
+
         history.pushState( "", "", "/options/options.html" );
     }
 }
