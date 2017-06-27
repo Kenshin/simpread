@@ -1,7 +1,7 @@
 {
     "sites"  : [{
         "name"    : "cnbeta.com",
-        "url"     : "http://www.cnbeta.com/*",
+        "url"     : "http://*.cnbeta.com/articles/*/*.htm",
         "title"   : "[[{$('header.title h1').text()}]]",
         "desc"    : "[[{$('.article-summary').text()}]]",
         "include" : "<div class='article-content'>",
@@ -290,7 +290,7 @@
         ]
     },{
         "name"    : "leiphone.com",
-        "url"     : "http://www.leiphone.com/*",
+        "url"     : "https://www.leiphone.com/news/*/*.html",
         "title"   : "<h1 class='headTit'>",
         "desc"    : "",
         "include" : "<div class='lph-article-comView'>",
@@ -414,7 +414,7 @@
         ]
     },{
         "name"    : "xueqiu.com",
-        "url"     : "https://xueqiu.com/*",
+        "url"     : "https://xueqiu.com/*/*",
         "title"   : "<h1 class='status-title'>",
         "desc"    : "",
         "include" : "[[[$('.status-content').find('.detail')]]]",
@@ -454,7 +454,7 @@
         ]
     },{
         "name"    : "w3cplus.com",
-        "url"     : "https://www.w3cplus.com/*",
+        "url"     : "https://www.w3cplus.com/**/*.html",
         "title"   : "<h1 id='page-title'>",
         "desc"    : "",
         "include" : "<div class='body-content'>",
