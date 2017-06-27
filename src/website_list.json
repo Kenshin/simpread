@@ -1075,7 +1075,7 @@
         ]
     },{
         "name"    : "young.ifeng.com",
-        "url"     : "http://young.ifeng.com/*",
+        "url"     : "http://young.ifeng.com/a/*/*.shtml",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='ya_main_con'>",
@@ -1089,7 +1089,7 @@
         ]
     },{
         "name"    : "news.ifeng.com",
-        "url"     : "http://news.ifeng.com/*",
+        "url"     : "http://*.ifeng.com/a/*/*.shtml",
         "title"   : "<h1 id='artical_topic'>",
         "desc"    : "",
         "include" : "<div id='artical_real'>",
@@ -1099,7 +1099,7 @@
         ]
     },{
         "name"    : "news.mtime.com",
-        "url"     : "http://news.mtime.com/*",
+        "url"     : "http://news.mtime.com/**/*/*.html",
         "title"   : "<h2>",
         "desc"    : "<div class='newsnote'>",
         "include" : "<div id='newsContent'>",
@@ -1108,7 +1108,7 @@
         ]
     },{
         "name"    : "feng.com",
-        "url"     : "http://www.feng.com/*",
+        "url"     : "http://*.feng.com/**/*/*.shtml",
         "title"   : "[[{$('.h2').text()==''?$('h1').text():$('.h2').text()}]]",
         "desc"    : "<p class='content_title'>",
         "include" : "<div id='article_content'>",
@@ -1117,7 +1117,7 @@
         ]
     },{
         "name"    : "caixin.com",
-        "url"     : "http://www.caixin.com/*",
+        "url"     : "http://*.caixin.com/*/*.html",
         "title"   : "<h1>",
         "desc"    : "<div id='subhead'>",
         "include" : "<div id='Main_Content_Val'>",
@@ -1126,7 +1126,7 @@
         ]
     },{
         "name"    : "ithome.com",
-        "url"     : "http://www.ithome.com/*",
+        "url"     : "https://www.ithome.com/html/**/*/*.htm",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='paragraph'>",
@@ -1135,7 +1135,7 @@
         ]
     },{
         "name"    : "news.sohu.com",
-        "url"     : "http://news.sohu.com/*",
+        "url"     : "http://news.sohu.com/*/*.shtml",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='contentText'>",
@@ -1143,8 +1143,17 @@
             "<div class='conserve-photo'>"
         ]
     },{
+        "name"    : "sohu.com",
+        "url"     : "http://www.sohu.com/a/*_*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<article class='article'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "news.sina.com.cn",
-        "url"     : "http://news.sina.com.cn/*",
+        "url"     : "http://news.sina.com.cn/**/*/*.shtml",
         "title"   : "<h1 id='artibodyTitle'>",
         "desc"    : "",
         "include" : "<div id='artibody'>",
@@ -1153,7 +1162,7 @@
         ]
     },{
         "name"    : "tech.sina.com.cn",
-        "url"     : "http://tech.sina.com.cn/*",
+        "url"     : "http://tech.sina.com.cn/**/*/*.shtml",
         "title"   : "<h1 id='main_title'>",
         "desc"    : "",
         "include" : "<div class='content'>",
