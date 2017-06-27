@@ -17,6 +17,7 @@ import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
+import * as watch from 'watch';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -100,6 +101,7 @@ function vernotify() {
         if ( hash.startsWith( "#update?ver=" ) && version == "1.0.1" ) {
             storage.read.sites = storage.Fix( storage.read.sites, storage.version );
             storage.Write( ()=> {
+                watch.SendMessage( "version", true );
                 console.log( "站点编辑器升级完毕！" )
             });
         }
