@@ -477,19 +477,18 @@ function formatSites( result ) {
  * @param  {array}  new sites from local or remote
  * @return {object} count: new sites; forced: update sites( discard, all site must be forced update)
  */
-function addsites( sites ) {
-    const update   = new Map( simpread.sites ),
-          urls     = [ ...update.keys() ];
+function addsites( newsites ) {
+    const oldsites = new Map( simpread.sites ),
+          urls     = [ ...oldsites.keys() ];
     let   [ count, forced ] = [ 0, 0 ];
-    sites.map( ( site ) => {
-        update.set( site[0], site[1] );
+    newsites.map( site => {
         if ( !urls.includes( site[0] ) ) {
             count++;
         } else if ( urls.includes( site[0] )) {
             forced++;
         }
     });
-    simpread.sites = [ ...update ];
+    simpread.sites = newsites;
     return { count, forced };
 }
 
