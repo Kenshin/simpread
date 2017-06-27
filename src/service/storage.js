@@ -428,6 +428,28 @@ class Storage {
         ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
     }
 
+    /**
+     * Fix simpread.read.sites, 1.0.0 → 1.0.1, because 1.0.1 usage minimatch
+     * 
+     * @param  {array} changed target
+     * @param  {string} version, e.g. 1.0.0 1.0.1
+     * @return {array} new sites
+     */
+    Fix( target, ver ) {
+        const newsites = target.map( site => {
+            let url      = site[0],
+                { name } = site[1];
+            for ( let item of simpread.sites ) {
+                if ( name == item[1].name ) {
+                    url = item[0];
+                    break;
+                }
+            }
+            return [ url, site[1] ];
+        });
+        return newsites;
+    }
+
 }
 
 /**
