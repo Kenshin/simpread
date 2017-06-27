@@ -651,7 +651,7 @@
         ]
     },{
         "name"    : "my.oschina.net",
-        "url"     : "https://my.oschina.net/*",
+        "url"     : "https://my.oschina.net/u/*/blog/*",
         "title"   : "<title>",
         "desc"    : "<div class='blog-abstract'>",
         "include" : "<div class='BlogContent'>",
@@ -660,7 +660,7 @@
         ]
     },{
         "name"    : "oschina.net",
-        "url"     : "https://www.oschina.net/news/*",
+        "url"     : "https://www.oschina.net/news/**/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='editor-viewer'>",
