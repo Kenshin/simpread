@@ -22,6 +22,7 @@ const version  = browser.runtime.getManifest().version,
  * @param {object} simpread data structure
  */
 function Verify( curver, data ) {
+    
 
     if ( curver == "1.0.0" ) {
         data.option.esc      = true;
@@ -41,6 +42,8 @@ function Verify( curver, data ) {
         curver = "2.0.0";
     }
     */
+
+    console.log( "33333", data.read.sites )
 
     data.version = version;
     return data;

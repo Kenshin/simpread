@@ -442,6 +442,7 @@ class Storage {
             for ( let item of simpread.sites ) {
                 if ( name == item[1].name ) {
                     url = item[0];
+                    console.log( "111111", url)
                     break;
                 }
             }
