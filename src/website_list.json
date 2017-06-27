@@ -527,6 +527,15 @@
             "[['<b>QCon北京2017</b>']]"
         ]
     },{
+        "name"    : "news.infoq.com",
+        "url"     : "http://www.infoq.com/cn/news/**/*",
+        "title"   : "<h1 class='general'>",
+        "desc"    : "",
+        "include" : "<div class='text_info'>",
+        "exclude" : [
+            "<div class='random_links'>"
+        ]
+    },{
         "name"    : "freebuf.com",
         "url"     : "http://www.freebuf.com/vuls/",
         "title"   : "<title>",
@@ -1457,7 +1466,7 @@
         ]
     },{
         "name"    : "msdn.microsoft.com",
-        "url"     : "https://msdn.microsoft.com/en-us/library/*",
+        "url"     : "https://msdn.microsoft.com/**/*/*.aspx",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1466,7 +1475,7 @@
         ]
     },{
         "name"    : "qu.la",
-        "url"     : "http://www.qu.la/book/*",
+        "url"     : "http://www.qu.la/book/*/*.html",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1475,7 +1484,7 @@
         ]
     },{
         "name"    : "biquge.com.tw",
-        "url"     : "http://www.biquge.com.tw/*",
+        "url"     : "http://www.biquge.com.tw/**/*.html",
         "title"   : "[[{$('.bookname').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1484,7 +1493,7 @@
         ]
     },{
         "name"    : "xxbiquge.com",
-        "url"     : "http://www.xxbiquge.com/*",
+        "url"     : "http://www.xxbiquge.com/**/*.html",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1493,7 +1502,7 @@
         ]
     },{
         "name"    : "biquge5200.com",
-        "url"     : "http://www.biquge5200.com/*",
+        "url"     : "http://www.biquge5200.com/**/*.html",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1502,7 +1511,7 @@
         ]
     },{
         "name"    : "piaotian.com",
-        "url"     : "http://www.piaotian.com/html/*",
+        "url"     : "http://www.piaotian.com/html/**/*.html",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
