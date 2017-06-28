@@ -1171,7 +1171,7 @@
         ]
     },{
         "name"    : "news.163.com",
-        "url"     : "http://news.163.com/*",
+        "url"     : "http://news.163.com/**/*/*.html",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div id='endText'>",
@@ -1180,7 +1180,7 @@
         ]
     },{
         "name"    : "tech.163.com",
-        "url"     : "http://tech.163.com/*",
+        "url"     : "http://*.163.com/**/*/*.html",
         "title"   : "[[{$('.post_content_main').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='post_text'>",
@@ -1189,7 +1189,7 @@
         ]
     },{
         "name"    : "mi.techweb.com.cn",
-        "url"     : "http://mi.techweb.com.cn/*",
+        "url"     : "http://mi.techweb.com.cn/tmt/*/*.shtml",
         "title"   : "[[{$('.title').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='content_txt'>",
@@ -1198,7 +1198,7 @@
         ]
     },{
         "name"    : "techweb.com.cn",
-        "url"     : "http://www.techweb.com.cn/*",
+        "url"     : "http://www.techweb.com.cn/*/*/*.shtml",
         "title"   : "[[{$('.title').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='content_txt'>",
@@ -1207,7 +1207,16 @@
         ]
     },{
         "name"    : "donews.com",
-        "url"     : "http://www.donews.com/*",
+        "url"     : "http://www.donews.com/**/*/*.html",
+        "title"   : "[[{$($('.contentbox').find('h2')[0]).text()}]]",
+        "desc"    : "",
+        "include" : "[[{$($('.article-con')[0]).html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "flashnews.donews.com",
+        "url"     : "http://www.donews.com/flashnews/detail/",
         "title"   : "[[{$($('.contentbox').find('h2')[0]).text()}]]",
         "desc"    : "",
         "include" : "[[{$($('.article-con')[0]).html()}]]",
@@ -1216,7 +1225,7 @@
         ]
     },{
         "name"    : "newseed.pedaily.cn",
-        "url"     : "http://newseed.pedaily.cn/news/*",
+        "url"     : "http://newseed.pedaily.cn/*/*.shtml",
         "title"   : "<h1>",
         "desc"    : "<div class='subject'>",
         "include" : "<div id='news-content'>",
@@ -1225,7 +1234,7 @@
         ]
     },{
         "name"    : "digi.tech.qq.com",
-        "url"     : "http://digi.tech.qq.com/*",
+        "url"     : "http://digi.tech.qq.com/a/*/*.htm",
         "title"   : "[[{$('.hd').find('h1').text()}]]",
         "desc"    : "<p class='titdd-Article'>",
         "include" : "<div class='Cnt-Main-Article-QQ'>",
@@ -1236,12 +1245,22 @@
         ]
     },{
         "name"    : "qq.com",
-        "url"     : "http://www.qq.com/*",
+        "url"     : "http://*.qq.com/a/*/*.htm",
         "title"   : "[[{$('.hd h1').text()}]]",
         "desc"    : "",
         "include" : "<div id='Cnt-Main-Article-QQ'>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "view.inews.qq.com",
+        "url"     : "http://view.inews.qq.com/a/",
+        "title"   : "<p class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<p class='title'>",
+            "<div class='src'>"
         ]
     },{
         "name"    : "zhidx.com",
@@ -1254,7 +1273,7 @@
         ]
     },{
         "name"    : "iheima.com",
-        "url"     : "http://www.iheima.com/*",
+        "url"     : "http://www.iheima.com/zixun/*/*/*.shtml",
         "title"   : "<div class='title'>",
         "desc"    : "<div class='outline'>",
         "include" : "<div class='main-content'>",
@@ -1398,16 +1417,6 @@
         "include" : "<div class='article-text'>",
         "exclude" : [
             ""
-        ]
-    },{
-        "name"    : "view.inews.qq.com",
-        "url"     : "http://view.inews.qq.com/a/",
-        "title"   : "<p class='title'>",
-        "desc"    : "",
-        "include" : "<div id='content'>",
-        "exclude" : [
-            "<p class='title'>",
-            "<div class='src'>"
         ]
     },{
         "name"    : "chinaventure.com.cn",
