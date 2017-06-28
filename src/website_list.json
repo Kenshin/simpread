@@ -564,7 +564,7 @@
         ]
     },{
         "name"    : "qianduan.net",
-        "url"     : "https://www.qianduan.net/",
+        "url"     : "https://www.qianduan.net/*/",
         "title"   : "<h1 class='post-title'>",
         "desc"    : "",
         "include" : "<section class='post-content'>",
@@ -573,7 +573,7 @@
         ]
     },{
         "name"    : "importnew.com",
-        "url"     : "http://www.importnew.com/",
+        "url"     : "http://www.importnew.com/*.html",
         "title"   : "<div class='entry-header'>",
         "desc"    : "",
         "include" : "<div class='entry'>",
@@ -582,7 +582,7 @@
         ]
     },{
         "name"    : "solidot.org",
-        "url"     : "http://www.solidot.org/",
+        "url"     : "http://www.solidot.org/story?sid=*",
         "title"   : "<div class='bg_htit'>",
         "desc"    : "",
         "include" : "<div class='p_mainnew'>",
@@ -591,7 +591,7 @@
         ]
     },{
         "name"    : "ifeve.com",
-        "url"     : "http://ifeve.com/",
+        "url"     : "http://ifeve.com/*/",
         "title"   : "<h3 class='title'>",
         "desc"    : "",
         "include" : "<div class='post_content'>",
@@ -806,7 +806,7 @@
         ]
     },{
         "name"    : "liqi.io",
-        "url"     : "http://liqi.io/",
+        "url"     : "http://liqi.io/*/",
         "title"   : "<h1 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
@@ -815,7 +815,7 @@
         ]
     },{
         "name"    : "daqianduan.com",
-        "url"     : "http://www.daqianduan.com/",
+        "url"     : "http://www.daqianduan.com/*.html",
         "title"   : "<h1 class='article-title'>",
         "desc"    : "",
         "include" : "<article class='article-content'>",
@@ -824,7 +824,7 @@
         ]
     },{
         "name"    : "caibaojian.com",
-        "url"     : "http://caibaojian.com/",
+        "url"     : "http://caibaojian.com/*.html",
         "title"   : "<h1 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
@@ -834,7 +834,7 @@
         ]
     },{
         "name"    : "hao.caibaojian.com",
-        "url"     : "http://hao.caibaojian.com/",
+        "url"     : "http://hao.caibaojian.com/*.html",
         "title"   : "<h1 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
@@ -879,12 +879,12 @@
         ]
     },{
         "name"    : "ctolib.com",
-        "url"     : "http://www.ctolib.com/",
+        "url"     : "http://www.ctolib.com/*.html",
         "title"   : "<h3 class='m-t-xs'>",
         "desc"    : "",
         "include" : "<article>",
         "exclude" : [
-            ""
+            "<a class='anchor'>"
         ]
     },{
         "name"    : "zuojj.com",
@@ -908,7 +908,7 @@
         ]
     },{
         "name"    : "xituqu.com",
-        "url"     : "https://xituqu.com/",
+        "url"     : "https://xituqu.com/*.html",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
         "include" : "<div class='post-content'>",
@@ -955,7 +955,7 @@
         ]
     },{
         "name"    : "dataunion.org",
-        "url"     : "http://dataunion.org/",
+        "url"     : "http://dataunion.org/*.html",
         "title"   : "<h1 class='mscctitle'>",
         "desc"    : "",
         "include" : "<div class='content-text'>",
@@ -964,7 +964,7 @@
         ]
     },{
         "name"    : "linux.cn",
-        "url"     : "https://linux.cn/",
+        "url"     : "https://linux.cn/article-*.html",
         "title"   : "<h1 id='article_title'>",
         "desc"    : "",
         "include" : "<div id='article_content'>",
@@ -1011,7 +1011,7 @@
     },{
         "name"    : "readme.github.com",
         "override": true,
-        "url"     : "https://github.com/**/*/README.md",
+        "url"     : "https://github.com/**/*/README*.md",
         "title"   : "[[{$('title').text()}]]",
         "desc"    : "",
         "include" : "<article class='markdown-body'>",
@@ -1048,7 +1048,7 @@
         ]
     },{
         "name"    : "thepaper.cn",
-        "url"     : "http://www.thepaper.cn/",
+        "url"     : "http://www.thepaper.cn/newsDetail_*",
         "title"   : "<h1 class='news_title'>",
         "desc"    : "",
         "include" : "<div class='news_txt'>",
@@ -1350,7 +1350,7 @@
         ]
     },{
         "name"    : "tech2ipo.com",
-        "url"     : "http://tech2ipo.com/",
+        "url"     : "http://tech2ipo.com/*",
         "title"   : "[[{$('.title').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='content'>",
@@ -1437,7 +1437,7 @@
         ]
     },{
         "name"    : "cokeji.com",
-        "url"     : "http://www.cokeji.com/",
+        "url"     : "http://www.cokeji.com/*.html",
         "title"   : "[[{$('.single-header').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='single-main'>",
