@@ -281,7 +281,7 @@
         ]
     },{
         "name"    : "qingmang.me",
-        "url"     : "http://qingmang.me/*",
+        "url"     : "http://qingmang.me/magazines/*/**/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<article>",
@@ -490,7 +490,7 @@
         ]
     },{
         "name"    : "aotu.io",
-        "url"     : "https://aotu.io/*",
+        "url"     : "https://aotu.io/notes/**/*/*/",
         "title"   : "<h1 class='post-tit'>",
         "desc"    : "",
         "include" : "<div class='post-content'>",
