@@ -152,7 +152,7 @@
         ]
     },{
         "name"    : "dgtle.com",
-        "url"     : "http://www.dgtle.com/",
+        "url"     : "http://www.dgtle.com/article-*.html",
         "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
         "include" : "<div id='view_content'>",
