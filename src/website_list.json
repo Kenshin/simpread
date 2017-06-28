@@ -614,7 +614,7 @@
         ]
     },{
         "name"    : "code.oschina.net",
-        "url"     : "https://www.oschina.net/code/",
+        "url"     : "https://www.oschina.net/code/snippet_*_*",
         "title"   : "[[{$('.QTitle').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='Body'>",
@@ -667,6 +667,15 @@
         "exclude" : [
             "[[/src=\\S+(hot3)\\S+'/]]",
             "<div class='thumb'>"
+        ]
+    },{
+        "name"    : "question.oschina.net",
+        "url"     : "https://www.oschina.net/question/*_*",
+        "title"   : "<span class='question-title-link'>",
+        "desc"    : "",
+        "include" : "<header class='detail'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "geek.csdn.net",
