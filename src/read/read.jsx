@@ -72,7 +72,8 @@ class Read extends React.Component {
 
     componentWillUnmount() {
         $root.removeClass( theme )
-             .removeClass( "simpread-font" );
+             .removeClass( "simpread-font" )
+             .attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
         tooltip.Exit( rdclsjq );
