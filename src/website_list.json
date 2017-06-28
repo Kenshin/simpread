@@ -423,6 +423,15 @@
             "<a class='ke_img_link'>"
         ]
     },{
+        "name"    : "chuansong.me",
+        "url"     : "http://chuansong.me/n/",
+        "title"   : "<h2 id='activity-name'>",
+        "desc"    : "",
+        "include" : "<div id='js_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
         "title"   : "<title>",
