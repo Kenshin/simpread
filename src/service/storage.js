@@ -252,6 +252,7 @@ class Storage {
     FindSite() {
         const url = st.GetURI();
         let   arr = st.Getsite( new Map( simpread.sites ), url );
+        stcode = -1;
         if ( arr ) {
             stcode = 1;
         } else {
