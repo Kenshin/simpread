@@ -993,6 +993,34 @@
             ""
         ]
     },{
+        "name"    : "issue.github.com",
+        "url"     : "https://github.com/*/*/issues/*",
+        "title"   : "[[{$('h1.gh-header-title .js-issue-title').text()}]]",
+        "desc"    : "",
+        "include" : "[[{$('#discussion_bucket table td.js-comment-body').html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "readme.github.com",
+        "override": true,
+        "url"     : "https://github.com/**/*/README.md",
+        "title"   : "[[{$('title').text()}]]",
+        "desc"    : "",
+        "include" : "<article class='markdown-body'>",
+        "exclude" : [
+            "<a class='anchor'>"
+        ]
+    },{
+        "name"    : "msdn.microsoft.com",
+        "url"     : "https://msdn.microsoft.com/**/*/*.aspx",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<div id='navigationButtons'>"
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -1462,34 +1490,6 @@
         "include" : "<td class='t_f'>",
         "exclude" : [
             "<i class='pstatus'>"
-        ]
-    },{
-        "name"    : "issue.github.com",
-        "url"     : "https://github.com/*/*/issues/*",
-        "title"   : "[[{$('h1.gh-header-title .js-issue-title').text()}]]",
-        "desc"    : "",
-        "include" : "[[{$('#discussion_bucket table td.js-comment-body').html()}]]",
-        "exclude" : [
-            ""
-        ]
-    },{
-        "name"    : "readme.github.com",
-        "override": true,
-        "url"     : "https://github.com/**/*/README.md",
-        "title"   : "[[{$('title').text()}]]",
-        "desc"    : "",
-        "include" : "<article class='markdown-body'>",
-        "exclude" : [
-            "<a class='anchor'>"
-        ]
-    },{
-        "name"    : "msdn.microsoft.com",
-        "url"     : "https://msdn.microsoft.com/**/*/*.aspx",
-        "title"   : "<h1 class='title'>",
-        "desc"    : "",
-        "include" : "<div id='content'>",
-        "exclude" : [
-            "<div id='navigationButtons'>"
         ]
     },{
         "name"    : "qu.la",
