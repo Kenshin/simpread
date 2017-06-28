@@ -46,7 +46,7 @@ function findSitebyURL( sites, url ) {
         if ( name == "baijia.baidu.com" && url.includes(name) ) {
             found = cur;
             break;
-        } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
+        } else if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
             found = cur;
             break;
         } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
