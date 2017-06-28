@@ -1021,6 +1021,15 @@
             "<div id='navigationButtons'>"
         ]
     },{
+      "name"    : "docs.microsoft.com",
+      "url"     : "https://docs.microsoft.com/*/*/*",
+      "title"   : "<h1>",
+      "desc"    : "",
+      "include" : "<div id='main'>",
+      "exclude" : [
+          ""
+      ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
