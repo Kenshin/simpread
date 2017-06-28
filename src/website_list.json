@@ -853,13 +853,20 @@
         ]
     },{
         "name"    : "ibm.com",
-        "url"     : "https://www.ibm.com/developerworks/cn/web/",
-        "title"   : "<h1>",
+        "url"     : "https://www.ibm.com/developerworks/cn/**/*/*.html",
+        "title"   : "<h1 id='ibm-pagetitle-h1'>",
         "desc"    : "",
-        "include" : "[[{$($('.ibm-columns')[0]).html()}]]",
+        "include" : "<div class='ibm-col-6-4'>",
         "exclude" : [
-            "<div class='dw-article-sidebar'>",
-            "<p class='ibm-back-to-top'>"
+            "<h1 id='ibm-pagetitle-h1'>",
+            "<div class='dw-article-topbar'>",
+            "<div class='ibm-alternate-rule'>",
+            "<h4 id='artrelatedtopics'>",
+            "<ul class='ibm-plain-list'>",
+            "<div id='dw-article-cmts-top'>",
+            "<div class='dw-article-cmts-container'>",
+            "<p class='ibm-ind-link'>",
+            "<div class='dw-article-sidebar'>"
         ]
     },{
         "name"    : "guanggoo.com",
