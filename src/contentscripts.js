@@ -127,6 +127,7 @@ function autoOpen() {
     getCurrent( mode.read );
     if ( !window.location.href.includes( "simpread_mode=read" ) && !storage.current.auto ) return;
     switch ( storage.current.site.name ) {
+        case "my.oschina.net":
         case "36kr.com":
             $( () => readMode() );
             break;
