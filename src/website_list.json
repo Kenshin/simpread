@@ -1316,6 +1316,15 @@
             "<div class='src'>"
         ]
     },{
+        "name"    : "view2.inews.qq.com",
+        "url"     : "http://view.news.qq.com/original/intouchtoday/*.html",
+        "title"   : "<h2 id='sharetitle'>",
+        "desc"    : "",
+        "include" : "<div id='articleContent'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "zhidx.com",
         "url"     : "http://zhidx.com/p/",
         "title"   : "[[{$('.finTit').find('h1').text()}]]",
