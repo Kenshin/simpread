@@ -1306,7 +1306,7 @@
         ]
     },{
         "name"    : "column.iresearch.cn",
-        "url"     : "http://column.iresearch.cn/*",
+        "url"     : "http://column.iresearch.cn/b/*/*.shtml",
         "title"   : "[[{$('.title').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='m-article'>",
@@ -1315,7 +1315,7 @@
         ]
     },{
         "name"    : "news.iresearch.cn",
-        "url"     : "http://news.iresearch.cn/*",
+        "url"     : "http://news.iresearch.cn/content/**/*/*.shtml",
         "title"   : "[[{$('.title').find('h1').text()}]]",
         "desc"    : "<div class='review'>",
         "include" : "<div class='m-article'>",
@@ -1334,7 +1334,7 @@
         ]
     },{
         "name"    : "timetimetime.net",
-        "url"     : "http://www.timetimetime.net/*",
+        "url"     : "http://www.timetimetime.net/*/*.html",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "[[[$('.neir')]]]",
@@ -1371,10 +1371,10 @@
         ]
     },{
         "name"    : "ebrun.com",
-        "url"     : "http://www.ebrun.com/*",
+        "url"     : "http://www.ebrun.com/*/*.shtml",
         "title"   : "<h1>",
         "desc"    : "",
-        "include" : "<div class='contdiv'>",
+        "include" : "<div class='cmsDiv'>",
         "exclude" : [
             "<p class='ybfirst_go'>",
             "<div id='corp'>",
@@ -1411,7 +1411,7 @@
         ]
     },{
         "name"    : "cn.engadget.com",
-        "url"     : "http://cn.engadget.com/*",
+        "url"     : "http://cn.engadget.com/*/*/*/*/",
         "title"   : "[[{$('head').find('title').text()}]]",
         "desc"    : "",
         "include" : "<div class='article-text'>",
