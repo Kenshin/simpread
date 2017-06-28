@@ -1492,8 +1492,17 @@
             ""
         ]
     },{
+        "name"    : "article.chiphell.com",
+        "url"     : "https://www.chiphell.com/article-*.html",
+        "title"   : "<h1 class='ph'>",
+        "desc"    : "",
+        "include" : "<table class='vwtb'>",
+        "exclude" : [
+            "<i class='pstatus'>"
+        ]
+    },{
         "name"    : "chiphell.com",
-        "url"     : "https://www.chiphell.com/*",
+        "url"     : "https://www.chiphell.com/thread-*.html",
         "title"   : "<span id='thread_subject'>",
         "desc"    : "",
         "include" : "<td class='t_f'>",

@@ -115,9 +115,6 @@ function readMode() {
                         document.location = document.location.href + "?see_lz=1&simpread_mode=read";
                     });
                     break;
-                case -3:
-                    new Notify().Render( 2, "只有选中【只看该作者】后，才能进入阅读模式。" );
-                    break;
             }
         }
     });
