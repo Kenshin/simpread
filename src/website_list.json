@@ -56,18 +56,6 @@
             "[[/src=\\S+(146241438767289600_a580xH)\\S+'/]]"
         ]
     },{
-        "name"    : "ifanr.com",
-        "url"     : "http://www.ifanr.com/",
-        "title"   : "<title>",
-        "desc"    : "",
-        "include" : "<article>",
-        "exclude" : [
-            "[['<span>快速关注知晓程序</span>']]",
-            "[['<strong>本文由知晓程序原创出品</strong>']]",
-            "[['<strong>爱范儿旗下专注于小程序生态的公众号</strong>']]",
-            "[[/src=\\S+(zxcx-1)\\S+'/]]"
-        ]
-    },{
         "name"    : "news.ifanr.com",
         "url"     : "http://www.ifanr.com/news/",
         "title"   : "<h1 class='c-single-normal__title'>",
@@ -75,16 +63,6 @@
         "include" : "<article>",
         "exclude" : [
             ""
-        ]
-    },{
-        "name"    : "minapp.com",
-        "url"     : "https://minapp.com/article/",
-        "title"   : "<h1 class='article-header-title'>",
-        "desc"    : "",
-        "include" : "<div class='origin-content'>",
-        "exclude" : [
-            "[['<strong>本文由知晓程序</strong>']]",
-            "[[/src=\\S+(zxcx_0208)\\S+'/]]"
         ]
     },{
         "name"    : "minapp.ifanr.com",
@@ -136,6 +114,28 @@
         "include" : "<article>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "ifanr.com",
+        "url"     : "http://www.ifanr.com/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            "[['<span>快速关注知晓程序</span>']]",
+            "[['<strong>本文由知晓程序原创出品</strong>']]",
+            "[['<strong>爱范儿旗下专注于小程序生态的公众号</strong>']]",
+            "[[/src=\\S+(zxcx-1)\\S+'/]]"
+        ]
+    },{
+        "name"    : "minapp.com",
+        "url"     : "https://minapp.com/article/",
+        "title"   : "<h1 class='article-header-title'>",
+        "desc"    : "",
+        "include" : "<div class='origin-content'>",
+        "exclude" : [
+            "[['<strong>本文由知晓程序</strong>']]",
+            "[[/src=\\S+(zxcx_0208)\\S+'/]]"
         ]
     },{
         "name"    : "sspai.com",
