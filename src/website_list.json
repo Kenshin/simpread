@@ -1491,10 +1491,10 @@
         ]
     },{
         "name"    : "baijia.baidu.com",
-        "url"     : "http://baijia.baidu.com/article/",
-        "title"   : "<h1>",
+        "url"     : "https://baijia.baidu.com/s?id=*",
+        "title"   : "<h1 class='title'>",
         "desc"    : "",
-        "include" : "<div class='article-detail'>",
+        "include" : "<section class='news-content'>",
         "exclude" : [
             ""
         ]
