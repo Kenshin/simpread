@@ -1223,6 +1223,33 @@
             ""
         ]
     },{
+        "name"    : "finance.sina.com.cn",
+        "url"     : "http://finance.sina.com.cn/**/*/*.shtml",
+        "title"   : "<h1 id='artibodyTitle'>",
+        "desc"    : "",
+        "include" : "<div id='artibody'>",
+        "exclude" : [
+            "[['<p>【新浪财经股吧】</p>']]"
+        ]
+    },{
+        "name"    : "people.com.cn",
+        "url"     : "http://*.people.com.cn/**/*/*.html",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='rwb_zw'>",
+        "exclude" : [
+            "<div class='edit'>"
+        ]
+    },{
+        "name"    : "chinanews.com",
+        "url"     : "http://www.chinanews.com/*/**/*/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='left_zw'>",
+        "exclude" : [
+            "<table>"
+        ]
+    },{
         "name"    : "news.163.com",
         "url"     : "http://news.163.com/**/*/*.html",
         "title"   : "<title>",
@@ -1238,7 +1265,7 @@
         "desc"    : "",
         "include" : "<div id='endText'>",
         "exclude" : [
-            "<div class='ep-source cDGray'>",
+            "<div class='ep-source'>",
             "<div class='ep-pages'>",
             "<p class='end'>"
         ]
