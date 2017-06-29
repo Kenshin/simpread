@@ -56,13 +56,13 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
     hashnotify();
-    vernotify();
     firstLoad( first );
     sidebarRender();
     navRender();
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
+    vernotify();
 });
 
 /**
