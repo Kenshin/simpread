@@ -1583,7 +1583,7 @@
         ]
     },{
         "name"    : "zanghaihua.org",
-        "url"     : "http://www.zanghaihua.org/",
+        "url"     : "http://www.zanghaihua.org/*.html",
         "title"   : "[[{$('.chaptertitle').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='bookcontent'>",
