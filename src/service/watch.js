@@ -36,8 +36,7 @@ function push( type, value ) {
  * @param {string} tab id
  */
 function pull( tabid ) {
-    watcher.site.delete( tabid );
-    watcher.import.delete( tabid );
+    Object.values( watcher ).forEach( item => item.delete( tabid ));
 }
 
 /**
