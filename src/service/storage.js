@@ -318,13 +318,13 @@ class Storage {
             sync = { ...simpread };
             sync.option.update = now();
             delete sync.sites;
-            browser.storage.sync.set( { [name] : sync }, () => {
+            browser.storage.sync.set( { name : sync }, () => {
                 console.log( "chrome storage sync[set] success!" )
                 simpread.option.update = sync.option.update;
                 save( callback( sync.option.update ));
             });
         } else {
-            browser.storage.sync.get( [name] , result => {
+            browser.storage.sync.get( name , result => {
                 console.log( "chrome storage sync[get] success!", result, simpread )
                 let success = false;
                 if ( result && !$.isEmptyObject( result )) {
