@@ -103,9 +103,9 @@ browser.tabs.onActivated.addListener( function( active ) {
  * Listen chrome tab update message, include: `tab_selected`
  */
 browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
+    watch.Pull( tabId );
     if ( changeInfo.status == "complete" ) {
         console.log( "background tabs Listener:update", tabId, changeInfo, tab );
-        watch.Pull( tabId );
         if ( !tab.url.startsWith( "chrome://" ) ) {
             browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
         } else {

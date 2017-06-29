@@ -49,7 +49,7 @@ function findSitebyURL( sites, url ) {
         } else if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
             found = cur;
             break;
-        } else if ( !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
+        } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
             //    if    ( suffix != url ) return undefined;
             //} else if ( suffix == url ) return undefined;
@@ -93,20 +93,12 @@ async function removeSpareTag( name, $target ) {
  * Verify site
  * 
  * @param  {string} storage.current.site.name
- * @return {number} 0: success; -1: not exsit; -2: tieba.com; -3: chiphell.com
+ * @return {number} 0: success; -1: not exsit; -2: tieba.com;
  */
 function verify( name ) {
     const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
     if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
         return -2;
-    } else if ( hostname == "www.chiphell.com" ) {
-        if ( pathname == "/forum.php" && window.location.search.includes( "mod=viewthread" ) ) {
-            return 0;
-        } else if ( pathname.includes( "thread" ) && window.location.search == "" ) {
-            return -3;
-        } else {
-            return -1;
-        }
     } else if ( name === "" ) {
         return -1;
     } else {

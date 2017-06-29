@@ -4,8 +4,10 @@ import * as msg    from 'message';
 import {browser}   from 'browser';
 
 const watcher = {
-        site  : new Map(),
-        import: new Map(),
+        site   : new Map(),
+        import : new Map(),
+        version: new Map(),
+        option : new Map(),
     };
 
 /**
@@ -34,8 +36,7 @@ function push( type, value ) {
  * @param {string} tab id
  */
 function pull( tabid ) {
-    watcher.site.delete( tabid );
-    watcher.import.delete( tabid );
+    Object.values( watcher ).forEach( item => item.delete( tabid ));
 }
 
 /**
@@ -47,8 +48,10 @@ function pull( tabid ) {
 function lock( url ) {
     try {
         return {
-            site  : [ ...watcher.site.values()].includes( url ),
-            import: [ ...watcher.import.values()].includes( url ),
+            site   : [ ...watcher.site.values()   ].includes( url ),
+            import : [ ...watcher.import.values() ].includes( url ),
+            version: [ ...watcher.version.values()].includes( url ),
+            option : [ ...watcher.option.values() ].includes( url ),
         };
     } catch( error ) {
         console.error( "watch.Lock has same failed, ", error );
@@ -59,11 +62,11 @@ function lock( url ) {
 /**
  * Verify
  * 
- * @param {fucntion} callback watch.Lock() result
+ * @param {fucntion} callback watch.Lock() state, result
  */
 function verify( callback ) {
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_verify, { url: window.location.href }), result => {
-        callback( result );
+        callback( result.site || result.import || result.version || result.option, result );
     });
 }
 

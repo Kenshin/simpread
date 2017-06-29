@@ -4,6 +4,7 @@ import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
 import {version} from 'version';
+import minimatch from 'minimatch';
 
 /**
  * Read and Write Chrome storage
@@ -44,6 +45,9 @@ const name = "simpread",
         shortcuts : "A A",
         theme     : "github",
         fontfamily: "default",
+        exclusion : [
+            "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
+        ],
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
         sites     : []   // e.g. [ "<url>", site ]
@@ -244,6 +248,19 @@ class Storage {
     }
 
     /**
+     * Exclusion
+     * 
+     * @return {boolen} true: not exist; false: exist
+     */
+    Exclusion() {
+        const url = window.location.origin + window.location.pathname;
+        return simpread.read.exclusion.findIndex( item => {
+            item = item.trim();
+            return item.startsWith( "http" ) ? minimatch( url, item ) : item == current.site.name;
+        }) == -1 ? true : false;
+    }
+
+    /**
      * Find site
      * 
      * @return {object} code: -1: not found; 1: simpread.site found; 2:simpread.read.site found;
@@ -252,6 +269,7 @@ class Storage {
     FindSite() {
         const url = st.GetURI();
         let   arr = st.Getsite( new Map( simpread.sites ), url );
+        stcode = -1;
         if ( arr ) {
             stcode = 1;
         } else {
@@ -300,13 +318,13 @@ class Storage {
             sync = { ...simpread };
             sync.option.update = now();
             delete sync.sites;
-            browser.storage.sync.set( { [name] : sync }, () => {
+            browser.storage.sync.set( { name : sync }, () => {
                 console.log( "chrome storage sync[set] success!" )
                 simpread.option.update = sync.option.update;
                 save( callback( sync.option.update ));
             });
         } else {
-            browser.storage.sync.get( [name] , result => {
+            browser.storage.sync.get( name , result => {
                 console.log( "chrome storage sync[get] success!", result, simpread )
                 let success = false;
                 if ( result && !$.isEmptyObject( result )) {
@@ -426,6 +444,28 @@ class Storage {
         state == "remote" && ( code = 1 );
         ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
         ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
+    }
+
+    /**
+     * Fix simpread.read.sites, 1.0.0 → 1.0.1, because 1.0.1 usage minimatch
+     * 
+     * @param  {array} changed target
+     * @param  {string} version, e.g. 1.0.0 1.0.1
+     * @return {array} new sites
+     */
+    Fix( target, ver ) {
+        const newsites = target.map( site => {
+            let url      = site[0],
+                { name } = site[1];
+            for ( let item of simpread.sites ) {
+                if ( name == item[1].name ) {
+                    url = item[0];
+                    break;
+                }
+            }
+            return [ url, site[1] ];
+        });
+        return newsites;
     }
 
 }

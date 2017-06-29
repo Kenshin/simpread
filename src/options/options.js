@@ -17,6 +17,7 @@ import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
+import * as watch from 'watch';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -55,13 +56,13 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
     hashnotify();
-    vernotify();
     firstLoad( first );
     sidebarRender();
     navRender();
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
+    vernotify();
 });
 
 /**
@@ -94,7 +95,17 @@ function vernotify() {
         const prefix  = hash.match( /\w+/      )[0],
               version = hash.match( /[0-9\.]+/ )[0],
               msg     = ver.Notify( prefix, version );
+
         new Notify().Render( "简悦 版本提示", msg );
+
+        if ( hash.startsWith( "#update?ver=" ) && version == "1.0.1" ) {
+            storage.read.sites = storage.Fix( storage.read.sites, storage.version );
+            storage.Write( ()=> {
+                watch.SendMessage( "version", true );
+                console.log( "站点编辑器升级完毕！" )
+            });
+        }
+
         history.pushState( "", "", "/options/options.html" );
     }
 }
@@ -110,6 +121,7 @@ function firstLoad( first ) {
         !error && storage.Statistics( "create" );
     });
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
+    /* remove https://trello.com/c/p8cwFcu1/71-simpread-dropbox
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first &&
         storage.Sync( "get", success => {
             success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
@@ -118,6 +130,7 @@ function firstLoad( first ) {
                 new Notify().Render( 0, "数据恢复成功！" );
             });
     });
+    */
 }
 
 /**
@@ -158,7 +171,7 @@ function tabsRender( color ) {
                                 color="#fff" backgroundColor={ conf.topColors[1] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( mode.focus ) } />
+                                onClick={ ()=>save( true ) } />
                     </section>
                     <section>
                         <ReadOpt option={ storage.read } />
@@ -166,10 +179,10 @@ function tabsRender( color ) {
                                 color="#fff" backgroundColor={ conf.topColors[2] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( mode.read ) } />
+                                onClick={ ()=>save( true ) } />
                     </section>
                     <section>
-                        <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ ()=>save() } />
+                        <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section><About option={ storage.option } /></section>
@@ -182,9 +195,10 @@ function tabsRender( color ) {
           refresh = () => {
                 tt.Render( "body" );
           },
-          save = mode => {
+          save = state => {
                 storage.Write( ()=> {
-                    new Notify().Render( 0, "保存成功，页面刷新后生效！" );
+                    watch.SendMessage( "option", true );
+                    state && new Notify().Render( 0, "保存成功，页面刷新后生效！" );
                 });
           };
     ReactDOM.render( tabs, $( ".tabscontainer" )[0] );
