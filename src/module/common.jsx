@@ -50,7 +50,7 @@ export default class CommonOpt extends React.Component {
                                 storage.version != json.version && storage.version == "1.0.1" &&
                                     ( json.read.sites = storage.Fix( json.read.sites, json.version ));
                                 json = ver.Verify( json.version, json );
-                                new Notify().Render( 1, "上传版本太低，已自动升级为最新版本。" );
+                                new Notify().Render( "上传版本太低，已自动转换为最新版本。" );
                             }
                             menu.Refresh( json.option.menu );
                             storage.Write( ()=> {
