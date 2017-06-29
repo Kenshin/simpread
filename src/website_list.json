@@ -1232,6 +1232,17 @@
             "<div class='ep-source'>"
         ]
     },{
+        "name"    : "renjian.163.com",
+        "url"     : "http://renjian.163.com/**/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='endText'>",
+        "exclude" : [
+            "<div class='ep-source cDGray'>",
+            "<div class='ep-pages'>",
+            "<p class='end'>"
+        ]
+    },{
         "name"    : "tech.163.com",
         "url"     : "http://*.163.com/**/*/*.html",
         "title"   : "[[{$('.post_content_main').find('h1').text()}]]",
