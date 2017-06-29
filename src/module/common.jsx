@@ -20,12 +20,14 @@ export default class CommonOpt extends React.Component {
     };
 
     sync() {
+        new Notify().Render( 2, "由于 Google 账户的限制，此功能将在下个版本升级为 Dropbox 方案。" );
+        /* https://trello.com/c/p8cwFcu1/71-simpread-dropbox
         storage.Sync( "set", time => {
             new Notify().Render( 2, "注意：这是实验性功能，最好采用保存配置文件到本地的方式。" );
             new Notify().Render( 0, "数据同步成功。" );
             this.setState({ update: `上次同步时间： ${ time }` });
             this.props.sync && this.props.sync();
-        });
+        });*/
     }
 
     import() {
