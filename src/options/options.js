@@ -169,7 +169,7 @@ function tabsRender( color ) {
                                 color="#fff" backgroundColor={ conf.topColors[1] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( mode.focus ) } />
+                                onClick={ ()=>save( true ) } />
                     </section>
                     <section>
                         <ReadOpt option={ storage.read } />
@@ -177,10 +177,10 @@ function tabsRender( color ) {
                                 color="#fff" backgroundColor={ conf.topColors[2] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( mode.read ) } />
+                                onClick={ ()=>save( true ) } />
                     </section>
                     <section>
-                        <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ ()=>save() } />
+                        <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section><About option={ storage.option } /></section>
@@ -193,9 +193,9 @@ function tabsRender( color ) {
           refresh = () => {
                 tt.Render( "body" );
           },
-          save = mode => {
+          save = state => {
                 storage.Write( ()=> {
-                    new Notify().Render( 0, "保存成功，页面刷新后生效！" );
+                    state && new Notify().Render( 0, "保存成功，页面刷新后生效！" );
                 });
           };
     ReactDOM.render( tabs, $( ".tabscontainer" )[0] );

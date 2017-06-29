@@ -125,23 +125,26 @@ function readMode() {
  */
 function autoOpen() {
     getCurrent( mode.read );
-    if ( !window.location.href.includes( "simpread_mode=read" ) && !storage.current.auto ) return;
-    switch ( storage.current.site.name ) {
-        case "my.oschina.net":
-        case "36kr.com":
-            $( () => readMode() );
-            break;
-        case "post.juejin.im":
-        case "entry.juejin.im":
-            setTimeout( ()=>readMode(), 2500 );
-            break;
-        case "sspai.com":
-            setTimeout( ()=>readMode(), 500 );
-            break;
-        default:
-            storage.current.site.name != "" && readMode();
-            break;
-    }
+    if ( window.location.href.includes( "simpread_mode=read" ) ||
+         ( storage.current.auto && storage.Exclusion() )
+        ) {
+        switch ( storage.current.site.name ) {
+            case "my.oschina.net":
+            case "36kr.com":
+                $( () => readMode() );
+                break;
+            case "post.juejin.im":
+            case "entry.juejin.im":
+                setTimeout( ()=>readMode(), 2500 );
+                break;
+            case "sspai.com":
+                setTimeout( ()=>readMode(), 500 );
+                break;
+            default:
+                storage.current.site.name != "" && readMode();
+                break;
+        }
+        }
 }
 
 /**

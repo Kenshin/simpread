@@ -22,7 +22,6 @@ const version  = browser.runtime.getManifest().version,
  * @param {object} simpread data structure
  */
 function Verify( curver, data ) {
-    
 
     if ( curver == "1.0.0" ) {
         data.option.esc      = true;
@@ -32,6 +31,10 @@ function Verify( curver, data ) {
         data.read.progress   = true;
         data.read.auto       = false;
         data.read.controlbar = true;
+        data.read.exclusion  = [
+            "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","https://docs.microsoft.com","https://msdn.microsoft.com","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
+        ];
+
         curver = "1.0.1";
     }
 
