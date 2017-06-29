@@ -70,8 +70,8 @@ function focusMode() {
 
     if ( !entry( focus, read, "阅读", "聚焦" )) return;
 
-    watch.Verify( result => {
-        if ( result.site || result.import || result.version ) {
+    watch.Verify( ( state, result ) => {
+        if ( state ) {
             console.log( "watch.Lock()", result );
             new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
@@ -95,8 +95,8 @@ function readMode() {
 
     if ( !entry( read, focus, "聚焦", "阅读" )) return;
 
-    watch.Verify( result => {
-        if ( result.site || result.import || result.version ) {
+    watch.Verify( ( state, result ) => {
+        if ( state ) {
             console.log( "watch.Lock()", result );
             new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href + "?simpread_mode=read" );
         } else {

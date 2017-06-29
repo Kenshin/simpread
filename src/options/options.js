@@ -195,6 +195,7 @@ function tabsRender( color ) {
           },
           save = state => {
                 storage.Write( ()=> {
+                    watch.SendMessage( "option", true );
                     state && new Notify().Render( 0, "保存成功，页面刷新后生效！" );
                 });
           };

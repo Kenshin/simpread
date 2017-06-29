@@ -7,6 +7,7 @@ const watcher = {
         site   : new Map(),
         import : new Map(),
         version: new Map(),
+        option : new Map(),
     };
 
 /**
@@ -51,6 +52,7 @@ function lock( url ) {
             site   : [ ...watcher.site.values()   ].includes( url ),
             import : [ ...watcher.import.values() ].includes( url ),
             version: [ ...watcher.version.values()].includes( url ),
+            option : [ ...watcher.option.values() ].includes( url ),
         };
     } catch( error ) {
         console.error( "watch.Lock has same failed, ", error );
@@ -61,11 +63,11 @@ function lock( url ) {
 /**
  * Verify
  * 
- * @param {fucntion} callback watch.Lock() result
+ * @param {fucntion} callback watch.Lock() state, result
  */
 function verify( callback ) {
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_verify, { url: window.location.href }), result => {
-        callback( result );
+        callback( result.site || result.import || result.version || result.option, result );
     });
 }
 
