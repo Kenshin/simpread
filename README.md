@@ -20,7 +20,7 @@
 - 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
 - 站点编辑器； `可编程，定制化`，详细请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8)
 - 多种主题； `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
-- 同步、上传/下载 配置、同步适配列表等；
+- 同步、上传/下载 配置、同步适配列表、转换为 Markdown 并下载 等；
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` 以及 [排除列表](https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）#排除列表)
 - 稍后读；
 
@@ -56,7 +56,6 @@
 
 - 快捷键；（默认为 `A S` )
 
-
 #### 投票：
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
@@ -79,12 +78,16 @@
 - 同样，你也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8)；
 
 #### 感谢：
+- [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/Kenshin/simpread/issues/11)，详细请看 [Pull requests](https://github.com/Kenshin/simpread/pull/16)；
+- [airycanon](https://github.com/airycanon) 解决了 [Fix 13](https://github.com/Kenshin/simpread/issues/13)，详细请看 [Pull requests](https://github.com/Kenshin/simpread/pull/23)；
+
+#### 简悦的诞生离不开它们：
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
 - [Webpack](https://webpack.github.io/)
 - [React](https://facebook.github.io/react)
 - [ES6](http://es6-features.org/) · [Babel](https://babeljs.io)
 - [PostCSS](http://postcss.org/) · [cssnext](http://cssnext.io/)
-- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/)
+- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/) · [minimatch](https://github.com/isaacs/minimatch) · [to-markdown](https://github.com/domchristie/to-markdown)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
 - Icon from <http://iconfont.cn>
