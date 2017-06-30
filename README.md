@@ -94,6 +94,7 @@
 - Mockup Design usage <http://magicmockups.com/>
 - Material Design usage <https://material.io/guidelines/>
 - Mind Maps <https://coggle.it/>
+- 咖啡 · 网易音乐 · Google Chrome · rMBP
 
 #### 许可：
 [![license-badge]][license-link]
