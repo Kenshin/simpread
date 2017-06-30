@@ -18,7 +18,7 @@
 #### 主要功能一览：
 - 阅读模式； `逐一适配了 160+ 个网站，并提取 标题  描述 正文 媒体资源（ 图片/ 视频 ） 等，生成 符合中文阅读 的页面`
 - 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
-- 站点编辑器； `可编程，定制化`，详细请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8)
+- 站点编辑器； `可编程，定制化`，详细请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/站点编辑器)
 - 多种主题； `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
 - 同步、上传/下载 配置、同步适配列表、转换为 Markdown 并下载 等；
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` 以及 [排除列表](https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）#排除列表)
@@ -75,7 +75,7 @@
 
 #### 如何提交新的网址用于适配模式：
 - 请提交网址 [到这里](https://github.com/Kenshin/simpread/labels/new%20site)；当我适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
-- 同样，你也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8)；
+- 同样，你也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/站点编辑器)；
 
 #### 感谢：
 - [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/Kenshin/simpread/issues/11)，详细请看 [Pull requests](https://github.com/Kenshin/simpread/pull/16)；
