@@ -36,7 +36,7 @@
 * <http://ksria.com/simpread/gallery/>
 
 #### 详细功能：
-![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature.png)
+![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.0.1.png)
 
 #### 如何使用（阅读模式）：
 
