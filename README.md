@@ -29,8 +29,8 @@
 ![简悦 - 阅读模式](http://ojec5ddd5.bkt.clouddn.com/read%20mode.png)  
 ![简悦 - 阅读模式 · 控制栏界面](http://ojec5ddd5.bkt.clouddn.com/read%20mode%20controlbar.png)  
 ![简悦 - 阅读模式 · 设置界面](http://ojec5ddd5.bkt.clouddn.com/read%20mode%20setting.png)  
-![简悦 - 设置界面](http://ojec5ddd5.bkt.clouddn.com/option.png)  
-![简悦 - 稍后读](http://ojec5ddd5.bkt.clouddn.com/unread%20list.png)  
+![简悦 - 设置界面](http://ojec5ddd5.bkt.clouddn.com/option%201.0.1.png)  
+![简悦 - 高级定制](http://ojec5ddd5.bkt.clouddn.com/option%20labs.png)  
 
 #### 照片集：
 * <http://ksria.com/simpread/gallery/>
