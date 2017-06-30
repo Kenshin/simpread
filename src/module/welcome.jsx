@@ -144,7 +144,7 @@ class Welcome extends React.Component {
                             <h2 style={ style.h2 }>欢迎使用 简悦</h2>
                             <div style={ style.desc }>
                                 去掉干扰元素，提升阅读体验，<strong style={ style.strong }>「简」</strong>单阅读，愉<strong style={ style.strong }>「悦」</strong>心情。<br/>
-                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }>120+</strong> 个网站。
+                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }>160+</strong> 个网站。
                             </div>
                         </section>
                     </div>
