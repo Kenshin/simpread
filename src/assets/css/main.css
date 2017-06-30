@@ -645,6 +645,31 @@ body {
     background-color: #03A9F4;
 }
 
+.version code {
+    margin: 0;
+    padding: 2px;
+    background-color: color(#333 alpha(-85%));
+    border-radius: 3px;
+}
+
+.version .details a {
+    @apply --white-link;
+    font-size: inherit;
+    color: var(--text-color);
+}
+
+.version .details a:hover {
+    @apply --white-link-hover;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--text-color);
+}
+
+.header .introduce img {
+    padding-top: 40px;
+    max-width: 800px;
+}
+
+
 @media all and ( min-width: 980px ) {
 
     .container {
