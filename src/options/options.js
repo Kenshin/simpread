@@ -102,7 +102,7 @@ function vernotify() {
             storage.read.sites = storage.Fix( storage.read.sites, storage.version );
             storage.Write( ()=> {
                 watch.SendMessage( "version", true );
-                console.log( "站点编辑器升级完毕！" )
+                console.log( "site editor update complete!" )
             });
         }
 
