@@ -1,7 +1,7 @@
 <p align="center"><img src="http://ojec5ddd5.bkt.clouddn.com/logo%20bigger.png" /></p>
 <h1 align="center">简悦 - SimpRead</h1>
 <p align="center">让你瞬间进入沉浸式阅读的 Chrome 扩展，还原阅读的本质，提升你的阅读体验。</p>
-<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/适配站点列表">160+</a> 个网站，因此诞生了简悦。</p>
+<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">160+</a> 个网站，因此诞生了简悦。</p>
 <p align="center">
    <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.0.1-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
@@ -18,10 +18,10 @@
 #### 主要功能一览：
 - 阅读模式； `逐一适配了 160+ 个网站，并提取 标题  描述 正文 媒体资源（ 图片/ 视频 ） 等，生成 符合中文阅读 的页面`
 - 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
-- 站点编辑器； `可编程，定制化`，详细请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/站点编辑器)
+- 站点编辑器； `可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
 - 多种主题； `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
-- 同步、上传/下载 配置、同步适配列表、转换为 Markdown 并下载 等；
-- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` 以及 [排除列表](https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）#排除列表)
+- 同步、上传/下载 配置、同步适配列表、转换为 Markdown 并下载、[快捷键](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）#快捷键) 等；
+- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` 以及 [排除列表](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）#排除列表)
 - 稍后读；
 
 #### 截图：
@@ -68,18 +68,18 @@
 #### 相关链接：
 * [更新日志](http://ksria.com/simpread/changelog.html)
 * [Wiki](https://github.com/kenshin/simpread/wiki)
-* [常见问题](https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）)
+* [常见问题](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）)
 * [反馈](https://github.com/kenshin/simpread/issues)
 * [联系](http://kenshin.wang) | [邮件](kenshin@ksria.com) | [微博](http://weibo.com/23784148)
 * 想了解简悦背后的故事？ [猛击这里](http://www.jianshu.com/p/2917e4e0169d)
 
 #### 如何提交新的网址用于适配模式：
-- 请提交网址 [到这里](https://github.com/Kenshin/simpread/labels/new%20site)；当我适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
-- 同样，你也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/Kenshin/simpread/wiki/站点编辑器)；
+- 请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；当我适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
+- 同样，你也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)；
 
 #### 感谢：
-- [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/Kenshin/simpread/issues/11)，详细请看 [Pull requests](https://github.com/Kenshin/simpread/pull/16)；
-- [airycanon](https://github.com/airycanon) 解决了 [Fix 13](https://github.com/Kenshin/simpread/issues/13)，详细请看 [Pull requests](https://github.com/Kenshin/simpread/pull/23)；
+- [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/16)；
+- [airycanon](https://github.com/airycanon) 解决了 [Fix 13](https://github.com/kenshin/simpread/issues/13)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/23)；
 
 #### 简悦的诞生离不开它们：
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
