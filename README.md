@@ -20,7 +20,7 @@
 - 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
 - 站点编辑器； `可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
 - 多种主题； `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
-- 同步、上传/下载 配置、同步适配列表、转换为 Markdown 并下载、[快捷键](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）#快捷键) 等；
+- 同步、上传/下载 配置、同步适配列表、[转换为 Markdown 并下载](https://github.com/Kenshin/simpread/tree/release/1.0.1#感谢)、[快捷键](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）#快捷键) 等；
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` 以及 [排除列表](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）#排除列表)
 - 稍后读；
 
