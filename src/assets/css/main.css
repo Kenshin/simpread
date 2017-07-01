@@ -242,10 +242,17 @@ body {
         font-size: 2.4rem;
     }
 
-
     & .desc {
         font-size: 1.8rem;
         color: var(--secondary-color);
+    }
+
+    & .desc a {
+        color: inherit;
+        font-size: inherit;
+        text-decoration: none;
+        cursor: help;
+        font-weight: 400;
     }
 }
 
