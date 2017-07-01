@@ -645,6 +645,10 @@ body {
     background-color: #03A9F4;
 }
 
+.version .type.important {
+    background-color: #9c27b0;
+}
+
 .version code {
     margin: 0;
     padding: 2px;
@@ -668,7 +672,6 @@ body {
     padding-top: 40px;
     max-width: 800px;
 }
-
 
 @media all and ( min-width: 980px ) {
 
