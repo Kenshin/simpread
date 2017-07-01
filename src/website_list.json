@@ -1019,7 +1019,6 @@
         ]
     },{
         "name"    : "readme.github.com",
-        "override": true,
         "url"     : "https://github.com/**/*/README*.md",
         "title"   : "[[{$('title').text()}]]",
         "desc"    : "",

@@ -102,7 +102,7 @@ function vernotify() {
             storage.read.sites = storage.Fix( storage.read.sites, storage.version );
             storage.Write( ()=> {
                 watch.SendMessage( "version", true );
-                console.log( "站点编辑器升级完毕！" )
+                console.log( "site editor update complete!" )
             });
         }
 
@@ -185,7 +185,7 @@ function tabsRender( color ) {
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
-                    <section><About option={ storage.option } /></section>
+                    <section><About option={ storage.option } site={ storage.simpread.sites.length } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );

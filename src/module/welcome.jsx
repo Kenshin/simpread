@@ -141,10 +141,11 @@ class Welcome extends React.Component {
                     <div className="carousel-item">
                         <section style={ style.section }>
                             <img src={ ss.IconPath( "welcome" )}/>
-                            <h2 style={ style.h2 }>欢迎使用 简悦</h2>
+                            <h2 style={{ ...style.h2, ...{ 'margin-bottom': 0 } }}>欢迎使用 简悦</h2>
                             <div style={ style.desc }>
+                                让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。<br/>
                                 去掉干扰元素，提升阅读体验，<strong style={ style.strong }>「简」</strong>单阅读，愉<strong style={ style.strong }>「悦」</strong>心情。<br/>
-                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }>120+</strong> 个网站。
+                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }>160+</strong> 个网站。
                             </div>
                         </section>
                     </div>

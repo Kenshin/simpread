@@ -8,7 +8,7 @@ import {browser} from 'browser';
 const version  = browser.runtime.getManifest().version,
       versions = new Map([
           [ "1.0.0", "Sun Jun 11 2017 12:30:00 GMT+0800 (CST)" ],
-          [ "1.0.1", "Thu Jun 29 2017 15:48:15 GMT+0800 (CST)" ],
+          [ "1.0.1", "Fri Jun 30 2017 09:27:18 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -32,7 +32,7 @@ function Verify( curver, data ) {
         data.read.auto       = false;
         data.read.controlbar = true;
         data.read.exclusion  = [
-            "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
+            "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","code.oschina.net","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
         ];
 
         curver = "1.0.1";
