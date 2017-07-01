@@ -92,7 +92,9 @@ const webpack = require( 'webpack' ),
           'message',
           'storage',
           'site',
-          'version'
+          'version',
+          'menu',
+          'watch'
         ],
 
         vendors : [
@@ -100,6 +102,11 @@ const webpack = require( 'webpack' ),
           // react
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
+
+          //minimatch
+          './node_modules/minimatch/minimatch.js',
+          //to markdown
+          './node_modules/to-markdown/dist/to-markdown.js',
 
           // vendors
           'pangu',
@@ -187,6 +194,8 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
+          minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
+          'to-markdown'  : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           pangu      : __dirname + '/src/vender/pangu.min.js',
@@ -208,6 +217,8 @@ const webpack = require( 'webpack' ),
           stylesheet : __dirname + '/src/service/stylesheet.js',
           config     : __dirname + '/src/service/config.js',
           version    : __dirname + '/src/service/version.js',
+          menu       : __dirname + '/src/service/menu.js',
+          watch      : __dirname + '/src/service/watch.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
@@ -220,6 +231,7 @@ const webpack = require( 'webpack' ),
           focusopt   : __dirname + '/src/module/focus.jsx',
           readopt    : __dirname + '/src/module/read.jsx',
           commonopt  : __dirname + '/src/module/common.jsx',
+          labsopt    : __dirname + '/src/module/labs.jsx',
           about      : __dirname + '/src/module/about.jsx',
           unrdist    : __dirname + '/src/module/unrdist.jsx',
           welcome    : __dirname + '/src/module/welcome.jsx',

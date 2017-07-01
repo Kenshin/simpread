@@ -1,6 +1,7 @@
 console.log( "=== simpread focus load ===" );
 
-var util     = require( "util" ),
+var storage  = require( "storage" ).storage,
+    util     = require( "util" ),
     fcontrol = require( "controlbar" ),
     tooltip  = require( "tooltip" ),
     waves    = require( "waves" ),
@@ -60,8 +61,10 @@ var util     = require( "util" ),
         waves.Render({ root: bgclsjq });
 
         // click mask remove it
-        $( bgclsjq ).on( "click", function( event ) {
-            if ( $( event.target ).attr("class") != bgcls ) return;
+        $( bgclsjq ).on( "click", function( event, data ) {
+            if ( ( event.target.tagName.toLowerCase() == "i" && event.target.id !="exit" ) ||
+                $( event.currentTarget ).attr("class") != bgcls ||
+                ( !storage.current.mask && !data )) return;
              $( bgclsjq ).velocity({ opacity: 0 }, {
                  complete: ()=> {
                     includeStyle( $target, focusstyle, focuscls, "delete" );
@@ -87,21 +90,6 @@ var util     = require( "util" ),
     }
 
     /**
-     * Verify exit
-     * 
-     * @param  {boolean} when true, call fcontrol.Click()
-     * @return {boolen} true: exist; false: not exist
-     */
-    Focus.prototype.Exist = function( action ) {
-        if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
-            if (action) fcontrol.elem.onAction( undefined, "setting" );
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Get focus
      * 
      * @param {string} storage.current.site.include
@@ -112,11 +100,20 @@ var util     = require( "util" ),
             sel, range, node, tag,
             target;
         target = util.selector( include );
-        if ( util.specTest( target) ) {
-            var value = util.specAction( include )[0];
-            $focus = $( "body" ).find( value );
-        } else if ( target ) {
-            $focus = $( "body" ).find( target );
+        try {
+            if ( util.specTest( target ) ) {
+                const [ value, state ] = util.specAction( include );
+                if ( state == 0 ) {
+                    include = include.replace( /\[\[{\$\(|}\]\]|\).html\(\)/g, "" );
+                    $focus  = $( util.specAction( `[[[${include}]]]` )[0] );
+                } else if ( state == 3 ) {
+                    $focus  = value;
+                }
+            } else if ( target ) {
+                $focus = $( "body" ).find( target );
+            }
+        } catch ( error ) {
+            console.error( "Get $focus failed", error )
         }
         while ( $focus.length == 0 ) {
             if ( $( "body" ).find( "article" ).length > 0 ) {
@@ -137,6 +134,28 @@ var util     = require( "util" ),
             }
         }
         return fixFocus( $focus );
+    }
+
+    /**
+     * Exist
+     * 
+     * @param  {boolean} when true, call fcontrol.Click()
+     * @return {boolen} true: exist; false: not exist
+     */
+    Focus.prototype.Exist = function( action ) {
+        if ( $( "body" ).find( "." + focuscls ).length > 0 ) {
+            if (action) fcontrol.elem.onAction( undefined, "setting" );
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Exit
+     */
+    Focus.prototype.Exit = function() {
+        $( bgclsjq ).trigger( "click", "okay" );
     }
 
     return new Focus();

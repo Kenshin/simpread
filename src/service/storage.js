@@ -4,6 +4,7 @@ import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
 import {version} from 'version';
+import minimatch from 'minimatch';
 
 /**
  * Read and Write Chrome storage
@@ -12,7 +13,7 @@ import {version} from 'version';
  */
 
 const name = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list.json",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v2.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
@@ -30,15 +31,23 @@ const name = "simpread",
     focus  = {
         version   : "2016-12-29",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
+        controlbar: true,
+        mask      : true,
         opacity   : 90,
         shortcuts : "A S",
         sites     : [],    // e.g. [ "<url>", site ]
     },
     read   = {
         version   : "2017-03-16",
+        progress  : true,
+        auto      : false,
+        controlbar: true,
         shortcuts : "A A",
         theme     : "github",
         fontfamily: "default",
+        exclusion : [
+            "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","code.oschina.net","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
+        ],
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
         sites     : []   // e.g. [ "<url>", site ]
@@ -49,6 +58,12 @@ const name = "simpread",
         update    : "",
         focus     : 0,
         read      : 0,
+        esc       : true,
+        menu      : {
+            focus : true,
+            read  : true,
+            link  : true,
+        },
     },
     unread = {
         idx       : 0,
@@ -70,7 +85,7 @@ let current  = {},
         unrdist : [],
         sites   : [],
     },
-    rdstcode = -1;
+    stcode = -1;
 
 class Storage {
 
@@ -111,12 +126,12 @@ class Storage {
     }
 
     /**
-     * Get read site code
+     * Get read site code, include: simpread.sites and simpread.read.sites
      * 
-     * @return {int} @see setCode
+     * @return {int} @see FindSite
      */
-    get rdstcode() {
-        return rdstcode;
+    get stcode() {
+        return stcode;
     }
 
     /**
@@ -189,7 +204,6 @@ class Storage {
         current.url  = url;
         current.mode = key;
         let arr = st.Getsite( new Map( simpread[key].sites ), url );
-        arr  ? setCode( key, 0 ) : setCode( key, 1 );
         !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
         if ( arr ) {
             current.site = arr[0];
@@ -197,7 +211,6 @@ class Storage {
         } else {
             sites.set( url, clone( site ));
             current.site = sites.get( url );
-            setCode( key, -1 );
         }
         curori      = { ...current };
         curori.site = { ...current.site };
@@ -235,6 +248,38 @@ class Storage {
     }
 
     /**
+     * Exclusion
+     * 
+     * @return {boolen} true: not exist; false: exist
+     */
+    Exclusion() {
+        const url = window.location.origin + window.location.pathname;
+        return simpread.read.exclusion.findIndex( item => {
+            item = item.trim();
+            return item.startsWith( "http" ) ? minimatch( url, item ) : item == current.site.name;
+        }) == -1 ? true : false;
+    }
+
+    /**
+     * Find site
+     * 
+     * @return {object} code: -1: not found; 1: simpread.site found; 2:simpread.read.site found;
+     *                  site: array, include: site object, url
+     */
+    FindSite() {
+        const url = st.GetURI();
+        let   arr = st.Getsite( new Map( simpread.sites ), url );
+        stcode = -1;
+        if ( arr ) {
+            stcode = 1;
+        } else {
+            arr = st.Getsite( new Map( simpread.read.sites ), url );
+            arr && ( stcode = 2 );
+        }
+        return { code: stcode, site: arr };
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
@@ -244,18 +289,18 @@ class Storage {
         try {
             const url    = type === "remote" ? remote : local,
                 response = await fetch( url + "?_=" + Math.round(+new Date()) ),
-                sites    = await response.json(),
+                newsites = await response.json(),
                 len      = simpread.sites.length;
-            let [ count, forced ] = [ 0, 0 ];
+            let count    = 0;
             if ( len == 0 ) {
-                simpread.sites = formatSites( sites );
+                simpread.sites = formatSites( newsites );
                 count          = simpread.sites.length;
                 save();
             }
-            else if ( { count, forced } = addsites( formatSites( sites )), count > 0 || forced > 0 ) {
+            else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
                 save();
             }
-            callback && callback( { count, forced }, undefined );
+            callback && callback( { count }, undefined );
         } catch ( error ) {
             console.error( error );
             callback && callback( {}, error );
@@ -273,13 +318,13 @@ class Storage {
             sync = { ...simpread };
             sync.option.update = now();
             delete sync.sites;
-            browser.storage.sync.set( { [name] : sync }, () => {
+            browser.storage.sync.set( { name : sync }, () => {
                 console.log( "chrome storage sync[set] success!" )
                 simpread.option.update = sync.option.update;
                 save( callback( sync.option.update ));
             });
         } else {
-            browser.storage.sync.get( [name] , result => {
+            browser.storage.sync.get( name , result => {
                 console.log( "chrome storage sync[get] success!", result, simpread )
                 let success = false;
                 if ( result && !$.isEmptyObject( result )) {
@@ -349,7 +394,7 @@ class Storage {
             } else {
                 Object.keys( target ).forEach( key => {
                     if ( !Object.keys( source ).includes( key ) ||
-                       ( key != "sites" && value != "option" && target[key] == "" )) {
+                       ( key != "sites" && value != "option" && typeof target == "string" && target[key] == "" )) {
                         result.keys.push( key );
                     }
                     if ( key == "sites" ) {
@@ -401,6 +446,28 @@ class Storage {
         ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
     }
 
+    /**
+     * Fix simpread.read.sites, 1.0.0 → 1.0.1, because 1.0.1 usage minimatch
+     * 
+     * @param  {array} changed target
+     * @param  {string} version, e.g. 1.0.0 1.0.1
+     * @return {array} new sites
+     */
+    Fix( target, ver ) {
+        const newsites = target.map( site => {
+            let url      = site[0],
+                { name } = site[1];
+            for ( let item of simpread.sites ) {
+                if ( name == item[1].name ) {
+                    url = item[0];
+                    break;
+                }
+            }
+            return [ url, site[1] ];
+        });
+        return newsites;
+    }
+
 }
 
 /**
@@ -448,22 +515,20 @@ function formatSites( result ) {
  * Add new sites to old sites
  * 
  * @param  {array}  new sites from local or remote
- * @return {object} count: new sites; forced: update sites
+ * @return {object} count: new sites; forced: update sites( discard, all site must be forced update)
  */
-function addsites( sites ) {
-    const update   = new Map( simpread.sites ),
-          urls     = [ ...update.keys() ];
+function addsites( newsites ) {
+    const oldsites = new Map( simpread.sites ),
+          urls     = [ ...oldsites.keys() ];
     let   [ count, forced ] = [ 0, 0 ];
-    sites.map( ( site ) => {
+    newsites.map( site => {
         if ( !urls.includes( site[0] ) ) {
-            simpread.sites.push([ site[0], site[1] ]);
             count++;
-        } else if ( urls.includes( site[0] ) && site[1].override ) {
-            update.set( site[0], site[1] );
-            simpread.sites = [ ...update ];
+        } else if ( urls.includes( site[0] )) {
             forced++;
         }
     });
+    simpread.sites = newsites;
     return { count, forced };
 }
 
@@ -478,16 +543,6 @@ function save( callback ) {
         curori.site = { ...current.site };
         callback && callback();
     });
-}
-
-/**
- * Set read site code
- * 
- * @param {string} mode type
- * @param {int}    -1: not found; 0: simpread.read.sites; 1: simpread.sites
- */
-function setCode( type, value ) {
-    if ( type == mode.read ) rdstcode = value;
 }
 
 /**

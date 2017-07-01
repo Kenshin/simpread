@@ -1,6 +1,8 @@
 console.log( "=== simpread read load ===" )
 
+import toMarkdown  from 'to-markdown';
 import pangu       from 'pangu';
+
 import ProgressBar from 'schedule';
 import ReadCtlbar  from 'readctlbar';
 import * as modals from 'modals';
@@ -22,9 +24,8 @@ const rdcls   = "simpread-read-root",
 
 const errorpage = `
         <sr-rd-content-error>
-            <p>当前页面使用 <span style="color: #4183c4;">阅读模式</span> 解析后 <b style="color: #E57373;">无法正常显示</b>，暂时不支持 <b style="color: #E57373;">手动添加</b>，请换用 <span style="color: #4183c4;">聚焦模式</span>。
-  </p>
-            <p>或者<a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">报告此页面</a> 以便让 <a href="http://ksria.com/simpread" target="_blank">简悦 - SimpRead</a> 变得更加出色，谢谢。</p>
+            <p>当前页面使用 <span style="color: #4183c4;">阅读模式</span> 解析后 <b style="color: #E57373;">无法正常显示</b>，暂时不支持 <b style="color: #E57373;">手动添加</b>，请换用 <span style="color: #4183c4;">聚焦模式</span> 或者 将当前页面加入到<a href="https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）#排除列表" target="_blank">排除列表</a> 。</p>
+            <p>报告<a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a> 以便让 <a href="http://ksria.com/simpread" target="_blank">简悦 - SimpRead</a> 变得更加出色，谢谢。</p>
         </sr-rd-content-error>`;
 
 const Footer = () => {
@@ -69,7 +70,9 @@ class Read extends React.Component {
     }
 
     componentWillUnmount() {
-        $root.removeClass( theme );
+        $root.removeClass( theme )
+             .removeClass( "simpread-font" );
+        $root.attr("style") && $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
         tooltip.Exit( rdclsjq );
@@ -105,28 +108,36 @@ class Read extends React.Component {
                 storage.current[type]=value;
                 storage.Setcur( storage.current.mode );
                 break;
+            case "markdown":
+                new Notify().Render( "请注意，这是一个实验性功能，不一定能导出成功。" );
+                const { include } = this.props.wrapper;
+                try {
+                    const md   = toMarkdown( include, { gfm: true }),
+                          data = "data:text/plain;charset=utf-8," + encodeURIComponent( md ),
+                          $a   = $( `<a style="display:none" href=${data} download="simpread-${ this.props.wrapper.title.trim() }.md"></a>` ).appendTo( "body" );
+                    $a[0].click();
+                    $a.remove();
+                } catch( e ) {
+                    new Notify().Render( 1, "转换 Markdown 格式失败！" );
+                }
+                break;
         }
     }
 
    // exit read mode
    exit() {
-        $( rdclsjq ).velocity( { opacity: 0 }, {
-            delay: 100,
-            complete: ( elements ) => {
-                ReactDOM.unmountComponentAtNode( getReadRoot() );
-            }
-        }).addClass( "simpread-read-root-hide" );
+        Exit();
     }
 
     render() {
         return(
             <sr-read>
-                <ProgressBar />
+                <ProgressBar show={ this.props.read.progress } />
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
                 <Footer />
-                <ReadCtlbar site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
+                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
         )
     }
@@ -142,6 +153,33 @@ function Render() {
 }
 
 /**
+ * Verify simpread-read-root tag exit
+ * 
+ * @param  {boolean}
+ * @return {boolean}
+ */
+function Exist( action ) {
+    if ( $root.find( rdclsjq ).length > 0 ) {
+        action && modals.Render();
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Exit
+ */
+function Exit() {
+    $( rdclsjq ).velocity( { opacity: 0 }, {
+        delay: 100,
+        complete: ( elements ) => {
+            ReactDOM.unmountComponentAtNode( getReadRoot() );
+        }
+    }).addClass( "simpread-read-root-hide" );
+}
+
+/**
  * Get read root
  * 
  * @return {jquery} read root jquery object
@@ -151,20 +189,6 @@ function getReadRoot() {
         $root.append( bgtmpl );
     }
     return $( rdclsjq )[0];
-}
-
-/**
- * Verify simpread-read-root tag exit
- * 
- * @return {boolean}
- */
-function Exist( action = true ) {
-    if ( $root.find( rdclsjq ).length > 0 ) {
-        action && modals.Render();
-        return true;
-    } else {
-        return false;
-    }
 }
 
 /**
@@ -359,4 +383,4 @@ async function commbeautify( $target ) {
     $target.find( "a" ).removeAttr( "style" );
 }
 
-export { Render, Exist };
+export { Render, Exist, Exit };

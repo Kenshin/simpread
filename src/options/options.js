@@ -17,10 +17,12 @@ import { storage, STORAGE_MODE as mode } from 'storage';
 import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
+import * as watch from 'watch';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
+import LabsOpt    from 'labsopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
@@ -54,13 +56,13 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
     hashnotify();
-    vernotify();
     firstLoad( first );
     sidebarRender();
     navRender();
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
+    vernotify();
 });
 
 /**
@@ -93,13 +95,24 @@ function vernotify() {
         const prefix  = hash.match( /\w+/      )[0],
               version = hash.match( /[0-9\.]+/ )[0],
               msg     = ver.Notify( prefix, version );
+
         new Notify().Render( "简悦 版本提示", msg );
+
+        if ( hash.startsWith( "#update?ver=" ) && version == "1.0.1" ) {
+            storage.read.sites = storage.Fix( storage.read.sites, storage.version );
+            storage.Write( ()=> {
+                watch.SendMessage( "version", true );
+                console.log( "site editor update complete!" )
+            });
+        }
+
+        history.pushState( "", "", "/options/options.html" );
     }
 }
 
 /**
  * First load call remote simpread data structure( usage storage.Sync() )
- * 
+ *
  * @param {bool} is first load
  */
 function firstLoad( first ) {
@@ -108,6 +121,7 @@ function firstLoad( first ) {
         !error && storage.Statistics( "create" );
     });
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
+    /* remove https://trello.com/c/p8cwFcu1/71-simpread-dropbox
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first &&
         storage.Sync( "get", success => {
             success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
@@ -116,6 +130,7 @@ function firstLoad( first ) {
                 new Notify().Render( 0, "数据恢复成功！" );
             });
     });
+    */
 }
 
 /**
@@ -138,7 +153,7 @@ function mainRender( idx ) {
 
 /**
  * Tabs render
- * 
+ *
  * @param {string} header background color
  */
 function tabsRender( color ) {
@@ -146,7 +161,7 @@ function tabsRender( color ) {
                     headerStyle={{ transition: 'all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms' }}
                     bgColor={ color }
                     items={ conf.tabsItem }
-                    onChange={ ( $p, evt )=>tabsOnChange( $p, evt ) }>
+                    onChange={ ( $p, $t, evt )=>tabsOnChange( $p, $t, evt ) }>
                     <section>
                         <CommonOpt backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
@@ -156,7 +171,7 @@ function tabsRender( color ) {
                                 color="#fff" backgroundColor={ conf.topColors[1] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( mode.focus ) } />
+                                onClick={ ()=>save( true ) } />
                     </section>
                     <section>
                         <ReadOpt option={ storage.read } />
@@ -164,24 +179,26 @@ function tabsRender( color ) {
                                 color="#fff" backgroundColor={ conf.topColors[2] }
                                 icon={ ss.IconPath( "save_icon" ) }
                                 waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( mode.read ) } />
+                                onClick={ ()=>save( true ) } />
+                    </section>
+                    <section>
+                        <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
-                    <section><About option={ storage.option } /></section>
+                    <section><About option={ storage.option } site={ storage.simpread.sites.length } /></section>
                 </Tabs>,
-          tabsOnChange = ( $prev, event ) => {
-                let $target = $( event.target );
-                while ( !$target.is( "tab-label" ) ) { $target = $target.parent(); }
-                const idx = $target.find( "a" ).attr( "id" );
+          tabsOnChange = ( $prev, $target, event ) => {
+                const idx = $target.attr( "id" );
                 mainRender( idx );
                 conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
           },
           refresh = () => {
                 tt.Render( "body" );
           },
-          save = mode => {
+          save = state => {
                 storage.Write( ()=> {
-                    new Notify().Render( 0, "保存成功，页面刷新后生效！" );
+                    watch.SendMessage( "option", true );
+                    state && new Notify().Render( 0, "保存成功，页面刷新后生效！" );
                 });
           };
     ReactDOM.render( tabs, $( ".tabscontainer" )[0] );

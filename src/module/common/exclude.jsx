@@ -34,7 +34,7 @@ export default class Exclude extends React.Component {
                 rows={ this.props.rows }
                 placeholder="默认为空，每行一个，支持： Html标签, {}, '', //, [] 等，详细请看站点编辑器。" 
                 floatingtext="隐藏列表" 
-                value={ this.props.exclude.join( "\n" ) }
+                value={ (this.props.exclude||[]).join( "\n" ) }
                 errortext={ this.state.error }
                 onChange={ ()=>this.changeExclude() }
             />

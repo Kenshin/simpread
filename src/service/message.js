@@ -7,6 +7,9 @@ const action = {
     browser_action : "browser_action",
     tab_selected   : "tab_selected",
     new_tab        : "new_tab",
+    menu           : "menu",
+    updated        : "updated",
+    save_verify    : "save_verify",
 };
 
 /**

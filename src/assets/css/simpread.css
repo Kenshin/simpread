@@ -196,3 +196,23 @@ sr-rd-footer a:active {
     color: #787878;
     text-decoration: underline;
 }
+
+/**
+ * Controlbar: focus mode and read mode
+ */
+sr-rd-crlbar.controlbar {
+    position: fixed;
+
+    right: 0;
+    bottom: 0;
+
+    width: 100px;
+    height: 100%;
+
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+sr-rd-crlbar.controlbar:hover {
+    opacity: 1;
+}

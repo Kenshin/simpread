@@ -1,11 +1,13 @@
 console.log( "===== simpread option common load =====" )
 
-import Button      from 'button'; 
+import Button      from 'button';
 import Notify      from 'notify';
 
 import * as ss     from 'stylesheet';
 import { storage, Now } from 'storage';
 import * as ver    from 'version';
+import * as menu   from 'menu';
+import * as watch  from 'watch';
 
 export default class CommonOpt extends React.Component {
 
@@ -18,12 +20,14 @@ export default class CommonOpt extends React.Component {
     };
 
     sync() {
+        new Notify().Render( 2, "由于 Google 账户的限制，此功能将在下个版本升级为 Dropbox 方案。" );
+        /* https://trello.com/c/p8cwFcu1/71-simpread-dropbox
         storage.Sync( "set", time => {
             new Notify().Render( 2, "注意：这是实验性功能，最好采用保存配置文件到本地的方式。" );
             new Notify().Render( 0, "数据同步成功。" );
             this.setState({ update: `上次同步时间： ${ time }` });
             this.props.sync && this.props.sync();
-        });
+        });*/
     }
 
     import() {
@@ -32,13 +36,27 @@ export default class CommonOpt extends React.Component {
             onload = event => {
                 if ( event && event.target && event.target.result ) {
                     try {
-                        let json = JSON.parse( event.target.result ),
-                            result = storage.Verify( json );
-                        if ( result.option.code != 0 || result.focus.code != 0 || result.read.code != 0 ) {
-                            new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
+                        let json     = JSON.parse( event.target.result );
+                        const result = ver.Compare( json.version );
+                        if ( result < 0 ) {
+                            result == -1 && new Notify().Render( 2, "上传失败，当前版本太低，请升级简悦。" );
+                            result == -2 && new Notify().Render( 2, "上传失败，配置文件版本不存在。" );
                         } else {
-                            ver.version != json.version && ( json = ver.Verify( json.version, json ));
+                            if ( result == 0 ) {
+                                const obj = storage.Verify( json );
+                                if ( obj.option.code != 0 || obj.focus.code != 0 || obj.read.code != 0 ) {
+                                    new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
+                                    return;
+                                }
+                            } else if ( result == 1 ) {
+                                storage.version != json.version && storage.version == "1.0.1" &&
+                                    ( json.read.sites = storage.Fix( json.read.sites, json.version ));
+                                json = ver.Verify( json.version, json );
+                                new Notify().Render( "上传版本太低，已自动转换为最新版本。" );
+                            }
+                            menu.Refresh( json.option.menu );
                             storage.Write( ()=> {
+                                watch.SendMessage( "import", true );
                                 new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
                                     location.href = location.origin + location.pathname + "?simpread_mode=reload";
                                 });
@@ -73,11 +91,10 @@ export default class CommonOpt extends React.Component {
     }
 
     newsites() {
-        storage.GetNewsites( "remote", ( { count, forced }, error ) => {
+        storage.GetNewsites( "remote", ( { count }, error ) => {
             if ( !error ) {
-                count  > 0 && new Notify().Render( 0, `同步更新成功，新更新 ${ count } 个站点。` );
-                forced > 0 && new Notify().Render( 0, `同步更新成功，强制更新 ${forced } 个站点。` );
-                count == 0 && forced == 0 && new Notify().Render( 0, "暂无更新。" );
+                watch.SendMessage( "site", true );
+                count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
             } else {
                 new Notify().Render( 3, `同步时发生了一些问题，并不会影响本地配置文件，请稍后再试！` );
             }

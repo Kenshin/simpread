@@ -12,7 +12,7 @@
 
 console.log( "==== simpread component: Switch ====" )
 
-let style, styles = new Map();
+let styles = new Map();
 
 const color           = "rgba(51, 51, 51, .87)",
       secondary_color = "rgba(204, 204, 204, 1)",
@@ -194,8 +194,8 @@ export default class Switch extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, cssinjs() );
-        style = styles.get( this.state.id );
+        const style = { ...cssinjs() };
+        styles.set( this.state.id, style );
 
         this.props.thumbColor   && ( style.thumb_normal.backgroundColor = this.props.thumbColor );
         this.props.thumbedColor && ( style.thumbed.backgroundColor      = this.props.thumbedColor );
