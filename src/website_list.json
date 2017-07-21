@@ -1045,6 +1045,24 @@
           ""
       ]
     },{
+      "name"    : "article.52im.net",
+      "url"     : "http://www.52im.net/article-*.html",
+      "title"   : "<h1 class='ph'>",
+      "desc"    : "<div class='js-ptl-atcl-summery'>",
+      "include" : "<td id='article_content'>",
+      "exclude" : [
+          ""
+      ]
+    },{
+      "name"    : "thread.52im.net",
+      "url"     : "http://www.52im.net/thread-*.html",
+      "title"   : "<span id='thread_subject'>",
+      "desc"    : "",
+      "include" : "[[{$('td.t_f:first').html()}]]",
+      "exclude" : [
+          ""
+      ]
+    },{
         "name"    : "edaoe.com",
         "url"     : "http://www.edaoe.com/*.html",
         "title"   : "<h1 class='article-title'>",
