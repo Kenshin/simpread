@@ -1045,6 +1045,15 @@
           ""
       ]
     },{
+        "name"    : "edaoe.com",
+        "url"     : "http://www.edaoe.com/*.html",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<article class='article-content'>",
+        "exclude" : [
+            "<div class='article-social'>"
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -1627,15 +1636,6 @@
         "exclude" : [
             "<script>",
             "<a>"
-        ]
-    },{
-        "name"    : "edaoe.com",
-        "url"     : "http://www.edaoe.com/*.html",
-        "title"   : "<h1 class='article-title'>",
-        "desc"    : "",
-        "include" : "<article class='article-content'>",
-        "exclude" : [
-            "<div class='article-social'>"
         ]
     }]
 }
