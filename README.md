@@ -99,7 +99,7 @@
 
 #### 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:
-![支付宝](http://ksria.qiniudn.com/zhifubao_m.jpg)     ![微信](http://ksria.qiniudn.com/weixin_m.png)
+![支付](http://ksria.qiniudn.com/zhifu_m.jpg)
 
 #### 许可：
 [![license-badge]][license-link]
