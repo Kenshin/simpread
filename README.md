@@ -13,7 +13,8 @@
 ***
 
 #### 马上使用：
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.0.1/simpread.crx)
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.0.1/simpread.crx) 或者 [下载测试版](https://github.com/Kenshin/simpread/wiki/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%88-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%BC%95-%EF%BC%89#%E6%B5%8B%E8%AF%95%E7%89%88%E9%80%9A%E9%81%93) 体验简悦最新功能。
+* 建议加入 [Telegram 群](https://t.me/simpread) 方便沟通。
 
 #### 主要功能一览：
 - 阅读模式； `逐一适配了 160+ 个网站，并提取 标题  描述 正文 媒体资源（ 图片/ 视频 ） 等，生成 符合中文阅读 的页面`
@@ -95,6 +96,10 @@
 - Material Design usage <https://material.io/guidelines/>
 - Mind Maps <https://coggle.it/>
 - 咖啡 · 网易音乐 · Google Chrome · rMBP
+
+#### 请杯咖啡：
+如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:
+![支付](http://ksria.qiniudn.com/zhifu_m.png?eee)
 
 #### 许可：
 [![license-badge]][license-link]
