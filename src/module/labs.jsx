@@ -45,8 +45,8 @@ export default class LabsOpt extends React.Component {
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
-                <div className="label">全局</div>
                 <div className="lab">
+                    <div className="label">全局</div>
                     <Switch width="100%" checked={ this.props.option.esc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             tooltip={{ text: "包括：聚焦模式与阅读模式。" }}
