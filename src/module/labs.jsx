@@ -44,8 +44,8 @@ export default class LabsOpt extends React.Component {
 
     render() {
         return (
-            <div id="labs" style={{ width: '80%' }}>
-                <div>
+            <div id="labs" style={{ width: '100%' }}>
+                <div className="lab">
                     <div className="label">全局</div>
                     <Switch width="100%" checked={ this.props.option.esc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
@@ -54,7 +54,7 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
                 </div>
 
-                <div style={{ 'padding-top': '21px;' }}>
+                <div style={{ 'padding-top': '21px;' }} className="lab">
                     <div className="label">右键菜单</div>
                     <Switch width="100%" checked={ this.props.option.menu.focus }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
@@ -70,7 +70,7 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "menu", "link" ) } />
                 </div>
 
-                <div style={{ 'padding-top': '21px;' }}>
+                <div style={{ 'padding-top': '21px;' }} className="lab">
                     <div className="label">聚焦模式</div>
                     <Switch width="100%" checked={ this.props.focus.mask }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
@@ -83,7 +83,7 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "focus", "controlbar") } />
                 </div>
 
-                <div style={{ 'padding-top': '21px;' }}>
+                <div style={{ 'padding-top': '21px;' }} className="lab">
                     <div className="label">阅读模式</div>
                     <Switch width="100%" checked={ this.props.read.progress }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"

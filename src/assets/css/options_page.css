@@ -157,14 +157,32 @@ a {
     z-index: 3;
 }
 
+.lab {
+    margin-bottom: 20px;
+    padding: 10px;
+
+    width: 100%;
+
+    background-color: #fff;
+    border-radius: 2px;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    border: 1.1px solid #e7e7e7;
+}
+
+.main_labs {
+    background: transparent;
+    box-shadow: none;
+}
+
 #labs .label {
     height: 56px;
     line-height: 56px;
 
     text-align: left;
 
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    font-weight: 700;
 
     border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
