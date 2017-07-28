@@ -41,7 +41,7 @@ export default class ReadCtlbar extends React.Component {
                         url = `https://plus.google.com/share?url=${ this.props.site.url }`;
                         break;
                     case "weibo":
-                        url = `http://service.weibo.com/share/share.php?url=${ this.props.site.url }&title=${ this.props.site.title }`;
+                        url = `http://service.weibo.com/share/share.php?url=${ this.props.site.url }&title=${ this.props.site.title } （ 分享自 简悦-SimpRead ）`;
                         break;
                 }
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
