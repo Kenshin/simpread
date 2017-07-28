@@ -118,6 +118,7 @@ const readItems = {
             },
         },
     },
+    /*
     "down" : {
         "name" : "向下滚动",
         "icon" : ss.IconPath("down_icon"),
@@ -128,6 +129,7 @@ const readItems = {
         "icon" : ss.IconPath("up_icon"),
         "color": "#00BCD4",
     },
+    */
     "fontfamily" : {
         "name" : "字体样式",
         "icon" : ss.IconPath("fontfamily_icon"),
