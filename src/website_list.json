@@ -1664,5 +1664,14 @@
             "<script>",
             "<a>"
         ]
+    },{
+        "name"    : "lofter.com",
+        "url"     : "http://*.lofter.com/post/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.content').html()||$('.text').html()}]]",
+        "exclude" : [
+            ""
+        ]
     }]
 }
