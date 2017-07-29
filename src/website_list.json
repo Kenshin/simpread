@@ -1673,5 +1673,44 @@
         "exclude" : [
             ""
         ]
+    },{
+        "name"    : "aktuell.faz.net",
+        "url"     : "http://www.faz.net/aktuell/*/**/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$($('.FAZArtikelText')[0]).html()}]]",
+        "exclude" : [
+            "<span class='Bildnachweis'>",
+            "<span class='autorBox'>",
+            "<ul class='RelatedLinkBox'>"
+        ]
+    },{
+        "name"    : "cn.nytstyle.com",
+        "url"     : "https://cn.nytstyle.com/*/*/*/",
+        "title"   : "<h3 class='articleHeadline'>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<div class='authorIdentification'>",
+            "<div class='articleCR'>",
+            "<div class='articleTool'>",
+            "<div id='disqus_thread'>",
+            "<div id='subscribe_cont'>",
+            "<div class='articleByside'>"
+        ]
+    },{
+        "name"    : "cn.nytimes.com",
+        "url"     : "https://cn.nytimes.com/*/*/*/",
+        "title"   : "<h3 class='articleHeadline'>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<div class='authorIdentification'>",
+            "<div class='articleCR'>",
+            "<div class='articleTool'>",
+            "<div id='disqus_thread'>",
+            "<div id='subscribe_cont'>",
+            "<div class='articleByside'>"
+        ]
     }]
 }
