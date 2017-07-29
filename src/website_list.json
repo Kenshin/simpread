@@ -1712,5 +1712,14 @@
             "<div id='subscribe_cont'>",
             "<div class='articleByside'>"
         ]
+    },{
+        "name"    : "sueddeutsche.de",
+        "url"     : "http://www.sueddeutsche.de/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<section id='article-body'>",
+        "exclude" : [
+            ""
+        ]
     }]
 }
