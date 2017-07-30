@@ -35,7 +35,7 @@ export default class ReadCtlbar extends React.Component {
                         url = `https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=${ this.props.site.url }`;
                         break;
                     case "twitter":
-                        url = `https://twitter.com/intent/tweet?text=${ this.props.site.title }&url=${ this.props.site.url }`;
+                        url = `https://twitter.com/intent/tweet?text=${ this.props.site.title } （ 分享自 简悦 ）&url=${ this.props.site.url }`;
                         break;
                     case "gplus":
                         url = `https://plus.google.com/share?url=${ this.props.site.url }`;
