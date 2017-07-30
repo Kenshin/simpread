@@ -35,13 +35,13 @@ export default class ReadCtlbar extends React.Component {
                         url = `https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=${ this.props.site.url }`;
                         break;
                     case "twitter":
-                        url = `https://twitter.com/intent/tweet?text=${ this.props.site.title }&url=${ this.props.site.url }`;
+                        url = `https://twitter.com/intent/tweet?text=${ this.props.site.title } （ 分享自 简悦 ）&url=${ this.props.site.url }`;
                         break;
                     case "gplus":
                         url = `https://plus.google.com/share?url=${ this.props.site.url }`;
                         break;
                     case "weibo":
-                        url = `http://service.weibo.com/share/share.php?url=${ this.props.site.url }&title=${ this.props.site.title }`;
+                        url = `http://service.weibo.com/share/share.php?url=${ this.props.site.url }&title=${ this.props.site.title } （ 分享自 简悦-SimpRead ）`;
                         break;
                 }
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
@@ -49,9 +49,11 @@ export default class ReadCtlbar extends React.Component {
             case [ "exit", "setting", "save", "markdown" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
                 break;
+            /*
             case [ "up", "down" ].includes( type ):
                 this.props.onAction && this.props.onAction( "scroll", type == "up" ? -250 : 250 );
                 break;
+            */
             case type.indexOf( "_" ) > 0 && ( type.startsWith( "fontfamily" ) || type.startsWith( "fontsize" ) || type.startsWith( "layout" )):
                 const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
                 Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));

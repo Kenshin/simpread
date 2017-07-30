@@ -35,7 +35,7 @@ let tabsItemID = 0;
 $( window ).scroll( (event) => {
     const $target = $( event.target ),
           scroll  = $target.scrollTop(),
-          offset  = ( 0 - scroll ) / 2;
+          offset  = 0 - scroll;
     scroll >  200 && ( $( ".header" ).css({ opacity: 1, visibility: "visible" }) );
     scroll <= 200 && ( $( ".header" ).css({ opacity: 0, visibility: "hidden"  }) );
     $( ".top" ).css( "transform", `translate3d(0px, ${offset}px, 0px)` );
@@ -148,6 +148,7 @@ function welcomeRender() {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
+    idx == 3 ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -181,7 +182,7 @@ function tabsRender( color ) {
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>save( true ) } />
                     </section>
-                    <section>
+                    <section style={{ 'padding': '0;' }}>
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>

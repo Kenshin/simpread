@@ -98,9 +98,11 @@ class Read extends React.Component {
                     !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
                 });
                 break;
+            /*
             case "scroll":
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
                 break;
+            */
             case "fontfamily":
             case "fontsize":
             case "layout":

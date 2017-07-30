@@ -432,6 +432,35 @@
             ""
         ]
     },{
+        "name"    : "stream.107cine.cm",
+        "url"     : "http://107cine.com/stream/*",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<div class='flow_content'>",
+        "exclude" : [
+            "<div class='postfix'>",
+            "[['<p>影视工业网不会对原创文章作任何编辑</p>']]"
+        ]
+    },{
+        "name"    : "zhuanti.107cine.cm",
+        "url"     : "http://107cine.com/zhuanti/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='zhuanti'>",
+        "exclude" : [
+            "<div class='z-top'>",
+            "<div class='datu'>"
+        ]
+    },{
+        "name"    : "jiemi.baike.com",
+        "url"     : "http://jiemi.baike.com/pa/detail?id=*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div class='jiemi-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
         "title"   : "<title>",
@@ -1081,6 +1110,15 @@
             "<div class='article-social'>"
         ]
     },{
+        "name"    : "chinabyte.cm",
+        "url"     : "http://*.chinabyte.com/**/*/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='art_txt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -1283,6 +1321,34 @@
         "include" : "<div class='left_zw'>",
         "exclude" : [
             "<table>"
+        ]
+    },{
+        "name"    : "toutiao.com",
+        "url"     : "http://www.toutiao.com/a*/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "cwzg.cm",
+        "url"     : "http://www.cwzg.cn/*/*/*.html",
+        "title"   : "<h1>",
+        "desc"    : "<div class='article-brief'>",
+        "include" : "<div id='article'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "idianzixun.com",
+        "url"     : "http://www.yidianzixun.com/article/*",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<div class='content-bd'>",
+        "exclude" : [
+            "<div class='postfix'>",
+            "<p class='yidian-wm-copyright-bottom'>"
         ]
     },{
         "name"    : "news.163.com",
@@ -1663,6 +1729,15 @@
         "exclude" : [
             "<script>",
             "<a>"
+        ]
+    },{
+        "name"    : "lofter.com",
+        "url"     : "http://*.lofter.com/post/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.content').html()||$('.text').html()}]]",
+        "exclude" : [
+            ""
         ]
     }]
 }
