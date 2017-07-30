@@ -109,7 +109,15 @@ export default class LabsOpt extends React.Component {
                             onChange={ ()=>this.changeExclusion() }
                         />
                     </div>
+                </div>
 
+                <div className="label">中文阅读</div>
+                <div style={{ 'padding-top': '10px;' }} className="lab">
+                    <div className="more">
+                        <div>增强中文阅读体验设定</div>
+                        <span className="desc">包括：字间距、行间距、首行缩进以及自定义样式等。</span>
+                        <span className="arrow"></span>
+                    </div>
                 </div>
 
             </div>
