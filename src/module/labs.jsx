@@ -42,6 +42,10 @@ export default class LabsOpt extends React.Component {
         this.exclusionState( this.props.read.auto );
     }
 
+    onClick( state ) {
+        state == "custom" && ( location.href = location.origin + "/options/custom.html" );
+    }
+
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
