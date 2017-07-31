@@ -55,7 +55,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="label">右键菜单</div>
-                <div style={{ 'padding-top': '10px;' }} className="lab">
+                <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.option.menu.focus }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示聚焦模式？"
@@ -71,7 +71,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="label">聚焦模式</div>
-                <div style={{ 'padding-top': '10px;' }} className="lab">
+                <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.focus.mask }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否启用点击空白（遮罩）退出功能？"
@@ -84,7 +84,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="label">阅读模式</div>
-                <div style={{ 'padding-top': '10px;' }} className="lab">
+                <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.read.progress }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示阅读进度？"
@@ -100,7 +100,7 @@ export default class LabsOpt extends React.Component {
                             label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
-                    <div ref="exclusion" style={{ 'padding-top': '10px;', 'margin-bottom': '8px;' }}>
+                    <div ref="exclusion" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
                         <div className="label">排除列表</div>
                         <TextField 
                             multi={ true } rows={8}
@@ -112,7 +112,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="label">中文阅读</div>
-                <div style={{ 'padding-top': '10px;' }} className="lab">
+                <div style={{ 'padding-top': '10px' }} className="lab" onClick={ ()=>this.onClick('custom') }>
                     <div className="more">
                         <div>增强中文阅读体验设定</div>
                         <span className="desc">包括：字间距、行间距、首行缩进以及自定义样式等。</span>
