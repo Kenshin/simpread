@@ -79,9 +79,9 @@ function propertyRender() {
         th.Change( th.names[conf.readLabels.indexOf( name )] );
         $( ".preview" ).css({ "background-color": `rgba(${value})` });
     },
-    change     = ( type, props, event ) => {
-        cur_custom[type][props] = event.target.value;
-        props == "marginLeft" && ( cur_custom[type]["marginRight"] = event.target.value );
+    change     = ( type, props, value ) => {
+        cur_custom[type][props] = value;
+        props == "marginLeft" && ( cur_custom[type]["marginRight"] = value );
         ss.Custom( type, cur_custom[type] );
     },
     click      = type => {
@@ -119,7 +119,7 @@ function propertyRender() {
                                 floatingtext="字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
                                 value = { cur_custom.global.fontFamily }
-                                onChange={ (evt)=>change( "global", "fontFamily", evt ) }
+                                onChange={ (evt)=>change( "global", "fontFamily", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -128,7 +128,7 @@ function propertyRender() {
                                 floatingtext="版面布局"
                                 placeholder="支持 CSS3 margin-left, margin-right 值"
                                 value = { cur_custom.global.marginLeft }
-                                onChange={ (evt)=>change( "global", "marginLeft", evt ) }
+                                onChange={ (evt)=>change( "global", "marginLeft", evt.target.value ) }
                             />
                         </group>
                     </group>
@@ -141,7 +141,7 @@ function propertyRender() {
                                 floatingtext="标题字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
                                 value = { cur_custom.title.fontFamily }
-                                onChange={ (evt)=>change( "title", "fontFamily", evt ) }
+                                onChange={ (evt)=>change( "title", "fontFamily", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -150,7 +150,7 @@ function propertyRender() {
                                 floatingtext="标题字体大小"
                                 placeholder="仅支持 px 单位"
                                 value = { cur_custom.title.fontSize }
-                                onChange={ (evt)=>change( "title", "fontSize", evt ) }
+                                onChange={ (evt)=>change( "title", "fontSize", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -159,7 +159,7 @@ function propertyRender() {
                                 floatingtext="标题颜色"
                                 placeholder="支持 CSS3 color 颜色值"
                                 value = { cur_custom.title.color }
-                                onChange={ (evt)=>change( "title", "color", evt ) }
+                                onChange={ (evt)=>change( "title", "color", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -168,7 +168,7 @@ function propertyRender() {
                                 floatingtext="描述字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
                                 value = { cur_custom.desc.fontFamily }
-                                onChange={ (evt)=>change( "desc", "fontFamily", evt ) }
+                                onChange={ (evt)=>change( "desc", "fontFamily", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -177,7 +177,7 @@ function propertyRender() {
                                 floatingtext="描述字体大小"
                                 placeholder="仅支持 px 单位"
                                 value = { cur_custom.desc.fontSize }
-                                onChange={ (evt)=>change( "desc", "fontSize", evt ) }
+                                onChange={ (evt)=>change( "desc", "fontSize", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -186,7 +186,7 @@ function propertyRender() {
                                 floatingtext="描述颜色"
                                 placeholder="支持 CSS3 color 颜色值"
                                 value = { cur_custom.desc.color }
-                                onChange={ (evt)=>change( "desc", "color", evt ) }
+                                onChange={ (evt)=>change( "desc", "color", evt.target.value ) }
                             />
                         </group>
                     </group>
@@ -199,7 +199,7 @@ function propertyRender() {
                                 floatingtext="字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
                                 value = { cur_custom.art.fontFamily }
-                                onChange={ (evt)=>change( "art", "fontFamily", evt ) }
+                                onChange={ (evt)=>change( "art", "fontFamily", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -208,7 +208,7 @@ function propertyRender() {
                                 floatingtext="字体大小"
                                 placeholder="仅支持 px 单位"
                                 value = { cur_custom.art.fontSize }
-                                onChange={ (evt)=>change( "art", "fontSize", evt ) }
+                                onChange={ (evt)=>change( "art", "fontSize", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -217,7 +217,7 @@ function propertyRender() {
                                 floatingtext="字体颜色"
                                 placeholder="支持 CSS3 color 颜色值"
                                 value = { cur_custom.art.color }
-                                onChange={ (evt)=>change( "art", "color", evt ) }
+                                onChange={ (evt)=>change( "art", "color", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -226,7 +226,7 @@ function propertyRender() {
                                 floatingtext="字重"
                                 placeholder="支持 CSS3 font-weight 值"
                                 value = { cur_custom.art.fontWeight }
-                                onChange={ (evt)=>change( "art", "fontWeight", evt ) }
+                                onChange={ (evt)=>change( "art", "fontWeight", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -235,7 +235,7 @@ function propertyRender() {
                                 floatingtext="单词间距"
                                 placeholder="支持 CSS3 word-spacing 值"
                                 value = { cur_custom.art.wordSpacing }
-                                onChange={ (evt)=>change( "art", "wordSpacing", evt ) }
+                                onChange={ (evt)=>change( "art", "wordSpacing", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -244,7 +244,7 @@ function propertyRender() {
                                 floatingtext="字间距"
                                 placeholder="支持 CSS3 letter-spacing 值"
                                 value = { cur_custom.art.letterSpacing }
-                                onChange={ (evt)=>change( "art", "letterSpacing", evt ) }
+                                onChange={ (evt)=>change( "art", "letterSpacing", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -253,7 +253,7 @@ function propertyRender() {
                                 floatingtext="行间距"
                                 placeholder="支持 CSS3 line-height 值"
                                 value = { cur_custom.art.lineHeight }
-                                onChange={ (evt)=>change( "art", "lineHeight", evt ) }
+                                onChange={ (evt)=>change( "art", "lineHeight", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -262,7 +262,7 @@ function propertyRender() {
                                 floatingtext="首行缩进"
                                 placeholder="支持 CSS3 text-indent 值"
                                 value = { cur_custom.art.textIndent }
-                                onChange={ (evt)=>change( "art", "textIndent", evt ) }
+                                onChange={ (evt)=>change( "art", "textIndent", evt.target.value ) }
                             />
                         </group>
                     </group>
