@@ -117,6 +117,13 @@ function propertyRender() {
                         <group>
                             <TextField 
                                 multi={ false }
+                                floatingtext="标题字体样式"
+                                placeholder="支持 CSS3 font-family 名称"
+                            />
+                        </group>
+                        <group>
+                            <TextField 
+                                multi={ false }
                                 floatingtext="标题字体大小"
                                 placeholder="仅支持 px 单位"
                             />
@@ -126,6 +133,13 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="标题颜色"
                                 placeholder="支持 CSS3 color 颜色值"
+                            />
+                        </group>
+                        <group>
+                            <TextField 
+                                multi={ false }
+                                floatingtext="描述字体样式"
+                                placeholder="支持 CSS3 font-family 名称"
                             />
                         </group>
                         <group>
@@ -172,13 +186,6 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字重"
                                 placeholder="支持 CSS3 font-weigth 值"
-                            />
-                        </group>
-                        <group>
-                            <TextField 
-                                multi={ false }
-                                floatingtext="H1 ~ H6"
-                                placeholder="仅支持 px 单位"
                             />
                         </group>
                         <group>
