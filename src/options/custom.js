@@ -283,8 +283,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
-                                value = { cur_custom.pre.fontFamily }
-                                onChange={ (evt)=>change( "pre", "fontFamily", evt.target.value ) }
+                                value = { cur_custom.code.fontFamily }
+                                onChange={ (evt)=>change( "code", "fontFamily", evt.target.value ) }
                             />
                         </group>
                         <group>
