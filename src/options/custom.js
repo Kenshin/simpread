@@ -23,6 +23,8 @@ import * as ver   from 'version';
 import * as watch from 'watch';
 import th         from 'theme';
 
+let cur_custom;
+
 /**
  * Entry:
  * - storage get data form chrome storage
@@ -76,9 +78,14 @@ function propertyRender() {
     changeTheme = ( value, name ) => {
         th.Change( th.names[conf.readLabels.indexOf( name )] );
         $( ".preview" ).css({ "background-color": `rgba(${value})` });
+    },
+    change      = ( type, props, event ) => {
+        cur_custom[type][props] = event.target.value;
+        props == "marginLeft" && ( cur_custom[type]["marginRight"] = event.target.value );
+        ss.Custom( type, cur_custom[type] );
     };
+    cur_custom = storage.read.custom;
     const doms = <div>
-
                     <group className="lab">
                         <h1>帮助</h1>
                         <group>
@@ -101,6 +108,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
+                                value = { cur_custom.global.fontFamily }
+                                onChange={ (evt)=>change( "global", "fontFamily", evt ) }
                             />
                         </group>
                         <group>
@@ -108,6 +117,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="版面布局"
                                 placeholder="支持 CSS3 margin-left, margin-right 值"
+                                value = { cur_custom.global.marginLeft }
+                                onChange={ (evt)=>change( "global", "marginLeft", evt ) }
                             />
                         </group>
                     </group>
@@ -119,6 +130,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="标题字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
+                                value = { cur_custom.title.fontFamily }
+                                onChange={ (evt)=>change( "title", "fontFamily", evt ) }
                             />
                         </group>
                         <group>
@@ -126,6 +139,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="标题字体大小"
                                 placeholder="仅支持 px 单位"
+                                value = { cur_custom.title.fontFamily }
+                                onChange={ (evt)=>change( "title", "fontSize", evt ) }
                             />
                         </group>
                         <group>
@@ -133,6 +148,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="标题颜色"
                                 placeholder="支持 CSS3 color 颜色值"
+                                value = { cur_custom.title.color }
+                                onChange={ (evt)=>change( "title", "color", evt ) }
                             />
                         </group>
                         <group>
@@ -140,6 +157,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="描述字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
+                                value = { cur_custom.desc.fontFamily }
+                                onChange={ (evt)=>change( "desc", "fontFamily", evt ) }
                             />
                         </group>
                         <group>
@@ -147,6 +166,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="描述字体大小"
                                 placeholder="仅支持 px 单位"
+                                value = { cur_custom.desc.fontFamily }
+                                onChange={ (evt)=>change( "desc", "fontSize", evt ) }
                             />
                         </group>
                         <group>
@@ -154,6 +175,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="描述颜色"
                                 placeholder="支持 CSS3 color 颜色值"
+                                value = { cur_custom.desc.fontFamily }
+                                onChange={ (evt)=>change( "desc", "color", evt ) }
                             />
                         </group>
                     </group>
@@ -165,6 +188,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
+                                value = { cur_custom.art.fontFamily }
+                                onChange={ (evt)=>change( "art", "fontFamily", evt ) }
                             />
                         </group>
                         <group>
@@ -172,6 +197,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字体大小"
                                 placeholder="仅支持 px 单位"
+                                value = { cur_custom.art.fontSize }
+                                onChange={ (evt)=>change( "art", "fontSize", evt ) }
                             />
                         </group>
                         <group>
@@ -179,6 +206,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字体颜色"
                                 placeholder="支持 CSS3 color 颜色值"
+                                value = { cur_custom.art.color }
+                                onChange={ (evt)=>change( "art", "color", evt ) }
                             />
                         </group>
                         <group>
@@ -186,6 +215,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字重"
                                 placeholder="支持 CSS3 font-weigth 值"
+                                value = { cur_custom.art.fontWeigth }
+                                onChange={ (evt)=>change( "art", "fontWeigth", evt ) }
                             />
                         </group>
                         <group>
@@ -193,6 +224,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="单词间距"
                                 placeholder="支持 CSS3 word-spacing 值"
+                                value = { cur_custom.art.wordSpacing }
+                                onChange={ (evt)=>change( "art", "wordSpacing", evt ) }
                             />
                         </group>
                         <group>
@@ -200,6 +233,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字间距"
                                 placeholder="支持 CSS3 letter-spacing 值"
+                                value = { cur_custom.art.letterSpacing }
+                                onChange={ (evt)=>change( "art", "letterSpacing", evt ) }
                             />
                         </group>
                         <group>
@@ -207,6 +242,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="行间距"
                                 placeholder="支持 CSS3 line-height 值"
+                                value = { cur_custom.art.lineHeight }
+                                onChange={ (evt)=>change( "art", "lineHeight", evt ) }
                             />
                         </group>
                         <group>
@@ -214,6 +251,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="首行缩进"
                                 placeholder="支持 CSS3 text-indent 值"
+                                value = { cur_custom.art.textIndent }
+                                onChange={ (evt)=>change( "art", "textIndent", evt ) }
                             />
                         </group>
                     </group>
