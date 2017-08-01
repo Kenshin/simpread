@@ -68,7 +68,7 @@ function Verify( curver, data ) {
                 textIndent : "",
             },
             pre  : {
-                textShadow : false,
+                textShadow : "",
                 fontFamily : "",
             },
             code  : {
