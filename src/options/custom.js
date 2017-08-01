@@ -36,7 +36,10 @@ storage.Read( () => {
     setPreviewStyle();
     tt.Render( "body" );
     waves.Render({ root: "body" });
-});
+    $( "body" ).velocity({ opacity: 1 }, { duration: 1000, complete: ()=> {
+        $( "body" ).removeAttr( "style" );
+    }});
+}); 
 
 /**
  * navigation Render
