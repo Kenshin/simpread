@@ -79,10 +79,20 @@ function propertyRender() {
         th.Change( th.names[conf.readLabels.indexOf( name )] );
         $( ".preview" ).css({ "background-color": `rgba(${value})` });
     },
-    change      = ( type, props, event ) => {
+    change     = ( type, props, event ) => {
         cur_custom[type][props] = event.target.value;
         props == "marginLeft" && ( cur_custom[type]["marginRight"] = event.target.value );
         ss.Custom( type, cur_custom[type] );
+    },
+    click      = type => {
+        if ( type == "save" ) {
+            storage.Write( ()=> {
+                    watch.SendMessage( "option", true );
+                    new Notify().Render( 0, "保存成功，页面刷新后生效！" );
+            });
+        } else {
+            
+        }
     };
     cur_custom = storage.read.custom;
     const doms = <div>
@@ -139,7 +149,7 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="标题字体大小"
                                 placeholder="仅支持 px 单位"
-                                value = { cur_custom.title.fontFamily }
+                                value = { cur_custom.title.fontSize }
                                 onChange={ (evt)=>change( "title", "fontSize", evt ) }
                             />
                         </group>
@@ -166,7 +176,7 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="描述字体大小"
                                 placeholder="仅支持 px 单位"
-                                value = { cur_custom.desc.fontFamily }
+                                value = { cur_custom.desc.fontSize }
                                 onChange={ (evt)=>change( "desc", "fontSize", evt ) }
                             />
                         </group>
@@ -175,7 +185,7 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="描述颜色"
                                 placeholder="支持 CSS3 color 颜色值"
-                                value = { cur_custom.desc.fontFamily }
+                                value = { cur_custom.desc.color }
                                 onChange={ (evt)=>change( "desc", "color", evt ) }
                             />
                         </group>
@@ -297,6 +307,7 @@ function propertyRender() {
                                 icon={ ss.IconPath( "save_icon" ) }
                                 color="#fff" backgroundColor="#3f51b5"
                                 waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>click( "save" ) }
                             />
                         </group>
 
@@ -307,6 +318,7 @@ function propertyRender() {
                                 tooltip={{ text: "不包含：主题、字体类型、字体大小、版面布局等；" }}
                                 color="#fff" backgroundColor="#FF5252"
                                 waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>click( "clear" ) }
                             />
                         </group>
                     </group>
