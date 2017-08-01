@@ -129,7 +129,11 @@ function custom( type, props ) {
         case "art":
             styles = `sr-rd-content *, sr-rd-content p, sr-rd-content div {${styles}}`;
             break;
+        case "pre":
+            styles = `sr-rd-content pre {${styles}}`;
+            break;
         case "code":
+            styles = `sr-rd-content pre code * {${styles}}`;
             break;
         case "css":
             break;

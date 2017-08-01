@@ -82,6 +82,7 @@ function propertyRender() {
     change     = ( type, props, value ) => {
         cur_custom[type][props] = value;
         props == "marginLeft" && ( cur_custom[type]["marginRight"] = value );
+        props == "textShadow" && ( cur_custom[type]["textShadow"]  = value ? "0 1px rgba(0,0,0,0.3)" : "" );
         ss.Custom( type, cur_custom[type] );
     },
     click      = type => {
@@ -272,13 +273,18 @@ function propertyRender() {
                         <group>
                             <Switch width="100%" checked={ false }
                                 thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                                label="是否启用阴影"/>
+                                label="是否启用阴影"
+                                value = { cur_custom.pre.textShadow ? true : false }
+                                onChange={ (s)=>change( "pre", "textShadow", s ) }
+                            />
                         </group>
                         <group>
                             <TextField 
                                 multi={ false }
                                 floatingtext="字体样式"
                                 placeholder="支持 CSS3 font-family 名称"
+                                value = { cur_custom.pre.fontFamily }
+                                onChange={ (evt)=>change( "pre", "fontFamily", evt.target.value ) }
                             />
                         </group>
                         <group>
@@ -286,6 +292,8 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字体大小"
                                 placeholder="仅支持 px 单位"
+                                value = { cur_custom.code.fontSize }
+                                onChange={ (evt)=>change( "code", "fontSize", evt.target.value ) }
                             />
                         </group>
                     </group>
