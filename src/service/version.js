@@ -9,7 +9,7 @@ const version  = browser.runtime.getManifest().version,
       versions = new Map([
           [ "1.0.0", "Sun Jun 11 2017 12:30:00 GMT+0800 (CST)" ],
           [ "1.0.1", "Fri Jun 30 2017 09:27:18 GMT+0800 (CST)" ],
-          [ "1.0.2", "Tue Aug 01 2017 10:43:04 GMT+0800 (CST)" ],
+          [ "1.0.2", "Tue Aug 01 2017 15:57:26 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -67,9 +67,11 @@ function Verify( curver, data ) {
                 lineHeight : "",
                 textIndent : "",
             },
-            code  : {
-                shadow     : false,
+            pre  : {
+                textShadow : false,
                 fontFamily : "",
+            },
+            code  : {
                 fontSize   : "",
             },
             css   : "",

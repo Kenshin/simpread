@@ -77,9 +77,11 @@ const name = "simpread",
                 lineHeight : "",
                 textIndent : "",
             },
-            code  : {
-                shadow     : false,
+            pre  : {
+                textShadow : false,
                 fontFamily : "",
+            },
+            code  : {
                 fontSize   : "",
             },
             css   : "",
