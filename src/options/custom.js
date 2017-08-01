@@ -274,7 +274,7 @@ function propertyRender() {
                             <Switch width="100%" checked={ false }
                                 thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                                 label="是否启用阴影"
-                                value = { cur_custom.pre.textShadow ? true : false }
+                                checked = { cur_custom.pre.textShadow ? true : false }
                                 onChange={ (s)=>change( "pre", "textShadow", s ) }
                             />
                         </group>
