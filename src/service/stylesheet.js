@@ -3,6 +3,7 @@ console.log( "=== simpread stylesheet load ===" )
 import {browser} from 'browser';
 
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ];
+let origin_read_style = "";
 
 /**
  * Get chrome extension icon path
@@ -101,6 +102,50 @@ function layout( width ) {
     $( "sr-read" ).css( "margin", width ? `20px ${width}` : "" );
 }
 
+/**
+ * 
+ * @param {string} storage.read.custom[type]
+ * @param {object} storage.read.custom
+ */
+function custom( type, props ) {
+    const format = ( name ) => {
+        return name.replace( /[A-Z]/, name => { return `-${name.toLowerCase()}` } );
+    },
+    arr = Object.keys( props ).map( v => {
+        return props[v] && `${format( v )}: ${ props[v] };`
+    });
+    let styles = arr.join( "" );
+    switch ( type ) {
+        case "global":
+            !origin_read_style && ( origin_read_style = $( "sr-read" ).attr( "style" ) );
+            $( "sr-read" ).attr( "style", origin_read_style + styles );
+            return;
+        case "title":
+            styles = `sr-rd-title {${styles}}`;
+            break;
+        case "desc":
+            styles = `sr-rd-desc {${styles}}`;
+            break;
+        case "art":
+            styles = `sr-rd-content *, sr-rd-content p, sr-rd-content div {${styles}}`;
+            break;
+        case "code":
+            break;
+        case "css":
+            break;
+    }
+
+    console.log( "current style is ", styles );
+
+    const $target = $( "head" ).find( `style#simpread-custom-${type}` );
+    if ( $target.length == 0 ) {
+        $( "head" ).append(`<style type="text/css" id="simpread-custom-${type}">${styles}</style>`);
+    } else {
+        $target.html( styles );
+    }
+
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
@@ -109,4 +154,5 @@ export {
     fontFamily as FontFamily,
     fontSize   as FontSize,
     layout     as Layout,
+    custom     as Custom,
 }
