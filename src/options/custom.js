@@ -214,9 +214,9 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="字重"
-                                placeholder="支持 CSS3 font-weigth 值"
-                                value = { cur_custom.art.fontWeigth }
-                                onChange={ (evt)=>change( "art", "fontWeigth", evt ) }
+                                placeholder="支持 CSS3 font-weight 值"
+                                value = { cur_custom.art.fontWeight }
+                                onChange={ (evt)=>change( "art", "fontWeight", evt ) }
                             />
                         </group>
                         <group>
