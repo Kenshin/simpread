@@ -79,9 +79,9 @@ const name = "simpread",
             },
             pre  : {
                 textShadow : "",
-                fontFamily : "",
             },
             code  : {
+                fontFamily : "",
                 fontSize   : "",
             },
             css   : "",

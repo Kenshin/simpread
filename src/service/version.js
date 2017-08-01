@@ -69,9 +69,9 @@ function Verify( curver, data ) {
             },
             pre  : {
                 textShadow : "",
-                fontFamily : "",
             },
             code  : {
+                fontFamily : "",
                 fontSize   : "",
             },
             css   : "",
