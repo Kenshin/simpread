@@ -80,10 +80,15 @@ function propertyRender() {
         $( ".preview" ).css({ "background-color": `rgba(${value})` });
     },
     change     = ( type, props, value ) => {
-        cur_custom[type][props] = value;
-        props == "marginLeft" && ( cur_custom[type]["marginRight"] = value );
-        props == "textShadow" && ( cur_custom[type]["textShadow"]  = value ? "0 1px rgba(0,0,0,0.3)" : "" );
-        ss.Custom( type, cur_custom[type] );
+        if ( props ) {
+            cur_custom[type][props] = value;
+            props == "marginLeft" && ( cur_custom[type]["marginRight"] = value );
+            props == "textShadow" && ( cur_custom[type]["textShadow"]  = value ? "0 1px rgba(0,0,0,0.3)" : "" );
+            ss.Custom( type, cur_custom[type] );
+        } else {
+            cur_custom[type] = value;
+            ss.CSS( type, value );
+        }
     },
     click      = type => {
         if ( type == "save" ) {
@@ -312,8 +317,9 @@ function propertyRender() {
                         <h1>自定义 CSS</h1>
                         <group>
                             <TextField 
-                                multi={ true } 
-                                rows={ 10 }
+                                multi ={ true } rows ={ 10 }
+                                value = { cur_custom.css }
+                                onChange={ (evt)=>change( "css", "", evt.target.value ) }
                             />
                         </group>
                     </group>
