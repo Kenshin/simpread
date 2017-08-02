@@ -150,6 +150,21 @@ function custom( type, props ) {
 
 }
 
+/**
+ * Add css to heade
+ * 
+ * @param {string} storage.read.custom.css
+ * @param {object} storage.read.custom.css value
+ */
+function css( type, styles ) {
+    const $target = $( "head" ).find( `style#simpread-custom-${type}` );
+    if ( $target.length == 0 ) {
+        $( "head" ).append(`<style type="text/css" id="simpread-custom-${type}">${styles}</style>`);
+    } else {
+        $target.html( styles );
+    }
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
@@ -159,4 +174,5 @@ export {
     fontSize   as FontSize,
     layout     as Layout,
     custom     as Custom,
+    css        as CSS,
 }
