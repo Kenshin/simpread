@@ -97,18 +97,22 @@ function propertyRender() {
         } else {
             new Notify().Render( "snackbar", "请问是否初始化自定义主题的全部数据？", "同意", () => {
                 Object.keys( cur_custom ).forEach( v => {
-                    v != "css" && Object.keys( cur_custom[v] ).forEach( item => {
+                    v != "css" ? Object.keys( cur_custom[v] ).forEach( item => {
                         cur_custom[v][item] = "";
-                    });
+                    }) : cur_custom[v] = "";
                 });
-                save();
+                save( "clear" );
             });
         }
     },
-    save       = () => {
-        storage.Write( ()=> {
-                watch.SendMessage( "option", true );
-                new Notify().Render( 0, "保存成功，页面刷新后生效！" );
+    save       = state => {
+        storage.Write( () => {
+            watch.SendMessage( "option", true );
+            state == "clear" ? 
+                new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
+                    location.href = location.origin + location.pathname;
+                })
+            : new Notify().Render( 0, "保存成功，页面刷新后生效！" );
         });
     };
     const doms = <div>
