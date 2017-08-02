@@ -166,6 +166,19 @@ function css( type, styles ) {
     }
 }
 
+/**
+ * Add custom to .preview tag
+ * 
+ * @param {object} storage.read.custom
+ * @param {string} theme backgroud color
+ */
+function preview( styles ) {
+    Object.keys( styles ).forEach( v => {
+        v != "css" && custom( v, styles[v] );
+    });
+    css( "css", styles["css"] );
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
@@ -176,4 +189,5 @@ export {
     layout     as Layout,
     custom     as Custom,
     css        as CSS,
+    preview    as Preview,
 }
