@@ -63,13 +63,7 @@ function setPreviewStyle() {
     ss.FontFamily( storage.read.fontfamily );
     ss.FontSize( storage.read.fontsize );
     ss.Layout( storage.read.layout );
-
-    Object.keys( cur_custom ).forEach( v => {
-        v != "css" && ss.Custom( v, cur_custom[v] );
-    });
-    ss.CSS( "css", cur_custom["css"] );
-
-    $( ".preview" ).css({ "background-color": `rgba(${ th.colors[ th.names.indexOf( storage.read.theme ) ] })` });
+    ss.Preview( storage.read.custom );
 }
 
 /**
@@ -85,7 +79,6 @@ function propertyRender() {
     changeTheme = ( value, name ) => {
         storage.read.theme = th.names[conf.readLabels.indexOf( name )];
         th.Change( storage.read.theme );
-        $( ".preview" ).css({ "background-color": `rgba(${value})` });
     },
     change     = ( type, props, value ) => {
         if ( props ) {
