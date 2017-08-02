@@ -87,13 +87,15 @@ function propertyRender() {
     },
     click      = type => {
         if ( type == "save" ) {
-            storage.Write( ()=> {
-                    watch.SendMessage( "option", true );
-                    new Notify().Render( 0, "保存成功，页面刷新后生效！" );
-            });
+            save();
         } else {
-            
         }
+    },
+    save       = () => {
+        storage.Write( ()=> {
+                watch.SendMessage( "option", true );
+                new Notify().Render( 0, "保存成功，页面刷新后生效！" );
+        });
     };
     cur_custom = storage.read.custom;
     const doms = <div>
