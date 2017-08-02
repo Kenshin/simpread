@@ -115,11 +115,11 @@ export default class LabsOpt extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">中文阅读</div>
+                <div className="label">自定义样式</div>
                 <div style={{ 'padding-top': '10px' }} className="lab" onClick={ ()=>this.onClick('custom') }>
                     <div className="more">
-                        <div>增强中文阅读体验设定</div>
-                        <span className="desc">包括：字间距、行间距、首行缩进以及自定义样式等。</span>
+                        <div>增强「中文阅读体验」设置</div>
+                        <span className="desc">包括：标题、描述、正文的字间距、行间距、首行缩进等及自定义 CSS。</span>
                         <span className="arrow"></span>
                     </div>
                 </div>
