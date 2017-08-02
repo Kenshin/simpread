@@ -137,7 +137,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="字体样式"
-                                placeholder="支持 CSS3 font-family 名称"
+                                placeholder="支持 CSS3 font-family 值"
                                 value = { cur_custom.global.fontFamily }
                                 onChange={ (evt)=>change( "global", "fontFamily", evt.target.value ) }
                             />
@@ -159,7 +159,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="标题字体样式"
-                                placeholder="支持 CSS3 font-family 名称"
+                                placeholder="支持 CSS3 font-family 值"
                                 value = { cur_custom.title.fontFamily }
                                 onChange={ (evt)=>change( "title", "fontFamily", evt.target.value ) }
                             />
@@ -168,7 +168,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="标题字体大小"
-                                placeholder="仅支持 px 单位"
+                                placeholder="支持 CSS3 font-size 值"
                                 value = { cur_custom.title.fontSize }
                                 onChange={ (evt)=>change( "title", "fontSize", evt.target.value ) }
                             />
@@ -186,7 +186,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="描述字体样式"
-                                placeholder="支持 CSS3 font-family 名称"
+                                placeholder="支持 CSS3 font-family 值"
                                 value = { cur_custom.desc.fontFamily }
                                 onChange={ (evt)=>change( "desc", "fontFamily", evt.target.value ) }
                             />
@@ -195,7 +195,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="描述字体大小"
-                                placeholder="仅支持 px 单位"
+                                placeholder="支持 CSS3 font-size 值"
                                 value = { cur_custom.desc.fontSize }
                                 onChange={ (evt)=>change( "desc", "fontSize", evt.target.value ) }
                             />
@@ -217,7 +217,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="字体样式"
-                                placeholder="支持 CSS3 font-family 名称"
+                                placeholder="支持 CSS3 font-family 值"
                                 value = { cur_custom.art.fontFamily }
                                 onChange={ (evt)=>change( "art", "fontFamily", evt.target.value ) }
                             />
@@ -226,7 +226,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="字体大小"
-                                placeholder="仅支持 px 单位"
+                                placeholder="支持 CSS3 font-size 值"
                                 value = { cur_custom.art.fontSize }
                                 onChange={ (evt)=>change( "art", "fontSize", evt.target.value ) }
                             />
@@ -301,7 +301,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="字体样式"
-                                placeholder="支持 CSS3 font-family 名称"
+                                placeholder="支持 CSS3 font-family 值"
                                 value = { cur_custom.code.fontFamily }
                                 onChange={ (evt)=>change( "code", "fontFamily", evt.target.value ) }
                             />
@@ -310,7 +310,7 @@ function propertyRender() {
                             <TextField 
                                 multi={ false }
                                 floatingtext="字体大小"
-                                placeholder="仅支持 px 单位"
+                                placeholder="支持 CSS3 font-size 值"
                                 value = { cur_custom.code.fontSize }
                                 onChange={ (evt)=>change( "code", "fontSize", evt.target.value ) }
                             />
