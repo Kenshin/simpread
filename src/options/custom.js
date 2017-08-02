@@ -76,7 +76,9 @@ function propertyRender() {
         });
     },
     changeTheme = ( value, name ) => {
-        th.Change( th.names[conf.readLabels.indexOf( name )] );
+        const theme = th.names[conf.readLabels.indexOf( name )];
+        storage.read.theme = theme;
+        th.Change( theme );
         $( ".preview" ).css({ "background-color": `rgba(${value})` });
     },
     change     = ( type, props, value ) => {
