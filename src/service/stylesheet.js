@@ -103,6 +103,7 @@ function layout( width ) {
 }
 
 /**
+ * Add custom css to <head>
  * 
  * @param {string} storage.read.custom[type]
  * @param {object} storage.read.custom
@@ -151,7 +152,7 @@ function custom( type, props ) {
 }
 
 /**
- * Add css to heade
+ * Add css to <head>
  * 
  * @param {string} storage.read.custom.css
  * @param {object} storage.read.custom.css value
