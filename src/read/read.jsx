@@ -56,6 +56,7 @@ class Read extends React.Component {
         this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
         this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
         this.props.read.layout     && ss.Layout( this.props.read.layout );
+        ss.Preview( this.props.read.custom );
 
         if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
         if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
