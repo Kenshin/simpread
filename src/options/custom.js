@@ -33,6 +33,7 @@ let cur_custom;
  */
 storage.Read( () => {
     console.log( "simpread storage get success!", storage.focus, storage.read );
+    cur_custom = storage.read.custom;
     navRender();
     propertyRender();
     setPreviewStyle();
@@ -62,6 +63,12 @@ function setPreviewStyle() {
     ss.FontFamily( storage.read.fontfamily );
     ss.FontSize( storage.read.fontsize );
     ss.Layout( storage.read.layout );
+
+    Object.keys( cur_custom ).forEach( v => {
+        v != "css" && ss.Custom( v, cur_custom[v] );
+    });
+    ss.CSS( "css", cur_custom["css"] );
+
     $( ".preview" ).css({ "background-color": `rgba(${ th.colors[ th.names.indexOf( storage.read.theme ) ] })` });
 }
 
@@ -111,7 +118,6 @@ function propertyRender() {
                 new Notify().Render( 0, "保存成功，页面刷新后生效！" );
         });
     };
-    cur_custom = storage.read.custom;
     const doms = <div>
                     <group className="lab">
                         <h1>帮助</h1>
