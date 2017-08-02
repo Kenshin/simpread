@@ -179,6 +179,28 @@ function preview( styles ) {
     css( "css", styles["css"] );
 }
 
+/**
+ * Verify custom is exist
+ * 
+ * @param {string} verify type
+ * @param {object} storage.read.custom.css value
+ */
+function vfyCustom( type, styles ) {
+    switch( type ) {
+        case "margin":
+            return styles.global.marginLeft != "" || styles.css != "";
+        case "fontsize":
+            return styles.title.fontSize != "" ||
+                   styles.desc.fontSize != ""  ||
+                   styles.art.fontSize != ""   ||
+                   styles.css != "";
+        case "fontfamily":
+            return styles.global.fontFamily != "" || styles.css != "";
+        case "theme":
+            return styles.css.search( "simpread-theme-root" ) != -1;
+    }
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
@@ -190,4 +212,5 @@ export {
     custom     as Custom,
     css        as CSS,
     preview    as Preview,
+    vfyCustom  as VerifyCustom,
 }
