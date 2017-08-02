@@ -134,7 +134,7 @@ function custom( type, props ) {
             styles = `sr-rd-content pre {${styles}}`;
             break;
         case "code":
-            styles = `sr-rd-content pre code * {${styles}}`;
+            styles = `sr-rd-content pre code, sr-rd-content pre code * {${styles}}`;
             break;
         case "css":
             break;
