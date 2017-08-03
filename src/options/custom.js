@@ -81,6 +81,7 @@ function propertyRender() {
         th.Change( storage.read.theme );
     },
     change     = ( type, props, value ) => {
+        value = value.trim();
         if ( props ) {
             cur_custom[type][props] = value;
             props == "marginLeft" && ( cur_custom[type]["marginRight"] = value );
