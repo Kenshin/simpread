@@ -14,7 +14,7 @@ const version  = browser.runtime.getManifest().version,
       details = new Map([
           [ "1.0.0", "" ],
           [ "1.0.1", "新增「高级设定」选项页，" ],
-          [ "1.0.2", "新增「自定义主题」选项页，" ],
+          [ "1.0.2", "新增「高级设定 - 自定义样式」选项，" ],
     ]);
 
 /**
