@@ -1,0 +1,43 @@
+
+.header {
+    background-color: rgb(63, 81, 181);
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom {
+    position: relative;
+
+    display: flex;
+    flex-flow: row;
+
+    top: 65px;
+}
+
+.custom .property {
+    margin: 20px;
+    width: 450px;
+}
+
+.custom .property h1 {
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.custom .property group {
+    display: block;
+}
+
+.custom .property group:not(:last-child) {
+    margin-bottom: 25px;
+}
+
+.custom .preview {
+    display: flex;
+    justify-content: center;
+
+    margin: 20px 20px 0 0;
+    width: 100%;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+}

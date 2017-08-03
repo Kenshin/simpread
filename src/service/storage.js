@@ -50,7 +50,42 @@ const name = "simpread",
         ],
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
-        sites     : []   // e.g. [ "<url>", site ]
+        sites     : [],  // e.g. [ "<url>", site ]
+        custom    : {
+            global: {
+                fontFamily : "",
+                marginLeft : "",
+                marginRight: "",
+            },
+            title : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+            },
+            desc  : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+            },
+            art   : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+                fontWeight : "",
+                wordSpacing: "",
+                letterSpacing: "",
+                lineHeight : "",
+                textIndent : "",
+            },
+            pre  : {
+                textShadow : "",
+            },
+            code  : {
+                fontFamily : "",
+                fontSize   : "",
+            },
+            css   : "",
+        },
     },
     option = {
         version   : "2017-04-03",

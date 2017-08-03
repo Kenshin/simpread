@@ -9,10 +9,12 @@ const version  = browser.runtime.getManifest().version,
       versions = new Map([
           [ "1.0.0", "Sun Jun 11 2017 12:30:00 GMT+0800 (CST)" ],
           [ "1.0.1", "Fri Jun 30 2017 09:27:18 GMT+0800 (CST)" ],
+          [ "1.0.2", "Tue Aug 01 2017 15:57:26 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
           [ "1.0.1", "新增「高级设定」选项页，" ],
+          [ "1.0.2", "新增「高级设定 - 自定义样式」选项，" ],
     ]);
 
 /**
@@ -36,6 +38,45 @@ function Verify( curver, data ) {
         ];
 
         curver = "1.0.1";
+    }
+
+    if ( curver == "1.0.1" ) {
+        data.read.custom     = {
+            global: {
+                fontFamily : "",
+                marginLeft : "",
+                marginRight: "",
+            },
+            title : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+            },
+            desc  : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+            },
+            art   : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+                fontWeight : "",
+                wordSpacing: "",
+                letterSpacing: "",
+                lineHeight : "",
+                textIndent : "",
+            },
+            pre  : {
+                textShadow : "",
+            },
+            code  : {
+                fontFamily : "",
+                fontSize   : "",
+            },
+            css   : "",
+        };
+        curver = "1.0.2";
     }
 
     /*
