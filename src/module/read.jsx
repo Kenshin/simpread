@@ -33,7 +33,7 @@ export default class ReadOpt extends React.Component {
             th.Change( this.props.option.theme );
             console.log( "this.props.option.theme = ", this.props.option.theme )
         } else {
-            new Notify().Render( '已设定「自定义主题」，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
+            new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
         }
     }
 
@@ -48,7 +48,7 @@ export default class ReadOpt extends React.Component {
             this.props.option.fontfamily = value;
             console.log( "this.props.option.fontfamily = ", value, name )
         } else {
-            new Notify().Render( '已设定「自定义主题」，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
+            new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
         }
     }
 
@@ -58,7 +58,7 @@ export default class ReadOpt extends React.Component {
             this.props.option.fontsize = value;
             console.log( "this.props.option.fontsize = ", value, name )
         } else {
-            new Notify().Render( '已设定「自定义主题」，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
+            new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
         }
     }
 
@@ -68,7 +68,7 @@ export default class ReadOpt extends React.Component {
             this.props.option.layout = value;
             console.log( "this.props.option.layout = ", value, name )
         } else {
-            new Notify().Render( '已设定「自定义主题」，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
+            new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98" target="_blank">请看这里</a>。' );
         }
     }
 
