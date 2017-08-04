@@ -133,6 +133,7 @@ function autoOpen() {
             case "36kr.com":
                 $( () => readMode() );
                 break;
+            case "question.zhihu.com":
             case "post.juejin.im":
             case "entry.juejin.im":
                 setTimeout( ()=>readMode(), 2500 );
