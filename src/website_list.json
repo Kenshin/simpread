@@ -190,11 +190,16 @@
     },{
         "name"    : "question.zhihu.com",
         "url"     : "https://www.zhihu.com/question/**/*",
+        "type"    : "multi",
+        "multi"   : [
+            {"name"  : "[[{$('.AuthorInfo-name')}]]"},
+            {"avatar": "[[{$('.AuthorInfo-avatar')}]]"}
+        ],
         "title"   : "[[{$($('.QuestionHeader-main').find('h1')[0]).text()}]]",
         "desc"    : "",
-        "include" : "[[{$($('.RichContent-inner')[0]).html()}]]",
+        "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
-            ""
+            "<i class='icon-external'>"
         ]
     },{
         "name"    : "geekpark.net",
@@ -1703,9 +1708,14 @@
     },{
         "name"    : "tieba.baidu.com",
         "url"     : "https://tieba.baidu.com/p/",
+        "type"    : "multi",
+        "multi"   : [
+            {"name"  : "[[{$('.p_author_name')}]]"},
+            {"avatar": "[[{$('.p_author_face').find('img')}]]"}
+        ],
         "title"   : "[[{$('.core_title_txt').text()}]]",
         "desc"    : "",
-        "include" : "<div class='d_post_content'>",
+        "include" : "[[{$('.p_content')}]]",
         "exclude" : [
             ""
         ]
