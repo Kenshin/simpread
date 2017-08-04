@@ -202,6 +202,15 @@ async function specbeautify( name, $target ) {
             break;
         case "question.zhihu.com":
             $target.find( ".zu-edit-button" ).remove();
+            $target.find( "a.external" ).map( ( idx, target ) => {
+                $( target ).removeAttr( "class" )
+                           .attr( "style", "border: none;" );
+            });
+            $target.find( ".VagueImage" ).map( ( idx, target ) => {
+                const $target = $( target ),
+                      src     = $target.attr( "data-src" );
+                $target.replaceWith( `<img class="sr-rd-content-img" src="${ src }" style="zoom: 0.6;">` )
+            });
             break;
         case "chiphell.com":
             $target.find( "img" ).map( ( index, item ) => {
