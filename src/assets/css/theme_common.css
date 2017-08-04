@@ -1,5 +1,3 @@
-
-
 /**
  * Common style, include:
  * .simpread-theme-root
@@ -216,4 +214,61 @@ sr-rd-content p code {
     padding: 0;
     border: 0;
     box-shadow: 0 0 0;
+}
+
+sr-rd-mult {
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 3px;
+    margin-bottom: 16px;
+    padding: 16px 16px 16px 3px;
+
+    width: 100%;
+
+    background-color: #fafafa;
+
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+}
+
+sr-rd-mult sr-rd-mult-content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 3px;
+}
+
+sr-rd-mult sr-rd-mult-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+sr-rd-mult sr-rd-mult-avatar span {
+    display: -webkit-box;
+
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    max-width: 82px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+
+    font-size: 1rem;
+}
+
+sr-rd-mult sr-rd-mult-avatar img {
+    margin-bottom: 0;
+
+    max-width: 50px;
+    max-height: 50px;
+
+    border-radius: 50%;
+}
+
+sr-rd-mult sr-rd-mult-avatar .sr-rd-content-center {
+    margin: 0;
 }

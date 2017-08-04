@@ -4,6 +4,7 @@ import toMarkdown  from 'to-markdown';
 import pangu       from 'pangu';
 
 import ProgressBar from 'schedule';
+import Multiple    from 'multiple';
 import ReadCtlbar  from 'readctlbar';
 import * as modals from 'modals';
 
@@ -133,12 +134,15 @@ class Read extends React.Component {
     }
 
     render() {
+        const Article = this.props.wrapper.type && this.props.wrapper.type == "multi" ? 
+                        <Multiple include={ this.props.wrapper.include } multi={ this.props.wrapper.multi } /> :
+                        <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>;
         return(
             <sr-read>
                 <ProgressBar show={ this.props.read.progress } />
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
-                <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>
+                { Article }
                 <Footer />
                 <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
@@ -208,6 +212,11 @@ function wrap( site ) {
     wrapper.title   = query( title );
     wrapper.desc    = query( desc  );
     wrapper.include = query( include, "html" );
+    wrapper.multi && wrapper.multi.forEach( item => {
+        const key   = Object.keys( item ).join(),
+              value = item[key];
+        item[key]   = query( util.selector( value ), "html" );
+    });
     return wrapper;
 }
 

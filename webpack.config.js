@@ -226,6 +226,7 @@ const webpack = require( 'webpack' ),
           controlbar : __dirname + '/src/focus/controlbar.jsx',
 
           read       : __dirname + '/src/read/read.jsx',
+          multiple   : __dirname + '/src/read/multiple.jsx',
           readctlbar : __dirname + '/src/read/controlbar.jsx',
           schedule   : __dirname + '/src/read/progressbar.jsx',
 
