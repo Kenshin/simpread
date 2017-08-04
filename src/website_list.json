@@ -461,6 +461,21 @@
             ""
         ]
     },{
+        "name"    : "wikipedia.org",
+        "url"     : "https://*.wikipedia.org/wiki/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='mw-parser-output'>",
+        "exclude" : [
+            "<div id='toc'>",
+			"<table class='infobox'>",
+			"<span class='mw-editsection'>",
+            "<table class='navbox'>",
+            "<div class='thumb'>",
+            "<div class='dablink'>",
+            "<table class='metadata'>"
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
         "title"   : "<title>",
@@ -1074,6 +1089,26 @@
           ""
       ]
     },{
+        "name"    : "developer.mozilla.org",
+        "url"     : "https://developer.mozilla.org/*/docs/*/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<article id='wikiArticle'>",
+        "exclude" : [
+            "<aside id='helpful-survey'>",
+			"<a class='section-edit'>"
+        ]
+    },{
+        "name"    : "apps.mozilla.org",
+        "url"     : "https://developer.mozilla.org/*/Apps/*/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<article id='wikiArticle'>",
+        "exclude" : [
+            "<aside id='helpful-survey'>",
+			"<a class='section-edit'>"
+        ]
+    },{
       "name"    : "article.52im.net",
       "url"     : "http://www.52im.net/article-*.html",
       "title"   : "<h1 class='ph'>",
@@ -1117,6 +1152,16 @@
         "include" : "<div class='art_txt'>",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "wiki.jikexueyuan.com",
+        "url"     : "http://wiki.jikexueyuan.com/project/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='markdown-body'>",
+        "exclude" : [
+            "<h1>",
+			"<a rel='nofollow'>"
         ]
     },{
         "name"    : "voidcn.com",
@@ -1349,6 +1394,15 @@
         "exclude" : [
             "<div class='postfix'>",
             "<p class='yidian-wm-copyright-bottom'>"
+        ]
+    },{
+        "name"    : "reader.s-reader.com",
+        "url"     : "http://reader.s-reader.com/article/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<h1>"
         ]
     },{
         "name"    : "news.163.com",
