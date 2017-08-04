@@ -97,9 +97,10 @@ async function removeSpareTag( name, $target ) {
  */
 function verify( name ) {
     const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
-    if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
+    /*if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
         return -2;
-    } else if ( name === "" ) {
+    } else */
+    if ( name === "" ) {
         return -1;
     } else {
         return 0;
@@ -199,6 +200,9 @@ async function specbeautify( name, $target ) {
             $target.find( ".BDE_Smiley" ).addClass( "sr-rd-content-nobeautify" );
             $target.find( ".replace_div" ).removeAttr( "class" ).removeAttr( "style" );
             $target.find( ".replace_tip" ).remove();
+            $target.find( ".post_bubble_top, .post_bubble_middle, .post_bubble_bottom" ).map( ( idx, target ) => {
+                $( target ).removeAttr( "class" ).removeAttr( "style" );
+            });
             break;
         case "question.zhihu.com":
             $target.find( ".zu-edit-button" ).remove();
