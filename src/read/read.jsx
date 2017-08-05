@@ -135,7 +135,7 @@ class Read extends React.Component {
 
     render() {
         const Article = this.props.wrapper.type && this.props.wrapper.type == "multi" ? 
-                        <Multiple include={ this.props.wrapper.include } multi={ this.props.wrapper.multi } /> :
+                        <Multiple include={ this.props.wrapper.include } avatar={ this.props.wrapper.avatar } /> :
                         <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>;
         return(
             <sr-read>
@@ -212,7 +212,7 @@ function wrap( site ) {
     wrapper.title   = query( title );
     wrapper.desc    = query( desc  );
     wrapper.include = query( include, "html" );
-    wrapper.multi && wrapper.multi.forEach( item => {
+    wrapper.avatar && wrapper.avatar.forEach( item => {
         const key   = Object.keys( item ).join(),
               value = item[key];
         item[key]   = query( util.selector( value ), "html" );

@@ -191,9 +191,9 @@
         "name"    : "question.zhihu.com",
         "url"     : "https://www.zhihu.com/question/**/*",
         "type"    : "multi",
-        "multi"   : [
-            {"name"  : "[[{$('.AuthorInfo-name')}]]"},
-            {"avatar": "[[{$('.AuthorInfo-avatar')}]]"}
+        "avatar"  : [
+            {"name" : "[[{$('.AuthorInfo-name')}]]"},
+            {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
         "title"   : "[[{$($('.QuestionHeader-main').find('h1')[0]).text()}]]",
         "desc"    : "",
@@ -1709,9 +1709,9 @@
         "name"    : "tieba.baidu.com",
         "url"     : "https://tieba.baidu.com/p/",
         "type"    : "multi",
-        "multi"   : [
-            {"name"  : "[[{$('.p_author_name')}]]"},
-            {"avatar": "[[{$('.p_author_face').find('img')}]]"}
+        "avatar"  : [
+            {"name" : "[[{$('.p_author_name')}]]"},
+            {"url"  : "[[{$('.p_author_face').find('img')}]]"}
         ],
         "title"   : "[[{$('.core_title_txt').text()}]]",
         "desc"    : "",
