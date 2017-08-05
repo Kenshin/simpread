@@ -200,7 +200,7 @@ async function specbeautify( name, $target ) {
             $target.find( ".BDE_Smiley" ).addClass( "sr-rd-content-nobeautify" );
             $target.find( ".replace_div" ).removeAttr( "class" ).removeAttr( "style" );
             $target.find( ".replace_tip" ).remove();
-            $target.find( ".post_bubble_top, .post_bubble_middle, .post_bubble_bottom" ).map( ( idx, target ) => {
+            $target.find( ".d_post_content, .j_d_post_content, .post_bubble_top, .post_bubble_middle, .post_bubble_bottom" ).map( ( idx, target ) => {
                 $( target ).removeAttr( "class" ).removeAttr( "style" );
             });
             break;
