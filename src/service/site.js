@@ -207,7 +207,6 @@ async function specbeautify( name, $target ) {
                 const $target = $( target ).find( "img" ),
                       src     = $target.attr( "data-tb-lazyload" ),
                       name    = $target.attr( "username" );
-                console.log( src, name )
                 src && $( "sr-rd-mult-avatar" ).find( "span" ).map( ( idx, span ) => {
                     const $span = $( span ),
                           text  = $span.text();
