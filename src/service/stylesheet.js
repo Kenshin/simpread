@@ -136,8 +136,6 @@ function custom( type, props ) {
         case "code":
             styles = `sr-rd-content pre code, sr-rd-content pre code * {${styles}}`;
             break;
-        case "css":
-            break;
     }
 
     console.log( "current style is ", styles );
