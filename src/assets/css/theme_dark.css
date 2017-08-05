@@ -85,3 +85,10 @@ sr-rd-content p code {
     color: #caca16;
     background-color: transparent;
 }
+
+/**
+ * Multiple page
+ */
+sr-rd-mult {
+    background-color: #111111;
+}

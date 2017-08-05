@@ -92,3 +92,10 @@ sr-rd-content li code,
 sr-rd-content p code {
     background-color: rgb(218, 218, 218);
 }
+
+/**
+ * Multiple page
+ */
+sr-rd-mult {
+    background-color: #e6e4db;
+}
