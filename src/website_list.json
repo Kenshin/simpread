@@ -257,6 +257,19 @@
             ""
         ]
     },{
+        "name"    : "question.guokr.com",
+        "url"     : "http://www.guokr.com/question/*",
+        "avatar"  : [
+            {"name" : "[[{$('.p_author_name')}]]"},
+            {"url"  : "[[{$('.p_author_face').find('img')}]]"}
+        ],
+        "title"   : "<h1 id='articleTitle'>",
+        "desc"    : "",
+        "include" : "[[{$('.gbbcode-content')}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "zuimeia.com",
         "url"     : "http://zuimeia.com/app/",
         "title"   : "<span class='sub-title'>",
