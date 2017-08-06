@@ -232,9 +232,11 @@ async function specbeautify( name, $target ) {
             $target.find( "img" ).map( ( index, item ) => {
                 const $target = $(item),
                       $parent = $target.parent(),
-                      src     = $target.attr( "src" );
+                      src     = $target.attr( "src" ),
+                      smilieid= $target.attr( "smilieid" );
                 if ( $parent.is( "ignore_js_op" )) $target.unwrap();
-                if ( src && src.includes( "static/image/smiley" ) ) $target.addClass( "sr-rd-content-nobeautify" );
+                smilieid && src && src.includes( "static/image/smiley" ) &&
+                    $target.addClass( "sr-rd-content-nobeautify" ).attr( "style", "width: 50px;" );
             });
             $target.find( ".quote" ).remove();
             break;

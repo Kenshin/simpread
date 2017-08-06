@@ -1733,9 +1733,14 @@
         "url"     : "https://www.chiphell.com/thread-*.html",
         "title"   : "<span id='thread_subject'>",
         "desc"    : "",
-        "include" : "<td class='t_f'>",
+        "avatar"  : [
+            {"name" : "[[{$('.favatar').find('.authi')}]]"},
+            {"url"  : "[[{$('.avatar').find('img')}]]"}
+        ],
+        "include" : "[[{$('.t_f')}]]",
         "exclude" : [
-            "<i class='pstatus'>"
+            "<i class='pstatus'>",
+            "[[/src=\\S+(none.gif)\\S+'/]]"
         ]
     },{
         "name"    : "qu.la",
