@@ -1740,7 +1740,8 @@
         "include" : "[[{$('.t_f')}]]",
         "exclude" : [
             "<i class='pstatus'>",
-            "[[/src=\\S+(none.gif)\\S+'/]]"
+            "[[/src=\\S+(none.gif)\\S+'/]]",
+            "<div class='aimg_tip'>"
         ]
     },{
         "name"    : "qu.la",

@@ -131,6 +131,7 @@ function autoOpen() {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
             case "36kr.com":
+            case "chiphell.com":
                 $( () => readMode() );
                 break;
             case "post.juejin.im":
