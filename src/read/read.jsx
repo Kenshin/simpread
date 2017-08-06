@@ -134,7 +134,7 @@ class Read extends React.Component {
     }
 
     render() {
-        const Article = this.props.wrapper.type && this.props.wrapper.type == "multi" ? 
+        const Article = this.props.wrapper.avatar ? 
                         <Multiple include={ this.props.wrapper.include } avatar={ this.props.wrapper.avatar } /> :
                         <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>;
         return(
