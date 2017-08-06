@@ -90,5 +90,5 @@ sr-rd-content p code {
  * Multiple page
  */
 sr-rd-mult {
-    background-color: #111111;
+    background-color: rgba(128, 128, 128, 0.1);
 }
