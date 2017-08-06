@@ -220,9 +220,8 @@ sr-rd-mult {
     display: flex;
     flex-direction: row;
 
-    margin-top: 3px;
-    margin-bottom: 16px;
-    padding: 16px 16px 16px 3px;
+    margin: 3px 0 16px 0;
+    padding: 16px 0 24px;
 
     width: 100%;
 
@@ -236,7 +235,7 @@ sr-rd-mult sr-rd-mult-content {
     display: flex;
     flex-direction: column;
 
-    padding: 3px;
+    padding: 0 16px 0;
 }
 
 sr-rd-mult sr-rd-mult-avatar {
