@@ -1721,16 +1721,20 @@
     },{
         "name"    : "tieba.baidu.com",
         "url"     : "https://tieba.baidu.com/p/",
-        "type"    : "multi",
         "avatar"  : [
             {"name" : "[[{$('.p_author_name')}]]"},
             {"url"  : "[[{$('.p_author_face').find('img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('.pb_list_pager').find('.tP').prev().attr('href')}]]"},
+            {"next" : "[[{$('.pb_list_pager').find('.tP').next().attr('href')}]]"}
         ],
         "title"   : "[[{$('.core_title_txt').text()}]]",
         "desc"    : "",
         "include" : "[[{$('.p_content')}]]",
         "exclude" : [
-            ""
+            "<span class='apc_src_wrapper'>",
+            "<div class='save_face_bg_2'>"
         ]
     },{
         "name"    : "article.chiphell.com",

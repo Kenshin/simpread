@@ -4,7 +4,7 @@ import toMarkdown  from 'to-markdown';
 import pangu       from 'pangu';
 
 import ProgressBar from 'schedule';
-import Multiple    from 'multiple';
+import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
 import * as modals from 'modals';
 
@@ -135,14 +135,18 @@ class Read extends React.Component {
 
     render() {
         const Article = this.props.wrapper.avatar ? 
-                        <Multiple include={ this.props.wrapper.include } avatar={ this.props.wrapper.avatar } /> :
+                        <spec.Multiple include={ this.props.wrapper.include } avatar={ this.props.wrapper.avatar } /> :
                         <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>;
-        return(
+
+        const Page    = this.props.wrapper.paging && 
+                        <spec.Paging paging={ this.props.wrapper.paging } />;
+        return (
             <sr-read>
                 <ProgressBar show={ this.props.read.progress } />
                 <sr-rd-title>{ this.props.wrapper.title }</sr-rd-title>
                 <sr-rd-desc>{ this.props.wrapper.desc }</sr-rd-desc>
                 { Article }
+                { Page    }
                 <Footer />
                 <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
             </sr-read>
@@ -216,6 +220,11 @@ function wrap( site ) {
         const key   = Object.keys( item ).join(),
               value = item[key];
         item[key]   = query( util.selector( value ), "html" );
+    });
+    wrapper.paging && wrapper.paging.forEach( item => {
+        const key   = Object.keys( item ).join(),
+              value = item[key];
+        item[key]   = query( util.selector( value ) );
     });
     return wrapper;
 }

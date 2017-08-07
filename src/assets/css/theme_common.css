@@ -278,3 +278,11 @@ sr-rd-mult sr-rd-mult-avatar img {
 sr-rd-mult sr-rd-mult-avatar .sr-rd-content-center {
     margin: 0;
 }
+
+sr-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+}
