@@ -134,6 +134,7 @@ function autoOpen() {
             case "my.oschina.net":
             case "36kr.com":
             case "chiphell.com":
+            case "question.zhihu.com":
                 $( () => readMode() );
                 break;
             case "post.juejin.im":
