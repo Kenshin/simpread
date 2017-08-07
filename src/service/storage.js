@@ -487,19 +487,32 @@ class Storage {
     }
 
     /**
-     * Fix simpread.read.sites, 1.0.0 → 1.0.1, because 1.0.1 usage minimatch
+     * Fix simpread.read.site
      * 
      * @param  {array} changed target
-     * @param  {string} version, e.g. 1.0.0 1.0.1
+     * @param  {string} old version
+     * @param  {string} new version
+     * 
      * @return {array} new sites
      */
-    Fix( target, ver ) {
+    Fix( target, curver, newver ) {
         const newsites = target.map( site => {
             let url      = site[0],
                 { name } = site[1];
             for ( let item of simpread.sites ) {
                 if ( name == item[1].name ) {
-                    url = item[0];
+
+                    // 1.0.0 → 1.0.1
+                    if ( curver == "1.0.0" && newver == "1.0.1" ) {
+                        url = item[0];
+                    }
+
+                    // 1.0.1 → 1.0.2
+                    if ( curver == "1.0.1" && newver == "1.0.2" ) {
+                        item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
+                        item[1].paging  && ( site[1].paging  = item[1].paging  );
+                        item[1].include && ( site[1].include = item[1].include );
+                    }
                     break;
                 }
             }
