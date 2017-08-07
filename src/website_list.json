@@ -486,8 +486,8 @@
         "include" : "<div class='mw-parser-output'>",
         "exclude" : [
             "<div id='toc'>",
-			"<table class='infobox'>",
-			"<span class='mw-editsection'>",
+            "<table class='infobox'>",
+            "<span class='mw-editsection'>",
             "<table class='navbox'>",
             "<div class='thumb'>",
             "<div class='dablink'>",
@@ -1013,7 +1013,7 @@
         "include" : "<article class='article-content'>",
         "exclude" : [
             "[['<p>转载请注明来自</p>']]",
-			"[['<p>End.</p>']]"
+            "[['<p>End.</p>']]"
         ]
     },{
         "name"    : "cocoachina.com",
@@ -1114,7 +1114,7 @@
         "include" : "<article id='wikiArticle'>",
         "exclude" : [
             "<aside id='helpful-survey'>",
-			"<a class='section-edit'>"
+            "<a class='section-edit'>"
         ]
     },{
         "name"    : "apps.mozilla.org",
@@ -1124,7 +1124,7 @@
         "include" : "<article id='wikiArticle'>",
         "exclude" : [
             "<aside id='helpful-survey'>",
-			"<a class='section-edit'>"
+            "<a class='section-edit'>"
         ]
     },{
       "name"    : "article.52im.net",
@@ -1179,7 +1179,7 @@
         "include" : "<div class='markdown-body'>",
         "exclude" : [
             "<h1>",
-			"<a rel='nofollow'>"
+            "<a rel='nofollow'>"
         ]
     },{
         "name"    : "voidcn.com",
