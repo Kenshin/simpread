@@ -27,6 +27,8 @@ const name = "simpread",
         desc      : "",   // only read mode
         exclude   : [],
         include   : "",
+        avatar    : [],
+        paging    : [],
     },
     focus  = {
         version   : "2016-12-29",
@@ -434,12 +436,15 @@ class Storage {
                     }
                     if ( key == "sites" ) {
                         target.sites.forEach( items => {
-                            if ( Object.keys( items[1] ).length != Object.keys( site ).length ) {
-                                result.code = -2;
-                            } else {
-                                Object.keys( items[1] ).forEach( key => {
-                                    ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
-                                });
+                            const site_keys = Object.keys( items[1] );
+                            if ( !site_keys.includes( "avatar" ) && site_keys.includes( "paging" ) ) {
+                                if ( site_keys.length != Object.keys( site ).length ) {
+                                    result.code = -2;
+                                } else {
+                                    site_keys.forEach( key => {
+                                        ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
+                                    });
+                                }
                             }
                         });
                     }
