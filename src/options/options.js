@@ -98,8 +98,8 @@ function vernotify() {
 
         new Notify().Render( "简悦 版本提示", msg );
 
-        if ( hash.startsWith( "#update?ver=" ) && version == "1.0.1" ) {
-            storage.read.sites = storage.Fix( storage.read.sites, storage.version );
+        if ( hash.startsWith( "#update?ver=" )) {
+            storage.read.sites = storage.Fix( storage.read.sites, storage.version, version );
             storage.Write( ()=> {
                 watch.SendMessage( "version", true );
                 console.log( "site editor update complete!" )
