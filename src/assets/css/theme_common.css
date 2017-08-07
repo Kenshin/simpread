@@ -255,7 +255,7 @@ sr-rd-mult sr-rd-mult-avatar span {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 
-    max-width: 82px;
+    max-width: 75px;
 
     overflow: hidden;
     text-overflow: ellipsis;
