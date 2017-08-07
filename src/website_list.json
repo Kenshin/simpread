@@ -1174,6 +1174,10 @@
     },{
         "name"    : "wiki.jikexueyuan.com",
         "url"     : "http://wiki.jikexueyuan.com/project/*",
+        "paging"  : [
+            {"prev" : "[[{$('#previous_link').attr('href')}]]"},
+            {"next" : "[[{$('#next_link').attr('href')}]]"}
+        ],
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div class='markdown-body'>",
@@ -1763,6 +1767,10 @@
     },{
         "name"    : "qu.la",
         "url"     : "http://www.qu.la/book/*/*.html",
+        "paging"  : [
+            {"prev" : "[[{$('#A1').attr('href')}]]"},
+            {"next" : "[[{$('#A3').attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1781,6 +1789,10 @@
     },{
         "name"    : "xxbiquge.com",
         "url"     : "http://www.xxbiquge.com/**/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.bottem2').find('a')[0]).attr('href')}]]"},
+            {"next" : "[[{$($('.bottem2').find('a')[2]).attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1790,6 +1802,10 @@
     },{
         "name"    : "biquge5200.com",
         "url"     : "http://www.biquge5200.com/**/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.bottem2').find('a')[1]).attr('href')}]]"},
+            {"next" : "[[{$($('.bottem2').find('a')[3]).attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1799,6 +1815,10 @@
     },{
         "name"    : "piaotian.com",
         "url"     : "http://www.piaotian.com/html/**/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.bottomlink').find('a')[0]).attr('href')}]]"},
+            {"next" : "[[{$($('.bottomlink').find('a')[5]).attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1810,6 +1830,10 @@
     },{
         "name"    : "zanghaihua.org",
         "url"     : "http://www.zanghaihua.org/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.linkbtn').find('a')[0]).attr('href')}]]"},
+            {"next" : "[[{$($('.linkbtn').find('a')[2]).attr('href')}]]"}
+        ],
         "title"   : "[[{$('.chaptertitle').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='bookcontent'>",
