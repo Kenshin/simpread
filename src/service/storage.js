@@ -13,7 +13,7 @@ import minimatch from 'minimatch';
  */
 
 const name = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v2.json",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
