@@ -220,7 +220,7 @@ sr-rd-mult {
     display: flex;
     flex-direction: row;
 
-    margin: 3px 0 16px 0;
+    margin: 0 0 16px 0;
     padding: 16px 0 24px;
 
     width: 100%;
