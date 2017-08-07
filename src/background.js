@@ -19,6 +19,8 @@ storage.Read( () => {
     else {
         !local.Count() && storage.GetNewsites( "remote", getNewsitesHandler );
         ver.version != storage.version && storage.GetNewsites( "local", getNewsitesHandler );
+        ver.version != storage.version &&
+            ( storage.read.sites = storage.Fix( storage.read.sites, storage.version, ver.version ));
         ver.version != storage.version && storage.Write( () => {
                 local.Version( ver.version );
                 browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
