@@ -519,7 +519,6 @@ class Storage {
                 }
             }
         });
-        console.log( "dfasdfasdf", newsites )
         return newsites;
     }
 
