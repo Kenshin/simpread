@@ -503,21 +503,23 @@ class Storage {
                 if ( name == item[1].name ) {
 
                     // 1.0.0 → 1.0.1
-                    if ( curver == "1.0.0" && newver == "1.0.1" ) {
-                        url = item[0];
+                    if ( curver == "1.0.0" ) {
+                        site[0] = item[0];
+                        curver = "1.0.1";
                     }
 
                     // 1.0.1 → 1.0.2
-                    if ( curver == "1.0.1" && newver == "1.0.2" ) {
+                    if ( curver == "1.0.1" ) {
                         item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
                         item[1].paging  && ( site[1].paging  = item[1].paging  );
                         item[1].include && ( site[1].include = item[1].include );
+                        curver = "1.0.2";
                     }
-                    break;
+                    return [ item[0], site[1] ];
                 }
             }
-            return [ url, site[1] ];
         });
+        console.log( "dfasdfasdf", newsites )
         return newsites;
     }
 
