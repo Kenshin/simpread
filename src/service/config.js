@@ -87,12 +87,10 @@ const readItems = {
                 "color": "#D4237A",
             },
             "png" : {
-                "name" : "导出为 PNG",
                 "icon" : ss.IconPath("png_icon"),
                 "color": "#D4237A",
             },
             "pdf" : {
-                "name" : "导出为 PDF",
                 "icon" : ss.IconPath("pdf_icon"),
                 "color": "#D4237A",
             },
