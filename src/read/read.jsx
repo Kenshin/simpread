@@ -114,24 +114,27 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "markdown":
-                new Notify().Render( "请注意，这是一个实验性功能，不一定能导出成功。" );
                 const { include } = this.props.wrapper;
                 try {
                     const md   = toMarkdown( include, { gfm: true }),
                           data = "data:text/plain;charset=utf-8," + encodeURIComponent( md );
                     exp.Download( data, `simpread-${ this.props.wrapper.title.trim() }.md` );
                 } catch( e ) {
-                    new Notify().Render( 1, "转换 Markdown 格式失败！" );
+                    new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                 }
                 break;
             case "png":
-                new Notify().Render( "下载已开始，请稍等..." );
-                $( "sr-rd-crlbar" ).css({ "opacity": 0 });
-                setTimeout( () => {
-                    exp.PNG( $( ".simpread-read-root" )[0], `simpread-${ this.props.wrapper.title.trim() }.png`, () => {
-                        $( "sr-rd-crlbar" ).removeAttr( "style" );
-                    });
-                }, 1000 );
+                try {
+                    new Notify().Render( "下载已开始，请稍等..." );
+                    $( "sr-rd-crlbar" ).css({ "opacity": 0 });
+                    setTimeout( () => {
+                        exp.PNG( $( ".simpread-read-root" )[0], `simpread-${ this.props.wrapper.title.trim() }.png`, () => {
+                            $( "sr-rd-crlbar" ).removeAttr( "style" );
+                        });
+                    }, 1000 );
+                } catch ( e ) {
+                    new Notify().Render( 1, "转换 PNG 格式失败，请注意，这是一个实验性功能，不一定能导出成功。" );
+                }
                 break;
         }
     }
