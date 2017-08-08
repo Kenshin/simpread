@@ -97,9 +97,10 @@ async function removeSpareTag( name, $target ) {
  */
 function verify( name ) {
     const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
-    if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
+    /*if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
         return -2;
-    } else if ( name === "" ) {
+    } else */
+    if ( name === "" ) {
         return -1;
     } else {
         return 0;
@@ -199,17 +200,43 @@ async function specbeautify( name, $target ) {
             $target.find( ".BDE_Smiley" ).addClass( "sr-rd-content-nobeautify" );
             $target.find( ".replace_div" ).removeAttr( "class" ).removeAttr( "style" );
             $target.find( ".replace_tip" ).remove();
+            $target.find( ".d_post_content, .j_d_post_content, .post_bubble_top, .post_bubble_middle, .post_bubble_bottom" ).map( ( idx, target ) => {
+                $( target ).removeAttr( "class" ).removeAttr( "style" );
+            });
+            $( "body" ).find( ".p_author_face" ).map( ( idx, target ) => {
+                const $target = $( target ).find( "img" ),
+                      src     = $target.attr( "data-tb-lazyload" ),
+                      name    = $target.attr( "username" );
+                src && $( "sr-rd-mult-avatar" ).find( "span" ).map( ( idx, span ) => {
+                    const $span = $( span ),
+                          text  = $span.text();
+                    if ( text == name ) {
+                        $span.parent().find( "img" ).attr( "src", src );
+                    }
+                });
+            });
             break;
         case "question.zhihu.com":
             $target.find( ".zu-edit-button" ).remove();
+            $target.find( "a.external" ).map( ( idx, target ) => {
+                $( target ).removeAttr( "class" )
+                           .attr( "style", "border: none;" );
+            });
+            $target.find( ".VagueImage" ).map( ( idx, target ) => {
+                const $target = $( target ),
+                      src     = $target.attr( "data-src" );
+                $target.replaceWith( `<img class="sr-rd-content-img" src="${ src }" style="zoom: 0.6;">` )
+            });
             break;
         case "chiphell.com":
             $target.find( "img" ).map( ( index, item ) => {
                 const $target = $(item),
                       $parent = $target.parent(),
-                      src     = $target.attr( "src" );
+                      src     = $target.attr( "src" ),
+                      smilieid= $target.attr( "smilieid" );
                 if ( $parent.is( "ignore_js_op" )) $target.unwrap();
-                if ( src && src.includes( "static/image/smiley" ) ) $target.addClass( "sr-rd-content-nobeautify" );
+                smilieid && src && src.includes( "static/image/smiley" ) &&
+                    $target.addClass( "sr-rd-content-nobeautify" ).attr( "style", "width: 50px;" );
             });
             $target.find( ".quote" ).remove();
             break;

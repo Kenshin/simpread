@@ -13,7 +13,7 @@ import minimatch from 'minimatch';
  */
 
 const name = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v2.json",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
@@ -27,6 +27,8 @@ const name = "simpread",
         desc      : "",   // only read mode
         exclude   : [],
         include   : "",
+        avatar    : [],
+        paging    : [],
     },
     focus  = {
         version   : "2016-12-29",
@@ -434,12 +436,15 @@ class Storage {
                     }
                     if ( key == "sites" ) {
                         target.sites.forEach( items => {
-                            if ( Object.keys( items[1] ).length != Object.keys( site ).length ) {
-                                result.code = -2;
-                            } else {
-                                Object.keys( items[1] ).forEach( key => {
-                                    ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
-                                });
+                            const site_keys = Object.keys( items[1] );
+                            if ( !site_keys.includes( "avatar" ) && site_keys.includes( "paging" ) ) {
+                                if ( site_keys.length != Object.keys( site ).length ) {
+                                    result.code = -2;
+                                } else {
+                                    site_keys.forEach( key => {
+                                        ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
+                                    });
+                                }
                             }
                         });
                     }
@@ -482,23 +487,40 @@ class Storage {
     }
 
     /**
-     * Fix simpread.read.sites, 1.0.0 → 1.0.1, because 1.0.1 usage minimatch
+     * Fix simpread.read.site
      * 
      * @param  {array} changed target
-     * @param  {string} version, e.g. 1.0.0 1.0.1
+     * @param  {string} old version
+     * @param  {string} new version
+     * 
      * @return {array} new sites
      */
-    Fix( target, ver ) {
+    Fix( target, curver, newver ) {
         const newsites = target.map( site => {
             let url      = site[0],
                 { name } = site[1];
             for ( let item of simpread.sites ) {
                 if ( name == item[1].name ) {
-                    url = item[0];
-                    break;
+
+                    // 1.0.0 → 1.0.1
+                    if ( curver == "1.0.0" ) {
+                        site[0] = item[0];
+                    }
+
+                    if ( curver == "1.0.0"  && newver == "1.0.2" ) {
+                        curver = "1.0.1";
+                    }
+
+                    // 1.0.1 → 1.0.2
+                    if ( curver == "1.0.1" ) {
+                        item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
+                        item[1].paging  && ( site[1].paging  = item[1].paging  );
+                        item[1].include && ( site[1].include = item[1].include );
+                    }
+
+                    return [ item[0], site[1] ];
                 }
             }
-            return [ url, site[1] ];
         });
         return newsites;
     }
