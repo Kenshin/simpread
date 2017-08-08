@@ -76,16 +76,29 @@ const readItems = {
         "icon" : ss.IconPath("save_icon"),
         "color": "#FF5722",
     },
-    "markdown" : {
-        "name" : "导出为 MD",
-        "icon" : ss.IconPath("markdown_icon"),
-        "color": "#D4237A",
-    },
-    /*"download" : {
+    "download" : {
         "name" : "导出",
         "icon" : ss.IconPath("download_icon"),
-        "color": "#673AB7",
+        "color": "#D4237A",
+        "items": {
+            "markdown" : {
+                "name" : "导出为 MD",
+                "icon" : ss.IconPath("markdown_icon"),
+                "color": "#D4237A",
+            },
+            "png" : {
+                "name" : "导出为 PNG",
+                "icon" : ss.IconPath("png_icon"),
+                "color": "#D4237A",
+            },
+            "pdf" : {
+                "name" : "导出为 PDF",
+                "icon" : ss.IconPath("pdf_icon"),
+                "color": "#D4237A",
+            },
+        },
     },
+    /*
     "send" : {
         "name" : "发送到 Pocket",
         "icon" : ss.IconPath("send_icon"),
