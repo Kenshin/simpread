@@ -118,10 +118,8 @@ class Read extends React.Component {
                 const { include } = this.props.wrapper;
                 try {
                     const md   = toMarkdown( include, { gfm: true }),
-                          data = "data:text/plain;charset=utf-8," + encodeURIComponent( md ),
-                          $a   = $( `<a style="display:none" href=${data} download="simpread-${ this.props.wrapper.title.trim() }.md"></a>` ).appendTo( "body" );
-                    $a[0].click();
-                    $a.remove();
+                          data = "data:text/plain;charset=utf-8," + encodeURIComponent( md );
+                    exp.Download( data, `simpread-${ this.props.wrapper.title.trim() }.md` );
                 } catch( e ) {
                     new Notify().Render( 1, "转换 Markdown 格式失败！" );
                 }
