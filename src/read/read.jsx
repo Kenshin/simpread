@@ -13,6 +13,7 @@ import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
 import * as ss            from 'stylesheet';
+import * as exp           from 'export';
 
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
@@ -124,6 +125,15 @@ class Read extends React.Component {
                 } catch( e ) {
                     new Notify().Render( 1, "转换 Markdown 格式失败！" );
                 }
+                break;
+            case "png":
+                new Notify().Render( "下载已开始，请稍等..." );
+                $( "sr-rd-crlbar" ).css({ "opacity": 0 });
+                setTimeout( () => {
+                    exp.PNG( $( ".simpread-read-root" )[0], `simpread-${ this.props.wrapper.title.trim() }.png`, () => {
+                        $( "sr-rd-crlbar" ).removeAttr( "style" );
+                    });
+                }, 1000 );
                 break;
         }
     }
