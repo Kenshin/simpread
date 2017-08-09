@@ -19,6 +19,13 @@ function png( element, name, callback ) {
 }
 
 /**
+ * Create PDF file
+ */
+function pdf() {
+    window.print();
+}
+
+/**
  * Downlaod
  * 
  * @param {string} image base64 code
@@ -32,5 +39,6 @@ function download( data, name ) {
 
 export {
     png      as PNG,
+    pdf      as PDF,
     download as Download,
 }
