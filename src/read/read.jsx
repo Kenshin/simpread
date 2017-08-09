@@ -128,8 +128,9 @@ class Read extends React.Component {
                     new Notify().Render( "下载已开始，请稍等..." );
                     $( "sr-rd-crlbar" ).css({ "opacity": 0 });
                     setTimeout( () => {
-                        exp.PNG( $( ".simpread-read-root" )[0], `simpread-${ this.props.wrapper.title.trim() }.png`, () => {
+                        exp.PNG( $( ".simpread-read-root" )[0], `simpread-${ this.props.wrapper.title.trim() }.png`, result => {
                             $( "sr-rd-crlbar" ).removeAttr( "style" );
+                            !result && new Notify().Render( 2, "转换 PNG 格式失败，这是一个实验性功能，不一定能导出成功。" );
                         });
                     }, 1000 );
                 } catch ( e ) {

@@ -13,8 +13,8 @@ import FileSaver  from 'filesaver';
 function png( element, name, callback ) {
     domtoimage.toBlob( element )
     .then( blob => {
-        FileSaver.saveAs( blob, name );
-        callback();
+        blob && FileSaver.saveAs( blob, name );
+        callback( !!blob );
     });
 }
 
