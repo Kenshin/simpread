@@ -8,6 +8,7 @@ import { storage, Now } from 'storage';
 import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
+import * as exp    from 'export';
 
 export default class CommonOpt extends React.Component {
 
@@ -84,10 +85,8 @@ export default class CommonOpt extends React.Component {
                 read   : { ...storage.read   },
                 unrdist: storage.unrdist,
             },
-            data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) ),
-            $a   = $( `<a style="display:none" href=${data} download="simpread-config-${Now()}.json"></a>` ).appendTo( "body" );
-        $a[0].click();
-        $a.remove();
+            data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) );
+        exp.Download( data, `simpread-config-${Now()}.json` );
     }
 
     newsites() {
