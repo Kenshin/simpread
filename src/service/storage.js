@@ -350,6 +350,7 @@ class Storage {
      * @param {string} include: set, get
      * @param {function} callback
      */
+    /*
     Sync( state, callback ) {
         if ( state == "set" ) {
             sync = { ...simpread };
@@ -374,6 +375,7 @@ class Storage {
             });
         }
     }
+    */
 
     /**
      * Statistics simpread same info
@@ -483,7 +485,6 @@ class Storage {
         state == "local"  && ( code = 0 );
         state == "remote" && ( code = 1 );
         ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
-        ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
     }
 
     /**

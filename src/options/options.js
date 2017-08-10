@@ -125,7 +125,7 @@ function vernotify() {
 }
 
 /**
- * First load call remote simpread data structure( usage storage.Sync() )
+ * First load
  *
  * @param {bool} is first load
  */
@@ -135,16 +135,6 @@ function firstLoad( first ) {
         !error && storage.Statistics( "create" );
     });
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
-    /* remove https://trello.com/c/p8cwFcu1/71-simpread-dropbox
-    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first &&
-        storage.Sync( "get", success => {
-            success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
-            success && mainRender( tabsItemID );
-            success && storage.Write( ()=> {
-                new Notify().Render( 0, "数据恢复成功！" );
-            });
-    });
-    */
 }
 
 /**
