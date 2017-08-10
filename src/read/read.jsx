@@ -1,6 +1,5 @@
 console.log( "=== simpread read load ===" )
 
-import toMarkdown  from 'to-markdown';
 import pangu       from 'pangu';
 
 import ProgressBar from 'schedule';
@@ -114,14 +113,9 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "markdown":
-                const { include } = this.props.wrapper;
-                try {
-                    const md   = toMarkdown( include, { gfm: true }),
-                          data = "data:text/plain;charset=utf-8," + encodeURIComponent( md );
-                    exp.Download( data, `simpread-${ this.props.wrapper.title.trim() }.md` );
-                } catch( e ) {
+                exp.Markdown( this.props.wrapper.include, `simpread-${ this.props.wrapper.title.trim() }.md`, error => {
                     new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                }
+                });
                 break;
             case "png":
                 try {
