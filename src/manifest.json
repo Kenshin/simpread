@@ -40,6 +40,7 @@
     "/assets/images/*",
     "website_list.json"
   ],
+  "content_security_policy":"script-src 'self' https://cdn.bootcss.com/; object-src 'self'",
   "offline_enabled" : true,
   "update_url"      : "https://clients2.google.com/service/update2/crx",
   "manifest_version": 2
