@@ -25,7 +25,7 @@ storage.Read( () => {
                     local.Version( ver.version );
                     browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
                 }, ver.Verify( storage.version, storage.simpread ) );
-            getNewsitesHandler( result );            
+            getNewsitesHandler( result );
         });
     }
     menu.CreateAll();
@@ -110,6 +110,17 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
     watch.Pull( tabId );
     if ( changeInfo.status == "complete" ) {
         console.log( "background tabs Listener:update", tabId, changeInfo, tab );
+
+        if ( tab.url.includes( "http://ksria.com/simpread/#access_token=" )) {
+            browser.tabs.query( {}, tabs => {
+                const opts = tabs.find( tab => tab.url.includes( browser.extension.getURL( "options/options.html" ) ));
+                if ( opts ) {
+                    browser.tabs.sendMessage( opts.id, msg.Add( msg.MESSAGE_ACTION.dbx_redirect_uri, { uri: tab.url } ));
+                    chrome.tabs.remove( tabId );
+                }
+            });
+        }
+
         if ( !tab.url.startsWith( "chrome://" ) ) {
             browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
         } else {

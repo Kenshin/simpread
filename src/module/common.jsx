@@ -21,7 +21,7 @@ export default class CommonOpt extends React.Component {
     };
 
     sync() {
-        new Notify().Render( 2, "由于 Google 账户的限制，此功能将在下个版本升级为 Dropbox 方案。" );
+        //new Notify().Render( 2, "由于 Google 账户的限制，此功能将在下个版本升级为 Dropbox 方案。" );
         /* https://trello.com/c/p8cwFcu1/71-simpread-dropbox
         storage.Sync( "set", time => {
             new Notify().Render( 2, "注意：这是实验性功能，最好采用保存配置文件到本地的方式。" );
@@ -29,6 +29,50 @@ export default class CommonOpt extends React.Component {
             this.setState({ update: `上次同步时间： ${ time }` });
             this.props.sync && this.props.sync();
         });*/
+
+        const read = () => {
+            new Notify().Render( "数据同步中，请稍等..." );
+            exp.dropbox.Exist( exp.dropbox.config_name, ( result, error ) => {
+                if ( result == -1 ) {
+                    storage.simpread.option.update = Now();
+                    exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                } else {
+                    exp.dropbox.Read( exp.dropbox.config_name, callback );
+                }
+            });
+        },
+        callback = ( type, result, error ) => {
+            console.log( "callback", type, error );
+            switch ( type ) {
+                case "write":
+                    !error ? storage.Write( () => {
+                        location.href = location.origin + location.pathname + "?simpread_mode=sync";
+                    }) : new Notify().Render( "远程数据同步失败，请稍后再试！" );
+                    break;
+                case "read":
+                    const json   = JSON.parse( result ),
+                          local  = storage.option.update ? new Date( storage.option.update.replace( /年|月/ig, "-" ).replace( "日", "" )) : new Date( "1999-01-01 12:12:12" ),
+                          remote = new Date( json.option.update.replace( /年|月/ig, "-" ).replace( "日", "" ));
+                    if ( local < remote ) {
+                        new Notify().Render( "远程备份配置文件较新，是否覆盖本地文件？", "覆盖", () => {
+                            storage.Write( () => {
+                                location.href = location.origin + location.pathname + "?simpread_mode=reload";
+                            }, json );
+                        });
+                    } else if ( local > remote ) {
+                        new Notify().Render( "本地配置文件较新，是否覆盖远程备份文件？", "覆盖", () => {
+                            exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                        });
+                    } else {
+                        new Notify().Render( "本地与远程数据相同，无需重复同步。" );
+                    }
+                    break;
+            }
+        };
+
+        !exp.dropbox.access_token ? exp.dropbox.Auth().done( () => read() ).fail( error => {
+            new Notify().Render( 2, "获取 Dropbox 授权失败，请重新获取。" );
+        }) : read();
     }
 
     import() {
@@ -101,7 +145,7 @@ export default class CommonOpt extends React.Component {
     }
 
     clear() {
-        new Notify().Render( "snackbar", "是否清除掉包括本地与网络账户的全部配置文件？", "同意 ", ()=>{
+        new Notify().Render( "snackbar", "是否清除掉本地配置文件？", "同意 ", () => {
             storage.Clear( "all", () => {
                 new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
                     location.href = location.origin + location.pathname + "?simpread_mode=clear";
@@ -113,7 +157,7 @@ export default class CommonOpt extends React.Component {
     render() {
         return(
             <div style={{ width: '100%' }}>
-                <Button type="raised" text="同步到你的 Google 账户"
+                <Button type="raised" text="同步到你的 Dropbox 账户"
                         icon={ ss.IconPath( "sync_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="md-waves-effect md-waves-button"
@@ -138,9 +182,9 @@ export default class CommonOpt extends React.Component {
                             color="#fff" backgroundColor="#2196F3"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.newsites() } />
-                    <Button type="raised" text="清除全部数据" width="100%"
+                    <Button type="raised" text="清除数据" width="100%"
                             icon={ ss.IconPath( "clear_icon" ) }
-                            tooltip={{ text: "清除掉包括本地与网络账户的全部配置文件，需谨慎！" }}
+                            tooltip={{ text: "清除掉本地配置文件，需谨慎！" }}
                             color="#fff" backgroundColor="#757575"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.clear() } />

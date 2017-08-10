@@ -18,6 +18,9 @@ import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
 import * as watch from 'watch';
+import {browser}  from 'browser';
+import * as msg   from 'message';
+import * as exp   from 'export';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -46,6 +49,15 @@ $( window ).scroll( (event) => {
  */
 window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => item.route == window.location.hash ) );
 tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
+
+/**
+ * Listen runtime message
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.dbx_redirect_uri ) {
+        exp.dropbox.access_token = request.value.uri;
+    }
+});
 
 /**
  * Entry:
@@ -78,6 +90,9 @@ function hashnotify() {
                 break;
             case "clear":
                 new Notify().Render( 0, "数据清除成功！" );
+                break;
+            case "sync":
+                new Notify().Render( 0, "数据同步成功！" );
                 break;
             default:
                 // TO-DO
