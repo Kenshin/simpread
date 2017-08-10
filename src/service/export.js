@@ -1,10 +1,11 @@
 console.log( "=== simpread export load ===" )
 
-import * as msg   from 'message';
-import {browser}  from 'browser';
-
 import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
+import toMarkdown from 'to-markdown';
+
+import * as msg   from 'message';
+import {browser}  from 'browser';
 
 /**
  * Create PNG
@@ -26,6 +27,23 @@ function png( element, name, callback ) {
  */
 function pdf() {
     window.print();
+}
+
+/**
+ * Create Markdown file
+ * 
+ * @param {string} data
+ * @param {string} name
+ * @param {function} when catch callback
+ */
+function markdown( data, name, callback ) {
+    try {
+        const md     = toMarkdown( data, { gfm: true }),
+              base64 = "data:text/plain;charset=utf-8," + encodeURIComponent( data );
+        download( base64, name );
+    } catch( error ) {
+        callback( error );
+    }
 }
 
 /**
@@ -142,6 +160,7 @@ defer.promise( dropbox );
 export {
     png      as PNG,
     pdf      as PDF,
+    markdown as Markdown,
     download as Download,
     dropbox,
 }
