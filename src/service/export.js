@@ -58,7 +58,7 @@ function download( data, name ) {
     $a.remove();
 }
 
-let dbx_token, defer = $.Deferred();
+let dbx_token, dbx_error, defer = $.Deferred();
 
 class DropboxClient {
 
@@ -93,15 +93,25 @@ class DropboxClient {
     }
 
     constructor() {
-        location.protocol == "chrome-extension:" && $.getScript( this.api_url, () => {
+        location.protocol == "chrome-extension:" && $.ajax({
+            url     : this.api_url,
+            dataType: "script",
+        }).done( () => {
             console.log( "dropbox api load complete." )
+        }).fail( ( jqXHR, textStatus ) => {
+            console.error( "droboxp api load failed: ", textStatus, jqXHR )
+            dbx_error = jqXHR.status;
         });
     }
 
     Auth() {
-        const dbx = new Dropbox({ clientId: this.client_id });
-        const url = dbx.getAuthenticationUrl( this.redirect_uri );
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+        if ( !dbx_error ) {
+            const dbx = new Dropbox({ clientId: this.client_id });
+            const url = dbx.getAuthenticationUrl( this.redirect_uri );
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+        } else {
+            defer.reject( "access_failed" );
+        }
         return this;
     }
 
