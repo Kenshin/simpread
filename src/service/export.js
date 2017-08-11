@@ -82,10 +82,10 @@ class DropboxClient {
         const arr = uri.match( /access_token=\S+&token_type/i );
         if ( arr && arr.length > 0 ) {
             dbx_token = arr[0].replace( /(access_token=)|(&token_type)/ig, "" );
-            defer.resolve( "token_success" );
         } else {
-            defer.reject( "token_failed" );
+            dbx_token = uri;
         }
+        defer.resolve( "token_success" );
     }
 
     get access_token() {
