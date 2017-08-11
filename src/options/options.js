@@ -114,10 +114,10 @@ function vernotify() {
         new Notify().Render( "简悦 版本提示", msg );
 
         if ( hash.startsWith( "#update?ver=" )) {
-            storage.Write( ()=> {
-                watch.SendMessage( "version", true );
-                console.log( "site editor update complete!" )
-            });
+            //storage.Write( ()=> {
+            watch.SendMessage( "version", true );
+            //    console.log( "site editor update complete!" )
+            //});
         }
 
         history.pushState( "", "", "/options/options.html" );
