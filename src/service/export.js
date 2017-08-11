@@ -34,15 +34,15 @@ function pdf() {
  * 
  * @param {string} data
  * @param {string} name
- * @param {function} when catch callback
+ * @param {function} 0: base64; 1: error
  */
 function markdown( data, name, callback ) {
     try {
         const md     = toMarkdown( data, { gfm: true }),
               base64 = "data:text/plain;charset=utf-8," + encodeURIComponent( data );
-        download( base64, name );
+        name ? download( base64, name ) : callback( base64 );
     } catch( error ) {
-        callback( error );
+        callback( undefined, error );
     }
 }
 
@@ -98,7 +98,7 @@ class DropboxClient {
     }
 
     constructor() {
-        location.protocol == "chrome-extension:" && $.ajax({
+        !location.host.includes( "dropbox.com" ) && $.ajax({
             url     : this.api_url,
             dataType: "script",
         }).done( () => {
@@ -151,11 +151,11 @@ class DropboxClient {
 
     Write( name, data, callback ) {
         const parts = [
-          new Blob([data], {type: 'text/json'})
+          new Blob([data], {type: 'text/plain'})
         ];
 
         const file = new File( parts, name, {
-            type: "application/json"
+            type: "application/plain"
         });
 
         const dbx = new Dropbox({ accessToken: this.access_token });
