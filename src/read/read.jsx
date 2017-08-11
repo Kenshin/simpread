@@ -13,6 +13,8 @@ import * as st            from 'site';
 import th                 from 'theme';
 import * as ss            from 'stylesheet';
 import * as exp           from 'export';
+import {browser}          from 'browser';
+import * as msg           from 'message';
 
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
@@ -146,12 +148,14 @@ class Read extends React.Component {
                         storage.Safe( ()=> {
                             if ( storage.secret.dropbox.access_token ) {
                                 exp.dropbox.access_token = storage.secret.dropbox.access_token;
-                                exp.dropbox.Write( `md/simpread-${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
+                                exp.dropbox.Write( `md/{ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
                                     !error && new Notify().Render( "已成功保存到 Dropbox！" );
                                     error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                                 });
                             } else {
-                                new Notify().Render( 2, "请先获取 Dropbox 的授权，才能使用此功能！" );
+                                new Notify().Render( "请先获取 Dropbox 的授权，才能使用此功能！", "授权", ()=>{
+                                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                                });
                             }
                         });
                     }
