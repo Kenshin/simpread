@@ -60,6 +60,11 @@ function download( data, name ) {
 
 let dbx_token, dbx_error, defer = $.Deferred();
 
+/**
+ * Dropbox
+ * 
+ * @class
+ */
 class DropboxClient {
 
     get api_url() {
