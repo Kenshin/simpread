@@ -93,7 +93,7 @@ class DropboxClient {
     }
 
     constructor() {
-        $.getScript( this.api_url, () => {
+        location.protocol == "chrome-extension:" && $.getScript( this.api_url, () => {
             console.log( "dropbox api load complete." )
         });
     }
