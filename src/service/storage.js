@@ -224,7 +224,7 @@ class Storage {
      */
     Write( callback, new_val = undefined ) {
         new_val && Object.keys( new_val ).forEach( key => simpread[ key ] = new_val[key] );
-        save( callback );
+        save( callback, new_val );
     }
 
     /**
@@ -268,7 +268,7 @@ class Storage {
                 simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
             }
             swap( current, simpread[key] );
-            save();
+            save( undefined, true );
         }
         return code;
     }
@@ -332,10 +332,10 @@ class Storage {
             if ( len == 0 ) {
                 simpread.sites = formatSites( newsites );
                 count          = simpread.sites.length;
-                save();
+                save( undefined, type );
             }
             else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
-                save();
+                save( undefined, type );
             }
             callback && callback( { count }, undefined );
         } catch ( error ) {
@@ -388,7 +388,7 @@ class Storage {
         } else {
             simpread.option[ type ] = simpread.option[ type ] + 1;
         }
-        save();
+        save( undefined, type == "create" );
     }
 
     /**
@@ -592,8 +592,12 @@ function addsites( newsites ) {
 
 /**
  * Call chrome storage set
+ * 
+ * @param {function} callback
+ * @param {object}   when exist no_update = false
  */
-function save( callback ) {
+function save( callback, no_update ) {
+    !no_update && ( simpread.option.update = now());
     browser.storage.local.set( { [name] : simpread }, function() {
         console.log( "chrome storage save success!", simpread );
         origin      = clone( simpread );
