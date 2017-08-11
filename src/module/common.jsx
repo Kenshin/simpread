@@ -25,8 +25,9 @@ export default class CommonOpt extends React.Component {
             new Notify().Render( "数据同步中，请稍等..." );
             exp.dropbox.Exist( exp.dropbox.config_name, ( result, error ) => {
                 if ( result == -1 ) {
-                    storage.simpread.option.update = Now();
-                    exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                    storage.Write( () => {
+                        exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                    });
                 } else {
                     exp.dropbox.Read( exp.dropbox.config_name, callback );
                 }
@@ -36,9 +37,8 @@ export default class CommonOpt extends React.Component {
             console.log( "callback", type, error );
             switch ( type ) {
                 case "write":
-                    !error ? storage.Write( () => {
-                        location.href = location.origin + location.pathname + "?simpread_mode=sync";
-                    }) : new Notify().Render( "远程数据同步失败，请稍后再试！" );
+                    !error ? ( location.href = location.origin + location.pathname + "?simpread_mode=sync" ) :
+                        new Notify().Render( "远程数据同步失败，请稍后再试！" );
                     break;
                 case "read":
                     const json   = JSON.parse( result ),
