@@ -40,7 +40,7 @@ function markdown( data, name, callback ) {
     try {
         const md     = toMarkdown( data, { gfm: true }),
               base64 = "data:text/plain;charset=utf-8," + encodeURIComponent( data );
-        name ? download( base64, name ) : callback( base64 );
+        name ? download( base64, name ) : callback( md );
     } catch( error ) {
         callback( undefined, error );
     }
