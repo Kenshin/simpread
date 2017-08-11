@@ -122,6 +122,12 @@ let current  = {},
         unrdist : [],
         sites   : [],
     },
+    secret = {
+        version   : "2017-08-11",
+        "dropbox" : {
+            "access_token": ""
+        },
+    },
     stcode = -1;
 
 class Storage {
@@ -196,6 +202,15 @@ class Storage {
      */
     get simpread() {
         return { ...simpread };
+    }
+
+    /**
+     * Get secret data structure
+     * 
+     * @return {object} secret object
+     */
+    get secret() {
+        return secret;
     }
 
     /**
@@ -462,6 +477,27 @@ class Storage {
 
         console.log( "storage.Verify() result ", opt, focu, rd )
         return { option: opt, focus: focu, read: rd };
+    }
+
+    /**
+     * Safe set/get, secret not import/export
+     * 
+     * @param {object}   secret
+     * @param {function} callback
+     */
+    Safe( callback, data ) {
+        if ( data ) {
+            browser.storage.local.set( { ["secret"] : secret }, () => {
+                console.log( "chrome storage safe set success!", secret );
+                callback && callback();
+            });
+        } else {
+            browser.storage.local.get( ["secret"], result => {
+                console.log( "chrome storage safe get success!", secret );
+                result && !$.isEmptyObject( result ) && ( secret  = result["secret"] );
+                callback && callback();
+            });
+        }
     }
 
     /**
