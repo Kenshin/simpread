@@ -66,10 +66,18 @@ export default class CommonOpt extends React.Component {
             }
         };
 
-        !exp.dropbox.access_token ? exp.dropbox.Auth().done( () => read() ).fail( error => {
-            console.error( error )
-            new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
-        }) : read();
+        storage.Safe( ()=> {
+            !storage.secret.dropbox.access_token ? exp.dropbox.Auth().done( () => {
+                storage.secret.dropbox.access_token = exp.dropbox.access_token;
+                storage.Safe( () => read(), storage.secret );
+            }).fail( error => {
+                console.error( error )
+                new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
+            }) : ( () => {
+                exp.dropbox.access_token = storage.secret.dropbox.access_token;
+                read();
+            })();
+        });
     }
 
     import() {
