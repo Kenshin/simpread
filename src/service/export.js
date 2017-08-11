@@ -3,6 +3,7 @@ console.log( "=== simpread export load ===" )
 import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
 import toMarkdown from 'to-markdown';
+import Dropbox    from 'dropbox';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
@@ -98,6 +99,7 @@ class DropboxClient {
     }
 
     constructor() {
+        /*
         !location.host.includes( "dropbox.com" ) && $.ajax({
             url     : this.api_url,
             dataType: "script",
@@ -107,6 +109,7 @@ class DropboxClient {
             console.error( "droboxp api load failed: ", textStatus, jqXHR )
             dbx_error = jqXHR.status;
         });
+        */
     }
 
     Auth() {
