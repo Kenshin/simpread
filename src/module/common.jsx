@@ -44,7 +44,12 @@ export default class CommonOpt extends React.Component {
                     const json   = JSON.parse( result ),
                           local  = storage.option.update ? new Date( storage.option.update.replace( /年|月/ig, "-" ).replace( "日", "" )) : new Date( "1999-01-01 12:12:12" ),
                           remote = new Date( json.option.update.replace( /年|月/ig, "-" ).replace( "日", "" ));
-                    if ( local < remote ) {
+                    if ( ver.Compare( json.version ) == 1 ) {
+                        new Notify().Render( "本地版本与远程版本不一致，且本地版本较新，是否覆盖远程版本？", "覆盖", () => {
+                            exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                        });
+                    }
+                    else if ( local < remote ) {
                         new Notify().Render( "远程备份配置文件较新，是否覆盖本地文件？", "覆盖", () => {
                             storage.Write( () => {
                                 location.href = location.origin + location.pathname + "?simpread_mode=reload";
