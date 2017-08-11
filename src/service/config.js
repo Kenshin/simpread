@@ -96,12 +96,18 @@ const readItems = {
             },
         },
     },
-    /*
     "send" : {
-        "name" : "发送到 Pocket",
+        "name" : "保存",
         "icon" : ss.IconPath("send_icon"),
-        "color": "#4CAF50",
-    },*/
+        "color": "#00BCD4",
+        "items": {
+            "dropbox" : {
+                "name" : "保存到 Dropbox",
+                "icon" : ss.IconPath("sync_icon"),
+                "color": "#00BCD4",
+            }
+        },
+    },
     "share" : {
         "name" : "共享",
         "icon" : ss.IconPath("share_icon"),

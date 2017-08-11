@@ -137,6 +137,26 @@ class Read extends React.Component {
                     exp.PDF();
                     $( "sr-rd-crlbar" ).removeAttr( "style" );
                 }, 500 );
+                break;
+            case "dropbox":
+                exp.Markdown( this.props.wrapper.include, undefined, ( result, error ) => {
+                    if ( error ) {
+                        new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
+                    } else {
+                        storage.Safe( ()=> {
+                            if ( storage.secret.dropbox.access_token ) {
+                                exp.dropbox.access_token = storage.secret.dropbox.access_token;
+                                exp.dropbox.Write( `md/simpread-${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
+                                    !error && new Notify().Render( "已成功保存到 Dropbox！" );
+                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                                });
+                            } else {
+                                new Notify().Render( 2, "请先获取 Dropbox 的授权，才能使用此功能！" );
+                            }
+                        });
+                    }
+                });
+                break;
         }
     }
 
