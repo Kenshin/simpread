@@ -148,8 +148,14 @@ class DropboxClient {
     }
 
     Write( name, data, callback ) {
-        const param = {path: "/" + name, mode: "overwrite" },
-        token = this.access_token;
+        const args     = { path: "/" + name, mode: "overwrite" },
+              token    = this.access_token,
+              safejson = args => {
+                const charsToEncode = /[\u007f-\uffff]/g;
+                return JSON.stringify(args).replace( charsToEncode, c => {
+                    return '\\u' + ( '000' + c.charCodeAt(0).toString(16)).slice(-4);
+                });
+        };
 
         $.ajax({
             url     : "https://content.dropboxapi.com/2/files/upload",
@@ -157,7 +163,7 @@ class DropboxClient {
             data    : data,
             headers : {
                 "Authorization"   : `Bearer ${token}`,
-                "Dropbox-API-Arg" : JSON.stringify( param ),
+                "Dropbox-API-Arg" : safejson( args ),
                 "Content-Type"    : "application/octet-stream"
             },
             processData : false,
