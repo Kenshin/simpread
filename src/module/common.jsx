@@ -26,7 +26,7 @@ export default class CommonOpt extends React.Component {
             exp.dropbox.Exist( exp.dropbox.config_name, ( result, error ) => {
                 if ( result == -1 ) {
                     storage.Write( () => {
-                        exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                        exp.dropbox.Write( exp.dropbox.config_name, storage.Export(), callback );
                     });
                 } else {
                     exp.dropbox.Read( exp.dropbox.config_name, callback );
@@ -46,7 +46,7 @@ export default class CommonOpt extends React.Component {
                           remote = new Date( json.option.update.replace( /年|月/ig, "-" ).replace( "日", "" ));
                     if ( ver.Compare( json.version ) == 1 ) {
                         new Notify().Render( "本地版本与远程版本不一致，且本地版本较新，是否覆盖远程版本？", "覆盖", () => {
-                            exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                            exp.dropbox.Write( exp.dropbox.config_name, storage.Export(), callback );
                         });
                     }
                     else if ( local < remote ) {
@@ -57,7 +57,7 @@ export default class CommonOpt extends React.Component {
                         });
                     } else if ( local > remote ) {
                         new Notify().Render( "本地配置文件较新，是否覆盖远程备份文件？", "覆盖", () => {
-                            exp.dropbox.Write( exp.dropbox.config_name, JSON.stringify( storage.simpread ), callback );
+                            exp.dropbox.Write( exp.dropbox.config_name, storage.Export(), callback );
                         });
                     } else {
                         new Notify().Render( "本地与远程数据相同，无需重复同步。" );
@@ -127,14 +127,7 @@ export default class CommonOpt extends React.Component {
     }
 
     export() {
-        const download = {
-                version: storage.version,
-                option : { ...storage.option },
-                focus  : { ...storage.focus  },
-                read   : { ...storage.read   },
-                unrdist: storage.unrdist,
-            },
-            data = "data:text/json;charset=utf-8," + encodeURIComponent( JSON.stringify( download ) );
+        const data = "data:text/json;charset=utf-8," + encodeURIComponent( storage.Export() );
         exp.Download( data, `simpread-config-${Now()}.json` );
     }
 
