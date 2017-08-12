@@ -124,7 +124,27 @@ class DropboxClient {
     }
 
     Exist( name, callback ) {
-        let idx = -1;
+        let idx     = -1;
+        const data  = { path : "" },
+              token = this.access_token;
+
+        $.ajax({
+            url     : "https://api.dropboxapi.com/2/files/list_folder",
+            type    : "POST",
+            data    : JSON.stringify( data ),
+            headers : {
+                "Authorization"   : `Bearer ${token}`,
+                "Content-Type"    : "application/json"
+            },
+        }).done( ( data, textStatus, jqXHR ) => {
+            idx = data.entries.findIndex( item => item.name == name && item[".tag"] == "file" );
+            callback( idx, undefined );
+        }).fail( ( jqXHR, textStatus, errorThrown ) => {
+            console.error( errorThrown );
+            callback( idx, errorThrown );
+        });
+
+        /*
         const dbx = new Dropbox({ accessToken: this.access_token });
         dbx.filesListFolder( { path: "" })
         .then( response => {
@@ -135,6 +155,7 @@ class DropboxClient {
             console.error(error);
             callback( idx, error );
         });
+        */
     }
 
     Read( name, callback ) {
