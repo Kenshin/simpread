@@ -501,6 +501,22 @@ class Storage {
     }
 
     /**
+     * Export, only include: version, option, focus, read, unrdist
+     * 
+     * @return {string} object json stringify
+     */
+    Export() {
+        const download = {
+            version: version,
+            option : { ...this.option },
+            focus  : { ...this.focus  },
+            read   : { ...this.read   },
+            unrdist: this.unrdist,
+        };
+        return JSON.stringify( download );
+    }
+
+    /**
      * Restore simpread[key]
      * 
      * @param {string} @see mode
