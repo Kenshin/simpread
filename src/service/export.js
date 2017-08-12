@@ -114,8 +114,9 @@ class DropboxClient {
 
     Auth() {
         if ( !dbx_error ) {
-            const dbx = new Dropbox({ clientId: this.client_id });
-            const url = dbx.getAuthenticationUrl( this.redirect_uri );
+            //const dbx = new Dropbox({ clientId: this.client_id });
+            //const url = dbx.getAuthenticationUrl( this.redirect_uri );
+            const url = `https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=${this.client_id}&redirect_uri=${this.redirect_uri}`;
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
         } else {
             defer.reject( "access_failed" );
