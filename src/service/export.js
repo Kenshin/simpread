@@ -138,6 +138,7 @@ class DropboxClient {
     }
 
     Read( name, callback ) {
+        /*
         const dbx = new Dropbox({ accessToken: this.access_token });
         dbx.filesDownload( { path: `/${name}` })
         .then( response => {
@@ -149,6 +150,23 @@ class DropboxClient {
         })
         .catch( error => {
             callback( "read", undefined, error )
+        });
+        */
+
+        const data  = { path : `/${name}` },
+              token = this.access_token;
+
+        $.ajax({
+            url     : "https://content.dropboxapi.com/2/files/download",
+            type    : "POST",
+            headers : {
+                "Authorization"   : `Bearer ${token}`,
+                "Dropbox-API-Arg" : JSON.stringify( data ),
+            },
+        }).done( ( data, textStatus, jqXHR ) => {
+            callback( "read", data, undefined )
+        }).fail( ( jqXHR, textStatus, errorThrown ) => {
+            callback( "read", undefined, errorThrown )
         });
     }
 
