@@ -193,6 +193,28 @@ class DropboxClient {
     }
 
     Write( name, data, callback ) {
+        const param = {path: "/" + name, mode: "overwrite" },
+        token = this.access_token;
+
+        $.ajax({
+            url     : "https://content.dropboxapi.com/2/files/upload",
+            type    : "POST",
+            data    : data,
+            headers : {
+                "Authorization"   : `Bearer ${token}`,
+                "Dropbox-API-Arg" : JSON.stringify( param ),
+                "Content-Type"    : "application/octet-stream"
+            },
+            processData : false,
+            contentType : false
+        }).done( ( data, textStatus, jqXHR ) => {
+            callback( "write", data, undefined );
+        }).fail( ( jqXHR, textStatus, errorThrown ) => {
+            console.log( jqXHR, textStatus, errorThrown )
+            callback( "write", undefined, error );
+        });
+
+        /*
         const parts = [
           new Blob([data], {type: 'text/plain'})
         ];
@@ -209,6 +231,7 @@ class DropboxClient {
         .catch( error => {
             callback( "write", undefined, error );
         });
+        */
     }
 }
 
