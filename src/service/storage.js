@@ -494,7 +494,7 @@ class Storage {
             });
         } else {
             browser.storage.local.get( ["secret"], result => {
-                console.log( "chrome storage safe get success!", secret );
+                console.log( "chrome storage safe get success!", result );
                 result && !$.isEmptyObject( result ) && ( secret  = result["secret"] );
                 callback && callback();
             });
