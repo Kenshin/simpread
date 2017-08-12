@@ -94,6 +94,9 @@ function hashnotify() {
             case "sync":
                 new Notify().Render( 0, "数据同步成功！" );
                 break;
+            case "auth":
+                new Notify().Render( 0, "授权成功！" );
+                break;
             default:
                 // TO-DO
         }
