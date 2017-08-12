@@ -487,6 +487,7 @@ class Storage {
      */
     Safe( callback, data ) {
         if ( data ) {
+            secret = { ...data };
             browser.storage.local.set( { ["secret"] : secret }, () => {
                 console.log( "chrome storage safe set success!", secret );
                 callback && callback();
