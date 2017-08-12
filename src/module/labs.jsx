@@ -6,6 +6,8 @@ import * as menu from 'menu';
 import Switch    from 'switch';
 import TextField from 'textfield';
 
+import Auth      from 'authorize';
+
 export default class LabsOpt extends React.Component {
 
     static defaultProps = {
@@ -56,6 +58,7 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "包括：聚焦模式与阅读模式。" }}
                             label="是否启用 「ESC」 退出方式？"
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
+                    <Auth/>
                 </div>
 
                 <div className="label">右键菜单</div>
