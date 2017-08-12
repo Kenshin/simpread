@@ -3,7 +3,6 @@ console.log( "=== simpread export load ===" )
 import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
 import toMarkdown from 'to-markdown';
-import Dropbox    from 'dropbox';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
@@ -98,24 +97,8 @@ class DropboxClient {
         return dbx_token;
     }
 
-    constructor() {
-        /*
-        !location.host.includes( "dropbox.com" ) && $.ajax({
-            url     : this.api_url,
-            dataType: "script",
-        }).done( () => {
-            console.log( "dropbox api load complete." )
-        }).fail( ( jqXHR, textStatus ) => {
-            console.error( "droboxp api load failed: ", textStatus, jqXHR )
-            dbx_error = jqXHR.status;
-        });
-        */
-    }
-
     Auth() {
         if ( !dbx_error ) {
-            //const dbx = new Dropbox({ clientId: this.client_id });
-            //const url = dbx.getAuthenticationUrl( this.redirect_uri );
             const url = `https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=${this.client_id}&redirect_uri=${this.redirect_uri}`;
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
         } else {
@@ -144,37 +127,9 @@ class DropboxClient {
             console.error( errorThrown );
             callback( idx, errorThrown );
         });
-
-        /*
-        const dbx = new Dropbox({ accessToken: this.access_token });
-        dbx.filesListFolder( { path: "" })
-        .then( response => {
-            idx = response.entries.findIndex( item => item.name == name && item[".tag"] == "file" );
-            callback( idx, undefined );
-        })
-        .catch( error => {
-            console.error(error);
-            callback( idx, error );
-        });
-        */
     }
 
     Read( name, callback ) {
-        /*
-        const dbx = new Dropbox({ accessToken: this.access_token });
-        dbx.filesDownload( { path: `/${name}` })
-        .then( response => {
-            const reader = new FileReader()
-            reader.addEventListener( "loadend", () => {
-                callback( "read", reader.result, undefined )
-            })
-            reader.readAsText( response.fileBlob );
-        })
-        .catch( error => {
-            callback( "read", undefined, error )
-        });
-        */
-
         const data  = { path : `/${name}` },
               token = this.access_token;
 
@@ -214,24 +169,6 @@ class DropboxClient {
             callback( "write", undefined, error );
         });
 
-        /*
-        const parts = [
-          new Blob([data], {type: 'text/plain'})
-        ];
-
-        const file = new File( parts, name, {
-            type: "application/plain"
-        });
-
-        const dbx = new Dropbox({ accessToken: this.access_token });
-        dbx.filesUpload({path: '/' + file.name, contents: file, mode:{ ".tag": "overwrite" } })
-        .then( response => {
-            callback( "write", response, undefined );
-        })
-        .catch( error => {
-            callback( "write", undefined, error );
-        });
-        */
     }
 }
 

@@ -207,7 +207,6 @@ const webpack = require( 'webpack' ),
           carousel   : __dirname + '/src/vender/carousel/carousel.js',
           dom2image  : __dirname + '/src/vender/dom2image.min.js',
           filesaver  : __dirname + '/src/vender/filesaver.min.js',
-          dropbox    : __dirname + '/src/vender/dropbox.min.js',
 
           wavess     : __dirname + '/src/vender/waves/waves.js',
           notify     : __dirname + '/src/vender/notify/notify.js',
