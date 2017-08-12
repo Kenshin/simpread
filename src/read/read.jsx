@@ -148,7 +148,7 @@ class Read extends React.Component {
                         storage.Safe( ()=> {
                             if ( storage.secret.dropbox.access_token ) {
                                 exp.dropbox.access_token = storage.secret.dropbox.access_token;
-                                exp.dropbox.Write( `md/{ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
+                                exp.dropbox.Write( `md/${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
                                     !error && new Notify().Render( "已成功保存到 Dropbox！" );
                                     error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                                 });
