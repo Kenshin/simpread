@@ -21,20 +21,20 @@ export default class CommonOpt extends React.Component {
     };
 
     sync() {
-        const read = () => {
+        const dbx = exp.dropbox,
+        read      = () => {
             new Notify().Render( "数据同步中，请稍等..." );
-            exp.dropbox.Exist( exp.dropbox.config_name, ( result, error ) => {
+            dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
                     storage.Write( () => {
-                        exp.dropbox.Write( exp.dropbox.config_name, storage.Export(), callback );
+                        dbx.Write( dbx.config_name, storage.Export(), callback );
                     });
                 } else {
-                    exp.dropbox.Read( exp.dropbox.config_name, callback );
+                    dbx.Read( dbx.config_name, callback );
                 }
             });
         },
         callback = ( type, result, error ) => {
-            console.log( "callback", type, error );
             switch ( type ) {
                 case "write":
                     !error ? ( location.href = location.origin + location.pathname + "?simpread_mode=sync" ) :
@@ -46,7 +46,7 @@ export default class CommonOpt extends React.Component {
                           remote = new Date( json.option.update.replace( /年|月/ig, "-" ).replace( "日", "" ));
                     if ( ver.Compare( json.version ) == 1 ) {
                         new Notify().Render( "本地版本与远程版本不一致，且本地版本较新，是否覆盖远程版本？", "覆盖", () => {
-                            exp.dropbox.Write( exp.dropbox.config_name, storage.Export(), callback );
+                            dbx.Write( dbx.config_name, storage.Export(), callback );
                         });
                     }
                     else if ( local < remote ) {
@@ -57,7 +57,7 @@ export default class CommonOpt extends React.Component {
                         });
                     } else if ( local > remote ) {
                         new Notify().Render( "本地配置文件较新，是否覆盖远程备份文件？", "覆盖", () => {
-                            exp.dropbox.Write( exp.dropbox.config_name, storage.Export(), callback );
+                            dbx.Write( dbx.config_name, storage.Export(), callback );
                         });
                     } else {
                         new Notify().Render( "本地与远程数据相同，无需重复同步。" );
@@ -67,14 +67,15 @@ export default class CommonOpt extends React.Component {
         };
 
         storage.Safe( ()=> {
-            !storage.secret.dropbox.access_token ? exp.dropbox.Auth().done( () => {
-                storage.secret.dropbox.access_token = exp.dropbox.access_token;
+            const sec_dbx = storage.secret.dropbox;
+            !sec_dbx.access_token ? dbx.Auth().done( () => {
+                sec_dbx.access_token = dbx.access_token;
                 storage.Safe( () => read(), storage.secret );
             }).fail( error => {
                 console.error( error )
                 new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
             }) : ( () => {
-                exp.dropbox.access_token = storage.secret.dropbox.access_token;
+                dbx.access_token = sec_dbx.access_token;
                 read();
             })();
         });
