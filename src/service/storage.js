@@ -533,10 +533,7 @@ class Storage {
      * @param {function} callback
      */
     Clear( state, callback ) {
-        let code = 2;
-        state == "local"  && ( code = 0 );
-        state == "remote" && ( code = 1 );
-        ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
+        browser.storage.local.clear( callback );
     }
 
     /**
