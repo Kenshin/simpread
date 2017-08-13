@@ -123,9 +123,9 @@ class Dropbox {
         }).done( ( data, textStatus, jqXHR ) => {
             idx = data.entries.findIndex( item => item.name == name && item[".tag"] == "file" );
             callback( idx, undefined );
-        }).fail( ( jqXHR, textStatus, errorThrown ) => {
-            console.error( errorThrown );
-            callback( idx, errorThrown );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( idx, error );
         });
     }
 
@@ -142,8 +142,9 @@ class Dropbox {
             },
         }).done( ( data, textStatus, jqXHR ) => {
             callback( "read", data, undefined )
-        }).fail( ( jqXHR, textStatus, errorThrown ) => {
-            callback( "read", undefined, errorThrown )
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( "read", undefined, error )
         });
     }
 
@@ -170,8 +171,8 @@ class Dropbox {
             contentType : false
         }).done( ( data, textStatus, jqXHR ) => {
             callback( "write", data, undefined );
-        }).fail( ( jqXHR, textStatus, errorThrown ) => {
-            console.log( jqXHR, textStatus, errorThrown )
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
             callback( "write", undefined, error );
         });
 
