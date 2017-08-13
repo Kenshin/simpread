@@ -55,7 +55,14 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     if ( request.type == msg.MESSAGE_ACTION.dbx_redirect_uri ) {
-        exp.dropbox.access_token = request.value.uri;
+        switch ( request.value.id ) {
+            case "pocket":
+                exp.pocket.Accesstoken();
+                break;
+            default:
+                exp.dropbox.access_token = request.value.uri;
+            break;
+        }
     }
 });
 
