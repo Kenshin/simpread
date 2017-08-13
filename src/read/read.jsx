@@ -161,6 +161,21 @@ class Read extends React.Component {
                     }
                 });
                 break;
+            case "pocket":
+                storage.Safe( ()=> {
+                    if ( storage.secret.pocket.access_token ) {
+                        exp.pocket.access_token = storage.secret.pocket.access_token;
+                        exp.pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
+                            !error && new Notify().Render( "已成功保存到 Pocket！" );
+                            error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                        });
+                    } else {
+                        new Notify().Render( "请先获取 Pocket 的授权，才能使用此功能！", "授权", ()=>{
+                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                        });
+                    }
+                });
+                break;
         }
     }
 
