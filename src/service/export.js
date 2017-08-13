@@ -65,7 +65,7 @@ let dbx_token, dbx_error, defer = $.Deferred();
  * 
  * @class
  */
-class DropboxClient {
+class Dropbox {
 
     get api_url() {
         return "https://cdn.bootcss.com/dropbox.js/2.5.7/Dropbox-sdk.min.js";
@@ -178,7 +178,7 @@ class DropboxClient {
     }
 }
 
-const dropbox = new DropboxClient();
+const dropbox = new Dropbox();
 defer.promise( dropbox );
 
 export {
