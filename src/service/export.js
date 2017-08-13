@@ -202,6 +202,10 @@ class Pocket {
             return "http://ksria.com/simpread/auth.html?id=pocket";
         }
 
+        get tags() {
+            return "simpread";
+        }
+
         Accesstoken() {
             defer_pocket.resolve( "token_success" );
         }
@@ -251,7 +255,31 @@ class Pocket {
                 console.error( jqXHR, textStatus, error )
                 callback( undefined, error );
             });
+        }
 
+        Add( url, title, callback ) {
+            const data = {
+                consumer_key: this.consumer_key,
+                access_token: this.access_token,
+                url,
+                title,
+                tags: this.tags
+            };
+
+            $.ajax({
+                url     : "https://getpocket.com/v3/add",
+                type    : "POST",
+                headers : {
+                    "content-type": "application/x-www-form-urlencoded",
+                    "X-Accept"    : "application/json"
+                },
+                data,
+            }).done( ( data, textStatus, jqXHR ) => {
+                callback( data, undefined );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error )
+                callback( undefined, error );
+            });
         }
 
     }
