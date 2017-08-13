@@ -127,6 +127,10 @@ let current  = {},
         "dropbox" : {
             "access_token": ""
         },
+        "pocket"  : {
+            "access_token": "",
+            "username"    : "",
+        }
     },
     stcode = -1;
 
