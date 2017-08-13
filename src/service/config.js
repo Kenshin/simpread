@@ -105,7 +105,12 @@ const readItems = {
                 "name" : "保存到 Dropbox",
                 "icon" : ss.IconPath("sync_icon"),
                 "color": "#00BCD4",
-            }
+            },
+            "pocket" : {
+                "name" : "保存到 Pocket",
+                "icon" : ss.IconPath("pocket_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "share" : {
