@@ -179,8 +179,88 @@ class Dropbox {
     }
 }
 
+let defer_pocket = $.Deferred();
+
+/**
+ * Pocket
+ * 
+ * @class
+ */
+class Pocket {
+
+        constructor( access_token, username, code ) {
+            this.access_token = access_token;
+            this.username     = username;
+            this.code         = code;
+        }
+    
+        get consumer_key() {
+            return "69741-d75561b7a9a96a511f36552e";
+        }
+
+        get redirect_uri() {
+            return "http://ksria.com/simpread/auth.html?id=pocket";
+        }
+
+        Accesstoken() {
+            defer_pocket.resolve( "token_success" );
+        }
+
+        Request( callback ) {
+            const consumer = this.consumer_key,
+                  redirect = this.redirect_uri;
+    
+            $.ajax({
+                url     : "https://getpocket.com/v3/oauth/request",
+                type    : "POST",
+                headers : {
+                    "content-type": "application/x-www-form-urlencoded",
+                    "X-Accept"    : "application/json"
+                },
+                data    : `consumer_key=${consumer}&redirect_uri=${redirect}`,
+            }).done( ( data, textStatus, jqXHR ) => {
+                callback( data, textStatus == "success" ? "" : textStatus );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error )
+                callback( undefined, error );
+            });
+        }
+
+        Redirect( code ) {
+            this.code = code;
+            const url = `https://getpocket.com/auth/authorize?request_token=${code}&redirect_uri=${this.redirect_uri}`;
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+            return this;
+        }
+
+        Auth( callback ) {
+            const consumer = this.consumer_key,
+                  redirect = this.redirect_uri;
+
+            $.ajax({
+                url     : "https://getpocket.com/v3/oauth/authorize",
+                type    : "POST",
+                headers : {
+                    "content-type": "application/x-www-form-urlencoded",
+                    "X-Accept"    : "application/json"
+                },
+                data    : `consumer_key=${consumer}&code=${this.code}&redirect_uri=${redirect}`,
+            }).done( ( data, textStatus, jqXHR ) => {
+                callback( data, undefined );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error )
+                callback( undefined, error );
+            });
+
+        }
+
+    }
+
 const dropbox = new Dropbox();
 defer.promise( dropbox );
+
+const pocket = new Pocket();
+defer_pocket.promise( pocket );
 
 export {
     png      as PNG,
@@ -188,4 +268,5 @@ export {
     markdown as Markdown,
     download as Download,
     dropbox,
+    pocket,
 }
