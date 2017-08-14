@@ -42,6 +42,7 @@ export default class Auth extends React.Component {
                 break;
             case "pocket":
                 if ( value ) {
+                    new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
                     exp.pocket.Request( ( result, error ) => {
                         exp.pocket.Redirect( result.code ).done( () => {
                             exp.pocket.Auth( ( result, error ) => {
