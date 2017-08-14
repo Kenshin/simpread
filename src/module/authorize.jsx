@@ -52,7 +52,6 @@ export default class Auth extends React.Component {
                             new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
                         });
                     });
-
                 }
                 else {
                     Object.keys( storage.secret.pocket ).forEach( item => storage.secret.pocket[item] = "" );
