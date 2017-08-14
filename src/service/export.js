@@ -281,13 +281,53 @@ class Pocket {
         });
     }
 
+}
+
+class Linnk {
+
+    constructor( access_token, username, password ) {
+        this.access_token = access_token;
+        this.username     = username;
+        this.password     = password;
     }
+
+    get error_code() {
+        return {
+            "-1001": "密码不正确，请确认。",
+            "-1002": "⽤户不存在，请确认。",
+            "-1004": "验证错误，请重新登录。",
+            "-1005": "登录失效，请重新登录。",
+            "-1006": "验证失效，请重新登录。",
+        }
+    }
+
+    Login( username, password, callback ) {
+        const data = {
+            userName: username,
+            password: password,
+        };
+
+        $.ajax({
+            url     : "https://linnk.net/a/api/login",
+            type    : "POST",
+            data,
+        }).done( ( result, textStatus, jqXHR ) => {
+            callback( result, undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+
+    }
+}
 
 const dropbox = new Dropbox();
 defer.promise( dropbox );
 
 const pocket = new Pocket();
 defer_pocket.promise( pocket );
+
+const linnk = new Linnk();
 
 export {
     png      as PNG,
@@ -296,4 +336,5 @@ export {
     download as Download,
     dropbox,
     pocket,
+    linnk,
 }
