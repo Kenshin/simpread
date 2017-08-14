@@ -387,8 +387,10 @@ const actionItems = [
     {
         id: "pocket",
         title: "发送到 Pocket",
-    },
-    {
+    },{
+        id: "linnk",
+        title: "发送到 Linnk",
+    },{
         id: "remove",
         title: "删除",
     }
