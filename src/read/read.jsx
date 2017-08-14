@@ -177,6 +177,9 @@ class Read extends React.Component {
                     }
                 });
                 break;
+            case "linnk":
+                console.log( "Sadfasdfasdf" )
+                break;
         }
     }
 

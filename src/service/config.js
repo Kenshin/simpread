@@ -111,6 +111,11 @@ const readItems = {
                 "icon" : ss.IconPath("pocket_icon"),
                 "color": "#00BCD4",
             },
+            "linnk" : {
+                "name" : "保存到 Linnk",
+                "icon" : ss.IconPath("linnk_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "share" : {
