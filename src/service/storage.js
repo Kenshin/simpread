@@ -129,7 +129,7 @@ let current  = {},
         },
         "pocket"  : {
             "access_token": "",
-            "username"    : "",
+            "tags"        : "",
         }
     },
     stcode = -1;
