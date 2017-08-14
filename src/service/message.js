@@ -10,7 +10,7 @@ const action = {
     menu           : "menu",
     updated        : "updated",
     save_verify    : "save_verify",
-    dbx_redirect_uri: "dbx_redirect_uri",
+    redirect_uri   : "redirect_uri",
 };
 
 /**
