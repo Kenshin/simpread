@@ -184,10 +184,11 @@ let defer_pocket = $.Deferred();
  */
 class Pocket {
 
-        constructor( access_token, username, code ) {
+        constructor( access_token, username, code, tags ) {
             this.access_token = access_token;
             this.username     = username;
             this.code         = code;
+            this.tags         = tags;
         }
     
         get consumer_key() {
@@ -198,15 +199,15 @@ class Pocket {
             return "http://ksria.com/simpread/auth.html?id=pocket";
         }
 
-        get tags() {
-            return "simpread";
-        }
-
         get header() {
             return {
                 "content-type": "application/x-www-form-urlencoded",
                 "X-Accept"    : "application/json"
             }
+        }
+
+        Settags( value ) {
+            this.tags = value ? value : "simpread";
         }
 
         Accesstoken() {
