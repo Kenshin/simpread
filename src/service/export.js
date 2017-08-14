@@ -67,10 +67,6 @@ let dbx_token, dbx_error, defer = $.Deferred();
  */
 class Dropbox {
 
-    get api_url() {
-        return "https://cdn.bootcss.com/dropbox.js/2.5.7/Dropbox-sdk.min.js";
-    }
-
     get client_id() {
         return "4cyaw4wqpbg4751";
     }
