@@ -130,6 +130,10 @@ let current  = {},
         "pocket"  : {
             "access_token": "",
             "tags"        : "",
+        },
+        "linnk"   : {
+            access_token  : "",
+            "group_id"    : "",
         }
     },
     stcode = -1;
