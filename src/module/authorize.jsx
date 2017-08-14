@@ -29,7 +29,7 @@ export default class Auth extends React.Component {
                         new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
                     });
                 } else {
-                    storage.secret.dropbox.access_token = "";
+                    Object.keys( storage.secret.dropbox ).forEach( item => storage.secret.dropbox[item] = "" );
                     storage.Safe( ()=> {
                         new Notify().Render( "已取消对 Dropbox 的授权。" );
                         this.setState({ secret: storage.secret });
@@ -96,7 +96,7 @@ export default class Auth extends React.Component {
                         { this.state.secret.pocket.access_token && 
                         <div ref="pocket_tags" style={{ "width": "60%" }}>
                             <TextField
-                                placeholder="请填入Pocket 标签，默认为 simpread ;每个标签用小写, 分割。" 
+                                placeholder="请填入 Pocket 标签，默认为 simpread 每个标签用小写, 分割。" 
                                 value={ this.state.secret.pocket.tags }
                                 onChange={ (evt)=>this.save( "pocket", evt.target.value ) }
                             />
