@@ -285,8 +285,9 @@ class Pocket {
 
 class Linnk {
 
-    constructor( access_token, username, password ) {
+    constructor( access_token, group_id, username, password ) {
         this.access_token = access_token;
+        this.group_id     = group_id;
         this.username     = username;
         this.password     = password;
     }
@@ -299,6 +300,10 @@ class Linnk {
             "-1005": "登录失效，请重新登录。",
             "-1006": "验证失效，请重新登录。",
         }
+    }
+
+    get tags() {
+        return "simpread";
     }
 
     Login( username, password, callback ) {
@@ -317,7 +322,27 @@ class Linnk {
             console.error( jqXHR, textStatus, error )
             callback( undefined, error );
         });
+    }
 
+    Add( url, title, callback ) {
+        const data = {
+            groupId  : this.group_id,
+            targetURL: url,
+            title,
+            tagsStr  : this.tags,
+        };
+
+        $.ajax({
+            url     : "https://linnk.net/a/api/bookmark/new",
+            type    : "POST",
+            headers : { Authorization: this.access_token },
+            data,
+        }).done( ( result, textStatus, jqXHR ) => {
+            callback( JSON.parse(result), undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
     }
 }
 
