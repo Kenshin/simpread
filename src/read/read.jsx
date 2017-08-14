@@ -165,6 +165,7 @@ class Read extends React.Component {
                 storage.Safe( ()=> {
                     if ( storage.secret.pocket.access_token ) {
                         exp.pocket.access_token = storage.secret.pocket.access_token;
+                        exp.pocket.Settags( storage.secret.pocket.tags );
                         exp.pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
                             !error && new Notify().Render( "已成功保存到 Pocket！" );
                             error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
