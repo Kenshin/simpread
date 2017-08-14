@@ -202,7 +202,7 @@ class Pocket {
             return "simpread";
         }
 
-        get header () {
+        get header() {
             return {
                 "content-type": "application/x-www-form-urlencoded",
                 "X-Accept"    : "application/json"
