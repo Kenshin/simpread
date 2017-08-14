@@ -13,6 +13,14 @@ export default class Auth extends React.Component {
         secret : undefined
     }
 
+    clear( id ) {
+        Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
+        storage.Safe( ()=> {
+            new Notify().Render( `已取消对 ${id.replace( /\S/i, $0=>$0.toUpperCase() )} 的授权。` );
+            this.setState({ secret: storage.secret });
+        }, storage.secret );
+    }
+
     onChange( state, value ) {
         const dbx = exp.dropbox;
         switch ( state ) {
@@ -29,11 +37,7 @@ export default class Auth extends React.Component {
                         new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
                     });
                 } else {
-                    Object.keys( storage.secret.dropbox ).forEach( item => storage.secret.dropbox[item] = "" );
-                    storage.Safe( ()=> {
-                        new Notify().Render( "已取消对 Dropbox 的授权。" );
-                        this.setState({ secret: storage.secret });
-                    }, storage.secret );
+                    this.clear( "dropbox" );
                 }
                 break;
             case "pocket":
@@ -54,11 +58,7 @@ export default class Auth extends React.Component {
                     });
                 }
                 else {
-                    Object.keys( storage.secret.pocket ).forEach( item => storage.secret.pocket[item] = "" );
-                    storage.Safe( ()=> {
-                        new Notify().Render( "已取消对 Dropbox 的授权。" );
-                        this.setState({ secret: storage.secret });
-                    }, storage.secret );
+                    this.clear( "pocket" );
                 }
                 $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
                 break;
