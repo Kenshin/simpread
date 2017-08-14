@@ -202,22 +202,28 @@ class Pocket {
             return "simpread";
         }
 
+        get header () {
+            return {
+                "content-type": "application/x-www-form-urlencoded",
+                "X-Accept"    : "application/json"
+            }
+        }
+
         Accesstoken() {
             defer_pocket.resolve( "token_success" );
         }
 
         Request( callback ) {
-            const consumer = this.consumer_key,
-                  redirect = this.redirect_uri;
-    
+            const data = {
+                consumer_key: this.consumer_key,
+                redirect_uri: this.redirect_uri,
+            };
+
             $.ajax({
                 url     : "https://getpocket.com/v3/oauth/request",
                 type    : "POST",
-                headers : {
-                    "content-type": "application/x-www-form-urlencoded",
-                    "X-Accept"    : "application/json"
-                },
-                data    : `consumer_key=${consumer}&redirect_uri=${redirect}`,
+                headers : this.header,
+                data,
             }).done( ( data, textStatus, jqXHR ) => {
                 callback( data, textStatus == "success" ? "" : textStatus );
             }).fail( ( jqXHR, textStatus, error ) => {
@@ -234,17 +240,17 @@ class Pocket {
         }
 
         Auth( callback ) {
-            const consumer = this.consumer_key,
-                  redirect = this.redirect_uri;
+            const data = {
+                consumer_key: this.consumer_key,
+                code        : this.code,
+                redirect_uri: this.redirect_uri,
+            };
 
             $.ajax({
                 url     : "https://getpocket.com/v3/oauth/authorize",
                 type    : "POST",
-                headers : {
-                    "content-type": "application/x-www-form-urlencoded",
-                    "X-Accept"    : "application/json"
-                },
-                data    : `consumer_key=${consumer}&code=${this.code}&redirect_uri=${redirect}`,
+                headers : this.header,
+                data,
             }).done( ( data, textStatus, jqXHR ) => {
                 callback( data, undefined );
             }).fail( ( jqXHR, textStatus, error ) => {
@@ -265,10 +271,7 @@ class Pocket {
             $.ajax({
                 url     : "https://getpocket.com/v3/add",
                 type    : "POST",
-                headers : {
-                    "content-type": "application/x-www-form-urlencoded",
-                    "X-Accept"    : "application/json"
-                },
+                headers : this.header,
                 data,
             }).done( ( data, textStatus, jqXHR ) => {
                 callback( data, undefined );
