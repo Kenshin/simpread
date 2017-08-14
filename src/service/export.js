@@ -189,7 +189,7 @@ class Pocket {
             this.code         = code;
             this.tags         = tags;
         }
-    
+
         get consumer_key() {
             return "69741-d75561b7a9a96a511f36552e";
         }
