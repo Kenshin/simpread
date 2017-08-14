@@ -111,12 +111,13 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
     if ( changeInfo.status == "complete" ) {
         console.log( "background tabs Listener:update", tabId, changeInfo, tab );
 
-        if ( tab.url.includes( "http://ksria.com/simpread/#access_token=" ) || tab.url.startsWith( "http://ksria.com/simpread/auth.html" )) {
-            const id = tab.url.replace( "http://ksria.com/simpread/auth.html?id=", "" );
+        if ( tab.url.startsWith( "http://ksria.com/simpread/auth.html" )) {
+            const url = tab.url.replace( "http://ksria.com/simpread/auth.html?id=", "" ),
+                  id  = url.includes( "#" ) ? url.substr( 0, url.search( /\S#/ ) + 1 ) : url ;
             browser.tabs.query( {}, tabs => {
                 const opts = tabs.find( tab => tab.url.includes( browser.extension.getURL( "options/options.html" ) ));
                 if ( opts ) {
-                    browser.tabs.sendMessage( opts.id, msg.Add( msg.MESSAGE_ACTION.dbx_redirect_uri, { uri: tab.url, id } ));
+                    browser.tabs.sendMessage( opts.id, msg.Add( msg.MESSAGE_ACTION.redirect_uri, { uri: tab.url, id } ));
                     chrome.tabs.remove( tabId );
                 }
             });
