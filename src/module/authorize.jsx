@@ -5,6 +5,7 @@ import * as exp  from 'export';
 
 import Notify    from 'notify';
 import Switch    from 'switch';
+import TextField from 'textfield';
 
 export default class Auth extends React.Component {
 
@@ -41,28 +42,33 @@ export default class Auth extends React.Component {
                         exp.pocket.Redirect( result.code ).done( () => {
                             exp.pocket.Auth( ( result, error ) => {
                                 storage.secret.pocket.access_token = result.access_token;
-                                storage.secret.pocket.username     = result.username;
                                 storage.Safe( ()=> {
                                     new Notify().Render( "已成功授权 Pocket 。" );
                                     this.setState({ secret: storage.secret });
                                 }, storage.secret );
-                                    });
+                            });
                         }).fail( error => {
                             console.error( error )
                             new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
                         });
                     });
-                        
+
                 }
                 else {
-                    storage.secret.pocket.access_token = "";
+                    Object.keys( storage.secret.pocket ).forEach( item => storage.secret.pocket[item] = "" );
                     storage.Safe( ()=> {
                         new Notify().Render( "已取消对 Dropbox 的授权。" );
                         this.setState({ secret: storage.secret });
                     }, storage.secret );
                 }
+                $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
                 break;
         }
+    }
+
+    save( state, value ) {
+        state == "pocket" && ( storage.secret.pocket.tags = value );
+        storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
 
     componentDidMount() {
@@ -74,6 +80,7 @@ export default class Auth extends React.Component {
         let auth;
 
         if ( this.state.secret ) {
+
             auth = <div>
                         <Switch width="100%" checked={ this.state.secret.dropbox.access_token != "" ? true : false }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
@@ -85,6 +92,15 @@ export default class Auth extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label={ this.state.secret.pocket.access_token ? "已授权 Pocket，是否取消授权？" : "是否连接并授权 Pocket ？" }
                             onChange={ (s)=>this.onChange( "pocket", s ) } />
+
+                        { this.state.secret.pocket.access_token && 
+                        <div ref="pocket_tags" style={{ "width": "60%" }}>
+                            <TextField
+                                placeholder="请填入Pocket 标签，默认为 simpread ;每个标签用小写, 分割。" 
+                                value={ this.state.secret.pocket.tags }
+                                onChange={ (evt)=>this.save( "pocket", evt.target.value ) }
+                            />
+                        </div> }
 
                     </div>;
         } 
