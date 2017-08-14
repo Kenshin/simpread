@@ -82,9 +82,10 @@ export default class Auth extends React.Component {
                         if ( error ) {
                             new Notify().Render( 2, "获取 Linnk 授权失败，请重新获取。" );
                         } else {
-                            console.log( result.code )
                             if ( result.code == 200 ) {
                                 storage.secret.linnk.access_token = result.token;
+                                // test code
+                                storage.secret.linnk.group_id = "ff8080815d5829bf015de0181ca02397";
                                 storage.Safe( ()=> {
                                     new Notify().Render( "已成功授权 Linnk 。" );
                                     this.setState({ secret: storage.secret, linnk: false });
