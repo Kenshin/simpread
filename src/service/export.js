@@ -72,7 +72,7 @@ class Dropbox {
     }
 
     get redirect_uri() {
-        return "https://kenshin.github.io/simpread/";
+        return "https://kenshin.github.io/simpread/auth.html?id=dropbox";
     }
 
     get config_name() {
