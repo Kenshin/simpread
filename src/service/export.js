@@ -184,9 +184,8 @@ let defer_pocket = $.Deferred();
  */
 class Pocket {
 
-        constructor( access_token, username, code, tags ) {
+        constructor( access_token, code, tags ) {
             this.access_token = access_token;
-            this.username     = username;
             this.code         = code;
             this.tags         = tags;
         }
