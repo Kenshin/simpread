@@ -184,102 +184,102 @@ let defer_pocket = $.Deferred();
  */
 class Pocket {
 
-        constructor( access_token, code, tags ) {
-            this.access_token = access_token;
-            this.code         = code;
-            this.tags         = tags;
+    constructor( access_token, code, tags ) {
+        this.access_token = access_token;
+        this.code         = code;
+        this.tags         = tags;
+    }
+
+    get consumer_key() {
+        return "69741-d75561b7a9a96a511f36552e";
+    }
+
+    get redirect_uri() {
+        return "http://ksria.com/simpread/auth.html?id=pocket";
+    }
+
+    get header() {
+        return {
+            "content-type": "application/x-www-form-urlencoded",
+            "X-Accept"    : "application/json"
         }
+    }
 
-        get consumer_key() {
-            return "69741-d75561b7a9a96a511f36552e";
-        }
+    Settags( value ) {
+        this.tags = value ? value : "simpread";
+    }
 
-        get redirect_uri() {
-            return "http://ksria.com/simpread/auth.html?id=pocket";
-        }
+    Accesstoken() {
+        defer_pocket.resolve( "token_success" );
+    }
 
-        get header() {
-            return {
-                "content-type": "application/x-www-form-urlencoded",
-                "X-Accept"    : "application/json"
-            }
-        }
+    Request( callback ) {
+        const data = {
+            consumer_key: this.consumer_key,
+            redirect_uri: this.redirect_uri,
+        };
 
-        Settags( value ) {
-            this.tags = value ? value : "simpread";
-        }
+        $.ajax({
+            url     : "https://getpocket.com/v3/oauth/request",
+            type    : "POST",
+            headers : this.header,
+            data,
+        }).done( ( data, textStatus, jqXHR ) => {
+            callback( data, textStatus == "success" ? "" : textStatus );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
 
-        Accesstoken() {
-            defer_pocket.resolve( "token_success" );
-        }
+    Redirect( code ) {
+        this.code = code;
+        const url = `https://getpocket.com/auth/authorize?request_token=${code}&redirect_uri=${this.redirect_uri}`;
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+        return this;
+    }
 
-        Request( callback ) {
-            const data = {
-                consumer_key: this.consumer_key,
-                redirect_uri: this.redirect_uri,
-            };
+    Auth( callback ) {
+        const data = {
+            consumer_key: this.consumer_key,
+            code        : this.code,
+            redirect_uri: this.redirect_uri,
+        };
 
-            $.ajax({
-                url     : "https://getpocket.com/v3/oauth/request",
-                type    : "POST",
-                headers : this.header,
-                data,
-            }).done( ( data, textStatus, jqXHR ) => {
-                callback( data, textStatus == "success" ? "" : textStatus );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error )
-                callback( undefined, error );
-            });
-        }
+        $.ajax({
+            url     : "https://getpocket.com/v3/oauth/authorize",
+            type    : "POST",
+            headers : this.header,
+            data,
+        }).done( ( data, textStatus, jqXHR ) => {
+            callback( data, undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
 
-        Redirect( code ) {
-            this.code = code;
-            const url = `https://getpocket.com/auth/authorize?request_token=${code}&redirect_uri=${this.redirect_uri}`;
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-            return this;
-        }
+    Add( url, title, callback ) {
+        const data = {
+            consumer_key: this.consumer_key,
+            access_token: this.access_token,
+            url,
+            title,
+            tags: this.tags
+        };
 
-        Auth( callback ) {
-            const data = {
-                consumer_key: this.consumer_key,
-                code        : this.code,
-                redirect_uri: this.redirect_uri,
-            };
-
-            $.ajax({
-                url     : "https://getpocket.com/v3/oauth/authorize",
-                type    : "POST",
-                headers : this.header,
-                data,
-            }).done( ( data, textStatus, jqXHR ) => {
-                callback( data, undefined );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error )
-                callback( undefined, error );
-            });
-        }
-
-        Add( url, title, callback ) {
-            const data = {
-                consumer_key: this.consumer_key,
-                access_token: this.access_token,
-                url,
-                title,
-                tags: this.tags
-            };
-
-            $.ajax({
-                url     : "https://getpocket.com/v3/add",
-                type    : "POST",
-                headers : this.header,
-                data,
-            }).done( ( data, textStatus, jqXHR ) => {
-                callback( data, undefined );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error )
-                callback( undefined, error );
-            });
-        }
+        $.ajax({
+            url     : "https://getpocket.com/v3/add",
+            type    : "POST",
+            headers : this.header,
+            data,
+        }).done( ( data, textStatus, jqXHR ) => {
+            callback( data, undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
 
     }
 
