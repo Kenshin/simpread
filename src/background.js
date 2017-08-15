@@ -113,7 +113,7 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
 
         if ( tab.url.startsWith( "http://ksria.com/simpread/auth.html" )) {
             const url = tab.url.replace( "http://ksria.com/simpread/auth.html?id=", "" ),
-                  id  = url.includes( "#" ) ? url.substr( 0, url.search( /\S#/ ) + 1 ) : url ;
+                  id  = url.includes( "#" ) || url.includes( "&" ) ? url.substr( 0, url.search( /\S(#|&)/ ) + 1 ) : url ;
             browser.tabs.query( {}, tabs => {
                 const opts = tabs.find( tab => tab.url.includes( browser.extension.getURL( "options/options.html" ) ));
                 if ( opts ) {
