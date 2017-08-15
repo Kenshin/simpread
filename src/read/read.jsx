@@ -199,6 +199,9 @@ class Read extends React.Component {
                     }
                 });
                 break;
+            case "yinxiang":
+                console.log( "adfasdf" )
+                break;
         }
     }
 

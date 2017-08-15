@@ -116,6 +116,11 @@ const readItems = {
                 "icon" : ss.IconPath("linnk_icon"),
                 "color": "#00BCD4",
             },
+            "yinxiang" : {
+                "name" : "保存到 印象笔记",
+                "icon" : ss.IconPath("yinxiang_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "share" : {
