@@ -87,7 +87,7 @@ export default class Auth extends React.Component {
                                 storage.secret.linnk.access_token = result.token;
                                 exp.linnk.Groups( result => {
                                     if ( result.code == 200 ) {
-                                        const obj = exp.linnk.Getgroup( "", result.data );
+                                        const obj = exp.linnk.GetGroup( "", result.data );
                                         storage.secret.linnk.group_name = obj.groupName;
                                         storage.Safe( ()=> {
                                             new Notify().Render( "已成功授权 Linnk 。" );

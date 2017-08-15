@@ -358,11 +358,11 @@ class Linnk {
         });
     }
 
-    Getgroup( name, target ) {
+    GetGroup( name, target ) {
         return target.find( obj => obj.groupName == name );
     }
 
-    Newgroup( name, callback ) {
+    NewGroup( name, callback ) {
         $.ajax({
             url     : "https://linnk.net/a/api/group/new",
             type    : "POST",
@@ -379,8 +379,8 @@ class Linnk {
     GetSafeGroup( name, callback ) {
         this.Groups( result => {
             if ( result.code == 200 ) {
-                const group = this.Getgroup( name, result.data );
-                !group && this.Newgroup( name, callback );
+                const group = this.GetGroup( name, result.data );
+                !group && this.NewGroup( name, callback );
                 group  && callback({ data: group, code: 200 }, undefined );
             } else {
                 callback( undefined, result.code );
