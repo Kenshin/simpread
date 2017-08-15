@@ -83,13 +83,21 @@ export default class Auth extends React.Component {
                             new Notify().Render( 2, "获取 Linnk 授权失败，请重新获取。" );
                         } else {
                             if ( result.code == 200 ) {
+                                exp.linnk.access_token            = result.token;
                                 storage.secret.linnk.access_token = result.token;
-                                // test code
-                                storage.secret.linnk.group_id = "ff8080815d5829bf015de0181ca02397";
-                                storage.Safe( ()=> {
-                                    new Notify().Render( "已成功授权 Linnk 。" );
-                                    this.setState({ secret: storage.secret, linnk: false });
-                                }, storage.secret );
+                                exp.linnk.Groups( result => {
+                                    if ( result.code == 200 ) {
+                                        const obj = exp.linnk.Getgroup( "", result.data );
+                                        storage.secret.linnk.group_name = obj.groupName;
+                                        storage.Safe( ()=> {
+                                            new Notify().Render( "已成功授权 Linnk 。" );
+                                            this.setState({ secret: storage.secret, linnk: false });
+                                        }, storage.secret );
+                                    } else {
+                                        const msg = exp.linnk.error_code[result.code];
+                                        new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
+                                    }
+                                });
                             } else {
                                 const msg = exp.linnk.error_code[result.code];
                                 new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
@@ -106,7 +114,8 @@ export default class Auth extends React.Component {
     }
 
     save( state, value ) {
-        state == "pocket" && ( storage.secret.pocket.tags = value );
+        state == "pocket" && ( storage.secret.pocket.tags      = value );
+        state == "linnk"  && ( storage.secret.linnk.group_name = value );
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
 
@@ -148,6 +157,15 @@ export default class Auth extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label={ this.state.secret.linnk.access_token ? "已授权 Linnk，是否取消授权？" : "是否连接并授权 Linnk ？" }
                             onChange={ (s)=>this.onChange( "linnk", s ) } />
+
+                        { this.state.secret.linnk.access_token && 
+                            <div style={{ "width": "60%" }}>
+                                <TextField
+                                    value={ this.state.secret.linnk.group_name }
+                                    placeholder="请填入 Linnk 收藏夹名称，默认保存到 收件箱。" 
+                                    onChange={ (evt)=>this.save( "linnk", evt.target.value ) }
+                                />
+                            </div> }
 
                         { this.state.linnk && 
                         <div ref="linnk">
