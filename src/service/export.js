@@ -344,6 +344,23 @@ class Linnk {
             callback( undefined, error );
         });
     }
+
+    Groups( callback ) {
+        $.ajax({
+            url     : "https://linnk.net/a/api/group/my",
+            type    : "GET",
+            headers : { Authorization: this.access_token },
+        }).done( ( result, textStatus, jqXHR ) => {
+            callback( JSON.parse(result), undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
+
+    Getgroup( name, target ) {
+        return target.find( obj => obj.groupName == name );
+    }
 }
 
 const dropbox = new Dropbox();
