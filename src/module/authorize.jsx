@@ -114,8 +114,8 @@ export default class Auth extends React.Component {
     }
 
     save( state, value ) {
-        state == "pocket" && ( storage.secret.pocket.tags      = value );
-        state == "linnk"  && ( storage.secret.linnk.group_name = value );
+        state == "pocket" && ( storage.secret.pocket.tags      = value.trim() );
+        state == "linnk"  && ( storage.secret.linnk.group_name = value.trim() );
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
 

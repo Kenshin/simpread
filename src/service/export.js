@@ -377,7 +377,6 @@ class Linnk {
     }
 
     GetSafeGroup( name, callback ) {
-        name = name.trim();
         this.Groups( result => {
             if ( result.code == 200 ) {
                 const group = this.Getgroup( name, result.data );
