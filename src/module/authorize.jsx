@@ -30,7 +30,7 @@ export default class Auth extends React.Component {
         }, storage.secret );
     }
 
-    onChange( state, value ) {
+    onChange( state, value, flag ) {
         const dbx = exp.dropbox;
         switch ( state ) {
             case "dropbox":
@@ -73,8 +73,8 @@ export default class Auth extends React.Component {
                 $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
                 break;
             case "linnk":
-                if ( !storage.secret.linnk.access_token && !this.state.linnk ) {
-                    this.setState({ linnk: true });
+                if ( !flag && !storage.secret.linnk.access_token ) {
+                    this.setState({ linnk: !this.state.linnk });
                     return;
                 }
                 if ( value ) {
@@ -96,8 +96,9 @@ export default class Auth extends React.Component {
                             }
                         }
                     })
-                    
                 } else {
+                    this.props.linnk.username = "";
+                    this.props.linnk.password = "";
                     this.clear( "linnk" );
                 }
                 break;
@@ -165,7 +166,7 @@ export default class Auth extends React.Component {
                                 text="登录 Linnk 并授权"
                                 color="#fff" backgroundColor="#3F51B5"
                                 waves="md-waves-effect md-waves-button"
-                                onClick={ (s)=>this.onChange( "linnk", s ) } />
+                                onClick={ (s)=>this.onChange( "linnk", s, "login" ) } />
                         </div> }
 
                     </div>;
