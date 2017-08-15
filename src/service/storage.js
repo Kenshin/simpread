@@ -134,7 +134,10 @@ let current  = {},
         "linnk"   : {
             access_token  : "",
             "group_name"  : "",
-        }
+        },
+        "yinxiang" : {
+            access_token  : "",
+        },
     },
     stcode = -1;
 
