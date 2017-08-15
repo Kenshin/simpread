@@ -175,6 +175,7 @@ export default class Auth extends React.Component {
                                     onChange={ (evt)=>this.linnkOnChange( "username", evt.target.value ) }
                                 />
                                 <TextField
+                                    password={true}
                                     placeholder="请填入 Linnk 密码，简悦不会记录你的密码。" 
                                     onChange={ (evt)=>this.linnkOnChange( "password", evt.target.value ) }
                                 />
