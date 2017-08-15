@@ -285,11 +285,9 @@ class Pocket {
 
 class Linnk {
 
-    constructor( access_token, group_id, username, password ) {
+    constructor( access_token, group_id ) {
         this.access_token = access_token;
         this.group_id     = group_id;
-        this.username     = username;
-        this.password     = password;
     }
 
     get error_code() {
