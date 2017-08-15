@@ -361,6 +361,33 @@ class Linnk {
     Getgroup( name, target ) {
         return target.find( obj => obj.groupName == name );
     }
+
+    Newgroup( name, callback ) {
+        $.ajax({
+            url     : "https://linnk.net/a/api/group/new",
+            type    : "POST",
+            headers : { Authorization: this.access_token },
+            data    : { groupName: name },
+        }).done( ( result, textStatus, jqXHR ) => {
+            callback( JSON.parse(result), undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
+
+    GetSafeGroup( name, callback ) {
+        name = name.trim();
+        this.Groups( result => {
+            if ( result.code == 200 ) {
+                const group = this.Getgroup( name, result.data );
+                !group && this.Newgroup( name, callback );
+                group  && callback({ data: group, code: 200 }, undefined );
+            } else {
+                callback( undefined, result.code );
+            }
+        })
+    }
 }
 
 const dropbox = new Dropbox();
