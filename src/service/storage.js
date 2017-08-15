@@ -134,7 +134,6 @@ let current  = {},
         "linnk"   : {
             access_token  : "",
             "group_name"  : "",
-            "group_id"    : "",
         }
     },
     stcode = -1;
