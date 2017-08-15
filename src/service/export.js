@@ -387,11 +387,130 @@ class Linnk {
     }
 }
 
+class Evernote {
+
+    constructor() {
+        this.oauth_token    = "";
+        this.oauth_verifier = "";
+        this.env            = "sandbox"; // include: "sandbox" "yinxiang" "evernote"
+    }
+
+    get callback() {
+        return "http://ksria.com/simpread/auth.html?id=evernote";
+    }
+
+    get consumer_key() {
+        return "kenshin";
+    }
+
+    get consumer_secret() {
+        return "18ee551a10a0c323";
+    }
+
+    get host() {
+        switch ( this.env ) {
+            case "sandbox":
+                return "sandbox.evernote.com";
+            case "yinxiang":
+                return "app.yinxiang.com";
+            case "evernote":
+                return "www.evernote.com";
+        }
+    }
+
+    get nonce() {
+        return "HXB5W5D2xRZdLaWUlije1TXDgHCsXz81";
+    }
+
+    get signature_method() {
+        return "HMAC-SHA1";
+    }
+
+    get timestamp() {
+        return 1502784996;
+    }
+
+    get signature() {
+        return "blnDj%2F4Fjj%2FrUE6x63xA26vlbF0%3D";
+    }
+
+    get authorization() {
+        return `OAuth oauth_callback="${this.callback}",oauth_consumer_key="${this.consumer_key}",oauth_nonce="${this.nonce}",oauth_signature_method="${this.signature_method}",oauth_timestamp="${this.timestamp}",oauth_version="1.0",oauth_signature="${this.signature}"`;
+    }
+
+    get header() {
+        return {
+            "Authorization"  : this.authorization,
+            "Accept"         : "*/*",
+            "Content-Type"   : "application/x-www-form-urlencoded"
+        }
+    }
+
+    Accesstoken( url ) {
+        url.split( "&" ).forEach( item => {
+            if ( item.startsWith( "oauth_token=" ) ) {
+                this.oauth_token    = item.replace( "oauth_token=", "" );
+            }
+            if ( item.startsWith( "oauth_verifier=" ) ) {
+                this.oauth_verifier = item.replace( "oauth_verifier=", "" );
+            }
+        });
+        const new_url = `https://sandbox.evernote.com/oauth?oauth_consumer_key=${this.consumer_key}&oauth_token=${this.oauth_token}&oauth_verifier=${this.oauth_verifier}&oauth_nonce=${this.nonce}&auth_signature=${this.signature}&oauth_signature_method=${this.signature_method}&oauth_timestamp=${this.timestamp}&oauth_version=1.0`;
+        this.Auth( new_url );
+    }
+
+    Auth( url ) {
+        console.log( url )
+        const data = {
+            oauth_consumer_key: this.consumer_key,
+            auth_token: this.oauth_token,
+            oauth_verifier: this.oauth_consumer_key,
+            oauth_nonce: this.nonce,
+            auth_signature: this.signature,
+            oauth_signature_method: this.signature_method,
+            oauth_timestamp: this.timestamp,
+            oauth_version: 1.0
+        };
+        $.ajax({
+            url     : `https://${this.host}/oauth`,
+            type    : "GET",
+            data,
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( result, textStatus, jqXHR )
+            //callback( JSON.parse(result), undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            //callback( undefined, error );
+        });
+    }
+
+    RequestToken( callback ) {
+        $.ajax({
+            url     : `https://${this.host}/oauth`,
+            type    : "POST",
+            headers : this.header,
+        }).done( ( result, textStatus, jqXHR ) => {
+            const arr = result.split( "&" ).map( item => {
+                return { key: item.split( "=" )[0], value: item.split( "=" )[1] }
+            }),
+            obj = arr.find( item => item.key == "oauth_token" ),
+            url = `https://${this.host}/OAuth.action?oauth_token=${obj.value}`;
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            //callback( undefined, error );
+        });
+    }
+
+}
+
 const dropbox = new Dropbox();
 defer.promise( dropbox );
 
 const pocket = new Pocket();
 defer_pocket.promise( pocket );
+
+const evernote = new Evernote();
 
 const linnk = new Linnk();
 
@@ -403,4 +522,5 @@ export {
     dropbox,
     pocket,
     linnk,
+    evernote,
 }
