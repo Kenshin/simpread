@@ -496,10 +496,17 @@ async function commbeautify( $target ) {
 /**
  * Html conver to enml
  * 
- * @param {string} conver string 
+ * @param {string} conver string
  */
 function html2enml( str ) {
-    return str.replace( "<img", '<en-media type="image/jpeg"' );
+    return str//.replace( "<img", '<en-media type="image/jpeg hash="f03c1c2d96bc67eda02968c8b5af9008"' )
+              .replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
+              .replace( / style=[ \w="-:\/\/:#;]+/ig, "" )
+              .replace( /<img[ \w="-:\/\/]+>/ig, "" )
+              .replace( /<\/br>/ig, "" )
+              .replace( /<br>/ig, "<br></br>" )
+              .replace( /<p>/ig, "" )
+              .replace( /<\/p>/ig, "<br></br>" );
 }
 
 export { Render, Exist, Exit };
