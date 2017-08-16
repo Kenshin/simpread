@@ -200,8 +200,20 @@ class Read extends React.Component {
                 });
                 break;
             case "yinxiang":
-                console.log( "adfasdf" )
-                break;
+                storage.Safe( ()=> {
+                    if ( storage.secret.yinxiang.access_token ) {
+                        exp.evernote.access_token = storage.secret.yinxiang.access_token;
+                        exp.evernote.Add( this.props.wrapper.title.trim(), html2enml( this.props.wrapper.include ), ( result, error ) => {
+                            !error && new Notify().Render( "已成功保存到 印象笔记！" );
+                            error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                        });
+                    } else {
+                        new Notify().Render( "请先获取 印象笔记 的授权，才能使用此功能！", "授权", ()=>{
+                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                        });
+                    }
+                });
+            break;
         }
     }
 
@@ -479,6 +491,15 @@ async function commbeautify( $target ) {
     });
     $target.find( "pre" ).removeAttr( "class" );
     $target.find( "a" ).removeAttr( "style" );
+}
+
+/**
+ * Html conver to enml
+ * 
+ * @param {string} conver string 
+ */
+function html2enml( str ) {
+    return str.replace( "<img", '<en-media type="image/jpeg"' );
 }
 
 export { Render, Exist, Exit };
