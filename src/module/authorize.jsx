@@ -111,16 +111,31 @@ export default class Auth extends React.Component {
                 }
                 break;
             case "yinxiang":
-            if ( value ) {
-                new Notify().Render( "开始对 印象笔记 进行授权，请稍等..." );
-                exp.evernote.RequestToken( ( result, error ) => {
-                    console.log( "Asdfasdfasdfasdf", result, error )
-                });
-            }
-            else {
-                this.clear( "yinxiang" );
-            }
-            break;
+                if ( value ) {
+                    new Notify().Render( "开始对 印象笔记 进行授权，请稍等..." );
+                    //exp.evernote.evn = state;
+                    exp.evernote.RequestToken( ( result, error ) => {
+                        if ( error ) {
+                            console.error( error )
+                            new Notify().Render( 2, "获取 印象笔记 授权失败，请重新获取。" );
+                        } else {
+                            exp.evernote.Auth().done( result => {
+                                storage.secret[state].access_token = exp.evernote.access_token;
+                                storage.Safe( ()=> {
+                                    new Notify().Render( "已成功授权 印象笔记 。" );
+                                    this.setState({ secret: storage.secret, linnk: false });
+                                }, storage.secret );
+                            }).fail( error => {
+                                console.error( error )
+                                new Notify().Render( 2, "获取 印象笔记 授权失败，请重新获取。" );
+                            });
+                        }
+                    });
+                }
+                else {
+                    this.clear( "yinxiang" );
+                }
+                break;
         }
     }
 
