@@ -387,24 +387,15 @@ class Linnk {
     }
 }
 
+let defer_evernote = $.Deferred();
+
 class Evernote {
 
     constructor() {
-        this.oauth_token    = "";
+        this.token          = "";
+        this.token_secret   = ""
         this.oauth_verifier = "";
         this.env            = "sandbox"; // include: "sandbox" "yinxiang" "evernote"
-    }
-
-    get callback() {
-        return "http://ksria.com/simpread/auth.html?id=evernote";
-    }
-
-    get consumer_key() {
-        return "kenshin";
-    }
-
-    get consumer_secret() {
-        return "18ee551a10a0c323";
     }
 
     get host() {
@@ -416,6 +407,23 @@ class Evernote {
             case "evernote":
                 return "www.evernote.com";
         }
+    }
+
+    get server() {
+        return "localhost:3000";
+    }
+
+    /*
+    get callback() {
+        return "http://ksria.com/simpread/auth.html?id=evernote";
+    }
+
+    get consumer_key() {
+        return "kenshin";
+    }
+
+    get consumer_secret() {
+        return "18ee551a10a0c323";
     }
 
     get nonce() {
@@ -437,68 +445,98 @@ class Evernote {
     get authorization() {
         return `OAuth oauth_callback="${this.callback}",oauth_consumer_key="${this.consumer_key}",oauth_nonce="${this.nonce}",oauth_signature_method="${this.signature_method}",oauth_timestamp="${this.timestamp}",oauth_version="1.0",oauth_signature="${this.signature}"`;
     }
+    */
 
-    get header() {
-        return {
-            "Authorization"  : this.authorization,
-            "Accept"         : "*/*",
-            "Content-Type"   : "application/x-www-form-urlencoded"
-        }
+    //get header() {
+    //    return {
+    //        "Authorization"  : this.authorization,
+    //        "Accept"         : "*/*",
+    //        "Content-Type"   : "application/x-www-form-urlencoded"
+    //    }
+    //}
+
+    RequestToken( callback ) {
+        $.ajax({
+            url     : `http://${this.serv}/oauth`,
+            type    : "POST",
+            data    : {
+                sandbox: true,
+                china  : true,
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( result && result.code == 200 ) {
+                this.token        = result.data.token;
+                this.token_secret = result.data.token_secret;
+                const url = `https://${this.host}/OAuth.action?oauth_token=${this.token}`;
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+                callback( result, undefined );
+            } else {
+                // TO-DO
+            }
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+        return this;
     }
 
     Accesstoken( url ) {
         url.split( "&" ).forEach( item => {
             if ( item.startsWith( "oauth_token=" ) ) {
-                this.oauth_token    = item.replace( "oauth_token=", "" );
+                this.token          = item.replace( "oauth_token=", "" );
             }
             if ( item.startsWith( "oauth_verifier=" ) ) {
                 this.oauth_verifier = item.replace( "oauth_verifier=", "" );
             }
         });
-        const new_url = `https://sandbox.evernote.com/oauth?oauth_consumer_key=${this.consumer_key}&oauth_token=${this.oauth_token}&oauth_verifier=${this.oauth_verifier}&oauth_nonce=${this.nonce}&auth_signature=${this.signature}&oauth_signature_method=${this.signature_method}&oauth_timestamp=${this.timestamp}&oauth_version=1.0`;
-        this.Auth( new_url );
+        this.Auth();
     }
 
-    Auth( url ) {
-        console.log( url )
-        const data = {
-            oauth_consumer_key: this.consumer_key,
-            auth_token: this.oauth_token,
-            oauth_verifier: this.oauth_consumer_key,
-            oauth_nonce: this.nonce,
-            auth_signature: this.signature,
-            oauth_signature_method: this.signature_method,
-            oauth_timestamp: this.timestamp,
-            oauth_version: 1.0
-        };
+    Auth() {
         $.ajax({
-            url     : `https://${this.host}/oauth`,
-            type    : "GET",
-            data,
-        }).done( ( result, textStatus, jqXHR ) => {
-            console.log( result, textStatus, jqXHR )
-            //callback( JSON.parse(result), undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            //callback( undefined, error );
-        });
-    }
-
-    RequestToken( callback ) {
-        $.ajax({
-            url     : `https://${this.host}/oauth`,
+            url     : `http://${this.server}/token`,
             type    : "POST",
-            headers : this.header,
+            data    : {
+                sandbox: true,
+                china  : true,
+                token  : this.token,
+                token_secret  : this.token_secret,
+                oauth_verifier: this.oauth_verifier,
+            }
         }).done( ( result, textStatus, jqXHR ) => {
-            const arr = result.split( "&" ).map( item => {
-                return { key: item.split( "=" )[0], value: item.split( "=" )[1] }
-            }),
-            obj = arr.find( item => item.key == "oauth_token" ),
-            url = `https://${this.host}/OAuth.action?oauth_token=${obj.value}`;
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+            if ( result && result.code == 200 ) {
+                this.access_token = result.data.token;
+                defer_evernote.resolve( "token_success" );
+            } else if ( result && result.code == 401  ) {
+                // TO-DO
+            } else {
+                defer_evernote.reject( "token_failed" );
+            }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            //callback( undefined, error );
+            defer_evernote.reject( "token_failed" );
+        });
+        return this;
+    }
+
+    Add( title, content, callback ) {
+        $.ajax({
+            url     : `http://${this.server}/add`,
+            type    : "POST",
+            data    : {
+                sandbox: true,
+                china  : true,
+                token  : this.access_token,
+                title,
+                content,
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( "asdfasdfasdfasdf", result )
+            result && result.code == -1 &&  callback( undefined, result  );
+            result && result.code == 200 && callback( result, undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
         });
     }
 
@@ -510,9 +548,10 @@ defer.promise( dropbox );
 const pocket = new Pocket();
 defer_pocket.promise( pocket );
 
-const evernote = new Evernote();
-
 const linnk = new Linnk();
+
+const evernote = new Evernote();
+defer_evernote.promise( evernote );
 
 export {
     png      as PNG,
