@@ -503,6 +503,7 @@ function html2enml( str ) {
               .replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
               .replace( / style=[ \w="-:\/\/:#;]+/ig, "" )
               .replace( /<img[ \w="-:\/\/]+>/ig, "" )
+              .replace( /href="javascript:[\w()"]+/ig, "" )
               .replace( /<\/br>/ig, "" )
               .replace( /<br>/ig, "<br></br>" )
               .replace( /<p>/ig, "" )
