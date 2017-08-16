@@ -413,51 +413,9 @@ class Evernote {
         return "localhost:3000";
     }
 
-    /*
-    get callback() {
-        return "http://ksria.com/simpread/auth.html?id=evernote";
-    }
-
-    get consumer_key() {
-        return "kenshin";
-    }
-
-    get consumer_secret() {
-        return "18ee551a10a0c323";
-    }
-
-    get nonce() {
-        return "HXB5W5D2xRZdLaWUlije1TXDgHCsXz81";
-    }
-
-    get signature_method() {
-        return "HMAC-SHA1";
-    }
-
-    get timestamp() {
-        return 1502784996;
-    }
-
-    get signature() {
-        return "blnDj%2F4Fjj%2FrUE6x63xA26vlbF0%3D";
-    }
-
-    get authorization() {
-        return `OAuth oauth_callback="${this.callback}",oauth_consumer_key="${this.consumer_key}",oauth_nonce="${this.nonce}",oauth_signature_method="${this.signature_method}",oauth_timestamp="${this.timestamp}",oauth_version="1.0",oauth_signature="${this.signature}"`;
-    }
-    */
-
-    //get header() {
-    //    return {
-    //        "Authorization"  : this.authorization,
-    //        "Accept"         : "*/*",
-    //        "Content-Type"   : "application/x-www-form-urlencoded"
-    //    }
-    //}
-
     RequestToken( callback ) {
         $.ajax({
-            url     : `http://${this.serv}/oauth`,
+            url     : `http://${this.server}/oauth`,
             type    : "POST",
             data    : {
                 sandbox: true,
@@ -531,8 +489,8 @@ class Evernote {
                 content,
             }
         }).done( ( result, textStatus, jqXHR ) => {
-            console.log( "asdfasdfasdfasdf", result )
-            result && result.code == -1 &&  callback( undefined, result  );
+            console.log( "evernote add note result = ", result )
+            result && result.code == -1 &&  callback( undefined, result );
             result && result.code == 200 && callback( result, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
