@@ -349,9 +349,18 @@ function clone( target ) {
  * 
  * @return {string} convert string
  */
-function html2enml( $target, url ) {
+function html2enml( html, url ) {
+    let $target, str;
+
+    $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
+    $target = $( "#simpread-en" );
+    $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
+        console.log( item )
+    });
     $target.find( "figure,applet,base,basefont,bgsound,blink,body,button,dir,embed,fieldset,form,frame,frameset,head,html,iframe,ilayer,input,isindex,label,layer,legend,link,marquee,menu,meta,noframes,noscript,object,optgroup,option,param,plaintext,script,select,style,textarea,xml" ).remove();
-    let str = $target.html();
+    str = $target.html();
+    $target.remove();
+
     try {
         str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
         //.replace( "<img", '<en-media type="image/jpeg hash="f03c1c2d96bc67eda02968c8b5af9008"' )
