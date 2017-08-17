@@ -61,7 +61,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 break;
             case "dropbox":
                 exp.dropbox.access_token = request.value.uri;
+                break;
             case "evernote":
+            case "yinxiang":
                 exp.evernote.Accesstoken( request.value.uri );
             break;
         }
