@@ -410,12 +410,12 @@ class Evernote {
     }
 
     get server() {
-        return "localhost:3000";
+        return this.env == "sandbox" ? "http://localhost:3000" : "https://simpread.herokuapp.com" ;
     }
 
     RequestToken( callback ) {
         $.ajax({
-            url     : `http://${this.server}/oauth`,
+            url     : `${this.server}/oauth`,
             type    : "POST",
             data    : {
                 sandbox: true,
@@ -452,7 +452,7 @@ class Evernote {
 
     Auth() {
         $.ajax({
-            url     : `http://${this.server}/token`,
+            url     : `${this.server}/token`,
             type    : "POST",
             data    : {
                 sandbox: true,
@@ -479,7 +479,7 @@ class Evernote {
 
     Add( title, content, callback ) {
         $.ajax({
-            url     : `http://${this.server}/add`,
+            url     : `${this.server}/add`,
             type    : "POST",
             data    : {
                 sandbox: true,
