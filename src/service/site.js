@@ -351,14 +351,18 @@ function clone( target ) {
  */
 function html2enml( html, url ) {
     let $target, str;
-
+    const tags = [ "figure", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ];
+    
     $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
     $target = $( "#simpread-en" );
     $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         $( "<div>" ).attr( "style", `width: ${item.naturalWidth}px; height:${item.naturalHeight}px; background: url(${item.src})` )
         .replaceAll( $(item) );
     });
-    $target.find( "figure,applet,base,basefont,bgsound,blink,body,button,dir,embed,fieldset,form,frame,frameset,head,html,iframe,ilayer,input,isindex,label,layer,legend,link,marquee,menu,meta,noframes,noscript,object,optgroup,option,param,plaintext,script,select,style,textarea,xml" ).remove();
+    $target.find( tags.join( "," ) ).map( ( index, item ) => {
+        $( "<div>" ).html( $(item).html() ).replaceAll( $(item) );
+    });
+    $target.find( tags.join( "," ) ).remove();
     str = $target.html();
     $target.remove();
 
@@ -371,6 +375,8 @@ function html2enml( html, url ) {
                 .replace( /href="javascript:[\w()"]+/ig, "" )          // href="javascript:xxx"
                 .replace( /sr-blockquote/ig, "blockquote" )            // sr-blockquote to blockquote
                 .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )      // <p> || <p > || <p xxx="xxx">
+                .replace( /<figcaption[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" ) // <figcaption >
+                .replace( /<\/figcaption>/ig, "" )                     // </figcaption>
                 .replace( /<\/br>/ig, "" )                             // </br>
                 .replace( /<br>/ig, "<br></br>" )
                 .replace( /<\/p>/ig, "<br></br>" );
