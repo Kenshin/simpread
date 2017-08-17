@@ -353,17 +353,18 @@ function html2enml( $target, url ) {
     $target.find( "figure,applet,base,basefont,bgsound,blink,body,button,dir,embed,fieldset,form,frame,frameset,head,html,iframe,ilayer,input,isindex,label,layer,legend,link,marquee,menu,meta,noframes,noscript,object,optgroup,option,param,plaintext,script,select,style,textarea,xml" ).remove();
     let str = $target.html();
     try {
-        str = str//.replace( "<img", '<en-media type="image/jpeg hash="f03c1c2d96bc67eda02968c8b5af9008"' )
-        .replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
-        .replace( / style=[ \w="-:\/\/:#;]+/ig, "" )           // style="xxxx"
-        .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )              // <img>
-        .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+" /ig, "" )  // data="xxx" || data-xxx="xxx"
-        .replace( /href="javascript:[\w()"]+/ig, "" )          // href="javascript:xxx"
-        .replace( /sr-blockquote/ig, "blockquote" )            // sr-blockquote to blockquote
-        .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )      // <p> || <p > || <p xxx="xxx">
-        .replace( /<\/br>/ig, "" )                             // </br>
-        .replace( /<br>/ig, "<br></br>" )
-        .replace( /<\/p>/ig, "<br></br>" );
+        str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
+        //.replace( "<img", '<en-media type="image/jpeg hash="f03c1c2d96bc67eda02968c8b5af9008"' )
+        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
+                .replace( / style=[ \w="-:\/\/:#;]+/ig, "" )           // style="xxxx"
+                .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )              // <img>
+                .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+" /ig, "" )  // data="xxx" || data-xxx="xxx"
+                .replace( /href="javascript:[\w()"]+/ig, "" )          // href="javascript:xxx"
+                .replace( /sr-blockquote/ig, "blockquote" )            // sr-blockquote to blockquote
+                .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )      // <p> || <p > || <p xxx="xxx">
+                .replace( /<\/br>/ig, "" )                             // </br>
+                .replace( /<br>/ig, "<br></br>" )
+                .replace( /<\/p>/ig, "<br></br>" );
 
         console.log(str)
         return str;
