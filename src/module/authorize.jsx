@@ -113,7 +113,7 @@ export default class Auth extends React.Component {
             case "yinxiang":
                 if ( value ) {
                     new Notify().Render( "开始对 印象笔记 进行授权，请稍等..." );
-                    //exp.evernote.evn = state;
+                    exp.evernote.env = "sandbox";
                     exp.evernote.RequestToken( ( result, error ) => {
                         if ( error ) {
                             console.error( error )
