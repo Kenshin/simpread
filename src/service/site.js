@@ -369,15 +369,16 @@ function html2enml( html, url ) {
     try {
         str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
         str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
-                //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )         // style="xxxx"
-                .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )              // <img>
-                .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )  // data="xxx" || data-xxx="xxx"
-                .replace( /href="javascript:[\w()"]+/ig, "" )          // href="javascript:xxx"
-                .replace( /sr-blockquote/ig, "blockquote" )            // sr-blockquote to blockquote
-                .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )      // <p> || <p > || <p xxx="xxx">
+                //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
+                .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
+                .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                  // <img>
+                .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )   // data="xxx" || data-xxx="xxx"
+                .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
+                .replace( /sr-blockquote/ig, "blockquote" )                // sr-blockquote to blockquote
+                .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )          // <p> || <p > || <p xxx="xxx">
                 .replace( /<figcaption[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" ) // <figcaption >
-                .replace( /<\/figcaption>/ig, "" )                     // </figcaption>
-                .replace( /<\/br>/ig, "" )                             // </br>
+                .replace( /<\/figcaption>/ig, "" )                         // </figcaption>
+                .replace( /<\/br>/ig, "" )                                 // </br>
                 .replace( /<br>/ig, "<br></br>" )
                 .replace( /<\/p>/ig, "<br></br>" );
 
