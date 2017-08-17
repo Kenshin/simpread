@@ -341,10 +341,40 @@ function clone( target ) {
     return $.extend( true, {}, target );
 }
 
+/**
+ * Html convert to enml
+ * 
+ * @param  {string} convert string
+ * @param  {string} url
+ * 
+ * @return {string} convert string
+ */
+function html2enml( $target, url ) {
+    const str = $target.html();
+    try {
+        return str//.replace( "<img", '<en-media type="image/jpeg hash="f03c1c2d96bc67eda02968c8b5af9008"' )
+        .replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
+        .replace( / style=[ \w="-:\/\/:#;]+/ig, "" )
+        .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )
+        .replace( /data-origindate=[ \w="-:\/\/?!]+/ig, "" )
+        .replace( /href="javascript:[\w()"]+/ig, "" )
+        .replace( /<\/br>/ig, "" )
+        .replace( /sr-blockquote/ig, "blockquote" )
+        .replace( /<br>/ig, "<br></br>" )
+        .replace( /<p>/ig, "" )
+        .replace( /<\/p>/ig, "<br></br>" );
+
+    } catch( error ) {
+        return `<div>转换失败，原文地址 <a href="${url}" target="_blank">${url}</a></div>`
+    }
+
+}
+
 export {
     getURI         as GetURI,
     findSitebyURL  as Getsite,
     specbeautify   as Beautify,
     removeSpareTag as RemoveTag,
-    verify         as Verify
+    verify         as Verify,
+    html2enml      as HTML2ENML,
 }

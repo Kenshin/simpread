@@ -203,7 +203,7 @@ class Read extends React.Component {
                 storage.Safe( ()=> {
                     if ( storage.secret.yinxiang.access_token ) {
                         exp.evernote.access_token = storage.secret.yinxiang.access_token;
-                        exp.evernote.Add( this.props.wrapper.title.trim(), html2enml( this.props.wrapper.include ), ( result, error ) => {
+                        exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content"), window.location.url ), ( result, error ) => {
                             !error && new Notify().Render( "已成功保存到 印象笔记！" );
                             error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                         });
@@ -491,24 +491,6 @@ async function commbeautify( $target ) {
     });
     $target.find( "pre" ).removeAttr( "class" );
     $target.find( "a" ).removeAttr( "style" );
-}
-
-/**
- * Html conver to enml
- * 
- * @param {string} conver string
- */
-function html2enml( str ) {
-    return str//.replace( "<img", '<en-media type="image/jpeg hash="f03c1c2d96bc67eda02968c8b5af9008"' )
-              .replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
-              .replace( / style=[ \w="-:\/\/:#;]+/ig, "" )
-              .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )
-              .replace( /data-origindate=[ \w="-:\/\/?!]+/ig, "" )
-              .replace( /href="javascript:[\w()"]+/ig, "" )
-              .replace( /<\/br>/ig, "" )
-              .replace( /<br>/ig, "<br></br>" )
-              .replace( /<p>/ig, "" )
-              .replace( /<\/p>/ig, "<br></br>" );
 }
 
 export { Render, Exist, Exit };
