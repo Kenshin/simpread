@@ -204,7 +204,7 @@ class Read extends React.Component {
                     if ( storage.secret.yinxiang.access_token ) {
                         new Notify().Render( "开始转码并上传至 印象笔记，请稍等..." );
                         exp.evernote.access_token = storage.secret.yinxiang.access_token;
-                        exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content"), window.location.href ), ( result, error ) => {
+                        exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
                             !error && new Notify().Render( "已成功保存到 印象笔记！" );
                             error  && new Notify().Render( 2, "转码失败，请稍后重新再试。" );
                         });
