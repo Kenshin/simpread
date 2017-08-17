@@ -414,14 +414,27 @@ class Evernote {
         return "https://simpread.herokuapp.com";
     }
 
+    get sandbox() {
+        return this.env == "sandbox" ? true : false;
+    }
+
+    get china() {
+        return this.env != "evernote" ? true : false;
+    }
+
+    get headers() {
+        return {
+            sandbox: this.sandbox,
+            china  : this.china,
+            type   : this.env == "sandbox" ? "yinxiang" : this.env,
+        }
+    }
+
     RequestToken( callback ) {
         $.ajax({
             url     : `${this.server}/oauth`,
             type    : "POST",
-            data    : {
-                sandbox: true,
-                china  : true,
-            }
+            headers : this.headers,
         }).done( ( result, textStatus, jqXHR ) => {
             if ( result && result.code == 200 ) {
                 this.token        = result.data.token;
@@ -455,9 +468,8 @@ class Evernote {
         $.ajax({
             url     : `${this.server}/token`,
             type    : "POST",
+            headers : this.headers,
             data    : {
-                sandbox: true,
-                china  : true,
                 token  : this.token,
                 token_secret  : this.token_secret,
                 oauth_verifier: this.oauth_verifier,
@@ -482,9 +494,8 @@ class Evernote {
         $.ajax({
             url     : `${this.server}/add`,
             type    : "POST",
+            headers : this.headers,
             data    : {
-                sandbox: true,
-                china  : true,
                 token  : this.access_token,
                 title,
                 content,
