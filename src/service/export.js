@@ -454,12 +454,8 @@ class Evernote {
 
     Accesstoken( url ) {
         url.split( "&" ).forEach( item => {
-            if ( item.startsWith( "oauth_token=" ) ) {
-                this.token          = item.replace( "oauth_token=", "" );
-            }
-            if ( item.startsWith( "oauth_verifier=" ) ) {
-                this.oauth_verifier = item.replace( "oauth_verifier=", "" );
-            }
+            item.startsWith( "oauth_token="    ) && ( this.token = item.replace( "oauth_token=", "" ));
+            item.startsWith( "oauth_verifier=" ) && ( this.oauth_verifier = item.replace( "oauth_verifier=", "" ));
         });
         this.Auth();
     }
