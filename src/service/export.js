@@ -400,12 +400,10 @@ class Evernote {
     }
 
     get host() {
-        //return "sandbox.evernote.com";
-        switch ( this.env ) {
-            case "yinxiang":
-                return "app.yinxiang.com";
-            case "evernote":
-                return "www.evernote.com";
+        if ( this.sandbox ) {
+            return "sandbox.evernote.com";
+        } else {
+            return this.env == "yinxiang" ? "app.yinxiang.com" : "www.evernote.com";
         }
     }
 
