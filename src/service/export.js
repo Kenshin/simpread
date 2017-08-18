@@ -396,6 +396,7 @@ class Evernote {
         this.token_secret   = ""
         this.oauth_verifier = "";
         this.env            = ""; // include: "yinxiang" "evernote"
+        this.sandbox        = true;
     }
 
     get host() {
@@ -411,10 +412,6 @@ class Evernote {
     get server() {
         return this.sandbox ? "http://localhost:3000" : "https://simpread.herokuapp.com";
         //return "https://simpread.herokuapp.com";
-    }
-
-    get sandbox() {
-        return this.env == "sandbox" ? true : false;
     }
 
     get china() {
