@@ -395,6 +395,7 @@ class Evernote {
         this.token          = "";
         this.token_secret   = ""
         this.oauth_verifier = "";
+        this.access_token   = "";
         this.env            = ""; // include: "yinxiang" "evernote"
         this.sandbox        = true;
     }
@@ -426,6 +427,14 @@ class Evernote {
             china  : this.china,
             type   : this.env,
         }
+    }
+
+    New() {
+        this.token = "";
+        this.token_secret = "";
+        this.access_token = ""
+        this.oauth_verifier = "";
+        return this;
     }
 
     RequestToken( callback ) {
