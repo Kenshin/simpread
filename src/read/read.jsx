@@ -206,7 +206,7 @@ class Read extends React.Component {
                         exp.evernote.access_token = storage.secret.yinxiang.access_token;
                         exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
                             !error && new Notify().Render( "已成功保存到 印象笔记！" );
-                            error  && new Notify().Render( 2, "转码失败，请稍后重新再试。" );
+                            error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
                         });
                     } else {
                         new Notify().Render( "请先获取 印象笔记 的授权，才能使用此功能！", "授权", ()=>{
