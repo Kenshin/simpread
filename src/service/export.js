@@ -387,8 +387,6 @@ class Linnk {
     }
 }
 
-let defer_evernote = $.Deferred();
-
 class Evernote {
 
     constructor() {
@@ -430,9 +428,10 @@ class Evernote {
     }
 
     New() {
-        this.token = "";
-        this.token_secret = "";
-        this.access_token = ""
+        this.dtd            = $.Deferred();
+        this.token          = "";
+        this.token_secret   = "";
+        this.access_token   = ""
         this.oauth_verifier = "";
         return this;
     }
@@ -456,7 +455,6 @@ class Evernote {
             console.error( jqXHR, textStatus, error )
             callback( undefined, error );
         });
-        return this;
     }
 
     Accesstoken( url ) {
@@ -464,10 +462,10 @@ class Evernote {
             item.startsWith( "oauth_token="    ) && ( this.token = item.replace( "oauth_token=", "" ));
             item.startsWith( "oauth_verifier=" ) && ( this.oauth_verifier = item.replace( "oauth_verifier=", "" ));
         });
-        this.Auth();
+        this.oauth_verifier ? this.dtd.resolve() : this.dtd.reject( "oauth_verifier is null" );
     }
 
-    Auth() {
+    Auth( callback ) {
         $.ajax({
             url     : `${this.server}/token`,
             type    : "POST",
@@ -480,15 +478,15 @@ class Evernote {
         }).done( ( result, textStatus, jqXHR ) => {
             if ( result && result.code == 200 ) {
                 this.access_token = result.data.token;
-                defer_evernote.resolve( "token_success" );
-            } else if ( result && result.code == 401  ) {
-                // TO-DO
+                callback( result, undefined );
+            } else if ( result && result.code == 401 ) {
+                console.log( "result.code == 401" )
             } else {
-                defer_evernote.reject( "token_failed" );
+                callback( undefined, result );
             }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            defer_evernote.reject( "token_failed" );
+            callback( undefined, result );
         });
         return this;
     }
@@ -524,7 +522,6 @@ defer_pocket.promise( pocket );
 const linnk = new Linnk();
 
 const evernote = new Evernote();
-defer_evernote.promise( evernote );
 
 export {
     png      as PNG,
