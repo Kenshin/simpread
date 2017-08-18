@@ -46,7 +46,7 @@ export default class ReadCtlbar extends React.Component {
                 }
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
                 break;
-            case [ "exit", "setting", "save", "markdown", "png", "pdf", "dropbox", "pocket", "linnk", "yinxiang", "evernote" ].includes( type ):
+            case [ "exit", "setting", "save", "markdown", "png", "pdf", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote" ].includes( type ):
                 this.props.onAction && this.props.onAction( type );
                 break;
             /*

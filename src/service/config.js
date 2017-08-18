@@ -126,6 +126,11 @@ const readItems = {
                 "icon" : ss.IconPath("evernote_icon"),
                 "color": "#00BCD4",
             },
+            "onenote" : {
+                "name" : "保存到 Onenote",
+                "icon" : ss.IconPath("onenote_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "share" : {

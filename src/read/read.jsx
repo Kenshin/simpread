@@ -216,7 +216,9 @@ class Read extends React.Component {
                         });
                     }
                 });
-            break;
+                break;
+            case "onenote":
+                break
         }
     }
 
