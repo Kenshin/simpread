@@ -25,6 +25,7 @@ export default class Auth extends React.Component {
     clear( id ) {
         Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
         storage.Safe( ()=> {
+            id == "yinxiang" && ( id = "印象笔记" );
             new Notify().Render( `已取消对 ${id.replace( /\S/i, $0=>$0.toUpperCase() )} 的授权。` );
             this.setState({ secret: storage.secret });
         }, storage.secret );
