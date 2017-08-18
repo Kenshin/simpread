@@ -395,13 +395,12 @@ class Evernote {
         this.token          = "";
         this.token_secret   = ""
         this.oauth_verifier = "";
-        this.env            = "sandbox"; // include: "sandbox" "yinxiang" "evernote"
+        this.env            = ""; // include: "yinxiang" "evernote"
     }
 
     get host() {
+        //return "sandbox.evernote.com";
         switch ( this.env ) {
-            case "sandbox":
-                return "sandbox.evernote.com";
             case "yinxiang":
                 return "app.yinxiang.com";
             case "evernote":
@@ -410,8 +409,8 @@ class Evernote {
     }
 
     get server() {
-        //return this.env == "sandbox" ? "http://localhost:3000" : "https://simpread.herokuapp.com";
-        return "https://simpread.herokuapp.com";
+        return this.sandbox ? "http://localhost:3000" : "https://simpread.herokuapp.com";
+        //return "https://simpread.herokuapp.com";
     }
 
     get sandbox() {
@@ -422,11 +421,15 @@ class Evernote {
         return this.env != "evernote" ? true : false;
     }
 
+    get name() {
+        return this.env == "evernote" ? "Evernote" : "印象笔记";
+    }
+
     get headers() {
         return {
             sandbox: this.sandbox,
             china  : this.china,
-            type   : this.env == "sandbox" ? "yinxiang" : this.env,
+            type   : this.env,
         }
     }
 
