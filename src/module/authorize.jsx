@@ -111,29 +111,31 @@ export default class Auth extends React.Component {
                 }
                 break;
             case "yinxiang":
+            case "evernote":
                 if ( value ) {
-                    new Notify().Render( "开始对 印象笔记 进行授权，请稍等..." );
-                    exp.evernote.env = "sandbox";
+                    exp.evernote.env = state;
+                    const name       = exp.evernote.name;
+                    new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
                     exp.evernote.RequestToken( ( result, error ) => {
                         if ( error ) {
                             console.error( error )
-                            new Notify().Render( 2, "获取 印象笔记 授权失败，请重新获取。" );
+                            new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
                         } else {
                             exp.evernote.Auth().done( result => {
                                 storage.secret[state].access_token = exp.evernote.access_token;
                                 storage.Safe( ()=> {
-                                    new Notify().Render( "已成功授权 印象笔记 。" );
+                                    new Notify().Render( `已成功授权 ${name} 。` );
                                     this.setState({ secret: storage.secret, linnk: false });
                                 }, storage.secret );
                             }).fail( error => {
                                 console.error( error )
-                                new Notify().Render( 2, "获取 印象笔记 授权失败，请重新获取。" );
+                                new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
                             });
                         }
                     });
                 }
                 else {
-                    this.clear( "yinxiang" );
+                    this.clear( state );
                 }
                 break;
         }
@@ -218,6 +220,11 @@ export default class Auth extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label={ this.state.secret.pocket.access_token ? "已授权 印象笔记，是否取消授权？" : "是否连接并授权 印象笔记 ？" }
                             onChange={ (s)=>this.onChange( "yinxiang", s ) } />
+
+                        <Switch width="100%" checked={ this.state.secret.evernote.access_token != "" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.pocket.access_token ? "已授权 Evernote，是否取消授权？" : "是否连接并授权 Evernote ？" }
+                            onChange={ (s)=>this.onChange( "evernote", s ) } />
 
                     </div>;
         }
