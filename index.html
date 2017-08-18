@@ -1,206 +1,205 @@
-﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <title>JavaScript SPA Guided Setup</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Kenshin"/>
+
+    <meta name="description" content="简悦 ( SimpRead ) - 让你瞬间进入沉浸式阅读的 Chrome extension" />
+    <meta name="keywords" content="Chrome extension, Chrome 扩展, 阅读模式, 沉浸式阅读, read mode, reading mode, reader view"/>
+
+    <meta name="thumbnail" content="http://ojec5ddd5.bkt.clouddn.com/introduce.png"/>
+
+    <meta property="og:title" content="简悦 ( SimpRead ) - 让你瞬间进入沉浸式阅读的 Chrome extension"/>
+    <meta property="og:type" content="website">
+    <meta property="og:local" content="zh_CN"/>
+    <meta property="og:url" content="http://ksria.com/simpread"/>
+
+    <meta property="og:image" content="http://ojec5ddd5.bkt.clouddn.com/introduce.png"/>
+    <meta property="og:image:type" content="image/png"/>
+    <meta property="og:image:width" content="960"/>
+    <meta property="og:image:height" content="355"/>
+
+    <meta property="og:site_name" content="http://ksria.com/simpread"/>
+    <meta property="og:description" content="简悦 ( SimpRead ) - 让你瞬间进入沉浸式阅读的 Chrome extension"/>
+
+    <title>SimpRead 简悦 - 让你瞬间进入沉浸式阅读的 Chrome extension </title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="./bundle/style.css">
+
 </head>
-<body style="margin: 40px">
-    <button id="callGraphButton" type="button" class="btn btn-primary" onclick="callGraphAPI()">Call Microsoft Graph API</button>
-    <div id="errorMessage" class="text-danger"></div>
-    <div class="hidden">
-        <h3>Graph API Call Response</h3>
-        <pre class="well" id="graphResponse"></pre>
+<body>
+    <div class="top">
+        <a href="http://ksria.com/simpread" class="logo"><span></span></a>
+        <ul>
+            <li><a href="#feature">功能</a></li>
+            <li><a href="https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8" target="_blank">站点编辑器</a></li>
+            <li><a href="/simpread/gallery/">图赏</a></li>
+            <li><a href="./changelog.html">更新日志</a></li>
+            <li><a href="https://github.com/kenshin/simpread" target="_blank">源码</a></li>
+            <li><a href="https://github.com/kenshin/simpread/wiki" target="_blank">帮助</a></li>
+            <li><a href="http://kenshin.wang" target="_blank">关于</a></li>
+        </ul>
     </div>
-    <div class="hidden">
-        <h3>Access Token</h3>
-        <pre class="well" id="accessToken"></pre>
+    <div class="header">
+        <div class="title">简单阅读，愉悦心情。</div>
+        <div class="desc">简悦 - 让你瞬间进入沉浸式阅读的 Chrome 扩展</div>
+        <div class="download">
+            <a class="online" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll" target="_blank"><span>开始使用</span></a>&nbsp;&nbsp;&nbsp;
+            <span class="offline">或者，&nbsp;<a href="http://ksria.com/simpread/crx/1.0.1/simpread.crx">离线下载</a></span>
+        </div>
+        <div class="introduce">
+            <img src="./assets/images/introduce.png"></img>
+        </div>
     </div>
-    <div class="hidden">
-        <h3>ID Token Claims</h3>
-        <pre class="well" id="userInfo"></pre>
+    <div id="feature" class="main">
+        <div class="feature read">
+            <img src="./assets/images/read_mode.png" alt="">
+            <div class="intro">
+                <div class="title">阅读模式</div>
+                <div class="desc">
+                    逐一适配 <a href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">160+</a> 个网址；<br>
+                    自动提取&nbsp;标题，描述，正文，媒体 （ 图片 / 视频 ） 等资源；<br>
+                    自动生成符合中文阅读习惯的页面；<br>
+                    零干扰、沉浸式，适合深入阅读；<br>
+                </div>
+            </div>
+        </div>
+        <div class="feature focus">
+            <div class="intro">
+                <div class="title">聚焦模式</div>
+                <div class="desc">
+                    不改变当前页面的结构，仅仅高亮需要阅读的部分；<br>
+                    适合临时阅读 或者 未适配阅读模式的网站；<br>
+                </div>
+            </div>
+            <img src="./assets/images/focus_mode.png" alt="">
+        </div>
+        <div class="feature theme">
+            <img src="./assets/images/theme.png" alt="">
+            <div class="intro">
+                <div class="title">多种主题模式</div>
+                <div class="desc">
+                    <span>白练</span>&nbsp;<span>白磁</span>&nbsp;<span>卯之花色</span>&nbsp;<span>丁子色</span>
+                    <span>娟鼠</span>&nbsp;<span>月白</span>&nbsp;<span>百合</span>&nbsp;<span>紺鼠</span>&nbsp;<span>黒鸢</span>
+                </div>
+            </div>
+        </div>
+        <div class="feature custom">
+            <div class="intro">
+                <div class="title">定制化，可编程</div>
+                <div class="desc">
+                    <p>有不想显示的图片？没问题！页面任意元素，均可隐藏，可编程，支持：</p>
+                    <span>HTML 节点</span>&nbsp;<span>jQuery 语句</span>&nbsp;<span>正则表达式</span>&nbsp;<span>任意段落</span>
+                    <p>详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8" target="_blank">站点编辑器</a>；</p>
+                </div>
+            </div>
+            <img src="./assets/images/custom.png" alt="">
+        </div>
+        <div class="feature all">
+            <section>
+                <div class="only">
+                    <span class="icon style"></span>
+                    <div class="name">多种主题</div>
+                </div>
+                <div class="only">
+                    <span class="icon fontfamily"></span>
+                    <div class="name">字体样式</div>
+                </div>
+                <div class="only">
+                    <span class="icon fontsize"></span>
+                    <div class="name">字体大小</div>
+                </div>
+                <div class="only">
+                    <span class="icon layout"></span>
+                    <div class="name">灵活布局</div>
+                </div>
+                <div class="only">
+                    <span class="icon share"></span>
+                    <div class="name">分享</div>
+                </div>
+                <div class="only">
+                    <span class="icon shortcuts"></span>
+                    <div class="name">快捷键</div>
+                </div>
+                <div class="only">
+                    <span class="icon custom"></span>
+                    <div class="name">定制化</div>
+                </div>
+                <div class="only">
+                    <span class="icon opacity"></span>
+                    <div class="name">透明度</div>
+                </div>
+                <div class="only">
+                    <span class="icon sync"></span>
+                    <div class="name">同步</div>
+                </div>
+                <div class="only">
+                    <span class="icon import"></span>
+                    <div class="name">上传配置</div>
+                </div>
+                <div class="only">
+                    <span class="icon export"></span>
+                    <div class="name">下载配置</div>
+                </div>
+                <div class="only">
+                    <span class="icon clear"></span>
+                    <div class="name">清除</div>
+                </div>
+            </section>
+            <div class="title">更多功能，等你<a href="http://ojec5ddd5.bkt.clouddn.com/feature%201.0.1.png" target="_blank">发现！</a></div>
+        </div>
     </div>
-    <button id="signOutButton" type="button" class="btn btn-primary hidden" onclick="signOut()">Sign out</button>
-    <button id="newPage" type="button" class="btn btn-primary" onclick="newPage()">New page</button>
-
-    <script src="//secure.aadcdn.microsoftonline-p.com/lib/0.1.1/js/msal.min.js"></script>
-    <script type="text/javascript" src="msalconfig.js"></script>
-
-    <!-- The 'bluebird' and 'fetch' references below are required if you need to run this application on Internet Explorer -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-    var graphAPIMeEndpoint = "https://graph.microsoft.com/v1.0/me";
-    var graphAPIScopes = ["https://graph.microsoft.com/user.read"];
-
-    // Initialize application
-    var userAgentApplication = new Msal.UserAgentApplication(msalconfig.clientID);
-
-    // Set redirect URI
-    userAgentApplication.redirectUri = msalconfig.redirectUri;
-
-    displayUserInfo();
-
-    function displayUserInfo() {
-        var user = userAgentApplication.getUser();
-        if (user) {
-            // Display the user info
-            var userInfoElement = document.getElementById("userInfo");
-            userInfoElement.parentElement.classList.remove("hidden");
-            userInfoElement.innerHTML = JSON.stringify(user, null, 4);
-
-            // Show Sign-Out button
-            document.getElementById("signOutButton").classList.remove("hidden");
-        }
-    }
-
-    function callGraphAPI() {
-        if (userAgentApplication.getAllUsers().length === 0) {
-            userAgentApplication.loginPopup()
-                .then(function (token) {
-                    console.log(token);
-                    displayUserInfo();
-                    callGraphAPI();
-                }, function (error) {
-                    showError("login", error, document.getElementById("errorMessage"));
-                });
-        } else {
-            var responseElement = document.getElementById("graphResponse");
-            responseElement.parentElement.classList.remove("hidden");
-            responseElement.innerText = "Calling Graph ...";
-            callWebApiWithScope(graphAPIMeEndpoint,
-                graphAPIScopes,
-                responseElement,
-                document.getElementById("errorMessage"),
-                document.getElementById("accessToken"));
-        }
-    }
-
-    function callWebApiWithScope(endpoint, scope, responseElement, errorElement, showTokenElement) {
-        userAgentApplication.acquireTokenSilent(scope)
-            .then(function (token) {
-                callWebApiWithToken(endpoint, token, responseElement, errorElement, showTokenElement);
-            }, function (error) {
-                if (error.indexOf("interaction_required" !== -1)) {
-                    userAgentApplication.acquireTokenPopup(scope).then(function(token) {
-                            callWebApiWithToken(endpoint, token, responseElement, errorElement, showTokenElement);
-                        },
-                        function(error) {
-                            showError(endpoint, error, errorElement);
-                        });
-                } else {
-                    showError(endpoint, error, errorElement);
-                }
-            });
-    }
-
-    function showAPIResponse(data, token, responseElement, showTokenElement) {
-        console.log(data);
-        responseElement.innerHTML = JSON.stringify(data, null, 4);
-        if (showTokenElement) {
-            showTokenElement.parentElement.classList.remove("hidden");
-            showTokenElement.innerHTML = token;
-        }
-    }
-
-    function showError(endpoint, error, errorElement) {
-        console.error(error);
-        var formattedError = JSON.stringify(error, null, 4);
-        if (formattedError.length < 3) {
-            formattedError = error;
-        }
-        errorElement.innerHTML = "Error calling " + endpoint + ": " + formattedError;
-    }
-
-    function newPage() {
-        var request = new XMLHttpRequest();
-        request.open('POST', 'https://www.onenote.com/api/v1.0/me/notes/pages');
-        request.setRequestHeader('Content-Type', 'application/xhtml+xml');
-        request.setRequestHeader('Authorization', 'Bearer ' + document.getElementById("accessToken").innerText );
-        request.onreadystatechange = function () {
-          if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.responseText);
-          }
-        };
-        var body = "<?xml version='1.0' encoding='utf-8' ?> \
-        <html xmlns='http://www.w3.org/1999/xhtml' lang='en-us'> \
-            <head> \
-                <title>Page from OneNote API console</title> \
-                <meta name='created' content='2014-03-17T09:00:00-08:00' />  \
-            </head> \
-            <body> \
-                <h1>HTML sample block</h1> \
-                <h2>The basics</h2> \
-                <p>For the most part, try to keep the HTML simple, and be sure to properly close all tags.</p> \
-            </body> \
-        </html>";
-        //request.send(body);
-
-        $.ajax({
-            url     : "https://www.onenote.com/api/v1.0/me/notes/pages",
-            type    : "POST",
-            data    : body,
-            headers : {
-                "Authorization"   : `Bearer ` + document.getElementById("accessToken").innerText,
-                "Content-Type"    : "application/xhtml+xml"
-            },
-            processData : false,
-            contentType : false
-        }).done( ( data, textStatus, jqXHR ) => {
-            console.log( data, textStatus, jqXHR )
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-        });
-
-    }
-
-</script>
-<script type="text/javascript">
-    function callWebApiWithToken(endpoint, token, responseElement, errorElement, showTokenElement) {
-        var headers = new Headers();
-        var bearer = "Bearer " + token;
-        headers.append("Authorization", bearer);
-        var options = {
-            method: "GET",
-            headers: headers
-        };
-
-        // Note that fetch API is not available in all browsers
-        fetch(endpoint, options)
-            .then(function (response) {
-                var contentType = response.headers.get("content-type");
-                if (response.status === 200 && contentType && contentType.indexOf("application/json") !== -1) {
-                    response.json()
-                        .then(function (data) {
-                            // Display response in the page
-                            showAPIResponse(data, token, responseElement, showTokenElement);
-                        })
-                        .catch(function (error) {
-                            showError(endpoint, error, errorElement);
-                        });
-                } else {
-                    response.json()
-                        .then(function (data) {
-                            // Display response in the page
-                            showError(endpoint, data, errorElement);
-                        })
-                        .catch(function (error) {
-                            showError(endpoint, error, errorElement);
-                        });
-                }
-            })
-            .catch(function (error) {
-                showError(endpoint, error, errorElement);
-            });
-    }
-</script>
-<script type="text/javascript">
-    function signOut() {
-        userAgentApplication.logout();
-    }
-</script>
+    <div class="footer">
+        <div class="groups">
+            <div class="links">
+                <a href="http://ksria.com/simpread" class="logo"><span></span></a>
+                <ul>
+                    <li><a target="_blank" href="http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png"><span class="icon weibo"></span></a></li>
+                    <li><a target="_blank" href="https://www.douban.com/share/service?href=http://ksria.com/simpread&name=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95"><span class="icon douban"></span></a></li>
+                    <li><a target="_blank" href="https://twitter.com/intent/tweet?via=wanglei001&amp;text=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&amp;url=http://ksria.com/simpread"><span class="icon twitter"></span></a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread"><span class="icon facebook"></span></a></li>
+                    <li><a target="_blank" href="https://plus.google.com/share?url=http://ksria.com/simpread"><span class="icon gplus"></span></a></li>
+                </ul>
+            </div>
+            <div class="links">
+                <h1>支持</h1>
+                <a href="./changelog.html">更新日志</a>
+                <a href="https://github.com/kenshin/simpread/wiki/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%88-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%BC%95-%EF%BC%89" target="_blank">入门指南</a>
+                <a href="https://github.com/Kenshin/simpread/wiki/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%88-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%BC%95-%EF%BC%89" target="_blank">常见问题</a>
+                <a href="https://github.com/kenshin/simpread/issues" target="_blank">反馈</a>
+            </div>
+            <div class="links">
+                <h1>关于</h1>
+                <a href="http://kenshin.wang" target="_blank">关于作者</a>
+                <a href="http://weibo.com/23784148" target="_blank">微博</a>
+                <a href="https://opensource.org/licenses/MIT" target="_blank">MIT Licenses</a>
+            </div>
+            <div class="links">
+                <h1>产品</h1>
+                <a href="http://ksria.com/simptab" target="_blank">简 Tab - 极简的 Chrome 新标签页扩展</a>
+                <a href="http://ksria.com/gnvm" target="_blank">GNVM - 使用 Go 语言编写的 Node.js 多版本管理器</a>
+            </div>
+        </div>
+        <div class="copywrite">
+            <span>简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。</span> <span>&nbsp;©&nbsp;2017 <a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
+        </div>
+    </div>
 </body>
 </html>
