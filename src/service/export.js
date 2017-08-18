@@ -449,7 +449,7 @@ class Evernote {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
                 callback( result, undefined );
             } else {
-                // TO-DO
+                callback( undefined, error );
             }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
