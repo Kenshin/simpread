@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>JavaScript SPA Guided Setup</title>
+</head>
+<body style="margin: 40px">
+    <button id="callGraphButton" type="button" class="btn btn-primary" onclick="callGraphAPI()">Call Microsoft Graph API</button>
+    <div id="errorMessage" class="text-danger"></div>
+    <div class="hidden">
+        <h3>Graph API Call Response</h3>
+        <pre class="well" id="graphResponse"></pre>
+    </div>
+    <div class="hidden">
+        <h3>Access Token</h3>
+        <pre class="well" id="accessToken"></pre>
+    </div>
+    <div class="hidden">
+        <h3>ID Token Claims</h3>
+        <pre class="well" id="userInfo"></pre>
+    </div>
+    <button id="signOutButton" type="button" class="btn btn-primary hidden" onclick="signOut()">Sign out</button>
+    <button id="newPage" type="button" class="btn btn-primary" onclick="newPage()">New page</button>
+
+    <script src="//secure.aadcdn.microsoftonline-p.com/lib/0.1.1/js/msal.min.js"></script>
+    <script type="text/javascript" src="msalconfig.js"></script>
+
+    <!-- The 'bluebird' and 'fetch' references below are required if you need to run this application on Internet Explorer -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    var graphAPIMeEndpoint = "https://graph.microsoft.com/v1.0/me";
+    var graphAPIScopes = ["https://graph.microsoft.com/user.read"];
+
+    // Initialize application
+    var userAgentApplication = new Msal.UserAgentApplication(msalconfig.clientID);
+
+    // Set redirect URI
+    userAgentApplication.redirectUri = msalconfig.redirectUri;
+
+    displayUserInfo();
+
+    function displayUserInfo() {
+        var user = userAgentApplication.getUser();
+        if (user) {
+            // Display the user info
+            var userInfoElement = document.getElementById("userInfo");
+            userInfoElement.parentElement.classList.remove("hidden");
+            userInfoElement.innerHTML = JSON.stringify(user, null, 4);
+
+            // Show Sign-Out button
+            document.getElementById("signOutButton").classList.remove("hidden");
+        }
+    }
+
+    function callGraphAPI() {
+        if (userAgentApplication.getAllUsers().length === 0) {
+            userAgentApplication.loginPopup()
+                .then(function (token) {
+                    console.log(token);
+                    displayUserInfo();
+                    callGraphAPI();
+                }, function (error) {
+                    showError("login", error, document.getElementById("errorMessage"));
+                });
+        } else {
+            var responseElement = document.getElementById("graphResponse");
+            responseElement.parentElement.classList.remove("hidden");
+            responseElement.innerText = "Calling Graph ...";
+            callWebApiWithScope(graphAPIMeEndpoint,
+                graphAPIScopes,
+                responseElement,
+                document.getElementById("errorMessage"),
+                document.getElementById("accessToken"));
+        }
+    }
+
+    function callWebApiWithScope(endpoint, scope, responseElement, errorElement, showTokenElement) {
+        userAgentApplication.acquireTokenSilent(scope)
+            .then(function (token) {
+                callWebApiWithToken(endpoint, token, responseElement, errorElement, showTokenElement);
+            }, function (error) {
+                if (error.indexOf("interaction_required" !== -1)) {
+                    userAgentApplication.acquireTokenPopup(scope).then(function(token) {
+                            callWebApiWithToken(endpoint, token, responseElement, errorElement, showTokenElement);
+                        },
+                        function(error) {
+                            showError(endpoint, error, errorElement);
+                        });
+                } else {
+                    showError(endpoint, error, errorElement);
+                }
+            });
+    }
+
+    function showAPIResponse(data, token, responseElement, showTokenElement) {
+        console.log(data);
+        responseElement.innerHTML = JSON.stringify(data, null, 4);
+        if (showTokenElement) {
+            showTokenElement.parentElement.classList.remove("hidden");
+            showTokenElement.innerHTML = token;
+        }
+    }
+
+    function showError(endpoint, error, errorElement) {
+        console.error(error);
+        var formattedError = JSON.stringify(error, null, 4);
+        if (formattedError.length < 3) {
+            formattedError = error;
+        }
+        errorElement.innerHTML = "Error calling " + endpoint + ": " + formattedError;
+    }
+
+    function newPage() {
+        var request = new XMLHttpRequest();
+        request.open('POST', 'https://www.onenote.com/api/v1.0/me/notes/pages');
+        request.setRequestHeader('Content-Type', 'application/xhtml+xml');
+        request.setRequestHeader('Authorization', 'Bearer ' + document.getElementById("accessToken").innerText );
+        request.onreadystatechange = function () {
+          if (this.readyState === 4) {
+            console.log('Status:', this.status);
+            console.log('Headers:', this.getAllResponseHeaders());
+            console.log('Body:', this.responseText);
+          }
+        };
+        var body = "<?xml version='1.0' encoding='utf-8' ?> \
+        <html xmlns='http://www.w3.org/1999/xhtml' lang='en-us'> \
+            <head> \
+                <title>Page from OneNote API console</title> \
+                <meta name='created' content='2014-03-17T09:00:00-08:00' />  \
+            </head> \
+            <body> \
+                <h1>HTML sample block</h1> \
+                <h2>The basics</h2> \
+                <p>For the most part, try to keep the HTML simple, and be sure to properly close all tags.</p> \
+            </body> \
+        </html>";
+        //request.send(body);
+
+        $.ajax({
+            url     : "https://www.onenote.com/api/v1.0/me/notes/pages",
+            type    : "POST",
+            data    : body,
+            headers : {
+                "Authorization"   : `Bearer ` + document.getElementById("accessToken").innerText,
+                "Content-Type"    : "application/xhtml+xml"
+            },
+            processData : false,
+            contentType : false
+        }).done( ( data, textStatus, jqXHR ) => {
+            console.log( data, textStatus, jqXHR )
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+        });
+
+    }
+
+</script>
+<script type="text/javascript">
+    function callWebApiWithToken(endpoint, token, responseElement, errorElement, showTokenElement) {
+        var headers = new Headers();
+        var bearer = "Bearer " + token;
+        headers.append("Authorization", bearer);
+        var options = {
+            method: "GET",
+            headers: headers
+        };
+
+        // Note that fetch API is not available in all browsers
+        fetch(endpoint, options)
+            .then(function (response) {
+                var contentType = response.headers.get("content-type");
+                if (response.status === 200 && contentType && contentType.indexOf("application/json") !== -1) {
+                    response.json()
+                        .then(function (data) {
+                            // Display response in the page
+                            showAPIResponse(data, token, responseElement, showTokenElement);
+                        })
+                        .catch(function (error) {
+                            showError(endpoint, error, errorElement);
+                        });
+                } else {
+                    response.json()
+                        .then(function (data) {
+                            // Display response in the page
+                            showError(endpoint, data, errorElement);
+                        })
+                        .catch(function (error) {
+                            showError(endpoint, error, errorElement);
+                        });
+                }
+            })
+            .catch(function (error) {
+                showError(endpoint, error, errorElement);
+            });
+    }
+</script>
+<script type="text/javascript">
+    function signOut() {
+        userAgentApplication.logout();
+    }
+</script>
+</body>
+</html>
