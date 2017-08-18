@@ -202,15 +202,16 @@ class Read extends React.Component {
             case "evernote":
             case "yinxiang":
                 storage.Safe( ()=> {
-                    if ( storage.secret.yinxiang.access_token ) {
-                        new Notify().Render( "开始转码并上传至 印象笔记，请稍等..." );
-                        exp.evernote.access_token = storage.secret.yinxiang.access_token;
+                    const name = type == "evernote" ? "Evernote" : "印象笔记";
+                    if ( storage.secret[type].access_token ) {
+                        new Notify().Render( `开始转码并上传至 ${name}，请稍等...` );
+                        exp.evernote.access_token = storage.secret[type].access_token;
                         exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
-                            !error && new Notify().Render( "已成功保存到 印象笔记！" );
+                            !error && new Notify().Render( `已成功保存到 ${name}！` );
                             error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
                         });
                     } else {
-                        new Notify().Render( "请先获取 印象笔记 的授权，才能使用此功能！", "授权", ()=>{
+                        new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
                             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
                         });
                     }
