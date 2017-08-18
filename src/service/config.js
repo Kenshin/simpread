@@ -121,6 +121,11 @@ const readItems = {
                 "icon" : ss.IconPath("yinxiang_icon"),
                 "color": "#00BCD4",
             },
+            "evernote" : {
+                "name" : "保存到 Evernote",
+                "icon" : ss.IconPath("evernote_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "share" : {

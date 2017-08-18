@@ -138,6 +138,9 @@ let current  = {},
         "yinxiang" : {
             access_token  : "",
         },
+        "evernote" : {
+            access_token  : "",
+        },
     },
     stcode = -1;
 

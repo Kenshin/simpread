@@ -199,6 +199,7 @@ class Read extends React.Component {
                     }
                 });
                 break;
+            case "evernote":
             case "yinxiang":
                 storage.Safe( ()=> {
                     if ( storage.secret.yinxiang.access_token ) {
