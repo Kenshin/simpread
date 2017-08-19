@@ -578,8 +578,13 @@ class Onenote {
     }
 
     Accesstoken( url ) {
-        this.code = url.replace( `${this.redirect_uri}/?code=`, "" );
-        this.code ? this.dtd.resolve() : this.dtd.reject();
+        url = url.replace( `${this.redirect_uri}/?`, "" );
+        if ( url.startsWith( "code" ) ) {
+            this.code = url.replace( "code=", "" );
+            this.dtd.resolve();
+        } else {
+            this.dtd.reject();
+        }
     }
 
     Auth( callback ) {
