@@ -387,6 +387,11 @@ class Linnk {
     }
 }
 
+/**
+ * Evernote
+ * 
+ * @class
+ */
 class Evernote {
 
     constructor() {
@@ -486,7 +491,7 @@ class Evernote {
             }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, result );
+            callback( undefined, error );
         });
         return this;
     }
