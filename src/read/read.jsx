@@ -218,8 +218,22 @@ class Read extends React.Component {
                 });
                 break;
             case "onenote":
-                break
-        }
+                storage.Safe( ()=> {
+                    if ( storage.secret.onenote.access_token ) {
+                        new Notify().Render( `开始保存到 Onenote，请稍等...` );
+                        exp.onenote.access_token = storage.secret.onenote.access_token;
+                        exp.onenote.Add( exp.onenote.Wrapper( window.location.href, this.props.wrapper.title.trim(), $("sr-rd-content").html() ),  ( result, error ) => {
+                            !error && new Notify().Render( "已成功保存到 Onenote！" );
+                            error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                        });
+                    } else {
+                        new Notify().Render( "请先获取 Onenote 的授权，才能使用此功能！", "授权", ()=>{
+                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                        });
+                    }
+                });
+                break;
+    }
     }
 
    // exit read mode
