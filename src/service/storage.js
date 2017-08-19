@@ -141,6 +141,9 @@ let current  = {},
         "evernote" : {
             access_token  : "",
         },
+        "onenote"  : {
+            access_token  : "",
+        },
     },
     stcode = -1;
 
