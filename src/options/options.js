@@ -55,17 +55,22 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     if ( request.type == msg.MESSAGE_ACTION.redirect_uri ) {
-        switch ( request.value.id ) {
+        const { id, uri } = request.value;
+        switch ( id ) {
             case "pocket":
                 exp.pocket.Accesstoken();
                 break;
             case "dropbox":
-                exp.dropbox.access_token = request.value.uri;
+                exp.dropbox.access_token = uri;
                 break;
             case "evernote":
             case "yinxiang":
-                exp.evernote.Accesstoken( request.value.uri );
-            break;
+                exp.evernote.Accesstoken( uri );
+                break;
+            default:
+                id.startsWith( "https://simpread.herokuapp.com/?code=" ) &&
+                    exp.onenote.Accesstoken( uri );
+                break;
         }
     }
 });
