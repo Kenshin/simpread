@@ -147,6 +147,32 @@ export default class Auth extends React.Component {
                     this.clear( state );
                 }
                 break;
+            case "onenote":
+            const faileds = ( error, name ) => {
+                console.error( error )
+                new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
+                storage.secret[state].access_token = "";
+                this.setState({ secret: storage.secret });
+            };
+            if ( value ) {
+                exp.onenote.New().Login();
+                exp.onenote.dtd.done( ()=> {
+                    exp.onenote.Auth( ( result, error ) => {
+                        if ( error ) {
+                            faileds( error, "Onenote" );
+                        } else {
+                            storage.secret.onenote.access_token = exp.onenote.access_token;
+                            storage.Safe( ()=> {
+                                new Notify().Render( `已成功授权 Onenote 。` );
+                                this.setState({ secret: storage.secret });
+                            }, storage.secret );
+                        }
+                    });
+                }).fail( error => faileds( error, "Onenote" ));
+                } else {
+                    this.clear( state );
+                }
+                break;
         }
     }
 
@@ -234,6 +260,11 @@ export default class Auth extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label={ this.state.secret.evernote.access_token ? "已授权 Evernote，是否取消授权？" : "是否连接并授权 Evernote ？" }
                             onChange={ (s)=>this.onChange( "evernote", s ) } />
+
+                        <Switch width="100%" checked={ this.state.secret.onenote.access_token != "" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.onenote.access_token ? "已授权 Onenote，是否取消授权？" : "是否连接并授权 Onenote ？" }
+                            onChange={ (s)=>this.onChange( "onenote", s ) } />
 
                     </div>;
         }
