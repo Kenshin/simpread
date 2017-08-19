@@ -554,7 +554,7 @@ class Onenote {
                 <blockquote>
                     本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a>
                 </blockquote>
-                <hr></hr><br></br>
+                <br></br>
                 ${content}
             </body>
         </html>
