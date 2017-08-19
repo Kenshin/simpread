@@ -513,6 +513,122 @@ class Evernote {
 
 }
 
+/**
+ * Onenote
+ * 
+ * @class
+ */
+class Onenote {
+
+    get client_id() {
+        return "b21d6e4a-30d5-4c39-9ef2-0ac14a01822b";
+    }
+
+    get client_secret() {
+        return "q0ewrhaVHidjZragQ0hi1MV";
+    }
+
+    get redirect_uri() {
+        return "https://simpread.herokuapp.com";
+    }
+
+    get scopes() {
+        return [ "office.onenote_create" ];
+    }
+
+    New() {
+        this.dtd  = $.Deferred();
+        this.code = "";
+        this.access_token = "";
+        return this;
+    }
+
+    Wrapper( url, title, content ) {
+        return `
+        <html xmlns='http://www.w3.org/1999/xhtml' lang='en-us'>
+            <head>
+                <title>${title}</title>
+                <meta name='created' content='${new Date()}'
+            </head>
+            <body>
+                <blockquote>
+                    本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a>
+                </blockquote>
+                <hr></hr><br></br>
+                ${content}
+            </body>
+        </html>
+        `;
+    }
+
+    Login() {
+        let url = "https://login.live.com/oauth20_authorize.srf?";
+        const params = {
+            client_id    : this.client_id,
+            redirect_uri : this.redirect_uri,
+            scope        : this.scopes.join( " " ),
+            response_type: "code",
+        };
+        Object.keys( params ).forEach( key => {
+            url += `${key}=${params[key]}&`;
+        });
+        url = url.substr( 0, url.length )
+        console.log( url )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+
+    Accesstoken( url ) {
+        this.code = url.replace( `${this.redirect_uri}/?code=`, "" );
+        this.code ? this.dtd.resolve() : this.dtd.reject();
+    }
+
+    Auth( callback ) {
+        $.ajax({
+            url     : "https://login.live.com/oauth20_token.srf",
+            type    : "POST",
+            headers : {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data    : {
+                client_id     : this.client_id,
+                client_secret : this.client_secret,
+                code          : this.code,
+                grant_type    : "authorization_code",
+                redirect_uri  : this.redirect_uri,
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( result ) {
+                this.access_token = result.access_token;
+                callback( result, undefined );
+            } else {
+                callback( undefined, result );
+            }
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
+
+    Add( html, callback ) {
+        $.ajax({
+            url     : "https://www.onenote.com/api/v1.0/me/notes/pages",
+            type    : "POST",
+            headers : {
+                "Content-Type": "application/xhtml+xml",
+                "Authorization": `Bearer ${this.access_token}`
+            },
+            data    : html,
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( result, textStatus, jqXHR )
+            textStatus == "success" && callback( result, undefined );
+            textStatus != "success" && callback( undefined, result );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
+}
+
 const dropbox = new Dropbox();
 defer.promise( dropbox );
 
@@ -523,6 +639,8 @@ const linnk = new Linnk();
 
 const evernote = new Evernote();
 
+const onenote  = new Onenote();
+
 export {
     png      as PNG,
     pdf      as PDF,
@@ -532,4 +650,5 @@ export {
     pocket,
     linnk,
     evernote,
+    onenote,
 }
