@@ -52,6 +52,7 @@ export default class CommonOpt extends React.Component {
                     else if ( local < remote ) {
                         new Notify().Render( "远程备份配置文件较新，是否覆盖本地文件？", "覆盖", () => {
                             storage.Write( () => {
+                                watch.SendMessage( "import", true );
                                 location.href = location.origin + location.pathname + "?simpread_mode=reload";
                             }, json );
                         });
