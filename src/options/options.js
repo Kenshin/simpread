@@ -68,7 +68,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 exp.evernote.Accesstoken( uri );
                 break;
             default:
-                id.startsWith( "https://simpread.herokuapp.com/?code=" ) &&
+                id.startsWith( "https://simpread.herokuapp.com/?" ) &&
                     exp.onenote.Accesstoken( uri );
                 break;
         }
