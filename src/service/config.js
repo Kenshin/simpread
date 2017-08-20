@@ -131,6 +131,11 @@ const readItems = {
                 "icon" : ss.IconPath("onenote_icon"),
                 "color": "#00BCD4",
             },
+            "gdrive" : {
+                "name" : "保存到 Google 云端硬盘",
+                "icon" : ss.IconPath("gdrive_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "share" : {
