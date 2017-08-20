@@ -148,27 +148,53 @@ export default class Auth extends React.Component {
                 }
                 break;
             case "onenote":
-            const faileds = ( error, name ) => {
-                console.error( error )
-                new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
-                storage.secret[state].access_token = "";
-                this.setState({ secret: storage.secret });
-            };
-            if ( value ) {
-                exp.onenote.New().Login();
-                exp.onenote.dtd.done( ()=> {
-                    exp.onenote.Auth( ( result, error ) => {
-                        if ( error ) {
-                            faileds( error, "Onenote" );
-                        } else {
-                            storage.secret.onenote.access_token = exp.onenote.access_token;
-                            storage.Safe( ()=> {
-                                new Notify().Render( `已成功授权 Onenote 。` );
-                                this.setState({ secret: storage.secret });
-                            }, storage.secret );
-                        }
-                    });
-                }).fail( error => faileds( error, "Onenote" ));
+                const faileds = ( error, name ) => {
+                    console.error( error )
+                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
+                    storage.secret[state].access_token = "";
+                    this.setState({ secret: storage.secret });
+                };
+                if ( value ) {
+                    exp.onenote.New().Login();
+                    exp.onenote.dtd.done( ()=> {
+                        exp.onenote.Auth( ( result, error ) => {
+                            if ( error ) {
+                                faileds( error, "Onenote" );
+                            } else {
+                                storage.secret.onenote.access_token = exp.onenote.access_token;
+                                storage.Safe( ()=> {
+                                    new Notify().Render( `已成功授权 Onenote 。` );
+                                    this.setState({ secret: storage.secret });
+                                }, storage.secret );
+                            }
+                        });
+                    }).fail( error => faileds( error, "Onenote" ));
+                } else {
+                    this.clear( state );
+                }
+                break;
+            case "gdrive":
+                const failedss = ( error, name ) => {
+                    console.error( error )
+                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
+                    storage.secret[state].access_token = "";
+                    this.setState({ secret: storage.secret });
+                };
+                if ( value ) {
+                    exp.gdrive.New().Login();
+                    exp.gdrive.dtd.done( ()=> {
+                        exp.gdrive.Auth( ( result, error ) => {
+                            if ( error ) {
+                                faileds( error, "Google 云端硬盘" );
+                            } else {
+                                storage.secret.gdrive.access_token = exp.gdrive.access_token;
+                                storage.Safe( ()=> {
+                                    new Notify().Render( `已成功授权 Google 云端硬盘 。` );
+                                    this.setState({ secret: storage.secret });
+                                }, storage.secret );
+                            }
+                        });
+                    }).fail( error => failedss( error, "Google 云端硬盘" ));
                 } else {
                     this.clear( state );
                 }
@@ -265,6 +291,11 @@ export default class Auth extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label={ this.state.secret.onenote.access_token ? "已授权 Onenote，是否取消授权？" : "是否连接并授权 Onenote ？" }
                             onChange={ (s)=>this.onChange( "onenote", s ) } />
+
+                        <Switch width="100%" checked={ this.state.secret.gdrive.access_token != "" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.gdrive.access_token ? "已授权 Google 云端硬盘，是否取消授权？" : "是否连接并授权 Google 云端硬盘 ？" }
+                            onChange={ (s)=>this.onChange( "gdrive", s ) } />
 
                     </div>;
         }
