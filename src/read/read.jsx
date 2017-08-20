@@ -233,7 +233,23 @@ class Read extends React.Component {
                     }
                 });
                 break;
-    }
+            case "gdrive":
+            storage.Safe( ()=> {
+                if ( storage.secret.gdrive.access_token ) {
+                    new Notify().Render( `开始保存到 Google 云端硬盘，请稍等...` );
+                    exp.gdrive.access_token = storage.secret.gdrive.access_token;
+                    exp.gdrive.Add( this.props.wrapper.title.trim(), $("sr-rd-content").html(), ( result, error ) => {
+                        !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
+                        error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                    });
+                } else {
+                    new Notify().Render( "请先获取 Google 云端硬盘 的授权，才能使用此功能！", "授权", ()=>{
+                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                    });
+                }
+            });
+            break;
+        }
     }
 
    // exit read mode
