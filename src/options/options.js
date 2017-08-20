@@ -67,6 +67,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             case "yinxiang":
                 exp.evernote.Accesstoken( uri );
                 break;
+            case "gdrive":
+                exp.gdrive.Accesstoken( uri );
+                break;
             default:
                 id.startsWith( "https://simpread.herokuapp.com/?" ) &&
                     exp.onenote.Accesstoken( uri );
