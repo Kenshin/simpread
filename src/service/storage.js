@@ -144,6 +144,9 @@ let current  = {},
         "onenote"  : {
             access_token  : "",
         },
+        "gdrive"   : {
+            access_token  : "",
+        },
     },
     stcode = -1;
 
