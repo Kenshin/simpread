@@ -639,6 +639,94 @@ class Onenote {
     }
 }
 
+/**
+ * Onenote
+ * 
+ * @class
+ */
+class GDrive {
+
+    get client_id() {
+        return "920476054505-fd4192mqtfodackl1vip1c3c0hp6298n.apps.googleusercontent.com";
+    }
+
+     get redirect_uri() {
+         return "http://ksria.com/simpread/auth.html?id=gdrive";
+     }
+
+     get scope() {
+         return "https://www.googleapis.com/auth/drive.file";
+     }
+
+    New() {
+        this.dtd = $.Deferred();
+        this.access_token = "";
+        return this;
+    }
+
+    Login() {
+        let url = "https://accounts.google.com/o/oauth2/v2/auth?";
+        const params = {
+            client_id    : this.client_id,
+            redirect_uri : this.redirect_uri,
+            scope        : this.scope,
+            response_type: "token",
+            include_granted_scopes: true,
+            state        : "state_parameter_passthrough_value"
+        };
+        Object.keys( params ).forEach( key => {
+            url += `${key}=${params[key]}&`;
+        });
+        url = url.substr( 0, url.length )
+        console.log( url )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+
+    Accesstoken( url ) {
+        url.split( "&" ).forEach( item => {
+            item.startsWith( "access_token=" ) && ( this.access_token = item.replace( "access_token=", "" ));
+        })
+        console.log( this.access_token )
+        this.access_token != "" ? this.dtd.resolve() : this.dtd.reject();
+    }
+
+    Auth( callback ) {
+        $.ajax({
+            url     : `https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${ this.access_token }`,
+            type    : "GET",
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( textStatus == "success" && result && result.aud == this.client_id ) {
+                callback( result, undefined );
+            } else {
+                callback( undefined, result );
+            }
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
+
+    Add( title, content, callback ) {
+        $.ajax({
+            url     : "https://www.googleapis.com/drive/v3/files",
+            type    : "POST",
+            headers : {
+                "Content-type" : "application/json",
+                "Authorization": `Bearer ${this.access_token}`
+            },
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( result, textStatus, jqXHR )
+            textStatus == "success" && callback( result, undefined );
+            textStatus != "success" && callback( undefined, result );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR.responseJSON, textStatus, error )
+            callback( undefined, error );
+        });
+        
+    }
+
+}
+
 const dropbox = new Dropbox();
 defer.promise( dropbox );
 
@@ -650,6 +738,7 @@ const linnk = new Linnk();
 const evernote = new Evernote();
 
 const onenote  = new Onenote();
+const gdrive   = new GDrive();
 
 export {
     png      as PNG,
@@ -661,4 +750,5 @@ export {
     linnk,
     evernote,
     onenote,
+    gdrive,
 }
