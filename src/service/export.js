@@ -658,6 +658,13 @@ class GDrive {
          return "https://www.googleapis.com/auth/drive.file";
      }
 
+     get folder() {
+         return {
+             name : "简悦",
+             mimeType: "application/vnd.google-apps.folder",
+         }
+     }
+
     New() {
         this.dtd = $.Deferred();
         this.access_token = "";
@@ -678,7 +685,6 @@ class GDrive {
             url += `${key}=${params[key]}&`;
         });
         url = url.substr( 0, url.length )
-        console.log( url )
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
     }
 
@@ -686,7 +692,6 @@ class GDrive {
         url.split( "&" ).forEach( item => {
             item.startsWith( "access_token=" ) && ( this.access_token = item.replace( "access_token=", "" ));
         })
-        console.log( this.access_token )
         this.access_token != "" ? this.dtd.resolve() : this.dtd.reject();
     }
 
@@ -695,18 +700,39 @@ class GDrive {
             url     : `https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${ this.access_token }`,
             type    : "GET",
         }).done( ( result, textStatus, jqXHR ) => {
-            if ( textStatus == "success" && result && result.aud == this.client_id ) {
-                callback( result, undefined );
-            } else {
+            textStatus == "success" && result && result.aud == this.client_id ?
+                this.CreateFolder( callback ) :
                 callback( undefined, result );
-            }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, error );
         });
     }
 
-    Add( title, content, callback ) {
+    CreateFolder( callback ) {
+        $.ajax({
+            url     : "https://www.googleapis.com/drive/v3/files",
+            type    : "GET",
+            headers : {
+                "Content-type" : "application/json",
+                "Authorization": `Bearer ${this.access_token}`
+            },
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( result, textStatus, jqXHR )
+            if ( textStatus == "success" ) {
+                const folder = result.files.find( file => file.name = this.folder.name && file.mimeType == this.folder.mimeType )
+                if ( folder ) {
+                    this.folder_id = folder.id;
+                    callback( result, undefined );
+                } else this.Add( "folder", callback );
+            } else callback( undefined, result );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, error );
+        });
+    }
+
+    Add( type, callback, title, content ) {
         $.ajax({
             url     : "https://www.googleapis.com/drive/v3/files",
             type    : "POST",
@@ -714,15 +740,16 @@ class GDrive {
                 "Content-type" : "application/json",
                 "Authorization": `Bearer ${this.access_token}`
             },
+            data   : type == "folder" ? JSON.stringify( this.folder ) : "sadfasdfad"
         }).done( ( result, textStatus, jqXHR ) => {
             console.log( result, textStatus, jqXHR )
+            textStatus == "success" && ( this.folder_id = result.id );
             textStatus == "success" && callback( result, undefined );
             textStatus != "success" && callback( undefined, result );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR.responseJSON, textStatus, error )
             callback( undefined, error );
         });
-        
     }
 
 }
