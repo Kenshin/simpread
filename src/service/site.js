@@ -397,7 +397,7 @@ function html2enml( html, url ) {
  */
 function clearMD( str ) {
     str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
-    str = str.replace( /<\/?(a|span|div|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,+"]*>/ig, "" )
+    str = str.replace( /<\/?(span|div|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,+()"]*>/ig, "" )
              .replace( /sr-blockquote/ig, "blockquote" )
     return str;
 }
