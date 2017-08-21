@@ -761,13 +761,25 @@ class GDrive {
         return body;
     }
 
+    /**
+     * Add folder / file
+     * @param {string} include: folder file
+     * @param {func} callback
+     * @param {string} content, only type == "folder"
+     */
     Add( type, callback, content ) {
         const boundary = '-------314159265358979323846';
         $.ajax({
-            url     : type == "folder" ? "https://www.googleapis.com/drive/v3/files" : "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+            url     : type == "folder" ? 
+                        "https://www.googleapis.com/drive/v3/files" : 
+                        "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
             type    : "POST",
-            headers : type == "folder" ? this.header : { ...this.header, ...{ "Content-Type": `multipart/form-data; boundary="${boundary}"` }},
-            data    : type == "folder" ? JSON.stringify( this.folder ) : content
+            headers : type == "folder" ? 
+                        this.header : 
+                        { ...this.header, ...{ "Content-Type": `multipart/form-data; boundary="${boundary}"` }},
+            data    : type == "folder" ? 
+                        JSON.stringify( this.folder ) : 
+                        content
         }).done( ( result, textStatus, jqXHR ) => {
             type == "folder" && textStatus == "success" && ( this.folder_id = result.id );
             textStatus == "success" && callback( result, undefined );
