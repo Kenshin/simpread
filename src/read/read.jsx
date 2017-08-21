@@ -115,7 +115,7 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "markdown":
-                exp.Markdown( this.props.wrapper.include, `simpread-${ this.props.wrapper.title.trim() }.md`, error => {
+                exp.Markdown( $("sr-rd-content").html(), `simpread-${ this.props.wrapper.title.trim() }.md`, error => {
                     new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                 });
                 break;
@@ -141,7 +141,7 @@ class Read extends React.Component {
                 }, 500 );
                 break;
             case "dropbox":
-                exp.Markdown( this.props.wrapper.include, undefined, ( result, error ) => {
+                exp.Markdown( $("sr-rd-content").html(), undefined, ( result, error ) => {
                     if ( error ) {
                         new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                     } else {
@@ -234,7 +234,7 @@ class Read extends React.Component {
                 });
                 break;
             case "gdrive":
-                exp.Markdown( this.props.wrapper.include, undefined, ( result, error ) => {
+                exp.Markdown( $("sr-rd-content").html(), undefined, ( result, error ) => {
                     if ( error ) {
                         new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                     } else {
