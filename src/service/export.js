@@ -669,6 +669,13 @@ class GDrive {
              mimeType: "application/vnd.google-apps.folder",
          }
      }
+     
+     get header () {
+         return {
+            "Content-type" : "application/json",
+            "Authorization": `Bearer ${this.access_token}`
+         }
+     }
 
     New() {
         this.dtd = $.Deferred();
@@ -718,10 +725,7 @@ class GDrive {
         $.ajax({
             url     : "https://www.googleapis.com/drive/v3/files",
             type    : "GET",
-            headers : {
-                "Content-type" : "application/json",
-                "Authorization": `Bearer ${this.access_token}`
-            },
+            headers : this.header,
         }).done( ( result, textStatus, jqXHR ) => {
             if ( textStatus == "success" ) {
                 const folder = result.files.find( file => file.name = this.folder.name && file.mimeType == this.folder.mimeType )
@@ -762,14 +766,10 @@ class GDrive {
         $.ajax({
             url     : type == "folder" ? "https://www.googleapis.com/drive/v3/files" : "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
             type    : "POST",
-            headers : {
-                "Content-type" : "application/json",
-                "Authorization": `Bearer ${this.access_token}`,
-                "Content-Type" : `multipart/form-data; boundary="${boundary}"`
-            },
-            data   : type == "folder" ? JSON.stringify( this.folder ) : content
+            headers : type == "folder" ? this.header : { ...this.header, ...{ "Content-Type": `multipart/form-data; boundary="${boundary}"` }},
+            data    : type == "folder" ? JSON.stringify( this.folder ) : content
         }).done( ( result, textStatus, jqXHR ) => {
-            textStatus == "success" && ( this.folder_id = result.id );
+            type == "folder" && textStatus == "success" && ( this.folder_id = result.id );
             textStatus == "success" && callback( result, undefined );
             textStatus != "success" && callback( undefined, result );
         }).fail( ( jqXHR, textStatus, error ) => {
