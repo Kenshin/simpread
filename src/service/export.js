@@ -283,6 +283,11 @@ class Pocket {
 
 }
 
+/**
+ * Linnk
+ * 
+ * @class
+ */
 class Linnk {
 
     constructor( access_token, group_id ) {
