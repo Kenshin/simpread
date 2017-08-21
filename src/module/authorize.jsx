@@ -188,6 +188,7 @@ export default class Auth extends React.Component {
                                 faileds( error, "Google 云端硬盘" );
                             } else {
                                 storage.secret.gdrive.access_token = exp.gdrive.access_token;
+                                storage.secret.gdrive.folder_id    = exp.gdrive.folder_id;
                                 storage.Safe( ()=> {
                                     new Notify().Render( `已成功授权 Google 云端硬盘 。` );
                                     this.setState({ secret: storage.secret });
