@@ -677,8 +677,13 @@ class GDrive {
          }
      }
 
+    get boundary() {
+        return "-------314159265358979323846";
+    }
+
     New() {
         this.dtd = $.Deferred();
+        this.folder_id    = "";
         this.access_token = "";
         return this;
     }
@@ -747,9 +752,8 @@ class GDrive {
                 parents: [ this.folder_id ],
                 mimeType: type,
         },
-        boundary    = "-------314159265358979323846",
-        delimiter   = `\r\n--${boundary}\r\n`,
-        close_delim = `\r\n--${boundary}--`,
+        delimiter   = `\r\n--${this.boundary}\r\n`,
+        close_delim = `\r\n--${this.boundary}--`,
         body        =
             delimiter +
             "Content-Type: application/json\r\n\r\n" +
@@ -768,7 +772,6 @@ class GDrive {
      * @param {string} content, only type == "folder"
      */
     Add( type, callback, content ) {
-        const boundary = '-------314159265358979323846';
         $.ajax({
             url     : type == "folder" ? 
                         "https://www.googleapis.com/drive/v3/files" : 
@@ -776,7 +779,7 @@ class GDrive {
             type    : "POST",
             headers : type == "folder" ? 
                         this.header : 
-                        { ...this.header, ...{ "Content-Type": `multipart/form-data; boundary="${boundary}"` }},
+                        { ...this.header, ...{ "Content-Type": `multipart/form-data; boundary="${this.boundary}"` }},
             data    : type == "folder" ? 
                         JSON.stringify( this.folder ) : 
                         content
