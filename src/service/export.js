@@ -39,7 +39,7 @@ function pdf() {
 function markdown( data, name, callback ) {
     try {
         const md     = toMarkdown( data, { gfm: true }),
-              base64 = "data:text/plain;charset=utf-8," + encodeURIComponent( data );
+              base64 = "data:text/plain;charset=utf-8," + encodeURIComponent( md );
         name ? download( base64, name ) : callback( md );
     } catch( error ) {
         callback( undefined, error );
