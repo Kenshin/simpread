@@ -388,7 +388,18 @@ function html2enml( html, url ) {
     } catch( error ) {
         return `<div>转换失败，原文地址 <a href="${url}" target="_blank">${url}</a></div>`
     }
+}
 
+/**
+ * Clear Html to MD, erorr <tag>
+ * 
+ * @param {string} convert string
+ */
+function clearMD( str ) {
+    str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
+    str = str.replace( /<\/?(a|span|div|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,+"]*>/ig, "" )
+             .replace( /sr-blockquote/ig, "blockquote" )
+    return str;
 }
 
 export {
@@ -398,4 +409,5 @@ export {
     removeSpareTag as RemoveTag,
     verify         as Verify,
     html2enml      as HTML2ENML,
+    clearMD        as ClearMD,
 }
