@@ -234,21 +234,28 @@ class Read extends React.Component {
                 });
                 break;
             case "gdrive":
-            storage.Safe( ()=> {
-                if ( storage.secret.gdrive.access_token ) {
-                    new Notify().Render( `开始保存到 Google 云端硬盘，请稍等...` );
-                    exp.gdrive.access_token = storage.secret.gdrive.access_token;
-                    exp.gdrive.Add( this.props.wrapper.title.trim(), $("sr-rd-content").html(), ( result, error ) => {
-                        !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
-                        error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                    });
-                } else {
-                    new Notify().Render( "请先获取 Google 云端硬盘 的授权，才能使用此功能！", "授权", ()=>{
-                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                    });
-                }
-            });
-            break;
+                exp.Markdown( this.props.wrapper.include, undefined, ( result, error ) => {
+                    if ( error ) {
+                        new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
+                    } else {
+                        storage.Safe( ()=> {
+                            if ( storage.secret.gdrive.access_token ) {
+                                new Notify().Render( `开始保存到 Google 云端硬盘，请稍等...` );
+                                exp.gdrive.access_token = storage.secret.gdrive.access_token;
+                                exp.gdrive.folder_id    = storage.secret.gdrive.folder_id;
+                                exp.gdrive.Add( "file",( result, error ) => {
+                                    !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
+                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                                }, exp.gdrive.CreateFile( `${this.props.wrapper.title.trim()}.md`, result ));
+                            } else {
+                                new Notify().Render( "请先获取 Google 云端硬盘 的授权，才能使用此功能！", "授权", ()=>{
+                                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                                });
+                            }
+                        });
+                    }
+                });
+                break;
         }
     }
 
