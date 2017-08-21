@@ -129,6 +129,7 @@ async function specbeautify( name, $target ) {
                     $(item).addClass( "sr-rd-content-nobeautify" );
                 }
             });
+            $target.find( "script" ).remove();
             break;
         case "appinn.com":
             $target.find( ".emoji" ).addClass( "sr-rd-content-nobeautify" );
