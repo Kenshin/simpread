@@ -737,21 +737,21 @@ class GDrive {
     }
 
     CreateFile( name, content ) {
-        const type = 'application/json; charset=UTF-8';
-        const meta = {
-            name,
-            parents: [ this.folder_id ],
-            mimeType: type,
-        }
-        const boundary = '-------314159265358979323846';
-        const delimiter = "\r\n--" + boundary + "\r\n";
-        const close_delim = "\r\n--" + boundary + "--";
-        const body =
+        const type  = "application/json; charset=UTF-8",
+              meta  = {
+                name,
+                parents: [ this.folder_id ],
+                mimeType: type,
+        },
+        boundary    = "-------314159265358979323846",
+        delimiter   = `\r\n--${boundary}\r\n`,
+        close_delim = `\r\n--${boundary}--`,
+        body        =
             delimiter +
-            'Content-Type: application/json\r\n\r\n' +
+            "Content-Type: application/json\r\n\r\n" +
             JSON.stringify( meta ) +
             delimiter +
-            'Content-Type: ' + type + '\r\n\r\n' +
+            `Content-Type: ${type}\r\n\r\n` +
             content +
             close_delim;
         return body;
