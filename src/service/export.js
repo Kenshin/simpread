@@ -670,7 +670,7 @@ class GDrive {
          }
      }
      
-     get header () {
+     get header() {
          return {
             "Content-type" : "application/json",
             "Authorization": `Bearer ${this.access_token}`
