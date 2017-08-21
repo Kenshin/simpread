@@ -71,27 +71,44 @@ const readItems = {
         "icon" : ss.IconPath("setting_icon"),
         "color": "#03A9F4",
     },
-    "save" : {
+    "readlater" : {
         "name" : "暂存",
         "icon" : ss.IconPath("save_icon"),
         "color": "#FF5722",
+        "items": {
+            "linnk" : {
+                "name" : "保存到 Linnk",
+                "icon" : ss.IconPath("linnk_icon"),
+                "color": "#FF5722",
+            },
+            "pocket" : {
+                "name" : "保存到 Pocket",
+                "icon" : ss.IconPath("pocket_icon"),
+                "color": "#FF5722",
+            },
+            "save" : {
+                "name" : "保存到 稍后读",
+                "icon" : ss.IconPath("readlater_icon"),
+                "color": "#FF5722",
+            },
+        },
     },
     "download" : {
         "name" : "导出",
         "icon" : ss.IconPath("download_icon"),
         "color": "#D4237A",
         "items": {
-            "markdown" : {
-                "name" : "导出为 MD",
-                "icon" : ss.IconPath("markdown_icon"),
+            "pdf" : {
+                "icon" : ss.IconPath("pdf_icon"),
                 "color": "#D4237A",
             },
             "png" : {
                 "icon" : ss.IconPath("png_icon"),
                 "color": "#D4237A",
             },
-            "pdf" : {
-                "icon" : ss.IconPath("pdf_icon"),
+            "markdown" : {
+                "name" : "导出为 MD",
+                "icon" : ss.IconPath("markdown_icon"),
                 "color": "#D4237A",
             },
         },
@@ -101,21 +118,6 @@ const readItems = {
         "icon" : ss.IconPath("send_icon"),
         "color": "#00BCD4",
         "items": {
-            "dropbox" : {
-                "name" : "保存到 Dropbox",
-                "icon" : ss.IconPath("sync_icon"),
-                "color": "#00BCD4",
-            },
-            "pocket" : {
-                "name" : "保存到 Pocket",
-                "icon" : ss.IconPath("pocket_icon"),
-                "color": "#00BCD4",
-            },
-            "linnk" : {
-                "name" : "保存到 Linnk",
-                "icon" : ss.IconPath("linnk_icon"),
-                "color": "#00BCD4",
-            },
             "yinxiang" : {
                 "name" : "保存到 印象笔记",
                 "icon" : ss.IconPath("yinxiang_icon"),
@@ -124,6 +126,11 @@ const readItems = {
             "evernote" : {
                 "name" : "保存到 Evernote",
                 "icon" : ss.IconPath("evernote_icon"),
+                "color": "#00BCD4",
+            },
+            "dropbox" : {
+                "name" : "保存到 Dropbox",
+                "icon" : ss.IconPath("sync_icon"),
                 "color": "#00BCD4",
             },
             "onenote" : {
