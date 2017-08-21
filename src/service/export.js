@@ -723,7 +723,6 @@ class GDrive {
                 "Authorization": `Bearer ${this.access_token}`
             },
         }).done( ( result, textStatus, jqXHR ) => {
-            console.log( result, textStatus, jqXHR )
             if ( textStatus == "success" ) {
                 const folder = result.files.find( file => file.name = this.folder.name && file.mimeType == this.folder.mimeType )
                 if ( folder ) {
@@ -737,26 +736,47 @@ class GDrive {
         });
     }
 
-    Add( type, callback, title, content ) {
+    CreateFile( name, content ) {
+        const type = 'application/json; charset=UTF-8';
+        const meta = {
+            name,
+            parents: [ this.folder_id ],
+            mimeType: type,
+        }
+        const boundary = '-------314159265358979323846';
+        const delimiter = "\r\n--" + boundary + "\r\n";
+        const close_delim = "\r\n--" + boundary + "--";
+        const body =
+            delimiter +
+            'Content-Type: application/json\r\n\r\n' +
+            JSON.stringify( meta ) +
+            delimiter +
+            'Content-Type: ' + type + '\r\n\r\n' +
+            content +
+            close_delim;
+        return body;
+    }
+
+    Add( type, callback, content ) {
+        const boundary = '-------314159265358979323846';
         $.ajax({
-            url     : "https://www.googleapis.com/drive/v3/files",
+            url     : type == "folder" ? "https://www.googleapis.com/drive/v3/files" : "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
             type    : "POST",
             headers : {
                 "Content-type" : "application/json",
-                "Authorization": `Bearer ${this.access_token}`
+                "Authorization": `Bearer ${this.access_token}`,
+                "Content-Type" : `multipart/form-data; boundary="${boundary}"`
             },
-            data   : type == "folder" ? JSON.stringify( this.folder ) : "sadfasdfad"
+            data   : type == "folder" ? JSON.stringify( this.folder ) : content
         }).done( ( result, textStatus, jqXHR ) => {
-            console.log( result, textStatus, jqXHR )
             textStatus == "success" && ( this.folder_id = result.id );
             textStatus == "success" && callback( result, undefined );
             textStatus != "success" && callback( undefined, result );
         }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR.responseJSON, textStatus, error )
-            callback( undefined, error );
+            console.error( jqXHR.responseJSON, textStatus, "error" )
+            callback( undefined, "error" );
         });
     }
-
 }
 
 const dropbox = new Dropbox();
