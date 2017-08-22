@@ -147,6 +147,7 @@ class Read extends React.Component {
                     } else {
                         storage.Safe( ()=> {
                             if ( storage.secret.dropbox.access_token ) {
+                                new Notify().Render( "开始保存到 Dropbox，请稍等..." );
                                 exp.dropbox.access_token = storage.secret.dropbox.access_token;
                                 exp.dropbox.Write( `md/${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
                                     !error && new Notify().Render( "已成功保存到 Dropbox！" );
@@ -164,6 +165,7 @@ class Read extends React.Component {
             case "pocket":
                 storage.Safe( ()=> {
                     if ( storage.secret.pocket.access_token ) {
+                        new Notify().Render( "开始保存到 Pocket，请稍等..." );
                         exp.pocket.access_token = storage.secret.pocket.access_token;
                         exp.pocket.Settags( storage.secret.pocket.tags );
                         exp.pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
@@ -241,7 +243,7 @@ class Read extends React.Component {
                     } else {
                         storage.Safe( ()=> {
                             if ( storage.secret.gdrive.access_token ) {
-                                new Notify().Render( `开始保存到 Google 云端硬盘，请稍等...` );
+                                new Notify().Render( "开始保存到 Google 云端硬盘，请稍等..." );
                                 exp.gdrive.access_token = storage.secret.gdrive.access_token;
                                 exp.gdrive.folder_id    = storage.secret.gdrive.folder_id;
                                 exp.gdrive.Add( "file",( result, error ) => {
