@@ -618,6 +618,23 @@ body {
     font-weight: 400;
 }
 
+.version .details img {
+    margin: 10px;
+    margin-left: 52px;
+    padding: 5px;
+
+    max-width:300px;
+
+    background: #fff;
+
+    border: 1px solid #bbb;
+    box-shadow: 1px 1px 3px #d4d4d4;
+}
+
+.version .details img:hover {
+    box-shadow: 3px 3px 3px #d4d4d4;
+}
+
 .version .details ul {
     list-style: none;
     line-height: 35px;
@@ -663,13 +680,13 @@ body {
     border-radius: 3px;
 }
 
-.version .details a {
+.version .details li a {
     @apply --white-link;
     font-size: inherit;
     color: var(--text-color);
 }
 
-.version .details a:hover {
+.version .details li a:hover {
     @apply --white-link-hover;
     color: var(--text-color);
     border-bottom: 2px solid var(--text-color);
