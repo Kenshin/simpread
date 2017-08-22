@@ -209,6 +209,7 @@ class Read extends React.Component {
                         exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
                             !error && new Notify().Render( `已成功保存到 ${name}！` );
                             error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+                            error  && new Notify().Render( "建议使用 Onenote 能更完美的还原被保存页面。" );
                         });
                     } else {
                         new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
