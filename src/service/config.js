@@ -143,6 +143,11 @@ const readItems = {
                 "icon" : ss.IconPath("gdrive_icon"),
                 "color": "#00BCD4",
             },
+            "kindle" : {
+                "name" : "保存到 Kindle",
+                "icon" : ss.IconPath("kindle_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "share" : {
