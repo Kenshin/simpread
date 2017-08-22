@@ -169,7 +169,7 @@ class Dropbox {
             callback( "write", data, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( "write", undefined, error );
+            callback( "write", undefined, textStatus );
         });
 
     }
@@ -277,7 +277,7 @@ class Pocket {
             callback( data, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -517,7 +517,7 @@ class Evernote {
             result && result.code == 200 && callback( result, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
