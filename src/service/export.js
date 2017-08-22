@@ -639,7 +639,7 @@ class Onenote {
             textStatus != "success" && callback( undefined, result );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 }
