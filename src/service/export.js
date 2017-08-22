@@ -228,7 +228,7 @@ class Pocket {
             callback( data, textStatus == "success" ? "" : textStatus );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 

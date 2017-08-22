@@ -54,7 +54,8 @@ export default class Auth extends React.Component {
                 if ( value ) {
                     new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
                     exp.pocket.Request( ( result, error ) => {
-                        exp.pocket.Redirect( result.code ).done( () => {
+                        error  && new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
+                        !error && exp.pocket.Redirect( result.code ).done( () => {
                             exp.pocket.Auth( ( result, error ) => {
                                 storage.secret.pocket.access_token = result.access_token;
                                 storage.Safe( ()=> {
