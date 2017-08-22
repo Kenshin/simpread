@@ -794,6 +794,55 @@ class GDrive {
     }
 }
 
+/**
+ * Kindle
+ * 
+ * @class
+ */
+class Kindle {
+
+    constructor() {
+        this.id = "";
+    }
+
+    get host() {
+        //return "http://localhost:3000/view";
+        return "https://simpread.herokuapp.com/view";
+    }
+
+    get server() {
+        return "http://fivefilters.org/kindle-it/send.php";
+    }
+
+    Read( url, title, desc, content, custom, callback ) {
+        $.ajax({
+            url     : `${this.host}/read`,
+            type    : "POST",
+            data    : {
+                url,
+                title,
+                desc,
+                content,
+                custom,
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( textStatus == "success" && result && result.id ) {
+                this.id = result.id;
+                callback( result );
+            } else callback( undefined, "error" );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, textStatus );
+        });
+    }
+
+    Send() {
+        const url = `${this.server}?url=${this.host}/${this.id}.html`;
+        console.log( url )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+}
+
 const dropbox = new Dropbox();
 defer.promise( dropbox );
 
@@ -806,6 +855,7 @@ const evernote = new Evernote();
 
 const onenote  = new Onenote();
 const gdrive   = new GDrive();
+const kindle   = new Kindle();
 
 export {
     png      as PNG,
@@ -818,4 +868,5 @@ export {
     evernote,
     onenote,
     gdrive,
+    kindle,
 }
