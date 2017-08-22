@@ -93,6 +93,7 @@ const name = "simpread",
         version   : "2017-04-03",
         create    : "",
         update    : "",
+        sync      : "",
         focus     : 0,
         read      : 0,
         esc       : true,
@@ -579,7 +580,7 @@ class Storage {
                         site[0] = item[0];
                     }
 
-                    if ( curver == "1.0.0"  && newver == "1.0.2" ) {
+                    if ( curver == "1.0.0" ) {
                         curver = "1.0.1";
                     }
 
