@@ -10,11 +10,13 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.0", "Sun Jun 11 2017 12:30:00 GMT+0800 (CST)" ],
           [ "1.0.1", "Fri Jun 30 2017 09:27:18 GMT+0800 (CST)" ],
           [ "1.0.2", "Mon Aug 07 2017 19:03:50 GMT+0800 (CST)" ],
+          [ "1.0.3", "Mon Aug 21 2017 04:09:23 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
           [ "1.0.1", "新增「高级设定」选项页，" ],
           [ "1.0.2", "新增「自定义样式，论坛类页面与分页功能」，" ],
+          [ "1.0.3", "更新 到最新版本 1.0.3 ，新增「保存到 Onenote · Google Drive · 印象笔记 · Pocket · Linnk 等功能」，" ],
     ]);
 
 /**
@@ -77,6 +79,11 @@ function Verify( curver, data ) {
             css   : "",
         };
         curver = "1.0.2";
+    }
+
+    if ( curver == "1.0.2" ) {
+        data.option.sync = "";
+        curver = "1.0.3";
     }
 
     /*
