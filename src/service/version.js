@@ -16,7 +16,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.0", "" ],
           [ "1.0.1", "新增「高级设定」选项页，" ],
           [ "1.0.2", "新增「自定义样式，论坛类页面与分页功能」，" ],
-          [ "1.0.3", "更新 到最新版本 1.0.3 ，新增「保存到 Onenote · Google Drive · 印象笔记 · Pocket · Linnk 等功能」，" ],
+          [ "1.0.3", "新增「保存到 Onenote · Google Drive · 印象笔记 · Pocket · Linnk 等功能」，" ],
     ]);
 
 /**
