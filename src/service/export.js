@@ -323,7 +323,7 @@ class Linnk {
             callback( result, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -344,7 +344,7 @@ class Linnk {
             callback( JSON.parse(result), undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -357,7 +357,7 @@ class Linnk {
             callback( JSON.parse(result), undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -375,7 +375,7 @@ class Linnk {
             callback( JSON.parse(result), undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
