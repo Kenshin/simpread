@@ -183,6 +183,7 @@ class Read extends React.Component {
                 storage.Safe( ()=> {
                     if ( storage.secret.linnk.access_token ) {
                         exp.linnk.access_token = storage.secret.linnk.access_token;
+                        new Notify().Render( "开始保存到 Linnk，请稍等..." );
                         exp.linnk.GetSafeGroup( storage.secret.linnk.group_name, ( result, error ) => {
                             if ( !error ) {
                                 exp.linnk.group_id = result.data.groupId;
