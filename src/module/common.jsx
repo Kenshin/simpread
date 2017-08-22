@@ -17,7 +17,7 @@ export default class CommonOpt extends React.Component {
     }
 
     state = {
-        update: ( update => !update ? "从未同步过，建议同步一次！" : `上次同步时间： ${ update }` ) ( storage.option.update )
+        sync: ( sync => !sync ? "从未同步过，建议同步一次！" : `上次同步时间： ${ sync }` ) ( storage.option.sync )
     };
 
     sync() {
@@ -46,7 +46,11 @@ export default class CommonOpt extends React.Component {
                           remote = new Date( json.option.update.replace( /年|月/ig, "-" ).replace( "日", "" ));
                     if ( ver.Compare( json.version ) == 1 ) {
                         new Notify().Render( "本地版本与远程版本不一致，且本地版本较新，是否覆盖远程版本？", "覆盖", () => {
-                            dbx.Write( dbx.config_name, storage.Export(), callback );
+                            storage.option.sync = Now();
+                            storage.Write( () => {
+                                watch.SendMessage( "import", true );
+                                dbx.Write( dbx.config_name, storage.Export(), callback );
+                            }, storage.simpread );
                         });
                     }
                     else if ( local < remote ) {
@@ -58,7 +62,11 @@ export default class CommonOpt extends React.Component {
                         });
                     } else if ( local > remote ) {
                         new Notify().Render( "本地配置文件较新，是否覆盖远程备份文件？", "覆盖", () => {
-                            dbx.Write( dbx.config_name, storage.Export(), callback );
+                            storage.option.sync = Now();
+                            storage.Write( () => {
+                                watch.SendMessage( "import", true );
+                                dbx.Write( dbx.config_name, storage.Export(), callback );
+                            }, storage.simpread );
                         });
                     } else {
                         new Notify().Render( "本地与远程数据相同，无需重复同步。" );
@@ -180,7 +188,7 @@ export default class CommonOpt extends React.Component {
                         icon={ ss.IconPath( "sync_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="md-waves-effect md-waves-button"
-                        //tooltip={{ text: this.state.update }}
+                        tooltip={{ text: this.state.sync }}
                         onClick={ ()=>this.sync() } />
                 <div style={{ display: 'inline-flex', width: '100%' }}>
                     <Button type="raised" text="从本地导入配置文件" width="100%"
