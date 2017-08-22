@@ -180,7 +180,7 @@ export default class CommonOpt extends React.Component {
                         icon={ ss.IconPath( "sync_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="md-waves-effect md-waves-button"
-                        tooltip={{ text: this.state.update }}
+                        //tooltip={{ text: this.state.update }}
                         onClick={ ()=>this.sync() } />
                 <div style={{ display: 'inline-flex', width: '100%' }}>
                     <Button type="raised" text="从本地导入配置文件" width="100%"
