@@ -381,12 +381,12 @@ class Linnk {
 
     GetSafeGroup( name, callback ) {
         this.Groups( result => {
-            if ( result.code == 200 ) {
+            if ( result && result.code == 200 ) {
                 const group = this.GetGroup( name, result.data );
                 !group && this.NewGroup( name, callback );
                 group  && callback({ data: group, code: 200 }, undefined );
             } else {
-                callback( undefined, result.code );
+                callback( undefined, "error" );
             }
         })
     }
