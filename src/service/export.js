@@ -255,7 +255,7 @@ class Pocket {
             callback( data, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -459,7 +459,7 @@ class Evernote {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
                 callback( result, undefined );
             } else {
-                callback( undefined, error );
+                callback( undefined, "error" );
             }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
@@ -492,7 +492,7 @@ class Evernote {
             } else if ( result && result.code == 401 ) {
                 console.log( "result.code == 401" )
             } else {
-                callback( undefined, result );
+                callback( undefined, "error" );
             }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
@@ -513,7 +513,7 @@ class Evernote {
             }
         }).done( ( result, textStatus, jqXHR ) => {
             console.log( "evernote add note result = ", result )
-            result && result.code == -1 &&  callback( undefined, result );
+            result && result.code == -1 &&  callback( undefined, "error" );
             result && result.code == 200 && callback( result, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
@@ -616,11 +616,11 @@ class Onenote {
                 this.access_token = result.access_token;
                 callback( result, undefined );
             } else {
-                callback( undefined, result );
+                callback( undefined, "error" );
             }
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -636,7 +636,7 @@ class Onenote {
         }).done( ( result, textStatus, jqXHR ) => {
             console.log( result, textStatus, jqXHR )
             textStatus == "success" && callback( result, undefined );
-            textStatus != "success" && callback( undefined, result );
+            textStatus != "success" && callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
@@ -719,10 +719,10 @@ class GDrive {
         }).done( ( result, textStatus, jqXHR ) => {
             textStatus == "success" && result && result.aud == this.client_id ?
                 this.CreateFolder( callback ) :
-                callback( undefined, result );
+                callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -738,10 +738,10 @@ class GDrive {
                     this.folder_id = folder.id;
                     callback( result, undefined );
                 } else this.Add( "folder", callback );
-            } else callback( undefined, result );
+            } else callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
-            callback( undefined, error );
+            callback( undefined, textStatus );
         });
     }
 
@@ -786,7 +786,7 @@ class GDrive {
         }).done( ( result, textStatus, jqXHR ) => {
             type == "folder" && textStatus == "success" && ( this.folder_id = result.id );
             textStatus == "success" && callback( result, undefined );
-            textStatus != "success" && callback( undefined, result );
+            textStatus != "success" && callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR.responseJSON, textStatus, "error" )
             callback( undefined, "error" );
