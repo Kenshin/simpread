@@ -262,7 +262,14 @@ class Read extends React.Component {
                 break;
             case "kindle":
                 new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );
-                exp.kindle.Read( location.href, $( "sr-rd-title" ).text(), $( "sr-rd-desc" ).html(), $( "sr-rd-content" ).html(), storage.read.custom, ( result, error ) => {
+                const style = {
+                    theme     : storage.read.theme,
+                    fontsize  : storage.read.fontsize,
+                    fontfamily: storage.read.fontfamily,
+                    layout    : storage.read.layout,
+                    custom    : storage.read.custom,
+                }
+                exp.kindle.Read( location.href, $( "sr-rd-title" ).text(), $( "sr-rd-desc" ).html(), $( "sr-rd-content" ).html(), style, ( result, error ) => {
                     error  && new Notify().Render( 2, "保存到 Kindle 失败，请稍候再试！" );
                     !error && new Notify().Render( "保存成功，3 秒钟后将跳转到发送页面。" );
                     !error && setTimeout( ()=>{ exp.kindle.Send(); }, 3000 );
