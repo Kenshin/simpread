@@ -814,7 +814,7 @@ class Kindle {
         return "http://fivefilters.org/kindle-it/send.php";
     }
 
-    Read( url, title, desc, content, custom, callback ) {
+    Read( url, title, desc, content, style, callback ) {
         $.ajax({
             url     : `${this.host}/read`,
             type    : "POST",
@@ -823,7 +823,7 @@ class Kindle {
                 title,
                 desc,
                 content,
-                custom,
+                style,
             }
         }).done( ( result, textStatus, jqXHR ) => {
             if ( textStatus == "success" && result && result.id ) {
