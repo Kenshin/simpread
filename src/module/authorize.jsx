@@ -32,13 +32,13 @@ export default class Auth extends React.Component {
     }
 
     onChange( state, value, flag ) {
-        const dbx = exp.dropbox;
+        const { dropbox, pocket } = exp;
         switch ( state ) {
             case "dropbox":
                 if ( value ) {
-                    dbx.New().Auth();
-                    dbx.dtd.done( () => {
-                        storage.secret.dropbox.access_token = dbx.access_token;
+                    dropbox.New().Auth();
+                    dropbox.dtd.done( () => {
+                        storage.secret.dropbox.access_token = dropbox.access_token;
                         storage.Safe( () => {
                             new Notify().Render( "已成功授权 Dropbox 。" );
                             this.setState({ secret: storage.secret });
@@ -54,12 +54,12 @@ export default class Auth extends React.Component {
             case "pocket":
                 if ( value ) {
                     new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
-                    exp.pocket.Request( ( result, error ) => {
+                    pocket.Request( ( result, error ) => {
                         error  && new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
                         if ( !error ) {
-                            exp.pocket.New().Login( result.code );
-                            exp.pocket.dtd.done( ()=> {
-                                exp.pocket.Auth( ( result, error ) => {
+                            pocket.New().Login( result.code );
+                            pocket.dtd.done( ()=> {
+                                pocket.Auth( ( result, error ) => {
                                     if ( error ) {
                                         new Notify().Render( 2, `获取 Pocket 授权失败，请重新获取。` );
                                         storage.secret[state].access_token = "";
