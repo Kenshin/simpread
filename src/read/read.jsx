@@ -140,6 +140,31 @@ class Read extends React.Component {
                     $( "sr-rd-crlbar" ).removeAttr( "style" );
                 }, 500 );
                 break;
+            case "kindle":
+                new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );
+                const style = {
+                    theme     : storage.read.theme,
+                    fontsize  : storage.read.fontsize,
+                    fontfamily: storage.read.fontfamily,
+                    layout    : storage.read.layout,
+                    custom    : storage.read.custom,
+                }
+                exp.kindle.Read( location.href, $( "sr-rd-title" ).text(), $( "sr-rd-desc" ).html(), $( "sr-rd-content" ).html(), style, ( result, error ) => {
+                    error  && new Notify().Render( 2, "保存到 Kindle 失败，请稍候再试！" );
+                    !error && new Notify().Render( "保存成功，3 秒钟后将跳转到发送页面。" );
+                    !error && setTimeout( ()=>{ exp.kindle.Send(); }, 3000 );
+                });
+                break;
+        }
+    }
+
+    /**
+     * Controlbar action event: Service, inlcude: "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive"
+     * @param {string} type, include: exit, setting, save, scroll, option
+     * @param {string} value 
+     */
+    onService( type, value ) {
+        switch( type ) {
             case "dropbox":
                 exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
                     if ( error ) {
@@ -260,21 +285,6 @@ class Read extends React.Component {
                     }
                 });
                 break;
-            case "kindle":
-                new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );
-                const style = {
-                    theme     : storage.read.theme,
-                    fontsize  : storage.read.fontsize,
-                    fontfamily: storage.read.fontfamily,
-                    layout    : storage.read.layout,
-                    custom    : storage.read.custom,
-                }
-                exp.kindle.Read( location.href, $( "sr-rd-title" ).text(), $( "sr-rd-desc" ).html(), $( "sr-rd-content" ).html(), style, ( result, error ) => {
-                    error  && new Notify().Render( 2, "保存到 Kindle 失败，请稍候再试！" );
-                    !error && new Notify().Render( "保存成功，3 秒钟后将跳转到发送页面。" );
-                    !error && setTimeout( ()=>{ exp.kindle.Send(); }, 3000 );
-                });
-                break;
         }
     }
 
@@ -298,7 +308,7 @@ class Read extends React.Component {
                 { Article }
                 { Page    }
                 <Footer />
-                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
+                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } onService={ (t,v)=>this.onService( t,v ) } />
             </sr-read>
         )
     }
