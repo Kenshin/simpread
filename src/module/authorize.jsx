@@ -51,87 +51,72 @@ export default class Auth extends React.Component {
 
         switch ( state ) {
             case "dropbox":
-                //if ( value ) {
-                    dropbox.New().Auth();
-                    dropbox.dtd.done( () => {
-                        storage.secret.dropbox.access_token = dropbox.access_token;
-                        storage.Safe( () => {
-                            new Notify().Render( "已成功授权 Dropbox 。" );
-                            this.setState({ secret: storage.secret });
-                        }, storage.secret );
-                    }).fail( error => {
-                        console.error( error )
-                        new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
-                    });
-                //} else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+                dropbox.New().Auth();
+                dropbox.dtd.done( () => {
+                    storage.secret.dropbox.access_token = dropbox.access_token;
+                    storage.Safe( () => {
+                        new Notify().Render( "已成功授权 Dropbox 。" );
+                        this.setState({ secret: storage.secret });
+                    }, storage.secret );
+                }).fail( error => {
+                    console.error( error )
+                    new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
+                });
                 break;
             case "pocket":
-                //if ( value ) {
-                    new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
-                    pocket.Request( ( result, error ) => {
-                        error  && new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
-                        if ( !error ) {
-                            pocket.New().Login( result.code );
-                            pocket.dtd.done( ()=> {
-                                pocket.Auth( ( result, error ) => {
-                                    if ( error ) {
-                                        new Notify().Render( 2, `获取 Pocket 授权失败，请重新获取。` );
-                                        storage.secret[state].access_token = "";
+                new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
+                pocket.Request( ( result, error ) => {
+                    error  && new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
+                    if ( !error ) {
+                        pocket.New().Login( result.code );
+                        pocket.dtd.done( ()=> {
+                            pocket.Auth( ( result, error ) => {
+                                if ( error ) {
+                                    new Notify().Render( 2, `获取 Pocket 授权失败，请重新获取。` );
+                                    storage.secret[state].access_token = "";
+                                    this.setState({ secret: storage.secret });
+                                } else {
+                                    storage.secret.pocket.access_token = result.access_token;
+                                    storage.Safe( ()=> {
+                                        new Notify().Render( "已成功授权 Pocket 。" );
                                         this.setState({ secret: storage.secret });
-                                    } else {
-                                        storage.secret.pocket.access_token = result.access_token;
-                                        storage.Safe( ()=> {
-                                            new Notify().Render( "已成功授权 Pocket 。" );
-                                            this.setState({ secret: storage.secret });
-                                        }, storage.secret );
-                                    }
-                                });
-                            }).fail( error => {
-                                console.error( error )
-                                new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
+                                    }, storage.secret );
+                                }
                             });
-                        }
-                    });
-                //} else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
-                //$( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
+                        }).fail( error => {
+                            console.error( error )
+                            new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
+                        });
+                    }
+                });
                 break;
             case "linnk":
-                //if ( !flag && !storage.secret.linnk.access_token ) {
-                //    this.setState({ linnk: !this.state.linnk });
-                //    return;
-                //}
-                //if ( value ) {
-                    linnk.Login( this.props.linnk.username, this.props.linnk.password, ( result, error ) => {
-                        if ( error ) {
-                            new Notify().Render( 2, "获取 Linnk 授权失败，请重新获取。" );
+                linnk.Login( this.props.linnk.username, this.props.linnk.password, ( result, error ) => {
+                    if ( error ) {
+                        new Notify().Render( 2, "获取 Linnk 授权失败，请重新获取。" );
+                    } else {
+                        if ( result.code == 200 ) {
+                            linnk.access_token            = result.token;
+                            storage.secret.linnk.access_token = result.token;
+                            linnk.Groups( result => {
+                                if ( result.code == 200 ) {
+                                    const obj = linnk.GetGroup( "", result.data );
+                                    storage.secret.linnk.group_name = obj.groupName;
+                                    storage.Safe( ()=> {
+                                        new Notify().Render( "已成功授权 Linnk 。" );
+                                        this.setState({ secret: storage.secret, linnk: false });
+                                    }, storage.secret );
+                                } else {
+                                    const msg = linnk.error_code[result.code];
+                                    new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
+                                }
+                            });
                         } else {
-                            if ( result.code == 200 ) {
-                                linnk.access_token            = result.token;
-                                storage.secret.linnk.access_token = result.token;
-                                linnk.Groups( result => {
-                                    if ( result.code == 200 ) {
-                                        const obj = linnk.GetGroup( "", result.data );
-                                        storage.secret.linnk.group_name = obj.groupName;
-                                        storage.Safe( ()=> {
-                                            new Notify().Render( "已成功授权 Linnk 。" );
-                                            this.setState({ secret: storage.secret, linnk: false });
-                                        }, storage.secret );
-                                    } else {
-                                        const msg = linnk.error_code[result.code];
-                                        new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
-                                    }
-                                });
-                            } else {
-                                const msg = linnk.error_code[result.code];
-                                new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
-                            }
+                            const msg = linnk.error_code[result.code];
+                            new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
                         }
-                    })
-                //} else {
-                //    this.props.linnk.username = "";
-                //    this.props.linnk.password = "";
-                //    clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
-                //}
+                    }
+                })
                 break;
             case "yinxiang":
             case "evernote":
@@ -141,30 +126,28 @@ export default class Auth extends React.Component {
                     storage.secret[state].access_token = "";
                     this.setState({ secret: storage.secret });
                 };
-                //if ( value ) {
-                    evernote.env = state;
-                    const name       = evernote.name;
-                    new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
-                    evernote.New().RequestToken( ( result, error ) => {
-                        if ( error ) {
-                            failed( error, name );
-                        } else {
-                            evernote.dtd.done( () => {
-                                evernote.Auth( ( result, error )=> {
-                                    if ( error ) {
-                                        failed( error, name );
-                                    } else {
-                                        storage.secret[state].access_token = evernote.access_token;
-                                        storage.Safe( ()=> {
-                                            new Notify().Render( `已成功授权 ${name} 。` );
-                                            this.setState({ secret: storage.secret });
-                                        }, storage.secret );
-                                    }
-                                });
-                            }).fail( error => failed( error, name ));
-                        }
-                    });
-                //} else clear( state, state == "yinxiang" ? "印象笔记" : "Evernote" );
+                evernote.env = state;
+                const name       = evernote.name;
+                new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
+                evernote.New().RequestToken( ( result, error ) => {
+                    if ( error ) {
+                        failed( error, name );
+                    } else {
+                        evernote.dtd.done( () => {
+                            evernote.Auth( ( result, error )=> {
+                                if ( error ) {
+                                    failed( error, name );
+                                } else {
+                                    storage.secret[state].access_token = evernote.access_token;
+                                    storage.Safe( ()=> {
+                                        new Notify().Render( `已成功授权 ${name} 。` );
+                                        this.setState({ secret: storage.secret });
+                                    }, storage.secret );
+                                }
+                            });
+                        }).fail( error => failed( error, name ));
+                    }
+                });
                 break;
             case "onenote":
                 const faileds = ( error, name ) => {
@@ -173,22 +156,20 @@ export default class Auth extends React.Component {
                     storage.secret[state].access_token = "";
                     this.setState({ secret: storage.secret });
                 };
-                //if ( value ) {
-                    onenote.New().Login();
-                    onenote.dtd.done( ()=> {
-                        onenote.Auth( ( result, error ) => {
-                            if ( error ) {
-                                faileds( error, "Onenote" );
-                            } else {
-                                storage.secret.onenote.access_token = onenote.access_token;
-                                storage.Safe( ()=> {
-                                    new Notify().Render( `已成功授权 Onenote 。` );
-                                    this.setState({ secret: storage.secret });
-                                }, storage.secret );
-                            }
-                        });
-                    }).fail( error => faileds( error, "Onenote" ));
-                //} else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+                onenote.New().Login();
+                onenote.dtd.done( ()=> {
+                    onenote.Auth( ( result, error ) => {
+                        if ( error ) {
+                            faileds( error, "Onenote" );
+                        } else {
+                            storage.secret.onenote.access_token = onenote.access_token;
+                            storage.Safe( ()=> {
+                                new Notify().Render( `已成功授权 Onenote 。` );
+                                this.setState({ secret: storage.secret });
+                            }, storage.secret );
+                        }
+                    });
+                }).fail( error => faileds( error, "Onenote" ));
                 break;
             case "gdrive":
                 const failedss = ( error, name ) => {
@@ -197,23 +178,21 @@ export default class Auth extends React.Component {
                     storage.secret[state].access_token = "";
                     this.setState({ secret: storage.secret });
                 };
-                //if ( value ) {
-                    gdrive.New().Login();
-                    gdrive.dtd.done( ()=> {
-                        gdrive.Auth( ( result, error ) => {
-                            if ( error ) {
-                                faileds( error, "Google 云端硬盘" );
-                            } else {
-                                storage.secret.gdrive.access_token = gdrive.access_token;
-                                storage.secret.gdrive.folder_id    = gdrive.folder_id;
-                                storage.Safe( ()=> {
-                                    new Notify().Render( `已成功授权 Google 云端硬盘 。` );
-                                    this.setState({ secret: storage.secret });
-                                }, storage.secret );
-                            }
-                        });
-                    }).fail( error => failedss( error, "Google 云端硬盘" ));
-                //} else clear( state, "Google 云端硬盘" );
+                gdrive.New().Login();
+                gdrive.dtd.done( ()=> {
+                    gdrive.Auth( ( result, error ) => {
+                        if ( error ) {
+                            faileds( error, "Google 云端硬盘" );
+                        } else {
+                            storage.secret.gdrive.access_token = gdrive.access_token;
+                            storage.secret.gdrive.folder_id    = gdrive.folder_id;
+                            storage.Safe( ()=> {
+                                new Notify().Render( `已成功授权 Google 云端硬盘 。` );
+                                this.setState({ secret: storage.secret });
+                            }, storage.secret );
+                        }
+                    });
+                }).fail( error => failedss( error, "Google 云端硬盘" ));
                 break;
         }
     }
