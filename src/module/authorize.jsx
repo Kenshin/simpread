@@ -166,13 +166,13 @@ export default class Auth extends React.Component {
                     this.setState({ secret: storage.secret });
                 };
                 if ( value ) {
-                    exp.onenote.New().Login();
-                    exp.onenote.dtd.done( ()=> {
-                        exp.onenote.Auth( ( result, error ) => {
+                    onenote.New().Login();
+                    onenote.dtd.done( ()=> {
+                        onenote.Auth( ( result, error ) => {
                             if ( error ) {
                                 faileds( error, "Onenote" );
                             } else {
-                                storage.secret.onenote.access_token = exp.onenote.access_token;
+                                storage.secret.onenote.access_token = onenote.access_token;
                                 storage.Safe( ()=> {
                                     new Notify().Render( `已成功授权 Onenote 。` );
                                     this.setState({ secret: storage.secret });
@@ -192,14 +192,14 @@ export default class Auth extends React.Component {
                     this.setState({ secret: storage.secret });
                 };
                 if ( value ) {
-                    exp.gdrive.New().Login();
-                    exp.gdrive.dtd.done( ()=> {
-                        exp.gdrive.Auth( ( result, error ) => {
+                    gdrive.New().Login();
+                    gdrive.dtd.done( ()=> {
+                        gdrive.Auth( ( result, error ) => {
                             if ( error ) {
                                 faileds( error, "Google 云端硬盘" );
                             } else {
-                                storage.secret.gdrive.access_token = exp.gdrive.access_token;
-                                storage.secret.gdrive.folder_id    = exp.gdrive.folder_id;
+                                storage.secret.gdrive.access_token = gdrive.access_token;
+                                storage.secret.gdrive.folder_id    = gdrive.folder_id;
                                 storage.Safe( ()=> {
                                     new Notify().Render( `已成功授权 Google 云端硬盘 。` );
                                     this.setState({ secret: storage.secret });
