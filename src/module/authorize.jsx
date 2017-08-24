@@ -36,6 +36,18 @@ export default class Auth extends React.Component {
         switch ( state ) {
             case "dropbox":
                 if ( value ) {
+                    dbx.New().Auth();
+                    dbx.dtd.done( () => {
+                        storage.secret.dropbox.access_token = dbx.access_token;
+                        storage.Safe( () => {
+                            new Notify().Render( "已成功授权 Dropbox 。" );
+                            this.setState({ secret: storage.secret });
+                        }, storage.secret );
+                    }).fail( error => {
+                        console.error( error )
+                        new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
+                    });
+                    /*
                     dbx.Auth().done( () => {
                         storage.secret.dropbox.access_token = dbx.access_token;
                         storage.Safe( () => {
@@ -46,6 +58,7 @@ export default class Auth extends React.Component {
                         console.error( error )
                         new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
                     });
+                */
                 } else {
                     this.clear( "dropbox" );
                 }
