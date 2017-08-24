@@ -131,19 +131,19 @@ export default class Auth extends React.Component {
                     this.setState({ secret: storage.secret });
                 };
                 if ( value ) {
-                    exp.evernote.env = state;
-                    const name       = exp.evernote.name;
+                    evernote.env = state;
+                    const name       = evernote.name;
                     new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
-                    exp.evernote.New().RequestToken( ( result, error ) => {
+                    evernote.New().RequestToken( ( result, error ) => {
                         if ( error ) {
                             failed( error, name );
                         } else {
-                            exp.evernote.dtd.done( () => {
-                                exp.evernote.Auth( ( result, error )=> {
+                            evernote.dtd.done( () => {
+                                evernote.Auth( ( result, error )=> {
                                     if ( error ) {
                                         failed( error, name );
                                     } else {
-                                        storage.secret[state].access_token = exp.evernote.access_token;
+                                        storage.secret[state].access_token = evernote.access_token;
                                         storage.Safe( ()=> {
                                             new Notify().Render( `已成功授权 ${name} 。` );
                                             this.setState({ secret: storage.secret });
