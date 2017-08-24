@@ -64,10 +64,7 @@ export default class Auth extends React.Component {
                         new Notify().Render( "已成功授权 Dropbox 。" );
                         this.setState({ secret: storage.secret });
                     }, storage.secret );
-                }).fail( error => {
-                    console.error( error )
-                    new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
-                });
+                }).fail( error => failed( error, "Dropbox" ));
                 break;
             case "pocket":
                 new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
