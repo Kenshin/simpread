@@ -31,6 +31,13 @@ export default class Auth extends React.Component {
                     this.setState({ secret: storage.secret });
                 }, storage.secret );
             },
+            success = ( id, name, data ) => {
+                Object.keys( data ).forEach( item => storage.secret[id][item] = data[item] );
+                storage.Safe( () => {
+                    new Notify().Render( `已成功授权 ${name} 。` );
+                    this.setState({ secret: storage.secret });
+                }, storage.secret );
+            },
             failed = ( error, name ) => {
                 console.error( `${name} auth faild, error: ${error}` )
                 new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
@@ -58,13 +65,9 @@ export default class Auth extends React.Component {
         switch ( state ) {
             case "dropbox":
                 dropbox.New().Auth();
-                dropbox.dtd.done( () => {
-                    storage.secret.dropbox.access_token = dropbox.access_token;
-                    storage.Safe( () => {
-                        new Notify().Render( "已成功授权 Dropbox 。" );
-                        this.setState({ secret: storage.secret });
-                    }, storage.secret );
-                }).fail( error => failed( error, "Dropbox" ));
+                dropbox.dtd
+                    .done( ()    => success( state, "Dropbox", { access_token: dropbox.access_token } ))
+                    .fail( error => failed( error, "Dropbox" ));
                 break;
             case "pocket":
                 new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
@@ -75,13 +78,7 @@ export default class Auth extends React.Component {
                         pocket.dtd.done( ()=> {
                             pocket.Auth( ( result, error ) => {
                                 if ( error ) failed( error, "Pocket" );
-                                else {
-                                    storage.secret.pocket.access_token = result.access_token;
-                                    storage.Safe( ()=> {
-                                        new Notify().Render( "已成功授权 Pocket 。" );
-                                        this.setState({ secret: storage.secret });
-                                    }, storage.secret );
-                                }
+                                else success( state, "Pocket", { access_token: pocket.access_token } )
                             });
                         }).fail( error => failed( error, "Pocket" ));
                     }
