@@ -332,7 +332,8 @@ class Linnk {
             type    : "POST",
             data,
         }).done( ( result, textStatus, jqXHR ) => {
-            callback( result, undefined );
+            result && result.code == 200 && ( this.access_token = result.token );
+            callback( result, undefined );                
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
@@ -374,7 +375,8 @@ class Linnk {
     }
 
     GetGroup( name, target ) {
-        return target.find( obj => obj.groupName == name );
+        const group = target.find( obj => obj.groupName == name );
+        this.group_name = group.groupName;
     }
 
     NewGroup( name, callback ) {
