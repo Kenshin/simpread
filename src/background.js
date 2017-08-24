@@ -25,7 +25,7 @@ storage.Read( () => {
                     local.Version( ver.version );
                     browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
                 }, ver.Verify( storage.version, storage.simpread ) );
-            getNewsitesHandler( result );            
+            getNewsitesHandler( result );
         });
     }
     menu.CreateAll();
@@ -110,6 +110,22 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
     watch.Pull( tabId );
     if ( changeInfo.status == "complete" ) {
         console.log( "background tabs Listener:update", tabId, changeInfo, tab );
+
+        if ( tab.url.startsWith( "http://ksria.com/simpread/auth.html" )  || 
+             tab.url.startsWith( "https://simpread.herokuapp.com/?code=") || 
+            tab.url.startsWith( "https://simpread.herokuapp.com/?error=" )
+        ) {
+            const url = tab.url.replace( "http://ksria.com/simpread/auth.html?id=", "" ),
+                  id  = url.includes( "#" ) || url.includes( "&" ) ? url.substr( 0, url.search( /\S(#|&)/ ) + 1 ) : url ;
+            browser.tabs.query( {}, tabs => {
+                const opts = tabs.find( tab => tab.url.includes( browser.extension.getURL( "options/options.html" ) ));
+                if ( opts ) {
+                    browser.tabs.sendMessage( opts.id, msg.Add( msg.MESSAGE_ACTION.redirect_uri, { uri: tab.url, id } ));
+                    chrome.tabs.remove( tabId );
+                }
+            });
+        }
+
         if ( !tab.url.startsWith( "chrome://" ) ) {
             browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
         } else {

@@ -18,6 +18,9 @@ import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
 import * as watch from 'watch';
+import {browser}  from 'browser';
+import * as msg   from 'message';
+import * as exp   from 'export';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -46,6 +49,34 @@ $( window ).scroll( (event) => {
  */
 window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => item.route == window.location.hash ) );
 tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
+
+/**
+ * Listen runtime message
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.redirect_uri ) {
+        const { id, uri } = request.value;
+        switch ( id ) {
+            case "pocket":
+                exp.pocket.Accesstoken();
+                break;
+            case "dropbox":
+                exp.dropbox.access_token = uri;
+                break;
+            case "evernote":
+            case "yinxiang":
+                exp.evernote.Accesstoken( uri );
+                break;
+            case "gdrive":
+                exp.gdrive.Accesstoken( uri );
+                break;
+            default:
+                id.startsWith( "https://simpread.herokuapp.com/?" ) &&
+                    exp.onenote.Accesstoken( uri );
+                break;
+        }
+    }
+});
 
 /**
  * Entry:
@@ -79,6 +110,12 @@ function hashnotify() {
             case "clear":
                 new Notify().Render( 0, "数据清除成功！" );
                 break;
+            case "sync":
+                new Notify().Render( 0, "数据同步成功！" );
+                break;
+            case "auth":
+                new Notify().Render( 0, "授权成功！" );
+                break;
             default:
                 // TO-DO
         }
@@ -99,10 +136,10 @@ function vernotify() {
         new Notify().Render( "简悦 版本提示", msg );
 
         if ( hash.startsWith( "#update?ver=" )) {
-            storage.Write( ()=> {
-                watch.SendMessage( "version", true );
-                console.log( "site editor update complete!" )
-            });
+            //storage.Write( ()=> {
+            watch.SendMessage( "version", true );
+            //    console.log( "site editor update complete!" )
+            //});
         }
 
         history.pushState( "", "", "/options/options.html" );
@@ -110,7 +147,7 @@ function vernotify() {
 }
 
 /**
- * First load call remote simpread data structure( usage storage.Sync() )
+ * First load
  *
  * @param {bool} is first load
  */
@@ -120,16 +157,6 @@ function firstLoad( first ) {
         !error && storage.Statistics( "create" );
     });
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
-    /* remove https://trello.com/c/p8cwFcu1/71-simpread-dropbox
-    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first &&
-        storage.Sync( "get", success => {
-            success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
-            success && mainRender( tabsItemID );
-            success && storage.Write( ()=> {
-                new Notify().Render( 0, "数据恢复成功！" );
-            });
-    });
-    */
 }
 
 /**

@@ -93,6 +93,7 @@ const name = "simpread",
         version   : "2017-04-03",
         create    : "",
         update    : "",
+        sync      : "",
         focus     : 0,
         read      : 0,
         esc       : true,
@@ -121,6 +122,33 @@ let current  = {},
         read,
         unrdist : [],
         sites   : [],
+    },
+    secret = {
+        version   : "2017-08-11",
+        "dropbox" : {
+            "access_token": ""
+        },
+        "pocket"  : {
+            "access_token": "",
+            "tags"        : "",
+        },
+        "linnk"   : {
+            access_token  : "",
+            "group_name"  : "",
+        },
+        "yinxiang" : {
+            access_token  : "",
+        },
+        "evernote" : {
+            access_token  : "",
+        },
+        "onenote"  : {
+            access_token  : "",
+        },
+        "gdrive"   : {
+            access_token  : "",
+            folder_id     : "",
+        },
     },
     stcode = -1;
 
@@ -199,6 +227,15 @@ class Storage {
     }
 
     /**
+     * Get secret data structure
+     * 
+     * @return {object} secret object
+     */
+    get secret() {
+        return secret;
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
@@ -224,7 +261,7 @@ class Storage {
      */
     Write( callback, new_val = undefined ) {
         new_val && Object.keys( new_val ).forEach( key => simpread[ key ] = new_val[key] );
-        save( callback );
+        save( callback, new_val );
     }
 
     /**
@@ -268,7 +305,7 @@ class Storage {
                 simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
             }
             swap( current, simpread[key] );
-            save();
+            save( undefined, true );
         }
         return code;
     }
@@ -332,10 +369,10 @@ class Storage {
             if ( len == 0 ) {
                 simpread.sites = formatSites( newsites );
                 count          = simpread.sites.length;
-                save();
+                save( undefined, type );
             }
             else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
-                save();
+                save( undefined, type );
             }
             callback && callback( { count }, undefined );
         } catch ( error ) {
@@ -350,6 +387,7 @@ class Storage {
      * @param {string} include: set, get
      * @param {function} callback
      */
+    /*
     Sync( state, callback ) {
         if ( state == "set" ) {
             sync = { ...simpread };
@@ -374,6 +412,7 @@ class Storage {
             });
         }
     }
+    */
 
     /**
      * Statistics simpread same info
@@ -386,7 +425,7 @@ class Storage {
         } else {
             simpread.option[ type ] = simpread.option[ type ] + 1;
         }
-        save();
+        save( undefined, type == "create" );
     }
 
     /**
@@ -463,6 +502,44 @@ class Storage {
     }
 
     /**
+     * Safe set/get, secret not import/export
+     * 
+     * @param {object}   secret
+     * @param {function} callback
+     */
+    Safe( callback, data ) {
+        if ( data ) {
+            secret = { ...data };
+            browser.storage.local.set( { ["secret"] : secret }, () => {
+                console.log( "chrome storage safe set success!", secret );
+                callback && callback();
+            });
+        } else {
+            browser.storage.local.get( ["secret"], result => {
+                console.log( "chrome storage safe get success!", result );
+                result && !$.isEmptyObject( result ) && ( secret  = result["secret"] );
+                callback && callback();
+            });
+        }
+    }
+
+    /**
+     * Export, only include: version, option, focus, read, unrdist
+     * 
+     * @return {string} object json stringify
+     */
+    Export() {
+        const download = {
+            version: version,
+            option : { ...this.option },
+            focus  : { ...this.focus  },
+            read   : { ...this.read   },
+            unrdist: this.unrdist,
+        };
+        return JSON.stringify( download );
+    }
+
+    /**
      * Restore simpread[key]
      * 
      * @param {string} @see mode
@@ -479,11 +556,7 @@ class Storage {
      * @param {function} callback
      */
     Clear( state, callback ) {
-        let code = 2;
-        state == "local"  && ( code = 0 );
-        state == "remote" && ( code = 1 );
-        ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
-        ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
+        browser.storage.local.clear( callback );
     }
 
     /**
@@ -507,7 +580,7 @@ class Storage {
                         site[0] = item[0];
                     }
 
-                    if ( curver == "1.0.0"  && newver == "1.0.2" ) {
+                    if ( curver == "1.0.0" ) {
                         curver = "1.0.1";
                     }
 
@@ -591,8 +664,12 @@ function addsites( newsites ) {
 
 /**
  * Call chrome storage set
+ * 
+ * @param {function} callback
+ * @param {object}   when exist no_update = false
  */
-function save( callback ) {
+function save( callback, no_update ) {
+    !no_update && ( simpread.option.update = now());
     browser.storage.local.set( { [name] : simpread }, function() {
         console.log( "chrome storage save success!", simpread );
         origin      = clone( simpread );

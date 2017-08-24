@@ -1,7 +1,7 @@
 {
   "name"            : "__MSG_extension_name__",
   "default_locale"  : "en",
-  "version"         : "1.0.2",
+  "version"         : "1.0.3",
   "short_name"      : "SimpRead",
   "description"     : "__MSG_extension_desc__",
   "homepage_url"    : "http://ksria.com/simpread",
@@ -22,6 +22,7 @@
   "content_scripts" : [
     {
       "matches"     : [ "http://*/*", "https://*/*" ],
+      "exclude_matches": [ "http://localhost:3000/*", "https://simpread.herokuapp.com/view/*" ],
       "js"          : [
         "/bundle/common.js",
         "/bundle/vendors.js",
@@ -40,6 +41,7 @@
     "/assets/images/*",
     "website_list.json"
   ],
+  "content_security_policy":"script-src 'self' https://cdn.bootcss.com/; object-src 'self'",
   "offline_enabled" : true,
   "update_url"      : "https://clients2.google.com/service/update2/crx",
   "manifest_version": 2
