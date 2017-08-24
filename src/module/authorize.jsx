@@ -88,16 +88,10 @@ export default class Auth extends React.Component {
                 linnk.Login( this.props.linnk.username, this.props.linnk.password, ( result, error ) => {
                     if ( error ) failed( error, "Linnk" );
                     else if ( result.code == 200 ) {
-                        linnk.access_token                = result.token;
-                        storage.secret.linnk.access_token = result.token;
                         linnk.Groups( result => {
                             if ( result.code == 200 ) {
-                                const obj = linnk.GetGroup( "", result.data );
-                                storage.secret.linnk.group_name = obj.groupName;
-                                storage.Safe( ()=> {
-                                    new Notify().Render( "已成功授权 Linnk 。" );
-                                    this.setState({ secret: storage.secret, linnk: false });
-                                }, storage.secret );
+                                linnk.GetGroup( "", result.data );
+                                success( state, "Linnk", { access_token: linnk.access_token, group_name: linnk.group_name });
                             } else {
                                 const msg = linnk.error_code[result.code];
                                 new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
