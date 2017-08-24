@@ -69,8 +69,8 @@ export default class Auth extends React.Component {
             case "pocket":
                 new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
                 pocket.Request( ( result, error ) => {
-                    error && failed( error, "Pocket" );
-                    if ( !error ) {
+                    if ( error ) failed( error, "Pocket" );
+                    else {
                         pocket.New().Login( result.code );
                         pocket.dtd.done( ()=> {
                             pocket.Auth( ( result, error ) => {
