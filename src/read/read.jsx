@@ -274,7 +274,7 @@ class Read extends React.Component {
                                 exp.gdrive.folder_id    = storage.secret.gdrive.folder_id;
                                 exp.gdrive.Add( "file",( result, error ) => {
                                     !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
-                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                                    error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
                                 }, exp.gdrive.CreateFile( `${this.props.wrapper.title.trim()}.md`, result ));
                             } else {
                                 new Notify().Render( "请先获取 Google 云端硬盘 的授权，才能使用此功能！", "授权", ()=>{
