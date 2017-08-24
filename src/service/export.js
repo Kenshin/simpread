@@ -677,6 +677,14 @@ class GDrive {
          }
      }
 
+    get errors() {
+        return {
+            401: "授权过期，请重新授权。",
+            403: "调用达到最大值，请重新授权后再使用。",
+            500: "Google 服务出现问题，请稍后再使用。",
+        }
+    }
+
     get boundary() {
         return "-------314159265358979323846";
     }
@@ -787,9 +795,10 @@ class GDrive {
             type == "folder" && textStatus == "success" && ( this.folder_id = result.id );
             textStatus == "success" && callback( result, undefined );
             textStatus != "success" && callback( undefined, "error" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR.responseJSON, textStatus, "error" )
-            callback( undefined, "error" );
+        }).fail( ( xhr, status, error ) => {
+            console.error( xhr, status, error )
+            const msg = xhr && xhr.responseJSON && this.errors[xhr.responseJSON.error.code] ? this.errors[xhr.responseJSON.error.code] : "error";
+            callback( undefined, msg );
         });
     }
 }
