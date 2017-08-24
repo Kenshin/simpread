@@ -597,7 +597,6 @@ class Onenote {
             url += `${key}=${params[key]}&`;
         });
         url = url.substr( 0, url.length )
-        console.log( url )
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
     }
 
