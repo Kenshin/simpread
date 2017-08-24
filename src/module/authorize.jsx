@@ -22,17 +22,16 @@ export default class Auth extends React.Component {
         linnk  : undefined,
     }
 
-    clear( id ) {
-        Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
-        storage.Safe( ()=> {
-            id == "yinxiang" && ( id = "印象笔记" );
-            new Notify().Render( `已取消对 ${id.replace( /\S/i, $0=>$0.toUpperCase() )} 的授权。` );
-            this.setState({ secret: storage.secret });
-        }, storage.secret );
-    }
-
     onChange( state, value, flag ) {
-        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp;
+        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
+            clear = ( id, name ) => {
+                Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
+                storage.Safe( ()=> {
+                    new Notify().Render( `已取消对 ${name} 的授权。` );
+                    this.setState({ secret: storage.secret });
+                }, storage.secret );
+            };
+
         switch ( state ) {
             case "dropbox":
                 if ( value ) {
@@ -47,9 +46,7 @@ export default class Auth extends React.Component {
                         console.error( error )
                         new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
                     });
-                } else {
-                    this.clear( "dropbox" );
-                }
+                } else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
                 break;
             case "pocket":
                 if ( value ) {
@@ -79,9 +76,7 @@ export default class Auth extends React.Component {
                         }
                     });
                 }
-                else {
-                    this.clear( "pocket" );
-                }
+                else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
                 $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
                 break;
             case "linnk":
@@ -119,7 +114,7 @@ export default class Auth extends React.Component {
                 } else {
                     this.props.linnk.username = "";
                     this.props.linnk.password = "";
-                    this.clear( "linnk" );
+                    clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
                 }
                 break;
             case "yinxiang":
@@ -154,9 +149,7 @@ export default class Auth extends React.Component {
                         }
                     });
                 }
-                else {
-                    this.clear( state );
-                }
+                else clear( state, state == "yinxiang" ? "印象笔记" : "Evernote" );
                 break;
             case "onenote":
                 const faileds = ( error, name ) => {
@@ -180,9 +173,7 @@ export default class Auth extends React.Component {
                             }
                         });
                     }).fail( error => faileds( error, "Onenote" ));
-                } else {
-                    this.clear( state );
-                }
+                } else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
                 break;
             case "gdrive":
                 const failedss = ( error, name ) => {
@@ -207,9 +198,7 @@ export default class Auth extends React.Component {
                             }
                         });
                     }).fail( error => failedss( error, "Google 云端硬盘" ));
-                } else {
-                    this.clear( state );
-                }
+                } else clear( state, "Google 云端硬盘" );
                 break;
         }
     }
