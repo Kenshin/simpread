@@ -56,18 +56,27 @@ export default class Auth extends React.Component {
                     new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
                     exp.pocket.Request( ( result, error ) => {
                         error  && new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
-                        !error && exp.pocket.Redirect( result.code ).done( () => {
-                            exp.pocket.Auth( ( result, error ) => {
-                                storage.secret.pocket.access_token = result.access_token;
-                                storage.Safe( ()=> {
-                                    new Notify().Render( "已成功授权 Pocket 。" );
-                                    this.setState({ secret: storage.secret });
-                                }, storage.secret );
+                        if ( !error ) {
+                            exp.pocket.New().Login( result.code );
+                            exp.pocket.dtd.done( ()=> {
+                                exp.pocket.Auth( ( result, error ) => {
+                                    if ( error ) {
+                                        new Notify().Render( 2, `获取 Pocket 授权失败，请重新获取。` );
+                                        storage.secret[state].access_token = "";
+                                        this.setState({ secret: storage.secret });
+                                    } else {
+                                        storage.secret.pocket.access_token = result.access_token;
+                                        storage.Safe( ()=> {
+                                            new Notify().Render( "已成功授权 Pocket 。" );
+                                            this.setState({ secret: storage.secret });
+                                        }, storage.secret );
+                                    }
+                                });
+                            }).fail( error => {
+                                console.error( error )
+                                new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
                             });
-                        }).fail( error => {
-                            console.error( error )
-                            new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
-                        });
+                        }
                     });
                 }
                 else {

@@ -58,7 +58,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         const { id, uri } = request.value;
         switch ( id ) {
             case "pocket":
-                exp.pocket.Accesstoken();
+                exp.pocket.Accesstoken( uri );
                 break;
             case "dropbox":
                 exp.dropbox.Accesstoken( uri );
