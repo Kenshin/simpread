@@ -61,7 +61,6 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 exp.pocket.Accesstoken();
                 break;
             case "dropbox":
-                //exp.dropbox.access_token = uri;
                 exp.dropbox.Accesstoken( uri );
                 break;
             case "evernote":

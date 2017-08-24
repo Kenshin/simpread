@@ -58,8 +58,6 @@ function download( data, name ) {
     $a.remove();
 }
 
-//let dbx_token, dbx_error, defer = $.Deferred();
-
 /**
  * Dropbox
  * 
@@ -79,22 +77,6 @@ class Dropbox {
         return "simpread_config.json";
     }
 
-    /*
-    set access_token( uri ) {
-        const arr = uri.match( /access_token=\S+&token_type/i );
-        if ( arr && arr.length > 0 ) {
-            dbx_token = arr[0].replace( /(access_token=)|(&token_type)/ig, "" );
-        } else {
-            dbx_token = uri;
-        }
-        defer.resolve( "token_success" );
-    }
-
-    get access_token() {
-        return dbx_token;
-    }
-    */
-
     New() {
         this.dtd  = $.Deferred();
         this.access_token = "";
@@ -102,15 +84,6 @@ class Dropbox {
     }
 
     Auth() {
-        /*
-        if ( !dbx_error ) {
-            const url = `https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=${this.client_id}&redirect_uri=${this.redirect_uri}`;
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-        } else {
-            defer.reject( "access_failed" );
-        }
-        return this;
-        */
         const url = `https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=${this.client_id}&redirect_uri=${this.redirect_uri}`;
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
     }
@@ -875,7 +848,6 @@ class Kindle {
 }
 
 const dropbox = new Dropbox();
-//defer.promise( dropbox );
 
 const pocket = new Pocket();
 defer_pocket.promise( pocket );
