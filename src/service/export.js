@@ -59,6 +59,24 @@ function download( data, name ) {
 }
 
 /**
+ * Dis contented serice
+ * 
+ * @param {string} service id 
+ */
+function unlink( id ) {
+    const content = {
+        "dropbox" : "https://www.dropbox.com/account/security",
+        "pocket"  : "https://getpocket.com/connected_applications",
+        "evernote": "https://www.evernote.com/AuthorizedServices.action",
+        "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
+        "onenote" : "https://account.live.com/consent/Manage",
+        "gdrive"  : "https://drive.google.com/drive/my-drive",
+        "linnk"   : "https://linnk.net/",
+    }
+    return content[id]
+}
+
+/**
  * Dropbox
  * 
  * @class
@@ -856,6 +874,7 @@ export {
     pdf      as PDF,
     markdown as Markdown,
     download as Download,
+    unlink   as Unlink,
     dropbox,
     pocket,
     linnk,
