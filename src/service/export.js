@@ -260,8 +260,11 @@ class Pocket {
             type    : "POST",
             headers : this.header,
             data,
-        }).done( ( data, textStatus, jqXHR ) => {
-            callback( data, undefined );
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( result && result.access_token ) {
+                this.access_token = result.access_token;
+                callback( result, undefined );    
+            } else callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
