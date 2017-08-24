@@ -170,20 +170,12 @@ class Dropbox {
     }
 }
 
-let defer_pocket = $.Deferred();
-
 /**
  * Pocket
  * 
  * @class
  */
 class Pocket {
-
-    constructor( access_token, code, tags ) {
-        this.access_token = access_token;
-        this.code         = code;
-        this.tags         = tags;
-    }
 
     get consumer_key() {
         return "69741-d75561b7a9a96a511f36552e";
@@ -204,8 +196,12 @@ class Pocket {
         this.tags = value ? value : "simpread";
     }
 
-    Accesstoken() {
-        defer_pocket.resolve( "token_success" );
+    New() {
+        this.dtd = $.Deferred();
+        this.access_token = "";
+        this.code         = "";
+        this.tags         = "";
+        return this;
     }
 
     Request( callback ) {
@@ -227,11 +223,14 @@ class Pocket {
         });
     }
 
-    Redirect( code ) {
+    Login( code ) {
         this.code = code;
         const url = `https://getpocket.com/auth/authorize?request_token=${code}&redirect_uri=${this.redirect_uri}`;
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-        return this;
+    }
+
+    Accesstoken( url ) {
+        url ? this.dtd.resolve() : this.reject();
     }
 
     Auth( callback ) {
@@ -850,7 +849,7 @@ class Kindle {
 const dropbox = new Dropbox();
 
 const pocket = new Pocket();
-defer_pocket.promise( pocket );
+//defer_pocket.promise( pocket );
 
 const linnk = new Linnk();
 
