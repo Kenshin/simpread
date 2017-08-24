@@ -78,7 +78,7 @@ export default class Auth extends React.Component {
                         pocket.dtd.done( ()=> {
                             pocket.Auth( ( result, error ) => {
                                 if ( error ) failed( error, "Pocket" );
-                                else success( state, "Pocket", { access_token: pocket.access_token } )
+                                else success( state, "Pocket", { access_token: pocket.access_token });
                             });
                         }).fail( error => failed( error, "Pocket" ));
                     }
@@ -114,13 +114,7 @@ export default class Auth extends React.Component {
                         evernote.dtd.done( () => {
                             evernote.Auth( ( result, error ) => {
                                 if ( error ) failed( error, name );
-                                else {
-                                    storage.secret[state].access_token = evernote.access_token;
-                                    storage.Safe( ()=> {
-                                        new Notify().Render( `已成功授权 ${name} 。` );
-                                        this.setState({ secret: storage.secret });
-                                    }, storage.secret );
-                                }
+                                else success( state, name, { access_token: evernote.access_token });
                             });
                         }).fail( error => failed( error, name ));
                     }
@@ -131,13 +125,7 @@ export default class Auth extends React.Component {
                 onenote.dtd.done( ()=> {
                     onenote.Auth( ( result, error ) => {
                         if ( error ) failed( error, "Onenote" );
-                        else {
-                            storage.secret.onenote.access_token = onenote.access_token;
-                            storage.Safe( ()=> {
-                                new Notify().Render( `已成功授权 Onenote 。` );
-                                this.setState({ secret: storage.secret });
-                            }, storage.secret );
-                        }
+                        else success( state, "Onenote", { access_token: onenote.access_token });
                     });
                 }).fail( error => failed( error, "Onenote" ));
                 break;
@@ -146,14 +134,7 @@ export default class Auth extends React.Component {
                 gdrive.dtd.done( ()=> {
                     gdrive.Auth( ( result, error ) => {
                         if ( error ) failed( error, "Google 云端硬盘" );
-                        else {
-                            storage.secret.gdrive.access_token = gdrive.access_token;
-                            storage.secret.gdrive.folder_id    = gdrive.folder_id;
-                            storage.Safe( ()=> {
-                                new Notify().Render( `已成功授权 Google 云端硬盘 。` );
-                                this.setState({ secret: storage.secret });
-                            }, storage.secret );
-                        }
+                        else success( state, "Google 云端硬盘", { access_token: gdrive.access_token, folder_id: gdrive.folder_id });
                     });
                 }).fail( error => failed( error, "Google 云端硬盘" ));
                 break;
