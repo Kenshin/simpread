@@ -846,18 +846,13 @@ class Kindle {
     }
 }
 
-const dropbox = new Dropbox();
-
-const pocket = new Pocket();
-//defer_pocket.promise( pocket );
-
-const linnk = new Linnk();
-
-const evernote = new Evernote();
-
-const onenote  = new Onenote();
-const gdrive   = new GDrive();
-const kindle   = new Kindle();
+const dropbox  = new Dropbox(),
+      pocket   = new Pocket(),
+      linnk    = new Linnk(),
+      evernote = new Evernote(),
+      onenote  = new Onenote(),
+      gdrive   = new GDrive(),
+      kindle   = new Kindle();
 
 export {
     png      as PNG,
