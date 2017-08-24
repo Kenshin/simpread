@@ -32,9 +32,26 @@ export default class Auth extends React.Component {
                 }, storage.secret );
             };
 
+        if ( state == "linnk" && !flag && !storage.secret.linnk.access_token ) {
+            this.setState({ linnk: !this.state.linnk });
+            return;
+        }
+
+        if ( !value ) {
+            state == "pocket" && $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
+            if ( state == "linnk" ) {
+                this.props.linnk.username = "";
+                this.props.linnk.password = "";
+            }
+            if ( state == "yinxiang" )    clear( state, "印象笔记" );
+            else if ( state == "gdrive" ) clear( state, "Google 云端硬盘" );
+            else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+            return;
+        }
+
         switch ( state ) {
             case "dropbox":
-                if ( value ) {
+                //if ( value ) {
                     dropbox.New().Auth();
                     dropbox.dtd.done( () => {
                         storage.secret.dropbox.access_token = dropbox.access_token;
@@ -46,10 +63,10 @@ export default class Auth extends React.Component {
                         console.error( error )
                         new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
                     });
-                } else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+                //} else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
                 break;
             case "pocket":
-                if ( value ) {
+                //if ( value ) {
                     new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
                     pocket.Request( ( result, error ) => {
                         error  && new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
@@ -75,16 +92,15 @@ export default class Auth extends React.Component {
                             });
                         }
                     });
-                }
-                else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
-                $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
+                //} else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+                //$( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
                 break;
             case "linnk":
-                if ( !flag && !storage.secret.linnk.access_token ) {
-                    this.setState({ linnk: !this.state.linnk });
-                    return;
-                }
-                if ( value ) {
+                //if ( !flag && !storage.secret.linnk.access_token ) {
+                //    this.setState({ linnk: !this.state.linnk });
+                //    return;
+                //}
+                //if ( value ) {
                     linnk.Login( this.props.linnk.username, this.props.linnk.password, ( result, error ) => {
                         if ( error ) {
                             new Notify().Render( 2, "获取 Linnk 授权失败，请重新获取。" );
@@ -111,11 +127,11 @@ export default class Auth extends React.Component {
                             }
                         }
                     })
-                } else {
-                    this.props.linnk.username = "";
-                    this.props.linnk.password = "";
-                    clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
-                }
+                //} else {
+                //    this.props.linnk.username = "";
+                //    this.props.linnk.password = "";
+                //    clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+                //}
                 break;
             case "yinxiang":
             case "evernote":
@@ -125,7 +141,7 @@ export default class Auth extends React.Component {
                     storage.secret[state].access_token = "";
                     this.setState({ secret: storage.secret });
                 };
-                if ( value ) {
+                //if ( value ) {
                     evernote.env = state;
                     const name       = evernote.name;
                     new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
@@ -148,8 +164,7 @@ export default class Auth extends React.Component {
                             }).fail( error => failed( error, name ));
                         }
                     });
-                }
-                else clear( state, state == "yinxiang" ? "印象笔记" : "Evernote" );
+                //} else clear( state, state == "yinxiang" ? "印象笔记" : "Evernote" );
                 break;
             case "onenote":
                 const faileds = ( error, name ) => {
@@ -158,7 +173,7 @@ export default class Auth extends React.Component {
                     storage.secret[state].access_token = "";
                     this.setState({ secret: storage.secret });
                 };
-                if ( value ) {
+                //if ( value ) {
                     onenote.New().Login();
                     onenote.dtd.done( ()=> {
                         onenote.Auth( ( result, error ) => {
@@ -173,7 +188,7 @@ export default class Auth extends React.Component {
                             }
                         });
                     }).fail( error => faileds( error, "Onenote" ));
-                } else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+                //} else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
                 break;
             case "gdrive":
                 const failedss = ( error, name ) => {
@@ -182,7 +197,7 @@ export default class Auth extends React.Component {
                     storage.secret[state].access_token = "";
                     this.setState({ secret: storage.secret });
                 };
-                if ( value ) {
+                //if ( value ) {
                     gdrive.New().Login();
                     gdrive.dtd.done( ()=> {
                         gdrive.Auth( ( result, error ) => {
@@ -198,7 +213,7 @@ export default class Auth extends React.Component {
                             }
                         });
                     }).fail( error => failedss( error, "Google 云端硬盘" ));
-                } else clear( state, "Google 云端硬盘" );
+                //} else clear( state, "Google 云端硬盘" );
                 break;
         }
     }
