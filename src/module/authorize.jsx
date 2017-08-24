@@ -30,6 +30,12 @@ export default class Auth extends React.Component {
                     new Notify().Render( `已取消对 ${name} 的授权。` );
                     this.setState({ secret: storage.secret });
                 }, storage.secret );
+            },
+            failed = ( error, name ) => {
+                console.error( `${name} auth faild, error: ${error}` )
+                new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
+                storage.secret[state].access_token = "";
+                this.setState({ secret: storage.secret });
             };
 
         if ( state == "linnk" && !flag && !storage.secret.linnk.access_token ) {
@@ -120,24 +126,16 @@ export default class Auth extends React.Component {
                 break;
             case "yinxiang":
             case "evernote":
-                const failed = ( error, name ) => {
-                    console.error( error )
-                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
-                    storage.secret[state].access_token = "";
-                    this.setState({ secret: storage.secret });
-                };
                 evernote.env = state;
-                const name       = evernote.name;
+                const name   = evernote.name;
                 new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
                 evernote.New().RequestToken( ( result, error ) => {
-                    if ( error ) {
-                        failed( error, name );
-                    } else {
+                    if ( error ) failed( error, name );
+                    else {
                         evernote.dtd.done( () => {
-                            evernote.Auth( ( result, error )=> {
-                                if ( error ) {
-                                    failed( error, name );
-                                } else {
+                            evernote.Auth( ( result, error ) => {
+                                if ( error ) failed( error, name );
+                                else {
                                     storage.secret[state].access_token = evernote.access_token;
                                     storage.Safe( ()=> {
                                         new Notify().Render( `已成功授权 ${name} 。` );
@@ -150,18 +148,11 @@ export default class Auth extends React.Component {
                 });
                 break;
             case "onenote":
-                const faileds = ( error, name ) => {
-                    console.error( error )
-                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
-                    storage.secret[state].access_token = "";
-                    this.setState({ secret: storage.secret });
-                };
                 onenote.New().Login();
                 onenote.dtd.done( ()=> {
                     onenote.Auth( ( result, error ) => {
-                        if ( error ) {
-                            faileds( error, "Onenote" );
-                        } else {
+                        if ( error ) failed( error, "Onenote" );
+                        else {
                             storage.secret.onenote.access_token = onenote.access_token;
                             storage.Safe( ()=> {
                                 new Notify().Render( `已成功授权 Onenote 。` );
@@ -169,21 +160,14 @@ export default class Auth extends React.Component {
                             }, storage.secret );
                         }
                     });
-                }).fail( error => faileds( error, "Onenote" ));
+                }).fail( error => failed( error, "Onenote" ));
                 break;
             case "gdrive":
-                const failedss = ( error, name ) => {
-                    console.error( error )
-                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
-                    storage.secret[state].access_token = "";
-                    this.setState({ secret: storage.secret });
-                };
                 gdrive.New().Login();
                 gdrive.dtd.done( ()=> {
                     gdrive.Auth( ( result, error ) => {
-                        if ( error ) {
-                            faileds( error, "Google 云端硬盘" );
-                        } else {
+                        if ( error ) failed( error, "Google 云端硬盘" );
+                        else {
                             storage.secret.gdrive.access_token = gdrive.access_token;
                             storage.secret.gdrive.folder_id    = gdrive.folder_id;
                             storage.Safe( ()=> {
@@ -192,7 +176,7 @@ export default class Auth extends React.Component {
                             }, storage.secret );
                         }
                     });
-                }).fail( error => failedss( error, "Google 云端硬盘" ));
+                }).fail( error => failed( error, "Google 云端硬盘" ));
                 break;
         }
     }
