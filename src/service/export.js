@@ -90,11 +90,8 @@ class Dropbox {
 
     Accesstoken( url ) {
         const arr = url.match( /access_token=\S+&token_type/i );
-        if ( arr && arr.length > 0 ) {
-            this.access_token = arr[0].replace( /(access_token=)|(&token_type)/ig, "" );
-        } else {
-            this.access_token = url;
-        }
+        arr && arr.length > 0 &&
+            ( this.access_token = arr[0].replace( /(access_token=)|(&token_type)/ig, "" ));
         this.access_token != "" ? this.dtd.resolve() : this.dtd.reject();
     }
 
