@@ -208,10 +208,6 @@ class Pocket {
         }
     }
 
-    Settags( value ) {
-        this.tags = value ? value : "simpread";
-    }
-
     New() {
         this.dtd = $.Deferred();
         this.access_token = "";
@@ -278,7 +274,7 @@ class Pocket {
             access_token: this.access_token,
             url,
             title,
-            tags: this.tags
+            tags: this.tags ? this.tags : "simpread"
         };
 
         $.ajax({
