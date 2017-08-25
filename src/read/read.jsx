@@ -253,7 +253,7 @@ class Read extends React.Component {
                         exp.onenote.access_token = storage.secret.onenote.access_token;
                         exp.onenote.Add( exp.onenote.Wrapper( window.location.href, this.props.wrapper.title.trim(), $("sr-rd-content").html() ),  ( result, error ) => {
                             !error && new Notify().Render( "已成功保存到 Onenote！" );
-                            error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                            error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
                         });
                     } else {
                         new Notify().Render( "请先获取 Onenote 的授权，才能使用此功能！", "授权", ()=>{
