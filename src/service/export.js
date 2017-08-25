@@ -154,8 +154,9 @@ class Dropbox {
         });
     }
 
-    Write( name, data, callback ) {
-        const args     = { path: "/" + name, mode: "overwrite" },
+    Write( name, data, callback, path = "" ) {
+        const safename = data => data.replace( /\//ig, "" ),
+              args     = { path: `/${path}${safename(name)}`, mode: "overwrite" },
               token    = this.access_token,
               safejson = args => {
                 const charsToEncode = /[\u007f-\uffff]/g;
