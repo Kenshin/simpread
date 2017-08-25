@@ -730,7 +730,7 @@ body {
 
     background-color: #fff;
     border-radius: 2px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+    /*box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);*/
 }
 
 .undefined .desc {
@@ -756,6 +756,7 @@ body {
 
     font-weight: bold;
     line-height: 25px;
+    text-decoration: none;
 
     border-radius: 50px;
     transition: all .5s;
