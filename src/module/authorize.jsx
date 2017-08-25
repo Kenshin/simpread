@@ -35,7 +35,7 @@ export default class Auth extends React.Component {
                 Object.keys( data ).forEach( item => storage.secret[id][item] = data[item] );
                 storage.Safe( () => {
                     new Notify().Render( `已成功授权 ${name} 。` );
-                    this.setState({ secret: storage.secret });
+                    this.setState({ secret: storage.secret, linnk: false });
                 }, storage.secret );
             },
             failed = ( error, name ) => {
