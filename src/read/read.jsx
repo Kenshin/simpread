@@ -194,7 +194,7 @@ class Read extends React.Component {
                         } else {
                             dropbox.Write( `${ title }.md`, result, ( _, resp, error ) => {
                                 !error && new Notify().Render( "已成功保存到 Dropbox！" );
-                                error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                                error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
                             }, "md/" );
                         }
                     });
