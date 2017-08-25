@@ -193,6 +193,10 @@ export default class Switch extends React.Component {
         !this.props.disable && this.props.onChange && this.props.onChange( !this.state.checked );
     }
 
+    componentWillReceiveProps( nextProps ) {
+        this.setState({ checked: nextProps.checked });
+    }
+
     render() {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
