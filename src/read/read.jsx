@@ -174,6 +174,7 @@ class Read extends React.Component {
         storage.Safe( ()=> {
             if ( storage.secret[type].access_token ) {
                 Object.keys( storage.secret[type] ).forEach( item => exp[id][item] = storage.secret[type][item] );
+                new Notify().Render( `开始保存到 ${name}，请稍等...` );
                 service( type );
             } else {
                 new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
@@ -190,7 +191,6 @@ class Read extends React.Component {
                         if ( error ) {
                             new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                         } else {
-                            new Notify().Render( "开始保存到 Dropbox，请稍等..." );
                             dropbox.Write( `${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
                                 !error && new Notify().Render( "已成功保存到 Dropbox！" );
                                 error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
@@ -199,14 +199,12 @@ class Read extends React.Component {
                     });
                     break;
                 case "pocket":
-                    new Notify().Render( "开始保存到 Pocket，请稍等..." );
                     pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
                         !error && new Notify().Render( "已成功保存到 Pocket！" );
                         error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                     });
                     break;
                 case "linnk":
-                    new Notify().Render( "开始保存到 Linnk，请稍等..." );
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
@@ -220,7 +218,6 @@ class Read extends React.Component {
                 case "evernote":
                 case "yinxiang":
                     const name = type == "evernote" ? "Evernote" : "印象笔记";
-                    new Notify().Render( `开始转码并上传至 ${name}，请稍等...` );
                     evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
                         !error && new Notify().Render( `已成功保存到 ${name}！` );
                         error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
@@ -228,7 +225,6 @@ class Read extends React.Component {
                     });
                     break;
                 case "onenote":
-                    new Notify().Render( `开始保存到 Onenote，请稍等...` );
                     onenote.Add( onenote.Wrapper( window.location.href, this.props.wrapper.title.trim(), $("sr-rd-content").html() ),  ( result, error ) => {
                         !error && new Notify().Render( "已成功保存到 Onenote！" );
                         error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
@@ -239,7 +235,6 @@ class Read extends React.Component {
                         if ( error ) {
                             new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                         } else {
-                            new Notify().Render( "开始保存到 Google 云端硬盘，请稍等..." );
                             gdrive.Add( "file",( result, error ) => {
                                 !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
                                 error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
