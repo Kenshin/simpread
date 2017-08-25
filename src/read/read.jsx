@@ -202,7 +202,7 @@ class Read extends React.Component {
                 case "pocket":
                     pocket.Add( window.location.href, title, ( result, error ) => {
                         !error && new Notify().Render( "已成功保存到 Pocket！" );
-                        error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                        error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
                     });
                     break;
                 case "linnk":
