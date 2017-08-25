@@ -178,9 +178,9 @@ class Dropbox {
             contentType : false
         }).done( ( data, textStatus, jqXHR ) => {
             callback( "write", data, undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( "write", undefined, textStatus );
+        }).fail( ( xhr, textStatus, error ) => {
+            console.error( xhr, status, error )
+            callback( "write", undefined, error.toLowerCase().startsWith( "invalid_access_token" ) ? "授权过期，请重新授权。" : "error" );
         });
 
     }
