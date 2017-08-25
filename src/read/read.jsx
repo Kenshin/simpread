@@ -164,7 +164,8 @@ class Read extends React.Component {
      * @param {string} value 
      */
     onService( type, value ) {
-        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp;
+        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
+              title = $( "sr-rd-title" ).text().trim();
         let id   = type,
             name = type.replace( /\S/i, $0=>$0.toUpperCase() );
         type == "yinxiang" && ( id   = "evernote" );
@@ -191,7 +192,7 @@ class Read extends React.Component {
                         if ( error ) {
                             new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                         } else {
-                            dropbox.Write( `${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
+                            dropbox.Write( `${ title }.md`, result, ( _, resp, error ) => {
                                 !error && new Notify().Render( "已成功保存到 Dropbox！" );
                                 error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                             }, "md/" );
@@ -199,7 +200,7 @@ class Read extends React.Component {
                     });
                     break;
                 case "pocket":
-                    pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
+                    pocket.Add( window.location.href, title, ( result, error ) => {
                         !error && new Notify().Render( "已成功保存到 Pocket！" );
                         error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                     });
@@ -208,7 +209,7 @@ class Read extends React.Component {
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
-                            linnk.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
+                            linnk.Add( window.location.href, title, ( result, error ) => {
                                 !error && result.code == 200 && new Notify().Render( "已成功保存到 Linnk！" );
                                 error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                             });
@@ -218,14 +219,14 @@ class Read extends React.Component {
                 case "evernote":
                 case "yinxiang":
                     const name = type == "evernote" ? "Evernote" : "印象笔记";
-                    evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
+                    evernote.Add( title, st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
                         !error && new Notify().Render( `已成功保存到 ${name}！` );
                         error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
                         error  && new Notify().Render( "建议使用 Onenote 能更完美的还原被保存页面。" );
                     });
                     break;
                 case "onenote":
-                    onenote.Add( onenote.Wrapper( window.location.href, this.props.wrapper.title.trim(), $("sr-rd-content").html() ),  ( result, error ) => {
+                    onenote.Add( onenote.Wrapper( window.location.href, title, $("sr-rd-content").html() ),  ( result, error ) => {
                         !error && new Notify().Render( "已成功保存到 Onenote！" );
                         error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
                     });
@@ -238,7 +239,7 @@ class Read extends React.Component {
                             gdrive.Add( "file",( result, error ) => {
                                 !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
                                 error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                            }, gdrive.CreateFile( `${this.props.wrapper.title.trim()}.md`, result ));
+                            }, gdrive.CreateFile( `${title}.md`, result ));
                         }
                     });
                     break;
