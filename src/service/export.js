@@ -302,9 +302,10 @@ class Pocket {
  */
 class Linnk {
 
-    constructor( access_token, group_id ) {
-        this.access_token = access_token;
-        this.group_id     = group_id;
+    constructor() {
+        this.access_token = "";
+        this.group_id     = "";
+        this.group_name   = "";
     }
 
     get error_code() {
@@ -377,6 +378,7 @@ class Linnk {
     GetGroup( name, target ) {
         const group = target.find( obj => obj.groupName == name );
         this.group_name = group.groupName;
+        return group;
     }
 
     NewGroup( name, callback ) {
