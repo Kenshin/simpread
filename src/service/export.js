@@ -648,13 +648,13 @@ class Onenote {
                 "Authorization": `Bearer ${this.access_token}`
             },
             data    : html,
-        }).done( ( result, textStatus, jqXHR ) => {
-            console.log( result, textStatus, jqXHR )
-            textStatus == "success" && callback( result, undefined );
-            textStatus != "success" && callback( undefined, "error" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        }).done( ( result, status, xhr ) => {
+            console.log( result, status, xhr )
+            status == "success" && callback( result, undefined );
+            status != "success" && callback( undefined, "error" );
+        }).fail( ( xhr, status, error ) => {
+            console.error( xhr, status, error )
+            callback( undefined, error.toLowerCase() == "unauthorized" ? "授权过期，请重新授权。" : "error" );
         });
     }
 }
