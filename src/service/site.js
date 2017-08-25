@@ -383,7 +383,6 @@ function html2enml( html, url ) {
                 .replace( /<br>/ig, "<br></br>" )
                 .replace( /<\/p>/ig, "<br></br>" );
 
-        console.log(str)
         return str;
 
     } catch( error ) {
