@@ -284,9 +284,9 @@ class Pocket {
             data,
         }).done( ( data, textStatus, jqXHR ) => {
             callback( data, undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        }).fail( ( xhr, status, error ) => {
+            console.error( xhr, status, error )
+            callback( undefined, error.toLowerCase() == "unauthorized" ? "授权过期，请重新授权。" : "error" );
         });
     }
 
