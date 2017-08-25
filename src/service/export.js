@@ -331,7 +331,7 @@ class Linnk {
             data,
         }).done( ( result, textStatus, jqXHR ) => {
             result && result.code == 200 && ( this.access_token = result.token );
-            callback( result, undefined );                
+            callback( result, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
