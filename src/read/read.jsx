@@ -164,128 +164,132 @@ class Read extends React.Component {
      * @param {string} value 
      */
     onService( type, value ) {
-        switch( type ) {
-            case "dropbox":
-                exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
-                    if ( error ) {
-                        new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                    } else {
-                        storage.Safe( ()=> {
-                            if ( storage.secret.dropbox.access_token ) {
-                                new Notify().Render( "开始保存到 Dropbox，请稍等..." );
-                                exp.dropbox.access_token = storage.secret.dropbox.access_token;
-                                exp.dropbox.Write( `${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
-                                    !error && new Notify().Render( "已成功保存到 Dropbox！" );
-                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                                }, "md/" );
-                            } else {
-                                new Notify().Render( "请先获取 Dropbox 的授权，才能使用此功能！", "授权", ()=>{
-                                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                                });
-                            }
-                        });
-                    }
+
+        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp;
+
+        storage.Safe( ()=> {
+            if ( storage.secret[type].access_token ) {
+                Object.keys( storage.secret[type] ).forEach( item => exp[type][item] = storage.secret[type][item] );
+                service( type );
+            } else {
+                let name = type.replace( /\S/i, $0=>$0.toUpperCase() );
+                type == "yinxiang" && ( name = "印象笔记" );
+                type == "gdrive"   && ( name = "Google 云端硬盘" );
+                new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
                 });
-                break;
-            case "pocket":
-                storage.Safe( ()=> {
-                    if ( storage.secret.pocket.access_token ) {
-                        new Notify().Render( "开始保存到 Pocket，请稍等..." );
-                        exp.pocket.access_token = storage.secret.pocket.access_token;
-                        exp.pocket.Settags( storage.secret.pocket.tags );
-                        exp.pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
-                            !error && new Notify().Render( "已成功保存到 Pocket！" );
-                            error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                        });
-                    } else {
-                        new Notify().Render( "请先获取 Pocket 的授权，才能使用此功能！", "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "linnk":
-                storage.Safe( ()=> {
-                    if ( storage.secret.linnk.access_token ) {
-                        exp.linnk.access_token = storage.secret.linnk.access_token;
-                        new Notify().Render( "开始保存到 Linnk，请稍等..." );
-                        exp.linnk.GetSafeGroup( storage.secret.linnk.group_name, ( result, error ) => {
-                            if ( !error ) {
-                                exp.linnk.group_id = result.data.groupId;
-                                exp.linnk.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
-                                    !error && result.code == 200 && new Notify().Render( "已成功保存到 Linnk！" );
-                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                                });
-                            } else {
-                                new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                            }
-                        })
-                    } else {
-                        new Notify().Render( "请先获取 Linnk 的授权，才能使用此功能！", "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "evernote":
-            case "yinxiang":
-                storage.Safe( ()=> {
-                    const name = type == "evernote" ? "Evernote" : "印象笔记";
-                    if ( storage.secret[type].access_token ) {
-                        new Notify().Render( `开始转码并上传至 ${name}，请稍等...` );
-                        exp.evernote.access_token = storage.secret[type].access_token;
-                        exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
-                            !error && new Notify().Render( `已成功保存到 ${name}！` );
-                            error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
-                            error  && new Notify().Render( "建议使用 Onenote 能更完美的还原被保存页面。" );
-                        });
-                    } else {
-                        new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "onenote":
-                storage.Safe( ()=> {
-                    if ( storage.secret.onenote.access_token ) {
-                        new Notify().Render( `开始保存到 Onenote，请稍等...` );
-                        exp.onenote.access_token = storage.secret.onenote.access_token;
-                        exp.onenote.Add( exp.onenote.Wrapper( window.location.href, this.props.wrapper.title.trim(), $("sr-rd-content").html() ),  ( result, error ) => {
-                            !error && new Notify().Render( "已成功保存到 Onenote！" );
-                            error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                        });
-                    } else {
-                        new Notify().Render( "请先获取 Onenote 的授权，才能使用此功能！", "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "gdrive":
-                exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
-                    if ( error ) {
-                        new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                    } else {
-                        storage.Safe( ()=> {
-                            if ( storage.secret.gdrive.access_token ) {
-                                new Notify().Render( "开始保存到 Google 云端硬盘，请稍等..." );
-                                exp.gdrive.access_token = storage.secret.gdrive.access_token;
-                                exp.gdrive.folder_id    = storage.secret.gdrive.folder_id;
-                                exp.gdrive.Add( "file",( result, error ) => {
-                                    !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
-                                    error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                                }, exp.gdrive.CreateFile( `${this.props.wrapper.title.trim()}.md`, result ));
-                            } else {
-                                new Notify().Render( "请先获取 Google 云端硬盘 的授权，才能使用此功能！", "授权", ()=>{
-                                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                                });
-                            }
-                        });
-                    }
-                });
-                break;
-        }
+                return;
+            }
+        });
+
+        console.log( "current service = ", exp[type] )
+
+        const service = type => {
+            switch( type ) {
+                case "dropbox":
+                    exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
+                        if ( error ) {
+                            new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
+                        } else {
+                            new Notify().Render( "开始保存到 Dropbox，请稍等..." );
+                            dropbox.Write( `${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
+                                !error && new Notify().Render( "已成功保存到 Dropbox！" );
+                                error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                            }, "md/" );
+                        }
+                    });
+                    break;
+                case "pocket":
+                    new Notify().Render( "开始保存到 Pocket，请稍等..." );
+                    pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
+                        !error && new Notify().Render( "已成功保存到 Pocket！" );
+                        error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                    });
+                    break;
+                case "linnk":
+                    storage.Safe( ()=> {
+                        if ( storage.secret.linnk.access_token ) {
+                            exp.linnk.access_token = storage.secret.linnk.access_token;
+                            new Notify().Render( "开始保存到 Linnk，请稍等..." );
+                            exp.linnk.GetSafeGroup( storage.secret.linnk.group_name, ( result, error ) => {
+                                if ( !error ) {
+                                    exp.linnk.group_id = result.data.groupId;
+                                    exp.linnk.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
+                                        !error && result.code == 200 && new Notify().Render( "已成功保存到 Linnk！" );
+                                        error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                                    });
+                                } else {
+                                    new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                                }
+                            })
+                        } else {
+                            new Notify().Render( "请先获取 Linnk 的授权，才能使用此功能！", "授权", ()=>{
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                            });
+                        }
+                    });
+                    break;
+                case "evernote":
+                case "yinxiang":
+                    storage.Safe( ()=> {
+                        const name = type == "evernote" ? "Evernote" : "印象笔记";
+                        if ( storage.secret[type].access_token ) {
+                            new Notify().Render( `开始转码并上传至 ${name}，请稍等...` );
+                            exp.evernote.access_token = storage.secret[type].access_token;
+                            exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
+                                !error && new Notify().Render( `已成功保存到 ${name}！` );
+                                error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
+                                error  && new Notify().Render( "建议使用 Onenote 能更完美的还原被保存页面。" );
+                            });
+                        } else {
+                            new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                            });
+                        }
+                    });
+                    break;
+                case "onenote":
+                    storage.Safe( ()=> {
+                        if ( storage.secret.onenote.access_token ) {
+                            new Notify().Render( `开始保存到 Onenote，请稍等...` );
+                            exp.onenote.access_token = storage.secret.onenote.access_token;
+                            exp.onenote.Add( exp.onenote.Wrapper( window.location.href, this.props.wrapper.title.trim(), $("sr-rd-content").html() ),  ( result, error ) => {
+                                !error && new Notify().Render( "已成功保存到 Onenote！" );
+                                error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+                            });
+                        } else {
+                            new Notify().Render( "请先获取 Onenote 的授权，才能使用此功能！", "授权", ()=>{
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                            });
+                        }
+                    });
+                    break;
+                case "gdrive":
+                    exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
+                        if ( error ) {
+                            new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
+                        } else {
+                            storage.Safe( ()=> {
+                                if ( storage.secret.gdrive.access_token ) {
+                                    new Notify().Render( "开始保存到 Google 云端硬盘，请稍等..." );
+                                    exp.gdrive.access_token = storage.secret.gdrive.access_token;
+                                    exp.gdrive.folder_id    = storage.secret.gdrive.folder_id;
+                                    exp.gdrive.Add( "file",( result, error ) => {
+                                        !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
+                                        error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+                                    }, exp.gdrive.CreateFile( `${this.props.wrapper.title.trim()}.md`, result ));
+                                } else {
+                                    new Notify().Render( "请先获取 Google 云端硬盘 的授权，才能使用此功能！", "授权", ()=>{
+                                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                                    });
+                                }
+                            });
+                        }
+                    });
+                    break;
+            }
+        };
+
     }
 
    // exit read mode
