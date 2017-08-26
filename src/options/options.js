@@ -71,7 +71,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 exp.gdrive.Accesstoken( uri );
                 break;
             default:
-                id.startsWith( "https://simpread.herokuapp.com/?" ) &&
+                id.startsWith( "http://ksria.com/simpread/auth.html?" ) &&
                     exp.onenote.Accesstoken( uri );
                 break;
         }
