@@ -51,6 +51,13 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
           inject  : false,
         })
       );
+      !isProduction() && plugins.push(
+        new HtmlWebpackPlugin({
+          filename: 'auth.html',
+          template: './src/auth.html',
+          inject  : false,
+        })
+      );
     })(),
 
     // only when environment variable is 'production' call
@@ -75,6 +82,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
             { from   : 'src/index.html',      to   : '../' },
             { from   : 'src/changelog.html',  to   : '../' },
             { from   : 'src/404.html',        to   : '../' },
+            { from   : 'src/auth.html',       to   : '../' },
             { context: 'src/assets/favicon/', from : "*" , to : '../assets/favicon' },
             { context: 'src/assets/images/',  from : "*" , to : '../assets/images' },
           ])
