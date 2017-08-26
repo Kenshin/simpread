@@ -789,10 +789,10 @@ body {
  */
 
 .auth .title {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .auth .notice {
-    width: inherit;
+    width: 583px;
     padding: 0 16px;
 }
