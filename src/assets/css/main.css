@@ -733,6 +733,7 @@ body {
     /*box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);*/
 }
 
+/*
 .undefined .title {
     font-family: 'Roboto', sans-serif;
 
@@ -743,6 +744,7 @@ body {
     line-height: 250px;
     font-weight: 700;
 }
+*/
 
 .undefined .desc {
     margin-top: 10px;
@@ -779,4 +781,18 @@ body {
 .undefined .backup:hover {
     background-color: #2196F3;
     box-shadow: 0 5px 5px rgba(0,0,0,.3), 0 5px 5px rgba(0,0,0,.3);
+}
+
+
+/**
+ * Auth page
+ */
+
+.auth .title {
+    font-size: 20px;
+}
+
+.auth .notice {
+    width: inherit;
+    padding: 0 16px;
 }
