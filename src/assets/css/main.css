@@ -733,6 +733,17 @@ body {
     /*box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);*/
 }
 
+.undefined .title {
+    font-family: 'Roboto', sans-serif;
+
+    margin-top: 0;
+    margin-bottom: 12px;
+
+    font-size: 250px;
+    line-height: 250px;
+    font-weight: 700;
+}
+
 .undefined .desc {
     margin-top: 10px;
 
