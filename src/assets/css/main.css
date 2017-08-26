@@ -71,7 +71,7 @@ body {
 }
 
 /**
- *  top
+ *  Index page
  */
 .top {
     display: flex;
@@ -509,7 +509,7 @@ body {
 }
 
 /**
- *  changelog
+ *  Changelog page
  */
 .container {
     margin: 0 auto;
@@ -706,7 +706,7 @@ body {
 }
 
 /**
- * 404
+ * 404 page
  */
 .undefined {
     display: flex;
