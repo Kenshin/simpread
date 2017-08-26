@@ -552,7 +552,8 @@ class Onenote {
     }
 
     get redirect_uri() {
-        return "https://simpread.herokuapp.com";
+        //return "https://simpread.herokuapp.com";
+        return "https://kenshin.github.io/simpread/auth.html";
     }
 
     get scopes() {
@@ -600,7 +601,7 @@ class Onenote {
     }
 
     Accesstoken( url ) {
-        url = url.replace( `${this.redirect_uri}/?`, "" );
+        url = url.replace( "http://ksria.com/simpread/auth.html?", "" );
         if ( url.startsWith( "code" ) ) {
             this.code = url.replace( "code=", "" );
             this.dtd.resolve();
