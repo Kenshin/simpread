@@ -760,19 +760,22 @@ body {
     margin-top: 20px;
 
     width: 100px;
-    height: 25px;
+    height: 36px;
 
     color: #fff;
-    background-color: red;
+    background-color: #1976D2;
 
     font-weight: bold;
-    line-height: 25px;
+    font-size: 15px;
+
+    line-height: 36px;
     text-decoration: none;
 
-    border-radius: 50px;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.3);
     transition: all .5s;
 }
 
 .undefined .backup:hover {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .26)
+    box-shadow: 0 5px 5px rgba(0, 0, 0, .26)
 }
