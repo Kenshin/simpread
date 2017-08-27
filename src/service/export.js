@@ -198,7 +198,7 @@ class Pocket {
     }
 
     get redirect_uri() {
-        return "http://ksria.com/simpread/auth.html?id=pocket";
+        return "https://kenshin.github.io/simpread/auth.html?id=pocket";
     }
 
     get header() {
@@ -669,7 +669,7 @@ class GDrive {
     }
 
      get redirect_uri() {
-         return "http://ksria.com/simpread/auth.html?id=gdrive";
+         return "https://kenshin.github.io/simpread/auth.html?id=gdrive";
      }
 
      get scope() {
