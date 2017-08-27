@@ -58,7 +58,6 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "包括：聚焦模式与阅读模式。" }}
                             label="是否启用 「ESC」 退出方式？"
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
-                    <Auth/>
                 </div>
 
                 <div className="label">右键菜单</div>
@@ -116,6 +115,11 @@ export default class LabsOpt extends React.Component {
                             onChange={ ()=>this.changeExclusion() }
                         />
                     </div>
+                </div>
+
+                <div className="label">授权管理</div>
+                <div style={{ 'padding-top': '10px' }} className="lab">
+                    <Auth/>
                 </div>
 
                 <div className="label">自定义样式</div>
