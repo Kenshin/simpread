@@ -56,24 +56,13 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     if ( request.type == msg.MESSAGE_ACTION.redirect_uri ) {
         const { id, uri } = request.value;
-        switch ( id ) {
-            case "pocket":
-                exp.pocket.Accesstoken( uri );
-                break;
-            case "dropbox":
-                exp.dropbox.Accesstoken( uri );
-                break;
-            case "evernote":
-            case "yinxiang":
-                exp.evernote.Accesstoken( uri );
-                break;
-            case "gdrive":
-                exp.gdrive.Accesstoken( uri );
-                break;
-            default:
-                id.startsWith( "http://ksria.com/simpread/auth.html?" ) &&
-                    exp.onenote.Accesstoken( uri );
-                break;
+        if ([ "pocket", "dropbox", "evernote", "gdrive" ].includes( id )) {
+            exp[id].Accesstoken( uri );
+        } else if ( id == "yinxiang" ) {
+            exp.evernote.Accesstoken( uri );
+        } else {
+            id.startsWith( "http://ksria.com/simpread/auth.html?" ) &&
+            exp.onenote.Accesstoken( uri );
         }
     }
 });
