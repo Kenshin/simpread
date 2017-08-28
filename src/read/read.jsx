@@ -116,11 +116,6 @@ class Read extends React.Component {
                 break;
             case "markdown":
                 exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, new Notify() );
-                /*
-                exp.Markdown( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, error => {
-                    new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                });
-                */
                 break;
             case "png":
                 try {
