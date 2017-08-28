@@ -868,6 +868,22 @@ class Kindle {
 }
 
 /**
+ * Get name
+ * 
+ * @param  {string} service type
+ * @return {string} service name
+ */
+function name( type ) {
+    if ( [ "dropbox", "pocket", "linnk" , "evernote", "onenote" ].includes( type ) ) {
+        return type.replace( /\S/i, $0=>$0.toUpperCase() );
+    } else if ( type == "yinxiang" ) {
+        return "印象笔记";
+    } else {
+        return "Google 云端硬盘";
+    }
+}
+
+/**
  * markdown wrapper
  * 
  * @param  {string} content
@@ -938,6 +954,7 @@ export {
     markdown as Markdown,
     download as Download,
     unlink   as Unlink,
+    name     as Name,
     dropbox, pocket, linnk, evernote, onenote, gdrive,
     kindle,
     mdWrapper       as MDWrapper,
