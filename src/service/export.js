@@ -423,8 +423,8 @@ class Linnk {
  */
 class Evernote {
 
-    get id()   { return this.constructor.env.toLowerCase(); }
-    get name() { return name( this.constructor.name ); }
+    get id()   { return this.env.toLowerCase(); }
+    get name() { return name( this.env ); }
 
     constructor() {
         this.token          = "";
@@ -450,10 +450,6 @@ class Evernote {
 
     get china() {
         return this.env != "evernote" ? true : false;
-    }
-
-    get name() {
-        return this.env == "evernote" ? "Evernote" : "印象笔记";
     }
 
     get headers() {
