@@ -63,18 +63,12 @@ export default class Unrdist extends React.Component {
               name    = id.replace( /\S/i, $0=>$0.toUpperCase() ),
               service = type => {
                   if ( type == "pocket" ) {
-                    pocket.Add( data.url, data.title.trim(), ( result, error ) => {
-                        !error && new Notify().Render( "已成功保存到 Pocket！" );
-                        error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                    });
+                    pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, "Pocket", new Notify() ));
                   } else {
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
-                            linnk.Add( data.url, data.title.trim(), ( result, error ) => {
-                                !error && new Notify().Render( "已成功保存到 Linnk！" );
-                                error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                            });
+                            linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, "Linnk", new Notify() ));
                         } else new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                     });
                   }
