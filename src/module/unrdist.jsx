@@ -60,7 +60,7 @@ export default class Unrdist extends React.Component {
     onAction( event, ...rests ) {
         const { pocket, linnk } = exp,
               [ id, _, data ]   = rests,
-              name              = id.replace( /\S/i, $0=>$0.toUpperCase() );
+              name              = exp.Name( id );
 
         [ "pocket", "linnk" ].includes( id ) &&
             exp.VerifySvcWrapper( storage, exp[id], id, name, new Notify() )

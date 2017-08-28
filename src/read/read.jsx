@@ -163,12 +163,9 @@ class Read extends React.Component {
      */
     onService( type, value ) {
         const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
-              title = $( "sr-rd-title" ).text().trim();
-        let id   = type,
-            name = type.replace( /\S/i, $0=>$0.toUpperCase() );
-        type == "yinxiang" && ( id   = "evernote" );
-        type == "yinxiang" && ( name = "印象笔记" );
-        type == "gdrive"   && ( name = "Google 云端硬盘" );
+              title = $( "sr-rd-title" ).text().trim(),
+              id    = type == "yinxiang" ? "evernote" : type,
+              name  = exp.Name( type );
 
         exp.VerifySvcWrapper( storage, exp[id], type, name, new Notify() )
             .done( result=>service( type, name ));
