@@ -56,9 +56,7 @@ export default class Auth extends React.Component {
                 this.props.linnk.username = "";
                 this.props.linnk.password = "";
             }
-            if ( state == "yinxiang" )    clear( state, "印象笔记" );
-            else if ( state == "gdrive" ) clear( state, "Google 云端硬盘" );
-            else clear( state, state.replace( /\S/i, $0=>$0.toUpperCase() ) );
+            clear( state, exp.Name( state ));
             return;
         }
 
