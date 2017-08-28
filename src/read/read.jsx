@@ -115,9 +115,12 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "markdown":
+                exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, new Notify() );
+                /*
                 exp.Markdown( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, error => {
                     new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
                 });
+                */
                 break;
             case "png":
                 try {
@@ -188,15 +191,11 @@ class Read extends React.Component {
         const service = type => {
             switch( type ) {
                 case "dropbox":
-                    exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
-                        if ( error ) {
-                            new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                        } else {
-                            dropbox.Write( `${ title }.md`, result, ( _, resp, error ) => {
-                                !error && new Notify().Render( "已成功保存到 Dropbox！" );
-                                error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                            }, "md/" );
-                        }
+                    exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
+                        dropbox.Write( `${ title }.md`, result, ( _, resp, error ) => {
+                            !error && new Notify().Render( "已成功保存到 Dropbox！" );
+                            error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+                        }, "md/" );
                     });
                     break;
                 case "pocket":
@@ -232,15 +231,11 @@ class Read extends React.Component {
                     });
                     break;
                 case "gdrive":
-                    exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
-                        if ( error ) {
-                            new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                        } else {
-                            gdrive.Add( "file",( result, error ) => {
-                                !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
-                                error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                            }, gdrive.CreateFile( `${title}.md`, result ));
-                        }
+                    exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
+                        gdrive.Add( "file",( result, error ) => {
+                            !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
+                            error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+                        }, gdrive.CreateFile( `${title}.md`, result ));
                     });
                     break;
             }
