@@ -868,7 +868,7 @@ class Kindle {
 }
 
 /**
- * markdown Wrapper
+ * markdown wrapper
  * 
  * @param  {string} content
  * @param  {string} download file name
@@ -885,7 +885,7 @@ function mdWrapper( content, name, notify ) {
 }
 
 /**
- * Service callback
+ * Service callback wrapper
  * 
  * @param {string} result
  * @param {string} error
@@ -895,6 +895,33 @@ function mdWrapper( content, name, notify ) {
 function serviceCallback( result, error, name, notify ) {
     !error && notify.Render( `已成功保存到 ${name}！` );
     error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+}
+
+/**
+ * Verify service wrapper
+ * 
+ * @param  {object} storage object
+ * @param  {object} service object
+ * @param  {string} service type
+ * @param  {string} service name
+ * @param  {object} notify
+ * @return {promise} promise
+ */
+function verifyService( storage, service, type, name, notify ) {
+    const dtd = $.Deferred();
+    storage.Safe( ()=> {
+        if ( storage.secret[type].access_token ) {
+            Object.keys( storage.secret[type] ).forEach( item => service[item] = storage.secret[type][item] );
+            notify.Render( `开始保存到 ${name}，请稍等...` );
+            dtd.resolve( type );
+        } else {
+            notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+            });
+            dtd.reject( type );
+        }
+    });
+    return dtd;
 }
 
 const dropbox  = new Dropbox(),
@@ -913,6 +940,7 @@ export {
     unlink   as Unlink,
     dropbox, pocket, linnk, evernote, onenote, gdrive,
     kindle,
-    mdWrapper as MDWrapper,
+    mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,
+    verifyService   as VerifySvcWrapper,
 }
