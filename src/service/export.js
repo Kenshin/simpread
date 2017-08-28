@@ -874,6 +874,7 @@ class Kindle {
  * @return {string} service name
  */
 function name( type ) {
+    type = type.toLowerCase();
     if ( [ "dropbox", "pocket", "linnk" , "evernote", "onenote" ].includes( type ) ) {
         return type.replace( /\S/i, $0=>$0.toUpperCase() );
     } else if ( type == "yinxiang" ) {
