@@ -60,36 +60,22 @@ export default class Unrdist extends React.Component {
     onAction( event, ...rests ) {
         const { pocket, linnk } = exp,
               [ id, _, data ]   = rests,
-              name    = id.replace( /\S/i, $0=>$0.toUpperCase() ),
-              service = ( type, name ) => {
-                  if ( type == "pocket" ) {
-                    pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
-                  } else {
-                    linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
-                        if ( !error ) {
-                            linnk.group_id = result.data.groupId;
-                            linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
-                        } else new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                    });
-                  }
-              };
+              name              = id.replace( /\S/i, $0=>$0.toUpperCase() );
 
         [ "pocket", "linnk" ].includes( id ) &&
-            exp.VerifySvcWrapper( storage, exp[id], type, name, new Notify() )
-                .done( result=>service( type, name ));
-            /*
-            storage.Safe( ()=> {
-                if ( storage.secret[id].access_token ) {
-                    Object.keys( storage.secret[id] ).forEach( item => exp[id][item] = storage.secret[id][item] );
-                    service( id );
-                } else {
-                    new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                    });
-                    return;
-                }
-            });
-            */
+            exp.VerifySvcWrapper( storage, exp[id], id, name, new Notify() )
+                .done( type => {
+                    if ( type == "pocket" ) {
+                        pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
+                    } else {
+                        linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
+                            if ( !error ) {
+                                linnk.group_id = result.data.groupId;
+                                linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
+                            } else new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                        });
+                    }
+                });
 
         id == "remove" &&
             storage.UnRead( id, data.idx, success => {
