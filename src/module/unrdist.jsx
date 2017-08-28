@@ -72,7 +72,7 @@ export default class Unrdist extends React.Component {
                             if ( !error ) {
                                 linnk.group_id = result.data.groupId;
                                 linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
-                            } else new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                            } else new Notify().Render( 2, `name 保存失败，请稍后重新再试。` );
                         });
                     }
                 });
