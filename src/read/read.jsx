@@ -178,21 +178,6 @@ class Read extends React.Component {
         exp.VerifySvcWrapper( storage, exp[id], type, name, new Notify() )
             .done( result=>service( type, name ));
 
-        /*
-        storage.Safe( ()=> {
-            if ( storage.secret[type].access_token ) {
-                Object.keys( storage.secret[type] ).forEach( item => exp[id][item] = storage.secret[type][item] );
-                new Notify().Render( `开始保存到 ${name}，请稍等...` );
-                service( type, name );
-            } else {
-                new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                });
-                return;
-            }
-        });
-        */
-
         const service = ( type, name ) => {
             switch( type ) {
                 case "dropbox":
