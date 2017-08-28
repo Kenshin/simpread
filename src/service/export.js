@@ -873,6 +873,23 @@ const dropbox  = new Dropbox(),
       gdrive   = new GDrive(),
       kindle   = new Kindle();
 
+/**
+ * markdown Wrapper
+ * 
+ * @param  {string} content
+ * @param  {string} download file name
+ * @param  {object} new Notify()
+ * @return {promise} promise
+ */
+function mdWrapper( content, name, notify ) {
+    const dtd  = $.Deferred();
+    markdown( content, name, ( result, error ) => {
+        error  && notify.Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
+        !error && dtd.resolve( result );
+    });
+    return dtd;
+}
+
 export {
     png      as PNG,
     pdf      as PDF,
@@ -886,4 +903,5 @@ export {
     onenote,
     gdrive,
     kindle,
+    mdWrapper as MDWrapper,
 }
