@@ -185,7 +185,7 @@ class Read extends React.Component {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
                             linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
-                        } else new Notify().Render( 2, "保存失败，请稍后重新再试。" );
+                        } else new Notify().Render( 2, `name 保存失败，请稍后重新再试。` );
                     });
                     break;
                 case "evernote":
