@@ -59,20 +59,19 @@ export default class Unrdist extends React.Component {
 
     onAction( event, ...rests ) {
         const { pocket, linnk } = exp,
-              [ id, _, data ]   = rests,
-              name              = exp.Name( id );
+              [ id, _, data ]   = rests;
 
         [ "pocket", "linnk" ].includes( id ) &&
-            exp.VerifySvcWrapper( storage, exp[id], id, name, new Notify() )
+            exp.VerifySvcWrapper( storage, exp[id], id, exp.Name( id ), new Notify() )
                 .done( type => {
                     if ( type == "pocket" ) {
-                        pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
+                        pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, new Notify() ));
                     } else {
                         linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                             if ( !error ) {
                                 linnk.group_id = result.data.groupId;
-                                linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
-                            } else new Notify().Render( 2, `name 保存失败，请稍后重新再试。` );
+                                linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, new Notify() ));
+                            } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
                         });
                     }
                 });
