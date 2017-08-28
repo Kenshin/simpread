@@ -75,7 +75,7 @@ export default class Auth extends React.Component {
                         pocket.New().Login( result.code );
                         pocket.dtd.done( ()=> {
                             pocket.Auth( ( result, error ) => {
-                                if ( error ) failed( error, state, pocket.name );
+                                if ( error ) failed( error, pocket.id, pocket.name );
                                 else success( pocket.id, pocket.name, { access_token: pocket.access_token });
                             });
                         }).fail( error => failed( error, pocket.id, pocket.name ));
@@ -104,17 +104,16 @@ export default class Auth extends React.Component {
             case "yinxiang":
             case "evernote":
                 evernote.env = state;
-                const name   = evernote.name;
-                new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
+                new Notify().Render( `开始对 ${ evernote.name } 进行授权，请稍等...` );
                 evernote.New().RequestToken( ( result, error ) => {
-                    if ( error ) failed( error, state, name );
+                    if ( error ) failed( error, evernote.id, evernote.name );
                     else {
                         evernote.dtd.done( () => {
                             evernote.Auth( ( result, error ) => {
-                                if ( error ) failed( error, state, name );
-                                else success( state, name, { access_token: evernote.access_token });
+                                if ( error ) failed( error, evernote.id, evernote.name );
+                                else success( evernote.id, evernote.name, { access_token: evernote.access_token });
                             });
-                        }).fail( error => failed( error, state, name ));
+                        }).fail( error => failed( error, evernote.id, evernote.name ));
                     }
                 });
                 break;
