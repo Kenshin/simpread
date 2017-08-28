@@ -164,43 +164,43 @@ class Read extends React.Component {
     onService( type, value ) {
         const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
               title = $( "sr-rd-title" ).text().trim(),
-              id    = type == "yinxiang" ? "evernote" : type,
-              name  = exp.Name( type );
+              id    = type == "yinxiang" ? "evernote" : type;
 
-        exp.VerifySvcWrapper( storage, exp[id], type, name, new Notify() )
-            .done( result=>service( type, name ));
+        exp.VerifySvcWrapper( storage, exp[id], type, exp.Name( type ), new Notify() )
+            .done( result => service( type ));
 
-        const service = ( type, name ) => {
+        const service = type => {
             switch( type ) {
                 case "dropbox":
                     exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
-                        dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ), "md/" );
+                        dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, new Notify() ), "md/" );
                     });
                     break;
                 case "pocket":
-                    pocket.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
+                    pocket.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, new Notify() ));
                     break;
                 case "linnk":
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
-                            linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
+                            linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, new Notify() ));
                         } else new Notify().Render( 2, `name 保存失败，请稍后重新再试。` );
                     });
                     break;
                 case "evernote":
                 case "yinxiang":
+                    evernote.env = type;
                     evernote.Add( title, st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
-                        exp.svcCbWrapper( result, error, name, new Notify() );
+                        exp.svcCbWrapper( result, error, evernote.name, new Notify() );
                         error && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
                     });
                     break;
                 case "onenote":
-                    onenote.Add( onenote.Wrapper( window.location.href, title, $("sr-rd-content").html() ), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
+                    onenote.Add( onenote.Wrapper( window.location.href, title, $("sr-rd-content").html() ), ( result, error ) => exp.svcCbWrapper( result, error, onenote.name, new Notify() ));
                     break;
                 case "gdrive":
                     exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
-                        gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
+                        gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
                     });
                     break;
             }
