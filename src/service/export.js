@@ -884,6 +884,19 @@ function mdWrapper( content, name, notify ) {
     return dtd;
 }
 
+/**
+ * Service callback
+ * 
+ * @param {string} result
+ * @param {string} error
+ * @param {string} name
+ * @param {object} notify
+ */
+function serviceCallback( result, error, name, notify ) {
+    !error && notify.Render( `已成功保存到 ${name}！` );
+    error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+}
+
 const dropbox  = new Dropbox(),
       pocket   = new Pocket(),
       linnk    = new Linnk(),
@@ -901,4 +914,5 @@ export {
     dropbox, pocket, linnk, evernote, onenote, gdrive,
     kindle,
     mdWrapper as MDWrapper,
+    serviceCallback as svcCbWrapper,
 }
