@@ -878,9 +878,10 @@ function name( type ) {
         return type.replace( /\S/i, $0=>$0.toUpperCase() );
     } else if ( type == "yinxiang" ) {
         return "印象笔记";
-    } else {
+    } else if ( type == "gdrive" ) {
         return "Google 云端硬盘";
     }
+    return type;
 }
 
 /**
