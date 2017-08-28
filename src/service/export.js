@@ -83,6 +83,9 @@ function unlink( id ) {
  */
 class Dropbox {
 
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
+
     get client_id() {
         return "4cyaw4wqpbg4751";
     }
@@ -193,6 +196,9 @@ class Dropbox {
  */
 class Pocket {
 
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
+    
     get consumer_key() {
         return "69741-d75561b7a9a96a511f36552e";
     }
@@ -298,6 +304,9 @@ class Pocket {
  * @class
  */
 class Linnk {
+
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
 
     constructor() {
         this.access_token = "";
@@ -413,6 +422,9 @@ class Linnk {
  * @class
  */
 class Evernote {
+
+    get id()   { return this.constructor.env.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
 
     constructor() {
         this.token          = "";
@@ -545,6 +557,9 @@ class Evernote {
  */
 class Onenote {
 
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
+
     get client_id() {
         return "b21d6e4a-30d5-4c39-9ef2-0ac14a01822b";
     }
@@ -665,6 +680,9 @@ class Onenote {
  * @class
  */
 class GDrive {
+
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
 
     get client_id() {
         return "920476054505-fd4192mqtfodackl1vip1c3c0hp6298n.apps.googleusercontent.com";
