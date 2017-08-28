@@ -352,7 +352,9 @@ class Linnk {
             headers : { Authorization: this.access_token },
             data,
         }).done( ( result, textStatus, jqXHR ) => {
-            callback( JSON.parse(result), undefined );
+            const data = JSON.parse(result);
+            if ( data && data.code == 200 ) callback( "success", undefined );
+            else callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
