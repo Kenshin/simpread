@@ -179,7 +179,7 @@ class Read extends React.Component {
             if ( storage.secret[type].access_token ) {
                 Object.keys( storage.secret[type] ).forEach( item => exp[id][item] = storage.secret[type][item] );
                 new Notify().Render( `开始保存到 ${name}，请稍等...` );
-                service( type );
+                service( type, name );
             } else {
                 new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
                     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
@@ -188,54 +188,37 @@ class Read extends React.Component {
             }
         });
 
-        const service = type => {
+        const service = ( type, name ) => {
             switch( type ) {
                 case "dropbox":
                     exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
-                        dropbox.Write( `${ title }.md`, result, ( _, resp, error ) => {
-                            !error && new Notify().Render( "已成功保存到 Dropbox！" );
-                            error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                        }, "md/" );
+                        dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ), "md/" );
                     });
                     break;
                 case "pocket":
-                    pocket.Add( window.location.href, title, ( result, error ) => {
-                        !error && new Notify().Render( "已成功保存到 Pocket！" );
-                        error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                    });
+                    pocket.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
                     break;
                 case "linnk":
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
-                            linnk.Add( window.location.href, title, ( result, error ) => {
-                                !error && new Notify().Render( "已成功保存到 Linnk！" );
-                                error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                            });
+                            linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
                         } else new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                     });
                     break;
                 case "evernote":
                 case "yinxiang":
-                    const name = type == "evernote" ? "Evernote" : "印象笔记";
                     evernote.Add( title, st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
-                        !error && new Notify().Render( `已成功保存到 ${name}！` );
-                        error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
-                        error  && new Notify().Render( "建议使用 Onenote 能更完美的还原被保存页面。" );
+                        exp.svcCbWrapper( result, error, name, new Notify() );
+                        error && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
                     });
                     break;
                 case "onenote":
-                    onenote.Add( onenote.Wrapper( window.location.href, title, $("sr-rd-content").html() ),  ( result, error ) => {
-                        !error && new Notify().Render( "已成功保存到 Onenote！" );
-                        error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                    });
+                    onenote.Add( onenote.Wrapper( window.location.href, title, $("sr-rd-content").html() ), ( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ));
                     break;
                 case "gdrive":
                     exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
-                        gdrive.Add( "file",( result, error ) => {
-                            !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
-                            error  && new Notify().Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
-                        }, gdrive.CreateFile( `${title}.md`, result ));
+                        gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, name, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
                     });
                     break;
             }
