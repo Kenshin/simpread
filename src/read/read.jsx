@@ -209,7 +209,7 @@ class Read extends React.Component {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
                             linnk.Add( window.location.href, title, ( result, error ) => {
-                                !error && result.code == 200 && new Notify().Render( "已成功保存到 Linnk！" );
+                                !error && new Notify().Render( "已成功保存到 Linnk！" );
                                 error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
                             });
                         } else new Notify().Render( 2, "保存失败，请稍后重新再试。" );
