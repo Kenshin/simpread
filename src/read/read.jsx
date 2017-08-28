@@ -175,6 +175,10 @@ class Read extends React.Component {
         type == "yinxiang" && ( name = "印象笔记" );
         type == "gdrive"   && ( name = "Google 云端硬盘" );
 
+        exp.VerifySvcWrapper( storage, exp[id], type, name, new Notify() )
+            .done( result=>service( type, name ));
+
+        /*
         storage.Safe( ()=> {
             if ( storage.secret[type].access_token ) {
                 Object.keys( storage.secret[type] ).forEach( item => exp[id][item] = storage.secret[type][item] );
@@ -187,6 +191,7 @@ class Read extends React.Component {
                 return;
             }
         });
+        */
 
         const service = ( type, name ) => {
             switch( type ) {
