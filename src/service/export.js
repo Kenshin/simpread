@@ -865,14 +865,6 @@ class Kindle {
     }
 }
 
-const dropbox  = new Dropbox(),
-      pocket   = new Pocket(),
-      linnk    = new Linnk(),
-      evernote = new Evernote(),
-      onenote  = new Onenote(),
-      gdrive   = new GDrive(),
-      kindle   = new Kindle();
-
 /**
  * markdown Wrapper
  * 
@@ -890,18 +882,21 @@ function mdWrapper( content, name, notify ) {
     return dtd;
 }
 
+const dropbox  = new Dropbox(),
+      pocket   = new Pocket(),
+      linnk    = new Linnk(),
+      evernote = new Evernote(),
+      onenote  = new Onenote(),
+      gdrive   = new GDrive(),
+      kindle   = new Kindle();
+
 export {
     png      as PNG,
     pdf      as PDF,
     markdown as Markdown,
     download as Download,
     unlink   as Unlink,
-    dropbox,
-    pocket,
-    linnk,
-    evernote,
-    onenote,
-    gdrive,
+    dropbox, pocket, linnk, evernote, onenote, gdrive,
     kindle,
     mdWrapper as MDWrapper,
 }
