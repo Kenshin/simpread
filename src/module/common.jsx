@@ -78,7 +78,7 @@ export default class CommonOpt extends React.Component {
         storage.Safe( ()=> {
             const sec_dbx = storage.secret.dropbox;
             !sec_dbx.access_token ?
-                new Notify().Render( "未对 Dropbox 授权，请先进行授权操作。", "授权", () => {
+                new Notify().Render( `未对 ${ dbx.name } 授权，请先进行授权操作。`, "授权", () => {
                     dbx.New().Auth();
                     dbx.dtd
                         .done( () => {
@@ -89,7 +89,7 @@ export default class CommonOpt extends React.Component {
                         })
                         .fail( error => {
                             console.error( error )
-                            new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
+                            new Notify().Render( 2, `获取 ${ dbx.name } 授权失败，请重新获取。` );
                         });
                 }) : ( () => {
                 dbx.access_token = sec_dbx.access_token;
