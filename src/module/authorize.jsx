@@ -64,40 +64,40 @@ export default class Auth extends React.Component {
             case "dropbox":
                 dropbox.New().Auth();
                 dropbox.dtd
-                    .done( ()    => success( state, "Dropbox", { access_token: dropbox.access_token } ))
-                    .fail( error => failed( error, state, "Dropbox" ));
+                    .done( ()    => success( dropbox.id, dropbox.name, { access_token: dropbox.access_token } ))
+                    .fail( error => failed( error, dropbox.id, dropbox.name ));
                 break;
             case "pocket":
-                new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
+                new Notify().Render( `开始对 ${ pocket.name } 进行授权，请稍等...` );
                 pocket.Request( ( result, error ) => {
-                    if ( error ) failed( error, state, "Pocket" );
+                    if ( error ) failed( error, pocket.id, pocket.name );
                     else {
                         pocket.New().Login( result.code );
                         pocket.dtd.done( ()=> {
                             pocket.Auth( ( result, error ) => {
-                                if ( error ) failed( error, state, "Pocket" );
-                                else success( state, "Pocket", { access_token: pocket.access_token });
+                                if ( error ) failed( error, state, pocket.name );
+                                else success( pocket.id, pocket.name, { access_token: pocket.access_token });
                             });
-                        }).fail( error => failed( error, state, "Pocket" ));
+                        }).fail( error => failed( error, pocket.id, pocket.name ));
                     }
                 });
                 break;
             case "linnk":
                 linnk.Login( this.props.linnk.username, this.props.linnk.password, ( result, error ) => {
-                    if ( error ) failed( error, state, "Linnk" );
+                    if ( error ) failed( error, linnk.id, linnk.name );
                     else if ( result.code == 200 ) {
                         linnk.Groups( result => {
                             if ( result.code == 200 ) {
                                 linnk.GetGroup( "", result.data );
-                                success( state, "Linnk", { access_token: linnk.access_token, group_name: linnk.group_name });
+                                success( linnk.id, linnk.name, { access_token: linnk.access_token, group_name: linnk.group_name });
                             } else {
                                 const msg = linnk.error_code[result.code];
-                                new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
+                                new Notify().Render( 2, msg ? msg : `获取 ${ linnk.name } 授权失败，请重新获取。` );
                             }
                         });
                     } else {
                         const msg = linnk.error_code[result.code];
-                        new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
+                        new Notify().Render( 2, msg ? msg : `获取 ${ linnk.name } 授权失败，请重新获取。` );
                     }
                 });
                 break;
@@ -122,19 +122,19 @@ export default class Auth extends React.Component {
                 onenote.New().Login();
                 onenote.dtd.done( ()=> {
                     onenote.Auth( ( result, error ) => {
-                        if ( error ) failed( error, state, "Onenote" );
-                        else success( state, "Onenote", { access_token: onenote.access_token });
+                        if ( error ) failed( error, onenote.id, onenote.name );
+                        else success( onenote.id, onenote.name, { access_token: onenote.access_token });
                     });
-                }).fail( error => failed( error, state, "Onenote" ));
+                }).fail( error => failed( error, onenote.id, onenote.name ));
                 break;
             case "gdrive":
                 gdrive.New().Login();
                 gdrive.dtd.done( ()=> {
                     gdrive.Auth( ( result, error ) => {
-                        if ( error ) failed( error, state, "Google 云端硬盘" );
-                        else success( state, "Google 云端硬盘", { access_token: gdrive.access_token, folder_id: gdrive.folder_id });
+                        if ( error ) failed( error, gdrive.id, gdrive.name );
+                        else success( gdrive.id, gdrive.name, { access_token: gdrive.access_token, folder_id: gdrive.folder_id });
                     });
-                }).fail( error => failed( error, state, "Google 云端硬盘" ));
+                }).fail( error => failed( error, gdrive.id, gdrive.name ));
                 break;
         }
     }
