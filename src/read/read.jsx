@@ -193,7 +193,7 @@ class Read extends React.Component {
                     evernote.sandbox = false;
                     evernote.Add( title, st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
                         exp.svcCbWrapper( result, error, evernote.name, new Notify() );
-                        error && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
+                        error == "error" && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
                     });
                     break;
                 case "onenote":

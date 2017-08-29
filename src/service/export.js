@@ -535,9 +535,9 @@ class Evernote {
                 content,
             }
         }).done( ( result, textStatus, jqXHR ) => {
-            console.log( "evernote add note result = ", result )
-            result && result.code == -1 &&  callback( undefined, "error" );
             result && result.code == 200 && callback( result, undefined );
+            result && result.code == -1  &&
+                callback( undefined, result.data.message == "authenticationToken" ? `${ name(this.env) } 授权错误，请重新授权。` : "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
