@@ -103,7 +103,8 @@ export default class Auth extends React.Component {
                 break;
             case "yinxiang":
             case "evernote":
-                evernote.env = state;
+                evernote.env     = state;
+                evernote.sandbox = false;
                 new Notify().Render( `开始对 ${ evernote.name } 进行授权，请稍等...` );
                 evernote.New().RequestToken( ( result, error ) => {
                     if ( error ) failed( error, evernote.id, evernote.name );
@@ -148,13 +149,8 @@ export default class Auth extends React.Component {
         this.props.linnk[state] = value;
     }
 
-    shouldComponentUpdate( nextProps, nextState ) {
-        if ( nextState.linnk != undefined   ) return true;
-        if ( JSON.stringify( storage.secret ) != JSON.stringify( this.state.secret )) {
-            nextState.secret = storage.secret;
-            return true;
-        }
-        return false;
+    componentWillReceiveProps( nextProps ) {
+        this.setState({ secret: storage.secret })
     }
 
     componentDidMount() {
