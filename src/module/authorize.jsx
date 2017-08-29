@@ -148,6 +148,14 @@ export default class Auth extends React.Component {
         this.props.linnk[state] = value;
     }
 
+    shouldComponentUpdate( nextProps, nextState ) {
+        if ( JSON.stringify( storage.secret ) != JSON.stringify( this.state.secret )) {
+            nextState.secret = storage.secret;
+            return true;
+        }
+        return false;
+    }
+
     componentDidMount() {
         storage.Safe( () => this.setState({ secret: storage.secret }) );
     }
