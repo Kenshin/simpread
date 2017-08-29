@@ -189,7 +189,8 @@ class Read extends React.Component {
                     break;
                 case "evernote":
                 case "yinxiang":
-                    evernote.env = type;
+                    evernote.env     = type;
+                    evernote.sandbox = false;
                     evernote.Add( title, st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
                         exp.svcCbWrapper( result, error, evernote.name, new Notify() );
                         error && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
