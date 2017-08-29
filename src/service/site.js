@@ -372,6 +372,7 @@ function html2enml( html, url ) {
         str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
                 //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
                 .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
+                .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
                 .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                  // <img>
                 .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )   // data="xxx" || data-xxx="xxx"
                 .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
