@@ -535,6 +535,7 @@ class Evernote {
                 content,
             }
         }).done( ( result, textStatus, jqXHR ) => {
+            console.assert( result.code != -1, result )
             result && result.code == 200 && callback( result, undefined );
             result && result.code == -1  &&
                 callback( undefined, result.data.message == "authenticationToken" ? `${ name(this.env) } 授权错误，请重新授权。` : "error" );
