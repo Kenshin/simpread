@@ -111,10 +111,7 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
     if ( changeInfo.status == "complete" ) {
         console.log( "background tabs Listener:update", tabId, changeInfo, tab );
 
-        if ( tab.url.startsWith( "http://ksria.com/simpread/auth.html" )  || 
-             tab.url.startsWith( "https://simpread.herokuapp.com/?code=") || 
-            tab.url.startsWith( "https://simpread.herokuapp.com/?error=" )
-        ) {
+        if ( tab.url.startsWith( "http://ksria.com/simpread/auth.html" )) {
             const url = tab.url.replace( "http://ksria.com/simpread/auth.html?id=", "" ),
                   id  = url.includes( "#" ) || url.includes( "&" ) ? url.substr( 0, url.search( /\S(#|&)/ ) + 1 ) : url ;
             browser.tabs.query( {}, tabs => {

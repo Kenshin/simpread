@@ -372,6 +372,7 @@ function html2enml( html, url ) {
         str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
                 //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
                 .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
+                .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
                 .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                  // <img>
                 .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )   // data="xxx" || data-xxx="xxx"
                 .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
@@ -383,7 +384,6 @@ function html2enml( html, url ) {
                 .replace( /<br>/ig, "<br></br>" )
                 .replace( /<\/p>/ig, "<br></br>" );
 
-        console.log(str)
         return str;
 
     } catch( error ) {
@@ -398,7 +398,7 @@ function html2enml( html, url ) {
  */
 function clearMD( str ) {
     str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
-    str = str.replace( /<\/?(ins|font|span|div|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,+()#"{}\u4e00-\u9fa5]*>/ig, "" )
+    str = str.replace( /<\/?(ins|font|span|div|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
              .replace( /sr-blockquote/ig, "blockquote" )
              .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
              .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )

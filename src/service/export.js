@@ -58,7 +58,23 @@ function download( data, name ) {
     $a.remove();
 }
 
-let dbx_token, dbx_error, defer = $.Deferred();
+/**
+ * Dis contented serice
+ * 
+ * @param {string} service id 
+ */
+function unlink( id ) {
+    const content = {
+        "dropbox" : "https://www.dropbox.com/account/security",
+        "pocket"  : "https://getpocket.com/connected_applications",
+        "evernote": "https://www.evernote.com/AuthorizedServices.action",
+        "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
+        "onenote" : "https://account.live.com/consent/Manage",
+        "gdrive"  : "https://drive.google.com/drive/my-drive",
+        "linnk"   : "https://linnk.net/",
+    }
+    return content[id]
+}
 
 /**
  * Dropbox
@@ -66,6 +82,9 @@ let dbx_token, dbx_error, defer = $.Deferred();
  * @class
  */
 class Dropbox {
+
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
 
     get client_id() {
         return "4cyaw4wqpbg4751";
@@ -79,28 +98,22 @@ class Dropbox {
         return "simpread_config.json";
     }
 
-    set access_token( uri ) {
-        const arr = uri.match( /access_token=\S+&token_type/i );
-        if ( arr && arr.length > 0 ) {
-            dbx_token = arr[0].replace( /(access_token=)|(&token_type)/ig, "" );
-        } else {
-            dbx_token = uri;
-        }
-        defer.resolve( "token_success" );
-    }
-
-    get access_token() {
-        return dbx_token;
+    New() {
+        this.dtd  = $.Deferred();
+        this.access_token = "";
+        return this;
     }
 
     Auth() {
-        if ( !dbx_error ) {
-            const url = `https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=${this.client_id}&redirect_uri=${this.redirect_uri}`;
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-        } else {
-            defer.reject( "access_failed" );
-        }
-        return this;
+        const url = `https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=${this.client_id}&redirect_uri=${this.redirect_uri}`;
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+
+    Accesstoken( url ) {
+        const arr = url.match( /access_token=\S+&token_type/i );
+        arr && arr.length > 0 &&
+            ( this.access_token = arr[0].replace( /(access_token=)|(&token_type)/ig, "" ));
+        this.access_token != "" ? this.dtd.resolve() : this.dtd.reject();
     }
 
     Exist( name, callback ) {
@@ -144,8 +157,9 @@ class Dropbox {
         });
     }
 
-    Write( name, data, callback ) {
-        const args     = { path: "/" + name, mode: "overwrite" },
+    Write( name, data, callback, path = "" ) {
+        const safename = data => data.replace( /\//ig, "" ),
+              args     = { path: `/${path}${safename(name)}`, mode: "overwrite" },
               token    = this.access_token,
               safejson = args => {
                 const charsToEncode = /[\u007f-\uffff]/g;
@@ -167,15 +181,13 @@ class Dropbox {
             contentType : false
         }).done( ( data, textStatus, jqXHR ) => {
             callback( "write", data, undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( "write", undefined, textStatus );
+        }).fail( ( xhr, textStatus, error ) => {
+            console.error( xhr, status, error )
+            callback( "write", undefined, error.toLowerCase().startsWith( "invalid_access_token" ) ? `${ name("dropbox") } 授权过期，请重新授权。` : "error" );
         });
 
     }
 }
-
-let defer_pocket = $.Deferred();
 
 /**
  * Pocket
@@ -184,18 +196,15 @@ let defer_pocket = $.Deferred();
  */
 class Pocket {
 
-    constructor( access_token, code, tags ) {
-        this.access_token = access_token;
-        this.code         = code;
-        this.tags         = tags;
-    }
-
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
+    
     get consumer_key() {
         return "69741-d75561b7a9a96a511f36552e";
     }
 
     get redirect_uri() {
-        return "http://ksria.com/simpread/auth.html?id=pocket";
+        return "https://kenshin.github.io/simpread/auth.html?id=pocket";
     }
 
     get header() {
@@ -205,12 +214,12 @@ class Pocket {
         }
     }
 
-    Settags( value ) {
-        this.tags = value ? value : "simpread";
-    }
-
-    Accesstoken() {
-        defer_pocket.resolve( "token_success" );
+    New() {
+        this.dtd = $.Deferred();
+        this.access_token = "";
+        this.code         = "";
+        this.tags         = "";
+        return this;
     }
 
     Request( callback ) {
@@ -232,11 +241,14 @@ class Pocket {
         });
     }
 
-    Redirect( code ) {
+    Login( code ) {
         this.code = code;
         const url = `https://getpocket.com/auth/authorize?request_token=${code}&redirect_uri=${this.redirect_uri}`;
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-        return this;
+    }
+
+    Accesstoken( url ) {
+        url ? this.dtd.resolve() : this.reject();
     }
 
     Auth( callback ) {
@@ -251,8 +263,11 @@ class Pocket {
             type    : "POST",
             headers : this.header,
             data,
-        }).done( ( data, textStatus, jqXHR ) => {
-            callback( data, undefined );
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( result && result.access_token ) {
+                this.access_token = result.access_token;
+                callback( result, undefined );    
+            } else callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
@@ -265,7 +280,7 @@ class Pocket {
             access_token: this.access_token,
             url,
             title,
-            tags: this.tags
+            tags: this.tags ? this.tags : "simpread"
         };
 
         $.ajax({
@@ -275,9 +290,9 @@ class Pocket {
             data,
         }).done( ( data, textStatus, jqXHR ) => {
             callback( data, undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        }).fail( ( xhr, status, error ) => {
+            console.error( xhr, status, error )
+            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ name("pocket") } 授权过期，请重新授权。` : "error" );
         });
     }
 
@@ -290,9 +305,13 @@ class Pocket {
  */
 class Linnk {
 
-    constructor( access_token, group_id ) {
-        this.access_token = access_token;
-        this.group_id     = group_id;
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
+
+    constructor() {
+        this.access_token = "";
+        this.group_id     = "";
+        this.group_name   = "";
     }
 
     get error_code() {
@@ -320,6 +339,7 @@ class Linnk {
             type    : "POST",
             data,
         }).done( ( result, textStatus, jqXHR ) => {
+            result && result.code == 200 && ( this.access_token = result.token );
             callback( result, undefined );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
@@ -341,7 +361,9 @@ class Linnk {
             headers : { Authorization: this.access_token },
             data,
         }).done( ( result, textStatus, jqXHR ) => {
-            callback( JSON.parse(result), undefined );
+            const data = JSON.parse(result);
+            if ( data && data.code == 200 ) callback( "success", undefined );
+            else callback( undefined, "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
@@ -362,7 +384,9 @@ class Linnk {
     }
 
     GetGroup( name, target ) {
-        return target.find( obj => obj.groupName == name );
+        const group = target.find( obj => obj.groupName == name );
+        this.group_name = group.groupName;
+        return group;
     }
 
     NewGroup( name, callback ) {
@@ -399,6 +423,9 @@ class Linnk {
  */
 class Evernote {
 
+    get id()   { return this.env.toLowerCase(); }
+    get name() { return name( this.env ); }
+
     constructor() {
         this.token          = "";
         this.token_secret   = ""
@@ -417,16 +444,12 @@ class Evernote {
     }
 
     get server() {
-        //return this.sandbox ? "http://localhost:3000" : "https://simpread.herokuapp.com";
+        //return this.sandbox ? "http://localhost:3000/evernote" : "https://simpread.herokuapp.com/evernote";
         return "https://simpread.herokuapp.com/evernote";
     }
 
     get china() {
         return this.env != "evernote" ? true : false;
-    }
-
-    get name() {
-        return this.env == "evernote" ? "Evernote" : "印象笔记";
     }
 
     get headers() {
@@ -512,9 +535,10 @@ class Evernote {
                 content,
             }
         }).done( ( result, textStatus, jqXHR ) => {
-            console.log( "evernote add note result = ", result )
-            result && result.code == -1 &&  callback( undefined, "error" );
+            console.assert( result.code != -1, result )
             result && result.code == 200 && callback( result, undefined );
+            result && result.code == -1  &&
+                callback( undefined, result.data.message == "authenticationToken" ? `${ name(this.env) } 授权错误，请重新授权。` : "error" );
         }).fail( ( jqXHR, textStatus, error ) => {
             console.error( jqXHR, textStatus, error )
             callback( undefined, textStatus );
@@ -530,6 +554,9 @@ class Evernote {
  */
 class Onenote {
 
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
+
     get client_id() {
         return "b21d6e4a-30d5-4c39-9ef2-0ac14a01822b";
     }
@@ -539,7 +566,8 @@ class Onenote {
     }
 
     get redirect_uri() {
-        return "https://simpread.herokuapp.com";
+        //return "https://simpread.herokuapp.com";
+        return "https://kenshin.github.io/simpread/auth.html";
     }
 
     get scopes() {
@@ -583,12 +611,11 @@ class Onenote {
             url += `${key}=${params[key]}&`;
         });
         url = url.substr( 0, url.length )
-        console.log( url )
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
     }
 
     Accesstoken( url ) {
-        url = url.replace( `${this.redirect_uri}/?`, "" );
+        url = url.replace( "http://ksria.com/simpread/auth.html?", "" );
         if ( url.startsWith( "code" ) ) {
             this.code = url.replace( "code=", "" );
             this.dtd.resolve();
@@ -633,13 +660,13 @@ class Onenote {
                 "Authorization": `Bearer ${this.access_token}`
             },
             data    : html,
-        }).done( ( result, textStatus, jqXHR ) => {
-            console.log( result, textStatus, jqXHR )
-            textStatus == "success" && callback( result, undefined );
-            textStatus != "success" && callback( undefined, "error" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        }).done( ( result, status, xhr ) => {
+            console.log( result, status, xhr )
+            status == "success" && callback( result, undefined );
+            status != "success" && callback( undefined, "error" );
+        }).fail( ( xhr, status, error ) => {
+            console.error( xhr, status, error )
+            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ name("onenote") } 授权过期，请重新授权。` : "error" );
         });
     }
 }
@@ -651,12 +678,15 @@ class Onenote {
  */
 class GDrive {
 
+    get id()   { return this.constructor.name.toLowerCase(); }
+    get name() { return name( this.constructor.name ); }
+
     get client_id() {
         return "920476054505-fd4192mqtfodackl1vip1c3c0hp6298n.apps.googleusercontent.com";
     }
 
      get redirect_uri() {
-         return "http://ksria.com/simpread/auth.html?id=gdrive";
+         return "https://kenshin.github.io/simpread/auth.html?id=gdrive";
      }
 
      get scope() {
@@ -676,6 +706,14 @@ class GDrive {
             "Authorization": `Bearer ${this.access_token}`
          }
      }
+
+    get errors() {
+        return {
+            401: `${ name("gdrive") } 授权过期，请重新授权。`,
+            403: "调用达到最大值，请重新授权后再使用。",
+            500: "Google 服务出现问题，请稍后再使用。",
+        }
+    }
 
     get boundary() {
         return "-------314159265358979323846";
@@ -787,9 +825,10 @@ class GDrive {
             type == "folder" && textStatus == "success" && ( this.folder_id = result.id );
             textStatus == "success" && callback( result, undefined );
             textStatus != "success" && callback( undefined, "error" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR.responseJSON, textStatus, "error" )
-            callback( undefined, "error" );
+        }).fail( ( xhr, status, error ) => {
+            console.error( xhr, status, error )
+            const msg = xhr && xhr.responseJSON && this.errors[xhr.responseJSON.error.code] ? this.errors[xhr.responseJSON.error.code] : "error";
+            callback( undefined, msg );
         });
     }
 }
@@ -843,30 +882,99 @@ class Kindle {
     }
 }
 
-const dropbox = new Dropbox();
-defer.promise( dropbox );
+/**
+ * Get name
+ * 
+ * @param  {string} service type
+ * @return {string} service name
+ */
+function name( type ) {
+    type = type.toLowerCase();
+    if ( [ "dropbox", "pocket", "linnk" , "evernote", "onenote" ].includes( type ) ) {
+        return type.replace( /\S/i, $0=>$0.toUpperCase() );
+    } else if ( type == "yinxiang" ) {
+        return "印象笔记";
+    } else if ( type == "gdrive" ) {
+        return "Google 云端硬盘";
+    }
+    return type;
+}
 
-const pocket = new Pocket();
-defer_pocket.promise( pocket );
+/**
+ * markdown wrapper
+ * 
+ * @param  {string} content
+ * @param  {string} download file name
+ * @param  {object} new Notify()
+ * @return {promise} promise
+ */
+function mdWrapper( content, name, notify ) {
+    const dtd  = $.Deferred();
+    markdown( content, name, ( result, error ) => {
+        error  && notify.Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
+        !error && dtd.resolve( result );
+    });
+    return dtd;
+}
 
-const linnk = new Linnk();
+/**
+ * Service callback wrapper
+ * 
+ * @param {string} result
+ * @param {string} error
+ * @param {string} name
+ * @param {object} notify
+ */
+function serviceCallback( result, error, name, notify ) {
+    !error && notify.Render( `已成功保存到 ${name}！` );
+    error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+}
 
-const evernote = new Evernote();
+/**
+ * Verify service wrapper
+ * 
+ * @param  {object} storage object
+ * @param  {object} service object
+ * @param  {string} service type
+ * @param  {string} service name
+ * @param  {object} notify
+ * @return {promise} promise
+ */
+function verifyService( storage, service, type, name, notify ) {
+    const dtd = $.Deferred();
+    storage.Safe( ()=> {
+        if ( storage.secret[type].access_token ) {
+            Object.keys( storage.secret[type] ).forEach( item => service[item] = storage.secret[type][item] );
+            notify.Render( `开始保存到 ${name}，请稍等...` );
+            dtd.resolve( type );
+        } else {
+            notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+            });
+            dtd.reject( type );
+        }
+    });
+    return dtd;
+}
 
-const onenote  = new Onenote();
-const gdrive   = new GDrive();
-const kindle   = new Kindle();
+const dropbox  = new Dropbox(),
+      pocket   = new Pocket(),
+      linnk    = new Linnk(),
+      evernote = new Evernote(),
+      onenote  = new Onenote(),
+      gdrive   = new GDrive(),
+      kindle   = new Kindle();
 
 export {
     png      as PNG,
     pdf      as PDF,
     markdown as Markdown,
     download as Download,
-    dropbox,
-    pocket,
-    linnk,
-    evernote,
-    onenote,
-    gdrive,
+    unlink   as Unlink,
+    name     as Name,
+    dropbox, pocket, linnk, evernote, onenote, gdrive,
     kindle,
+    mdWrapper       as MDWrapper,
+    serviceCallback as svcCbWrapper,
+    verifyService   as VerifySvcWrapper,
 }

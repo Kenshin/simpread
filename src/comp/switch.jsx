@@ -2,7 +2,7 @@
  * React Material Design: Switch
  * 
  * @version : 0.0.1
- * @update  : 2017/03/13
+ * @update  : 2017/08/25
  * @homepage: https://github.com/kenshin/react-md-ui
  * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -191,6 +191,10 @@ export default class Switch extends React.Component {
             checked: !this.state.checked,
         });
         !this.props.disable && this.props.onChange && this.props.onChange( !this.state.checked );
+    }
+
+    componentWillReceiveProps( nextProps ) {
+        this.setState({ checked: nextProps.checked });
     }
 
     render() {

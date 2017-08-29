@@ -58,44 +58,23 @@ export default class Unrdist extends React.Component {
     };
 
     onAction( event, ...rests ) {
-        const [ id, _, data ] = rests;
-        id == "pocket" && 
-            storage.Safe( ()=> {
-                if ( storage.secret.pocket.access_token ) {
-                    exp.pocket.access_token = storage.secret.pocket.access_token;
-                    exp.pocket.Settags( storage.secret.pocket.tags );
-                    exp.pocket.Add( data.url, data.title.trim(), ( result, error ) => {
-                        !error && new Notify().Render( "已成功保存到 Pocket！" );
-                        error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                    });
-                } else {
-                    new Notify().Render( "请先获取 Pocket 的授权，才能使用此功能！", "授权", ()=>{
-                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                    });
-                }
-            });
+        const { pocket, linnk } = exp,
+              [ id, _, data ]   = rests;
 
-        id == "linnk" &&
-            storage.Safe( ()=> {
-                if ( storage.secret.linnk.access_token ) {
-                    exp.linnk.access_token = storage.secret.linnk.access_token;
-                    exp.linnk.GetSafeGroup( storage.secret.linnk.group_name, ( result, error ) => {
-                        if ( !error ) {
-                            exp.linnk.group_id = result.data.groupId;
-                            exp.linnk.Add( data.url, data.title.trim(), ( result, error ) => {
-                                !error && result.code == 200 && new Notify().Render( "已成功保存到 Linnk！" );
-                                error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                            });
-                        } else {
-                            new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                        }
-                    })
-                } else {
-                    new Notify().Render( "请先获取 Linnk 的授权，才能使用此功能！", "授权", ()=>{
-                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                    });
-                }
-            });
+        [ "pocket", "linnk" ].includes( id ) &&
+            exp.VerifySvcWrapper( storage, exp[id], id, exp.Name( id ), new Notify() )
+                .done( type => {
+                    if ( type == "pocket" ) {
+                        pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, new Notify() ));
+                    } else {
+                        linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
+                            if ( !error ) {
+                                linnk.group_id = result.data.groupId;
+                                linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, new Notify() ));
+                            } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
+                        });
+                    }
+                });
 
         id == "remove" &&
             storage.UnRead( id, data.idx, success => {

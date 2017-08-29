@@ -115,9 +115,7 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "markdown":
-                exp.Markdown( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, error => {
-                    new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                });
+                exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, new Notify() );
                 break;
             case "png":
                 try {
@@ -140,126 +138,6 @@ class Read extends React.Component {
                     $( "sr-rd-crlbar" ).removeAttr( "style" );
                 }, 500 );
                 break;
-            case "dropbox":
-                exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
-                    if ( error ) {
-                        new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                    } else {
-                        storage.Safe( ()=> {
-                            if ( storage.secret.dropbox.access_token ) {
-                                new Notify().Render( "开始保存到 Dropbox，请稍等..." );
-                                exp.dropbox.access_token = storage.secret.dropbox.access_token;
-                                exp.dropbox.Write( `md/${ this.props.wrapper.title.trim() }.md`, result, ( _, resp, error ) => {
-                                    !error && new Notify().Render( "已成功保存到 Dropbox！" );
-                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                                });
-                            } else {
-                                new Notify().Render( "请先获取 Dropbox 的授权，才能使用此功能！", "授权", ()=>{
-                                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                                });
-                            }
-                        });
-                    }
-                });
-                break;
-            case "pocket":
-                storage.Safe( ()=> {
-                    if ( storage.secret.pocket.access_token ) {
-                        new Notify().Render( "开始保存到 Pocket，请稍等..." );
-                        exp.pocket.access_token = storage.secret.pocket.access_token;
-                        exp.pocket.Settags( storage.secret.pocket.tags );
-                        exp.pocket.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
-                            !error && new Notify().Render( "已成功保存到 Pocket！" );
-                            error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                        });
-                    } else {
-                        new Notify().Render( "请先获取 Pocket 的授权，才能使用此功能！", "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "linnk":
-                storage.Safe( ()=> {
-                    if ( storage.secret.linnk.access_token ) {
-                        exp.linnk.access_token = storage.secret.linnk.access_token;
-                        new Notify().Render( "开始保存到 Linnk，请稍等..." );
-                        exp.linnk.GetSafeGroup( storage.secret.linnk.group_name, ( result, error ) => {
-                            if ( !error ) {
-                                exp.linnk.group_id = result.data.groupId;
-                                exp.linnk.Add( window.location.href, this.props.wrapper.title.trim(), ( result, error ) => {
-                                    !error && result.code == 200 && new Notify().Render( "已成功保存到 Linnk！" );
-                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                                });
-                            } else {
-                                new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                            }
-                        })
-                    } else {
-                        new Notify().Render( "请先获取 Linnk 的授权，才能使用此功能！", "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "evernote":
-            case "yinxiang":
-                storage.Safe( ()=> {
-                    const name = type == "evernote" ? "Evernote" : "印象笔记";
-                    if ( storage.secret[type].access_token ) {
-                        new Notify().Render( `开始转码并上传至 ${name}，请稍等...` );
-                        exp.evernote.access_token = storage.secret[type].access_token;
-                        exp.evernote.Add( this.props.wrapper.title.trim(), st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
-                            !error && new Notify().Render( `已成功保存到 ${name}！` );
-                            error  && new Notify().Render( 2, `转码失败，此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>` );
-                            error  && new Notify().Render( "建议使用 Onenote 能更完美的还原被保存页面。" );
-                        });
-                    } else {
-                        new Notify().Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "onenote":
-                storage.Safe( ()=> {
-                    if ( storage.secret.onenote.access_token ) {
-                        new Notify().Render( `开始保存到 Onenote，请稍等...` );
-                        exp.onenote.access_token = storage.secret.onenote.access_token;
-                        exp.onenote.Add( exp.onenote.Wrapper( window.location.href, this.props.wrapper.title.trim(), $("sr-rd-content").html() ),  ( result, error ) => {
-                            !error && new Notify().Render( "已成功保存到 Onenote！" );
-                            error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                        });
-                    } else {
-                        new Notify().Render( "请先获取 Onenote 的授权，才能使用此功能！", "授权", ()=>{
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                        });
-                    }
-                });
-                break;
-            case "gdrive":
-                exp.Markdown( st.ClearMD( $("sr-rd-content").html()), undefined, ( result, error ) => {
-                    if ( error ) {
-                        new Notify().Render( 2, "转换 Markdown 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                    } else {
-                        storage.Safe( ()=> {
-                            if ( storage.secret.gdrive.access_token ) {
-                                new Notify().Render( "开始保存到 Google 云端硬盘，请稍等..." );
-                                exp.gdrive.access_token = storage.secret.gdrive.access_token;
-                                exp.gdrive.folder_id    = storage.secret.gdrive.folder_id;
-                                exp.gdrive.Add( "file",( result, error ) => {
-                                    !error && new Notify().Render( "已成功保存到 Google 云端硬盘！" );
-                                    error  && new Notify().Render( 2, "保存失败，请稍后重新再试。" );
-                                }, exp.gdrive.CreateFile( `${this.props.wrapper.title.trim()}.md`, result ));
-                            } else {
-                                new Notify().Render( "请先获取 Google 云端硬盘 的授权，才能使用此功能！", "授权", ()=>{
-                                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-                                });
-                            }
-                        });
-                    }
-                });
-                break;
             case "kindle":
                 new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );
                 const style = {
@@ -276,6 +154,58 @@ class Read extends React.Component {
                 });
                 break;
         }
+    }
+
+    /**
+     * Controlbar action event: Service, inlcude: "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive"
+     * @param {string} type, include: exit, setting, save, scroll, option
+     * @param {string} value 
+     */
+    onService( type, value ) {
+        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
+              title = $( "sr-rd-title" ).text().trim(),
+              id    = type == "yinxiang" ? "evernote" : type;
+
+        exp.VerifySvcWrapper( storage, exp[id], type, exp.Name( type ), new Notify() )
+            .done( result => service( type ));
+
+        const service = type => {
+            switch( type ) {
+                case "dropbox":
+                    exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
+                        dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, new Notify() ), "md/" );
+                    });
+                    break;
+                case "pocket":
+                    pocket.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, new Notify() ));
+                    break;
+                case "linnk":
+                    linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
+                        if ( !error ) {
+                            linnk.group_id = result.data.groupId;
+                            linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, new Notify() ));
+                        } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
+                    });
+                    break;
+                case "evernote":
+                case "yinxiang":
+                    evernote.env     = type;
+                    evernote.sandbox = false;
+                    evernote.Add( title, st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
+                        exp.svcCbWrapper( result, error, evernote.name, new Notify() );
+                        error == "error" && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
+                    });
+                    break;
+                case "onenote":
+                    onenote.Add( onenote.Wrapper( window.location.href, title, $("sr-rd-content").html() ), ( result, error ) => exp.svcCbWrapper( result, error, onenote.name, new Notify() ));
+                    break;
+                case "gdrive":
+                    exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
+                        gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
+                    });
+                    break;
+            }
+        };
     }
 
    // exit read mode
@@ -298,7 +228,7 @@ class Read extends React.Component {
                 { Article }
                 { Page    }
                 <Footer />
-                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } />
+                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } onService={ (t,v)=>this.onService( t,v ) } />
             </sr-read>
         )
     }

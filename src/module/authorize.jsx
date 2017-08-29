@@ -22,184 +22,119 @@ export default class Auth extends React.Component {
         linnk  : undefined,
     }
 
-    clear( id ) {
-        Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
-        storage.Safe( ()=> {
-            id == "yinxiang" && ( id = "印象笔记" );
-            new Notify().Render( `已取消对 ${id.replace( /\S/i, $0=>$0.toUpperCase() )} 的授权。` );
-            this.setState({ secret: storage.secret });
-        }, storage.secret );
-    }
-
     onChange( state, value, flag ) {
-        const dbx = exp.dropbox;
+        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
+            clear = ( id, name ) => {
+                Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
+                storage.Safe( ()=> {
+                    new Notify().Render( `已取消对 ${name} 的授权，也请解除简悦的访问权限， <a target="_blank" href="${exp.Unlink(id)}">点击这里</a>` );
+                    this.setState({ secret: storage.secret });
+                }, storage.secret );
+            },
+            success = ( id, name, data ) => {
+                Object.keys( data ).forEach( item => storage.secret[id][item] = data[item] );
+                storage.Safe( () => {
+                    new Notify().Render( `已成功授权 ${name} 。` );
+                    this.setState({ secret: storage.secret, linnk: false });
+                }, storage.secret );
+            },
+            failed = ( error, id, name ) => {
+                console.error( `${name} auth faild, error: ${error}` )
+                new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
+                storage.secret[state].access_token = "";
+                this.setState({ secret: storage.secret });
+            };
+
+        if ( state == "linnk" && !flag && !storage.secret.linnk.access_token ) {
+            this.setState({ linnk: !this.state.linnk });
+            return;
+        }
+
+        if ( !value ) {
+            state == "pocket" && $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
+            if ( state == "linnk" ) {
+                this.props.linnk.username = "";
+                this.props.linnk.password = "";
+            }
+            clear( state, exp.Name( state ));
+            return;
+        }
+
         switch ( state ) {
             case "dropbox":
-                if ( value ) {
-                    dbx.Auth().done( () => {
-                        storage.secret.dropbox.access_token = dbx.access_token;
-                        storage.Safe( () => {
-                            new Notify().Render( "已成功授权 Dropbox 。" );
-                            this.setState({ secret: storage.secret });
-                        }, storage.secret );
-                    }).fail( error => {
-                        console.error( error )
-                        new Notify().Render( 2, error == "access_failed" ? "获取 Dropbox SDK 失败，请检查网络，稍后再试！" : "获取 Dropbox 授权失败，请重新获取。" );
-                    });
-                } else {
-                    this.clear( "dropbox" );
-                }
+                dropbox.New().Auth();
+                dropbox.dtd
+                    .done( ()    => success( dropbox.id, dropbox.name, { access_token: dropbox.access_token } ))
+                    .fail( error => failed( error, dropbox.id, dropbox.name ));
                 break;
             case "pocket":
-                if ( value ) {
-                    new Notify().Render( "开始对 Pocket 进行授权，请稍等..." );
-                    exp.pocket.Request( ( result, error ) => {
-                        error  && new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
-                        !error && exp.pocket.Redirect( result.code ).done( () => {
-                            exp.pocket.Auth( ( result, error ) => {
-                                storage.secret.pocket.access_token = result.access_token;
-                                storage.Safe( ()=> {
-                                    new Notify().Render( "已成功授权 Pocket 。" );
-                                    this.setState({ secret: storage.secret });
-                                }, storage.secret );
+                new Notify().Render( `开始对 ${ pocket.name } 进行授权，请稍等...` );
+                pocket.Request( ( result, error ) => {
+                    if ( error ) failed( error, pocket.id, pocket.name );
+                    else {
+                        pocket.New().Login( result.code );
+                        pocket.dtd.done( ()=> {
+                            pocket.Auth( ( result, error ) => {
+                                if ( error ) failed( error, pocket.id, pocket.name );
+                                else success( pocket.id, pocket.name, { access_token: pocket.access_token });
                             });
-                        }).fail( error => {
-                            console.error( error )
-                            new Notify().Render( 2, "获取 Pocket 授权失败，请重新获取。" );
-                        });
-                    });
-                }
-                else {
-                    this.clear( "pocket" );
-                }
-                $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
+                        }).fail( error => failed( error, pocket.id, pocket.name ));
+                    }
+                });
                 break;
             case "linnk":
-                if ( !flag && !storage.secret.linnk.access_token ) {
-                    this.setState({ linnk: !this.state.linnk });
-                    return;
-                }
-                if ( value ) {
-                    exp.linnk.Login( this.props.linnk.username, this.props.linnk.password, ( result, error ) => {
-                        if ( error ) {
-                            new Notify().Render( 2, "获取 Linnk 授权失败，请重新获取。" );
-                        } else {
+                linnk.Login( this.props.linnk.username, this.props.linnk.password, ( result, error ) => {
+                    if ( error ) failed( error, linnk.id, linnk.name );
+                    else if ( result.code == 200 ) {
+                        linnk.Groups( result => {
                             if ( result.code == 200 ) {
-                                exp.linnk.access_token            = result.token;
-                                storage.secret.linnk.access_token = result.token;
-                                exp.linnk.Groups( result => {
-                                    if ( result.code == 200 ) {
-                                        const obj = exp.linnk.GetGroup( "", result.data );
-                                        storage.secret.linnk.group_name = obj.groupName;
-                                        storage.Safe( ()=> {
-                                            new Notify().Render( "已成功授权 Linnk 。" );
-                                            this.setState({ secret: storage.secret, linnk: false });
-                                        }, storage.secret );
-                                    } else {
-                                        const msg = exp.linnk.error_code[result.code];
-                                        new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
-                                    }
-                                });
+                                linnk.GetGroup( "", result.data );
+                                success( linnk.id, linnk.name, { access_token: linnk.access_token, group_name: linnk.group_name });
                             } else {
-                                const msg = exp.linnk.error_code[result.code];
-                                new Notify().Render( 2, msg ? msg : "获取 Linnk 授权失败，请重新获取。" );
+                                const msg = linnk.error_code[result.code];
+                                new Notify().Render( 2, msg ? msg : `获取 ${ linnk.name } 授权失败，请重新获取。` );
                             }
-                        }
-                    })
-                } else {
-                    this.props.linnk.username = "";
-                    this.props.linnk.password = "";
-                    this.clear( "linnk" );
-                }
+                        });
+                    } else {
+                        const msg = linnk.error_code[result.code];
+                        new Notify().Render( 2, msg ? msg : `获取 ${ linnk.name } 授权失败，请重新获取。` );
+                    }
+                });
                 break;
             case "yinxiang":
             case "evernote":
-                const failed = ( error, name ) => {
-                    console.error( error )
-                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
-                    storage.secret[state].access_token = "";
-                    this.setState({ secret: storage.secret });
-                };
-                if ( value ) {
-                    exp.evernote.env = state;
-                    const name       = exp.evernote.name;
-                    new Notify().Render( `开始对 ${name} 进行授权，请稍等...` );
-                    exp.evernote.New().RequestToken( ( result, error ) => {
-                        if ( error ) {
-                            failed( error, name );
-                        } else {
-                            exp.evernote.dtd.done( () => {
-                                exp.evernote.Auth( ( result, error )=> {
-                                    if ( error ) {
-                                        failed( error, name );
-                                    } else {
-                                        storage.secret[state].access_token = exp.evernote.access_token;
-                                        storage.Safe( ()=> {
-                                            new Notify().Render( `已成功授权 ${name} 。` );
-                                            this.setState({ secret: storage.secret });
-                                        }, storage.secret );
-                                    }
-                                });
-                            }).fail( error => failed( error, name ));
-                        }
-                    });
-                }
-                else {
-                    this.clear( state );
-                }
+                evernote.env     = state;
+                evernote.sandbox = false;
+                new Notify().Render( `开始对 ${ evernote.name } 进行授权，请稍等...` );
+                evernote.New().RequestToken( ( result, error ) => {
+                    if ( error ) failed( error, evernote.id, evernote.name );
+                    else {
+                        evernote.dtd.done( () => {
+                            evernote.Auth( ( result, error ) => {
+                                if ( error ) failed( error, evernote.id, evernote.name );
+                                else success( evernote.id, evernote.name, { access_token: evernote.access_token });
+                            });
+                        }).fail( error => failed( error, evernote.id, evernote.name ));
+                    }
+                });
                 break;
             case "onenote":
-                const faileds = ( error, name ) => {
-                    console.error( error )
-                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
-                    storage.secret[state].access_token = "";
-                    this.setState({ secret: storage.secret });
-                };
-                if ( value ) {
-                    exp.onenote.New().Login();
-                    exp.onenote.dtd.done( ()=> {
-                        exp.onenote.Auth( ( result, error ) => {
-                            if ( error ) {
-                                faileds( error, "Onenote" );
-                            } else {
-                                storage.secret.onenote.access_token = exp.onenote.access_token;
-                                storage.Safe( ()=> {
-                                    new Notify().Render( `已成功授权 Onenote 。` );
-                                    this.setState({ secret: storage.secret });
-                                }, storage.secret );
-                            }
-                        });
-                    }).fail( error => faileds( error, "Onenote" ));
-                } else {
-                    this.clear( state );
-                }
+                onenote.New().Login();
+                onenote.dtd.done( ()=> {
+                    onenote.Auth( ( result, error ) => {
+                        if ( error ) failed( error, onenote.id, onenote.name );
+                        else success( onenote.id, onenote.name, { access_token: onenote.access_token });
+                    });
+                }).fail( error => failed( error, onenote.id, onenote.name ));
                 break;
             case "gdrive":
-                const failedss = ( error, name ) => {
-                    console.error( error )
-                    new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
-                    storage.secret[state].access_token = "";
-                    this.setState({ secret: storage.secret });
-                };
-                if ( value ) {
-                    exp.gdrive.New().Login();
-                    exp.gdrive.dtd.done( ()=> {
-                        exp.gdrive.Auth( ( result, error ) => {
-                            if ( error ) {
-                                faileds( error, "Google 云端硬盘" );
-                            } else {
-                                storage.secret.gdrive.access_token = exp.gdrive.access_token;
-                                storage.secret.gdrive.folder_id    = exp.gdrive.folder_id;
-                                storage.Safe( ()=> {
-                                    new Notify().Render( `已成功授权 Google 云端硬盘 。` );
-                                    this.setState({ secret: storage.secret });
-                                }, storage.secret );
-                            }
-                        });
-                    }).fail( error => failedss( error, "Google 云端硬盘" ));
-                } else {
-                    this.clear( state );
-                }
+                gdrive.New().Login();
+                gdrive.dtd.done( ()=> {
+                    gdrive.Auth( ( result, error ) => {
+                        if ( error ) failed( error, gdrive.id, gdrive.name );
+                        else success( gdrive.id, gdrive.name, { access_token: gdrive.access_token, folder_id: gdrive.folder_id });
+                    });
+                }).fail( error => failed( error, gdrive.id, gdrive.name ));
                 break;
         }
     }
@@ -212,6 +147,10 @@ export default class Auth extends React.Component {
 
     linnkOnChange( state, value ) {
         this.props.linnk[state] = value;
+    }
+
+    componentWillReceiveProps( nextProps ) {
+        this.setState({ secret: storage.secret })
     }
 
     componentDidMount() {
