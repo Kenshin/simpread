@@ -122,12 +122,9 @@ function vernotify() {
         new Notify().Render( "简悦 版本提示", msg );
 
         if ( hash.startsWith( "#update?ver=" )) {
-            //storage.Write( ()=> {
             watch.SendMessage( "version", true );
-            //    console.log( "site editor update complete!" )
-            //});
+            welcomeRender( false, version );
         }
-
         history.pushState( "", "", "/options/options.html" );
     }
 }
@@ -142,14 +139,17 @@ function firstLoad( first ) {
         error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
         !error && storage.Statistics( "create" );
     });
-    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true );
 }
 
 /**
  * Welcome page render()
+ * 
+ * @param {boolean} true: first load
+ * @param {string} version
  */
-function welcomeRender() {
-    welc.Render( "body" );
+function welcomeRender( first, version ) {
+    welc.Render( "body", first, version );
 }
 
 /**
