@@ -200,9 +200,9 @@ class Welcome extends React.Component {
                         <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
                             <h2 style={ style.h2 }>连接你的生产力工具</h2>
                             <div style={ style.desc }>
-                                支持下载 <strong>PDF · PNG</strong> 到本地；发送页面链接到 <strong>Pocket · Linnk。</strong><br/>
+                                阅读模式支持下载 <strong>PDF · PNG</strong> 到本地；发送页面链接到 <strong>Pocket · Linnk。</strong><br/>
                                 支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
-                                支持发送到 Kindle（借用第三方服务实现），详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
+                                支持发送到 Kindle（使用第三方服务实现），详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
                             </div>
                         </section>
                     </div>
