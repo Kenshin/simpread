@@ -41,6 +41,8 @@ const style = {
     },
 
     h2: {
+        marginBottom: 0,
+
         color: 'inherit',
 
         fontSize: '24px',
@@ -55,11 +57,16 @@ const style = {
 
         color: 'rgba(51, 51, 51, 0.7)',
 
-        fontSize: '16px',
-        fontWeight: 500,
+        fontSize: '15px',
+        fontWeight: 400,
 
         lineHeight: '32px',
         textAlign: 'center',
+    },
+
+    gif : {
+        paddingTop: '58px',
+        width: '550px',
     },
 
     strong: {
@@ -106,7 +113,16 @@ class Welcome extends React.Component {
         exit();
     }
 
+    carousel() {
+        $( ".carousel-item" ).map( ( _, item ) => {
+            const $item = $(item),
+                  version = $item.attr( "id" );
+            version != "end" && version != "start" && version != this.props.version && $item.remove();
+        });
+    }
+
     componentDidMount() {
+        !this.props.first && this.carousel();
         max = $( ".carousel-item" ).length - 1;
         $( '.carousel.carousel-slider' ).carousel({
             fullWidth: true,
@@ -138,14 +154,14 @@ class Welcome extends React.Component {
         return (
             <welcome style={ style.root }>
                 <div className="carousel carousel-slider" data-indicators="true">
-                    <div className="carousel-item">
+                    <div className="carousel-item" id="start">
                         <section style={ style.section }>
                             <img src={ ss.IconPath( "welcome" )}/>
-                            <h2 style={{ ...style.h2, ...{ 'margin-bottom': 0 } }}>欢迎使用 简悦</h2>
+                            <h2 style={{ ...style.h2, ...{ 'margin-bottom': 0 } }}>{ this.props.first ? "欢迎使用 简悦": "简悦 已升至最新版" }</h2>
                             <div style={ style.desc }>
                                 让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。<br/>
                                 去掉干扰元素，提升阅读体验，<strong style={ style.strong }>「简」</strong>单阅读，愉<strong style={ style.strong }>「悦」</strong>心情。<br/>
-                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }>160+</strong> 个网站。
+                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8">180+</a></strong> 个网站。
                             </div>
                         </section>
                     </div>
@@ -178,7 +194,53 @@ class Welcome extends React.Component {
                             </div>
                         </section>
                     </div>
-                    <div className="carousel-item">
+
+                    <div className="carousel-item" id="1.0.3">
+                        <section style={ style.section }>
+                            <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
+                            <h2 style={ style.h2 }>连接你的生产力工具</h2>
+                            <div style={ style.desc }>
+                                阅读模式支持下载 <strong>PDF · PNG</strong> 到本地。<br/>
+                                支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
+                                发送页面链接到 <strong>Pocket · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
+                            </div>
+                        </section>
+                    </div>
+
+                <div className="carousel-item" id="1.0.3">
+                    <section style={ style.section }>
+                    <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/send%20to%20kindle.gif"/>
+                        <h2 style={ style.h2 }>发送你喜欢的文章到 Kindle</h2>
+                        <div style={ style.desc }>
+                            使用第三方服务 <a href="http://fivefilters.org/kindle-it" target="_blank">fivefilters.org</a><br/>
+                            现在可以发送页面到 Kindle 了 ，详细配置 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">请看这里</a> 。
+                        </div>
+                    </section>
+                </div>
+
+                    <div className="carousel-item" id="1.0.3">
+                        <section style={ style.section }>
+                            <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/custom%20theme.gif"/>
+                            <h2 style={ style.h2 }>自定义样式</h2>
+                            <div style={ style.desc }>
+                                <strong>选项页-高级设定 · 自定义样式</strong>，包含字间距、行间距等中文阅读设置。<br/>
+                                <strong>自定义CSS</strong> 方便定制属于你的主题，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98">请看这里</a> 。
+                            </div>
+                        </section>
+                    </div>
+
+                    <div className="carousel-item" id="1.0.3">
+                        <section style={ style.section }>
+                            <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/multi-page.gif"/>
+                            <h2 style={ style.h2 }>多页面 · 分页</h2>
+                            <div style={ style.desc }>
+                            支持 <strong>论坛类页面</strong>，包括：知乎 · 贴吧等具有多端内容的页面形式。<br/>
+                            支持 <strong>分页功能</strong>，在阅读模式下就可翻页。
+                            </div>
+                        </section>
+                    </div>
+
+                    <div className="carousel-item" id="end">
                         <section style={ style.section }>
                             <img src={ ss.IconPath( "welcome-others" )}/>
                             <h2 style={ style.h2 }>更多功能 等你发现！</h2>
@@ -224,11 +286,13 @@ function exit() {
  * Welcome Render
  * 
  * @param {string} root name
+ * @param {boolean} true: first load
+ * @param {string} version
  */
-export function Render( root ) {
+export function Render( root, first, version ) {
     const $root = $( root );
     if ( $root.find( "." + welcbgcls ).length == 0 ) {
         $root.append( welcbg );
     }
-    ReactDOM.render( <Welcome />, $( welcbgclsjq )[0] );
+    ReactDOM.render( <Welcome first={ first } version={ version } />, $( welcbgclsjq )[0] );
 }
