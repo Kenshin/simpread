@@ -71,7 +71,7 @@ body {
 }
 
 /**
- *  top
+ *  Index page
  */
 .top {
     display: flex;
@@ -82,6 +82,7 @@ body {
     height: 100px;
 
     background-color: #1976D2;
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
 
 .top .logo {
@@ -214,16 +215,20 @@ body {
 }
 
 .main .feature img {
+    min-width: 542px;
     max-width: 600px;
 }
 
 .main .feature.read,
 .main .feature.theme,
+.main .feature.export,
+.main .feature.multi,
 .main .feature.all {
     background: #fff;
 }
 
 .main .feature.focus,
+.main .feature.multi,
 .main .feature.custom {
     justify-content: flex-end;
 }
@@ -250,6 +255,7 @@ body {
     & .desc a {
         color: inherit;
         font-size: inherit;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.7);
         text-decoration: none;
         cursor: help;
         font-weight: 400;
@@ -508,7 +514,7 @@ body {
 }
 
 /**
- *  changelog
+ *  Changelog page
  */
 .container {
     margin: 0 auto;
@@ -702,4 +708,96 @@ body {
     .container {
         max-width: 700px;
     }
+}
+
+/**
+ * 404 page
+ */
+.undefined {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+}
+
+.undefined .bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 700px;
+    height: 400px;
+
+    margin: 116px 0;
+
+    background-color: #fff;
+    border-radius: 2px;
+    /*box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);*/
+}
+
+/*
+.undefined .title {
+    font-family: 'Roboto', sans-serif;
+
+    margin-top: 0;
+    margin-bottom: 12px;
+
+    font-size: 250px;
+    line-height: 250px;
+    font-weight: 700;
+}
+*/
+
+.undefined .desc {
+    margin-top: 10px;
+
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3;
+}
+
+.undefined .desc span {
+    border-bottom: 2px solid var(--text-color);
+}
+
+.undefined .backup {
+    margin-top: 20px;
+
+    width: 100px;
+    height: 36px;
+
+    color: #fff;
+    background-color: #1976D2;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    line-height: 36px;
+    text-decoration: none;
+
+    border-radius: 2px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.3);
+    transition: all .5s;
+}
+
+.undefined .backup:hover {
+    background-color: #2196F3;
+    box-shadow: 0 5px 5px rgba(0,0,0,.3), 0 5px 5px rgba(0,0,0,.3);
+}
+
+
+/**
+ * Auth page
+ */
+
+.auth .title {
+    font-size: 18px;
+}
+
+.auth .notice {
+    width: 583px;
+    padding: 0 16px;
 }
