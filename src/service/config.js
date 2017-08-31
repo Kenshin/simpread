@@ -377,7 +377,7 @@ const tabsItem = [{
         value: "about",
         route: "#about",
     },{
-        name: "帮助",
+        name: "新手入门",
         value: "help",
         route: "https://github.com/kenshin/simpread/wiki",
 }],
