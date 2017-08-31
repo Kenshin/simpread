@@ -457,6 +457,10 @@ body {
     background-image: url( '../icons/gplus.png' );
 }
 
+.footer .groups .links ul li .telegram {
+    background-image: url( '../icons/telegram.png' );
+}
+
 .footer .groups .links .logo {
     display: flex;
     justify-content: center;
