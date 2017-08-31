@@ -234,7 +234,7 @@ class Welcome extends React.Component {
                             <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/multi-page.gif"/>
                             <h2 style={ style.h2 }>论坛类页面 · 分页</h2>
                             <div style={ style.desc }>
-                            支持 <strong>论坛类页面</strong>，包括：知乎 · 贴吧等具有多端内容的页面形式。<br/>
+                            支持 <strong>论坛类页面</strong>，更完美的展示 <strong>知乎 · 贴吧</strong> 等论坛类页面。<br/>
                             支持 <strong>分页功能</strong>，在阅读模式下就可翻页。
                             </div>
                         </section>
