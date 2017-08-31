@@ -197,15 +197,26 @@ class Welcome extends React.Component {
 
                     <div className="carousel-item" id="1.0.3">
                         <section style={ style.section }>
-                        <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
+                            <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
                             <h2 style={ style.h2 }>连接你的生产力工具</h2>
                             <div style={ style.desc }>
-                                阅读模式支持下载 <strong>PDF · PNG</strong> 到本地；发送页面链接到 <strong>Pocket · Linnk。</strong><br/>
+                                阅读模式支持下载 <strong>PDF · PNG</strong> 到本地。<br/>
                                 支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
-                                支持发送到 Kindle（使用第三方服务实现），详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
+                                发送页面链接到 <strong>Pocket · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
                             </div>
                         </section>
                     </div>
+
+                <div className="carousel-item" id="1.0.3">
+                    <section style={ style.section }>
+                    <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/send%20to%20kindle.gif"/>
+                        <h2 style={ style.h2 }>发送你喜欢的文章到 Kindle</h2>
+                        <div style={ style.desc }>
+                            使用第三方服务 <a href="http://fivefilters.org/kindle-it" target="_blank">fivefilters.org</a><br/>
+                            现在可以发送页面到 Kindle 了 ，详细配置 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">请看这里</a> 。
+                        </div>
+                    </section>
+                </div>
 
                     <div className="carousel-item" id="1.0.3">
                         <section style={ style.section }>
