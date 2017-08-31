@@ -220,7 +220,7 @@ class Welcome extends React.Component {
 
                     <div className="carousel-item" id="1.0.3">
                         <section style={ style.section }>
-                            <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/multi-page%20optimize.gif"/>
+                            <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/multi-page.gif"/>
                             <h2 style={ style.h2 }>多页面 · 分页</h2>
                             <div style={ style.desc }>
                             支持 <strong>论坛类页面</strong>，包括：知乎 · 贴吧等具有多端内容的页面形式。<br/>
