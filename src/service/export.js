@@ -65,7 +65,7 @@ function download( data, name ) {
  */
 function unlink( id ) {
     const content = {
-        "dropbox" : "https://www.dropbox.com/account/security",
+        "dropbox" : "https://www.dropbox.com/account/connected_apps",
         "pocket"  : "https://getpocket.com/connected_applications",
         "evernote": "https://www.evernote.com/AuthorizedServices.action",
         "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
