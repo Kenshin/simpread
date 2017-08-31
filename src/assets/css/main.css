@@ -255,6 +255,7 @@ body {
     & .desc a {
         color: inherit;
         font-size: inherit;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.7);
         text-decoration: none;
         cursor: help;
         font-weight: 400;
