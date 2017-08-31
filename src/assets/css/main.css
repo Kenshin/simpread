@@ -220,6 +220,7 @@ body {
 
 .main .feature.read,
 .main .feature.theme,
+.main .feature.export,
 .main .feature.all {
     background: #fff;
 }
