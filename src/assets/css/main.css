@@ -215,6 +215,7 @@ body {
 }
 
 .main .feature img {
+    min-width: 542px;
     max-width: 600px;
 }
 
