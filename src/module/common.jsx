@@ -39,7 +39,7 @@ export default class CommonOpt extends React.Component {
             switch ( type ) {
                 case "write":
                     !error ? ( location.href = location.origin + location.pathname + "?simpread_mode=sync" ) :
-                        new Notify().Render( "远程数据同步失败，请稍后再试！" );
+                        new Notify().Render( 2, error == "error" ? "远程数据同步失败，请稍后再试！" : error );
                     break;
                 case "read":
                     const json   = JSON.parse( result ),
