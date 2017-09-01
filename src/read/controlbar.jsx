@@ -55,17 +55,25 @@ export default class ReadCtlbar extends React.Component {
                 break;
             */
             case type.indexOf( "_" ) > 0 && ( type.startsWith( "fontfamily" ) || type.startsWith( "fontsize" ) || type.startsWith( "layout" )):
-                const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
-                Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
-                this.props.onAction && this.props.onAction( key, value );
+                if ( !ss.VerifyCustom( type.split( "_" )[0], this.props.custom ) ) {
+                    const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
+                    Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
+                    this.props.onAction && this.props.onAction( key, value );    
+                } else {
+                    new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>。' );
+                }
                 break;
             case type.indexOf( "_" ) > 0 && type.startsWith( "theme" ):
-                let i = th.names.indexOf( th.theme );
-                i = type.endsWith( "prev" ) ? --i : ++i;
-                i >= th.names.length && ( i = 0 );
-                i < 0 && ( i = th.names.length - 1 );
-                th.Change( th.names[i] );
-                this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
+                if ( !ss.VerifyCustom( type.split( "_" )[0], this.props.custom ) ) {
+                    let i = th.names.indexOf( th.theme );
+                    i = type.endsWith( "prev" ) ? --i : ++i;
+                    i >= th.names.length && ( i = 0 );
+                    i < 0 && ( i = th.names.length - 1 );
+                    th.Change( th.names[i] );
+                    this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
+                } else {
+                    new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>。' );
+                }
                 break;
         }
     }
