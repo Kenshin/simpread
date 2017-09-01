@@ -384,7 +384,7 @@ class Linnk {
 
     GetGroup( name, target ) {
         const group = target.find( obj => obj.groupName == name );
-        this.group_name = group.groupName;
+        group && ( this.group_name = group.groupName );
         return group;
     }
 
