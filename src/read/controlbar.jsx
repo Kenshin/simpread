@@ -60,7 +60,7 @@ export default class ReadCtlbar extends React.Component {
                     Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
                     this.props.onAction && this.props.onAction( key, value );    
                 } else {
-                    new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>。' );
+                    new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
                 }
                 break;
             case type.indexOf( "_" ) > 0 && type.startsWith( "theme" ):
@@ -72,7 +72,7 @@ export default class ReadCtlbar extends React.Component {
                     th.Change( th.names[i] );
                     this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
                 } else {
-                    new Notify().Render( '「自定义样式」已设定相关项，因此无法生效，关于此功能 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>。' );
+                    new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
                 }
                 break;
         }
