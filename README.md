@@ -17,20 +17,37 @@
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
 
 #### 主要功能一览：
-- 阅读模式； `逐一适配了 180+ 个网站，并提取 标题  描述 正文 媒体资源（ 图片/ 视频 ） 等，生成 符合中文阅读 的页面`
-- 聚焦模式； `只高亮需要阅读，并隐藏掉其余部分，不分散用户的注意力，适合 非适配阅读模式 的网站，或者 临时阅读`
-- 站点编辑器； `可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
-- 多种主题； `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
+- 阅读模式：  
+  简悦 `原创` 功能，逐一适配了 180+ 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
+
+- 聚焦模式：  
+  不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
+
 - 支持 `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
-- 更详细的 `中文阅读设置`，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](https://github.com/Kenshin/simpread/wiki/自定义样式)
+
+- 站点编辑器：  
+  页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
+
+- 多种主题：  
+  `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
+
+- 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](https://github.com/Kenshin/simpread/wiki/自定义样式)
+
 - 丰富的导出功能，包括：
+
   - 导出 [Markdown](https://github.com/Kenshin/simpread#感谢) · `PNG` · `PDF`
+
   - 发送阅读模式优化后的页面到 `Kindle`，详细配置 [请看这里](https://github.com/Kenshin/simpread/wiki/发送到-Kindle)
+
   - 导出到 `Pocket` `Linnk` 的功能，包括：`当前页面的链接` `稍后读`
+
   - 导出到生产力工具，包括：`Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [授权服务](https://github.com/Kenshin/simpread/wiki/授权服务)
+
 - 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键](https://github.com/kenshin/simpread/wiki/faq#快捷键) 等；
+
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` 以及 [排除列表](https://github.com/kenshin/simpread/wiki/faq#排除列表)
-- 稍后读；
+
+- 稍后读
 
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/visual%20effect.jpg)
