@@ -181,10 +181,11 @@ function preview( styles ) {
  * Verify custom is exist
  * 
  * @param {string} verify type
- * @param {object} storage.read.custom.css value
+ * @param {object} storage.read.custom value
  */
 function vfyCustom( type, styles ) {
     switch( type ) {
+        case "layout":
         case "margin":
             return styles.global.marginLeft != "" || styles.css != "";
         case "fontsize":
