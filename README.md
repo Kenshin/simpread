@@ -111,7 +111,7 @@
 - [React](https://facebook.github.io/react)
 - [ES6](http://es6-features.org/) · [Babel](https://babeljs.io)
 - [PostCSS](http://postcss.org/) · [cssnext](http://cssnext.io/)
-- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/) · [minimatch](https://github.com/isaacs/minimatch) · [to-markdown](https://github.com/domchristie/to-markdown)
+- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/) · [minimatch](https://github.com/isaacs/minimatch) · [to-markdown](https://github.com/domchristie/to-markdown) · [FileSaver.js](https://github.com/eligrey/FileSaver.js) · [dom-to-image](https://github.com/tsayen/dom-to-image)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
 - Icon from <http://iconfont.cn>
