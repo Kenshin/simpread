@@ -183,7 +183,7 @@ class Dropbox {
             callback( "write", data, undefined );
         }).fail( ( xhr, textStatus, error ) => {
             console.error( xhr, status, error )
-            callback( "write", undefined, error.toLowerCase().startsWith( "invalid_access_token" ) ? `${ name("dropbox") } 授权过期，请重新授权。` : "error" );
+            callback( "write", undefined, error.toLowerCase().startsWith( "invalid_access_token" ) ? `${ this.name } 授权过期，请重新授权。` : "error" );
         });
 
     }
@@ -292,7 +292,7 @@ class Pocket {
             callback( data, undefined );
         }).fail( ( xhr, status, error ) => {
             console.error( xhr, status, error )
-            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ name("pocket") } 授权过期，请重新授权。` : "error" );
+            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ this.name } 授权过期，请重新授权。` : "error" );
         });
     }
 
@@ -665,7 +665,7 @@ class Onenote {
             status != "success" && callback( undefined, "error" );
         }).fail( ( xhr, status, error ) => {
             console.error( xhr, status, error )
-            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ name("onenote") } 授权过期，请重新授权。` : "error" );
+            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ this.name } 授权过期，请重新授权。` : "error" );
         });
     }
 }
@@ -708,7 +708,7 @@ class GDrive {
 
     get errors() {
         return {
-            401: `${ name("gdrive") } 授权过期，请重新授权。`,
+            401: `${ this.name } 授权过期，请重新授权。`,
             403: "调用达到最大值，请重新授权后再使用。",
             500: "Google 服务出现问题，请稍后再使用。",
         }
