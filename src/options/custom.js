@@ -96,7 +96,7 @@ function propertyRender() {
         if ( type == "save" ) {
             save();
         } else {
-            new Notify().Render( "snackbar", "请问是否初始化自定义主题的全部数据？", "同意", () => {
+            new Notify().Render( "snackbar", "是否初始化 自定义样式 的全部数据？", "同意", () => {
                 Object.keys( cur_custom ).forEach( v => {
                     v != "css" ? Object.keys( cur_custom[v] ).forEach( item => {
                         cur_custom[v][item] = "";
