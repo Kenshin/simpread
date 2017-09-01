@@ -683,6 +683,10 @@ body {
     background-color: #9c27b0;
 }
 
+.version .type.empty {
+    opacity: 0;
+}
+
 .version code {
     margin: 0;
     padding: 2px;
