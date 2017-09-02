@@ -52,15 +52,13 @@
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/visual%20effect.jpg)
 ![简悦 - 阅读模式](http://ojec5ddd5.bkt.clouddn.com/read%20mode.png)  
-![简悦 - 阅读模式 · 控制栏界面](http://ojec5ddd5.bkt.clouddn.com/read%20mode%20controlbar.png)  
-![简悦 - 阅读模式 · 设置界面](http://ojec5ddd5.bkt.clouddn.com/read%20mode%20setting.png)  
-![简悦 - 设置界面](http://ojec5ddd5.bkt.clouddn.com/option%201.0.1.png)  
-![简悦 - 高级定制](http://ojec5ddd5.bkt.clouddn.com/option%20labs.png)  
 
 #### 照片集：
+> 包含了 `稍后读` `阅读模式 · 设置界面` `导出到生产力工具` `发送到 Kindle` `自定义样式` `同步配置` `论坛类页面 · 分页` 等功能的截图（动图）
+
 * <http://ksria.com/simpread/gallery/>
 
-#### 详细功能：
+#### 全部功能：
 ![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.0.3.png)
 
 #### 如何使用（阅读模式）：
