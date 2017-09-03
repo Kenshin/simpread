@@ -13,7 +13,7 @@ import minimatch from 'minimatch';
  */
 
 const name = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v2.json",
+    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
@@ -27,6 +27,8 @@ const name = "simpread",
         desc      : "",   // only read mode
         exclude   : [],
         include   : "",
+        avatar    : [],
+        paging    : [],
     },
     focus  = {
         version   : "2016-12-29",
@@ -50,12 +52,48 @@ const name = "simpread",
         ],
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
-        sites     : []   // e.g. [ "<url>", site ]
+        sites     : [],  // e.g. [ "<url>", site ]
+        custom    : {
+            global: {
+                fontFamily : "",
+                marginLeft : "",
+                marginRight: "",
+            },
+            title : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+            },
+            desc  : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+            },
+            art   : {
+                fontFamily : "",
+                fontSize   : "",
+                color      : "",
+                fontWeight : "",
+                wordSpacing: "",
+                letterSpacing: "",
+                lineHeight : "",
+                textIndent : "",
+            },
+            pre  : {
+                textShadow : "",
+            },
+            code  : {
+                fontFamily : "",
+                fontSize   : "",
+            },
+            css   : "",
+        },
     },
     option = {
         version   : "2017-04-03",
         create    : "",
         update    : "",
+        sync      : "",
         focus     : 0,
         read      : 0,
         esc       : true,
@@ -84,6 +122,33 @@ let current  = {},
         read,
         unrdist : [],
         sites   : [],
+    },
+    secret = {
+        version   : "2017-08-11",
+        "dropbox" : {
+            "access_token": ""
+        },
+        "pocket"  : {
+            "access_token": "",
+            "tags"        : "",
+        },
+        "linnk"   : {
+            access_token  : "",
+            "group_name"  : "",
+        },
+        "yinxiang" : {
+            access_token  : "",
+        },
+        "evernote" : {
+            access_token  : "",
+        },
+        "onenote"  : {
+            access_token  : "",
+        },
+        "gdrive"   : {
+            access_token  : "",
+            folder_id     : "",
+        },
     },
     stcode = -1;
 
@@ -162,6 +227,15 @@ class Storage {
     }
 
     /**
+     * Get secret data structure
+     * 
+     * @return {object} secret object
+     */
+    get secret() {
+        return secret;
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
@@ -187,7 +261,7 @@ class Storage {
      */
     Write( callback, new_val = undefined ) {
         new_val && Object.keys( new_val ).forEach( key => simpread[ key ] = new_val[key] );
-        save( callback );
+        save( callback, new_val );
     }
 
     /**
@@ -231,7 +305,7 @@ class Storage {
                 simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
             }
             swap( current, simpread[key] );
-            save();
+            save( undefined, true );
         }
         return code;
     }
@@ -295,10 +369,10 @@ class Storage {
             if ( len == 0 ) {
                 simpread.sites = formatSites( newsites );
                 count          = simpread.sites.length;
-                save();
+                save( undefined, type );
             }
             else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
-                save();
+                save( undefined, type );
             }
             callback && callback( { count }, undefined );
         } catch ( error ) {
@@ -313,6 +387,7 @@ class Storage {
      * @param {string} include: set, get
      * @param {function} callback
      */
+    /*
     Sync( state, callback ) {
         if ( state == "set" ) {
             sync = { ...simpread };
@@ -337,6 +412,7 @@ class Storage {
             });
         }
     }
+    */
 
     /**
      * Statistics simpread same info
@@ -349,7 +425,7 @@ class Storage {
         } else {
             simpread.option[ type ] = simpread.option[ type ] + 1;
         }
-        save();
+        save( undefined, type == "create" );
     }
 
     /**
@@ -399,12 +475,15 @@ class Storage {
                     }
                     if ( key == "sites" ) {
                         target.sites.forEach( items => {
-                            if ( Object.keys( items[1] ).length != Object.keys( site ).length ) {
-                                result.code = -2;
-                            } else {
-                                Object.keys( items[1] ).forEach( key => {
-                                    ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
-                                });
+                            const site_keys = Object.keys( items[1] );
+                            if ( !site_keys.includes( "avatar" ) && site_keys.includes( "paging" ) ) {
+                                if ( site_keys.length != Object.keys( site ).length ) {
+                                    result.code = -2;
+                                } else {
+                                    site_keys.forEach( key => {
+                                        ( !Object.keys( site ).includes( key ) ) && result.keys.push( `site::${key}` );
+                                    });
+                                }
                             }
                         });
                     }
@@ -420,6 +499,44 @@ class Storage {
 
         console.log( "storage.Verify() result ", opt, focu, rd )
         return { option: opt, focus: focu, read: rd };
+    }
+
+    /**
+     * Safe set/get, secret not import/export
+     * 
+     * @param {object}   secret
+     * @param {function} callback
+     */
+    Safe( callback, data ) {
+        if ( data ) {
+            secret = { ...data };
+            browser.storage.local.set( { ["secret"] : secret }, () => {
+                console.log( "chrome storage safe set success!", secret );
+                callback && callback();
+            });
+        } else {
+            browser.storage.local.get( ["secret"], result => {
+                console.log( "chrome storage safe get success!", result );
+                result && !$.isEmptyObject( result ) && ( secret  = result["secret"] );
+                callback && callback();
+            });
+        }
+    }
+
+    /**
+     * Export, only include: version, option, focus, read, unrdist
+     * 
+     * @return {string} object json stringify
+     */
+    Export() {
+        const download = {
+            version: version,
+            option : { ...this.option },
+            focus  : { ...this.focus  },
+            read   : { ...this.read   },
+            unrdist: this.unrdist,
+        };
+        return JSON.stringify( download );
     }
 
     /**
@@ -439,31 +556,44 @@ class Storage {
      * @param {function} callback
      */
     Clear( state, callback ) {
-        let code = 2;
-        state == "local"  && ( code = 0 );
-        state == "remote" && ( code = 1 );
-        ( code == 0 || code == 2 ) && browser.storage.local.clear( callback );
-        ( code == 1 || code == 2 ) && browser.storage.sync.clear( callback );
+        browser.storage.local.clear( callback );
     }
 
     /**
-     * Fix simpread.read.sites, 1.0.0 → 1.0.1, because 1.0.1 usage minimatch
+     * Fix simpread.read.site
      * 
      * @param  {array} changed target
-     * @param  {string} version, e.g. 1.0.0 1.0.1
+     * @param  {string} old version
+     * @param  {string} new version
+     * 
      * @return {array} new sites
      */
-    Fix( target, ver ) {
+    Fix( target, curver, newver ) {
         const newsites = target.map( site => {
             let url      = site[0],
                 { name } = site[1];
             for ( let item of simpread.sites ) {
                 if ( name == item[1].name ) {
-                    url = item[0];
-                    break;
+
+                    // 1.0.0 → 1.0.1
+                    if ( curver == "1.0.0" ) {
+                        site[0] = item[0];
+                    }
+
+                    if ( curver == "1.0.0" ) {
+                        curver = "1.0.1";
+                    }
+
+                    // 1.0.1 → 1.0.2
+                    if ( curver == "1.0.1" ) {
+                        item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
+                        item[1].paging  && ( site[1].paging  = item[1].paging  );
+                        item[1].include && ( site[1].include = item[1].include );
+                    }
+
+                    return [ item[0], site[1] ];
                 }
             }
-            return [ url, site[1] ];
         });
         return newsites;
     }
@@ -534,8 +664,12 @@ function addsites( newsites ) {
 
 /**
  * Call chrome storage set
+ * 
+ * @param {function} callback
+ * @param {object}   when exist no_update = false
  */
-function save( callback ) {
+function save( callback, no_update ) {
+    !no_update && ( simpread.option.update = now());
     browser.storage.local.set( { [name] : simpread }, function() {
         console.log( "chrome storage save success!", simpread );
         origin      = clone( simpread );

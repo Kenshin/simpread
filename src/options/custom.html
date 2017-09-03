@@ -1,0 +1,92 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义样式 - 简悦 · 选项页</title>
+</head>
+<body style="opacity: 0;">
+    <div class="header"><div class="nav"></div><div class="title">自定义样式</div></div>
+    <div class="custom">
+        <div class="property">Property</div>
+        <div class="preview simpread-theme-root">
+            <sr-read>
+                <sr-rd-title>简悦 - 让你瞬间进入沉浸式阅读的 Chrome 扩展</sr-rd-title>
+                <sr-rd-desc>为了达到完美的阅读模式这个小目标 ，我适配了 180+ 个网站，因此诞生了简悦。</sr-rd-desc>
+                <sr-rd-content>
+                    <sr-blockquote>
+                        为了完美阅读模式这个小目标 ，我适配了 180+ 个网站，因此诞生了它 - 简悦 ：沉浸式阅读的 Chrome 扩展
+                    </sr-blockquote>
+                    <p>大家好，我叫 <a href="http://weibo.com/23784148/" title="Kenshin">Kenshin</a>，简悦的作者，本次想跟大家分享一下开发简悦的故事，希望大家能喜欢简悦。</p>
+                    <p><strong> 在 「知识爆炸 / 信息过载」 的当下，如果你有与我一样的 「阅读障碍」，相信本篇文章会对你所有帮助。 </strong></p>
+                    <h4>主要功能包括：</h4>
+                    <ul><li>快捷键，方便键盘控，直接召唤 “阅读模式 / 聚焦模式”；</li> <li>自选字体，包括： 系统默认，苹果苹方，苹果幼圆，微软雅黑，谷歌思源；</li> <li>字体大小；</li> <li>三种版面：宽版，正常，窄版；</li> <li>分享功能；</li> <li>几种不同的主题模式，包括： 白练，灰青，素色，鸟之子色，青磁鼠，焦茶，御纳戸色，黒鸢等；</li> <li>导出 / 导入 配置文件；</li> <li>清除数据；</li> <li>自动 / 手动 通过网络 同步最新的 适配列表；</li><li>自定义样式，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">自定义主题</a>；</li></ul>
+                    <h4>阅读模式 <code>可编程</code> 支持：</h4>
+                    <pre class="hljs objectivec"><code class="objectivec">    {
+        <span class="hljs-string">"name"</span>    : <span class="hljs-string">"qdaily.com"</span>,
+        <span class="hljs-string">"url"</span>     : <span class="hljs-string">"http://www.qdaily.com/articles/"</span>,
+        <span class="hljs-string">"title"</span>   : <span class="hljs-string">"&lt;h2 class='title'&gt;"</span>,
+        <span class="hljs-string">"desc"</span>    : <span class="hljs-string">"&lt;p class='excerpt'&gt;"</span>,
+        <span class="hljs-string">"include"</span> : <span class="hljs-string">"&lt;div class='article-detail-bd'&gt;"</span>,
+        <span class="hljs-string">"exclude"</span> : [
+            <span class="hljs-string">"&lt;div class='author-share'&gt;"</span>,
+            <span class="hljs-string">"&lt;div class='embed-control'&gt;"</span>
+            ]
+    }
+                    </code></pre>
+                    <h4>H1 ~ H6 的样式：</h4>
+                    <div>
+                        <h1>我是 H1</h1>
+                        <h2>我是 H2</h2>
+                        <h3>我是 H3</h3>
+                        <h4>我是 H4</h4>
+                        <h5>我是 H5</h5>
+                        <h6>我是 H6</h6>
+                    </div>
+                    <h4>表格样式：</h4>
+                    <table>
+                        <caption>Kenshin Wang 开源项目一览</caption>
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>作者</th>
+                                <th>主页</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td>名称</td>
+                                <td>作者</td>
+                                <td>主页</td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr>
+                                <td>简悦</td>
+                                <td>Kenshin Wang</td>
+                                <td><a href="http://ksria.com/simpread" target="_blank">主页地址</a></td>
+                            </tr>
+                            <tr>
+                                <td>简 Tab</td>
+                                <td>（同上）</td>
+                                <td><a href="http://ksria.com/simptab" target="_blank">主页地址</a></td>
+                            </tr>
+                            <tr>
+                                <td>gnvm</td>
+                                <td>（同上）</td>
+                                <td><a href="http://ksria.com/simptab" target="_blank">主页地址</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </sr-rd-content>
+            </sr-read>
+        </div>
+    </div>
+    <div class="bottom">
+        <span>简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。</span> <span>&nbsp;©&nbsp;2017 <a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
+    </div>
+    <script src="../bundle/common.js"></script>
+    <script src="../bundle/vendors.js"></script>
+    <script src="../bundle/custom.js"></script>
+</body>
+</html>

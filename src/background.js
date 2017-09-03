@@ -18,11 +18,15 @@ storage.Read( () => {
     }
     else {
         !local.Count() && storage.GetNewsites( "remote", getNewsitesHandler );
-        ver.version != storage.version && storage.GetNewsites( "local", getNewsitesHandler );
-        ver.version != storage.version && storage.Write( () => {
-                local.Version( ver.version );
-                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
-            }, ver.Verify( storage.version, storage.simpread ) );
+        ver.version != storage.version && storage.GetNewsites( "local", result => {
+            ver.version != storage.version &&
+                ( storage.read.sites = storage.Fix( storage.read.sites, storage.version, ver.version ));
+            ver.version != storage.version && storage.Write( () => {
+                    local.Version( ver.version );
+                    browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
+                }, ver.Verify( storage.version, storage.simpread ) );
+            getNewsitesHandler( result );
+        });
     }
     menu.CreateAll();
 });
@@ -106,6 +110,19 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
     watch.Pull( tabId );
     if ( changeInfo.status == "complete" ) {
         console.log( "background tabs Listener:update", tabId, changeInfo, tab );
+
+        if ( tab.url.startsWith( "http://ksria.com/simpread/auth.html" )) {
+            const url = tab.url.replace( "http://ksria.com/simpread/auth.html?id=", "" ),
+                  id  = url.includes( "#" ) || url.includes( "&" ) ? url.substr( 0, url.search( /\S(#|&)/ ) + 1 ) : url ;
+            browser.tabs.query( {}, tabs => {
+                const opts = tabs.find( tab => tab.url.includes( browser.extension.getURL( "options/options.html" ) ));
+                if ( opts ) {
+                    browser.tabs.sendMessage( opts.id, msg.Add( msg.MESSAGE_ACTION.redirect_uri, { uri: tab.url, id } ));
+                    chrome.tabs.remove( tabId );
+                }
+            });
+        }
+
         if ( !tab.url.startsWith( "chrome://" ) ) {
             browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
         } else {

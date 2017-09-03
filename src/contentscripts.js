@@ -109,12 +109,14 @@ function readMode() {
                 case -1:
                     new Notify().Render( "当前页面没有适配，如需要请看 <a href='https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E5%A6%82%E4%BD%95%E6%96%B0%E5%A2%9E' target='_blank' >站点编辑器</>" );
                     break;
+                /*
                 case -2:
                     new Notify().Render( "只有选中【只看楼主】后，才能进入阅读模式。" );
                     new Notify().Render( "是否直接进入阅读模式？", "直接进入", ()=>{
                         document.location = document.location.href + "?see_lz=1&simpread_mode=read";
                     });
                     break;
+                */
             }
         }
     });
@@ -131,6 +133,8 @@ function autoOpen() {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
             case "36kr.com":
+            case "chiphell.com":
+            case "question.zhihu.com":
                 $( () => readMode() );
                 break;
             case "post.juejin.im":

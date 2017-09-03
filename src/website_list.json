@@ -190,11 +190,16 @@
     },{
         "name"    : "question.zhihu.com",
         "url"     : "https://www.zhihu.com/question/**/*",
+        "type"    : "multi",
+        "avatar"  : [
+            {"name" : "[[{$('.AuthorInfo-name')}]]"},
+            {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
+        ],
         "title"   : "[[{$($('.QuestionHeader-main').find('h1')[0]).text()}]]",
         "desc"    : "",
-        "include" : "[[{$($('.RichContent-inner')[0]).html()}]]",
+        "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
-            ""
+            "<i class='icon-external'>"
         ]
     },{
         "name"    : "geekpark.net",
@@ -248,6 +253,19 @@
         "title"   : "<h1 id='articleTitle'>",
         "desc"    : "",
         "include" : "<div id='articleContent'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "question.guokr.com",
+        "url"     : "http://www.guokr.com/question/*",
+        "avatar"  : [
+            {"name" : "[[{$('.p_author_name')}]]"},
+            {"url"  : "[[{$('.p_author_face').find('img')}]]"}
+        ],
+        "title"   : "<h1 id='articleTitle'>",
+        "desc"    : "",
+        "include" : "[[{$('.gbbcode-content')}]]",
         "exclude" : [
             ""
         ]
@@ -428,6 +446,84 @@
         "title"   : "<h2 id='activity-name'>",
         "desc"    : "",
         "include" : "<div id='js_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "stream.107cine.cm",
+        "url"     : "http://107cine.com/stream/*",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<div class='flow_content'>",
+        "exclude" : [
+            "<div class='postfix'>",
+            "[['<p>影视工业网不会对原创文章作任何编辑</p>']]"
+        ]
+    },{
+        "name"    : "zhuanti.107cine.cm",
+        "url"     : "http://107cine.com/zhuanti/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='zhuanti'>",
+        "exclude" : [
+            "<div class='z-top'>",
+            "<div class='datu'>"
+        ]
+    },{
+        "name"    : "jiemi.baike.com",
+        "url"     : "http://jiemi.baike.com/pa/detail?id=*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div class='jiemi-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "wikipedia.org",
+        "url"     : "https://*.wikipedia.org/wiki/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='mw-parser-output'>",
+        "exclude" : [
+            "<div id='toc'>",
+            "<table class='infobox'>",
+            "<span class='mw-editsection'>",
+            "<table class='navbox'>",
+            "<div class='thumb'>",
+            "<div class='dablink'>",
+            "<table class='metadata'>"
+        ]
+    },{
+        "name"    : "article.pmcaff.com",
+        "url"     : "http://www.pmcaff.com/article/index/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-body'>",
+        "exclude" : [
+            "[[/src=\\S+(FlHy2hPIJYsjjeQRRKHhk0yfoLv)\\S+'/]]",
+            "[['<b>本文由PMCAFF专栏作者</b>']]",
+            "[['<strong>本文由</strong>']]",
+			"[['<strong>版权归原作者所有</strong>']]"
+        ]
+    },{
+        "name"    : "discuss.pmcaff.com",
+        "url"     : "http://www.pmcaff.com/discuss/answer/*",
+        "title"   : "<title>",
+        "desc"    : "<div class='discussion-content'>",
+        "include" : "[[{$('.panel-body').find('.content').html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "answer.pmcaff.com",
+        "url"     : "http://www.pmcaff.com/discuss/index/*",
+        "avatar"  : [
+            {"name" : "[[{$('.panel-heading').find('a').find('b')}]]"},
+            {"url"  : "[[{$('.avatar').find('img')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.panel-body').find('.content')}]]",
         "exclude" : [
             ""
         ]
@@ -951,7 +1047,7 @@
         "include" : "<article class='article-content'>",
         "exclude" : [
             "[['<p>转载请注明来自</p>']]",
-			"[['<p>End.</p>']]"
+            "[['<p>End.</p>']]"
         ]
     },{
         "name"    : "cocoachina.com",
@@ -1044,6 +1140,105 @@
       "exclude" : [
           ""
       ]
+    },{
+        "name"    : "developer.mozilla.org",
+        "url"     : "https://developer.mozilla.org/*/docs/*/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<article id='wikiArticle'>",
+        "exclude" : [
+            "<aside id='helpful-survey'>",
+            "<a class='section-edit'>"
+        ]
+    },{
+        "name"    : "apps.mozilla.org",
+        "url"     : "https://developer.mozilla.org/*/Apps/*/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<article id='wikiArticle'>",
+        "exclude" : [
+            "<aside id='helpful-survey'>",
+            "<a class='section-edit'>"
+        ]
+    },{
+      "name"    : "article.52im.net",
+      "url"     : "http://www.52im.net/article-*.html",
+      "title"   : "<h1 class='ph'>",
+      "desc"    : "<div class='js-ptl-atcl-summery'>",
+      "include" : "<td id='article_content'>",
+      "exclude" : [
+          ""
+      ]
+    },{
+      "name"    : "thread.52im.net",
+      "url"     : "http://www.52im.net/thread-*.html",
+      "title"   : "<span id='thread_subject'>",
+      "desc"    : "",
+      "include" : "[[{$('td.t_f:first').html()}]]",
+      "exclude" : [
+          ""
+      ]
+    },{
+        "name"    : "edaoe.com",
+        "url"     : "http://www.edaoe.com/*.html",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<article class='article-content'>",
+        "exclude" : [
+            "<div class='article-social'>"
+        ]
+    },{
+        "name"    : "gallery.edaoe.com",
+        "url"     : "http://www.edaoe.com/gallery/*.html",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<article class='article-content'>",
+        "exclude" : [
+            "<div class='article-social'>"
+        ]
+    },{
+        "name"    : "chinabyte.cm",
+        "url"     : "http://*.chinabyte.com/**/*/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='art_txt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "wiki.jikexueyuan.com",
+        "url"     : "http://wiki.jikexueyuan.com/project/*",
+        "paging"  : [
+            {"prev" : "[[{$('#previous_link').attr('href')}]]"},
+            {"next" : "[[{$('#next_link').attr('href')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='markdown-body'>",
+        "exclude" : [
+            "<h1>",
+            "<a rel='nofollow'>"
+        ]
+    },{
+        "name"    : "ourcoders.com",
+        "url"     : "http://ourcoders.com/thread/show/*/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$($('.threadblock')[0]).html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "uisdc.com",
+        "url"     : "http://www.uisdc.com/*",
+        "title"   : "<h1 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            "<div class='similarity'>",
+			"<div class='post-copyright'>",
+            "[[/src=\\S+(youshege725)\\S+'/]]"
+        ]
     },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
@@ -1247,6 +1442,43 @@
         "include" : "<div class='left_zw'>",
         "exclude" : [
             "<table>"
+        ]
+    },{
+        "name"    : "toutiao.com",
+        "url"     : "https://www.toutiao.com/a*/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "cwzg.cm",
+        "url"     : "http://www.cwzg.cn/*/*/*.html",
+        "title"   : "<h1>",
+        "desc"    : "<div class='article-brief'>",
+        "include" : "<div id='article'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "idianzixun.com",
+        "url"     : "http://www.yidianzixun.com/article/*",
+        "title"   : "<h2>",
+        "desc"    : "",
+        "include" : "<div class='content-bd'>",
+        "exclude" : [
+            "<div class='postfix'>",
+            "<p class='yidian-wm-copyright-bottom'>"
+        ]
+    },{
+        "name"    : "reader.s-reader.com",
+        "url"     : "http://reader.s-reader.com/article/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<h1>"
         ]
     },{
         "name"    : "news.163.com",
@@ -1547,11 +1779,20 @@
     },{
         "name"    : "tieba.baidu.com",
         "url"     : "https://tieba.baidu.com/p/",
+        "avatar"  : [
+            {"name" : "[[{$('.p_author_name')}]]"},
+            {"url"  : "[[{$('.p_author_face').find('img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('.pb_list_pager').find('.tP').prev().attr('href')}]]"},
+            {"next" : "[[{$('.pb_list_pager').find('.tP').next().attr('href')}]]"}
+        ],
         "title"   : "[[{$('.core_title_txt').text()}]]",
         "desc"    : "",
-        "include" : "<div class='d_post_content'>",
+        "include" : "[[{$('.p_content')}]]",
         "exclude" : [
-            ""
+            "<span class='apc_src_wrapper'>",
+            "<div class='save_face_bg_2'>"
         ]
     },{
         "name"    : "article.chiphell.com",
@@ -1567,13 +1808,23 @@
         "url"     : "https://www.chiphell.com/thread-*.html",
         "title"   : "<span id='thread_subject'>",
         "desc"    : "",
-        "include" : "<td class='t_f'>",
+        "avatar"  : [
+            {"name" : "[[{$('.favatar').find('.authi')}]]"},
+            {"url"  : "[[{$('.avatar').find('img')}]]"}
+        ],
+        "include" : "[[{$('.t_f')}]]",
         "exclude" : [
-            "<i class='pstatus'>"
+            "<i class='pstatus'>",
+            "[[/src=\\S+(none.gif)\\S+'/]]",
+            "<div class='aimg_tip'>"
         ]
     },{
         "name"    : "qu.la",
         "url"     : "http://www.qu.la/book/*/*.html",
+        "paging"  : [
+            {"prev" : "[[{$('#A1').attr('href')}]]"},
+            {"next" : "[[{$('#A3').attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1592,6 +1843,10 @@
     },{
         "name"    : "xxbiquge.com",
         "url"     : "http://www.xxbiquge.com/**/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.bottem2').find('a')[0]).attr('href')}]]"},
+            {"next" : "[[{$($('.bottem2').find('a')[2]).attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1601,6 +1856,10 @@
     },{
         "name"    : "biquge5200.com",
         "url"     : "http://www.biquge5200.com/**/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.bottem2').find('a')[1]).attr('href')}]]"},
+            {"next" : "[[{$($('.bottem2').find('a')[3]).attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1610,6 +1869,10 @@
     },{
         "name"    : "piaotian.com",
         "url"     : "http://www.piaotian.com/html/**/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.bottomlink').find('a')[0]).attr('href')}]]"},
+            {"next" : "[[{$($('.bottomlink').find('a')[5]).attr('href')}]]"}
+        ],
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='content'>",
@@ -1621,12 +1884,25 @@
     },{
         "name"    : "zanghaihua.org",
         "url"     : "http://www.zanghaihua.org/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.linkbtn').find('a')[0]).attr('href')}]]"},
+            {"next" : "[[{$($('.linkbtn').find('a')[2]).attr('href')}]]"}
+        ],
         "title"   : "[[{$('.chaptertitle').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='bookcontent'>",
         "exclude" : [
             "<script>",
             "<a>"
+        ]
+    },{
+        "name"    : "lofter.com",
+        "url"     : "http://*.lofter.com/post/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.content').html()||$('.text').html()}]]",
+        "exclude" : [
+            ""
         ]
     }]
 }

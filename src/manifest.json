@@ -1,7 +1,7 @@
 {
   "name"            : "__MSG_extension_name__",
   "default_locale"  : "en",
-  "version"         : "1.0.1",
+  "version"         : "1.0.3",
   "short_name"      : "SimpRead",
   "description"     : "__MSG_extension_desc__",
   "homepage_url"    : "http://ksria.com/simpread",
@@ -22,6 +22,7 @@
   "content_scripts" : [
     {
       "matches"     : [ "http://*/*", "https://*/*" ],
+      "exclude_matches": [ "http://localhost:3000/*", "https://simpread.herokuapp.com/view/*" ],
       "js"          : [
         "/bundle/common.js",
         "/bundle/vendors.js",

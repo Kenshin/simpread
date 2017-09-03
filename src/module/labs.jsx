@@ -6,6 +6,8 @@ import * as menu from 'menu';
 import Switch    from 'switch';
 import TextField from 'textfield';
 
+import Auth      from 'authorize';
+
 export default class LabsOpt extends React.Component {
 
     static defaultProps = {
@@ -42,11 +44,15 @@ export default class LabsOpt extends React.Component {
         this.exclusionState( this.props.read.auto );
     }
 
+    onClick( state ) {
+        state == "custom" && ( location.href = location.origin + "/options/custom.html" );
+    }
+
     render() {
         return (
-            <div id="labs" style={{ width: '80%' }}>
-                <div>
-                    <div className="label">全局</div>
+            <div id="labs" style={{ width: '100%' }}>
+                <div className="label">全局</div>
+                <div className="lab">
                     <Switch width="100%" checked={ this.props.option.esc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             tooltip={{ text: "包括：聚焦模式与阅读模式。" }}
@@ -54,8 +60,8 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
                 </div>
 
-                <div style={{ 'padding-top': '21px;' }}>
-                    <div className="label">右键菜单</div>
+                <div className="label">右键菜单</div>
+                <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.option.menu.focus }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示聚焦模式？"
@@ -70,8 +76,8 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "menu", "link" ) } />
                 </div>
 
-                <div style={{ 'padding-top': '21px;' }}>
-                    <div className="label">聚焦模式</div>
+                <div className="label">聚焦模式</div>
+                <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.focus.mask }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否启用点击空白（遮罩）退出功能？"
@@ -83,8 +89,8 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "focus", "controlbar") } />
                 </div>
 
-                <div style={{ 'padding-top': '21px;' }}>
-                    <div className="label">阅读模式</div>
+                <div className="label">阅读模式</div>
+                <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.read.progress }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示阅读进度？"
@@ -100,7 +106,7 @@ export default class LabsOpt extends React.Component {
                             label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
-                    <div ref="exclusion" style={{ 'padding-top': '21px;', 'margin-bottom': '8px;' }}>
+                    <div ref="exclusion" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
                         <div className="label">排除列表</div>
                         <TextField 
                             multi={ true } rows={8}
@@ -109,7 +115,20 @@ export default class LabsOpt extends React.Component {
                             onChange={ ()=>this.changeExclusion() }
                         />
                     </div>
+                </div>
 
+                <div className="label">授权管理</div>
+                <div style={{ 'padding-top': '10px' }} className="lab">
+                    <Auth/>
+                </div>
+
+                <div className="label">自定义样式</div>
+                <div style={{ 'padding-top': '10px' }} className="lab" onClick={ ()=>this.onClick('custom') }>
+                    <div className="more">
+                        <div>增强「中文阅读体验」设置</div>
+                        <span className="desc">包括：标题、描述、正文的字间距、行间距、首行缩进等及自定义 CSS。</span>
+                        <span className="arrow"></span>
+                    </div>
                 </div>
 
             </div>

@@ -85,6 +85,7 @@ function rollback() {
         ss.FontFamily( storage.current.fontfamily );
         ss.FontSize( storage.current.fontsize );
         ss.Layout( storage.current.layout );
+        ss.Preview( storage.read.custom );
     }
 }
 

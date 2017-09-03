@@ -18,6 +18,9 @@ import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
 import * as watch from 'watch';
+import {browser}  from 'browser';
+import * as msg   from 'message';
+import * as exp   from 'export';
 
 import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
@@ -35,7 +38,7 @@ let tabsItemID = 0;
 $( window ).scroll( (event) => {
     const $target = $( event.target ),
           scroll  = $target.scrollTop(),
-          offset  = ( 0 - scroll ) / 2;
+          offset  = 0 - scroll;
     scroll >  200 && ( $( ".header" ).css({ opacity: 1, visibility: "visible" }) );
     scroll <= 200 && ( $( ".header" ).css({ opacity: 0, visibility: "hidden"  }) );
     $( ".top" ).css( "transform", `translate3d(0px, ${offset}px, 0px)` );
@@ -46,6 +49,23 @@ $( window ).scroll( (event) => {
  */
 window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => item.route == window.location.hash ) );
 tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
+
+/**
+ * Listen runtime message
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.redirect_uri ) {
+        const { id, uri } = request.value;
+        if ([ "pocket", "dropbox", "evernote", "gdrive" ].includes( id )) {
+            exp[id].Accesstoken( uri );
+        } else if ( id == "yinxiang" ) {
+            exp.evernote.Accesstoken( uri );
+        } else {
+            id.startsWith( "http://ksria.com/simpread/auth.html?" ) &&
+            exp.onenote.Accesstoken( uri );
+        }
+    }
+});
 
 /**
  * Entry:
@@ -79,6 +99,9 @@ function hashnotify() {
             case "clear":
                 new Notify().Render( 0, "数据清除成功！" );
                 break;
+            case "sync":
+                new Notify().Render( 0, "数据同步成功！" );
+                break;
             default:
                 // TO-DO
         }
@@ -98,20 +121,16 @@ function vernotify() {
 
         new Notify().Render( "简悦 版本提示", msg );
 
-        if ( hash.startsWith( "#update?ver=" ) && version == "1.0.1" ) {
-            storage.read.sites = storage.Fix( storage.read.sites, storage.version );
-            storage.Write( ()=> {
-                watch.SendMessage( "version", true );
-                console.log( "site editor update complete!" )
-            });
+        if ( hash.startsWith( "#update?ver=" )) {
+            watch.SendMessage( "version", true );
+            welcomeRender( false, version );
         }
-
         history.pushState( "", "", "/options/options.html" );
     }
 }
 
 /**
- * First load call remote simpread data structure( usage storage.Sync() )
+ * First load
  *
  * @param {bool} is first load
  */
@@ -120,24 +139,17 @@ function firstLoad( first ) {
         error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
         !error && storage.Statistics( "create" );
     });
-    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender();
-    /* remove https://trello.com/c/p8cwFcu1/71-simpread-dropbox
-    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first &&
-        storage.Sync( "get", success => {
-            success && ReactDOM.unmountComponentAtNode( $( ".tabscontainer" )[0] );
-            success && mainRender( tabsItemID );
-            success && storage.Write( ()=> {
-                new Notify().Render( 0, "数据恢复成功！" );
-            });
-    });
-    */
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true );
 }
 
 /**
  * Welcome page render()
+ * 
+ * @param {boolean} true: first load
+ * @param {string} version
  */
-function welcomeRender() {
-    welc.Render( "body" );
+function welcomeRender( first, version ) {
+    welc.Render( "body", first, version );
 }
 
 /**
@@ -148,6 +160,7 @@ function welcomeRender() {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
+    idx == 3 ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -181,7 +194,7 @@ function tabsRender( color ) {
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>save( true ) } />
                     </section>
-                    <section>
+                    <section style={{ 'padding': '0;' }}>
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>

@@ -71,26 +71,85 @@ const readItems = {
         "icon" : ss.IconPath("setting_icon"),
         "color": "#03A9F4",
     },
-    "save" : {
+    "readlater" : {
         "name" : "暂存",
         "icon" : ss.IconPath("save_icon"),
         "color": "#FF5722",
+        "items": {
+            "linnk" : {
+                "name" : "保存到 Linnk",
+                "icon" : ss.IconPath("linnk_icon"),
+                "color": "#FF5722",
+            },
+            "pocket" : {
+                "name" : "保存到 Pocket",
+                "icon" : ss.IconPath("pocket_icon"),
+                "color": "#FF5722",
+            },
+            "save" : {
+                "name" : "保存到 稍后读",
+                "icon" : ss.IconPath("readlater_icon"),
+                "color": "#FF5722",
+            },
+        },
     },
-    "markdown" : {
-        "name" : "导出为 MD",
-        "icon" : ss.IconPath("markdown_icon"),
-        "color": "#D4237A",
-    },
-    /*"download" : {
+    "download" : {
         "name" : "导出",
         "icon" : ss.IconPath("download_icon"),
-        "color": "#673AB7",
+        "color": "#D4237A",
+        "items": {
+            "pdf" : {
+                "icon" : ss.IconPath("pdf_icon"),
+                "color": "#D4237A",
+            },
+            "png" : {
+                "icon" : ss.IconPath("png_icon"),
+                "color": "#D4237A",
+            },
+            "markdown" : {
+                "name" : "导出为 MD",
+                "icon" : ss.IconPath("markdown_icon"),
+                "color": "#D4237A",
+            },
+        },
     },
     "send" : {
-        "name" : "发送到 Pocket",
+        "name" : "保存",
         "icon" : ss.IconPath("send_icon"),
-        "color": "#4CAF50",
-    },*/
+        "color": "#00BCD4",
+        "items": {
+            "yinxiang" : {
+                "name" : "保存到 印象笔记",
+                "icon" : ss.IconPath("yinxiang_icon"),
+                "color": "#00BCD4",
+            },
+            "evernote" : {
+                "name" : "保存到 Evernote",
+                "icon" : ss.IconPath("evernote_icon"),
+                "color": "#00BCD4",
+            },
+            "dropbox" : {
+                "name" : "保存到 Dropbox",
+                "icon" : ss.IconPath("sync_icon"),
+                "color": "#00BCD4",
+            },
+            "onenote" : {
+                "name" : "保存到 Onenote",
+                "icon" : ss.IconPath("onenote_icon"),
+                "color": "#00BCD4",
+            },
+            "gdrive" : {
+                "name" : "保存到 Google 云端硬盘",
+                "icon" : ss.IconPath("gdrive_icon"),
+                "color": "#00BCD4",
+            },
+            "kindle" : {
+                "name" : "保存到 Kindle",
+                "icon" : ss.IconPath("kindle_icon"),
+                "color": "#00BCD4",
+            },
+        },
+    },
     "share" : {
         "name" : "共享",
         "icon" : ss.IconPath("share_icon"),
@@ -118,6 +177,7 @@ const readItems = {
             },
         },
     },
+    /*
     "down" : {
         "name" : "向下滚动",
         "icon" : ss.IconPath("down_icon"),
@@ -128,6 +188,7 @@ const readItems = {
         "icon" : ss.IconPath("up_icon"),
         "color": "#00BCD4",
     },
+    */
     "fontfamily" : {
         "name" : "字体样式",
         "icon" : ss.IconPath("fontfamily_icon"),
@@ -316,7 +377,7 @@ const tabsItem = [{
         value: "about",
         route: "#about",
     },{
-        name: "帮助",
+        name: "新手入门",
         value: "help",
         route: "https://github.com/kenshin/simpread/wiki",
 }],
@@ -358,8 +419,10 @@ const actionItems = [
     {
         id: "pocket",
         title: "发送到 Pocket",
-    },
-    {
+    },{
+        id: "linnk",
+        title: "发送到 Linnk",
+    },{
         id: "remove",
         title: "删除",
     }

@@ -157,14 +157,69 @@ a {
     z-index: 3;
 }
 
+/**
+ *  Labs style
+ */
+.lab {
+    /*margin-bottom: 20px;*/
+    padding: 10px;
+
+    width: 100%;
+
+    background-color: #fff;
+    border-radius: 2px;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    /*border: 1.1px solid #e7e7e7;*/
+}
+
+.main_labs {
+    background: transparent;
+    box-shadow: none;
+}
+
 #labs .label {
     height: 56px;
     line-height: 56px;
 
+    color: #616161;
     text-align: left;
 
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: 700;
 
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    /*border-bottom: 1px solid rgba(0, 0, 0, .12);*/
+}
+
+#labs .more {
+    width: 100%;
+    /*height: 37px;*/
+
+    font-size: 1.4rem;
+    font-weight: 400;
+
+    text-align: left;
+    /*line-height: 37px;*/
+
+    user-select: none;
+    cursor: pointer;
+}
+
+#labs .more .desc {
+    color: #757575;
+    font-size: 1rem;
+}
+
+#labs .more .arrow {
+    display: block;
+    position: absolute;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 24px;
+    height: 24px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAV1BMVEUAAAD////ExMS2tra/v7/Dw8O8vLzCwsK5ubnCwsK6urq+vr68vLy9vb29vb28vLy9vb29vb29vb29vb29vb29vb29vb29vb2+vr6+vr69vb29vb29vb2oiyseAAAAHHRSTlMAAQ0OEBETFRYZGkpMg8rLzM7R0tPW19je4uTlotOuxwAAAAFiS0dEAf8CLd4AAAB1SURBVCjPrdLHDoAgEATQUbH33vb/v1PEEnVXT85pM48QCAC/JhloC3AOJiO9wDms8UoZdN9KEHZUuAKEPeUuOGw9h0j36nqPHVi/g19RE9y3NoNenylwcGqqfQiANFMQwbIhAz/lB0z0yHg81Hzvp/jfj7AA4P8P+rUn4dEAAAAASUVORK5CYII=);
+    background-position: center;
+    background-repeat: no-repeat;
 }

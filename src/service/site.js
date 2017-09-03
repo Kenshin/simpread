@@ -97,9 +97,10 @@ async function removeSpareTag( name, $target ) {
  */
 function verify( name ) {
     const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
-    if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
+    /*if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
         return -2;
-    } else if ( name === "" ) {
+    } else */
+    if ( name === "" ) {
         return -1;
     } else {
         return 0;
@@ -128,6 +129,7 @@ async function specbeautify( name, $target ) {
                     $(item).addClass( "sr-rd-content-nobeautify" );
                 }
             });
+            $target.find( "script" ).remove();
             break;
         case "appinn.com":
             $target.find( ".emoji" ).addClass( "sr-rd-content-nobeautify" );
@@ -199,17 +201,43 @@ async function specbeautify( name, $target ) {
             $target.find( ".BDE_Smiley" ).addClass( "sr-rd-content-nobeautify" );
             $target.find( ".replace_div" ).removeAttr( "class" ).removeAttr( "style" );
             $target.find( ".replace_tip" ).remove();
+            $target.find( ".d_post_content, .j_d_post_content, .post_bubble_top, .post_bubble_middle, .post_bubble_bottom" ).map( ( idx, target ) => {
+                $( target ).removeAttr( "class" ).removeAttr( "style" );
+            });
+            $( "body" ).find( ".p_author_face" ).map( ( idx, target ) => {
+                const $target = $( target ).find( "img" ),
+                      src     = $target.attr( "data-tb-lazyload" ),
+                      name    = $target.attr( "username" );
+                src && $( "sr-rd-mult-avatar" ).find( "span" ).map( ( idx, span ) => {
+                    const $span = $( span ),
+                          text  = $span.text();
+                    if ( text == name ) {
+                        $span.parent().find( "img" ).attr( "src", src );
+                    }
+                });
+            });
             break;
         case "question.zhihu.com":
             $target.find( ".zu-edit-button" ).remove();
+            $target.find( "a.external" ).map( ( idx, target ) => {
+                $( target ).removeAttr( "class" )
+                           .attr( "style", "border: none;" );
+            });
+            $target.find( ".VagueImage" ).map( ( idx, target ) => {
+                const $target = $( target ),
+                      src     = $target.attr( "data-src" );
+                $target.replaceWith( `<img class="sr-rd-content-img" src="${ src }" style="zoom: 0.6;">` )
+            });
             break;
         case "chiphell.com":
             $target.find( "img" ).map( ( index, item ) => {
                 const $target = $(item),
                       $parent = $target.parent(),
-                      src     = $target.attr( "src" );
+                      src     = $target.attr( "src" ),
+                      smilieid= $target.attr( "smilieid" );
                 if ( $parent.is( "ignore_js_op" )) $target.unwrap();
-                if ( src && src.includes( "static/image/smiley" ) ) $target.addClass( "sr-rd-content-nobeautify" );
+                smilieid && src && src.includes( "static/image/smiley" ) &&
+                    $target.addClass( "sr-rd-content-nobeautify" ).attr( "style", "width: 50px;" );
             });
             $target.find( ".quote" ).remove();
             break;
@@ -314,10 +342,75 @@ function clone( target ) {
     return $.extend( true, {}, target );
 }
 
+/**
+ * Html convert to enml
+ * 
+ * @param  {string} convert string
+ * @param  {string} url
+ * 
+ * @return {string} convert string
+ */
+function html2enml( html, url ) {
+    let $target, str;
+    const tags = [ "figure", "sup", "hr", "section", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ];
+    
+    $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
+    $target = $( "#simpread-en" );
+    $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
+        $( "<div>" ).attr( "style", `width: ${item.naturalWidth}px; height:${item.naturalHeight}px; background: url(${item.src})` )
+        .replaceAll( $(item) );
+    });
+    $target.find( tags.join( "," ) ).map( ( index, item ) => {
+        $( "<div>" ).html( $(item).html() ).replaceAll( $(item) );
+    });
+    $target.find( tags.join( "," ) ).remove();
+    str = $target.html();
+    $target.remove();
+
+    try {
+        str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
+        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
+                //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
+                .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
+                .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
+                .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                  // <img>
+                .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )   // data="xxx" || data-xxx="xxx"
+                .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
+                .replace( /sr-blockquote/ig, "blockquote" )                // sr-blockquote to blockquote
+                .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )          // <p> || <p > || <p xxx="xxx">
+                .replace( /<figcaption[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" ) // <figcaption >
+                .replace( /<\/figcaption>/ig, "" )                         // </figcaption>
+                .replace( /<\/br>/ig, "" )                                 // </br>
+                .replace( /<br>/ig, "<br></br>" )
+                .replace( /<\/p>/ig, "<br></br>" );
+
+        return str;
+
+    } catch( error ) {
+        return `<div>转换失败，原文地址 <a href="${url}" target="_blank">${url}</a></div>`
+    }
+}
+
+/**
+ * Clear Html to MD, erorr <tag>
+ * 
+ * @param {string} convert string
+ */
+function clearMD( str ) {
+    str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
+    str = str.replace( /<\/?(ins|font|span|div|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
+             .replace( /sr-blockquote/ig, "blockquote" )
+             .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
+             .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )
+             return str;
+}
+
 export {
     getURI         as GetURI,
     findSitebyURL  as Getsite,
     specbeautify   as Beautify,
     removeSpareTag as RemoveTag,
-    verify         as Verify
+    verify         as Verify,
+    html2enml      as HTML2ENML,
+    clearMD        as ClearMD,
 }
