@@ -228,7 +228,7 @@ class Read extends React.Component {
                 { Article }
                 { Page    }
                 <Footer />
-                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} onAction={ (t,v)=>this.onAction( t,v ) } onService={ (t,v)=>this.onService( t,v ) } />
+                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} custom={ this.props.read.custom } onAction={ (t,v)=>this.onAction( t,v ) } onService={ (t,v)=>this.onService( t,v ) } />
             </sr-read>
         )
     }

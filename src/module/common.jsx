@@ -26,6 +26,7 @@ export default class CommonOpt extends React.Component {
             new Notify().Render( "数据同步中，请稍等..." );
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
+                    storage.option.sync = Now();
                     storage.Write( () => {
                         dbx.Write( dbx.config_name, storage.Export(), callback );
                     });
@@ -38,7 +39,7 @@ export default class CommonOpt extends React.Component {
             switch ( type ) {
                 case "write":
                     !error ? ( location.href = location.origin + location.pathname + "?simpread_mode=sync" ) :
-                        new Notify().Render( "远程数据同步失败，请稍后再试！" );
+                        new Notify().Render( 2, error == "error" ? "远程数据同步失败，请稍后再试！" : error );
                     break;
                 case "read":
                     const json   = JSON.parse( result ),

@@ -65,7 +65,7 @@ function download( data, name ) {
  */
 function unlink( id ) {
     const content = {
-        "dropbox" : "https://www.dropbox.com/account/security",
+        "dropbox" : "https://www.dropbox.com/account/connected_apps",
         "pocket"  : "https://getpocket.com/connected_applications",
         "evernote": "https://www.evernote.com/AuthorizedServices.action",
         "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
@@ -83,8 +83,8 @@ function unlink( id ) {
  */
 class Dropbox {
 
-    get id()   { return this.constructor.name.toLowerCase(); }
-    get name() { return name( this.constructor.name ); }
+    get id()   { return "dropbox"; }
+    get name() { return name( this.id ); }
 
     get client_id() {
         return "4cyaw4wqpbg4751";
@@ -183,7 +183,7 @@ class Dropbox {
             callback( "write", data, undefined );
         }).fail( ( xhr, textStatus, error ) => {
             console.error( xhr, status, error )
-            callback( "write", undefined, error.toLowerCase().startsWith( "invalid_access_token" ) ? `${ name("dropbox") } 授权过期，请重新授权。` : "error" );
+            callback( "write", undefined, error.toLowerCase().startsWith( "invalid_access_token" ) ? `${ this.name } 授权过期，请重新授权。` : "error" );
         });
 
     }
@@ -196,8 +196,8 @@ class Dropbox {
  */
 class Pocket {
 
-    get id()   { return this.constructor.name.toLowerCase(); }
-    get name() { return name( this.constructor.name ); }
+    get id()   { return "pocket"; }
+    get name() { return name( this.id ); }
     
     get consumer_key() {
         return "69741-d75561b7a9a96a511f36552e";
@@ -292,7 +292,7 @@ class Pocket {
             callback( data, undefined );
         }).fail( ( xhr, status, error ) => {
             console.error( xhr, status, error )
-            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ name("pocket") } 授权过期，请重新授权。` : "error" );
+            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ this.name } 授权过期，请重新授权。` : "error" );
         });
     }
 
@@ -305,9 +305,8 @@ class Pocket {
  */
 class Linnk {
 
-    get id()   { return this.constructor.name.toLowerCase(); }
-    get name() { return name( this.constructor.name ); }
-
+    get id()   { return "linnk"; }
+    get name() { return name( this.id ); }
     constructor() {
         this.access_token = "";
         this.group_id     = "";
@@ -385,7 +384,7 @@ class Linnk {
 
     GetGroup( name, target ) {
         const group = target.find( obj => obj.groupName == name );
-        this.group_name = group.groupName;
+        group && ( this.group_name = group.groupName );
         return group;
     }
 
@@ -554,8 +553,8 @@ class Evernote {
  */
 class Onenote {
 
-    get id()   { return this.constructor.name.toLowerCase(); }
-    get name() { return name( this.constructor.name ); }
+    get id()   { return "onenote"; }
+    get name() { return name( this.id ); }
 
     get client_id() {
         return "b21d6e4a-30d5-4c39-9ef2-0ac14a01822b";
@@ -666,7 +665,7 @@ class Onenote {
             status != "success" && callback( undefined, "error" );
         }).fail( ( xhr, status, error ) => {
             console.error( xhr, status, error )
-            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ name("onenote") } 授权过期，请重新授权。` : "error" );
+            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ this.name } 授权过期，请重新授权。` : "error" );
         });
     }
 }
@@ -678,8 +677,8 @@ class Onenote {
  */
 class GDrive {
 
-    get id()   { return this.constructor.name.toLowerCase(); }
-    get name() { return name( this.constructor.name ); }
+    get id()   { return "gdrive"; }
+    get name() { return name( this.id ); }
 
     get client_id() {
         return "920476054505-fd4192mqtfodackl1vip1c3c0hp6298n.apps.googleusercontent.com";
@@ -709,7 +708,7 @@ class GDrive {
 
     get errors() {
         return {
-            401: `${ name("gdrive") } 授权过期，请重新授权。`,
+            401: `${ this.name } 授权过期，请重新授权。`,
             403: "调用达到最大值，请重新授权后再使用。",
             500: "Google 服务出现问题，请稍后再使用。",
         }

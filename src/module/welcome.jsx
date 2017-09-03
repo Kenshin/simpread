@@ -224,7 +224,7 @@ class Welcome extends React.Component {
                             <h2 style={ style.h2 }>自定义样式</h2>
                             <div style={ style.desc }>
                                 <strong>选项页-高级设定 · 自定义样式</strong>，包含字间距、行间距等中文阅读设置。<br/>
-                                <strong>自定义CSS</strong> 方便定制属于你的主题，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%A2%98">请看这里</a> 。
+                                <strong>自定义CSS</strong> 方便定制属于你的主题，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F">请看这里</a> 。
                             </div>
                         </section>
                     </div>
@@ -232,9 +232,9 @@ class Welcome extends React.Component {
                     <div className="carousel-item" id="1.0.3">
                         <section style={ style.section }>
                             <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/multi-page.gif"/>
-                            <h2 style={ style.h2 }>多页面 · 分页</h2>
+                            <h2 style={ style.h2 }>论坛类页面 · 分页</h2>
                             <div style={ style.desc }>
-                            支持 <strong>论坛类页面</strong>，包括：知乎 · 贴吧等具有多端内容的页面形式。<br/>
+                            支持 <strong>论坛类页面</strong>，更完美的展示 <strong>知乎 · 贴吧</strong> 等论坛类页面。<br/>
                             支持 <strong>分页功能</strong>，在阅读模式下就可翻页。
                             </div>
                         </section>

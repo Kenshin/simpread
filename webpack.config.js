@@ -95,7 +95,8 @@ const webpack = require( 'webpack' ),
           'site',
           'version',
           'menu',
-          'watch'
+          'watch',
+          'export'
         ],
 
         vendors : [
@@ -115,6 +116,8 @@ const webpack = require( 'webpack' ),
           'progressbar',
           'velocity',
           'timeago',
+          'filesaver',
+          'dom2image',
 
           'wavess',
           'notify',
@@ -132,7 +135,15 @@ const webpack = require( 'webpack' ),
           'shortcuts',
           'include',
           'exclude',
+          'modals',
 
+          'welcome',
+          'commonopt',
+          'authorize',
+          'labsopt',
+          'unrdist',
+          'about',
+          
           // component
           'textfield',
           'fab',
