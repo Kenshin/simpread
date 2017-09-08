@@ -537,8 +537,53 @@
             ""
         ]
     },{
+        "name"    : "dxy.cn",
+        "url"     : "http://*.dxy.cn/article/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<div class='x_detail_btm'>"
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='entry'>",
+        "exclude" : [
+            "<div class='copyright-area'>",
+            "<blockquote class='rewards'>",
+            "<div class='post-adds'>",
+            "<div id='author-bio'>"
+        ]
+    },{
+        "name"    : "android.jobbole.com",
+        "url"     : "http://android.jobbole.com/*/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='entry'>",
+        "exclude" : [
+            "<div class='copyright-area'>",
+            "<blockquote class='rewards'>",
+            "<div class='post-adds'>",
+            "<div id='author-bio'>"
+        ]
+    },{
+        "name"    : "ios.jobbole.com",
+        "url"     : "http://ios.jobbole.com/*/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='entry'>",
+        "exclude" : [
+            "<div class='copyright-area'>",
+            "<blockquote class='rewards'>",
+            "<div class='post-adds'>",
+            "<div id='author-bio'>"
+        ]
+    },{
+        "name"    : "python.jobbole.com",
+        "url"     : "http://python.jobbole.com/*/",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div class='entry'>",
@@ -1621,6 +1666,15 @@
         "title"   : "<h2 id='sharetitle'>",
         "desc"    : "",
         "include" : "<div id='articleContent'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.china.com.cn",
+        "url"     : "http://news.china.com.cn/**/*/*.htm",
+        "title"   : "<h1 class='articleTitle'>",
+        "desc"    : "",
+        "include" : "<div id='articleBody'>",
         "exclude" : [
             ""
         ]
