@@ -837,7 +837,7 @@
         "url"     : "https://www.v2ex.com/t/",
         "title"   : "[[{$('.header h1').text()}]]",
         "desc"    : "",
-        "include" : "<div class='markdown_body'>",
+        "include" : "<div class='topic_content'>",
         "exclude" : [
             ""
         ]
@@ -1374,7 +1374,7 @@
     },{
         "name"    : "ithome.com",
         "url"     : "https://www.ithome.com/html/**/*/*.htm",
-        "title"   : "<h1>",
+        "title"   : "[[{$('.post_title').find('h1').text()}]]",
         "desc"    : "",
         "include" : "<div id='paragraph'>",
         "exclude" : [
