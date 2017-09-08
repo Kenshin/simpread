@@ -43,6 +43,15 @@
             "<p class='post-footer-wx'>"
         ]
     },{
+        "name"    : "pingwest.com",
+        "url"     : "http://www.pingwest.com/wire/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='sc-container'>",
+        "exclude" : [
+            "<p class='post-footer-wx'>"
+        ]
+    },{
         "name"    : "jiemian.com",
         "url"     : "http://www.jiemian.com/article/",
         "title"   : "<title>",
@@ -1445,7 +1454,16 @@
         ]
     },{
         "name"    : "toutiao.com",
-        "url"     : "https://www.toutiao.com/a*/",
+        "url"     : "http*://www.toutiao.com/a*/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "toutiao.com",
+        "url"     : "http*://www.toutiao.com/i*/",
         "title"   : "<h1 class='article-title'>",
         "desc"    : "",
         "include" : "<div class='article-content'>",
