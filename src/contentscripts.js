@@ -141,6 +141,7 @@ function autoOpen() {
             case "entry.juejin.im":
                 setTimeout( ()=>readMode(), 2500 );
                 break;
+            case "kancloud.cn":
             case "sspai.com":
                 setTimeout( ()=>readMode(), 500 );
                 break;
