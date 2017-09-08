@@ -512,7 +512,7 @@
             "[[/src=\\S+(FlHy2hPIJYsjjeQRRKHhk0yfoLv)\\S+'/]]",
             "[['<b>本文由PMCAFF专栏作者</b>']]",
             "[['<strong>本文由</strong>']]",
-			"[['<strong>版权归原作者所有</strong>']]"
+            "[['<strong>版权归原作者所有</strong>']]"
         ]
     },{
         "name"    : "discuss.pmcaff.com",
@@ -1245,8 +1245,21 @@
         "include" : "<div class='entry-content'>",
         "exclude" : [
             "<div class='similarity'>",
-			"<div class='post-copyright'>",
+            "<div class='post-copyright'>",
             "[[/src=\\S+(youshege725)\\S+'/]]"
+        ]
+    },{
+        "name"    : "kancloud.cn",
+        "url"     : "https://www.kancloud.cn/*/*/*",
+        "paging"  : [
+            {"prev" : "[[{$('.article-navigation').find('.prev a').attr('href')}]]"},
+            {"next" : "[[{$('.article-navigation').find('.next a').attr('href')}]]"}
+        ],
+        "title"   : "[[{$('.article-head').find('h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='article-body'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "voidcn.com",
