@@ -217,6 +217,9 @@ async function specbeautify( name, $target ) {
                 });
             });
             break;
+        case "jingyan.baidu.com":
+            $target.find( ".exp-image-wraper" ).removeAttr( "class" ).removeAttr( "href" );
+            break;
         case "question.zhihu.com":
             $target.find( ".zu-edit-button" ).remove();
             $target.find( "a.external" ).map( ( idx, target ) => {
