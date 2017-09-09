@@ -371,7 +371,8 @@ class Storage {
                 count          = simpread.sites.length;
                 save( undefined, type );
             }
-            else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
+            else {
+                count = addsites( formatSites( newsites )).count;
                 save( undefined, type );
             }
             callback && callback( { count }, undefined );
