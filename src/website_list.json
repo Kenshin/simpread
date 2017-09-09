@@ -1313,7 +1313,7 @@
         "desc"    : "",
         "include" : "<div class='blog-post-body'>",
         "exclude" : [
-            ""
+            "<h1>"
         ]
     },{
         "name"    : "voidcn.com",
