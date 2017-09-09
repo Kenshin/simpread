@@ -1307,6 +1307,15 @@
             ""
         ]
     },{
+        "name"    : "blog.wanqu.co",
+        "url"     : "https://wanqu.co/b/*/*.html*",
+        "title"   : "[[{$('.blog-post-body h1').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='blog-post-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -1679,6 +1688,27 @@
             ""
         ]
     },{
+        "name"    : "article.huanqiu.com/",
+        "url"     : "http://*.huanqiu.com/*/*/*.html",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='text'>",
+        "exclude" : [
+            "<div class='editorSign'>",
+            "<div class='reTopics'>"
+        ]
+    },{
+        "name"    : "news.mindynode.com",
+        "url"     : "https://news.mindynode.com/zh/links/*",
+        "title"   : "<div id='parsed_title'>",
+        "desc"    : "",
+        "include" : "<div id='parsed_content'>",
+        "exclude" : [
+            "<div class='reTopics'>",
+            "<p class='read-art-extra-bonus'>",
+            "<div class='editorSign'>"
+        ]
+    },{
         "name"    : "zhidx.com",
         "url"     : "http://zhidx.com/p/",
         "title"   : "[[{$('.finTit').find('h1').text()}]]",
@@ -1853,6 +1883,19 @@
             ""
         ]
     },{
+        "name"    : "jingyan.baidu.com",
+        "url"     : "http://jingyan.baidu.com/article/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<li class='exp-content-list'>",
+        "exclude" : [
+            "<span class='exp-album-enter-mask'>",
+            "<span class='enter-step-btn'>",
+            "<span class='last-item-end'>",
+            "<div class='quote-item'>",
+            "<div class='list-icon'>"
+        ]
+    },{
         "name"    : "g-cores.com",
         "url"     : "http://www.g-cores.com/articles/",
         "title"   : "<h1 class='story_title'>",
@@ -1902,6 +1945,20 @@
             "<i class='pstatus'>",
             "[[/src=\\S+(none.gif)\\S+'/]]",
             "<div class='aimg_tip'>"
+        ]
+    },{
+        "name"    : "bbs.hupu.com",
+        "url"     : "https://bbs.hupu.com/*.html",
+        "title"   : "<h1 id='j_data'>",
+        "desc"    : "",
+        "avatar"  : [
+            {"name" : "[[{$('.author').find('.left a')}]]"},
+            {"url"  : "[[{$('.user').find('img')}]]"}
+        ],
+        "include" : "[[{$('table.case')}]]",
+        "exclude" : [
+            "<div class='video-play-1'>",
+            "<div class='vote_box'>"
         ]
     },{
         "name"    : "qu.la",
