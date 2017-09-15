@@ -162,9 +162,19 @@
     },{
         "name"    : "dgtle.com",
         "url"     : "http://www.dgtle.com/article-*.html",
-        "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
+        "title"   : "<title>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "<div id='view_content'>",
+        "include" : "<div class='view_content'>",
+        "exclude" : [
+            "<div id='comments_top'>",
+            "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
+        ]
+    },{
+        "name"    : "bbs.dgtle.com",
+        "url"     : "http://*.dgtle.com/thread-*.html",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='view_content'>",
         "exclude" : [
             "<div id='comments_top'>",
             "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
@@ -544,6 +554,45 @@
         "include" : "<div id='content'>",
         "exclude" : [
             "<div class='x_detail_btm'>"
+        ]
+    },{
+        "name"    : "creative.adquan.com",
+        "url"     : "http://creative.adquan.com/show/*",
+        "title"   : "<h2 class='text_title'>",
+        "desc"    : "",
+        "include" : "<div class='con_Text'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "post.adquan.com",
+        "url"     : "http://www.adquan.com/post-*.html",
+        "title"   : "<h2 class='text_title'>",
+        "desc"    : "",
+        "include" : "<div class='con_Text'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "gonglve.mafengwo.cn",
+        "url"     : "http*://www.mafengwo.cn/gonglve/ziyouxing/*.html",
+        "title"   : "<h1>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='_j_content'>",
+        "exclude" : [
+            "<section class='travelnote'>",
+            "<div class='product-box'>",
+            "<div class='pro_list'>"
+        ]
+    },{
+        "name"    : "i.mafengwo.cn",
+        "url"     : "http*://www.mafengwo.cn/i/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='vc_article'>",
+        "exclude" : [
+            "<a class='_j_anchor'>",
+            "<div id='_j_paragraph_1'>"
         ]
     },{
         "name"    : "blog.jobbole.com",
@@ -1316,6 +1365,24 @@
             "<h1>"
         ]
     },{
+        "name"    : "hacknews.codedata.cn",
+        "url"     : "http://www.codedata.cn/hacknews/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "topics.codedata.cn",
+        "url"     : "http://www.codedata.cn/topics/*",
+        "title"   : "<h1 class='media-heading'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -1707,6 +1774,16 @@
             "<div class='reTopics'>",
             "<p class='read-art-extra-bonus'>",
             "<div class='editorSign'>"
+        ]
+    },{
+        "name"    : "8btc.com",
+        "url"     : "http://www.8btc.com/*-*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "[[{$($('.article-content')[0]).html()}]]",
+        "exclude" : [
+            "<div class='content-source-info'>",
+            "<div class='content-bottom'>"
         ]
     },{
         "name"    : "zhidx.com",
