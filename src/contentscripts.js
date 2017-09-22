@@ -76,13 +76,12 @@ function focusMode() {
             new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.focus );
-            const $focus = focus.GetFocus( storage.current.site.include );
-            if ( $focus ) {
+            focus.GetFocus( storage.current.site.include ).done( result => {
                 storage.Statistics( mode.focus );
-                focus.Render( $focus, storage.current.site.exclude, storage.current.bgcolor );
-            } else {
+                focus.Render( result, storage.current.site.exclude, storage.current.bgcolor );
+            }).fail( () => {
                 new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
-            }
+            });
         }
     });
 }
