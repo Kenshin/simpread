@@ -216,3 +216,14 @@ sr-rd-crlbar.controlbar {
 sr-rd-crlbar.controlbar:hover {
     opacity: 1;
 }
+
+/**
+ * Highlight
+ */
+.simpread-highlight-selector {
+    background-color: #fafafa;
+    outline: 3px dashed #1976d2;
+    opacity: .8;
+    cursor: pointer;
+    transition: opacity .5s ease;
+}
