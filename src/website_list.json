@@ -2146,6 +2146,19 @@
             ""
         ]
     },{
+        "name"    : "vipreader.qidian.com",
+        "url"     : "https://vipreader.qidian.com/chapter/**/*",
+        "paging"  : [
+            {"prev" : "[[{$('#j_chapterPrev').attr('href')}]]"},
+            {"next" : "[[{$('#j_chapterNext').attr('href')}]]"}
+        ],
+        "title"   : "<h3 class='j_chapterName'>",
+        "desc"    : "",
+        "include" : "<div class='read-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "lofter.com",
         "url"     : "http://*.lofter.com/post/*",
         "title"   : "<title>",
