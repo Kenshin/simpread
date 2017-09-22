@@ -2,6 +2,7 @@ console.log( "=== simpread focus load ===" );
 
 var storage  = require( "storage" ).storage,
     util     = require( "util" ),
+    highlight= require( "highlight"  ),
     fcontrol = require( "controlbar" ),
     tooltip  = require( "tooltip" ),
     waves    = require( "waves" ),
@@ -97,6 +98,7 @@ var storage  = require( "storage" ).storage,
      */
     Focus.prototype.GetFocus = function( include ) {
         var $focus = [],
+            dtd    = $.Deferred(),
             sel, range, node, tag,
             target;
         target = util.selector( include );
@@ -115,25 +117,33 @@ var storage  = require( "storage" ).storage,
         } catch ( error ) {
             console.error( "Get $focus failed", error )
         }
-        while ( $focus.length == 0 ) {
-            if ( $( "body" ).find( "article" ).length > 0 ) {
-                $focus = $( "body" ).find( "article" );
-            }
-            else {
-                try {
-                    sel    = window.getSelection();
-                    range  = sel.getRangeAt( sel.rangeCount - 1 );
-                    node   = range.startContainer.nodeName;
-                if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
-                    $focus = $( range.startContainer.parentNode );
-                } catch ( error ) {
-                    console.log( sel, range, node )
-                    console.error( error )
-                    return undefined;
+        if ( true ) {
+            highlight.Start().done( result => {
+                $focus = $( result );
+                dtd.resolve( $focus );
+            });
+        } else {
+            while ( $focus.length == 0 ) {
+                if ( $( "body" ).find( "article" ).length > 0 ) {
+                    $focus = $( "body" ).find( "article" );
+                }
+                else {
+                    try {
+                        sel    = window.getSelection();
+                        range  = sel.getRangeAt( sel.rangeCount - 1 );
+                        node   = range.startContainer.nodeName;
+                    if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
+                        $focus = $( range.startContainer.parentNode );
+                    } catch ( error ) {
+                        console.log( sel, range, node )
+                        console.error( error )
+                        return dtd.reject();
+                    }
                 }
             }
+            return dtd.resolve( $focus );
         }
-        return fixFocus( $focus );
+        return dtd;
     }
 
     /**
