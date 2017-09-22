@@ -1786,6 +1786,24 @@
             "<div class='content-bottom'>"
         ]
     },{
+        "name"    : "wiki.8btc.com",
+        "url"     : "http://www.8btc.com/wiki/*",
+        "title"   : "<div class='page-title'>",
+        "desc"    : "",
+        "include" : "<div class='col-xs-12'>",
+        "exclude" : [
+            "<div class='page-title'>"
+        ]
+    },{
+        "name"    : "vip.qikan.com",
+        "url"     : "http://nlc.vip.qikan.com/text/Article.aspx*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='newartbox'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "zhidx.com",
         "url"     : "http://zhidx.com/p/",
         "title"   : "[[{$('.finTit').find('h1').text()}]]",
@@ -2113,6 +2131,19 @@
         "exclude" : [
             "<script>",
             "<a>"
+        ]
+    },{
+        "name"    : "read.qidian.com",
+        "url"     : "https://read.qidian.com/chapter/**/*",
+        "paging"  : [
+            {"prev" : "[[{$('#j_chapterPrev').attr('href')}]]"},
+            {"next" : "[[{$('#j_chapterNext').attr('href')}]]"}
+        ],
+        "title"   : "<h3 class='j_chapterName'>",
+        "desc"    : "",
+        "include" : "<div class='read-content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "lofter.com",
