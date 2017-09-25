@@ -7,7 +7,7 @@ import * as output from 'output';
 
 import Fab         from 'fab';
 
-let timer, $root;
+let timer, $root, selector;
 
 const tooltip_options = {
     target   : "name",
@@ -40,7 +40,7 @@ class FControl extends React.Component {
 
     componentWillUnmount() {
         $(this.refs.target).remove();
-        $root.trigger( "click", "okay" );
+        $( "body" ).find( selector ).trigger( "click", "okay" );
     }
 
     render() {
@@ -70,9 +70,12 @@ function moveTop() {
 
 /**
  * Render
+ * 
+ * @param {string} class name, e.g. .xxx
  * @param {string} class name, e.g. .xxx
  */
-function Render( root ) {
+function Render( root, finder ) {
+    selector = finder;
     $root = $(root);
     ReactDOM.render( <FControl show={ storage.current.controlbar } />, getRoot() );
 }
