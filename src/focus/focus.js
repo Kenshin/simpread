@@ -16,6 +16,9 @@ var storage  = require( "storage" ).storage,
         maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
         bgcls      = "simpread-focus-root",
         bgtmpl     = "<div class=" + bgcls + "></div>",
+        ctrlbar    = "sr-controlbar-bg",
+        ctrlbarbg  = "<div class=" + ctrlbar + "></div>",
+        ctrlbarjq  = "." + ctrlbar,
         bgclsjq    = "." + bgcls;
 
     function Focus() { this.$target = null; }
@@ -48,6 +51,7 @@ var storage  = require( "storage" ).storage,
 
         // add background
         $( "body" ).append( bgtmpl );
+        $( "html" ).append( ctrlbarbg );
 
         // add background color
         $( bgclsjq )
@@ -55,7 +59,7 @@ var storage  = require( "storage" ).storage,
             .velocity({ opacity: 1 });
 
         // add control bar
-        fcontrol.Render( bgclsjq );
+        fcontrol.Render( ctrlbarjq, bgclsjq );
 
         // add tooltip and waves
         tooltip.Render( bgclsjq );
@@ -71,9 +75,10 @@ var storage  = require( "storage" ).storage,
                     includeStyle( $target, focusstyle, focuscls, "delete" );
                     excludeStyle( $target, exclude, "add" );
                     tooltip.Exit( bgclsjq );
-                    $( bgclsjq ).remove();
-                    $( bgclsjq ).off( "click" );
-                 }
+                    $( ctrlbarjq ).remove();
+                    $( bgclsjq   ).remove();
+                    $( bgclsjq   ).off( "click" );
+                }
              });
 
             // remove simpread-focus-mask style
