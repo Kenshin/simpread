@@ -22,7 +22,15 @@ function start() {
     $( "body" ).one( "click", event => {
         $( event.target ).removeClass( highlight_class );
         $( "body"       ).off( "mousemove", mousemoveEvent );
+        $prev = undefined;
         dtd.resolve( event.target );
+    });
+    $( "body" ).one( "keydown", event => {
+        if ( event.keyCode == 27 && $prev ) {
+            $( event.target ).find( `.${highlight_class}` ).removeClass( highlight_class );
+            $( "body"       ).off( "mousemove", mousemoveEvent );
+            $prev = undefined;
+        }
     });
     $( "body" ).on( "mousemove", mousemoveEvent );
     return dtd;
