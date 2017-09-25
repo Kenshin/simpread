@@ -45,6 +45,14 @@
     z-index: 2147483646;
 }
 
+.sr-controlbar-bg sr-rd-crlbar {
+    z-index: 2147483647;
+}
+
+.sr-controlbar-bg sr-rd-crlbar fab {
+    z-index: 2147483647;
+}
+
 /**
  * Dialog: style
 */
