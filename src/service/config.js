@@ -325,7 +325,6 @@ const focusItems = ( items => {
         "icon" : ss.IconPath("top_icon"),
         "color": "#009688",
     };
-    delete news.download.items.pdf;
     return news;
 })( readItems );
 
