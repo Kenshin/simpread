@@ -87,6 +87,11 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "选择隐藏意味着鼠标移上时才显示。" }}
                             label="是否一直显示右下角的控制栏？"
                             onChange={ (s)=>this.onChange(s, "focus", "controlbar") } />
+                    <Switch width="100%" checked={ this.props.focus.highlight }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            tooltip={{ text: "关闭后会启用自动聚焦模式" }}
+                            label="是否关闭手动聚焦模式？"
+                            onChange={ (s)=>this.onChange(s, "focus", "highlight") } />
                 </div>
 
                 <div className="label">阅读模式</div>
