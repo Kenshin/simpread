@@ -10,7 +10,7 @@ import * as msg    from 'message';
  * Controlbar common action, include:
  * 
  * - share_xxx
- * - save, markdown
+ * - save, markdown, png, pdf
  * - dropbox, pocket, linnk, evernote, onenote, gdrive
  * 
  * @param {string} type, include above ↑ type 
@@ -37,7 +37,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "png", "kindle" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "png", "kindle", "pdf" ].includes( type ) ) {
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
@@ -79,6 +79,17 @@ function action( type, title, desc, content ) {
                     !error && new Notify().Render( "保存成功，3 秒钟后将跳转到发送页面。" );
                     !error && setTimeout( ()=>{ exp.kindle.Send(); }, 3000 );
                 });
+                break;
+            case "pdf":
+                if ( storage.current.mode == "read" ) {
+                    $( "sr-rd-crlbar" ).css({ "opacity": 0 });
+                    setTimeout( () => {
+                        exp.PDF();
+                        $( "sr-rd-crlbar" ).removeAttr( "style" );
+                    }, 500 );
+                } else {
+                    new Notify().Render( 2, "当前模式不支持导出到 PDF，请使用阅读模式。" );
+                }
                 break;
         }
     } else if ( [ "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) ) {
