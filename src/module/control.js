@@ -37,7 +37,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "kindle" ].includes( type ) ) {
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
@@ -49,6 +49,21 @@ function action( type, title, desc, content ) {
             case "markdown":
                 const md = "simpread-" + title + ".md";
                 exp.MDWrapper( st.ClearMD( content ), md, new Notify() );
+                break;
+            case "kindle":
+                new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );
+                const style = {
+                    theme     : storage.read.theme,
+                    fontsize  : storage.read.fontsize,
+                    fontfamily: storage.read.fontfamily,
+                    layout    : storage.read.layout,
+                    custom    : storage.read.custom,
+                }
+                exp.kindle.Read( window.location.href, title, desc, content, style, ( result, error ) => {
+                    error  && new Notify().Render( 2, "保存到 Kindle 失败，请稍候再试！" );
+                    !error && new Notify().Render( "保存成功，3 秒钟后将跳转到发送页面。" );
+                    !error && setTimeout( ()=>{ exp.kindle.Send(); }, 3000 );
+                });
                 break;
         }
     } else if ( [ "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) ) {
