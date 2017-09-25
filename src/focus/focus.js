@@ -118,7 +118,7 @@ var storage  = require( "storage" ).storage,
             console.error( "Get $focus failed", error )
         }
         if ( true ) {
-            new Notify().Render( "已启动手动聚焦模式，请移动鼠标进行选择。" );
+            new Notify().Render( "已启动手动聚焦模式，请移动鼠标进行选择, ESC 退出。" );
             highlight.Start().done( result => {
                 $focus = $( result );
                 dtd.resolve( $focus );
