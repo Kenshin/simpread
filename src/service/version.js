@@ -11,12 +11,14 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.1", "Fri Jun 30 2017 09:27:18 GMT+0800 (CST)" ],
           [ "1.0.2", "Mon Aug 07 2017 19:03:50 GMT+0800 (CST)" ],
           [ "1.0.3", "Mon Aug 21 2017 04:09:23 GMT+0800 (CST)" ],
+          [ "1.0.4", "Mon Sep 25 2017 14:40:27 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
           [ "1.0.1", "新增「高级设定」选项页，" ],
           [ "1.0.2", "新增「自定义样式，论坛类页面与分页功能」，" ],
           [ "1.0.3", "新增「导出到生产力工具，发送到 Kindle，自定义样式，论坛类页面，分页等」，" ],
+          [ "1.0.4", "新增「聚焦模式手动选择以及导出到生产力工具」，" ],
     ]);
 
 /**
@@ -84,6 +86,11 @@ function Verify( curver, data ) {
     if ( curver == "1.0.2" ) {
         data.option.sync = "";
         curver = "1.0.3";
+    }
+
+    if ( curver == "1.0.3" ) {
+        data.focus.highlight = true;
+        curver = "1.0.4";
     }
 
     /*
