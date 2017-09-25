@@ -37,7 +37,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "kindle" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "png", "kindle" ].includes( type ) ) {
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
@@ -49,6 +49,21 @@ function action( type, title, desc, content ) {
             case "markdown":
                 const md = "simpread-" + title + ".md";
                 exp.MDWrapper( st.ClearMD( content ), md, new Notify() );
+                break;
+            case "png":
+                try {
+                    new Notify().Render( "下载已开始，请稍等..." );
+                    const $target = storage.current.mode == "read" ? $( ".simpread-read-root" ) : $( ".simpread-focus-highlight" );
+                    $( "sr-rd-crlbar" ).css({ "opacity": 0 });
+                    setTimeout( () => {
+                        exp.PNG( $target[0] , `simpread-${ title }.png`, result => {
+                            $( "sr-rd-crlbar" ).removeAttr( "style" );
+                            !result && new Notify().Render( 2, "转换 PNG 格式失败，这是一个实验性功能，不一定能导出成功。" );
+                        });
+                    }, 1000 );
+                } catch ( e ) {
+                    new Notify().Render( 1, "转换 PNG 格式失败，请注意，这是一个实验性功能，不一定能导出成功。" );
+                }
                 break;
             case "kindle":
                 new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );
