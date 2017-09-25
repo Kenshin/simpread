@@ -145,11 +145,13 @@ function firstLoad( first ) {
 /**
  * Welcome page render()
  * 
+ * exclude: 1.0.4
+ * 
  * @param {boolean} true: first load
  * @param {string} version
  */
 function welcomeRender( first, version ) {
-    welc.Render( "body", first, version );
+    version != "1.0.4" && welc.Render( "body", first, version );
 }
 
 /**
