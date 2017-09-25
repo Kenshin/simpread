@@ -3,7 +3,7 @@ console.log( "=== simpread focus controlbar load ===" )
 import * as modals from 'modals';
 import * as conf   from 'config';
 import { storage } from 'storage';
-import * as ctrl   from 'control';
+import * as output from 'output';
 
 import Fab         from 'fab';
 
@@ -33,7 +33,7 @@ class FControl extends React.Component {
                 if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
                      [ "save", "markdown", "png", "kindle", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
                     const [ title, desc, content ] = [ $( "head title" ).text().trim(), "", $( ".simpread-focus-highlight" ).html().trim() ];
-                    ctrl.Action( type, title, desc, content );
+                    output.Action( type, title, desc, content );
                 }
         }
     }
