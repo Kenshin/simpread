@@ -414,18 +414,20 @@ function clearMD( str ) {
  * @return {object} meata data or undefined
  */
 function metadata() {
-    const meta = {
-        name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
-        title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
-        desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
-        include: $( "meta[name='simpread:include']" ).attr( "content" ),
-        exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
+    const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
+          meta = {
+            name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
+            title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
+            desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
+            include: $( "meta[name='simpread:include']" ).attr( "content" ),
+            exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
     };
-    if ( meta.name && meta.include ) {
-        meta.title   == undefined && ( meta.title   = "<title>" );
-        meta.desc    == undefined && ( meta.desc    = "" );
-        meta.exclude == undefined && ( meta.exclude = "" );
-        return meta;
+    if ( meta.name ) {
+        !meta.title   && ( meta.title   = "<title>" );
+        !meta.desc    && ( meta.desc    = "" );
+        !meta.exclude && ( meta.exclude = "" );
+        const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        return idx == -1 ? meta : undefined;
     } else {
         return undefined;
     }
