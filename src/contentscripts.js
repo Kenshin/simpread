@@ -148,7 +148,7 @@ function autoOpen() {
                 storage.current.site.name != "" && readMode();
                 break;
         }
-        }
+    }
 }
 
 /**
@@ -175,7 +175,7 @@ function entry( current, other, ...str ) {
  */
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
-        storage.Getcur( mode );
+        storage.Getcur( mode, st.GetMetadata() );
     }
 }
 
