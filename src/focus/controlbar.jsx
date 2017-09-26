@@ -3,10 +3,11 @@ console.log( "=== simpread focus controlbar load ===" )
 import * as modals from 'modals';
 import * as conf   from 'config';
 import { storage } from 'storage';
+import * as output from 'output';
 
 import Fab         from 'fab';
 
-let timer, $root;
+let timer, $root, selector;
 
 const tooltip_options = {
     target   : "name",
@@ -28,12 +29,18 @@ class FControl extends React.Component {
             case "setting":
                 modals.Render();
                 break;
+            default:
+                if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
+                     [ "save", "markdown", "png", "pdf", "kindle", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
+                    const [ title, desc, content ] = [ $( "head title" ).text().trim(), "", $( ".simpread-focus-highlight" ).html().trim() ];
+                    output.Action( type, title, desc, content );
+                }
         }
     }
 
     componentWillUnmount() {
         $(this.refs.target).remove();
-        $root.trigger( "click", "okay" );
+        $( "body" ).find( selector ).trigger( "click", "okay" );
     }
 
     render() {
@@ -63,9 +70,12 @@ function moveTop() {
 
 /**
  * Render
+ * 
+ * @param {string} class name, e.g. .xxx
  * @param {string} class name, e.g. .xxx
  */
-function Render( root ) {
+function Render( root, finder ) {
+    selector = finder;
     $root = $(root);
     ReactDOM.render( <FControl show={ storage.current.controlbar } />, getRoot() );
 }

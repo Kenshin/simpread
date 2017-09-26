@@ -24,41 +24,6 @@ const shortcuts = {
 };
 
 /**
- * Focus controlbar items
- */
-const focusItems = {
-    "exit" : {
-        "name" : "关闭",
-        "icon" : ss.IconPath("exit_icon"),
-    },
-    "setting" : {
-        "name" : "设定",
-        "icon" : ss.IconPath("setting_icon"),
-        "color": "#f87f76",
-    },
-    "top" : {
-        "name" : "返回顶部",
-        "icon" : ss.IconPath("top_icon"),
-        "color": "#f99d97",
-    },
-};
-
-/**
- * Focus options
- */
-const focusThemes = [
-    "235, 235, 235, 0.9",
-    "216, 216, 216, 0.9",
-    "229, 221, 208, 0.9",
-    "243, 234, 203, 0.9",
-    "176, 192, 182, 0.9",
-    "28, 31, 43, 0.9",
-    "61, 66, 70, 0.9",
-    "17, 18, 20, 0.9"
-],
-focusLabels = [ "白练", "灰青", "素色", "鸟之子色", "青磁鼠", "焦茶", "御纳戸色", "黒鸢" ];
-
-/**
  * Read controlbar items
  */
 const readItems = {
@@ -347,6 +312,36 @@ const fontfamily = [{
         info  : "W + 1",
 }],
 readLabels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
+
+/**
+ * Focus controlbar items
+ */
+const focusItems = ( items => {
+    const news = { ...items },
+          dels = [ "theme", "fontfamily", "fontsize", "layout" ];
+    dels.forEach( del => delete news[ del ] );
+    news.top = {
+        "name" : "返回顶部",
+        "icon" : ss.IconPath("top_icon"),
+        "color": "#009688",
+    };
+    return news;
+})( readItems );
+
+/**
+ * Focus options
+ */
+const focusThemes = [
+    "235, 235, 235, 0.9",
+    "216, 216, 216, 0.9",
+    "229, 221, 208, 0.9",
+    "243, 234, 203, 0.9",
+    "176, 192, 182, 0.9",
+    "28, 31, 43, 0.9",
+    "61, 66, 70, 0.9",
+    "17, 18, 20, 0.9"
+],
+focusLabels = [ "白练", "灰青", "素色", "鸟之子色", "青磁鼠", "焦茶", "御纳戸色", "黒鸢" ];
 
 /**
  * Options page

@@ -127,6 +127,8 @@ const webpack = require( 'webpack' ),
           'theme',
           'stylesheet',
           'config',
+          'highlight',
+          'output',
 
           // module
           'focusopt',
@@ -235,6 +237,8 @@ const webpack = require( 'webpack' ),
           menu       : __dirname + '/src/service/menu.js',
           watch      : __dirname + '/src/service/watch.js',
           export     : __dirname + '/src/service/export.js',
+          highlight  : __dirname + '/src/service/highlight.js',
+          output     : __dirname + '/src/service/output.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',

@@ -2,6 +2,7 @@ console.log( "=== simpread focus load ===" );
 
 var storage  = require( "storage" ).storage,
     util     = require( "util" ),
+    highlight= require( "highlight"  ),
     fcontrol = require( "controlbar" ),
     tooltip  = require( "tooltip" ),
     waves    = require( "waves" ),
@@ -15,6 +16,9 @@ var storage  = require( "storage" ).storage,
         maskstyle  = "z-index: auto; opacity: 1; overflow: visible; transform: none; animation: none; position: relative;",
         bgcls      = "simpread-focus-root",
         bgtmpl     = "<div class=" + bgcls + "></div>",
+        ctrlbar    = "sr-controlbar-bg",
+        ctrlbarbg  = "<div class=" + ctrlbar + "></div>",
+        ctrlbarjq  = "." + ctrlbar,
         bgclsjq    = "." + bgcls;
 
     function Focus() { this.$target = null; }
@@ -47,6 +51,7 @@ var storage  = require( "storage" ).storage,
 
         // add background
         $( "body" ).append( bgtmpl );
+        $( "html" ).append( ctrlbarbg );
 
         // add background color
         $( bgclsjq )
@@ -54,7 +59,7 @@ var storage  = require( "storage" ).storage,
             .velocity({ opacity: 1 });
 
         // add control bar
-        fcontrol.Render( bgclsjq );
+        fcontrol.Render( ctrlbarjq, bgclsjq );
 
         // add tooltip and waves
         tooltip.Render( bgclsjq );
@@ -70,9 +75,10 @@ var storage  = require( "storage" ).storage,
                     includeStyle( $target, focusstyle, focuscls, "delete" );
                     excludeStyle( $target, exclude, "add" );
                     tooltip.Exit( bgclsjq );
-                    $( bgclsjq ).remove();
-                    $( bgclsjq ).off( "click" );
-                 }
+                    $( ctrlbarjq ).remove();
+                    $( bgclsjq   ).remove();
+                    $( bgclsjq   ).off( "click" );
+                }
              });
 
             // remove simpread-focus-mask style
@@ -97,6 +103,7 @@ var storage  = require( "storage" ).storage,
      */
     Focus.prototype.GetFocus = function( include ) {
         var $focus = [],
+            dtd    = $.Deferred(),
             sel, range, node, tag,
             target;
         target = util.selector( include );
@@ -115,25 +122,34 @@ var storage  = require( "storage" ).storage,
         } catch ( error ) {
             console.error( "Get $focus failed", error )
         }
-        while ( $focus.length == 0 ) {
-            if ( $( "body" ).find( "article" ).length > 0 ) {
-                $focus = $( "body" ).find( "article" );
-            }
-            else {
-                try {
-                    sel    = window.getSelection();
-                    range  = sel.getRangeAt( sel.rangeCount - 1 );
-                    node   = range.startContainer.nodeName;
-                if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
-                    $focus = $( range.startContainer.parentNode );
-                } catch ( error ) {
-                    console.log( sel, range, node )
-                    console.error( error )
-                    return undefined;
+        if ( storage.current.highlight && $focus.length == 0 ) {
+            new Notify().Render( "已启动手动聚焦模式，请移动鼠标进行选择, ESC 退出。" );
+            highlight.Start().done( result => {
+                $focus = $( result );
+                dtd.resolve( $focus );
+            });
+        } else {
+            while ( $focus.length == 0 ) {
+                if ( $( "body" ).find( "article" ).length > 0 ) {
+                    $focus = $( "body" ).find( "article" );
+                }
+                else {
+                    try {
+                        sel    = window.getSelection();
+                        range  = sel.getRangeAt( sel.rangeCount - 1 );
+                        node   = range.startContainer.nodeName;
+                    if ( node.toLowerCase() === "body" ) throw( "selection area is body tag." );
+                        $focus = $( range.startContainer.parentNode );
+                    } catch ( error ) {
+                        console.log( sel, range, node )
+                        console.error( error )
+                        return dtd.reject();
+                    }
                 }
             }
+            return dtd.resolve( $focus );
         }
-        return fixFocus( $focus );
+        return dtd;
     }
 
     /**
