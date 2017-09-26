@@ -341,22 +341,29 @@ class Storage {
     }
 
     /**
-     * Find site
+     * Find site, code include:
      * 
-     * @return {object} code: -1: not found; 1: simpread.site found; 2:simpread.read.site found;
-     *                  site: array, include: site object, url
+     * - -1: not found
+     * -  1: simpread.site
+     * -  2: simpread.read.site
+     * -  3: meta data
+     * 
+     * @param {object} meta data
      */
-    FindSite() {
+    FindSite( meta ) {
         const url = st.GetURI();
         let   arr = st.Getsite( new Map( simpread.sites ), url );
-        stcode = -1;
-        if ( arr ) {
-            stcode = 1;
+        if ( meta ) {
+            stcode = 3;
         } else {
-            arr = st.Getsite( new Map( simpread.read.sites ), url );
-            arr && ( stcode = 2 );
+            stcode = -1;
+            if ( arr ) {
+                stcode = 1;
+            } else {
+                arr = st.Getsite( new Map( simpread.read.sites ), url );
+                arr && ( stcode = 2 );
+            }
         }
-        return { code: stcode, site: arr };
     }
 
     /**
