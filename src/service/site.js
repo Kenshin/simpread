@@ -408,6 +408,29 @@ function clearMD( str ) {
              return str;
 }
 
+/**
+ * Get metadata
+ * 
+ * @return {object} meata data or undefined
+ */
+function metadata() {
+    const meta = {
+        name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
+        title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
+        desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
+        include: $( "meta[name='simpread:include']" ).attr( "content" ),
+        exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
+    };
+    if ( meta.name && meta.include ) {
+        meta.title   == undefined && ( meta.title   = "<title>" );
+        meta.desc    == undefined && ( meta.desc    = "" );
+        meta.exclude == undefined && ( meta.exclude = "" );
+        return meta;
+    } else {
+        return undefined;
+    }
+}
+
 export {
     getURI         as GetURI,
     findSitebyURL  as Getsite,
@@ -416,4 +439,5 @@ export {
     verify         as Verify,
     html2enml      as HTML2ENML,
     clearMD        as ClearMD,
+    metadata       as GetMetadata,
 }
