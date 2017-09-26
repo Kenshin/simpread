@@ -272,20 +272,25 @@ class Storage {
      * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
      * 
      * @param {string} @see mode
+     * @param {object} meta data
      */
-    Getcur( key ) {
+    Getcur( key, meta ) {
         const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
         current      = swap( simpread[key], {} );
         current.url  = url;
         current.mode = key;
-        let arr = st.Getsite( new Map( simpread[key].sites ), url );
-        !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
-        if ( arr ) {
-            current.site = arr[0];
-            current.url  = arr[1];
+        if ( meta ) {
+            current.site = { ...meta };
         } else {
-            sites.set( url, clone( site ));
-            current.site = sites.get( url );
+            let arr = st.Getsite( new Map( simpread[key].sites ), url );
+            !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
+            if ( arr ) {
+                current.site = arr[0];
+                current.url  = arr[1];
+            } else {
+                sites.set( url, clone( site ));
+                current.site = sites.get( url );
+            }
         }
         curori      = { ...current };
         curori.site = { ...current.site };
