@@ -151,7 +151,7 @@ function firstLoad( first ) {
  * @param {string} version
  */
 function welcomeRender( first, version ) {
-    version != "1.0.4" && welc.Render( "body", first, version );
+    !first && version != "1.0.4" && welc.Render( "body", first, version );
 }
 
 /**
