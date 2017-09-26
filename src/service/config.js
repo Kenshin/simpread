@@ -175,6 +175,11 @@ const readItems = {
                 "icon" : ss.IconPath("share_weibo_icon"),
                 "color": "#8BC34A",
             },
+            "share_telegram" : {
+                "name" : "Telegram",
+                "icon" : ss.IconPath("share_telegram_icon"),
+                "color": "#0088CC",
+            },
         },
     },
     /*
