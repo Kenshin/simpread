@@ -421,11 +421,13 @@ function metadata() {
             desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
             include: $( "meta[name='simpread:include']" ).attr( "content" ),
             exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
+            auto   : $( "meta[name='simpread:auto']"    ).attr( "content" ),
     };
     if ( meta.name ) {
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
         !meta.exclude && ( meta.exclude = "" );
+        meta.auto = meta.auto == "true" ? true : false;
         const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
         return idx == -1 ? meta : undefined;
     } else {
