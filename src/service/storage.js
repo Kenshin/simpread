@@ -280,6 +280,8 @@ class Storage {
         current.url  = url;
         current.mode = key;
         if ( meta ) {
+            current.auto = meta.auto;
+            delete meta.auto;
             current.site = { ...meta };
         } else {
             let arr = st.Getsite( new Map( simpread[key].sites ), url );
