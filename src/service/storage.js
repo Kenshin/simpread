@@ -308,7 +308,7 @@ class Storage {
         const { code } = compare();
         if ( code != 0 ) {
             if ( [ 2, 3 ].includes( code ) ) {
-                let idx = simpread[key].sites.findIndex( item => item[0] == current.url );
+                let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
                 idx == -1 && ( idx = simpread[key].sites.length );
                 simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
             }
@@ -728,6 +728,7 @@ function compare() {
             site_changed = true;
         }
     }
+    changed.includes( "url" ) && ( site_changed = true );
     site_changed && ( code = code + 2 );
     console.log( "current changed state is ", code, changed );
     return { code, changed };
