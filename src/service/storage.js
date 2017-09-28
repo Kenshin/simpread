@@ -369,6 +369,18 @@ class Storage {
     }
 
     /**
+     * Add new site( read only )
+     * 
+     * @param {object} new_site
+     */
+    Newsite( new_site ) {
+        current.mode = new_site.mode,
+        current.url  = new_site.url;
+        current.site = { ...new_site.site };
+        console.log( "【read only】current site object is ", current )
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
