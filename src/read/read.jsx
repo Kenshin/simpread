@@ -15,6 +15,7 @@ import * as ss            from 'stylesheet';
 import * as exp           from 'export';
 import {browser}          from 'browser';
 import * as msg           from 'message';
+import * as highlight     from 'highlight';
 
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
@@ -244,6 +245,18 @@ function Render() {
 }
 
 /**
+ * High light current page to read mode( read only )
+ */
+function Highlight() {
+    const dtd = $.Deferred();
+    highlight.Start().done( dom => {
+        storage.Newsite({ mode: "read", url: window.location.href, site: { name: `readonly::${window.location.host}`, title: "<title>", desc: "", include: "", html: dom.outerHTML, exclude: "" } });
+        dtd.resolve();
+    });
+    return dtd;
+}
+
+/**
  * Verify simpread-read-root tag exit
  * 
  * @param  {boolean}
@@ -295,7 +308,7 @@ function wrap( site ) {
           include   = util.selector( site.include );
     wrapper.title   = query( title );
     wrapper.desc    = query( desc  );
-    wrapper.include = query( include, "html" );
+    wrapper.include = site.include == "" && site.html != "" ? site.html : query( include, "html" );
     wrapper.avatar && wrapper.avatar.forEach( item => {
         const key   = Object.keys( item ).join(),
               value = item[key];
@@ -484,4 +497,4 @@ async function commbeautify( $target ) {
     $target.find( "a" ).removeAttr( "style" );
 }
 
-export { Render, Exist, Exit };
+export { Render, Exist, Exit, Highlight };
