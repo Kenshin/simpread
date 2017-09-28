@@ -93,7 +93,9 @@ function rollback() {
  * Modals Render
  */
 function Render() {
-    !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
+    storage.current.site.name.startsWith( "readonly::" ) ? 
+    new Notify().Render( "此功能为实验性功能，并不能保存到适配列表中，保存功能将在下个版本提供。" )
+    : !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
 }
 
 /**
