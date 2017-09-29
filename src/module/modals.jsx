@@ -38,7 +38,7 @@ class Modals extends React.Component {
             const code = storage.Setcur( storage.current.mode );
             if ( code != 0 ) {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，重新进入后生效！" )
+                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，页面刷新后生效！" )
             } else {
                 new Notify().Render( 0, "没有改变任何内容。" );
             }
@@ -94,7 +94,7 @@ function rollback() {
  */
 function Render() {
     storage.current.site.name.startsWith( "readonly::" ) ? 
-    new Notify().Render( "此功能为实验性功能，并不能保存到适配列表中，保存功能将在下个版本提供。" )
+    new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并不能保存到适配列表中，保存功能将在下个版本提供。" )
     : !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
 }
 
