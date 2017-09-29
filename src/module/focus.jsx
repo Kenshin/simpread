@@ -4,6 +4,8 @@ import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
 import Include   from 'include';
 import Exclude   from 'exclude';
+import Name      from 'name';
+import URL       from 'url';
 
 import * as ss   from 'stylesheet';
 import * as conf from 'config';
@@ -27,6 +29,16 @@ export default class FocusOpt extends React.Component {
     changeShortcuts( shortcuts ) {
         this.props.option.shortcuts = shortcuts;
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
+    }
+
+    changeName( value ) {
+        this.props.option.site.name = value;
+        console.log( "this.props.option.site.name = ", this.props.option.site.name )
+    }
+
+    changeURL( value ) {
+        this.props.option.url = value;
+        console.log( "this.props.option.url = ", this.props.option.url )
     }
 
     changeInclude( value ) {
@@ -65,6 +77,12 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 { this.props.option.site &&
                 <sr-opt-items>
+                    <sr-opt-gp>
+                        <Name name={ this.props.option.site.name } changeName={ val=>this.changeName(val) } />
+                    </sr-opt-gp>
+                    <sr-opt-gp>
+                        <URL url={ this.props.option.url } changeURL={ val=>this.changeURL(val) } />
+                    </sr-opt-gp>
                     <sr-opt-gp>
                         <Include mode="focus" include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
                     </sr-opt-gp>
