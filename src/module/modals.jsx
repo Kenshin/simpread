@@ -32,7 +32,7 @@ class Modals extends React.Component {
     // save modals focus option
     save() {
         console.log( "modals click submit button.", storage.current, flag )
-        if ( Object.values( flag ).findIndex( key => key == -1 ) != -1 ) {
+        if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
             new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
         } else {
             const code = storage.Setcur( storage.current.mode );
