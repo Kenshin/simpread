@@ -17,7 +17,7 @@ import * as dia     from 'dialog';
 
 const root   = "simpread-option-root",
       rootjq = `.${root}`;
-let   flag   = { title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
+let   flag   = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
 
 /**
  * Modals Rect component
