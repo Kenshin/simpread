@@ -79,10 +79,10 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 { this.props.option.site &&
                 <sr-opt-items>
-                    <sr-opt-gp>
+                    <sr-opt-gp style={{ display: "none" }}>
                         <Name name={ this.props.option.site.name } changeName={ (v,c)=>this.changeName(v,c) } />
                     </sr-opt-gp>
-                    <sr-opt-gp>
+                    <sr-opt-gp style={{ display: "none" }}>
                         <URL url={ this.props.option.url } changeURL={ (v,c)=>this.changeURL(v,c) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
