@@ -275,7 +275,7 @@ class Storage {
      * @param {object} meta data
      */
     Getcur( key, meta ) {
-        const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
+        const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
         current      = swap( simpread[key], {} );
         current.url  = url;
         current.mode = key;
@@ -284,7 +284,8 @@ class Storage {
             delete meta.auto;
             current.site = { ...meta };
         } else {
-            let arr = st.Getsite( new Map( simpread[key].sites ), url );
+            let arr       = st.Getsite( new Map( simpread[key].sites ), url );
+            !arr && ( arr = st.Getsite( new Map( simpread[other].sites ), url ));
             !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
             if ( arr ) {
                 current.site = arr[0];
@@ -354,16 +355,17 @@ class Storage {
      */
     FindSite( meta ) {
         const url = st.GetURI();
-        let   arr = st.Getsite( new Map( simpread.sites ), url );
         if ( meta ) {
             stcode = 3;
         } else {
+            let arr = st.Getsite( new Map( simpread.sites ), url );
             stcode = -1;
             if ( arr ) {
                 stcode = 1;
             } else {
                 arr = st.Getsite( new Map( simpread.read.sites ), url );
-                arr && ( stcode = 2 );
+                !arr && ( arr = st.Getsite( new Map( simpread.focus.sites ), url ));
+                arr && arr[0].name != "" && ( stcode = 2 );
             }
         }
     }
