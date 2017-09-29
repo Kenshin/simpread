@@ -12,7 +12,7 @@ console.log( "=== simpread util load ===" )
 function verifyHtml( html ) {
     if ( html == "" ) return [ 0, html ];
     else if ( specTest( html )) return [ 2, html ];
-    const item = html.match( /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][a-zA-Z0-9]+>?$/ig );
+    const item = html.match( /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig );
     if ( item && item.length > 0 ) {
         return [ 1, item ];
     } else {

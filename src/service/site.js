@@ -414,7 +414,7 @@ function clearMD( str ) {
  * @return {object} meata data or undefined
  */
 function metadata() {
-    const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
+    const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
           meta = {
             name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
             title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
