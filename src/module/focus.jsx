@@ -31,13 +31,15 @@ export default class FocusOpt extends React.Component {
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
-    changeName( value ) {
+    changeName( value, code ) {
         this.props.option.site.name = value;
+        this.props.flag.name        = code;
         console.log( "this.props.option.site.name = ", this.props.option.site.name )
     }
 
-    changeURL( value ) {
+    changeURL( value, code ) {
         this.props.option.url = value;
+        this.props.flag.url   = code;
         console.log( "this.props.option.url = ", this.props.option.url )
     }
 
@@ -78,10 +80,10 @@ export default class FocusOpt extends React.Component {
                 { this.props.option.site &&
                 <sr-opt-items>
                     <sr-opt-gp>
-                        <Name name={ this.props.option.site.name } changeName={ val=>this.changeName(val) } />
+                        <Name name={ this.props.option.site.name } changeName={ (v,c)=>this.changeName(v,c) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
-                        <URL url={ this.props.option.url } changeURL={ val=>this.changeURL(val) } />
+                        <URL url={ this.props.option.url } changeURL={ (v,c)=>this.changeURL(v,c) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <Include mode="focus" include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />

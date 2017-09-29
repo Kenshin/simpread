@@ -8,18 +8,28 @@ const names = [];
 
 export default class Name extends React.Component {
 
+    static defaultProps = {
+        flag: {},
+    }
+
+    static propType = {
+        flag : React.PropTypes.object,
+    }
+
     state = {
         error : ""
     };
 
     changeName() {
+        let   code = 0;
         const name = event.target.value.trim();
         if ( names.includes( name ) ) {
+            code = -1;
             this.setState({ error : "当前值重复，请重新录入。" });
         } else {
             this.setState({ error : "" });
-            this.props.changeName( name );
         }
+        this.props.changeName( name, code );
     }
 
     componentWillMount() {
