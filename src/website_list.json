@@ -595,6 +595,15 @@
             "<div id='_j_paragraph_1'>"
         ]
     },{
+        "name"    : "bohaishibei.com",
+        "url"     : "https://bohaishibei.com/post/*/",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<article>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
         "title"   : "<title>",
@@ -1383,6 +1392,44 @@
             ""
         ]
     },{
+        "name"    : "teakki.com",
+        "url"     : "https://teakki.com/p/*",
+        "title"   : "<h1 class='content-title'>",
+        "desc"    : "",
+        "include" : "<div class='content-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "cppdaxue.com",
+        "url"     : "http://cppdaxue.com/*/*.html",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<article class='article-content>",
+        "exclude" : [
+            "<div class='article-social'>"
+        ]
+    },{
+        "name"    : "bobao.360.cn",
+        "url"     : "http://bobao.360.cn/*/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='article_box'>",
+        "exclude" : [
+            "<h2>",
+            "<div class='article-msg'>",
+            "<hr>"
+        ]
+    },{
+        "name"    : "thebigdata.cn",
+        "url"     : "http://www.thebigdata.cn/*/*.html",
+        "title"   : "<h1 class='aTitle'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -1525,7 +1572,7 @@
         ]
     },{
         "name"    : "news.sohu.com",
-        "url"     : "http://news.sohu.com/*/*.shtml",
+        "url"     : "http*://news.sohu.com/*/*.shtml",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div id='contentText'>",
@@ -1534,7 +1581,7 @@
         ]
     },{
         "name"    : "sohu.com",
-        "url"     : "http://www.sohu.com/a/*_*",
+        "url"     : "http*://www.sohu.com/a/*_*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<article class='article'>",
@@ -1567,6 +1614,110 @@
         "include" : "<div id='artibody'>",
         "exclude" : [
             "[['<p>【新浪财经股吧】</p>']]"
+        ]
+    },{
+        "name"    : "sports.sina.com.cn",
+        "url"     : "http://sports.sina.com.cn/**/*.shtml",
+        "title"   : "<h1 id='j_title'>",
+        "desc"    : "",
+        "include" : "<div class='article-a__content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "collection.sina.com.cn",
+        "url"     : "http://collection.sina.com.cn/**/*.shtml",
+        "title"   : "<h1 id='main_title'>",
+        "desc"    : "",
+        "include" : "<div id='artibody'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.workercn.cn",
+        "url"     : "http://news.workercn.cn/*/*/**/*.shtml",
+        "title"   : "<div class='ad_tl_main'>",
+        "desc"    : "",
+        "include" : "<div class='ad_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.xinhuanet.com",
+        "url"     : "http://news.xinhuanet.com/**/*/*.htm",
+        "title"   : "<div class='h-title'>",
+        "desc"    : "",
+        "include" : "<div id='p-detail'>",
+        "exclude" : [
+            "<div class='zan-wap'>",
+            "<div class='p-tags'>",
+            "[[/src=\\S+(129713364_15065013734641n)\\S+'/]]"
+        ]
+    },{
+        "name"    : "news.gold678.com",
+        "url"     : "http://www.gold678.com/C/**/*.html",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='news_inter_area'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "stockstar.com",
+        "url"     : "http://*.stockstar.com/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='container-article'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "takungpao.com",
+        "url"     : "http://*.takungpao.com/**/*/*.html",
+        "title"   : "<h1 class='tpk_con_tle'>",
+        "desc"    : "",
+        "include" : "<div class='tpk_text'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "money.jrj.com.cn",
+        "url"     : "http://money.jrj.com.cn/**/*/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='titimg'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.ynet.com",
+        "url"     : "http://news.ynet.com/**/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='articleAll'>",
+        "exclude" : [
+            "<ul class='pageBox'>",
+            "<span class='authors'>",
+            "<a class='scrollLeft'>",
+            "<a class='scrollRight'>"
+        ]
+    },{
+        "name"    : "qianlong.com",
+        "url"     : "http://*.qianlong.com/*/*/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "article.myzaker.com",
+        "url"     : "http://www.myzaker.com/article/*/",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='article_content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "people.com.cn",
