@@ -35,6 +35,9 @@ function action( type, title, desc, content ) {
             case "weibo":
                 url = `http://service.weibo.com/share/share.php?url=${ window.location.href }&title=${ title } （ 分享自 简悦-SimpRead ）`;
                 break;
+            case "telegram":
+                url = `https://t.me/share/url?url=${ window.location.href }`;
+                break;
         }
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
     } else if ( [ "save", "markdown", "png", "kindle", "pdf" ].includes( type ) ) {

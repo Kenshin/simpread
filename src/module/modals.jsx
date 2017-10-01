@@ -17,7 +17,7 @@ import * as dia     from 'dialog';
 
 const root   = "simpread-option-root",
       rootjq = `.${root}`;
-let   flag   = { title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
+let   flag   = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
 
 /**
  * Modals Rect component
@@ -32,13 +32,13 @@ class Modals extends React.Component {
     // save modals focus option
     save() {
         console.log( "modals click submit button.", storage.current, flag )
-        if ( Object.values( flag ).findIndex( key => key == -1 ) != -1 ) {
+        if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
             new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
         } else {
             const code = storage.Setcur( storage.current.mode );
             if ( code != 0 ) {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，重新进入后生效！" )
+                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，页面刷新后生效！" )
             } else {
                 new Notify().Render( 0, "没有改变任何内容。" );
             }
@@ -93,7 +93,9 @@ function rollback() {
  * Modals Render
  */
 function Render() {
-    !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
+    storage.current.site.name.startsWith( "readonly::" ) ? 
+    new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>，并不能保存到适配列表中，保存功能将在下个版本提供。" )
+    : !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
 }
 
 /**

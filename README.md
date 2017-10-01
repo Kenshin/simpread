@@ -69,7 +69,7 @@
 
 - 右键选择 `简悦 - SimpRead` → `阅读模式`；
 
-- 快捷键；（默认为 `双击 A` )
+- 快捷键；（默认为 双击 <kbd>A</kbd> )
 
 
 #### 如何使用（聚焦模式）：
@@ -77,7 +77,7 @@
 
 - 在需要高亮的区域，右键选择 `简悦 - SimpRead` → `聚焦模式`；
 
-- 快捷键；（默认为 `A S` )
+- 快捷键；（默认为 <kbd>A</kbd> <kbd>S</kbd> )
 
 #### 投票：
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。

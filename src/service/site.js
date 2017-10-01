@@ -408,6 +408,33 @@ function clearMD( str ) {
              return str;
 }
 
+/**
+ * Get metadata
+ * 
+ * @return {object} meata data or undefined
+ */
+function metadata() {
+    const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
+          meta = {
+            name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
+            title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
+            desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
+            include: $( "meta[name='simpread:include']" ).attr( "content" ),
+            exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
+            auto   : $( "meta[name='simpread:auto']"    ).attr( "content" ),
+    };
+    if ( meta.name ) {
+        !meta.title   && ( meta.title   = "<title>" );
+        !meta.desc    && ( meta.desc    = "" );
+        !meta.exclude && ( meta.exclude = "" );
+        meta.auto = meta.auto == "true" ? true : false;
+        const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        return idx == -1 ? meta : undefined;
+    } else {
+        return undefined;
+    }
+}
+
 export {
     getURI         as GetURI,
     findSitebyURL  as Getsite,
@@ -416,4 +443,5 @@ export {
     verify         as Verify,
     html2enml      as HTML2ENML,
     clearMD        as ClearMD,
+    metadata       as GetMetadata,
 }

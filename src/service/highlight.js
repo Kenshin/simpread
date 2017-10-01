@@ -20,6 +20,7 @@ function start() {
             $prev = $( event.target );
     };
     $( "body" ).one( "click", event => {
+        if ( !$prev ) return;
         $( event.target ).removeClass( highlight_class );
         $( "body"       ).off( "mousemove", mousemoveEvent );
         $prev = undefined;

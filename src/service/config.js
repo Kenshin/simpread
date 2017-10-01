@@ -123,22 +123,27 @@ const readItems = {
             "share_facebook" : {
                 "name" : "Facebook",
                 "icon" : ss.IconPath("share_facebook_icon"),
-                "color": "#8BC34A",
+                "color": "#3B5998",
             },
             "share_twitter" : {
                 "name" : "Twitter",
                 "icon" : ss.IconPath("share_twitter_icon"),
-                "color": "#8BC34A",
+                "color": "#1DA1F2",
             },
             "share_gplus" : {
                 "name" : "Google G+",
                 "icon" : ss.IconPath("share_gplus_icon"),
-                "color": "#8BC34A",
+                "color": "#DD4B39",
             },
             "share_weibo" : {
                 "name" : "新浪微博",
                 "icon" : ss.IconPath("share_weibo_icon"),
                 "color": "#8BC34A",
+            },
+            "share_telegram" : {
+                "name" : "Telegram",
+                "icon" : ss.IconPath("share_telegram_icon"),
+                "color": "#0088CC",
             },
         },
     },
