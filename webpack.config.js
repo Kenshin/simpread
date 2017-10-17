@@ -141,12 +141,13 @@ const webpack = require( 'webpack' ),
           'url',
           'modals',
 
+          // options olny
           //'welcome',
-          'commonopt',
-          'authorize',
-          'labsopt',
-          'unrdist',
-          'about',
+          //'commonopt',
+          //'authorize',
+          //'labsopt',
+          //'unrdist',
+          //'about',
           
           // component
           'textfield',
