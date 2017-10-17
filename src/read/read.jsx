@@ -48,7 +48,15 @@ class Read extends React.Component {
     }
 
     async componentDidMount() {
-        $root
+        if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
+            new Notify().Render( 2, `当前页面不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，已启动 <a href='https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。` );
+            this.componentWillUnmount();
+            Highlight().done( () => {
+                storage.Statistics( "read" );
+                Render();
+            });
+        } else {
+            $root
             .addClass( "simpread-font" )
             .addClass( theme )
             .find( rdclsjq )
@@ -56,21 +64,22 @@ class Read extends React.Component {
                 .velocity( { opacity: 1 }, { delay: 100 })
                 .addClass( "simpread-read-root-show" );
 
-        this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
-        this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
-        this.props.read.layout     && ss.Layout( this.props.read.layout );
-        ss.Preview( this.props.read.custom );
+            this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
+            this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
+            this.props.read.layout     && ss.Layout( this.props.read.layout );
+            ss.Preview( this.props.read.custom );
 
-        if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
-        if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
-        await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-        await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
-        await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
-        await htmlbeautify( $( "sr-rd-content" ));
-        await commbeautify( $( "sr-rd-content" ));
-        pangu.spacingElementByClassName( rdcls );
-        tooltip.Render( rdclsjq );
-        waves.Render({ root: rdclsjq });
+            if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
+            if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
+            await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
+            await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
+            await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
+            await htmlbeautify( $( "sr-rd-content" ));
+            await commbeautify( $( "sr-rd-content" ));
+            pangu.spacingElementByClassName( rdcls );
+            tooltip.Render( rdclsjq );
+            waves.Render({ root: rdclsjq });
+        }
     }
 
     componentWillUnmount() {
