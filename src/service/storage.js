@@ -102,6 +102,7 @@ const name = "simpread",
             focus : true,
             read  : true,
             link  : true,
+            list  : false,
         },
     },
     unread = {
