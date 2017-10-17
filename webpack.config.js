@@ -89,14 +89,13 @@ const webpack = require( 'webpack' ),
 
           'jquery',
 
-          'browser',
-          'message',
           'storage',
-          'site',
+          'message',
+          'browser',
           'version',
           'menu',
           'watch',
-          'export'
+          'site',
         ],
 
         vendors : [
@@ -105,30 +104,27 @@ const webpack = require( 'webpack' ),
           './node_modules/react/dist/react.min.js',
           './node_modules/react-dom/dist/react-dom.min.js',
 
-          //minimatch
-          './node_modules/minimatch/minimatch.js',
-          //to markdown
-          './node_modules/to-markdown/dist/to-markdown.js',
-
           // vendors
-          'pangu',
-          'mousetrap',
-          'progressbar',
+          //'minimatch',
+          //'to-markdown',
           'velocity',
-          'timeago',
           'filesaver',
           'dom2image',
-
-          'wavess',
           'notify',
 
+          // only read
+          //'pangu',
+          //'mousetrap',
+          //'progressbar',
+          //'util',
+          //'highlight',
+          //'output',
+
           // service
-          'util',
+          'export',
           'theme',
           'stylesheet',
           'config',
-          'highlight',
-          'output',
 
           // module
           'focusopt',
@@ -141,27 +137,32 @@ const webpack = require( 'webpack' ),
           'url',
           'modals',
 
-          // options olny
+          // olny options
           //'welcome',
           //'commonopt',
           //'authorize',
           //'labsopt',
           //'unrdist',
           //'about',
-          
-          // component
+          //'timeago',
+
+          // mduikit
+          'tooltip',
+          'waves',
           'textfield',
-          'fab',
           'button',
           'selectfield',
-          'switch',
-          'tabs',
-          'sidebar',
-          'list',
-          'progress',
-          'dialog',
-          'tooltip',
-          'waves'
+
+          // only read
+          //'fab',
+          //'progress',
+          //'dialog',
+
+          // option custom
+          //'switch',
+          //'tabs',
+          //'sidebar',
+          //'list',
         ],
 
         contentscripts : './src/contentscripts.js',
@@ -224,9 +225,6 @@ const webpack = require( 'webpack' ),
           dom2image  : __dirname + '/src/vender/dom2image.min.js',
           filesaver  : __dirname + '/src/vender/filesaver.min.js',
 
-          wavess     : __dirname + '/src/vender/waves/waves.js',
-          notify     : __dirname + '/src/vender/notify/notify.js',
-
           util       : __dirname + '/src/service/util.js',
           local      : __dirname + '/src/service/local.js',
           storage    : __dirname + '/src/service/storage.js',
@@ -279,6 +277,8 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/comp/dialog.jsx',
           tooltip    : __dirname + '/src/comp/tooltip.jsx',
           waves      : __dirname + '/src/comp/waves.js',
+          wavess     : __dirname + '/src/vender/waves/waves.js',
+          notify     : __dirname + '/src/vender/notify/notify.js',
 
         }
       }
