@@ -141,7 +141,7 @@ const webpack = require( 'webpack' ),
           'url',
           'modals',
 
-          'welcome',
+          //'welcome',
           'commonopt',
           'authorize',
           'labsopt',
