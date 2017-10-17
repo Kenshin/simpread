@@ -12,7 +12,7 @@ import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
 import * as ss            from 'stylesheet';
-import * as exp           from 'export';
+//import * as exp           from 'export';
 import {browser}          from 'browser';
 import * as msg           from 'message';
 import * as highlight     from 'highlight';
@@ -96,16 +96,13 @@ class Read extends React.Component {
             case "setting":
                 modals.Render();
                 break;
+            /*
             case "save":
                 const [ url, title, desc ] = [ window.location.href.replace( /(\?|&)simpread_mode=read/, "" ), $("sr-rd-title").text().trim(), $("sr-rd-desc").text().trim() ];
                 storage.UnRead( "add", { url, title, desc }, success => {
                     success  && new Notify().Render( 0, "成功加入未读列表。" );
                     !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
                 });
-                break;
-            /*
-            case "scroll":
-                $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
                 break;
             */
             case "fontfamily":
@@ -115,6 +112,12 @@ class Read extends React.Component {
                 storage.current[type]=value;
                 storage.Setcur( storage.current.mode );
                 break;
+            /*
+            case "scroll":
+                $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
+                break;
+            */
+            /*
             case "markdown":
                 exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, new Notify() );
                 break;
@@ -154,6 +157,7 @@ class Read extends React.Component {
                     !error && setTimeout( ()=>{ exp.kindle.Send(); }, 3000 );
                 });
                 break;
+            */
         }
     }
 
@@ -163,6 +167,8 @@ class Read extends React.Component {
      * @param {string} value 
      */
     onService( type, value ) {
+        console.log( "asdfasdfasdf", type, value )
+        /*
         const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
               title = $( "sr-rd-title" ).text().trim(),
               id    = type == "yinxiang" ? "evernote" : type;
@@ -207,6 +213,7 @@ class Read extends React.Component {
                     break;
             }
         };
+        */
     }
 
    // exit read mode
