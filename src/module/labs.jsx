@@ -74,6 +74,10 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示使用阅读模式打开此链接？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "link" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.list }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示进入稍后读？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "list" ) } />
                 </div>
 
                 <div className="label">聚焦模式</div>
