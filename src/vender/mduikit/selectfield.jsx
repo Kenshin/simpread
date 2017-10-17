@@ -1,8 +1,8 @@
 /*!
  * React Material Design: SelectField
  * 
- * @version : 0.0.1
- * @update  : 2017/04/20
+ * @version :  0.0.2
+ * @update  : 2017/10/14
  * @homepage: https://github.com/kenshin/react-md-ui
  * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -288,7 +288,7 @@ class ListView extends React.Component {
         id : Math.round(+new Date()),
     };
 
-    onMouseOver() {
+    onMouseOver( event ) {
         const $target = $( event.target );
         if ( $target.is( "list-field" ) ) {
             $( "list-field[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
@@ -296,7 +296,7 @@ class ListView extends React.Component {
         }
     }
 
-    onClick() {
+    onClick( event ) {
         let $target = $( event.target );
         while ( !$target.is( "list-field" )) { $target = $target.parent(); }
         setTimeout( ()=>this.props.onChange && this.props.onChange( $target.find( "list-field-name" ).attr( "value" ), $target.find( "list-field-name" ).text() ), 130 );
@@ -322,7 +322,7 @@ class ListView extends React.Component {
             item.style && item.style.text  && ( name_style       = { ...name_style, ...item.style.text });
             item.style && item.style.state && ( info_style       = { ...info_style, ...item.style.state });
             return (
-                <list-field class={ this.props.waves } style={ style.list_filed } onMouseOver={ ()=>this.onMouseOver() } onClick={ ()=>this.onClick() }>
+                <list-field class={ this.props.waves } style={ style.list_filed } onMouseOver={ (e)=>this.onMouseOver(e) } onClick={ (e)=>this.onClick(e) }>
                     <i style={ icon_style }></i>
                     <list-field-name style={ name_style } value={ item.value }>{ item.name }</list-field-name>
                     <list-field-info style={ info_style }>{ item.info }</list-field-info>

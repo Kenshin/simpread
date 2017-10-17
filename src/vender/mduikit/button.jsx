@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Button
  * 
- * @version : 0.0.1
- * @update  : 2017/04/28
+ * @version : 0.0.2
+ * @update  : 2017/10/14
  * @homepage: https://github.com/kenshin/react-md-ui-ui
  * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -149,7 +149,7 @@ export default class Button extends React.Component {
 
     static defaultProps = {
         href    : "javascript:;",
-        target  : "_blank",
+        target  : "_self",
         text    : "",
         disable : false,
         icon    : "",
@@ -203,7 +203,7 @@ export default class Button extends React.Component {
         $mask.css({ ...style.mask });
     }
 
-    onClick() {
+    onClick( event ) {
         this.props.onClick && this.props.onClick( event );
     }
 
@@ -252,7 +252,7 @@ export default class Button extends React.Component {
         const events = this.props.disable ? {} : {
                 onMouseOver : ()=>this.onMouseOver(),
                 onMouseOut  : ()=>this.onMouseOut(),
-                onClick     : ()=>this.onClick(),
+                onClick     : (e)=>this.onClick(e),
         },
         tooltip = this.props.tooltip;
 

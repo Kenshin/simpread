@@ -1,8 +1,8 @@
 /*!
  * React Material Design: TextField
  * 
- * @version : 0.0.1
- * @update  : 2017/03/18
+ * @version :  0.0.2
+ * @update  : 2017/10/14
  * @homepage: https://github.com/kenshin/react-md-ui
  * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -255,11 +255,11 @@ export default class TextField extends React.Component {
         if ( this.props.errortext == "" ) $state.css({ ...style.state_normal });
     }
 
-    change() {
+    change( event ) {
         if ( this.props.onChange ) this.props.onChange( event );
     }
 
-    changeKeyDown() {
+    changeKeyDown( event ) {
         if ( this.props.onKeyDown ) this.props.onKeyDown( event );
     }
 
@@ -302,8 +302,8 @@ export default class TextField extends React.Component {
             placeholder :this.props.placeholder,
             onFocus  : ()=>this.changeFocus(),
             onBlur   : ()=>this.changeBlur(),
-            onChange : ()=>this.change(),
-            onKeyDown: ()=>this.changeKeyDown(),
+            onChange : (e)=>this.change(e),
+            onKeyDown: (e)=>this.changeKeyDown(e),
         },
         tooltip = this.props.tooltip;
         style = styles.get(this.state.id);
