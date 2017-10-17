@@ -5,6 +5,7 @@ import {browser}   from 'browser';
 import * as msg    from 'message';
 import th          from 'theme';
 import * as config from 'config';
+import * as output from 'output';
 
 import Fab         from 'fab';
 
@@ -28,6 +29,7 @@ export default class ReadCtlbar extends React.Component {
     onAction( event, type ) {
         console.log( "fab type is =", type )
         switch ( true ) {
+            /*
             case type.indexOf( "_" ) > 0 && type.startsWith( "share" ):
                 let url = "";
                 switch ( type.split("_")[1] ) {
@@ -51,6 +53,10 @@ export default class ReadCtlbar extends React.Component {
                 break;
             case [ "exit", "setting", "save", "markdown", "png", "pdf", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive", "kindle" ].includes( type ):
                 [ "exit", "setting", "save", "markdown", "png", "pdf", "kindle" ].includes( type ) ? this.props.onAction( type ) : this.props.onService( type );
+                break;
+            */
+            case [ "exit", "setting" ].includes( type ):
+            this.props.onAction( type );
                 break;
             /*
             case [ "up", "down" ].includes( type ):
@@ -78,6 +84,12 @@ export default class ReadCtlbar extends React.Component {
                     new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
                 }
                 break;
+            default:
+                if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
+                    [ "save", "markdown", "png", "pdf", "kindle", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
+                    const [ title, desc, content ] = [ $( "sr-rd-title" ).text().trim(), $( "sr-rd-desc" ).text().trim(), $( "sr-rd-content" ).html().trim() ];
+                    output.Action( type, title, desc, content );
+                }
         }
     }
 
