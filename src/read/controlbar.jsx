@@ -29,34 +29,8 @@ export default class ReadCtlbar extends React.Component {
     onAction( event, type ) {
         console.log( "fab type is =", type )
         switch ( true ) {
-            /*
-            case type.indexOf( "_" ) > 0 && type.startsWith( "share" ):
-                let url = "";
-                switch ( type.split("_")[1] ) {
-                    case "facebook":
-                        url = `https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=${ this.props.site.url }`;
-                        break;
-                    case "twitter":
-                        url = `https://twitter.com/intent/tweet?text=${ this.props.site.title } （ 分享自 简悦 ）&url=${ this.props.site.url }`;
-                        break;
-                    case "gplus":
-                        url = `https://plus.google.com/share?url=${ this.props.site.url }`;
-                        break;
-                    case "weibo":
-                        url = `http://service.weibo.com/share/share.php?url=${ this.props.site.url }&title=${ this.props.site.title } （ 分享自 简悦-SimpRead ）`;
-                        break;
-                    case "telegram":
-                        url = `https://t.me/share/url?url=${ this.props.site.url }`;
-                        break;
-                }
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-                break;
-            case [ "exit", "setting", "save", "markdown", "png", "pdf", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive", "kindle" ].includes( type ):
-                [ "exit", "setting", "save", "markdown", "png", "pdf", "kindle" ].includes( type ) ? this.props.onAction( type ) : this.props.onService( type );
-                break;
-            */
             case [ "exit", "setting" ].includes( type ):
-            this.props.onAction( type );
+                this.props.onAction( type );
                 break;
             /*
             case [ "up", "down" ].includes( type ):

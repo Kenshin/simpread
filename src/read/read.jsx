@@ -12,7 +12,6 @@ import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
 import * as ss            from 'stylesheet';
-//import * as exp           from 'export';
 import {browser}          from 'browser';
 import * as msg           from 'message';
 import * as highlight     from 'highlight';
@@ -96,15 +95,6 @@ class Read extends React.Component {
             case "setting":
                 modals.Render();
                 break;
-            /*
-            case "save":
-                const [ url, title, desc ] = [ window.location.href.replace( /(\?|&)simpread_mode=read/, "" ), $("sr-rd-title").text().trim(), $("sr-rd-desc").text().trim() ];
-                storage.UnRead( "add", { url, title, desc }, success => {
-                    success  && new Notify().Render( 0, "成功加入未读列表。" );
-                    !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
-                });
-                break;
-            */
             case "fontfamily":
             case "fontsize":
             case "layout":
@@ -117,103 +107,7 @@ class Read extends React.Component {
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
                 break;
             */
-            /*
-            case "markdown":
-                exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), `simpread-${ this.props.wrapper.title.trim() }.md`, new Notify() );
-                break;
-            case "png":
-                try {
-                    new Notify().Render( "下载已开始，请稍等..." );
-                    $( "sr-rd-crlbar" ).css({ "opacity": 0 });
-                    setTimeout( () => {
-                        exp.PNG( $( ".simpread-read-root" )[0], `simpread-${ this.props.wrapper.title.trim() }.png`, result => {
-                            $( "sr-rd-crlbar" ).removeAttr( "style" );
-                            !result && new Notify().Render( 2, "转换 PNG 格式失败，这是一个实验性功能，不一定能导出成功。" );
-                        });
-                    }, 1000 );
-                } catch ( e ) {
-                    new Notify().Render( 1, "转换 PNG 格式失败，请注意，这是一个实验性功能，不一定能导出成功。" );
-                }
-                break;
-            case "pdf":
-                $( "sr-rd-crlbar" ).css({ "opacity": 0 });
-                setTimeout( () => {
-                    exp.PDF();
-                    $( "sr-rd-crlbar" ).removeAttr( "style" );
-                }, 500 );
-                break;
-            case "kindle":
-                new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );
-                const style = {
-                    theme     : storage.read.theme,
-                    fontsize  : storage.read.fontsize,
-                    fontfamily: storage.read.fontfamily,
-                    layout    : storage.read.layout,
-                    custom    : storage.read.custom,
-                }
-                exp.kindle.Read( location.href, $( "sr-rd-title" ).text(), $( "sr-rd-desc" ).html(), $( "sr-rd-content" ).html(), style, ( result, error ) => {
-                    error  && new Notify().Render( 2, "保存到 Kindle 失败，请稍候再试！" );
-                    !error && new Notify().Render( "保存成功，3 秒钟后将跳转到发送页面。" );
-                    !error && setTimeout( ()=>{ exp.kindle.Send(); }, 3000 );
-                });
-                break;
-            */
         }
-    }
-
-    /**
-     * Controlbar action event: Service, inlcude: "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive"
-     * @param {string} type, include: exit, setting, save, scroll, option
-     * @param {string} value 
-     */
-    onService( type, value ) {
-        console.log( "asdfasdfasdf", type, value )
-        /*
-        const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
-              title = $( "sr-rd-title" ).text().trim(),
-              id    = type == "yinxiang" ? "evernote" : type;
-
-        exp.VerifySvcWrapper( storage, exp[id], type, exp.Name( type ), new Notify() )
-            .done( result => service( type ));
-
-        const service = type => {
-            switch( type ) {
-                case "dropbox":
-                    exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
-                        dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, new Notify() ), "md/" );
-                    });
-                    break;
-                case "pocket":
-                    pocket.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, new Notify() ));
-                    break;
-                case "linnk":
-                    linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
-                        if ( !error ) {
-                            linnk.group_id = result.data.groupId;
-                            linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, new Notify() ));
-                        } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
-                    });
-                    break;
-                case "evernote":
-                case "yinxiang":
-                    evernote.env     = type;
-                    evernote.sandbox = false;
-                    evernote.Add( title, st.HTML2ENML( $("sr-rd-content").html(), window.location.href ), ( result, error ) => {
-                        exp.svcCbWrapper( result, error, evernote.name, new Notify() );
-                        error == "error" && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
-                    });
-                    break;
-                case "onenote":
-                    onenote.Add( onenote.Wrapper( window.location.href, title, $("sr-rd-content").html() ), ( result, error ) => exp.svcCbWrapper( result, error, onenote.name, new Notify() ));
-                    break;
-                case "gdrive":
-                    exp.MDWrapper( st.ClearMD( $("sr-rd-content").html()), undefined, new Notify() ).done( result => {
-                        gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
-                    });
-                    break;
-            }
-        };
-        */
     }
 
    // exit read mode
@@ -236,7 +130,9 @@ class Read extends React.Component {
                 { Article }
                 { Page    }
                 <Footer />
-                <ReadCtlbar show={ this.props.read.controlbar } site={{ title: this.props.wrapper.title, url: window.location.href }} custom={ this.props.read.custom } onAction={ (t,v)=>this.onAction( t,v ) } onService={ (t,v)=>this.onService( t,v ) } />
+                <ReadCtlbar show={ this.props.read.controlbar } 
+                            site={{ title: this.props.wrapper.title, url: window.location.href }} 
+                            custom={ this.props.read.custom } onAction={ (t,v)=>this.onAction( t,v ) }/>
             </sr-read>
         )
     }
