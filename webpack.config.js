@@ -265,6 +265,9 @@ const webpack = require( 'webpack' ),
           name       : __dirname + '/src/module/common/name.jsx',
           url        : __dirname + '/src/module/common/url.jsx',
 
+          wavess     : __dirname + '/src/vender/waves/waves.js',
+          notify     : __dirname + '/src/vender/notify/notify.js',
+
           textfield  : __dirname + '/src/vender/mduikit/textfield.jsx',
           fab        : __dirname + '/src/vender/mduikit/fab.jsx',
           button     : __dirname + '/src/vender/mduikit/button.jsx',
@@ -277,8 +280,6 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/vender/mduikit/dialog.jsx',
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
-          wavess     : __dirname + '/src/vender/waves/waves.js',
-          notify     : __dirname + '/src/vender/notify/notify.js',
 
         }
       }
