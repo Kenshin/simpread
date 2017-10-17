@@ -13,8 +13,8 @@
 
 console.log( "==== simpread component: Waves ====" )
 
-import '../vender/waves/waves.min.css';
-import Waves from '../vender/waves/waves.js';
+import '../waves/waves.min.css';
+import Waves from '../waves/waves.js';
 
 const wavesopts = {
     root     : undefined,
