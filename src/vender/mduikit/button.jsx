@@ -3,8 +3,8 @@
  * 
  * @version : 0.0.2
  * @update  : 2017/10/14
- * @homepage: https://github.com/kenshin/react-md-ui-ui
- * @license : MIT https://github.com/kenshin/react-md/blob/master/LICENSE
+ * @homepage: https://github.com/kenshin/mduikit-ui
+ * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
  * 
  * @copyright 2017
