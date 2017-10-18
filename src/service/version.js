@@ -89,8 +89,9 @@ function Verify( curver, data ) {
     }
 
     if ( curver == "1.0.3" ) {
-        data.focus.highlight = true;
+        data.focus.highlight  = true;
         data.option.menu.list = false;
+        data.option.br_exit   = false;
         curver = "1.0.4";
     }
 

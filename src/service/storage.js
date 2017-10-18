@@ -98,6 +98,7 @@ const name = "simpread",
         focus     : 0,
         read      : 0,
         esc       : true,
+        br_exit   : false,
         menu      : {
             focus : true,
             read  : true,
