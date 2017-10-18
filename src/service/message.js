@@ -11,6 +11,7 @@ const action = {
     updated        : "updated",
     save_verify    : "save_verify",
     redirect_uri   : "redirect_uri",
+    browser_click  : "browser_click",
 };
 
 /**
