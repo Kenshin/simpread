@@ -140,6 +140,7 @@ class Read extends React.Component {
                 { Page    }
                 <Footer />
                 <ReadCtlbar show={ this.props.read.controlbar } 
+                            multi={ this.props.wrapper.avatar ? true : false }
                             site={{ title: this.props.wrapper.title, url: window.location.href }} 
                             custom={ this.props.read.custom } onAction={ (t,v)=>this.onAction( t,v ) }/>
             </sr-read>

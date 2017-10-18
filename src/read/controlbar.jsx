@@ -28,6 +28,11 @@ export default class ReadCtlbar extends React.Component {
 
     onAction( event, type ) {
         console.log( "fab type is =", type )
+
+        this.props.multi && 
+            [ "markdown", "dropbox", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) &&
+            new Notify().Render( "当前为论坛类页面，不建议使用导出服务，有可能出现未知错误。" );
+
         switch ( true ) {
             case [ "exit", "setting" ].includes( type ):
                 this.props.onAction( type );
