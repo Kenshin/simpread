@@ -142,7 +142,7 @@ browser.tabs.onRemoved.addListener( tabId => watch.Pull( tabId ));
  * Listen chrome page, include: `read`
  */
 browser.pageAction.onClicked.addListener( function( tab ) {
-    browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.read_mode ));
+    browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.browser_click ));
 });
 
 /**
