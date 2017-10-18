@@ -2,7 +2,6 @@ console.log( "=== simpread message load ===" )
 
 const action = {
     focus_mode     : "focus",
-    read_mode      : "read",
     shortcuts      : "shortcuts",
     browser_action : "browser_action",
     tab_selected   : "tab_selected",

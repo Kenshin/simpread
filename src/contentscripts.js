@@ -35,9 +35,6 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.focus_mode:
             focusMode();
             break;
-        case msg.MESSAGE_ACTION.read_mode:
-            readMode();
-            break;
         case msg.MESSAGE_ACTION.shortcuts:
             bindShortcuts();
             break;
