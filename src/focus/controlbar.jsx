@@ -27,7 +27,7 @@ class FControl extends React.Component {
                     ReactDOM.unmountComponentAtNode( getRoot() );
                     break;
                 case "top":
-                    moveTop();
+                    $( "html, body" ).animate({ scrollTop: 0 }, "normal" );
                     break;
                 case "setting":
                     modals.Render();
@@ -64,20 +64,6 @@ class FControl extends React.Component {
 }
 
 const fcontrol = new FControl();
-
-/**
- * Move top
- */
-function moveTop() {
-    timer = setInterval( function() {
-        var osTop = document.body.scrollTop;
-        var speed = Math.floor( -osTop / 3 );
-        document.body.scrollTop = osTop + speed;
-        if( osTop == 0 ) {
-            clearInterval( timer );
-        }
-    }, 30 );
-}
 
 /**
  * Render
