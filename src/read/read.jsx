@@ -83,6 +83,7 @@ class Read extends React.Component {
     }
 
     componentWillUnmount() {
+        ss.FontSize( "" );
         $root.removeClass( theme )
              .removeClass( "simpread-font" );
         $root.attr("style") && $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
