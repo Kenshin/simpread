@@ -92,6 +92,7 @@ function Verify( curver, data ) {
         data.focus.highlight  = true;
         data.option.menu.list = false;
         data.option.br_exit   = false;
+        data.option.secret    = false;
         curver = "1.0.4";
     }
 
