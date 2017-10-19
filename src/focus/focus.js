@@ -187,15 +187,18 @@ var storage  = require( "storage" ).storage,
  *  @param {string} include 'add' and 'delete'
 */
 function includeStyle( $target, style, cls, type ) {
-    var bakstyle;
-    if ( type === "add" ) {
-        bakstyle = $target.attr( "style" ) == undefined ? "" : $target.attr( "style" );
-        $target.attr( "style", bakstyle + style ).addClass( cls );
-    } else if (  type === "delete" ) {
-        bakstyle = $target.attr( "style" );
-        bakstyle = bakstyle.replace( style, "" );
-        $target.attr( "style", bakstyle ).removeClass( cls );
-    }
+    $target.each(function(index){
+        var bakstyle;
+        var selector = $(this);
+        if ( type === "add" ) {
+            bakstyle = selector.attr( "style" ) == undefined ? "" : selector.attr( "style" );
+            selector.attr( "style", bakstyle + style ).addClass( cls );
+        } else if (  type === "delete" ) {
+            bakstyle = selector.attr( "style" );
+            bakstyle = bakstyle.replace( style, "" );
+            selector.attr( "style", bakstyle ).removeClass( cls );
+        }
+    });
 }
 
 /**
