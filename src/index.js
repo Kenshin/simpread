@@ -1,2 +1,1 @@
-
-console.log( "hello webpack-dev-server" )
+import 'main';
