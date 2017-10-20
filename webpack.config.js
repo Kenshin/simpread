@@ -1,26 +1,58 @@
-
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       HtmlWebpackPlugin = require( 'html-webpack-plugin' )
       webpack           = require( 'webpack' ),
       plugins           = [
 
       // chunk files
-      new webpack.optimize.CommonsChunkPlugin({
-        names     : [ 'bundle', 'vendors' ],
-        minChunks: Infinity
-      }),
+      //new webpack.optimize.CommonsChunkPlugin({
+      //names     : [ 'vendors' ],
+      //minChunks : Infinity
+      //}),
 
       // defined environment variable
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify( 'production' ) // or development
       }),
 
-      // extract text plugin
+      // extract css files
       new ExtractTextPlugin( '[name].css' ),
 
-      // webpack-dev-server --hot
-      new webpack.HotModuleReplacementPlugin(),
+      // minify html files
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'src/index.html',
+        inject: true,
+        minify: {
+          collapseWhitespace: true,
+        },
+      }),
 
+      new HtmlWebpackPlugin({
+        filename: 'changelog.html',
+        template: 'src/changelog.html',
+        inject: true,
+        minify: {
+          collapseWhitespace: true,
+        },
+      }),
+
+      new HtmlWebpackPlugin({
+        filename: '404.html',
+        template: 'src/404.html',
+        inject: true,
+        minify: {
+          collapseWhitespace: true,
+        },
+      }),
+
+      new HtmlWebpackPlugin({
+        filename: 'auth.html',
+        template: 'src/auth.html',
+        inject: true,
+        minify: {
+          collapseWhitespace: true,
+        },
+      }),
     ],
 
     // conditions environment
@@ -28,42 +60,21 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       return process.env.NODE_ENV === 'production';
     },
 
-    // html plugin
-    hmr = ( function () {
-      !isProduction() && plugins.push(
-        new HtmlWebpackPlugin({
-          filename: 'index.html',
-          template: './src/index.html',
-          inject  : false,
-        })
-      );
-      !isProduction() && plugins.push(
-        new HtmlWebpackPlugin({
-          filename: 'changelog.html',
-          template: './src/changelog.html',
-          inject  : false,
-        })
-      );
-      !isProduction() && plugins.push(
-        new HtmlWebpackPlugin({
-          filename: '404.html',
-          template: './src/404.html',
-          inject  : false,
-        })
-      );
-      !isProduction() && plugins.push(
-        new HtmlWebpackPlugin({
-          filename: 'auth.html',
-          template: './src/auth.html',
-          inject  : false,
-        })
-      );
+    // only when environment variable is 'development' call
+    develop = ( function () {
+      const OpenBrowserPlugin  = require('open-browser-webpack-plugin');
+      if ( !isProduction() ) {
+        plugins.push(
+          new webpack.HotModuleReplacementPlugin(),
+          new OpenBrowserPlugin({ url: 'http://localhost:8080' })
+        );
+      }
     })(),
 
     // only when environment variable is 'production' call
     deploy = ( function () {
-      var CopyWebpackPlugin  = require( 'copy-webpack-plugin'  ),
-          CleanWebpackPlugin = require( 'clean-webpack-plugin' );
+      const CopyWebpackPlugin  = require( 'copy-webpack-plugin'  ),
+            CleanWebpackPlugin = require( 'clean-webpack-plugin' );
 
       // environment verify
       if ( isProduction() ) {
@@ -79,12 +90,8 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         // copy files
         plugins.push(
           new CopyWebpackPlugin([
-            { from   : 'src/index.html',      to   : '../' },
-            { from   : 'src/changelog.html',  to   : '../' },
-            { from   : 'src/404.html',        to   : '../' },
-            { from   : 'src/auth.html',       to   : '../' },
-            { context: 'src/assets/favicon/', from : "*" , to : '../assets/favicon' },
-            { context: 'src/assets/images/',  from : "*" , to : '../assets/images' },
+              { context: 'src/assets/favicon/', from : "*" , to : '../assets/favicon' },
+              { context: 'src/assets/images/',  from : "*" , to : '../assets/images' },
           ])
         );
 
@@ -113,61 +120,79 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       }
     })(),
 
+    bundle = ( function () {
+      const files = [
+        'index'
+      ];
+      if ( !isProduction() ) {
+        files.push(
+          'webpack/hot/dev-server',
+          'webpack-dev-server/client?http://localhost:8080'
+        );
+      }
+      return files;
+    }),
+
     // webpack config
     config = {
       entry: {
 
-        vendors : [
-          'jquery'
-        ],
+        //vendors : [
+        //  'jquery'
+        //],
 
-        bundle: ( function() {
-          const arr = [ './src/index.js' ];
-          !isProduction() && arr.push(
-            'webpack/hot/dev-server',
-            'webpack-dev-server/client?http://localhost:8080'
-          );
-          return arr;
-        })(),
-
-        style: './src/assets/css/main.css',
+        bundle: bundle(),
 
       },
 
       output: {
-        path      : isProduction() ? './publish/bundle' : './bundle',
-        filename  : '[name].js',
-        publicPath: '/bundle',
+        path     :  isProduction() ? './publish/' : './',
+        filename : '[name].js'
+      },
+
+      devServer: {
+        contentBase: './src',
+        port: 8080,
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        progress: true,
       },
 
       plugins: plugins,
 
       module: {
-        loaders: [{
-            test: /\.js[x]?$/,
-            exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-              presets: [ 'es2015', 'stage-0', 'react' ]
-            }
-        },
-        /*{
-            test:   /\.css$/,
-            loader: "style!css!postcss"
-        },*/
-        { test: /\.css$/,
-          loader: ExtractTextPlugin.extract( 'style-loader', 'css-loader!postcss-loader' )
-        },
-        { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288'   },
-        {
-          test  : require.resolve( './src/vender/jquery-2.1.1.min.js' ),
-          loader: 'expose?jQuery!expose?$'
-        }
+        loaders: [
+          {
+              test: /\.js[x]?$/,
+              exclude: /node_modules/,
+              loader: 'babel',
+              query: {
+                presets: [ 'es2015' ]
+              }
+          },
+
+          // css in js
+          //{ test: /\.css$/,         loader: 'style!css!postcss' },
+
+          // extract css files
+          { test: /\.css$/,           loader: ExtractTextPlugin.extract( 'style', 'css!postcss' ) },
+
+          // image in js
+          { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288'   },
+
+          // expose $
+          //{
+          //test  : require.resolve( './src/vender/jquery-2.1.1.min.js' ),
+          //loader: 'expose?jQuery!expose?$'
+          //},
+
         ]
       },
 
       postcss: function () {
         return [
+          require( 'import-postcss'  )(),
           require( 'postcss-cssnext' )(),
           require( 'autoprefixer'    )({
             browsers: [ 'last 5 versions', '> 5%' ]
@@ -176,9 +201,11 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       },
 
       resolve: {
-        alias : {
-          jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
-        }
+          alias : {
+            //jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
+            index      : __dirname + '/src/index.js',
+            main       : __dirname + '/src/assets/css/main.css',
+          }
       }
 
 };
