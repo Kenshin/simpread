@@ -925,6 +925,7 @@ body {
 }
 
 .update .info span.number {
+    display: block;
     margin-right: 5px;
 
     width: 18px;
