@@ -119,7 +119,7 @@ function Verify( curver, data ) {
 function Notify( type, ver ) {
     const str    = type == "firstload" ? "安装" : "更新",
           detail = type == "firstload" ? "" : details.get(ver);
-    return `${str} 到最新版本 ${ver} ，${detail}详细请看 <a href="http://ksria.com/simpread/version_${ver}.html" target="_blank">更新日志</a>`;
+    return `${str} 到最新版本 ${ver} ，${detail}详细请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新日志</a>`;
 }
 
 /**
