@@ -813,3 +813,154 @@ body {
     width: 583px;
     padding: 0 16px;
 }
+
+/**
+ *  version update page
+ */
+.update {
+    margin: 0 auto;
+    padding: 40px 0;
+
+    width: 100%;
+    max-width: 1024px;
+
+    text-align: left;
+}
+
+.update .dividers {
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.12);
+}
+
+.update .desc {
+    font-size: 16px;
+    font-size: 1.6rem;
+}
+
+.update h1 {
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.35;
+}
+
+.update h2 {
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+
+    line-height: 1.35;
+    font-size: 2.3rem;
+    font-weight: 300;
+}
+
+.update h3 {
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+
+    line-height: 1.35;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.update a {
+    padding-bottom: 2px;
+
+    color: inherit;
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    text-decoration: none;
+    border-bottom: 2px solid rgba(51, 51, 51, 0.12);
+}
+
+.update ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.update ul li {
+    margin: 5px 0;
+}
+
+.update .infos {
+    margin-top: 20px;
+}
+
+.update .info {
+    font-size: 1.6rem;
+}
+
+.update .info img {
+    margin: 10px;
+    padding: 5px;
+
+    max-width: 500px;
+
+    background: #fff;
+
+    border: 1px solid rgba(51, 51, 51, 0.35);
+    box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.15);
+}
+
+.update .info .line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.update .info blockquote {
+    margin: 20px 0;
+    padding: 0 1em;
+
+    font-size: 1.6rem;
+
+    border-left: 0.25em solid #3e50b4;
+}
+
+.update .info b {
+    margin: 0 2px;
+}
+
+.update .info span.number {
+    margin-right: 5px;
+
+    width: 18px;
+    height: 18px;
+
+    color: #fff;
+    background: #ff3f80;
+
+    border-radius: 50%;
+
+    text-align: center;
+    vertical-align: middle;
+
+    line-height: 18px;
+    font-size: 14px;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.update .info a {
+    padding-bottom: 0;
+
+    font-size: inherit;
+    font-weight: 500;
+    text-decoration: none;
+
+    transition: border-color .5s;
+    border-bottom: 0 solid transparent;
+}
+
+.update .info code {
+    margin: 0 2px;
+    padding: 4px;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    background-color: rgba(51, 51, 51, 0.15);
+    border-radius: 3px;
+}
