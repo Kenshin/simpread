@@ -35,14 +35,22 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.focus_mode:
             focusMode();
             break;
-        case msg.MESSAGE_ACTION.read_mode:
-            readMode();
-            break;
         case msg.MESSAGE_ACTION.shortcuts:
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
             browserAction();
+            break;
+        case msg.MESSAGE_ACTION.browser_click:
+            watch.Verify( ( state, result ) => {
+                if ( state ) {
+                    console.log( "watch.Lock()", result );
+                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href );
+                } else {
+                     if ( storage.option.br_exit ) read.Exist( false ) ? read.Exit() : readMode();
+                     else readMode();
+                }
+            });
             break;
     }
 });

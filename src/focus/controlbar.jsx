@@ -4,6 +4,7 @@ import * as modals from 'modals';
 import * as conf   from 'config';
 import { storage } from 'storage';
 import * as output from 'output';
+import * as watch  from 'watch';
 
 import Fab         from 'fab';
 
@@ -19,23 +20,33 @@ class FControl extends React.Component {
 
     onAction( event, type ) {
         console.log( "fab type is =", type )
-        switch ( type ) {
-            case "exit":
-                ReactDOM.unmountComponentAtNode( getRoot() );
-                break;
-            case "top":
-                moveTop();
-                break;
-            case "setting":
-                modals.Render();
-                break;
-            default:
-                if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                     [ "save", "markdown", "png", "pdf", "kindle", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
-                    const [ title, desc, content ] = [ $( "head title" ).text().trim(), "", $( ".simpread-focus-highlight" ).html().trim() ];
-                    output.Action( type, title, desc, content );
-                }
+
+        const action = ( event, type ) => {
+            switch ( type ) {
+                case "exit":
+                    ReactDOM.unmountComponentAtNode( getRoot() );
+                    break;
+                case "top":
+                    $( "html, body" ).animate({ scrollTop: 0 }, "normal" );
+                    break;
+                case "setting":
+                    modals.Render();
+                    break;
+                default:
+                    if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
+                         [ "save", "markdown", "png", "pdf", "kindle", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
+                        const [ title, desc, content ] = [ $( "head title" ).text().trim(), "", $( ".simpread-focus-highlight" ).html().trim() ];
+                        output.Action( type, title, desc, content );
+                    }
+            };
         }
+
+        ![ "exit", "top" ].includes( type ) ? watch.Verify( ( state, result ) => {
+            if ( state ) {
+                console.log( "watch.Lock()", result );
+                new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href );
+            } else action( event, type );
+        }) : action( event, type );
     }
 
     componentWillUnmount() {
@@ -53,20 +64,6 @@ class FControl extends React.Component {
 }
 
 const fcontrol = new FControl();
-
-/**
- * Move top
- */
-function moveTop() {
-    timer = setInterval( function() {
-        var osTop = document.body.scrollTop;
-        var speed = Math.floor( -osTop / 3 );
-        document.body.scrollTop = osTop + speed;
-        if( osTop == 0 ) {
-            clearInterval( timer );
-        }
-    }, 30 );
-}
 
 /**
  * Render

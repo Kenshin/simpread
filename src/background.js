@@ -46,6 +46,8 @@ menu.OnClicked( ( info, tab ) => {
     console.log( "background contentmenu Listener", info, tab );
     if ( info.menuItemId == "link" ) {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
+    } else if ( info.menuItemId == "list" ) {
+        browser.tabs.create({ url: browser.extension.getURL( "options/options.html#later" ) });
     } else {
         if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
     }
@@ -140,7 +142,7 @@ browser.tabs.onRemoved.addListener( tabId => watch.Pull( tabId ));
  * Listen chrome page, include: `read`
  */
 browser.pageAction.onClicked.addListener( function( tab ) {
-    browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.read_mode ));
+    browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.browser_click ));
 });
 
 /**

@@ -98,10 +98,13 @@ const name = "simpread",
         focus     : 0,
         read      : 0,
         esc       : true,
+        br_exit   : false,
+        secret    : false,
         menu      : {
             focus : true,
             read  : true,
             link  : true,
+            list  : false,
         },
     },
     unread = {
@@ -566,6 +569,7 @@ class Storage {
             read   : { ...this.read   },
             unrdist: this.unrdist,
         };
+        this.option.secret && ( download.secret = { ...secret });
         return JSON.stringify( download );
     }
 

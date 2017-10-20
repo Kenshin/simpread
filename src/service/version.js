@@ -89,7 +89,10 @@ function Verify( curver, data ) {
     }
 
     if ( curver == "1.0.3" ) {
-        data.focus.highlight = true;
+        data.focus.highlight  = true;
+        data.option.menu.list = false;
+        data.option.br_exit   = false;
+        data.option.secret    = false;
         curver = "1.0.4";
     }
 
@@ -107,6 +110,8 @@ function Verify( curver, data ) {
 
 /**
  * Notify with type and version
+ * 1.0.4 before usage http://ksria.com/simpread/changelog.html#{ver}
+ * 1.0.4 after  usage http://ksria.com/simpread/version_${ver}.html
  * 
  * @param {string} type, include: firstload, update
  * @param {string} ver, e.g. 1.0.0, 1.0.1
@@ -114,7 +119,7 @@ function Verify( curver, data ) {
 function Notify( type, ver ) {
     const str    = type == "firstload" ? "安装" : "更新",
           detail = type == "firstload" ? "" : details.get(ver);
-    return `${str} 到最新版本 ${ver} ，${detail}详细请看 <a href="http://ksria.com/simpread/changelog.html#${ver}" target="_blank">更新日志</a>`;
+    return `${str} 到最新版本 ${ver} ，${detail}详细请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新日志</a>`;
 }
 
 /**
