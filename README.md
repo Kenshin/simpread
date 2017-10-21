@@ -89,7 +89,6 @@
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
 #### 下一步：
-- [ ] 增强型 `聚焦模式`；  
 - [ ] 自行添加新的站点到 `阅读模式`；  
 
 #### 相关链接：
