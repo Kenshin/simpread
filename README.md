@@ -29,7 +29,7 @@
   将 `非适配页面` 生成 `阅读模式` 一样的页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/站点编辑器#临时阅读模式) 以及 [操作](http://ksria.com/simpread/test/welcome/version_1.0.4.html#temp-read-mode)
 
 - 主动适配：  
-  通过简单的几个步骤，就可以让你的博客自动支持阅读模式，详细请看 [主动适配：](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/test/welcome/version_1.0.4.html#mate-read-mode)
+  通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/test/welcome/version_1.0.4.html#mate-read-mode)
 
 - 站点编辑器：  
   页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
