@@ -18,7 +18,7 @@
 
 #### 主要功能一览：
 - 阅读模式：  
-  简悦 `原创` 功能，逐一适配了 [210+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
+  简悦 `原创` 功能，逐一适配了 [220+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
 - 聚焦模式：  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
@@ -26,10 +26,10 @@
 - 支持 `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
 
 - 临时阅读模式：  
-  将 `非适配页面` 生成 `阅读模式` 一样的页面
+  将 `非适配页面` 生成 `阅读模式` 一样的页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/站点编辑器#临时阅读模式) 以及 [操作](http://ksria.com/simpread/test/welcome/version_1.0.4.html#temp-read-mode)
 
 - 主动适配：  
-  通过简单的几个步骤，就可以让你的博客自动支持阅读模式
+  通过简单的几个步骤，就可以让你的博客自动支持阅读模式，详细请看 [主动适配：](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/test/welcome/version_1.0.4.html#mate-read-mode)
 
 - 站点编辑器：  
   页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
