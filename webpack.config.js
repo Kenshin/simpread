@@ -55,8 +55,8 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
       }),
 
      new HtmlWebpackPlugin({
-       filename: 'welcome/version_1.4.0.html',
-       template: 'src/welcome/version_1.4.0.html',
+       filename: 'welcome/version_1.0.4.html',
+       template: 'src/welcome/version_1.0.4.html',
        inject: true,
        minify: {
         collapseWhitespace: true,
