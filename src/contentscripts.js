@@ -45,7 +45,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             watch.Verify( ( state, result ) => {
                 if ( state ) {
                     console.log( "watch.Lock()", result );
-                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href );
+                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
                 } else {
                      if ( storage.option.br_exit ) read.Exist( false ) ? read.Exit() : readMode();
                      else readMode();
@@ -105,7 +105,7 @@ function readMode() {
     watch.Verify( ( state, result ) => {
         if ( state ) {
             console.log( "watch.Lock()", result );
-            new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href + "?simpread_mode=read" );
+            new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.read );
             switch ( st.Verify( storage.current.site.name ) ) {
