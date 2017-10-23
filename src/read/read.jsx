@@ -164,7 +164,7 @@ function Render() {
 function Highlight() {
     const dtd = $.Deferred();
     highlight.Start().done( dom => {
-        storage.Newsite({ mode: "read", url: window.location.href, site: { name: `readonly::${window.location.host}`, title: "<title>", desc: "", include: "", html: dom.outerHTML, exclude: "" } });
+        storage.Newsite({ mode: "read", url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", html: dom.outerHTML, exclude: "" } });
         dtd.resolve();
     });
     return dtd;

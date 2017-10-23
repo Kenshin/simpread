@@ -427,6 +427,7 @@ function metadata() {
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
         !meta.exclude && ( meta.exclude = "" );
+        meta.name = `metaread::${meta.name}`;
         meta.auto = meta.auto == "true" ? true : false;
         const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
         return idx == -1 ? meta : undefined;
