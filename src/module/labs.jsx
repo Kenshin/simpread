@@ -119,6 +119,10 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "选择隐藏意味着鼠标移上时才显示。" }}
                             label="是否一直显示右下角的控制栏？"
                             onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
+                    <Switch width="100%" checked={ this.props.read.highlight }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB"
+                            label="当前页面匹配适配模式失败后是否启动临时阅读模式？"
+                            onChange={ (s)=>this.onChange(s, "read", "highlight") } />
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             tooltip={{ text: "此项为实验性功能，建议不启动。" }}
