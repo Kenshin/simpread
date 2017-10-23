@@ -121,7 +121,8 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            label="当前页面匹配适配模式失败后是否启动临时阅读模式？"
+                            tooltip={{ text: "匹配失败的原因大多是因为页面结构改变导致。" }}
+                            label="匹配阅读模式失败后是否启动临时阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "highlight") } />
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
