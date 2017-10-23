@@ -2310,6 +2310,19 @@
             ""
         ]
     },{
+        "name"    : "37zw.net",
+        "url"     : "http://www.37zw.net/**/*.html",
+        "paging"  : [
+            {"prev" : "[[{$($('.bottem2').find('a')[1]).attr('href')}]]"},
+            {"next" : "[[{$($('.bottem2').find('a')[3]).attr('href')}]]"}
+        ],
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "lofter.com",
         "url"     : "http://*.lofter.com/post/*",
         "title"   : "<title>",
