@@ -420,16 +420,19 @@ function metadata() {
             title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
             desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
             include: $( "meta[name='simpread:include']" ).attr( "content" ),
-            exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
+            exp    : $( "meta[name='simpread:exclude']" ).attr( "content" ),
             auto   : $( "meta[name='simpread:auto']"    ).attr( "content" ),
+            exclude: [],
     };
     if ( meta.name && meta.include ) {
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
-        !meta.exclude && ( meta.exclude = "" );
+        !meta.exp     && ( meta.exp     = "" );
         meta.name = `metaread::${meta.name}`;
         meta.auto = meta.auto == "true" ? true : false;
-        const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        const idx = [ "title", "desc", "include", "exp" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        meta.exclude.push( meta.exp );
+        delete meta.exp;
         console.assert( idx == -1, "meta read mode error. ", meta )
         return idx == -1 ? meta : undefined;
     } else {
