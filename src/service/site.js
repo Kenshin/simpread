@@ -423,7 +423,7 @@ function metadata() {
             exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
             auto   : $( "meta[name='simpread:auto']"    ).attr( "content" ),
     };
-    if ( meta.name ) {
+    if ( meta.name && meta.include ) {
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
         !meta.exclude && ( meta.exclude = "" );
@@ -432,6 +432,7 @@ function metadata() {
         const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
         return idx == -1 ? meta : undefined;
     } else {
+        console.error( "meta read mode error, ", meta )
         return undefined;
     }
 }
