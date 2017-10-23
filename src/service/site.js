@@ -430,9 +430,10 @@ function metadata() {
         meta.name = `metaread::${meta.name}`;
         meta.auto = meta.auto == "true" ? true : false;
         const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        console.assert( idx == -1, "meta read mode error. ", meta )
         return idx == -1 ? meta : undefined;
     } else {
-        console.error( "meta read mode error, ", meta )
+        console.error( "meta read mode error. ", meta )
         return undefined;
     }
 }
