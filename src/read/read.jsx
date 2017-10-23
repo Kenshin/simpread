@@ -49,7 +49,7 @@ class Read extends React.Component {
 
     async componentDidMount() {
         if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
-            new Notify().Render( 2, `当前页面不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，已启动 <a href='https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。` );
+            new Notify().Render( 2, `当前页面不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，已启动 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。` );
             this.componentWillUnmount();
             Highlight().done( () => {
                 storage.Statistics( "read" );
