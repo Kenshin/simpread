@@ -26,7 +26,7 @@
 - 支持 `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
 
 - 临时阅读模式：  
-  将 `非适配页面` 生成 `阅读模式` 一样的页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/站点编辑器#临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#temp-read-mode)
+  将 `非适配页面` 生成 `阅读模式` 一样的页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#temp-read-mode)
 
 - 主动适配：  
   通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#mate-read-mode)
