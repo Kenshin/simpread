@@ -3,27 +3,33 @@
 <p align="center">让你瞬间进入沉浸式阅读的 Chrome 扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">220+</a> 个网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.0.3-blue.svg"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.0.4-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
-   <a href="http://ksria.com/simpread/crx/1.0.3/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
+   <a href="http://ksria.com/simpread/crx/1.0.4/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
 
 </p>
 
 ***
 
 #### 马上使用：
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.0.3/simpread.crx) 或者 [下载测试版](https://github.com/Kenshin/simpread/wiki/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%88-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%BC%95-%EF%BC%89#%E6%B5%8B%E8%AF%95%E7%89%88%E9%80%9A%E9%81%93) 体验简悦最新功能。
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.0.4/simpread.crx) 或者 [下载测试版](https://github.com/Kenshin/simpread/wiki/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%88-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%BC%95-%EF%BC%89#%E6%B5%8B%E8%AF%95%E7%89%88%E9%80%9A%E9%81%93) 体验简悦最新功能。
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
 
 #### 主要功能一览：
 - 阅读模式：  
-  简悦 `原创` 功能，逐一适配了 [210+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
+  简悦 `原创` 功能，逐一适配了 [220+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
 - 聚焦模式：  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
 - 支持 `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
+
+- 临时阅读模式：  
+  将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#temp-read-mode)
+
+- 主动适配：  
+  通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#mate-read-mode)
 
 - 站点编辑器：  
   页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
@@ -59,7 +65,7 @@
 * <http://ksria.com/simpread/gallery/>
 
 #### 全部功能：
-![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.0.3.png)
+![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.0.4.png)
 
 #### 如何使用（阅读模式）：
 
@@ -83,7 +89,6 @@
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
 #### 下一步：
-- [ ] 增强型 `聚焦模式`；  
 - [ ] 自行添加新的站点到 `阅读模式`；  
 
 #### 相关链接：
@@ -95,13 +100,10 @@
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
 
-#### 如何提交新的网址用于适配模式：
-- 请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；当我适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
-- 同样，你也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)；
-
 #### 感谢：
-- [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/16)；
-- [airycanon](https://github.com/airycanon) 解决了 [Fix 13](https://github.com/kenshin/simpread/issues/13)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/23)；
+- [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 Pull requests [#16](https://github.com/kenshin/simpread/pull/16)；
+- [airycanon](https://github.com/airycanon) Pull requests 详细请看 [#23](https://github.com/kenshin/simpread/pull/23) [#44](https://github.com/kenshin/simpread/pull/44) [#124](https://github.com/kenshin/simpread/pull/124)；
+- [mikelei8291](https://github.com/mikelei8291) 详细请看 Pull requests [#114](https://github.com/kenshin/simpread/pull/114)；
 
 #### 简悦的诞生离不开它们：
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
@@ -118,6 +120,27 @@
 - Mind Maps <https://coggle.it/>
 - 咖啡 · 网易音乐 · Google Chrome · rMBP
 
+#### 协作开发：
+- Pull requests 方式：
+  * 请从 `develop` 分支开始；（ 注意：非 develop 分支的 pr 将不会合并；）
+  * Pull requests
+  * 如果需要合并的话，合并后我会通知你；（在下个版本发布时一起发布）
+
+- 源代码编译：
+  * git clone https://github.com/Kenshin/simpread.git
+  * cd simpread
+  * npm install
+  * npm run develop ( for Mac ) 用于开发
+  * npm run publish ( for Mac ) 用于发布
+  * npmw run develop ( for Win ) 用于开发
+  * npmw run publish ( for Win ) 用于发布
+
+- 提交新站：
+  * 如果只是想提交新站的话，不建议使用 `pr` 方式；
+  * 请使用 issues 方式提交，请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；
+  * 当适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
+  * 同样，也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)；
+
 #### 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:
 ![支付](http://ksria.qiniudn.com/zhifu_m.png?eee)
@@ -128,11 +151,11 @@
 <!-- Link -->
 [www-badge]:        https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg
 [www-link]:         http://ksria.com/simpread
-[version-badge]:    https://img.shields.io/badge/lastest_version-1.0.3-blue.svg
+[version-badge]:    https://img.shields.io/badge/lastest_version-1.0.4-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
-[offline-link]:     http://ksria.com/simpread/crx/1.0.3/simpread.crx
+[offline-link]:     http://ksria.com/simpread/crx/1.0.4/simpread.crx
 [license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
 [license-link]:     https://opensource.org/licenses/MIT

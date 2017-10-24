@@ -18,7 +18,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.1", "新增「高级设定」选项页，" ],
           [ "1.0.2", "新增「自定义样式，论坛类页面与分页功能」，" ],
           [ "1.0.3", "新增「导出到生产力工具，发送到 Kindle，自定义样式，论坛类页面，分页等」，" ],
-          [ "1.0.4", "新增「聚焦模式手动选择以及导出到生产力工具」，" ],
+          [ "1.0.4", "新增「高级聚焦模式、主动适配与临时阅读模式」，" ],
     ]);
 
 /**
@@ -90,6 +90,7 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.3" ) {
         data.focus.highlight  = true;
+        data.read.highlight   = true;
         data.option.menu.list = false;
         data.option.br_exit   = false;
         data.option.secret    = false;
@@ -113,13 +114,15 @@ function Verify( curver, data ) {
  * 1.0.4 before usage http://ksria.com/simpread/changelog.html#{ver}
  * 1.0.4 after  usage http://ksria.com/simpread/version_${ver}.html
  * 
+ * @param {boolean} is first load
  * @param {string} type, include: firstload, update
  * @param {string} ver, e.g. 1.0.0, 1.0.1
  */
-function Notify( type, ver ) {
+function Notify( first, type, ver ) {
     const str    = type == "firstload" ? "安装" : "更新",
-          detail = type == "firstload" ? "" : details.get(ver);
-    return `${str} 到最新版本 ${ver} ，${detail}详细请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新日志</a>`;
+          detail = type == "firstload" ? "" : details.get(ver),
+          link   = first ? `${detail}如何使用请看 <a href="https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）" target="_blank">入门指南</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
+    return `${str} 到最新版本 ${ver} ，${ link }`;
 }
 
 /**

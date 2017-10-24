@@ -401,7 +401,7 @@ function html2enml( html, url ) {
  */
 function clearMD( str ) {
     str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
-    str = str.replace( /<\/?(ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
+    str = str.replace( /<\/?(a|ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
              .replace( /sr-blockquote/ig, "blockquote" )
              .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
              .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )
@@ -420,17 +420,23 @@ function metadata() {
             title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
             desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
             include: $( "meta[name='simpread:include']" ).attr( "content" ),
-            exclude: $( "meta[name='simpread:exclude']" ).attr( "content" ),
+            exp    : $( "meta[name='simpread:exclude']" ).attr( "content" ),
             auto   : $( "meta[name='simpread:auto']"    ).attr( "content" ),
+            exclude: [],
     };
-    if ( meta.name ) {
+    if ( meta.name && meta.include ) {
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
-        !meta.exclude && ( meta.exclude = "" );
+        !meta.exp     && ( meta.exp     = "" );
+        meta.name = `metaread::${meta.name}`;
         meta.auto = meta.auto == "true" ? true : false;
-        const idx = [ "title", "desc", "include", "exclude" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        const idx = [ "title", "desc", "include", "exp" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        meta.exclude.push( meta.exp );
+        delete meta.exp;
+        console.assert( idx == -1, "meta read mode error. ", meta )
         return idx == -1 ? meta : undefined;
     } else {
+        console.error( "meta read mode error. ", meta )
         return undefined;
     }
 }
