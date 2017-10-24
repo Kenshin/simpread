@@ -101,8 +101,9 @@
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
 
 #### 感谢：
-- [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/16)；
-- [airycanon](https://github.com/airycanon) 解决了 [Fix 13](https://github.com/kenshin/simpread/issues/13)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/23)；
+- [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 Pull requests [#16](https://github.com/kenshin/simpread/pull/16)；
+- [airycanon](https://github.com/airycanon) Pull requests 详细请看 [#23](https://github.com/kenshin/simpread/pull/23) [#44](https://github.com/kenshin/simpread/pull/44) [#124](https://github.com/kenshin/simpread/pull/124)；
+- [mikelei8291](https://github.com/mikelei8291) 详细请看 Pull requests [#114](https://github.com/kenshin/simpread/pull/114)；
 
 #### 简悦的诞生离不开它们：
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
