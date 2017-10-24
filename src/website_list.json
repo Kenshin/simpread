@@ -2310,8 +2310,6 @@
             ""
         ]
     },{
-<<<<<<< HEAD
-=======
         "name"    : "37zw.net",
         "url"     : "http://www.37zw.net/**/*.html",
         "paging"  : [
@@ -2325,7 +2323,6 @@
             ""
         ]
     },{
->>>>>>> release/1.0.4
         "name"    : "lofter.com",
         "url"     : "http://*.lofter.com/post/*",
         "title"   : "<title>",
