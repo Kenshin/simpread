@@ -819,7 +819,7 @@ body {
  */
 .update {
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 40px 10px;
 
     width: 100%;
     max-width: 1024px;
