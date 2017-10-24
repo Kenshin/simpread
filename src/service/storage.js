@@ -35,6 +35,7 @@ const name = "simpread",
         bgcolor   : "rgba( 235, 235, 235, 0.9 )",
         controlbar: true,
         mask      : true,
+        highlight : true,
         opacity   : 90,
         shortcuts : "A S",
         sites     : [],    // e.g. [ "<url>", site ]
@@ -44,6 +45,7 @@ const name = "simpread",
         progress  : true,
         auto      : false,
         controlbar: true,
+        highlight : true,
         shortcuts : "A A",
         theme     : "github",
         fontfamily: "default",
@@ -97,10 +99,13 @@ const name = "simpread",
         focus     : 0,
         read      : 0,
         esc       : true,
+        br_exit   : false,
+        secret    : false,
         menu      : {
             focus : true,
             read  : true,
             link  : true,
+            list  : false,
         },
     },
     unread = {
@@ -271,20 +276,28 @@ class Storage {
      * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
      * 
      * @param {string} @see mode
+     * @param {object} meta data
      */
-    Getcur( key ) {
-        const [ url, sites ] = [ st.GetURI(), new Map( simpread[key].sites )];
+    Getcur( key, meta ) {
+        const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
         current      = swap( simpread[key], {} );
         current.url  = url;
         current.mode = key;
-        let arr = st.Getsite( new Map( simpread[key].sites ), url );
-        !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
-        if ( arr ) {
-            current.site = arr[0];
-            current.url  = arr[1];
+        if ( meta ) {
+            current.auto = meta.auto;
+            delete meta.auto;
+            current.site = { ...meta };
         } else {
-            sites.set( url, clone( site ));
-            current.site = sites.get( url );
+            let arr       = st.Getsite( new Map( simpread[key].sites ), url );
+            !arr && ( arr = st.Getsite( new Map( simpread[other].sites ), url ));
+            !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
+            if ( arr ) {
+                current.site = arr[0];
+                current.url  = arr[1];
+            } else {
+                sites.set( url, clone( site ));
+                current.site = sites.get( url );
+            }
         }
         curori      = { ...current };
         curori.site = { ...current.site };
@@ -300,7 +313,7 @@ class Storage {
         const { code } = compare();
         if ( code != 0 ) {
             if ( [ 2, 3 ].includes( code ) ) {
-                let idx = simpread[key].sites.findIndex( item => item[0] == current.url );
+                let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
                 idx == -1 && ( idx = simpread[key].sites.length );
                 simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
             }
@@ -335,22 +348,42 @@ class Storage {
     }
 
     /**
-     * Find site
+     * Find site, code include:
      * 
-     * @return {object} code: -1: not found; 1: simpread.site found; 2:simpread.read.site found;
-     *                  site: array, include: site object, url
+     * - -1: not found
+     * -  1: simpread.site
+     * -  2: simpread.read.site
+     * -  3: meta data
+     * 
+     * @param {object} meta data
      */
-    FindSite() {
+    FindSite( meta ) {
         const url = st.GetURI();
-        let   arr = st.Getsite( new Map( simpread.sites ), url );
-        stcode = -1;
-        if ( arr ) {
-            stcode = 1;
+        if ( meta ) {
+            stcode = 3;
         } else {
-            arr = st.Getsite( new Map( simpread.read.sites ), url );
-            arr && ( stcode = 2 );
+            let arr = st.Getsite( new Map( simpread.sites ), url );
+            stcode = -1;
+            if ( arr ) {
+                stcode = 1;
+            } else {
+                arr = st.Getsite( new Map( simpread.read.sites ), url );
+                !arr && ( arr = st.Getsite( new Map( simpread.focus.sites ), url ));
+                arr && arr[0].name != "" && ( stcode = 2 );
+            }
         }
-        return { code: stcode, site: arr };
+    }
+
+    /**
+     * Add new site( read only )
+     * 
+     * @param {object} new_site
+     */
+    Newsite( new_site ) {
+        current.mode = new_site.mode,
+        current.url  = new_site.url;
+        current.site = { ...new_site.site };
+        console.log( "【read only】current site object is ", current )
     }
 
     /**
@@ -371,7 +404,8 @@ class Storage {
                 count          = simpread.sites.length;
                 save( undefined, type );
             }
-            else if ( { count } = addsites( formatSites( newsites )), count > 0 ) {
+            else {
+                count = addsites( formatSites( newsites )).count;
                 save( undefined, type );
             }
             callback && callback( { count }, undefined );
@@ -536,6 +570,7 @@ class Storage {
             read   : { ...this.read   },
             unrdist: this.unrdist,
         };
+        this.option.secret && ( download.secret = { ...secret });
         return JSON.stringify( download );
     }
 
@@ -700,6 +735,7 @@ function compare() {
             site_changed = true;
         }
     }
+    changed.includes( "url" ) && ( site_changed = true );
     site_changed && ( code = code + 2 );
     console.log( "current changed state is ", code, changed );
     return { code, changed };

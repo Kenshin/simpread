@@ -56,10 +56,13 @@ export default class CommonOpt extends React.Component {
                     }
                     else if ( local < remote ) {
                         new Notify().Render( "远程备份配置文件较新，是否覆盖本地文件？", "覆盖", () => {
-                            storage.Write( () => {
-                                watch.SendMessage( "import", true );
-                                location.href = location.origin + location.pathname + "?simpread_mode=reload";
-                            }, json );
+                            this.importsecret( json.option.secret, { ...json.secret }, () => {
+                                delete json.secret;
+                                storage.Write( () => {
+                                    watch.SendMessage( "import", true );
+                                    location.href = location.origin + location.pathname + "?simpread_mode=reload";
+                                }, json );
+                            });
                         });
                     } else if ( local > remote ) {
                         new Notify().Render( "本地配置文件较新，是否覆盖远程备份文件？", "覆盖", () => {
@@ -125,12 +128,15 @@ export default class CommonOpt extends React.Component {
                                 new Notify().Render( "上传版本太低，已自动转换为最新版本。" );
                             }
                             menu.Refresh( json.option.menu );
-                            storage.Write( ()=> {
-                                watch.SendMessage( "import", true );
-                                new Notify().Render( "snackbar", "上传成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
-                                    location.href = location.origin + location.pathname + "?simpread_mode=reload";
-                                });
-                            }, json );
+                            this.importsecret( json.option.secret, { ...json.secret }, () => {
+                                delete json.secret;
+                                storage.Write( ()=> {
+                                    watch.SendMessage( "import", true );
+                                    new Notify().Render( "snackbar", "导入成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
+                                        location.href = location.origin + location.pathname + "?simpread_mode=reload";
+                                    });
+                                }, json );
+                            });
                         }
                     } catch ( error ) {
                         new Notify().Render( 2, "上传失败，配置文件解析失败，请重新确认。" );
@@ -170,6 +176,19 @@ export default class CommonOpt extends React.Component {
                 });
             });
         });
+    }
+
+    /**
+     * Import to secret storage
+     * 
+     * @param {boole} option.secret value
+     * @param {object} simpread.secret
+     * @param {function} callback
+     */
+    importsecret( state, secret, callback ) {
+        state && !$.isEmptyObject( secret ) ? storage.Safe( ()=>{
+            callback();
+        }, secret ): callback();
     }
 
     render() {

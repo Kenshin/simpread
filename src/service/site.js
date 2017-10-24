@@ -217,6 +217,9 @@ async function specbeautify( name, $target ) {
                 });
             });
             break;
+        case "jingyan.baidu.com":
+            $target.find( ".exp-image-wraper" ).removeAttr( "class" ).removeAttr( "href" );
+            break;
         case "question.zhihu.com":
             $target.find( ".zu-edit-button" ).remove();
             $target.find( "a.external" ).map( ( idx, target ) => {
@@ -398,11 +401,44 @@ function html2enml( html, url ) {
  */
 function clearMD( str ) {
     str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
-    str = str.replace( /<\/?(ins|font|span|div|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
+    str = str.replace( /<\/?(a|ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
              .replace( /sr-blockquote/ig, "blockquote" )
              .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
              .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )
              return str;
+}
+
+/**
+ * Get metadata
+ * 
+ * @return {object} meata data or undefined
+ */
+function metadata() {
+    const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
+          meta = {
+            name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
+            title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
+            desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
+            include: $( "meta[name='simpread:include']" ).attr( "content" ),
+            exp    : $( "meta[name='simpread:exclude']" ).attr( "content" ),
+            auto   : $( "meta[name='simpread:auto']"    ).attr( "content" ),
+            exclude: [],
+    };
+    if ( meta.name && meta.include ) {
+        !meta.title   && ( meta.title   = "<title>" );
+        !meta.desc    && ( meta.desc    = "" );
+        !meta.exp     && ( meta.exp     = "" );
+        meta.name = `metaread::${meta.name}`;
+        meta.auto = meta.auto == "true" ? true : false;
+        const idx = [ "title", "desc", "include", "exp" ].findIndex( item => meta[item] != "" && !meta[item].match( reg ));
+        meta.exclude.push( meta.exp );
+        delete meta.exp;
+        console.assert( idx == -1, "meta read mode error. ", meta )
+        return idx == -1 ? meta : undefined;
+    } else {
+        console.error( "meta read mode error. ", meta )
+        return undefined;
+    }
 }
 
 export {
@@ -413,4 +449,5 @@ export {
     verify         as Verify,
     html2enml      as HTML2ENML,
     clearMD        as ClearMD,
+    metadata       as GetMetadata,
 }

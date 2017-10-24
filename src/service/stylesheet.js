@@ -3,7 +3,7 @@ console.log( "=== simpread stylesheet load ===" )
 import {browser} from 'browser';
 
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ];
-let origin_read_style = "";
+let origin_read_style = "", html_style_bal = "-1";
 
 /**
  * Get chrome extension icon path
@@ -90,7 +90,11 @@ function fontFamily( family ) {
  * @param {string} font size, e.g. 70% 62.5%
  */
 function fontSize( value ) {
-    value ? $( "html" ).attr( "style", `font-size: ${value}!important` ) : $( "html" ).css( "font-size", "" );
+    if ( html_style_bal == "-1" ) {
+        html_style_bal = $( "html" ).attr( "style" );
+        html_style_bal == undefined && ( html_style_bal = "" );
+    }
+    value ? $( "html" ).attr( "style", `font-size: ${value}!important;${html_style_bal}` ) : $( "html" ).attr( "style", html_style_bal );
 }
 
 /**

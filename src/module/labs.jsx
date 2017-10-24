@@ -58,6 +58,16 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "包括：聚焦模式与阅读模式。" }}
                             label="是否启用 「ESC」 退出方式？"
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
+                    <Switch width="100%" checked={ this.props.option.br_exit }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            tooltip={{ text: "默认点击后弹出设定对话框" }}
+                            label="动作栏图标是否改为 「进入/退出阅读模式 」？"
+                            onChange={ (s)=>this.onChange(s, "option", "br_exit") } />
+                    <Switch width="100%" checked={ this.props.option.secret }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            tooltip={{ text: "默认不同步，选中同步后，请妥善保管你的授权码。" }}
+                            label="同步时是否包含授权服务中的授权码？"
+                            onChange={ (s)=>this.onChange(s, "option", "secret") } />
                 </div>
 
                 <div className="label">右键菜单</div>
@@ -74,6 +84,10 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示使用阅读模式打开此链接？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "link" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.list }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示打开稍后读？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "list" ) } />
                 </div>
 
                 <div className="label">聚焦模式</div>
@@ -87,6 +101,11 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "选择隐藏意味着鼠标移上时才显示。" }}
                             label="是否一直显示右下角的控制栏？"
                             onChange={ (s)=>this.onChange(s, "focus", "controlbar") } />
+                    <Switch width="100%" checked={ this.props.focus.highlight }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            tooltip={{ text: "关闭后会启用自动聚焦模式" }}
+                            label="是否关闭手动聚焦模式？"
+                            onChange={ (s)=>this.onChange(s, "focus", "highlight") } />
                 </div>
 
                 <div className="label">阅读模式</div>
@@ -100,6 +119,11 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "选择隐藏意味着鼠标移上时才显示。" }}
                             label="是否一直显示右下角的控制栏？"
                             onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
+                    <Switch width="100%" checked={ this.props.read.highlight }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB"
+                            tooltip={{ text: "匹配失败的原因大多是因为页面结构改变导致。" }}
+                            label="匹配阅读模式失败后是否启动临时阅读模式？"
+                            onChange={ (s)=>this.onChange(s, "read", "highlight") } />
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             tooltip={{ text: "此项为实验性功能，建议不启动。" }}

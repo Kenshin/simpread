@@ -11,6 +11,7 @@ const context = {
         focus : { id: "", menu: {} },
         read  : { id: "", menu: {} },
         link  : { id: "", menu: {} },
+        list  : { id: "", menu: {} },
     },
     menu = {
         "type"     : "normal",
@@ -20,6 +21,7 @@ const context = {
 
 Object.assign( context.focus.menu, menu, { id: "focus", "title" : "聚焦模式" });
 Object.assign( context.read.menu,  menu, { id: "read",  "title" : "阅读模式" });
+Object.assign( context.list.menu,  menu, { id: "list",  "title" : "打开稍后读" });
 Object.assign( context.link.menu,  menu, { id: "link",  "title" : "使用阅读模式打开此链接", contexts: [ "link" ] });
 
 /**
@@ -39,8 +41,11 @@ function createAll() {
     storage.option.menu.read &&
         ( context.read.id  = browser.contextMenus.create( context.read.menu ));
 
-    storage.option.menu.link &&
+        storage.option.menu.link &&
         ( context.link.id  = browser.contextMenus.create( context.link.menu ));
+
+    storage.option.menu.list &&
+        ( context.list.id  = browser.contextMenus.create( context.list.menu ));
 }
 
 /**

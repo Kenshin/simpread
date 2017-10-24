@@ -35,14 +35,22 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.focus_mode:
             focusMode();
             break;
-        case msg.MESSAGE_ACTION.read_mode:
-            readMode();
-            break;
         case msg.MESSAGE_ACTION.shortcuts:
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
             browserAction();
+            break;
+        case msg.MESSAGE_ACTION.browser_click:
+            watch.Verify( ( state, result ) => {
+                if ( state ) {
+                    console.log( "watch.Lock()", result );
+                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+                } else {
+                     if ( storage.option.br_exit ) read.Exist( false ) ? read.Exit() : readMode();
+                     else readMode();
+                }
+            });
             break;
     }
 });
@@ -76,13 +84,12 @@ function focusMode() {
             new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.focus );
-            const $focus = focus.GetFocus( storage.current.site.include );
-            if ( $focus ) {
+            focus.GetFocus( storage.current.site.include ).done( result => {
                 storage.Statistics( mode.focus );
-                focus.Render( $focus, storage.current.site.exclude, storage.current.bgcolor );
-            } else {
+                focus.Render( result, storage.current.site.exclude, storage.current.bgcolor );
+            }).fail( () => {
                 new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
-            }
+            });
         }
     });
 }
@@ -98,7 +105,7 @@ function readMode() {
     watch.Verify( ( state, result ) => {
         if ( state ) {
             console.log( "watch.Lock()", result );
-            new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>location.href = location.href + "?simpread_mode=read" );
+            new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.read );
             switch ( st.Verify( storage.current.site.name ) ) {
@@ -107,16 +114,12 @@ function readMode() {
                     read.Render();
                     break;
                 case -1:
-                    new Notify().Render( "当前页面没有适配，如需要请看 <a href='https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E5%A6%82%E4%BD%95%E6%96%B0%E5%A2%9E' target='_blank' >站点编辑器</>" );
-                    break;
-                /*
-                case -2:
-                    new Notify().Render( "只有选中【只看楼主】后，才能进入阅读模式。" );
-                    new Notify().Render( "是否直接进入阅读模式？", "直接进入", ()=>{
-                        document.location = document.location.href + "?see_lz=1&simpread_mode=read";
+                    new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+                    read.Highlight().done( () => {
+                        storage.Statistics( mode.read );
+                        read.Render();
                     });
                     break;
-                */
             }
         }
     });
@@ -141,6 +144,7 @@ function autoOpen() {
             case "entry.juejin.im":
                 setTimeout( ()=>readMode(), 2500 );
                 break;
+            case "kancloud.cn":
             case "sspai.com":
                 setTimeout( ()=>readMode(), 500 );
                 break;
@@ -148,7 +152,7 @@ function autoOpen() {
                 storage.current.site.name != "" && readMode();
                 break;
         }
-        }
+    }
 }
 
 /**
@@ -175,7 +179,7 @@ function entry( current, other, ...str ) {
  */
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
-        storage.Getcur( mode );
+        storage.Getcur( mode, st.GetMetadata() );
     }
 }
 
@@ -183,6 +187,6 @@ function getCurrent( mode ) {
  * Browser action
  */
 function browserAction() {
-    storage.FindSite();
+    storage.FindSite( st.GetMetadata() );
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
 }

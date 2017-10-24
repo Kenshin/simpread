@@ -82,7 +82,7 @@ storage.Read( first => {
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
-    vernotify();
+    vernotify( first );
 });
 
 /**
@@ -111,13 +111,15 @@ function hashnotify() {
 
 /**
  * Version update notify
+ * 
+ * @param {boolean} is first load
  */
-function vernotify() {
+function vernotify( first ) {
     const hash = location.hash;
     if ( hash.startsWith( "#firstload?ver=" ) || hash.startsWith( "#update?ver=" ) ) {
         const prefix  = hash.match( /\w+/      )[0],
               version = hash.match( /[0-9\.]+/ )[0],
-              msg     = ver.Notify( prefix, version );
+              msg     = ver.Notify( first, prefix, version );
 
         new Notify().Render( "简悦 版本提示", msg );
 
@@ -145,11 +147,13 @@ function firstLoad( first ) {
 /**
  * Welcome page render()
  * 
+ * exclude: 1.0.4
+ * 
  * @param {boolean} true: first load
  * @param {string} version
  */
 function welcomeRender( first, version ) {
-    welc.Render( "body", first, version );
+    !( !first && version == "1.0.4" ) && welc.Render( "body", first, version );
 }
 
 /**
