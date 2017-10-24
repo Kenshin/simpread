@@ -26,7 +26,7 @@
 - 支持 `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
 
 - 临时阅读模式：  
-  将 `非适配页面` 生成 `阅读模式` 一样的页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#temp-read-mode)
+  将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#temp-read-mode)
 
 - 主动适配：  
   通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.4.html#mate-read-mode)
@@ -100,10 +100,6 @@
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
 
-#### 如何提交新的网址用于适配模式：
-- 请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；当我适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
-- 同样，你也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)；
-
 #### 感谢：
 - [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/16)；
 - [airycanon](https://github.com/airycanon) 解决了 [Fix 13](https://github.com/kenshin/simpread/issues/13)，详细请看 [Pull requests](https://github.com/kenshin/simpread/pull/23)；
@@ -122,6 +118,27 @@
 - Material Design usage <https://material.io/guidelines/>
 - Mind Maps <https://coggle.it/>
 - 咖啡 · 网易音乐 · Google Chrome · rMBP
+
+#### 协作开发：
+- Pull requests 方式：
+  * 请从 `develop` 分支开始；（ 注意：非 develop 分支的 pr 将不会合并；）
+  * Pull requests
+  * 如果需要合并的话，合并后我会通知你；（在下个版本发布时一起发布）
+
+- 源代码编译：
+  * git clone https://github.com/Kenshin/simpread.git
+  * cd simpread
+  * npm install
+  * npm run develop ( for Mac ) 用于开发
+  * npm run publish ( for Mac ) 用于发布
+  * npmw run develop ( for Win ) 用于开发
+  * npmw run publish ( for Win ) 用于发布
+
+- 提交新站：
+  * 如果只是想提交新站的话，不建议使用 `pr` 方式；
+  * 请使用 issues 方式提交，请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；
+  * 当适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
+  * 同样，也可以直接提交已完成适配的代码，关于如何适配请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)；
 
 #### 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:
