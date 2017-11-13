@@ -214,7 +214,7 @@ const webpack = require( 'webpack' ),
       resolve: {
         alias : {
           minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
-          'to-markdown' : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
+          markdown   : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           pangu      : __dirname + '/src/vender/pangu.min.js',

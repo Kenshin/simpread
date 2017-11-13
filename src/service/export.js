@@ -2,7 +2,7 @@ console.log( "=== simpread export load ===" )
 
 import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
-import toMarkdown from 'to-markdown';
+import toMarkdown from 'markdown';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
