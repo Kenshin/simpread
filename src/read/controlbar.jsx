@@ -104,6 +104,15 @@ export default class ReadCtlbar extends React.Component {
         Mousetrap.bind( [ "c c" ], ( event, combo ) => this.onAction( undefined, "exit" ) );
     }
 
+    componentWillMount() {
+        if ( this.props.type.startsWith( "txtread::" ) ) {
+            delete config.readItems.download;
+            this.props.type.endsWith( "::local" ) && delete config.readItems.readlater;
+            this.props.type.endsWith( "::local" ) && delete config.readItems.send;
+            this.props.type.endsWith( "::local" ) && delete config.readItems.share;
+        }
+    }
+
     constructor( props ) {
         super( props );
         this.bindShortcuts();

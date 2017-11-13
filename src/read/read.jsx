@@ -71,6 +71,7 @@ class Read extends React.Component {
             this.props.read.layout     && ss.Layout( this.props.read.layout );
             ss.Preview( this.props.read.custom );
 
+            this.props.wrapper.name.startsWith( "txtread::" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
             if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
             if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
             await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
@@ -144,6 +145,7 @@ class Read extends React.Component {
                 <Footer />
                 <ReadCtlbar show={ this.props.read.controlbar } 
                             multi={ this.props.wrapper.avatar ? true : false }
+                            type={ this.props.wrapper.name }
                             site={{ title: this.props.wrapper.title, url: window.location.href }} 
                             custom={ this.props.read.custom } onAction={ (t,v)=>this.onAction( t,v ) }/>
             </sr-read>
