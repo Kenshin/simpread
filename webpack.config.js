@@ -211,10 +211,16 @@ const webpack = require( 'webpack' ),
         ]
       },
 
+      node: {
+        fs: 'empty'
+      },
+
       resolve: {
         alias : {
           minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
           markdown   : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
+          epubpress  : __dirname + '/node_modules/epub-press-js/build/index.js',
+
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           pangu      : __dirname + '/src/vender/pangu.min.js',

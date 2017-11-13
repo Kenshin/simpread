@@ -40,7 +40,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "png", "kindle", "pdf" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub" ].includes( type ) ) {
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
@@ -67,6 +67,13 @@ function action( type, title, desc, content ) {
                 } catch ( e ) {
                     new Notify().Render( 1, "转换 PNG 格式失败，请注意，这是一个实验性功能，不一定能导出成功。" );
                 }
+                break;
+            case "epub":
+                new Notify().Render( `当前服务使用了 <a href="https://github.com/Kenshin/simpread/wiki/epub" target="_blank">epub.press</a> 服务，开始转码生成 epub 请稍等...` );
+                exp.Epub( content, window.location.href, title, desc, success => {
+                    success  && new Notify().Render( 0, "转换成功" );
+                    !success && new Notify().Render( 2, `转换失败，这是一个实验性功能，不一定能导出成功，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/epub" target="_blank">epub.press</a>` );
+                });
                 break;
             case "kindle":
                 new Notify().Render( "开始转码阅读模式并上传到服务器，请稍等..." );

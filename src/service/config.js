@@ -63,6 +63,11 @@ const readItems = {
         "icon" : ss.IconPath("download_icon"),
         "color": "#D4237A",
         "items": {
+            "epub" : {
+                "name" : "导出为 epub",
+                "icon" : ss.IconPath("epub_icon"),
+                "color": "#D4237A",
+            },
             "pdf" : {
                 "icon" : ss.IconPath("pdf_icon"),
                 "color": "#D4237A",

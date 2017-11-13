@@ -3,6 +3,7 @@ console.log( "=== simpread export load ===" )
 import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
 import toMarkdown from 'markdown';
+import EpubPress  from 'epubpress';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
@@ -44,6 +45,27 @@ function markdown( data, name, callback ) {
     } catch( error ) {
         callback( undefined, error );
     }
+}
+
+function epub( data, url, title, desc, callback ) {
+    console.log( data )
+    const ebook = new EpubPress({
+        title,
+        description: desc == "" ? title : desc,
+        sections: [{
+            url,
+            html: `<html><body><div>${data}</div></body></html>`,
+        }]
+    });
+    ebook.publish().then( () => {
+        ebook.download();
+    }).then(() => {
+        console.log( "succcess" );
+        callback( true );
+    }).catch( error => {
+        console.log( "publish epub error ", error );
+        callback( false );
+    });
 }
 
 /**
@@ -967,6 +989,7 @@ const dropbox  = new Dropbox(),
 export {
     png      as PNG,
     pdf      as PDF,
+    epub     as Epub,
     markdown as Markdown,
     download as Download,
     unlink   as Unlink,
