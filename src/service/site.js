@@ -457,7 +457,11 @@ function readtxt() {
             include: "<pre>",
             auto   : false,
             exclude: [],
-        };
+    };
+    if ( type == "remote" ) {
+        meta.include = "";
+        meta.html    = $( "body pre" ).html().replace( /\n/ig, "<br>" );
+    }
     !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".txt", "" )) }</title>` );
     return meta;
 }
