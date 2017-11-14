@@ -245,18 +245,26 @@ toc * {
 
 toc {
     position: fixed;
-    left: 0;
+    right: 0;
     top: 100px;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
+    width: 0;
     max-width: 200px;
 
     padding: 10px;
 
+    overflow: hidden;
+    cursor: pointer;
     border: 1px solid rgba(158, 158, 158, 0.22);
+    transition: width 1.5s;
+}
+
+toc:hover {
+    width: 100%;
 }
 
 toc outline {
@@ -267,6 +275,7 @@ toc outline {
     text-overflow: ellipsis;
 
     margin: 2px 0;
+    text-align: left;
 }
 
 toc outline a,
@@ -276,6 +285,10 @@ toc outline a:focus
 {
     color: inherit;
     text-decoration: none!important;
+}
+
+toc outline a:hover {
+    font-weight: bold!important;
 }
 
 toc outline a.toc-outline-theme-dark,
@@ -291,4 +304,8 @@ toc outline a.toc-outline-theme-night {
 }
 .toc-level-h4 {
     margin-left: 35px;
+}
+
+.toc-hidden {
+    width: 20px;
 }
