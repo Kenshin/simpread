@@ -1,17 +1,22 @@
 console.log( "=== simpread read toc load ===" )
 
+let is_click = false;
+
 class TOC extends React.Component {
 
     onClick( event ) {
+        is_click = true;
         const $target = $( event.target ).parent();
-        $target.parent().find( "a" ).removeClass( "toc-outline-active" );
+        $target.parent().find( "outline" ).removeClass( "toc-outline-active" );
         $target.addClass( "toc-outline-active" );
 
         const href     = $( event.target ).attr("href"),
              offsetTop = href === "#" ? 0 : $(href).offset().top - 5;
         $( "html" ).stop().animate({
             scrollTop: offsetTop
-        }, 300 );
+        }, 300, () => {
+            setTimeout( ()=>is_click = false, 500 );
+        });
         event.preventDefault();
     }
 
@@ -26,6 +31,7 @@ class TOC extends React.Component {
               });
 
         $( window ).scroll( function() {
+            if ( is_click ) return;
             const fromTop = $(this).scrollTop() + topMenuHeight;
             let cur = scrollItems.map( function() {
             if ($(this).offset().top < fromTop)
