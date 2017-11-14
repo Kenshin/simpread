@@ -2,9 +2,50 @@ console.log( "=== simpread read toc load ===" )
 
 class TOC extends React.Component {
 
+    onClick( event ) {
+        const $target = $( event.target ).parent();
+        $target.parent().find( "a" ).removeClass( "toc-outline-active" );
+        $target.addClass( "toc-outline-active" );
+
+        const href     = $( event.target ).attr("href"),
+             offsetTop = href === "#" ? 0 : $(href).offset().top - 5;
+        $( "html" ).stop().animate({
+            scrollTop: offsetTop
+        }, 300 );
+        event.preventDefault();
+    }
+
+    componentDidMount() {
+        let lastId;
+        const topMenu       = $( "toc" ),
+              topMenuHeight = topMenu.outerHeight(),
+              menuItems     = topMenu.find( "a" ),
+              scrollItems   = menuItems.map( function() {
+                const item  = $( $(this).attr("href") );
+                    if ( item.length ) { return item; }
+              });
+
+        $( window ).scroll( function() {
+            const fromTop = $(this).scrollTop() + topMenuHeight;
+            let cur = scrollItems.map( function() {
+            if ($(this).offset().top < fromTop)
+                return this;
+            });
+            cur = cur[cur.length - 1];
+            const id = cur && cur.length ? cur[0].id : "";
+
+            if ( lastId !== id ) {
+                lastId = id;
+                menuItems
+                    .parent().removeClass( "toc-outline-active" )
+                    .end().filter("[href='#"+id+"']").parent().addClass( "toc-outline-active" );
+            }
+        });
+    }
+
     render() {
         const outline = this.props.table.map( item => {
-            return <outline className={ item.level }><a className={ "toc-outline-theme-" + this.props.theme } href={ "#" + item.id}>{ item.value }</a></outline>
+            return <outline className={ item.level }><a className={ "toc-outline-theme-" + this.props.theme } href={ "#" + item.id} onClick={ evt=>this.onClick(evt) }>{ item.value }</a></outline>
         });
         return (
             <toc className="simpread-font simpread-theme-root">

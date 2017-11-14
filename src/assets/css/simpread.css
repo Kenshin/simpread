@@ -252,7 +252,7 @@ toc {
     flex-direction: column;
     align-items: flex-start;
 
-    width: 0;
+    /*width: 0;*/
     max-width: 200px;
 
     padding: 10px;
@@ -263,9 +263,11 @@ toc {
     transition: width 1.5s;
 }
 
+/*
 toc:hover {
     width: 100%;
 }
+*/
 
 toc outline {
     display: -webkit-box;
@@ -275,6 +277,7 @@ toc outline {
     text-overflow: ellipsis;
 
     margin: 2px 0;
+    width: 100%;
     text-align: left;
 }
 
@@ -289,6 +292,7 @@ toc outline a:focus
 
 toc outline a:hover {
     font-weight: bold!important;
+    text-decoration: underline!important;
 }
 
 toc outline a.toc-outline-theme-dark,
@@ -297,15 +301,16 @@ toc outline a.toc-outline-theme-night {
 }
 
 .toc-level-h2 {
-    margin-left: 10px;
+    padding-left: 10px;
 }
 .toc-level-h3 {
-    margin-left: 25px;
+    padding-left: 25px;
 }
 .toc-level-h4 {
-    margin-left: 35px;
+    padding-left: 35px;
 }
 
-.toc-hidden {
-    width: 20px;
+.toc-outline-active {
+    font-weight: bold;
+    border-left: 2px solid #3e50b4;
 }
