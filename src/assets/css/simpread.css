@@ -235,3 +235,60 @@ sr-rd-crlbar.controlbar:hover {
     cursor: pointer;
     transition: opacity .5s ease;
 }
+
+/**
+ * TOC
+ */
+toc * {
+    all: unset;
+}
+
+toc {
+    position: fixed;
+    left: 0;
+    top: 100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    max-width: 200px;
+
+    padding: 10px;
+
+    border: 1px solid rgba(158, 158, 158, 0.22);
+}
+
+toc outline {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    margin: 2px 0;
+}
+
+toc outline a,
+toc outline a:active,
+toc outline a:visited,
+toc outline a:focus
+{
+    color: inherit;
+    text-decoration: none!important;
+}
+
+toc outline a.toc-outline-theme-dark,
+toc outline a.toc-outline-theme-night {
+    color: #fff!important;
+}
+
+.toc-level-h2 {
+    margin-left: 10px;
+}
+.toc-level-h3 {
+    margin-left: 25px;
+}
+.toc-level-h4 {
+    margin-left: 35px;
+}

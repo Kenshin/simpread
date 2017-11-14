@@ -5,6 +5,7 @@ import pangu       from 'pangu';
 import ProgressBar from 'schedule';
 import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
+import * as toc    from 'toc';
 import * as modals from 'modals';
 
 import { storage, Clone } from 'storage';
@@ -80,6 +81,7 @@ class Read extends React.Component {
             await htmlbeautify( $( "sr-rd-content" ));
             await commbeautify( $( "sr-rd-content" ));
             pangu.spacingElementByClassName( rdcls );
+            toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme );
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
         }
