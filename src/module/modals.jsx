@@ -101,6 +101,9 @@ function Render() {
         case name.startsWith( "metaread::" ):
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/主动适配阅读模式' target='_blank'>主动适配阅读模式</a>，并不能保存到适配列表中，保存功能将在下个版本提供。" )
             break;
+        case name.startsWith( "txtread::" ):
+            new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/小说阅读器模式' target='_blank'>小说阅读器模式</a>，并不能使用设定功能。" )
+            break;
         default:
             !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
     }

@@ -414,6 +414,9 @@ function clearMD( str ) {
  * @return {object} meata data or undefined
  */
 function metadata() {
+    if ( minimatch( location.href, "file://**/*.txt" ) || minimatch( location.href, "http*://**/*.txt" ) ) {
+        return readtxt();
+    }
     const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
           meta = {
             name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
@@ -439,6 +442,28 @@ function metadata() {
         console.error( "meta read mode error. ", meta )
         return undefined;
     }
+}
+
+/**
+ * Read txt, include: file and http
+ */
+function readtxt() {
+    const title = location.pathname.split( "/" ).pop(),
+          type  = location.protocol == "file:" ? "local" : "remote",
+          meta  = {
+            name   : `txtread::${type}`,
+            title  : "<title>",
+            desc   : "",
+            include: "<pre>",
+            auto   : false,
+            exclude: [],
+    };
+    if ( type == "remote" ) {
+        meta.include = "";
+        meta.html    = $( "body pre" ).html().replace( /\n/ig, "<br>" );
+    }
+    !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".txt", "" )) }</title>` );
+    return meta;
 }
 
 export {
