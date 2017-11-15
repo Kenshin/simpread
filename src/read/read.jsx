@@ -369,6 +369,7 @@ async function commbeautify( $target ) {
         newsrc = cnbeta  ? cnbeta  : src;
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
+        !newsrc.startsWith( "http" ) && ( newsrc = $target[0].src );
         $img.attr( "src", newsrc )
             .one( "load",  ()=>fixOverflowImgsize() )
             .one( "error", ()=>loaderrorHandle()    )
