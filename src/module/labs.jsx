@@ -29,11 +29,16 @@ export default class LabsOpt extends React.Component {
         child  && menu.Refresh( this.props[model][state] );
         this.props.onChange && this.props.onChange( true );
         model == "read" && state == "auto" && this.exclusionState( value );
+        model == "read" && state == "toc"  && this.tocState( value );
     }
 
     changeExclusion() {
         this.props.read.exclusion = event.target.value.split("\n");
         this.props.onChange && this.props.onChange( false );
+    }
+
+    tocState( value ) {
+        $( this.refs.toc ).velocity( value ? "slideDown" : "slideUp" );
     }
 
     exclusionState( value ) {
@@ -42,6 +47,7 @@ export default class LabsOpt extends React.Component {
 
     componentDidMount() {
         this.exclusionState( this.props.read.auto );
+        this.tocState( this.props.read.toc );
     }
 
     onClick( state ) {
@@ -124,6 +130,16 @@ export default class LabsOpt extends React.Component {
                             tooltip={{ text: "匹配失败的原因大多是因为页面结构改变导致。" }}
                             label="匹配阅读模式失败后是否启动临时阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "highlight") } />
+                    <Switch width="100%" checked={ this.props.read.toc }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB"
+                            label="是否自动生成大纲（目录）？"
+                            onChange={ (s)=>this.onChange(s, "read", "toc") } />
+                    <div ref="toc">
+                        <Switch width="100%" checked={ this.props.read.toc_hide }
+                                thumbedColor="#3F51B5" trackedColor="#7986CB"
+                                label="生成的大纲（目录）是否开启鼠标移动到右上角自动显示？"
+                                onChange={ (s)=>this.onChange(s, "read", "toc_hide") } />
+                    </div>
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             tooltip={{ text: "此项为实验性功能，建议不启动。" }}
