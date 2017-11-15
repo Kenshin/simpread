@@ -248,6 +248,10 @@ toc-bg {
     height: 500px;
 }
 
+toc-bg:hover {
+    z-index: 3;
+}
+
 .toc-bg-hidden {
     opacity: 0;
     transition: opacity .5s ease;

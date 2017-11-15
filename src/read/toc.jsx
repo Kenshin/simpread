@@ -84,7 +84,7 @@ function Render( root, $target, theme, hidden ) {
         let   id    = $item.attr( "id" );
         id          = id == undefined ? `sr-toc-${idx}` : `${id}-${idx}`
         $item.attr( "id", id );
-        table.push({
+        value && table.push({
             level: `toc-level-${tag}`,
             id,
             value,
