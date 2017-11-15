@@ -41,6 +41,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.tab_selected:
             browserAction();
             break;
+        case msg.MESSAGE_ACTION.read_mode:
         case msg.MESSAGE_ACTION.browser_click:
             watch.Verify( ( state, result ) => {
                 if ( state ) {
