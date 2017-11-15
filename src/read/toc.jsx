@@ -72,9 +72,11 @@ class TOC extends React.Component {
  * @param {string} selector name
  * @param {jquery} jquery object
  * @param {string} theme
+ * @param {boolen} hidden
  */
-function Render( root, $target, theme ) {
-    const table = [];
+function Render( root, $target, theme, hidden ) {
+    const table = [],
+          cls   = hidden ? "toc-bg-hidden" : "";
     $target.find( "h1, h2, h3, h4" ).map( ( idx, item) => {
         const $item = $( item ),
               tag   = $item[0].tagName.toLowerCase(),
@@ -89,7 +91,7 @@ function Render( root, $target, theme ) {
         });
     });
     console.log( "current toc is ", table )
-    $( root ).append( "<toc-bg></tocbg>" );
+    $( root ).append( `<toc-bg class=${cls}></tocbg>` );
     table.length > 0 && ReactDOM.render( <TOC table={ table } theme={ theme } />, $( "toc-bg" )[0] );
 }
 
