@@ -270,6 +270,7 @@ toc:hover {
 */
 
 toc outline {
+    position: relative;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -311,5 +312,15 @@ toc outline a.toc-outline-theme-night {
 
 .toc-outline-active {
     font-weight: bold;
-    border-left: 3px solid #3e50b4;
+    background-color: #3e50b4;
+}
+
+toc outline active {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    padding: 0 0 0 3px;
 }

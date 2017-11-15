@@ -7,8 +7,8 @@ class TOC extends React.Component {
     onClick( event ) {
         is_click = true;
         const $target = $( event.target ).parent();
-        $target.parent().find( "outline" ).removeClass( "toc-outline-active" );
-        $target.addClass( "toc-outline-active" );
+        $target.parent().find( "active" ).removeClass( "toc-outline-active" );
+        $target.find( "active" ).addClass( "toc-outline-active" );
 
         const href     = $( event.target ).attr("href"),
              offsetTop = href === "#" ? 0 : $(href).offset().top - 5;
@@ -42,16 +42,20 @@ class TOC extends React.Component {
 
             if ( lastId !== id ) {
                 lastId = id;
-                menuItems
-                    .parent().removeClass( "toc-outline-active" )
-                    .end().filter("[href='#"+id+"']").parent().addClass( "toc-outline-active" );
+                menuItems.parent().find( "active" ).removeClass( "toc-outline-active" );
+                menuItems.filter("[href='#"+id+"']").parent().find( "active" ).addClass( "toc-outline-active" );
             }
         });
     }
 
     render() {
         const outline = this.props.table.map( item => {
-            return <outline className={ item.level }><a className={ "toc-outline-theme-" + this.props.theme } href={ "#" + item.id} onClick={ evt=>this.onClick(evt) }>{ item.value }</a></outline>
+            return (
+                <outline className={ item.level }>
+                    <active></active>
+                    <a className={ "toc-outline-theme-" + this.props.theme } href={ "#" + item.id} onClick={ evt=>this.onClick(evt) }>{ item.value }</a>
+                </outline>
+            )
         });
         return (
             <toc className="simpread-font simpread-theme-root">
