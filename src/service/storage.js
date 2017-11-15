@@ -595,7 +595,7 @@ class Storage {
     }
 
     /**
-     * Fix simpread.read.site
+     * Fix simpread.read.site only old 1.0.0 and 1.0.1
      * 
      * @param  {array} changed target
      * @param  {string} old version
@@ -604,33 +604,23 @@ class Storage {
      * @return {array} new sites
      */
     Fix( target, curver, newver ) {
-        const newsites = target.map( site => {
+        target.forEach( ( site, idx ) => {
             let url      = site[0],
                 { name } = site[1];
-            for ( let item of simpread.sites ) {
-                if ( name == item[1].name ) {
-
-                    // 1.0.0 → 1.0.1
-                    if ( curver == "1.0.0" ) {
-                        site[0] = item[0];
-                    }
-
-                    if ( curver == "1.0.0" ) {
-                        curver = "1.0.1";
-                    }
-
-                    // 1.0.1 → 1.0.2
-                    if ( curver == "1.0.1" ) {
+            if ( curver == "1.0.0" || curver == "1.0.1" ) {
+                for ( let item of simpread.sites ) {
+                    if ( name == item[1].name ) {
                         item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
                         item[1].paging  && ( site[1].paging  = item[1].paging  );
                         item[1].include && ( site[1].include = item[1].include );
+                        target[idx][1] = { ...item[1] };
+                        target[idx][0] = item[0];
+                        continue;
                     }
-
-                    return [ item[0], site[1] ];
                 }
             }
         });
-        return newsites;
+        return target;
     }
 
 }
