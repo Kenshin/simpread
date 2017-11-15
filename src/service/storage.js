@@ -47,6 +47,8 @@ const name = "simpread",
         controlbar: true,
         highlight : true,
         shortcuts : "A A",
+        toc       : true,
+        toc_hide  : true,
         theme     : "github",
         fontfamily: "default",
         exclusion : [
