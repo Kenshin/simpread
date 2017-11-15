@@ -219,6 +219,7 @@ sr-rd-crlbar.controlbar {
 
     opacity: 0;
     transition: opacity .5s ease;
+    z-index: 2;
 }
 
 sr-rd-crlbar.controlbar:hover {
@@ -239,6 +240,21 @@ sr-rd-crlbar.controlbar:hover {
 /**
  * TOC
  */
+toc-bg {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 500px;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+toc-bg:hover {
+    opacity: 1;
+    z-index: 3;
+}
+
 toc * {
     all: unset;
 }
@@ -252,7 +268,6 @@ toc {
     flex-direction: column;
     align-items: flex-start;
 
-    /*width: 0;*/
     max-width: 200px;
 
     padding: 10px;
@@ -262,12 +277,6 @@ toc {
     border: 1px solid rgba(158, 158, 158, 0.22);
     transition: width 1.5s;
 }
-
-/*
-toc:hover {
-    width: 100%;
-}
-*/
 
 toc outline {
     position: relative;
@@ -311,7 +320,6 @@ toc outline a.toc-outline-theme-night {
 }
 
 .toc-outline-active {
-    font-weight: bold;
     background-color: #3e50b4;
 }
 
