@@ -20,6 +20,9 @@ function png( element, name, callback ) {
     .then( blob => {
         blob && FileSaver.saveAs( blob, name );
         callback( !!blob );
+    }).catch( error => {
+        console.error( "export png failed", error )
+        callback( undefined );
     });
 }
 
