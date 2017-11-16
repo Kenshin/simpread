@@ -420,6 +420,7 @@ function metadata() {
     const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
           meta = {
             name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
+            url    : $( "meta[name='simpread:url']"     ).attr( "content" ),
             title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
             desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
             include: $( "meta[name='simpread:include']" ).attr( "content" ),
@@ -428,6 +429,9 @@ function metadata() {
             exclude: [],
     };
     if ( meta.name && meta.include ) {
+        if ( meta.url && !minimatch( location.href, meta.url )) {
+            return undefined;
+        }
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
         !meta.exp     && ( meta.exp     = "" );
