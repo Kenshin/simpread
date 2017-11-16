@@ -27,6 +27,16 @@ export default class ReadCtlbar extends React.Component {
         onAction: React.PropTypes.func,
     }
 
+    componentDidMount() {
+        browser.runtime.onMessage.addListener( ( request, sender, sendResponse ) => {
+            if ( request.type == msg.MESSAGE_ACTION.export ) {
+                console.log( "controlbar runtime Listener", request );
+                new Notify().Render( "已重新授权成功！" );
+                this.onAction( undefined, request.value.type );
+            }
+        });
+    }
+
     onAction( event, type ) {
         console.log( "fab type is =", type )
 

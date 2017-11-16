@@ -946,12 +946,17 @@ function mdWrapper( content, name, notify ) {
  * 
  * @param {string} result
  * @param {string} error
- * @param {string} name
+ * @param {string} service name, e.g. Google 云端硬盘
+ * @param {string} service id, e.g. gdrive
  * @param {object} notify
  */
-function serviceCallback( result, error, name, notify ) {
+function serviceCallback( result, error, name, type, notify ) {
     !error && notify.Render( `已成功保存到 ${name}！` );
     error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+    if ( error && error.includes( "重新授权" )) {
+        notify.Clone().Render( "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
+        setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
+    }
 }
 
 /**

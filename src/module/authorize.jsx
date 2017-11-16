@@ -2,6 +2,8 @@ console.log( "===== simpread option labs:Authorize load =====" )
 
 import {storage} from 'storage';
 import * as exp  from 'export';
+import * as msg  from 'message';
+import {browser} from 'browser';
 
 import Notify    from 'notify';
 import Switch    from 'switch';
@@ -36,6 +38,12 @@ export default class Auth extends React.Component {
                 storage.Safe( () => {
                     new Notify().Render( `已成功授权 ${name} 。` );
                     this.setState({ secret: storage.secret, linnk: false });
+                    if ( location.hash.startsWith( "#labs?auth=" ) ) {
+                        new Notify().Render( "3 秒钟将会关闭此页面..." );
+                        setTimeout( () => {
+                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth_success, { url: location.href, type: "auth", name: id } ));
+                        }, 3000 )
+                    }
                 }, storage.secret );
             },
             failed = ( error, id, name ) => {
@@ -155,6 +163,9 @@ export default class Auth extends React.Component {
 
     componentDidMount() {
         storage.Safe( () => this.setState({ secret: storage.secret }) );
+        if ( location.hash.startsWith( "#labs?auth=" ) ) {
+            this.onChange( location.hash.replace( "#labs?auth=", "" ), true );
+        }
     }
 
     render() {

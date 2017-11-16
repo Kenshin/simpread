@@ -86,6 +86,19 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.save_verify:
             sendResponse( watch.Lock( request.value.url ));
             break;
+        case msg.MESSAGE_ACTION.auth:
+            browser.tabs.create({ url: browser.extension.getURL( "options/options.html#labs?auth=" + request.value.name.toLowerCase() ) });
+            break;
+        case msg.MESSAGE_ACTION.auth_success:
+            getCurTab( { url: request.value.url }, tabs => {
+                if ( tabs && tabs.length > 0 ) {
+                    chrome.tabs.remove( tabs[0].id );
+                    getCurTab( { "active": true }, tabs => {
+                        tabs.forEach( tab => browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.export, {type: request.value.name.toLowerCase()} )) );
+                    });
+                }
+            });
+            break;
     }
 });
 
