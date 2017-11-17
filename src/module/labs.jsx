@@ -109,8 +109,8 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "focus", "controlbar") } />
                     <Switch width="100%" checked={ this.props.focus.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                            tooltip={{ text: "关闭后会启用自动聚焦模式" }}
-                            label="是否关闭手动聚焦模式？"
+                            tooltip={{ text: "关闭后会使用「自动聚焦模式」" }}
+                            label="是否启用手动聚焦模式？（关闭后会使用「自动聚焦模式」）"
                             onChange={ (s)=>this.onChange(s, "focus", "highlight") } />
                 </div>
 
