@@ -62,17 +62,17 @@ export default class LabsOpt extends React.Component {
                     <Switch width="100%" checked={ this.props.option.esc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             tooltip={{ text: "包括：聚焦模式与阅读模式。" }}
-                            label="是否启用 「ESC」 退出方式？"
+                            label="是否启用 「ESC」 退出方式？（包括：聚焦模式与阅读模式）"
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
                     <Switch width="100%" checked={ this.props.option.br_exit }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             tooltip={{ text: "默认动作为：点击「弹出设定对话框」" }}
-                            label="动作栏图标是否改为 「进入/退出 」（包括：聚焦模式和阅读模式）？"
+                            label="动作栏图标是否改为 「进入/退出 」模式？（包括：聚焦模式和阅读模式，关闭后为「弹出设定对话框」）"
                             onChange={ (s)=>this.onChange(s, "option", "br_exit") } />
                     <Switch width="100%" checked={ this.props.option.secret }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             tooltip={{ text: "默认不同步，选中同步后，请妥善保管你的授权码。" }}
-                            label="同步时是否包含授权服务中的授权码？"
+                            label="同步时是否包含授权服务中的授权码？（包括导出配置到本地）"
                             onChange={ (s)=>this.onChange(s, "option", "secret") } />
                 </div>
 
