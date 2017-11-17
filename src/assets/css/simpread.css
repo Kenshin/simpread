@@ -342,3 +342,29 @@ toc outline active {
 
     padding: 0 0 0 3px;
 }
+
+/**
+ * Keyboard
+ */
+
+sr-kbd {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 247, 133)), to(rgb(255, 197, 66)));
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(227, 190, 35);
+    border-image: initial;
+
+    position: absolute;
+    left: 0;
+    padding: 1px 3px 0px;
+
+    font-size: 11px!important;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 7px 0px;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.sr-kbd-a {
+    position: relative;
+}

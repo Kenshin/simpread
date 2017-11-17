@@ -256,6 +256,7 @@ const webpack = require( 'webpack' ),
           readctlbar : __dirname + '/src/read/controlbar.jsx',
           schedule   : __dirname + '/src/read/progressbar.jsx',
 
+          keyboard   : __dirname + '/src/module/keyboard.js',
           modals     : __dirname + '/src/module/modals.jsx',
           focusopt   : __dirname + '/src/module/focus.jsx',
           readopt    : __dirname + '/src/module/read.jsx',
