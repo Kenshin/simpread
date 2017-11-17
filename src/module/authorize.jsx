@@ -68,6 +68,8 @@ export default class Auth extends React.Component {
             return;
         }
 
+        new Notify().Render({ content: "授权中，请勿关闭此页面，授权成功后会有提示。", delay: 10000 } );
+
         switch ( state ) {
             case "dropbox":
                 dropbox.New().Auth();
