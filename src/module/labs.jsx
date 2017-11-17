@@ -66,8 +66,8 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
                     <Switch width="100%" checked={ this.props.option.br_exit }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                            tooltip={{ text: "默认点击后弹出设定对话框" }}
-                            label="动作栏图标是否改为 「进入/退出阅读模式 」？"
+                            tooltip={{ text: "默认动作为：点击「弹出设定对话框」" }}
+                            label="动作栏图标是否改为 「进入/退出 」（包括：聚焦模式和阅读模式）？"
                             onChange={ (s)=>this.onChange(s, "option", "br_exit") } />
                     <Switch width="100%" checked={ this.props.option.secret }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
