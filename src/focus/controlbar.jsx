@@ -5,6 +5,8 @@ import * as conf   from 'config';
 import { storage } from 'storage';
 import * as output from 'output';
 import * as watch  from 'watch';
+import {browser}   from 'browser';
+import * as msg    from 'message';
 
 import Fab         from 'fab';
 
@@ -17,6 +19,16 @@ const tooltip_options = {
 };
 
 class FControl extends React.Component {
+
+    componentDidMount() {
+        browser.runtime.onMessage.addListener( ( request, sender, sendResponse ) => {
+            if ( request.type == msg.MESSAGE_ACTION.export ) {
+                console.log( "controlbar runtime Listener", request );
+                new Notify().Render( "已重新授权成功！" );
+                this.onAction( undefined, request.value.type );
+            }
+        });
+    }
 
     onAction( event, type ) {
         console.log( "fab type is =", type )

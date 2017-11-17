@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Switch
  * 
- * @version : 0.0.1
- * @update  : 2017/08/25
+ * @version : 0.0.2
+ * @update  : 2017/11/17
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -40,6 +40,8 @@ const cssinjs = () => {
 
             overflow: 'visible',
         },
+
+        large_height : "46px",
 
         enable: {
             color: color,
@@ -136,6 +138,27 @@ const cssinjs = () => {
             backgroundColor: tracked_color,
         },
 
+        content: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            width: '100%',
+        },
+
+        subtitle: {
+            display: '-webkit-box',
+            flexShrink: 2,
+
+            WebkitLineClamp: 1,
+            '-webkit-box-orient': 'vertical',
+
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            textAlign: 'left',
+
+            color: "rgba( 51, 51, 51, .54 )",
+        },
+
     };
 
     return styles;
@@ -162,6 +185,7 @@ export default class Switch extends React.Component {
         thumbedColor : undefined,
         trackColor   : undefined,
         trackedColor : undefined,
+        desc         : "",
         waves        : "",
         tooltip      : "",
     };
@@ -176,6 +200,7 @@ export default class Switch extends React.Component {
         thumbedColor : React.PropTypes.string,
         trackColor   : React.PropTypes.string,
         trackedColor : React.PropTypes.string,
+        desc         : React.PropTypes.string,
         waves        : React.PropTypes.string,
         tooltip      : React.PropTypes.string,
         onChange     : React.PropTypes.func,
@@ -225,7 +250,8 @@ export default class Switch extends React.Component {
         style.label = this.props.order == "before" ? { ...style.label, ...style.label_before } : { ...style.label, ...style.label_after };
 
         this.props.label == "" && ( style.label.display = style.hidden );
-        this.props.width && ( style.root.width = this.props.width );
+        this.props.width && ( style.root.width  = this.props.width );
+        this.props.desc  && ( style.root.height = style.root.large_height );
 
         const tooltip = this.props.tooltip;
 
@@ -233,7 +259,10 @@ export default class Switch extends React.Component {
             <switch style={ style.root }
                     data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
                     onClick={ ()=>this.onClick() }>
-                <span style={ style.label }>{ this.props.label }</span>
+                <content style={ style.content }>
+                    <span style={ style.label }>{ this.props.label }</span>
+                    <subtitle style={ style.subtitle }>{ this.props.desc }</subtitle>
+                </content>
                 <switch-rang style={ style.range }>
                     <thumb style={ style.thumb } className={ this.props.waves }></thumb>
                     <track style={ style.track }></track>

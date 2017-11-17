@@ -113,17 +113,17 @@ function action( type, title, desc, content ) {
             switch( type ) {
                 case "dropbox":
                     exp.MDWrapper( st.ClearMD( content ), undefined, new Notify() ).done( result => {
-                        dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, new Notify() ), "md/" );
+                        dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, type, new Notify() ), "md/" );
                     });
                     break;
                 case "pocket":
-                    pocket.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, new Notify() ));
+                    pocket.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, type, new Notify() ));
                     break;
                 case "linnk":
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
-                            linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, new Notify() ));
+                            linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, type, new Notify() ));
                         } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
                     });
                     break;
@@ -132,16 +132,16 @@ function action( type, title, desc, content ) {
                     evernote.env     = type;
                     evernote.sandbox = false;
                     evernote.Add( title, st.HTML2ENML( content, window.location.href ), ( result, error ) => {
-                        exp.svcCbWrapper( result, error, evernote.name, new Notify() );
+                        exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
                         error == "error" && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
                     });
                     break;
                 case "onenote":
-                    onenote.Add( onenote.Wrapper( window.location.href, title, content ), ( result, error ) => exp.svcCbWrapper( result, error, onenote.name, new Notify() ));
+                    onenote.Add( onenote.Wrapper( window.location.href, title, content ), ( result, error ) => exp.svcCbWrapper( result, error, onenote.name, type, new Notify() ));
                     break;
                 case "gdrive":
                     exp.MDWrapper( st.ClearMD( content), undefined, new Notify() ).done( result => {
-                        gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
+                        gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, type, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
                     });
                     break;
             }

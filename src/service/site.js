@@ -401,7 +401,7 @@ function html2enml( html, url ) {
  */
 function clearMD( str ) {
     str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
-    str = str.replace( /<\/?(a|ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
+    str = str.replace( /<\/?(ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
              .replace( /sr-blockquote/ig, "blockquote" )
              .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
              .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )
@@ -420,6 +420,7 @@ function metadata() {
     const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
           meta = {
             name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
+            url    : $( "meta[name='simpread:url']"     ).attr( "content" ),
             title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
             desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
             include: $( "meta[name='simpread:include']" ).attr( "content" ),
@@ -428,6 +429,9 @@ function metadata() {
             exclude: [],
     };
     if ( meta.name && meta.include ) {
+        if ( meta.url && !minimatch( location.href, meta.url )) {
+            return undefined;
+        }
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
         !meta.exp     && ( meta.exp     = "" );

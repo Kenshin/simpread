@@ -219,7 +219,6 @@ sr-rd-crlbar.controlbar {
 
     opacity: 0;
     transition: opacity .5s ease;
-    z-index: 2;
 }
 
 sr-rd-crlbar.controlbar:hover {
@@ -246,6 +245,10 @@ toc-bg {
     top: 0;
     width: 300px;
     height: 500px;
+}
+
+toc-bg:hover {
+    z-index: 3;
 }
 
 .toc-bg-hidden {

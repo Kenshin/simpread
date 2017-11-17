@@ -20,6 +20,9 @@ function png( element, name, callback ) {
     .then( blob => {
         blob && FileSaver.saveAs( blob, name );
         callback( !!blob );
+    }).catch( error => {
+        console.error( "export png failed", error )
+        callback( undefined );
     });
 }
 
@@ -943,12 +946,17 @@ function mdWrapper( content, name, notify ) {
  * 
  * @param {string} result
  * @param {string} error
- * @param {string} name
+ * @param {string} service name, e.g. Google 云端硬盘
+ * @param {string} service id, e.g. gdrive
  * @param {object} notify
  */
-function serviceCallback( result, error, name, notify ) {
+function serviceCallback( result, error, name, type, notify ) {
     !error && notify.Render( `已成功保存到 ${name}！` );
     error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+    if ( error && error.includes( "重新授权" )) {
+        notify.Clone().Render( "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
+        setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
+    }
 }
 
 /**
@@ -970,7 +978,8 @@ function verifyService( storage, service, type, name, notify ) {
             dtd.resolve( type );
         } else {
             notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
+                notify.Clone().Render( type == "linnk" ? "Linnk 无法自动授权 3 秒后请自行授权。" : "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
+                setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
             });
             dtd.reject( type );
         }

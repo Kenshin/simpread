@@ -229,6 +229,10 @@ var Notify = ( function () {
         }
     };
 
+    Notify.prototype.Clone  = function () {
+        return new Notify();
+    };
+
     return Notify;
 
 })();

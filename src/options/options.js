@@ -47,7 +47,7 @@ $( window ).scroll( (event) => {
 /**
  * Get tabsItemID from window.location.hash exist
  */
-window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => item.route == window.location.hash ) );
+window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => window.location.hash.startsWith(item.route)));
 tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
 
 /**
