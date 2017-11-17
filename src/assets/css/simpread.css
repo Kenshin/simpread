@@ -219,7 +219,6 @@ sr-rd-crlbar.controlbar {
 
     opacity: 0;
     transition: opacity .5s ease;
-    z-index: 2;
 }
 
 sr-rd-crlbar.controlbar:hover {
