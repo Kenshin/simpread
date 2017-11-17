@@ -180,11 +180,12 @@ function setMenuAndIcon( id, code ) {
     let icon = "";
     if ( code == -1 ) {
         browser.pageAction.hide( id );
-        menu.Remove( "read" );
+        menu.Update( "tempread" );
     } else {
         icon = "-enable";
         browser.pageAction.show( id );
         storage.option.menu.read === true && menu.Create( "read" );
+        menu.Update( "read" );
     }
     browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/icon16${icon}.png` ) });
 }

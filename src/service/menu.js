@@ -41,7 +41,7 @@ function createAll() {
     storage.option.menu.read &&
         ( context.read.id  = browser.contextMenus.create( context.read.menu ));
 
-        storage.option.menu.link &&
+    storage.option.menu.link &&
         ( context.link.id  = browser.contextMenus.create( context.link.menu ));
 
     storage.option.menu.list &&
@@ -73,6 +73,18 @@ function remove( type ) {
 }
 
 /**
+ * Update menu from type
+ * 
+ * @param {string} include: tempread and read
+ */
+function update( type ) {
+    if ( context.read.id ) {
+        const title = type == "read" ? "阅读模式" : "临时阅读模式";
+        browser.contextMenus.update( context.read.id, { title } );
+    }
+}
+
+/**
  * Refresh menu ( Enforcement fresh )
  * 
  * @param {object} new menu object 
@@ -87,6 +99,7 @@ export {
     createAll as CreateAll,
     create    as Create,
     remove    as Remove,
+    update    as Update,
     refresh   as Refresh,
     onClicked as OnClicked,
 }
