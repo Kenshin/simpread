@@ -6,7 +6,9 @@ import {browser}   from 'browser';
 import * as msg    from 'message';
 
 let   $root, current_mode, links = [];
-const trigger = "s r";
+const trigger = "s r",
+      key     = [ "f", "?" ],
+      global_keys = key.map( item => `${trigger} ${item}` );
 
 /***********************
  * Entry: Render
@@ -27,7 +29,7 @@ Mousetrap.bind( "esc", ( event, combo ) => {
     return true;
 });
 
-Mousetrap.bind( trigger + " f", ( event, combo ) => {
+Mousetrap.bind( global_keys, ( event, combo ) => {
     task( combo.replace( trigger, "" ).trim());
 });
 
