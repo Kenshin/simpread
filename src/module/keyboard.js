@@ -8,6 +8,18 @@ import * as msg    from 'message';
 let   $root, current_mode, links = [];
 const trigger = "s r";
 
+/***********************
+ * Entry: Render
+ ***********************/
+
+function render( $target ) {
+    $root = $target;
+}
+
+/***********************
+ * Golbal
+ ***********************/
+
 Mousetrap.bind( "esc", ( event, combo ) => {
     if ( current_mode == "open_links" ) {
         removeOpenLink();
@@ -19,10 +31,6 @@ Mousetrap.bind( trigger + " f", ( event, combo ) => {
     task( combo.replace( trigger, "" ).trim());
 });
 
-function render( $target ) {
-    $root = $target;
-}
-
 function task( key ) {
     switch ( key ) {
         case "f":
@@ -30,6 +38,10 @@ function task( key ) {
             break;
     }
 }
+
+/***********************
+ * Task: Open link
+ ***********************/
 
 function openLink() {
     const charts  = [ "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" ],
@@ -71,6 +83,10 @@ function removeOpenLink() {
     links        = [];
     current_mode = "";
 }
+
+/***********************
+ * Export
+ ***********************/
 
 export {
     render as Render,
