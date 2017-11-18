@@ -101,7 +101,7 @@ function keyboradmap() {
             <kbd-maps-group>
                 <kbd-maps-title>全局</kbd-maps-title>
                 <kbd-map>
-                    <kbd-name><kbd>s r</kbd></kbd-name>
+                    <kbd-name><kbd>sr</kbd></kbd-name>
                     <kbd-desc>快捷键触发条件</kbd-desc>
                 </kbd-map>
                 <kbd-map>
@@ -178,20 +178,24 @@ function keyboradmap() {
             <kbd-maps-group>
                 <kbd-maps-title>控制栏 - 其它</kbd-maps-title>
                 <kbd-map>
-                    <kbd-name><kbd>md</kbd></kbd-name>
-                    <kbd-desc>导出为 Markdown</kbd-desc>
+                    <kbd-name><kbd>ff</kbd></kbd-name>
+                    <kbd-desc>改变字体样式，取值 1 ~ 5</kbd-desc>
                 </kbd-map>
                 <kbd-map>
-                    <kbd-name><kbd>pg</kbd></kbd-name>
-                    <kbd-desc>导出为 png</kbd-desc>
+                    <kbd-name><kbd>fs</kbd></kbd-name>
+                    <kbd-desc>改变字体大小，取值 1 ~ 3</kbd-desc>
                 </kbd-map>
                 <kbd-map>
-                    <kbd-name><kbd>pf</kbd></kbd-name>
-                    <kbd-desc>导出为 pdf</kbd-desc>
+                    <kbd-name><kbd>lo</kbd></kbd-name>
+                    <kbd-desc>改变版面布局，取值 1 ~ 3</kbd-desc>
                 </kbd-map>
                 <kbd-map>
-                    <kbd-name><kbd>ep</kbd></kbd-name>
-                    <kbd-desc>导出为 epub</kbd-desc>
+                    <kbd-name><kbd>th →</kbd></kbd-name>
+                    <kbd-desc>更换为后一个主题</kbd-desc>
+                </kbd-map>
+                <kbd-map>
+                    <kbd-name><kbd>th →</kbd></kbd-name>
+                    <kbd-desc>更换为前一个主题</kbd-desc>
                 </kbd-map>
             </kbd-maps-group>
         </kbd-maps>

@@ -382,6 +382,7 @@ kbd-mapping {
 
     background-color: #fff;
 
+    border: 1px solid rgba(158, 158, 158, .22);
     box-shadow: 0 2px 5px rgba(0,0,0,.26);
     border-radius: 3px;
 }
