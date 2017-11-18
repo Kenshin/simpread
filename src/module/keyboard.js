@@ -22,13 +22,6 @@ function render( $target ) {
  * Golbal
  ***********************/
 
-Mousetrap.bind( "esc", ( event, combo ) => {
-    if ( current_mode == "open_links" ) {
-        removeOpenLink();
-    }
-    return true;
-});
-
 Mousetrap.bind( global_keys, ( event, combo ) => {
     task( combo.replace( trigger, "" ).trim());
 });
@@ -42,6 +35,20 @@ function task( key ) {
             keyboradmap();
             break;
     }
+}
+
+function listen( callback ) {
+    const cb = $.Callbacks();
+    cb.add( callback );
+    Mousetrap.bind( "esc", ( event, combo ) => {
+        if ( current_mode == "open_links" ) {
+            removeOpenLink();
+        } else if ( current_mode == "help" ) {
+            removeHelp();
+        } else {
+            cb.fire( combo );
+        }
+    });
 }
 
 /***********************
@@ -203,6 +210,12 @@ function keyboradmap() {
     </kbd-mapping>
     `;
     $root.parent().find( "kbd-bg" ).length == 0 && $root.parent().append( `<kbd-bg>${tmpl}</kbd-bg>` );
+    current_mode = "help";
+}
+
+function removeHelp() {
+    $root.parent().find( "kbd-bg" ).remove();
+    current_mode = "";
 }
 
 /***********************
@@ -211,4 +224,5 @@ function keyboradmap() {
 
 export {
     render as Render,
+    listen as Listen,
 }

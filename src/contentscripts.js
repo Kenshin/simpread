@@ -11,6 +11,7 @@ import Notify    from 'notify';
 import {focus}   from 'focus';
 import * as read from 'read';
 import * as modals from 'modals';
+import * as kbd  from 'keyboard';
 
 import * as st   from 'site';
 import { storage, STORAGE_MODE as mode } from 'storage';
@@ -63,13 +64,13 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 function bindShortcuts() {
     Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
     Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
-    Mousetrap.bind( "esc", () => {
-        if ( storage.option.esc ) {
+    kbd.Listen( combo => {
+        if ( combo == "esc" && storage.option.esc ) {
             modals.Exist()  && modals.Exit();
             !modals.Exist() && focus.Exist() && focus.Exit();
             !modals.Exist() && read.Exist()  && read.Exit();
         }
-    })
+    });
 }
 
 /**
