@@ -5,7 +5,7 @@ import Mousetrap   from 'mousetrap';
 import {browser}   from 'browser';
 import * as msg    from 'message';
 
-let   $root, current_mode, links = [];
+let   $root, current_mode;
 const trigger = "s r",
       key     = [ "f", "," ],
       global_keys = key.map( item => `${trigger} ${item}` );
@@ -47,6 +47,7 @@ function task( key ) {
 /***********************
  * Task: Open link
  ***********************/
+let links = [];
 
 function openLink() {
     const charts  = [ "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" ],
