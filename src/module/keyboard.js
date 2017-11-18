@@ -5,7 +5,7 @@ import Mousetrap   from 'mousetrap';
 import {browser}   from 'browser';
 import * as msg    from 'message';
 
-let   $root, current_mode;
+let   $root, current_mode; // include: open_link, help
 const trigger = "s r",
       key     = [ "f", "," ],
       global_keys = key.map( item => `${trigger} ${item}` );
@@ -41,7 +41,7 @@ function listen( callback ) {
     const cb = $.Callbacks();
     cb.add( callback );
     Mousetrap.bind( "esc", ( event, combo ) => {
-        if ( current_mode == "open_links" ) {
+        if ( current_mode == "open_link" ) {
             removeOpenLink();
         } else if ( current_mode == "help" ) {
             removeHelp();
@@ -72,14 +72,14 @@ function openLink() {
         const key = getName( idx + "" );
         $(item).addClass( "sr-kbd-a" ).append( `<sr-kbd id=${key}>${key}</sr-kbd>` );
         links.push( key.toLowerCase() );
-        current_mode = "open_links";
+        current_mode = "open_link";
     });
     links.length > 0 && $( "html" ).on( "keypress", openLinkEventHander );
 }
 
 function openLinkEventHander( event ) {
     const combo = event.key;
-    if ( current_mode == "open_links" && links.includes( combo.toLowerCase() ) ) {
+    if ( current_mode == "open_link" && links.includes( combo.toLowerCase() ) ) {
         const $target = $root.find( `sr-kbd[id=${combo.toUpperCase()}]` );
         if ( $target && $target.is( "sr-kbd" ) ) {
             const url = $target.parent()[0].href;
