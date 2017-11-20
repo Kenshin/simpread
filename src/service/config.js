@@ -12,7 +12,7 @@ const keyboard = {
         pg: {
             "kbd"  : "pg",
             "type" : "png",
-            "desc" : "导出为 ",
+            "desc" : "导出为 PNG",
         },
         pf: {
             "kbd"  : "pf",
