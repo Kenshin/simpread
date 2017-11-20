@@ -95,7 +95,7 @@ const keyboard = {
         },
         "th ←": {
             "kbd"  : "th ←",
-            "type" : "theme_prve",
+            "type" : "theme_prev",
             "desc" : "更换为前一个主题",
         },
     },
