@@ -97,27 +97,6 @@ export default class ReadCtlbar extends React.Component {
 
     }
 
-    bindShortcuts() {
-        const bindOpt = ( name ) => {
-            const ffkey  = config.Shortcuts[name].key.toLowerCase(),
-                  ffkeys = config.Shortcuts[name].value.map( (key) => ffkey + " " + key );
-            Mousetrap.bind( ffkeys, ( event, combo ) => {
-                Object.keys( config.Shortcuts ).forEach( name=> {
-                    if ( config.Shortcuts[name].key.toLowerCase() == combo.split( " " )[0] ) {
-                       const idx = config.Shortcuts[name].value.indexOf( combo.split( " " )[1] );
-                       this.onAction( undefined, name + "_" + config.Shortcuts[name].name[idx] );
-                    }
-                });
-            });
-        };
-        Object.keys( config.Shortcuts ).forEach( name => bindOpt( name ) );
-        Mousetrap.bind( [ "up", "down" ], event => this.onAction( undefined, event.code.toLowerCase().replace( "arrow", "" ) ) );
-        Mousetrap.bind( [ "shift+left", "shift+right" ], ( event, combo ) => {
-            this.onAction( undefined, "theme_" + ( combo.split("+")[1] == "left" ? "prev" : "next" ));
-        });
-        Mousetrap.bind( [ "c c" ], ( event, combo ) => this.onAction( undefined, "exit" ) );
-    }
-
     componentWillMount() {
         if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
             delete config.readItems.download;
@@ -129,7 +108,6 @@ export default class ReadCtlbar extends React.Component {
 
     constructor( props ) {
         super( props );
-        this.bindShortcuts();
     }
 
     render() {
