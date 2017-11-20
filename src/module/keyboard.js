@@ -41,10 +41,10 @@ function listen( callback ) {
     const cb = $.Callbacks();
     cb.add( callback );
     Mousetrap.bind( "esc", ( event, combo ) => {
-        if ( current_mode == "open_link" ) {
-            removeOpenLink();
-        } else if ( current_mode == "help" ) {
+        if ( $( "kbd-bg" ).length > 0 ) {
             removeHelp();
+        } else if ( $( "sr-kbd" ).length > 0 ) {
+            removeOpenLink();
         } else {
             cb.fire( combo );
         }
