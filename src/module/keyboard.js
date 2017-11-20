@@ -37,7 +37,7 @@ function task( key ) {
     }
 }
 
-function listen( callback ) {
+function listenESC( callback ) {
     const cb = $.Callbacks();
     cb.add( callback );
     Mousetrap.bind( "esc", ( event, combo ) => {
@@ -232,6 +232,6 @@ function helpExist() {
  ***********************/
 
 export {
-    render as Render,
-    listen as Listen,
+    render    as Render,
+    listenESC as ListenESC,
 }

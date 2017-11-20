@@ -64,7 +64,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 function bindShortcuts() {
     Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
     Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
-    kbd.Listen( combo => {
+    kbd.ListenESC( combo => {
         if ( combo == "esc" && storage.option.esc ) {
             modals.Exist()  && modals.Exit();
             !modals.Exist() && focus.Exist() && focus.Exit();
