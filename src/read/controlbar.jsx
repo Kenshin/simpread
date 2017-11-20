@@ -7,6 +7,7 @@ import th          from 'theme';
 import * as config from 'config';
 import * as output from 'output';
 import * as watch  from 'watch';
+import * as kbd    from 'keyboard';
 
 import Fab         from 'fab';
 
@@ -34,6 +35,10 @@ export default class ReadCtlbar extends React.Component {
                 new Notify().Render( "已重新授权成功！" );
                 this.onAction( undefined, request.value.type );
             }
+        });
+        kbd.Listen( combo => {
+            console.log( "asdfadfasdf ", combo )
+            this.onAction( undefined, combo )
         });
     }
 

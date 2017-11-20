@@ -52,6 +52,21 @@ function listenESC( callback ) {
     });
 }
 
+function listen( callback ) {
+    const cb = $.Callbacks();
+    cb.add( callback );
+    let keys = new Map();
+    Object.values( conf.keyboard ).forEach( item => {
+        Object.values( item ).forEach( obj => {
+            keys.set( `${obj.kbd[0]} ${obj.kbd[1]}`, obj.type );
+        });
+    });
+    Mousetrap.bind( [ ...keys.keys() ] , ( event, combo ) => {
+        console.log( "current shortcuts is ", combo, keys.get( combo ) )
+        cb.fire( keys.get( combo ) )
+    });    
+}
+
 /***********************
  * Task: Open link
  ***********************/
@@ -160,4 +175,5 @@ function helpExist() {
 export {
     render    as Render,
     listenESC as ListenESC,
+    listen    as Listen,
 }
