@@ -36,8 +36,8 @@ const keyboard = {
             "type" : "evernote",
             "desc" : "保存到 Evernote",
         },
-        dd: {
-            "kbd"  : "dd",
+        db: {
+            "kbd"  : "db",
             "type" : "dropbox",
             "desc" : "保存到 Dropbox",
         },
