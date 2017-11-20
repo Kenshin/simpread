@@ -79,13 +79,15 @@ function openLink() {
 
 function openLinkEventHander( event ) {
     const combo = event.key;
-    if ( current_mode == "open_link" && links.includes( combo.toLowerCase() ) ) {
+    if ( links.includes( combo.toLowerCase() ) ) {
         const $target = $root.find( `sr-kbd[id=${combo.toUpperCase()}]` );
         if ( $target && $target.is( "sr-kbd" ) ) {
             const url = $target.parent()[0].href;
             url && url.startsWith( "http" ) && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
             url && url.startsWith( "http" ) && removeOpenLink();
         }
+    } else {
+        new Notify().Render( "当前已进入链接模式，如需其它操作，请使用 ESC 退出此模式。" );
     }
 }
 
@@ -213,7 +215,7 @@ function keyboradmap() {
         </kbd-maps>
     </kbd-mapping>
     `;
-    $root.parent().find( "kbd-bg" ).length == 0 && $root.parent().append( `<kbd-bg>${tmpl}</kbd-bg>` );
+    helpExist() ? removeHelp() : $root.parent().append( `<kbd-bg>${tmpl}</kbd-bg>` );
     current_mode = "help";
 }
 
