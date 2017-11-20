@@ -37,7 +37,6 @@ export default class ReadCtlbar extends React.Component {
             }
         });
         kbd.Listen( combo => {
-            console.log( "asdfadfasdf ", combo )
             this.onAction( undefined, combo )
         });
     }

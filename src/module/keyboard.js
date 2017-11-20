@@ -64,7 +64,7 @@ function listen( callback ) {
     Mousetrap.bind( [ ...keys.keys() ] , ( event, combo ) => {
         console.log( "current shortcuts is ", combo, keys.get( combo ) )
         cb.fire( keys.get( combo ) )
-    });    
+    });
 }
 
 /***********************
@@ -139,18 +139,10 @@ function keyboradmap() {
         <kbd-maps>
             <kbd-maps-group>
                 <kbd-maps-title>全局</kbd-maps-title>
-                <kbd-map>
-                    <kbd-name><kbd>sr</kbd></kbd-name><kbd-desc>快捷键触发条件</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>,</kbd></kbd-name><kbd-desc>打开/关闭快捷键一览</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>f</kbd></kbd-name><kbd-desc>打开当前页面的任意链接</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>esc</kbd></kbd-name><kbd-desc>退出当前模式</kbd-desc>
-                </kbd-map>
+                <kbd-map><kbd-name><kbd>sr</kbd></kbd-name><kbd-desc>快捷键触发条件</kbd-desc></kbd-map>
+                <kbd-map><kbd-name><kbd>,</kbd></kbd-name><kbd-desc>打开/关闭快捷键一览</kbd-desc></kbd-map>
+                <kbd-map><kbd-name><kbd>f</kbd></kbd-name><kbd-desc>打开当前页面的任意链接</kbd-desc></kbd-map>
+                <kbd-map><kbd-name><kbd>esc</kbd></kbd-name><kbd-desc>退出当前模式</kbd-desc></kbd-map>
             </kbd-maps-group>
             ${ html }
         </kbd-maps>
