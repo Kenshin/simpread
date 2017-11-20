@@ -435,5 +435,5 @@ kbd-map kbd-name {
 }
 
 kbd-map kbd-desc {
-
+    padding-left: 3px;
 }

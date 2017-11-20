@@ -2,6 +2,105 @@ console.log( "=== simpread config load ===" )
 
 import * as ss from 'stylesheet';
 
+const keyboard = {
+    "控制栏 - 导出" : {
+        md: {
+            "kbd"  : "md",
+            "type" : "markdown",
+            "desc" : "导出为 Markdown",
+        },
+        pg: {
+            "kbd"  : "pg",
+            "type" : "png",
+            "desc" : "导出为 ",
+        },
+        pf: {
+            "kbd"  : "pf",
+            "type" : "pdf",
+            "desc" : "导出为 PDF",
+        },
+        ep: {
+            "kbd"  : "ep",
+            "type" : "epub",
+            "desc" : "导出为 epub",
+        }
+    },
+    "控制栏 - 生产力工具" : {
+        yx: {
+            "kbd"  : "yx",
+            "type" : "yinxiang",
+            "desc" : "保存到 印象笔记",
+        },
+        er: {
+            "kbd"  : "er",
+            "type" : "evernote",
+            "desc" : "保存到 Evernote",
+        },
+        dd: {
+            "kbd"  : "dd",
+            "type" : "dropbox",
+            "desc" : "保存到 Dropbox",
+        },
+        on: {
+            "kbd"  : "on",
+            "type" : "onenote",
+            "desc" : "保存到 Onenote",
+        },
+        gr: {
+            "kbd"  : "gr",
+            "type" : "gdrive",
+            "desc" : "保存到 Google 云端硬盘",
+        },
+        kd: {
+            "kbd"  : "kd",
+            "type" : "kindle",
+            "desc" : "保存到 Kindle",
+        },
+        ln: {
+            "kbd"  : "ln",
+            "type" : "linnk",
+            "desc" : "保存到 Linnk",
+        },
+        pt: {
+            "kbd"  : "pt",
+            "type" : "pocket",
+            "desc" : "保存到 Pocket",
+        },
+        rl: {
+            "kbd"  : "rl",
+            "type" : "save",
+            "desc" : "保存到 稍后读",
+        },
+    },
+    "控制栏 - 其它" : {
+        ff: {
+            "kbd"  : "ff",
+            "type" : "fontfamily_",
+            "desc" : "改变字体样式，取值 1 ~ 5",
+        },
+        fs: {
+            "kbd"  : "fs",
+            "type" : "fontsize_",
+            "desc" : "改变字体大小，取值 1 ~ 3",
+        },
+        la: {
+            "kbd"  : "la",
+            "type" : "layout_",
+            "desc" : "改变版面布局，取值 1 ~ 3",
+        },
+        "th →": {
+            "kbd"  : "th →",
+            "type" : "theme_next",
+            "desc" : "更换为后一个主题",
+        },
+        "th ←": {
+            "kbd"  : "th ←",
+            "type" : "theme_prve",
+            "desc" : "更换为前一个主题",
+        },
+    },
+};
+
 /**
  * Shortcust
  */
@@ -435,6 +534,7 @@ const actionItems = [
 
 export {
     shortcuts as Shortcuts,
+    keyboard,
 
     focusItems,
     focusThemes,

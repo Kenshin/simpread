@@ -4,6 +4,7 @@ import Mousetrap   from 'mousetrap';
 
 import {browser}   from 'browser';
 import * as msg    from 'message';
+import * as conf   from 'config';
 
 let   $root, current_mode; // include: open_link, help
 const trigger = "s r",
@@ -108,6 +109,15 @@ function openLinkExist() {
  ***********************/
 
 function keyboradmap() {
+    let html = "";
+    Object.keys( conf.keyboard ).forEach( item => {
+        let maptml = "";
+        Object.keys( conf.keyboard[item] ).forEach( ( map, idx ) => {
+            const obj = conf.keyboard[item][map];
+            maptml += `<kbd-map><kbd-name><kbd id="${obj.type}">${obj.kbd}</kbd></kbd-name><kbd-desc>${obj.desc}</kbd-desc></kbd-map>`
+        });
+        html += `<kbd-maps-group><kbd-maps-title>${item}</kbd-maps-title>${maptml}</kbd-maps-group>`;
+    });
     const tmpl    = `
     <kbd-mapping>
         <kbd-map-title>简悦快捷键一览</kbd-map-title>
@@ -115,103 +125,19 @@ function keyboradmap() {
             <kbd-maps-group>
                 <kbd-maps-title>全局</kbd-maps-title>
                 <kbd-map>
-                    <kbd-name><kbd>sr</kbd></kbd-name>
-                    <kbd-desc>快捷键触发条件</kbd-desc>
+                    <kbd-name><kbd>sr</kbd></kbd-name><kbd-desc>快捷键触发条件</kbd-desc>
                 </kbd-map>
                 <kbd-map>
-                    <kbd-name><kbd>,</kbd></kbd-name>
-                    <kbd-desc>打开/关闭快捷键一览</kbd-desc>
+                    <kbd-name><kbd>,</kbd></kbd-name><kbd-desc>打开/关闭快捷键一览</kbd-desc>
                 </kbd-map>
                 <kbd-map>
-                    <kbd-name><kbd>f</kbd></kbd-name>
-                    <kbd-desc>打开当前页面的任意链接</kbd-desc>
+                    <kbd-name><kbd>f</kbd></kbd-name><kbd-desc>打开当前页面的任意链接</kbd-desc>
                 </kbd-map>
                 <kbd-map>
-                    <kbd-name><kbd>esc</kbd></kbd-name>
-                    <kbd-desc>退出当前模式</kbd-desc>
+                    <kbd-name><kbd>esc</kbd></kbd-name><kbd-desc>退出当前模式</kbd-desc>
                 </kbd-map>
             </kbd-maps-group>
-            <kbd-maps-group>
-                <kbd-maps-title>控制栏 - 导出</kbd-maps-title>
-                <kbd-map>
-                    <kbd-name><kbd>md</kbd></kbd-name>
-                    <kbd-desc>导出为 Markdown</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>pg</kbd></kbd-name>
-                    <kbd-desc>导出为 png</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>pf</kbd></kbd-name>
-                    <kbd-desc>导出为 pdf</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>ep</kbd></kbd-name>
-                    <kbd-desc>导出为 epub</kbd-desc>
-                </kbd-map>
-            </kbd-maps-group>
-            <kbd-maps-group>
-                <kbd-maps-title>控制栏 - 生产力工具</kbd-maps-title>
-                <kbd-map>
-                    <kbd-name><kbd>yx</kbd></kbd-name>
-                    <kbd-desc>保存到 印象笔记</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>er</kbd></kbd-name>
-                    <kbd-desc>保存到 Evernote</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>dd</kbd></kbd-name>
-                    <kbd-desc>保存到 Dropbox</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>on</kbd></kbd-name>
-                    <kbd-desc>保存到 Onenote</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>gr</kbd></kbd-name>
-                    <kbd-desc>保存到 Google 云端硬盘</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>kd</kbd></kbd-name>
-                    <kbd-desc>保存到 Kindle</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>ln</kbd></kbd-name>
-                    <kbd-desc>保存到 Linnk</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>pk</kbd></kbd-name>
-                    <kbd-desc>保存到 Pocket</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>rl</kbd></kbd-name>
-                    <kbd-desc>保存到 稍后读</kbd-desc>
-                </kbd-map>
-            </kbd-maps-group>
-            <kbd-maps-group>
-                <kbd-maps-title>控制栏 - 其它</kbd-maps-title>
-                <kbd-map>
-                    <kbd-name><kbd>ff</kbd></kbd-name>
-                    <kbd-desc>改变字体样式，取值 1 ~ 5</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>fs</kbd></kbd-name>
-                    <kbd-desc>改变字体大小，取值 1 ~ 3</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>lo</kbd></kbd-name>
-                    <kbd-desc>改变版面布局，取值 1 ~ 3</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>th →</kbd></kbd-name>
-                    <kbd-desc>更换为后一个主题</kbd-desc>
-                </kbd-map>
-                <kbd-map>
-                    <kbd-name><kbd>th →</kbd></kbd-name>
-                    <kbd-desc>更换为前一个主题</kbd-desc>
-                </kbd-map>
-            </kbd-maps-group>
+            ${ html }
         </kbd-maps>
     </kbd-mapping>
     `;
