@@ -533,7 +533,7 @@ const actionItems = [
 ];
 
 export {
-    shortcuts as Shortcuts,
+    shortcuts,
     keyboard,
 
     focusItems,

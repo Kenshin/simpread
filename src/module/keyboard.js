@@ -62,7 +62,7 @@ function listen( callback ) {
                   loop = ( item, idx ) => {
                 const type = obj.type.replace( "_", "" );
                 keys.delete( kbd );
-                keys.set( `${kbd} ${idx+1}`, obj.type + conf.Shortcuts[type].name[idx] );
+                keys.set( `${kbd} ${idx+1}`, obj.type + conf.shortcuts[type].name[idx] );
             };
             keys.set( kbd, obj.type );
             switch ( obj.type ) {

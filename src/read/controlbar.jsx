@@ -4,7 +4,7 @@ import * as ss     from 'stylesheet';
 import {browser}   from 'browser';
 import * as msg    from 'message';
 import th          from 'theme';
-import * as config from 'config';
+import * as conf   from 'config';
 import * as output from 'output';
 import * as watch  from 'watch';
 import * as kbd    from 'keyboard';
@@ -99,10 +99,10 @@ export default class ReadCtlbar extends React.Component {
 
     componentWillMount() {
         if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
-            delete config.readItems.download;
-            delete config.readItems.readlater;
-            delete config.readItems.send;
-            delete config.readItems.share;
+            delete conf.readItems.download;
+            delete conf.readItems.readlater;
+            delete conf.readItems.send;
+            delete conf.readItems.share;
         }
     }
 
@@ -113,7 +113,7 @@ export default class ReadCtlbar extends React.Component {
     render() {
         return (
             <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": "2" }}>
-                <Fab items={ config.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
+                <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )
     }
