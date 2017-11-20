@@ -58,11 +58,34 @@ function listen( callback ) {
     let keys = new Map();
     Object.values( conf.keyboard ).forEach( item => {
         Object.values( item ).forEach( obj => {
-            keys.set( `${obj.kbd[0]} ${obj.kbd[1]}`, obj.type );
+            const kbd  = `${obj.kbd[0]} ${obj.kbd[1]}`,
+                  loop = ( item, idx ) => {
+                const type = obj.type.replace( "_", "" );
+                keys.delete( kbd );
+                keys.set( `${kbd} ${idx+1}`, obj.type + conf.Shortcuts[type].name[idx] );
+            };
+            keys.set( kbd, obj.type );
+            switch ( obj.type ) {
+                case "fontfamily_":
+                    Array(5).fill(1).forEach( loop );
+                    break;
+                case "fontsize_":
+                case "layout_":
+                    Array(3).fill(1).forEach( loop );
+                    break;
+                case "theme_next":
+                    keys.delete( kbd );
+                    keys.set( `${kbd} right`, obj.type );
+                    break;
+                case "theme_prev":
+                    keys.delete( kbd );
+                    keys.set( `${kbd} left`, obj.type );
+                    break;
+            }
         });
     });
+    console.log( "current shortcuts is", keys )
     Mousetrap.bind( [ ...keys.keys() ] , ( event, combo ) => {
-        console.log( "current shortcuts is ", combo, keys.get( combo ) )
         cb.fire( keys.get( combo ) )
     });
 }
