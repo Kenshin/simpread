@@ -41,9 +41,9 @@ function listen( callback ) {
     const cb = $.Callbacks();
     cb.add( callback );
     Mousetrap.bind( "esc", ( event, combo ) => {
-        if ( $( "kbd-bg" ).length > 0 ) {
+        if ( helpExist() ) {
             removeHelp();
-        } else if ( $( "sr-kbd" ).length > 0 ) {
+        } else if ( openLinkExist() ) {
             removeOpenLink();
         } else {
             cb.fire( combo );
@@ -95,6 +95,10 @@ function removeOpenLink() {
     $( "html" ).off( "keypress", openLinkEventHander );
     links        = [];
     current_mode = "";
+}
+
+function openLinkExist() {
+    return $( "sr-kbd" ).length > 0 ? true : false;
 }
 
 /***********************
@@ -218,6 +222,9 @@ function removeHelp() {
     current_mode = "";
 }
 
+function helpExist() {
+    return $( "kbd-bg" ).length > 0 ? true : false;
+}
 /***********************
  * Export
  ***********************/
