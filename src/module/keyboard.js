@@ -105,24 +105,24 @@ function listen( callback ) {
 /***********************
  * Task: Open link
  ***********************/
-let links = [];
+let links     = [];
+const charts  = [ "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" ],
+      getName = idx => {
+        switch ( true ) {
+            case idx < 26:
+                return charts[idx];
+            case idx >= 26 && idx <= 99:
+                return charts[idx[0]] + charts[idx[1]];
+            case idx > 99:
+                return charts[idx[0]] + charts[idx[1]] + charts[idx[2]];
+        }
+};
 
 function openLink() {
     if ( openLinkExist() ) {
         removeOpenLink();
         return;
     }
-    const charts  = [ "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" ],
-          getName = idx => {
-              switch ( true ) {
-                  case idx < 26:
-                    return charts[idx];
-                  case idx >= 26 && idx <= 99:
-                    return charts[idx[0]] + charts[idx[1]];
-                  case idx > 99:
-                    return charts[idx[0]] + charts[idx[1]] + charts[idx[2]];
-              }
-          };
     $root.find( "a" ).map( ( idx, item ) => {
         const key = getName( idx + "" );
         $(item).addClass( "sr-kbd-a" ).append( `<sr-kbd id=${key}>${key}</sr-kbd>` );
@@ -132,13 +132,30 @@ function openLink() {
 }
 
 function openLinkEventHander( event ) {
-    const combo = event.key;
-    if ( links.includes( combo.toLowerCase() ) ) {
-        const $target = $root.find( `sr-kbd[id=${combo.toUpperCase()}]` );
-        if ( $target && $target.is( "sr-kbd" ) ) {
-            const url = $target.parent()[0].href;
-            url && url.startsWith( "http" ) && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-            url && url.startsWith( "http" ) && removeOpenLink();
+    const combo  = event.key.toUpperCase(),
+          result = links.join("").match( new RegExp( combo, "ig" ) );
+    if ( result ) {
+        if ( result.length == 1 ) {
+            const $target = $root.find( `sr-kbd[id=${combo}]` );
+            if ( $target && $target.is( "sr-kbd" ) ) {
+                const url = $target.parent()[0].href;
+                url && url.startsWith( "http" ) && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+                url && url.startsWith( "http" ) && removeOpenLink();
+            }
+        } else {
+            new Notify().Render( "已缩小查询范围。" );
+            links   = [];
+            let idx = 0;
+            $root.find( `sr-kbd` ).map( ( _, item ) => {
+                if ( item.id.includes( combo ) ) {
+                    const key      = getName( idx + "" );
+                    item.outerHTML = `<sr-kbd id=${key}>${key}</sr-kbd>`
+                    links.push( key.toLowerCase() );
+                    idx++;
+                } else {
+                    $(item).remove();
+                }
+            });
         }
     } else {
         new Notify().Render( "当前已进入链接模式，如需其它操作，请使用 ESC 退出此模式。" );
