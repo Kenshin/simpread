@@ -6,9 +6,9 @@ import {browser}   from 'browser';
 import * as msg    from 'message';
 import * as conf   from 'config';
 
-let   $root, current_mode; // include: open_link, help
+let   $root, current_mode = ""; // include: keyboard
 const trigger = "s r",
-      key     = [ "f", "," ],
+      key     = [ ".", "," ],
       global_keys = key.map( item => `${trigger} ${item}` );
 
 /***********************
@@ -23,13 +23,23 @@ function render( $target ) {
  * Golbal
  ***********************/
 
-Mousetrap.bind( global_keys, ( event, combo ) => {
-    task( combo.replace( trigger, "" ).trim());
+Mousetrap.bind( trigger, () => {
+    if ( current_mode == "" ) {
+        current_mode = "keyboard";
+        new Notify().Render( "已进入快捷键操作模式，退出请使用 sr，帮助请按," );
+    } else {
+        current_mode = "";
+        new Notify().Render( "已退出快捷键操作模式！" );
+    }
+});
+
+Mousetrap.bind( key, ( event, combo ) => {
+    current_mode == "keyboard" && task( combo );
 });
 
 function task( key ) {
     switch ( key ) {
-        case "f":
+        case ".":
             openLink();
             break;
         case ",":
@@ -46,6 +56,8 @@ function listenESC( callback ) {
             removeHelp();
         } else if ( openLinkExist() ) {
             removeOpenLink();
+        } else if ( current_mode == "keyboard" ) {
+            Mousetrap.trigger( trigger );
         } else {
             cb.fire( combo );
         }
@@ -86,7 +98,7 @@ function listen( callback ) {
     });
     console.log( "current shortcuts is", keys )
     Mousetrap.bind( [ ...keys.keys() ] , ( event, combo ) => {
-        cb.fire( keys.get( combo ) )
+        current_mode == "keyboard" && cb.fire( keys.get( combo ) )
     });
 }
 
@@ -111,7 +123,6 @@ function openLink() {
         const key = getName( idx + "" );
         $(item).addClass( "sr-kbd-a" ).append( `<sr-kbd id=${key}>${key}</sr-kbd>` );
         links.push( key.toLowerCase() );
-        current_mode = "open_link";
     });
     links.length > 0 && $( "html" ).on( "keypress", openLinkEventHander );
 }
@@ -135,7 +146,6 @@ function removeOpenLink() {
     $root.find( "a" ).removeClass( "sr-kbd-a" );
     $( "html" ).off( "keypress", openLinkEventHander );
     links        = [];
-    current_mode = "";
 }
 
 function openLinkExist() {
@@ -162,9 +172,9 @@ function keyboradmap() {
         <kbd-maps>
             <kbd-maps-group>
                 <kbd-maps-title>全局</kbd-maps-title>
-                <kbd-map><kbd-name><kbd>sr</kbd></kbd-name><kbd-desc>快捷键触发条件</kbd-desc></kbd-map>
+                <kbd-map><kbd-name><kbd>sr</kbd></kbd-name><kbd-desc>快捷键开启/关闭条件</kbd-desc></kbd-map>
                 <kbd-map><kbd-name><kbd>,</kbd></kbd-name><kbd-desc>打开/关闭快捷键一览</kbd-desc></kbd-map>
-                <kbd-map><kbd-name><kbd>f</kbd></kbd-name><kbd-desc>打开当前页面的任意链接</kbd-desc></kbd-map>
+                <kbd-map><kbd-name><kbd>.</kbd></kbd-name><kbd-desc>打开当前页面的任意链接</kbd-desc></kbd-map>
                 <kbd-map><kbd-name><kbd>esc</kbd></kbd-name><kbd-desc>退出当前模式</kbd-desc></kbd-map>
             </kbd-maps-group>
             ${ html }
@@ -172,12 +182,10 @@ function keyboradmap() {
     </kbd-mapping>
     `;
     helpExist() ? removeHelp() : $root.parent().append( `<kbd-bg>${tmpl}</kbd-bg>` );
-    current_mode = "help";
 }
 
 function removeHelp() {
     $root.parent().find( "kbd-bg" ).remove();
-    current_mode = "";
 }
 
 function helpExist() {
