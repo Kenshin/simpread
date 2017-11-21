@@ -342,3 +342,98 @@ toc outline active {
 
     padding: 0 0 0 3px;
 }
+
+/**
+ * Keyboard
+ */
+
+sr-kbd {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 247, 133)), to(rgb(255, 197, 66)));
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(227, 190, 35);
+    border-image: initial;
+
+    position: absolute;
+    left: 0;
+    padding: 1px 3px 0px;
+
+    font-size: 11px!important;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 7px 0px;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.sr-kbd-a {
+    position: relative;
+}
+
+kbd-mapping {
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 500px;
+    height: 500px;
+
+    background-color: #fff;
+
+    border: 1px solid rgba(158, 158, 158, .22);
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+    border-radius: 3px;
+}
+
+kbd-maps {
+    display: flex;
+    flex-flow: column wrap;    
+}
+
+kbd-mapping kbd-map-title {
+    margin: 5px 0;
+    
+    font-size: 14px;
+    font-weight: bold;
+}
+
+kbd-maps-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+kbd-maps-title {
+    margin: 5px 0;
+    padding-left: 53px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+kbd-map kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 11px;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: solid 1px #c6cbd1;
+    border-bottom-color: #959da5;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #959da5;
+}
+
+kbd-map kbd-name {
+    display: inline-block;
+    text-align: right;
+
+    width: 50px;
+}
+
+kbd-map kbd-desc {
+    padding-left: 3px;
+}

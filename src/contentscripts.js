@@ -4,13 +4,13 @@ import './assets/css/simpread.css';
 import './assets/css/option.css';
 import './vender/notify/notify.css';
 
-import Mousetrap from 'mousetrap';
 import Velocity  from 'velocity';
 import Notify    from 'notify';
 
 import {focus}   from 'focus';
 import * as read from 'read';
 import * as modals from 'modals';
+import * as kbd  from 'keyboard';
 
 import * as st   from 'site';
 import { storage, STORAGE_MODE as mode } from 'storage';
@@ -61,15 +61,15 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
-    Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
-    Mousetrap.bind( "esc", () => {
-        if ( storage.option.esc ) {
+    kbd.Bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
+    kbd.Bind( [ storage.read.shortcuts.toLowerCase()  ], readMode  );
+    kbd.ListenESC( combo => {
+        if ( combo == "esc" && storage.option.esc ) {
             modals.Exist()  && modals.Exit();
             !modals.Exist() && focus.Exist() && focus.Exit();
             !modals.Exist() && read.Exist()  && read.Exit();
         }
-    })
+    });
 }
 
 /**

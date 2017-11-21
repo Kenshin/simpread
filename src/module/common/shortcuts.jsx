@@ -107,6 +107,7 @@ function fixKey( event ) {
     if ( [ 16, 17, 18 ].includes( keycode ) ) {
         return event.key.toLowerCase().trim();
     } else if ( keycode >= 49 || keycode <= 90 ) {
-        return event.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
+        //return event.code.toLowerCase().trim().replace( /(digit|key)/ig, "" );
+        return event.key.toLowerCase();
     }
 }

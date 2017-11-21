@@ -7,6 +7,7 @@ import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
 import * as toc    from 'toc';
 import * as modals from 'modals';
+import * as kbd    from 'keyboard';
 
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -82,6 +83,7 @@ class Read extends React.Component {
             await commbeautify( $( "sr-rd-content" ));
             pangu.spacingElementByClassName( rdcls );
             this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+            kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
         }
