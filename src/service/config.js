@@ -25,6 +25,33 @@ const keyboard = {
             "desc" : "导出为 epub",
         }
     },
+    "控制栏 - 其它" : {
+        ff: {
+            "kbd"  : "ff",
+            "type" : "fontfamily_",
+            "desc" : "改变字体样式，取值 1 ~ 5",
+        },
+        fs: {
+            "kbd"  : "fs",
+            "type" : "fontsize_",
+            "desc" : "改变字体大小，取值 1 ~ 3",
+        },
+        la: {
+            "kbd"  : "la",
+            "type" : "layout_",
+            "desc" : "改变版面布局，取值 1 ~ 3",
+        },
+        "th →": {
+            "kbd"  : "th →",
+            "type" : "theme_next",
+            "desc" : "更换为后一个主题",
+        },
+        "th ←": {
+            "kbd"  : "th ←",
+            "type" : "theme_prev",
+            "desc" : "更换为前一个主题",
+        },
+    },
     "控制栏 - 生产力工具" : {
         yx: {
             "kbd"  : "yx",
@@ -70,33 +97,6 @@ const keyboard = {
             "kbd"  : "rl",
             "type" : "save",
             "desc" : "保存到 稍后读",
-        },
-    },
-    "控制栏 - 其它" : {
-        ff: {
-            "kbd"  : "ff",
-            "type" : "fontfamily_",
-            "desc" : "改变字体样式，取值 1 ~ 5",
-        },
-        fs: {
-            "kbd"  : "fs",
-            "type" : "fontsize_",
-            "desc" : "改变字体大小，取值 1 ~ 3",
-        },
-        la: {
-            "kbd"  : "la",
-            "type" : "layout_",
-            "desc" : "改变版面布局，取值 1 ~ 3",
-        },
-        "th →": {
-            "kbd"  : "th →",
-            "type" : "theme_next",
-            "desc" : "更换为后一个主题",
-        },
-        "th ←": {
-            "kbd"  : "th ←",
-            "type" : "theme_prev",
-            "desc" : "更换为前一个主题",
         },
     },
 };

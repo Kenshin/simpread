@@ -193,10 +193,15 @@ function keyboradmap() {
         <kbd-maps>
             <kbd-maps-group>
                 <kbd-maps-title>全局</kbd-maps-title>
+                <kbd-map><kbd-name><kbd>esc</kbd></kbd-name><kbd-desc>退出当前模式</kbd-desc></kbd-map>
+                <kbd-map><kbd-name><kbd>←</kbd></kbd-name><kbd-desc>前一页</kbd-desc></kbd-map>
+                <kbd-map><kbd-name><kbd>→</kbd></kbd-name><kbd-desc>后一页</kbd-desc></kbd-map>
+            </kbd-maps-group>
+            <kbd-maps-group>
+                <kbd-maps-title>阅读模式</kbd-maps-title>
                 <kbd-map><kbd-name><kbd>sr</kbd></kbd-name><kbd-desc>快捷键开启/关闭条件</kbd-desc></kbd-map>
                 <kbd-map><kbd-name><kbd>,</kbd></kbd-name><kbd-desc>打开/关闭快捷键一览</kbd-desc></kbd-map>
                 <kbd-map><kbd-name><kbd>.</kbd></kbd-name><kbd-desc>打开当前页面的任意链接</kbd-desc></kbd-map>
-                <kbd-map><kbd-name><kbd>esc</kbd></kbd-name><kbd-desc>退出当前模式</kbd-desc></kbd-map>
             </kbd-maps-group>
             ${ html }
         </kbd-maps>
