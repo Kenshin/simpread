@@ -102,7 +102,7 @@ function action( type, title, desc, content ) {
                 }
                 break;
         }
-    } else if ( [ "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) ) {
+    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) ) {
         const { dropbox, pocket, linnk, evernote, onenote, gdrive } = exp,
         id    = type == "yinxiang" ? "evernote" : type;
 
@@ -126,6 +126,9 @@ function action( type, title, desc, content ) {
                             linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, type, new Notify() ));
                         } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
                     });
+                    break;
+                case "instapaper":
+                    console.log( "adfafadf" )
                     break;
                 case "evernote":
                 case "yinxiang":

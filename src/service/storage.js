@@ -143,6 +143,9 @@ let current  = {},
             access_token  : "",
             "group_name"  : "",
         },
+        "instapaper"   : {
+            access_token  : "",
+        },
         "yinxiang" : {
             access_token  : "",
         },
