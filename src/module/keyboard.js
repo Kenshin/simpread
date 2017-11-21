@@ -138,6 +138,7 @@ function openLink() {
 function openLinkEventHander( event ) {
     const combo  = event.key.toUpperCase(),
           result = links.join("").match( new RegExp( combo, "ig" ) );
+    if ( combo == "." ) return;
     if ( result ) {
         if ( result.length == 1 ) {
             const $target = $root.find( `sr-kbd[id=${combo}]` );
@@ -174,7 +175,7 @@ function removeOpenLink() {
 }
 
 function openLinkExist() {
-    return $( "sr-kbd" ).length > 0 ? true : false;
+    return $root.find( $( "sr-kbd" ) ).length > 0 ? true : false;
 }
 
 /***********************
