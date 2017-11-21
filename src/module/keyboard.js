@@ -102,6 +102,10 @@ function listen( callback ) {
     });
 }
 
+function bind( combo, callback ) {
+    Mousetrap.bind( combo, callback );
+}
+
 /***********************
  * Task: Open link
  ***********************/
@@ -225,4 +229,5 @@ export {
     render    as Render,
     listenESC as ListenESC,
     listen    as Listen,
+    bind      as Bind,
 }
