@@ -4,7 +4,6 @@ import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
 import {version} from 'version';
-import minimatch from 'minimatch';
 
 /**
  * Read and Write Chrome storage
