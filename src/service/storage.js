@@ -342,19 +342,6 @@ class Storage {
     }
 
     /**
-     * Exclusion
-     * 
-     * @return {boolen} true: not exist; false: exist
-     */
-    Exclusion() {
-        const url = window.location.origin + window.location.pathname;
-        return simpread.read.exclusion.findIndex( item => {
-            item = item.trim();
-            return item.startsWith( "http" ) ? minimatch( url, item ) : item == current.site.name;
-        }) == -1 ? true : false;
-    }
-
-    /**
      * Find site, code include:
      * 
      * - -1: not found
