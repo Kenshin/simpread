@@ -4,6 +4,7 @@ import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
 import toMarkdown from 'markdown';
 import EpubPress  from 'epubpress';
+import Instapaper from 'instapaper';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
@@ -92,6 +93,7 @@ function unlink( id ) {
     const content = {
         "dropbox" : "https://www.dropbox.com/account/connected_apps",
         "pocket"  : "https://getpocket.com/connected_applications",
+        "instapaper":"https://www.instapaper.com/",
         "evernote": "https://www.evernote.com/AuthorizedServices.action",
         "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
         "onenote" : "https://account.live.com/consent/Manage",
@@ -223,7 +225,7 @@ class Pocket {
 
     get id()   { return "pocket"; }
     get name() { return name( this.id ); }
-    
+
     get consumer_key() {
         return "69741-d75561b7a9a96a511f36552e";
     }
@@ -321,6 +323,57 @@ class Pocket {
         });
     }
 
+}
+
+/**
+ * Instapaper
+ * 
+ * @class
+ */
+class Ins {
+
+        get id()   { return "instapaper"; }
+        get name() { return name( this.id ); }
+        constructor() {
+            this.access_token = "";
+            this.token_secret = "";
+            this.ins          = new Instapaper();
+        }
+
+        get consumer_key() {
+            return "23464e13c91c4cba86f0df8aa87ec15a";
+        }
+    
+        get consumer_secret() {
+            return "b71eb22c7def4d19a2d9e7b7208d31c9";
+        }
+
+        Login( username, password, callback ) {
+            this.ins.consumer_key    = this.consumer_key;
+            this.ins.consumer_secret = this.consumer_secret;
+            this.ins.requestToken( username, password ).done( result => {
+                this.access_token    = this.ins.token;
+                this.token_secret    = this.ins.token_secret;
+                callback( result, undefined );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error )
+                callback( undefined, textStatus );
+            });
+        }
+
+        Add( url, title, description, callback ) {
+            this.ins.token           = this.access_token;
+            this.ins.token_secret    = this.token_secret;
+            this.ins.consumer_key    = this.consumer_key;
+            this.ins.consumer_secret = this.consumer_secret;
+            this.ins.add( url, title, description ).done( result => {
+                if ( result && result.length > 0 ) callback( "success", undefined );
+                else callback( undefined, "error" );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error )
+                callback( undefined, textStatus );
+            });
+        }
 }
 
 /**
@@ -914,7 +967,7 @@ class Kindle {
  */
 function name( type ) {
     type = type.toLowerCase();
-    if ( [ "dropbox", "pocket", "linnk" , "evernote", "onenote" ].includes( type ) ) {
+    if ( [ "dropbox", "pocket", "instapaper", "linnk" , "evernote", "onenote" ].includes( type ) ) {
         return type.replace( /\S/i, $0=>$0.toUpperCase() );
     } else if ( type == "yinxiang" ) {
         return "印象笔记";
@@ -989,6 +1042,7 @@ function verifyService( storage, service, type, name, notify ) {
 
 const dropbox  = new Dropbox(),
       pocket   = new Pocket(),
+      instapaper = new Ins(),
       linnk    = new Linnk(),
       evernote = new Evernote(),
       onenote  = new Onenote(),
@@ -1003,7 +1057,7 @@ export {
     download as Download,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, linnk, evernote, onenote, gdrive,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,

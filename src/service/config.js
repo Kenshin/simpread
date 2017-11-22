@@ -93,6 +93,11 @@ const keyboard = {
             "type" : "pocket",
             "desc" : "保存到 Pocket",
         },
+        ip: {
+            "kbd"  : "ip",
+            "type" : "instapaper",
+            "desc" : "保存到 Instapaper",
+        },
         rl: {
             "kbd"  : "rl",
             "type" : "save",
@@ -143,6 +148,11 @@ const readItems = {
             "linnk" : {
                 "name" : "保存到 Linnk",
                 "icon" : ss.IconPath("linnk_icon"),
+                "color": "#FF5722",
+            },
+            "instapaper" : {
+                "name" : "保存到 Instapaper",
+                "icon" : ss.IconPath("instapaper_icon"),
                 "color": "#FF5722",
             },
             "pocket" : {

@@ -230,6 +230,7 @@ const webpack = require( 'webpack' ),
           carousel   : __dirname + '/src/vender/carousel/carousel.js',
           dom2image  : __dirname + '/src/vender/dom2image.min.js',
           filesaver  : __dirname + '/src/vender/filesaver.min.js',
+          instapaper : __dirname + '/src/vender/instapaper.js',
 
           util       : __dirname + '/src/service/util.js',
           local      : __dirname + '/src/service/local.js',
