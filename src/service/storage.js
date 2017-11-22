@@ -131,7 +131,7 @@ let current  = {},
         sites   : [],
     },
     secret = {
-        version   : "2017-08-11",
+        version   : "2017-11-22",
         "dropbox" : {
             "access_token": ""
         },
@@ -548,6 +548,15 @@ class Storage {
      * @param {function} callback
      */
     Safe( callback, data ) {
+        const safesave = obj => {
+            if ( secret.version != obj.version ) {
+                obj.version = secret.version;
+                Object.keys( secret ).forEach( item => {
+                    obj[item] == undefined && ( obj[item] = secret[item] );
+                });
+            }
+            return obj;
+        };
         if ( data ) {
             secret = { ...data };
             browser.storage.local.set( { ["secret"] : secret }, () => {
@@ -557,7 +566,7 @@ class Storage {
         } else {
             browser.storage.local.get( ["secret"], result => {
                 console.log( "chrome storage safe get success!", result );
-                result && !$.isEmptyObject( result ) && ( secret  = result["secret"] );
+                result && !$.isEmptyObject( result ) && ( secret = safesave( result["secret"] ));
                 callback && callback();
             });
         }
