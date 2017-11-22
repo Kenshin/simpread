@@ -133,7 +133,8 @@ function readMode() {
 function autoOpen() {
     getCurrent( mode.read );
     if ( window.location.href.includes( "simpread_mode=read" ) ||
-         ( storage.current.auto && storage.Exclusion() )
+         ( storage.current.auto && storage.Exclusion() ) ||
+         ( !storage.current.auto && st.Whitelist( storage.current ) )
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":

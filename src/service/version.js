@@ -100,8 +100,9 @@ function Verify( curver, data ) {
     }
 
     if ( curver == "1.0.4" ) {
-        data.read.toc      = true;
-        data.read.toc_hide = true;
+        data.read.toc       = true;
+        data.read.toc_hide  = true;
+        data.read.whitelist = [];
         curver = "1.0.5";
     }
 
