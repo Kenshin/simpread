@@ -145,6 +145,7 @@ let current  = {},
         },
         "instapaper"   : {
             access_token  : "",
+            token_secret  : "",
         },
         "yinxiang" : {
             access_token  : "",
