@@ -20,7 +20,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.2", "新增「自定义样式，论坛类页面与分页功能」，" ],
           [ "1.0.3", "新增「导出到生产力工具，发送到 Kindle，自定义样式，论坛类页面，分页等」，" ],
           [ "1.0.4", "新增「高级聚焦模式、主动适配与临时阅读模式」，" ],
-          [ "1.0.5", "新增「导出 epub，文本阅读器，阅读模式增加目录功能」，" ],
+          [ "1.0.5", "新增「导出 epub，文本阅读器，阅读模式增加目录功能，白名单等」，" ],
     ]);
 
 /**
@@ -100,8 +100,9 @@ function Verify( curver, data ) {
     }
 
     if ( curver == "1.0.4" ) {
-        data.read.toc      = true;
-        data.read.toc_hide = true;
+        data.read.toc       = true;
+        data.read.toc_hide  = true;
+        data.read.whitelist = [];
         curver = "1.0.5";
     }
 

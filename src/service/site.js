@@ -470,6 +470,34 @@ function readtxt() {
     return meta;
 }
 
+/**
+ * Exclusion
+ * 
+ * @param  {object} simpread.read
+ * @return {boolen} true: not exist; false: exist
+ */
+function exclusion( data ) {
+    const url = window.location.origin + window.location.pathname;
+    return data.exclusion.findIndex( item => {
+        item = item.trim();
+        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+    }) == -1 ? true : false;
+}
+
+/**
+ * Whitelist
+ * 
+ * @param  {object} simpread.read
+ * @return {boolean} 
+ */
+function whitelist( data ) {
+    const url = window.location.origin + window.location.pathname;
+    return data.whitelist.findIndex( item => {
+        item = item.trim();
+        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+    }) != -1 ? true : false;
+}
+
 export {
     getURI         as GetURI,
     findSitebyURL  as Getsite,
@@ -479,4 +507,6 @@ export {
     html2enml      as HTML2ENML,
     clearMD        as ClearMD,
     metadata       as GetMetadata,
+    exclusion      as Exclusion,
+    whitelist      as Whitelist,
 }

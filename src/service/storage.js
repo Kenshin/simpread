@@ -4,7 +4,6 @@ import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
 import {version} from 'version';
-import minimatch from 'minimatch';
 
 /**
  * Read and Write Chrome storage
@@ -51,6 +50,7 @@ const name = "simpread",
         toc_hide  : true,
         theme     : "github",
         fontfamily: "default",
+        whitelist : [],
         exclusion : [
             "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","code.oschina.net","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
         ],
@@ -338,19 +338,6 @@ class Storage {
         return ( current.mode && current.mode != type ) ||
                ( current.url  && current.url != st.GetURI() ) ||
                $.isEmptyObject( current );
-    }
-
-    /**
-     * Exclusion
-     * 
-     * @return {boolen} true: not exist; false: exist
-     */
-    Exclusion() {
-        const url = window.location.origin + window.location.pathname;
-        return simpread.read.exclusion.findIndex( item => {
-            item = item.trim();
-            return item.startsWith( "http" ) ? minimatch( url, item ) : item == current.site.name;
-        }) == -1 ? true : false;
     }
 
     /**

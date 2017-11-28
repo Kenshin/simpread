@@ -37,12 +37,18 @@ export default class LabsOpt extends React.Component {
         this.props.onChange && this.props.onChange( false );
     }
 
+    changeWhitelist() {
+        this.props.read.whitelist = event.target.value.split("\n");
+        this.props.onChange && this.props.onChange( false );
+    }
+
     tocState( value ) {
         $( this.refs.toc ).velocity( value ? "slideDown" : "slideUp" );
     }
 
     exclusionState( value ) {
-        $( this.refs.exclusion ).velocity( value ? "slideDown" : "slideUp" );
+        $( this.refs.exclusion  ).velocity( value ? "slideDown" : "slideUp" );
+        $( this.refs.whitelist ).velocity( !value ? "slideDown" : "slideUp" );
     }
 
     componentDidMount() {
@@ -143,17 +149,27 @@ export default class LabsOpt extends React.Component {
                     </div>
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            tooltip={{ text: "此项为实验性功能，建议不启动。" }}
+                            desc="白名单与黑名单功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
                             label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
                     <div ref="exclusion" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
-                        <div className="label">排除列表</div>
+                        <div className="label">排除列表（黑名单）</div>
                         <TextField 
                             multi={ true } rows={8}
                             placeholder="每行一个，支持： URL, minimatch 等。" 
                             value={ ( this.props.read.exclusion||[] ).join( "\n" ) }
                             onChange={ ()=>this.changeExclusion() }
+                        />
+                    </div>
+
+                    <div ref="whitelist" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
+                        <div className="label">白名单</div>
+                        <TextField 
+                            multi={ true } rows={8}
+                            placeholder="每行一个，支持： URL, minimatch 等。" 
+                            value={ ( this.props.read.whitelist||[] ).join( "\n" ) }
+                            onChange={ ()=>this.changeWhitelist() }
                         />
                     </div>
                 </div>
