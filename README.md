@@ -23,7 +23,7 @@
 - 聚焦模式：  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
-- 支持 `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
+- 支持 `自动生成目录` [txt 阅读器](https://github.com/Kenshin/simpread/wiki/txt-%E9%98%85%E8%AF%BB%E5%99%A8) `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
 
 - 临时阅读模式：  
   将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#temp-read-mode)
