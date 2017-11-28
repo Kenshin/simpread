@@ -45,13 +45,13 @@
 
   - 发送阅读模式优化后的页面到 `Kindle`，详细配置 [请看这里](https://github.com/Kenshin/simpread/wiki/发送到-Kindle)
 
-  - 导出到 `Pocket` `Linnk` 的功能，包括：`当前页面的链接` `稍后读`
+  - 导出到 `Pocket` `Linnk` `Instapaper` 的功能，包括：`当前页面的链接` `稍后读`
 
   - 导出到生产力工具，包括：`Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [授权服务](https://github.com/Kenshin/simpread/wiki/授权服务)
 
-- 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键](https://github.com/kenshin/simpread/wiki/faq#快捷键) 等；
+- 同步 · 上传/下载 配置 · 同步适配列表 · [阅读模式的全快捷键支持](https://github.com/kenshin/simpread/wiki/faq#快捷键) 等；
 
-- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` 以及 [排除列表](https://github.com/kenshin/simpread/wiki/faq#排除列表)
+- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](https://github.com/kenshin/simpread/wiki/faq#白名单) 以及 [黑名单（排除列表）](https://github.com/kenshin/simpread/wiki/faq#排除列表) 等
 
 - 稍后读
 
