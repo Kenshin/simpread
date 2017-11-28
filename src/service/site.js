@@ -478,7 +478,7 @@ function readtxt() {
  */
 function exclusion( data ) {
     const url = window.location.origin + window.location.pathname;
-    return data.whitelist.exclusion.findIndex( item => {
+    return data.exclusion.findIndex( item => {
         item = item.trim();
         return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
     }) == -1 ? true : false;
