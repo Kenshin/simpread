@@ -41,7 +41,7 @@
 
 - 丰富的导出功能，包括：
 
-  - 导出 [Markdown](https://github.com/Kenshin/simpread#感谢) · `PNG` · `PDF`
+  - 导出 [Markdown](https://github.com/Kenshin/simpread#感谢) · `PNG` · `PDF` · [epub](https://github.com/Kenshin/simpread/wiki/发送到-epub)
 
   - 发送阅读模式优化后的页面到 `Kindle`，详细配置 [请看这里](https://github.com/Kenshin/simpread/wiki/发送到-Kindle)
 

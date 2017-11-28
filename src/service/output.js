@@ -69,10 +69,10 @@ function action( type, title, desc, content ) {
                 }
                 break;
             case "epub":
-                new Notify().Render( `当前服务使用了 <a href="https://github.com/Kenshin/simpread/wiki/epub" target="_blank">epub.press</a> 服务，开始转码生成 epub 请稍等...` );
+                new Notify().Render( `当前服务使用了 <a href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-epub" target="_blank">epub.press</a> 服务，开始转码生成 epub 请稍等...` );
                 exp.Epub( content, window.location.href, title, desc, success => {
                     success  && new Notify().Render( 0, "转换成功" );
-                    !success && new Notify().Render( 2, `转换失败，这是一个实验性功能，不一定能导出成功，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/epub" target="_blank">epub.press</a>` );
+                    !success && new Notify().Render( 2, `转换失败，这是一个实验性功能，不一定能导出成功，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-epub" target="_blank">epub.press</a>` );
                 });
                 break;
             case "kindle":
