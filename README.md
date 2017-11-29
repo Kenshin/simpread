@@ -17,13 +17,15 @@
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
 
 #### 主要功能一览：
-- 阅读模式：  
-  简悦 `原创` 功能，逐一适配了 [230+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
-
 - 聚焦模式：  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
-- 支持 `自动生成目录` [txt 阅读器](https://github.com/Kenshin/simpread/wiki/txt-%E9%98%85%E8%AF%BB%E5%99%A8) `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
+- 阅读模式：  
+  简悦 `原创` 功能，逐一适配了 [230+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
+
+  * 支持 `自动生成目录` [TXT 阅读器](https://github.com/Kenshin/simpread/wiki/txt-%E9%98%85%E8%AF%BB%E5%99%A8) `论坛类页面` 与 `分页功能` 如：知乎 · 百度贴吧等
+
+  * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](https://github.com/Kenshin/simpread/wiki/自定义样式)
 
 - 临时阅读模式：  
   将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#temp-read-mode)
@@ -36,8 +38,6 @@
 
 - 多种主题：  
   `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
-
-- 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](https://github.com/Kenshin/simpread/wiki/自定义样式)
 
 - 丰富的导出功能，包括：
 
