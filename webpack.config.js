@@ -54,7 +54,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         },
       }),
 
-     new HtmlWebpackPlugin({
+      new HtmlWebpackPlugin({
        filename: 'welcome/version_1.0.4.html',
        template: 'src/welcome/version_1.0.4.html',
        inject: true,
@@ -62,6 +62,15 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         collapseWhitespace: true,
        },
      }),
+
+      new HtmlWebpackPlugin({
+        filename: 'welcome/version_1.0.5.html',
+        template: 'src/welcome/version_1.0.5.html',
+        inject: true,
+        minify: {
+         collapseWhitespace: true,
+        },
+      }),
     ],
 
     // conditions environment
