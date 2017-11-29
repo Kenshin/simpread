@@ -49,7 +49,7 @@
 
   - 导出到生产力工具，包括：`Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [授权服务](https://github.com/Kenshin/simpread/wiki/授权服务)
 
-- 同步 · 上传/下载 配置 · 同步适配列表 · [阅读模式的全快捷键支持](https://github.com/kenshin/simpread/wiki/faq#快捷键) 等；
+- 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](https://github.com/kenshin/simpread/wiki/快捷键) 等；
 
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](https://github.com/kenshin/simpread/wiki/faq#白名单) 以及 [黑名单（排除列表）](https://github.com/kenshin/simpread/wiki/faq#排除列表) 等
 
