@@ -58,21 +58,23 @@ export default class Unrdist extends React.Component {
     };
 
     onAction( event, ...rests ) {
-        const { pocket, linnk } = exp,
+        const { pocket, linnk, instapaper } = exp,
               [ id, _, data ]   = rests;
 
-        [ "pocket", "linnk" ].includes( id ) &&
+        [ "pocket", "instapaper", "linnk" ].includes( id ) &&
             exp.VerifySvcWrapper( storage, exp[id], id, exp.Name( id ), new Notify() )
                 .done( type => {
                     if ( type == "pocket" ) {
-                        pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, new Notify() ));
-                    } else {
+                        pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, type, new Notify() ));
+                    } else if ( type == "linnk" ) {
                         linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                             if ( !error ) {
                                 linnk.group_id = result.data.groupId;
-                                linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, new Notify() ));
+                                linnk.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, type, new Notify() ));
                             } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
                         });
+                    } else {
+                        instapaper.Add( data.url, data.title.trim(), "", ( result, error ) => exp.svcCbWrapper( result, error, instapaper.name, type, new Notify() ));
                     }
                 });
 

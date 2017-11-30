@@ -523,6 +523,9 @@ const actionItems = [
         id: "pocket",
         title: "发送到 Pocket",
     },{
+        id: "instapaper",
+        title: "发送到 Instapaper",
+    },{
         id: "linnk",
         title: "发送到 Linnk",
     },{
