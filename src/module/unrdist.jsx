@@ -62,7 +62,7 @@ export default class Unrdist extends React.Component {
               [ id, _, data ]   = rests;
 
         [ "pocket", "instapaper", "linnk" ].includes( id ) &&
-            exp.VerifySvcWrapper( storage, exp[id], id, exp.Name( id ), new Notify() )
+            exp.VerifySvcWrapper( storage, exp[id], id, exp.Name( id ), new Notify(), false )
                 .done( type => {
                     if ( type == "pocket" ) {
                         pocket.Add( data.url, data.title.trim(), ( result, error ) => exp.svcCbWrapper( result, error, pocket.name, type, new Notify() ));

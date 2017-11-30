@@ -1020,9 +1020,10 @@ function serviceCallback( result, error, name, type, notify ) {
  * @param  {string} service type
  * @param  {string} service name
  * @param  {object} notify
+ * @param  {object} default auto re-auth
  * @return {promise} promise
  */
-function verifyService( storage, service, type, name, notify ) {
+function verifyService( storage, service, type, name, notify, auto = true ) {
     const dtd = $.Deferred();
     storage.Safe( ()=> {
         if ( storage.secret[type].access_token ) {
@@ -1030,10 +1031,10 @@ function verifyService( storage, service, type, name, notify ) {
             notify.Render( `开始保存到 ${name}，请稍等...` );
             dtd.resolve( type );
         } else {
-            notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
+            auto ? notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
                 notify.Clone().Render( type == "linnk" ? "Linnk 无法自动授权 3 秒后请自行授权。" : "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
                 setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
-            });
+            }) : notify.Render( `请先获取 ${name} 的授权，才能使用此功能！` );
             dtd.reject( type );
         }
     });
