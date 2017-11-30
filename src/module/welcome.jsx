@@ -202,7 +202,7 @@ class Welcome extends React.Component {
                             <div style={ style.desc }>
                                 支持下载 <strong>PDF · PNG</strong> 到本地。<br/>
                                 支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
-                                发送页面链接到 <strong>Pocket · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
+                                发送页面链接到 <strong>Pocket · Instapaper · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
                             </div>
                         </section>
                     </div>
