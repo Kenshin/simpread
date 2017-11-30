@@ -556,6 +556,24 @@
             "<div class='x_detail_btm'>"
         ]
     },{
+        "name"    : "faq.dxy.com",
+        "url"     : "https://dxy.com/faq/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='editor-style'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "column.dxy.com",
+        "url"     : "https://dxy.com/column/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class='editor-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "creative.adquan.com",
         "url"     : "http://creative.adquan.com/show/*",
         "title"   : "<h2 class='text_title'>",
@@ -1426,6 +1444,15 @@
         "title"   : "<h1 class='aTitle'>",
         "desc"    : "",
         "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "blog.codingnow.com",
+        "url"     : "https://blog.codingnow.com/*/*/*.html",
+        "title"   : "<h3 class='entry-header'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
         "exclude" : [
             ""
         ]
