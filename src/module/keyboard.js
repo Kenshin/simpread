@@ -24,6 +24,7 @@ function render( $target ) {
  ***********************/
 
 Mousetrap.bind( trigger, () => {
+    if ( $( "html" ).find( ".simpread-read-root" ).length == 0 ) return;
     if ( current_mode == "" ) {
         current_mode = "keyboard";
         new Notify().Render( "已进入快捷键操作模式，退出请使用 sr，帮助请按," );
