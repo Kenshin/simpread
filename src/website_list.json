@@ -1430,6 +1430,25 @@
             ""
         ]
     },{
+        "name"    : "coolshell.cn",
+        "url"     : "https://coolshell.cn/articles/*.html",
+        "title"   : "<h1 class='entry-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            "<div class='jiathis_style'>",
+			"<div id='wp_rp_first'>",
+			"<div class='post-ratings'>",
+			"<footer class='entry-footer'>",
+			"[[/src=\\S+(qrcode_for_gh_dd9d8c843f20_860)\\S+'/]]",
+			"[[/src=\\S+(100offer_600_200)\\S+'/]]",
+			"[['<p>微信公众账号可以在手机端搜索文章</p>']]",
+			"[['<p>全文完</p>']]",
+			"[['<strong>转载本站文章请注明作者</strong>']]",
+			"[['<div>——===</div>']]",
+			"[['<b>酷壳404页面</b>']]"
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
