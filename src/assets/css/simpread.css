@@ -213,12 +213,15 @@ sr-rd-crlbar.controlbar:hover {
 /**
  * Golbal
 */
-
-@media all and ( max-height: 783px ) {
+@media all and ( max-height: 620px ) {
 
     fab {
         zoom: .8;
     }
+
+}
+
+@media all and ( max-height: 783px ) {
 
     dialog-gp dialog-content {
         max-height: 580px;
