@@ -111,12 +111,12 @@ export default class LabsOpt extends React.Component {
                     <Switch width="100%" checked={ this.props.focus.controlbar }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否一直显示右下角的控制栏？"
-                            desc="默认（关闭）意味着「鼠标移上时才显示」"
+                            desc="关闭意味着「鼠标移上时才显示」"
                             onChange={ (s)=>this.onChange(s, "focus", "controlbar") } />
                     <Switch width="100%" checked={ this.props.focus.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否启用手动聚焦模式？"
-                            desc="默认（关闭）会使用「自动聚焦模式」"
+                            desc="关闭意味着使用「自动聚焦模式」"
                             onChange={ (s)=>this.onChange(s, "focus", "highlight") } />
                 </div>
 
@@ -129,7 +129,7 @@ export default class LabsOpt extends React.Component {
                     <Switch width="100%" checked={ this.props.read.controlbar }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否一直显示右下角的控制栏？"
-                            desc="默认（关闭）意味着「鼠标移上时才显示」"
+                            desc="关闭意味着「鼠标移上时才显示」"
                             onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
@@ -144,7 +144,7 @@ export default class LabsOpt extends React.Component {
                         <Switch width="100%" checked={ this.props.read.toc_hide }
                                 thumbedColor="#3F51B5" trackedColor="#7986CB"
                                 label="大纲（目录）是否开启「鼠标移动到右上角」自动显示？"
-                                desc="默认（关闭）意味着「一直显示」"
+                                desc="关闭意味着「一直显示」"
                                 onChange={ (s)=>this.onChange(s, "read", "toc_hide") } />
                     </div>
                     <Switch width="100%" checked={ this.props.read.auto }
