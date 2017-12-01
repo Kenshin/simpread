@@ -134,11 +134,12 @@ export default class LabsOpt extends React.Component {
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="是否启动临时阅读模式？"
-                            desc="当前页面未适配阅读模式时，才能使用此功能"
+                            desc="当页面未适配阅读模式时，才能使用此功能"
                             onChange={ (s)=>this.onChange(s, "read", "highlight") } />
                     <Switch width="100%" checked={ this.props.read.toc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="是否自动生成大纲（目录）？"
+                            desc="只整理 h1, h2, h3, h4 的内容为大纲"
                             onChange={ (s)=>this.onChange(s, "read", "toc") } />
                     <div ref="toc">
                         <Switch width="100%" checked={ this.props.read.toc_hide }
