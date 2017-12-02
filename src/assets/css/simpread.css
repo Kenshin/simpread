@@ -54,22 +54,6 @@
 }
 
 /**
- * Dialog: style
-*/
-
-@media all and ( max-height: 783px ) {
-
-    dialog-gp dialog-content {
-        max-height: 625px;
-    }
-
-    dialog-gp dialog-footer {
-        border-top: 1px solid rgba(224, 224, 224, 1);
-    }
-
-}
-
-/**
  *  Read: background( root ) style
  */
 .simpread-read-root {
@@ -87,6 +71,7 @@
 
     z-index: 2147483646;
 
+    overflow-x: hidden;
     opacity: 0;
     transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
 }
@@ -223,6 +208,29 @@ sr-rd-crlbar.controlbar {
 
 sr-rd-crlbar.controlbar:hover {
     opacity: 1;
+}
+
+/**
+ * Golbal
+*/
+@media all and ( max-height: 620px ) {
+
+    fab {
+        zoom: .8;
+    }
+
+}
+
+@media all and ( max-height: 783px ) {
+
+    dialog-gp dialog-content {
+        max-height: 580px;
+    }
+
+    dialog-gp dialog-footer {
+        border-top: 1px solid rgba(224, 224, 224, 1);
+    }
+
 }
 
 /**

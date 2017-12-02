@@ -374,32 +374,27 @@ const readItems = {
 const fontfamily = [{
         value : "default",
         name  : "系统默认",
-        info  : "F + 1",
     },{
         value : "PingFang SC",
         name  : "苹方字体",
-        info  : "F + 2",
         style : {
             text: { fontFamily: "PingFang SC" }
         }
     },{
         value : "Hiragino Sans GB",
         name  : "冬青黑体",
-        info  : "F + 3",
         style : {
             text: { fontFamily: "Hiragino Sans GB" }
         }
     },{
         value : "Microsoft Yahei",
         name  : "微软雅黑",
-        info  : "F + 4",
         style : {
             text: { fontFamily: "Microsoft Yahei" }
         }
     },{
         value : "Source Han Sans CN",
         name  : "思源黑体",
-        info  : "F + 5",
         style : {
             text: { fontFamily: "Source Han Sans CN" }
         }
@@ -407,28 +402,22 @@ const fontfamily = [{
     fontsize = [{
         value : "62.5%",
         name  : "正常",
-        info  : "S + 2",
     },{
         value : "70%",
         name  : "大号",
-        info  : "S + 3",
     },{
         value : "58%",
         name  : "小号",
-        info  : "S + 1",
     }],
     layout = [{
         value : "20%",
         name  : "正常",
-        info  : "W + 2",
     },{
         value : "15%",
         name  : "宽栏",
-        info  : "W + 3",
     },{
         value : "25%",
         name  : "窄栏",
-        info  : "W + 1",
 }],
 readLabels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
 
@@ -533,6 +522,9 @@ const actionItems = [
     {
         id: "pocket",
         title: "发送到 Pocket",
+    },{
+        id: "instapaper",
+        title: "发送到 Instapaper",
     },{
         id: "linnk",
         title: "发送到 Linnk",
