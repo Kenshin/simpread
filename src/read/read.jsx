@@ -5,7 +5,9 @@ import pangu       from 'pangu';
 import ProgressBar from 'schedule';
 import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
+import * as toc    from 'toc';
 import * as modals from 'modals';
+import * as kbd    from 'keyboard';
 
 import { storage, Clone } from 'storage';
 import * as util          from 'util';
@@ -71,6 +73,7 @@ class Read extends React.Component {
             this.props.read.layout     && ss.Layout( this.props.read.layout );
             ss.Preview( this.props.read.custom );
 
+            this.props.wrapper.name.startsWith( "txtread::" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
             if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
             if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
             await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
@@ -79,6 +82,8 @@ class Read extends React.Component {
             await htmlbeautify( $( "sr-rd-content" ));
             await commbeautify( $( "sr-rd-content" ));
             pangu.spacingElementByClassName( rdcls );
+            this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+            kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
         }
@@ -144,6 +149,7 @@ class Read extends React.Component {
                 <Footer />
                 <ReadCtlbar show={ this.props.read.controlbar } 
                             multi={ this.props.wrapper.avatar ? true : false }
+                            type={ this.props.wrapper.name }
                             site={{ title: this.props.wrapper.title, url: window.location.href }} 
                             custom={ this.props.read.custom } onAction={ (t,v)=>this.onAction( t,v ) }/>
             </sr-read>
@@ -365,6 +371,7 @@ async function commbeautify( $target ) {
         newsrc = cnbeta  ? cnbeta  : src;
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
+        !newsrc.startsWith( "http" ) && ( newsrc = $target[0].src );
         $img.attr( "src", newsrc )
             .one( "load",  ()=>fixOverflowImgsize() )
             .one( "error", ()=>loaderrorHandle()    )

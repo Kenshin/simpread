@@ -1,6 +1,8 @@
 console.log( "=== simpread read: special load ===" )
 
-import Button from 'button';
+import Button    from 'button';
+
+import * as kbd  from 'keyboard';
 
 const default_src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAOVBMVEX///+AgICfn5+Hh4f39/fPz8+vr6+QkJDg4ODv7+/n5+fAwMCoqKiYmJjHx8fX19e4uLjQ0NDIyMhhw/XSAAACBUlEQVRYw6VX2ZKEIAw0ATnk8Pj/j90q3V13SSOxpl+mHEknaUKCUw9xTZnpBLu02ukV4lGoAR9Rbb4Xgii7ztxTF35/ay4p1kdzm2mI/KDn4kkB0w3iICVmbO9IDae31zMkoo8YZkJgl5IrGh1WpHaN34VdDUks//YfrNjsn/cO8NtnAedhivl+G6D9kCH8Buhl/JptLv0dLMIcuqnTBY8TGCdhelvohfGjI3mEEybYZKGdZTKokcfNipCXpg4IysgoMAwDl5KegFGwy2cEYZpfEBQkAjpnehFpQ2HRCwKeDKHdhQiQgGBcEE5NgEWwhgAm/eSo2BchmAXMPUMwBSaEYlE/0RPIGWxLb8BkwiiLam6n/kgzx+3+IOoSBGSbr5+0nN43cz0SnE9Wpr9O0/qz2psf0jCtTrqSR8zFK2lu1D5FjZtpnLX1wfGu/Pxn3e8QillUXGxa3A07J8fimjqb9tixrD8JXJJ8UQp7NcN6n7LrScvQTLAqxtEItTm0/r5wKOH/j9AgutAIc5MzE4VXBLa56UUjOsAwB2+bhuteprCIf9wr+yp7tl5H7C0TzW/tZQwaJQ+i2mX2w92M/BBpMEMhkiGzPtOXhyBCGaYZPFHBH6l2z90cRcfh3QJr8lWjsq1nn2Xe0hHCEvaUmL/btRaxyo/vFKdXiCFlPmk8u9rvdl/WWxJO0oeE7gAAAABJRU5ErkJggg==";
 
@@ -53,6 +55,12 @@ export class Paging extends React.Component {
 
     onClick( state ) {
         location.href = this.state[state];
+    }
+
+    componentDidMount() {
+        kbd.Bind( [ "left", "right" ], ( event, combo ) => {
+            this.onClick( combo == "left" ? "prev" : "next" );
+        });
     }
 
     render() {

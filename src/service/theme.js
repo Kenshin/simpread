@@ -63,6 +63,7 @@ class Theme {
             if ( name == theme )  $target.html( themes[theme] );
             else                  $target.html( `${flag}${name}` + "{}" );
         });
+        tocTheme( theme );
     }
 
     constructor() {
@@ -87,6 +88,15 @@ function findThemeStyle( callback ) {
             callback( name, css, $target );
         }
     });
+}
+
+/**
+ * Change toc <a> style( hacked )
+ * 
+ * @param {string} theme
+ */
+function tocTheme( theme ) {
+    $( "toc outline a" ).removeClass().addClass( "toc-outline-theme-" + theme );
 }
 
 const theme = new Theme();

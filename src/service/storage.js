@@ -4,7 +4,6 @@ import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
 import {version} from 'version';
-import minimatch from 'minimatch';
 
 /**
  * Read and Write Chrome storage
@@ -47,8 +46,11 @@ const name = "simpread",
         controlbar: true,
         highlight : true,
         shortcuts : "A A",
+        toc       : true,
+        toc_hide  : true,
         theme     : "github",
         fontfamily: "default",
+        whitelist : [],
         exclusion : [
             "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","code.oschina.net","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
         ],
@@ -129,7 +131,7 @@ let current  = {},
         sites   : [],
     },
     secret = {
-        version   : "2017-08-11",
+        version   : "2017-11-22",
         "dropbox" : {
             "access_token": ""
         },
@@ -140,6 +142,10 @@ let current  = {},
         "linnk"   : {
             access_token  : "",
             "group_name"  : "",
+        },
+        "instapaper"   : {
+            access_token  : "",
+            token_secret  : "",
         },
         "yinxiang" : {
             access_token  : "",
@@ -332,19 +338,6 @@ class Storage {
         return ( current.mode && current.mode != type ) ||
                ( current.url  && current.url != st.GetURI() ) ||
                $.isEmptyObject( current );
-    }
-
-    /**
-     * Exclusion
-     * 
-     * @return {boolen} true: not exist; false: exist
-     */
-    Exclusion() {
-        const url = window.location.origin + window.location.pathname;
-        return simpread.read.exclusion.findIndex( item => {
-            item = item.trim();
-            return item.startsWith( "http" ) ? minimatch( url, item ) : item == current.site.name;
-        }) == -1 ? true : false;
     }
 
     /**
@@ -542,6 +535,15 @@ class Storage {
      * @param {function} callback
      */
     Safe( callback, data ) {
+        const safesave = obj => {
+            if ( secret.version != obj.version ) {
+                obj.version = secret.version;
+                Object.keys( secret ).forEach( item => {
+                    obj[item] == undefined && ( obj[item] = secret[item] );
+                });
+            }
+            return obj;
+        };
         if ( data ) {
             secret = { ...data };
             browser.storage.local.set( { ["secret"] : secret }, () => {
@@ -551,7 +553,7 @@ class Storage {
         } else {
             browser.storage.local.get( ["secret"], result => {
                 console.log( "chrome storage safe get success!", result );
-                result && !$.isEmptyObject( result ) && ( secret  = result["secret"] );
+                result && !$.isEmptyObject( result ) && ( secret = safesave( result["secret"] ));
                 callback && callback();
             });
         }
@@ -595,7 +597,7 @@ class Storage {
     }
 
     /**
-     * Fix simpread.read.site
+     * Fix simpread.read.site only old 1.0.0 and 1.0.1
      * 
      * @param  {array} changed target
      * @param  {string} old version
@@ -604,33 +606,23 @@ class Storage {
      * @return {array} new sites
      */
     Fix( target, curver, newver ) {
-        const newsites = target.map( site => {
+        target.forEach( ( site, idx ) => {
             let url      = site[0],
                 { name } = site[1];
-            for ( let item of simpread.sites ) {
-                if ( name == item[1].name ) {
-
-                    // 1.0.0 → 1.0.1
-                    if ( curver == "1.0.0" ) {
-                        site[0] = item[0];
-                    }
-
-                    if ( curver == "1.0.0" ) {
-                        curver = "1.0.1";
-                    }
-
-                    // 1.0.1 → 1.0.2
-                    if ( curver == "1.0.1" ) {
+            if ( curver == "1.0.0" || curver == "1.0.1" ) {
+                for ( let item of simpread.sites ) {
+                    if ( name == item[1].name ) {
                         item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
                         item[1].paging  && ( site[1].paging  = item[1].paging  );
                         item[1].include && ( site[1].include = item[1].include );
+                        target[idx][1] = { ...item[1] };
+                        target[idx][0] = item[0];
+                        continue;
                     }
-
-                    return [ item[0], site[1] ];
                 }
             }
         });
-        return newsites;
+        return target;
     }
 
 }
@@ -749,7 +741,7 @@ function compare() {
 function now() {
     const date   = new Date(),
           format = value => value = value < 10 ? "0" + value : value;
-    return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + ":" + format( date.getMinutes() ) + ":" + format( date.getSeconds() );
+    return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + "-" + format( date.getMinutes() ) + "-" + format( date.getSeconds() );
 }
 
 const storage = new Storage();

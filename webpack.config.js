@@ -211,10 +211,16 @@ const webpack = require( 'webpack' ),
         ]
       },
 
+      node: {
+        fs: 'empty'
+      },
+
       resolve: {
         alias : {
           minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
-          'to-markdown' : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
+          markdown   : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
+          epubpress  : __dirname + '/node_modules/epub-press-js/build/index.js',
+
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           pangu      : __dirname + '/src/vender/pangu.min.js',
@@ -224,6 +230,7 @@ const webpack = require( 'webpack' ),
           carousel   : __dirname + '/src/vender/carousel/carousel.js',
           dom2image  : __dirname + '/src/vender/dom2image.min.js',
           filesaver  : __dirname + '/src/vender/filesaver.min.js',
+          instapaper : __dirname + '/src/vender/instapaper.js',
 
           util       : __dirname + '/src/service/util.js',
           local      : __dirname + '/src/service/local.js',
@@ -245,10 +252,12 @@ const webpack = require( 'webpack' ),
           controlbar : __dirname + '/src/focus/controlbar.jsx',
 
           read       : __dirname + '/src/read/read.jsx',
+          toc        : __dirname + '/src/read/toc.jsx',
           special    : __dirname + '/src/read/special.jsx',
           readctlbar : __dirname + '/src/read/controlbar.jsx',
           schedule   : __dirname + '/src/read/progressbar.jsx',
 
+          keyboard   : __dirname + '/src/module/keyboard.js',
           modals     : __dirname + '/src/module/modals.jsx',
           focusopt   : __dirname + '/src/module/focus.jsx',
           readopt    : __dirname + '/src/module/read.jsx',

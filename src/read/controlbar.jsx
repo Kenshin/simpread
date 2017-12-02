@@ -4,9 +4,10 @@ import * as ss     from 'stylesheet';
 import {browser}   from 'browser';
 import * as msg    from 'message';
 import th          from 'theme';
-import * as config from 'config';
+import * as conf   from 'config';
 import * as output from 'output';
 import * as watch  from 'watch';
+import * as kbd    from 'keyboard';
 
 import Fab         from 'fab';
 
@@ -25,6 +26,19 @@ export default class ReadCtlbar extends React.Component {
 
     static propTypes = {
         onAction: React.PropTypes.func,
+    }
+
+    componentDidMount() {
+        browser.runtime.onMessage.addListener( ( request, sender, sendResponse ) => {
+            if ( request.type == msg.MESSAGE_ACTION.export ) {
+                console.log( "controlbar runtime Listener", request );
+                new Notify().Render( "已重新授权成功！" );
+                this.onAction( undefined, request.value.type );
+            }
+        });
+        kbd.Listen( combo => {
+            this.onAction( undefined, combo )
+        });
     }
 
     onAction( event, type ) {
@@ -67,7 +81,7 @@ export default class ReadCtlbar extends React.Component {
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                        [ "save", "markdown", "png", "pdf", "kindle", "dropbox", "pocket", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
+                        [ "save", "markdown", "png", "epub", "pdf", "kindle", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
                         const [ title, desc, content ] = [ $( "sr-rd-title" ).text().trim(), $( "sr-rd-desc" ).text().trim(), $( "sr-rd-content" ).html().trim() ];
                         output.Action( type, title, desc, content );
                     }
@@ -83,36 +97,23 @@ export default class ReadCtlbar extends React.Component {
 
     }
 
-    bindShortcuts() {
-        const bindOpt = ( name ) => {
-            const ffkey  = config.Shortcuts[name].key.toLowerCase(),
-                  ffkeys = config.Shortcuts[name].value.map( (key) => ffkey + " " + key );
-            Mousetrap.bind( ffkeys, ( event, combo ) => {
-                Object.keys( config.Shortcuts ).forEach( name=> {
-                    if ( config.Shortcuts[name].key.toLowerCase() == combo.split( " " )[0] ) {
-                       const idx = config.Shortcuts[name].value.indexOf( combo.split( " " )[1] );
-                       this.onAction( undefined, name + "_" + config.Shortcuts[name].name[idx] );
-                    }
-                });
-            });
-        };
-        Object.keys( config.Shortcuts ).forEach( name => bindOpt( name ) );
-        Mousetrap.bind( [ "up", "down" ], event => this.onAction( undefined, event.code.toLowerCase().replace( "arrow", "" ) ) );
-        Mousetrap.bind( [ "shift+left", "shift+right" ], ( event, combo ) => {
-            this.onAction( undefined, "theme_" + ( combo.split("+")[1] == "left" ? "prev" : "next" ));
-        });
-        Mousetrap.bind( [ "c c" ], ( event, combo ) => this.onAction( undefined, "exit" ) );
+    componentWillMount() {
+        if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
+            delete conf.readItems.download;
+            delete conf.readItems.readlater;
+            delete conf.readItems.send;
+            delete conf.readItems.share;
+        }
     }
 
     constructor( props ) {
         super( props );
-        this.bindShortcuts();
     }
 
     render() {
         return (
-            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" }>
-                <Fab items={ config.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
+            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": "2" }}>
+                <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )
     }

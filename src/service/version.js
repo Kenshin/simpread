@@ -12,6 +12,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.2", "Mon Aug 07 2017 19:03:50 GMT+0800 (CST)" ],
           [ "1.0.3", "Mon Aug 21 2017 04:09:23 GMT+0800 (CST)" ],
           [ "1.0.4", "Mon Sep 25 2017 14:40:27 GMT+0800 (CST)" ],
+          [ "1.0.5", "Wed Nov 15 2017 11:39:23 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -19,6 +20,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.2", "新增「自定义样式，论坛类页面与分页功能」，" ],
           [ "1.0.3", "新增「导出到生产力工具，发送到 Kindle，自定义样式，论坛类页面，分页等」，" ],
           [ "1.0.4", "新增「高级聚焦模式、主动适配与临时阅读模式」，" ],
+          [ "1.0.5", "新增「导出 epub，TXT 阅读器，阅读模式增加目录功能，白名单等」，" ],
     ]);
 
 /**
@@ -95,6 +97,13 @@ function Verify( curver, data ) {
         data.option.br_exit   = false;
         data.option.secret    = false;
         curver = "1.0.4";
+    }
+
+    if ( curver == "1.0.4" ) {
+        data.read.toc       = true;
+        data.read.toc_hide  = true;
+        data.read.whitelist = [];
+        curver = "1.0.5";
     }
 
     /*

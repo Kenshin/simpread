@@ -401,7 +401,7 @@ function html2enml( html, url ) {
  */
 function clearMD( str ) {
     str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
-    str = str.replace( /<\/?(a|ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
+    str = str.replace( /<\/?(ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
              .replace( /sr-blockquote/ig, "blockquote" )
              .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
              .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )
@@ -414,9 +414,13 @@ function clearMD( str ) {
  * @return {object} meata data or undefined
  */
 function metadata() {
+    if ( minimatch( location.href, "file://**/*.txt" ) || minimatch( location.href, "http*://**/*.txt" ) ) {
+        return readtxt();
+    }
     const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
           meta = {
             name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
+            url    : $( "meta[name='simpread:url']"     ).attr( "content" ),
             title  : $( "meta[name='simpread:title']"   ).attr( "content" ),
             desc   : $( "meta[name='simpread:desc']"    ).attr( "content" ),
             include: $( "meta[name='simpread:include']" ).attr( "content" ),
@@ -425,6 +429,9 @@ function metadata() {
             exclude: [],
     };
     if ( meta.name && meta.include ) {
+        if ( meta.url && !minimatch( location.href, meta.url )) {
+            return undefined;
+        }
         !meta.title   && ( meta.title   = "<title>" );
         !meta.desc    && ( meta.desc    = "" );
         !meta.exp     && ( meta.exp     = "" );
@@ -441,6 +448,56 @@ function metadata() {
     }
 }
 
+/**
+ * Read txt, include: file and http
+ */
+function readtxt() {
+    const title = location.pathname.split( "/" ).pop(),
+          type  = location.protocol == "file:" ? "local" : "remote",
+          meta  = {
+            name   : `txtread::${type}`,
+            title  : "<title>",
+            desc   : "",
+            include: "<pre>",
+            auto   : false,
+            exclude: [],
+    };
+    if ( type == "remote" ) {
+        meta.include = "";
+        meta.html    = $( "body pre" ).html().replace( /\n/ig, "<br>" );
+    }
+    !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".txt", "" )) }</title>` );
+    return meta;
+}
+
+/**
+ * Exclusion
+ * 
+ * @param  {object} simpread.read
+ * @return {boolen} true: not exist; false: exist
+ */
+function exclusion( data ) {
+    const url = window.location.origin + window.location.pathname;
+    return data.exclusion.findIndex( item => {
+        item = item.trim();
+        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+    }) == -1 ? true : false;
+}
+
+/**
+ * Whitelist
+ * 
+ * @param  {object} simpread.read
+ * @return {boolean} 
+ */
+function whitelist( data ) {
+    const url = window.location.origin + window.location.pathname;
+    return data.whitelist.findIndex( item => {
+        item = item.trim();
+        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+    }) != -1 ? true : false;
+}
+
 export {
     getURI         as GetURI,
     findSitebyURL  as Getsite,
@@ -450,4 +507,6 @@ export {
     html2enml      as HTML2ENML,
     clearMD        as ClearMD,
     metadata       as GetMetadata,
+    exclusion      as Exclusion,
+    whitelist      as Whitelist,
 }

@@ -2,7 +2,9 @@ console.log( "=== simpread export load ===" )
 
 import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
-import toMarkdown from 'to-markdown';
+import toMarkdown from 'markdown';
+import EpubPress  from 'epubpress';
+import Instapaper from 'instapaper';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
@@ -19,6 +21,9 @@ function png( element, name, callback ) {
     .then( blob => {
         blob && FileSaver.saveAs( blob, name );
         callback( !!blob );
+    }).catch( error => {
+        console.error( "export png failed", error )
+        callback( undefined );
     });
 }
 
@@ -46,6 +51,27 @@ function markdown( data, name, callback ) {
     }
 }
 
+function epub( data, url, title, desc, callback ) {
+    console.log( data )
+    const ebook = new EpubPress({
+        title,
+        description: desc == "" ? title : desc,
+        sections: [{
+            url,
+            html: `<html><body><div>${data}</div></body></html>`,
+        }]
+    });
+    ebook.publish().then( () => {
+        ebook.download();
+    }).then(() => {
+        console.log( "succcess" );
+        callback( true );
+    }).catch( error => {
+        console.log( "publish epub error ", error );
+        callback( false );
+    });
+}
+
 /**
  * Downlaod
  * 
@@ -67,6 +93,7 @@ function unlink( id ) {
     const content = {
         "dropbox" : "https://www.dropbox.com/account/connected_apps",
         "pocket"  : "https://getpocket.com/connected_applications",
+        "instapaper":"https://www.instapaper.com/",
         "evernote": "https://www.evernote.com/AuthorizedServices.action",
         "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
         "onenote" : "https://account.live.com/consent/Manage",
@@ -198,7 +225,7 @@ class Pocket {
 
     get id()   { return "pocket"; }
     get name() { return name( this.id ); }
-    
+
     get consumer_key() {
         return "69741-d75561b7a9a96a511f36552e";
     }
@@ -296,6 +323,57 @@ class Pocket {
         });
     }
 
+}
+
+/**
+ * Instapaper
+ * 
+ * @class
+ */
+class Ins {
+
+        get id()   { return "instapaper"; }
+        get name() { return name( this.id ); }
+        constructor() {
+            this.access_token = "";
+            this.token_secret = "";
+            this.ins          = new Instapaper();
+        }
+
+        get consumer_key() {
+            return "23464e13c91c4cba86f0df8aa87ec15a";
+        }
+    
+        get consumer_secret() {
+            return "b71eb22c7def4d19a2d9e7b7208d31c9";
+        }
+
+        Login( username, password, callback ) {
+            this.ins.consumer_key    = this.consumer_key;
+            this.ins.consumer_secret = this.consumer_secret;
+            this.ins.requestToken( username, password ).done( result => {
+                this.access_token    = this.ins.token;
+                this.token_secret    = this.ins.token_secret;
+                callback( result, undefined );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error )
+                callback( undefined, textStatus );
+            });
+        }
+
+        Add( url, title, description, callback ) {
+            this.ins.token           = this.access_token;
+            this.ins.token_secret    = this.token_secret;
+            this.ins.consumer_key    = this.consumer_key;
+            this.ins.consumer_secret = this.consumer_secret;
+            this.ins.add( url, title, description ).done( result => {
+                if ( result && result.length > 0 ) callback( "success", undefined );
+                else callback( undefined, "error" );
+            }).fail( ( jqXHR, textStatus, error ) => {
+                console.error( jqXHR, textStatus, error )
+                callback( undefined, textStatus );
+            });
+        }
 }
 
 /**
@@ -889,7 +967,7 @@ class Kindle {
  */
 function name( type ) {
     type = type.toLowerCase();
-    if ( [ "dropbox", "pocket", "linnk" , "evernote", "onenote" ].includes( type ) ) {
+    if ( [ "dropbox", "pocket", "instapaper", "linnk" , "evernote", "onenote" ].includes( type ) ) {
         return type.replace( /\S/i, $0=>$0.toUpperCase() );
     } else if ( type == "yinxiang" ) {
         return "印象笔记";
@@ -921,12 +999,17 @@ function mdWrapper( content, name, notify ) {
  * 
  * @param {string} result
  * @param {string} error
- * @param {string} name
+ * @param {string} service name, e.g. Google 云端硬盘
+ * @param {string} service id, e.g. gdrive
  * @param {object} notify
  */
-function serviceCallback( result, error, name, notify ) {
+function serviceCallback( result, error, name, type, notify ) {
     !error && notify.Render( `已成功保存到 ${name}！` );
     error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+    if ( error && error.includes( "重新授权" )) {
+        notify.Clone().Render( "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
+        setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
+    }
 }
 
 /**
@@ -937,9 +1020,10 @@ function serviceCallback( result, error, name, notify ) {
  * @param  {string} service type
  * @param  {string} service name
  * @param  {object} notify
+ * @param  {object} default auto re-auth
  * @return {promise} promise
  */
-function verifyService( storage, service, type, name, notify ) {
+function verifyService( storage, service, type, name, notify, auto = true ) {
     const dtd = $.Deferred();
     storage.Safe( ()=> {
         if ( storage.secret[type].access_token ) {
@@ -947,9 +1031,10 @@ function verifyService( storage, service, type, name, notify ) {
             notify.Render( `开始保存到 ${name}，请稍等...` );
             dtd.resolve( type );
         } else {
-            notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: browser.extension.getURL( "options/options.html#labs" ) } ));
-            });
+            auto ? notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
+                notify.Clone().Render( type == "linnk" ? "Linnk 无法自动授权 3 秒后请自行授权。" : "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
+                setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
+            }) : notify.Render( `请先获取 ${name} 的授权，才能使用此功能！` );
             dtd.reject( type );
         }
     });
@@ -958,6 +1043,7 @@ function verifyService( storage, service, type, name, notify ) {
 
 const dropbox  = new Dropbox(),
       pocket   = new Pocket(),
+      instapaper = new Ins(),
       linnk    = new Linnk(),
       evernote = new Evernote(),
       onenote  = new Onenote(),
@@ -967,11 +1053,12 @@ const dropbox  = new Dropbox(),
 export {
     png      as PNG,
     pdf      as PDF,
+    epub     as Epub,
     markdown as Markdown,
     download as Download,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, linnk, evernote, onenote, gdrive,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,

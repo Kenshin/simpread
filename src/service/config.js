@@ -2,6 +2,110 @@ console.log( "=== simpread config load ===" )
 
 import * as ss from 'stylesheet';
 
+const keyboard = {
+    "控制栏 - 导出" : {
+        md: {
+            "kbd"  : "md",
+            "type" : "markdown",
+            "desc" : "导出为 Markdown",
+        },
+        pg: {
+            "kbd"  : "pg",
+            "type" : "png",
+            "desc" : "导出为 PNG",
+        },
+        pf: {
+            "kbd"  : "pf",
+            "type" : "pdf",
+            "desc" : "导出为 PDF",
+        },
+        ep: {
+            "kbd"  : "ep",
+            "type" : "epub",
+            "desc" : "导出为 epub",
+        }
+    },
+    "控制栏 - 其它" : {
+        ff: {
+            "kbd"  : "ff",
+            "type" : "fontfamily_",
+            "desc" : "改变字体样式，取值 1 ~ 5",
+        },
+        fs: {
+            "kbd"  : "fs",
+            "type" : "fontsize_",
+            "desc" : "改变字体大小，取值 1 ~ 3",
+        },
+        la: {
+            "kbd"  : "la",
+            "type" : "layout_",
+            "desc" : "改变版面布局，取值 1 ~ 3",
+        },
+        "th →": {
+            "kbd"  : "th →",
+            "type" : "theme_next",
+            "desc" : "更换为后一个主题",
+        },
+        "th ←": {
+            "kbd"  : "th ←",
+            "type" : "theme_prev",
+            "desc" : "更换为前一个主题",
+        },
+    },
+    "控制栏 - 生产力工具" : {
+        yx: {
+            "kbd"  : "yx",
+            "type" : "yinxiang",
+            "desc" : "保存到 印象笔记",
+        },
+        er: {
+            "kbd"  : "er",
+            "type" : "evernote",
+            "desc" : "保存到 Evernote",
+        },
+        db: {
+            "kbd"  : "db",
+            "type" : "dropbox",
+            "desc" : "保存到 Dropbox",
+        },
+        on: {
+            "kbd"  : "on",
+            "type" : "onenote",
+            "desc" : "保存到 Onenote",
+        },
+        gr: {
+            "kbd"  : "gr",
+            "type" : "gdrive",
+            "desc" : "保存到 Google 云端硬盘",
+        },
+        kd: {
+            "kbd"  : "kd",
+            "type" : "kindle",
+            "desc" : "保存到 Kindle",
+        },
+        ln: {
+            "kbd"  : "ln",
+            "type" : "linnk",
+            "desc" : "保存到 Linnk",
+        },
+        pt: {
+            "kbd"  : "pt",
+            "type" : "pocket",
+            "desc" : "保存到 Pocket",
+        },
+        ip: {
+            "kbd"  : "ip",
+            "type" : "instapaper",
+            "desc" : "保存到 Instapaper",
+        },
+        rl: {
+            "kbd"  : "rl",
+            "type" : "save",
+            "desc" : "保存到 稍后读",
+        },
+    },
+};
+
 /**
  * Shortcust
  */
@@ -46,6 +150,11 @@ const readItems = {
                 "icon" : ss.IconPath("linnk_icon"),
                 "color": "#FF5722",
             },
+            "instapaper" : {
+                "name" : "保存到 Instapaper",
+                "icon" : ss.IconPath("instapaper_icon"),
+                "color": "#FF5722",
+            },
             "pocket" : {
                 "name" : "保存到 Pocket",
                 "icon" : ss.IconPath("pocket_icon"),
@@ -63,6 +172,11 @@ const readItems = {
         "icon" : ss.IconPath("download_icon"),
         "color": "#D4237A",
         "items": {
+            "epub" : {
+                "name" : "导出为 epub",
+                "icon" : ss.IconPath("epub_icon"),
+                "color": "#D4237A",
+            },
             "pdf" : {
                 "icon" : ss.IconPath("pdf_icon"),
                 "color": "#D4237A",
@@ -260,32 +374,27 @@ const readItems = {
 const fontfamily = [{
         value : "default",
         name  : "系统默认",
-        info  : "F + 1",
     },{
         value : "PingFang SC",
         name  : "苹方字体",
-        info  : "F + 2",
         style : {
             text: { fontFamily: "PingFang SC" }
         }
     },{
         value : "Hiragino Sans GB",
         name  : "冬青黑体",
-        info  : "F + 3",
         style : {
             text: { fontFamily: "Hiragino Sans GB" }
         }
     },{
         value : "Microsoft Yahei",
         name  : "微软雅黑",
-        info  : "F + 4",
         style : {
             text: { fontFamily: "Microsoft Yahei" }
         }
     },{
         value : "Source Han Sans CN",
         name  : "思源黑体",
-        info  : "F + 5",
         style : {
             text: { fontFamily: "Source Han Sans CN" }
         }
@@ -293,28 +402,22 @@ const fontfamily = [{
     fontsize = [{
         value : "62.5%",
         name  : "正常",
-        info  : "S + 2",
     },{
         value : "70%",
         name  : "大号",
-        info  : "S + 3",
     },{
         value : "58%",
         name  : "小号",
-        info  : "S + 1",
     }],
     layout = [{
         value : "20%",
         name  : "正常",
-        info  : "W + 2",
     },{
         value : "15%",
         name  : "宽栏",
-        info  : "W + 3",
     },{
         value : "25%",
         name  : "窄栏",
-        info  : "W + 1",
 }],
 readLabels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月白", "百合", "紺鼠", "黒鸢" ];
 
@@ -420,6 +523,9 @@ const actionItems = [
         id: "pocket",
         title: "发送到 Pocket",
     },{
+        id: "instapaper",
+        title: "发送到 Instapaper",
+    },{
         id: "linnk",
         title: "发送到 Linnk",
     },{
@@ -429,7 +535,8 @@ const actionItems = [
 ];
 
 export {
-    shortcuts as Shortcuts,
+    shortcuts,
+    keyboard,
 
     focusItems,
     focusThemes,

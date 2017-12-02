@@ -4,13 +4,13 @@ import './assets/css/simpread.css';
 import './assets/css/option.css';
 import './vender/notify/notify.css';
 
-import Mousetrap from 'mousetrap';
 import Velocity  from 'velocity';
 import Notify    from 'notify';
 
 import {focus}   from 'focus';
 import * as read from 'read';
 import * as modals from 'modals';
+import * as kbd  from 'keyboard';
 
 import * as st   from 'site';
 import { storage, STORAGE_MODE as mode } from 'storage';
@@ -33,7 +33,8 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
     console.log( "contentscripts runtime Listener", request );
     switch ( request.type ) {
         case msg.MESSAGE_ACTION.focus_mode:
-            focusMode();
+            if ( storage.option.br_exit ) focus.Exist( false ) ? focus.Exit() : focusMode();
+            else focusMode();
             break;
         case msg.MESSAGE_ACTION.shortcuts:
             bindShortcuts();
@@ -41,6 +42,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.tab_selected:
             browserAction();
             break;
+        case msg.MESSAGE_ACTION.read_mode:
         case msg.MESSAGE_ACTION.browser_click:
             watch.Verify( ( state, result ) => {
                 if ( state ) {
@@ -59,15 +61,15 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  * Keyboard event handler
  */
 function bindShortcuts() {
-    Mousetrap.bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
-    Mousetrap.bind( [ storage.read.shortcuts.toLowerCase()  ], readMode   );
-    Mousetrap.bind( "esc", () => {
-        if ( storage.option.esc ) {
+    kbd.Bind( [ storage.focus.shortcuts.toLowerCase() ], focusMode );
+    kbd.Bind( [ storage.read.shortcuts.toLowerCase()  ], readMode  );
+    kbd.ListenESC( combo => {
+        if ( combo == "esc" && storage.option.esc ) {
             modals.Exist()  && modals.Exit();
             !modals.Exist() && focus.Exist() && focus.Exit();
             !modals.Exist() && read.Exist()  && read.Exit();
         }
-    })
+    });
 }
 
 /**
@@ -130,8 +132,9 @@ function readMode() {
  */
 function autoOpen() {
     getCurrent( mode.read );
-    if ( window.location.href.includes( "simpread_mode=read" ) ||
-         ( storage.current.auto && storage.Exclusion() )
+    if   ( window.location.href.includes( "simpread_mode=read"     ) ||
+         ( storage.current.auto && st.Exclusion(  storage.current )) ||
+         ( !storage.current.auto && st.Whitelist( storage.current ))
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
