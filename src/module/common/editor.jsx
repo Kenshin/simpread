@@ -38,12 +38,13 @@ export default class Editor extends React.Component {
     }
 
     changeTitle() {
-        if ( event.target.value.trim() == "" ) {
+        const title = event.target.value.trim();
+        if ( title == "" ) {
             this.setState({ errtitle : "当前输入不能为空。" });
         }
-        else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
+        else if ( verifyHtml( title )[0] != -1 ) {
             this.setState({ errtitle : "" });
-            this.props.site.title = event.target.value.trim();
+            this.props.site.title = title;
             console.log( "this.props.site.title = ", this.props.site.title )
         } else {
             this.setState({ errtitle : "当前输入为非法。" });
@@ -51,9 +52,10 @@ export default class Editor extends React.Component {
     }
 
     changeDesc() {
-        if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
+        const desc = event.target.value.trim();
+        if ( verifyHtml( title )[0] != -1 ) {
             this.setState({ errdesc : "" });
-            this.props.site.desc = event.target.value.trim();
+            this.props.site.desc = desc;
             console.log( "this.props.site.desc = ", this.props.site.desc )
         } else {
             this.setState({ errdesc : "当前输入为非法。" });
