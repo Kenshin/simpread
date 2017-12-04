@@ -19,8 +19,12 @@ const getName = ( value, items ) => {
 export default class Editor extends React.Component {
 
     state = {
-        errtitle : "",
-        errdesc  : "",
+        errtitle    : "",
+        errdesc     : "",
+        avatar_name : "",
+        avatar_url  : "",
+        paging_prev : "",
+        paging_next : "",
     };
 
     changeName( value, code ) {
@@ -29,8 +33,8 @@ export default class Editor extends React.Component {
     }
 
     changeURL( value, code ) {
-         this.props.url = value;
-        console.log( "this.props.option.url = ",  this.props.url )
+        this.props.site.url = value;
+        console.log( "this.props.option.url = ",  this.props.site.url )
     }
 
     changeTitle() {
@@ -73,16 +77,29 @@ export default class Editor extends React.Component {
         console.log( "this.props.option.site.exclude = ", this.props.site.exclude )
     }
 
+    changeAvatar( idx, type, value ) {
+        value = value.trim();
+        if ( verifyHtml( value )[0] != -1 ) {
+            this.setState({ [`avatar_${type}`] : "" });
+            this.props.site.avatar[idx][type] = value;
+            console.log( "this.props.site.avatar = ", this.props.site.avatar )
+        } else {
+            this.setState({ [`avatar_${type}`] : "当前输入为非法。" });
+        }
+    }
+
+    changePaging( idx, type, value ) {
+        value = value.trim();
+        if ( verifyHtml( value )[0] != -1 ) {
+            this.setState({ [`paging_${type}`] : "" });
+            this.props.site.paging[idx][type] = value;
+            console.log( "this.props.site.paging = ", this.props.site.paging )
+        } else {
+            this.setState({ [`paging_${type}`] : "当前输入为非法。" });
+        }
+    }
+
     render() {
-        !this.props.site.avatar && ( this.props.site.avatar = [
-            { name: "" },
-            { url: "" },
-        ]);
-        !this.props.site.paging && ( this.props.site.paging = [
-            { prev: "" },
-            { next: "" },
-        ]);
-        console.log( "current site ", this.props.url, this.props.site )
         return (
             <sr-opt-read>
                 <sr-opt-items>
@@ -90,7 +107,7 @@ export default class Editor extends React.Component {
                         <Name name={ this.props.site.name } changeName={ (v,c)=>this.changeName(v,c) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
-                        <URL url={  this.props.url } changeURL={ (v,c)=>this.changeURL(v,c) } />
+                        <URL url={  this.props.site.url } changeURL={ (v,c)=>this.changeURL(v,c) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField 
@@ -122,24 +139,32 @@ export default class Editor extends React.Component {
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="头像的名称"
                                 value={ this.props.site.avatar[0].name }
+                                errortext={ this.state.avatar_name }
+                                onChange={ event=>this.changeAvatar( 0, "name", event.target.value ) }
                         />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="头像的地址"
                                 value={ this.props.site.avatar[1].url }
+                                errortext={ this.state.avatar_url }
+                                onChange={ event=>this.changeAvatar( 1, "url", event.target.value ) }
                         />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="前一页"
                                 value={ this.props.site.paging[0].prev }
+                                errortext={ this.state.paging_prev }
+                                onChange={ event=>this.changePaging( 0, "prev", event.target.value ) }
                         />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="后一页"
                                 value={ this.props.site.paging[1].next }
+                                errortext={ this.state.paging_next }
+                                onChange={ event=>this.changePaging( 1, "next", event.target.value ) }
                         />
                     </sr-opt-gp>
                 </sr-opt-items>

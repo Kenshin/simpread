@@ -11,6 +11,7 @@ import * as dia     from 'dialog';
 
 const root   = "simpread-option-root",
       rootjq = `.${root}`;
+let site;
 
 /**
  * SiteEditor Rect component
@@ -22,12 +23,12 @@ class SiteEditor extends React.Component {
     }
 
     delete() {
-        console.log( "siteeditor click delete button.", storage.current )
+        console.log( "siteeditor click delete button.", storage.current.site )
     }
 
     // save siteeditor focus option
     save() {
-        console.log( "siteeditor click save button.", storage.current )
+        console.log( "siteeditor click save button.", storage.current.site, site )
     }
 
     componentDidMount() {
@@ -36,10 +37,14 @@ class SiteEditor extends React.Component {
     }
 
     render() {
+        site     = { ...storage.current.site };
+        site.url = storage.current.url;
+        !site.avatar && ( site.avatar = [{ name: "" }, { url: ""  }]);
+        !site.paging && ( site.paging = [{ prev: "" }, { next: "" }]);
         return (
             <dia.Dialog>
                 <dia.Content>
-                    <Editor site={ storage.current.site } url={ storage.current.url } />
+                    <Editor site={ site } />
                 </dia.Content>
                 <dia.Footer>
                     <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.delete() } />
