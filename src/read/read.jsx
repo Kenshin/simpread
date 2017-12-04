@@ -7,6 +7,7 @@ import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
 import * as toc    from 'toc';
 import * as modals from 'modals';
+import * as se     from 'siteeditor';
 import * as kbd    from 'keyboard';
 
 import { storage, Clone } from 'storage';
@@ -111,6 +112,9 @@ class Read extends React.Component {
                 break;
             case "setting":
                 modals.Render();
+                break;
+            case "siteeditor":
+                se.Render();
                 break;
             case "fontfamily":
             case "fontsize":

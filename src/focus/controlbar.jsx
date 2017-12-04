@@ -1,6 +1,7 @@
 console.log( "=== simpread focus controlbar load ===" )
 
 import * as modals from 'modals';
+import * as se     from 'siteeditor';
 import * as conf   from 'config';
 import { storage } from 'storage';
 import * as output from 'output';
@@ -43,6 +44,9 @@ class FControl extends React.Component {
                     break;
                 case "setting":
                     modals.Render();
+                    break;
+                case "siteeditor":
+                    se.Render();
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 

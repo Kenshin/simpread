@@ -50,7 +50,7 @@ export default class ReadCtlbar extends React.Component {
             new Notify().Render( "当前为论坛类页面，不建议使用导出服务，有可能出现未知错误。" );
 
             switch ( true ) {
-                case [ "exit", "setting" ].includes( type ):
+                case [ "exit", "setting", "siteeditor" ].includes( type ):
                     this.props.onAction( type );
                     break;
                 /*
