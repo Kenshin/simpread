@@ -53,7 +53,7 @@ export default class Editor extends React.Component {
 
     changeDesc() {
         const desc = event.target.value.trim();
-        if ( verifyHtml( title )[0] != -1 ) {
+        if ( verifyHtml( desc )[0] != -1 ) {
             this.setState({ errdesc : "" });
             this.props.site.desc = desc;
             console.log( "this.props.site.desc = ", this.props.site.desc )
