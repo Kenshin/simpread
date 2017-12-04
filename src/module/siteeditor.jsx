@@ -2,6 +2,8 @@ console.log( "=== simpread option siteeditor ===" )
 
 import { storage }  from 'storage';
 
+import Editor       from 'editor';
+
 import Button       from 'button';
 import * as tooltip from 'tooltip';
 import * as waves   from 'waves';
@@ -37,7 +39,7 @@ class SiteEditor extends React.Component {
         return (
             <dia.Dialog>
                 <dia.Content>
-                    Site Editor
+                    <Editor site={ storage.current.site } url={ storage.current.url } />
                 </dia.Content>
                 <dia.Footer>
                     <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.delete() } />
