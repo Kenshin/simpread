@@ -19,9 +19,13 @@ class SiteEditor extends React.Component {
         dia.Close();
     }
 
+    delete() {
+        console.log( "siteeditor click delete button.", storage.current )
+    }
+
     // save siteeditor focus option
     save() {
-        console.log( "siteeditor click submit button.", storage.current )
+        console.log( "siteeditor click save button.", storage.current )
     }
 
     componentDidMount() {
@@ -36,8 +40,10 @@ class SiteEditor extends React.Component {
                     Site Editor
                 </dia.Content>
                 <dia.Footer>
-                    <Button text="取 消" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
-                    <Button text="确 认" waves="md-waves-effect" onClick={ ()=>this.save() } />
+                    <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.delete() } />
+                    <div style={{ width: "100%" }}></div>
+                    <Button text="退 出" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
+                    <Button text="保 存" waves="md-waves-effect" onClick={ ()=>this.save() } />
                 </dia.Footer>
             </dia.Dialog>
         )
