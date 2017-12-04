@@ -29,7 +29,7 @@ export default class Editor extends React.Component {
 
     changeName( value, code ) {
         this.props.site.name = value;
-        console.log( "this.props.option.site.name = ", this.props.site.name )
+        console.log( "this.props.site.name = ", this.props.site.name )
     }
 
     changeURL( value, code ) {
@@ -39,16 +39,13 @@ export default class Editor extends React.Component {
 
     changeTitle() {
         if ( event.target.value.trim() == "" ) {
-            //this.props.flag.title = -2;
             this.setState({ errtitle : "当前输入不能为空。" });
         }
         else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
             this.setState({ errtitle : "" });
             this.props.site.title = event.target.value.trim();
-            //this.props.flag.title = 0;
-            console.log( "this.props.option.site.title = ", this.props.site.title )
+            console.log( "this.props.site.title = ", this.props.site.title )
         } else {
-            //this.props.flag.title = -1;
             this.setState({ errtitle : "当前输入为非法。" });
         }
     }
@@ -57,24 +54,20 @@ export default class Editor extends React.Component {
         if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
             this.setState({ errdesc : "" });
             this.props.site.desc = event.target.value.trim();
-            //this.props.flag.desc = 0;
-            console.log( "this.props.option.site.desc = ", this.props.site.desc )
+            console.log( "this.props.site.desc = ", this.props.site.desc )
         } else {
-            //this.props.flag.desc = -1;
             this.setState({ errdesc : "当前输入为非法。" });
         }
     }
 
     changeInclude( value, code ) {
         this.props.site.include = value;
-        //this.props.flag.include        = code;
-        console.log( "this.props.option.site.include = ", this.props.site.include )
+        console.log( "this.props.site.include = ", this.props.site.include )
     }
 
     changeExclude( value, code ) {
         this.props.site.exclude = value;
-        //this.props.flag.exclude        = code;
-        console.log( "this.props.option.site.exclude = ", this.props.site.exclude )
+        console.log( "this.props.site.exclude = ", this.props.site.exclude )
     }
 
     changeAvatar( idx, type, value ) {
