@@ -23,7 +23,7 @@ export default class Name extends React.Component {
     changeName() {
         let   code = 0;
         const name = event.target.value.trim();
-        if ( names.includes( name ) ) {
+        if ( names.includes( name ) && name != this.props.name ) {
             code = -1;
             this.setState({ error : "当前值重复，请重新录入。" });
         } else {
