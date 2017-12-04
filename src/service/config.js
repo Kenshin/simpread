@@ -135,10 +135,22 @@ const readItems = {
         "name" : "关闭",
         "icon" : ss.IconPath("exit_icon"),
     },
-    "setting" : {
+    "option" : {
         "name" : "设定",
-        "icon" : ss.IconPath("setting_icon"),
+        "icon" : ss.IconPath("option_icon"),
         "color": "#03A9F4",
+        "items": {
+            "siteeditor" : {
+                "name" : "站点编辑器",
+                "icon" : ss.IconPath("siteeditor_icon"),
+                "color": "#03A9F4",
+            },
+            "setting" : {
+                "name" : "设定",
+                "icon" : ss.IconPath("setting_icon"),
+                "color": "#03A9F4",
+            },
+        },
     },
     "readlater" : {
         "name" : "暂存",
