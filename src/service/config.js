@@ -104,6 +104,18 @@ const keyboard = {
             "desc" : "保存到 稍后读",
         },
     },
+    "控制栏 - 设定" : {
+        st: {
+            "kbd"  : "st",
+            "type" : "setting",
+            "desc" : "设定对话框",
+        },
+        se: {
+            "kbd"  : "se",
+            "type" : "siteeditor",
+            "desc" : "站点编辑器",
+        },
+    },
 };
 
 /**
