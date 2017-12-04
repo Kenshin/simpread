@@ -19,12 +19,12 @@ const getName = ( value, items ) => {
 export default class Editor extends React.Component {
 
     state = {
-        errtitle    : "",
-        errdesc     : "",
-        avatar_name : "",
-        avatar_url  : "",
-        paging_prev : "",
-        paging_next : "",
+        err_title   : "",
+        err_desc    : "",
+        err_avatar_name : "",
+        err_avatar_url  : "",
+        err_paging_prev : "",
+        err_paging_next : "",
     };
 
     changeName( value, code ) {
@@ -40,25 +40,25 @@ export default class Editor extends React.Component {
     changeTitle() {
         const title = event.target.value.trim();
         if ( title == "" ) {
-            this.setState({ errtitle : "当前输入不能为空。" });
+            this.setState({ err_title : "当前输入不能为空。" });
         }
         else if ( verifyHtml( title )[0] != -1 ) {
-            this.setState({ errtitle : "" });
+            this.setState({ err_title : "" });
             this.props.site.title = title;
             console.log( "this.props.site.title = ", this.props.site.title )
         } else {
-            this.setState({ errtitle : "当前输入为非法。" });
+            this.setState({ err_title : "当前输入为非法。" });
         }
     }
 
     changeDesc() {
         const desc = event.target.value.trim();
         if ( verifyHtml( desc )[0] != -1 ) {
-            this.setState({ errdesc : "" });
+            this.setState({ err_desc : "" });
             this.props.site.desc = desc;
             console.log( "this.props.site.desc = ", this.props.site.desc )
         } else {
-            this.setState({ errdesc : "当前输入为非法。" });
+            this.setState({ err_desc : "当前输入为非法。" });
         }
     }
 
@@ -75,22 +75,22 @@ export default class Editor extends React.Component {
     changeAvatar( idx, type, value ) {
         value = value.trim();
         if ( verifyHtml( value )[0] != -1 ) {
-            this.setState({ [`avatar_${type}`] : "" });
+            this.setState({ [`err_avatar_${type}`] : "" });
             this.props.site.avatar[idx][type] = value;
             console.log( "this.props.site.avatar = ", this.props.site.avatar )
         } else {
-            this.setState({ [`avatar_${type}`] : "当前输入为非法。" });
+            this.setState({ [`err_avatar_${type}`] : "当前输入为非法。" });
         }
     }
 
     changePaging( idx, type, value ) {
         value = value.trim();
         if ( verifyHtml( value )[0] != -1 ) {
-            this.setState({ [`paging_${type}`] : "" });
+            this.setState({ [`err_paging_${type}`] : "" });
             this.props.site.paging[idx][type] = value;
             console.log( "this.props.site.paging = ", this.props.site.paging )
         } else {
-            this.setState({ [`paging_${type}`] : "当前输入为非法。" });
+            this.setState({ [`err_paging_${type}`] : "当前输入为非法。" });
         }
     }
 
@@ -110,7 +110,7 @@ export default class Editor extends React.Component {
                             floatingtext="标题"
                             placeholder="必填，不可为空。"
                             value={ this.props.site.title }
-                            errortext={ this.state.errtitle }
+                            errortext={ this.state.err_title }
                             onChange={ ()=>this.changeTitle() }
                         />
                     </sr-opt-gp>
@@ -120,7 +120,7 @@ export default class Editor extends React.Component {
                                 placeholder="默认为空。"
                                 floatingtext="描述"
                                 value={ this.props.site.desc }
-                                errortext={ this.state.errdesc }
+                                errortext={ this.state.err_desc }
                                 onChange={ ()=>this.changeDesc() }
                         />
                     </sr-opt-gp>
@@ -134,7 +134,7 @@ export default class Editor extends React.Component {
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="头像的名称"
                                 value={ this.props.site.avatar[0].name }
-                                errortext={ this.state.avatar_name }
+                                errortext={ this.state.err_avatar_name }
                                 onChange={ event=>this.changeAvatar( 0, "name", event.target.value ) }
                         />
                     </sr-opt-gp>
@@ -142,7 +142,7 @@ export default class Editor extends React.Component {
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="头像的地址"
                                 value={ this.props.site.avatar[1].url }
-                                errortext={ this.state.avatar_url }
+                                errortext={ this.state.err_avatar_url }
                                 onChange={ event=>this.changeAvatar( 1, "url", event.target.value ) }
                         />
                     </sr-opt-gp>
@@ -150,7 +150,7 @@ export default class Editor extends React.Component {
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="前一页"
                                 value={ this.props.site.paging[0].prev }
-                                errortext={ this.state.paging_prev }
+                                errortext={ this.state.err_paging_prev }
                                 onChange={ event=>this.changePaging( 0, "prev", event.target.value ) }
                         />
                     </sr-opt-gp>
@@ -158,7 +158,7 @@ export default class Editor extends React.Component {
                         <TextField multi={ false }
                                 placeholder="默认为空，只限论坛类页面使用。" floatingtext="后一页"
                                 value={ this.props.site.paging[1].next }
-                                errortext={ this.state.paging_next }
+                                errortext={ this.state.err_paging_next }
                                 onChange={ event=>this.changePaging( 1, "next", event.target.value ) }
                         />
                     </sr-opt-gp>
