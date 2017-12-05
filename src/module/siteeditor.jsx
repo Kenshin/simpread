@@ -1,6 +1,8 @@
 console.log( "=== simpread option siteeditor ===" )
 
 import { storage }  from 'storage';
+import * as msg     from 'message';
+import {browser}    from 'browser';
 
 import Editor       from 'editor';
 
@@ -40,9 +42,17 @@ class SiteEditor extends React.Component {
         } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
             new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
         } else {
-            //site.avatar[0].name == "" && site.avatar[1].url  == "" && delete site.avatar;
-            //site.paging[0].prev == "" && site.paging[1].next == "" && delete site.paging;
-            console.log( "adfasdfafd", site )
+            storage.current.url  = site.url;
+            storage.current.site = { ...site };
+            storage.current.site.avatar[0].name == "" && storage.current.site.avatar[1].url  == "" && delete storage.current.site.avatar;
+            storage.current.site.paging[0].prev == "" && storage.current.site.paging[1].next == "" && delete storage.current.site.paging;
+            const code = storage.Setcur( storage.current.mode );
+            if ( code != 0 ) {
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
+                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，页面刷新后生效！" )
+            } else {
+                new Notify().Render( 0, "没有改变任何内容。" );
+            }
         }
     }
 
