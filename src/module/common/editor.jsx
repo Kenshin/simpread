@@ -29,12 +29,12 @@ export default class Editor extends React.Component {
 
     changeName( value, code ) {
         this.props.site.name = value;
-        console.log( "this.props.site.name = ", this.props.site.name )
+        console.log( "this.props.site.name = ", this.props.site.name, code )
     }
 
     changeURL( value, code ) {
         this.props.site.url = value;
-        console.log( "this.props.option.url = ",  this.props.site.url )
+        console.log( "this.props.option.url = ",  this.props.site.url, code )
     }
 
     changeTitle() {
@@ -64,12 +64,12 @@ export default class Editor extends React.Component {
 
     changeInclude( value, code ) {
         this.props.site.include = value;
-        console.log( "this.props.site.include = ", this.props.site.include )
+        console.log( "this.props.site.include = ", this.props.site.include, code )
     }
 
     changeExclude( value, code ) {
         this.props.site.exclude = value;
-        console.log( "this.props.site.exclude = ", this.props.site.exclude )
+        console.log( "this.props.site.exclude = ", this.props.site.exclude, code )
     }
 
     changeAvatar( idx, type, value ) {
