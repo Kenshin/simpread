@@ -29,13 +29,13 @@ export default class Editor extends React.Component {
 
     changeName( value, code ) {
         this.props.site.name  = value;
-        this.props.state.name = value;
+        this.props.state.name = code;
         console.log( "this.props.site.name = ", this.props.site.name, code )
     }
 
     changeURL( value, code ) {
         this.props.site.url  = value;
-        this.props.state.url = value;
+        this.props.state.url = code;
         console.log( "this.props.option.url = ",  this.props.site.url, code )
     }
 
@@ -71,13 +71,13 @@ export default class Editor extends React.Component {
 
     changeInclude( value, code ) {
         this.props.site.include  = value;
-        this.props.state.include = value;
+        this.props.state.include = code;
         console.log( "this.props.site.include = ", this.props.site.include, code )
     }
 
     changeExclude( value, code ) {
         this.props.site.exclude  = value;
-        this.props.state.exclude = value;
+        this.props.state.exclude = code;
         console.log( "this.props.site.exclude = ", this.props.site.exclude, code )
     }
 
