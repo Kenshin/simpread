@@ -722,7 +722,7 @@ function compare() {
         }
     }
     for ( key of Object.keys( curori.site ) ) {
-        if ( ( typeof curori.site[key] == "object" && curori.site[key].join( "" ) != current.site[key].join( "" ) ) || curori.site[key] != current.site[key] ) {
+        if ( ( typeof curori.site[key] == "object" && ![ "avatar", "paging" ].includes( key ) && curori.site[key].join( "" ) != current.site[key].join( "" ) ) || curori.site[key] != current.site[key] ) {
             changed.push( key );
             site_changed = true;
         }
