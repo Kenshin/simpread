@@ -28,12 +28,14 @@ export default class Editor extends React.Component {
     };
 
     changeName( value, code ) {
-        this.props.site.name = value;
+        this.props.site.name  = value;
+        this.props.state.name = value;
         console.log( "this.props.site.name = ", this.props.site.name, code )
     }
 
     changeURL( value, code ) {
-        this.props.site.url = value;
+        this.props.site.url  = value;
+        this.props.state.url = value;
         console.log( "this.props.option.url = ",  this.props.site.url, code )
     }
 
@@ -41,13 +43,16 @@ export default class Editor extends React.Component {
         const title = event.target.value.trim();
         if ( title == "" ) {
             this.setState({ err_title : "当前输入不能为空。" });
+            this.props.state.title = -2;
         }
         else if ( verifyHtml( title )[0] != -1 ) {
             this.setState({ err_title : "" });
-            this.props.site.title = title;
+            this.props.site.title  = title;
+            this.props.state.title = 0;
             console.log( "this.props.site.title = ", this.props.site.title )
         } else {
             this.setState({ err_title : "当前输入为非法。" });
+            this.props.state.title = -1;
         }
     }
 
@@ -55,20 +60,24 @@ export default class Editor extends React.Component {
         const desc = event.target.value.trim();
         if ( verifyHtml( desc )[0] != -1 ) {
             this.setState({ err_desc : "" });
-            this.props.site.desc = desc;
+            this.props.site.desc  = desc;
+            this.props.state.desc = 0;
             console.log( "this.props.site.desc = ", this.props.site.desc )
         } else {
             this.setState({ err_desc : "当前输入为非法。" });
+            this.props.state.desc = -1;
         }
     }
 
     changeInclude( value, code ) {
-        this.props.site.include = value;
+        this.props.site.include  = value;
+        this.props.state.include = value;
         console.log( "this.props.site.include = ", this.props.site.include, code )
     }
 
     changeExclude( value, code ) {
-        this.props.site.exclude = value;
+        this.props.site.exclude  = value;
+        this.props.state.exclude = value;
         console.log( "this.props.site.exclude = ", this.props.site.exclude, code )
     }
 
@@ -77,9 +86,11 @@ export default class Editor extends React.Component {
         if ( verifyHtml( value )[0] != -1 ) {
             this.setState({ [`err_avatar_${type}`] : "" });
             this.props.site.avatar[idx][type] = value;
+            this.props.state.avatar[type]     = 0;
             console.log( "this.props.site.avatar = ", this.props.site.avatar )
         } else {
             this.setState({ [`err_avatar_${type}`] : "当前输入为非法。" });
+            this.props.state.avatar[type] = -1;
         }
     }
 
@@ -88,9 +99,11 @@ export default class Editor extends React.Component {
         if ( verifyHtml( value )[0] != -1 ) {
             this.setState({ [`err_paging_${type}`] : "" });
             this.props.site.paging[idx][type] = value;
+            this.props.state.paging[type]     = 0;
             console.log( "this.props.site.paging = ", this.props.site.paging )
         } else {
             this.setState({ [`err_paging_${type}`] : "当前输入为非法。" });
+            this.props.state.paging[type] = -1;
         }
     }
 

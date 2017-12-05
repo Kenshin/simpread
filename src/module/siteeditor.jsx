@@ -11,7 +11,8 @@ import * as dia     from 'dialog';
 
 const root   = "simpread-option-root",
       rootjq = `.${root}`;
-let site;
+let site,
+    state    = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty
 
 /**
  * SiteEditor Rect component
@@ -28,7 +29,21 @@ class SiteEditor extends React.Component {
 
     // save siteeditor focus option
     save() {
-        console.log( "siteeditor click save button.", storage.current.site, site )
+        console.log( "siteeditor click save button.", storage.current.site, site, state )
+        if ( Object.values( state ).findIndex( key => typeof key == "string" && key != 0 ) != -1 ||
+           ( state.avatar.name != 0 || state.avatar.url  != 0 ) ||
+           ( state.paging.prev != 0 || state.paging.next != 0 )
+        ) {
+            new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
+        } else if (( site.avatar[0].name != "" && site.avatar[1].url == "" ) || ( site.avatar[0].name == "" && site.avatar[1].url != "" )) {
+            new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
+        } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
+            new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
+        } else {
+            //site.avatar[0].name == "" && site.avatar[1].url  == "" && delete site.avatar;
+            //site.paging[0].prev == "" && site.paging[1].next == "" && delete site.paging;
+            console.log( "adfasdfafd", site )
+        }
     }
 
     componentDidMount() {
@@ -44,7 +59,7 @@ class SiteEditor extends React.Component {
         return (
             <dia.Dialog>
                 <dia.Content>
-                    <Editor site={ site } />
+                    <Editor site={ site } state={ state } />
                 </dia.Content>
                 <dia.Footer>
                     <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.delete() } />
