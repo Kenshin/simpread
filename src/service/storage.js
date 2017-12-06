@@ -409,7 +409,7 @@ class Storage {
         idx == -1 && ( idx = simpread[key].sites.length );
         simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
         
-        save( callback, true )
+        save( callback, true );
     }
 
     /**
