@@ -26,12 +26,14 @@ class SiteEditor extends React.Component {
 
     delete() {
         console.log( "siteeditor click delete button.", storage.current.site )
-        storage.Deletesite( "read", site, result => {
-            if ( result == -1 ) new Notify().Render( 2, "删除失败，请刷新本页再试试。" );
-            else {
-                new Notify().Render( "删除成功，如需生效，请刷新本页。" );
-                watch.SendMessage( "site", true );
-            }
+        new Notify().Render( "是否删除当前适配站点？", "删除", () => {
+            storage.Deletesite( "read", site, result => {
+                if ( result == -1 ) new Notify().Render( 2, "删除失败，请刷新本页再试试。" );
+                else {
+                    new Notify().Render( "删除成功，如需生效，请刷新本页。" );
+                    watch.SendMessage( "site", true );
+                }
+            });
         });
     }
 
