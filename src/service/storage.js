@@ -388,8 +388,8 @@ class Storage {
         const site = { ...current.site };
         site.url   = current.url;
         site.name  == "" && ( site.name = "tempread::" + location.host );
-        !site.avatar || site.avatar.length == 0 && ( site.avatar = [{ name: "" }, { url: ""  }]);
-        !site.paging || site.paging.length == 0 && ( site.paging = [{ prev: "" }, { next: "" }]);
+        ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
+        ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
         return site;
     }
 
