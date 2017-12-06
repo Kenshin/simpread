@@ -47,6 +47,8 @@ class SiteEditor extends React.Component {
             new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
         } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
             new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
+        } else if ( site.name.startsWith( "tempread::" ) ) {
+            new Notify().Render( 2, "标识不能包含 tempread:: 请删除。" );
         } else {
             storage.Updatesite( "read", site, () => {
                 new Notify().Render( 0, "更新成功，页面刷新后生效！" );

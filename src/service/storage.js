@@ -402,8 +402,9 @@ class Storage {
     Updatesite( key, site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
-        current.site.avatar[0].name == "" && current.site.avatar[1].url  == "" && delete current.site.avatar;
-        current.site.paging[0].prev == "" && current.site.paging[1].next == "" && delete current.site.paging;
+        current.site.avatar[0].name == "" && delete current.site.avatar;
+        current.site.paging[0].prev == "" && delete current.site.paging;
+        current.site.html                 && delete current.site.html;
 
         let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
         idx == -1 && ( idx = simpread[key].sites.length );
