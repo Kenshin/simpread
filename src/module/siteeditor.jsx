@@ -42,10 +42,7 @@ class SiteEditor extends React.Component {
         } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
             new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
         } else {
-            storage.current.url  = site.url;
-            storage.current.site = { ...site };
-            storage.current.site.avatar[0].name == "" && storage.current.site.avatar[1].url  == "" && delete storage.current.site.avatar;
-            storage.current.site.paging[0].prev == "" && storage.current.site.paging[1].next == "" && delete storage.current.site.paging;
+            storage.Updatesite( site );
             const code = storage.Setcur( storage.current.mode );
             if ( code != 0 ) {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
@@ -62,10 +59,7 @@ class SiteEditor extends React.Component {
     }
 
     render() {
-        site     = { ...storage.current.site };
-        site.url = storage.current.url;
-        !site.avatar && ( site.avatar = [{ name: "" }, { url: ""  }]);
-        !site.paging && ( site.paging = [{ prev: "" }, { next: "" }]);
+        site = storage.Clonesite();
         return (
             <dia.Dialog>
                 <dia.Content>

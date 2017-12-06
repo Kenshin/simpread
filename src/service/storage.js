@@ -380,6 +380,31 @@ class Storage {
     }
 
     /**
+     * Clone current site
+     * 
+     * @return {object} new site
+     */
+    Clonesite() {
+        const site = { ...current.site };
+        site.url   = current.url;
+        !site.avatar && ( site.avatar = [{ name: "" }, { url: ""  }]);
+        !site.paging && ( site.paging = [{ prev: "" }, { next: "" }]);
+        return site;
+    }
+
+    /**
+     * Update current.site from param
+     * 
+     * @param {object} new site 
+     */
+    Updatesite( site ) {
+        current.url  = site.url;
+        current.site = { ...site };
+        current.site.avatar[0].name == "" && current.site.avatar[1].url  == "" && delete current.site.avatar;
+        current.site.paging[0].prev == "" && current.site.paging[1].next == "" && delete current.site.paging;
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
