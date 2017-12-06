@@ -2,8 +2,6 @@ console.log( "=== simpread option siteeditor ===" )
 
 import { storage }  from 'storage';
 import * as watch   from 'watch';
-import * as msg     from 'message';
-import {browser}    from 'browser';
 
 import Editor       from 'editor';
 
@@ -50,14 +48,10 @@ class SiteEditor extends React.Component {
         } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
             new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
         } else {
-            storage.Updatesite( site );
-            const code = storage.Setcur( storage.current.mode );
-            if ( code != 0 ) {
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，页面刷新后生效！" )
-            } else {
-                new Notify().Render( 0, "没有改变任何内容。" );
-            }
+            storage.Updatesite( site, () => {
+                new Notify().Render( 0, "更新成功，页面刷新后生效！" );
+                watch.SendMessage( "site", true );
+            });
         }
     }
 

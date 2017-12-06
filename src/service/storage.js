@@ -395,13 +395,15 @@ class Storage {
     /**
      * Update current.site from param
      * 
-     * @param {object} new site 
+     * @param {object} new site
+     * @param {func}   callback
      */
-    Updatesite( site ) {
+    Updatesite( site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
         current.site.avatar[0].name == "" && current.site.avatar[1].url  == "" && delete current.site.avatar;
         current.site.paging[0].prev == "" && current.site.paging[1].next == "" && delete current.site.paging;
+        save( callback, true )
     }
 
     /**
