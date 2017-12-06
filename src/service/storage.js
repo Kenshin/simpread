@@ -405,6 +405,19 @@ class Storage {
     }
 
     /**
+     * Delete site from simpread[key].site
+     * 
+     * @param {string} include: focus, read 
+     * @param {object} site
+     * @param {func}   callback
+     */
+    Deletesite( key, site, callback ) {
+        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
+        simpread[key].sites.splice( idx, 1 );
+        idx != -1 ? save( callback, true ) : callback( idx );
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
