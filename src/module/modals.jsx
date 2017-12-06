@@ -48,8 +48,8 @@ class Modals extends React.Component {
     }
 
     siteeditor() {
-        this.close();
         callback();
+        this.close();
     }
 
     constructor( props ) {
