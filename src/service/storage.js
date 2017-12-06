@@ -395,14 +395,20 @@ class Storage {
     /**
      * Update current.site from param
      * 
+     * @param {string} include: focus, read 
      * @param {object} new site
      * @param {func}   callback
      */
-    Updatesite( site, callback ) {
+    Updatesite( key, site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
         current.site.avatar[0].name == "" && current.site.avatar[1].url  == "" && delete current.site.avatar;
         current.site.paging[0].prev == "" && current.site.paging[1].next == "" && delete current.site.paging;
+
+        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
+        idx == -1 && ( idx = simpread[key].sites.length );
+        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+        
         save( callback, true )
     }
 

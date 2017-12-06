@@ -48,7 +48,7 @@ class SiteEditor extends React.Component {
         } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
             new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
         } else {
-            storage.Updatesite( site, () => {
+            storage.Updatesite( "read", site, () => {
                 new Notify().Render( 0, "更新成功，页面刷新后生效！" );
                 watch.SendMessage( "site", true );
             });
