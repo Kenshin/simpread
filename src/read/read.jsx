@@ -111,7 +111,7 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                modals.Render();
+                modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                 break;
             case "siteeditor":
                 se.Render();

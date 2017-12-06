@@ -17,7 +17,8 @@ import * as dia     from 'dialog';
 
 const root   = "simpread-option-root",
       rootjq = `.${root}`;
-let   flag   = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
+let   callback,
+      flag   = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
 
 /**
  * Modals Rect component
@@ -46,6 +47,11 @@ class Modals extends React.Component {
         }
     }
 
+    siteeditor() {
+        this.close();
+        callback();
+    }
+
     constructor( props ) {
         super( props );
     }
@@ -64,6 +70,8 @@ class Modals extends React.Component {
                     <Option option={ storage.current } flag={ flag } />
                 </dia.Content>
                 <dia.Footer>
+                    <Button text="站点编辑器" waves="md-waves-effect" color="#fff" backgroundColor="#4caf50" onClick={ ()=>this.siteeditor() } width="70%" />
+                    <div style={{ width: "100%" }}></div>
                     <Button text="取 消" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
                     <Button text="确 认" waves="md-waves-effect" onClick={ ()=>this.save() } />
                 </dia.Footer>
@@ -91,8 +99,11 @@ function rollback() {
 
 /**
  * Modals Render
+ * 
+ * @param {func} callback
  */
-function Render() {
+function Render( cb ) {
+    callback   = cb;
     const name = storage.current.site.name;
     switch ( true ) {
         case name.startsWith( "tempread::" ):

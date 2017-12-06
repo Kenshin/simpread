@@ -43,7 +43,7 @@ class FControl extends React.Component {
                     $( "html, body" ).animate({ scrollTop: 0 }, "normal" );
                     break;
                 case "setting":
-                    modals.Render();
+                    modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                     break;
                 case "siteeditor":
                     se.Render();
