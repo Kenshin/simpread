@@ -130,6 +130,9 @@ let current  = {},
         read,
         unrdist : [],
         sites   : [],
+        websites: {
+            origins: [],
+        }
     },
     secret = {
         version   : "2017-11-22",
@@ -472,6 +475,21 @@ class Storage {
             if ( result && result.origins.length > 0 ) {
                 const urls = result.origins.map( item => item.url );
                 callback( urls );
+            } else callback( undefined, "error" );
+        } catch ( error ) {
+            callback( undefined, "error" );
+        }
+    }
+
+    async AddOrigin( url, callback ) {
+        try {
+            const response = await fetch( url + "?_=" + Math.round(+new Date()) ),
+                  result   = await response.json(),
+                  len      = result.sites.length;
+            let count      = 0;
+            if ( result && len > 0 ) {
+                const arr = formatSites( result );
+                callback( { url, sites: arr }, undefined );
             } else callback( undefined, "error" );
         } catch ( error ) {
             callback( undefined, "error" );
