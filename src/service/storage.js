@@ -460,6 +460,11 @@ class Storage {
         }
     }
 
+    /**
+     * Get origins from http://xxxx.xx/website_list_origins.json
+     * 
+     * @param {func} callback 
+     */
     async GetOrigins( callback ) {
         try {
             const response = await fetch( origins + "?_=" + Math.round(+new Date()) ),
