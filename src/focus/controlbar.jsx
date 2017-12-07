@@ -72,7 +72,7 @@ class FControl extends React.Component {
 
     render() {
         return (
-            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" }>
+            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": 2147483645 }}>
                 <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )
