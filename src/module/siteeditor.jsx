@@ -51,6 +51,8 @@ class SiteEditor extends React.Component {
             new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
         } else if ( site.name.startsWith( "tempread::" ) ) {
             new Notify().Render( 2, "标识不能包含 tempread:: 请删除。" );
+        } else if ( site.include.trim() == "" ) {
+            new Notify().Render( 2, "高亮区域不能为空。" );
         } else {
             storage.Updatesite( "read", site, () => {
                 new Notify().Render( 0, "更新成功，页面刷新后生效！" );
