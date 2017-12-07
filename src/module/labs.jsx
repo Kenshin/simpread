@@ -5,6 +5,7 @@ import * as menu from 'menu';
 
 import Switch    from 'switch';
 import TextField from 'textfield';
+import Button    from 'button';
 
 import Auth      from 'authorize';
 
@@ -58,6 +59,10 @@ export default class LabsOpt extends React.Component {
 
     onClick( state ) {
         state == "custom" && ( location.href = location.origin + "/options/custom.html" );
+    }
+
+    origins( type ) {
+        console.log( "sadfasfasf", type )
     }
 
     render() {
@@ -181,11 +186,46 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="label">自定义样式</div>
-                <div style={{ 'padding-top': '10px' }} className="lab" onClick={ ()=>this.onClick('custom') }>
+                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('custom') }>
                     <div className="more">
                         <div>增强「中文阅读体验」设置</div>
                         <span className="desc">包括：标题、描述、正文的字间距、行间距、首行缩进等及自定义 CSS。</span>
                         <span className="arrow"></span>
+                    </div>
+                </div>
+
+                <div className="label">站点适配器</div>
+                <div ref="origins" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }} className="lab">
+                    <div className="label">站点适配源</div>
+                    <TextField 
+                        multi={ true } rows={8}
+                        placeholder="仅支持 URL 地址，每行一个。" 
+                        value={ ( this.props.option.origins||[] ).join( "\n" ) }
+                        onChange={ ()=>this.changeWhitelist() }
+                    />
+                    <div style={{ "display": "flex" }}>
+                        <Button type="raised" text="加载官方适配列表"
+                            width="100%" style={{ "margin": "0" }}
+                            color="#fff" backgroundColor="#4CAF50"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.origins( "download" ) } />
+                        <Button type="raised" text="导入适配列表"
+                            width="100%" style={{ "margin": "0 10px" }}
+                            color="#fff" backgroundColor="#3F51B5"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.origins( "import" ) } />
+                        <Button type="raised" text="清除适配列表" 
+                            width="100%" style={{ "margin": "0" }}
+                            color="#fff" backgroundColor="#FF5252"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.origins( "clear" ) } />
+                    </div>
+                    <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('siteeditor') }>
+                        <div className="more">
+                            <div>适配站点编辑器</div>
+                            <span className="desc">可以编辑全部的自定义适配站点。</span>
+                            <span className="arrow" style={{ 'bottom': '13px' }}></span>
+                        </div>
                     </div>
                 </div>
 
