@@ -370,9 +370,12 @@ class Storage {
     /**
      * Add new site( read only )
      * 
-     * @param {object} new_site
+     * @param {string} include: focus, read
+     * @param {string} when read html is dom.outerHTML
      */
-    Newsite( new_site ) {
+    Newsite( mode, html ) {
+        const new_site = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: "" } };
+        html && ( new_site.site.html = html );
         current.mode = new_site.mode,
         current.url  = new_site.url;
         current.site = { ...new_site.site };

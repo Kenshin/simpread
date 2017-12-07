@@ -176,7 +176,7 @@ function Render() {
 function Highlight() {
     const dtd = $.Deferred();
     highlight.Start().done( dom => {
-        storage.Newsite({ mode: "read", url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", html: dom.outerHTML, exclude: "" } });
+        storage.Newsite( "read", dom.outerHTML );
         dtd.resolve();
     });
     return dtd;

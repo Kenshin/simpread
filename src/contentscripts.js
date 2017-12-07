@@ -87,8 +87,7 @@ function focusMode() {
         } else {
             getCurrent( mode.focus );
             focus.GetFocus( storage.current.site.include ).done( result => {
-                storage.current.site.name == "" && 
-                    storage.Newsite({ mode: "focus", url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: "" } });
+                storage.current.site.name == "" && storage.Newsite( mode.focus );
                 storage.Statistics( mode.focus );
                 focus.Render( result, storage.current.site.exclude, storage.current.bgcolor );
             }).fail( () => {
