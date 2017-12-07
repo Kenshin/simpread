@@ -13,6 +13,7 @@ import {version} from 'version';
 
 const name = "simpread",
     remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json",
+    origins= "http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
@@ -456,6 +457,19 @@ class Storage {
         } catch ( error ) {
             console.error( error );
             callback && callback( {}, error );
+        }
+    }
+
+    async GetOrigins( callback ) {
+        try {
+            const response = await fetch( origins + "?_=" + Math.round(+new Date()) ),
+                  result   = await response.json();
+            if ( result && result.origins.length > 0 ) {
+                const urls = result.origins.map( item => item.url );
+                callback( urls );
+            } else callback( undefined, "error" );
+        } catch ( error ) {
+            callback( undefined, "error" );
         }
     }
 
