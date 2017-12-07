@@ -61,6 +61,10 @@ export default class LabsOpt extends React.Component {
         state == "custom" && ( location.href = location.origin + "/options/custom.html" );
     }
 
+    changeOrigins() {
+        
+    }
+
     origins( type ) {
         console.log( "sadfasfasf", type )
     }
@@ -201,7 +205,7 @@ export default class LabsOpt extends React.Component {
                         multi={ true } rows={8}
                         placeholder="仅支持 URL 地址，每行一个。" 
                         value={ ( this.props.option.origins||[] ).join( "\n" ) }
-                        onChange={ ()=>this.changeWhitelist() }
+                        onChange={ ()=>this.changeOrigins() }
                     />
                     <div style={{ "display": "flex" }}>
                         <Button type="raised" text="加载官方适配列表"
