@@ -82,6 +82,13 @@ export default class LabsOpt extends React.Component {
                     new Notify().Render( "导入成功。" );
                 }
             });
+        } else if ( type == "import" ) {
+            this.props.option.origins.forEach( item => {
+                item.trim() != "" && item.trim().startsWith( "http" ) && item.trim().endsWith( ".json" ) &&
+                    storage.AddOrigin( item, ( result, error ) => {
+                        console.log( "Asdfasdfasdf", result )
+                    });
+            });
         }
     }
 
