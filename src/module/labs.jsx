@@ -2,6 +2,7 @@ console.log( "===== simpread option labs load =====" )
 
 import {browser} from 'browser';
 import * as menu from 'menu';
+import {storage} from 'storage';
 
 import Switch    from 'switch';
 import TextField from 'textfield';
@@ -67,7 +68,21 @@ export default class LabsOpt extends React.Component {
     }
 
     origins( type ) {
-        console.log( "sadfasfasf", type )
+        if ( type == "origins" ) {
+            storage.GetOrigins( ( result, error ) => {
+                if ( error ) new Notify().Render( 2, "获取失败，请稍后重新加载。" );
+                else {
+                    const urls = new Set( this.props.option.origins.concat( result ) );
+                    urls.forEach( item => {
+                        if ( item.trim() == "" || !item.trim().startsWith( "http" ) || !item.trim().endsWith( ".json" ) ) urls.delete( item );
+                    });
+                    this.props.option.origins = [ ...urls ];
+                    this.props.onChange && this.props.onChange( false );
+                    $( this.refs.origins ).find( "textarea" ).val( this.props.option.origins.join( "\n" ) );
+                    new Notify().Render( "导入成功。" );
+                }
+            });
+        }
     }
 
     render() {
@@ -213,7 +228,7 @@ export default class LabsOpt extends React.Component {
                             width="100%" style={{ "margin": "0" }}
                             color="#fff" backgroundColor="#4CAF50"
                             waves="md-waves-effect md-waves-button"
-                            onClick={ ()=>this.origins( "download" ) } />
+                            onClick={ ()=>this.origins( "origins" ) } />
                         <Button type="raised" text="导入适配列表"
                             width="100%" style={{ "margin": "0 10px" }}
                             color="#fff" backgroundColor="#3F51B5"
