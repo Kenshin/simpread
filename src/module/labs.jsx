@@ -62,7 +62,8 @@ export default class LabsOpt extends React.Component {
     }
 
     changeOrigins() {
-        
+        this.props.option.origins = event.target.value.split("\n");
+        this.props.onChange && this.props.onChange( false );
     }
 
     origins( type ) {
