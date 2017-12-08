@@ -83,11 +83,28 @@ export default class LabsOpt extends React.Component {
                 }
             });
         } else if ( type == "import" ) {
+            const urls = this.props.option.origins.filter( item => {
+                return item.trim() != "" && item.trim().startsWith( "http" ) && item.trim().endsWith( ".json" )
+            });
+            const max  = urls.length;
+            let   idx  = 0, arr = [];
+            if ( urls.length != this.props.option.origins.length ) {
+                this.props.option.origins = [ ...urls ];
+                this.props.onChange && this.props.onChange( false );
+                $( this.refs.origins ).find( "textarea" ).val( this.props.option.origins.join( "\n" ) );
+                new Notify().Render( "已剔除掉不符合规范的第三方源。" );
+            }
             this.props.option.origins.forEach( item => {
-                item.trim() != "" && item.trim().startsWith( "http" ) && item.trim().endsWith( ".json" ) &&
-                    storage.AddOrigin( item, ( result, error ) => {
-                        console.log( "Asdfasdfasdf", result )
-                    });
+                storage.AddOrigin( item, ( result, error ) => {
+                    idx++;
+                    result && ( arr = arr.concat( result.sites ));
+                    if ( idx == max ) {
+                        storage.websites.origins = [ ...arr ];
+                        console.log( "current storage websites origins is ", arr );
+                        new Notify().Render( `已完成导入，共计：${ max } 个站点。` );
+                        this.props.onChange && this.props.onChange( false );
+                    }
+                });
             });
         }
     }
