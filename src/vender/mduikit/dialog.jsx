@@ -2,7 +2,7 @@
  * React Material Design: Dialog
  * 
  * @version : 0.0.2
- * @update  : 2017/12/06
+ * @update  : 2017/12/08
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -60,7 +60,6 @@ const style = {
         display: 'block',
 
         width: '100%',
-        height: '100%',
 
         minHeight: '244px',
 
