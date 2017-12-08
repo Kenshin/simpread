@@ -108,6 +108,13 @@ export default class LabsOpt extends React.Component {
                     });
                 });
             });
+        } else if ( type == "clear" ) {
+            new Notify().Render( "snackbar", "只能清除第三方源的适配站点，请问是否清除？", "确认", () => {
+                const len = storage.websites.origins.length;
+                storage.websites.origins = [];
+                new Notify().Render( `已完成清除，共计：${ len } 条数据。` );
+                this.props.onChange && this.props.onChange( false );
+            });
         }
     }
 
