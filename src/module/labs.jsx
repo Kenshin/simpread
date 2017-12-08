@@ -79,7 +79,7 @@ export default class LabsOpt extends React.Component {
                     this.props.option.origins = [ ...urls ];
                     this.props.onChange && this.props.onChange( false );
                     $( this.refs.origins ).find( "textarea" ).val( this.props.option.origins.join( "\n" ) );
-                    new Notify().Render( "导入成功。" );
+                    new Notify().Render( "官方源加载成功。" );
                 }
             });
         } else if ( type == "import" ) {
