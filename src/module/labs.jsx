@@ -96,7 +96,7 @@ export default class LabsOpt extends React.Component {
                     new Notify().Render( "已剔除掉不符合规范的第三方源。" );
                 }
                 this.props.option.origins.forEach( item => {
-                    storage.AddOrigin( item, ( result, error ) => {
+                    storage.LoadOrigin( item, ( result, error ) => {
                         idx++;
                         result && ( arr = arr.concat( result.sites ));
                         if ( idx == max ) {

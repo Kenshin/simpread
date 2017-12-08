@@ -492,7 +492,13 @@ class Storage {
         }
     }
 
-    async AddOrigin( url, callback ) {
+    /**
+     * Load origins from url
+     * 
+     * @param {string} url
+     * @param {func} callback 
+     */
+    async LoadOrigin( url, callback ) {
         try {
             const response = await fetch( url + "?_=" + Math.round(+new Date()) ),
                   result   = await response.json(),
