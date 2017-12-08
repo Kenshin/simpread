@@ -110,6 +110,7 @@ const name = "simpread",
             link  : true,
             list  : false,
         },
+        origins   : [],
     },
     unread = {
         idx       : 0,
