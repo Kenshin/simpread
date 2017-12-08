@@ -514,6 +514,17 @@ class Storage {
     }
 
     /**
+     * Clear origins
+     * 
+     * @returns origins.length
+     */
+    ClearOrigins() {
+        const len = simpread.websites.origins.length;
+        simpread.websites.origins = [];
+        return len;
+    }
+
+    /**
      * Sync simpread data structure
      * 
      * @param {string} include: set, get
