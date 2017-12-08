@@ -514,6 +514,15 @@ class Storage {
     }
 
     /**
+     * Add new sites to simpread.websites.origins
+     * 
+     * @param {object} new sites
+     */
+    AddOrigins( new_sites ) {
+        simpread.websites.origins = [ ...new_sites ];
+    }
+
+    /**
      * Clear origins
      * 
      * @returns origins.length

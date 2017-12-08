@@ -100,7 +100,7 @@ export default class LabsOpt extends React.Component {
                         idx++;
                         result && ( arr = arr.concat( result.sites ));
                         if ( idx == max ) {
-                            storage.websites.origins = [ ...arr ];
+                            storage.AddOrigins( arr );
                             console.log( "current storage websites origins is ", arr );
                             new Notify().Render( `已完成导入，共计：${ max } 个站点， ${ arr.length } 条数据。` );
                             this.props.onChange && this.props.onChange( false );
