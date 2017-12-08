@@ -110,6 +110,7 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.5" ) {
         data.option.origins = [];
+        data.websites       = {};
         curver = "1.0.6";
     }
 
