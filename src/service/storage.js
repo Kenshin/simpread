@@ -252,6 +252,15 @@ class Storage {
     }
 
     /**
+     * Get simpread.websites data structure
+     * 
+     * @return {object} secret object
+     */
+    get websites() {
+        return simpread.websites;
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
