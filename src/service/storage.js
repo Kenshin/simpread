@@ -507,7 +507,7 @@ class Storage {
             if ( result && len > 0 ) {
                 const arr = formatSites( result );
                 callback( { url, sites: arr }, undefined );
-            } else callback( undefined, "error" );
+            } else callback( { url }, "error" );
         } catch ( error ) {
             callback( { url }, error );
         }
