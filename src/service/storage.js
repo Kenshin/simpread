@@ -4,6 +4,7 @@ import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
 import {version} from 'version';
+import { verifyHtml } from 'util';
 
 /**
  * Read and Write Chrome storage
@@ -786,7 +787,7 @@ function clone( target ) {
 function formatSites( result ) {
     const format = new Map();
     for ( let site of result.sites ) {
-        if ( !site.name || !site.url || !site.include ) continue;
+        if ( verifysite( site ) != 0 ) continue;
         const url = site.url;
         delete site.url;
         format.set( url, site );
@@ -813,6 +814,42 @@ function addsites( newsites ) {
     });
     simpread.sites = newsites;
     return { count, forced };
+}
+
+/**
+ * Verify site validity, include:
+ * - name, url, include, error is -1
+ * - title include desc, error is -2
+ * - paging, error is -3 ~ -6
+ * - avatar, error is -7 ~ -10
+ * 
+ * @param {object} site 
+ */
+function verifysite( site ) {
+    if ( !site.name || !site.url || !site.include ) return -1;
+    if ( verifyHtml( site.title   )[0] == -1 ||
+         verifyHtml( site.include )[0] == -1 ||
+         verifyHtml( site.desc    )[0] == -1
+        ) {
+        return -2;
+    }
+    if ( site.paging ) {
+        if ( site.paging.length != 2 ) return -3;
+        if ( !site.paging[0].prev )    return -4;
+        if ( !site.paging[1].next )    return -5;
+        if ( verifyHtml( site.paging[0].prev )[0] == -1 || verifyHtml( site.paging[1].next )[0] == -1 ) {
+            return -6;
+        }
+    }
+    if ( site.avatar ) {
+        if ( site.avatar.length != 2 ) return -7;
+        if ( !site.avatar[0].name )    return -8;
+        if ( !site.avatar[1].url  )    return -9;
+        if ( verifyHtml( site.avatar[0].name )[0] == -1 || verifyHtml( site.avatar[1].url )[0] == -1 ) {
+            return -10;
+        }
+    }
+    return 0;
 }
 
 /**
