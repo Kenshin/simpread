@@ -786,6 +786,7 @@ function clone( target ) {
 function formatSites( result ) {
     const format = new Map();
     for ( let site of result.sites ) {
+        if ( !site.name || !site.url || !site.include ) continue;
         const url = site.url;
         delete site.url;
         format.set( url, site );
