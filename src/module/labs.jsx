@@ -88,7 +88,7 @@ export default class LabsOpt extends React.Component {
                     return item.trim() != "" && item.trim().startsWith( "http" ) && item.trim().endsWith( ".json" )
                 });
                 const max  = urls.length;
-                let   idx  = 0, arr = [];
+                let   idx  = 0, arr = [], count = 0;
                 if ( urls.length != this.props.option.origins.length ) {
                     this.props.option.origins = [ ...urls ];
                     this.props.onChange && this.props.onChange( false );
@@ -98,11 +98,13 @@ export default class LabsOpt extends React.Component {
                 this.props.option.origins.forEach( item => {
                     storage.LoadOrigin( item, ( result, error ) => {
                         idx++;
-                        result && ( arr = arr.concat( result.sites ));
+                        !error && count++;
+                        !error && ( arr = arr.concat( result.sites ));
+                        error  && new Notify().Render( `导入失败 ${ result.url }` );
                         if ( idx == max ) {
-                            storage.AddOrigins( arr );
+                            arr.length > 0 && storage.AddOrigins( arr );
                             console.log( "current storage websites origins is ", arr );
-                            new Notify().Render( `已完成导入，共计：${ max } 个站点， ${ arr.length } 条数据。` );
+                            new Notify().Render( `已完成导入，本次共计：${ count } 个站点， ${ arr.length } 条数据。` );
                             this.props.onChange && this.props.onChange( false );
                         }
                     });
@@ -260,7 +262,7 @@ export default class LabsOpt extends React.Component {
                             color="#fff" backgroundColor="#4CAF50"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.origins( "origins" ) } />
-                        <Button type="raised" text="导入适配列表"
+                        <Button type="raised" text="导入到适配列表"
                             width="100%" style={{ "margin": "0 10px" }}
                             color="#fff" backgroundColor="#3F51B5"
                             waves="md-waves-effect md-waves-button"
