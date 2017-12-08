@@ -509,7 +509,7 @@ class Storage {
                 callback( { url, sites: arr }, undefined );
             } else callback( undefined, "error" );
         } catch ( error ) {
-            callback( undefined, error );
+            callback( { url }, error );
         }
     }
 
