@@ -310,6 +310,7 @@ class Storage {
         } else {
             let arr       = st.Getsite( new Map( simpread[key].sites ), url );
             !arr && ( arr = st.Getsite( new Map( simpread[other].sites ), url ));
+            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
             !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
             if ( arr ) {
                 current.site = arr[0];
