@@ -65,6 +65,12 @@ class FControl extends React.Component {
         }) : action( event, type );
     }
 
+    componentWillMount() {
+        if ( storage.current.site.name.startsWith( "metaread::" ) || storage.current.site.name.startsWith( "txtread::" ) ) {
+            delete conf.focusItems.option;
+        }
+    }
+
     componentWillUnmount() {
         $(this.refs.target).remove();
         $( "body" ).find( selector ).trigger( "click", "okay" );
