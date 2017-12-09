@@ -103,6 +103,10 @@ export default class ReadCtlbar extends React.Component {
             delete conf.readItems.readlater;
             delete conf.readItems.send;
             delete conf.readItems.share;
+            delete conf.readItems.option;
+        }
+        if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
+            delete conf.readItems.option;
         }
     }
 
