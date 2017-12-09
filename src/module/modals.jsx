@@ -33,6 +33,10 @@ class Modals extends React.Component {
     // save modals focus option
     save() {
         console.log( "modals click submit button.", storage.current, flag )
+        if ( storage.current.mode == "focus" ) {
+            new Notify().Render( 3, "测试版 1.0.6 所以暂时不支持聚焦模式下的保存功能，正式版时将会恢复。" );
+            return;
+        }
         if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
             new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
         } else {
