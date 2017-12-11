@@ -545,39 +545,6 @@ class Storage {
     }
 
     /**
-     * Sync simpread data structure
-     * 
-     * @param {string} include: set, get
-     * @param {function} callback
-     */
-    /*
-    Sync( state, callback ) {
-        if ( state == "set" ) {
-            sync = { ...simpread };
-            sync.option.update = now();
-            delete sync.sites;
-            browser.storage.sync.set( { name : sync }, () => {
-                console.log( "chrome storage sync[set] success!" )
-                simpread.option.update = sync.option.update;
-                save( callback( sync.option.update ));
-            });
-        } else {
-            browser.storage.sync.get( name , result => {
-                console.log( "chrome storage sync[get] success!", result, simpread )
-                let success = false;
-                if ( result && !$.isEmptyObject( result )) {
-                    success = true;
-                    Object.keys( mode ).forEach( key => {
-                        simpread[ key ] = result[ name ][ key ];
-                    });
-                }
-                callback( success );
-            });
-        }
-    }
-    */
-
-    /**
      * Statistics simpread same info
      * 
      * @param {string} include: create, focus, read
