@@ -340,9 +340,9 @@ class Storage {
      * @param {string} include: focus and read
      */
     Setsite( key ) {
-        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
-        idx == -1 && ( idx = simpread[key].sites.length );
-        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+        let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
+        idx == -1 && ( idx = simpread.websites.local.length );
+        simpread.websites.local.splice( idx, 1, [ current.url, current.site ] );
     }
 
     /**
@@ -354,7 +354,8 @@ class Storage {
      * @param {object} include: meta read and txt read
      */
     Getsites( key, current, meta ) {
-        const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
+        //const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
+        const   url       = st.GetURI();
         current.url       = url;
         if ( meta ) {
             current.auto  = meta.auto;
@@ -363,16 +364,17 @@ class Storage {
             delete meta.url;
             current.site  = { ...meta };
         } else {
-            let arr       = st.Getsite( new Map( simpread[key].sites       ), url );
-            !arr && ( arr = st.Getsite( new Map( simpread[other].sites     ), url ));
+            let arr       = st.Getsite( new Map( simpread.websites.local   ), url );
+            //!arr && ( arr = st.Getsite( new Map( simpread[other].sites     ), url ));
             !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url ));
             !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
             if ( arr ) {
                 current.site = arr[0];
                 current.url  = arr[1];
             } else {
-                sites.set( url, clone( site ));
-                current.site = sites.get( url );
+                //sites.set( url, clone( site ));
+                //current.site = sites.get( url );
+                current.site = clone( site );
             }
         }
     }
@@ -458,7 +460,7 @@ class Storage {
      * @param {func}   callback
      */
     Deletesite( key, site, callback ) {
-        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
+        let idx = simpread[key].findIndex( item => item[0] == curori.url );
         simpread[key].sites.splice( idx, 1 );
         idx != -1 ? save( callback, true ) : callback( idx );
     }
