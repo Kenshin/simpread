@@ -4,6 +4,7 @@ import "babel-polyfill";
 import * as st   from 'site';
 import {browser} from 'browser';
 import {version} from 'version';
+import { verifyHtml } from 'util';
 
 /**
  * Read and Write Chrome storage
@@ -13,6 +14,7 @@ import {version} from 'version';
 
 const name = "simpread",
     remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json",
+    origins= "http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
@@ -109,6 +111,7 @@ const name = "simpread",
             link  : true,
             list  : false,
         },
+        origins   : [],
     },
     unread = {
         idx       : 0,
@@ -129,6 +132,9 @@ let current  = {},
         read,
         unrdist : [],
         sites   : [],
+        websites: {
+            origins: [],
+        }
     },
     secret = {
         version   : "2017-11-22",
@@ -247,6 +253,15 @@ class Storage {
     }
 
     /**
+     * Get simpread.websites data structure
+     * 
+     * @return {object} secret object
+     */
+    get websites() {
+        return simpread.websites;
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
@@ -291,12 +306,15 @@ class Storage {
         current.mode = key;
         if ( meta ) {
             current.auto = meta.auto;
+            current.url  = meta.url;
             delete meta.auto;
+            delete meta.url;
             current.site = { ...meta };
         } else {
-            let arr       = st.Getsite( new Map( simpread[key].sites ), url );
-            !arr && ( arr = st.Getsite( new Map( simpread[other].sites ), url ));
-            !arr && ( arr = st.Getsite( new Map( simpread.sites ), url ));
+            let arr       = st.Getsite( new Map( simpread[key].sites       ), url );
+            !arr && ( arr = st.Getsite( new Map( simpread[other].sites     ), url ));
+            !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url ));
+            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
             if ( arr ) {
                 current.site = arr[0];
                 current.url  = arr[1];
@@ -370,13 +388,64 @@ class Storage {
     /**
      * Add new site( read only )
      * 
-     * @param {object} new_site
+     * @param {string} include: focus, read
+     * @param {string} when read html is dom.outerHTML
      */
-    Newsite( new_site ) {
+    Newsite( mode, html ) {
+        const new_site = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: "" } };
+        html && ( new_site.site.html = html );
         current.mode = new_site.mode,
         current.url  = new_site.url;
         current.site = { ...new_site.site };
         console.log( "【read only】current site object is ", current )
+    }
+
+    /**
+     * Clone current site
+     * 
+     * @return {object} new site
+     */
+    Clonesite() {
+        const site = { ...current.site };
+        site.url   = current.url;
+        site.name  == "" && ( site.name = "tempread::" + location.host );
+        ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
+        ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
+        return site;
+    }
+
+    /**
+     * Update current.site from param
+     * 
+     * @param {string} include: focus, read 
+     * @param {object} new site
+     * @param {func}   callback
+     */
+    Updatesite( key, site, callback ) {
+        current.url  = site.url;
+        current.site = { ...site };
+        current.site.avatar[0].name == "" && delete current.site.avatar;
+        current.site.paging[0].prev == "" && delete current.site.paging;
+        current.site.html                 && delete current.site.html;
+
+        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
+        idx == -1 && ( idx = simpread[key].sites.length );
+        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+        
+        save( callback, true );
+    }
+
+    /**
+     * Delete site from simpread[key].site
+     * 
+     * @param {string} include: focus, read 
+     * @param {object} site
+     * @param {func}   callback
+     */
+    Deletesite( key, site, callback ) {
+        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
+        simpread[key].sites.splice( idx, 1 );
+        idx != -1 ? save( callback, true ) : callback( idx );
     }
 
     /**
@@ -406,6 +475,65 @@ class Storage {
             console.error( error );
             callback && callback( {}, error );
         }
+    }
+
+    /**
+     * Get origins from http://xxxx.xx/website_list_origins.json
+     * 
+     * @param {func} callback 
+     */
+    async GetOrigins( callback ) {
+        try {
+            const response = await fetch( origins + "?_=" + Math.round(+new Date()) ),
+                  result   = await response.json();
+            if ( result && result.origins.length > 0 ) {
+                const urls = result.origins.map( item => item.url );
+                callback( urls );
+            } else callback( undefined, "error" );
+        } catch ( error ) {
+            callback( undefined, "error" );
+        }
+    }
+
+    /**
+     * Load origins from url
+     * 
+     * @param {string} url
+     * @param {func} callback 
+     */
+    async LoadOrigin( url, callback ) {
+        try {
+            const response = await fetch( url + "?_=" + Math.round(+new Date()) ),
+                  result   = await response.json(),
+                  len      = result.sites.length;
+            let count      = 0;
+            if ( result && len > 0 ) {
+                const arr = formatSites( result );
+                callback( { url, sites: arr }, undefined );
+            } else callback( { url }, "error" );
+        } catch ( error ) {
+            callback( { url }, error );
+        }
+    }
+
+    /**
+     * Add new sites to simpread.websites.origins
+     * 
+     * @param {object} new sites
+     */
+    AddOrigins( new_sites ) {
+        simpread.websites.origins = [ ...new_sites ];
+    }
+
+    /**
+     * Clear origins
+     * 
+     * @returns origins.length
+     */
+    ClearOrigins() {
+        const len = simpread.websites.origins.length;
+        simpread.websites.origins = [];
+        return len;
     }
 
     /**
@@ -661,6 +789,7 @@ function clone( target ) {
 function formatSites( result ) {
     const format = new Map();
     for ( let site of result.sites ) {
+        if ( verifysite( site ) != 0 ) continue;
         const url = site.url;
         delete site.url;
         format.set( url, site );
@@ -687,6 +816,42 @@ function addsites( newsites ) {
     });
     simpread.sites = newsites;
     return { count, forced };
+}
+
+/**
+ * Verify site validity, include:
+ * - name, url, include, error is -1
+ * - title include desc, error is -2
+ * - paging, error is -3 ~ -6
+ * - avatar, error is -7 ~ -10
+ * 
+ * @param {object} site 
+ */
+function verifysite( site ) {
+    if ( !site.name || !site.url || !site.include ) return -1;
+    if ( verifyHtml( site.title   )[0] == -1 ||
+         verifyHtml( site.include )[0] == -1 ||
+         verifyHtml( site.desc    )[0] == -1
+        ) {
+        return -2;
+    }
+    if ( site.paging ) {
+        if ( site.paging.length != 2 ) return -3;
+        if ( !site.paging[0].prev )    return -4;
+        if ( !site.paging[1].next )    return -5;
+        if ( verifyHtml( site.paging[0].prev )[0] == -1 || verifyHtml( site.paging[1].next )[0] == -1 ) {
+            return -6;
+        }
+    }
+    if ( site.avatar ) {
+        if ( site.avatar.length != 2 ) return -7;
+        if ( !site.avatar[0].name )    return -8;
+        if ( !site.avatar[1].url  )    return -9;
+        if ( verifyHtml( site.avatar[0].name )[0] == -1 || verifyHtml( site.avatar[1].url )[0] == -1 ) {
+            return -10;
+        }
+    }
+    return 0;
 }
 
 /**
@@ -722,7 +887,7 @@ function compare() {
         }
     }
     for ( key of Object.keys( curori.site ) ) {
-        if ( ( typeof curori.site[key] == "object" && curori.site[key].join( "" ) != current.site[key].join( "" ) ) || curori.site[key] != current.site[key] ) {
+        if ( ( typeof curori.site[key] == "object" && ![ "avatar", "paging" ].includes( key ) && curori.site[key].join( "" ) != current.site[key].join( "" ) ) || curori.site[key] != current.site[key] ) {
             changed.push( key );
             site_changed = true;
         }

@@ -7,6 +7,7 @@ import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
 import * as toc    from 'toc';
 import * as modals from 'modals';
+import * as se     from 'siteeditor';
 import * as kbd    from 'keyboard';
 
 import { storage, Clone } from 'storage';
@@ -110,7 +111,10 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                modals.Render();
+                modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                break;
+            case "siteeditor":
+                se.Render();
                 break;
             case "fontfamily":
             case "fontsize":
@@ -172,7 +176,7 @@ function Render() {
 function Highlight() {
     const dtd = $.Deferred();
     highlight.Start().done( dom => {
-        storage.Newsite({ mode: "read", url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", html: dom.outerHTML, exclude: "" } });
+        storage.Newsite( "read", dom.outerHTML );
         dtd.resolve();
     });
     return dtd;
@@ -186,7 +190,7 @@ function Highlight() {
  */
 function Exist( action ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        action && modals.Render();
+        action && modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
         return true;
     } else {
         return false;

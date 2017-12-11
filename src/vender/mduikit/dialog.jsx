@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Dialog
  * 
- * @version : 0.0.1
- * @update  : 2017/05/11
+ * @version : 0.0.2
+ * @update  : 2017/12/08
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -34,7 +34,7 @@ const style = {
         opacity: 0,
         transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
 
-        zIndex: 2147483647,
+        zIndex: 2147483646,
     },
 
     root: {
@@ -60,7 +60,6 @@ const style = {
         display: 'block',
 
         width: '100%',
-        height: '100%',
 
         minHeight: '244px',
 

@@ -176,7 +176,7 @@ function removeOpenLink() {
 }
 
 function openLinkExist() {
-    return $root.find( $( "sr-kbd" ) ).length > 0 ? true : false;
+    return $root && $root.find( $( "sr-kbd" ) ).length > 0 ? true : false;
 }
 
 /***********************

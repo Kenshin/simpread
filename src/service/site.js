@@ -409,7 +409,7 @@ function clearMD( str ) {
 }
 
 /**
- * Get metadata
+ * Get metadata, inlcude: txtread and metaread
  * 
  * @return {object} meata data or undefined
  */
