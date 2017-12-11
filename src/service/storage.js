@@ -293,38 +293,15 @@ class Storage {
     /**
      * Get current object, current object structure include:
      * 
-     * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
-     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
-     * 
      * @param {string} @see mode
-     * @param {object} meta data
+     * @param {object} include: meta read and txt read
      */
     Getcur( key, meta ) {
-        const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
         current      = swap( simpread[key], {} );
         current.mode = key;
-        current.url  = url;
-        if ( meta ) {
-            current.auto = meta.auto;
-            current.url  = meta.url;
-            delete meta.auto;
-            delete meta.url;
-            current.site = { ...meta };
-        } else {
-            let arr       = st.Getsite( new Map( simpread[key].sites       ), url );
-            !arr && ( arr = st.Getsite( new Map( simpread[other].sites     ), url ));
-            !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url ));
-            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
-            if ( arr ) {
-                current.site = arr[0];
-                current.url  = arr[1];
-            } else {
-                sites.set( url, clone( site ));
-                current.site = sites.get( url );
-            }
-        }
-        curori      = { ...current };
-        curori.site = { ...current.site };
+        this.Getsites( key, current, meta );
+        curori       = { ...current };
+        curori.site  = { ...current.site };
         console.log( "current site object is ", current )
     }
 
@@ -356,6 +333,38 @@ class Storage {
         return ( current.mode && current.mode != type ) ||
                ( current.url  && current.url != st.GetURI() ) ||
                $.isEmptyObject( current );
+    }
+
+    /**
+     * Get adapter site(s)
+     * include: url, site props
+     * 
+     * @param {string} include: focus and read
+     * @param {object} storage.current
+     * @param {object} include: meta read and txt read
+     */
+    Getsites( key, current, meta ) {
+        const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
+        current.url       = url;
+        if ( meta ) {
+            current.auto  = meta.auto;
+            current.url   = meta.url;
+            delete meta.auto;
+            delete meta.url;
+            current.site  = { ...meta };
+        } else {
+            let arr       = st.Getsite( new Map( simpread[key].sites       ), url );
+            !arr && ( arr = st.Getsite( new Map( simpread[other].sites     ), url ));
+            !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url ));
+            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
+            if ( arr ) {
+                current.site = arr[0];
+                current.url  = arr[1];
+            } else {
+                sites.set( url, clone( site ));
+                current.site = sites.get( url );
+            }
+        }
     }
 
     /**
