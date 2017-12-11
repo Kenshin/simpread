@@ -323,7 +323,7 @@ class Storage {
     }
 
     /**
-     * Update current.site from param
+     * Update url and site from param
      * 
      * @param {string} include: focus, read 
      * @param {object} new site
@@ -335,11 +335,8 @@ class Storage {
         current.site.avatar[0].name == "" && delete current.site.avatar;
         current.site.paging[0].prev == "" && delete current.site.paging;
         current.site.html                 && delete current.site.html;
+        this.Setsite( key );
 
-        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
-        idx == -1 && ( idx = simpread[key].sites.length );
-        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
-        
         save( callback, true );
     }
 
