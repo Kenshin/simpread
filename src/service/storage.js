@@ -306,7 +306,7 @@ class Storage {
     }
 
     /**
-     * Set current to chrome storage and save
+     * Set current to simpread[key]
      * 
      * @param {string} @see mode
      */
@@ -314,9 +314,7 @@ class Storage {
         const { code } = compare();
         if ( code != 0 ) {
             if ( [ 2, 3 ].includes( code ) ) {
-                let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
-                idx == -1 && ( idx = simpread[key].sites.length );
-                simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+                this.Setsite( key );
             }
             swap( current, simpread[key] );
             save( undefined, true );
@@ -333,6 +331,17 @@ class Storage {
         return ( current.mode && current.mode != type ) ||
                ( current.url  && current.url != st.GetURI() ) ||
                $.isEmptyObject( current );
+    }
+
+    /**
+     * Set adapter site
+     * 
+     * @param {string} include: focus and read
+     */
+    Setsite( key ) {
+        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
+        idx == -1 && ( idx = simpread[key].sites.length );
+        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
     }
 
     /**
