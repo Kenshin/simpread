@@ -300,7 +300,7 @@ class Storage {
     Getcur( key, meta ) {
         current      = swap( simpread[key], {} );
         current.mode = key;
-        this.Getsites( key, current, meta );
+        this.Getsites( current, meta );
         curori       = { ...current };
         curori.site  = { ...current.site };
         console.log( "current site object is ", current )
@@ -315,7 +315,7 @@ class Storage {
         const { code } = compare();
         if ( code != 0 ) {
             if ( [ 2, 3 ].includes( code ) ) {
-                this.Setsite( key );
+                this.Setsite();
             }
             swap( current, simpread[key] );
             save( undefined, true );
@@ -336,10 +336,8 @@ class Storage {
 
     /**
      * Set adapter site
-     * 
-     * @param {string} include: focus and read
      */
-    Setsite( key ) {
+    Setsite() {
         let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
         idx == -1 && ( idx = simpread.websites.local.length );
         simpread.websites.local.splice( idx, 1, [ current.url, current.site ] );
@@ -349,11 +347,10 @@ class Storage {
      * Get adapter site(s)
      * include: url, site props
      * 
-     * @param {string} include: focus and read
      * @param {object} storage.current
      * @param {object} include: meta read and txt read
      */
-    Getsites( key, current, meta ) {
+    Getsites( current, meta ) {
         const   url       = st.GetURI();
         current.url       = url;
         if ( meta ) {
@@ -430,7 +427,7 @@ class Storage {
         current.site.avatar[0].name == "" && delete current.site.avatar;
         current.site.paging[0].prev == "" && delete current.site.paging;
         current.site.html                 && delete current.site.html;
-        this.Setsite( key );
+        this.Setsite();
         save( callback, true );
     }
 
