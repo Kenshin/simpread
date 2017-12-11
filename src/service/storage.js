@@ -323,6 +323,27 @@ class Storage {
     }
 
     /**
+     * Update current.site from param
+     * 
+     * @param {string} include: focus, read 
+     * @param {object} new site
+     * @param {func}   callback
+     */
+    Updatesite( key, site, callback ) {
+        current.url  = site.url;
+        current.site = { ...site };
+        current.site.avatar[0].name == "" && delete current.site.avatar;
+        current.site.paging[0].prev == "" && delete current.site.paging;
+        current.site.html                 && delete current.site.html;
+
+        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
+        idx == -1 && ( idx = simpread[key].sites.length );
+        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
+        
+        save( callback, true );
+    }
+
+    /**
      * Verity current changed
      * 
      * @param {string} @see mode
@@ -430,27 +451,6 @@ class Storage {
         ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
         ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
         return site;
-    }
-
-    /**
-     * Update current.site from param
-     * 
-     * @param {string} include: focus, read 
-     * @param {object} new site
-     * @param {func}   callback
-     */
-    Updatesite( key, site, callback ) {
-        current.url  = site.url;
-        current.site = { ...site };
-        current.site.avatar[0].name == "" && delete current.site.avatar;
-        current.site.paging[0].prev == "" && delete current.site.paging;
-        current.site.html                 && delete current.site.html;
-
-        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
-        idx == -1 && ( idx = simpread[key].sites.length );
-        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
-        
-        save( callback, true );
     }
 
     /**
