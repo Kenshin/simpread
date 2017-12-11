@@ -211,7 +211,7 @@ class Storage {
     /**
      * Get read site code, include: simpread.sites and simpread.read.sites
      * 
-     * @return {int} @see FindSite
+     * @return {int} @see Findsite
      */
     get stcode() {
         return stcode;
@@ -382,7 +382,7 @@ class Storage {
      * 
      * @param {object} meta data
      */
-    FindSite( meta ) {
+    Findsite( meta ) {
         const url = getURI();
         if ( meta ) {
             stcode = 3;

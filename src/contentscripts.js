@@ -195,6 +195,6 @@ function getCurrent( mode ) {
  * Browser action
  */
 function browserAction() {
-    storage.FindSite( st.GetMetadata() );
+    storage.Findsite( st.GetMetadata() );
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
 }
