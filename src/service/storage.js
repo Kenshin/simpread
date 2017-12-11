@@ -39,7 +39,7 @@ const name = "simpread",
         highlight : true,
         opacity   : 90,
         shortcuts : "A S",
-        sites     : [],    // e.g. [ "<url>", site ]
+        //sites     : [],    // e.g. [ "<url>", site ]
     },
     read   = {
         version   : "2017-03-16",
@@ -58,7 +58,7 @@ const name = "simpread",
         ],
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
-        sites     : [],  // e.g. [ "<url>", site ]
+        //sites     : [],  // e.g. [ "<url>", site ]
         custom    : {
             global: {
                 fontFamily : "",
@@ -134,6 +134,7 @@ let current  = {},
         sites   : [],
         websites: {
             origins: [],
+            local  : [], // include focus.sites and read.sites
         }
     },
     secret = {

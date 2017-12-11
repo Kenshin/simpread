@@ -14,6 +14,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.4", "Mon Sep 25 2017 14:40:27 GMT+0800 (CST)" ],
           [ "1.0.5", "Wed Nov 15 2017 11:39:23 GMT+0800 (CST)" ],
           [ "1.0.6", "Thu Dec 07 2017 14:48:44 GMT+0800 (CST)" ],
+          [ "1.0.7", "Mon Dec 11 2017 12:47:46 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -23,6 +24,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.4", "新增「高级聚焦模式、主动适配与临时阅读模式」，" ],
           [ "1.0.5", "新增「导出 epub，TXT 阅读器，阅读模式增加目录功能，白名单等」，" ],
           [ "1.0.6", "新增「添加新站到阅读模式，导入第三方适配站点等」，" ],
+          [ "1.0.7", "新增「多个适配站点等」，" ],
     ]);
 
 /**
@@ -112,6 +114,13 @@ function Verify( curver, data ) {
         data.option.origins = [];
         data.websites       = {};
         curver = "1.0.6";
+    }
+
+    if ( curver == "1.0.6" ) {
+        data.websites.local = data.read.sites.concat( data.focus.sites );
+        delete data.focus.sites;
+        delete data.read.sites;
+        curver = "1.0.7";
     }
 
     /*
