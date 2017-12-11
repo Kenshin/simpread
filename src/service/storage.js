@@ -302,8 +302,8 @@ class Storage {
     Getcur( key, meta ) {
         const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
         current      = swap( simpread[key], {} );
-        current.url  = url;
         current.mode = key;
+        current.url  = url;
         if ( meta ) {
             current.auto = meta.auto;
             current.url  = meta.url;
