@@ -3,22 +3,6 @@ console.log( "=== simpread site load ===" )
 import minimatch from 'minimatch';
 
 /**
- * Get URI
- * 
- * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
- */
-function getURI() {
-    //const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
-    //return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
-    const name = (pathname) => {
-        pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
-        return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
-    },
-    path = name( window.location.pathname );
-    return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
-}
-
-/**
  * Find site by url from simpread.sites, include wildcard, support: *
  * 
  * @param  {map}    simpread.sites
@@ -499,7 +483,6 @@ function whitelist( data ) {
 }
 
 export {
-    getURI         as GetURI,
     findSitebyURL  as Getsite,
     specbeautify   as Beautify,
     removeSpareTag as RemoveTag,

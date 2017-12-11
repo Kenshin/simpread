@@ -330,7 +330,7 @@ class Storage {
      */
     VerifyCur( type ) {
         return ( current.mode && current.mode != type ) ||
-               ( current.url  && current.url != st.GetURI() ) ||
+               ( current.url  && current.url != getURI() ) ||
                $.isEmptyObject( current );
     }
 
@@ -351,7 +351,7 @@ class Storage {
      * @param {object} include: meta read and txt read
      */
     Getsites( current, meta ) {
-        const   url       = st.GetURI();
+        const   url       = getURI();
         current.url       = url;
         if ( meta ) {
             current.auto  = meta.auto;
@@ -383,7 +383,7 @@ class Storage {
      * @param {object} meta data
      */
     FindSite( meta ) {
-        const url = st.GetURI();
+        const url = getURI();
         if ( meta ) {
             stcode = 3;
         } else {
@@ -915,6 +915,20 @@ function now() {
     const date   = new Date(),
           format = value => value = value < 10 ? "0" + value : value;
     return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + "-" + format( date.getMinutes() ) + "-" + format( date.getSeconds() );
+}
+
+/**
+ * Get URI
+ * 
+ * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
+ */
+function getURI() {
+    const name = (pathname) => {
+        pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
+        return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
+    },
+    path = name( window.location.pathname );
+    return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
 }
 
 const storage = new Storage();
