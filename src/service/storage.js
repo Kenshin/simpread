@@ -354,7 +354,6 @@ class Storage {
      * @param {object} include: meta read and txt read
      */
     Getsites( key, current, meta ) {
-        //const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
         const   url       = st.GetURI();
         current.url       = url;
         if ( meta ) {
@@ -365,15 +364,12 @@ class Storage {
             current.site  = { ...meta };
         } else {
             let arr       = st.Getsite( new Map( simpread.websites.local   ), url );
-            //!arr && ( arr = st.Getsite( new Map( simpread[other].sites     ), url ));
             !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url ));
             !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
             if ( arr ) {
                 current.site = arr[0];
                 current.url  = arr[1];
             } else {
-                //sites.set( url, clone( site ));
-                //current.site = sites.get( url );
                 current.site = clone( site );
             }
         }
