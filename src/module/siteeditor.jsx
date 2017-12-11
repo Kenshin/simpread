@@ -27,7 +27,7 @@ class SiteEditor extends React.Component {
     delete() {
         console.log( "siteeditor click delete button.", storage.current.site )
         new Notify().Render( "是否删除当前适配站点？", "删除", () => {
-            storage.Deletesite( "read", site, result => {
+            storage.Deletesite( site, result => {
                 if ( result == -1 ) new Notify().Render( 2, "当前站点并不存在，无需删除。" );
                 else {
                     new Notify().Render( "删除成功，如需生效，请刷新本页。" );

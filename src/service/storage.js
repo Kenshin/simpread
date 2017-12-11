@@ -392,8 +392,7 @@ class Storage {
             if ( arr ) {
                 stcode = 1;
             } else {
-                arr = st.Getsite( new Map( simpread.read.sites ), url );
-                !arr && ( arr = st.Getsite( new Map( simpread.focus.sites ), url ));
+                arr = st.Getsite( new Map( simpread.websites.local ), url );
                 arr && arr[0].name != "" && ( stcode = 2 );
             }
         }
@@ -446,16 +445,15 @@ class Storage {
     }
 
     /**
-     * Delete site from simpread[key].site
+     * Delete site from simpread.websites.local
      * 
-     * @param {string} include: focus, read 
      * @param {object} site
      * @param {func}   callback
      */
-    Deletesite( key, site, callback ) {
-        let idx = simpread[key].findIndex( item => item[0] == curori.url );
-        simpread[key].sites.splice( idx, 1 );
-        idx != -1 ? save( callback, true ) : callback( idx );
+    Deletesite( site, callback ) {
+        let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
+        idx != -1 && simpread.websites.local.splice( idx, 1 );
+        idx != -1 ?  save( callback, true ) : callback( idx );
     }
 
     /**
