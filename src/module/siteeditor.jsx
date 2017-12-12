@@ -28,7 +28,7 @@ class SiteEditor extends React.Component {
         console.log( "siteeditor click delete button.", storage.current.site )
         new Notify().Render( "是否删除当前适配站点？", "删除", () => {
             storage.Deletesite( site, result => {
-                if ( result == -1 ) new Notify().Render( 2, "当前站点并不存在，无需删除。" );
+                if ( result == -1 ) new Notify().Render( 2, `当前站点并不存在或 <a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>无法删除</a>，如不想显示请加入黑名单。` );
                 else {
                     new Notify().Render( "删除成功，如需生效，请刷新本页。" );
                     watch.SendMessage( "site", true );
