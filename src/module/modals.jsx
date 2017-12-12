@@ -9,6 +9,7 @@ import {browser}    from 'browser';
 import th           from 'theme';
 import Notify       from 'notify';
 import * as ss      from 'stylesheet';
+import * as watch   from 'watch';
 
 import Button       from 'button';
 import * as tooltip from 'tooltip';
@@ -40,10 +41,17 @@ class Modals extends React.Component {
         if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
             new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
         } else {
-            storage.Setcur( storage.current.mode );
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-            new Notify().Render( 0, "更新成功！" )
-            this.close( false );
+            watch.Verify( ( state, result ) => {
+                if ( state ) {
+                    console.log( "watch.Lock()", result );
+                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+                } else {
+                    storage.Setcur( storage.current.mode );
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
+                    new Notify().Render( 0, "更新成功！" )
+                    this.close( false );
+                }
+            });
         }
     }
 
