@@ -121,7 +121,7 @@ function Verify( curver, data ) {
             origins: [],
             local  : []
         });
-        data.websites.local = data.focus.sites.concat( data.read.sites );
+        data.websites.local = data.read.sites.concat( data.focus.sites );
         delete data.focus.sites;
         delete data.read.sites;
         curver = "1.0.7";
