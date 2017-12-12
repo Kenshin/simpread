@@ -314,15 +314,9 @@ class Storage {
      * @param {string} @see mode
      */
     Setcur( key ) {
-        const { code } = compare();
-        if ( code != 0 ) {
-            if ( [ 2, 3 ].includes( code ) ) {
-                this.Setsite();
-            }
-            swap( current, simpread[key] );
-            save( undefined, true );
-        }
-        return code;
+        this.Setsite();
+        swap( current, simpread[key] );
+        save( undefined, true );
     }
 
     /**
@@ -848,33 +842,6 @@ function save( callback, no_update ) {
         curori.site = { ...current.site };
         callback && callback();
     });
-}
-
-/**
- * Compare current and curori( origin_current )
- * 
- * return {object}
- *      code    {number} include 0: equal； 1: option changed; 2: site changed; 3: all changed
- *      changed {array}  changed key, e.g. [ "theme", "title", "exclude" ]
- */
-function compare() {
-    let key, code = 0, changed = [], site_changed = false;
-    for ( key of Object.keys( curori ) ) {
-        if ( typeof curori[key] == "string" && curori[key] != current[key] ) {
-            changed.push( key );
-            code = 1;
-        }
-    }
-    for ( key of Object.keys( curori.site ) ) {
-        if ( ( typeof curori.site[key] == "object" && ![ "avatar", "paging" ].includes( key ) && curori.site[key].join( "" ) != current.site[key].join( "" ) ) || curori.site[key] != current.site[key] ) {
-            changed.push( key );
-            site_changed = true;
-        }
-    }
-    changed.includes( "url" ) && ( site_changed = true );
-    site_changed && ( code = code + 2 );
-    console.log( "current changed state is ", code, changed );
-    return { code, changed };
 }
 
 /**

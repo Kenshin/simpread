@@ -40,13 +40,9 @@ class Modals extends React.Component {
         if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
             new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
         } else {
-            const code = storage.Setcur( storage.current.mode );
-            if ( code != 0 ) {
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，页面刷新后生效！" )
-            } else {
-                new Notify().Render( 0, "没有改变任何内容。" );
-            }
+            storage.Setcur( storage.current.mode );
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
+            new Notify().Render( 0, "更新成功！" )
             this.close( false );
         }
     }
