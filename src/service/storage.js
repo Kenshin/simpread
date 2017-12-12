@@ -167,8 +167,8 @@ let current  = {},
             access_token  : "",
             folder_id     : "",
         },
-    },
-    stcode = -1;
+    };
+    //stcode = -1;
 
 class Storage {
 
@@ -213,9 +213,11 @@ class Storage {
      * 
      * @return {int} @see Findsite
      */
+    /*
     get stcode() {
         return stcode;
     }
+    */
 
     /**
      * Get unread list
@@ -382,6 +384,7 @@ class Storage {
      * 
      * @param {object} meta data
      */
+    /*
     Findsite( meta ) {
         const url = getURI();
         if ( meta ) {
@@ -397,6 +400,7 @@ class Storage {
             }
         }
     }
+    */
 
     /**
      * Add new site( read only )
