@@ -698,32 +698,39 @@ class Storage {
     }
 
     /**
-     * Fix simpread.read.site only old 1.0.0 and 1.0.1
+     * Fix simpread.read.site only old 1.0.0 / 1.0.1 and 1.0.7
      * 
      * @param  {array} changed target
      * @param  {string} old version
      * @param  {string} new version
-     * 
-     * @return {array} new sites
+     * @param  {object} simpread.focus.site
      */
-    Fix( target, curver, newver ) {
-        target.forEach( ( site, idx ) => {
-            let url      = site[0],
-                { name } = site[1];
-            if ( curver == "1.0.0" || curver == "1.0.1" ) {
-                for ( let item of simpread.sites ) {
-                    if ( name == item[1].name ) {
-                        item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
-                        item[1].paging  && ( site[1].paging  = item[1].paging  );
-                        item[1].include && ( site[1].include = item[1].include );
-                        target[idx][1] = { ...item[1] };
-                        target[idx][0] = item[0];
-                        continue;
+    Fix( target, curver, newver, source ) {
+        if ( curver == "1.0.0" || curver == "1.0.1" ) {
+            target.forEach( ( site, idx ) => {
+                let url      = site[0],
+                    { name } = site[1];
+                    for ( let item of simpread.sites ) {
+                        if ( name == item[1].name ) {
+                            item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
+                            item[1].paging  && ( site[1].paging  = item[1].paging  );
+                            item[1].include && ( site[1].include = item[1].include );
+                            target[idx][1] = { ...item[1] };
+                            target[idx][0] = item[0];
+                            continue;
+                        }
                     }
-                }
-            }
-        });
-        return target;
+            });
+        }
+        if ( newver == "1.0.7" ) {
+            const map = new Map( target );
+            source.forEach( site => {
+                map.get( site[0] ) &&
+                    ( site[0] = site[0].endsWith( "*" ) ? site[0] + "*" : site[0] + "**" );
+                site[1].name == "" &&
+                    ( site[1].name = "tempfocus" );
+            });
+        }
     }
 
 }

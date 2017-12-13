@@ -123,7 +123,7 @@ export default class CommonOpt extends React.Component {
                                 }
                             } else if ( result == 1 ) {
                                 storage.version != json.version &&
-                                    ( json.read.sites = storage.Fix( json.read.sites, json.version, storage.version ));
+                                    storage.Fix( json.read.sites, json.version, storage.version, json.focus.sites );
                                 json = ver.Verify( json.version, json );
                                 new Notify().Render( "上传版本太低，已自动转换为最新版本。" );
                             }
