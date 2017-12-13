@@ -667,11 +667,12 @@ class Storage {
      */
     Export() {
         const download = {
-            version: version,
-            option : { ...this.option },
-            focus  : { ...this.focus  },
-            read   : { ...this.read   },
-            unrdist: this.unrdist,
+            version : version,
+            option  : { ...this.option },
+            focus   : { ...this.focus  },
+            read    : { ...this.read   },
+            websites: { ...this.websites },
+            unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });
         return JSON.stringify( download );
