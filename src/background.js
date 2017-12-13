@@ -19,7 +19,6 @@ storage.Read( () => {
     else {
         !local.Count() && storage.GetNewsites( "remote", getNewsitesHandler );
         ver.version != storage.version && storage.GetNewsites( "local", result => {
-            console.log( "adfasfasfd", ver.version, storage.version )
             ver.version != storage.version &&
                 storage.Fix( storage.read.sites, storage.version, ver.version, storage.focus.sites );
             ver.version != storage.version && storage.Write( () => {
