@@ -357,17 +357,18 @@ class Storage {
             delete meta.url;
             current.site  = { ...meta };
         } else {
-            let arr       = st.Getsite( new Map( simpread.websites.local   ), url, matching );
-            !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url, matching ));
-            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url, matching ));
-            if ( arr ) {
-                current.site = arr[0];
-                current.url  = arr[1];
+            st.Getsite( "local",  new Map( simpread.websites.local   ), url, matching );
+            st.Getsite( "global", new Map( simpread.sites            ), url, matching );
+            st.Getsite( "custom", new Map( simpread.websites.origins ), url, matching );
+            if ( matching.length > 0 ) {
+                const found  = matching[0];
+                current.url  = found[0];
+                current.site = { ...found[1] };
             } else {
                 current.site = clone( site );
             }
-            current.site.matching = matching;
         }
+        current.site.matching = matching;
     }
 
     /**

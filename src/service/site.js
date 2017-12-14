@@ -3,15 +3,16 @@ console.log( "=== simpread site load ===" )
 import minimatch from 'minimatch';
 
 /**
- * Find site by url from simpread.sites, include wildcard, support: *
+ * Find site by url from sites
  * 
- * @param  {map}    simpread.sites
+ * @param  {string} type, include: global, local, custom
+ * @param  {map}    sites
  * @param  {string} url
  * @param  {array}  matching sites
  * 
- * @return {array}  0: current site; 1: current url
+ * @return {array}  0: current site; 1: current url， 2: type
  */
-function findSitebyURL( sites, url, matching = [] ) {
+function findSitebyURL( type, sites, url, matching = [] ) {
     const domain   = (names)=>{
             const arr = names.replace( "www.", "" ).match( /\.\S+\.\S+/g );
             if ( arr ) {
@@ -29,19 +30,14 @@ function findSitebyURL( sites, url, matching = [] ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
         if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
-            matching.push( [ cur, clone( sites.get( cur )) ] );
+            matching.push( [ cur, clone( sites.get( cur )), type ] );
         } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             // e.g. https://www.douban.com/* http://mp.weixin.qq.com/*
-            matching.push( [ cur, clone( sites.get( cur )) ] );
+            matching.push( [ cur, clone( sites.get( cur )), type ] );
         } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
-            matching.push( [ cur, clone( sites.get( cur )) ] );
+            matching.push( [ cur, clone( sites.get( cur )), type ] );
         }
     }
-    if ( matching.length > 0 ) {
-        const found = matching[0];
-        return [ clone(found[1]), found[0] ];
-    }
-    return undefined;
 }
 
 /**
