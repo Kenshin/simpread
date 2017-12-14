@@ -418,16 +418,17 @@ class Storage {
     /**
      * Update url and site from param
      * 
-     * @param {string} include: focus, read 
      * @param {object} new site
      * @param {func}   callback
      */
-    Updatesite( key, site, callback ) {
+    Updatesite( site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
         current.site.avatar[0].name == "" && delete current.site.avatar;
         current.site.paging[0].prev == "" && delete current.site.paging;
         current.site.html                 && delete current.site.html;
+        current.site.target               && delete current.site.target;
+        current.site.matching             && delete current.site.matching;
         this.Setsite();
         save( callback, true );
     }
@@ -801,6 +802,19 @@ function addsites( newsites ) {
     });
     simpread.sites = newsites;
     return { count, forced };
+}
+
+/**
+ * Get site
+ * 
+ * @param {string} type include: global, local, custom
+ */
+function getsites( type ) {
+    if ( [ "global", undefined ].includes( type ) ) {
+        return simpread.websites.local;
+    } else if ( type == "cstom" ) {
+        return simpread.websites.origins;
+    }
 }
 
 /**
