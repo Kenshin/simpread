@@ -331,6 +331,28 @@ class Storage {
     }
 
     /**
+     * Compare focus and read setting is changed
+     * 
+     * @param {string} inlcude: focus, read
+     */
+    Compare( type ) {
+        const target = { ...current },
+              read   = [ "theme", "shortcuts", "fontfamily", "fontsize", "layout" ],
+              focus  = [ "bgcolor", "opacity", "shortcuts" ],
+              site   = [ "title", "include", "exclude", "desc" ],
+              option = [],
+              st     = [],
+              source = type == "read" ? read : focus;
+        source.forEach( item => {
+            curori[item] != current[item] && option.push({ item, old: curori[item], newer: current[item] });
+        });
+        site.forEach( item => {
+            curori.site[item] != current.site[item] && st.push({ item, old: curori.site[item], newer: current.site[item] });
+        });
+        return { option, st };
+    }
+
+    /**
      * Set adapter site
      */
     Setsite() {

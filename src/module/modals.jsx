@@ -46,10 +46,15 @@ class Modals extends React.Component {
                     console.log( "watch.Lock()", result );
                     new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
                 } else {
-                    storage.Setcur( storage.current.mode );
-                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                    new Notify().Render( 0, "更新成功！" )
-                    this.close( false );
+                    const changed = storage.Compare( storage.current.mode );
+                    if ( changed.option.length == 0 && changed.st.length == 0 ) {
+                        new Notify().Render( 0, "当前未改变内容，无需保存。" );
+                    } else {
+                        storage.Setcur( storage.current.mode );
+                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
+                        new Notify().Render( 0, "更新成功！" )
+                        this.close( false );
+                    }
                 }
             });
         }
