@@ -805,19 +805,6 @@ function addsites( newsites ) {
 }
 
 /**
- * Get site
- * 
- * @param {string} type include: global, local, custom
- */
-function getsites( type ) {
-    if ( [ "global", undefined ].includes( type ) ) {
-        return simpread.websites.local;
-    } else if ( type == "cstom" ) {
-        return simpread.websites.origins;
-    }
-}
-
-/**
  * Verify site validity, include:
  * - name, url, include, error is -1
  * - title include desc, error is -2
