@@ -54,7 +54,7 @@ class SiteEditor extends React.Component {
         } else if ( site.include.trim() == "" ) {
             new Notify().Render( 2, "高亮区域不能为空。" );
         } else {
-            storage.Updatesite( "read", site, () => {
+            storage.Updatesite( site, () => {
                 new Notify().Render( 0, "更新成功，页面刷新后生效！" );
                 watch.SendMessage( "site", true );
             });
