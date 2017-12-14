@@ -451,12 +451,14 @@ class Storage {
      * Delete site from simpread.websites.local
      * 
      * @param {object} site
-     * @param {func}   callback
+     * @param {func}   callback, -1: not exist, -2: not local, > 0: exist
      */
     Deletesite( site, callback ) {
-        let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
-        idx != -1 && simpread.websites.local.splice( idx, 1 );
-        idx != -1 ?  save( callback, true ) : callback( idx );
+        if ( site.target == "local" ) {
+            let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
+            idx != -1 && simpread.websites.local.splice( idx, 1 );
+            idx != -1 ?  save( callback, true ) : callback( idx );
+        } else callback( -2 );
     }
 
     /**
