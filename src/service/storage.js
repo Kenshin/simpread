@@ -364,6 +364,7 @@ class Storage {
                 const found  = matching[0];
                 current.url  = found[0];
                 current.site = { ...found[1] };
+                current.site.target = found[2];
             } else {
                 current.site = clone( site );
             }
