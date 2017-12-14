@@ -333,7 +333,8 @@ class Storage {
     /**
      * Compare focus and read setting is changed
      * 
-     * @param {string} inlcude: focus, read
+     * @param  {string} inlcude: focus, read
+     * @return {object} option: option changed, st: site changed
      */
     Compare( type ) {
         const target = { ...current },
