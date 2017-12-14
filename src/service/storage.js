@@ -312,9 +312,10 @@ class Storage {
      * Set current to simpread[key]
      * 
      * @param {string} @see mode
+     * @param {boolean} is true update site
      */
-    Setcur( key ) {
-        this.Setsite();
+    Setcur( key, site_update = false ) {
+        site_update && this.Setsite();
         swap( current, simpread[key] );
         save( undefined, true );
     }
