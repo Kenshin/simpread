@@ -347,7 +347,8 @@ class Storage {
      * @param {object} include: meta read and txt read
      */
     Getsites( current, meta ) {
-        const   url       = getURI();
+        const   url       = getURI(),
+                matching  = [];
         current.url       = url;
         if ( meta ) {
             current.auto  = meta.auto;
@@ -356,15 +357,16 @@ class Storage {
             delete meta.url;
             current.site  = { ...meta };
         } else {
-            let arr       = st.Getsite( new Map( simpread.websites.local   ), url );
-            !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url ));
-            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
+            let arr       = st.Getsite( new Map( simpread.websites.local   ), url, matching );
+            !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url, matching ));
+            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url, matching ));
             if ( arr ) {
                 current.site = arr[0];
                 current.url  = arr[1];
             } else {
                 current.site = clone( site );
             }
+            current.site.matching = matching;
         }
     }
 

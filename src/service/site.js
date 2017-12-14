@@ -7,9 +7,11 @@ import minimatch from 'minimatch';
  * 
  * @param  {map}    simpread.sites
  * @param  {string} url
+ * @param  {array}  matching sites
+ * 
  * @return {array}  0: current site; 1: current url
  */
-function findSitebyURL( sites, url ) {
+function findSitebyURL( sites, url, matching = [] ) {
     const domain   = (names)=>{
             const arr = names.replace( "www.", "" ).match( /\.\S+\.\S+/g );
             if ( arr ) {
@@ -23,29 +25,21 @@ function findSitebyURL( sites, url ) {
           uri      = arr[1].replace( "www.", "" ),
           hostname = domain( window.location.hostname ),
           isroot   = ()=>window.location.pathname == "/" || /\/(default|index|portal).[0-9a-zA-Z]+$/.test(window.location.pathname);
-    let   found;
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
-        if ( name == "baijia.baidu.com" && url.includes(name) ) {
-            found = cur;
-            break;
-        } else if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
-            found = cur;
-            break;
+        if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
+            matching.push( [ cur, clone( sites.get( cur )) ] );
         } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
-            //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
-            //    if    ( suffix != url ) return undefined;
-            //} else if ( suffix == url ) return undefined;
-            found = cur;
-            break;
+            // e.g. https://www.douban.com/* http://mp.weixin.qq.com/*
+            matching.push( [ cur, clone( sites.get( cur )) ] );
         } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
-            found = cur;
-            break;
+            matching.push( [ cur, clone( sites.get( cur )) ] );
         }
     }
-    if ( found ) {
-        return [ clone( sites.get( found )), found ];
+    if ( matching.length > 0 ) {
+        const found = matching[0];
+        return [ clone(found[1]), found[0] ];
     }
     return undefined;
 }
