@@ -118,7 +118,7 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.6" ) {
         !data.websites && ( data.websites = {
-            origins: [],
+            custom : [],
             local  : []
         });
         data.websites.local = data.read.sites.concat( data.focus.sites );

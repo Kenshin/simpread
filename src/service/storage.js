@@ -133,7 +133,7 @@ let current  = {},
         unrdist : [],
         sites   : [],
         websites: {
-            origins: [],
+            custom : [],
             local  : [], // include focus.sites and read.sites
         }
     },
@@ -381,9 +381,9 @@ class Storage {
             delete meta.url;
             current.site  = { ...meta };
         } else {
-            st.Getsite( "local",  new Map( simpread.websites.local   ), url, matching );
-            st.Getsite( "global", new Map( simpread.sites            ), url, matching );
-            st.Getsite( "custom", new Map( simpread.websites.origins ), url, matching );
+            st.Getsite( "local",  new Map( simpread.websites.local  ), url, matching );
+            st.Getsite( "global", new Map( simpread.sites           ), url, matching );
+            st.Getsite( "custom", new Map( simpread.websites.custom ), url, matching );
             if ( matching.length > 0 ) {
                 const found  = matching[0];
                 current.url  = found[0];
@@ -554,22 +554,22 @@ class Storage {
     }
 
     /**
-     * Add new sites to simpread.websites.origins
+     * Add new sites to simpread.websites.custom
      * 
      * @param {object} new sites
      */
     AddOrigins( new_sites ) {
-        simpread.websites.origins = [ ...new_sites ];
+        simpread.websites.custom = [ ...new_sites ];
     }
 
     /**
      * Clear origins
      * 
-     * @returns origins.length
+     * @returns custom.length
      */
     ClearOrigins() {
-        const len = simpread.websites.origins.length;
-        simpread.websites.origins = [];
+        const len = simpread.websites.custom.length;
+        simpread.websites.custom = [];
         return len;
     }
 
