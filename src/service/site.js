@@ -3,29 +3,16 @@ console.log( "=== simpread site load ===" )
 import minimatch from 'minimatch';
 
 /**
- * Get URI
+ * Find site by url from sites
  * 
- * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
- */
-function getURI() {
-    //const arr = window.location.pathname.match( /(\S+\/\b|^\/)/g );
-    //return `${ window.location.protocol }//${ window.location.hostname }${ arr[0] }`;
-    const name = (pathname) => {
-        pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
-        return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
-    },
-    path = name( window.location.pathname );
-    return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
-}
-
-/**
- * Find site by url from simpread.sites, include wildcard, support: *
- * 
- * @param  {map}    simpread.sites
+ * @param  {string} type, include: global, local, custom
+ * @param  {map}    sites
  * @param  {string} url
- * @return {array}  0: current site; 1: current url
+ * @param  {array}  matching sites
+ * 
+ * @return {array}  0: current site; 1: current url， 2: type
  */
-function findSitebyURL( sites, url ) {
+function findSitebyURL( type, sites, url, matching = [] ) {
     const domain   = (names)=>{
             const arr = names.replace( "www.", "" ).match( /\.\S+\.\S+/g );
             if ( arr ) {
@@ -39,31 +26,18 @@ function findSitebyURL( sites, url ) {
           uri      = arr[1].replace( "www.", "" ),
           hostname = domain( window.location.hostname ),
           isroot   = ()=>window.location.pathname == "/" || /\/(default|index|portal).[0-9a-zA-Z]+$/.test(window.location.pathname);
-    let   found;
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
-        if ( name == "baijia.baidu.com" && url.includes(name) ) {
-            found = cur;
-            break;
-        } else if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
-            found = cur;
-            break;
+        if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
+            matching.push( [ cur, clone( sites.get( cur )), type ] );
         } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
-            //if ( /\/[a-zA-Z0-9]+\/\*/g.test( cur )) {
-            //    if    ( suffix != url ) return undefined;
-            //} else if ( suffix == url ) return undefined;
-            found = cur;
-            break;
+            // e.g. https://www.douban.com/* http://mp.weixin.qq.com/*
+            matching.push( [ cur, clone( sites.get( cur )), type ] );
         } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
-            found = cur;
-            break;
+            matching.push( [ cur, clone( sites.get( cur )), type ] );
         }
     }
-    if ( found ) {
-        return [ clone( sites.get( found )), found ];
-    }
-    return undefined;
 }
 
 /**
@@ -499,7 +473,6 @@ function whitelist( data ) {
 }
 
 export {
-    getURI         as GetURI,
     findSitebyURL  as Getsite,
     specbeautify   as Beautify,
     removeSpareTag as RemoveTag,

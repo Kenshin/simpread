@@ -1,9 +1,10 @@
 console.log( "=== simpread storage load ===" )
 
 import "babel-polyfill";
-import * as st   from 'site';
-import {browser} from 'browser';
-import {version} from 'version';
+
+import * as st        from 'site';
+import {browser}      from 'browser';
+import {version}      from 'version';
 import { verifyHtml } from 'util';
 
 /**
@@ -39,7 +40,7 @@ const name = "simpread",
         highlight : true,
         opacity   : 90,
         shortcuts : "A S",
-        sites     : [],    // e.g. [ "<url>", site ]
+        //sites     : [],    // e.g. [ "<url>", site ]
     },
     read   = {
         version   : "2017-03-16",
@@ -58,7 +59,7 @@ const name = "simpread",
         ],
         fontsize  : "",  // default 62.5%
         layout    : "",  // default 20%
-        sites     : [],  // e.g. [ "<url>", site ]
+        //sites     : [],  // e.g. [ "<url>", site ]
         custom    : {
             global: {
                 fontFamily : "",
@@ -133,7 +134,8 @@ let current  = {},
         unrdist : [],
         sites   : [],
         websites: {
-            origins: [],
+            custom : [],
+            local  : [], // include focus.sites and read.sites
         }
     },
     secret = {
@@ -166,8 +168,8 @@ let current  = {},
             access_token  : "",
             folder_id     : "",
         },
-    },
-    stcode = -1;
+    };
+    //stcode = -1;
 
 class Storage {
 
@@ -210,11 +212,13 @@ class Storage {
     /**
      * Get read site code, include: simpread.sites and simpread.read.sites
      * 
-     * @return {int} @see FindSite
+     * @return {int} @see Findsite
      */
+    /*
     get stcode() {
         return stcode;
     }
+    */
 
     /**
      * Get unread list
@@ -293,58 +297,28 @@ class Storage {
     /**
      * Get current object, current object structure include:
      * 
-     * focus mode: { url, mode, site, shortcuts, bgcolor, opacity }
-     * read  mode: { url, mode, site, shortcuts, theme, fontsize, fontfamily, layout }
-     * 
      * @param {string} @see mode
-     * @param {object} meta data
+     * @param {object} include: meta read and txt read
      */
     Getcur( key, meta ) {
-        const [ url, sites, other ] = [ st.GetURI(), new Map( simpread[key].sites ), key == "read" ? "focus" : "read" ];
         current      = swap( simpread[key], {} );
-        current.url  = url;
         current.mode = key;
-        if ( meta ) {
-            current.auto = meta.auto;
-            current.url  = meta.url;
-            delete meta.auto;
-            delete meta.url;
-            current.site = { ...meta };
-        } else {
-            let arr       = st.Getsite( new Map( simpread[key].sites       ), url );
-            !arr && ( arr = st.Getsite( new Map( simpread[other].sites     ), url ));
-            !arr && ( arr = st.Getsite( new Map( simpread.sites            ), url ));
-            !arr && ( arr = st.Getsite( new Map( simpread.websites.origins ), url ));
-            if ( arr ) {
-                current.site = arr[0];
-                current.url  = arr[1];
-            } else {
-                sites.set( url, clone( site ));
-                current.site = sites.get( url );
-            }
-        }
-        curori      = { ...current };
-        curori.site = { ...current.site };
+        this.Getsites( current, meta );
+        curori       = { ...current };
+        curori.site  = { ...current.site };
         console.log( "current site object is ", current )
     }
 
     /**
-     * Set current to chrome storage and save
+     * Set current to simpread[key]
      * 
      * @param {string} @see mode
+     * @param {boolean} is true update site
      */
-    Setcur( key ) {
-        const { code } = compare();
-        if ( code != 0 ) {
-            if ( [ 2, 3 ].includes( code ) ) {
-                let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
-                idx == -1 && ( idx = simpread[key].sites.length );
-                simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
-            }
-            swap( current, simpread[key] );
-            save( undefined, true );
-        }
-        return code;
+    Setcur( key, site_update = false ) {
+        site_update && this.Setsite();
+        swap( current, simpread[key] );
+        save( undefined, true );
     }
 
     /**
@@ -354,8 +328,73 @@ class Storage {
      */
     VerifyCur( type ) {
         return ( current.mode && current.mode != type ) ||
-               ( current.url  && current.url != st.GetURI() ) ||
+               ( current.url  && current.url != getURI() ) ||
                $.isEmptyObject( current );
+    }
+
+    /**
+     * Compare focus and read setting is changed
+     * 
+     * @param  {string} inlcude: focus, read
+     * @return {object} option: option changed, st: site changed
+     */
+    Compare( type ) {
+        const target = { ...current },
+              read   = [ "theme", "shortcuts", "fontfamily", "fontsize", "layout" ],
+              focus  = [ "bgcolor", "opacity", "shortcuts" ],
+              site   = [ "title", "include", "exclude", "desc" ],
+              option = [],
+              st     = [],
+              source = type == "read" ? read : focus;
+        source.forEach( item => {
+            curori[item] != current[item] && option.push({ item, old: curori[item], newer: current[item] });
+        });
+        site.forEach( item => {
+            curori.site[item] != current.site[item] && st.push({ item, old: curori.site[item], newer: current.site[item] });
+        });
+        return { option, st };
+    }
+
+    /**
+     * Set adapter site
+     */
+    Setsite() {
+        let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
+        idx == -1 && ( idx = simpread.websites.local.length );
+        simpread.websites.local.splice( idx, 1, [ current.url, current.site ] );
+    }
+
+    /**
+     * Get adapter site(s)
+     * include: url, site props
+     * 
+     * @param {object} storage.current
+     * @param {object} include: meta read and txt read
+     */
+    Getsites( current, meta ) {
+        const   url       = getURI(),
+                matching  = [];
+        current.url       = url;
+        if ( meta ) {
+            current.auto  = meta.auto;
+            current.url   = meta.url;
+            delete meta.auto;
+            delete meta.url;
+            current.site  = { ...meta };
+        } else {
+            st.Getsite( "local",  new Map( simpread.websites.local  ), url, matching );
+            st.Getsite( "global", new Map( simpread.sites           ), url, matching );
+            st.Getsite( "custom", new Map( simpread.websites.custom ), url, matching );
+            if ( matching.length > 0 ) {
+                const found  = matching[0];
+                current.url  = found[0];
+                current.site = { ...found[1] };
+                current.site.target = found[2];
+            } else {
+                current.site = clone( site );
+            }
+        }
+        current.site.matching = matching;
     }
 
     /**
@@ -368,8 +407,9 @@ class Storage {
      * 
      * @param {object} meta data
      */
-    FindSite( meta ) {
-        const url = st.GetURI();
+    /*
+    Findsite( meta ) {
+        const url = getURI();
         if ( meta ) {
             stcode = 3;
         } else {
@@ -378,12 +418,12 @@ class Storage {
             if ( arr ) {
                 stcode = 1;
             } else {
-                arr = st.Getsite( new Map( simpread.read.sites ), url );
-                !arr && ( arr = st.Getsite( new Map( simpread.focus.sites ), url ));
+                arr = st.Getsite( new Map( simpread.websites.local ), url );
                 arr && arr[0].name != "" && ( stcode = 2 );
             }
         }
     }
+    */
 
     /**
      * Add new site( read only )
@@ -401,6 +441,24 @@ class Storage {
     }
 
     /**
+     * Update url and site from param
+     * 
+     * @param {object} new site
+     * @param {func}   callback
+     */
+    Updatesite( site, callback ) {
+        current.url  = site.url;
+        current.site = { ...site };
+        current.site.avatar[0].name == "" && delete current.site.avatar;
+        current.site.paging[0].prev == "" && delete current.site.paging;
+        current.site.html                 && delete current.site.html;
+        current.site.target               && delete current.site.target;
+        current.site.matching             && delete current.site.matching;
+        this.Setsite();
+        save( callback, true );
+    }
+
+    /**
      * Clone current site
      * 
      * @return {object} new site
@@ -415,37 +473,17 @@ class Storage {
     }
 
     /**
-     * Update current.site from param
+     * Delete site from simpread.websites.local
      * 
-     * @param {string} include: focus, read 
-     * @param {object} new site
-     * @param {func}   callback
-     */
-    Updatesite( key, site, callback ) {
-        current.url  = site.url;
-        current.site = { ...site };
-        current.site.avatar[0].name == "" && delete current.site.avatar;
-        current.site.paging[0].prev == "" && delete current.site.paging;
-        current.site.html                 && delete current.site.html;
-
-        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
-        idx == -1 && ( idx = simpread[key].sites.length );
-        simpread[key].sites.splice( idx, 1, [ current.url, current.site ] );
-        
-        save( callback, true );
-    }
-
-    /**
-     * Delete site from simpread[key].site
-     * 
-     * @param {string} include: focus, read 
      * @param {object} site
-     * @param {func}   callback
+     * @param {func}   callback, -1: not exist, -2: not local, > 0: exist
      */
-    Deletesite( key, site, callback ) {
-        let idx = simpread[key].sites.findIndex( item => item[0] == curori.url );
-        simpread[key].sites.splice( idx, 1 );
-        idx != -1 ? save( callback, true ) : callback( idx );
+    Deletesite( site, callback ) {
+        if ( site.target == "local" ) {
+            let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
+            idx != -1 && simpread.websites.local.splice( idx, 1 );
+            idx != -1 ?  save( callback, true ) : callback( idx );
+        } else callback( -2 );
     }
 
     /**
@@ -517,57 +555,24 @@ class Storage {
     }
 
     /**
-     * Add new sites to simpread.websites.origins
+     * Add new sites to simpread.websites.custom
      * 
      * @param {object} new sites
      */
     AddOrigins( new_sites ) {
-        simpread.websites.origins = [ ...new_sites ];
+        simpread.websites.custom = [ ...new_sites ];
     }
 
     /**
      * Clear origins
      * 
-     * @returns origins.length
+     * @returns custom.length
      */
     ClearOrigins() {
-        const len = simpread.websites.origins.length;
-        simpread.websites.origins = [];
+        const len = simpread.websites.custom.length;
+        simpread.websites.custom = [];
         return len;
     }
-
-    /**
-     * Sync simpread data structure
-     * 
-     * @param {string} include: set, get
-     * @param {function} callback
-     */
-    /*
-    Sync( state, callback ) {
-        if ( state == "set" ) {
-            sync = { ...simpread };
-            sync.option.update = now();
-            delete sync.sites;
-            browser.storage.sync.set( { name : sync }, () => {
-                console.log( "chrome storage sync[set] success!" )
-                simpread.option.update = sync.option.update;
-                save( callback( sync.option.update ));
-            });
-        } else {
-            browser.storage.sync.get( name , result => {
-                console.log( "chrome storage sync[get] success!", result, simpread )
-                let success = false;
-                if ( result && !$.isEmptyObject( result )) {
-                    success = true;
-                    Object.keys( mode ).forEach( key => {
-                        simpread[ key ] = result[ name ][ key ];
-                    });
-                }
-                callback( success );
-            });
-        }
-    }
-    */
 
     /**
      * Statistics simpread same info
@@ -694,11 +699,12 @@ class Storage {
      */
     Export() {
         const download = {
-            version: version,
-            option : { ...this.option },
-            focus  : { ...this.focus  },
-            read   : { ...this.read   },
-            unrdist: this.unrdist,
+            version : version,
+            option  : { ...this.option },
+            focus   : { ...this.focus  },
+            read    : { ...this.read   },
+            websites: { ...this.websites },
+            unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });
         return JSON.stringify( download );
@@ -725,32 +731,39 @@ class Storage {
     }
 
     /**
-     * Fix simpread.read.site only old 1.0.0 and 1.0.1
+     * Fix simpread.read.site only old 1.0.0 / 1.0.1 and 1.0.7
      * 
      * @param  {array} changed target
      * @param  {string} old version
      * @param  {string} new version
-     * 
-     * @return {array} new sites
+     * @param  {object} simpread.focus.site
      */
-    Fix( target, curver, newver ) {
-        target.forEach( ( site, idx ) => {
-            let url      = site[0],
-                { name } = site[1];
-            if ( curver == "1.0.0" || curver == "1.0.1" ) {
-                for ( let item of simpread.sites ) {
-                    if ( name == item[1].name ) {
-                        item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
-                        item[1].paging  && ( site[1].paging  = item[1].paging  );
-                        item[1].include && ( site[1].include = item[1].include );
-                        target[idx][1] = { ...item[1] };
-                        target[idx][0] = item[0];
-                        continue;
+    Fix( target, curver, newver, source ) {
+        if ( curver == "1.0.0" || curver == "1.0.1" ) {
+            target.forEach( ( site, idx ) => {
+                let url      = site[0],
+                    { name } = site[1];
+                    for ( let item of simpread.sites ) {
+                        if ( name == item[1].name ) {
+                            item[1].avatar  && ( site[1].avatar  = item[1].avatar  );
+                            item[1].paging  && ( site[1].paging  = item[1].paging  );
+                            item[1].include && ( site[1].include = item[1].include );
+                            target[idx][1] = { ...item[1] };
+                            target[idx][0] = item[0];
+                            continue;
+                        }
                     }
-                }
-            }
-        });
-        return target;
+            });
+        }
+        if ( newver == "1.0.7" ) {
+            const map = new Map( target );
+            source.forEach( site => {
+                map.get( site[0] ) &&
+                    ( site[0] = site[0].endsWith( "*" ) ? site[0] + "*" : site[0] + "**" );
+                site[1].name == "" &&
+                    ( site[1].name = "tempfocus" );
+            });
+        }
     }
 
 }
@@ -872,33 +885,6 @@ function save( callback, no_update ) {
 }
 
 /**
- * Compare current and curori( origin_current )
- * 
- * return {object}
- *      code    {number} include 0: equal； 1: option changed; 2: site changed; 3: all changed
- *      changed {array}  changed key, e.g. [ "theme", "title", "exclude" ]
- */
-function compare() {
-    let key, code = 0, changed = [], site_changed = false;
-    for ( key of Object.keys( curori ) ) {
-        if ( typeof curori[key] == "string" && curori[key] != current[key] ) {
-            changed.push( key );
-            code = 1;
-        }
-    }
-    for ( key of Object.keys( curori.site ) ) {
-        if ( ( typeof curori.site[key] == "object" && ![ "avatar", "paging" ].includes( key ) && curori.site[key].join( "" ) != current.site[key].join( "" ) ) || curori.site[key] != current.site[key] ) {
-            changed.push( key );
-            site_changed = true;
-        }
-    }
-    changed.includes( "url" ) && ( site_changed = true );
-    site_changed && ( code = code + 2 );
-    console.log( "current changed state is ", code, changed );
-    return { code, changed };
-}
-
-/**
  * Get now time
  * 
  * @return {string} return now, e.g. 2017年04月03日 11:43:53
@@ -907,6 +893,20 @@ function now() {
     const date   = new Date(),
           format = value => value = value < 10 ? "0" + value : value;
     return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + "-" + format( date.getMinutes() ) + "-" + format( date.getSeconds() );
+}
+
+/**
+ * Get URI
+ * 
+ * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
+ */
+function getURI() {
+    const name = (pathname) => {
+        pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
+        return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
+    },
+    path = name( window.location.pathname );
+    return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
 }
 
 const storage = new Storage();

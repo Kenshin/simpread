@@ -23,7 +23,7 @@ import * as watch from 'watch';
  */
 storage.Read( () => {
     bindShortcuts();
-    autoOpen();
+    //autoOpen();
 });
 
 /**
@@ -40,7 +40,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            browserAction();
+            browserAction( request.value.is_update );
             break;
         case msg.MESSAGE_ACTION.read_mode:
         case msg.MESSAGE_ACTION.browser_click:
@@ -136,7 +136,7 @@ function readMode() {
  * Auto open read mode
  */
 function autoOpen() {
-    getCurrent( mode.read );
+    //getCurrent( mode.read );
     if   ( window.location.href.includes( "simpread_mode=read"     ) ||
          ( storage.current.auto && st.Exclusion(  storage.current )) ||
          ( !storage.current.auto && st.Whitelist( storage.current ))
@@ -193,8 +193,15 @@ function getCurrent( mode ) {
 
 /**
  * Browser action
+ * 
+ * @param {boolean} when set icon is_update = true
  */
-function browserAction() {
-    storage.FindSite( st.GetMetadata() );
-    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
+function browserAction( is_update ) {
+    if ( is_update ) {
+        getCurrent( mode.read );
+        storage.current.auto == true && autoOpen();
+    }
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.current.site.name == "" ? -1 : 0 , url: window.location.href } ));
+    //storage.Findsite( st.GetMetadata() );
+    //browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
 }

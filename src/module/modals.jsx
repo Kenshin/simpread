@@ -9,6 +9,7 @@ import {browser}    from 'browser';
 import th           from 'theme';
 import Notify       from 'notify';
 import * as ss      from 'stylesheet';
+import * as watch   from 'watch';
 
 import Button       from 'button';
 import * as tooltip from 'tooltip';
@@ -33,21 +34,25 @@ class Modals extends React.Component {
     // save modals focus option
     save() {
         console.log( "modals click submit button.", storage.current, flag )
-        if ( storage.current.mode == "focus" ) {
-            new Notify().Render( 3, "测试版 1.0.6 暂时不支持聚焦模式下的保存功能，正式版时将会恢复。" );
-            return;
-        }
         if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
             new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
         } else {
-            const code = storage.Setcur( storage.current.mode );
-            if ( code != 0 ) {
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，页面刷新后生效！" )
-            } else {
-                new Notify().Render( 0, "没有改变任何内容。" );
-            }
-            this.close( false );
+            watch.Verify( ( state, result ) => {
+                if ( state ) {
+                    console.log( "watch.Lock()", result );
+                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+                } else {
+                    const changed = storage.Compare( storage.current.mode );
+                    if ( changed.option.length == 0 && changed.st.length == 0 ) {
+                        new Notify().Render( 0, "当前未改变内容，无需保存。" );
+                    } else {
+                        storage.Setcur( storage.current.mode, changed.st.length > 0 ? true : false );
+                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
+                        new Notify().Render( 0, "更新成功！" )
+                        this.close( false );
+                    }
+                }
+            });
         }
     }
 
@@ -111,7 +116,9 @@ function Render( cb ) {
     const name = storage.current.site.name;
     switch ( true ) {
         case name.startsWith( "tempread::" ):
-            new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank'>临时阅读模式</a>，请用【站点编辑器】保存后才能使用此功能。" );
+            storage.current.mode == "read" ?
+                new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank'>临时阅读模式</a>，请用【站点编辑器】保存后才能使用此功能。" ) :
+                new Notify().Render( "当前站未保存，请用【站点编辑器】保存后才能使用此功能。" );
             break;
         case name.startsWith( "metaread::" ):
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/主动适配阅读模式' target='_blank'>主动适配阅读模式</a>，并不能使用设定功能。" )

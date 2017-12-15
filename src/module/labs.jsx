@@ -103,7 +103,7 @@ export default class LabsOpt extends React.Component {
                         error  && new Notify().Render( `导入失败 ${ result.url }` );
                         if ( idx == max ) {
                             arr.length > 0 && storage.AddOrigins( arr );
-                            console.log( "current storage websites origins is ", arr );
+                            console.log( "current storage websites.custom is ", arr );
                             new Notify().Render( `已完成导入，本次共计：${ count } 个站点， ${ arr.length } 条数据。` );
                             this.props.onChange && this.props.onChange( false );
                         }
