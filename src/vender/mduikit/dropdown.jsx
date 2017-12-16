@@ -312,7 +312,7 @@ export default class Dropdown extends React.Component {
         const maxwidth = items => {
             items.sort( ( a, b ) => b.name.length - a.name.length );
             return items[0].name.length * 12;
-        }
+        };
         styles.set( this.state.id, cssinjs() );
         style = styles.get( this.state.id );
 
@@ -322,7 +322,7 @@ export default class Dropdown extends React.Component {
         if ( !this.props.width ) {
             const max = maxwidth( this.props.items ) + 40;
             max >= 100 && ( style.root.width = `${max}px` );
-        } else style.root.width = this.props.width
+        } else style.root.width = this.props.width;
 
         return (
             <dropdown style={ style.root }>
