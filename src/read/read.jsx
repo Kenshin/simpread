@@ -84,6 +84,8 @@ class Read extends React.Component {
             await commbeautify( $( "sr-rd-content" ));
             pangu.spacingElementByClassName( rdcls );
             this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+            this.props.read.site.css && this.props.read.site.css.length > 0 &&
+                ss.SiteCSS( this.props.read.site.css );
             kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
@@ -95,6 +97,7 @@ class Read extends React.Component {
         $root.removeClass( theme )
              .removeClass( "simpread-font" );
         $root.attr("style") && $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
+        ss.SiteCSS();
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
         tooltip.Exit( rdclsjq );

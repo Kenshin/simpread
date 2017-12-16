@@ -107,6 +107,11 @@ export default class Editor extends React.Component {
         }
     }
 
+    changeCSS() {
+        console.log( "this.props.site.name = ", event.target.value.trim() )
+        this.props.site.css = event.target.value.trim();
+    }
+
     render() {
         return (
             <sr-opt-read>
@@ -173,6 +178,13 @@ export default class Editor extends React.Component {
                                 value={ this.props.site.paging[1].next }
                                 errortext={ this.state.err_paging_next }
                                 onChange={ event=>this.changePaging( 1, "next", event.target.value ) }
+                        />
+                    </sr-opt-gp>
+                    <sr-opt-gp>
+                        <TextField multi={ true }
+                                placeholder="默认为空，输入的 CSS 只针对当前站点有效。" floatingtext="自定义 CSS"
+                                value={ this.props.site.css || "" }
+                                onChange={ ()=>this.changeCSS() }
                         />
                     </sr-opt-gp>
                 </sr-opt-items>
