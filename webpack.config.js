@@ -50,6 +50,7 @@ const webpack = require( 'webpack' ),
             { from   : "src/website_list.json" ,          to : '../' },
             { from   : 'src/options/options.html',        to : '../options/' },
             { from   : 'src/options/custom.html',         to : '../options/' },
+            { from   : 'src/options/sitemgr.html',        to : '../options/' },
             { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
             { context: 'src/_locales/',    from : "*/*" , to : '../_locales/' },
           ])
@@ -169,6 +170,7 @@ const webpack = require( 'webpack' ),
         background     : './src/background.js',
         options        : './src/options/options.js',
         custom         : './src/options/custom.js',
+        sitemgr        : './src/options/sitemgr.js',
       },
 
       output: {

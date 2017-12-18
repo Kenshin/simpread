@@ -59,7 +59,8 @@ export default class LabsOpt extends React.Component {
     }
 
     onClick( state ) {
-        state == "custom" && ( location.href = location.origin + "/options/custom.html" );
+        state == "custom"  && ( location.href = location.origin + "/options/custom.html" );
+        state == "sitemgr" && ( location.href = location.origin + "/options/sitemgr.html" );
     }
 
     changeOrigins() {
@@ -273,7 +274,7 @@ export default class LabsOpt extends React.Component {
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.origins( "clear" ) } />
                     </div>
-                    <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('siteeditor') }>
+                    <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('sitemgr') }>
                         <div className="more">
                             <div>适配站点编辑器</div>
                             <span className="desc">可以编辑全部的自定义适配站点。</span>
