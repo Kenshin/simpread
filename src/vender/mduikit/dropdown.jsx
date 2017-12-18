@@ -112,7 +112,7 @@ const cssinjs_list = () => {
 
             width: '100%',
             minHeight: '100px',
-            maxHeight: '718px',
+            maxHeight: '400px',
 
             color,
             backgroundColor: background_color,
