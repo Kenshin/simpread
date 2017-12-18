@@ -378,6 +378,20 @@ class Storage {
     }
 
     /**
+     * Get site from url
+     * 
+     * @param {string} include: global, custom, local
+     * @param {string} url 
+     */
+    Getsite( type, url ) {
+        let sites;
+        if ( type == "global" ) {
+            sites = simpread.sites;
+        } else sites = simpread.websites[type];
+        return sites.find( item => item[0] == url );
+    }
+
+    /**
      * Get adapter site(s)
      * include: url, site props
      * 
