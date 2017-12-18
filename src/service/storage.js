@@ -257,6 +257,19 @@ class Storage {
     }
 
     /**
+     * Get all sites structure
+     * 
+     * @return {object} all sites
+     */
+    get sites() {
+        return {
+            global: simpread.sites,
+            custom: simpread.websites.custom,
+            local : simpread.websites.local,
+        }
+    }
+
+    /**
      * Get simpread.websites data structure
      * 
      * @return {object} secret object
