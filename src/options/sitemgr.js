@@ -25,7 +25,7 @@ import * as ss    from 'stylesheet';
  * - tooltip.Render()
  */
 storage.Read( () => {
-    console.log( "simpread storage get success!", storage.focus, storage.read );
+    console.log( "simpread storage get success!", storage.sites );
     navRender();
     controlbarRender();
     siteeditorRender();
