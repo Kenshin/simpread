@@ -22,7 +22,7 @@ import Editor     from 'editor';
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
 
-let cur_site;
+let cur_site, org_site;
 
 /**
  * Entry:
@@ -60,12 +60,39 @@ function formatsites( sites ) {
 
 function controlbarRender() {
     const getCursite = ( type, value ) => {
-            const site = storage.Getsite( type, value )
+            const site = storage.Getsite( type, value );
+            org_site   = [ site[0], site[1] ];
             site.length > 0 && siteeditorRender( site[0], site[1], type );
         },
         click = ( type ) => {
-            console.log( "current site is ", type, cur_site, storage.sites ) 
-    };
+            if ( !cur_site ) {
+                new Notify().Render( 2, "请选择一个站点源。" );
+                return;
+            }
+
+            const key = cur_site.target,
+                  url = cur_site.url,
+                  site= clearsite({ ...cur_site });
+            let idx   = storage.sites[key].findIndex( item => item[0] == org_site[0] ),
+                flag  = -1;
+
+            if ( type == "add" ) {
+
+            } else if ( type == "update" ) {
+                storage.sites[key].splice( idx, 1, [ url, site ] );
+                org_site = [ url, site ];
+                flag = 0;
+            } else {
+                if ( idx != -1 ) {
+                    storage.sites[key].splice( idx, 1 );                    
+                    flag = 1;
+                } else new Notify().Render( "当前站点已删除，请勿重复提交。" );
+            }
+            flag != -1 && storage.Write( ()=> {
+                console.log( "current site is ", cur_site, org_site )
+                new Notify().Render( `当前站点${ flag == 0 ? "更新" : "删除" }成功。` )
+            });
+        };
     const doms = <div>
                     <group className="lab">
                         <Dropdown name={ `官方主适配源（${storage.sites.global.length} 条）` } width="100%" waves="md-waves-effect" items={ formatsites( storage.sites.global ) } onChange={ v=>getCursite( "global", v) } />
@@ -85,7 +112,7 @@ function controlbarRender() {
                                     style={{ "margin": "0" }} width="100%"
                                     color="#fff" backgroundColor="#3F51B5"
                                     waves="md-waves-effect md-waves-button"
-                                    onClick={ ()=>click( "add" ) } />
+                                    onClick={ ()=>click( "update" ) } />
                         </group>
                         <group>
                             <Button type="raised" text="删除当前站"
@@ -104,14 +131,28 @@ function siteeditorRender( url, site, type ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
 
-    site.url   = url;
-    site.target= type;
-    site.name  == "" && ( site.name = "tempread::" + location.host );
-    ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
-    ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
+    safesite( site, { url, type });
     cur_site   = site;
 
     let state  = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty
     const doms = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
+}
+
+function safesite( site, opts ) {
+    site.url   = opts.url;
+    site.target= opts.type;
+    site.name  == "" && ( site.name = "tempread::" );
+    ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
+    ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
+}
+
+function clearsite( site ) {
+    site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
+    site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
+    site.url                  && delete site.url;
+    site.html                 && delete site.html;
+    site.target               && delete site.target;
+    site.matching             && delete site.matching;
+    return site;
 }
