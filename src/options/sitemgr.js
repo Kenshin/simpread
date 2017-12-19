@@ -192,18 +192,18 @@ function verify() {
     if ( Object.values( state ).findIndex( key => typeof key == "string" && key != 0 ) != -1 ||
            ( state.avatar.name != 0 || state.avatar.url  != 0 ) ||
            ( state.paging.prev != 0 || state.paging.next != 0 )
-        ) {
-            new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
-        } else if (( cur_site.avatar[0].name != "" && cur_site.avatar[1].url == "" ) || ( cur_site.avatar[0].name == "" && cur_site.avatar[1].url != "" )) {
-            new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
-        } else if (( cur_site.paging[0].prev != "" && cur_site.paging[1].next == "" ) || ( cur_site.paging[0].prev == "" && cur_site.paging[1].next != "" )) {
-            new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
-        } else if ( cur_site.name.startsWith( "tempread::" ) ) {
-            new Notify().Render( 2, "标识不能包含 tempread:: 请删除。" );
-        } else if ( cur_site.include.trim() == "" ) {
-            new Notify().Render( 2, "高亮区域不能为空。" );
-        } else {
-            flag = true;
-        }
+    ) {
+        new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
+    } else if (( cur_site.avatar[0].name != "" && cur_site.avatar[1].url == "" ) || ( cur_site.avatar[0].name == "" && cur_site.avatar[1].url != "" )) {
+        new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
+    } else if (( cur_site.paging[0].prev != "" && cur_site.paging[1].next == "" ) || ( cur_site.paging[0].prev == "" && cur_site.paging[1].next != "" )) {
+        new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
+    } else if ( cur_site.name.startsWith( "tempread::" ) ) {
+        new Notify().Render( 2, "标识不能包含 tempread:: 请删除。" );
+    } else if ( cur_site.include.trim() == "" ) {
+        new Notify().Render( 2, "高亮区域不能为空。" );
+    } else {
+        flag = true;
+    }
     return flag;
 }
