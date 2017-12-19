@@ -53,12 +53,9 @@ function navRender() {
     ReactDOM.render( button, $( ".header .nav" )[0] );
 }
 
-function formatsites( sites ) {
-    return sites.map( item => {
-        return { value: item[0], name: item[0] }
-    });
-}
-
+/**
+ * controlbar Render
+ */
 function controlbarRender() {
     const getCursite = ( type, value ) => {
             const site = storage.Getsite( type, value );
@@ -71,7 +68,7 @@ function controlbarRender() {
                 return;
             }
             if ( type != "delete" && !verify() ) return;
-            
+
             const key = cur_site.target,
                   url = cur_site.url,
                   site= clearsite({ ...cur_site });
@@ -79,14 +76,14 @@ function controlbarRender() {
                 flag  = -1;
 
             if ( type == "add" ) {
-
+                // TO-DO
             } else if ( type == "update" ) {
                 storage.sites[key].splice( idx, 1, [ url, site ] );
                 org_site = [ url, site ];
                 flag = 0;
             } else {
                 if ( idx != -1 ) {
-                    storage.sites[key].splice( idx, 1 );                    
+                    storage.sites[key].splice( idx, 1 );
                     flag = 1;
                 } else new Notify().Render( "当前站点已删除，请勿重复提交。" );
             }
@@ -128,6 +125,9 @@ function controlbarRender() {
     ReactDOM.render( doms, $( ".custom .property" )[0] );
 }
 
+/**
+ * siteeditor Render
+ */
 function siteeditorRender( url, site, type ) {
 
     $( "sr-opt-read" ).length > 0 &&
@@ -140,6 +140,24 @@ function siteeditorRender( url, site, type ) {
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
 }
 
+/**
+ * Format storage sites
+ * 
+ * @param {array} sites
+ */
+function formatsites( sites ) {
+    return sites.map( item => {
+        return { value: item[0], name: item[0] }
+    });
+}
+
+/**
+ * Set safe site object, include:
+ *  url, title, desc, include, exclude, avatar, paging, target
+ * 
+ * @param {object} site
+ * @param {object} opts
+ */
 function safesite( site, opts ) {
     site.url   = opts.url;
     site.target= opts.type;
@@ -148,6 +166,12 @@ function safesite( site, opts ) {
     ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
 }
 
+/**
+ * Clean site
+ * 
+ * @param  {object} site
+ * @return {object} clean site
+ */
 function clearsite( site ) {
     site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
     site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
@@ -158,6 +182,11 @@ function clearsite( site ) {
     return site;
 }
 
+/**
+ * Verify site editor site
+ * 
+ * @return {boolean}
+ */
 function verify() {
     let flag = false;
     if ( Object.values( state ).findIndex( key => typeof key == "string" && key != 0 ) != -1 ||
