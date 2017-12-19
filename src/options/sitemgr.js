@@ -22,7 +22,8 @@ import Editor     from 'editor';
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
 
-let cur_site, org_site;
+let cur_site, org_site,
+    state = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty
 
 /**
  * Entry:
@@ -69,7 +70,8 @@ function controlbarRender() {
                 new Notify().Render( 2, "请选择一个站点源。" );
                 return;
             }
-
+            if ( type != "delete" && !verify() ) return;
+            
             const key = cur_site.target,
                   url = cur_site.url,
                   site= clearsite({ ...cur_site });
@@ -134,7 +136,6 @@ function siteeditorRender( url, site, type ) {
     safesite( site, { url, type });
     cur_site   = site;
 
-    let state  = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty
     const doms = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
 }
@@ -155,4 +156,25 @@ function clearsite( site ) {
     site.target               && delete site.target;
     site.matching             && delete site.matching;
     return site;
+}
+
+function verify() {
+    let flag = false;
+    if ( Object.values( state ).findIndex( key => typeof key == "string" && key != 0 ) != -1 ||
+           ( state.avatar.name != 0 || state.avatar.url  != 0 ) ||
+           ( state.paging.prev != 0 || state.paging.next != 0 )
+        ) {
+            new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
+        } else if (( cur_site.avatar[0].name != "" && cur_site.avatar[1].url == "" ) || ( cur_site.avatar[0].name == "" && cur_site.avatar[1].url != "" )) {
+            new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
+        } else if (( cur_site.paging[0].prev != "" && cur_site.paging[1].next == "" ) || ( cur_site.paging[0].prev == "" && cur_site.paging[1].next != "" )) {
+            new Notify().Render( 3, "【前一页与后一页】必须同时设定。" );
+        } else if ( cur_site.name.startsWith( "tempread::" ) ) {
+            new Notify().Render( 2, "标识不能包含 tempread:: 请删除。" );
+        } else if ( cur_site.include.trim() == "" ) {
+            new Notify().Render( 2, "高亮区域不能为空。" );
+        } else {
+            flag = true;
+        }
+    return flag;
 }
