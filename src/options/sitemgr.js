@@ -63,14 +63,16 @@ function controlbarRender() {
             site.length > 0 && siteeditorRender( site[0], site[1], type );
         },
         add   = () => {
-            if ( cur_site && cur_site.name != "" ) {
-                new Notify().Render( "是否覆盖当前站点并新建立一个？", "新建", () => {
-                    org_site = [ "", "" ];
-                    siteeditorRender( "", { name: "", desc: "", include: "", exclude: "" }, "local" );
-                });
-            }
+            const msg = cur_site ? "是否覆盖当前站点并新建立一个？" : "是否建立一个新站？";
+            new Notify().Render( "snackbar", msg, "新建", () => {
+                org_site = [ "", "" ];
+                siteeditorRender( "", { name: "", desc: "", include: "", exclude: "" }, "local" );
+            });
         },
-        click = ( type ) => {
+        remove = () => {
+            new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete" ));
+        },
+        save = type => {
             if ( !cur_site ) {
                 new Notify().Render( 2, "请选择一个站点源。" );
                 return;
@@ -118,14 +120,14 @@ function controlbarRender() {
                                     style={{ "margin": "0" }} width="100%"
                                     color="#fff" backgroundColor="#3F51B5"
                                     waves="md-waves-effect md-waves-button"
-                                    onClick={ ()=>click( "update" ) } />
+                                    onClick={ ()=>save( "update" ) } />
                         </group>
                         <group>
                             <Button type="raised" text="删除当前站"
                                     style={{ "margin": "0" }} width="100%"
                                     color="#fff" backgroundColor="#FF5252"
                                     waves="md-waves-effect md-waves-button"
-                                    onClick={ ()=>click( "delete" ) } />
+                                    onClick={ ()=>remove() } />
                         </group>
                     </group>
                  </div>;
