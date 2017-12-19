@@ -23,7 +23,7 @@ import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
 
 let cur_site, org_site,
-    state = { name: 1, url: 1, title: 1, desc: 0, include: 1, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty
+    state = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty0
 
 /**
  * Entry:
@@ -191,7 +191,10 @@ function cleansite( site ) {
  */
 function verify() {
     let flag = false;
-    if ( Object.values( state ).findIndex( key => typeof key == "number" && key != 0 ) != -1 ||
+    if ( [ "url", "name", "title", "include" ].findIndex( key => cur_site[key] == "" ) != -1 ) {
+        new Notify().Render( 3, "【标识、域名、标题、高亮】不能为空。" );
+    }
+    else if ( Object.values( state ).findIndex( key => typeof key == "number" && key != 0 ) != -1 ||
            ( state.avatar.name != 0 || state.avatar.url  != 0 ) ||
            ( state.paging.prev != 0 || state.paging.next != 0 )
     ) {
