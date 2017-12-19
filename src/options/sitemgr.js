@@ -62,6 +62,10 @@ function controlbarRender() {
             org_site   = [ site[0], site[1] ];
             site.length > 0 && siteeditorRender( site[0], site[1], type );
         },
+        add   = () => {
+            org_site = [ "", "" ];
+            siteeditorRender( "", { name: "", desc: "", include: "", exclude: "" }, "local" );
+        },
         click = ( type ) => {
             if ( !cur_site ) {
                 new Notify().Render( 2, "请选择一个站点源。" );
@@ -75,9 +79,7 @@ function controlbarRender() {
             let idx   = storage.sites[key].findIndex( item => item[0] == org_site[0] ),
                 flag  = -1;
 
-            if ( type == "add" ) {
-                // TO-DO
-            } else if ( type == "update" ) {
+            if ( type == "update" ) {
                 storage.sites[key].splice( idx, 1, [ url, site ] );
                 org_site = [ url, site ];
                 flag = 0;
@@ -104,10 +106,10 @@ function controlbarRender() {
                                     style={{ "margin": "0" }} width="100%"
                                     color="#fff" backgroundColor="#4CAF50"
                                     waves="md-waves-effect md-waves-button"
-                                    onClick={ ()=>click( "add" ) } />
+                                    onClick={ ()=>add() } />
                         </group>
                         <group>
-                            <Button type="raised" text="修改当前站"
+                            <Button type="raised" text="保存当前站"
                                     style={{ "margin": "0" }} width="100%"
                                     color="#fff" backgroundColor="#3F51B5"
                                     waves="md-waves-effect md-waves-button"
