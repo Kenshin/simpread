@@ -91,7 +91,7 @@ function controlbarRender() {
             }
             flag != -1 && storage.Write( ()=> {
                 console.log( "current site is ", cur_site, org_site )
-                new Notify().Render( `当前站点${ flag == 0 ? "更新" : "删除" }成功。` )
+                new Notify().Render( `当前站点${ flag == 0 ? "更新" : "删除" }成功，请刷新本页。` );
             });
         };
     const doms = <div>
@@ -195,7 +195,7 @@ function verify() {
            ( state.avatar.name != 0 || state.avatar.url  != 0 ) ||
            ( state.paging.prev != 0 || state.paging.next != 0 )
     ) {
-        new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
+        new Notify().Render( 3, "请正确填写【标识、域名、标题、高亮】后再提交。" );
     } else if (( cur_site.avatar[0].name != "" && cur_site.avatar[1].url == "" ) || ( cur_site.avatar[0].name == "" && cur_site.avatar[1].url != "" )) {
         new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
     } else if (( cur_site.paging[0].prev != "" && cur_site.paging[1].next == "" ) || ( cur_site.paging[0].prev == "" && cur_site.paging[1].next != "" )) {
