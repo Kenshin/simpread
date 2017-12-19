@@ -63,8 +63,12 @@ function controlbarRender() {
             site.length > 0 && siteeditorRender( site[0], site[1], type );
         },
         add   = () => {
-            org_site = [ "", "" ];
-            siteeditorRender( "", { name: "", desc: "", include: "", exclude: "" }, "local" );
+            if ( cur_site && cur_site.name != "" ) {
+                new Notify().Render( "是否覆盖当前站点并新建立一个？", "新建", () => {
+                    org_site = [ "", "" ];
+                    siteeditorRender( "", { name: "", desc: "", include: "", exclude: "" }, "local" );
+                });
+            }
         },
         click = ( type ) => {
             if ( !cur_site ) {
