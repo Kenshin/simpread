@@ -80,6 +80,7 @@ function controlbarRender() {
                 flag  = -1;
 
             if ( type == "update" ) {
+                idx == -1 && ( idx = storage.sites[key].length );
                 storage.sites[key].splice( idx, 1, [ url, site ] );
                 org_site = [ url, site ];
                 flag = 0;
