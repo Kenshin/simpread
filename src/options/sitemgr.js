@@ -71,7 +71,7 @@ function controlbarRender() {
 
             const key = cur_site.target,
                   url = cur_site.url,
-                  site= clearsite({ ...cur_site });
+                  site= cleansite({ ...cur_site });
             let idx   = storage.sites[key].findIndex( item => item[0] == org_site[0] ),
                 flag  = -1;
 
@@ -172,7 +172,7 @@ function safesite( site, opts ) {
  * @param  {object} site
  * @return {object} clean site
  */
-function clearsite( site ) {
+function cleansite( site ) {
     site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
     site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
     site.url                  && delete site.url;
