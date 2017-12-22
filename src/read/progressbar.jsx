@@ -2,6 +2,7 @@ console.log( "==== simpread read component: ProcessBar ====" )
 
 import Progress from 'progress';
 
+/*
 const options = {
     strokeWidth: 4,
     easing     : "easeInOut",
@@ -20,12 +21,13 @@ const options = {
         bar.path.setAttribute( "stroke", state.color );
     },
 };
+*/
 
 export default class ProcessBar extends React.Component {
 
     static defaultProps = {
         show  : true,
-        offset: document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight ) || 0
+        offset: document.documentElement.scrollTop / ( document.documentElement.scrollHeight - document.documentElement.clientHeight ) || 0
     }
 
     state = {
@@ -43,17 +45,23 @@ export default class ProcessBar extends React.Component {
     }
 
     scrollEventHandle() {
-        const offset = document.body.scrollTop / ( document.body.scrollHeight - document.documentElement.clientHeight );
+        const offset = document.documentElement.scrollTop / ( document.documentElement.scrollHeight - document.documentElement.clientHeight );
         this.setState({ progress: offset });
     }
 
     render() {
+        const progress = this.state.progress * 100;
+        return (
+            this.props.show && <read-process style={{ "width": `${progress}%` }}></read-process>
+        )
+        /*
         const progress = !Number.isFinite( this.state.progress ) ? 0 : this.state.progress;
         return (
             this.props.show && <Progress type="line" progress={ progress } options={ options }>
                 <read-process></read-process>
             </Progress>
         )
+        */
 
     }
 
