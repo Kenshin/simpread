@@ -107,6 +107,9 @@ read-process {
 
     height: 3px;
     width: 100%;
+
+    background-color: #64B5F6;
+    transition: width 2s;
 }
 
 sr-rd-content-error {

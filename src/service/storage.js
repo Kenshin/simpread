@@ -257,6 +257,19 @@ class Storage {
     }
 
     /**
+     * Get all sites structure
+     * 
+     * @return {object} all sites
+     */
+    get sites() {
+        return {
+            global: simpread.sites,
+            custom: simpread.websites.custom,
+            local : simpread.websites.local,
+        }
+    }
+
+    /**
      * Get simpread.websites data structure
      * 
      * @return {object} secret object
@@ -362,6 +375,20 @@ class Storage {
         let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
         idx == -1 && ( idx = simpread.websites.local.length );
         simpread.websites.local.splice( idx, 1, [ current.url, current.site ] );
+    }
+
+    /**
+     * Get site from url
+     * 
+     * @param {string} include: global, custom, local
+     * @param {string} url 
+     */
+    Getsite( type, url ) {
+        let sites;
+        if ( type == "global" ) {
+            sites = simpread.sites;
+        } else sites = simpread.websites[type];
+        return sites.find( item => item[0] == url );
     }
 
     /**
@@ -892,7 +919,7 @@ function save( callback, no_update ) {
 function now() {
     const date   = new Date(),
           format = value => value = value < 10 ? "0" + value : value;
-    return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + "-" + format( date.getMinutes() ) + "-" + format( date.getSeconds() );
+    return date.getFullYear() + "年" + format( date.getUTCMonth() + 1 ) + "月" + format( date.getUTCDate() ) + "日 " + format( date.getHours() ) + ":" + format( date.getMinutes() ) + ":" + format( date.getSeconds() );
 }
 
 /**

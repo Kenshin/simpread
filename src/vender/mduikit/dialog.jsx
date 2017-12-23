@@ -104,6 +104,8 @@ class Dialog extends React.Component {
 
     componentDidMount() {
         $( "dialog-content" ).height() < 585 && $( "dialog-footer" ).css( "border-top", "none" );
+        $( rootjq ).height() - $( "dialog-content" ).height() <= 200 &&
+            $( "dialog-content" ).height( $( rootjq ).height() - 200 );
         $( rootjq ).css({ opacity: 1, top: 0 });
         this.props.onOpen && this.props.onOpen();
     }

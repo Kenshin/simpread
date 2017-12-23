@@ -4,7 +4,7 @@ import { storage } from 'storage';
 
 import TextField   from 'textfield';
 
-const names = [];
+//const names = [];
 
 export default class Name extends React.Component {
 
@@ -15,10 +15,11 @@ export default class Name extends React.Component {
     changeName() {
         let   code = 0;
         const name = event.target.value.trim();
-        if ( names.includes( name ) && name != this.props.name ) {
-            code = -1;
-            this.setState({ error : "当前值重复，请重新录入。" });
-        } else if( name == "" ) {
+        //if ( names.includes( name ) && name != this.props.name ) {
+        //    code = -1;
+        //    this.setState({ error : "当前值重复，请重新录入。" });
+        //} else 
+        if( name == "" ) {
             code = -2;
             this.setState({ error : "当前输入不能为空。" });
         } else {
@@ -27,9 +28,9 @@ export default class Name extends React.Component {
         this.props.changeName( name, code );
     }
 
-    componentWillMount() {
-        storage.simpread.sites.forEach( site => names.push( site[1].name ) );
-    }
+    //componentWillMount() {
+    //    storage.simpread.sites.forEach( site => names.push( site[1].name ) );
+    //}
 
     render() {
         return (
