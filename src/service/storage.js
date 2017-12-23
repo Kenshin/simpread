@@ -758,7 +758,7 @@ class Storage {
     }
 
     /**
-     * Fix simpread.read.site only old 1.0.0 / 1.0.1 and 1.0.7
+     * Fix simpread.read.site only old 1.0.0 / 1.0.1 and 1.1.0
      * 
      * @param  {array} changed target
      * @param  {string} old version
@@ -782,7 +782,7 @@ class Storage {
                     }
             });
         }
-        if ( newver == "1.0.7" ) {
+        if ( newver == "1.1.0" ) {
             const map = new Map( target );
             source.forEach( site => {
                 map.get( site[0] ) &&
