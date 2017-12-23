@@ -93,7 +93,7 @@
 
 #### 提交新站：
 
-* 方式1：请使用 issues 方式提交（不要使用 `pr` 方式），请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；  
+* 方式1：通过 **提交 issues** 的方式（不要使用 `pr` 方式），请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；  
   > 当适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
 
 * 方式2：通过 **新增站点编辑器** 的方式（适合逐一添加单个新站），详细说明 [请看这里](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E5%A6%82%E4%BD%95%E6%96%B0%E5%A2%9E%E4%BF%AE%E6%94%B9)；
