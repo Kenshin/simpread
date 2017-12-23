@@ -228,7 +228,7 @@ body {
 }
 
 .main .feature.focus,
-.main .feature.multi,
+.main .feature.sitemanager,
 .main .feature.custom {
     justify-content: flex-end;
 }
