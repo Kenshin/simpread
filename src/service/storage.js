@@ -476,6 +476,7 @@ class Storage {
     Updatesite( site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
+        current.site.url                  && delete current.site.url;
         current.site.avatar[0].name == "" && delete current.site.avatar;
         current.site.paging[0].prev == "" && delete current.site.paging;
         current.site.html                 && delete current.site.html;
