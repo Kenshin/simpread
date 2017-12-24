@@ -182,12 +182,14 @@ function safesite( site, opts ) {
  * @return {object} clean site
  */
 function cleansite( site ) {
+    ////////////////// optimize site useless props
     site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
     site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
     site.url                  && delete site.url;
     site.html                 && delete site.html;
     site.target               && delete site.target;
     site.matching             && delete site.matching;
+    ////////////////// optimize site useless props
     return site;
 }
 

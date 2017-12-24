@@ -476,12 +476,14 @@ class Storage {
     Updatesite( site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
+        ////////////////// optimize site useless props
         current.site.url                  && delete current.site.url;
         current.site.avatar[0].name == "" && delete current.site.avatar;
         current.site.paging[0].prev == "" && delete current.site.paging;
         current.site.html                 && delete current.site.html;
         current.site.target               && delete current.site.target;
         current.site.matching             && delete current.site.matching;
+        ////////////////// optimize site useless props
         this.Setsite();
         save( callback, true );
     }
