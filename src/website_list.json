@@ -1494,6 +1494,15 @@
             "[['<b>酷壳404页面</b>']]"
         ]
     },{
+        "name"    : "kotlinguides.github.io",
+        "url"     : "https://*.github.io/kotlin-guides/*.html",
+        "title"   : "<h1 class='post-title'>",
+        "desc"    : "",
+        "include" : "<article class='post-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
