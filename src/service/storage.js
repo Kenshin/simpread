@@ -419,8 +419,6 @@ class Storage {
                 const found  = matching[0];
                 current.url  = found[0];
                 current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
-                //current.site.target = found[2];
-                //this.Safesite( current.site );
             } else {
                 current.site = clone( site );
             }
@@ -428,6 +426,14 @@ class Storage {
         current.site.matching = matching;
     }
 
+    /**
+     * Safe site, add all site props
+     * 
+     * @param {object} modify site 
+     * @param {string} target include: global custom local
+     * @param {string} url 
+     * @returns {object} site
+     */
     Safesite( site, target, url ) {
         site.url    = url;
         site.target = target;
@@ -437,6 +443,12 @@ class Storage {
         return site;
     }
 
+    /**
+     * Clean useless site props
+     * 
+     * @param   {object} site
+     * @returns {object} site
+    */
     Cleansite( site ) {
        delete site.url;
        delete site.html;
@@ -486,7 +498,6 @@ class Storage {
         html && ( new_site.site.html = html );
         current.mode = new_site.mode,
         current.url  = new_site.url;
-        //current.site = { ...new_site.site };
         current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
         console.log( "【read only】current site object is ", current )
     }
@@ -501,14 +512,6 @@ class Storage {
         current.url  = site.url;
         current.site = { ...site };
         this.Cleansite( current.site );
-        ////////////////// optimize site useless props
-        //current.site.url                  && delete current.site.url;
-        //current.site.avatar[0].name == "" && delete current.site.avatar;
-        //current.site.paging[0].prev == "" && delete current.site.paging;
-        //current.site.html                 && delete current.site.html;
-        //current.site.target               && delete current.site.target;
-        //current.site.matching             && delete current.site.matching;
-        ////////////////// optimize site useless props
         this.Setsite();
         save( callback, true );
     }
