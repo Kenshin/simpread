@@ -34,7 +34,8 @@ class Modals extends React.Component {
     // save modals focus option
     save() {
         console.log( "modals click submit button.", storage.current, flag )
-        if ( [ "title", "include" ].findIndex( key => storage.current.site[key] == "" ) != -1 ) {
+        const props = storage.current.mode == "focus" ? [ "include" ] : [ "title", "include" ];
+        if ( props.findIndex( key => storage.current.site[key] == "" ) != -1 ) {
             new Notify().Render( 3, "【标题、高亮】不能为空。" );
         }
         else if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
