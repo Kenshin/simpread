@@ -818,8 +818,8 @@ class Storage {
         if ( newver == "1.1.0" ) {
             const map = new Map( target );
             source.forEach( site => {
-                //map.get( site[0] ) &&
-                //    ( site[0] = site[0].endsWith( "*" ) ? site[0] + "*" : site[0] + "**" );
+                map.get( site[0] ) &&
+                    ( site[0] = site[0].endsWith( "*" ) ? site[0] + "*" : site[0] + "**" );
                 site[1].name == "" &&
                     ( site[1].name = "tempfocus" );
             });
