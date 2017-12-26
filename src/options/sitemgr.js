@@ -81,7 +81,7 @@ function controlbarRender() {
 
             const key = cur_site.target,
                   url = cur_site.url,
-                  site= cleansite({ ...cur_site });
+                  site= storage.Cleansite({ ...cur_site });
             let idx   = storage.sites[key].findIndex( item => item[0] == org_site[0] ),
                 flag  = -1;
 
@@ -142,8 +142,7 @@ function siteeditorRender( url, site, type ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
 
-    safesite( site, { url, type });
-    cur_site   = site;
+    cur_site   = storage.Safesite( site, type, url );
 
     const doms = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
@@ -158,39 +157,6 @@ function formatsites( sites ) {
     return sites.map( item => {
         return { value: item[0], name: item[0] }
     });
-}
-
-/**
- * Set safe site object, include:
- *  url, title, desc, include, exclude, avatar, paging, target
- * 
- * @param {object} site
- * @param {object} opts
- */
-function safesite( site, opts ) {
-    site.url   = opts.url;
-    site.target= opts.type;
-    site.name  == "" && ( site.name = "tempread::" );
-    ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
-    ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
-}
-
-/**
- * Clean site
- * 
- * @param  {object} site
- * @return {object} clean site
- */
-function cleansite( site ) {
-    ////////////////// optimize site useless props
-    site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
-    site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
-    site.url                  && delete site.url;
-    site.html                 && delete site.html;
-    site.target               && delete site.target;
-    site.matching             && delete site.matching;
-    ////////////////// optimize site useless props
-    return site;
 }
 
 /**

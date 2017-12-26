@@ -68,7 +68,7 @@ class SiteEditor extends React.Component {
     }
 
     render() {
-        site = storage.Clonesite();
+        site = { ...storage.current.site };
         return (
             <dia.Dialog>
                 <dia.Content>
