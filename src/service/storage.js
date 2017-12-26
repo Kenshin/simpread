@@ -24,6 +24,9 @@ const name = "simpread",
         unrdist   : "unrdist",
     },
     site   = {
+        url       : "",
+        target    : "",
+        matching  : [],
         name      : "",   // only read mode
         title     : "",   // only read mode
         desc      : "",   // only read mode
@@ -415,13 +418,33 @@ class Storage {
             if ( matching.length > 0 ) {
                 const found  = matching[0];
                 current.url  = found[0];
-                current.site = { ...found[1] };
-                current.site.target = found[2];
+                current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
+                //current.site.target = found[2];
+                //this.Safesite( current.site );
             } else {
                 current.site = clone( site );
             }
         }
         current.site.matching = matching;
+    }
+
+    Safesite( site, target, url ) {
+        site.url    = url;
+        site.target = target;
+        site.name  == "" && ( site.name = "tempread::" );
+        ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
+        ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
+        return site;
+    }
+
+    Cleansite( site ) {
+       delete site.url;
+       delete site.html;
+       delete site.target;
+       delete site.matching;
+       site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
+       site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
+       return site;
     }
 
     /**
@@ -459,11 +482,12 @@ class Storage {
      * @param {string} when read html is dom.outerHTML
      */
     Newsite( mode, html ) {
-        const new_site = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: "" } };
+        const new_site = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: [] } };
         html && ( new_site.site.html = html );
         current.mode = new_site.mode,
         current.url  = new_site.url;
-        current.site = { ...new_site.site };
+        //current.site = { ...new_site.site };
+        current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
         console.log( "【read only】current site object is ", current )
     }
 
@@ -476,13 +500,14 @@ class Storage {
     Updatesite( site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
+        this.Cleansite( current.site );
         ////////////////// optimize site useless props
-        current.site.url                  && delete current.site.url;
-        current.site.avatar[0].name == "" && delete current.site.avatar;
-        current.site.paging[0].prev == "" && delete current.site.paging;
-        current.site.html                 && delete current.site.html;
-        current.site.target               && delete current.site.target;
-        current.site.matching             && delete current.site.matching;
+        //current.site.url                  && delete current.site.url;
+        //current.site.avatar[0].name == "" && delete current.site.avatar;
+        //current.site.paging[0].prev == "" && delete current.site.paging;
+        //current.site.html                 && delete current.site.html;
+        //current.site.target               && delete current.site.target;
+        //current.site.matching             && delete current.site.matching;
         ////////////////// optimize site useless props
         this.Setsite();
         save( callback, true );
@@ -493,6 +518,7 @@ class Storage {
      * 
      * @return {object} new site
      */
+    /*
     Clonesite() {
         const site = { ...current.site };
         site.url   = current.url;
@@ -501,6 +527,7 @@ class Storage {
         ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
         return site;
     }
+    */
 
     /**
      * Delete site from simpread.websites.local
