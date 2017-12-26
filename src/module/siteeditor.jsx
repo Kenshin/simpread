@@ -24,6 +24,17 @@ class SiteEditor extends React.Component {
         dia.Close();
     }
 
+    action( type ) {
+        watch.Verify( ( state, result ) => {
+            if ( state ) {
+                console.log( "watch.Lock()", result );
+                new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+            } else {
+                type == "save" ? this.save() : this.delete();
+            }
+        });
+    }
+
     delete() {
         console.log( "siteeditor click delete button.", storage.current.site )
         if ( site.target != "local" ) {
@@ -82,10 +93,10 @@ class SiteEditor extends React.Component {
                     <Editor site={ site } state={ state } />
                 </dia.Content>
                 <dia.Footer>
-                    <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.delete() } />
+                    <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.action( "delete" ) } />
                     <div style={{ width: "100%" }}></div>
                     <Button text="退 出" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
-                    <Button text="保 存" waves="md-waves-effect" onClick={ ()=>this.save() } />
+                    <Button text="保 存" waves="md-waves-effect" onClick={ ()=>this.action( "save" ) } />
                 </dia.Footer>
             </dia.Dialog>
         )
