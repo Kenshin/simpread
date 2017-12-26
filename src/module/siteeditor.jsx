@@ -26,6 +26,10 @@ class SiteEditor extends React.Component {
 
     delete() {
         console.log( "siteeditor click delete button.", storage.current.site )
+        if ( site.target != "local" ) {
+            new Notify().Render( 2, `只能删除 <a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>本地站点</a> ，如需要请使用 站点管理器 删除。` );
+            return;
+        }
         new Notify().Render( "是否删除当前适配站点？", "删除", () => {
             storage.Deletesite( site, result => {
                 if      ( result == -1 ) new Notify().Render( 2, `此站已被删除，请勿重复操作。` );
