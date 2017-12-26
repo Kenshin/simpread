@@ -21,6 +21,7 @@ import Editor     from 'editor';
 
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
+import * as watch from 'watch';
 
 let cur_site, org_site,
     state = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty0
@@ -98,6 +99,7 @@ function controlbarRender() {
             }
             flag != -1 && storage.Write( ()=> {
                 console.log( "current site is ", cur_site, org_site )
+                watch.SendMessage( "site", true );
                 new Notify().Render( `当前站点${ flag == 0 ? "更新" : "删除" }成功，请刷新本页。` );
             });
         };
