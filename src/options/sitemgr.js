@@ -66,7 +66,7 @@ function controlbarRender() {
             const msg = cur_site ? "是否覆盖当前站点并新建立一个？" : "是否建立一个新站？";
             new Notify().Render( "snackbar", msg, "新建", () => {
                 org_site = [ "", "" ];
-                siteeditorRender( "", { name: "", desc: "", include: "", exclude: "" }, "local" );
+                siteeditorRender( "", { name: "", desc: "", include: "", exclude: [] }, "local" );
             });
         },
         remove = () => {
