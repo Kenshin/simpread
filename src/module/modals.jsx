@@ -53,7 +53,7 @@ class Modals extends React.Component {
                         storage.Cleansite( storage.current.site );
                         storage.Setcur( storage.current.mode, changed.st.length > 0 ? true : false );
                         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                        new Notify().Render( 0, "更新成功！" )
+                        new Notify().Render( 0, "更新成功，刷新当前页面后才能生效！" )
                         this.close( false );
                     }
                 }
