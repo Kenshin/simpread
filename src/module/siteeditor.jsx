@@ -41,11 +41,14 @@ class SiteEditor extends React.Component {
     // save siteeditor focus option
     save() {
         console.log( "siteeditor click save button.", storage.current.site, site, state )
-        if ( Object.values( state ).findIndex( key => typeof key == "string" && key != 0 ) != -1 ||
+        if ( [ "url", "name", "title", "include" ].findIndex( key => site[key] == "" ) != -1 ) {
+            new Notify().Render( 3, "【标识、域名、标题、高亮】不能为空。" );
+        }
+        else if ( Object.values( state ).findIndex( key => typeof key == "number" && key != 0 ) != -1 ||
            ( state.avatar.name != 0 || state.avatar.url  != 0 ) ||
            ( state.paging.prev != 0 || state.paging.next != 0 )
         ) {
-            new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
+            new Notify().Render( 3, "请正确填写【标识、域名、标题、高亮】后再提交。" );
         } else if (( site.avatar[0].name != "" && site.avatar[1].url == "" ) || ( site.avatar[0].name == "" && site.avatar[1].url != "" )) {
             new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
         } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
