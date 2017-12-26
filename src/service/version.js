@@ -112,15 +112,14 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.5" ) {
         data.option.origins = [];
-        data.websites       = {};
+        data.websites       = {
+            custom : [],
+            local  : []
+        };
         curver = "1.0.6";
     }
 
     if ( curver == "1.0.6" ) {
-        !data.websites && ( data.websites = {
-            custom : [],
-            local  : []
-        });
         data.websites.local = data.read.sites.concat( data.focus.sites );
         delete data.focus.sites;
         delete data.read.sites;
