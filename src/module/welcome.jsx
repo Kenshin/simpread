@@ -186,7 +186,7 @@ class Welcome extends React.Component {
                             </div>
                         </section>
                     </div>
-                    <div className="carousel-item">
+                    <div className="carousel-item" id="1.1.0">
                         <section style={ style.section }>
                             <img src={ ss.IconPath( "welcome-setting" )}/>
                             <h2 style={ style.h2 }>站点编辑器 · 站点适配源 · 站点管理器</h2>
