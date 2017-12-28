@@ -182,7 +182,7 @@ class Welcome extends React.Component {
                             <h2 style={ style.h2 }>聚焦模式</h2>
                             <div style={ style.desc }>
                                 高亮鼠标所在的文章段落，不改变当前页面的结构，适合未适配的网站。<br/>
-                                除此以外，包含阅读模式的全部功能。
+                                除此以外，包含 <strong>阅读模式的全部功能</strong>。
                             </div>
                         </section>
                     </div>
@@ -203,7 +203,7 @@ class Welcome extends React.Component {
                             <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
                             <h2 style={ style.h2 }>连接你的生产力工具</h2>
                             <div style={ style.desc }>
-                                支持下载 <strong>PDF · PNG</strong> 到本地 以及 发送到 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a>。<br/>
+                                支持下载 <strong>PDF · PNG · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a></strong> 到本地 以及 发送到 <strong><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a></strong>。<br/>
                                 支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
                                 发送页面链接到 <strong>Pocket · Instapaper · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
                             </div>
