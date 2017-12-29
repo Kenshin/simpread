@@ -159,7 +159,7 @@ function autoOpen() {
                 break;
             case "kancloud.cn":
             case "sspai.com":
-                setTimeout( ()=>readMode(), 500 );
+                setTimeout( ()=>readMode(), 1000 );
                 break;
             default:
                 storage.current.site.name != "" && readMode();
