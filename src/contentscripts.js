@@ -18,6 +18,8 @@ import * as msg  from 'message';
 import {browser} from 'browser';
 import * as watch from 'watch';
 
+let current_url = location.href; // current page url ( when changed page changed )
+
 /**
  * Sevice: storage Get data form chrome storage
  */
@@ -40,7 +42,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            browserAction();
+            browserAction( request.value.is_update );
             break;
         case msg.MESSAGE_ACTION.read_mode:
         case msg.MESSAGE_ACTION.browser_click:
@@ -49,7 +51,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                     console.log( "watch.Lock()", result );
                     new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
                 } else {
-                     if ( storage.option.br_exit ) read.Exist( false ) ? read.Exit() : readMode();
+                     if ( storage.option.br_exit ) {
+                        modals.Exist()  && modals.Exit();
+                        !modals.Exist() && read.Exist( false ) ? read.Exit() : readMode();
+                     }
                      else readMode();
                 }
             });
@@ -86,7 +91,12 @@ function focusMode() {
             new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.focus );
+            if ( storage.current.site.name.startsWith( "txtread:" ) ) {
+                new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
+                return;
+            }
             focus.GetFocus( storage.current.site.include ).done( result => {
+                storage.current.site.name == "" && storage.Newsite( mode.focus );
                 storage.Statistics( mode.focus );
                 focus.Render( result, storage.current.site.exclude, storage.current.bgcolor );
             }).fail( () => {
@@ -149,7 +159,7 @@ function autoOpen() {
                 break;
             case "kancloud.cn":
             case "sspai.com":
-                setTimeout( ()=>readMode(), 500 );
+                setTimeout( ()=>readMode(), 1000 );
                 break;
             default:
                 storage.current.site.name != "" && readMode();
@@ -188,8 +198,13 @@ function getCurrent( mode ) {
 
 /**
  * Browser action
+ * 
+ * @param {boolean} when set icon is_update = true
  */
-function browserAction() {
-    storage.FindSite( st.GetMetadata() );
-    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.stcode, url: window.location.href } ));
+function browserAction( is_update ) {
+    if ( is_update && current_url != location.href ) {
+        current_url = location.href;
+        autoOpen();
+    }
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.current.site.name == "" ? -1 : 0 , url: window.location.href } ));
 }

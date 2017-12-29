@@ -9,6 +9,7 @@ import {browser}    from 'browser';
 import th           from 'theme';
 import Notify       from 'notify';
 import * as ss      from 'stylesheet';
+import * as watch   from 'watch';
 
 import Button       from 'button';
 import * as tooltip from 'tooltip';
@@ -17,7 +18,8 @@ import * as dia     from 'dialog';
 
 const root   = "simpread-option-root",
       rootjq = `.${root}`;
-let   flag   = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
+let   callback,
+      flag   = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
 
 /**
  * Modals Rect component
@@ -32,18 +34,37 @@ class Modals extends React.Component {
     // save modals focus option
     save() {
         console.log( "modals click submit button.", storage.current, flag )
-        if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
-            new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
-        } else {
-            const code = storage.Setcur( storage.current.mode );
-            if ( code != 0 ) {
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                code == 1 ? new Notify().Render( 0, "更新成功！" ) : new Notify().Render( 0, "更新成功，页面刷新后生效！" )
-            } else {
-                new Notify().Render( 0, "没有改变任何内容。" );
-            }
-            this.close( false );
+        const props = storage.current.mode == "focus" ? [ "include" ] : [ "title", "include" ];
+        if ( props.findIndex( key => storage.current.site[key] == "" ) != -1 ) {
+            new Notify().Render( 3, "【标题、高亮】不能为空。" );
         }
+        else if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
+            new Notify().Render( 3, "请正确填写【标识、域名、标题、高亮】后再提交。" );
+        } else {
+            watch.Verify( ( state, result ) => {
+                if ( state ) {
+                    console.log( "watch.Lock()", result );
+                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+                } else {
+                    const changed = storage.Compare( storage.current.mode );
+                    if ( changed.option.length == 0 && changed.st.length == 0 ) {
+                        new Notify().Render( 0, "当前未改变内容，无需保存。" );
+                    } else {
+                        storage.Cleansite( storage.current.site );
+                        storage.Setcur( storage.current.mode, changed.st.length > 0 ? true : false );
+                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
+                        watch.SendMessage( "site", true );
+                        new Notify().Render( 0, "更新成功，刷新当前页面后才能生效！" )
+                        this.close( false );
+                    }
+                }
+            });
+        }
+    }
+
+    siteeditor() {
+        callback();
+        this.close();
     }
 
     constructor( props ) {
@@ -64,6 +85,8 @@ class Modals extends React.Component {
                     <Option option={ storage.current } flag={ flag } />
                 </dia.Content>
                 <dia.Footer>
+                    <Button text="站点编辑器" waves="md-waves-effect" color="#fff" backgroundColor="#4caf50" onClick={ ()=>this.siteeditor() } width="70%" />
+                    <div style={{ width: "100%" }}></div>
                     <Button text="取 消" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
                     <Button text="确 认" waves="md-waves-effect" onClick={ ()=>this.save() } />
                 </dia.Footer>
@@ -91,18 +114,23 @@ function rollback() {
 
 /**
  * Modals Render
+ * 
+ * @param {func} callback
  */
-function Render() {
+function Render( cb ) {
+    callback   = cb;
     const name = storage.current.site.name;
     switch ( true ) {
         case name.startsWith( "tempread::" ):
-            new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank'>临时阅读模式</a>，并不能保存到适配列表中，保存功能将在下个版本提供。" )
+            storage.current.mode == "read" ?
+                new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank'>临时阅读模式</a>，请用【站点编辑器】保存后才能使用此功能。" ) :
+                new Notify().Render( "当前站未保存，请用【站点编辑器】保存后才能使用此功能。" );
             break;
         case name.startsWith( "metaread::" ):
-            new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/主动适配阅读模式' target='_blank'>主动适配阅读模式</a>，并不能保存到适配列表中，保存功能将在下个版本提供。" )
+            new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/主动适配阅读模式' target='_blank'>主动适配阅读模式</a>，并不能使用设定功能。" )
             break;
         case name.startsWith( "txtread::" ):
-            new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/小说阅读器模式' target='_blank'>小说阅读器模式</a>，并不能使用设定功能。" )
+            new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
             break;
         default:
             !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );

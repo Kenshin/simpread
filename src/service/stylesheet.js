@@ -169,6 +169,16 @@ function css( type, styles ) {
 }
 
 /**
+ * Add/Remove current site styles( string ) to head
+ * 
+ * @param {string} styles 
+ */
+function siteCSS( styles ) {
+    styles ? $( "head" ).append(`<style type="text/css" id="simpread-site-css">${styles}</style>`) :
+             $( "#simpread-site-css" ).remove();
+}
+
+/**
  * Add custom to .preview tag
  * 
  * @param {object} storage.read.custom
@@ -214,6 +224,7 @@ export {
     layout     as Layout,
     custom     as Custom,
     css        as CSS,
+    siteCSS    as SiteCSS,
     preview    as Preview,
     vfyCustom  as VerifyCustom,
 }

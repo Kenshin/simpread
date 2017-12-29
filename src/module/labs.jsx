@@ -2,9 +2,11 @@ console.log( "===== simpread option labs load =====" )
 
 import {browser} from 'browser';
 import * as menu from 'menu';
+import {storage} from 'storage';
 
 import Switch    from 'switch';
 import TextField from 'textfield';
+import Button    from 'button';
 
 import Auth      from 'authorize';
 
@@ -57,7 +59,64 @@ export default class LabsOpt extends React.Component {
     }
 
     onClick( state ) {
-        state == "custom" && ( location.href = location.origin + "/options/custom.html" );
+        state == "custom"  && ( location.href = location.origin + "/options/custom.html" );
+        state == "sitemgr" && ( location.href = location.origin + "/options/sitemgr.html" );
+    }
+
+    changeOrigins() {
+        this.props.option.origins = event.target.value.split("\n");
+        this.props.onChange && this.props.onChange( false );
+    }
+
+    origins( type ) {
+        if ( type == "origins" ) {
+            storage.GetOrigins( ( result, error ) => {
+                if ( error ) new Notify().Render( 2, "获取失败，请稍后重新加载。" );
+                else {
+                    const urls = new Set( this.props.option.origins.concat( result ) );
+                    urls.forEach( item => {
+                        if ( item.trim() == "" || !item.trim().startsWith( "http" ) || !item.trim().endsWith( ".json" ) ) urls.delete( item );
+                    });
+                    this.props.option.origins = [ ...urls ];
+                    this.props.onChange && this.props.onChange( false );
+                    $( this.refs.origins ).find( "textarea" ).val( this.props.option.origins.join( "\n" ) );
+                    new Notify().Render( "官方源加载成功。" );
+                }
+            });
+        } else if ( type == "import" ) {
+            new Notify().Render( "snackbar", "导入后会覆盖掉原来的第三方适配列表，请问是否覆盖？", "确认", () => {
+                const urls = this.props.option.origins.filter( item => {
+                    return item.trim() != "" && item.trim().startsWith( "http" ) && item.trim().endsWith( ".json" )
+                });
+                const max  = urls.length;
+                let   idx  = 0, arr = [], count = 0;
+                if ( urls.length != this.props.option.origins.length ) {
+                    this.props.option.origins = [ ...urls ];
+                    this.props.onChange && this.props.onChange( false );
+                    $( this.refs.origins ).find( "textarea" ).val( this.props.option.origins.join( "\n" ) );
+                    new Notify().Render( "已剔除掉不符合规范的第三方源。" );
+                }
+                this.props.option.origins.forEach( item => {
+                    storage.LoadOrigin( item, ( result, error ) => {
+                        idx++;
+                        !error && count++;
+                        !error && ( arr = arr.concat( result.sites ));
+                        error  && new Notify().Render( `导入失败 ${ result.url }` );
+                        if ( idx == max ) {
+                            arr.length > 0 && storage.AddOrigins( arr );
+                            console.log( "current storage websites.custom is ", arr );
+                            new Notify().Render( `已完成导入，本次共计：${ count } 个站点， ${ arr.length } 条数据。` );
+                            this.props.onChange && this.props.onChange( false );
+                        }
+                    });
+                });
+            });
+        } else if ( type == "clear" ) {
+            new Notify().Render( "snackbar", "只能清除第三方源的适配站点，请问是否清除？", "确认", () => {
+                new Notify().Render( `已完成清除，共计：${ storage.ClearOrigins() } 条数据。` );
+                this.props.onChange && this.props.onChange( false );
+            });
+        }
     }
 
     render() {
@@ -181,11 +240,46 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="label">自定义样式</div>
-                <div style={{ 'padding-top': '10px' }} className="lab" onClick={ ()=>this.onClick('custom') }>
+                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('custom') }>
                     <div className="more">
                         <div>增强「中文阅读体验」设置</div>
                         <span className="desc">包括：标题、描述、正文的字间距、行间距、首行缩进等及自定义 CSS。</span>
                         <span className="arrow"></span>
+                    </div>
+                </div>
+
+                <div className="label">站点适配器</div>
+                <div ref="origins" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }} className="lab">
+                    <div className="label">站点适配源</div>
+                    <TextField 
+                        multi={ true } rows={8}
+                        placeholder="仅支持 URL 地址，每行一个。" 
+                        value={ ( this.props.option.origins||[] ).join( "\n" ) }
+                        onChange={ ()=>this.changeOrigins() }
+                    />
+                    <div style={{ "display": "flex" }}>
+                        <Button type="raised" text="加载官方适配列表"
+                            width="100%" style={{ "margin": "0" }}
+                            color="#fff" backgroundColor="#4CAF50"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.origins( "origins" ) } />
+                        <Button type="raised" text="导入到适配列表"
+                            width="100%" style={{ "margin": "0 10px" }}
+                            color="#fff" backgroundColor="#3F51B5"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.origins( "import" ) } />
+                        <Button type="raised" text="清除适配列表" 
+                            width="100%" style={{ "margin": "0" }}
+                            color="#fff" backgroundColor="#FF5252"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.origins( "clear" ) } />
+                    </div>
+                    <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('sitemgr') }>
+                        <div className="more">
+                            <div>适配站点编辑器</div>
+                            <span className="desc">可以编辑全部的自定义适配站点。</span>
+                            <span className="arrow" style={{ 'bottom': '13px' }}></span>
+                        </div>
                     </div>
                 </div>
 

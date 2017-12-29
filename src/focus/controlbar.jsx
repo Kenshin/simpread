@@ -1,6 +1,7 @@
 console.log( "=== simpread focus controlbar load ===" )
 
 import * as modals from 'modals';
+import * as se     from 'siteeditor';
 import * as conf   from 'config';
 import { storage } from 'storage';
 import * as output from 'output';
@@ -42,7 +43,10 @@ class FControl extends React.Component {
                     $( "html, body" ).animate({ scrollTop: 0 }, "normal" );
                     break;
                 case "setting":
-                    modals.Render();
+                    modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                    break;
+                case "siteeditor":
+                    se.Render();
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
@@ -61,6 +65,12 @@ class FControl extends React.Component {
         }) : action( event, type );
     }
 
+    componentWillMount() {
+        if ( storage.current.site.name.startsWith( "metaread::" ) || storage.current.site.name.startsWith( "txtread::" ) ) {
+            delete conf.focusItems.option;
+        }
+    }
+
     componentWillUnmount() {
         $(this.refs.target).remove();
         $( "body" ).find( selector ).trigger( "click", "okay" );
@@ -68,7 +78,7 @@ class FControl extends React.Component {
 
     render() {
         return (
-            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" }>
+            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": 2147483645 }}>
                 <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )

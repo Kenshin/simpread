@@ -170,8 +170,9 @@ class Welcome extends React.Component {
                             <img src={ ss.IconPath( "welcome-read" )}/>
                             <h2 style={ style.h2 }>阅读模式</h2>
                             <div style={ style.desc }>
-                                自动提取适配页面的标题、描述、正文、媒体 （ 图片/视频 ） 等资源。<br/>
-                                定制化生成更适合中文阅读的页面。
+                                简悦 <strong>独有功能</strong>，自动提取适配页面的标题、描述、正文、媒体等资源。<br/>
+                                更多阅读场景，包括：<a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F">临时阅读</a> · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/TXT-%E9%98%85%E8%AF%BB%E5%99%A8">TXT 阅读器</a> · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E4%B8%BB%E5%8A%A8%E9%80%82%E9%85%8D%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F">主动适配模式</a>。<br/>
+                                支持 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F">自定义 CSS</a> 以及 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%AE%BA%E5%9D%9B%E7%B1%BB%E9%A1%B5%E9%9D%A2%E5%8F%8A%E5%88%86%E9%A1%B5">论坛类页面 / 分页</a>。<br/>
                             </div>
                         </section>
                     </div>
@@ -180,17 +181,19 @@ class Welcome extends React.Component {
                             <img src={ ss.IconPath( "welcome-focus" )}/>
                             <h2 style={ style.h2 }>聚焦模式</h2>
                             <div style={ style.desc }>
-                                高亮鼠标所在的文章段落，不改变当前页面的结构，适合未适配的网站。
+                                高亮鼠标所在的文章段落，不改变当前页面的结构，适合未适配的网站。<br/>
+                                除此以外，包含 <strong>阅读模式的全部功能</strong>。
                             </div>
                         </section>
                     </div>
-                    <div className="carousel-item">
+                    <div className="carousel-item" id="1.1.0">
                         <section style={ style.section }>
                             <img src={ ss.IconPath( "welcome-setting" )}/>
-                            <h2 style={ style.h2 }>高度定制化</h2>
+                            <h2 style={ style.h2 }>站点编辑器 · 站点适配源 · 站点管理器</h2>
                             <div style={ style.desc }>
-                                字体样式/大小、版本设计、主题均可设定。<br/>
-                                页面上任意元素（ 不想显示的文字 / 图片 ）均可隐藏。
+                                页面上任意元素均可隐藏，更支持编程，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8" target="_blank">站点编辑器</a><br/>
+                                更灵活、社区化的多种 <a href="https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90" target="_blank">站点适配源</a>。<br/>
+                                内置了 <a href="https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%AE%A1%E7%90%86%E5%99%A8" target="_blank">站点管理器</a>，方便管理全部的适配站点。
                             </div>
                         </section>
                     </div>
@@ -200,42 +203,9 @@ class Welcome extends React.Component {
                             <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
                             <h2 style={ style.h2 }>连接你的生产力工具</h2>
                             <div style={ style.desc }>
-                                支持下载 <strong>PDF · PNG</strong> 到本地。<br/>
+                                支持下载 <strong>PDF · PNG · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a></strong> 到本地 以及 发送到 <strong><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a></strong>。<br/>
                                 支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
                                 发送页面链接到 <strong>Pocket · Instapaper · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
-                            </div>
-                        </section>
-                    </div>
-
-                    <div className="carousel-item" id="1.0.3">
-                        <section style={ style.section }>
-                        <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/send%20to%20kindle.gif"/>
-                            <h2 style={ style.h2 }>发送你喜欢的文章到 Kindle</h2>
-                            <div style={ style.desc }>
-                                使用第三方服务 <a href="http://fivefilters.org/kindle-it" target="_blank">fivefilters.org</a><br/>
-                                现在可以发送页面到 Kindle 了 ，详细配置 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">请看这里</a> 。
-                            </div>
-                        </section>
-                    </div>
-
-                    <div className="carousel-item" id="1.0.3">
-                        <section style={ style.section }>
-                            <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/custom%20theme.gif"/>
-                            <h2 style={ style.h2 }>自定义样式</h2>
-                            <div style={ style.desc }>
-                                <strong>选项页-高级设定 · 自定义样式</strong>，包含字间距、行间距等中文阅读设置。<br/>
-                                <strong>自定义CSS</strong> 方便定制属于你的主题，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F">请看这里</a> 。
-                            </div>
-                        </section>
-                    </div>
-
-                    <div className="carousel-item" id="1.0.3">
-                        <section style={ style.section }>
-                            <img style={ style.gif } src="http://ojec5ddd5.bkt.clouddn.com/multi-page.gif"/>
-                            <h2 style={ style.h2 }>论坛类页面 · 分页</h2>
-                            <div style={ style.desc }>
-                            支持 <strong>论坛类页面</strong>，更完美的展示 <strong>知乎 · 贴吧</strong> 等论坛类页面。<br/>
-                            支持 <strong>分页功能</strong>，在阅读模式下就可翻页。
                             </div>
                         </section>
                     </div>

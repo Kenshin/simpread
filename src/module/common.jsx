@@ -123,11 +123,13 @@ export default class CommonOpt extends React.Component {
                                 }
                             } else if ( result == 1 ) {
                                 storage.version != json.version &&
-                                    ( json.read.sites = storage.Fix( json.read.sites, json.version, storage.version ));
+                                    storage.Fix( json.read.sites, json.version, storage.version, json.focus.sites );
                                 json = ver.Verify( json.version, json );
                                 new Notify().Render( "上传版本太低，已自动转换为最新版本。" );
                             }
                             menu.Refresh( json.option.menu );
+                            json.option.origins && json.option.origins.length > 0 &&
+                                new Notify().Render( "导入的配置文件包含了第三方源，请通过手动导入。" );
                             this.importsecret( json.option.secret, { ...json.secret }, () => {
                                 delete json.secret;
                                 storage.Write( ()=> {

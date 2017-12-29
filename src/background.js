@@ -20,7 +20,7 @@ storage.Read( () => {
         !local.Count() && storage.GetNewsites( "remote", getNewsitesHandler );
         ver.version != storage.version && storage.GetNewsites( "local", result => {
             ver.version != storage.version &&
-                ( storage.read.sites = storage.Fix( storage.read.sites, storage.version, ver.version ));
+                storage.Fix( storage.read.sites, storage.version, ver.version, storage.focus.sites );
             ver.version != storage.version && storage.Write( () => {
                     local.Version( ver.version );
                     browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
@@ -110,7 +110,7 @@ browser.tabs.onActivated.addListener( function( active ) {
         if ( tabs && tabs.length > 0 && tabs[0].status == "complete" ) {
             console.log( "background tabs Listener:active", active );
             if ( tabs && tabs.length > 0 && !tabs[0].url.startsWith( "chrome://" ) ) {
-                browser.tabs.sendMessage( tabs[0].id, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
+                browser.tabs.sendMessage( tabs[0].id, msg.Add( msg.MESSAGE_ACTION.tab_selected, { is_update: false } ));
             } else {
                 setMenuAndIcon( tabs[0].id, -1 );
             }
@@ -139,7 +139,7 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
         }
 
         if ( !tab.url.startsWith( "chrome://" ) ) {
-            browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected ));
+            browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected, { is_update: true } ));
         } else {
             setMenuAndIcon( tab.id, -1 );
         }

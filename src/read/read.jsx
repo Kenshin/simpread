@@ -7,6 +7,7 @@ import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
 import * as toc    from 'toc';
 import * as modals from 'modals';
+import * as se     from 'siteeditor';
 import * as kbd    from 'keyboard';
 
 import { storage, Clone } from 'storage';
@@ -83,6 +84,8 @@ class Read extends React.Component {
             await commbeautify( $( "sr-rd-content" ));
             pangu.spacingElementByClassName( rdcls );
             this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+            this.props.read.site.css && this.props.read.site.css.length > 0 &&
+                ss.SiteCSS( this.props.read.site.css );
             kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
@@ -94,6 +97,7 @@ class Read extends React.Component {
         $root.removeClass( theme )
              .removeClass( "simpread-font" );
         $root.attr("style") && $root.attr( "style", $root.attr("style").replace( "font-size: 62.5%!important", "" ));
+        ss.SiteCSS();
         $( "body" ).removeClass( "simpread-hidden" );
         $( rdclsjq ).remove();
         tooltip.Exit( rdclsjq );
@@ -110,7 +114,10 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                modals.Render();
+                modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                break;
+            case "siteeditor":
+                se.Render();
                 break;
             case "fontfamily":
             case "fontsize":
@@ -172,7 +179,7 @@ function Render() {
 function Highlight() {
     const dtd = $.Deferred();
     highlight.Start().done( dom => {
-        storage.Newsite({ mode: "read", url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", html: dom.outerHTML, exclude: "" } });
+        storage.Newsite( "read", dom.outerHTML );
         dtd.resolve();
     });
     return dtd;
@@ -186,7 +193,7 @@ function Highlight() {
  */
 function Exist( action ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        action && modals.Render();
+        action && modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
         return true;
     } else {
         return false;
@@ -231,8 +238,8 @@ function wrap( site ) {
     wrapper.title   = query( title );
     wrapper.desc    = query( desc  );
     wrapper.include = site.include == "" && site.html != "" ? site.html : query( include, "html" );
-    wrapper.avatar && wrapper.avatar.length == 0 && ( delete wrapper.avatar );
-    wrapper.paging && wrapper.paging.length == 0 && ( delete wrapper.paging );
+    wrapper.avatar && wrapper.avatar.length > 0  && wrapper.avatar[0].name == "" && delete wrapper.avatar;
+    wrapper.paging && wrapper.paging.length > 0  && wrapper.paging[0].prev == "" && delete wrapper.paging;
     wrapper.avatar && wrapper.avatar.forEach( item => {
         const key   = Object.keys( item ).join(),
               value = item[key];
@@ -338,6 +345,13 @@ async function htmlbeautify( $target ) {
  * @param {jquery}
  */
 async function commbeautify( $target ) {
+    // hack code
+    storage.current.site.name == "jianshu.com" &&
+    $target.find( ".image-package" ).map( ( index, item ) => {
+        const $target = $( item ),
+              $div    = $target.find( "img" );
+        $target.html( $div );
+    });
     $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
@@ -346,6 +360,7 @@ async function commbeautify( $target ) {
               lazysrc = $target.attr( "data-src" ),
               zuimei  = $target.attr( "data-original" ),
               cnbeta  = $target.attr( "original" ),
+              jianshu = $target.attr( "data-original-src" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
                   if ( $img[0].clientWidth > 1000 ) {
@@ -371,7 +386,8 @@ async function commbeautify( $target ) {
         newsrc = cnbeta  ? cnbeta  : src;
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
-        !newsrc.startsWith( "http" ) && ( newsrc = $target[0].src );
+        newsrc = jianshu ? jianshu : newsrc;
+        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
         $img.attr( "src", newsrc )
             .one( "load",  ()=>fixOverflowImgsize() )
             .one( "error", ()=>loaderrorHandle()    )
