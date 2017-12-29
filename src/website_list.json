@@ -308,6 +308,15 @@
             "<div class='neirong-shouquan-public'>"
         ]
     },{
+        "name"    : "moment.douban.com",
+        "url"     : "https://moment.douban.com/post/*/",
+        "title"   : "<h1 id='title'>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "douban.com",
         "url"     : "https://www.douban.com/*",
         "title"   : "<title>",
@@ -622,6 +631,15 @@
             ""
         ]
     },{
+        "name"    : "read.bilibili.com",
+        "url"     : "https://www.bilibili.com/read/cv*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div class='article-holder'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
         "title"   : "<title>",
@@ -818,7 +836,7 @@
     },{
         "name"    : "solidot.org",
         "url"     : "http://www.solidot.org/story?sid=*",
-        "title"   : "<div class='bg_htit'>",
+        "title"   : "<title>",
         "desc"    : "",
         "include" : "<div class='p_mainnew'>",
         "exclude" : [
@@ -1474,6 +1492,15 @@
             "[['<strong>转载本站文章请注明作者</strong>']]",
             "[['<div>——===</div>']]",
             "[['<b>酷壳404页面</b>']]"
+        ]
+    },{
+        "name"    : "kotlinguides.github.io",
+        "url"     : "https://*.github.io/kotlin-guides/*.html",
+        "title"   : "<h1 class='post-title'>",
+        "desc"    : "",
+        "include" : "<article class='post-content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "voidcn.com",

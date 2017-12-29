@@ -14,7 +14,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.4", "Mon Sep 25 2017 14:40:27 GMT+0800 (CST)" ],
           [ "1.0.5", "Wed Nov 15 2017 11:39:23 GMT+0800 (CST)" ],
           [ "1.0.6", "Thu Dec 07 2017 14:48:44 GMT+0800 (CST)" ],
-          [ "1.0.7", "Mon Dec 11 2017 12:47:46 GMT+0800 (CST)" ],
+          [ "1.1.0", "Sat Dec 23 2017 15:09:30 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -24,7 +24,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.4", "新增「高级聚焦模式、主动适配与临时阅读模式」，" ],
           [ "1.0.5", "新增「导出 epub，TXT 阅读器，阅读模式增加目录功能，白名单等」，" ],
           [ "1.0.6", "新增「添加新站到阅读模式，导入第三方适配站点等」，" ],
-          [ "1.0.7", "新增「多个适配站点等」，" ],
+          [ "1.1.0", "新增「站点编辑器，站点适配源，站点管理器等」，" ],
     ]);
 
 /**
@@ -112,19 +112,18 @@ function Verify( curver, data ) {
 
     if ( curver == "1.0.5" ) {
         data.option.origins = [];
-        data.websites       = {};
+        data.websites       = {
+            custom : [],
+            local  : []
+        };
         curver = "1.0.6";
     }
 
     if ( curver == "1.0.6" ) {
-        !data.websites && ( data.websites = {
-            custom : [],
-            local  : []
-        });
         data.websites.local = data.read.sites.concat( data.focus.sites );
         delete data.focus.sites;
         delete data.read.sites;
-        curver = "1.0.7";
+        curver = "1.1.0";
     }
 
     /*
@@ -151,7 +150,7 @@ function Verify( curver, data ) {
 function Notify( first, type, ver ) {
     const str    = type == "firstload" ? "安装" : "更新",
           detail = type == "firstload" ? "" : details.get(ver),
-          link   = first ? `${detail}如何使用请看 <a href="https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）" target="_blank">入门指南</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
+          link   = first ? `${detail}如何使用请看 <a href="https://github.com/Kenshin/simpread/wiki/" target="_blank">入门指南</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
     return `${str} 到最新版本 ${ver} ，${ link }`;
 }
 

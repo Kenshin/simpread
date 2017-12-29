@@ -21,6 +21,7 @@ import Editor     from 'editor';
 
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
+import * as watch from 'watch';
 
 let cur_site, org_site,
     state = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty0
@@ -66,7 +67,7 @@ function controlbarRender() {
             const msg = cur_site ? "是否覆盖当前站点并新建立一个？" : "是否建立一个新站？";
             new Notify().Render( "snackbar", msg, "新建", () => {
                 org_site = [ "", "" ];
-                siteeditorRender( "", { name: "", desc: "", include: "", exclude: "" }, "local" );
+                siteeditorRender( "", { name: "", title: "<title>", desc: "", include: "", exclude: [] }, "local" );
             });
         },
         remove = () => {
@@ -81,7 +82,7 @@ function controlbarRender() {
 
             const key = cur_site.target,
                   url = cur_site.url,
-                  site= cleansite({ ...cur_site });
+                  site= storage.Cleansite({ ...cur_site });
             let idx   = storage.sites[key].findIndex( item => item[0] == org_site[0] ),
                 flag  = -1;
 
@@ -98,6 +99,7 @@ function controlbarRender() {
             }
             flag != -1 && storage.Write( ()=> {
                 console.log( "current site is ", cur_site, org_site )
+                watch.SendMessage( "site", true );
                 new Notify().Render( `当前站点${ flag == 0 ? "更新" : "删除" }成功，请刷新本页。` );
             });
         };
@@ -142,8 +144,7 @@ function siteeditorRender( url, site, type ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
 
-    safesite( site, { url, type });
-    cur_site   = site;
+    cur_site   = storage.Safesite( site, type, url );
 
     const doms = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
@@ -158,37 +159,6 @@ function formatsites( sites ) {
     return sites.map( item => {
         return { value: item[0], name: item[0] }
     });
-}
-
-/**
- * Set safe site object, include:
- *  url, title, desc, include, exclude, avatar, paging, target
- * 
- * @param {object} site
- * @param {object} opts
- */
-function safesite( site, opts ) {
-    site.url   = opts.url;
-    site.target= opts.type;
-    site.name  == "" && ( site.name = "tempread::" );
-    ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
-    ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
-}
-
-/**
- * Clean site
- * 
- * @param  {object} site
- * @return {object} clean site
- */
-function cleansite( site ) {
-    site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
-    site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
-    site.url                  && delete site.url;
-    site.html                 && delete site.html;
-    site.target               && delete site.target;
-    site.matching             && delete site.matching;
-    return site;
 }
 
 /**

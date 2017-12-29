@@ -38,7 +38,7 @@ export default class Include extends React.Component {
         return (
             <TextField 
                 multi={ false } 
-                placeholder={ this.props.mode == "focus" ? "可选，默认为空，为空时每次进入需要重新选择。" : "必填，不可为空。" }
+                placeholder= "必填，不可为空。"
                 floatingtext="高亮区域" 
                 value={ this.props.include }
                 errortext={ this.state.error }

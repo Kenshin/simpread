@@ -24,8 +24,23 @@ class SiteEditor extends React.Component {
         dia.Close();
     }
 
+    action( type ) {
+        watch.Verify( ( state, result ) => {
+            if ( state ) {
+                console.log( "watch.Lock()", result );
+                new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+            } else {
+                type == "save" ? this.save() : this.delete();
+            }
+        });
+    }
+
     delete() {
         console.log( "siteeditor click delete button.", storage.current.site )
+        if ( site.target != "local" ) {
+            new Notify().Render( 2, `只能删除 <a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>本地站点</a> ，如需要请使用 站点管理器 删除。` );
+            return;
+        }
         new Notify().Render( "是否删除当前适配站点？", "删除", () => {
             storage.Deletesite( site, result => {
                 if      ( result == -1 ) new Notify().Render( 2, `此站已被删除，请勿重复操作。` );
@@ -41,11 +56,14 @@ class SiteEditor extends React.Component {
     // save siteeditor focus option
     save() {
         console.log( "siteeditor click save button.", storage.current.site, site, state )
-        if ( Object.values( state ).findIndex( key => typeof key == "string" && key != 0 ) != -1 ||
+        if ( [ "url", "name", "title", "include" ].findIndex( key => site[key] == "" ) != -1 ) {
+            new Notify().Render( 3, "【标识、域名、标题、高亮】不能为空。" );
+        }
+        else if ( Object.values( state ).findIndex( key => typeof key == "number" && key != 0 ) != -1 ||
            ( state.avatar.name != 0 || state.avatar.url  != 0 ) ||
            ( state.paging.prev != 0 || state.paging.next != 0 )
         ) {
-            new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
+            new Notify().Render( 3, "请正确填写【标识、域名、标题、高亮】后再提交。" );
         } else if (( site.avatar[0].name != "" && site.avatar[1].url == "" ) || ( site.avatar[0].name == "" && site.avatar[1].url != "" )) {
             new Notify().Render( 3, "【头像的名称与地址】必须同时设定。" );
         } else if (( site.paging[0].prev != "" && site.paging[1].next == "" ) || ( site.paging[0].prev == "" && site.paging[1].next != "" )) {
@@ -68,17 +86,17 @@ class SiteEditor extends React.Component {
     }
 
     render() {
-        site = storage.Clonesite();
+        site = { ...storage.current.site };
         return (
             <dia.Dialog>
                 <dia.Content>
                     <Editor site={ site } state={ state } />
                 </dia.Content>
                 <dia.Footer>
-                    <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.delete() } />
+                    <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.action( "delete" ) } />
                     <div style={{ width: "100%" }}></div>
                     <Button text="退 出" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
-                    <Button text="保 存" waves="md-waves-effect" onClick={ ()=>this.save() } />
+                    <Button text="保 存" waves="md-waves-effect" onClick={ ()=>this.action( "save" ) } />
                 </dia.Footer>
             </dia.Dialog>
         )

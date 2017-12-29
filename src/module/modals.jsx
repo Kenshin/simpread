@@ -34,8 +34,12 @@ class Modals extends React.Component {
     // save modals focus option
     save() {
         console.log( "modals click submit button.", storage.current, flag )
-        if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
-            new Notify().Render( 3, "验证内容中有错误，请确认后再提交。" );
+        const props = storage.current.mode == "focus" ? [ "include" ] : [ "title", "include" ];
+        if ( props.findIndex( key => storage.current.site[key] == "" ) != -1 ) {
+            new Notify().Render( 3, "【标题、高亮】不能为空。" );
+        }
+        else if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
+            new Notify().Render( 3, "请正确填写【标识、域名、标题、高亮】后再提交。" );
         } else {
             watch.Verify( ( state, result ) => {
                 if ( state ) {
@@ -46,9 +50,11 @@ class Modals extends React.Component {
                     if ( changed.option.length == 0 && changed.st.length == 0 ) {
                         new Notify().Render( 0, "当前未改变内容，无需保存。" );
                     } else {
+                        storage.Cleansite( storage.current.site );
                         storage.Setcur( storage.current.mode, changed.st.length > 0 ? true : false );
                         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                        new Notify().Render( 0, "更新成功！" )
+                        watch.SendMessage( "site", true );
+                        new Notify().Render( 0, "更新成功，刷新当前页面后才能生效！" )
                         this.close( false );
                     }
                 }

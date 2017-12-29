@@ -238,10 +238,8 @@ function wrap( site ) {
     wrapper.title   = query( title );
     wrapper.desc    = query( desc  );
     wrapper.include = site.include == "" && site.html != "" ? site.html : query( include, "html" );
-    wrapper.avatar && wrapper.avatar.length > 0 && wrapper.avatar[0].name == "" && delete wrapper.avatar;
-    wrapper.avatar && wrapper.avatar.length == 0 && ( delete wrapper.avatar );
-    wrapper.paging && wrapper.paging.length == 0 && ( delete wrapper.paging );
-    wrapper.paging && wrapper.paging.length > 0 && wrapper.paging[0].prev == "" && delete wrapper.paging;
+    wrapper.avatar && wrapper.avatar.length > 0  && wrapper.avatar[0].name == "" && delete wrapper.avatar;
+    wrapper.paging && wrapper.paging.length > 0  && wrapper.paging[0].prev == "" && delete wrapper.paging;
     wrapper.avatar && wrapper.avatar.forEach( item => {
         const key   = Object.keys( item ).join(),
               value = item[key];
