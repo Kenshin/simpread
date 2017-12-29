@@ -51,7 +51,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                     console.log( "watch.Lock()", result );
                     new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
                 } else {
-                     if ( storage.option.br_exit ) read.Exist( false ) ? read.Exit() : readMode();
+                     if ( storage.option.br_exit ) {
+                        modals.Exist()  && modals.Exit();
+                        !modals.Exist() && read.Exist( false ) ? read.Exit() : readMode();
+                     }
                      else readMode();
                 }
             });
