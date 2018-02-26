@@ -1,7 +1,7 @@
 {
     "sites"  : [{
         "name"    : "cnbeta.com",
-        "url"     : "http://*.cnbeta.com/articles/*/*.htm",
+        "url"     : "https://*.cnbeta.com/articles/*/*.htm",
         "title"   : "[[{$('header.title h1').text()}]]",
         "desc"    : "[[{$('.article-summary').text()}]]",
         "include" : "<div class='article-content'>",
