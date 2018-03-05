@@ -18,6 +18,9 @@ import * as msg  from 'message';
 import {browser} from 'browser';
 import * as watch from 'watch';
 
+import PureRead  from 'pureread';
+
+let pr; // pure read object
 let current_url = location.href; // current page url ( when changed page changed )
 
 /**
@@ -26,6 +29,7 @@ let current_url = location.href; // current page url ( when changed page changed
 storage.Read( () => {
     bindShortcuts();
     autoOpen();
+    pRead();
 });
 
 /**
@@ -127,9 +131,10 @@ function readMode() {
                     break;
                 case -1:
                     new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
-                    read.Highlight().done( () => {
+                    read.Highlight().done( dom => {
+                        pr.TempMode( dom );
                         storage.Statistics( mode.read );
-                        read.Render();
+                        read.Render( pr );
                     });
                     break;
             }
@@ -207,4 +212,13 @@ function browserAction( is_update ) {
         autoOpen();
     }
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.current.site.name == "" ? -1 : 0 , url: window.location.href } ));
+}
+
+/** 
+ * Pure Read
+*/
+function pRead() {
+    pr = new PureRead( window.location.href, storage.sites );
+    pr.Getsites();
+    console.log( "current pureread object is   ", pr )
 }
