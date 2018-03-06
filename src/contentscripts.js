@@ -99,7 +99,8 @@ function focusMode() {
                 return;
             }
             focus.GetFocus( storage.current.site.include ).done( result => {
-                storage.current.site.name == "" && storage.Newsite( mode.focus );
+                storage.current.site.name == "" && pr.TempMode( result[0].outerHTML );
+                storage.current.site.name == "" && storage.Newsite( mode.focus, pr.current.site );
                 storage.Statistics( mode.focus );
                 focus.Render( result, storage.current.site.exclude, storage.current.bgcolor );
             }).fail( () => {
