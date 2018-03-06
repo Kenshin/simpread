@@ -170,6 +170,7 @@ class Read extends React.Component {
  * 
  */
 function Render( pr ) {
+    pr.ReadMode();
     console.log( "current pureread object is   ", pr )
     ReactDOM.render( <Read read={ storage.current } wrapper={ wrap(storage.current.site) } />, getReadRoot() );
 }
