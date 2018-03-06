@@ -27,9 +27,9 @@ let current_url = location.href; // current page url ( when changed page changed
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
+    pRead();
     bindShortcuts();
     autoOpen();
-    pRead();
 });
 
 /**
@@ -132,7 +132,8 @@ function readMode() {
                 case -1:
                     new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
                     read.Highlight().done( dom => {
-                        pr.TempMode( dom );
+                        pr.TempMode( dom.outerHTML );
+                        storage.Newsite( mode.read, pr.current.site );
                         storage.Statistics( mode.read );
                         read.Render( pr );
                     });
@@ -197,7 +198,8 @@ function entry( current, other, ...str ) {
  */
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
-        storage.Getcur( mode, st.GetMetadata() );
+        //storage.Getcur( mode, st.GetMetadata() );
+        storage.Getcur( mode, pr.current.site );
     }
 }
 

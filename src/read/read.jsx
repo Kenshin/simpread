@@ -172,7 +172,7 @@ class Read extends React.Component {
 function Render( pr ) {
     pr.ReadMode();
     console.log( "current pureread object is   ", pr )
-    ReactDOM.render( <Read read={ storage.current } wrapper={ wrap(storage.current.site) } />, getReadRoot() );
+    ReactDOM.render( <Read read={ storage.current } wrapper={ pr.html } />, getReadRoot() );
 }
 
 /**
@@ -181,7 +181,7 @@ function Render( pr ) {
 function Highlight() {
     const dtd = $.Deferred();
     highlight.Start().done( dom => {
-        storage.Newsite( "read", dom.outerHTML );
+        //storage.Newsite( "read", dom.outerHTML );
         dtd.resolve( dom );
     });
     return dtd;

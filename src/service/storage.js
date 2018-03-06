@@ -316,10 +316,22 @@ class Storage {
      * @param {string} @see mode
      * @param {object} include: meta read and txt read
      */
+    /*
     Getcur( key, meta ) {
         current      = swap( simpread[key], {} );
         current.mode = key;
         this.Getsites( current, meta );
+        curori       = { ...current };
+        curori.site  = { ...current.site };
+        console.log( "current site object is ", current )
+    }
+    */
+
+    Getcur( key, site ) {
+        current      = swap( simpread[key], {} );
+        current.url  = site.url;
+        current.mode = key;
+        current.site = site;
         curori       = { ...current };
         curori.site  = { ...current.site };
         console.log( "current site object is ", current )
@@ -493,12 +505,21 @@ class Storage {
      * @param {string} include: focus, read
      * @param {string} when read html is dom.outerHTML
      */
+    /*
     Newsite( mode, html ) {
         const new_site = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: [] } };
         html && ( new_site.site.html = html );
         current.mode = new_site.mode,
         current.url  = new_site.url;
         current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
+        console.log( "【read only】current site object is ", current )
+    }
+    */
+
+    Newsite( mode, new_site ) {
+        current.mode = mode;
+        current.url  = new_site.url;
+        current.site = new_site;
         console.log( "【read only】current site object is ", current )
     }
 
@@ -777,7 +798,7 @@ class Storage {
      */
     Restore( key ) {
         simpread[key] = clone( origin[key] );
-        this.Getcur( key );
+        this.Getcur( key, current.site );
     }
 
     /**
