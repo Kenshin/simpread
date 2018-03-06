@@ -27,7 +27,6 @@ let current_url = location.href; // current page url ( when changed page changed
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
-    pRead();
     bindShortcuts();
     autoOpen();
 });
@@ -199,6 +198,7 @@ function entry( current, other, ...str ) {
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
         //storage.Getcur( mode, st.GetMetadata() );
+        pRead();
         storage.Getcur( mode, pr.current.site );
     }
 }

@@ -355,8 +355,8 @@ class Storage {
      * @param {string} @see mode
      */
     VerifyCur( type ) {
-        return ( current.mode && current.mode != type ) ||
-               ( current.url  && current.url != getURI() ) ||
+        return current.mode != type    ||
+               current.url != getURI() ||
                $.isEmptyObject( current );
     }
 
