@@ -167,7 +167,7 @@ function autoOpen() {
                 setTimeout( ()=>readMode(), 1000 );
                 break;
             default:
-                storage.current.site.name != "" && readMode();
+                pr.state == "adapter" && readMode();
                 break;
         }
     }
