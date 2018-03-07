@@ -27,10 +27,10 @@ var storage  = require( "storage" ).storage,
      * Add focus mode
      * 
      * @param {jquery} jquery object
-     * @param {array}  exclude html array
+     * @param {object} pure read object
      * @param {string} background color style
      */
-    Focus.prototype.Render = function( $target, exclude, bgcolor ) {
+    Focus.prototype.Render = function( $target, pr, bgcolor ) {
         console.log( "=== simpread focus add ===" );
         this.$target = $target;
 
@@ -38,7 +38,7 @@ var storage  = require( "storage" ).storage,
         includeStyle( $target, focusstyle, focuscls, "add" );
 
         // set exclude style
-        excludeStyle( $target, exclude, "delete" );
+        excludeStyle( $target, pr, "delete" );
 
         // add simpread-focus-mask
         $parent = $target.parent();
@@ -73,7 +73,7 @@ var storage  = require( "storage" ).storage,
              $( bgclsjq ).velocity({ opacity: 0 }, {
                  complete: ()=> {
                     includeStyle( $target, focusstyle, focuscls, "delete" );
-                    excludeStyle( $target, exclude, "add" );
+                    excludeStyle( $target, pr, "add" );
                     tooltip.Exit( bgclsjq );
                     $( ctrlbarjq ).remove();
                     $( bgclsjq   ).remove();
@@ -208,11 +208,12 @@ function includeStyle( $target, style, cls, type ) {
  * Set exclude style
  * 
  * @param {jquery} jquery object
- * @param {array}  hidden html
+ * @param {object} pure read object
  * @param {string} include: 'add' 'delete'
  */
-function excludeStyle( $target, exclude, type ) {
-    const tags = util.exclude( $target, exclude );
+function excludeStyle( $target, pr, type ) {
+    //const tags = util.exclude( $target, exclude );
+    const tags = pr.Exclude( $target );
     if ( type == "delete" )   $target.find( tags ).hide();
     else if ( type == "add" ) $target.find( tags ).show();
 }
