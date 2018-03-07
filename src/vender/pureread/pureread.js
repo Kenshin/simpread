@@ -67,6 +67,10 @@ export default class PureRead {
     ReadMode() {
         this.html = wrap( this.current.site );
     }
+
+    Exclude( $target, exclude ) {
+        return excludeSelector( $target, exclude );
+    }
 }
 
 /**
@@ -261,4 +265,37 @@ function getcontent( $target ) {
             break;
     }
     return html;
+}
+
+/**
+ * Get exclude tags list
+ * 
+ * @param  {jquery} jquery object
+ * @param  {array}  hidden html
+ * @return {string} tags list string
+ */
+function excludeSelector( $target, exclude ) {
+    let tags = [], tag = "";
+    for ( let content of exclude ) {
+        if ( util.specTest( content )) {
+             const [ value, type ] = util.specAction( content );
+             if ( type == 1 ) {
+                 tag = value;
+             } else if ( type == 2 ) {
+                 const arr = $target.html().match( new RegExp( value, "g" ) );
+                 if ( arr && arr.length > 0 ) {
+                    const str = arr.join( "" );
+                    tag = `*[${str}]`;
+                 } else {
+                     tag = undefined;
+                 }
+             } else if ( type == 3 ) {
+                 value.remove();
+             }
+        } else {
+            tag = util.selector( content );
+        }
+        if ( tag ) tags.push( tag );
+    }
+    return tags.join( "," );
 }

@@ -313,7 +313,8 @@ function getcontent( $target ) {
  * @param {array}  hidden html
  */
 async function excludes( $target, exclude ) {
-    const tags = util.exclude( $target, exclude );
+    //const tags = util.exclude( $target, exclude );
+    pr.Exclude( $target, exclude );
     $target.find( tags ).remove();
 }
 
