@@ -90,8 +90,8 @@ export default class PureRead {
         return $focus;
     }
 
-    Exclude( $target, exclude ) {
-        return excludeSelector( $target, exclude );
+    Exclude( $target ) {
+        return excludeSelector( $target, this.current.site.exclude );
     }
 }
 

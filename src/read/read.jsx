@@ -314,7 +314,7 @@ function getcontent( $target ) {
  */
 async function excludes( $target, exclude ) {
     //const tags = util.exclude( $target, exclude );
-    pr.Exclude( $target, exclude );
+    const tags = pr.Exclude( $target );
     $target.find( tags ).remove();
 }
 
