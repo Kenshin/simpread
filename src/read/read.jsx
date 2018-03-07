@@ -22,6 +22,7 @@ import * as highlight     from 'highlight';
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
 
+let pr;
 const rdcls   = "simpread-read-root",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
@@ -56,9 +57,11 @@ class Read extends React.Component {
             this.props.read.highlight == true && ( msg += `，已启动 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。` )
             new Notify().Render( 2, msg );
             this.componentWillUnmount();
-            this.props.read.highlight == true && Highlight().done( () => {
+            this.props.read.highlight == true && Highlight().done( dom => {
+                pr.TempMode( dom.outerHTML );
+                storage.Newsite( "read", pr.current.site );
                 storage.Statistics( "read" );
-                Render();
+                Render( pr );
             });
         } else {
             $root
@@ -169,7 +172,8 @@ class Read extends React.Component {
  * Render entry
  * 
  */
-function Render( pr ) {
+function Render( pureread ) {
+    pr = pureread;
     pr.ReadMode();
     console.log( "current pureread object is   ", pr )
     ReactDOM.render( <Read read={ storage.current } wrapper={ pr.html } />, getReadRoot() );

@@ -273,7 +273,7 @@ function getcontent( $target ) {
     let html = "";
     switch ( $target.length ) {
         case 0:
-            html = "errorpage";
+            html = "<sr-rd-content-error></sr-rd-content-error>";
             break;
         case 1:
             html = $target.html().trim();
