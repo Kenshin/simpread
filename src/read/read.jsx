@@ -387,7 +387,7 @@ async function commbeautify( $target ) {
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
         newsrc = jianshu ? jianshu : newsrc;
-        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
+        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : (location.origin + (newsrc.startsWith('/') ? newsrc : '/' + newsrc)) );
         $img.attr( "src", newsrc )
             .one( "load",  ()=>fixOverflowImgsize() )
             .one( "error", ()=>loaderrorHandle()    )
