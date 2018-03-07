@@ -98,14 +98,16 @@ var storage  = require( "storage" ).storage,
     /**
      * Get focus
      * 
+     * @param {jquery} focus jquery object
      * @param {string} storage.current.site.include
      * @return {jquery} focus jquery object or undefined
      */
-    Focus.prototype.GetFocus = function( include ) {
-        var $focus = [],
+    Focus.prototype.GetFocus = function( $focus, include ) {
+        var //$focus = [],
             dtd    = $.Deferred(),
-            sel, range, node, tag,
-            target;
+            sel, range, node, tag;
+            //target;
+        /*
         target = util.selector( include );
         try {
             if ( util.specTest( target ) ) {
@@ -122,6 +124,7 @@ var storage  = require( "storage" ).storage,
         } catch ( error ) {
             console.error( "Get $focus failed", error )
         }
+        */
         if ( storage.current.highlight && $focus.length == 0 ) {
             new Notify().Render( "已启动手动聚焦模式，请移动鼠标进行选择，支持 ESC 退出。" );
             highlight.Start().done( result => {

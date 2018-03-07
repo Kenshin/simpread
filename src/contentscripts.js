@@ -98,7 +98,7 @@ function focusMode() {
                 new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
                 return;
             }
-            focus.GetFocus( storage.current.site.include ).done( result => {
+            focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
                 storage.current.site.name == "" && pr.TempMode( result[0].outerHTML );
                 storage.current.site.name == "" && storage.Newsite( mode.focus, pr.current.site );
                 storage.Statistics( mode.focus );

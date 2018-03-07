@@ -68,6 +68,28 @@ export default class PureRead {
         this.html = wrap( this.current.site );
     }
 
+    Include() {
+        let   include = this.current.site.include,
+              $focus  = [];
+        const target  = util.selector( include );
+        try {
+            if ( util.specTest( target ) ) {
+                const [ value, state ] = util.specAction( include );
+                if ( state == 0 ) {
+                    include = include.replace( /\[\[{\$\(|}\]\]|\).html\(\)/g, "" );
+                    $focus  = $( util.specAction( `[[[${include}]]]` )[0] );
+                } else if ( state == 3 ) {
+                    $focus  = value;
+                }
+            } else if ( target ) {
+                $focus = $( "body" ).find( target );
+            }
+        } catch ( error ) {
+            console.error( "Get $focus failed", error )
+        }
+        return $focus;
+    }
+
     Exclude( $target, exclude ) {
         return excludeSelector( $target, exclude );
     }
