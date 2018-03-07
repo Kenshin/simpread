@@ -2,6 +2,8 @@ console.log( "=== simpread storage load ===" )
 
 import minimatch from 'minimatch';
 
+import * as util from './util';
+
 let meta;
 const site   = {
     url       : "",
@@ -19,7 +21,7 @@ const site   = {
 export default class PureRead {
 
     constructor( url, origins ) {
-        this.url     = getURI();
+        this.url     = util.getURI();
         this.origins = origins;
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
@@ -48,7 +50,7 @@ export default class PureRead {
                 this.current.site = safesite({ ...found[1] }, found[2], found[0] );
                 this.state        = "adapter";
             } else {
-                this.current.site = clone( site );
+                this.current.site = util.clone( site );
             }
         }
         this.current.site.matching = matching;
@@ -65,30 +67,6 @@ export default class PureRead {
     ReadMode() {
         this.html = wrap( this.current.site );
     }
-}
-
-/**
- * Deep clone object
- * 
- * @param  {object} target object
- * @return {object} new target object
- */
-function clone( target ) {
-    return $.extend( true, {}, target );
-}
-
-/**
- * Get URI
- * 
- * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
- */
-function getURI() {
-    const name = (pathname) => {
-        pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
-        return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
-    },
-    path = name( window.location.pathname );
-    return `${ window.location.protocol }//${ window.location.hostname }${ path }/`;
 }
 
 /**
@@ -198,12 +176,12 @@ function getsite( type, sites, url, matching = [] ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
         if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
-            matching.push( [ cur, clone( sites.get( cur )), type ] );
+            matching.push( [ cur, util.clone( sites.get( cur )), type ] );
         } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             // e.g. https://www.douban.com/* http://mp.weixin.qq.com/*
-            matching.push( [ cur, clone( sites.get( cur )), type ] );
+            matching.push( [ cur, util.clone( sites.get( cur )), type ] );
         } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
-            matching.push( [ cur, clone( sites.get( cur )), type ] );
+            matching.push( [ cur, util.clone( sites.get( cur )), type ] );
         }
     }
 }
@@ -215,10 +193,10 @@ function getsite( type, sites, url, matching = [] ) {
  * @return {object} wrapper object
  */
 function wrap( site ) {
-    const wrapper   = clone( site ),
-          title     = selector( site.title == "" ? "<title>" : site.title ),
-          desc      = selector( site.desc    ),
-          include   = selector( site.include );
+    const wrapper   = util.clone( site ),
+          title     = util.selector( site.title == "" ? "<title>" : site.title ),
+          desc      = util.selector( site.desc    ),
+          include   = util.selector( site.include );
     wrapper.title   = query( title );
     wrapper.desc    = query( desc  );
     wrapper.include = site.include == "" && site.html != "" ? site.html : query( include, "html" );
@@ -227,12 +205,12 @@ function wrap( site ) {
     wrapper.avatar && wrapper.avatar.forEach( item => {
         const key   = Object.keys( item ).join(),
               value = item[key];
-        item[key]   = query( selector( value ), "html" );
+        item[key]   = query( util.selector( value ), "html" );
     });
     wrapper.paging && wrapper.paging.forEach( item => {
         const key   = Object.keys( item ).join(),
               value = item[key];
-        item[key]   = query( selector( value ) );
+        item[key]   = query( util.selector( value ) );
     });
     return wrapper;
 }
@@ -246,8 +224,8 @@ function wrap( site ) {
  */
 function query( content, type = "text" ) {
     const $root = $( "html" );
-    if ( specTest( content ) ) {
-        const [ value, state ] = specAction( content );
+    if ( util.specTest( content ) ) {
+        const [ value, state ] = util.specAction( content );
         if ( state == 0 ) {
             content = value;
         } else if ( state == 3 ) {
@@ -283,111 +261,4 @@ function getcontent( $target ) {
             break;
     }
     return html;
-}
-
-/**
- * Verify html
- * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {array} 0: int include ( -1: fail； 0: empty html; 1: success; 2: special tag )
- *                 1: result
- */
-function verifyHtml( html ) {
-    if ( html == "" ) return [ 0, html ];
-    else if ( specTest( html )) return [ 2, html ];
-    const item = html.match( /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig );
-    if ( item && item.length > 0 ) {
-        return [ 1, item ];
-    } else {
-        return [ -1, undefined ];
-    }
-}
-
-/**
- * Conver html to jquery object
- * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {string} formatting e.g.:
-            h2#news_title
-            div.introduction
-            div.content
-            div.clearfix
-            div.rating_box
-            span
-            special tag, @see specTest
-                 e.g. [['<strong>▽</strong>']]        [[[$('.article-btn')]]]
-                      [[/src=\\S+(342459.png)\\S+'/]] [[{$('.content').html()}]]
- *
- */
-function selector( html ) {
-    const [ code, item ] = verifyHtml( html );
-    if ( code == 2 ) return html;
-    else if ( code == 1 ) {
-        let [tag, prop, value] = item[0].trim().replace( /['"<>]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
-        if      ( !prop ) prop = tag;
-        else if ( prop.toLowerCase() === "class") prop = `${tag}.${value}`;
-        else if ( prop.toLowerCase() === "id"   ) prop = `${tag}#${value}`;
-        return prop;
-    } else {
-        return null;
-    }
-}
-
-/**
- * Verify special action, action include:
-   - [[{juqery code}]] // new Function, e.g. $("xxx").xxx() return string
-   - [['text']]        // remove '<text>'
-   - [[/regexp/]]      // regexp e.g. $("sr-rd-content").find( "*[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']" )
-   - [[[juqery code]]] // new Function, e.g. $("xxx").find() return jquery object
-
- * 
- * @param  {string} verify content
- * @return {boolen} verify result
- */
-function specTest( content ) {
-    return /^(\[\[)[\[{'/]{1}[ \S]+[}'/\]]\]\]{1}($)/g.test( content );
-}
-
-/**
- * Exec special action, action include: @see specTest
- * type: 0, 3 - be chiefly used in include logic
- * type: 1, 2 - be chiefly used in exclude logic
- * 
- * @param  {string} content
- * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// 3:[])
- */
-function specAction( content ) {
-    let [ value, type ] = [ content.replace( /(^)\[\[|\]\]$/g, "" ) ];
-    switch (value[0]) {
-        case "{":
-            value      = value.replace( /^{|}$/g, "" );
-            content    = ( v=>new Function( `return ${v}` )() )(value);
-            type       = 0;
-            break;
-        case "'":
-            content    = value.replace( /^'|'$/g, "" );
-            const name = content.match(/^<[a-zA-Z0-9_-]+>/g).join("").replace( /<|>/g, "" );
-            const str  = content.replace( /<[/a-zA-Z0-9_-]+>/g, "" );
-            content    =  `${name}:contains(${str})`;
-            type       = 1;
-            break;
-        case "/":
-            content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "\\" ).replace( /'/g, '"' );
-            type       = 2;
-            break;
-        case "[":
-            value      = value.replace( /^{|}$/g, "" );
-            content    = ( v=>new Function( `return ${v}` )() )(value)[0];
-            type       = 3;
-            break;
-        default:
-            console.error( "Not support current action.", content )
-            type       = -1;
-            break;
-    }
-    return [ content, type ];
 }
