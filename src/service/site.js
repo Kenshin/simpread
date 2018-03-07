@@ -306,6 +306,13 @@ async function specbeautify( name, $target ) {
                 $target.replaceWith( `<div class="sr-rd-content-center"><img src="${ src }"></div>` );
             });
             break;
+        case "jianshu.com":
+            $target.find( ".image-package" ).map( ( index, item ) => {
+                const $target = $( item ),
+                    $div    = $target.find( "img" );
+                $target.html( $div );
+            });
+            break;
     }
 }
 

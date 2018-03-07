@@ -352,13 +352,6 @@ async function htmlbeautify( $target ) {
  * @param {jquery}
  */
 async function commbeautify( $target ) {
-    // hack code
-    storage.current.site.name == "jianshu.com" &&
-    $target.find( ".image-package" ).map( ( index, item ) => {
-        const $target = $( item ),
-              $div    = $target.find( "img" );
-        $target.html( $div );
-    });
     $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         const $target = $(item),
               $orgpar = $target.parent(),
