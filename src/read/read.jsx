@@ -81,10 +81,11 @@ class Read extends React.Component {
             if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
             if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
             await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-            await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
-            await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
-            await htmlbeautify( $( "sr-rd-content" ));
-            await commbeautify( $( "sr-rd-content" ));
+            pr.Beautify( $( "sr-rd-content" ) );
+            //await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
+            //await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
+            //await htmlbeautify( $( "sr-rd-content" ));
+            //await commbeautify( $( "sr-rd-content" ));
             pangu.spacingElementByClassName( rdcls );
             this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
             this.props.read.site.css && this.props.read.site.css.length > 0 &&

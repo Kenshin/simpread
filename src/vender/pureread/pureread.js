@@ -3,6 +3,7 @@ console.log( "=== simpread storage load ===" )
 import minimatch from 'minimatch';
 
 import * as util from './util';
+import * as be   from './beautify';
 
 let meta;
 const site   = {
@@ -92,6 +93,13 @@ export default class PureRead {
 
     Exclude( $target ) {
         return excludeSelector( $target, this.current.site.exclude );
+    }
+
+    Beautify( $target ) {
+        be.specbeautify(   this.current.site.name, $target );
+        be.removeSpareTag( this.current.site.name, $target );
+        be.htmlbeautify( $target );
+        be.commbeautify( this.current.site.name, $target );
     }
 }
 
