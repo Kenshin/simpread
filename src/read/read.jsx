@@ -377,6 +377,10 @@ async function commbeautify( $target ) {
                   if ( $img.parent().hasClass( "sr-rd-content-center" )) {
                       $img.parent().removeAttr( "class" ).addClass( "simpread-hidden" );
                   }
+              },
+              tryOriginSrc = () => {
+                  $img.attr( "src", src )
+                      .one( "error", ()=>loaderrorHandle() )
               };
         let  newsrc,
              $parent = $target.parent(),
@@ -387,10 +391,10 @@ async function commbeautify( $target ) {
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
         newsrc = jianshu ? jianshu : newsrc;
-        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
+        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc :  (location.origin + (newsrc.startsWith('/') ? newsrc : '/' + newsrc)) );
         $img.attr( "src", newsrc )
             .one( "load",  ()=>fixOverflowImgsize() )
-            .one( "error", ()=>loaderrorHandle()    )
+            .one( "error", ()=>(src === newsrc ? loaderrorHandle() : tryOriginSrc()) )
             .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );
 
