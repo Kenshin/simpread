@@ -221,7 +221,7 @@ function browserAction( is_update ) {
  * Pure Read
 */
 function pRead() {
-    pr = new PureRead( window.location.href, storage.sites );
+    pr = new PureRead( storage.sites );
     pr.Getsites();
     console.log( "current pureread object is   ", pr )
 }

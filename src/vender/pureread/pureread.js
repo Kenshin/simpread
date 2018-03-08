@@ -22,7 +22,7 @@ const site   = {
 
 export default class PureRead {
 
-    constructor( url, origins ) {
+    constructor( origins ) {
         this.url     = util.getURI();
         this.origins = origins;
         this.current = {};
