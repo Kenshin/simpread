@@ -30,6 +30,9 @@ export default class PureRead {
         meta         = metadata();
     }
 
+    /**
+     * Get sites from url
+     */
     Getsites() {
         const matching         = [];
         this.current.url       = this.url;
@@ -57,6 +60,11 @@ export default class PureRead {
         this.current.site.matching = matching;
     }
 
+    /**
+     * Create temp read mode
+     * 
+     * @param {string} html
+     */
     TempMode( html ) {
         const new_site = { url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: [] } };
         html && ( new_site.site.html = html );
@@ -65,10 +73,18 @@ export default class PureRead {
         this.current.site = safesite({ ...new_site.site }, "local", new_site.url );
     }
 
+    /**
+     * Get read mode html
+     */
     ReadMode() {
         this.html = wrap( this.current.site );
     }
 
+    /**
+     * Get highlight( focus ) jquery, only usage focus mode
+     * 
+     * @return {jquery} jquery object
+     */
     Include() {
         let   include = this.current.site.include,
               $focus  = [];
@@ -91,10 +107,21 @@ export default class PureRead {
         return $focus;
     }
 
+    /**
+     * Get exlcude jquery selector array list
+     * 
+     * @param  {jquery} jquery object
+     * @return {array} jquery selector
+     */
     Exclude( $target ) {
         return excludeSelector( $target, this.current.site.exclude );
     }
 
+    /**
+     * Beautify html
+     * 
+     * @param {jquery} jquery
+     */
     Beautify( $target ) {
         be.specbeautify(   this.current.site.name, $target );
         be.removeSpareTag( this.current.site.name, $target );
