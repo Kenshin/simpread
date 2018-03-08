@@ -798,7 +798,7 @@ class Storage {
      */
     Restore( key ) {
         simpread[key] = clone( origin[key] );
-        this.Getcur( key, current.site );
+        this.Getcur( key, curori.site );
     }
 
     /**
