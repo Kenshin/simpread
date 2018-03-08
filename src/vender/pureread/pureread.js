@@ -1,4 +1,4 @@
-console.log( "=== simpread storage load ===" )
+console.log( "=== PureRead: pureread load ===" )
 
 import minimatch from 'minimatch';
 import pangu     from './plugin/pangu.min';
