@@ -1,6 +1,6 @@
 console.log( "=== simpread read load ===" )
 
-import pangu       from 'pangu';
+//import pangu       from 'pangu';
 
 import ProgressBar from 'schedule';
 import * as spec   from 'special';
@@ -82,11 +82,12 @@ class Read extends React.Component {
             if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
             await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
             pr.Beautify( $( "sr-rd-content" ) );
+            pr.Format( rdcls );
             //await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
             //await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
             //await htmlbeautify( $( "sr-rd-content" ));
             //await commbeautify( $( "sr-rd-content" ));
-            pangu.spacingElementByClassName( rdcls );
+            //pangu.spacingElementByClassName( rdcls );
             this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
             this.props.read.site.css && this.props.read.site.css.length > 0 &&
                 ss.SiteCSS( this.props.read.site.css );

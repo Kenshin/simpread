@@ -1,6 +1,7 @@
 console.log( "=== simpread storage load ===" )
 
 import minimatch from 'minimatch';
+import pangu     from './plugin/pangu.min';
 
 import * as util from './util';
 import * as be   from './beautify';
@@ -127,6 +128,10 @@ export default class PureRead {
         be.removeSpareTag( this.current.site.name, $target );
         be.htmlbeautify( $target );
         be.commbeautify( this.current.site.name, $target );
+    }
+
+    Format( cls ) {
+        pangu.spacingElementByClassName( cls );
     }
 }
 
