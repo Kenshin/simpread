@@ -6,7 +6,6 @@ import pangu     from './plugin/pangu.min';
 import * as util from './util';
 import * as be   from './beautify';
 
-let meta;
 const site   = {
     url       : "",
     target    : "",
@@ -28,14 +27,14 @@ export default class PureRead {
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
         this.html    = {};      // clone site, include: title, desc, include, avatar, paging
-        meta         = metadata();
     }
 
     /**
      * Get sites from url
      */
     Getsites() {
-        const matching         = [];
+        const matching         = [],
+              meta             = metadata();
         this.current.url       = this.url;
         if ( meta ) {
             this.current.auto  = meta.auto;
