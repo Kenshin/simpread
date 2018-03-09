@@ -60,7 +60,7 @@ class Read extends React.Component {
                 storage.pr.TempMode( "read", dom.outerHTML );
                 //storage.Newsite( "read", pr.current.site );
                 storage.Statistics( "read" );
-                Render( pr );
+                Render();
             });
         } else {
             $root
