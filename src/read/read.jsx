@@ -22,7 +22,6 @@ import * as highlight     from 'highlight';
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
 
-let pr;
 const rdcls   = "simpread-read-root",
       bgtmpl  = `<div class="${rdcls}"></div>`,
       rdclsjq = "." + rdcls,
@@ -58,7 +57,7 @@ class Read extends React.Component {
             new Notify().Render( 2, msg );
             this.componentWillUnmount();
             this.props.read.highlight == true && Highlight().done( dom => {
-                pr.TempMode( "read", dom.outerHTML );
+                storage.pr.TempMode( "read", dom.outerHTML );
                 //storage.Newsite( "read", pr.current.site );
                 storage.Statistics( "read" );
                 Render( pr );
@@ -81,8 +80,8 @@ class Read extends React.Component {
             if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
             if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
             await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-            pr.Beautify( $( "sr-rd-content" ) );
-            pr.Format( rdcls );
+            storage.pr.Beautify( $( "sr-rd-content" ) );
+            storage.pr.Format( rdcls );
             //await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
             //await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
             //await htmlbeautify( $( "sr-rd-content" ));
@@ -174,11 +173,10 @@ class Read extends React.Component {
  * Render entry
  * 
  */
-function Render( pureread ) {
-    pr = pureread;
-    pr.ReadMode();
-    console.log( "current pureread object is   ", pr )
-    ReactDOM.render( <Read read={ storage.current } wrapper={ pr.html } />, getReadRoot() );
+function Render() {
+    storage.pr.ReadMode();
+    console.log( "current pureread object is   ", storage.pr )
+    ReactDOM.render( <Read read={ storage.current } wrapper={ storage.pr.html } />, getReadRoot() );
 }
 
 /**
@@ -316,7 +314,7 @@ function getcontent( $target ) {
  */
 async function excludes( $target, exclude ) {
     //const tags = util.exclude( $target, exclude );
-    const tags = pr.Exclude( $target );
+    const tags = storage.pr.Exclude( $target );
     $target.find( tags ).remove();
 }
 

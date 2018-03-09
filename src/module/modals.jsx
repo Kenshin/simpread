@@ -50,7 +50,7 @@ class Modals extends React.Component {
                     if ( changed.option.length == 0 && changed.st.length == 0 ) {
                         new Notify().Render( 0, "当前未改变内容，无需保存。" );
                     } else {
-                        storage.Cleansite( storage.current.site );
+                        storage.pr.Cleansite( storage.current.site );
                         storage.Setcur( storage.current.mode, changed.st.length > 0 ? true : false );
                         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
                         watch.SendMessage( "site", true );
