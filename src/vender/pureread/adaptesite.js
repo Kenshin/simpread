@@ -75,23 +75,6 @@ export default class AdapteSite {
     }
 
     /**
-     * Safe site, add all site props
-     * 
-     * @param {object} modify site 
-     * @param {string} target include: global custom local
-     * @param {string} url 
-     * @returns {object} site
-     */
-    Safesite( site, target, url ) {
-        site.url    = url;
-        site.target = target;
-        site.name  == "" && ( site.name = "tempread::" );
-        ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
-        ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
-        return site;
-    }
-
-    /**
      * Add new site( read only )
      * 
      * @param {string} include: focus, read
@@ -130,6 +113,23 @@ export default class AdapteSite {
        let idx = this.sites[key].findIndex( item => item[0] == older );
        idx != -1 && this.sites[key].splice( idx, 1 );
        callback( idx );
+    }
+
+    /**
+     * Safe site, add all site props
+     * 
+     * @param {object} modify site 
+     * @param {string} target include: global custom local
+     * @param {string} url 
+     * @returns {object} site
+     */
+    Safesite( site, target, url ) {
+        site.url    = url;
+        site.target = target;
+        site.name  == "" && ( site.name = "tempread::" );
+        ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
+        ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
+        return site;
     }
 
     /**
