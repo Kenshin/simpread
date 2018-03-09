@@ -102,7 +102,7 @@ function focusMode() {
                 storage.current.site.name == "" && pr.TempMode( mode.focus, result[0].outerHTML );
                 //storage.current.site.name == "" && storage.Newsite( mode.focus, pr.current.site );
                 storage.Statistics( mode.focus );
-                focus.Render( result, pr, storage.current.bgcolor );
+                focus.Render( result, storage.current.bgcolor );
             }).fail( () => {
                 new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
             });
