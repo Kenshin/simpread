@@ -311,6 +311,19 @@ class Storage {
     }
 
     /**
+     * Set simpread sites to chrome storage
+     * 
+     * @param {object} all sites, @see this.sites
+     * @param {function} callback
+     */
+    Writesite( sites, callback ) {
+        simpread.sites           = sites.global;
+        simpread.websites.custom = sites.custom;
+        simpread.websites.local  = sites.local;
+        save( callback, true );
+    }
+
+    /**
      * Get current object, current object structure include:
      * 
      * @param {string} @see mode
