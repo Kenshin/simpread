@@ -21,9 +21,9 @@ const site   = {
 
 export default class PureRead {
 
-    constructor( origins ) {
+    constructor( sites ) {
         this.url     = util.getURI();
-        this.origins = origins;
+        this.sites   = sites;
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
         this.html    = {};      // clone site, include: title, desc, include, avatar, paging
@@ -45,9 +45,9 @@ export default class PureRead {
             this.current.site.name.startsWith( "metaread::" ) && ( this.state = "meta" );
             this.current.site.name.startsWith( "txtread::"  ) && ( this.state = "txt" );
         } else {
-            getsite( "local",  new Map( this.origins.local  ), this.url, matching );
-            getsite( "global", new Map( this.origins.global ), this.url, matching );
-            getsite( "custom", new Map( this.origins.custom ), this.url, matching );
+            getsite( "local",  new Map( this.sites.local  ), this.url, matching );
+            getsite( "global", new Map( this.sites.global ), this.url, matching );
+            getsite( "custom", new Map( this.sites.custom ), this.url, matching );
             if ( matching.length > 0 ) {
                 const found       = matching[0];
                 this.current.url  = found[0];
