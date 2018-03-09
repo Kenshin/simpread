@@ -19,13 +19,6 @@ export default class PureRead extends AdapteSite {
      * @param {string} html
      */
     TempMode( mode, html ) {
-        /*
-        const new_site = { url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: [] } };
-        html && ( new_site.site.html = html );
-        this.state        = "temp";
-        this.current.url  = new_site.url;
-        this.current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
-        */
        this.state        = "temp";
        this.Newsite( mode, html );
     }
