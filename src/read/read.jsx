@@ -58,8 +58,8 @@ class Read extends React.Component {
             new Notify().Render( 2, msg );
             this.componentWillUnmount();
             this.props.read.highlight == true && Highlight().done( dom => {
-                pr.TempMode( dom.outerHTML );
-                storage.Newsite( "read", pr.current.site );
+                pr.TempMode( "read", dom.outerHTML );
+                //storage.Newsite( "read", pr.current.site );
                 storage.Statistics( "read" );
                 Render( pr );
             });

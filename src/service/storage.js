@@ -514,7 +514,6 @@ class Storage {
         current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
         console.log( "【read only】current site object is ", current )
     }
-    */
 
     Newsite( mode, new_site ) {
         current.mode = mode;
@@ -522,6 +521,7 @@ class Storage {
         current.site = new_site;
         console.log( "【read only】current site object is ", current )
     }
+    */
 
     /**
      * Update url and site from param
