@@ -23,7 +23,7 @@ export default class PureRead {
 
     constructor( sites ) {
         this.url     = util.getURI();
-        this.sites   = sites;
+        this.sites   = sites;   // include: global, custom, local
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
         this.html    = {};      // clone site, include: title, desc, include, avatar, paging
