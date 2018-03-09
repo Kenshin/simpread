@@ -106,6 +106,48 @@ export default class AdapteSite {
         console.log( "【read only】current site object is ", this.current )
     }
 
+    /**
+     * Update url and site from param
+     * 
+     * @param {string} value is: global, custom, local
+     * @param {string} older url
+     * @param {array}  [ url, new site]
+     */
+    Updatesite( key, older, newer ) {
+        let idx = this.sites[key].findIndex( item => item[0] == older );
+        idx == -1 && ( idx = this.sites[key].length );
+        this.sites[key].splice( idx, 1, newer );
+    }
+
+    /**
+     * Delete site from this.sites.local
+     * 
+     * @param {string} value is: global, custom, local
+     * @param {string} older url
+     * @param {func}   callback
+     */
+    Deletesite( key, older, callback ) {
+       let idx = this.sites[key].findIndex( item => item[0] == older );
+       idx != -1 && this.sites[key].splice( idx, 1 );
+       callback( idx );
+    }
+
+    /**
+     * Clean useless site props
+     * 
+     * @param   {object} site
+     * @returns {object} site
+    */
+    Cleansite( site ) {
+        delete site.url;
+        delete site.html;
+        delete site.target;
+        delete site.matching;
+        site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
+        site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
+        return site;
+    }
+
 }
 
 /**
