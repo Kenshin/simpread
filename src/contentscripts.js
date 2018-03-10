@@ -19,6 +19,7 @@ import {browser} from 'browser';
 import * as watch from 'watch';
 
 import PureRead  from 'pureread';
+import * as prplugin from 'prplugin';
 
 let pr; // pure read object
 let current_url = location.href; // current page url ( when changed page changed )
@@ -222,6 +223,7 @@ function browserAction( is_update ) {
 */
 function pRead() {
     pr = new PureRead( storage.sites );
+    pr.AddPlugin( prplugin.Plugin() );
     pr.Getsites();
     storage.pr = pr;
     console.log( "current pureread object is   ", pr, storage.pr )

@@ -294,6 +294,7 @@ const webpack = require( 'webpack' ),
 
           minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
           pureread   : __dirname + '/src/vender/pureread/pureread.js',
+          prplugin   : __dirname + '/src/vender/pureread/plugin.js',
 
         }
       }
