@@ -1,7 +1,5 @@
 console.log( "=== PureRead: pureread load ===" )
 
-import pangu      from './plugin/pangu.min';
-
 import * as util  from './util';
 import * as be    from './beautify';
 import AdapteSite from './adaptesite';
@@ -11,6 +9,11 @@ export default class PureRead extends AdapteSite {
     constructor( sites ) {
         super( sites );
         this.html  = {}; // clone site, include: title, desc, include, avatar, paging
+    }
+
+    AddPlugin( plugin ) {
+        super.minimatch = plugin.minimatch;
+        this.pangu      = plugin.pangu;
     }
 
     /**
@@ -80,7 +83,8 @@ export default class PureRead extends AdapteSite {
     }
 
     Format( cls ) {
-        pangu.spacingElementByClassName( cls );
+        this.pangu &&
+            this.pangu.spacingElementByClassName( cls );
     }
 }
 

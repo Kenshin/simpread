@@ -1,7 +1,5 @@
 console.log( "=== PureRead: AdapteSite load ===" )
 
-import minimatch from 'minimatch';
-
 import * as util from './util';
 
 const site   = {
@@ -16,6 +14,7 @@ const site   = {
     avatar    : [],
     paging    : [],
 };
+let minimatch;
 
 export default class AdapteSite {
 
@@ -24,6 +23,10 @@ export default class AdapteSite {
         this.sites   = sites;   // include: global, custom, local
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
+    }
+
+    set minimatch( value ) {
+        minimatch = value;
     }
 
     /**
