@@ -18,11 +18,12 @@ let minimatch;
 
 export default class AdapteSite {
 
-    constructor( sites ) {
+    constructor( sites = { global:[], custom:[], local:[] } ) {
         this.url     = util.getURI();
         this.sites   = sites;   // include: global, custom, local
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
+        this.origins = [];
     }
 
     set minimatch( value ) {
@@ -149,6 +150,42 @@ export default class AdapteSite {
         site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
         site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
         return site;
+    }
+
+    /**
+     * Add urls to origins
+     * 
+     * @param {array} origins array
+     */
+    Origins( result ) {
+        const urls = new Set( this.origins.concat( result ) );
+        urls.forEach( item => {
+            if ( item.trim() == "" || !item.trim().startsWith( "http" ) || !item.trim().endsWith( ".json" ) ) urls.delete( item );
+        });
+        this.origins = [ ...urls ];
+        return this.origins;
+    }
+
+    /**
+     * Add new sites to this.sites.custom
+     * 
+     * @param  {object} new sites
+     * @return {array} this.sites.custom
+     */
+    AddOrigins( new_sites ) {
+        this.sites.custom = [ ...new_sites ];
+        return this.sites.custom;
+    }
+
+    /**
+     * Clear origins
+     * 
+     * @returns custom.length
+     */
+    ClearOrigins() {
+        const len = this.sites.custom.length;
+        this.sites.custom = [];
+        return len;
     }
 
 }
