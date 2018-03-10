@@ -30,6 +30,8 @@ import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
 
+import PureRead   from 'pureread';
+
 let tabsItemID = 0;
 
 /**
@@ -75,6 +77,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
+    pRead();
     hashnotify();
     firstLoad( first );
     sidebarRender();
@@ -246,4 +249,13 @@ function sidebarRender() {
                              waves="md-waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
+}
+
+/** 
+ * Pure Read
+*/
+function pRead() {
+    storage.pr         = new PureRead( storage.sites );
+    storage.pr.origins = storage.option.origins;
+    console.log( "current pureread object is   ", storage.pr )
 }
