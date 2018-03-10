@@ -11,6 +11,11 @@ export default class PureRead extends AdapteSite {
         this.html  = {}; // clone site, include: title, desc, include, avatar, paging
     }
 
+    /**
+     * Add Plugin
+     * 
+     * @param {object} plugin object
+     */
     AddPlugin( plugin ) {
         super.minimatch = plugin.minimatch;
         this.pangu      = plugin.pangu;
@@ -82,6 +87,11 @@ export default class PureRead extends AdapteSite {
         be.commbeautify( this.current.site.name, $target );
     }
 
+    /**
+     * Format usage pangu plugin
+     * 
+     * @param {string} class name
+     */
     Format( cls ) {
         this.pangu &&
             this.pangu.spacingElementByClassName( cls );
