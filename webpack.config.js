@@ -292,7 +292,6 @@ const webpack = require( 'webpack' ),
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
 
-          minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
           pureread   : __dirname + '/src/vender/pureread/pureread.js',
           prplugin   : __dirname + '/src/vender/pureread/plugin.js',
 

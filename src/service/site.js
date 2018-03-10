@@ -1,6 +1,8 @@
 console.log( "=== simpread site load ===" )
 
-import minimatch from 'minimatch';
+import * as prplugin from 'prplugin';
+
+const minimatch = prplugin.Plugin( "minimatch" );
 
 /**
  * Find site by url from sites
