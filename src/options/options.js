@@ -140,9 +140,17 @@ function vernotify( first ) {
  * @param {bool} is first load
  */
 function firstLoad( first ) {
+    /* from new workflow by pureread
     first && storage.GetNewsites( "local", ( _, error ) => {
         error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
         !error && storage.Statistics( "create" );
+    });
+    */
+    first && storage.GetRemote( "local", ( result, error ) => {
+        if ( !error ) {
+            storage.pr.Addsites( result );
+            storage.Writesite( storage.pr.sites, () => storage.Statistics( "create" ) );
+        } else new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
     });
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true );
 }
