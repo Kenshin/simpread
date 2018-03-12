@@ -79,6 +79,26 @@ export default class AdapteSite {
     }
 
     /**
+     * Add sites from url result
+     * 
+     * @param {object} sites.[array]
+     * @return {int} update sites count
+     */
+    Addsites( result ) {
+        let count = 0;
+        if ( this.sites.global.length == 0 ) {
+            this.sites.global = this.Formatsite( result );
+            count             = this.sites.global.length;
+        }
+        else {
+            const obj         = addsites( this.Formatsite( result ), this.sites.global );
+            count             = obj.count;
+            this.sites.global = obj.newsites;
+        }
+        return count;
+    }
+
+    /**
      * Add new site( read only )
      * 
      * @param {string} include: focus, read
@@ -273,11 +293,12 @@ function readtxt() {
 /**
  * Add new sites to old sites
  * 
- * @param  {array}  new sites from local or remote
+ * @param  {array}  new     sites from local or remote
+ * @param  {array}  current sites from this.sites.global
  * @return {object} count: new sites; forced: update sites( discard, all site must be forced update)
  */
-function addsites( newsites ) {
-    const oldsites = new Map( simpread.sites ),
+function addsites( newsites, old ) {
+    const oldsites = new Map( old ),
           urls     = [ ...oldsites.keys() ];
     let   [ count, forced ] = [ 0, 0 ];
     newsites.map( site => {
@@ -287,8 +308,7 @@ function addsites( newsites ) {
             forced++;
         }
     });
-    simpread.sites = newsites;
-    return { count, forced };
+    return { count, newsites };
 }
 
 /**
