@@ -1,3 +1,4 @@
+console.log( "=== PureRead: Util load ===" )
 
 /**
  * Deep clone object
