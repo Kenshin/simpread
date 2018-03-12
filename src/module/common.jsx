@@ -160,10 +160,14 @@ export default class CommonOpt extends React.Component {
     }
 
     newsites() {
-        storage.GetNewsites( "remote", ( { count }, error ) => {
+        //storage.GetNewsites( "remote", ( { count }, error ) => {
+        storage.GetRemote( "remote", ( result, error ) => {
             if ( !error ) {
-                watch.SendMessage( "site", true );
-                count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
+                const count = storage.pr.Addsites( result );
+                storage.Writesite( storage.pr.sites, () => {
+                    watch.SendMessage( "site", true );
+                    count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
+                });
             } else {
                 new Notify().Render( 3, `同步时发生了一些问题，并不会影响本地配置文件，请稍后再试！` );
             }
