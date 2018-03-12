@@ -87,11 +87,11 @@ export default class AdapteSite {
     Addsites( result ) {
         let count = 0;
         if ( this.sites.global.length == 0 ) {
-            this.sites.global = this.Formatsite( result );
+            this.sites.global = this.Formatsites( result );
             count             = this.sites.global.length;
         }
         else {
-            const obj         = addsites( this.Formatsite( result ), this.sites.global );
+            const obj         = addsites( this.Formatsites( result ), this.sites.global );
             count             = obj.count;
             this.sites.global = obj.newsites;
         }
@@ -178,7 +178,7 @@ export default class AdapteSite {
      * @param  {object} sites.[array]
      * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
      */
-    Formatsite( result ) {
+    Formatsites( result ) {
         const format = new Map();
         for ( let site of result.sites ) {
             if ( verifysite( site ) != 0 ) continue;

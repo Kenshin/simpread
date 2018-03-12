@@ -107,7 +107,7 @@ export default class LabsOpt extends React.Component {
                         idx++;
                         if ( result && result.sites.length > 0 ) {
                             count++;
-                            arr = arr.concat( storage.pr.Formatsite( result ) );
+                            arr = arr.concat( storage.pr.Formatsites( result ) );
                         } else new Notify().Render( `导入失败 ${ item }` );
                         /*
                         !error && count++;
