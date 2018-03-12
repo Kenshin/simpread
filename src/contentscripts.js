@@ -225,6 +225,6 @@ function pRead() {
     pr = new PureRead( storage.sites );
     pr.AddPlugin( prplugin.Plugin() );
     pr.Getsites();
-    storage.pr = pr;
+    storage.puread = pr;
     console.log( "current pureread object is   ", pr, storage.pr )
 }

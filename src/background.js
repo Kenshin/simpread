@@ -14,7 +14,7 @@ import PureRead    from 'pureread';
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
-    storage.pr = new PureRead( storage.sites );
+    storage.puread = new PureRead( storage.sites );
     if ( local.Firstload() ) {
         local.Version( ver.version );
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });

@@ -263,7 +263,7 @@ function sidebarRender() {
  * Pure Read
 */
 function pRead() {
-    storage.pr         = new PureRead( storage.sites );
+    storage.puread     = new PureRead( storage.sites );
     storage.pr.origins = storage.option.origins;
     console.log( "current pureread object is   ", storage.pr )
 }
