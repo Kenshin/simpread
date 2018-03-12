@@ -71,7 +71,8 @@ export default class LabsOpt extends React.Component {
 
     origins( type ) {
         if ( type == "origins" ) {
-            storage.GetOrigins( ( result, error ) => {
+            //storage.GetOrigins( ( result, error ) => {
+            storage.GetRemote( "origins", ( result, error ) => {
                 if ( error ) new Notify().Render( 2, "获取失败，请稍后重新加载。" );
                 else {
                     /*
@@ -101,11 +102,18 @@ export default class LabsOpt extends React.Component {
                     new Notify().Render( "已剔除掉不符合规范的第三方源。" );
                 }
                 this.props.option.origins.forEach( item => {
-                    storage.LoadOrigin( item, ( result, error ) => {
+                    //storage.LoadOrigin( item, ( result, error ) => {
+                    storage.GetRemote( item, ( result, error ) => {
                         idx++;
+                        if ( result && result.sites.length > 0 ) {
+                            count++;
+                            arr = arr.concat( storage.pr.Formatsite( result ) );
+                        } else new Notify().Render( `导入失败 ${ item }` );
+                        /*
                         !error && count++;
                         !error && ( arr = arr.concat( result.sites ));
                         error  && new Notify().Render( `导入失败 ${ result.url }` );
+                        /*/
                         if ( idx == max ) {
                             //arr.length > 0 && storage.AddOrigins( arr );
                             arr.length > 0 && ( storage.websites.custom = storage.pr.AddOrigins( arr ) );
