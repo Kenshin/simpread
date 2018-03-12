@@ -37,13 +37,6 @@ export default class AdapteSite {
      * @param {string} url 
      */
     Getsite( type, url ) {
-        /*
-        let sites;
-        if ( type == "global" ) {
-            sites = simpread.sites;
-        } else sites = simpread.websites[type];
-        return sites.find( item => item[0] == url );
-        */
        return this.sites[type].find( item => item[0] == url );
     }
 
