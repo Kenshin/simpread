@@ -581,6 +581,36 @@ class Storage {
     }
 
     /**
+     * Get remote from type
+     * 
+     * @param {string} include: local, remote, origins, and <urls>
+     * @param {func} callback
+     */
+    async GetRemote( type, callback ) {
+        let url;
+        switch ( type ) {
+            case "local":
+                url = local;
+                break;
+            case "remote":
+                url = remote;
+                break;
+            case "origins":
+                url = origins;
+                break;
+            default:
+                url = type;
+        }
+        try {
+            const response = await fetch( url + "?_=" + Math.round(+new Date()) ),
+                  result   = await response.json();
+            result ? callback( result ) : callback( undefined, "error" );
+        } catch ( error ) {
+            callback( undefined, "error" );
+        }
+    }
+
+    /**
      * Get local/remote JSON usage async
      * 
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
