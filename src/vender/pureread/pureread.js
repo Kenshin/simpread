@@ -1,4 +1,4 @@
-console.log( "=== PureRead: pureread load ===" )
+console.log( "=== PureRead: PureRead load ===" )
 
 import * as util  from './util';
 import * as be    from './beautify';
