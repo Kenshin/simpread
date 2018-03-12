@@ -282,6 +282,24 @@ class Storage {
     }
 
     /**
+     * Set puread object
+     * 
+     * @param {object} pure read
+     */
+    set puread( value ) {
+        this.pr = value;
+    }
+
+    /**
+     * Get puread object
+     * 
+     * @return {object} pure read
+     */
+    get puread() {
+        return this.pr;
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
