@@ -153,12 +153,30 @@ export default class AdapteSite {
     }
 
     /**
+     * Format sites object from local or remote json file
+     * 
+     * @param  {object} sites.[array]
+     * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
+     */
+    Formatsite( result ) {
+        const format = new Map();
+        for ( let site of result.sites ) {
+            if ( verifysite( site ) != 0 ) continue;
+            const url = site.url;
+            delete site.url;
+            format.set( url, site );
+        }
+        return [ ...format ];
+    }
+
+    /**
      * Add urls to origins
      * 
-     * @param {array} origins array
+     * @param {json} result json
      */
     Origins( result ) {
-        const urls = new Set( this.origins.concat( result ) );
+        let urls = result.origins.map( item => item.url );
+        urls     = new Set( this.origins.concat( urls ) );
         urls.forEach( item => {
             if ( item.trim() == "" || !item.trim().startsWith( "http" ) || !item.trim().endsWith( ".json" ) ) urls.delete( item );
         });
@@ -253,23 +271,6 @@ function readtxt() {
 }
 
 /**
- * Format sites object from local or remote json file
- * 
- * @param  {object} sites.[array]
- * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
- */
-function formatSites( result ) {
-    const format = new Map();
-    for ( let site of result.sites ) {
-        if ( verifysite( site ) != 0 ) continue;
-        const url = site.url;
-        delete site.url;
-        format.set( url, site );
-    }
-    return [ ...format ];
-}
-
-/**
  * Add new sites to old sites
  * 
  * @param  {array}  new sites from local or remote
@@ -339,9 +340,9 @@ function getsite( type, sites, url, matching = [] ) {
  */
 function verifysite( site ) {
     if ( !site.name || !site.url || !site.include ) return -1;
-    if ( verifyHtml( site.title   )[0] == -1 ||
-         verifyHtml( site.include )[0] == -1 ||
-         verifyHtml( site.desc    )[0] == -1
+    if ( util.verifyHtml( site.title   )[0] == -1 ||
+         util.verifyHtml( site.include )[0] == -1 ||
+         util.verifyHtml( site.desc    )[0] == -1
         ) {
         return -2;
     }
@@ -349,7 +350,7 @@ function verifysite( site ) {
         if ( site.paging.length != 2 ) return -3;
         if ( !site.paging[0].prev )    return -4;
         if ( !site.paging[1].next )    return -5;
-        if ( verifyHtml( site.paging[0].prev )[0] == -1 || verifyHtml( site.paging[1].next )[0] == -1 ) {
+        if ( util.verifyHtml( site.paging[0].prev )[0] == -1 || util.verifyHtml( site.paging[1].next )[0] == -1 ) {
             return -6;
         }
     }
@@ -357,7 +358,7 @@ function verifysite( site ) {
         if ( site.avatar.length != 2 ) return -7;
         if ( !site.avatar[0].name )    return -8;
         if ( !site.avatar[1].url  )    return -9;
-        if ( verifyHtml( site.avatar[0].name )[0] == -1 || verifyHtml( site.avatar[1].url )[0] == -1 ) {
+        if ( util.verifyHtml( site.avatar[0].name )[0] == -1 || util.verifyHtml( site.avatar[1].url )[0] == -1 ) {
             return -10;
         }
     }
