@@ -1,3 +1,4 @@
+console.log( "=== PureRead: Beautify load ===" )
 
 /**
  * Beautify html
