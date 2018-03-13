@@ -14,6 +14,7 @@ const minimatch = prplugin.Plugin( "minimatch" );
  * 
  * @return {array}  0: current site; 1: current url， 2: type
  */
+/* from new workflow by pureread
 function findSitebyURL( type, sites, url, matching = [] ) {
     const domain   = (names)=>{
             const arr = names.replace( "www.", "" ).match( /\.\S+\.\S+/g );
@@ -33,14 +34,15 @@ function findSitebyURL( type, sites, url, matching = [] ) {
               sufname= domain( name );
         if ( !isroot() && !cur.endsWith( "*" ) && cur.replace( /^http[s]?:/, "" ) == url.replace( /^http[s]?:/, "" ) ) {
             matching.push( [ cur, clone( sites.get( cur )), type ] );
-        } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
-            // e.g. https://www.douban.com/* http://mp.weixin.qq.com/*
-            matching.push( [ cur, clone( sites.get( cur )), type ] );
-        } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
-            matching.push( [ cur, clone( sites.get( cur )), type ] );
-        }
-    }
-}
+*/
+//        } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
+//            // e.g. https://www.douban.com/* http://mp.weixin.qq.com/*
+//            matching.push( [ cur, clone( sites.get( cur )), type ] );
+//        } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
+//            matching.push( [ cur, clone( sites.get( cur )), type ] );
+//        }
+//    }
+//}
 
 /**
  * Remove spare tag
@@ -48,6 +50,7 @@ function findSitebyURL( type, sites, url, matching = [] ) {
  * @param {string} storage.current.site.name
  * @param {jquery} jquery object
  */
+/* from new workflow by pureread
 async function removeSpareTag( name, $target ) {
     let [ remove, tag ] = [ false, "" ];
     if ([ "lib.csdn.net", "huxiu.com", "my.oschina.net", "caixin.com", "163.com", "steachs.com", "hacpai.com", "apprcn.com", "mp.weixin.qq.com" ].includes( name )) {
@@ -64,6 +67,7 @@ async function removeSpareTag( name, $target ) {
         });
     }
 }
+*/
 
 /**
  * Verify site
@@ -88,6 +92,7 @@ function verify( name ) {
  * 
  * @param {string} storage.current.site.name
  */
+/* from new workflow by pureread
 async function specbeautify( name, $target ) {
     switch ( name ) {
         case "sspai.com":
@@ -317,6 +322,7 @@ async function specbeautify( name, $target ) {
             break;
     }
 }
+*/
 
 /**
  * Deep clone object
@@ -324,9 +330,11 @@ async function specbeautify( name, $target ) {
  * @param  {object} target object
  * @return {object} new target object
  */
+/* from new workflow by pureread
 function clone( target ) {
     return $.extend( true, {}, target );
 }
+*/
 
 /**
  * Html convert to enml
@@ -396,9 +404,11 @@ function clearMD( str ) {
  * 
  * @return {object} meata data or undefined
  */
-function metadata() {
-    if ( minimatch( location.href, "file://**/*.txt" ) || minimatch( location.href, "http*://**/*.txt" ) ) {
-        return readtxt();
+
+//function metadata() {
+//    if ( minimatch( location.href, "file://**/*.txt" ) || minimatch( location.href, "http*://**/*.txt" ) ) {
+//        return readtxt();
+/* from new workflow by pureread
     }
     const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
           meta = {
@@ -430,10 +440,12 @@ function metadata() {
         return undefined;
     }
 }
+*/
 
 /**
  * Read txt, include: file and http
  */
+/* from new workflow by pureread
 function readtxt() {
     const title = location.pathname.split( "/" ).pop(),
           type  = location.protocol == "file:" ? "local" : "remote",
@@ -452,6 +464,7 @@ function readtxt() {
     !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".txt", "" )) }</title>` );
     return meta;
 }
+*/
 
 /**
  * Exclusion
@@ -482,13 +495,13 @@ function whitelist( data ) {
 }
 
 export {
-    findSitebyURL  as Getsite,
-    specbeautify   as Beautify,
-    removeSpareTag as RemoveTag,
+    //findSitebyURL  as Getsite,
+    //specbeautify   as Beautify,
+    //removeSpareTag as RemoveTag,
     verify         as Verify,
     html2enml      as HTML2ENML,
     clearMD        as ClearMD,
-    metadata       as GetMetadata,
+    //metadata       as GetMetadata,
     exclusion      as Exclusion,
     whitelist      as Whitelist,
 }

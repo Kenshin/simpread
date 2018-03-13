@@ -5,7 +5,7 @@ import "babel-polyfill";
 import * as st        from 'site';
 import {browser}      from 'browser';
 import {version}      from 'version';
-import { verifyHtml } from 'util';
+//import { verifyHtml } from 'util';
 
 /**
  * Read and Write Chrome storage
@@ -347,7 +347,7 @@ class Storage {
      * @param {string} @see mode
      * @param {object} include: meta read and txt read
      */
-    /*
+    /* from new workflow by pureread
     Getcur( key, meta ) {
         current      = swap( simpread[key], {} );
         current.mode = key;
@@ -429,6 +429,7 @@ class Storage {
      * @param {string} include: global, custom, local
      * @param {string} url 
      */
+    /* from new workflow by pureread
     Getsite( type, url ) {
         let sites;
         if ( type == "global" ) {
@@ -436,6 +437,7 @@ class Storage {
         } else sites = simpread.websites[type];
         return sites.find( item => item[0] == url );
     }
+    */
 
     /**
      * Get adapter site(s)
@@ -444,6 +446,7 @@ class Storage {
      * @param {object} storage.current
      * @param {object} include: meta read and txt read
      */
+    /* from new workflow by pureread
     Getsites( current, meta ) {
         const   url       = getURI(),
                 matching  = [];
@@ -468,6 +471,7 @@ class Storage {
         }
         current.site.matching = matching;
     }
+    */
 
     /**
      * Safe site, add all site props
@@ -477,6 +481,7 @@ class Storage {
      * @param {string} url 
      * @returns {object} site
      */
+    /* from new workflow by pureread
     Safesite( site, target, url ) {
         site.url    = url;
         site.target = target;
@@ -485,6 +490,7 @@ class Storage {
         ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
         return site;
     }
+    */
 
     /**
      * Clean useless site props
@@ -492,6 +498,7 @@ class Storage {
      * @param   {object} site
      * @returns {object} site
     */
+   /* from new workflow by pureread
     Cleansite( site ) {
        delete site.url;
        delete site.html;
@@ -501,6 +508,7 @@ class Storage {
        site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
        return site;
     }
+    */
 
     /**
      * Find site, code include:
@@ -536,7 +544,7 @@ class Storage {
      * @param {string} include: focus, read
      * @param {string} when read html is dom.outerHTML
      */
-    /*
+    /* from new workflow by pureread
     Newsite( mode, html ) {
         const new_site = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: [] } };
         html && ( new_site.site.html = html );
@@ -560,6 +568,7 @@ class Storage {
      * @param {object} new site
      * @param {func}   callback
      */
+    /* from new workflow by pureread
     Updatesite( site, callback ) {
         current.url  = site.url;
         current.site = { ...site };
@@ -567,6 +576,7 @@ class Storage {
         this.Setsite();
         save( callback, true );
     }
+    */
 
     /**
      * Clone current site
@@ -590,6 +600,7 @@ class Storage {
      * @param {object} site
      * @param {func}   callback, -1: not exist, -2: not local, > 0: exist
      */
+    /* from new workflow by pureread
     Deletesite( site, callback ) {
         if ( site.target == "local" ) {
             let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
@@ -597,6 +608,7 @@ class Storage {
             idx != -1 ?  save( callback, true ) : callback( idx );
         } else callback( -2 );
     }
+    */
 
     /**
      * Get remote from type
@@ -634,6 +646,7 @@ class Storage {
      * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
      * @return {function} callback, param1: object; param2: error
      */
+    /* from new workflow by pureread
     async GetNewsites( type, callback ) {
         try {
             const url    = type === "remote" ? remote : local,
@@ -656,12 +669,14 @@ class Storage {
             callback && callback( {}, error );
         }
     }
+    */
 
     /**
      * Get origins from http://xxxx.xx/website_list_origins.json
      * 
      * @param {func} callback 
      */
+    /*
     async GetOrigins( callback ) {
         try {
             const response = await fetch( origins + "?_=" + Math.round(+new Date()) ),
@@ -674,6 +689,7 @@ class Storage {
             callback( undefined, "error" );
         }
     }
+    */
 
     /**
      * Load origins from url
@@ -681,6 +697,7 @@ class Storage {
      * @param {string} url
      * @param {func} callback 
      */
+    /* from new workflow by pureread
     async LoadOrigin( url, callback ) {
         try {
             const response = await fetch( url + "?_=" + Math.round(+new Date()) ),
@@ -695,26 +712,31 @@ class Storage {
             callback( { url }, error );
         }
     }
+    */
 
     /**
      * Add new sites to simpread.websites.custom
      * 
      * @param {object} new sites
      */
+    /* from new workflow by pureread
     AddOrigins( new_sites ) {
         simpread.websites.custom = [ ...new_sites ];
     }
+    */
 
     /**
      * Clear origins
      * 
      * @returns custom.length
      */
+    /* from new workflow by pureread
     ClearOrigins() {
         const len = simpread.websites.custom.length;
         simpread.websites.custom = [];
         return len;
     }
+    */
 
     /**
      * Statistics simpread same info
@@ -941,6 +963,7 @@ function clone( target ) {
  * @param  {object} sites.[array]
  * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
  */
+/* from new workflow by pureread
 function formatSites( result ) {
     const format = new Map();
     for ( let site of result.sites ) {
@@ -951,6 +974,7 @@ function formatSites( result ) {
     }
     return [ ...format ];
 }
+*/
 
 /**
  * Add new sites to old sites
@@ -958,6 +982,7 @@ function formatSites( result ) {
  * @param  {array}  new sites from local or remote
  * @return {object} count: new sites; forced: update sites( discard, all site must be forced update)
  */
+/* from new workflow by pureread
 function addsites( newsites ) {
     const oldsites = new Map( simpread.sites ),
           urls     = [ ...oldsites.keys() ];
@@ -972,6 +997,7 @@ function addsites( newsites ) {
     simpread.sites = newsites;
     return { count, forced };
 }
+*/
 
 /**
  * Verify site validity, include:
@@ -982,6 +1008,7 @@ function addsites( newsites ) {
  * 
  * @param {object} site 
  */
+/* from new workflow by pureread
 function verifysite( site ) {
     if ( !site.name || !site.url || !site.include ) return -1;
     if ( verifyHtml( site.title   )[0] == -1 ||
@@ -1008,6 +1035,7 @@ function verifysite( site ) {
     }
     return 0;
 }
+*/
 
 /**
  * Call chrome storage set

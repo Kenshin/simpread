@@ -27,6 +27,7 @@ function verifyHtml( html ) {
  * @param  {array}  hidden html
  * @return {string} tags list string
  */
+/* from new workflow by pureread
 function excludeSelector( $target, exclude ) {
     let tags = [], tag = "";
     for ( let content of exclude ) {
@@ -52,6 +53,7 @@ function excludeSelector( $target, exclude ) {
     }
     return tags.join( "," );
 }
+*/
 
 /**
  * Conver html to jquery object
@@ -71,6 +73,7 @@ function excludeSelector( $target, exclude ) {
                       [[/src=\\S+(342459.png)\\S+'/]] [[{$('.content').html()}]]
  *
  */
+/* from new workflow by pureread
 function getSelector( html ) {
     const [ code, item ] = verifyHtml( html );
     if ( code == 2 ) return html;
@@ -84,6 +87,7 @@ function getSelector( html ) {
         return null;
     }
 }
+*/
 
 /**
  * Verify special action, action include:
@@ -108,6 +112,7 @@ function specTest( content ) {
  * @param  {string} content
  * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// 3:[])
  */
+/* from new workflow by pureread
 function specAction( content ) {
     let [ value, type ] = [ content.replace( /(^)\[\[|\]\]$/g, "" ) ];
     switch (value[0]) {
@@ -139,11 +144,12 @@ function specAction( content ) {
     }
     return [ content, type ];
 }
+*/
 
 export {
     verifyHtml      as verifyHtml,
-    excludeSelector as exclude,
-    getSelector     as selector,
-    specTest        as specTest,
-    specAction      as specAction
+    //excludeSelector as exclude,
+    //getSelector     as selector,
+    //specTest        as specTest,
+    //specAction      as specAction
 }

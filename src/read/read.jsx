@@ -11,7 +11,7 @@ import * as se     from 'siteeditor';
 import * as kbd    from 'keyboard';
 
 import { storage, Clone } from 'storage';
-import * as util          from 'util';
+//import * as util          from 'util';
 import * as st            from 'site';
 import th                 from 'theme';
 import * as ss            from 'stylesheet';
@@ -82,11 +82,13 @@ class Read extends React.Component {
             await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
             storage.pr.Beautify( $( "sr-rd-content" ) );
             storage.pr.Format( rdcls );
+            /* from new workflow by pureread
             //await st.Beautify( storage.current.site.name, $( "sr-rd-content" ) );
             //await st.RemoveTag( storage.current.site.name, $( "sr-rd-content" ) );
             //await htmlbeautify( $( "sr-rd-content" ));
             //await commbeautify( $( "sr-rd-content" ));
             //pangu.spacingElementByClassName( rdcls );
+            */
             this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
             this.props.read.site.css && this.props.read.site.css.length > 0 &&
                 ss.SiteCSS( this.props.read.site.css );
@@ -236,6 +238,7 @@ function getReadRoot() {
  * @param  {object} storage.current.site object
  * @return {object} wrapper object
  */
+/* from new workflow by pureread
 function wrap( site ) {
     const wrapper   = Clone( site ),
           title     = util.selector( site.title == "" ? "<title>" : site.title ),
@@ -258,6 +261,7 @@ function wrap( site ) {
     });
     return wrapper;
 }
+*/
 
 /**
  * Query content usage jquery
@@ -266,6 +270,7 @@ function wrap( site ) {
  * @param  {string} type, incldue: text,  html and multi
  * @return {string} query result
  */
+/*  from new workflow by pureread
 function query( content, type = "text" ) {
     if ( util.specTest( content ) ) {
         const [ value, state ] = util.specAction( content );
@@ -283,6 +288,7 @@ function query( content, type = "text" ) {
     }
     return content;
 }
+*/
 
 /**
  * Get content from current.site.include
@@ -290,6 +296,7 @@ function query( content, type = "text" ) {
  * @param  {jquery} jquery object e.g. $root.find( content )
  * @return {string} $target html
  */
+/* from new workflow by pureread
 function getcontent( $target ) {
     let html = "";
     switch ( $target.length ) {
@@ -305,6 +312,7 @@ function getcontent( $target ) {
     }
     return html;
 }
+*/
 
 /**
  * Set exclude style
@@ -326,19 +334,20 @@ async function excludes( $target, exclude ) {
  * 
  * @param {jquery} jquery object
  */
-async function htmlbeautify( $target ) {
-    try {
-        $target.html( ( index, html ) => {
-            return html.trim()
-                    .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
-                    .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
-                    .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
-        });
-    } catch ( error ) {
-        console.error( error );
-        return $target.html();
-    }
-}
+/* from new workflow by pureread */
+//async function htmlbeautify( $target ) {
+//    try {
+//        $target.html( ( index, html ) => {
+//            return html.trim()
+//                    .replace( /<\/?blockquote/g, (value) => value[1] == "/" ? "</sr-blockquote" : "<sr-blockquote" )
+//                    .replace( /<br>\n?<br>(\n?<br>)*/g, "<br>" )
+//                    .replace( /\/(div|p)>\n*(<br>\n)+/g, (value) =>value.replace( "<br>", "" ));
+//        });
+//    } catch ( error ) {
+//        console.error( error );
+//        return $target.html();
+//    }
+//}
 
 /**
  * Common Beautify html, include:
@@ -351,6 +360,7 @@ async function htmlbeautify( $target ) {
  * 
  * @param {jquery}
  */
+/* from new workflow by pureread
 async function commbeautify( $target ) {
     $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         const $target = $(item),
@@ -393,29 +403,6 @@ async function commbeautify( $target ) {
             .one( "error", ()=>loaderrorHandle()    )
             .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );
-
-        // origin style
-        /*if ( tagname !== "sr-read" && !$parent.hasClass( "simpread-hidden" ) ) {
-            $img.parent().unwrap();
-        }*/
-
-        // beautify style
-        /* remove other class and add center class
-        while ( ![ "p", "div", "span" ].includes( tagname ) ) {
-            $parent = $parent.parent();
-            tagname = $parent[0].tagName.toLowerCase();
-            if ( tagname == "sr-read" ) {
-                const $p = $( "<p>" );
-                $p.append( $img );
-                $orgpar.append( $p );
-                $parent = $p;
-                tagname = $parent[0].tagName.toLowerCase();
-            }
-        }
-        if ( !$parent.hasClass( "simpread-hidden" ) ) {
-            $parent.removeAttr( "style" ).removeClass( $parent.attr("class") ).addClass( "sr-rd-content-center" );
-        }
-        */
     });
     $target.find( "sr-blockquote" ).map( ( index, item ) => {
         const $target = $(item),
@@ -437,5 +424,6 @@ async function commbeautify( $target ) {
     $target.find( "pre" ).removeAttr( "class" );
     $target.find( "a" ).removeAttr( "style" );
 }
+*/
 
 export { Render, Exist, Exit, Highlight };
