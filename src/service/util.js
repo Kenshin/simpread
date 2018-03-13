@@ -1,9 +1,5 @@
 console.log( "=== simpread util load ===" )
 
-import * as prplugin from 'prplugin';
-
-const minimatch = prplugin.Plugin( "minimatch" );
-
 /**
  * Verify html
  * 
@@ -105,10 +101,11 @@ function clearMD( str ) {
 /**
  * Exclusion
  * 
+ * @param  {object} minimatch
  * @param  {object} simpread.read
  * @return {boolen} true: not exist; false: exist
  */
-function exclusion( data ) {
+function exclusion( minimatch, data ) {
     const url = window.location.origin + window.location.pathname;
     return data.exclusion.findIndex( item => {
         item = item.trim();
@@ -119,10 +116,11 @@ function exclusion( data ) {
 /**
  * Whitelist
  * 
+ * @param  {object} minimatch
  * @param  {object} simpread.read
  * @return {boolean} 
  */
-function whitelist( data ) {
+function whitelist( minimatch, data ) {
     const url = window.location.origin + window.location.pathname;
     return data.whitelist.findIndex( item => {
         item = item.trim();

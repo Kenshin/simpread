@@ -145,8 +145,8 @@ function readMode() {
 function autoOpen() {
     getCurrent( mode.read );
     if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && util.Exclusion(  storage.current )) ||
-         ( !storage.current.auto && util.Whitelist( storage.current ))
+         ( storage.current.auto && util.Exclusion(  prplugin.Plugin( "minimatch" ), storage.current )) ||
+         ( !storage.current.auto && util.Whitelist( prplugin.Plugin( "minimatch" ), storage.current ))
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
