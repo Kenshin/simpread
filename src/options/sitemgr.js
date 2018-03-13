@@ -36,6 +36,7 @@ let cur_site, org_site, pr,
  */
 storage.Read( () => {
     console.log( "simpread storage get success!", storage.sites );
+    pr = new PureRead( storage.sites );
     navRender();
     controlbarRender();
     tt.Render( "body" );
@@ -43,7 +44,6 @@ storage.Read( () => {
     $( "body" ).velocity({ opacity: 1 }, { duration: 1000, complete: ()=> {
         $( "body" ).removeAttr( "style" );
     }});
-    pr = new PureRead( storage.sites );
     console.log( "current pureread object is   ", pr )
 }); 
 
