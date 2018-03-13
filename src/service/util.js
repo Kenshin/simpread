@@ -1,7 +1,7 @@
 console.log( "=== simpread util load ===" )
 
 /**
- * Verify html
+ * Verify html from puread/util verifyHtml()
  * 
  * @param  {string} input include html tag, e.g.:
     <div class="article fmt article__content">
@@ -21,7 +21,8 @@ function verifyHtml( html ) {
 }
 
 /**
- * Verify special action, action include:
+ * Verify special action from puread/util specTest()
+ * action include:
    - [[{juqery code}]] // new Function, e.g. $("xxx").xxx() return string
    - [['text']]        // remove '<text>'
    - [[/regexp/]]      // regexp e.g. $("sr-rd-content").find( "*[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']" )
