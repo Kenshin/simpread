@@ -9,7 +9,6 @@ import * as se     from 'siteeditor';
 import * as kbd    from 'keyboard';
 
 import { storage, Clone } from 'storage';
-import * as st            from 'site';
 import th                 from 'theme';
 import * as ss            from 'stylesheet';
 import {browser}          from 'browser';
