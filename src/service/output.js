@@ -1,6 +1,6 @@
 console.log( "=== simpread control:action load ===" )
 
-import * as st     from 'site';
+import * as util   from 'util';
 import * as exp    from 'export';
 import { storage } from 'storage';
 import {browser}   from 'browser';
@@ -51,7 +51,7 @@ function action( type, title, desc, content ) {
                 break;
             case "markdown":
                 const md = "simpread-" + title + ".md";
-                exp.MDWrapper( st.ClearMD( content ), md, new Notify() );
+                exp.MDWrapper( util.ClearMD( content ), md, new Notify() );
                 break;
             case "png":
                 try {
@@ -112,7 +112,7 @@ function action( type, title, desc, content ) {
         const service = type => {
             switch( type ) {
                 case "dropbox":
-                    exp.MDWrapper( st.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
                         dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, type, new Notify() ), "md/" );
                     });
                     break;
@@ -134,7 +134,7 @@ function action( type, title, desc, content ) {
                 case "yinxiang":
                     evernote.env     = type;
                     evernote.sandbox = false;
-                    evernote.Add( title, st.HTML2ENML( content, window.location.href ), ( result, error ) => {
+                    evernote.Add( title, util.HTML2ENML( content, window.location.href ), ( result, error ) => {
                         exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
                         error == "error" && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
                     });
@@ -143,7 +143,7 @@ function action( type, title, desc, content ) {
                     onenote.Add( onenote.Wrapper( window.location.href, title, content ), ( result, error ) => exp.svcCbWrapper( result, error, onenote.name, type, new Notify() ));
                     break;
                 case "gdrive":
-                    exp.MDWrapper( st.ClearMD( content), undefined, new Notify() ).done( result => {
+                    exp.MDWrapper( util.ClearMD( content), undefined, new Notify() ).done( result => {
                         gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, type, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
                     });
                     break;

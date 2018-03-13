@@ -12,7 +12,7 @@ import * as read from 'read';
 import * as modals from 'modals';
 import * as kbd  from 'keyboard';
 
-import * as st   from 'site';
+import * as util from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as msg  from 'message';
 import {browser} from 'browser';
@@ -145,8 +145,8 @@ function readMode() {
 function autoOpen() {
     getCurrent( mode.read );
     if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && st.Exclusion(  storage.current )) ||
-         ( !storage.current.auto && st.Whitelist( storage.current ))
+         ( storage.current.auto && util.Exclusion(  storage.current )) ||
+         ( !storage.current.auto && util.Whitelist( storage.current ))
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
