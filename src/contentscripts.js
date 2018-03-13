@@ -124,19 +124,16 @@ function readMode() {
             new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.read );
-            switch ( st.Verify( storage.current.site.name ) ) {
-                case 0:
+            if ( storage.current.site.name != "" ) {
+                storage.Statistics( mode.read );
+                read.Render();
+            } else {
+                new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+                read.Highlight().done( dom => {
+                    pr.TempMode( mode.read, dom.outerHTML );
                     storage.Statistics( mode.read );
                     read.Render();
-                    break;
-                case -1:
-                    new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
-                    read.Highlight().done( dom => {
-                        pr.TempMode( mode.read, dom.outerHTML );
-                        storage.Statistics( mode.read );
-                        read.Render();
-                    });
-                    break;
+                });
             }
         }
     });

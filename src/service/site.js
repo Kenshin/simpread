@@ -5,24 +5,6 @@ import * as prplugin from 'prplugin';
 const minimatch = prplugin.Plugin( "minimatch" );
 
 /**
- * Verify site
- * 
- * @param  {string} storage.current.site.name
- * @return {number} 0: success; -1: not exsit; -2: tieba.com;
- */
-function verify( name ) {
-    const [ hostname, pathname, href ] = [ window.location.hostname, window.location.pathname, window.location.href ];
-    /*if ( hostname == "tieba.baidu.com" && !href.includes( "see_lz=1" ) ) {
-        return -2;
-    } else */
-    if ( name === "" ) {
-        return -1;
-    } else {
-        return 0;
-    }
-}
-
-/**
  * Html convert to enml
  * 
  * @param  {string} convert string
@@ -114,7 +96,6 @@ function whitelist( data ) {
 }
 
 export {
-    verify         as Verify,
     html2enml      as HTML2ENML,
     clearMD        as ClearMD,
     exclusion      as Exclusion,
