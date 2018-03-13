@@ -27,7 +27,7 @@ export default class AdapteSite {
     }
 
     /**
-     * Set golbal minimatch
+     * Set global minimatch
      */
     set minimatch( value ) {
         minimatch = value;
