@@ -356,7 +356,6 @@ class Storage {
      * @param {string} @see mode
      */
     Setcur( key ) {
-        //site_update && this.Setsite();
         swap( current, simpread[key] );
         save( undefined, true );
     }
