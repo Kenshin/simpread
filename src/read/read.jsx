@@ -24,12 +24,6 @@ const rdcls   = "simpread-read-root",
       $root   = $( "html" ),
       theme   = "simpread-theme-root";
 
-const errorpage = `
-        <sr-rd-content-error>
-            <p>当前页面使用 <span style="color: #4183c4;">阅读模式</span> 解析后 <b style="color: #E57373;">无法正常显示</b>，暂时不支持 <b style="color: #E57373;">手动添加</b>，请换用 <span style="color: #4183c4;">聚焦模式</span> 或者 将当前页面加入到<a href="https://github.com/Kenshin/simpread/wiki/入门指南（-操作指引-）#排除列表" target="_blank">排除列表</a> 。</p>
-            <p>报告<a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a> 以便让 <a href="http://ksria.com/simpread" target="_blank">简悦 - SimpRead</a> 变得更加出色，谢谢。</p>
-        </sr-rd-content-error>`;
-
 const Footer = () => {
     return (
         <sr-rd-footer>
