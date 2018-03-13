@@ -671,7 +671,7 @@ function now() {
 }
 
 /**
- * Get URI
+ * Get URI from puread/util getURI()
  * 
  * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
  */
