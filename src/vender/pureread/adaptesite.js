@@ -26,6 +26,9 @@ export default class AdapteSite {
         this.origins = [];
     }
 
+    /**
+     * Set golbal minimatch
+     */
     set minimatch( value ) {
         minimatch = value;
     }
