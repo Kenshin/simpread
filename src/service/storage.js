@@ -2,7 +2,6 @@ console.log( "=== simpread storage load ===" )
 
 import "babel-polyfill";
 
-import * as st        from 'site';
 import {browser}      from 'browser';
 import {version}      from 'version';
 
