@@ -65,17 +65,17 @@ class Read extends React.Component {
             this.props.read.layout     && ss.Layout( this.props.read.layout );
             ss.Preview( this.props.read.custom );
 
-            this.props.wrapper.name.startsWith( "txtread::" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
-            if ( $("sr-rd-content-error").length > 0 ) $("sr-rd-footer").remove();
-            if ( $( "sr-rd-desc" ).html() == "" ) $( "sr-rd-desc" ).addClass( "simpread-hidden" );
+            storage.pr.state == "txt"       && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
+            storage.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
 
-            await excludes( $("sr-rd-content"), this.props.wrapper.exclude );
+            excludes( $("sr-rd-content"), this.props.wrapper.exclude );
             storage.pr.Beautify( $( "sr-rd-content" ) );
             storage.pr.Format( rdcls );
 
             this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
             this.props.read.site.css && this.props.read.site.css.length > 0 &&
                 ss.SiteCSS( this.props.read.site.css );
+
             kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
@@ -221,7 +221,7 @@ function getReadRoot() {
  * @param {jquery} jquery object
  * @param {array}  hidden html
  */
-async function excludes( $target, exclude ) {
+function excludes( $target, exclude ) {
     const tags = storage.pr.Exclude( $target );
     $target.find( tags ).remove();
 }
