@@ -102,28 +102,8 @@ var storage  = require( "storage" ).storage,
      * @return {jquery} focus jquery object or undefined
      */
     Focus.prototype.GetFocus = function( $focus, include ) {
-        var //$focus = [],
-            dtd    = $.Deferred(),
+        var dtd    = $.Deferred(),
             sel, range, node, tag;
-            //target;
-        /*
-        target = util.selector( include );
-        try {
-            if ( util.specTest( target ) ) {
-                const [ value, state ] = util.specAction( include );
-                if ( state == 0 ) {
-                    include = include.replace( /\[\[{\$\(|}\]\]|\).html\(\)/g, "" );
-                    $focus  = $( util.specAction( `[[[${include}]]]` )[0] );
-                } else if ( state == 3 ) {
-                    $focus  = value;
-                }
-            } else if ( target ) {
-                $focus = $( "body" ).find( target );
-            }
-        } catch ( error ) {
-            console.error( "Get $focus failed", error )
-        }
-        */
         if ( storage.current.highlight && $focus.length == 0 ) {
             new Notify().Render( "已启动手动聚焦模式，请移动鼠标进行选择，支持 ESC 退出。" );
             highlight.Start().done( result => {
@@ -210,7 +190,6 @@ function includeStyle( $target, style, cls, type ) {
  * @param {string} include: 'add' 'delete'
  */
 function excludeStyle( $target, type ) {
-    //const tags = util.exclude( $target, exclude );
     const tags = storage.pr.Exclude( $target );
     if ( type == "delete" )   $target.find( tags ).hide();
     else if ( type == "add" ) $target.find( tags ).show();

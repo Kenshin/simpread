@@ -101,7 +101,6 @@ function focusMode() {
             }
             focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
                 storage.current.site.name == "" && pr.TempMode( mode.focus, result[0].outerHTML );
-                //storage.current.site.name == "" && storage.Newsite( mode.focus, pr.current.site );
                 storage.Statistics( mode.focus );
                 focus.Render( result, storage.current.bgcolor );
             }).fail( () => {
@@ -134,7 +133,6 @@ function readMode() {
                     new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
                     read.Highlight().done( dom => {
                         pr.TempMode( mode.read, dom.outerHTML );
-                        //storage.Newsite( mode.read, pr.current.site );
                         storage.Statistics( mode.read );
                         read.Render();
                     });
@@ -199,7 +197,6 @@ function entry( current, other, ...str ) {
  */
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
-        //storage.Getcur( mode, st.GetMetadata() );
         pRead();
         storage.Getcur( mode, pr.current.site );
     }

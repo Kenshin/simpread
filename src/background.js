@@ -20,18 +20,6 @@ storage.Read( () => {
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
     }
     else {
-        /* from new workflow by pureread
-        !local.Count() && storage.GetNewsites( "remote", getNewsitesHandler );
-        ver.version != storage.version && storage.GetNewsites( "local", result => {
-            ver.version != storage.version &&
-                storage.Fix( storage.read.sites, storage.version, ver.version, storage.focus.sites );
-            ver.version != storage.version && storage.Write( () => {
-                    local.Version( ver.version );
-                    browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
-                }, ver.Verify( storage.version, storage.simpread ) );
-            getNewsitesHandler( result );
-        });
-        */
        !local.Count() && storage.GetRemote( "remote", ( result, error ) => {
             if ( !error ) {
                 storage.pr.Addsites( result );

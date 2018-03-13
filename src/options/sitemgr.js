@@ -63,7 +63,6 @@ function navRender() {
  */
 function controlbarRender() {
     const getCursite = ( type, value ) => {
-            //const site = storage.Getsite( type, value );
             const site = pr.Getsite( type, value );
             org_site   = [ site[0], site[1] ];
             site.length > 0 && siteeditorRender( site[0], site[1], type );
@@ -88,23 +87,13 @@ function controlbarRender() {
             const key = cur_site.target,
                   url = cur_site.url,
                   site= pr.Cleansite({ ...cur_site });
-                  //site= storage.Cleansite({ ...cur_site });
-            let //idx   = storage.sites[key].findIndex( item => item[0] == org_site[0] ),
-                flag  = -1;
+            let flag  = -1;
 
             if ( type == "update" ) {
-                //idx == -1 && ( idx = storage.sites[key].length );
-                //storage.sites[key].splice( idx, 1, [ url, site ] );
                 pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
                 org_site = [ url, site ];
                 flag = 0;
             } else {
-                /*
-                if ( idx != -1 ) {
-                    storage.sites[key].splice( idx, 1 );
-                    flag = 1;
-                } else new Notify().Render( "当前站点已删除，请勿重复提交。" );
-                */
                pr.Deletesite( key, org_site[0], result => {
                    result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
                });
@@ -156,7 +145,6 @@ function siteeditorRender( url, site, type ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
 
-    //cur_site   = storage.Safesite( site, type, url );
     cur_site   = pr.Safesite( site, type, url );
 
     const doms = <Editor site={ cur_site } state={ state } />;
