@@ -2,10 +2,12 @@ console.log( "=== PureRead: Plugin load ===" )
 
 import pangu     from './plugin/pangu.min';
 import minimatch from './plugin/minimatch';
+import * as be   from './plugin/beautify';
 
 const plugins = {
     pangu    : pangu,
-    minimatch: minimatch
+    minimatch: minimatch,
+    beautify : be,
 };
 
 /**

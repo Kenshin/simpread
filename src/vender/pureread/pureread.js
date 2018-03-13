@@ -1,7 +1,6 @@
 console.log( "=== PureRead: PureRead load ===" )
 
 import * as util  from './util';
-import * as be    from './beautify';
 import AdapteSite from './adaptesite';
 
 export default class PureRead extends AdapteSite {
@@ -19,6 +18,7 @@ export default class PureRead extends AdapteSite {
     AddPlugin( plugin ) {
         super.minimatch = plugin.minimatch;
         this.pangu      = plugin.pangu;
+        this.beautify   = plugin.beautify;
     }
 
     /**
@@ -81,10 +81,12 @@ export default class PureRead extends AdapteSite {
      * @param {jquery} jquery
      */
     Beautify( $target ) {
-        be.specbeautify(   this.current.site.name, $target );
-        be.removeSpareTag( this.current.site.name, $target );
-        be.htmlbeautify( $target );
-        be.commbeautify( this.current.site.name, $target );
+        if ( this.beautify ) {
+            this.beautify.specbeautify(   this.current.site.name, $target );
+            this.beautify.removeSpareTag( this.current.site.name, $target );
+            this.beautify.htmlbeautify( $target );
+            this.beautify.commbeautify( this.current.site.name, $target );
+        }
     }
 
     /**
