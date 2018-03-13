@@ -337,7 +337,7 @@ class Storage {
         simpread.sites           = sites.global;
         simpread.websites.custom = sites.custom;
         simpread.websites.local  = sites.local;
-        save( callback, true );
+        callback && save( callback, true );
     }
 
     Getcur( key, site ) {
@@ -354,10 +354,9 @@ class Storage {
      * Set current to simpread[key]
      * 
      * @param {string} @see mode
-     * @param {boolean} is true update site
      */
-    Setcur( key, site_update = false ) {
-        site_update && this.Setsite();
+    Setcur( key ) {
+        //site_update && this.Setsite();
         swap( current, simpread[key] );
         save( undefined, true );
     }
@@ -394,15 +393,6 @@ class Storage {
             curori.site[item] != current.site[item] && st.push({ item, old: curori.site[item], newer: current.site[item] });
         });
         return { option, st };
-    }
-
-    /**
-     * Set adapter site
-     */
-    Setsite() {
-        let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
-        idx == -1 && ( idx = simpread.websites.local.length );
-        simpread.websites.local.splice( idx, 1, [ current.url, current.site ] );
     }
 
     /**
