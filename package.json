@@ -19,6 +19,8 @@
   "scripts": {
     "develop": "cross-env NODE_ENV=development webpack --devtool=source-map --progress --colors --watch",
     "publish": "cross-env NODE_ENV=production  webpack -p --progress --colors",
+    "ext_dev": "cross-env NODE_ENV=development webpack --devtool=source-map --progress --colors --watch --config webpack.config.ext.js",
+    "ext_pub": "cross-env NODE_ENV=production  webpack -p --progress --color --config webpack.config.ext.js",
     "server": "webpack-dev-server --hot --progress --colors"
   },
   "devDependencies": {
