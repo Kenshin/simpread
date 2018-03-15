@@ -173,10 +173,10 @@ function Open( reactDom, cls, $target = $("html") ) {
  * Close Dialog
  */
 function Close() {
-    $.fn.velocity == undefined && ( $.fn.velocity = $.fn.animate ); // hack code for firefox
+    $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // hack code for firefox
     $( rootjq )
         .css({ top: "-100px" })
-        .velocity({ opacity: 0 }, { complete: ()=>{
+        .sreffect({ opacity: 0 }, { complete: ()=>{
             ReactDOM.unmountComponentAtNode( $( rootjq )[0] );
             $( rootjq ).remove();
         }});
