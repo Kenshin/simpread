@@ -3,5 +3,10 @@ node_modules/**
 src/bundle/**
 publish/**
 
+# for firefox
+ext/options/**
+ext/assets/**
+ext/_locales/**
+
 # for mac
 **/.DS_Store
