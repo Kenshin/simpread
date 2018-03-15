@@ -1,6 +1,6 @@
 console.log( "===== simpread option common: URL =====" )
 
-import minimatch from 'minimatch';
+import * as prplugin from 'prplugin';
 
 import TextField from 'textfield';
 
@@ -20,7 +20,9 @@ export default class URL extends React.Component {
 
     changeURL() {
         let  code = 0;
-        const url = event.target.value.trim();
+        const url = event.target.value.trim(),
+              minimatch = prplugin.Plugin( "minimatch" );
+
         if ( url == "" ) {
             code = -2;
             this.setState({ error : "当前输入不能为空。" });

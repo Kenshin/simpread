@@ -1,7 +1,7 @@
 console.log( "=== simpread util load ===" )
 
 /**
- * Verify html
+ * Verify html from puread/util verifyHtml()
  * 
  * @param  {string} input include html tag, e.g.:
     <div class="article fmt article__content">
@@ -21,72 +21,8 @@ function verifyHtml( html ) {
 }
 
 /**
- * Get exclude tags list
- * 
- * @param  {jquery} jquery object
- * @param  {array}  hidden html
- * @return {string} tags list string
- */
-function excludeSelector( $target, exclude ) {
-    let tags = [], tag = "";
-    for ( let content of exclude ) {
-        if ( specTest( content )) {
-             const [ value, type ] = specAction( content );
-             if ( type == 1 ) {
-                 tag = value;
-             } else if ( type == 2 ) {
-                 const arr = $target.html().match( new RegExp( value, "g" ) );
-                 if ( arr && arr.length > 0 ) {
-                    const str = arr.join( "" );
-                    tag = `*[${str}]`;
-                 } else {
-                     tag = undefined;
-                 }
-             } else if ( type == 3 ) {
-                 value.remove();
-             }
-        } else {
-            tag = getSelector( content );
-        }
-        if ( tag ) tags.push( tag );
-    }
-    return tags.join( "," );
-}
-
-/**
- * Conver html to jquery object
- * 
- * @param  {string} input include html tag, e.g.:
-    <div class="article fmt article__content">
- *
- * @return {string} formatting e.g.:
-            h2#news_title
-            div.introduction
-            div.content
-            div.clearfix
-            div.rating_box
-            span
-            special tag, @see specTest
-                 e.g. [['<strong>▽</strong>']]        [[[$('.article-btn')]]]
-                      [[/src=\\S+(342459.png)\\S+'/]] [[{$('.content').html()}]]
- *
- */
-function getSelector( html ) {
-    const [ code, item ] = verifyHtml( html );
-    if ( code == 2 ) return html;
-    else if ( code == 1 ) {
-        let [tag, prop, value] = item[0].trim().replace( /['"<>]/g, "" ).replace( / /ig, "=" ).split( "=" );  // ["h2", "class", "title"]
-        if      ( !prop ) prop = tag;
-        else if ( prop.toLowerCase() === "class") prop = `${tag}.${value}`;
-        else if ( prop.toLowerCase() === "id"   ) prop = `${tag}#${value}`;
-        return prop;
-    } else {
-        return null;
-    }
-}
-
-/**
- * Verify special action, action include:
+ * Verify special action from puread/util specTest()
+ * action include:
    - [[{juqery code}]] // new Function, e.g. $("xxx").xxx() return string
    - [['text']]        // remove '<text>'
    - [[/regexp/]]      // regexp e.g. $("sr-rd-content").find( "*[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']" )
@@ -101,49 +37,102 @@ function specTest( content ) {
 }
 
 /**
- * Exec special action, action include: @see specTest
- * type: 0, 3 - be chiefly used in include logic
- * type: 1, 2 - be chiefly used in exclude logic
+ * Html convert to enml
  * 
- * @param  {string} content
- * @return {array}  0: result; 1: type( include: -1:error 0:{} 1:'' 2:// 3:[])
+ * @param  {string} convert string
+ * @param  {string} url
+ * 
+ * @return {string} convert string
  */
-function specAction( content ) {
-    let [ value, type ] = [ content.replace( /(^)\[\[|\]\]$/g, "" ) ];
-    switch (value[0]) {
-        case "{":
-            value      = value.replace( /^{|}$/g, "" );
-            content    = ( v=>new Function( `return ${v}` )() )(value);
-            type       = 0;
-            break;
-        case "'":
-            content    = value.replace( /^'|'$/g, "" );
-            const name = content.match(/^<[a-zA-Z0-9_-]+>/g).join("").replace( /<|>/g, "" );
-            const str  = content.replace( /<[/a-zA-Z0-9_-]+>/g, "" );
-            content    =  `${name}:contains(${str})`;
-            type       = 1;
-            break;
-        case "/":
-            content    = value.replace( /^\/|\/$/g, "" ).replace( /\\{2}/g, "\\" ).replace( /'/g, '"' );
-            type       = 2;
-            break;
-        case "[":
-            value      = value.replace( /^{|}$/g, "" );
-            content    = ( v=>new Function( `return ${v}` )() )(value)[0];
-            type       = 3;
-            break;
-        default:
-            console.error( "Not support current action.", content )
-            type       = -1;
-            break;
+function html2enml( html, url ) {
+    let $target, str;
+    const tags = [ "figure", "sup", "hr", "section", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ];
+    
+    $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
+    $target = $( "#simpread-en" );
+    $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
+        $( "<div>" ).attr( "style", `width: ${item.naturalWidth}px; height:${item.naturalHeight}px; background: url(${item.src})` )
+        .replaceAll( $(item) );
+    });
+    $target.find( tags.join( "," ) ).map( ( index, item ) => {
+        $( "<div>" ).html( $(item).html() ).replaceAll( $(item) );
+    });
+    $target.find( tags.join( "," ) ).remove();
+    str = $target.html();
+    $target.remove();
+
+    try {
+        str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
+        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
+                //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
+                .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
+                .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
+                .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                  // <img>
+                .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )   // data="xxx" || data-xxx="xxx"
+                .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
+                .replace( /sr-blockquote/ig, "blockquote" )                // sr-blockquote to blockquote
+                .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )          // <p> || <p > || <p xxx="xxx">
+                .replace( /<figcaption[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" ) // <figcaption >
+                .replace( /<\/figcaption>/ig, "" )                         // </figcaption>
+                .replace( /<\/br>/ig, "" )                                 // </br>
+                .replace( /<br>/ig, "<br></br>" )
+                .replace( /<\/p>/ig, "<br></br>" );
+
+        return str;
+
+    } catch( error ) {
+        return `<div>转换失败，原文地址 <a href="${url}" target="_blank">${url}</a></div>`
     }
-    return [ content, type ];
+}
+
+/**
+ * Clear Html to MD, erorr <tag>
+ * 
+ * @param {string} convert string
+ */
+function clearMD( str ) {
+    str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}`;
+    str = str.replace( /<\/?(ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
+             .replace( /sr-blockquote/ig, "blockquote" )
+             .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
+             .replace( /(name|lable)=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )
+             return str;
+}
+
+/**
+ * Exclusion
+ * 
+ * @param  {object} minimatch
+ * @param  {object} simpread.read
+ * @return {boolen} true: not exist; false: exist
+ */
+function exclusion( minimatch, data ) {
+    const url = window.location.origin + window.location.pathname;
+    return data.exclusion.findIndex( item => {
+        item = item.trim();
+        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+    }) == -1 ? true : false;
+}
+
+/**
+ * Whitelist
+ * 
+ * @param  {object} minimatch
+ * @param  {object} simpread.read
+ * @return {boolean} 
+ */
+function whitelist( minimatch, data ) {
+    const url = window.location.origin + window.location.pathname;
+    return data.whitelist.findIndex( item => {
+        item = item.trim();
+        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+    }) != -1 ? true : false;
 }
 
 export {
-    verifyHtml      as verifyHtml,
-    excludeSelector as exclude,
-    getSelector     as selector,
-    specTest        as specTest,
-    specAction      as specAction
+    verifyHtml     as verifyHtml,
+    html2enml      as HTML2ENML,
+    clearMD        as ClearMD,
+    exclusion      as Exclusion,
+    whitelist      as Whitelist,
 }

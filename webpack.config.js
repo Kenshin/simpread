@@ -96,7 +96,7 @@ const webpack = require( 'webpack' ),
           'version',
           'menu',
           'watch',
-          'site',
+          'util',
         ],
 
         vendors : [
@@ -219,13 +219,11 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
-          minimatch  : __dirname + '/node_modules/minimatch/minimatch.js',
           markdown   : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
           epubpress  : __dirname + '/node_modules/epub-press-js/build/index.js',
 
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
-          pangu      : __dirname + '/src/vender/pangu.min.js',
           velocity   : __dirname + '/src/vender/velocity.min.js',
           timeago    : __dirname + '/src/vender/timeago.min.js',
           carousel   : __dirname + '/src/vender/carousel/carousel.js',
@@ -236,7 +234,6 @@ const webpack = require( 'webpack' ),
           util       : __dirname + '/src/service/util.js',
           local      : __dirname + '/src/service/local.js',
           storage    : __dirname + '/src/service/storage.js',
-          site       : __dirname + '/src/service/site.js',
           message    : __dirname + '/src/service/message.js',
           browser    : __dirname + '/src/service/browser.js',
           theme      : __dirname + '/src/service/theme.js',
@@ -293,6 +290,9 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/vender/mduikit/dialog.jsx',
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
+
+          pureread   : __dirname + '/src/vender/pureread/pureread.js',
+          prplugin   : __dirname + '/src/vender/pureread/plugin.js',
 
         }
       }

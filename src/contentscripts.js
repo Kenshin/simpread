@@ -12,12 +12,16 @@ import * as read from 'read';
 import * as modals from 'modals';
 import * as kbd  from 'keyboard';
 
-import * as st   from 'site';
+import * as util from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
 import * as msg  from 'message';
 import {browser} from 'browser';
 import * as watch from 'watch';
 
+import PureRead  from 'pureread';
+import * as prplugin from 'prplugin';
+
+let pr; // pure read object
 let current_url = location.href; // current page url ( when changed page changed )
 
 /**
@@ -95,10 +99,10 @@ function focusMode() {
                 new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
                 return;
             }
-            focus.GetFocus( storage.current.site.include ).done( result => {
-                storage.current.site.name == "" && storage.Newsite( mode.focus );
+            focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
+                storage.current.site.name == "" && pr.TempMode( mode.focus, result[0].outerHTML );
                 storage.Statistics( mode.focus );
-                focus.Render( result, storage.current.site.exclude, storage.current.bgcolor );
+                focus.Render( result, storage.current.bgcolor );
             }).fail( () => {
                 new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
             });
@@ -120,18 +124,16 @@ function readMode() {
             new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
         } else {
             getCurrent( mode.read );
-            switch ( st.Verify( storage.current.site.name ) ) {
-                case 0:
+            if ( storage.current.site.name != "" ) {
+                storage.Statistics( mode.read );
+                read.Render();
+            } else {
+                new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+                read.Highlight().done( dom => {
+                    pr.TempMode( mode.read, dom.outerHTML );
                     storage.Statistics( mode.read );
                     read.Render();
-                    break;
-                case -1:
-                    new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
-                    read.Highlight().done( () => {
-                        storage.Statistics( mode.read );
-                        read.Render();
-                    });
-                    break;
+                });
             }
         }
     });
@@ -143,8 +145,8 @@ function readMode() {
 function autoOpen() {
     getCurrent( mode.read );
     if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && st.Exclusion(  storage.current )) ||
-         ( !storage.current.auto && st.Whitelist( storage.current ))
+         ( storage.current.auto && util.Exclusion(  prplugin.Plugin( "minimatch" ), storage.current )) ||
+         ( !storage.current.auto && util.Whitelist( prplugin.Plugin( "minimatch" ), storage.current ))
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
@@ -162,7 +164,7 @@ function autoOpen() {
                 setTimeout( ()=>readMode(), 1000 );
                 break;
             default:
-                storage.current.site.name != "" && readMode();
+                pr.state == "adapter" && readMode();
                 break;
         }
     }
@@ -192,7 +194,8 @@ function entry( current, other, ...str ) {
  */
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
-        storage.Getcur( mode, st.GetMetadata() );
+        pRead();
+        storage.Getcur( mode, pr.current.site );
     }
 }
 
@@ -207,4 +210,15 @@ function browserAction( is_update ) {
         autoOpen();
     }
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.current.site.name == "" ? -1 : 0 , url: window.location.href } ));
+}
+
+/** 
+ * Pure Read
+*/
+function pRead() {
+    pr = new PureRead( storage.sites );
+    pr.AddPlugin( prplugin.Plugin() );
+    pr.Getsites();
+    storage.puread = pr;
+    console.log( "current pureread object is   ", pr )
 }
