@@ -1,6 +1,6 @@
 console.log( "===== simpread option welcome page load =====" )
 
-import '../vender/carousel/carousel.css';
+import 'carous_css';
 import 'carousel';
 
 import Button  from 'button';

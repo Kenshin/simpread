@@ -3,7 +3,7 @@ console.log( "==== simpread options page: custom load ====" )
 import '../assets/css/simpread.css';
 import '../assets/css/options_page.css';
 import '../assets/css/options_custom.css';
-import '../vender/notify/notify.css';
+import 'notify_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';

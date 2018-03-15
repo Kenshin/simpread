@@ -5,7 +5,7 @@ import '../assets/css/option.css';
 import '../assets/css/options_page.css';
 import '../assets/css/options_custom.css';
 import '../assets/css/options_sitemgr.css';
-import '../vender/notify/notify.css';
+import 'notify_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
