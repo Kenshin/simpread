@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Tabs
  * 
- * @version : 0.0.1
- * @update  : 2017/04/07
+ * @version : 0.0.2
+ * @update  : 2018/03/14
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -181,7 +181,7 @@ const TabLabel = ( props ) => {
         style.icon.display = "none";
     }
     return (
-        <tab-label style={ style.label } class={ props.waves } active={ props.active } onClick={ !disable && ( ()=>props.onClick() )}>
+        <tab-label style={ style.label } class={ props.waves } active={ props.active } onClick={ !disable && ( evt=>props.onClick(evt) )}>
             <a style={ style.link }
                id={ props.idx } href={ route } target={ target }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
@@ -261,7 +261,7 @@ export default class Tabs extends React.Component {
         $( "tabs" ).remove();
     }
 
-    tabLabelOnClick() {
+    tabLabelOnClick( event ) {
         let $target = $( event.target );
 
         if($target.is("tab-label")) {
@@ -327,7 +327,7 @@ export default class Tabs extends React.Component {
                   return <TabLabel idx={ idx }
                                    { ...item } { ...others }
                                    style={ label_style }
-                                   onClick={ ()=> this.tabLabelOnClick() } />;
+                                   onClick={ evt=> this.tabLabelOnClick(evt) } />;
               }),
               tabHeader = tabLabel && <tab-header style={ style.header }>{ tabLabel }<tab-shadow style={ style.shadow }></tab-shadow></tab-header>;
 
