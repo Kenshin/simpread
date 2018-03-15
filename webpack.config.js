@@ -219,6 +219,9 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
+          notify_css : __dirname + '/src/vender/notify/notify.css',
+          carous_css : __dirname + '/src/vender/carousel/carousel.css',
+
           markdown   : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
           epubpress  : __dirname + '/node_modules/epub-press-js/build/index.js',
 
