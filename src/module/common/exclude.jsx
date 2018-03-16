@@ -17,7 +17,7 @@ export default class Exclude extends React.Component {
         error : ""
     };
 
-    changeExclude() {
+    changeExclude( event ) {
         const { good, bad } = getExclude( event.target.value );
         this.props.changeExclude( good, bad.length > 0 ? -1 : 0 );
         if ( bad.length > 0 ) {
@@ -36,7 +36,7 @@ export default class Exclude extends React.Component {
                 floatingtext="隐藏列表" 
                 value={ (this.props.exclude||[]).join( "\n" ) }
                 errortext={ this.state.error }
-                onChange={ ()=>this.changeExclude() }
+                onChange={ evt=>this.changeExclude(evt) }
             />
         )
     }

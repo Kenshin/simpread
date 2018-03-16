@@ -18,7 +18,7 @@ export default class URL extends React.Component {
         error : ""
     };
 
-    changeURL() {
+    changeURL( event ) {
         let  code = 0;
         const url = event.target.value.trim(),
               minimatch = prplugin.Plugin( "minimatch" );
@@ -46,7 +46,7 @@ export default class URL extends React.Component {
                 floatingtext="域名" 
                 value={ this.props.url }
                 errortext={ this.state.error }
-                onChange={ ()=>this.changeURL() }
+                onChange={ evt=>this.changeURL(evt) }
             />
         )
     }

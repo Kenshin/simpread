@@ -39,7 +39,7 @@ export default class Editor extends React.Component {
         console.log( "this.props.option.url = ",  this.props.site.url, code )
     }
 
-    changeTitle() {
+    changeTitle( event ) {
         const title = event.target.value.trim();
         if ( title == "" ) {
             this.setState({ err_title : "当前输入不能为空。" });
@@ -56,7 +56,7 @@ export default class Editor extends React.Component {
         }
     }
 
-    changeDesc() {
+    changeDesc( event ) {
         const desc = event.target.value.trim();
         if ( verifyHtml( desc )[0] != -1 ) {
             this.setState({ err_desc : "" });
@@ -107,7 +107,7 @@ export default class Editor extends React.Component {
         }
     }
 
-    changeCSS() {
+    changeCSS( event ) {
         console.log( "this.props.site.name = ", event.target.value.trim() )
         this.props.site.css = event.target.value.trim();
     }
@@ -129,7 +129,7 @@ export default class Editor extends React.Component {
                             placeholder="必填，不可为空。"
                             value={ this.props.site.title }
                             errortext={ this.state.err_title }
-                            onChange={ ()=>this.changeTitle() }
+                            onChange={ event=>this.changeTitle(event) }
                         />
                     </sr-opt-gp>
                     <sr-opt-gp>
@@ -139,7 +139,7 @@ export default class Editor extends React.Component {
                                 floatingtext="描述"
                                 value={ this.props.site.desc }
                                 errortext={ this.state.err_desc }
-                                onChange={ ()=>this.changeDesc() }
+                                onChange={ event=>this.changeDesc(event) }
                         />
                     </sr-opt-gp>
                     <sr-opt-gp>
@@ -184,7 +184,7 @@ export default class Editor extends React.Component {
                         <TextField multi={ true }
                                 placeholder="默认为空，输入的 CSS 只针对当前站点有效。" floatingtext="自定义 CSS"
                                 value={ this.props.site.css || "" }
-                                onChange={ ()=>this.changeCSS() }
+                                onChange={ event=>this.changeCSS(event) }
                         />
                     </sr-opt-gp>
                 </sr-opt-items>
