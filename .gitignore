@@ -1,7 +1,9 @@
-# for chrome
+# for common
 node_modules/**
-src/bundle/**
 publish/**
+
+# for chrome
+src/bundle/**
 
 # for firefox
 ext/bundle/**
