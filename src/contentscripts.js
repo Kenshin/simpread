@@ -24,6 +24,8 @@ import * as prplugin from 'prplugin';
 let pr; // pure read object
 let current_url = location.href; // current page url ( when changed page changed )
 
+$.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // hack code for firefox
+
 /**
  * Sevice: storage Get data form chrome storage
  */
