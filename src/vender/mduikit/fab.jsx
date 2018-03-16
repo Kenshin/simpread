@@ -340,7 +340,7 @@ export default class Fab extends React.Component {
             },
             list = ( items, key, style, child, tooltip, waves ) => {
                 const props = btn_props( key, "normal", style.origin, items, style.icon, tooltip, waves );
-                return <ListView id={ key } child={ child } style={ style } btn_props={ props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
+                return <ListView id={ key } child={ child } style={ style } btn_props={ props } onMouseLeave={ evt=> this.liMouseLeaveHandler(evt) } />
         };
 
         if ( keys.length > 0 ) {
