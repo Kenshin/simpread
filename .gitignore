@@ -4,6 +4,9 @@ src/bundle/**
 publish/**
 
 # for firefox
+ext/bundle/**
+ext/focus/**
+ext/read/**
 ext/options/**
 ext/assets/**
 ext/_locales/**
