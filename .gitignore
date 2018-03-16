@@ -1,4 +1,4 @@
-#ignore node_modules
+# for chrome
 node_modules/**
 src/bundle/**
 publish/**
