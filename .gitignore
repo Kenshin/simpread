@@ -9,6 +9,7 @@ src/bundle/**
 ext/bundle/**
 ext/focus/**
 ext/read/**
+ext/module/**
 ext/options/**
 ext/assets/**
 ext/_locales/**
