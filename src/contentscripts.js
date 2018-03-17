@@ -2,7 +2,7 @@ console.log( "=== simpread contentscripts load ===" )
 
 import './assets/css/simpread.css';
 import './assets/css/option.css';
-import './vender/notify/notify.css';
+import 'notify_css';
 
 import Velocity  from 'velocity';
 import Notify    from 'notify';
