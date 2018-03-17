@@ -106,9 +106,6 @@ function action( type, title, desc, content ) {
         const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive } = exp,
         id    = type == "yinxiang" ? "evernote" : type;
 
-        exp.VerifySvcWrapper( storage, exp[id], type, exp.Name( type ), new Notify() )
-        .done( result => service( type ));
-
         const service = type => {
             switch( type ) {
                 case "dropbox":
@@ -149,6 +146,10 @@ function action( type, title, desc, content ) {
                     break;
             }
         };
+
+        exp.VerifySvcWrapper( storage, exp[id], type, exp.Name( type ), new Notify() )
+        .done( result => service( result ));
+
     } else {
         new Notify().Render( 2, "当前模式下，不支持此功能。" );
     }
