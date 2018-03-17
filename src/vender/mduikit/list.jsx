@@ -1,8 +1,8 @@
 /*!
  * React Material Design: List
  * 
- * @version : 0.0.1
- * @update  : 2017/04/17
+ * @version : 0.0.2
+ * @update  : 2018/03/17
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -331,6 +331,13 @@ const ListItem = props => {
     props.priBgColor && ( pri_style.backgroundColor = props.priBgColor );
     props.secBgColor && ( sec_style.backgroundColor = props.secBgColor );
 
+    // hack code by only firefox
+    let true_title = title;
+    if ( window.navigator.userAgent.toLowerCase().includes( "firefox" )) {
+        style.subtitle.display = "none";
+        true_title.length > 26 && ( true_title = true_title.substring( 0, 26 ) + "..." );
+    }
+
     const actionItems = action ? action.map( item => {
         const { id, title, disable, hr } = item,
                 root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
@@ -347,7 +354,7 @@ const ListItem = props => {
         <list-item idx={ idx } style={ style.list_item }>
             <pri-item style={ pri_style } onClick={ (e,d)=>events.priOnClick( event, props ) }>{ pri_value }</pri-item>
             <content style={ content_style }>
-                <a style={ style.link } href={ url } target="_blank">{ title }</a>
+                <a style={ style.link } href={ url } target="_blank">{ true_title }</a>
                 <subtitle style={ style.subtitle }>{ desc }</subtitle>
             </content>
             <sec-item style={ sec_style } onClick={ (e,d)=>events.secOnClick( event, props ) }>{ sec_value }</sec-item>
