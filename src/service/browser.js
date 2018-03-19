@@ -49,6 +49,15 @@ class Browser {
         browser_type = type;
     }
 
+    /**
+     * Is firefox
+     * 
+     * @return {boolean} true or false
+     */
+    isFirefox() {
+        return browser_type == mode.firefox;
+    }
+
 }
 
 const br      = new Browser( userAgent() ),
