@@ -2,7 +2,7 @@ console.log( "=== simpread storage load ===" )
 
 import "babel-polyfill";
 
-import {browser}      from 'browser';
+import {browser, br}  from 'browser';
 import {version}      from 'version';
 
 /**
@@ -316,6 +316,52 @@ class Storage {
     }
 
     /**
+     * Read storage usage aync only firefox
+     * 
+     * @param {func} callback 
+     */
+    ReadAsync( callback ) {
+        const db = browser.storage.local.get();
+        const safesave = obj => {
+            if ( secret && secret.version != obj.version ) {
+                obj.version = secret.version;
+                Object.keys( secret ).forEach( item => {
+                    obj[item] == undefined && ( obj[item] = secret[item] );
+                });
+            }
+            return { ...obj };
+        };
+        db.then( result => {
+            let firstload = true;
+            if ( result && !$.isEmptyObject( result )) {
+                secret    = result[ "secret" ] && safesave( result[ "secret" ]);
+                simpread  = result[name];
+                firstload = false;
+            }
+            origin = clone( simpread );
+            callback( simpread, secret );
+            console.log( "chrome storage read success!", simpread, origin, result );
+        }, error => {
+            console.log(`Error: ${error}`);
+        });
+    }
+
+    /**
+     * Write Object only firefox
+     * 
+     * @param {object} simpread object 
+     * @param {object} secret object 
+     */
+    WriteAsync( simp, sec ) {
+        simpread  = simp;
+        origin    = clone( simpread );
+        sec && ( secret = sec );
+        browser.storage.local.set( { ["secret"] : secret }, () => {
+            console.log( "firefox storage safe set success!", secret );
+        });
+    }
+
+    /**
      * Set simpread object to chrome storage
      * 
      * @param {function} callback
@@ -533,11 +579,15 @@ class Storage {
                 callback && callback();
             });
         } else {
-            browser.storage.local.get( ["secret"], result => {
-                console.log( "chrome storage safe get success!", result );
-                result && !$.isEmptyObject( result ) && ( secret = safesave( result["secret"] ));
+            if ( br.type == "firefox" && window.location.protocol != "moz-extension:" ) {
                 callback && callback();
-            });
+            } else {
+                browser.storage.local.get( ["secret"], result => {
+                    console.log( "chrome storage safe get success!", result );
+                    result && !$.isEmptyObject( result ) && ( secret = safesave( result["secret"] ));
+                    callback && callback();
+                });
+            }
         }
     }
 
