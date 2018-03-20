@@ -157,7 +157,7 @@ export default class CommonOpt extends React.Component {
 
     export() {
         if ( br.isFirefox() ) {
-            exp.PrDownload( storage.Export(), `simpread-config-.json` );
+            exp.PrDownload( storage.Export(), `simpread-config.json` );
         } else {
             const data = "data:text/json;charset=utf-8," + encodeURIComponent( storage.Export() );
             exp.Download( data, `simpread-config-${Now()}.json` );

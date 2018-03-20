@@ -97,7 +97,7 @@ function prueDownload( data, name ) {
     const url = URL.createObjectURL(blob);
     browser.downloads.download({
         url     : url,
-        filename: "name.md"
+        filename: name,
     });
 }
 
