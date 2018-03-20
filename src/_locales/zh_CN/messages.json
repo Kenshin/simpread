@@ -7,6 +7,11 @@
     "extension_desc": {
         "message": "让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。",
         "description": "类似 Safari 阅读模式的 Chrome 扩展，阅读模式，阅读器，阅读，命名为 简悦，即：简单阅读，愉悦心情之意。"
+    },
+
+    "ext_extension_desc": {
+        "message": "让你瞬间进入沉浸式阅读的扩展，Chrome 好评率超过 99% 的阅读模式现已来到 Firefox。",
+        "description": "类似 Safari 阅读模式的扩展，阅读模式，阅读器，阅读，命名为 简悦，即：简单阅读，愉悦心情之意。"
     }
 
 }

@@ -7,6 +7,11 @@
     "extension_desc": {
         "message": "讓你瞬間進入沉浸式閱讀的 Chrome 擴展，提供與 Safari 類似的 read mode。",
         "description": "類似 Safari 閱讀模式的 Chrome 擴展，閱讀模式，閱讀器，閱讀，命名為 簡悅，即：簡單閱讀，愉悅心情之意。"
+    },
+
+    "ext_extension_desc": {
+        "message": "讓你瞬間進入沉浸式閱讀的擴展，Chrome 好評率超過 99% 的閱讀模式現已來到 Firefox。",
+        "description": "類似 Safari 閱讀模式的擴展，閱讀模式，閱讀器，閱讀，命名為 簡悅，即：簡單閱讀，愉悅心情之意。"
     }
 
 }
