@@ -6,6 +6,7 @@ publish/**
 src/bundle/**
 
 # for firefox
+ext/website_list.json
 ext/bundle/**
 ext/focus/**
 ext/read/**
