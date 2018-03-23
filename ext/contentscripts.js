@@ -193,7 +193,7 @@ function entry( current, other, ...str ) {
         new Notify().Render( `请先退出${str[0]}模式，才能进入${str[1]}模式。` );
         return false;
     }
-    if ( current.Exist(false) ) return false;
+    if ( current.Exist(true) ) return false;
     return true;
 }
 
