@@ -133,7 +133,7 @@ export default class About extends React.Component {
             onMouseOver: ()=>this.mouseOver(),
             onMouseOut: ()=>this.mouseOut(),
         },
-            href = br.isFirefox() ? "https://addons.mozilla.org/zh-CN/firefox/addon/simpread/reviews/" : "https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/reviews";
+            href = br.isFirefox() ? "https://addons.mozilla.org/addon/simpread?src=external-ext" : "https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/reviews";
         return (
             <div style={ style.root }>
                 <div style={ style.title }>简悦（ SimpRead ）</div>
