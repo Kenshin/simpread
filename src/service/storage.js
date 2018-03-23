@@ -579,7 +579,7 @@ class Storage {
                 callback && callback();
             });
         } else {
-            if ( br.type == "firefox" && window.location.protocol != "moz-extension:" ) {
+            if ( br.isFirefox() && window.location.protocol != "moz-extension:" ) {
                 callback && callback();
             } else {
                 browser.storage.local.get( ["secret"], result => {

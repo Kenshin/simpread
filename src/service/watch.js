@@ -65,7 +65,7 @@ function lock( url ) {
  * @param {fucntion} callback watch.Lock() state, result
  */
 function verify( callback ) {
-    br.type == "chrome" ?
+    !br.isFirefox() ?
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_verify, { url: window.location.href }), result => {
         callback( result.site || result.import || result.version || result.option, result );
     }) : callback( false );
