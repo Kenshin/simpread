@@ -29,7 +29,7 @@ export default class URL extends React.Component {
         }  else if ( !/^http(s)?:\/\//.test( url ) ) {
             code = -1;
             this.setState({ error : "请输入有效的 url " });
-        } else if ( location.protocol != "chrome-extension:" && !minimatch( window.location.href, url ) && url != this.props.url ) {
+        } else if ( location.protocol.startsWith( "http" ) && !minimatch( window.location.href, url ) && url != this.props.url ) {
             code = -1;
             this.setState({ error : "请输入与当前网址匹配的域名，支持 minimatch " });
         } else {
