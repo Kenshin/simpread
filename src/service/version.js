@@ -5,7 +5,8 @@ import {browser} from 'browser';
 /**
  * Manifest.json version
  */
-const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ), // add hack code with firefox,
+const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),           // get x.x.x,
+      sub_ver  = browser.runtime.getManifest().version.replace( /(\d{1,2}.){2}\d.?/, "" ), // get *.*.*.xxxx
       versions = new Map([
           [ "1.0.0", "Sun Jun 11 2017 12:30:00 GMT+0800 (CST)" ],
           [ "1.0.1", "Fri Jun 30 2017 09:27:18 GMT+0800 (CST)" ],
@@ -175,6 +176,7 @@ function Compare( target ) {
 
 export {
     version,
+    sub_ver,
     Verify,
     Notify,
     Compare,
