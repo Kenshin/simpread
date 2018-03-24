@@ -1,7 +1,7 @@
 console.log( "=== simpread read controlbar load ===" )
 
 import * as ss     from 'stylesheet';
-import {browser}   from 'browser';
+import {browser,br}from 'browser';
 import * as msg    from 'message';
 import th          from 'theme';
 import * as conf   from 'config';
@@ -33,7 +33,7 @@ export default class ReadCtlbar extends React.Component {
             if ( request.type == msg.MESSAGE_ACTION.export ) {
                 console.log( "controlbar runtime Listener", request );
                 new Notify().Render( "已重新授权成功！" );
-                this.onAction( undefined, request.value.type );
+                br.isFirefox() ? new Notify().Render( "请刷新本页才能生效。" ) : this.onAction( undefined, request.value.type );
             }
         });
         kbd.Listen( combo => {
