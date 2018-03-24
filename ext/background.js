@@ -3,7 +3,7 @@ console.log( "=== simpread background load ===" )
 import local       from 'local';
 import { storage } from 'storage';
 import * as msg    from 'message';
-import {browser}   from 'browser';
+import {browser,br}from 'browser';
 import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
@@ -38,6 +38,10 @@ storage.Read( () => {
                 getNewsitesHandler( result );
             });
         });
+        // only firefox and only usage 1.1.0.3024
+        if ( ver.version == storage.version && ver.sub_ver == "3024" ) {
+            browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
+        }
     }
     menu.CreateAll();
 });

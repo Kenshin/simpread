@@ -18,7 +18,7 @@ import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
 import * as watch from 'watch';
-import {browser}  from 'browser';
+import {browser,br}from 'browser';
 import * as msg   from 'message';
 import * as exp   from 'export';
 
@@ -86,6 +86,12 @@ storage.Read( first => {
     tt.Render( "body" );
     waves.Render({ root: "body" });
     vernotify( first );
+    // only firefox and only usage 1.1.0.3024
+    if ( !first && ver.sub_ver != "" && br.isFirefox() && !localStorage["first"] ) {
+        welcomeRender( true );
+        localStorage["first"] = ver.sub_ver;
+    }
+    first && ( localStorage["first"] = ver.sub_ver );
 });
 
 /**
