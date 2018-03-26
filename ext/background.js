@@ -39,9 +39,9 @@ storage.Read( () => {
             });
         });
         // only firefox and only usage 1.1.0.3024
-        if ( ver.version == storage.version && ver.sub_ver == "3024" && !localStorage["first"] ) {
+        if ( ver.version == storage.version && ver.sub_ver == "3024" && !localStorage["bg-3024"] ) {
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
-            localStorage["first"] = ver.sub_ver;
+            localStorage["bg-3024"] = ver.sub_ver;
         }
     }
     menu.CreateAll();
