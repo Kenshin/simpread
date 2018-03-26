@@ -21,8 +21,9 @@ import * as watch from 'watch';
 import PureRead  from 'pureread';
 import * as prplugin from 'prplugin';
 
-let pr, storage_load = false; // pure read object
-let current_url = location.href; // current page url ( when changed page changed )
+let pr,                           // pure read object
+    storage_load = false,         // only usage firefox on windows
+    current_url  = location.href; // current page url ( when changed page changed )
 
 $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // hack code for firefox
 
