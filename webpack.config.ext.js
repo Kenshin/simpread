@@ -67,8 +67,8 @@ const webpack = require( 'webpack' ),
             { from   : 'src/options/options.html',        to : '../options/' },
             { from   : 'src/options/custom.html',         to : '../options/' },
             { from   : 'src/options/sitemgr.html',        to : '../options/' },
-            { context: 'ext/assets/images/', from : "*" , to : '../assets/images' },
-            { context: 'ext/_locales/',    from : "*/*" , to : '../_locales/' },
+            { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
+            { context: 'src/_locales/',    from : "*/*" , to : '../_locales/' },
           ])
         );
 
