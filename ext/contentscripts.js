@@ -21,7 +21,7 @@ import * as watch from 'watch';
 import PureRead  from 'pureread';
 import * as prplugin from 'prplugin';
 
-let pr; // pure read object
+let pr, storage_load = false; // pure read object
 let current_url = location.href; // current page url ( when changed page changed )
 
 $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // hack code for firefox
@@ -68,10 +68,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             });
             break;
         case msg.MESSAGE_ACTION.storage:
+            if ( storage_load ) return;
             storage.WriteAsync( request.value.simpread, request.value.secret );
             bindShortcuts();
             autoOpen();
             browserAction( false );
+            storage_load = true;
             break;
     }
 });
