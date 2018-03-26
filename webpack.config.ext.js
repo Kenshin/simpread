@@ -63,7 +63,7 @@ const webpack = require( 'webpack' ),
         plugins.push(
           new CopyWebpackPlugin([
             { from   : "ext/manifest.json" ,              to : '../' },
-            { from   : "ext/website_list.json" ,          to : '../' },
+            { from   : "src/website_list.json" ,          to : '../' },
             { from   : 'src/options/options.html',        to : '../options/' },
             { from   : 'src/options/custom.html',         to : '../options/' },
             { from   : 'src/options/sitemgr.html',        to : '../options/' },
