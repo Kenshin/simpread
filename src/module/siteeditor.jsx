@@ -89,7 +89,7 @@ class SiteEditor extends React.Component {
     }
 
     render() {
-        site = { ...storage.current.site };
+        site = { ...storage.pr.current.site };
         return (
             <dia.Dialog>
                 <dia.Content>
@@ -110,12 +110,11 @@ class SiteEditor extends React.Component {
  * Modals Render
  */
 function Render() {
-    const name = storage.current.site.name;
     switch ( true ) {
-        case name.startsWith( "metaread::" ):
+        case storage.pr.state == "meta":
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/主动适配阅读模式' target='_blank'>主动适配阅读模式</a>，并不能使用设定功能。" )
             break;
-        case name.startsWith( "txtread::" ):
+        case storage.pr.state == "txt":
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
             break;
         default:
