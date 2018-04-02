@@ -524,10 +524,10 @@
         ]
     },{
         "name"    : "article.pmcaff.com",
-        "url"     : "http://www.pmcaff.com/article/index/*",
+        "url"     : "http*://www.pmcaff.com/article/index/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='article-body'>",
+        "include" : "<div id='editorContent'>",
         "exclude" : [
             "[[/src=\\S+(FlHy2hPIJYsjjeQRRKHhk0yfoLv)\\S+'/]]",
             "[['<b>本文由PMCAFF专栏作者</b>']]",
@@ -536,7 +536,7 @@
         ]
     },{
         "name"    : "discuss.pmcaff.com",
-        "url"     : "http://www.pmcaff.com/discuss/answer/*",
+        "url"     : "http*://www.pmcaff.com/discuss/answer/*",
         "title"   : "<title>",
         "desc"    : "<div class='discussion-content'>",
         "include" : "[[{$('.panel-body').find('.content').html()}]]",
@@ -545,14 +545,10 @@
         ]
     },{
         "name"    : "answer.pmcaff.com",
-        "url"     : "http://www.pmcaff.com/discuss/index/*",
-        "avatar"  : [
-            {"name" : "[[{$('.panel-heading').find('a').find('b')}]]"},
-            {"url"  : "[[{$('.avatar').find('img')}]]"}
-        ],
+        "url"     : "http*://www.pmcaff.com/discuss/index/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "[[{$('.panel-body').find('.content')}]]",
+        "include" : "<div id='editorContent'>",
         "exclude" : [
             ""
         ]
@@ -649,7 +645,7 @@
         "exclude" : [
             ""
         ]
-    }11,{
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
         "title"   : "<title>",
