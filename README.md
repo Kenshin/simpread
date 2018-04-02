@@ -1,7 +1,7 @@
 <p align="center"><img src="http://ojec5ddd5.bkt.clouddn.com/logo%20bigger.png" /></p>
 <h1 align="center">简悦 - SimpRead</h1>
 <p align="center">让你瞬间进入沉浸式阅读的 Chrome 扩展，还原阅读的本质，提升你的阅读体验。</p>
-<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">230+</a> 个网站，因此诞生了简悦。</p>
+<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">240+</a> 个网站，因此诞生了简悦。</p>
 <p align="center">
    <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.0-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
@@ -21,7 +21,7 @@
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
 - [阅读模式](https://github.com/Kenshin/simpread/wiki/%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F/)：  
-  简悦 `原创` 功能，逐一适配了 [230+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
+  简悦 `原创` 功能，逐一适配了 [240+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
   * 支持 `自动生成目录` [TXT 阅读器](https://github.com/Kenshin/simpread/wiki/txt-%E9%98%85%E8%AF%BB%E5%99%A8) [论坛类页面及分页](https://github.com/Kenshin/simpread/wiki/%E8%AE%BA%E5%9D%9B%E7%B1%BB%E9%A1%B5%E9%9D%A2%E5%8F%8A%E5%88%86%E9%A1%B5) 如：知乎 · 百度贴吧等
 
