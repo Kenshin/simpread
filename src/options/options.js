@@ -2,7 +2,7 @@ console.log( "==== simpread options page load ====" )
 
 import '../assets/css/options_page.css';
 import '../assets/css/option.css';
-import '../vender/notify/notify.css';
+import 'notify_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
@@ -18,7 +18,7 @@ import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
 import * as watch from 'watch';
-import {browser}  from 'browser';
+import {browser,br}from 'browser';
 import * as msg   from 'message';
 import * as exp   from 'export';
 
@@ -86,6 +86,11 @@ storage.Read( first => {
     tt.Render( "body" );
     waves.Render({ root: "body" });
     vernotify( first );
+    // only firefox and only usage 1.1.0.3024
+    if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
+        welcomeRender( true );
+        localStorage["opt-3024"] = ver.sub_ver;
+    }
 });
 
 /**

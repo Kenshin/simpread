@@ -7,6 +7,11 @@
     "extension_desc": {
         "message": "Immersion-reading mode of Chrome extensions, similar to Safari read mode.",
         "description": "similar to Safari reading mode, read mode, reader view module, named simpread."
+    },
+
+    "ext_extension_desc": {
+        "message": "Immersion-reading mode of extensions, similar to Safari read mode.",
+        "description": "similar to Safari reading mode, read mode, reader view module, named simpread."
     }
 
 }

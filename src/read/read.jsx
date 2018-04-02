@@ -57,7 +57,7 @@ class Read extends React.Component {
             .addClass( theme )
             .find( rdclsjq )
                 .addClass( theme )
-                .velocity( { opacity: 1 }, { delay: 100 })
+                .sreffect( { opacity: 1 }, { delay: 100 })
                 .addClass( "simpread-read-root-show" );
 
             this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
@@ -195,7 +195,7 @@ function Exist( action ) {
  * Exit
  */
 function Exit() {
-    $( rdclsjq ).velocity( { opacity: 0 }, {
+    $( rdclsjq ).sreffect( { opacity: 0 }, {
         delay: 100,
         complete: ( elements ) => {
             ReactDOM.unmountComponentAtNode( getReadRoot() );

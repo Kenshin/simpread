@@ -22,6 +22,7 @@ import PureRead  from 'pureread';
 import * as prplugin from 'prplugin';
 
 let pr,                           // pure read object
+    storage_load = false,         // only usage firefox on windows
     current_url  = location.href; // current page url ( when changed page changed )
 
 $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // hack code for firefox
@@ -29,10 +30,12 @@ $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // ha
 /**
  * Sevice: storage Get data form chrome storage
  */
+/*
 storage.Read( () => {
     bindShortcuts();
     autoOpen();
 });
+*/
 
 /**
  * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
@@ -64,6 +67,14 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                      else readMode();
                 }
             });
+            break;
+        case msg.MESSAGE_ACTION.storage:
+            if ( storage_load ) return;
+            storage.WriteAsync( request.value.simpread, request.value.secret );
+            bindShortcuts();
+            autoOpen();
+            browserAction( false );
+            storage_load = true;
             break;
     }
 });
@@ -174,7 +185,7 @@ function autoOpen() {
 
 /**
  * Focus and Read mode entry
- * 
+ *
  * @param  {object}  current mode object
  * @param  {object}  other   mode object
  * @param  {array}   render str
@@ -191,7 +202,7 @@ function entry( current, other, ...str ) {
 
 /**
  * Get storage.current
- * 
+ *
  * @param {string} value is mode.focus or mode.read or undefined
  */
 function getCurrent( mode ) {
@@ -203,7 +214,7 @@ function getCurrent( mode ) {
 
 /**
  * Browser action
- * 
+ *
  * @param {boolean} when set icon is_update = true
  */
 function browserAction( is_update ) {
@@ -214,7 +225,7 @@ function browserAction( is_update ) {
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.current.site.name == "" ? -1 : 0 , url: window.location.href } ));
 }
 
-/** 
+/**
  * Pure Read
 */
 function pRead() {

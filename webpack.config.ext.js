@@ -32,6 +32,22 @@ const webpack = require( 'webpack' ),
       var CopyWebpackPlugin  = require( 'copy-webpack-plugin'  ),
           CleanWebpackPlugin = require( 'clean-webpack-plugin' );
 
+      // development verify
+      if ( !isProduction() ) {
+        // copy files
+        plugins.push(
+          new CopyWebpackPlugin([
+            { from   : 'src/options/options.html',        to : '../options/' },
+            { from   : 'src/options/custom.html',         to : '../options/' },
+            { from   : 'src/options/sitemgr.html',        to : '../options/' },
+            //{ from   : "src/website_list.json" ,          to : '../' },
+            //{ context: 'src/assets/css/', from : "*" ,    to : '../assets/css' },
+            //{ context: 'src/assets/images/', from : "*" , to : '../assets/images' },
+            //{ context: 'src/_locales/',    from : "*/*" , to : '../_locales/' },
+          ])
+        )
+      }
+
       // environment verify
       if ( isProduction() ) {
 
@@ -46,7 +62,7 @@ const webpack = require( 'webpack' ),
         // copy files
         plugins.push(
           new CopyWebpackPlugin([
-            { from   : "src/manifest.json" ,              to : '../' },
+            { from   : "ext/manifest.json" ,              to : '../' },
             { from   : "src/website_list.json" ,          to : '../' },
             { from   : 'src/options/options.html',        to : '../options/' },
             { from   : 'src/options/custom.html',         to : '../options/' },
@@ -166,15 +182,15 @@ const webpack = require( 'webpack' ),
           //'list',
         ],
 
-        contentscripts : './src/contentscripts.js',
-        background     : './src/background.js',
+        contentscripts : './ext/contentscripts.js',
+        background     : './ext/background.js',
         options        : './src/options/options.js',
         custom         : './src/options/custom.js',
         sitemgr        : './src/options/sitemgr.js',
       },
 
       output: {
-        path     :  isProduction() ? './publish/bundle' : './src/bundle',
+        path     :  isProduction() ? './publish/bundle' : './ext/bundle',
         filename : '[name].js'
       },
 
@@ -219,6 +235,7 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
+
           notify_css : __dirname + '/src/vender/notify/notify.css',
           carous_css : __dirname + '/src/vender/carousel/carousel.css',
 

@@ -119,18 +119,17 @@ function rollback() {
  * @param {func} callback
  */
 function Render( cb ) {
-    callback   = cb;
-    const name = storage.current.site.name;
+    callback = cb;
     switch ( true ) {
-        case name.startsWith( "tempread::" ):
+        case storage.pr.state == "temp":
             storage.current.mode == "read" ?
                 new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank'>临时阅读模式</a>，请用【站点编辑器】保存后才能使用此功能。" ) :
                 new Notify().Render( "当前站未保存，请用【站点编辑器】保存后才能使用此功能。" );
             break;
-        case name.startsWith( "metaread::" ):
+        case storage.pr.state == "meta":
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/主动适配阅读模式' target='_blank'>主动适配阅读模式</a>，并不能使用设定功能。" )
             break;
-        case name.startsWith( "txtread::" ):
+        case storage.pr.state == "txt":
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
             break;
         default:

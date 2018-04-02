@@ -1,5 +1,7 @@
 console.log( "===== simpread option about load =====" )
 
+import {br} from 'browser';
+
 const style = {
 
     root: {
@@ -70,10 +72,10 @@ const style = {
 },
 urls = {
     share: {
-        weibo: "http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png",
-        douban: "https://www.douban.com/share/service?href=http://ksria.com/simpread&name=简悦（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展",
-        twitter: "https://twitter.com/intent/tweet?via=wanglei001&amp;text=简悦（SimpRead）-%20让你瞬间进入沉浸式阅读的%20Chrome%20扩展&amp;url=http://ksria.com/simpread",
-        facebook: "https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%20Chrome%20%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread",
+        weibo: "http://service.weibo.com/share/share.php?url=http://ksria.com/simpread&title=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%E6%89%A9%E5%B1%95&pic=http://ksria.com/simpread/assets/image/introduce.png",
+        douban: "https://www.douban.com/share/service?href=http://ksria.com/simpread&name=简悦（SimpRead）-%20让你瞬间进入沉浸式阅读的扩展",
+        twitter: "https://twitter.com/intent/tweet?via=wanglei001&amp;text=简悦（SimpRead）-%20让你瞬间进入沉浸式阅读的扩展&amp;url=http://ksria.com/simpread",
+        facebook: "https://www.facebook.com/dialog/feed?app_id=1528743474024441&link=http://ksria.com/simpread&picture=http://simpread.qiniudn.com/introduce.png&name=simpread&description=%E7%AE%80%E6%82%A6%EF%BC%88SimpRead%EF%BC%89-%20%E8%AE%A9%E4%BD%A0%E7%9E%AC%E9%97%B4%E8%BF%9B%E5%85%A5%E6%B2%89%E6%B5%B8%E5%BC%8F%E9%98%85%E8%AF%BB%E7%9A%84%E6%89%A9%E5%B1%95&redirect_uri=http://ksria.com/simpread",
         gplus: "https://plus.google.com/share?url=http://ksria.com/simpread",
     },
 
@@ -130,11 +132,12 @@ export default class About extends React.Component {
         const events = {
             onMouseOver: ()=>this.mouseOver(),
             onMouseOut: ()=>this.mouseOut(),
-        };
+        },
+            href = br.isFirefox() ? "https://addons.mozilla.org/addon/simpread?src=external-ext" : "https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/reviews";
         return (
             <div style={ style.root }>
                 <div style={ style.title }>简悦（ SimpRead ）</div>
-                <div>让你瞬间进入沉浸式阅读的 Chrome 扩展</div>
+                <div>让你瞬间进入沉浸式阅读的扩展</div>
                 <div style={ style.badges }>
                     <a href={ urls.href.version      } target="_blank"><img style={ style.img } src={ urls.badges.version }/></a>
                     <a href={ urls.href.website      } target="_blank"><img style={ style.img } src={ urls.badges.website }/></a>
@@ -150,7 +153,7 @@ export default class About extends React.Component {
                     <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的初衷：还原一个干净的阅读空间，提升你的阅读体验。<br/>
                     截至到目前为止，简悦已经适配了 <spn style={ style.stat }>{ this.props.site }个</spn> 网址，详细请看 <a style={ style.link } href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">这里</a>。<br/>
                     自从 <span style={ style.stat }>{ this.props.option.create && this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <spn style={ style.stat }>{ this.props.option.focus }次</spn> 聚焦模式，以及 <span style={ style.stat }>{ this.props.option.read }次</span> 阅读模式。<br/>
-                    如果觉得它还不错，希望可以给我 <a style={ style.link } href="https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/reviews" target="_blank">投票</a> 或 <a style={ style.link } href="https://github.com/kenshin/simpread#请杯咖啡" target="_blank">请我喝杯咖啡</a>，这是对简悦的最大鼓励。<br/>
+                    如果觉得它还不错，希望可以给我 <a style={ style.link } href={href} target="_blank">投票</a> 或 <a style={ style.link } href="https://github.com/kenshin/simpread#请杯咖啡" target="_blank">请我喝杯咖啡</a>，这是对简悦的最大鼓励。<br/>
                     通过下方的分享，让更多人知道 <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的存在。<br/>
                     现在就加入 <a style={ style.link } href="https://t.me/simpread">Telegram</a> 群，获取简悦的第一手资料。
                     </div>

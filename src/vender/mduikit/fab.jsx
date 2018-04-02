@@ -1,8 +1,8 @@
 /*!
  * React Material Design: FAB( Floating Action Button )
  * 
- * @version : 0.0.1
- * @update  : 2017/05/07
+ * @version : 0.0.2
+ * @update  : 2018/03/14
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -162,9 +162,9 @@ const Button = ( props ) => {
                 name={ props.name }
                 color={ props.color }
                 style={ props.icon.style }
-                onClick={ ()=>props.onClick() }
-                onMouseOver={ ()=> props.onMouseOver() }
-                onMouseOut={ ()=> props.onMouseOut() }
+                onClick={ evt=>props.onClick(evt) }
+                onMouseOver={ evt=> props.onMouseOver(evt) }
+                onMouseOut={ evt=> props.onMouseOut(evt) }
             ></i>
         </a>
     )
@@ -182,7 +182,7 @@ const Button = ( props ) => {
  */
 const ListView = ( props ) => {
     return (
-        <li id={ props.id } style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ ()=> props.onMouseLeave() }>
+        <li id={ props.id } style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ evt=> props.onMouseLeave(evt) }>
             <Button { ...props.btn_props } />
             { props.child && props.child.length > 0 && <ul style={{ ...props.style.ul, ...props.style.ul_hori }}>{ props.child }</ul> }
         </li>
@@ -195,13 +195,13 @@ const ListView = ( props ) => {
     <Button id={ "exit" } name={"退出"} icon={ {style.spec_icon, `${path}assets/images/exit_icon.png`} } type={ "spec" }   style={ style.spec } />
     <Button id={ "more" } name={"更多"} icon={ {style.icon, `${path}assets/images/more_icon.png` } }     type={ "anchor" } style={ style.origin } />
     <ul style={ style.ul }>
-        <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
+        <li style={ style.li } onMouseLeave={ evt=> this.liMouseLeaveHandler(evt) } >
             <Button id={ "fontsize" } name={"字体大小"} icon={ {style.icon, `${path}assets/images/fontsize_icon.png` } } color="#9E9E9E" type={ "normal" } style={ style.origin } />
             <ul style={{ ...style.ul, ...style.ul_hori }}>
                 <li style={ style.li_hori } ><Button id={ "fontsizedown"  } name={"减小"} icon={ {style.icon, `${path}assets/images/fontsize_small_icon.png`  } } color="#9E9E9E" type={ "normal" } style={ style.origin } /></li>
             </ul>
         </li>
-        <li style={ style.li } onMouseLeave={ ()=> this.liMouseLeaveHandler() } >
+        <li style={ style.li } onMouseLeave={ evt=> this.liMouseLeaveHandler(evt) } >
             <Button id={ "weight" } name={"版面布局"} icon={ {style.icon, `${path}assets/images/weight_icon.png` } } color="#FFEB3B" type={ "normal" } style={ style.origin } />
         </li>
     </ul>
@@ -233,12 +233,12 @@ export default class Fab extends React.Component {
         items: {},
     }
 
-    btnClickHandler() {
+    btnClickHandler( event ) {
         const type = $( event.target ).attr( "id" );
         if ( this.props.onAction ) this.props.onAction( event, type );
     }
 
-    btnMouseOverHandler() {
+    btnMouseOverHandler( event ) {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
@@ -254,7 +254,7 @@ export default class Fab extends React.Component {
         }
     }
 
-    btnMouseOutHandler() {
+    btnMouseOutHandler( event ) {
         style = styles.get( this.state.id );
         $target = $( event.target );
         type    = $target.attr( "type" );
@@ -267,7 +267,7 @@ export default class Fab extends React.Component {
         }
     }
 
-    fabMouseOutHandler() {
+    fabMouseOutHandler( event ) {
         $target = $( event.target );
         while( !$target.is( "fab" ) ) {
             $target = $target.parent();
@@ -275,7 +275,7 @@ export default class Fab extends React.Component {
         $target.find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
     }
 
-    liMouseLeaveHandler() {
+    liMouseLeaveHandler( event ) {
         $target = $( event.target );
         type    = $target.attr( "type" );
         if ( $target.is( "i" ) ) {
@@ -333,14 +333,14 @@ export default class Fab extends React.Component {
                     tooltip,
                     waves,
                     icon       : { style: icon_style, path: icon },
-                    onClick    : ()=>this.btnClickHandler(),
-                    onMouseOver: ()=>this.btnMouseOverHandler(),
-                    onMouseOut : ()=>this.btnMouseOutHandler(),
+                    onClick    : evt=>this.btnClickHandler(evt),
+                    onMouseOver: evt=>this.btnMouseOverHandler(evt),
+                    onMouseOut : evt=>this.btnMouseOutHandler(evt),
                 };
             },
             list = ( items, key, style, child, tooltip, waves ) => {
                 const props = btn_props( key, "normal", style.origin, items, style.icon, tooltip, waves );
-                return <ListView id={ key } child={ child } style={ style } btn_props={ props } onMouseLeave={ ()=> this.liMouseLeaveHandler() } />
+                return <ListView id={ key } child={ child } style={ style } btn_props={ props } onMouseLeave={ evt=> this.liMouseLeaveHandler(evt) } />
         };
 
         if ( keys.length > 0 ) {
@@ -364,7 +364,7 @@ export default class Fab extends React.Component {
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
         return (
-            <fab style={ style.root } onMouseLeave={ ()=>this.fabMouseOutHandler() }>
+            <fab style={ style.root } onMouseLeave={ evt=>this.fabMouseOutHandler(evt) }>
                 { spec   }
                 { anchor }
                 { others }

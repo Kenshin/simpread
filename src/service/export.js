@@ -85,6 +85,23 @@ function download( data, name ) {
 }
 
 /**
+ * Downlaod
+ * 
+ * @param {string} origin data
+ * @param {string} name
+ */
+function prueDownload( data, name ) {
+    const blob = new Blob([data], {
+        type: "text/plain;charset=utf-8"
+    });
+    const url = URL.createObjectURL(blob);
+    browser.downloads.download({
+        url     : url,
+        filename: name,
+    });
+}
+
+/**
  * Dis contented serice
  * 
  * @param {string} service id 
@@ -1056,6 +1073,7 @@ export {
     epub     as Epub,
     markdown as Markdown,
     download as Download,
+    prueDownload as PrDownload,
     unlink   as Unlink,
     name     as Name,
     dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,

@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Sidebar
  * 
- * @version : 0.0.1
- * @update  : 2017/04/03
+ * @version : 0.0.2
+ * @update  : 2018/03/14
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -223,7 +223,7 @@ const Item = ( props ) => {
         <a style={ props.style.link } className={  props.route && props.waves }
            href={ props.route } value={ props.value }
            data-tooltip={ tooltip.text ? tooltip.text : props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
-           onClick={ props.route && props.onClick && ( ()=>props.onClick()) } >
+           onClick={ props.route && props.onClick && ( evt=>props.onClick(evt)) } >
             <icon style={ props.style.icon }></icon>
             <text style={ props.style.text }>{ props.name }</text>
         </a>
@@ -281,7 +281,7 @@ class Sidebar extends React.Component {
         id : Math.round(+new Date()),
     }
 
-    onClick() {
+    onClick( event ) {
         let $target = $( event.target );
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
         const [ name, value, href ] = [ $target.text(), $target.attr( "value" ), $target.attr( "href" ) ];
@@ -289,7 +289,7 @@ class Sidebar extends React.Component {
         this.maskOnClick();
     }
 
-    liOnClick() {
+    liOnClick( event ) {
         let $target = $( event.target ), i = 0;
         if ( $target.is( "dropdown" ) ) {
             $target = $target.parent().parent();
@@ -322,7 +322,7 @@ class Sidebar extends React.Component {
         }
     }
 
-    maskOnClick() {
+    maskOnClick( event ) {
         $( "side" ).velocity( { left: 0 - Number.parseInt( $( "side" ).width() ) }, {
             progress: ( elements, complete ) => {
                 $( "side" ).css( "opacity", 1 - complete );
@@ -362,15 +362,15 @@ class Sidebar extends React.Component {
                 item.items && item.items.length > 0 &&
                     ( style.ul_sub.marginTop = 0 - item.items.length * Number.parseInt( style.li.minHeight ));
                 return (
-                    <li style={ style.li } onClick={ item.items && ( ()=>this.liOnClick() ) } >
+                    <li style={ style.li } onClick={ item.items && ( evt=>this.liOnClick(evt) ) } >
                         <Item style={ style }
                             waves={ this.props.waves } tooltip={ this.props.tooltip }
                             icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
-                            onClick={ !item.items && ( ()=>this.onClick() ) } />
+                            onClick={ !item.items && ( evt=>this.onClick(evt) ) } />
                         { item.items && item.items.length > 0 &&
                                 <sub-menu style={ style.sub_menu }>
                                     <dropdown style={ style.dropdown } data-state="down"></dropdown>
-                                    <ul data-margin-top={ style.ul_sub.marginTop } 
+                                    <ul data-margin-top={ style.ul_sub.marginTop }
                                         style={{ ...style.ul, ...style.ul_sub }}>{ subMenu( item.items ) }</ul>
                                 </sub-menu> }
                     </li>
@@ -386,7 +386,7 @@ class Sidebar extends React.Component {
                     <header style={ style.header }>
                         <Item style={ style } icon={ icon } name={ header }
                               waves={ this.props.waves } tooltip={ this.props.tooltip }
-                              onClick={ ()=>this.onClick() }/>
+                              onClick={ evt=>this.onClick(evt) }/>
                     </header>
                     }
                     <content style={ style.content }>
@@ -396,11 +396,11 @@ class Sidebar extends React.Component {
                     <footer style={ style.footer }>
                         <Item style={ style } name={ footer }
                               waves={ this.props.waves } tooltip={ this.props.tooltip }
-                              onClick={ ()=>this.onClick() }/>
+                              onClick={ evt=>this.onClick(evt) }/>
                     </footer>
                     }
                 </side>
-                <mask style={ style.mask } onClick={ ()=>this.maskOnClick() }></mask>
+                <mask style={ style.mask } onClick={ evt=>this.maskOnClick(evt) }></mask>
             </sidebar>
         )
     }

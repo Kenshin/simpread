@@ -6,7 +6,7 @@ import * as conf   from 'config';
 import { storage } from 'storage';
 import * as output from 'output';
 import * as watch  from 'watch';
-import {browser}   from 'browser';
+import {browser,br}from 'browser';
 import * as msg    from 'message';
 
 import Fab         from 'fab';
@@ -26,7 +26,7 @@ class FControl extends React.Component {
             if ( request.type == msg.MESSAGE_ACTION.export ) {
                 console.log( "controlbar runtime Listener", request );
                 new Notify().Render( "已重新授权成功！" );
-                this.onAction( undefined, request.value.type );
+                br.isFirefox() ? new Notify().Render( "请刷新本页才能生效。" ) : this.onAction( undefined, request.value.type );
             }
         });
     }

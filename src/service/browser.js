@@ -3,7 +3,14 @@ console.log( "=== simpread browser load ===" )
 const mode = {
     chrome : "chrome",
     sogou  : "sogouExplorer",
-}
+    firefox: "firefox",
+}, userAgent = () => {
+    if ( window.navigator.userAgent.toLowerCase().includes( "firefox" ) ) {
+        return "firefox";
+    } else {
+        return "chrome"
+    }
+};
 let browser_type;
 
 /**
@@ -24,6 +31,8 @@ class Browser {
                 return chrome;
             case mode.sogou:
                 return sogouExplorer;
+            case mode.firefox:
+                return browser;
         }
     }
 
@@ -40,9 +49,18 @@ class Browser {
         browser_type = type;
     }
 
+    /**
+     * Is firefox
+     * 
+     * @return {boolean} true or false
+     */
+    isFirefox() {
+        return browser_type == mode.firefox;
+    }
+
 }
 
-const br      = new Browser( mode.chrome ),
+const br      = new Browser( userAgent() ),
       adapter = br.adapter;
 
 export {

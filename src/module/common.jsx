@@ -9,6 +9,7 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 import * as exp    from 'export';
+import {br}        from 'browser';
 
 export default class CommonOpt extends React.Component {
 
@@ -155,8 +156,12 @@ export default class CommonOpt extends React.Component {
     }
 
     export() {
-        const data = "data:text/json;charset=utf-8," + encodeURIComponent( storage.Export() );
-        exp.Download( data, `simpread-config-${Now()}.json` );
+        if ( br.isFirefox() ) {
+            exp.PrDownload( storage.Export(), `simpread-config.json` );
+        } else {
+            const data = "data:text/json;charset=utf-8," + encodeURIComponent( storage.Export() );
+            exp.Download( data, `simpread-config-${Now()}.json` );
+        }
     }
 
     newsites() {
