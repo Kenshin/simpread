@@ -1,11 +1,12 @@
 <p align="center"><img src="http://ojec5ddd5.bkt.clouddn.com/logo%20bigger.png" /></p>
 <h1 align="center">简悦 - SimpRead</h1>
 <p align="center">让你瞬间进入沉浸式阅读的 Chrome 扩展，还原阅读的本质，提升你的阅读体验。</p>
-<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">230+</a> 个网站，因此诞生了简悦。</p>
+<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">240+</a> 个网站，因此诞生了简悦。</p>
 <p align="center">
    <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.0-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
+   <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
    <a href="http://ksria.com/simpread/crx/1.1.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
 
 </p>
@@ -13,15 +14,18 @@
 ***
 
 #### 马上使用：
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.0/simpread.crx) 或者 [下载测试版](https://github.com/Kenshin/simpread/wiki/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%88-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%BC%95-%EF%BC%89#%E6%B5%8B%E8%AF%95%E7%89%88%E9%80%9A%E9%81%93) 体验简悦最新功能。
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.0/simpread.crx)
+* [Firefox 扩展中心](https://addons.mozilla.org/zh-CN/firefox/addon/simpread) 
+* [下载测试版](https://github.com/Kenshin/simpread/wiki/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%88-%E6%93%8D%E4%BD%9C%E6%8C%87%E5%BC%95-%EF%BC%89#%E6%B5%8B%E8%AF%95%E7%89%88%E9%80%9A%E9%81%93) 体验简悦最新功能。
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
+* 不同简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](https://github.com/kenshin/simpread/wiki) 。
 
 #### 主要功能一览：
 - [聚焦模式](https://github.com/Kenshin/simpread/wiki/%E8%81%9A%E7%84%A6%E6%A8%A1%E5%BC%8F)：  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
 - [阅读模式](https://github.com/Kenshin/simpread/wiki/%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F/)：  
-  简悦 `原创` 功能，逐一适配了 [230+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
+  简悦 `原创` 功能，逐一适配了 [240+](https://github.com/kenshin/simpread/wiki/适配站点列表) 个网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
   * 支持 `自动生成目录` [TXT 阅读器](https://github.com/Kenshin/simpread/wiki/txt-%E9%98%85%E8%AF%BB%E5%99%A8) [论坛类页面及分页](https://github.com/Kenshin/simpread/wiki/%E8%AE%BA%E5%9D%9B%E7%B1%BB%E9%A1%B5%E9%9D%A2%E5%8F%8A%E5%88%86%E9%A1%B5) 如：知乎 · 百度贴吧等
 
@@ -106,8 +110,7 @@
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
 #### 下一步：
-- 适配 Firfox；  
-- 适配 Safari；  
+-[ ] 适配 UserScript；  
 
 #### 相关链接：
 * [更新日志](http://ksria.com/simpread/changelog.html)
