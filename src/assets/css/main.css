@@ -403,6 +403,38 @@ body {
     width: 90px;
 }
 
+.main .downloads .platform span {
+    width: 92px;
+    height: 81px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+
+        &.chrome {
+            background-image: url( '../icons/download_chrome.png' );
+        }
+
+        &.offline {
+            background-image: url( '../icons/download_offline.png' );
+        }
+
+        &.firefox {
+            background-image: url( '../icons/download_firefox.png' );
+        }
+
+        &.safe {
+            background-image: url( '../icons/download_360.png' );
+        }
+
+        &.qq {
+            background-image: url( '../icons/download_qq.png' );
+        }
+
+        &.lite {
+            background-image: url( '../icons/download_lite.png' );
+        }
+}
+
 .main .downloads .platform a {
     margin: 10px;
     padding: 3px 10px;
