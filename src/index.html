@@ -40,6 +40,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.bootcss.com/Swiper/4.2.2/css/swiper.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="top">
@@ -222,9 +223,55 @@
             <div class="platforms">
                 <div class="platform">
                     <span class="lite"></span>
-                    <a class="userscript" href="https://greasyfork.org/zh-CN/scripts/39998" target="_blank">简悦 · 轻阅版</a>
+                    <a class="userscript" href="https://greasyfork.org/zh-CN/scripts/39998" target="_blank">下 载</a>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="reviews">
+        <div class="title">用户如是说</div>
+        <div id="fullpage" class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide review">
+                    <div class="content">我至今用过的最好的阅读模式插件。</div>
+                    <div class="auth">Larry X</div>
+                </div>
+                <div class="swiper-slide review">
+                    <div class="content">非常棒的一款作品，作者切合了现在网络阅读的需求，可以说完美解决了杂乱信息中阅读的痛点。</div>
+                    <div class="auth">Y **** g</div>
+                </div>
+                <div class="swiper-slide review">
+                  <div class="content">试用了几个小时，还是很好用的，点个赞，解决了痛点问题，让阅读更幸福。</div>
+                  <div class="auth">张 **** 磊</div>
+                </div>
+                <div class="swiper-slide review">
+                  <div class="content">超赞，用熟了可能真的不用什么去广告的扩展了，更新也很频繁，感谢开发者！</div>
+                  <div class="auth">:D GreatFinger</div>
+                </div>
+                <div class="swiper-slide review">
+                  <div class="content">真的太好用了，简悦真的解决了我很大的问题！感谢作者。</div>
+                  <div class="auth">陈 **** 贵</div>
+                </div>
+                <div class="swiper-slide review">
+                  <div class="content">之前用的是印象笔记的「阅读」，但是许多网页适配得不好。用了这个就好多了，大大提高了效率，开发者一定很用心。</div>
+                  <div class="auth">林 **** 梓</div>
+                </div>
+                <div class="swiper-slide review">
+                  <div class="content">如果非得选出最中意的插件，这个绝对可以排前5。情怀雕琢之作，敬佩作者！</div>
+                  <div class="auth">Yu Wang</div>
+                </div>
+                <div class="swiper-slide review">
+                  <div class="content">什么叫生产力，这 tm 的才叫生产力！</div>
+                  <div class="auth">雾 **** 香</div>
+                </div>
+                <div class="swiper-slide review">
+                  <div class="content">
+                      非常棒的阅读体验升级产品，值得推荐！！可能之前都没发现，原来阅读是一件如此惬意的事情~~
+                  </div>
+                  <div class="auth">Steven Wong</div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
     </div>
     <div class="footer">
@@ -266,5 +313,14 @@
         </div>
     </div>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-405976-9"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/Swiper/4.2.2/js/swiper.min.js"></script>
+    <script>
+        $( document ).ready( function() {
+            var swiper = new Swiper('.swiper-container', {
+              pagination : { el: '.swiper-pagination', loop: true, clickable: true,}
+            });
+        });
+    </script>
 </body>
 </html>

@@ -514,6 +514,47 @@ body {
     }
 }
 
+.reviews {
+
+    background-color: var(--text-secondary-color);
+
+    & .title {
+        padding-top: 40px;
+        font-size: 2.4rem;
+    }
+
+    & #fullpage {
+        height: 200px;
+    }
+
+    & .review {
+        line-height: 89px;
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+
+        & .content:before {
+            content: '“';
+
+            font-size: 80px;
+            font-family: "Arial";
+
+            color: rgba( 0, 0, 0, 0.15 );
+        }
+
+        & .content:after {
+            content: '”';
+
+            position: absolute;
+            bottom: 20px;
+
+            font-size: 80px;
+            font-family: "Arial";
+
+            color: rgba( 0, 0, 0, 0.15 );
+        }
+    }
+}
+
 /**
  *  footer
  */
