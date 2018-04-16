@@ -431,7 +431,8 @@ body {
         }
 
         &.lite {
-            background-image: url( '../icons/download_lite.png' );
+            width: 175px;
+            background-image: url( '../icons/download_userscript.png' );
         }
 }
 
