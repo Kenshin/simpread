@@ -57,6 +57,8 @@ body {
 
     color: var(--text-color);
     background-color: var(--background-color);
+
+    overflow-x: hidden;
 }
 
 .logo span {
@@ -248,6 +250,35 @@ body {
         text-decoration: none;
         cursor: help;
         font-weight: 400;
+    }
+}
+
+.main .service {
+    background-color: var(--text-secondary-color);
+
+    & .title {
+        padding: 40px 0;
+        font-size: 2.4rem;
+    }
+
+    & .desc {
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+
+        & span {
+            padding: 5px;
+            border-radius: 3px;
+            background-color: rgba(27,31,35,0.05);
+        }
+
+        & a {
+            color: inherit;
+            font-size: inherit;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.7);
+            text-decoration: none;
+            cursor: help;
+            font-weight: 400;
+        }
     }
 }
 
