@@ -28,6 +28,23 @@
         color: color( var(--text-secondary-color) alpha(-10%));
         border-bottom: 2px solid var(--text-secondary-color);
     }
+
+    --large-button: {
+        padding: 0 16px;
+
+        width: 200px;
+        height: 48px;
+
+        min-width: 88px;
+        min-height: 36px;
+
+        line-height: 48px;
+        text-decoration: none;
+
+        border-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+        transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    }
 }
 
 * {
@@ -157,21 +174,8 @@ body {
     justify-content: center;
     align-items: center;
 
-    padding: 0 16px;
-
-    width: 200px;
-    height: 48px;
-
-    min-width: 88px;
-    min-height: 36px;
-
-    line-height: 48px;
-    text-decoration: none;
-
     background-color: #F44336;
-    border-radius: 2px;
-    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    @apply --large-button;
 }
 
 .header .download .online:hover {
@@ -253,6 +257,7 @@ body {
     }
 }
 
+.main .lite,
 .main .service {
     background-color: var(--text-secondary-color);
 
@@ -451,7 +456,7 @@ body {
         }
 
         &.lite {
-            width: 175px;
+            width: 233px;
             background-image: url( '../icons/download_userscript.png' );
         }
 }
@@ -497,8 +502,16 @@ body {
         background-color: #0c9ce0;
     }
 
+
+    &.userscript {
+        font-size: 2.2rem;
+        background-color: rgba(0, 72, 91, .8);
+        @apply --large-button;
+    }
+
     &.userscript:hover {
         background-color: #00485b;
+        box-shadow: rgba(0, 0, 0, .3) 0px 5px 5px, rgba(0, 0, 0, .3) 0px 5px 5px;
     }
 }
 
