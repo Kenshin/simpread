@@ -481,7 +481,6 @@ body {
 
 .main .downloads .platform a {
     &:hover {
-        font-weight: bold;
         background-color: #42A5F5;
         box-shadow: rgba(0, 0, 0, .3) 0px 5px 5px, rgba(0, 0, 0, .3) 0px 5px 5px;
     }
