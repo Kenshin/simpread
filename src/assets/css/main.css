@@ -74,8 +74,6 @@ body {
 
     color: var(--text-color);
     background-color: var(--background-color);
-
-    overflow-x: hidden;
 }
 
 .logo span {
@@ -410,7 +408,6 @@ body {
     flex-direction: row;
     justify-content: space-around;
 
-    margin: 0 20px;
     padding: 40px 0;
 
     width: 100%;
