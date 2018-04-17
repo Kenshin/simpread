@@ -234,39 +234,51 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide review">
                     <div class="content">我至今用过的最好的阅读模式插件。</div>
-                    <div class="auth">Larry X</div>
+                    <div class="auth">Larry X <span>来自 Chrome 应用商店</span></div>
                 </div>
                 <div class="swiper-slide review">
                     <div class="content">非常棒的一款作品，作者切合了现在网络阅读的需求，可以说完美解决了杂乱信息中阅读的痛点。</div>
-                    <div class="auth">Y **** g</div>
+                    <div class="auth">Yongliang Zhang <span>来自 Chrome 应用商店</span></div>
+                </div>
+                <div class="swiper-slide review">
+                    <div class="content">好棒啊，非常用心的作品！赏心悦目的感觉。虽然用了abp以后就看不到乱七八糟的广告了，阅读模式精致的像一本书。</div>
+                    <div class="auth">打架鱼 <span>来自 少数派</span></div>
                 </div>
                 <div class="swiper-slide review">
                     <div class="content">试用了几个小时，还是很好用的，点个赞，解决了痛点问题，让阅读更幸福。</div>
-                    <div class="auth">张 **** 磊</div>
+                    <div class="auth">张 **** 磊 <span>来自 Chrome 应用商店</span></div>
+                </div>
+                <div class="swiper-slide review">
+                    <div class="content">已使用，很棒，解决了痛点问题，让阅读更美好。一直在找类似的插件，相见恨晚啊。</div>
+                    <div class="auth">rayjoy <span>来自 V2EX</span></div>
                 </div>
                 <div class="swiper-slide review">
                     <div class="content">超赞，用熟了可能真的不用什么去广告的扩展了，更新也很频繁，感谢开发者！</div>
-                    <div class="auth">:D GreatFinger</div>
+                    <div class="auth">:D GreatFinger <span>来自 Chrome 应用商店</span></div>
                 </div>
                 <div class="swiper-slide review">
                     <div class="content">真的太好用了，简悦真的解决了我很大的问题！感谢作者。</div>
-                    <div class="auth">陈 **** 贵</div>
+                    <div class="auth">陈 **** 贵 <span>来自 Chrome 应用商店</span></div>
                 </div>
                 <div class="swiper-slide review">
-                    <div class="content">之前用的是印象笔记的「阅读」，但是许多网页适配得不好。用了这个就好多了，大大提高了效率，开发者一定很用心。</div>
-                    <div class="auth">林 **** 梓</div>
+                    <div class="content">非常感谢你的开发, 现在看网页的文章真的属于一种享受。</div>
+                    <div class="auth">HXP_Summer <span>来自 简书</span></div>
+                </div>
+                <div class="swiper-slide review">
+                    <div class="content">之前用的是印象笔记的阅读，但是许多网页适配得不好。用了这个就好多了，大大提高了效率，开发者一定很用心。</div>
+                    <div class="auth">林 **** 梓 <span>来自 Chrome 应用商店</span></div>
                 </div>
                 <div class="swiper-slide review">
                     <div class="content">如果非得选出最中意的插件，这个绝对可以排前5。情怀雕琢之作，敬佩作者！</div>
-                    <div class="auth">Yu Wang</div>
+                    <div class="auth">Yu Wang <span>来自 Chrome 应用商店</span></div>
                 </div>
                 <div class="swiper-slide review">
                     <div class="content">什么叫生产力，这 tm 的才叫生产力！</div>
-                    <div class="auth">雾 **** 香</div>
+                    <div class="auth">雾 **** 香 <span>来自 Chrome 应用商店</span></div>
                 </div>
                 <div class="swiper-slide review">
                     <div class="content">非常棒的阅读体验升级产品，值得推荐！！可能之前都没发现，原来阅读是一件如此惬意的事情~~</div>
-                    <div class="auth">Steven Wong</div>
+                    <div class="auth">Steven Wong <span>来自 Chrome 应用商店</span></div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -316,7 +328,7 @@
     <script>
         $( document ).ready( function() {
             var swiper = new Swiper('.swiper-container', {
-              pagination : { el: '.swiper-pagination', loop: true, clickable: true,}
+              pagination : { el: '.swiper-pagination', loop: true, clickable: true,dynamicBullets: true}
             });
         });
     </script>

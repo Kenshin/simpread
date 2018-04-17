@@ -549,6 +549,10 @@ body {
 
             color: rgba( 0, 0, 0, 0.15 );
         }
+
+        & .auth span {
+            font-size: 11px;
+        }
     }
 }
 
