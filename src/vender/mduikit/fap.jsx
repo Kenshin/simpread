@@ -104,91 +104,97 @@ const cssinjs = () => {
                 height: '100%',
               },
 
-              panel : {
-                  display: '-webkit-flex',
-                  flexDirection: 'column',
-
-                  position: 'absolute',
-                  right: '32px',
-                  bottom: '185px',
-
-                  minWidth: '480px',
-                  minHeight: '300px',
-
-                  margin: 0,
-                  padding: '39px 24px 0',
-
-                  color: 'rgba(0, 0, 0, 0.870588)',
-                  backgroundColor: 'rgb(255, 255, 255)',
-
-                  borderRadius: '3px',
-
-                  boxSizing: 'border-box',
-                  boxShadow: '0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.26)',
-
-                  opacity: 0,
-                  visibility: 'hidden',
-                  transition: 'opacity 1s ease',
-
-                  zIndex: 2147483647,
-              },
-
-              panel_tabs: {
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-
-                fontSize: '14px',
-
-                borderBottom: '1px solid #E0E0E0',
-              },
-
-              panel_tab: {
-                position: 'relative',
-                padding: '0px 24px 5px 24px',
-
-                cursor: 'pointer',
-              },
-
-              panel_border: {
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-
-                marginBottom: '-1px',
-
-                fontWeight: 500,
-                color: '#3273dc',
-
-                borderBottom: '1px solid rgb(33, 150, 243)',
-
-                transform: 'scaleX(0)',
-                transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-              },
-
-              panel_border_active: {
-                transform: 'scaleX(1)',
-              },
-
-              groups: {
-                display: 'block',
-                width: '100%',
-              },
-
-              group: {
-                display: 'none',
-                padding: '39px 0px 10px',
-              },
-
-              group_active: {
-                display: 'block',
-                opacity: 1,
-              }
-
           };
     return styles;
 };
+
+const cssinjs_panel = () => {
+
+    const styles = {
+          root : {
+              display: '-webkit-flex',
+              flexDirection: 'column',
+
+              position: 'absolute',
+              right: '32px',
+              bottom: '185px',
+
+              minWidth: '480px',
+              minHeight: '300px',
+
+              margin: 0,
+              padding: '39px 24px 0',
+
+              color: 'rgba(0, 0, 0, 0.870588)',
+              backgroundColor: 'rgb(255, 255, 255)',
+
+              borderRadius: '3px',
+
+              boxSizing: 'border-box',
+              boxShadow: '0 0 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.26)',
+
+              opacity: 0,
+              visibility: 'hidden',
+              transition: 'opacity 1s ease',
+
+              zIndex: 2147483647,
+          },
+
+          panel_tabs: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+
+            fontSize: '14px',
+
+            borderBottom: '1px solid #E0E0E0',
+          },
+
+          panel_tab: {
+            position: 'relative',
+            padding: '0px 24px 5px 24px',
+
+            cursor: 'pointer',
+          },
+
+          panel_border: {
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+
+            marginBottom: '-1px',
+
+            fontWeight: 500,
+            color: '#3273dc',
+
+            borderBottom: '1px solid rgb(33, 150, 243)',
+
+            transform: 'scaleX(0)',
+            transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+          },
+
+          panel_border_active: {
+            transform: 'scaleX(1)',
+          },
+
+          groups: {
+            display: 'block',
+            width: '100%',
+          },
+
+          group: {
+            display: 'none',
+            padding: '39px 0px 10px',
+          },
+
+          group_active: {
+            display: 'block',
+            opacity: 1,
+          },
+    }
+    return styles;
+}
 
 class Panel extends React.Component {
 
@@ -200,8 +206,13 @@ class Panel extends React.Component {
         item: React.PropTypes.array,
     };
 
+    state = {
+        id : Math.round(+new Date()),
+    };
+
     onTabMouseEnter( event ) {
-        const $target = $( event.target ),
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target ),
               active  = $target.attr( "active" ),
               tag     = event.target.tagName.toLowerCase();
         if ( tag == "panel-tab" ) {
@@ -227,7 +238,8 @@ class Panel extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
+        const style = { ...cssinjs_panel() };
+        styles.set( this.state.id, style );
 
         const active_border = { ...style.panel_border, ...style.panel_border_active },
               active_group  = { ...style.group, ...style.group_active },
@@ -242,7 +254,7 @@ class Panel extends React.Component {
         });
 
         return (
-            <panel ref="panel" style={ style.panel }>
+            <panel ref="panel" style={ style.root }>
                 <panel-tabs style={ style.panel_tabs }>
                     { tabs }
                 </panel-tabs>
