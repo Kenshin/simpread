@@ -353,11 +353,13 @@ export default class Fap extends React.Component {
                 "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
             }
         },
+        items   : [],
         tooltip : {},
         waves   : undefined,
     };
 
     static propTypes = {
+        item        : React.PropTypes.array,   // panel props
         triggerItems: React.PropTypes.object,
         tooltip     : React.PropTypes.object,
         waves       : React.PropTypes.string,
