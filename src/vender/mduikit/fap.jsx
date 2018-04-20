@@ -166,6 +166,7 @@ const cssinjs = () => {
 
               group: {
                 display: 'none',
+                padding: '39px 0px 10px',
               },
 
               group_active: {
