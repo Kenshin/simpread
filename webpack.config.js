@@ -282,6 +282,7 @@ const webpack = require( 'webpack' ),
 
           textfield  : __dirname + '/src/vender/mduikit/textfield.jsx',
           fab        : __dirname + '/src/vender/mduikit/fab.jsx',
+          fap        : __dirname + '/src/vender/mduikit/fap.jsx',
           button     : __dirname + '/src/vender/mduikit/button.jsx',
           selectfield: __dirname + '/src/vender/mduikit/selectfield.jsx',
           dropdown   : __dirname + '/src/vender/mduikit/dropdown.jsx',
