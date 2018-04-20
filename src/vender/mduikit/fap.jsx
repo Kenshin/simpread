@@ -359,9 +359,9 @@ export default class Fap extends React.Component {
 
     static propTypes = {
         triggerItems: React.PropTypes.object,
-        tooltip  : React.PropTypes.object,
-        waves    : React.PropTypes.string,
-        onAction : React.PropTypes.func,
+        tooltip     : React.PropTypes.object,
+        waves       : React.PropTypes.string,
+        onAction    : React.PropTypes.func,
     }
 
     state = {
