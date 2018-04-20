@@ -300,27 +300,29 @@ const Button = ( props ) => {
  * 
     <Button id={ "exit" } name={"退出"} icon={ {style.spec_icon, `${path}assets/images/exit_icon.png`} } type={ "spec" }   style={ style.spec } />
     <Button id={ "more" } name={"更多"} icon={ {style.icon, `${path}assets/images/more_icon.png` } }     type={ "anchor" } style={ style.origin } />
-    <panel>
-        <panel-tabs>
-            <panel-tab active="true">
-                <span>设定</span>
-                <panel-border></panel-border>
-            </panel-tab>
-            <panel-tab>
-                <span>动作</span>
-                <panel-border></panel-border>
-            </panel-tab>
-            <panel-tab>
-                <span>脚本</span>
-                <panel-border></panel-border>
-            </panel-tab>
-    </panel-tabs>
-        <panel-groups>
-            <panel-group>设定</panel-group>
-            <panel-group>动作</panel-group>
-            <panel-group>脚本</panel-group>
-        </panel-groups>
-    </panel>
+    <panel-bg>
+        <panel>
+            <panel-tabs>
+                <panel-tab active="true">
+                    <span>设定</span>
+                    <panel-border></panel-border>
+                </panel-tab>
+                <panel-tab>
+                    <span>动作</span>
+                    <panel-border></panel-border>
+                </panel-tab>
+                <panel-tab>
+                    <span>脚本</span>
+                    <panel-border></panel-border>
+                </panel-tab>
+        </panel-tabs>
+            <panel-groups>
+                <panel-group>设定</panel-group>
+                <panel-group>动作</panel-group>
+                <panel-group>脚本</panel-group>
+            </panel-groups>
+        </panel>
+    </panel-bg>
  * 
  * Reference:
  * - https://material.io/guidelines/components/tabs.html
@@ -360,26 +362,7 @@ export default class Fap extends React.Component {
         if ( type == "spec" ) {
             $target.parent().css({ ...style.spec, ...style.spec_focus });
         } else {
-            //$target.parent().css({ ...style.normal, ...style.normal_focus });
-
-            const $panelbg = $target.parent().next();
-            if ( $panelbg.length > 0 ) {
-                $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
-                ReactDOM.render( <Panel { ...this.props } />, $panelbg[0] );
-                setTimeout( () => {
-                    $panelbg.on( "mouseover", event => {
-                        if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
-                            $panelbg.animate({ opacity: 0 },{
-                                complete: ()=> {
-                                    ReactDOM.unmountComponentAtNode( $panelbg[0] );
-                                    $panelbg.off( "mouseover" );
-                                    $panelbg.css({ ...style.panel_bg });
-                                }
-                            });
-                        }
-                    });
-                }, 200 );
-            }
+            this.panelRender( $( this.refs.bg ) );
         }
     }
 
@@ -390,6 +373,26 @@ export default class Fap extends React.Component {
         const color = $target.attr( "color" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
+        }
+    }
+
+    panelRender( $panelbg ) {
+        if ( $panelbg.length > 0 ) {
+            $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
+            ReactDOM.render( <Panel { ...this.props } />, $panelbg[0] );
+            setTimeout( () => {
+                $panelbg.on( "mouseover", event => {
+                    if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
+                        $panelbg.animate({ opacity: 0 },{
+                            complete: ()=> {
+                                ReactDOM.unmountComponentAtNode( $panelbg[0] );
+                                $panelbg.off( "mouseover" );
+                                $panelbg.css({ ...style.panel_bg });
+                            }
+                        });
+                    }
+                });
+            }, 200 );
         }
     }
 
@@ -425,7 +428,7 @@ export default class Fap extends React.Component {
         },
         spec   = <Button { ...btn_props( "exit", "spec",     style.spec,   items.exit,   style.icon, this.props.tooltip, this.props.waves ) } />,
         anchor = <Button { ...btn_props( "anchor", "anchor", style.origin, items.anchor, style.icon, this.props.tooltip, this.props.waves ) } />,
-        panel  = <panel-bg></panel-bg>;
+        panel  = <panel-bg ref="bg"></panel-bg>;
 
         return (
             <fap style={ style.root }>
