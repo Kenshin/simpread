@@ -343,13 +343,22 @@ const Button = ( props ) => {
 export default class Fap extends React.Component {
 
     static defaultProps = {
-        items   : {},
+        triggerItems: {
+            "exit"  : {
+                "name": "关闭",
+                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAdklEQVQ4y+WTuQ3AIBAEaQKK8NN/BEUArmccgGyj43MMIZo5TqtFqbUPJxYtbg2OvS44IJQKhguwdUETSiXjXr77KhGICRjihWKm8Dw3KXP4Z5VZ/Lfw7B5kyD1cy5C7uAx5iJcht6vhRTUi4OrC0Szftvi/vAFNdbZ2Dp661QAAAABJRU5ErkJggg==",
+            },
+            "anchor": {
+                "name" : "更多",
+                "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
+            }
+        },
         tooltip : {},
         waves   : undefined,
-    }
+    };
 
     static propTypes = {
-        items    : React.PropTypes.object,
+        triggerItems: React.PropTypes.object,
         tooltip  : React.PropTypes.object,
         waves    : React.PropTypes.string,
         onAction : React.PropTypes.func,
@@ -425,19 +434,9 @@ export default class Fap extends React.Component {
                     onMouseOver: evt=>this.btnMouseOverHandler(evt),
                     onMouseOut : evt=>this.btnMouseOutHandler(evt),
                 };
-            },
-            items = {
-                "exit"  : {
-                    "name": "关闭",
-                    "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAdklEQVQ4y+WTuQ3AIBAEaQKK8NN/BEUArmccgGyj43MMIZo5TqtFqbUPJxYtbg2OvS44IJQKhguwdUETSiXjXr77KhGICRjihWKm8Dw3KXP4Z5VZ/Lfw7B5kyD1cy5C7uAx5iJcht6vhRTUi4OrC0Szftvi/vAFNdbZ2Dp661QAAAABJRU5ErkJggg=="
-                },
-                "anchor": {
-                    "name" : "更多",
-                    "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
-                }
         },
-        spec   = <Button { ...btn_props( "exit", "spec",     style.spec,   items.exit,   style.icon, this.props.tooltip, this.props.waves ) } />,
-        anchor = <Button { ...btn_props( "anchor", "anchor", style.origin, items.anchor, style.icon, this.props.tooltip, this.props.waves ) } />,
+        spec   = <Button { ...btn_props( "exit", "spec",     style.spec,   this.props.triggerItems.exit,   style.icon, this.props.tooltip, this.props.waves ) } />,
+        anchor = <Button { ...btn_props( "anchor", "anchor", style.origin, this.props.triggerItems.anchor, style.icon, this.props.tooltip, this.props.waves ) } />,
         panel  = <panel-bg ref="bg"></panel-bg>;
 
         return (
