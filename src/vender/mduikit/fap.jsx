@@ -232,9 +232,7 @@ class Panel extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout( ()=>{
-            $( this.refs.panel ).css( "opacity", 1 ).attr( "active", true ).css( "visibility", "visible" );
-        }, 50 );
+        setTimeout( ()=>$( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" ), 50 );
     }
 
     render() {
