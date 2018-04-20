@@ -199,11 +199,13 @@ const cssinjs_panel = () => {
 class Panel extends React.Component {
 
     static defaultProps = {
-        items: [],
+        items     : [],
+        autoHeight: false,
     };
 
     static propTypes = {
-        item: React.PropTypes.array,
+        item       : React.PropTypes.array,
+        autoHeight : React.PropTypes.bool,
     };
 
     state = {
