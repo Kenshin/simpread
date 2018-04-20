@@ -111,6 +111,7 @@ const cssinjs = () => {
 const cssinjs_panel = () => {
 
     const styles = {
+          activeColor: 'rgba(0, 137, 123, .8)',
           root : {
               display: '-webkit-flex',
               flexDirection: 'column',
@@ -168,7 +169,7 @@ const cssinjs_panel = () => {
             fontWeight: 500,
             color: '#3273dc',
 
-            borderBottom: '1px solid rgb(33, 150, 243)',
+            borderBottom: '1px solid ',
 
             transform: 'scaleX(0)',
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
@@ -199,13 +200,15 @@ const cssinjs_panel = () => {
 class Panel extends React.Component {
 
     static defaultProps = {
-        items     : [],
-        autoHeight: false,
+        items      : [],
+        autoHeight : false,
+        activeColor: undefined,
     };
 
     static propTypes = {
         item       : React.PropTypes.array,
         autoHeight : React.PropTypes.bool,
+        activeColor: React.PropTypes.string,
     };
 
     state = {
@@ -254,6 +257,8 @@ class Panel extends React.Component {
     render() {
         const style = { ...cssinjs_panel() };
         styles.set( this.state.id, style );
+
+        style.panel_border.borderBottom = style.panel_border.borderBottom + ( this.props.activeColor ? this.props.activeColor : style.activeColor );
 
         const active_border = { ...style.panel_border, ...style.panel_border_active },
               active_group  = { ...style.group, ...style.group_active },
@@ -369,15 +374,17 @@ export default class Fap extends React.Component {
                 "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
             }
         },
-        items   : [],
-        autoHeight: false,
-        tooltip : {},
-        waves   : undefined,
+        items      : [],
+        autoHeight : false,
+        activeColor: undefined,
+        tooltip    : {},
+        waves      : undefined,
     };
 
     static propTypes = {
         item        : React.PropTypes.array,   // panel props
         autoHeight  : React.PropTypes.bool,    // panel props
+        activeColor: React.PropTypes.string,   // panel props
         triggerItems: React.PropTypes.object,
         tooltip     : React.PropTypes.object,
         waves       : React.PropTypes.string,
