@@ -399,6 +399,7 @@ export default class Fap extends React.Component {
 
     panelRender( $panelbg ) {
         if ( $panelbg.length > 0 ) {
+            style = styles.get( this.state.id );
             $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
             ReactDOM.render( <Panel { ...this.props } />, $panelbg[0] );
             setTimeout( () => {
@@ -418,7 +419,7 @@ export default class Fap extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, cssinjs() );
+        styles.set( this.state.id, { ...cssinjs() });
         style      = styles.get( this.state.id );
         style.spec = { ...style.origin, ...style.large, ...style.spec_item };
 
