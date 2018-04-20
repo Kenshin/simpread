@@ -364,9 +364,9 @@ const Button = ( props ) => {
 export default class Fap extends React.Component {
 
     static defaultProps = {
-        items      : [],
-        autoHeight : false,
-        activeColor: undefined,
+        items       : [],
+        autoHeight  : false,
+        activeColor : undefined,
 
         triggerItems: {
             "exit"  : {
@@ -378,14 +378,14 @@ export default class Fap extends React.Component {
                 "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
             }
         },
-        tooltip    : {},
-        waves      : undefined,
+        tooltip     : {},
+        waves       : undefined,
     };
 
     static propTypes = {
         item        : React.PropTypes.array,   // panel props
         autoHeight  : React.PropTypes.bool,    // panel props
-        activeColor: React.PropTypes.string,   // panel props
+        activeColor : React.PropTypes.string,  // panel props
 
         triggerItems: React.PropTypes.object,
         tooltip     : React.PropTypes.object,
