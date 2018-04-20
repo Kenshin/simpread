@@ -231,8 +231,22 @@ class Panel extends React.Component {
         }
     }
 
+    autoHeight() {
+        let height = 0;
+        $( "panel-groups" ).children().map( ( idx, item ) => {
+            if ( height == 0 ) {
+                height = $(item).height();
+            } else if ( $(item).height() > height ) {
+                height = $(item).height();
+            } else if ( $(item).height() <= height ) {
+                $(item).height( height );
+            }
+        });
+    }
+
     componentDidMount() {
         setTimeout( ()=>$( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" ), 50 );
+        this.props.autoHeight == false && this.autoHeight();
     }
 
     render() {
@@ -354,12 +368,14 @@ export default class Fap extends React.Component {
             }
         },
         items   : [],
+        autoHeight: false,
         tooltip : {},
         waves   : undefined,
     };
 
     static propTypes = {
         item        : React.PropTypes.array,   // panel props
+        autoHeight  : React.PropTypes.bool,    // panel props
         triggerItems: React.PropTypes.object,
         tooltip     : React.PropTypes.object,
         waves       : React.PropTypes.string,
