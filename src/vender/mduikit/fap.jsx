@@ -367,6 +367,7 @@ export default class Fap extends React.Component {
         items       : [],
         autoHeight  : false,
         activeColor : undefined,
+        autoHide    : true,
 
         triggerItems: {
             "exit"  : {
@@ -386,6 +387,7 @@ export default class Fap extends React.Component {
         item        : React.PropTypes.array,   // panel props
         autoHeight  : React.PropTypes.bool,    // panel props
         activeColor : React.PropTypes.string,  // panel props
+        autoHide    : React.PropTypes.bool,    // panel props
 
         triggerItems: React.PropTypes.object,
         tooltip     : React.PropTypes.object,
@@ -430,7 +432,8 @@ export default class Fap extends React.Component {
             $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
             ReactDOM.render( <Panel { ...this.props } />, $panelbg[0] );
             setTimeout( () => {
-                $panelbg.on( "mouseover", event => {
+                const evt = this.props.autoHide ? "mouseover" : "click";
+                $panelbg.on( evt, event => {
                     if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
                         $panelbg.animate({ opacity: 0 },{
                             complete: ()=> {
