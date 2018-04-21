@@ -265,7 +265,7 @@ class Panel extends React.Component {
 
         const active_border = { ...style.panel_border, ...style.panel_border_active },
               active_group  = { ...style.group, ...style.group_active },
-              events        = this.props.tabautoSel ? { onMouseEnter: evt => this.onTabChange(evt) } : { onClick: evt => this.onTabChange(evt) },
+              events        = this.props.tabAutoSel ? { onMouseEnter: evt => this.onTabChange(evt) } : { onClick: evt => this.onTabChange(evt) },
               tabs          = this.props.items.map( ( item, idx ) => {
             return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } { ...events } >
                       <span>{item}</span>
@@ -372,7 +372,7 @@ export default class Fap extends React.Component {
         autoHeight  : false,
         activeColor : undefined,
         autoHide    : true,
-        tabautoSel  : true,
+        tabAutoSel  : true,
 
         triggerItems: {
             "exit"  : {
@@ -393,7 +393,7 @@ export default class Fap extends React.Component {
         autoHeight  : React.PropTypes.bool,    // panel props
         activeColor : React.PropTypes.string,  // panel props
         autoHide    : React.PropTypes.bool,    // panel props
-        tabautoSel  : React.PropTypes.bool,    // panel props
+        tabAutoSel  : React.PropTypes.bool,    // panel props
 
         triggerItems: React.PropTypes.object,
         tooltip     : React.PropTypes.object,
