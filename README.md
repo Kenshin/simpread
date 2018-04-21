@@ -107,7 +107,7 @@
 
 * 更多说明请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器) [站点管理](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%AE%A1%E7%90%86%E5%99%A8) [站点适配源](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90)；
 
-#### Chrome / Firefox / 轻阅版（UserScript）功能差别
+#### Chrome / Firefox / 轻阅版（UserScript）功能差别：
 ![Chrome / Firefox / 轻阅版（UserScript）功能差别](https://i.imgur.com/z4WI7uK.png)
 
 #### 投票：
@@ -159,7 +159,7 @@
 
 #### 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
-_如发现下图显示不全，请直接访问 http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png_
+_如发现下图显示不全，请直接访问 http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png_  
 ![支付](http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png)
 
 #### 许可：
