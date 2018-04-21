@@ -148,12 +148,13 @@ const cssinjs_panel = () => {
 
             fontSize: '14px',
 
-            borderBottom: '1px solid #E0E0E0',
+            borderBottom: '2px solid #E0E0E0',
           },
 
           panel_tab: {
             position: 'relative',
             padding: '0px 24px 5px 24px',
+            width: '100%',
 
             cursor: 'pointer',
           },
@@ -164,12 +165,12 @@ const cssinjs_panel = () => {
             left: 0,
             right: 0,
 
-            marginBottom: '-1px',
+            marginBottom: '-2px',
 
             fontWeight: 500,
             color: '#3273dc',
 
-            borderBottom: '1px solid ',
+            borderBottom: '2px solid ',
 
             transform: 'scaleX(0)',
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
