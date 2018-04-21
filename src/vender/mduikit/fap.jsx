@@ -266,7 +266,7 @@ class Panel extends React.Component {
             return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } onMouseEnter={ evt=> this.onTabMouseEnter(evt) }>
                       <span>{item}</span>
                       <panel-border style={ idx == 0 ? active_border : { ...style.panel_border } }></panel-border>
-                  </panel-tab>;
+                   </panel-tab>;
         }),
         groups        = this.props.children.map( ( child, idx ) => {
             return <panel-group style={ idx == 0 ? active_group : { ...style.group } } active={ idx == 0 ? "true" : "false" } >{child}</panel-group>;
