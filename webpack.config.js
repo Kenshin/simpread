@@ -292,6 +292,7 @@ const webpack = require( 'webpack' ),
           sidebar    : __dirname + '/src/vender/mduikit/sidebar.jsx',
           list       : __dirname + '/src/vender/mduikit/list.jsx',
           dialog     : __dirname + '/src/vender/mduikit/dialog.jsx',
+          slider     : __dirname + '/src/vender/mduikit/slider.jsx',
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
 
