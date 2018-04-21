@@ -215,24 +215,27 @@ class Panel extends React.Component {
         id : Math.round(+new Date()),
     };
 
-    onTabMouseEnter( event ) {
-        const style   = styles.get( this.state.id ),
-              $target = $( event.target ),
+    onTabChange( event ) {
+        const style   = styles.get( this.state.id );
+        let   $target = $( event.target ),
               active  = $target.attr( "active" ),
               tag     = event.target.tagName.toLowerCase();
-        if ( tag == "panel-tab" ) {
-            if ( active == "false" ) {
-                const $others = $( "panel-tab[active=true]"   ),
-                      $group  = $( "panel-group[active=true]" );
-                $target.attr( "active", true );
-                $target.find( "panel-border" ).css({ ...style.panel_border, ...style.panel_border_active });
+        while ( tag  != "panel-tab" ) {
+            $target   = $target.parent();
+            active    = $target.attr( "active" );
+            tag       = $target[0].tagName.toLowerCase();
+        }
+        if ( active == "false" ) {
+            const $others = $( "panel-tab[active=true]"   ),
+                    $group  = $( "panel-group[active=true]" );
+            $target.attr( "active", true );
+            $target.find( "panel-border" ).css({ ...style.panel_border, ...style.panel_border_active });
 
-                $others.attr( "active", false );
-                $others.find( "panel-border" ).css({ ...style.panel_border });
+            $others.attr( "active", false );
+            $others.find( "panel-border" ).css({ ...style.panel_border });
 
-                $( "panel-group[active=false]" ).attr( "active", true ).css({ ...style.group, ...style.group_active });
-                $group.attr( "active", false ).css({ ...style.group });
-            }
+            $( "panel-group[active=false]" ).attr( "active", true ).css({ ...style.group, ...style.group_active });
+            $group.attr( "active", false ).css({ ...style.group });
         }
     }
 
@@ -262,8 +265,9 @@ class Panel extends React.Component {
 
         const active_border = { ...style.panel_border, ...style.panel_border_active },
               active_group  = { ...style.group, ...style.group_active },
+              events        = this.props.tabautoSel ? { onMouseEnter: evt => this.onTabChange(evt) } : { onClick: evt => this.onTabChange(evt) },
               tabs          = this.props.items.map( ( item, idx ) => {
-            return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } onMouseEnter={ evt=> this.onTabMouseEnter(evt) }>
+            return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } { ...events } >
                       <span>{item}</span>
                       <panel-border style={ idx == 0 ? active_border : { ...style.panel_border } }></panel-border>
                    </panel-tab>;
@@ -368,6 +372,7 @@ export default class Fap extends React.Component {
         autoHeight  : false,
         activeColor : undefined,
         autoHide    : true,
+        tabautoSel  : true,
 
         triggerItems: {
             "exit"  : {
@@ -388,6 +393,7 @@ export default class Fap extends React.Component {
         autoHeight  : React.PropTypes.bool,    // panel props
         activeColor : React.PropTypes.string,  // panel props
         autoHide    : React.PropTypes.bool,    // panel props
+        tabautoSel  : React.PropTypes.bool,    // panel props
 
         triggerItems: React.PropTypes.object,
         tooltip     : React.PropTypes.object,
