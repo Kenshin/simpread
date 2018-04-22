@@ -18,7 +18,19 @@ let styles = new Map();
           hover_color  = 'rgb(0, 105, 92)',
         cssinjs = () => {
 
-        const styles = {
+        const
+            color       = 'rgba(51, 51, 51, .87)',
+            focus_color = 'rgba(0, 137, 123, .8)',
+            border_color= 'rgba(224, 224, 224, 1)',
+            error_color = 'rgba(244, 67, 54, 1)',
+            margin      = '8px 0 0 0',
+            display     = 'block',
+            medium      = '14px',
+            large       = '16px',
+            lineHeight  = 1.5,
+            fontWeight  = 'bold',
+            width       = '100%',
+            styles      = {
             root: {
                 position: 'relative',
                 display: 'flex',
@@ -49,6 +61,99 @@ let styles = new Map();
 
                 backgroundColor: 'rgba(0, 137, 123, 1)',
                 pointerEvents: 'none',
+            },
+
+            text_field: {
+                display,
+                position: 'relative',
+                margin: '0 0 0 30px',
+                padding: 0,
+
+                width: '50px',
+                lineHeight: 1,
+            },
+
+            input: {
+                color,
+                backgroundColor: 'transparent',
+
+                width,
+                height: '20px',
+
+                margin: 0,
+                padding: 0,
+
+                fontFamily: 'sans-serif',
+                fontSize: medium,
+                textAlign: 'center',
+
+                border: 'none',
+                outline: 'none',
+
+                boxShadow: 'none',
+                boxSizing: 'content-box',
+                transition: 'all 0.3s',
+            },
+
+            border : {
+                display,
+
+                width,
+                margin,
+
+                borderTop: `none ${border_color}`,
+                borderLeft: `none ${border_color}`,
+                borderRight: `none ${border_color}`,
+                borderBottom: `1px solid ${border_color}`,
+                boxSizing: 'content-box',
+            },
+
+            state : {
+                display,
+                position: 'absolute',
+
+                width,
+                margin: '-1px 0 0 0',
+
+                borderTop: `none ${focus_color}`,
+                borderLeft: `none ${focus_color}`,
+                borderRight: `none ${focus_color}`,
+                borderBottom: `2px solid ${focus_color}`,
+                boxSizing: 'content-box',
+
+                transform: 'scaleX(0)',
+                transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+            },
+
+            state_focus : {
+                transform: 'scaleX(1)',
+            },
+
+            state_error : {
+                transform: 'scaleX(1)',
+                borderTop: `none ${error_color}`,
+                borderLeft: `none ${error_color}`,
+                borderRight: `none ${error_color}`,
+                borderBottom: `2px solid ${error_color}`,
+            },
+
+            error : {
+                display,
+                position: 'relative',
+
+                margin,
+                maxWidth: '428px',
+
+                fontSize: medium,
+                fontWeight,
+                lineHeight,
+                textAlign: 'initial',
+                wordWrap: 'break-word',
+
+                userSelect: 'none',
+
+                color: error_color,
+                transform: 'scale(0.75) translate( -73px, 0 )',
             },
 
         };
@@ -155,11 +260,46 @@ export default class Slider extends React.Component {
         const maxWidth = $( this.refs.range ).width(),
               perc     = ( this.props.max - value ) / ( this.props.max - this.props.min );
         $( this.refs.line ).width( maxWidth - ( maxWidth * perc ));
+        this.refs.input.value = value;
     }
 
-    onChange( event ) {
-        this.props.onChange && this.props.onChange( event );
-        this.lineWidth( event.target.value );
+    onTextChangeFocus( event ) {
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target ),
+              $state  = $target.next().find( "text-field-state" );
+        $state.css({ ...style.state, ...style.state_focus });
+    }
+
+    onTextChangeBlur( event ) {
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target ),
+              $state  = $target.next().find( "text-field-state" );
+        $state.css({ ...style.state });
+    }
+
+    onTextChange( event ) {
+        let   istrue  = true;
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target ),
+              $state  = $target.next().find( "text-field-state" ),
+              min     = Number.parseInt( this.props.min ),
+              max     = Number.parseInt( this.props.max ),
+              value   = Number.parseInt( event.target.value );
+         if ( !Number.isInteger( value )) {
+            istrue = false;
+        } else if ( value < min ) {
+            istrue = false;
+        } else if ( value > max ) {
+            istrue = false;
+        }
+        if ( !istrue ) {
+            $state.css({ ...style.state, ...style.state_error });
+        } else {
+            $state.css({ ...style.state, ...style.state_focus });
+            this.refs.range.value = event.target.value;
+            this.lineWidth( event.target.value );
+            this.props.onChange && this.props.onChange( event );
+        }
     }
 
     componentWillMount() {
@@ -172,9 +312,20 @@ export default class Slider extends React.Component {
         this.lineWidth( this.props.value );
     }
 
+    onChange( event ) {
+        this.props.onChange && this.props.onChange( event );
+        this.lineWidth( event.target.value );
+    }
+
     render() {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
+
+        const events = {
+            onFocus  : (e)=>this.onTextChangeFocus(e),
+            onBlur   : (e)=>this.onTextChangeBlur(e),
+            onChange : (e)=>this.onTextChange(e),
+        };
 
         return (
             <slider style={ style.root }>
@@ -182,6 +333,14 @@ export default class Slider extends React.Component {
                     <input ref="range" type="range" min={this.props.min} max={this.props.max} step={this.props.step} onChange={ evt=> this.onChange(evt) }/>
                     <line ref="line" style={ style.line }></line>
                 </group>
+                <text-field style={ style.text_field }>
+                    <input ref="input" style={ style.input } { ...events } />
+                    <div>
+                        <text-field-border style={ style.border }/>
+                        <text-field-state style={ style.state }/>
+                    </div>
+                    <text-field-error style={ style.error }>{ this.props.errortext }</text-field-error>
+                </text-field>
             </slider>
         )
     }
