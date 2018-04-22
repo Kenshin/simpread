@@ -260,7 +260,6 @@ export default class Slider extends React.Component {
         const maxWidth = $( this.refs.range ).width(),
               perc     = ( this.props.max - value ) / ( this.props.max - this.props.min );
         $( this.refs.line ).width( maxWidth - ( maxWidth * perc ));
-        this.refs.input.value = value;
     }
 
     onTextChangeFocus( event ) {
@@ -297,6 +296,7 @@ export default class Slider extends React.Component {
         } else {
             $state.css({ ...style.state, ...style.state_focus });
             this.refs.range.value = event.target.value;
+            this.refs.input.value = event.target.value;
             this.lineWidth( event.target.value );
             this.props.onChange && this.props.onChange( event );
         }
@@ -312,6 +312,7 @@ export default class Slider extends React.Component {
         const style  = styles.get( this.state.id ),
               $state = $( event.target ).parent().next().find( "text-field-state" );
         $state.css({ ...style.state, ...style.state_focus });
+        this.refs.input.value = event.target.value;
         this.lineWidth( event.target.value );
         this.props.onChange && this.props.onChange( event );
     }
@@ -323,6 +324,7 @@ export default class Slider extends React.Component {
 
     componentDidMount() {
         this.refs.range.value = this.props.value;
+        this.refs.input.value = this.props.value;
         this.lineWidth( this.props.value );
     }
 
