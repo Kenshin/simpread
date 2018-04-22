@@ -14,8 +14,7 @@ console.log( "==== simpread component: Slider ====" )
 
 let styles = new Map();
 
-    const normal_color = 'rgba(0, 137, 123, 1)',
-          hover_color  = 'rgb(0, 105, 92)',
+    const hover_color  = 'rgba(0, 137, 123, 1)',
           color        = 'rgba(51, 51, 51, .87)',
           border_color = 'rgba(224, 224, 224, 1)',
           focus_color  = 'rgba(0, 137, 123, .8)',
@@ -59,7 +58,7 @@ let styles = new Map();
                 width: '20px',
                 height: '3px',
 
-                backgroundColor: 'rgba(0, 137, 123, 1)',
+                backgroundColor: focus_color,
                 pointerEvents: 'none',
             },
 
@@ -199,23 +198,12 @@ let styles = new Map();
 
             margin-top: -5px;
 
-            background: rgba(0, 137, 123, 1);
+            background-color: rgba(0, 137, 123, 1);
 
-            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-            border: 1px solid rgba(0, 0, 0, 0);
             border-radius: 50px;
 
             cursor: pointer;
             -webkit-appearance: none;
-            transition: all .5s ease-in-out .1s;
-        }
-
-        slider input[type=range]:focus::-webkit-slider-thumb {
-            background: rgba(0, 137, 123, 1);
-        }
-
-        slider input[type=range]:focus::-webkit-slider-thumb:hover {
-            background: rgb(0, 105, 92);
         }
     `;
 
