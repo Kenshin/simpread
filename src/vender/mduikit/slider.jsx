@@ -14,7 +14,7 @@ console.log( "==== simpread component: Slider ====" )
 
 let styles = new Map();
 
-    const hover_color  = 'rgba(0, 137, 123, 1)',
+    const thumb_color  = 'rgba(0, 137, 123, 1)',
           color        = 'rgba(51, 51, 51, .87)',
           border_color = 'rgba(224, 224, 224, 1)',
           focus_color  = 'rgba(0, 137, 123, .8)',
@@ -159,53 +159,55 @@ let styles = new Map();
 
         return styles;
     },
-    range_style = `
-        slider input[type=range] {
-            position: absolute;
-            left: 0;
-            bottom: 0;
+    range_style = color => {
+        return `
+            slider input[type=range] {
+                position: absolute;
+                left: 0;
+                bottom: 0;
 
-            width: 100%;
+                width: 100%;
 
-            margin: 6px 0;
-            padding: 0;
+                margin: 6px 0;
+                padding: 0;
 
-            border: none;
-            background-color: transparent;
-            -webkit-appearance: none;
-        }
+                border: none;
+                background-color: transparent;
+                -webkit-appearance: none;
+            }
 
-        slider input[type=range]:focus {
-            outline: none;
-        }
+            slider input[type=range]:focus {
+                outline: none;
+            }
 
-        slider input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 3px;
+            slider input[type=range]::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 3px;
 
-            background-color: #c2c0c2;
+                background-color: #c2c0c2;
 
-            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
-            border-radius: 1.3px;
+                box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
+                border-radius: 1.3px;
 
-            transition: all 0.3s;
-            cursor: pointer;
-        }
+                transition: all 0.3s;
+                cursor: pointer;
+            }
 
-        slider input[type=range]::-webkit-slider-thumb {
-            height: 14px;
-            width: 14px;
+            slider input[type=range]::-webkit-slider-thumb {
+                height: 14px;
+                width: 14px;
 
-            margin-top: -5px;
+                margin-top: -5px;
 
-            background-color: rgba(0, 137, 123, 1);
+                background-color: ${color};
 
-            border-radius: 50px;
+                border-radius: 50px;
 
-            cursor: pointer;
-            -webkit-appearance: none;
-        }
-    `;
+                cursor: pointer;
+                -webkit-appearance: none;
+            }
+        `;
+    };
 
 /**
  * Custom component: Slider, component e.g.
@@ -227,28 +229,34 @@ export default class Slider extends React.Component {
 
     static defaultProps = {
         // range
-        min  : 0,
-        max  : 100,
-        step : 0,
-        value: 0,
+        min         : 0,
+        max         : 100,
+        step        : 0,
+        value       : 0,
+        // slider
         precentColor: undefined,
+        thumbColor  : undefined,
         // input
-        color      : undefined,
-        borderColor: undefined,
-        stateColor : undefined,
-        errorColor : undefined,
+        color       : undefined,
+        borderColor : undefined,
+        stateColor  : undefined,
+        errorColor  : undefined,
     };
 
     static propTypes = {
-        min     : React.PropTypes.number,
-        max     : React.PropTypes.number,
-        step    : React.PropTypes.number,
-        value   : React.PropTypes.number,
-        color      : React.PropTypes.string,
-        borderColor: React.PropTypes.string,
-        stateColor : React.PropTypes.string,
-        errorColor : React.PropTypes.string,
-        onChange: React.PropTypes.func,
+        min         : React.PropTypes.number,
+        max         : React.PropTypes.number,
+        step        : React.PropTypes.number,
+        value       : React.PropTypes.number,
+
+        precentColor: React.PropTypes.string,
+        thumbColor  : React.PropTypes.string,
+
+        color       : React.PropTypes.string,
+        borderColor : React.PropTypes.string,
+        stateColor  : React.PropTypes.string,
+        errorColor  : React.PropTypes.string,
+        onChange    : React.PropTypes.func,
     }
 
     state = {
@@ -318,7 +326,7 @@ export default class Slider extends React.Component {
 
     componentWillMount() {
         $( "#mduikit-slider" ).length > 0 && $( "#mduikit-slider" ).remove();
-        $( "head" ).append(`<style type="text/css" id="mduikit-slider">${range_style}</style>`);
+        $( "head" ).append(`<style type="text/css" id="mduikit-slider">${range_style(this.props.thumbColor ? this.props.thumbColor : thumb_color)}</style>`);
     }
 
     componentDidMount() {
