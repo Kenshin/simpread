@@ -18,10 +18,10 @@ let styles = new Map();
           hover_color  = 'rgb(0, 105, 92)',
           color        = 'rgba(51, 51, 51, .87)',
           border_color = 'rgba(224, 224, 224, 1)',
+          focus_color  = 'rgba(0, 137, 123, .8)',
           cssinjs = () => {
 
         const
-            focus_color = 'rgba(0, 137, 123, .8)',
             error_color = 'rgba(244, 67, 54, 1)',
             margin      = '8px 0 0 0',
             display     = 'block',
@@ -246,6 +246,7 @@ export default class Slider extends React.Component {
         // input
         color      : undefined,
         borderColor: undefined,
+        stateColor : undefined,
     };
 
     static propTypes = {
@@ -255,6 +256,7 @@ export default class Slider extends React.Component {
         value   : React.PropTypes.number,
         color      : React.PropTypes.string,
         borderColor: React.PropTypes.string,
+        stateColor : React.PropTypes.string,
         onChange: React.PropTypes.func,
     }
 
@@ -344,6 +346,12 @@ export default class Slider extends React.Component {
             style.border.borderLeft   = `none ${this.props.borderColor}`;
             style.border.borderRight  = `none ${this.props.borderColor}`;
             style.border.borderBottom = `1px solid ${this.props.borderColor}`;
+        }
+        if ( this.props.stateColor ) {
+            style.state.borderTop    = `none ${this.props.stateColor}`;
+            style.state.borderLeft   = `none ${this.props.stateColor}`;
+            style.state.borderRight  = `none ${this.props.stateColor}`;
+            style.state.borderBottom = `2px solid ${this.props.stateColor}`;
         }
 
         const events = {
