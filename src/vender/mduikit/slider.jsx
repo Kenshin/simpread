@@ -298,7 +298,7 @@ export default class Slider extends React.Component {
             this.refs.range.value = event.target.value;
             this.refs.input.value = event.target.value;
             this.lineWidth( event.target.value );
-            this.props.onChange && this.props.onChange( event );
+            this.props.onChange && this.props.onChange( event.target.value, event );
         }
     }
 
@@ -314,7 +314,7 @@ export default class Slider extends React.Component {
         $state.css({ ...style.state, ...style.state_focus });
         this.refs.input.value = event.target.value;
         this.lineWidth( event.target.value );
-        this.props.onChange && this.props.onChange( event );
+        this.props.onChange && this.props.onChange( event.target.value, event );
     }
 
     componentWillMount() {
