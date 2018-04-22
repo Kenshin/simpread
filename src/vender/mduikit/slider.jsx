@@ -313,8 +313,11 @@ export default class Slider extends React.Component {
     }
 
     onChange( event ) {
-        this.props.onChange && this.props.onChange( event );
+        const style  = styles.get( this.state.id ),
+              $state = $( event.target ).parent().next().find( "text-field-state" );
+        $state.css({ ...style.state, ...style.state_focus });
         this.lineWidth( event.target.value );
+        this.props.onChange && this.props.onChange( event );
     }
 
     render() {
