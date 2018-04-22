@@ -16,10 +16,10 @@ let styles = new Map();
 
     const normal_color = 'rgba(0, 137, 123, 1)',
           hover_color  = 'rgb(0, 105, 92)',
+          color        = 'rgba(51, 51, 51, .87)',
         cssinjs = () => {
 
         const
-            color       = 'rgba(51, 51, 51, .87)',
             focus_color = 'rgba(0, 137, 123, .8)',
             border_color= 'rgba(224, 224, 224, 1)',
             error_color = 'rgba(244, 67, 54, 1)',
@@ -242,6 +242,7 @@ export default class Slider extends React.Component {
         max  : 100,
         step : 0,
         value: 0,
+        color: undefined, // input color
     };
 
     static propTypes = {
@@ -331,6 +332,8 @@ export default class Slider extends React.Component {
     render() {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
+
+        this.props.color && ( style.input.color = this.props.color );
 
         const events = {
             onFocus  : (e)=>this.onTextChangeFocus(e),
