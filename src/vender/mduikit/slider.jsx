@@ -19,10 +19,10 @@ let styles = new Map();
           color        = 'rgba(51, 51, 51, .87)',
           border_color = 'rgba(224, 224, 224, 1)',
           focus_color  = 'rgba(0, 137, 123, .8)',
+          error_color  = 'rgba(244, 67, 54, 1)',
           cssinjs = () => {
 
         const
-            error_color = 'rgba(244, 67, 54, 1)',
             margin      = '8px 0 0 0',
             display     = 'block',
             medium      = '14px',
@@ -247,6 +247,7 @@ export default class Slider extends React.Component {
         color      : undefined,
         borderColor: undefined,
         stateColor : undefined,
+        errorColor : undefined,
     };
 
     static propTypes = {
@@ -257,6 +258,7 @@ export default class Slider extends React.Component {
         color      : React.PropTypes.string,
         borderColor: React.PropTypes.string,
         stateColor : React.PropTypes.string,
+        errorColor : React.PropTypes.string,
         onChange: React.PropTypes.func,
     }
 
@@ -352,6 +354,13 @@ export default class Slider extends React.Component {
             style.state.borderLeft   = `none ${this.props.stateColor}`;
             style.state.borderRight  = `none ${this.props.stateColor}`;
             style.state.borderBottom = `2px solid ${this.props.stateColor}`;
+        }
+        if ( this.props.errorColor ) {
+            style.error.color              = this.props.errorColor;
+            style.state_error.borderTop    = `none ${this.props.errorColor}`;
+            style.state_error.borderLeft   = `none ${this.props.errorColor}`;
+            style.state_error.borderRight  = `none ${this.props.errorColor}`;
+            style.state_error.borderBottom = `2px solid ${this.props.errorColor}`;
         }
 
         const events = {
