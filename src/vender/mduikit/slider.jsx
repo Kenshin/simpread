@@ -231,6 +231,7 @@ export default class Slider extends React.Component {
         max  : 100,
         step : 0,
         value: 0,
+        precentColor: undefined,
         // input
         color      : undefined,
         borderColor: undefined,
@@ -330,6 +331,7 @@ export default class Slider extends React.Component {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
 
+        this.props.precentColor && ( style.line.backgroundColor = this.props.precentColor );
         this.props.color && ( style.input.color = this.props.color );
         if ( this.props.borderColor ) {
             style.border.borderTop    = `none ${this.props.borderColor}`;
