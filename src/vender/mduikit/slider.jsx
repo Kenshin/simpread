@@ -217,6 +217,14 @@ let styles = new Map();
             <line></line>
             <input type="range" min=0 max=100 step=1 />
         </group>
+        <text-field>
+            <input />
+            <div>
+                <text-field-border/>
+                <text-field-state/>
+            </div>
+            <text-field-error></text-field-error>
+        </text-field>
     </slider>
  * 
  * Reference:
@@ -379,7 +387,7 @@ export default class Slider extends React.Component {
                         <text-field-border style={ style.border }/>
                         <text-field-state style={ style.state }/>
                     </div>
-                    <text-field-error style={ style.error }>{ this.props.errortext }</text-field-error>
+                    <text-field-error style={ style.error }></text-field-error>
                 </text-field>
             </slider>
         )
