@@ -42,7 +42,7 @@ let styles = new Map();
                 width: '20px',
 
                 left: 0,
-                bottom: '10px',
+                bottom: '6px',
 
                 width: '20px',
                 height: '3px',
@@ -57,6 +57,10 @@ let styles = new Map();
     },
     range_style = `
         slider input[type=range] {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+
             width: 100%;
 
             margin: 6px 0;
@@ -175,8 +179,8 @@ export default class Slider extends React.Component {
         return (
             <slider style={ style.root }>
                 <group style={ style.group }>
-                    <line ref="line" style={ style.line }></line>
                     <input ref="range" type="range" min={this.props.min} max={this.props.max} step={this.props.step} onChange={ evt=> this.onChange(evt) }/>
+                    <line ref="line" style={ style.line }></line>
                 </group>
             </slider>
         )
