@@ -302,14 +302,10 @@ export default class Slider extends React.Component {
         }
     }
 
-    componentWillMount() {
-        $( "#mduikit-slider" ).length > 0 && $( "#mduikit-slider" ).remove();
-        $( "head" ).append(`<style type="text/css" id="mduikit-slider">${range_style}</style>`);
-    }
-
-    componentDidMount() {
-        this.refs.range.value = this.props.value;
-        this.lineWidth( this.props.value );
+    onMouseUp( event ) {
+        const style  = styles.get( this.state.id ),
+              $state = $( event.target ).parent().next().find( "text-field-state" );
+        $state.css({ ...style.state });
     }
 
     onChange( event ) {
@@ -318,6 +314,16 @@ export default class Slider extends React.Component {
         $state.css({ ...style.state, ...style.state_focus });
         this.lineWidth( event.target.value );
         this.props.onChange && this.props.onChange( event );
+    }
+
+    componentWillMount() {
+        $( "#mduikit-slider" ).length > 0 && $( "#mduikit-slider" ).remove();
+        $( "head" ).append(`<style type="text/css" id="mduikit-slider">${range_style}</style>`);
+    }
+
+    componentDidMount() {
+        this.refs.range.value = this.props.value;
+        this.lineWidth( this.props.value );
     }
 
     render() {
@@ -333,7 +339,7 @@ export default class Slider extends React.Component {
         return (
             <slider style={ style.root }>
                 <group style={ style.group }>
-                    <input ref="range" type="range" min={this.props.min} max={this.props.max} step={this.props.step} onChange={ evt=> this.onChange(evt) }/>
+                    <input ref="range" type="range" min={this.props.min} max={this.props.max} step={this.props.step} onChange={ evt=> this.onChange(evt) } onMouseUp={ evt=>this.onMouseUp(evt)}/>
                     <line ref="line" style={ style.line }></line>
                 </group>
                 <text-field style={ style.text_field }>
