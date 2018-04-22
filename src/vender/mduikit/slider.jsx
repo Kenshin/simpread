@@ -17,11 +17,11 @@ let styles = new Map();
     const normal_color = 'rgba(0, 137, 123, 1)',
           hover_color  = 'rgb(0, 105, 92)',
           color        = 'rgba(51, 51, 51, .87)',
-        cssinjs = () => {
+          border_color = 'rgba(224, 224, 224, 1)',
+          cssinjs = () => {
 
         const
             focus_color = 'rgba(0, 137, 123, .8)',
-            border_color= 'rgba(224, 224, 224, 1)',
             error_color = 'rgba(244, 67, 54, 1)',
             margin      = '8px 0 0 0',
             display     = 'block',
@@ -238,11 +238,14 @@ let styles = new Map();
 export default class Slider extends React.Component {
 
     static defaultProps = {
+        // range
         min  : 0,
         max  : 100,
         step : 0,
         value: 0,
-        color: undefined, // input color
+        // input
+        color      : undefined,
+        borderColor: undefined,
     };
 
     static propTypes = {
@@ -250,6 +253,8 @@ export default class Slider extends React.Component {
         max     : React.PropTypes.number,
         step    : React.PropTypes.number,
         value   : React.PropTypes.number,
+        color      : React.PropTypes.string,
+        borderColor: React.PropTypes.string,
         onChange: React.PropTypes.func,
     }
 
@@ -334,6 +339,12 @@ export default class Slider extends React.Component {
         styles.set( this.state.id, style );
 
         this.props.color && ( style.input.color = this.props.color );
+        if ( this.props.borderColor ) {
+            style.border.borderTop    = `none ${this.props.borderColor}`;
+            style.border.borderLeft   = `none ${this.props.borderColor}`;
+            style.border.borderRight  = `none ${this.props.borderColor}`;
+            style.border.borderBottom = `1px solid ${this.props.borderColor}`;
+        }
 
         const events = {
             onFocus  : (e)=>this.onTextChangeFocus(e),
