@@ -323,6 +323,38 @@ export default class AC extends React.Component {
         items : [],
     }
 
+    // usage hack code, not usage react
+    onTextKeyDown( event ) {
+        const $target = $( "list-view" );
+        if ( $target.children().length == 0 && event.keyCode == 40 ) {
+            this.setState({ name : this.refs.input.value, items: this.props.items });
+            this.refs.dropdown.dataset.state = "open";
+            return;
+        }
+        const $sub = $target.find( "list-field[active=true]" );
+        if ( event.keyCode == 9 || event.keyCode == 27 ) {
+            this.refs.dropdown.dataset.state = "close";
+            this.setState({ name : "", items: [] });
+        }
+        else if ( event.keyCode == 40 ) {
+            if ( $sub.length == 0 ) {
+                $target.children().first().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+            } else {
+                $sub.css( "background-color", "transparent" ).attr( "active", false );
+                $sub.next().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+            }
+        } else if ( event.keyCode == 38 ) {
+            if ( $sub.length == 0 ) {
+                $target.children().last().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+            } else {
+                $sub.css( "background-color", "transparent" ).attr( "active", false );
+                $sub.prev().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+            }
+        } else if ( event.keyCode == 13 ) {
+            this.onDropdownChange( $sub.text() );
+        }
+    }
+
     onTextChangeFocus( event ) {
         const style   = styles.get( this.state.id ),
               $target = $( this.refs.input ),
@@ -387,6 +419,7 @@ export default class AC extends React.Component {
             onFocus  : (e)=>this.onTextChangeFocus(event),
             onBlur   : (e)=>this.onTextChangeBlur(event),
             onChange : (e)=>this.onTextChange(e),
+            onKeyDown: (e)=>this.onTextKeyDown(e),
         };
 
         style.float = this.props.placeholder == "" && this.props.value == "" ? style.float : { ...style.float, ...style.float_focus };
