@@ -151,7 +151,6 @@ const cssinjs = () => {
 const cssinjs_list = () => {
 
     const styles = {
-            hover_color: 'rgba(238, 238, 238, 1)',
             root : {
                 display: 'block',
                 position: 'absolute',
@@ -237,11 +236,10 @@ class ListView extends React.Component {
     };
 
     onMouseOver( event ) {
-        const style   = styles_list.get( this.state.id ),
-              $target = $( event.target );
+        const $target = $( event.target );
         if ( $target.is( "list-field" ) ) {
             $( "list-field[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
-            $target.attr( "active", true ).css( "background-color", style.hover_color );
+            $target.attr( "active", true ).css( "background-color", this.props.hoverColor );
         }
     }
 
@@ -308,7 +306,8 @@ export default class AC extends React.Component {
         floating    : undefined,
         // dropdown
         items       : [],
-        activeColor : 'rgba(255, 64, 129, 1)',
+        activeColor : "rgba(255, 64, 129, 1)",
+        hoverColor  : "rgba(238, 238, 238, 1)",
     };
 
     static propTypes = {
@@ -319,6 +318,7 @@ export default class AC extends React.Component {
         items       : React.PropTypes.array,
         // dropdown
         activeColor : React.PropTypes.string,
+        hoverColor  : React.PropTypes.string,
         // event
         onChange    : React.PropTypes.func,
     }
@@ -344,17 +344,17 @@ export default class AC extends React.Component {
         }
         else if ( event.keyCode == 40 ) {
             if ( $sub.length == 0 ) {
-                $target.children().first().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+                $target.children().first().attr( "active", true ).css( "background-color", this.props.hoverColor );
             } else {
                 $sub.css( "background-color", "transparent" ).attr( "active", false );
-                $sub.next().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+                $sub.next().attr( "active", true ).css( "background-color", this.props.hoverColor );
             }
         } else if ( event.keyCode == 38 ) {
             if ( $sub.length == 0 ) {
-                $target.children().last().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+                $target.children().last().attr( "active", true ).css( "background-color", this.props.hoverColor );
             } else {
                 $sub.css( "background-color", "transparent" ).attr( "active", false );
-                $sub.prev().attr( "active", true ).css( "background-color", 'rgba(238, 238, 238, 1)' );
+                $sub.prev().attr( "active", true ).css( "background-color", this.props.hoverColor );
             }
         } else if ( event.keyCode == 13 ) {
             this.onDropdownChange( $sub.text() );
@@ -440,7 +440,7 @@ export default class AC extends React.Component {
                     <text-field-state style={ style.state }/>
                 </group>
                 <ListView waves={ this.props.waves } onChange={ (v)=>this.onDropdownChange(v) }
-                    activeColor={ this.props.activeColor }
+                    activeColor={ this.props.activeColor } hoverColor={ this.props.hoverColor }
                     active={ this.state.name } items={ this.state.items } />
             </auto-complete>
         )
