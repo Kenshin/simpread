@@ -16,8 +16,7 @@ let styles = new Map(), styles_list = new Map();
 
 const cssinjs = () => {
 
-    const color           = 'rgba(51, 51, 51, .87)',
-          secondary_color = 'rgba(204, 204, 204, 1)',
+    const secondary_color = 'rgba(204, 204, 204, 1)',
 
           focus_color     = 'rgba(0, 137, 123, .8)',
           border_color    = 'rgba(224, 224, 224, 1)',
@@ -41,7 +40,6 @@ const cssinjs = () => {
             },
 
             input: {
-                color,
                 backgroundColor: 'transparent',
 
                 width,
@@ -301,6 +299,7 @@ export default class AC extends React.Component {
 
     static defaultProps = {
         // input
+        color       : "rgba(51, 51, 51, .87)",
         value       : "",
         placeholder : "",
         floating    : undefined,
@@ -312,6 +311,7 @@ export default class AC extends React.Component {
 
     static propTypes = {
         // input
+        color       : React.PropTypes.string,
         value       : React.PropTypes.string,
         placeholder : React.PropTypes.string,
         floating    : React.PropTypes.string,
@@ -419,6 +419,8 @@ export default class AC extends React.Component {
     render() {
         const style = { ...cssinjs() };
         styles.set( this.state.id, style );
+        style.input.color = this.props.color;
+        style.float       = this.props.placeholder == "" && this.props.value == "" ? style.float : { ...style.float, ...style.float_focus };
 
         const props = {
             placeholder :this.props.placeholder,
@@ -427,8 +429,6 @@ export default class AC extends React.Component {
             onChange : (e)=>this.onTextChange(e),
             onKeyDown: (e)=>this.onTextKeyDown(e),
         };
-
-        style.float = this.props.placeholder == "" && this.props.value == "" ? style.float : { ...style.float, ...style.float_focus };
 
         return (
             <auto-complete style={ style.root }>
