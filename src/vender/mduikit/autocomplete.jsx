@@ -151,7 +151,6 @@ const cssinjs = () => {
 const cssinjs_list = () => {
 
     const styles = {
-            active_color: 'rgba(255, 64, 129, 1)',
             hover_color: 'rgba(238, 238, 238, 1)',
             root : {
                 display: 'block',
@@ -258,7 +257,7 @@ class ListView extends React.Component {
 
         const list = this.props.items.map( ( item, idx ) => {
             let name_style = { ...style.list_filed_value };
-            item.name == this.props.active && ( name_style.color = style.active_color );
+            item.name == this.props.active && ( name_style.color = this.props.activeColor );
             item.style && item.style.root  && ( style.list_filed = { ...style.list_filed, ...item.style.root });
             item.style && item.style.text  && ( name_style       = { ...name_style, ...item.style.text });
             return (
@@ -303,17 +302,24 @@ class ListView extends React.Component {
 export default class AC extends React.Component {
 
     static defaultProps = {
+        // input
         value       : "",
         placeholder : "",
         floating    : undefined,
+        // dropdown
         items       : [],
+        activeColor : 'rgba(255, 64, 129, 1)',
     };
 
     static propTypes = {
+        // input
         value       : React.PropTypes.string,
         placeholder : React.PropTypes.string,
         floating    : React.PropTypes.string,
         items       : React.PropTypes.array,
+        // dropdown
+        activeColor : React.PropTypes.string,
+        // event
         onChange    : React.PropTypes.func,
     }
 
@@ -433,7 +439,9 @@ export default class AC extends React.Component {
                     <text-field-border style={ style.border }/>
                     <text-field-state style={ style.state }/>
                 </group>
-                <ListView waves={ this.props.waves } active={ this.state.name } items={ this.state.items } onChange={ (v)=>this.onDropdownChange(v) } />
+                <ListView waves={ this.props.waves } onChange={ (v)=>this.onDropdownChange(v) }
+                    activeColor={ this.props.activeColor }
+                    active={ this.state.name } items={ this.state.items } />
             </auto-complete>
         )
     }
