@@ -30,7 +30,6 @@ const cssinjs = () => {
           fontWeight  = 'bold',
           width       = '100%',
           styles      = {
-            hidden : 'none',
             root: {
                 display,
                 position: 'relative',
@@ -151,71 +150,68 @@ const cssinjs = () => {
 
 const cssinjs_list = () => {
 
-    const color            = 'rgba(51, 51, 51, .87)',
-          background_color = 'rgba(255, 255, 255, 1)',
-        styles = {
-        hidden : 'none',
-        selected_color: 'rgba(255, 64, 129, 1)',
-        hover_color: 'rgba(238, 238, 238, 1)',
-        root : {
-            display: 'block',
-            position: 'absolute',
+    const styles = {
+            active_color: 'rgba(255, 64, 129, 1)',
+            hover_color: 'rgba(238, 238, 238, 1)',
+            root : {
+                display: 'block',
+                position: 'absolute',
 
-            top: '40px',
-            left: 0,
+                top: '40px',
+                left: 0,
 
-            margin: 0,
-            padding: 0,
+                margin: 0,
+                padding: 0,
 
-            width: '100%',
-            maxHeight: '400px',
+                width: '100%',
+                maxHeight: '400px',
 
-            color,
-            backgroundColor: background_color,
+                color: 'rgba(51, 51, 51, .87)',
+                backgroundColor: 'rgba(255, 255, 255, 1)',
 
-            boxSizing: 'border-box',
-            boxShadow: '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
-            borderRadius: '2px',
+                boxSizing: 'border-box',
+                boxShadow: '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
+                borderRadius: '2px',
 
-            zIndex: 2100,
+                zIndex: 2100,
 
-            overflowY: 'auto',
+                overflowY: 'auto',
 
-            opacity: 0,
-            transform: 'scaleY(0)',
-            transformOrigin: 'left top 0px',
-            transition : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+                opacity: 0,
+                transform: 'scaleY(0)',
+                transformOrigin: 'left top 0px',
+                transition : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
 
-            overflowX: 'hidden',
-        },
+                overflowX: 'hidden',
+            },
 
-        open: {
-            opacity: 1,
-            transform: 'scaleY(1)',
-        },
+            open: {
+                opacity: 1,
+                transform: 'scaleY(1)',
+            },
 
-        list_filed: {
-            display: 'flex',
-            alignItems: 'center',
+            list_filed: {
+                display: 'flex',
+                alignItems: 'center',
 
-            padding: '8px 24px 8px 16px',
+                padding: '8px 24px 8px 16px',
 
-            height: '36px',
-            width: '100%',
+                height: '36px',
+                width: '100%',
 
-            textAlign: 'left',
+                textAlign: 'left',
 
-            boxSizing: 'border-box',
-            transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+                boxSizing: 'border-box',
+                transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
 
-            cursor: 'pointer',
-        },
+                cursor: 'pointer',
+            },
 
-        list_filed_value: {
-            display: 'inline',
-            width: '100%',
-            fontSize: 'inherit',
-        },
+            list_filed_value: {
+                display: 'inline',
+                width: '100%',
+                fontSize: 'inherit',
+            },
 
     }
 
@@ -262,7 +258,7 @@ class ListView extends React.Component {
 
         const list = this.props.items.map( ( item, idx ) => {
             let name_style = { ...style.list_filed_value };
-            item.name == this.props.active && ( name_style.color = style.selected_color );
+            item.name == this.props.active && ( name_style.color = style.active_color );
             item.style && item.style.root  && ( style.list_filed = { ...style.list_filed, ...item.style.root });
             item.style && item.style.text  && ( name_style       = { ...name_style, ...item.style.text });
             return (
