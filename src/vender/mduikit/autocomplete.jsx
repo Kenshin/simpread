@@ -1,0 +1,412 @@
+/*!
+ * React Material Design: AutoComplete
+ * 
+ * @version :  0.0.2
+ * @update  : 2017/10/14
+ * @homepage: https://github.com/kenshin/mduikit
+ * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
+ * @author  : Kenshin Wang <kenshin@ksria.com>
+ * 
+ * @copyright 2017
+ */
+
+console.log( "==== simpread component: AutoComplete ====" )
+
+let styles = new Map();
+
+const cssinjs = () => {
+
+    const color           = 'rgba(51, 51, 51, .87)',
+          secondary_color = 'rgba(204, 204, 204, 1)',
+
+          focus_color     = 'rgba(0, 137, 123, .8)',
+          border_color    = 'rgba(224, 224, 224, 1)',
+
+          margin      = '8px 0 0 0',
+          display     = 'block',
+          medium      = '14px',
+          large       = '16px',
+          lineHeight  = 1.5,
+          fontWeight  = 'bold',
+          width       = '100%',
+          styles      = {
+            hidden : 'none',
+            root: {
+                display,
+                position: 'relative',
+                margin: 0,
+                padding: 0,
+
+                width,
+                lineHeight: 1,
+            },
+
+            input: {
+                color,
+                backgroundColor: 'transparent',
+
+                width,
+                height: '20px',
+
+                margin,
+                padding: 0,
+
+                fontFamily: 'sans-serif',
+                fontSize: medium,
+
+                border: 'none',
+                outline: 'none',
+
+                boxShadow: 'none',
+                boxSizing: 'content-box',
+                transition: 'all 0.3s',
+            },
+
+            border : {
+                display,
+
+                width,
+                margin,
+
+                borderTop: `none ${border_color}`,
+                borderLeft: `none ${border_color}`,
+                borderRight: `none ${border_color}`,
+                borderBottom: `1px solid ${border_color}`,
+                boxSizing: 'content-box',
+            },
+
+            float : {
+                display,
+                position: 'absolute',
+
+                margin,
+
+                color: secondary_color,
+
+                fontSize: medium,
+                fontWeight: 'initial',
+
+                userSelect: 'none',
+                pointerEvents: 'none',
+
+                transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+                transform: 'scale(1) translate( 0px, 0px )',
+                transformOrigin: 'left top 0px',
+            },
+
+            float_focus : {
+                color: focus_color,
+
+                margin: `-${margin}`,
+
+                fontSize: medium,
+                fontWeight,
+
+                transform: 'scale(0.75) translate( 0px, -8px )',
+            },
+
+            state : {
+                display,
+                position: 'absolute',
+
+                width,
+                margin: '-1px 0 0 0',
+
+                borderTop: `none ${focus_color}`,
+                borderLeft: `none ${focus_color}`,
+                borderRight: `none ${focus_color}`,
+                borderBottom: `2px solid ${focus_color}`,
+                boxSizing: 'content-box',
+
+                transform: 'scaleX(0)',
+                transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+            },
+
+            state_focus : {
+                transform: 'scaleX(1)',
+            },
+
+            icon: {
+                display: 'block',
+                position: 'absolute',
+
+                width: '24px',
+                height: '24px',
+
+                top: '1px',
+                right: 0,
+
+                border: 'none',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundImage: 'url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNXG14zYAAABqSURBVEiJ7dQxCsAgDIXhZ8ktgmetVw31GIF06lI0yeIWJyH4f4hgMzOcXNfRegEFFAAAoGA+ROR2A0STmftu7t5ARAYRTS+uqtt4CACAqvYVkomngBWSjQPxG/yR59tnz7X6rgso4DzwAnJQKlbAmFdgAAAAAElFTkSuQmCC)',
+
+                cursor: 'pointer',
+            },
+
+        };
+
+    return styles;
+};
+
+const cssinjs_list = () => {
+
+    const color            = 'rgba(51, 51, 51, .87)',
+          background_color = 'rgba(255, 255, 255, 1)',
+        styles = {
+        hidden : 'none',
+        selected_color: 'rgba(255, 64, 129, 1)',
+        hover_color: 'rgba(238, 238, 238, 1)',
+        root : {
+            display: 'block',
+            position: 'absolute',
+
+            top: '40px',
+            left: 0,
+
+            margin: 0,
+            padding: 0,
+
+            width: '100%',
+            maxHeight: '400px',
+
+            color,
+            backgroundColor: background_color,
+
+            boxSizing: 'border-box',
+            boxShadow: '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
+            borderRadius: '2px',
+
+            zIndex: 2100,
+
+            overflowY: 'auto',
+
+            opacity: 0,
+            transform: 'scaleY(0)',
+            transformOrigin: 'left top 0px',
+            transition : 'transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+
+            overflowX: 'hidden',
+        },
+
+        open: {
+            opacity: 1,
+            transform: 'scaleY(1)',
+        },
+
+        list_filed: {
+            display: 'flex',
+            alignItems: 'center',
+
+            padding: '8px 24px 8px 16px',
+
+            height: '36px',
+            width: '100%',
+
+            textAlign: 'left',
+
+            boxSizing: 'border-box',
+            transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+
+            cursor: 'pointer',
+        },
+
+        list_filed_value: {
+            display: 'inline',
+            width: '100%',
+            fontSize: 'inherit',
+        },
+
+    }
+
+    return styles;
+};
+
+class ListView extends React.Component {
+
+    static defaultProps = {
+        waves           : "",
+        items           : [],
+        active          : "",
+    };
+
+    static propTypes = {
+        waves           : React.PropTypes.string,
+        items           : React.PropTypes.array,
+        active          : React.PropTypes.string,
+        onChange        : React.PropTypes.func,
+    };
+
+    state = {
+        id : Math.round(+new Date()),
+    };
+
+    onMouseOver( event ) {
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target );
+        if ( $target.is( "list-field" ) ) {
+            $( "list-field[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
+            $target.attr( "active", true ).css( "background-color", style.hover_color );
+        }
+    }
+
+    onClick( event ) {
+        this.props.onChange && this.props.onChange( $( event.target ).text() );
+    }
+
+    render() {
+        const style = { ...cssinjs_list() };
+        styles.set( this.state.id, style );
+
+        style.root = this.props.items.length > 0 ? { ...style.root, ...style.open } : { ...style.root };
+
+        const list = this.props.items.map( ( item, idx ) => {
+            let name_style = { ...style.list_filed_value };
+            item.name == this.props.active && ( name_style.color = style.selected_color );
+            item.style && item.style.root  && ( style.list_filed = { ...style.list_filed, ...item.style.root });
+            item.style && item.style.text  && ( name_style       = { ...name_style, ...item.style.text });
+            return (
+                <list-field class={ this.props.waves } style={ style.list_filed } onMouseOver={ (e)=>this.onMouseOver(e) } onClick={ (e)=>this.onClick(e) }>
+                    <list-field-name style={ name_style } value={ item.value }>{ item.name }</list-field-name>
+                </list-field>
+            )
+        });
+
+        return (
+            <list-view style={ style.root }>
+                { list }
+            </list-view>
+        )
+    }
+}
+
+/**
+ * Custom component: AutoComplete
+ * 
+    <auto-complete>
+        <icon></icon>
+        <text-field-float></text-field-float>
+        <input/>
+        <group>
+            <text-field-border/>
+            <text-field-state/>
+        </group>
+        <list-view>
+            <list-field>
+                <list-field-name></list-field-name>
+            </list-field>
+        </list-view>
+    </auto-complete>
+ * 
+ * Reference:
+ * - https://material.io/guidelines/components/text-fields.html#text-fields-layout
+ * - http://materializecss.com/autocomplete.html
+ * 
+ * @class
+ */
+export default class AC extends React.Component {
+
+    static defaultProps = {
+        value       : "",
+        placeholder : "",
+        floating    : undefined,
+        items       : [],
+    };
+
+    static propTypes = {
+        value       : React.PropTypes.string,
+        placeholder : React.PropTypes.string,
+        floating    : React.PropTypes.string,
+        items       : React.PropTypes.array,
+        onChange    : React.PropTypes.func,
+    }
+
+    state = {
+        id    : Math.round(+new Date()),
+        name  : "",
+        items : [],
+    }
+
+    onTextChangeFocus( event ) {
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target ),
+              $state  = $target.next().find( "text-field-state" ),
+              $float  = $target.prev();
+        $state.css({ ...style.state, ...style.state_focus });
+        this.props.floating != "" && $float.css({ ...style.float, ...style.float_focus });
+    }
+
+    onTextChangeBlur( event ) {
+        const style   = styles.get( this.state.id ),
+              $target = $( event.target ),
+              $state  = $target.next().find( "text-field-state" ),
+              $float  = $target.prev();
+        $state.css({ ...style.state });
+        if ( this.props.floating != "" && event.target.value == "" ) $float.css({ ...style.float });
+    }
+
+    onTextChange( event ) {
+        if ( event.target.value == "" ) {
+            this.setState({ name : "", items: [] });
+            this.refs.dropdown.dataset.state = "close";
+        } else {
+            this.setState({name : event.target.value, items: this.filter( event.target.value ) });
+            this.refs.dropdown.dataset.state = "open";
+        }
+    }
+
+    onDropdownClick( event ) {
+        if ( event.target.dataset.state == "close" ) {
+            this.setState({ name : this.refs.input.value, items: this.props.items });
+            event.target.dataset.state = "open";
+        } else {
+            this.setState({ name : "", items: [] });
+            event.target.dataset.state = "close";
+        }
+    }
+
+    onDropdownChange( value ) {
+        this.refs.input.value = value;
+        this.refs.dropdown.dataset.state = "close";
+        this.setState({ name : "", items: [] });
+        this.props.onChange && this.props.onChange( value );
+    }
+
+    filter( value ) {
+        return this.props.items.filter( obj => {
+            return obj.value.includes( value );
+        });
+    }
+
+    componentDidMount() {
+        this.refs.input.value = this.props.value;
+    }
+
+    render() {
+        const style = { ...cssinjs() };
+        styles.set( this.state.id, style );
+
+        const props = {
+            placeholder :this.props.placeholder,
+            onFocus  : (e)=>this.onTextChangeFocus(event),
+            onBlur   : (e)=>this.onTextChangeBlur(event),
+            onChange : (e)=>this.onTextChange(e),
+        };
+
+        style.float = this.props.placeholder == "" && this.props.value == "" ? style.float : { ...style.float, ...style.float_focus };
+
+        return (
+            <auto-complete style={ style.root }>
+                <icon ref="dropdown" style={ style.icon } data-state="close" onClick={evt=>this.onDropdownClick(evt)}></icon>
+                <text-field-float style={ style.float }>{this.props.floating}</text-field-float>
+                <input ref="input" style={ style.input } { ...props }/>
+                <group>
+                    <text-field-border style={ style.border }/>
+                    <text-field-state style={ style.state }/>
+                </group>
+                <ListView waves={ this.props.waves } active={ this.state.name } items={ this.state.items } onChange={ (v)=>this.onDropdownChange(v) } />
+            </auto-complete>
+        )
+    }
+
+}
