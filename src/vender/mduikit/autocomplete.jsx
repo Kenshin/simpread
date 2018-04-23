@@ -12,7 +12,7 @@
 
 console.log( "==== simpread component: AutoComplete ====" )
 
-let styles = new Map();
+let styles = new Map(), styles_list = new Map();
 
 const cssinjs = () => {
 
@@ -238,7 +238,7 @@ class ListView extends React.Component {
     };
 
     onMouseOver( event ) {
-        const style   = styles.get( this.state.id ),
+        const style   = styles_list.get( this.state.id ),
               $target = $( event.target );
         if ( $target.is( "list-field" ) ) {
             $( "list-field[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
@@ -252,7 +252,7 @@ class ListView extends React.Component {
 
     render() {
         const style = { ...cssinjs_list() };
-        styles.set( this.state.id, style );
+        styles_list.set( this.state.id, style );
 
         style.root = this.props.items.length > 0 ? { ...style.root, ...style.open } : { ...style.root };
 
@@ -325,7 +325,7 @@ export default class AC extends React.Component {
 
     onTextChangeFocus( event ) {
         const style   = styles.get( this.state.id ),
-              $target = $( event.target ),
+              $target = $( this.refs.input ),
               $state  = $target.next().find( "text-field-state" ),
               $float  = $target.prev();
         $state.css({ ...style.state, ...style.state_focus });
