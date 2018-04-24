@@ -377,10 +377,10 @@ export default class Slider extends React.Component {
 
         return (
             <slider style={ style.root }>
-                <group style={ style.group }>
+                <sl-group style={ style.group }>
                     <input ref="range" type="range" min={this.props.min} max={this.props.max} step={this.props.step} onChange={ evt=> this.onChange(evt) } onMouseUp={ evt=>this.onMouseUp(evt)}/>
                     <line ref="line" style={ style.line }></line>
-                </group>
+                </sl-group>
                 <text-field style={ style.text_field }>
                     <input ref="input" style={ style.input } { ...events } />
                     <div>
