@@ -16,9 +16,8 @@ let styles = new Map(), styles_list = new Map();
 
 const cssinjs = () => {
 
-    const focus_color     = 'rgba(0, 137, 123, .8)',
-          border_color    = 'rgba(224, 224, 224, 1)',
-
+    const focus_color = 'rgba(0, 137, 123, .8)',
+          border_color= 'rgba(224, 224, 224, 1)',
           margin      = '8px 0 0 0',
           display     = 'block',
           medium      = '14px',
@@ -305,6 +304,7 @@ export default class AC extends React.Component {
         items       : [],
         activeColor : "rgba(255, 64, 129, 1)",
         hoverColor  : "rgba(238, 238, 238, 1)",
+        borderColor : undefined,
     };
 
     static propTypes = {
@@ -317,6 +317,7 @@ export default class AC extends React.Component {
         // dropdown
         activeColor : React.PropTypes.string,
         hoverColor  : React.PropTypes.string,
+        borderColor : undefined,
         // event
         onChange    : React.PropTypes.func,
     }
@@ -419,6 +420,12 @@ export default class AC extends React.Component {
         styles.set( this.state.id, style );
         style.input.color = this.props.color;
         style.float       = this.props.placeholder == "" && this.props.value == "" ? style.float : { ...style.float, ...style.float_focus };
+        if ( this.props.borderColor ) {
+            style.border.borderTop    = `none ${this.props.borderColor}`;
+            style.border.borderLeft   = `none ${this.props.borderColor}`;
+            style.border.borderRight  = `none ${this.props.borderColor}`;
+            style.border.borderBottom = `1px solid ${this.props.borderColor}`;
+        }
 
         const props = {
             placeholder :this.props.placeholder,
