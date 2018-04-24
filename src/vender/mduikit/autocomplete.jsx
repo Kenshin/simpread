@@ -305,6 +305,7 @@ export default class AC extends React.Component {
         activeColor : "rgba(255, 64, 129, 1)",
         hoverColor  : "rgba(238, 238, 238, 1)",
         borderColor : undefined,
+        focusColor  : undefined,
     };
 
     static propTypes = {
@@ -318,6 +319,7 @@ export default class AC extends React.Component {
         activeColor : React.PropTypes.string,
         hoverColor  : React.PropTypes.string,
         borderColor : undefined,
+        focusColor  : undefined,
         // event
         onChange    : React.PropTypes.func,
     }
@@ -425,6 +427,13 @@ export default class AC extends React.Component {
             style.border.borderLeft   = `none ${this.props.borderColor}`;
             style.border.borderRight  = `none ${this.props.borderColor}`;
             style.border.borderBottom = `1px solid ${this.props.borderColor}`;
+        }
+        if ( this.props.focusColor ) {
+            style.float_focus.color  = this.props.focusColor;
+            style.state.borderTop    = `none ${this.props.focusColor}`;
+            style.state.borderLeft   = `none ${this.props.focusColor}`;
+            style.state.borderRight  = `none ${this.props.focusColor}`;
+            style.state.borderBottom = `2px solid ${this.props.focusColor}`;
         }
 
         const props = {
