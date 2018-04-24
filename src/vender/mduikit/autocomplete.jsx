@@ -16,9 +16,7 @@ let styles = new Map(), styles_list = new Map();
 
 const cssinjs = () => {
 
-    const secondary_color = 'rgba(204, 204, 204, 1)',
-
-          focus_color     = 'rgba(0, 137, 123, .8)',
+    const focus_color     = 'rgba(0, 137, 123, .8)',
           border_color    = 'rgba(224, 224, 224, 1)',
 
           margin      = '8px 0 0 0',
@@ -78,7 +76,7 @@ const cssinjs = () => {
 
                 margin,
 
-                color: secondary_color,
+                color: 'rgba(204, 204, 204, 1)',
 
                 fontSize: medium,
                 fontWeight: 'initial',
