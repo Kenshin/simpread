@@ -76,7 +76,7 @@ const cssinjs = () => {
 
                 margin,
 
-                color: 'rgba(204, 204, 204, 1)',
+                color: 'rgb(117, 117, 117)',
 
                 fontSize: medium,
                 fontWeight: 'initial',
