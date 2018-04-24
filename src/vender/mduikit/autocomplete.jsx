@@ -449,10 +449,10 @@ export default class AC extends React.Component {
                 <icon ref="dropdown" style={ style.icon } data-state="close" onClick={evt=>this.onDropdownClick(evt)}></icon>
                 <text-field-float style={ style.float }>{this.props.floating}</text-field-float>
                 <input ref="input" style={ style.input } { ...props }/>
-                <group>
+                <ac-group>
                     <text-field-border style={ style.border }/>
                     <text-field-state style={ style.state }/>
-                </group>
+                </ac-group>
                 <ListView waves={ this.props.waves } onChange={ (v)=>this.onDropdownChange(v) }
                     activeColor={ this.props.activeColor } hoverColor={ this.props.hoverColor }
                     active={ this.state.name } items={ this.state.items } />
