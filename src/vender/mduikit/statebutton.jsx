@@ -284,7 +284,7 @@ class SVG extends React.Component {
         const states = { loading, success, failed, warning };
 
         return (
-            <svg-state dangerouslySetInnerHTML={{__html: states[this.props.state] }} ></svg-state>
+            this.props.state != "init" && <svg-state dangerouslySetInnerHTML={{__html: states[this.props.state] }} ></svg-state>
         )
     }
 }
@@ -346,37 +346,33 @@ export default class StateButton extends React.Component {
         hoverColor     : ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
     }
 
+   changeStateStyle() {
+        const $root = $( this.refs.button );
+        if ( $root.find(".special").length == 0 ) return;
+        const width  = $root.width(),
+            svgWidth = $root.find(".special").width() * 0.5,
+            padding  = 16,
+            left     = ( width - svgWidth ) / 2 - padding;
+        $root.find( ".special" ).css({ left });
+        $root.css({ "background-color": global.bgColor[global.state] })
+             .find( "button-span" ).css({ display: global.state == "init" ? "block" : "none" });
+    }
+
     /**
      * Change state
      * 
-     * @param {string} changed state, @see this.state.state
-     * @param {element} html element
+     * @param {string} @see this.state.state
      */
-    changeState( changed, root ) {
-        global.state = changed;
-        const $root = $( root );
-        switch ( changed ) {
-            case "loading":
-                $root.find( "button-span" ).css({ display: "none" });
-                break;
-            case "success":
-                break;
-            case "failed":
-                break;
-            case "warning":
-                break;
-        }
-        ReactDOM.render( <SVG state={changed}/>, $("button-svg")[0] );
-        changeStateStyle( $root, global.bgColor[changed] );
+    changeState( state ) {
+        global.state = state;
+        this.setState({ state });
+        this.changeStateStyle();
     }
 
     onMouseOver() {
         if ( global.state == "loading" ) return;
         else if ( [ "success", "failed", "warning" ].includes( global.state)) {
-            $( this.refs.button ).css({ "background-color": global.bgColor.init });
-            global.state = "init";
-            $( this.refs.button ).find( "button-svg" ).remove();
-            $( this.refs.button ).find( "button-span" ).css({ display: "block" });
+            this.changeState( "init" );
         }
         const [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         $mask.css( "background-color", this.state.hoverColor );
@@ -388,17 +384,14 @@ export default class StateButton extends React.Component {
     }
 
     onClick( event ) {
-        this.props.onState && this.props.onState( this.changeState, this.refs.button );
+        if ( global.state == "loading" ) return;
+        this.props.onState && this.props.onState( this );
     }
 
     componentWillMount() {
         this.props.color != "" && this.setState({ color: this.props.color });
         this.props.backgroundColor != "" && this.setState({ backgroundColor: this.props.backgroundColor });
         this.props.hoverColor != "" && this.setState({ hoverColor: this.props.hoverColor });
-    }
-
-    componentDidMount() {
-        changeStateStyle( $( this.refs.button ));
     }
 
     render() {
@@ -430,6 +423,7 @@ export default class StateButton extends React.Component {
         this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
         this.props.order == "after" && ( style.icon.order = 1 );
         this.props.width && ( style.root.width = this.props.width );
+        this.state.state != "init" && ( style.span.display = "none" );
 
         const events = this.props.disable ? {} : {
                 onMouseOver : ()=>this.onMouseOver(),
@@ -443,14 +437,16 @@ export default class StateButton extends React.Component {
                 init   : style.root.backgroundColor,
                 success: this.props.successBgColor,
             }
-        }
+        };
 
         return (
             <state-button ref="button" style={ style.root } class={ this.props.waves }
                 type={ this.props.type } mode={ this.props.mode } 
                 { ...events }>
                 <button-mask ref="mask" style={ style.mask }>
-                    <button-svg></button-svg>
+                    <button-svg>
+                        <SVG state={this.state.state}/>
+                    </button-svg>
                     <button-span style={ style.span }>
                         <button-icon style={ style.icon }></button-icon>
                         <button-text style={ style.text }>{ this.props.text }</button-text>
@@ -459,20 +455,4 @@ export default class StateButton extends React.Component {
             </state-button>
         )
     }
-}
-
-/**
- * Change state style
- * 
- * @param {jquery} root jquery object
- * @param {string} root background color
- */
-function changeStateStyle( $root, bgColor ) {
-    if ( $root.find(".special").length == 0 ) return;
-    const width    = $root.width(),
-          svgWidth = $root.find(".special").width() * 0.5,
-          padding  = 16,
-          left     = ( width - svgWidth ) / 2 - padding;
-    $root.find( ".special" ).css({ left });
-    bgColor && $root.css({ "background-color": bgColor });
 }
