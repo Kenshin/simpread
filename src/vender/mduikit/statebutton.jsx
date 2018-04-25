@@ -347,12 +347,11 @@ export default class StateButton extends React.Component {
     }
 
    changeStateStyle() {
-        const $root = $( this.refs.button );
-        if ( $root.find(".special").length == 0 ) return;
-        const width  = $root.width(),
-            svgWidth = $root.find(".special").width() * 0.5,
-            padding  = 16,
-            left     = ( width - svgWidth ) / 2 - padding;
+        const $root    = $( this.refs.button ),
+              width    = $root.width(),
+              svgWidth = $root.find(".special").width() * 0.5,
+              padding  = 16,
+              left     = ( width - svgWidth ) / 2 - padding;
         $root.find( ".special" ).css({ left });
         $root.css({ "background-color": global.bgColor[global.state] })
              .find( "button-span" ).css({ display: global.state == "init" ? "block" : "none" });
@@ -389,9 +388,9 @@ export default class StateButton extends React.Component {
     }
 
     componentWillMount() {
-        this.props.color != "" && this.setState({ color: this.props.color });
+        this.props.color != ""           && this.setState({ color: this.props.color });
         this.props.backgroundColor != "" && this.setState({ backgroundColor: this.props.backgroundColor });
-        this.props.hoverColor != "" && this.setState({ hoverColor: this.props.hoverColor });
+        this.props.hoverColor != ""      && this.setState({ hoverColor: this.props.hoverColor });
     }
 
     render() {
@@ -416,26 +415,25 @@ export default class StateButton extends React.Component {
 
         style.root = { ...style.normal_root, ...current };
 
-        this.props.style &&
-            ( style.root = { ...style.root, ...this.props.style } );
+        this.props.style            && ( style.root = { ...style.root, ...this.props.style } );
 
-        this.props.text  == "" && ( style.text.display = "none" );
-        this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+        this.props.icon  != ""       ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+        this.props.text  == ""      && ( style.text.display = "none" );
         this.props.order == "after" && ( style.icon.order = 1 );
-        this.props.width && ( style.root.width = this.props.width );
-        this.state.state != "init" && ( style.span.display = "none" );
+        this.props.width            && ( style.root.width = this.props.width );
+        this.state.state != "init"  && ( style.span.display = "none" );
 
         const events = this.props.disable ? {} : {
-                onMouseOver : ()=>this.onMouseOver(),
-                onMouseOut  : ()=>this.onMouseOut(),
-                onClick     : (e)=>this.onClick(e),
+            onMouseOver : (e)=>this.onMouseOver(e),
+            onMouseOut  : (e)=>this.onMouseOut(e),
+            onClick     : (e)=>this.onClick(e),
         };
 
         global = {
-            state  : this.state.state,
-            bgColor: {
-                init   : style.root.backgroundColor,
-                success: this.props.successBgColor,
+            state       : this.state.state,
+            bgColor     : {
+                init    : style.root.backgroundColor,
+                success : this.props.successBgColor,
             }
         };
 
