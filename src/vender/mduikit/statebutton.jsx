@@ -343,6 +343,7 @@ export default class StateButton extends React.Component {
     }
 
     /**
+     * Change state
      * 
      * @param {string} changed state, @see this.state.state
      * @param {element} html element
