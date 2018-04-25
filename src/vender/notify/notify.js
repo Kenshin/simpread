@@ -48,6 +48,12 @@
      console.log( "current type is", type )
   }});
 *
+  const notify = new Notify().Render({ content: "加载中，请稍等...", mode: "loading" });
+  setTimeout( ()=>{
+    notify.complete();
+    new Notify().Render("加载完成！");
+  }, 2000);
+*
 */
 var Notify = ( function () {
     var VERSION = "2.0.1",
@@ -63,9 +69,11 @@ var Notify = ( function () {
             toast    : "toast",
             modal    : "modal",
             snackbar : "snackbar",
+            loading  : "loading"
         },
         options = {
             version : VERSION,
+            $target : undefined,
             title   : "",
             content : "",
             type    : NORMAL,
@@ -75,6 +83,7 @@ var Notify = ( function () {
             action  : "",
             cancel  : "",
             callback: undefined,
+            complete: undefined,
         },
         timer      = {},
         $root,
@@ -87,7 +96,13 @@ var Notify = ( function () {
             <notify-action></notify-action>\
             <notify-cancel></notify-cancel>\
         </notify>',
-        prefix      = function( value ) {
+        loading    = '\
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling">\
+                <circle stroke="#fff" stroke-width="10" cx="50" cy="50" fill="none" ng-attr-stroke="{{config.color}}" ng-attr-stroke-width="{{config.width}}" ng-attr-r="{{config.radius}}" ng-attr-stroke-dasharray="{{config.dasharray}}" r="30" stroke-dasharray="141.37166941154067 49.12388980384689" transform="rotate(102 50 50)">\
+                    <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform>\
+                </circle>\
+            </svg>',
+        prefix     = function( value ) {
             return name + "-" + value;
         },
         registyElement = function( name, elements ) {
@@ -109,6 +124,9 @@ var Notify = ( function () {
             $root.off( "click", "." + event.data[0] + " notify-action", callbackHander );
             hidden( $(this).parent() );
         },
+        completeHandler = function() {
+            hidden( this.$target );
+        },
         hidden = function( target ) {
             target.addClass( "notify-hide" ).slideUp( 500, function() {
                 target.remove();
@@ -125,6 +143,7 @@ var Notify = ( function () {
                 $cancel  = $target.find(prefix( "cancel"  )),
                 item     = "notify-item-" + num++;
 
+            this.$target = $target;
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
 
@@ -164,8 +183,14 @@ var Notify = ( function () {
                 $root.on( "click", "." + item + " notify-cancel", [ item, this.callback, "cancel" ], callbackHander );
             }
 
-            this.mode !== MODE.modal && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
+            this.mode !== MODE.modal && this.mode !== MODE.loading && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
                 ( timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay ) );
+
+            if ( this.mode == MODE.loading ) {
+                $icon.html( loading );
+                $icon.css({ display: "block" });
+                this.complete = completeHandler;
+            }
 
             $target.addClass( item );
             $root.append( $target ).css( "z-index", 2147483647 );
@@ -181,6 +206,7 @@ var Notify = ( function () {
         }
     }
 
+    Notify.prototype.$target = options.title;
     Notify.prototype.title   = options.title;
     Notify.prototype.content = options.content;
     Notify.prototype.type    = options.type;
@@ -190,6 +216,7 @@ var Notify = ( function () {
     Notify.prototype.action  = options.action;
     Notify.prototype.cancel  = options.cancel;
     Notify.prototype.callback= options.callback;
+    Notify.prototype.complete= options.complete;
 
     Notify.prototype.Render  = function () {
 
@@ -240,6 +267,7 @@ var Notify = ( function () {
         else {
             console.error( "Arguments error", arguments );
         }
+        return self;
     };
 
     Notify.prototype.Clone  = function () {
