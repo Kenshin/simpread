@@ -206,7 +206,7 @@ var Notify = ( function () {
         }
     }
 
-    Notify.prototype.$target = options.title;
+    Notify.prototype.$target = "";
     Notify.prototype.title   = options.title;
     Notify.prototype.content = options.content;
     Notify.prototype.type    = options.type;
