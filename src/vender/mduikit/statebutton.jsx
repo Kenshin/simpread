@@ -371,6 +371,13 @@ export default class StateButton extends React.Component {
     }
 
     onMouseOver() {
+        if ( global.state == "loading" ) return;
+        else if ( [ "success", "failed", "warning" ].includes( global.state)) {
+            $( this.refs.button ).css({ "background-color": global.bgColor.init });
+            global.state = "init";
+            $( this.refs.button ).find( "button-svg" ).remove();
+            $( this.refs.button ).find( "button-span" ).css({ display: "block" });
+        }
         const [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
         $mask.css( "background-color", this.state.hoverColor );
     }
@@ -433,6 +440,7 @@ export default class StateButton extends React.Component {
         global = {
             state  : this.state.state,
             bgColor: {
+                init   : style.root.backgroundColor,
                 success: this.props.successBgColor,
             }
         }
