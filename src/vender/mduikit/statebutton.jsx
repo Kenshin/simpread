@@ -342,6 +342,11 @@ export default class StateButton extends React.Component {
         hoverColor     : ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
     }
 
+    /**
+     * 
+     * @param {string} changed state, @see this.state.state
+     * @param {element} html element
+     */
     changeState( changed, root ) {
         global.state = changed;
         const $root = $( root );
