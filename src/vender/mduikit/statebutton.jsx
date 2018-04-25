@@ -12,7 +12,7 @@
 
 console.log( "==== simpread component: StateButton ====" )
 
-let styles = new Map();
+let styles = new Map(), global ={};
 
 const raisedstyle = {
         color           : "rgba(255, 255, 255, .7)",
@@ -64,6 +64,8 @@ const raisedstyle = {
 
                 border: 'none',
                 borderRadius: '2px',
+
+                transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
             },
 
             mask: {
@@ -311,6 +313,8 @@ export default class StateButton extends React.Component {
         hoverColor : "",
         width   : undefined,
         waves   : undefined,
+
+        successBgColor: "rgba(139, 195, 74, 1)",
     }
 
     static propTypes = {
@@ -339,6 +343,7 @@ export default class StateButton extends React.Component {
     }
 
     changeState( changed, root ) {
+        global.state = changed;
         const $root = $( root );
         switch ( changed ) {
             case "loading":
@@ -352,7 +357,7 @@ export default class StateButton extends React.Component {
                 break;
         }
         ReactDOM.render( <SVG state={changed}/>, $("button-svg")[0] );
-        changeStateStyle( $root );
+        changeStateStyle( $root, global.bgColor[changed] );
     }
 
     onMouseOver() {
@@ -415,6 +420,13 @@ export default class StateButton extends React.Component {
                 onClick     : (e)=>this.onClick(e),
         };
 
+        global = {
+            state  : this.state.state,
+            bgColor: {
+                success: this.props.successBgColor,
+            }
+        }
+
         return (
             <state-button ref="button" style={ style.root } class={ this.props.waves }
                 type={ this.props.type } mode={ this.props.mode } 
@@ -435,12 +447,14 @@ export default class StateButton extends React.Component {
  * Change state style
  * 
  * @param {jquery} root jquery object
+ * @param {string} root background color
  */
-function changeStateStyle( $root ) {
+function changeStateStyle( $root, bgColor ) {
     if ( $root.find(".special").length == 0 ) return;
     const width    = $root.width(),
           svgWidth = $root.find(".special").width() * 0.5,
           padding  = 16,
           left     = ( width - svgWidth ) / 2 - padding;
     $root.find( ".special" ).css({ left });
+    bgColor && $root.css({ "background-color": bgColor });
 }
