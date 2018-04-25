@@ -292,8 +292,7 @@ class SVG extends React.Component {
  * 
  * Reference:
  * - https://material.io/guidelines/components/progress-activity.html
- * - http://materializecss.com/preloader.html
- * - https://loading.io/spinner/custom/138356
+ * - https://github.com/Kamonlojn/svg-icons-animate
  * 
  * @class
  */
@@ -352,7 +351,7 @@ export default class StateButton extends React.Component {
                 break;
         }
         ReactDOM.render( <SVG state={changed}/>, $("button-svg")[0] );
-        position( $root );
+        changeStateStyle( $root );
     }
 
     onMouseOver() {
@@ -376,7 +375,7 @@ export default class StateButton extends React.Component {
     }
 
     componentDidMount() {
-        position( $( this.refs.button ));
+        changeStateStyle( $( this.refs.button ));
     }
 
     render() {
@@ -431,7 +430,12 @@ export default class StateButton extends React.Component {
     }
 }
 
-function position( $root ) {
+/**
+ * Change state style
+ * 
+ * @param {jquery} root jquery object
+ */
+function changeStateStyle( $root ) {
     if ( $root.find(".special").length == 0 ) return;
     const width    = $root.width(),
           svgWidth = $root.find(".special").width() * 0.5,
