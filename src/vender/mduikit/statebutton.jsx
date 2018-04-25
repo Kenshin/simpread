@@ -330,11 +330,12 @@ export default class StateButton extends React.Component {
     }
 
     state = {
-        id : Math.round(+new Date()),
-        state: "init",
-        color: ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type != "raised" ),
+        id   : Math.round(+new Date()),
+        state: "init", // include: init, loading, success, failed, warning
+
+        color          : ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type != "raised" ),
         backgroundColor: ((bool)=>bool ? flatstyle.backgroundColor : raisedstyle.backgroundColor)( this.props.type != "raised" ),
-        hoverColor: ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
+        hoverColor     : ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
     }
 
     changeState( changed, root ) {
