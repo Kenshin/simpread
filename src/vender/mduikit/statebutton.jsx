@@ -253,17 +253,17 @@ class SVG extends React.Component {
 
     render() {
 
-        const loading = `<svg class ="loading" width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling">
-                            <circle cx="50" cy="50" fill="none" ng-attr-stroke="{{config.color}}" ng-attr-stroke-width="{{config.width}}" ng-attr-r="{{config.radius}}" ng-attr-stroke-dasharray="{{config.dasharray}}" stroke="#fff" stroke-width="10" r="30" stroke-dasharray="141.37166941154067 49.12388980384689" transform="rotate(102 50 50)">
+        const loading = `<svg class="loading" width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling">
+                            <circle stroke="#fff" stroke-width="10" cx="50" cy="50" fill="none" ng-attr-stroke="{{config.color}}" ng-attr-stroke-width="{{config.width}}" ng-attr-r="{{config.radius}}" ng-attr-stroke-dasharray="{{config.dasharray}}" r="30" stroke-dasharray="141.37166941154067 49.12388980384689" transform="rotate(102 50 50)">
                                 <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform>
                             </circle>
                         </svg>`,
-              success = `<svg class="special success" stroke="#fff" stroke-width="6.25" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              success = `<svg class="special success" stroke="#fff" stroke-width="10" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
                             <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
                                 <path fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53"></path>
                             </g>
                         </svg>`,
-              failed = `<svg class="special failed" stroke="#fff" stroke-width="6.25" stroke-linecap="round">
+              failed = `<svg class="special failed" stroke="#fff" stroke-width="10" stroke-linecap="round">
                             <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
                                 <path class="first-line" d="M634.087,300.805L673.361,261.53" fill="none"/>
                             </g>
@@ -271,7 +271,7 @@ class SVG extends React.Component {
                                 <path class="second-line" d="M634.087,300.805L673.361,261.53"/>
                             </g>
                         </svg>`,
-              warning = `<svg class="special warning" stroke="#fff" stroke-width="6.25" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              warning = `<svg class="special warning" stroke="#fff" stroke-width="10" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
                             <g transform="matrix(1,0,0,1,-615.516,-257.346)">
                                 <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
                                     <path class="line" d="M634.087,300.805L673.361,261.53" fill="none"/>
