@@ -314,6 +314,7 @@ export default class StateButton extends React.Component {
         backgroundColor : "",
         hoverColor      : "",
         successBgColor  : "rgba(139, 195, 74, 1)",
+        failedBgColor   : "rgba(244, 67, 54, 1)",
 
         waves   : undefined,
     }
@@ -332,6 +333,7 @@ export default class StateButton extends React.Component {
         hoverColor      : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
         successBgColor  : React.PropTypes.string,
+        failedBgColor   : React.PropTypes.string,
 
         waves   : React.PropTypes.string,
         onState : React.PropTypes.func,
@@ -434,6 +436,7 @@ export default class StateButton extends React.Component {
             bgColor     : {
                 init    : style.root.backgroundColor,
                 success : this.props.successBgColor,
+                failed  : this.props.failedBgColor,
             }
         };
 
