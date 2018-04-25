@@ -332,18 +332,27 @@ export default class StateButton extends React.Component {
 
     state = {
         id : Math.round(+new Date()),
-        state: undefined,
+        state: "init",
         color: ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type != "raised" ),
         backgroundColor: ((bool)=>bool ? flatstyle.backgroundColor : raisedstyle.backgroundColor)( this.props.type != "raised" ),
         hoverColor: ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
     }
 
-    position() {
-        const width    = $(this.refs.button).width(),
-              svgWidth = $(this.refs.button).find(".special").width() * 0.5,
-              padding  = 16,
-              left     = ( width - svgWidth ) / 2 - padding;
-        $( this.refs.button ).find( ".special" ).css({ left });
+    changeState( changed, root ) {
+        const $root = $( root );
+        switch ( changed ) {
+            case "loading":
+                $root.find( "button-span" ).css({ display: "none" });
+                break;
+            case "success":
+                break;
+            case "failed":
+                break;
+            case "warning":
+                break;
+        }
+        ReactDOM.render( <SVG state={changed}/>, $("button-svg")[0] );
+        position( $root );
     }
 
     onMouseOver() {
@@ -357,7 +366,7 @@ export default class StateButton extends React.Component {
     }
 
     onClick( event ) {
-        this.props.onState && this.props.onState( event );
+        this.props.onState && this.props.onState( this.changeState, this.refs.button );
     }
 
     componentWillMount() {
@@ -367,7 +376,7 @@ export default class StateButton extends React.Component {
     }
 
     componentDidMount() {
-        this.position();
+        position( $( this.refs.button ));
     }
 
     render() {
@@ -412,7 +421,7 @@ export default class StateButton extends React.Component {
                 { ...events }>
                 <button-mask ref="mask" style={ style.mask }>
                     <button-svg></button-svg>
-                    <button-span ref="label" style={ style.span }>
+                    <button-span style={ style.span }>
                         <button-icon style={ style.icon }></button-icon>
                         <button-text style={ style.text }>{ this.props.text }</button-text>
                     </button-span>
@@ -420,4 +429,13 @@ export default class StateButton extends React.Component {
             </state-button>
         )
     }
+}
+
+function position( $root ) {
+    if ( $root.find(".special").length == 0 ) return;
+    const width    = $root.width(),
+          svgWidth = $root.find(".special").width() * 0.5,
+          padding  = 16,
+          left     = ( width - svgWidth ) / 2 - padding;
+    $root.find( ".special" ).css({ left });
 }
