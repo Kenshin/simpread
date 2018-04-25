@@ -308,13 +308,14 @@ export default class StateButton extends React.Component {
         type    : "flat",
         mode    : "primary",
         style   : undefined,
-        color   : "",
-        backgroundColor : "",
-        hoverColor : "",
         width   : undefined,
-        waves   : undefined,
 
-        successBgColor: "rgba(139, 195, 74, 1)",
+        color           : "",
+        backgroundColor : "",
+        hoverColor      : "",
+        successBgColor  : "rgba(139, 195, 74, 1)",
+
+        waves   : undefined,
     }
 
     static propTypes = {
@@ -326,9 +327,12 @@ export default class StateButton extends React.Component {
         mode    : React.PropTypes.oneOf([ "primary", "secondary" ]),
         style   : React.PropTypes.object,
         width   : React.PropTypes.string,
-        color   : React.PropTypes.string,
+
+        color           : React.PropTypes.string,
+        hoverColor      : React.PropTypes.string,
         backgroundColor : React.PropTypes.string,
-        hoverColor : React.PropTypes.string,
+        successBgColor  : React.PropTypes.string,
+
         waves   : React.PropTypes.string,
         onState : React.PropTypes.func,
     }
