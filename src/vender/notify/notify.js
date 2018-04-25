@@ -44,10 +44,13 @@
 * new Notify().Render({ content: "带 icon 的 snackbar", icon: "<path>/fontsize_icon.png" });
 * new Notify().Render({ content: "带 callback 的 toast", icon: "<path>/icon.png", mode: "snackbar", action: "提交", callback: ()=>{console.log("dddddddd")}} );
 * new Notify().Render( "错误的 callback", "undo", '()=>{console.log("eeeeeeee")}' );
+* new Notify().Render({ content: "带确认的 toast", action: "提交", cancel: "取消", callback: type => {
+     console.log( "current type is", type )
+  }});
 *
 */
 var Notify = ( function () {
-    var VERSION = "2.0.0",
+    var VERSION = "2.0.1",
         name    = "notify",
         root    = "notify-gp",
         roottmpl= "<" + root + ">",
@@ -70,6 +73,7 @@ var Notify = ( function () {
             delay   : 1000 * 5,
             icon    : "",
             action  : "",
+            cancel  : "",
             callback: undefined,
         },
         timer      = {},
@@ -81,6 +85,7 @@ var Notify = ( function () {
             <notify-title></notify-title>\
             <notify-content></notify-content>\
             <notify-action></notify-action>\
+            <notify-cancel></notify-cancel>\
         </notify>',
         prefix      = function( value ) {
             return name + "-" + value;
@@ -100,7 +105,7 @@ var Notify = ( function () {
             hidden( this );
         },
         callbackHander = function( event ) {
-            event.data[1]();
+            event.data[1]( event.data[2] );
             $root.off( "click", "." + event.data[0] + " notify-action", callbackHander );
             hidden( $(this).parent() );
         },
@@ -117,6 +122,7 @@ var Notify = ( function () {
                 $close   = $target.find(prefix( "a"       )),
                 $icon    = $target.find(prefix( "i"       )),
                 $action  = $target.find(prefix( "action"  )),
+                $cancel  = $target.find(prefix( "cancel"  )),
                 item     = "notify-item-" + num++;
 
             this.title   ? $title.text( this.title )     : $title.hide();
@@ -149,7 +155,13 @@ var Notify = ( function () {
             if ( this.action !== "" && this.callback && typeof this.callback == "function" ) {
                 $content.css( "width", "100%" );
                 $action.text( this.action ).css( "display", "block" );
-                $root.on( "click", "." + item + " notify-action", [ item, this.callback ], callbackHander );
+                $root.on( "click", "." + item + " notify-action", [ item, this.callback, "action" ], callbackHander );
+            }
+
+            if ( this.cancel !== "" && this.callback && typeof this.callback == "function" ) {
+                $content.css( "width", "100%" );
+                $cancel.text( this.cancel ).css( "display", "block" );
+                $root.on( "click", "." + item + " notify-cancel", [ item, this.callback, "cancel" ], callbackHander );
             }
 
             this.mode !== MODE.modal && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
@@ -176,6 +188,7 @@ var Notify = ( function () {
     Notify.prototype.delay   = options.delay;
     Notify.prototype.icon    = options.icon;
     Notify.prototype.action  = options.action;
+    Notify.prototype.cancel  = options.cancel;
     Notify.prototype.callback= options.callback;
 
     Notify.prototype.Render  = function () {

@@ -106,7 +106,8 @@ notify-gp notify-i {
     background-repeat: no-repeat;
 }
 
-notify-gp notify-action {
+notify-gp notify-action,
+notify-gp notify-cancel {
     display: none;
 
     margin: 0 0 0 24px;
@@ -125,6 +126,10 @@ notify-gp notify-action {
     white-space: nowrap;
 
     cursor: pointer;
+}
+
+notify-gp notify-cancel {
+    margin: 0;
 }
 
 notify-gp notify-a {
