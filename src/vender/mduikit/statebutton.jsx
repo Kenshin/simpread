@@ -370,7 +370,7 @@ export default class StateButton extends React.Component {
               left     = ( width - svgWidth ) / 2 - padding;
         $root.find( ".special" ).css({ left });
         $root.css({ "background-color": global.bgColor[global.state] })
-             .find( "button-span" ).css({ display: global.state == "init" ? "block" : "none" });
+             .find( "button-span" ).animate({ opacity: global.state == "init" ? 1 : 0 });
     }
 
     /**
