@@ -1,8 +1,8 @@
 /*!
  * React Material Design: TextField
  * 
- * @version :  0.0.2
- * @update  : 2017/10/14
+ * @version : 0.0.2
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -13,7 +13,6 @@
 console.log( "==== simpread component: TextField ====" )
 
 let $target, $float, $state, $border, $error,
-    element,
     style, styles = new Map();
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
@@ -298,6 +297,7 @@ export default class TextField extends React.Component {
     }
 
     render() {
+        style = styles.get(this.state.id);
         const props = {
             placeholder :this.props.placeholder,
             onFocus  : ()=>this.changeFocus(),
@@ -305,9 +305,7 @@ export default class TextField extends React.Component {
             onChange : (e)=>this.change(e),
             onKeyDown: (e)=>this.changeKeyDown(e),
         },
-        tooltip = this.props.tooltip;
-        style = styles.get(this.state.id);
-
+        tooltip = this.props.tooltip,
         element = this.props.multi ? (
             <textarea ref="target" 
                        style={ style.textarea }
