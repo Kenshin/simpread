@@ -2,7 +2,7 @@
  * React Material Design: SelectField
  * 
  * @version : 0.0.3
- * @update  : 2017/10/14
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
