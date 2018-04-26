@@ -35,10 +35,10 @@ let styles = new Map();
                 display: 'flex',
                 alignItems: 'center',
                 position: 'relative',
-    
+
                 width: '100%',
                 height: '37px',
-    
+
                 margin: '8px 0 0 0',
                 padding: 0,
             },
@@ -167,6 +167,7 @@ let styles = new Map();
                 bottom: 0;
 
                 width: 100%;
+                height: 3px;
 
                 margin: 6px 0;
                 padding: 0;
@@ -205,6 +206,17 @@ let styles = new Map();
 
                 cursor: pointer;
                 -webkit-appearance: none;
+            }
+
+            slider input[type=range]::-moz-range-thumb {
+                height: 14px;
+                width: 14px;
+
+                background-color: ${color};
+                border: 0;
+                border-radius: 50px;
+
+                cursor: pointer;
             }
         `;
     };
