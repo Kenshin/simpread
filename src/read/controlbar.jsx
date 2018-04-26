@@ -9,7 +9,7 @@ import * as output from 'output';
 import * as watch  from 'watch';
 import * as kbd    from 'keyboard';
 
-import Fap         from 'fap'
+import Fab         from 'fab';
 
 const tooltip_options = {
     target   : "name",
@@ -117,10 +117,7 @@ export default class ReadCtlbar extends React.Component {
     render() {
         return (
             <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": "2" }}>
-                <Fap items={ [ "设定", "动作" ] } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) }>
-                    <div>设定选项</div>
-                    <div>发送到生产力工具</div>
-                </Fap>
+                <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )
     }
