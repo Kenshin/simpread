@@ -12,8 +12,6 @@
 
 console.log( "==== simpread component: AutoComplete ====" )
 
-let styles = new Map(), styles_list = new Map();
-
 const cssinjs = () => {
 
     const focus_color = 'rgba(0, 137, 123, .8)',
@@ -227,7 +225,7 @@ class ListView extends React.Component {
     };
 
     state = {
-        id : Math.round(+new Date()),
+        style: { ...cssinjs_list() }
     };
 
     onMouseOver( event ) {
@@ -243,8 +241,7 @@ class ListView extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs_list() };
-        styles_list.set( this.state.id, style );
+        const style = this.state.style;
 
         style.root = this.props.items.length > 0 ? { ...style.root, ...style.open } : { ...style.root };
 
@@ -325,7 +322,7 @@ export default class AC extends React.Component {
     }
 
     state = {
-        id    : Math.round(+new Date()),
+        style : { ...cssinjs() },
         name  : "",
         items : [],
     }
@@ -363,7 +360,7 @@ export default class AC extends React.Component {
     }
 
     onTextChangeFocus( event ) {
-        const style   = styles.get( this.state.id ),
+        const style   = this.state.style,
               $target = $( this.refs.input ),
               $state  = $target.next().find( "text-field-state" ),
               $float  = $target.prev();
@@ -372,7 +369,7 @@ export default class AC extends React.Component {
     }
 
     onTextChangeBlur( event ) {
-        const style   = styles.get( this.state.id ),
+        const style   = this.state.style,
               $target = $( event.target ),
               $state  = $target.next().find( "text-field-state" ),
               $float  = $target.prev();
@@ -418,8 +415,7 @@ export default class AC extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
+        const style       = this.state.style;
         style.input.color = this.props.color;
         style.float       = this.props.placeholder == "" && this.props.value == "" ? style.float : { ...style.float, ...style.float_focus };
         if ( this.props.borderColor ) {
