@@ -73,7 +73,6 @@ var Notify = ( function () {
         },
         options = {
             version : VERSION,
-            $target : undefined,
             title   : "",
             content : "",
             type    : NORMAL,
@@ -125,7 +124,7 @@ var Notify = ( function () {
             hidden( $(this).parent() );
         },
         completeHandler = function() {
-            hidden( this.$target );
+            hidden( this );
         },
         hidden = function( target ) {
             target.addClass( "notify-hide" ).slideUp( 500, function() {
@@ -143,7 +142,6 @@ var Notify = ( function () {
                 $cancel  = $target.find(prefix( "cancel"  )),
                 item     = "notify-item-" + num++;
 
-            this.$target = $target;
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
 
@@ -189,7 +187,7 @@ var Notify = ( function () {
             if ( this.mode == MODE.loading ) {
                 $icon.html( loading );
                 $icon.css({ display: "block" });
-                this.complete = completeHandler;
+                this.complete = completeHandler.bind( $target );
             }
 
             $target.addClass( item );
@@ -206,7 +204,6 @@ var Notify = ( function () {
         }
     }
 
-    Notify.prototype.$target = "";
     Notify.prototype.title   = options.title;
     Notify.prototype.content = options.content;
     Notify.prototype.type    = options.type;
