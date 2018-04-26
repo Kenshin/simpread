@@ -438,8 +438,8 @@ export default class AC extends React.Component {
 
         const props = {
             placeholder :this.props.placeholder,
-            onFocus  : (e)=>this.onTextChangeFocus(event),
-            onBlur   : (e)=>this.onTextChangeBlur(event),
+            onFocus  : (e)=>this.onTextChangeFocus(e),
+            onBlur   : (e)=>this.onTextChangeBlur(e),
             onChange : (e)=>this.onTextChange(e),
             onKeyDown: (e)=>this.onTextKeyDown(e),
         };
