@@ -13,6 +13,7 @@
 console.log( "==== simpread component: Floating Action Button ====" )
 
 let $target, type,
+    maxWidth = -1,
     style, styles = new Map();
 
 const cssinjs = () => {
@@ -39,9 +40,9 @@ const cssinjs = () => {
                 position: 'fixed',
 
                 bottom: '45px',
-                right: '24px',
+                right: 0,
 
-                width: '300px',
+                width: '100px',
                 height: '100%',
               },
 
@@ -262,6 +263,7 @@ export default class Fab extends React.Component {
                 $target.parent().next().removeAttr( "current" );
             }
         }
+        $( this.refs.root ).width( maxWidth + 100 );
     }
 
     btnMouseOutHandler( event ) {
@@ -278,7 +280,9 @@ export default class Fab extends React.Component {
     }
 
     fabMouseOutHandler( event ) {
+        style = styles.get( this.state.id );
         $( event.target ).find("fab").find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
+        $( this.refs.root ).css({ ...style.bg });
     }
 
     liMouseLeaveHandler( event ) {
@@ -305,7 +309,6 @@ export default class Fab extends React.Component {
     }
 
     componentDidMount() {
-        let maxWidth = -1;
         const $root  = $( "fab" ),
               $ul    = $($root.children()[2]);
         if ( $ul.is("ul") ) {
@@ -317,7 +320,6 @@ export default class Fab extends React.Component {
                 }
             });
         }
-        $root.parent().width( maxWidth + 20 );
     }
 
     componentWillUnmount() {
@@ -375,7 +377,7 @@ export default class Fab extends React.Component {
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
         return (
-            <fab-bg style={ style.bg } onMouseLeave={ evt=>this.fabMouseOutHandler(evt) }>
+            <fab-bg ref="root" style={ style.bg } onMouseLeave={ evt=>this.fabMouseOutHandler(evt) }>
                 <fab style={ style.root }>
                     { spec   }
                     { anchor }
