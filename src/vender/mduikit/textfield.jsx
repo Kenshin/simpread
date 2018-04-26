@@ -13,7 +13,7 @@
 console.log( "==== simpread component: TextField ====" )
 
 let $target, $float, $state, $border, $error,
-    style, styles = new Map();
+    styles = new Map();
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
@@ -245,7 +245,7 @@ export default class TextField extends React.Component {
 
     changeBlur() {
         setjQueryObj( this.refs );
-        style = styles.get(this.state.id);
+        const style = styles.get(this.state.id);
         if ( $target.val() == "" && $target.attr( "placeholder" ) == "" ) {
             $float.css( style.float_normal );
         } else {
@@ -280,7 +280,7 @@ export default class TextField extends React.Component {
 
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
-        style = styles.get(this.state.id);
+        const style = styles.get(this.state.id);
         if ( this.props.floatingtext == "" ) style.float.display = style.hidden;
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows        = this.props.rows - MIN_ROWS,
@@ -297,7 +297,6 @@ export default class TextField extends React.Component {
     }
 
     render() {
-        style = styles.get(this.state.id);
         const props = {
             placeholder :this.props.placeholder,
             onFocus  : ()=>this.changeFocus(),
@@ -305,6 +304,7 @@ export default class TextField extends React.Component {
             onChange : (e)=>this.change(e),
             onKeyDown: (e)=>this.changeKeyDown(e),
         },
+        style   = styles.get(this.state.id),
         tooltip = this.props.tooltip,
         element = this.props.multi ? (
             <textarea ref="target" 
