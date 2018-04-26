@@ -12,8 +12,6 @@
 
 console.log( "==== simpread component: StateButton ====" )
 
-let styles = new Map(), global ={};
-
 const raisedstyle = {
         color           : "rgba(255, 255, 255, .7)",
         backgroundColor : "rgba(0, 137, 123, 1)",
@@ -242,10 +240,6 @@ class SVG extends React.Component {
         warningColor : React.PropTypes.string,
     }
 
-    state = {
-        id : Math.round(+new Date()),
-    }
-
     componentWillMount() {
         $( "#mduikit-state-button" ).length > 0 && $( "#mduikit-state-button" ).remove();
         $( "head" ).append(`<style type="text/css" id="mduikit-state-button">${statue_button_style}</style>`);
@@ -354,23 +348,26 @@ export default class StateButton extends React.Component {
     }
 
     state = {
-        id   : Math.round(+new Date()),
-        state: "init", // include: init, loading, success, failed, warning
+        state          : "init", // include: init, loading, success, failed, warning
 
         color          : ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type != "raised" ),
         backgroundColor: ((bool)=>bool ? flatstyle.backgroundColor : raisedstyle.backgroundColor)( this.props.type != "raised" ),
         hoverColor     : ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
     }
 
-   changeStateStyle() {
+    global = {}
+    style  = cssinjs()
+
+    changeStateStyle() {
         const $root    = $( this.refs.button ),
               width    = $root.width(),
               svgWidth = $root.find(".special").width() * 0.5,
               padding  = 16,
               left     = ( width - svgWidth ) / 2 - padding;
         $root.find( ".special" ).css({ left });
-        $root.css({ "background-color": global.bgColor[global.state] })
-             .find( "button-span" ).animate({ opacity: global.state == "init" ? 1 : 0 });
+        this.global.state == "init" && $root.find( "button-span" ).css({ ...this.style.span });
+        $root.css({ "background-color": this.global.bgColor[this.global.state] })
+             .find( "button-span" ).animate({ opacity: this.global.state == "init" ? 1 : 0 });
     }
 
     /**
@@ -379,27 +376,27 @@ export default class StateButton extends React.Component {
      * @param {string} @see this.state.state
      */
     changeState( state ) {
-        global.state = state;
+        this.global.state = state;
         this.setState({ state });
         this.changeStateStyle();
     }
 
     onMouseOver() {
-        if ( global.state == "loading" ) return;
-        else if ( [ "success", "failed", "warning" ].includes( global.state)) {
+        if ( this.global.state == "loading" ) return;
+        else if ( [ "success", "failed", "warning" ].includes( this.global.state)) {
             this.changeState( "init" );
         }
-        const [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
+        const [ style, $mask ] = [ { ...this.style }, $( this.refs.mask ) ];
         $mask.css( "background-color", this.state.hoverColor );
     }
 
     onMouseOut() {
-        const [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
+        const [ style, $mask ] = [ { ...this.style }, $( this.refs.mask ) ];
         $mask.css({ ...style.mask });
     }
 
     onClick( event ) {
-        if ( global.state == "loading" ) return;
+        if ( this.global.state == "loading" ) return;
         this.props.onState && this.props.onState( this );
     }
 
@@ -410,10 +407,8 @@ export default class StateButton extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
-
-        const current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
+        const style   = $.extend( true, {}, this.style ),
+              current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
         current.color = this.state.color;
         current.backgroundColor = this.state.backgroundColor;
 
@@ -445,7 +440,7 @@ export default class StateButton extends React.Component {
             onClick     : (e)=>this.onClick(e),
         };
 
-        global = {
+        this.global = {
             state       : this.state.state,
             bgColor     : {
                 init    : style.root.backgroundColor,

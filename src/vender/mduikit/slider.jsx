@@ -12,214 +12,213 @@
 
 console.log( "==== simpread component: Slider ====" )
 
-let styles = new Map();
+const
+        thumb_color  = 'rgba(0, 137, 123, 1)',
+        color        = 'rgba(51, 51, 51, .87)',
+        border_color = 'rgba(224, 224, 224, 1)',
+        focus_color  = 'rgba(0, 137, 123, .8)',
+        error_color  = 'rgba(244, 67, 54, 1)',
+        cssinjs = () => {
 
-    const thumb_color  = 'rgba(0, 137, 123, 1)',
-          color        = 'rgba(51, 51, 51, .87)',
-          border_color = 'rgba(224, 224, 224, 1)',
-          focus_color  = 'rgba(0, 137, 123, .8)',
-          error_color  = 'rgba(244, 67, 54, 1)',
-          cssinjs = () => {
+            const
+                margin      = '8px 0 0 0',
+                display     = 'block',
+                medium      = '14px',
+                large       = '16px',
+                lineHeight  = 1.5,
+                fontWeight  = 'bold',
+                width       = '100%',
+                styles      = {
+                root: {
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    position: 'relative',
 
-        const
-            margin      = '8px 0 0 0',
-            display     = 'block',
-            medium      = '14px',
-            large       = '16px',
-            lineHeight  = 1.5,
-            fontWeight  = 'bold',
-            width       = '100%',
-            styles      = {
-            root: {
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                position: 'relative',
+                    width: '100%',
+                    height: '37px',
 
-                width: '100%',
-                height: '37px',
+                    margin: '8px 0 0 0',
+                    padding: 0,
+                },
 
-                margin: '8px 0 0 0',
-                padding: 0,
-            },
+                group: {
+                    position: 'relative',
+                    width: '100%',
+                },
 
-            group: {
-                position: 'relative',
-                width: '100%',
-            },
+                line: {
+                    position: 'absolute',
+                    width: '20px',
 
-            line: {
-                position: 'absolute',
-                width: '20px',
+                    left: 0,
+                    bottom: '6px',
 
-                left: 0,
-                bottom: '6px',
+                    width: '20px',
+                    height: '3px',
 
-                width: '20px',
-                height: '3px',
+                    backgroundColor: focus_color,
+                    pointerEvents: 'none',
+                },
 
-                backgroundColor: focus_color,
-                pointerEvents: 'none',
-            },
+                text_field: {
+                    display,
+                    position: 'relative',
+                    margin: '0 0 0 30px',
+                    padding: 0,
 
-            text_field: {
-                display,
-                position: 'relative',
-                margin: '0 0 0 30px',
-                padding: 0,
+                    width: '50px',
+                    lineHeight: 1,
+                },
 
-                width: '50px',
-                lineHeight: 1,
-            },
+                input: {
+                    color,
+                    backgroundColor: 'transparent',
 
-            input: {
-                color,
-                backgroundColor: 'transparent',
+                    width,
+                    height: '20px',
 
-                width,
-                height: '20px',
+                    margin: 0,
+                    padding: 0,
 
-                margin: 0,
-                padding: 0,
+                    fontFamily: 'sans-serif',
+                    fontSize: medium,
+                    textAlign: 'center',
 
-                fontFamily: 'sans-serif',
-                fontSize: medium,
-                textAlign: 'center',
+                    border: 'none',
+                    outline: 'none',
 
-                border: 'none',
-                outline: 'none',
+                    boxShadow: 'none',
+                    boxSizing: 'content-box',
+                    transition: 'all 0.3s',
+                },
 
-                boxShadow: 'none',
-                boxSizing: 'content-box',
-                transition: 'all 0.3s',
-            },
+                border : {
+                    display,
 
-            border : {
-                display,
+                    width,
+                    margin,
 
-                width,
-                margin,
+                    borderTop: `none ${border_color}`,
+                    borderLeft: `none ${border_color}`,
+                    borderRight: `none ${border_color}`,
+                    borderBottom: `1px solid ${border_color}`,
+                    boxSizing: 'content-box',
+                },
 
-                borderTop: `none ${border_color}`,
-                borderLeft: `none ${border_color}`,
-                borderRight: `none ${border_color}`,
-                borderBottom: `1px solid ${border_color}`,
-                boxSizing: 'content-box',
-            },
+                state : {
+                    display,
+                    position: 'absolute',
 
-            state : {
-                display,
-                position: 'absolute',
+                    width,
+                    margin: '-1px 0 0 0',
 
-                width,
-                margin: '-1px 0 0 0',
+                    borderTop: `none ${focus_color}`,
+                    borderLeft: `none ${focus_color}`,
+                    borderRight: `none ${focus_color}`,
+                    borderBottom: `2px solid ${focus_color}`,
+                    boxSizing: 'content-box',
 
-                borderTop: `none ${focus_color}`,
-                borderLeft: `none ${focus_color}`,
-                borderRight: `none ${focus_color}`,
-                borderBottom: `2px solid ${focus_color}`,
-                boxSizing: 'content-box',
+                    transform: 'scaleX(0)',
+                    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+                },
 
-                transform: 'scaleX(0)',
-                transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-            },
+                state_focus : {
+                    transform: 'scaleX(1)',
+                },
 
-            state_focus : {
-                transform: 'scaleX(1)',
-            },
+                state_error : {
+                    transform: 'scaleX(1)',
+                    borderTop: `none ${error_color}`,
+                    borderLeft: `none ${error_color}`,
+                    borderRight: `none ${error_color}`,
+                    borderBottom: `2px solid ${error_color}`,
+                },
 
-            state_error : {
-                transform: 'scaleX(1)',
-                borderTop: `none ${error_color}`,
-                borderLeft: `none ${error_color}`,
-                borderRight: `none ${error_color}`,
-                borderBottom: `2px solid ${error_color}`,
-            },
+                error : {
+                    display,
+                    position: 'relative',
 
-            error : {
-                display,
-                position: 'relative',
+                    margin,
+                    maxWidth: '428px',
 
-                margin,
-                maxWidth: '428px',
+                    fontSize: medium,
+                    fontWeight,
+                    lineHeight,
+                    textAlign: 'initial',
+                    wordWrap: 'break-word',
 
-                fontSize: medium,
-                fontWeight,
-                lineHeight,
-                textAlign: 'initial',
-                wordWrap: 'break-word',
+                    userSelect: 'none',
 
-                userSelect: 'none',
+                    color: error_color,
+                    transform: 'scale(0.75) translate( -73px, 0 )',
+                },
 
-                color: error_color,
-                transform: 'scale(0.75) translate( -73px, 0 )',
-            },
+            };
 
-        };
+            return styles;
+        },
+        range_style = color => {
+            return `
+                slider input[type=range] {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
 
-        return styles;
-    },
-    range_style = color => {
-        return `
-            slider input[type=range] {
-                position: absolute;
-                left: 0;
-                bottom: 0;
+                    width: 100%;
+                    height: 3px;
 
-                width: 100%;
-                height: 3px;
+                    margin: 6px 0;
+                    padding: 0;
 
-                margin: 6px 0;
-                padding: 0;
+                    border: none;
+                    background-color: transparent;
+                    -webkit-appearance: none;
+                }
 
-                border: none;
-                background-color: transparent;
-                -webkit-appearance: none;
-            }
+                slider input[type=range]:focus {
+                    outline: none;
+                }
 
-            slider input[type=range]:focus {
-                outline: none;
-            }
+                slider input[type=range]::-webkit-slider-runnable-track {
+                    width: 100%;
+                    height: 3px;
 
-            slider input[type=range]::-webkit-slider-runnable-track {
-                width: 100%;
-                height: 3px;
+                    background-color: #c2c0c2;
 
-                background-color: #c2c0c2;
+                    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
+                    border-radius: 1.3px;
 
-                box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px rgba(13, 13, 13, 0.5);
-                border-radius: 1.3px;
+                    transition: all 0.3s;
+                    cursor: pointer;
+                }
 
-                transition: all 0.3s;
-                cursor: pointer;
-            }
+                slider input[type=range]::-webkit-slider-thumb {
+                    height: 14px;
+                    width: 14px;
 
-            slider input[type=range]::-webkit-slider-thumb {
-                height: 14px;
-                width: 14px;
+                    margin-top: -5px;
 
-                margin-top: -5px;
+                    background-color: ${color};
 
-                background-color: ${color};
+                    border-radius: 50px;
 
-                border-radius: 50px;
+                    cursor: pointer;
+                    -webkit-appearance: none;
+                }
 
-                cursor: pointer;
-                -webkit-appearance: none;
-            }
+                slider input[type=range]::-moz-range-thumb {
+                    height: 14px;
+                    width: 14px;
 
-            slider input[type=range]::-moz-range-thumb {
-                height: 14px;
-                width: 14px;
+                    background-color: ${color};
+                    border: 0;
+                    border-radius: 50px;
 
-                background-color: ${color};
-                border: 0;
-                border-radius: 50px;
-
-                cursor: pointer;
-            }
-        `;
-    };
+                    cursor: pointer;
+                }
+            `;
+};
 
 /**
  * Custom component: Slider, component e.g.
@@ -279,9 +278,7 @@ export default class Slider extends React.Component {
         onChange    : React.PropTypes.func,
     }
 
-    state = {
-        id   : Math.round(+new Date()),
-    }
+    style = cssinjs()
 
     lineWidth( value ) {
         const maxWidth = $( this.refs.range ).width(),
@@ -290,14 +287,14 @@ export default class Slider extends React.Component {
     }
 
     onTextChangeFocus( event ) {
-        const style   = styles.get( this.state.id ),
+        const style   = { ...this.style },
               $target = $( event.target ),
               $state  = $target.next().find( "text-field-state" );
         $state.css({ ...style.state, ...style.state_focus });
     }
 
     onTextChangeBlur( event ) {
-        const style   = styles.get( this.state.id ),
+        const style   = { ...this.style },
               $target = $( event.target ),
               $state  = $target.next().find( "text-field-state" );
         $state.css({ ...style.state });
@@ -305,7 +302,7 @@ export default class Slider extends React.Component {
 
     onTextChange( event ) {
         let   istrue  = true;
-        const style   = styles.get( this.state.id ),
+        const style   = { ...this.style },
               $target = $( event.target ),
               $state  = $target.next().find( "text-field-state" ),
               min     = Number.parseInt( this.props.min ),
@@ -330,13 +327,13 @@ export default class Slider extends React.Component {
     }
 
     onMouseUp( event ) {
-        const style  = styles.get( this.state.id ),
+        const style  = { ...this.style },
               $state = $( event.target ).parent().next().find( "text-field-state" );
         $state.css({ ...style.state });
     }
 
     onChange( event ) {
-        const style  = styles.get( this.state.id ),
+        const style  = { ...this.style },
               $state = $( event.target ).parent().next().find( "text-field-state" );
         $state.css({ ...style.state, ...style.state_focus });
         this.refs.input.value = event.target.value;
@@ -356,9 +353,7 @@ export default class Slider extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
-
+        const style = { ...this.style };
         this.props.precentColor && ( style.line.backgroundColor = this.props.precentColor );
         this.props.color && ( style.input.color = this.props.color );
         if ( this.props.borderColor ) {

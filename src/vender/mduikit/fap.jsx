@@ -12,9 +12,6 @@
 
 console.log( "==== simpread component: Floating Action Panel ====" )
 
-let $target, type,
-    style, styles = new Map();
-
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
           normal_color= 'rgba(245, 82, 70, .8)',
@@ -212,12 +209,10 @@ class Panel extends React.Component {
         activeColor: React.PropTypes.string,
     };
 
-    state = {
-        id : Math.round(+new Date()),
-    };
+    style = cssinjs_panel()
 
     onTabChange( event ) {
-        const style   = styles.get( this.state.id );
+        const style   = { ...this.style };
         let   $target = $( event.target ),
               active  = $target.attr( "active" ),
               tag     = event.target.tagName.toLowerCase();
@@ -259,8 +254,7 @@ class Panel extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs_panel() };
-        styles.set( this.state.id, style );
+        const style = { ...this.style };
 
         style.panel_border.borderBottom = style.panel_border.borderBottom + ( this.props.activeColor ? this.props.activeColor : style.activeColor );
 
@@ -268,14 +262,14 @@ class Panel extends React.Component {
               active_group  = { ...style.group, ...style.group_active },
               events        = this.props.tabAutoSel ? { onMouseEnter: evt => this.onTabChange(evt) } : { onClick: evt => this.onTabChange(evt) },
               tabs          = this.props.items.map( ( item, idx ) => {
-            return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } { ...events } >
-                      <span>{item}</span>
-                      <panel-border style={ idx == 0 ? active_border : { ...style.panel_border } }></panel-border>
-                   </panel-tab>;
-        }),
-        groups        = this.props.children.map( ( child, idx ) => {
-            return <panel-group style={ idx == 0 ? active_group : { ...style.group } } active={ idx == 0 ? "true" : "false" } >{child}</panel-group>;
-        });
+                return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } { ...events } >
+                        <span>{item}</span>
+                        <panel-border style={ idx == 0 ? active_border : { ...style.panel_border } }></panel-border>
+                    </panel-tab>;
+             }),
+             groups         = this.props.children.map( ( child, idx ) => {
+                return <panel-group style={ idx == 0 ? active_group : { ...style.group } } active={ idx == 0 ? "true" : "false" } >{child}</panel-group>;
+             });
 
         return (
             <panel ref="panel" style={ style.root }>
@@ -402,9 +396,7 @@ export default class Fap extends React.Component {
         onAction    : React.PropTypes.func,
     }
 
-    state = {
-        id   : Math.round(+new Date()),
-    }
+    style = cssinjs()
 
     btnClickHandler( event ) {
         const type = $( event.target ).attr( "id" );
@@ -412,10 +404,10 @@ export default class Fap extends React.Component {
     }
 
     btnMouseOverHandler( event ) {
-        style = styles.get( this.state.id );
-        $target = $( event.target );
-        type    = $target.attr( "type" );
-        const active  = $target.attr( "active" );
+        const style   = { ...this.style },
+              $target = $( event.target ),
+              type    = $target.attr( "type" ),
+              active  = $target.attr( "active" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.spec, ...style.spec_focus });
         } else {
@@ -424,10 +416,10 @@ export default class Fap extends React.Component {
     }
 
     btnMouseOutHandler( event ) {
-        style = styles.get( this.state.id );
-        $target = $( event.target );
-        type    = $target.attr( "type" );
-        const color = $target.attr( "color" );
+        const style   = { ...this.style },
+              $target = $( event.target ),
+              type    = $target.attr( "type" ),
+              color   = $target.attr( "color" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
         }
@@ -435,7 +427,7 @@ export default class Fap extends React.Component {
 
     panelRender( $panelbg ) {
         if ( $panelbg.length > 0 ) {
-            style = styles.get( this.state.id );
+            const style = { ...this.style };
             $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
             ReactDOM.render( <Panel { ...this.props } />, $panelbg[0] );
             setTimeout( () => {
@@ -456,9 +448,8 @@ export default class Fap extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, { ...cssinjs() });
-        style      = styles.get( this.state.id );
-        style.spec = { ...style.origin, ...style.large, ...style.spec_item };
+        const style = { ...this.style };
+        style.spec  = { ...style.origin, ...style.large, ...style.spec_item };
 
         const btn_props = ( id, type, style, { name, color, icon }, icon_style, tooltip, waves )=> {
                 return {

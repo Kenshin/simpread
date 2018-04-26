@@ -224,9 +224,7 @@ class ListView extends React.Component {
         onChange        : React.PropTypes.func,
     };
 
-    state = {
-        style: { ...cssinjs_list() }
-    };
+    style = cssinjs_list()
 
     onMouseOver( event ) {
         const $target = $( event.target );
@@ -241,11 +239,9 @@ class ListView extends React.Component {
     }
 
     render() {
-        const style = this.state.style;
-
-        style.root = this.props.items.length > 0 ? { ...style.root, ...style.open } : { ...style.root };
-
-        const list = this.props.items.map( ( item, idx ) => {
+        const style = { ...this.style };
+        style.root  = this.props.items.length > 0 ? { ...style.root, ...style.open } : { ...style.root };
+        const list  = this.props.items.map( ( item, idx ) => {
             let name_style = { ...style.list_filed_value };
             item.name == this.props.active && ( name_style.color = this.props.activeColor );
             item.style && item.style.root  && ( style.list_filed = { ...style.list_filed, ...item.style.root });
@@ -321,8 +317,9 @@ export default class AC extends React.Component {
         onChange    : React.PropTypes.func,
     }
 
+    style = cssinjs()
+
     state = {
-        style : { ...cssinjs() },
         name  : "",
         items : [],
     }
@@ -360,7 +357,7 @@ export default class AC extends React.Component {
     }
 
     onTextChangeFocus( event ) {
-        const style   = this.state.style,
+        const style   = { ...this.style },
               $target = $( this.refs.input ),
               $state  = $target.next().find( "text-field-state" ),
               $float  = $target.prev();
@@ -369,7 +366,7 @@ export default class AC extends React.Component {
     }
 
     onTextChangeBlur( event ) {
-        const style   = this.state.style,
+        const style   = { ...this.style },
               $target = $( event.target ),
               $state  = $target.next().find( "text-field-state" ),
               $float  = $target.prev();
@@ -415,7 +412,7 @@ export default class AC extends React.Component {
     }
 
     render() {
-        const style       = this.state.style;
+        const style       = { ...this.style };
         style.input.color = this.props.color;
         style.float       = this.props.placeholder == "" && this.props.value == "" ? style.float : { ...style.float, ...style.float_focus };
         if ( this.props.borderColor ) {
