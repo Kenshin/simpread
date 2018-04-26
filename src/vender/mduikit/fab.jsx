@@ -1,8 +1,8 @@
 /*!
  * React Material Design: FAB( Floating Action Button )
  * 
- * @version : 0.0.2
- * @update  : 2018/03/14
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -33,6 +33,16 @@ const cssinjs = () => {
 
                 width: 'auto',
                 height: 'auto',
+              },
+
+              bg: {
+                position: 'fixed',
+
+                bottom: '45px',
+                right: '24px',
+
+                width: '300px',
+                height: '100%',
               },
 
               origin : {
@@ -268,11 +278,7 @@ export default class Fab extends React.Component {
     }
 
     fabMouseOutHandler( event ) {
-        $target = $( event.target );
-        while( !$target.is( "fab" ) ) {
-            $target = $target.parent();
-        }
-        $target.find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
+        $( event.target ).find("fab").find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
     }
 
     liMouseLeaveHandler( event ) {
@@ -299,14 +305,19 @@ export default class Fab extends React.Component {
     }
 
     componentDidMount() {
-        const $root = $( "fab" );
-        const $ul   = $($root.children()[2]);
+        let maxWidth = -1;
+        const $root  = $( "fab" ),
+              $ul    = $($root.children()[2]);
         if ( $ul.is("ul") ) {
             $ul.children().map( ( idx, item )=> {
                 const $ul = $(item).find( "ul" );
-                if ( $ul ) $ul.css( "top", `${idx * $ul.height()}px` );
+                if ( $ul ) {
+                    $ul.width() > maxWidth && ( maxWidth = $ul.width() );
+                    $ul.css( "top", `${idx * $ul.height()}px` );
+                }
             });
         }
+        $root.parent().width( maxWidth + 20 );
     }
 
     componentWillUnmount() {
@@ -364,11 +375,13 @@ export default class Fab extends React.Component {
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
         return (
-            <fab style={ style.root } onMouseLeave={ evt=>this.fabMouseOutHandler(evt) }>
-                { spec   }
-                { anchor }
-                { others }
-            </fab>
+            <fab-bg style={ style.bg } onMouseLeave={ evt=>this.fabMouseOutHandler(evt) }>
+                <fab style={ style.root }>
+                    { spec   }
+                    { anchor }
+                    { others }
+                </fab>
+            </fab-bg>
         )
     }
 
