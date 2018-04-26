@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Dropdown
  * 
- * @version :  0.0.1
- * @update  : 2017/12/15
+ * @version : 0.0.2
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,8 +11,6 @@
  */
 
 console.log( "==== simpread component: Dropdown ====" )
-
-let style, styles = new Map();
 
 const color            = 'rgba(51, 51, 51, .87)',
       secondary_color  = 'rgba(204, 204, 204, 1)',
@@ -111,7 +109,6 @@ const cssinjs_list = () => {
             padding: 0,
 
             width: '100%',
-            minHeight: '100px',
             maxHeight: '400px',
 
             color,
@@ -201,9 +198,7 @@ class ListView extends React.Component {
         onChange        : React.PropTypes.func,
     };
 
-    state = {
-        id : Math.round(+new Date()),
-    };
+    style = cssinjs_list();
 
     onMouseOver( event ) {
         const $target = $( event.target );
@@ -220,10 +215,8 @@ class ListView extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, cssinjs_list() );
-        style = styles.get( this.state.id );
-
-        style.root = this.props.items.length > 1 ? { ...style.root_normal, ...style.open } : { ...style.root_normal };
+        const style = { ...this.style };
+        style.root  = this.props.items.length > 0 ? { ...style.root_normal, ...style.open } : { ...style.root_normal };
 
         const list = this.props.items.map( ( item, idx ) => {
             let [ name_style, icon_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }];
@@ -247,7 +240,7 @@ class ListView extends React.Component {
         return (
             <list-view style={ style.root }>
                 { list }
-            </list-view> 
+            </list-view>
         )
     }
 }
@@ -281,9 +274,10 @@ export default class Dropdown extends React.Component {
     };
 
     state = {
-        id    : Math.round(+new Date()),
-        name  : this.props.name,
+        name : this.props.name,
     };
+
+    style = cssinjs();
 
     onClick() {
         !this.props.disable && this.props.items.length > 0 && this.setState({ items: this.props.items });
@@ -304,20 +298,15 @@ export default class Dropdown extends React.Component {
         $( this.refs.bg ).css( "display", "none" );
     }
 
-    componentDidMount() {
-        style = styles.get( this.state.id );
-    }
-
     render() {
         const maxwidth = items => {
             items.sort( ( a, b ) => b.name.length - a.name.length );
             return items[0].name.length * 12;
-        };
-        styles.set( this.state.id, cssinjs() );
-        style = styles.get( this.state.id );
+        },
+        style = { ...this.style };
 
-        style.root  = this.props.disable ? { ...style.root_normal, ...style.disable } : { ...style.root_normal };
-        this.props.disable            && ( style.border = { ...style.border, ...style.border_disable });
+        style.root = this.props.disable ? { ...style.root_normal, ...style.disable } : { ...style.root_normal };
+        this.props.disable && ( style.border = { ...style.border, ...style.border_disable });
 
         if ( !this.props.width ) {
             const max = maxwidth( this.props.items ) + 40;
