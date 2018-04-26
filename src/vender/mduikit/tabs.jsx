@@ -12,8 +12,6 @@
 
 console.log( "==== simpread component: Tabs ====" )
 
-let styles = new Map();
-
 const color           = 'rgba(255, 255, 255, .7)',
       secondary_color = "rgba(204, 204, 204, 1)",
       active_color    = 'rgba(255, 255, 255, 1)',
@@ -253,9 +251,7 @@ export default class Tabs extends React.Component {
         onChange : React.PropTypes.func,
     };
 
-    state = {
-        id : Math.round(+new Date()),
-    }
+    style = cssinjs();
 
     componentWillUnmount() {
         $( "tabs" ).remove();
@@ -275,7 +271,7 @@ export default class Tabs extends React.Component {
         const href = $target.attr('href');
         if(!href.startsWith( "#" )) { return; }
 
-        const style   = styles.get( this.state.id ),
+        const style = { ...this.style },
             idx     = $target.attr( "id" ),
             value   = $target.attr( "value" ),
             name    = $target.text(),
@@ -300,10 +296,8 @@ export default class Tabs extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
-
-        const { items, color, activeColor, bgColor, headerStyle, groupsStyle, borderStyle, children, ...others } = this.props;
+        const style = { ...this.style },
+              { items, color, activeColor, bgColor, headerStyle, groupsStyle, borderStyle, children, ...others } = this.props;
 
         color       && ( style.label.color = color );
         bgColor     && ( style.header.backgroundColor = bgColor );
