@@ -286,6 +286,7 @@ export default class Fab extends React.Component {
     }
 
     liMouseLeaveHandler( event ) {
+        return;
         $target = $( event.target );
         type    = $target.attr( "type" );
         if ( $target.is( "i" ) ) {
