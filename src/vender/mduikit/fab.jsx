@@ -13,7 +13,6 @@
 console.log( "==== simpread component: Floating Action Button ====" )
 
 let $target, type,
-    maxWidth = -1,
     style, styles = new Map();
 
 const cssinjs = () => {
@@ -244,6 +243,8 @@ export default class Fab extends React.Component {
         items: {},
     }
 
+    maxWidth = -1;
+
     btnClickHandler( event ) {
         const type = $( event.target ).attr( "id" );
         if ( this.props.onAction ) this.props.onAction( event, type );
@@ -263,7 +264,7 @@ export default class Fab extends React.Component {
                 $target.parent().next().removeAttr( "current" );
             }
         }
-        $( this.refs.root ).width( maxWidth + 100 );
+        $( this.refs.root ).width( this.maxWidth + 100 );
     }
 
     btnMouseOutHandler( event ) {
@@ -315,7 +316,7 @@ export default class Fab extends React.Component {
             $ul.children().map( ( idx, item )=> {
                 const $ul = $(item).find( "ul" );
                 if ( $ul ) {
-                    $ul.width() > maxWidth && ( maxWidth = $ul.width() );
+                    $ul.width() > this.maxWidth && ( this.maxWidth = $ul.width() );
                     $ul.css( "top", `${idx * $ul.height()}px` );
                 }
             });
