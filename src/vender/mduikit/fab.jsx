@@ -12,8 +12,6 @@
 
 console.log( "==== simpread component: Floating Action Button ====" )
 
-let style, styles = new Map();
-
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
           normal_color= 'rgba(245, 82, 70, .8)',
@@ -237,10 +235,11 @@ export default class Fab extends React.Component {
     }
 
     state = {
-        id   : Math.round(+new Date()),
         keys : [],
         items: {},
     }
+
+    style = cssinjs();
 
     maxWidth = -1;
 
@@ -250,9 +249,9 @@ export default class Fab extends React.Component {
     }
 
     btnMouseOverHandler( event ) {
-        style = styles.get( this.state.id );
         const $target = $( event.target ),
-              type    = $target.attr( "type" );
+              type    = $target.attr( "type" ),
+              style   = { ...this.style };
         if ( type == "spec" ) {
             $target.parent().css({ ...style.spec, ...style.spec_focus });
         } else {
@@ -266,9 +265,9 @@ export default class Fab extends React.Component {
     }
 
     btnMouseOutHandler( event ) {
-        style = styles.get( this.state.id );
         const $target = $( event.target ),
-              type    = $target.attr( "type" );
+              type    = $target.attr( "type" ),
+              style   = { ...this.style };
         const color = $target.attr( "color" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
@@ -279,7 +278,7 @@ export default class Fab extends React.Component {
     }
 
     fabMouseOutHandler( event ) {
-        style = styles.get( this.state.id );
+        const style = { ...this.style };
         $( event.target ).find("fab").find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
         $( this.refs.root ).css({ ...style.bg });
     }
@@ -329,9 +328,7 @@ export default class Fab extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, cssinjs() );
-        style = styles.get( this.state.id );
-
+        const style = { ...this.style };
         let spec, anchor, others = [];
 
         const keys = this.state.keys,
