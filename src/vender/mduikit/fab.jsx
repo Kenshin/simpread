@@ -12,8 +12,7 @@
 
 console.log( "==== simpread component: Floating Action Button ====" )
 
-let $target, type,
-    style, styles = new Map();
+let style, styles = new Map();
 
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
@@ -252,8 +251,8 @@ export default class Fab extends React.Component {
 
     btnMouseOverHandler( event ) {
         style = styles.get( this.state.id );
-        $target = $( event.target );
-        type    = $target.attr( "type" );
+        const $target = $( event.target ),
+              type    = $target.attr( "type" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.spec, ...style.spec_focus });
         } else {
@@ -268,8 +267,8 @@ export default class Fab extends React.Component {
 
     btnMouseOutHandler( event ) {
         style = styles.get( this.state.id );
-        $target = $( event.target );
-        type    = $target.attr( "type" );
+        const $target = $( event.target ),
+              type    = $target.attr( "type" );
         const color = $target.attr( "color" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
@@ -287,8 +286,7 @@ export default class Fab extends React.Component {
 
     liMouseLeaveHandler( event ) {
         return;
-        $target = $( event.target );
-        type    = $target.attr( "type" );
+        const $target = $( event.target );
         if ( $target.is( "i" ) ) {
             $target.parent().next().css( "opacity", 0 ).css( "visibility", "hidden" );
         } else if ( $target.is( "li" ) ) {
