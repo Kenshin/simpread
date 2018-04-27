@@ -194,7 +194,7 @@ const ListView = ( props ) => {
     return (
         <li id={ props.id } style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ evt=> props.onMouseLeave(evt) }>
             <Button { ...props.btn_props } />
-            { props.child && props.child.length > 0 && <ul style={{ ...props.style.ul, ...props.style.ul_hori }}>{ props.child }</ul> }
+            { props.child && props.child.length > 0 && <ul type="hori" style={{ ...props.style.ul, ...props.style.ul_hori }}>{ props.child }</ul> }
         </li>
     )
 };
@@ -259,9 +259,8 @@ export default class Fab extends React.Component {
         } else {
             $target.parent().css({ ...style.normal, ...style.normal_focus });
             if ( $target.parent().next() && $target.parent().next().is( "ul" ) ) {
-                $target.parent().next().css( "opacity", 1 ).attr( "current", true ).css( "visibility", "visible" );
-                $target.parent().parent().find("ul[current!=true]").css( "opacity", 0 ).css( "visibility", "hidden" );
-                $target.parent().next().removeAttr( "current" );
+                $( this.refs.root ).find( "ul[type=hori]" ).css( "opacity", 0 ).css( "visibility", "hidden" );
+                $target.parent().next().css( "opacity", 1 ).css( "visibility", "visible" );
             }
         }
         $( this.refs.root ).width( this.maxWidth + 100 );
