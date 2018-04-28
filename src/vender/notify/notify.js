@@ -47,6 +47,9 @@
 * new Notify().Render({ content: "带确认的 toast", action: "提交", cancel: "取消", callback: type => {
      console.log( "current type is", type )
   }});
+  new Notify().Render({ content: "一直存在带 close 的 toast", action: "撤销", mode: "holdon", callback: type => {
+      console.log( "asdfasdfadsf", type )
+  }});
 *
   const notify = new Notify().Render({ content: "加载中，请稍等...", mode: "loading" });
   setTimeout( ()=>{
@@ -69,7 +72,8 @@ var Notify = ( function () {
             toast    : "toast",
             modal    : "modal",
             snackbar : "snackbar",
-            loading  : "loading"
+            loading  : "loading",
+            holdon   : "holdon",
         },
         options = {
             version : VERSION,
@@ -181,13 +185,20 @@ var Notify = ( function () {
                 $root.on( "click", "." + item + " notify-cancel", [ item, this.callback, "cancel" ], callbackHander );
             }
 
-            this.mode !== MODE.modal && this.mode !== MODE.loading && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
+            this.mode !== MODE.modal && this.mode !== MODE.loading && this.mode !== MODE.holdon && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
                 ( timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay ) );
 
             if ( this.mode == MODE.loading ) {
                 $icon.html( loading );
                 $icon.css({ display: "block" });
                 this.complete = completeHandler.bind( $target );
+            }
+
+            if ( this.mode == MODE.holdon ) {
+                $icon.css({ display: "block" }).addClass( "holdon" );
+                $action.after( $icon[0].outerHTML );
+                $target.find( "notify-i:first" ).remove();
+                $root.on( "click", "." + item + " notify-i", [ item, this.callback, "holdon" ], callbackHander );
             }
 
             $target.addClass( item );
