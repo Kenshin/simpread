@@ -115,8 +115,9 @@ notify-gp notify-cancel {
     max-width: 80px;
     min-width: 56px;
 
-    color: rgba(255, 238, 88, 1);
+    color: #8ab4f8;
 
+    font-weight: 500;
     font-size: inherit;
     text-transform: uppercase;
     text-align: right;
