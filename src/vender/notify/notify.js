@@ -81,6 +81,7 @@ var Notify = ( function () {
             content : "",
             type    : NORMAL,
             mode    : MODE.toast,
+            flat    : false,
             delay   : 1000 * 5,
             icon    : "",
             action  : "",
@@ -201,6 +202,10 @@ var Notify = ( function () {
                 $root.on( "click", "." + item + " notify-i", [ item, this.callback, "holdon" ], callbackHander );
             }
 
+            if ( this.flat ) {
+                $target.css({ "box-shadow": "none", "border-radius": "2px" });
+            }
+
             $target.addClass( item );
             $root.append( $target ).css( "z-index", 2147483647 );
             this.mode == MODE.snackbar && $target.css( "margin-left", "-" + $target.width()/2 + "px" );
@@ -221,6 +226,7 @@ var Notify = ( function () {
     Notify.prototype.mode    = options.mode;
     Notify.prototype.delay   = options.delay;
     Notify.prototype.icon    = options.icon;
+    Notify.prototype.flat    = options.flat;
     Notify.prototype.action  = options.action;
     Notify.prototype.cancel  = options.cancel;
     Notify.prototype.callback= options.callback;
