@@ -47,11 +47,9 @@
 * new Notify().Render({ content: "带确认的 toast", action: "提交", cancel: "取消", callback: type => {
      console.log( "current type is", type )
   }});
-  new Notify().Render({ content: "一直存在带 close 的 toast", action: "撤销", mode: "holdon", callback: type => {
-      console.log( "asdfasdfadsf", type )
-  }});
+  new Notify().Render({ content: "一直存在带 close 的 toast", state: "holdon" });
 *
-  const notify = new Notify().Render({ content: "加载中，请稍等...", mode: "loading" });
+  const notify = new Notify().Render({ content: "加载中，请稍等...", state: "loading" });
   setTimeout( ()=>{
     notify.complete();
     new Notify().Render("加载完成！");
