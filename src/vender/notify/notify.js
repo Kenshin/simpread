@@ -72,15 +72,19 @@ var Notify = ( function () {
             toast    : "toast",
             modal    : "modal",
             snackbar : "snackbar",
+        },
+        STATE   = {
             loading  : "loading",
             holdon   : "holdon",
         },
+
         options = {
             version : VERSION,
             title   : "",
             content : "",
             type    : NORMAL,
             mode    : MODE.toast,
+            state   : undefined,
             flat    : false,
             delay   : 1000 * 5,
             icon    : "",
@@ -186,16 +190,16 @@ var Notify = ( function () {
                 $root.on( "click", "." + item + " notify-cancel", [ item, this.callback, "cancel" ], callbackHander );
             }
 
-            this.mode !== MODE.modal && this.mode !== MODE.loading && this.mode !== MODE.holdon && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
+            this.mode !== MODE.modal && this.state !== STATE.loading && this.state !== STATE.holdon && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
                 ( timer[item] = setTimeout( delayHandler.bind( $target, item ), this.delay ) );
 
-            if ( this.mode == MODE.loading ) {
+            if ( this.state == STATE.loading ) {
                 $icon.html( loading );
                 $icon.css({ display: "block" });
                 this.complete = completeHandler.bind( $target );
             }
 
-            if ( this.mode == MODE.holdon ) {
+            if ( this.state == STATE.holdon ) {
                 $icon.css({ display: "block" }).addClass( "holdon" );
                 $action.after( $icon[0].outerHTML );
                 $target.find( "notify-i:first" ).remove();
@@ -224,6 +228,7 @@ var Notify = ( function () {
     Notify.prototype.content = options.content;
     Notify.prototype.type    = options.type;
     Notify.prototype.mode    = options.mode;
+    Notify.prototype.state   = options.state;
     Notify.prototype.delay   = options.delay;
     Notify.prototype.icon    = options.icon;
     Notify.prototype.flat    = options.flat;
