@@ -54,6 +54,7 @@
     notify.complete();
     new Notify().Render("加载完成！");
   }, 2000);
+* Notify.Position = rt( default ) | rb | lt | lb
 *
 */
 var Notify = ( function () {
