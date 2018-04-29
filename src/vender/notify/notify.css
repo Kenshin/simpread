@@ -43,7 +43,7 @@ notify-gp notify {
     background-color: rgba(50, 50, 50, 1);
 
     box-sizing: border-box;
-    border-radius: 2px;
+    border-radius: 4px;
     pointer-events: auto;
     user-select: none;
 
@@ -224,6 +224,7 @@ notify-gp .notify-snackbar {
     position: fixed;
     bottom: 0;
     left: 50%;
+    margin-bottom: 5px;
     transform-origin: left bottom 0px;
 }
 
