@@ -75,7 +75,11 @@ var Notify = ( function () {
             loading  : "loading",
             holdon   : "holdon",
         },
-
+        POSITION= {
+            lefttop     : "lt",
+            leftbottom  : "lb",
+            rightbottom : "rb",
+        },
         options = {
             version : VERSION,
             title   : "",
@@ -147,7 +151,8 @@ var Notify = ( function () {
                 $icon    = $target.find(prefix( "i"       )),
                 $action  = $target.find(prefix( "action"  )),
                 $cancel  = $target.find(prefix( "cancel"  )),
-                item     = "notify-item-" + num++;
+                item     = "notify-item-" + num++,
+                position = this.constructor.Position;
 
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
@@ -209,6 +214,13 @@ var Notify = ( function () {
                 $target.css({ "box-shadow": "none", "border-radius": "2px" });
             }
 
+            if ( position == POSITION.rightbottom || position == POSITION.leftbottom ) {
+                $target.css({ "transform-origin": "left bottom 0px" });
+                $root.addClass( "notify-position-" + position + "-corner" );
+            } else if ( position == POSITION.lefttop ) {
+                $root.addClass( "notify-position-" + position + "-corner" );
+            }
+
             $target.addClass( item );
             $root.append( $target ).css( "z-index", 2147483647 );
             this.mode == MODE.snackbar && $target.css( "margin-left", "-" + $target.width()/2 + "px" );
@@ -235,6 +247,7 @@ var Notify = ( function () {
     Notify.prototype.cancel  = options.cancel;
     Notify.prototype.callback= options.callback;
     Notify.prototype.complete= options.complete;
+    Notify.Position          = undefined;
 
     Notify.prototype.Render  = function () {
 

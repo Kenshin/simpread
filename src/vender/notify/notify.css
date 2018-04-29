@@ -228,7 +228,7 @@ notify-gp .notify-snackbar {
     transform-origin: left bottom 0px;
 }
 
-.notify-position-left-top-corner {
+.notify-position-lt-corner {
     align-items: flex-start;
 
     margin: 0 0 0 15px;
@@ -237,7 +237,7 @@ notify-gp .notify-snackbar {
     right: initial;
 }
 
-.notify-position-left-bottom-corner {
+.notify-position-lb-corner {
     flex-flow: column-reverse wrap-reverse;
 
     margin: 0 0 15px 15px;
@@ -249,7 +249,7 @@ notify-gp .notify-snackbar {
     bottom: 0;
 }
 
-.notify-position-right-bottom-corner {
+.notify-position-rb-corner {
     flex-flow: column-reverse wrap-reverse;
     align-items: flex-start;
 
