@@ -128,7 +128,7 @@ var Notify = ( function () {
             hidden( this );
         },
         callbackHander = function( event ) {
-            event.data[1]( event.data[2] );
+            event.data[1] && event.data[1]( event.data[2] );
             $root.off( "click", "." + event.data[0] + " notify-action", callbackHander );
             hidden( $(this).parent() );
         },
@@ -201,9 +201,10 @@ var Notify = ( function () {
 
             if ( this.state == STATE.holdon ) {
                 $icon.css({ display: "block" }).addClass( "holdon" );
-                $action.after( $icon[0].outerHTML );
+                $cancel.after( $icon[0].outerHTML );
                 $target.find( "notify-i:first" ).remove();
                 $root.on( "click", "." + item + " notify-i", [ item, this.callback, "holdon" ], callbackHander );
+                if ( !this.action || !this.cancel ) $content.css({ width: "100%" });
             }
 
             if ( this.flat ) {
