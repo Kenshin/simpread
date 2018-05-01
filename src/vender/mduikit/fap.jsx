@@ -379,7 +379,6 @@ export default class Fap extends React.Component {
                 "icon" : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAANElEQVQ4T+3GMQ0AIAwAMAwSEvwLACai3HtmAHq1te8xpnCM6okAu3rigFU9MWxLr/695AI0E1VgH26hCQAAAABJRU5ErkJggg==',
             }
         },
-        tooltip     : {},
         waves       : undefined,
     };
 
@@ -391,7 +390,6 @@ export default class Fap extends React.Component {
         tabAutoSel  : React.PropTypes.bool,    // panel props
 
         triggerItems: React.PropTypes.object,
-        tooltip     : React.PropTypes.object,
         waves       : React.PropTypes.string,
         onAction    : React.PropTypes.func,
     }
@@ -466,8 +464,8 @@ export default class Fap extends React.Component {
                     onMouseOut : evt=>this.btnMouseOutHandler(evt),
                 };
         },
-        spec   = <Button { ...btn_props( "exit", "spec",     style.spec,   this.props.triggerItems.exit,   style.icon, this.props.tooltip, this.props.waves ) } />,
-        anchor = <Button { ...btn_props( "anchor", "anchor", style.origin, this.props.triggerItems.anchor, style.icon, this.props.tooltip, this.props.waves ) } />,
+        spec   = <Button { ...btn_props( "exit", "spec",     style.spec,   this.props.triggerItems.exit,   style.icon, {target: "name", delay: 50}, this.props.waves ) } />,
+        anchor = <Button { ...btn_props( "anchor", "anchor", style.origin, this.props.triggerItems.anchor, style.icon, {target: "name", delay: 50}, this.props.waves ) } />,
         panel  = <panel-bg ref="bg"></panel-bg>;
 
         return (
