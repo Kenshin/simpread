@@ -317,6 +317,7 @@ export default class StateButton extends React.Component {
         failedBgColor   : "rgba(244, 67, 54, 1)",
         warningBgColor  : "rgba(255, 193, 7, 1)",
 
+        tooltip : {},
         waves   : undefined,
     }
 
@@ -343,6 +344,7 @@ export default class StateButton extends React.Component {
         failedBgColor   : React.PropTypes.string,
         warningBgColor  : React.PropTypes.string,
 
+        tooltip : React.PropTypes.object,
         waves   : React.PropTypes.string,
         onState : React.PropTypes.func,
     }
@@ -438,7 +440,8 @@ export default class StateButton extends React.Component {
             onMouseOver : (e)=>this.onMouseOver(e),
             onMouseOut  : (e)=>this.onMouseOut(e),
             onClick     : (e)=>this.onClick(e),
-        };
+        },
+        tooltip      = this.props.tooltip;
 
         this.global = {
             state       : this.state.state,
@@ -453,6 +456,7 @@ export default class StateButton extends React.Component {
         return (
             <state-button ref="button" style={ style.root } class={ this.props.waves }
                 type={ this.props.type } mode={ this.props.mode } 
+                data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
                 { ...events }>
                 <button-mask ref="mask" style={ style.mask }>
                     <button-svg>
