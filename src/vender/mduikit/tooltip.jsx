@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Tooltip
  * 
- * @version : 0.0.1
- * @update  : 2017/04/25
+ * @version : 0.0.2
+ * @update  : 2018/05/01
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -169,8 +169,8 @@ class ToolTip extends React.Component {
             });
 
             $target.css({
-                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollTop() : 0 ),
-                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollLeft(): 0 ),
+                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).offset().top : 0 ),
+                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).offset().left: 0 ),
             });
 
             scaleXFactor = Math.SQRT2 * tooltipWidth  / parseInt( backWidth  );
