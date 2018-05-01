@@ -277,7 +277,7 @@ function Exit( root ) {
 function getTooltipRoot( $root ) {
     $root.find( "tooltip-gp" ).length == 0 && $root.append( "<tooltip-gp>" );
     $root.find( "tooltip-gp" ).append( "<tooltip-tips>" );
-    return $( "tooltip-tips" ).last()[0];
+    return $root.find( "tooltip-tips" ).last()[0];
 }
 
 export { Render, Exit };
