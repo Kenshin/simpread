@@ -260,6 +260,8 @@ export default class Slider extends React.Component {
         borderColor : undefined,
         stateColor  : undefined,
         errorColor  : undefined,
+
+        tooltip     : {},
     };
 
     static propTypes = {
@@ -275,6 +277,8 @@ export default class Slider extends React.Component {
         borderColor : React.PropTypes.string,
         stateColor  : React.PropTypes.string,
         errorColor  : React.PropTypes.string,
+
+        tooltip     : React.PropTypes.object,
         onChange    : React.PropTypes.func,
     }
 
@@ -380,10 +384,12 @@ export default class Slider extends React.Component {
             onFocus  : (e)=>this.onTextChangeFocus(e),
             onBlur   : (e)=>this.onTextChangeBlur(e),
             onChange : (e)=>this.onTextChange(e),
-        };
+        },
+        tooltip = this.props.tooltip;
 
         return (
-            <slider style={ style.root }>
+            <slider style={ style.root }
+                    data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <sl-group style={ style.group }>
                     <input ref="range" type="range" min={this.props.min} max={this.props.max} step={this.props.step} onChange={ evt=> this.onChange(evt) } onMouseUp={ evt=>this.onMouseUp(evt)}/>
                     <line ref="line" style={ style.line }></line>
