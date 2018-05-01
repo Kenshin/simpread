@@ -206,14 +206,22 @@ class ToolTip extends React.Component {
           }, delay );
     }
 
+    onScroll() {
+        $( this.refs.back ).css({   visibility: "hidden" });
+        $( this.refs.target ).css({ visibility: "hidden" });
+        started = false;
+    }
+
     componentDidMount() {
         this.props.$item.on( "mouseenter", this.onMouseEnter.bind( this ) );
         this.props.$item.on( "mouseleave", this.onMouseLeave.bind( this ) );
+        $( document    ).on( "scroll",     this.onScroll.bind( this ) );
     }
 
     componentWillUnmount() {
         this.props.$item.off( "mouseenter", this.onMouseEnter );
         this.props.$item.off( "mouseleave", this.onMouseLeave );
+        $( document    ).off( "scroll",     this.onScroll     );
     }
 
     render() {
