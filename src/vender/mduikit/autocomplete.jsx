@@ -299,6 +299,8 @@ export default class AC extends React.Component {
         hoverColor  : "rgba(238, 238, 238, 1)",
         borderColor : undefined,
         focusColor  : undefined,
+
+        tooltip     : {},
     };
 
     static propTypes = {
@@ -313,6 +315,8 @@ export default class AC extends React.Component {
         hoverColor  : React.PropTypes.string,
         borderColor : undefined,
         focusColor  : undefined,
+
+        tooltip     : React.PropTypes.object,
         // event
         onChange    : React.PropTypes.func,
     }
@@ -435,10 +439,12 @@ export default class AC extends React.Component {
             onBlur   : (e)=>this.onTextChangeBlur(e),
             onChange : (e)=>this.onTextChange(e),
             onKeyDown: (e)=>this.onTextKeyDown(e),
-        };
+        },
+        tooltip = this.props.tooltip;
 
         return (
-            <auto-complete style={ style.root }>
+            <auto-complete style={ style.root }
+                data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }>
                 <icon ref="dropdown" style={ style.icon } data-state="close" onClick={evt=>this.onDropdownClick(evt)}></icon>
                 <text-field-float style={ style.float }>{this.props.floating}</text-field-float>
                 <input ref="input" style={ style.input } { ...props }/>
