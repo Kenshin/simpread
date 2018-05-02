@@ -45,11 +45,11 @@ export default class ReadOpt extends React.Component {
         }
     }
 
-    changeFontsize( value, name ) {
+    changeFontsize( value ) {
         if ( !ss.VerifyCustom( "fontsize", this.props.option.custom ) ) {
-            ss.FontSize( value );
-            this.props.option.fontsize = value;
-            console.log( "this.props.option.fontsize = ", value, name )
+            this.props.option.fontsize = value + "%";
+            ss.FontSize( this.props.option.fontsize );
+            console.log( "this.props.option.fontsize = ", this.props.option.fontsize )
         } else {
             new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
         }
@@ -83,11 +83,8 @@ export default class ReadOpt extends React.Component {
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="md-waves-effect"
-                        name={ getName( this.props.option.fontsize, conf.fontsize )} items={ conf.fontsize }
-                        floatingtext="字体大小" placeholder="默认为 正常"
-                        onChange={ (v,n)=>this.changeFontsize(v,n) }
-                    />
+                <sr-opt-label>字体大小</sr-opt-label>
+                    <Slider min="45" max="100" step="1" value={ parseInt( this.props.option.fontsize ) } tooltip={{ text: "字体大小，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeFontsize(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>版面宽度</sr-opt-label>
