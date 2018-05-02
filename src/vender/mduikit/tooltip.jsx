@@ -242,8 +242,9 @@ class ToolTip extends React.Component {
  * Render
  * 
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
+ * @param {string} id
  */
-function Render( root ) {
+function Render( root, id ) {
     setTimeout( () => {
         const $root      = $( root );
         $root.find( "[data-tooltip]" ).map( ( idx, item )=>{
@@ -252,7 +253,7 @@ function Render( root ) {
                 delay    = $item.attr( "data-tooltip-delay" ),
                 text     = $item.attr( "data-tooltip" );
             text && text != "" && 
-                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
+                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root, id ) );
         });
     }, 500 );
 }
@@ -261,23 +262,28 @@ function Render( root ) {
  * Exit
  * 
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
+ * @param {string} id
  */
-function Exit( root ) {
-    $( root ).find( "tooltip-tips" ).map( ( idx, item )=>{
+function Exit( root, id ) {
+    const selector = !id ? "tooltip-gp" : `tooltip-gp[id="${id}"]`;
+    $( selector ).find( "tooltip-tips" ).map( ( idx, item )=>{
         ReactDOM.unmountComponentAtNode( $(item)[0] );
     });
+    $( selector ).remove();
 }
 
 /**
  * Create Tooltip root html
  * 
  * @param  {jquery}  jquery object
+ * @param  {string}  id
  * @return {element} html element
  */
-function getTooltipRoot( $root ) {
-    $root.find( "tooltip-gp" ).length == 0 && $root.append( "<tooltip-gp>" );
-    $root.find( "tooltip-gp" ).append( "<tooltip-tips>" );
-    return $root.find( "tooltip-tips" ).last()[0];
+function getTooltipRoot( $root, id ) {
+    const selector = !id ? "tooltip-gp" : `tooltip-gp[id="${id}"]`;
+    $root.find( selector ).length == 0 && $root.append( !id ? "<tooltip-gp>" : `<tooltip-gp id="${id}">` );
+    $root.find( selector ).append( "<tooltip-tips>" );
+    return $root.find( `${selector} tooltip-tips` ).last()[0];
 }
 
 export { Render, Exit };
