@@ -7,6 +7,7 @@ import * as conf      from 'config';
 import TextField      from 'textfield';
 import SelectField    from 'selectfield';
 import Slider         from 'slider';
+import AC             from 'ac';
 
 import ThemeSel       from 'themesel';
 import Shortcuts      from 'shortcuts';
@@ -35,8 +36,12 @@ export default class ReadOpt extends React.Component {
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
-    changeFontfamily( value, name ) {
+    changeFontfamily( name ) {
         if ( !ss.VerifyCustom( "fontfamily", this.props.option.custom ) ) {
+            let value;
+            conf.fontfamily.forEach( obj => {
+                return obj.name == name && ( value = obj.value );
+            })
             ss.FontFamily( value );
             this.props.option.fontfamily = value;
             console.log( "this.props.option.fontfamily = ", value, name )
@@ -76,10 +81,10 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="md-waves-effect"
-                        name={ getName( this.props.option.fontfamily, conf.fontfamily )} items={ conf.fontfamily }
-                        floatingtext="字体类型" placeholder="默认为 系统类型"
-                        onChange={ (v,n)=>this.changeFontfamily(v,n) }
+                    <sr-opt-label>字体类型</sr-opt-label>
+                    <AC value={ getName( this.props.option.fontfamily, conf.fontfamily )}
+                        items={ conf.fontfamily }
+                        onChange={ (v)=>this.changeFontfamily(v) }
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
