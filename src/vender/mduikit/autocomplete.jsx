@@ -235,7 +235,7 @@ class ListView extends React.Component {
     }
 
     onClick( event ) {
-        this.props.onChange && this.props.onChange( $( event.target ).text() );
+        this.props.onChange && this.props.onChange( $( event.target ).text(), $(event.target).attr("value") );
     }
 
     render() {
@@ -243,11 +243,11 @@ class ListView extends React.Component {
         style.root  = this.props.items.length > 0 ? { ...style.root, ...style.open } : { ...style.root };
         const list  = this.props.items.map( ( item, idx ) => {
             let name_style = { ...style.list_filed_value };
-            item.name == this.props.active && ( name_style.color = this.props.activeColor );
-            item.style && item.style.root  && ( style.list_filed = { ...style.list_filed, ...item.style.root });
-            item.style && item.style.text  && ( name_style       = { ...name_style, ...item.style.text });
+            item.value == this.props.active && ( name_style.color = this.props.activeColor );
+            item.style && item.style.root   && ( style.list_filed = { ...style.list_filed, ...item.style.root });
+            item.style && item.style.text   && ( name_style       = { ...name_style, ...item.style.text });
             return (
-                <list-field class={ this.props.waves } style={ style.list_filed } onMouseOver={ (e)=>this.onMouseOver(e) } onClick={ (e)=>this.onClick(e) }>
+                <list-field class={ this.props.waves } style={ style.list_filed } value={ item.value } onMouseOver={ (e)=>this.onMouseOver(e) } onClick={ (e)=>this.onClick(e) }>
                     <list-field-name style={ name_style } value={ item.value }>{ item.name }</list-field-name>
                 </list-field>
             )
@@ -356,7 +356,7 @@ export default class AC extends React.Component {
                 $sub.prev().attr( "active", true ).css( "background-color", this.props.hoverColor );
             }
         } else if ( event.keyCode == 13 ) {
-            this.onDropdownChange( $sub.text() );
+            this.onDropdownChange( $sub.text(), $sub.attr("value") );
         }
     }
 
@@ -386,6 +386,7 @@ export default class AC extends React.Component {
             this.setState({name : event.target.value, items: this.filter( event.target.value ) });
             this.refs.dropdown.dataset.state = "open";
         }
+        this.props.onChange && this.props.onChange( name, event.target.value );
     }
 
     onDropdownClick( event ) {
@@ -398,16 +399,16 @@ export default class AC extends React.Component {
         }
     }
 
-    onDropdownChange( value ) {
-        this.refs.input.value = value;
+    onDropdownChange( name, value ) {
+        this.refs.input.value = value == undefined ? "" : value;
         this.refs.dropdown.dataset.state = "close";
         this.setState({ name : "", items: [] });
-        this.props.onChange && this.props.onChange( value );
+        this.props.onChange && this.props.onChange( name, value );
     }
 
     filter( value ) {
         return this.props.items.filter( obj => {
-            return obj.value.includes( value );
+            return obj.name.includes( value );
         });
     }
 
@@ -452,7 +453,7 @@ export default class AC extends React.Component {
                     <text-field-border style={ style.border }/>
                     <text-field-state style={ style.state }/>
                 </ac-group>
-                <ListView waves={ this.props.waves } onChange={ (v)=>this.onDropdownChange(v) }
+                <ListView waves={ this.props.waves } onChange={ (n,v)=>this.onDropdownChange(n,v) }
                     activeColor={ this.props.activeColor } hoverColor={ this.props.hoverColor }
                     active={ this.state.name } items={ this.state.items } />
             </auto-complete>
