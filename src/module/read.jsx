@@ -6,6 +6,7 @@ import * as conf      from 'config';
 
 import TextField      from 'textfield';
 import SelectField    from 'selectfield';
+import Slider         from 'slider';
 
 import ThemeSel       from 'themesel';
 import Shortcuts      from 'shortcuts';
@@ -54,11 +55,11 @@ export default class ReadOpt extends React.Component {
         }
     }
 
-    changeLayout( value, name ) {
+    changeLayout( value ) {
         if ( !ss.VerifyCustom( "margin", this.props.option.custom ) ) {
-            ss.Layout( value );
-            this.props.option.layout = value;
-            console.log( "this.props.option.layout = ", value, name )
+            this.props.option.layout = `${ 100 - value }%`;
+            ss.Layout( this.props.option.layout );
+            console.log( "this.props.option.layout = ", this.props.option.layout )
         } else {
             new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>。' );
         }
@@ -89,11 +90,8 @@ export default class ReadOpt extends React.Component {
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="md-waves-effect"
-                        name={ getName( this.props.option.layout, conf.layout )} items={ conf.layout }
-                        floatingtext="版面布局" placeholder="默认为 正常"
-                        onChange={ (v,n)=>this.changeLayout(v,n) }
-                    />
+                    <sr-opt-label>版面宽度</sr-opt-label>
+                    <Slider min="70" max="100" step="1" value={ 100 - parseInt( this.props.option.layout ) } tooltip={{ text: "版本布局的宽窄度，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeLayout(v) }/>
                 </sr-opt-gp>
             </sr-opt-read>
         )
