@@ -36,9 +36,8 @@ export default class ReadOpt extends React.Component {
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
-    changeFontfamily( name ) {
+    changeFontfamily( name, value ) {
         if ( !ss.VerifyCustom( "fontfamily", this.props.option.custom ) ) {
-            let value;
             conf.fontfamily.forEach( obj => {
                 return obj.name == name && ( value = obj.value );
             })
@@ -82,9 +81,10 @@ export default class ReadOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>字体类型</sr-opt-label>
-                    <AC value={ getName( this.props.option.fontfamily, conf.fontfamily )}
+                    <AC value={ this.props.option.fontfamily }
+                        placeholder="请输入 font-family 值"
                         items={ conf.fontfamily }
-                        onChange={ (v)=>this.changeFontfamily(v) }
+                        onChange={ (n,v)=>this.changeFontfamily(n,v) }
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
