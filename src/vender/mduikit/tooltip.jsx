@@ -246,14 +246,14 @@ class ToolTip extends React.Component {
  */
 function Render( root, id ) {
     setTimeout( () => {
-        const $root      = $( root );
+        const $root      = !id ? $(root) : $(id);
         $root.find( "[data-tooltip]" ).map( ( idx, item )=>{
             const $item  = $(item),
                 position = $item.attr( "data-tooltip-position" ),
                 delay    = $item.attr( "data-tooltip-delay" ),
                 text     = $item.attr( "data-tooltip" );
             text && text != "" && 
-                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root, id ) );
+                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $(root), id ) );
         });
     }, 500 );
 }
