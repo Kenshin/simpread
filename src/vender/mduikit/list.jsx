@@ -1,8 +1,8 @@
 /*!
  * React Material Design: List
  * 
- * @version : 0.0.2
- * @update  : 2018/03/17
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,8 +11,6 @@
  */
 
 console.log( "==== simpread component: List ====" )
-
-let styles = new Map();
 
 const color            = "rgba( 51, 51, 51, .87 )",
       secondary_color  = "rgba( 51, 51, 51, .54 )",
@@ -343,8 +341,8 @@ const ListItem = props => {
                 root = disable ? { ...style.action_item, ...style.disable } : { ...style.action_item };
         return <action-group>
                     <action-item style={ root } id={ id } class={ acItemWaves }
-                                 onClick={ !disable && ( (e,d)=>events.itemOnClick( event, props )) }
-                                 onMouseOver={ ()=>events.itemMouseOver() }>
+                                 onClick={ !disable && ( (e)=>events.itemOnClick( e, props )) }
+                                 onMouseOver={ (e)=>events.itemMouseOver(e) }>
                                  { title }
                     </action-item>
                     { hr && <hr style={ style.hr }/> }
@@ -352,18 +350,18 @@ const ListItem = props => {
         }) : undefined;
     return (
         <list-item idx={ idx } style={ style.list_item }>
-            <pri-item style={ pri_style } onClick={ (e,d)=>events.priOnClick( event, props ) }>{ pri_value }</pri-item>
+            <pri-item style={ pri_style } onClick={ (e)=>events.priOnClick( e, props ) }>{ pri_value }</pri-item>
             <content style={ content_style }>
                 <a style={ style.link } href={ url } target="_blank">{ true_title }</a>
                 <subtitle style={ style.subtitle }>{ desc }</subtitle>
             </content>
-            <sec-item style={ sec_style } onClick={ (e,d)=>events.secOnClick( event, props ) }>{ sec_value }</sec-item>
+            <sec-item style={ sec_style } onClick={ (e)=>events.secOnClick( e, props ) }>{ sec_value }</sec-item>
             <action style={ style.action }>
-                <action-icon style={ style.action_icon } class={ acIconWaves } onClick={ ()=>events.iconOnClick() }></action-icon>
+                <action-icon style={ style.action_icon } class={ acIconWaves } onClick={ (e)=>events.iconOnClick(e) }></action-icon>
                 <action-items style={ style.action_items }>
                     { actionItems }
                 </action-items>
-                <action-bg style={ style.action_bg } onClick={ ()=>events.bgOnClick() }></action-bg>
+                <action-bg style={ style.action_bg } onClick={ (e)=>events.bgOnClick(e) }></action-bg>
             </action>
         </list-item>
     );
@@ -443,18 +441,16 @@ export default class List extends React.Component {
        secBgColor  : React.PropTypes.string,
     };
 
-    state = {
-        id : Math.round(+new Date()),
-    };
+    style = cssinjs()
 
-    acIconOnClick() {
-        const style = styles.get( this.state.id );
+    acIconOnClick( event ) {
+        const style = { ...this.style };
         $( event.target ).next().css({ ...style.action_items, ...style.action_items_active });
         $( event.target ).parent().find( "action-bg" ).css( "display", "block" );
     }
 
-    acBgOnClick() {
-        const style = styles.get( this.state.id );
+    acBgOnClick( event ) {
+        const style = { ...this.style };
         $( event.target )
             .css( "display", "none" )
             .prev().css({ ...style.action_items });
@@ -464,14 +460,14 @@ export default class List extends React.Component {
         const $target = $( event.target ),
               id      = $target.attr( "id" ),
               title   = $target.text(),
-              style   = styles.get( this.state.id );
+              style   = { ...this.style };
         $target.parent().parent()
             .css({ ...style.action_items })
             .next().css( "display", "none" );
         this.props.onAction && this.props.onAction( event, id, title, data )
     }
 
-    acItemMouseOver() {
+    acItemMouseOver( event ) {
         const $target = $( event.target );
         if ( $target.is( "action-item" ) ) {
             $( "action-item[active=true]" ).css( "background-color", "transparent" ).attr( "active", false );
@@ -482,30 +478,26 @@ export default class List extends React.Component {
     }
 
     priOnClick( event, data ) {
-        console.log( "priOnClick", event, data )
         this.props.priOnClick && this.props.priOnClick( event, data );
     }
 
     secOnClick( event, data ) {
-        console.log( "secOnClick", event, data )
         this.props.secOnClick && this.props.secOnClick( event, data );
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
-
-        const { items, title, actionItems, ...others } = this.props,
+        const style = { ...this.style },
+              { items, title, actionItems, ...others } = this.props,
               list = items.map( item => {
-            const events = {
-                iconOnClick  : () => this.acIconOnClick(),
-                bgOnClick    : () => this.acBgOnClick(),
-                itemOnClick  : ( e, d ) => this.acItemOnClick( e, d ),
-                itemMouseOver: () => this.acItemMouseOver(),
-                priOnClick   : ( e, d ) => this.priOnClick( e, d ),
-                secOnClick   : ( e, d ) => this.secOnClick( e, d ),
-            };
-            return <ListItem { ...item } { ...others } action={ actionItems } events={ events } style={{ ...style }} />
+                const events = {
+                    iconOnClick  : (e) => this.acIconOnClick(e),
+                    bgOnClick    : (e) => this.acBgOnClick(e),
+                    itemOnClick  : ( e, d ) => this.acItemOnClick( e, d ),
+                    itemMouseOver: (e) => this.acItemMouseOver(e),
+                    priOnClick   : ( e, d ) => this.priOnClick( e, d ),
+                    secOnClick   : ( e, d ) => this.secOnClick( e, d ),
+                };
+                return <ListItem { ...item } { ...others } action={ actionItems } events={ events } style={{ ...style }} />
         });
         return (
             <list style={ style.root }>

@@ -1,8 +1,8 @@
 /*!
  * React Material Design: SelectField
  * 
- * @version :  0.0.2
- * @update  : 2017/10/14
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,8 +11,6 @@
  */
 
 console.log( "==== simpread component: SelectField ====" )
-
-let style, styles = new Map();
 
 const color            = 'rgba(51, 51, 51, .87)',
       secondary_color  = 'rgba(204, 204, 204, 1)',
@@ -284,9 +282,7 @@ class ListView extends React.Component {
         onChange        : React.PropTypes.func,
     };
 
-    state = {
-        id : Math.round(+new Date()),
-    };
+    style = cssinjs_list()
 
     onMouseOver( event ) {
         const $target = $( event.target );
@@ -303,10 +299,8 @@ class ListView extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, cssinjs_list() );
-        style = styles.get( this.state.id );
-
-        style.root = this.props.items.length > 1 ? { ...style.root_normal, ...style.open } : { ...style.root_normal };
+        const style = { ...this.style };
+        style.root  = this.props.items.length > 1 ? { ...style.root_normal, ...style.open } : { ...style.root_normal };
 
         const list = this.props.items.map( ( item, idx ) => {
             let [ name_style, icon_style, info_style ] =[ { ...style.list_filed_value }, { ...style.list_filed_icon }, { ...style.list_filed_info } ];
@@ -375,9 +369,10 @@ export default class SelectField extends React.Component {
     };
 
     state = {
-        id    : Math.round(+new Date()),
-        name  : this.props.name,
-    };
+        name : this.props.name,
+    }
+
+    style = cssinjs()
 
     onClick() {
         !this.props.disable && this.props.items.length > 0 && this.setState({ items: this.props.items });
@@ -399,15 +394,14 @@ export default class SelectField extends React.Component {
     }
 
     componentDidMount() {
-        style = styles.get( this.state.id );
-        const $error = $( this.refs.error );
+        const style  = { ...this.style },
+              $error = $( this.refs.error );
         this.props.errortext != "" &&
             $error.parent().height( Number.parseInt(style.root.height) + $error.height() );
     }
 
     render() {
-        styles.set( this.state.id, cssinjs() );
-        style = styles.get( this.state.id );
+        const style = { ...this.style };
 
         this.props.width              && ( style.root.width = this.props.width );
         this.props.disable            && ( style.border = { ...style.border, ...style.border_disable });

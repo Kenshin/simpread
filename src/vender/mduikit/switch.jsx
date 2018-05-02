@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Switch
  * 
- * @version : 0.0.2
- * @update  : 2017/11/17
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,8 +11,6 @@
  */
 
 console.log( "==== simpread component: Switch ====" )
-
-let styles = new Map();
 
 const color           = "rgba(51, 51, 51, .87)",
       secondary_color = "rgba(204, 204, 204, 1)",
@@ -207,9 +205,10 @@ export default class Switch extends React.Component {
     };
 
     state = {
-        id      : Math.round(+new Date()),
         checked : this.props.checked,
     };
+
+    style = cssinjs();
 
     onClick() {
         !this.props.disable && this.setState({
@@ -223,8 +222,7 @@ export default class Switch extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
+        const style = { ...this.style };
 
         this.props.thumbColor   && ( style.thumb_normal.backgroundColor = this.props.thumbColor );
         this.props.thumbedColor && ( style.thumbed.backgroundColor      = this.props.thumbedColor );

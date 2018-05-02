@@ -1,8 +1,8 @@
 /*!
  * React Material Design: TextField
  * 
- * @version :  0.0.2
- * @update  : 2017/10/14
+ * @version : 0.0.2
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -13,8 +13,7 @@
 console.log( "==== simpread component: TextField ====" )
 
 let $target, $float, $state, $border, $error,
-    element,
-    style, styles = new Map();
+    styles = new Map();
 
 const [ MIN_ROWS, steps ] = [ 3, 24 ],
       cssinjs = ()=>{
@@ -246,7 +245,7 @@ export default class TextField extends React.Component {
 
     changeBlur() {
         setjQueryObj( this.refs );
-        style = styles.get(this.state.id);
+        const style = styles.get(this.state.id);
         if ( $target.val() == "" && $target.attr( "placeholder" ) == "" ) {
             $float.css( style.float_normal );
         } else {
@@ -281,7 +280,7 @@ export default class TextField extends React.Component {
 
     componentWillMount() {
         styles.set( this.state.id, cssinjs() );
-        style = styles.get(this.state.id);
+        const style = styles.get(this.state.id);
         if ( this.props.floatingtext == "" ) style.float.display = style.hidden;
         if ( this.props.multi && ( this.props.rows > MIN_ROWS )) {
             const rows        = this.props.rows - MIN_ROWS,
@@ -305,9 +304,8 @@ export default class TextField extends React.Component {
             onChange : (e)=>this.change(e),
             onKeyDown: (e)=>this.changeKeyDown(e),
         },
-        tooltip = this.props.tooltip;
-        style = styles.get(this.state.id);
-
+        style   = styles.get(this.state.id),
+        tooltip = this.props.tooltip,
         element = this.props.multi ? (
             <textarea ref="target" 
                        style={ style.textarea }

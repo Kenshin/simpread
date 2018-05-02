@@ -1,8 +1,8 @@
 /*!
  * React Material Design: FAB( Floating Action Button )
  * 
- * @version : 0.0.2
- * @update  : 2018/03/14
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,9 +11,6 @@
  */
 
 console.log( "==== simpread component: Floating Action Button ====" )
-
-let $target, type,
-    style, styles = new Map();
 
 const cssinjs = () => {
     const spec_color = 'rgba(244, 67, 54, 1)',
@@ -33,6 +30,16 @@ const cssinjs = () => {
 
                 width: 'auto',
                 height: 'auto',
+              },
+
+              bg: {
+                position: 'fixed',
+
+                bottom: '45px',
+                right: 0,
+
+                width: '100px',
+                height: '100%',
               },
 
               origin : {
@@ -184,7 +191,7 @@ const ListView = ( props ) => {
     return (
         <li id={ props.id } style={ props.child ? props.style.li : props.style.li_hori } onMouseLeave={ evt=> props.onMouseLeave(evt) }>
             <Button { ...props.btn_props } />
-            { props.child && props.child.length > 0 && <ul style={{ ...props.style.ul, ...props.style.ul_hori }}>{ props.child }</ul> }
+            { props.child && props.child.length > 0 && <ul type="hori" style={{ ...props.style.ul, ...props.style.ul_hori }}>{ props.child }</ul> }
         </li>
     )
 };
@@ -228,10 +235,13 @@ export default class Fab extends React.Component {
     }
 
     state = {
-        id   : Math.round(+new Date()),
         keys : [],
         items: {},
     }
+
+    style = cssinjs();
+
+    maxWidth = -1;
 
     btnClickHandler( event ) {
         const type = $( event.target ).attr( "id" );
@@ -239,25 +249,25 @@ export default class Fab extends React.Component {
     }
 
     btnMouseOverHandler( event ) {
-        style = styles.get( this.state.id );
-        $target = $( event.target );
-        type    = $target.attr( "type" );
+        const $target = $( event.target ),
+              type    = $target.attr( "type" ),
+              style   = { ...this.style };
         if ( type == "spec" ) {
             $target.parent().css({ ...style.spec, ...style.spec_focus });
         } else {
             $target.parent().css({ ...style.normal, ...style.normal_focus });
             if ( $target.parent().next() && $target.parent().next().is( "ul" ) ) {
-                $target.parent().next().css( "opacity", 1 ).attr( "current", true ).css( "visibility", "visible" );
-                $target.parent().parent().find("ul[current!=true]").css( "opacity", 0 ).css( "visibility", "hidden" );
-                $target.parent().next().removeAttr( "current" );
+                $( this.refs.root ).find( "ul[type=hori]" ).css( "opacity", 0 ).css( "visibility", "hidden" );
+                $target.parent().next().css( "opacity", 1 ).css( "visibility", "visible" );
             }
         }
+        $( this.refs.root ).width( this.maxWidth + 100 );
     }
 
     btnMouseOutHandler( event ) {
-        style = styles.get( this.state.id );
-        $target = $( event.target );
-        type    = $target.attr( "type" );
+        const $target = $( event.target ),
+              type    = $target.attr( "type" ),
+              style   = { ...this.style };
         const color = $target.attr( "color" );
         if ( type == "spec" ) {
             $target.parent().css({ ...style.origin, ...style.large, ...style.spec_item });
@@ -268,16 +278,14 @@ export default class Fab extends React.Component {
     }
 
     fabMouseOutHandler( event ) {
-        $target = $( event.target );
-        while( !$target.is( "fab" ) ) {
-            $target = $target.parent();
-        }
-        $target.find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
+        const style = { ...this.style };
+        $( event.target ).find("fab").find( "ul" ).css( "opacity", 0 ).css( "visibility", "hidden" );
+        $( this.refs.root ).css({ ...style.bg });
     }
 
     liMouseLeaveHandler( event ) {
-        $target = $( event.target );
-        type    = $target.attr( "type" );
+        return;
+        const $target = $( event.target );
         if ( $target.is( "i" ) ) {
             $target.parent().next().css( "opacity", 0 ).css( "visibility", "hidden" );
         } else if ( $target.is( "li" ) ) {
@@ -299,12 +307,15 @@ export default class Fab extends React.Component {
     }
 
     componentDidMount() {
-        const $root = $( "fab" );
-        const $ul   = $($root.children()[2]);
+        const $root  = $( "fab" ),
+              $ul    = $($root.children()[2]);
         if ( $ul.is("ul") ) {
             $ul.children().map( ( idx, item )=> {
                 const $ul = $(item).find( "ul" );
-                if ( $ul ) $ul.css( "top", `${idx * $ul.height()}px` );
+                if ( $ul ) {
+                    $ul.width() > this.maxWidth && ( this.maxWidth = $ul.width() );
+                    $ul.css( "top", `${idx * $ul.height()}px` );
+                }
             });
         }
     }
@@ -317,9 +328,7 @@ export default class Fab extends React.Component {
     }
 
     render() {
-        styles.set( this.state.id, cssinjs() );
-        style = styles.get( this.state.id );
-
+        const style = { ...this.style };
         let spec, anchor, others = [];
 
         const keys = this.state.keys,
@@ -364,11 +373,13 @@ export default class Fab extends React.Component {
         others.length > 0 && ( others = ( <ul style={ style.ul }>{ others }</ul> ) );
 
         return (
-            <fab style={ style.root } onMouseLeave={ evt=>this.fabMouseOutHandler(evt) }>
-                { spec   }
-                { anchor }
-                { others }
-            </fab>
+            <fab-bg ref="root" style={ style.bg } onMouseLeave={ evt=>this.fabMouseOutHandler(evt) }>
+                <fab style={ style.root }>
+                    { spec   }
+                    { anchor }
+                    { others }
+                </fab>
+            </fab-bg>
         )
     }
 

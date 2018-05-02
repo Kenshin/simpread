@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Sidebar
  * 
- * @version : 0.0.2
- * @update  : 2018/03/14
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,8 +11,6 @@
  */
 
 console.log( "==== simpread component: Sidebar ====" )
-
-let styles = new Map();
 
 const color           = "rgb(90, 90, 90)",
       secondary_color = "rgba(204, 204, 204, 1)",
@@ -277,9 +275,7 @@ class Sidebar extends React.Component {
         onExit     : React.PropTypes.func,
     };
 
-    state = {
-        id : Math.round(+new Date()),
-    }
+    style = cssinjs();
 
     onClick( event ) {
         let $target = $( event.target );
@@ -304,7 +300,7 @@ class Sidebar extends React.Component {
         }
 
         $target     = $target.parent();
-        const style = styles.get( this.state.id ),
+        const style = { ...this.style },
               $ul   = $target.find( "ul" ),
               state = $target.find( "dropdown" ).attr( "data-state" );
 
@@ -337,12 +333,9 @@ class Sidebar extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
-
-        let menu = [];
-
-        const { items, width,
+        let menu    = [];
+        const style = { ...this.style },
+              { items, width,
                 header, icon, footer,
                 color, bgColor,
                 headerStyle, contentStyle, footerStyle, maskStyle } = this.props;

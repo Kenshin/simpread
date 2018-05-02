@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Tooltip
  * 
- * @version : 0.0.1
- * @update  : 2017/04/25
+ * @version : 0.0.2
+ * @update  : 2018/05/01
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -168,9 +168,11 @@ class ToolTip extends React.Component {
                 marginLeft: ( tooltipWidth - backWidth ) / 2
             });
 
+            const offsetTop  = this.props.root == "body" ? $( "body" ).scrollTop() : $( "body" ).offset().top,
+                  offsetLeft = $( "body" ).offset().left;
             $target.css({
-                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollTop() : 0 ),
-                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).scrollLeft(): 0 ),
+                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? offsetTop : 0 ),
+                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? offsetLeft: 0 ),
             });
 
             scaleXFactor = Math.SQRT2 * tooltipWidth  / parseInt( backWidth  );
@@ -206,14 +208,22 @@ class ToolTip extends React.Component {
           }, delay );
     }
 
+    onScroll() {
+        $( this.refs.back ).css({   visibility: "hidden" });
+        $( this.refs.target ).css({ visibility: "hidden" });
+        started = false;
+    }
+
     componentDidMount() {
         this.props.$item.on( "mouseenter", this.onMouseEnter.bind( this ) );
         this.props.$item.on( "mouseleave", this.onMouseLeave.bind( this ) );
+        $( document    ).on( "scroll",     this.onScroll.bind( this ) );
     }
 
     componentWillUnmount() {
         this.props.$item.off( "mouseenter", this.onMouseEnter );
         this.props.$item.off( "mouseleave", this.onMouseLeave );
+        $( document    ).off( "scroll",     this.onScroll     );
     }
 
     render() {
@@ -234,42 +244,48 @@ class ToolTip extends React.Component {
  * Render
  * 
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
+ * @param {string} id
  */
-function Render( root ) {
+function Render( root, id ) {
     setTimeout( () => {
-        const $root        = $( root );
+        const $root      = !id ? $(root) : $(id);
         $root.find( "[data-tooltip]" ).map( ( idx, item )=>{
-            const $item    = $(item),
+            const $item  = $(item),
                 position = $item.attr( "data-tooltip-position" ),
                 delay    = $item.attr( "data-tooltip-delay" ),
                 text     = $item.attr( "data-tooltip" );
             text && text != "" && 
-                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $root ) );
+                ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $(root), id ) );
         });
-    }, 1000 );
+    }, 500 );
 }
 
 /**
  * Exit
  * 
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
+ * @param {string} id
  */
-function Exit( root ) {
-    $( root ).find( "tooltip-tips" ).map( ( idx, item )=>{
+function Exit( root, id ) {
+    const selector = !id ? "tooltip-gp" : `tooltip-gp[id="${id}"]`;
+    $( selector ).find( "tooltip-tips" ).map( ( idx, item )=>{
         ReactDOM.unmountComponentAtNode( $(item)[0] );
     });
+    $( selector ).remove();
 }
 
 /**
  * Create Tooltip root html
  * 
  * @param  {jquery}  jquery object
+ * @param  {string}  id
  * @return {element} html element
  */
-function getTooltipRoot( $root ) {
-    $root.find( "tooltip-gp" ).length == 0 && $root.append( "<tooltip-gp>" );
-    $root.find( "tooltip-gp" ).append( "<tooltip-tips>" );
-    return $( "tooltip-tips" ).last()[0];
+function getTooltipRoot( $root, id ) {
+    const selector = !id ? "tooltip-gp" : `tooltip-gp[id="${id}"]`;
+    $root.find( selector ).length == 0 && $root.append( !id ? "<tooltip-gp>" : `<tooltip-gp id="${id}">` );
+    $root.find( selector ).append( "<tooltip-tips>" );
+    return $root.find( `${selector} tooltip-tips` ).last()[0];
 }
 
 export { Render, Exit };
