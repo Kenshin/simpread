@@ -2,8 +2,6 @@ console.log( "===== simpread option focus mode load =====" )
 
 import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
-import Include   from 'include';
-import Exclude   from 'exclude';
 
 import * as ss   from 'stylesheet';
 import * as conf from 'config';
@@ -29,17 +27,6 @@ export default class FocusOpt extends React.Component {
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
-    changeInclude( value ) {
-        this.props.option.site.include = value;
-        console.log( "this.props.option.site.include = ", this.props.option.site.include )
-    }
-
-    changeExclude( value, code ) {
-        this.props.option.site.exclude = value;
-        this.props.flag.exclude = code;
-        console.log( "this.props.option.site.exclude = ", this.props.option.site.exclude )
-    }
-
     componentDidMount() {
         this.refs.opacity.value   = this.props.option.opacity;
     }
@@ -63,16 +50,6 @@ export default class FocusOpt extends React.Component {
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
-                { this.props.option.site &&
-                <sr-opt-items>
-                    <sr-opt-gp>
-                        <Include mode="focus" include={ this.props.option.site.include } changeInclude={ val=>this.changeInclude(val) } />
-                    </sr-opt-gp>
-                    <sr-opt-gp>
-                        { this.props.option.site && <Exclude exclude={ this.props.option.site.exclude } changeExclude={ (v,c)=>this.changeExclude(v,c) } />}
-                    </sr-opt-gp>
-                </sr-opt-items>
-                }
             </sr-opt-focus>
         )
     }

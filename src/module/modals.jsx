@@ -18,8 +18,7 @@ import * as dia     from 'dialog';
 
 const root   = "simpread-option-root",
       rootjq = `.${root}`;
-let   callback,
-      flag   = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0 }; // 0: success -1: faield -2: not empty
+let   callback;
 
 /**
  * Modals Rect component
@@ -33,34 +32,24 @@ class Modals extends React.Component {
 
     // save modals focus option
     save() {
-        console.log( "modals click submit button.", storage.current, flag )
-        const props = storage.current.mode == "focus" ? [ "include" ] : [ "title", "include" ];
-        if ( props.findIndex( key => storage.current.site[key] == "" ) != -1 ) {
-            new Notify().Render( 3, "【标题、高亮】不能为空。" );
-        }
-        else if ( Object.values( flag ).findIndex( key => key != 0 ) != -1 ) {
-            new Notify().Render( 3, "请正确填写【标识、域名、标题、高亮】后再提交。" );
-        } else {
-            watch.Verify( ( state, result ) => {
-                if ( state ) {
-                    console.log( "watch.Lock()", result );
-                    new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+        console.log( "modals click submit button.", storage.current )
+        watch.Verify( ( state, result ) => {
+            if ( state ) {
+                console.log( "watch.Lock()", result );
+                new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
+            } else {
+                const changed = storage.Compare( storage.current.mode );
+                if ( changed.option.length == 0 && changed.st.length == 0 ) {
+                    new Notify().Render( 0, "当前未改变内容，无需保存。" );
                 } else {
-                    const changed = storage.Compare( storage.current.mode );
-                    if ( changed.option.length == 0 && changed.st.length == 0 ) {
-                        new Notify().Render( 0, "当前未改变内容，无需保存。" );
-                    } else {
-                        changed.st.length > 0 && storage.pr.Updatesite( "local", storage.current.url, [ storage.current.site.url, storage.pr.Cleansite(storage.current.site) ]);
-                        changed.st.length > 0 && storage.Writesite( storage.pr.sites );
-                        storage.Setcur( storage.current.mode );
-                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
-                        watch.SendMessage( "site", true );
-                        new Notify().Render( 0, "更新成功，刷新当前页面后才能生效！" )
-                        this.close( false );
-                    }
+                    storage.Setcur( storage.current.mode );
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.shortcuts, { url: window.location.href } ));
+                    watch.SendMessage( "site", true );
+                    new Notify().Render( 0, "更新成功，刷新当前页面后才能生效！" )
+                    this.close( false );
                 }
-            });
-        }
+            }
+        });
     }
 
     siteeditor() {
@@ -83,7 +72,7 @@ class Modals extends React.Component {
         return (
             <dia.Dialog>
                 <dia.Content>
-                    <Option option={ storage.current } flag={ flag } />
+                    <Option option={ storage.current } />
                 </dia.Content>
                 <dia.Footer>
                     <Button text="站点编辑器" waves="md-waves-effect" color="#fff" backgroundColor="#4caf50" onClick={ ()=>this.siteeditor() } width="70%" />
@@ -102,7 +91,6 @@ class Modals extends React.Component {
  */
 function rollback() {
     storage.Restore( storage.current.mode );
-    flag = { title: 0, desc: 0, include: 0, exclude: 0 }
     if ( storage.current.mode == STORAGE_MODE.focus ) $( ".simpread-focus-root" ).css({ "background-color" : storage.current.bgcolor });
     if ( storage.current.mode == STORAGE_MODE.read ) {
         th.theme != storage.current.theme && th.Change( storage.current.theme );
