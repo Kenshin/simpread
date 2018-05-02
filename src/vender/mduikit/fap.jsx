@@ -207,6 +207,9 @@ class Panel extends React.Component {
         item       : React.PropTypes.array,
         autoHeight : React.PropTypes.bool,
         activeColor: React.PropTypes.string,
+
+        onOpen     : React.PropTypes.func,
+        onClose    : React.PropTypes.func,
     };
 
     style = cssinjs_panel()
@@ -251,6 +254,11 @@ class Panel extends React.Component {
     componentDidMount() {
         setTimeout( ()=>$( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" ), 50 );
         this.props.autoHeight == false && this.autoHeight();
+        this.props.onOpen();
+    }
+
+    componentWillUnmount() {
+        this.props.onClose();
     }
 
     render() {
@@ -391,6 +399,9 @@ export default class Fap extends React.Component {
 
         triggerItems: React.PropTypes.object,
         waves       : React.PropTypes.string,
+
+        onOpen      : React.PropTypes.func,
+        onClose     : React.PropTypes.func,
         onAction    : React.PropTypes.func,
     }
 
@@ -427,7 +438,7 @@ export default class Fap extends React.Component {
         if ( $panelbg.length > 0 ) {
             const style = { ...this.style };
             $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
-            ReactDOM.render( <Panel { ...this.props } />, $panelbg[0] );
+            ReactDOM.render( <Panel { ...this.props } onOpen={ ()=>this.onPop( "onOpen" ) } onClose={ ()=>this.onPop( "onClose" ) } />, $panelbg[0] );
             setTimeout( () => {
                 const evt = this.props.autoHide ? "mouseover" : "click";
                 $panelbg.on( evt, event => {
@@ -443,6 +454,10 @@ export default class Fap extends React.Component {
                 });
             }, 200 );
         }
+    }
+
+    onPop( type ) {
+        this.props[type] && this.props[type]();
     }
 
     render() {
