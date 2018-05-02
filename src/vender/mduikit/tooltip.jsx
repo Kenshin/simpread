@@ -168,9 +168,11 @@ class ToolTip extends React.Component {
                 marginLeft: ( tooltipWidth - backWidth ) / 2
             });
 
+            const offsetTop  = this.props.root == "body" ? $( "body" ).scrollTop() : $( "body" ).offset().top,
+                  offsetLeft = $( "body" ).offset().left;
             $target.css({
-                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).offset().top : 0 ),
-                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? $( "body" ).offset().left: 0 ),
+                top:  targetTop  + ( $( this.props.root ).css( "position" ) != "fixed" ? offsetTop : 0 ),
+                left: targetLeft + ( $( this.props.root ).css( "position" ) != "fixed" ? offsetLeft: 0 ),
             });
 
             scaleXFactor = Math.SQRT2 * tooltipWidth  / parseInt( backWidth  );
