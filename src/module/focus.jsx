@@ -3,6 +3,8 @@ console.log( "===== simpread option focus mode load =====" )
 import ThemeSel  from 'themesel';
 import Shortcuts from 'shortcuts';
 
+import Slider    from 'slider';
+
 import * as ss   from 'stylesheet';
 import * as conf from 'config';
 
@@ -14,21 +16,16 @@ export default class FocusOpt extends React.Component {
         console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
     }
 
-    changeOpacity() {
-        const opacity = event.target.value,
-              bgcolor = ss.Opacity( opacity );
+    changeOpacity( value ) {
+        const bgcolor = ss.Opacity( value );
         bgcolor && ( this.props.option.bgcolor = bgcolor );
-        this.props.option.opacity = opacity;
+        this.props.option.opacity = value;
         console.log( "this.props.option.opacity = ", this.props.option.opacity )
     }
 
     changeShortcuts( shortcuts ) {
         this.props.option.shortcuts = shortcuts;
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
-    }
-
-    componentDidMount() {
-        this.refs.opacity.value   = this.props.option.opacity;
     }
 
     render() {
@@ -40,12 +37,7 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度</sr-opt-label>
-                    <opacity>
-                        <input ref="opacity"
-                            type="range" min="50" max="95" step="5" 
-                            onChange={ ()=> this.changeOpacity() }
-                        />
-                    </opacity>
+                    <Slider min="50" max="95" step="1" value={ this.props.option.opacity } onChange={ (v)=>this.changeOpacity(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
