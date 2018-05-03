@@ -37,6 +37,7 @@ export default class ReadOpt extends React.Component {
     }
 
     changeFontfamily( name, value ) {
+        value.trim() == "" && ( value = "default" );
         if ( !ss.VerifyCustom( "fontfamily", this.props.option.custom ) ) {
             conf.fontfamily.forEach( obj => {
                 return obj.name == name && ( value = obj.value );
