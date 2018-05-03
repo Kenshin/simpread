@@ -180,7 +180,7 @@ const cssinjs_panel = () => {
           groups: {
             display: 'block',
 
-            padding: '20px',
+            padding: '20px 20px 20px 0',
 
             width: '100%',
             maxHeight: '550px',
@@ -190,7 +190,7 @@ const cssinjs_panel = () => {
 
           group: {
             display: 'none',
-            padding: '39px 0px 10px',
+            padding: '10px 0px 10px',
           },
 
           group_active: {
