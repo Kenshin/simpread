@@ -422,6 +422,18 @@ const fontfamily = [{
         style : {
             text: { fontFamily: "Source Han Sans CN" }
         }
+    },{
+        value : "Noto Serif CJK SC, Source Han Serif SC, Source Han Serif CN",
+        name  : "思源宋体",
+        style : {
+            text: { fontFamily: "Noto Serif CJK SC, Source Han Serif SC, Source Han Serif CN" }
+        }
+    },{
+        value : "",
+        name  : "自定义字体",
+        style : {
+            text: { fontFamily: "default" }
+        }
     }],
     fontsize = [{
         value : "62.5%",
