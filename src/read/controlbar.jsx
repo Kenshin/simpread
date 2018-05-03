@@ -8,9 +8,15 @@ import * as conf   from 'config';
 import * as output from 'output';
 import * as watch  from 'watch';
 import * as kbd    from 'keyboard';
+import { storage } from 'storage';
+
+import ReadOpt     from 'readopt';
 
 import Fab         from 'fab';
+import Fap         from 'fap'
+import * as ttips  from 'tooltip';
 
+let fap = true;
 const tooltip_options = {
     target   : "name",
     position : "bottom",
@@ -97,6 +103,10 @@ export default class ReadCtlbar extends React.Component {
 
     }
 
+    onPop( type ) {
+        type == "open" ? ttips.Render( ".simpread-read-root", "panel" ) : ttips.Exit( ".simpread-read-root", "panel" );
+    }
+
     componentWillMount() {
         if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
             delete conf.readItems.download;
@@ -115,9 +125,19 @@ export default class ReadCtlbar extends React.Component {
     }
 
     render() {
+         const Controlbar = fap ? 
+            <Fap items={ [ "样式", "动作" ] } autoHide={ false }
+                waves="md-waves-effect md-waves-circle md-waves-float" 
+                onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }
+                onAction={ (event, type)=>this.onAction(event, type ) }>
+                <ReadOpt option={ storage.current }/>
+                <div>发送到生产力工具</div>
+            </Fap>
+            :
+            <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
         return (
             <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": "2" }}>
-                <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
+                { Controlbar }
             </sr-rd-crlbar>
         )
     }
