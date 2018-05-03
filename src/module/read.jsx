@@ -18,16 +18,23 @@ const getName = ( value, items ) => {
         else if ( item.value == value ) return item.name;
     }
 };
+let notify;
 
 export default class ReadOpt extends React.Component {
 
+    verify( type ) {
+        if ( ss.VerifyCustom( type, this.props.option.custom ) ) {
+            !notify && ( notify = new Notify().Render({ state: "holdon", content: '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>', callback:()=>notify=undefined }));
+            return false;
+        }
+        return true;
+    }
+
     changeBgColor( theme ) {
-        if ( !ss.VerifyCustom( "theme", this.props.option.custom ) ) {
+        if ( this.verify( "theme" ) ) {
             this.props.option.theme = theme;
             th.Change( this.props.option.theme );
             console.log( "this.props.option.theme = ", this.props.option.theme )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
         }
     }
 
@@ -37,36 +44,30 @@ export default class ReadOpt extends React.Component {
     }
 
     changeFontfamily( name, value ) {
-        value.trim() == "" && ( value = "default" );
-        if ( !ss.VerifyCustom( "fontfamily", this.props.option.custom ) ) {
+        if ( this.verify( "fontfamily" ) ) {
+            value.trim() == "" && ( value = "default" );
             conf.fontfamily.forEach( obj => {
                 return obj.name == name && ( value = obj.value );
             })
             ss.FontFamily( value );
             this.props.option.fontfamily = value;
             console.log( "this.props.option.fontfamily = ", value, name )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
         }
     }
 
     changeFontsize( value ) {
-        if ( !ss.VerifyCustom( "fontsize", this.props.option.custom ) ) {
+        if ( this.verify( "fontsize" ) ) {
             this.props.option.fontsize = value + "%";
             ss.FontSize( this.props.option.fontsize );
             console.log( "this.props.option.fontsize = ", this.props.option.fontsize )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
         }
     }
 
     changeLayout( value ) {
-        if ( !ss.VerifyCustom( "margin", this.props.option.custom ) ) {
+        if ( this.verify( "margin" ) ) {
             this.props.option.layout = `${ 100 - value }%`;
             ss.Layout( this.props.option.layout );
             console.log( "this.props.option.layout = ", this.props.option.layout )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>。' );
         }
     }
 
