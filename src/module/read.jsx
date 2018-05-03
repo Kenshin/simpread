@@ -79,7 +79,7 @@ export default class ReadOpt extends React.Component {
     changeStyle( value, type ) {
         let news = value
         if ( value == 0 ) {
-            news = "inherit";
+            news = "";
         } else news = type != "lineHeight" ? value + "px" : value;
         this.props.option.custom.art[type] = news;
         ss.Custom( "art", this.props.option.custom.art );
