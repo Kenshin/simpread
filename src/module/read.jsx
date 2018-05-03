@@ -71,6 +71,12 @@ export default class ReadOpt extends React.Component {
         }
     }
 
+    changeStyle( value, type ) {
+        this.props.option.custom.art[type] = value + "px";
+        ss.Custom( "art", this.props.option.custom.art );
+        console.log( "this.props.option.custom.art[type]", this.props.option.custom.art[type] )
+    }
+
     render() {
         return (
             <sr-opt-read>
@@ -96,6 +102,10 @@ export default class ReadOpt extends React.Component {
                 <sr-opt-gp>
                     <sr-opt-label>版面宽度</sr-opt-label>
                     <Slider min="70" max="100" step="1" value={ 100 - parseInt( this.props.option.layout ) } tooltip={{ text: "版本布局的宽窄度，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeLayout(v) }/>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>字间距</sr-opt-label>
+                    <Slider min="0" max="10" step="1" value={ parseInt( this.props.option.custom.art.letterSpacing ) } onChange={ (v)=>this.changeStyle(v, "letterSpacing") }/>
                 </sr-opt-gp>
             </sr-opt-read>
         )
