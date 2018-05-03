@@ -179,7 +179,13 @@ const cssinjs_panel = () => {
 
           groups: {
             display: 'block',
+
+            padding: '20px',
+
             width: '100%',
+            maxHeight: '550px',
+
+            overflowY: 'auto',
           },
 
           group: {
