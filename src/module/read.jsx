@@ -22,6 +22,11 @@ let notify;
 
 export default class ReadOpt extends React.Component {
 
+    parse( value ) {
+        const news = parseInt( value );
+        return isNaN(news) ? 0 : news;
+    }
+
     verify( type ) {
         if ( ss.VerifyCustom( type, this.props.option.custom ) ) {
             !notify && ( notify = new Notify().Render({ state: "holdon", content: '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>', callback:()=>notify=undefined }));
@@ -72,9 +77,13 @@ export default class ReadOpt extends React.Component {
     }
 
     changeStyle( value, type ) {
-        this.props.option.custom.art[type] = value + "px";
+        let news = value
+        if ( value == 0 ) {
+            news = "inherit";
+        } else news = type != "lineHeight" ? value + "px" : value;
+        this.props.option.custom.art[type] = news;
         ss.Custom( "art", this.props.option.custom.art );
-        console.log( "this.props.option.custom.art[type]", this.props.option.custom.art[type] )
+        console.log( "this.props.option.custom.art", this.props.option.custom.art[type] )
     }
 
     render() {
@@ -97,15 +106,27 @@ export default class ReadOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                 <sr-opt-label>字体大小</sr-opt-label>
-                    <Slider min="45" max="100" step="1" value={ parseInt( this.props.option.fontsize ) } tooltip={{ text: "字体大小，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeFontsize(v) }/>
+                    <Slider min="45" max="100" step="1" value={ this.parse( this.props.option.fontsize ) } tooltip={{ text: "字体大小，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeFontsize(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>版面宽度</sr-opt-label>
-                    <Slider min="70" max="100" step="1" value={ 100 - parseInt( this.props.option.layout ) } tooltip={{ text: "版本布局的宽窄度，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeLayout(v) }/>
+                    <Slider min="70" max="100" step="1" value={ 100 - this.parse( this.props.option.layout ) } tooltip={{ text: "版本布局的宽窄度，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeLayout(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>字间距</sr-opt-label>
-                    <Slider min="0" max="10" step="1" value={ parseInt( this.props.option.custom.art.letterSpacing ) } onChange={ (v)=>this.changeStyle(v, "letterSpacing") }/>
+                    <Slider min="0" max="10" step="1" value={ this.parse( this.props.option.custom.art.letterSpacing ) } onChange={ (v)=>this.changeStyle(v, "letterSpacing") }/>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>行间距</sr-opt-label>
+                    <Slider min="0" max="5" step="1" value={ this.parse( this.props.option.custom.art.lineHeight ) } onChange={ (v)=>this.changeStyle(v, "lineHeight") }/>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>单词间距</sr-opt-label>
+                    <Slider min="0" max="10" step="1" value={ this.parse( this.props.option.custom.art.wordSpacing ) } onChange={ (v)=>this.changeStyle(v, "wordSpacing") }/>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>首行缩进</sr-opt-label>
+                    <Slider min="0" max="30" step="1" value={ this.parse( this.props.option.custom.art.textIndent ) } onChange={ (v)=>this.changeStyle(v, "textIndent") }/>
                 </sr-opt-gp>
             </sr-opt-read>
         )
