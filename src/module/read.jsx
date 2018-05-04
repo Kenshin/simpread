@@ -39,12 +39,14 @@ export default class ReadOpt extends React.Component {
         if ( this.verify( "theme" ) ) {
             this.props.option.theme = theme;
             th.Change( this.props.option.theme );
+            this.props.onChange && this.props.onChange( `theme_${theme}` );
             console.log( "this.props.option.theme = ", this.props.option.theme )
         }
     }
 
     changeShortcuts( shortcuts ) {
         this.props.option.shortcuts = shortcuts;
+        this.props.onChange && this.props.onChange( `shortcuts_${shortcuts}` );
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
@@ -56,6 +58,7 @@ export default class ReadOpt extends React.Component {
             })
             ss.FontFamily( value );
             this.props.option.fontfamily = value;
+            this.props.onChange && this.props.onChange( `fontfamily_${value}` );
             console.log( "this.props.option.fontfamily = ", value, name )
         }
     }
@@ -64,6 +67,7 @@ export default class ReadOpt extends React.Component {
         if ( this.verify( "fontsize" ) ) {
             this.props.option.fontsize = value + "%";
             ss.FontSize( this.props.option.fontsize );
+            this.props.onChange && this.props.onChange( `fontsize_${this.props.option.fontsize}` );
             console.log( "this.props.option.fontsize = ", this.props.option.fontsize )
         }
     }
@@ -72,6 +76,7 @@ export default class ReadOpt extends React.Component {
         if ( this.verify( "margin" ) ) {
             this.props.option.layout = `${ 100 - value }%`;
             ss.Layout( this.props.option.layout );
+            this.props.onChange && this.props.onChange( `layout_${this.props.option.layout}` );
             console.log( "this.props.option.layout = ", this.props.option.layout )
         }
     }
@@ -83,6 +88,7 @@ export default class ReadOpt extends React.Component {
         } else news = type != "lineHeight" ? value + "px" : value;
         this.props.option.custom.art[type] = news;
         ss.Custom( "art", this.props.option.custom.art );
+        this.props.onChange && this.props.onChange( `custom_${this.props.option.custom.art[type]}`, type );
         console.log( "this.props.option.custom.art", this.props.option.custom.art[type] )
     }
 

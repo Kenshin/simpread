@@ -97,8 +97,9 @@ class Read extends React.Component {
      * Controlbar action event
      * @param {string} type, include: exit, setting, save, scroll, option
      * @param {string} value 
+     * @param {string} custom value, storage.current.custom.art.xxx 
      */
-    onAction( type, value ) {
+    onAction( type, value, custom ) {
         switch ( type ) {
             case "exit":
                 this.exit();
@@ -113,7 +114,9 @@ class Read extends React.Component {
             case "fontsize":
             case "layout":
             case "theme":
-                storage.current[type]=value;
+            case "shortcuts":
+            case "custom":
+                type != "custom" ? storage.current[type]=value : storage.current.custom.art[custom]=value;
                 storage.Setcur( storage.current.mode );
                 break;
             /*
@@ -148,7 +151,7 @@ class Read extends React.Component {
                             multi={ this.props.wrapper.avatar ? true : false }
                             type={ this.props.wrapper.name }
                             site={{ title: this.props.wrapper.title, url: window.location.href }} 
-                            custom={ this.props.read.custom } onAction={ (t,v)=>this.onAction( t,v ) }/>
+                            custom={ this.props.read.custom } onAction={ (t,v,c)=>this.onAction( t,v,c ) }/>
             </sr-read>
         )
     }

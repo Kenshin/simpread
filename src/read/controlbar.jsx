@@ -68,7 +68,7 @@ export default class ReadCtlbar extends React.Component {
                     if ( !ss.VerifyCustom( type.split( "_" )[0], this.props.custom ) ) {
                         const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
                         Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
-                        this.props.onAction && this.props.onAction( key, value );    
+                        this.props.onAction && this.props.onAction( key, value );
                     } else {
                         new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
                     }
@@ -103,6 +103,11 @@ export default class ReadCtlbar extends React.Component {
 
     }
 
+    onChange( type, custom ) {
+        const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
+        this.props.onAction && this.props.onAction( key, value, custom );
+    }
+
     onPop( type ) {
         type == "open" ? ttips.Render( ".simpread-read-root", "panel" ) : ttips.Exit( ".simpread-read-root", "panel" );
     }
@@ -130,7 +135,7 @@ export default class ReadCtlbar extends React.Component {
                 waves="md-waves-effect md-waves-circle md-waves-float" 
                 onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }
                 onAction={ (event, type)=>this.onAction(event, type ) }>
-                <ReadOpt option={ storage.current }/>
+                <ReadOpt option={ storage.current } onChange={ (t,c)=>this.onChange(t,c)}/>
                 <div>发送到生产力工具</div>
             </Fap>
             :
