@@ -156,6 +156,17 @@ const cssinjs_panel = () => {
             cursor: 'pointer',
           },
 
+          panel_tab_label: {
+            display: '-webkit-box',
+            flexShrink: 1,
+
+            WebkitLineClamp: 1,
+            '-webkit-box-orient': 'vertical',
+
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          },
+
           panel_border: {
             position: 'absolute',
             bottom: 0,
@@ -219,23 +230,24 @@ class Panel extends React.Component {
         const style   = { ...this.style };
         let   $target = $( event.target ),
               active  = $target.attr( "active" ),
+              idx     = $target.attr( "idx" ),
               tag     = event.target.tagName.toLowerCase();
         while ( tag  != "panel-tab" ) {
             $target   = $target.parent();
             active    = $target.attr( "active" );
+            idx       = $target.attr( "idx" );
             tag       = $target[0].tagName.toLowerCase();
         }
         if ( active == "false" ) {
-            const $others = $( "panel-tab[active=true]"   ),
-                    $group  = $( "panel-group[active=true]" );
+            const $others = $( "panel-tab[active=true]"   );
             $target.attr( "active", true );
             $target.find( "panel-border" ).css({ ...style.panel_border, ...style.panel_border_active });
 
             $others.attr( "active", false );
             $others.find( "panel-border" ).css({ ...style.panel_border });
 
-            $( "panel-group[active=false]" ).attr( "active", true ).css({ ...style.group, ...style.group_active });
-            $group.attr( "active", false ).css({ ...style.group });
+            $( `panel-group[idx=${idx}]`  ).attr( "active", true ).css({ ...style.group, ...style.group_active });
+            $( `panel-group[idx!=${idx}]` ).attr( "active", false ).css({ ...style.group });
         }
     }
 
@@ -282,13 +294,13 @@ class Panel extends React.Component {
               active_group  = { ...style.group, ...style.group_active },
               events        = this.props.tabAutoSel ? { onMouseEnter: evt => this.onTabChange(evt) } : { onClick: evt => this.onTabChange(evt) },
               tabs          = this.props.items.map( ( item, idx ) => {
-                return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } { ...events } >
-                        <span>{item}</span>
+                return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } idx={ idx } { ...events } >
+                        <span style={ style.panel_tab_label }>{item}</span>
                         <panel-border style={ idx == 0 ? active_border : { ...style.panel_border } }></panel-border>
                     </panel-tab>;
              }),
              groups         = this.props.children.map( ( child, idx ) => {
-                return <panel-group style={ idx == 0 ? active_group : { ...style.group } } active={ idx == 0 ? "true" : "false" } >{child}</panel-group>;
+                return <panel-group style={ idx == 0 ? active_group : { ...style.group } } active={ idx == 0 ? "true" : "false" } idx={ idx }>{child}</panel-group>;
              });
 
         return (
