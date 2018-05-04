@@ -11,6 +11,7 @@ import * as kbd    from 'keyboard';
 import { storage } from 'storage';
 
 import ReadOpt     from 'readopt';
+import Actionbar   from 'actionbar';
 
 import Fab         from 'fab';
 import Fap         from 'fap'
@@ -118,6 +119,10 @@ export default class ReadCtlbar extends React.Component {
         if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
             delete conf.readItems.option;
         }
+        if ( fap ) {
+            delete conf.readItems.exit;
+            delete conf.readItems.option.items.setting;
+        }
     }
 
     constructor( props ) {
@@ -131,7 +136,7 @@ export default class ReadCtlbar extends React.Component {
                 onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }
                 onAction={ (event, type)=>this.onAction(event, type ) }>
                 <ReadOpt option={ storage.current } onChange={ (t,c)=>this.onChange(t,c)}/>
-                <div>发送到生产力工具</div>
+                <Actionbar items={ conf.readItems } onAction={ (type)=>this.onAction(undefined, type ) }/>
             </Fap>
             :
             <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
