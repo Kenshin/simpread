@@ -270,7 +270,7 @@ class Panel extends React.Component {
               $groups = $target.find( "panel-groups" ),
               height  = $groups.height();
         if ( offset < 0 ) {
-            $groups.height( height + offset - 10 ).css({ "padding-right": "20px" });
+            $groups.height( height + offset - 32 ).css({ "padding-right": "20px" });
         }
     }
 
