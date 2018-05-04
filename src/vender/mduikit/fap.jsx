@@ -117,8 +117,10 @@ const cssinjs_panel = () => {
               right: '32px',
               bottom: '185px',
 
-              minWidth: '480px',
+              minWidth: '380px',
               minHeight: '300px',
+              maxWidth: '500px',
+              width: '100%',
 
               margin: 0,
               padding: '39px 24px 0',
