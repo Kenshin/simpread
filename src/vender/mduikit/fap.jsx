@@ -459,32 +459,24 @@ export default class Fap extends React.Component {
         }
     }
 
-    panelBgEventHandler( $panelbg ) {
-        const evt   = this.props.autoHide ? "mouseover" : "click",
-              style = { ...this.style };
-        $panelbg.one( evt, event => {
-            if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
-                $panelbg.animate({ opacity: 0 },{
-                    complete: ()=> {
-                        ReactDOM.unmountComponentAtNode( $panelbg[0] );
-                        $panelbg.css({ ...style.panel_bg });
-                    }
-                });
-            }
-        });
+    panelBgEventHandler( event ) {
+        if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
+            const $panelbg = $( this.refs.bg ),
+                  style    = { ...this.style };
+            $panelbg.animate({ opacity: 0 },{
+                complete: ()=> {
+                    ReactDOM.unmountComponentAtNode( $panelbg[0] );
+                    $panelbg.css({ ...style.panel_bg });
+                }
+            });
+        }
     }
 
     panelRender( $panelbg ) {
         if ( $panelbg.length > 0 ) {
             const style = { ...this.style };
             $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
-            ReactDOM.render( 
-                <Panel { ...this.props } onOpen={ ()=>{
-                        this.panelBgEventHandler( $panelbg );
-                        this.onPop( "onOpen" );
-                    }}
-                    onClose={ ()=>this.onPop( "onClose" ) }
-                />, $panelbg[0] );
+            ReactDOM.render( <Panel { ...this.props } onOpen={ ()=>this.onPop( "onOpen" ) } onClose={ ()=>this.onPop( "onClose" ) }/>, $panelbg[0] );
         }
     }
 
@@ -495,6 +487,12 @@ export default class Fap extends React.Component {
     render() {
         const style = { ...this.style };
         style.spec  = { ...style.origin, ...style.large, ...style.spec_item };
+
+        const evt   = this.props.autoHide ? {
+            onMouseOver: (e)=> this.panelBgEventHandler(e)
+        } : {
+            onClick    : (e)=> this.panelBgEventHandler(e)
+        };
 
         const btn_props = ( id, type, style, { name, color, icon }, icon_style, tooltip, waves )=> {
                 return {
@@ -516,7 +514,7 @@ export default class Fap extends React.Component {
         panel  = <panel-bg ref="bg"></panel-bg>;
 
         return (
-            <fap style={ style.root }>
+            <fap style={ style.root } { ...evt } >
                 { spec   }
                 { anchor }
                 { panel  }
