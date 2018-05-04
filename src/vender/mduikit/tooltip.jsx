@@ -190,7 +190,7 @@ class ToolTip extends React.Component {
 
     onMouseLeave() {
         started = false;
-        const delay = 225;
+        const delay = 10;
         clearTimeout( timeout );
         setTimeout( () => {
             [ $target, $back ] = [ $( this.refs.target ), $( this.refs.back ) ];
