@@ -112,11 +112,11 @@ export default class ReadOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                 <sr-opt-label>字体大小</sr-opt-label>
-                    <Slider min="45" max="100" step="1" value={ this.parse( this.props.option.fontsize ) } tooltip={{ text: "字体大小，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeFontsize(v) }/>
+                    <Slider min="45" max="100" step="1" value={ this.parse( this.props.option.fontsize ) } onChange={ (v)=>this.changeFontsize(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>版面宽度</sr-opt-label>
-                    <Slider min="70" max="100" step="1" value={ 100 - this.parse( this.props.option.layout ) } tooltip={{ text: "版本布局的宽窄度，取值为百分比，如需固定值，请使用【自定义样式】" }} onChange={ (v)=>this.changeLayout(v) }/>
+                    <Slider min="70" max="100" step="1" value={ 100 - this.parse( this.props.option.layout ) } onChange={ (v)=>this.changeLayout(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>字间距</sr-opt-label>
