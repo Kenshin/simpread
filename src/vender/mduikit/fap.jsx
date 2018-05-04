@@ -135,7 +135,7 @@ const cssinjs_panel = () => {
 
               opacity: 0,
               visibility: 'hidden',
-              transition: 'opacity 1s ease',
+              transition: 'opacity 300ms ease',
 
               zIndex: 2147483647,
           },
