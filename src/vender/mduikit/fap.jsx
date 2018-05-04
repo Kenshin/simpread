@@ -241,7 +241,7 @@ class Panel extends React.Component {
             tag       = $target[0].tagName.toLowerCase();
         }
         if ( active == "false" ) {
-            const $others = $( "panel-tab[active=true]"   );
+            const $others = $( "panel-tab[active=true]" );
             $target.attr( "active", true );
             $target.find( "panel-border" ).css({ ...style.panel_border, ...style.panel_border_active });
 
@@ -276,7 +276,7 @@ class Panel extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout( ()=>$( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" ), 50 );
+        $( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" );
         this.props.autoHeight == false && this.autoHeight();
         this.offsetHeight();
         this.props.onOpen();
