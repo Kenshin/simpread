@@ -459,25 +459,32 @@ export default class Fap extends React.Component {
         }
     }
 
+    panelBgEventHandler( $panelbg ) {
+        const evt   = this.props.autoHide ? "mouseover" : "click",
+              style = { ...this.style };
+        $panelbg.one( evt, event => {
+            if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
+                $panelbg.animate({ opacity: 0 },{
+                    complete: ()=> {
+                        ReactDOM.unmountComponentAtNode( $panelbg[0] );
+                        $panelbg.css({ ...style.panel_bg });
+                    }
+                });
+            }
+        });
+    }
+
     panelRender( $panelbg ) {
         if ( $panelbg.length > 0 ) {
             const style = { ...this.style };
             $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
-            ReactDOM.render( <Panel { ...this.props } onOpen={ ()=>this.onPop( "onOpen" ) } onClose={ ()=>this.onPop( "onClose" ) } />, $panelbg[0] );
-            setTimeout( () => {
-                const evt = this.props.autoHide ? "mouseover" : "click";
-                $panelbg.on( evt, event => {
-                    if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
-                        $panelbg.animate({ opacity: 0 },{
-                            complete: ()=> {
-                                ReactDOM.unmountComponentAtNode( $panelbg[0] );
-                                $panelbg.off( "mouseover" );
-                                $panelbg.css({ ...style.panel_bg });
-                            }
-                        });
-                    }
-                });
-            }, 200 );
+            ReactDOM.render( 
+                <Panel { ...this.props } onOpen={ ()=>{
+                        this.panelBgEventHandler( $panelbg );
+                        this.onPop( "onOpen" );
+                    }}
+                    onClose={ ()=>this.onPop( "onClose" ) }
+                />, $panelbg[0] );
         }
     }
 
