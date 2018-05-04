@@ -254,16 +254,15 @@ class Panel extends React.Component {
     }
 
     autoHeight() {
-        let height = 0;
+        let maxHeight = 0;
         $( "panel-groups" ).children().map( ( idx, item ) => {
-            if ( height == 0 ) {
-                height = $(item).height();
-            } else if ( $(item).height() > height ) {
-                height = $(item).height();
-            } else if ( $(item).height() <= height ) {
-                $(item).height( height );
+            if ( maxHeight == 0 ) {
+                maxHeight = $(item).height();
+            } else if ( $(item).height() > maxHeight ) {
+                maxHeight = $(item).height();
             }
         });
+        $( "panel-groups" ).height( maxHeight );
     }
 
     offsetHeight() {
