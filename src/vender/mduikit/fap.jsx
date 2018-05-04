@@ -278,8 +278,8 @@ class Panel extends React.Component {
     componentDidMount() {
         setTimeout( ()=>$( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" ), 50 );
         this.props.autoHeight == false && this.autoHeight();
-        this.props.onOpen();
         this.offsetHeight();
+        this.props.onOpen();
     }
 
     componentWillUnmount() {
