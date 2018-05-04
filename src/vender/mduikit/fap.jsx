@@ -179,18 +179,13 @@ const cssinjs_panel = () => {
 
           groups: {
             display: 'block',
-
-            padding: '20px 20px 20px 0',
-
             width: '100%',
-            maxHeight: '550px',
-
             overflowY: 'auto',
           },
 
           group: {
             display: 'none',
-            padding: '10px 0px 10px',
+            padding: '39px 0px 10px',
           },
 
           group_active: {
@@ -257,10 +252,21 @@ class Panel extends React.Component {
         });
     }
 
+    offsetHeight() {
+        const $target = $( this.refs.panel ),
+              offset  = $target.position().top,
+              $groups = $target.find( "panel-groups" ),
+              height  = $groups.height();
+        if ( offset < 0 ) {
+            $groups.height( height + offset - 10 ).css({ "padding-right": "20px" });
+        }
+    }
+
     componentDidMount() {
         setTimeout( ()=>$( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" ), 50 );
         this.props.autoHeight == false && this.autoHeight();
         this.props.onOpen();
+        this.offsetHeight();
     }
 
     componentWillUnmount() {
