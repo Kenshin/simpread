@@ -189,6 +189,11 @@ export default class LabsOpt extends React.Component {
                             label="是否一直显示右下角的控制栏？"
                             desc="关闭意味着「鼠标移上时才显示」"
                             onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
+                    <Switch width="100%" checked={ this.props.read.fap }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否启用高级控制栏面板？"
+                            desc="关闭意味着「使用浮动控制栏」"
+                            onChange={ (s)=>this.onChange(s, "read", "fap") } />
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="是否启动临时阅读模式？"

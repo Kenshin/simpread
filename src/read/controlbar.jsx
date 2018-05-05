@@ -17,7 +17,6 @@ import Fab         from 'fab';
 import Fap         from 'fap'
 import * as ttips  from 'tooltip';
 
-let fap = true;
 let notify;
 const tooltip_options = {
     target   : "name",
@@ -38,7 +37,7 @@ export default class ReadCtlbar extends React.Component {
 
     verify( type ) {
         if ( ss.VerifyCustom( type, storage.current.custom ) ) {
-            !notify && ( notify = new Notify().Render({ state: "holdon", content: '由于已使用自定义样式，因此设定有可能无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>', callback:()=>notify=undefined }));
+            !notify && ( notify = new Notify().Render({ state: "holdon", content: '由于已使用自定义样式，设定 <b style="color: #fff;">有可能无效</b>，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>', callback:()=>notify=undefined }));
         }
     }
 
@@ -121,7 +120,7 @@ export default class ReadCtlbar extends React.Component {
         if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
             delete conf.readItems.option;
         }
-        if ( fap ) {
+        if ( storage.current.fap ) {
             delete conf.readItems.exit;
             delete conf.readItems.option.items.setting;
         }
@@ -132,7 +131,7 @@ export default class ReadCtlbar extends React.Component {
     }
 
     render() {
-         const Controlbar = fap ? 
+         const Controlbar = storage.current.fap ? 
             <Fap items={ [ "样式", "动作" ] } autoHide={ false }
                 waves="md-waves-effect md-waves-circle md-waves-float" 
                 onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }
