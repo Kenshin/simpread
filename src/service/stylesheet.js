@@ -121,10 +121,6 @@ function custom( type, props ) {
     });
     let styles = arr.join( "" );
     switch ( type ) {
-        case "global":
-            !origin_read_style && ( origin_read_style = $( "sr-read" ).attr( "style" ) );
-            $( "sr-read" ).attr( "style", origin_read_style + styles );
-            return;
         case "title":
             styles = `sr-rd-title {${styles}}`;
             break;
