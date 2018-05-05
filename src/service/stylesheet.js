@@ -202,13 +202,13 @@ function vfyCustom( type, styles ) {
         case "layout":
         case "margin":
             return styles.global.marginLeft != "" || styles.css != "";
+        case "fontfamily":
+            return styles.global.fontFamily != "" || styles.css != "";
         case "fontsize":
             return styles.title.fontSize != "" ||
                    styles.desc.fontSize != ""  ||
                    styles.art.fontSize != ""   ||
                    styles.css != "";
-        case "fontfamily":
-            return styles.global.fontFamily != "" || styles.css != "";
         case "theme":
             return styles.css.search( "simpread-theme-root" ) != -1;
     }
