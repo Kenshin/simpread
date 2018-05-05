@@ -116,6 +116,9 @@ const name = "simpread",
             list  : false,
         },
         origins   : [],
+        blacklist : [
+            "google.com",
+        ]
     },
     unread = {
         idx       : 0,

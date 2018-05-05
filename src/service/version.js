@@ -130,7 +130,8 @@ function Verify( curver, data ) {
     }
 
     if ( curver == "1.1.0" ) {
-        data.read.fap = true;
+        data.option.blacklist = [ "google.com" ];
+        data.read.fap         = true;
         data.read.custom.global.fontFamily && ( data.read.fontfamily = data.read.custom.global.fontFamily );
         data.read.custom.global.marginLeft && ( data.read.layout     = data.read.custom.global.marginLeft );
         delete data.read.custom.global;
