@@ -201,9 +201,8 @@ function vfyCustom( type, styles ) {
     switch( type ) {
         case "layout":
         case "margin":
-            return styles.global.marginLeft != "" || styles.css != "";
         case "fontfamily":
-            return styles.global.fontFamily != "" || styles.css != "";
+            return styles.css != "";
         case "fontsize":
             return styles.title.fontSize != "" ||
                    styles.desc.fontSize != ""  ||
@@ -211,6 +210,8 @@ function vfyCustom( type, styles ) {
                    styles.css != "";
         case "theme":
             return styles.css.search( "simpread-theme-root" ) != -1;
+        default:
+            return styles.css != "";
     }
 }
 
