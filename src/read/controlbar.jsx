@@ -18,6 +18,7 @@ import Fap         from 'fap'
 import * as ttips  from 'tooltip';
 
 let fap = true;
+let notify;
 const tooltip_options = {
     target   : "name",
     position : "bottom",
@@ -66,7 +67,7 @@ export default class ReadCtlbar extends React.Component {
                         Object.keys( ss ).forEach( (name)=>name.toLowerCase() == key && ss[name]( value ));
                         this.props.onAction && this.props.onAction( key, value );
                     } else {
-                        new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
+                        !notify && ( notify = new Notify().Render({ state: "holdon", content: '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>', callback:()=>notify=undefined }));
                     }
                     break;
                 case type.indexOf( "_" ) > 0 && type.startsWith( "theme" ):
@@ -78,7 +79,7 @@ export default class ReadCtlbar extends React.Component {
                         th.Change( th.names[i] );
                         this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
                     } else {
-                        new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
+                        !notify && ( notify = new Notify().Render({ state: "holdon", content: '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>', callback:()=>notify=undefined }));
                     }
                     break;
                 default:
