@@ -103,7 +103,8 @@ function rollback() {
  */
 function Render( cb ) {
     callback = cb;
-    !dia.Popup( rootjq ) && dia.Open( <Modals/>, root );
+    !dia.Popup( rootjq ) && !storage.current.fap && dia.Open( <Modals/>, root );
+    storage.current.mode == STORAGE_MODE.read && storage.current.fap && new Notify().Render( "已经启用控制栏面板，所以无法使用此功能。" );
 }
 
 /**
