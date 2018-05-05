@@ -48,6 +48,7 @@ const name = "simpread",
         progress  : true,
         auto      : false,
         controlbar: true,
+        fap       : true,
         highlight : true,
         shortcuts : "A A",
         toc       : true,
@@ -62,11 +63,12 @@ const name = "simpread",
         layout    : "",  // default 20%
         //sites     : [],  // e.g. [ "<url>", site ]
         custom    : {
-            global: {
-                fontFamily : "",
-                marginLeft : "",
-                marginRight: "",
-            },
+            // remove by 1.1.1
+            //global: {
+            //    fontFamily : "",
+            //    marginLeft : "",
+            //    marginRight: "",
+            //},
             title : {
                 fontFamily : "",
                 fontSize   : "",

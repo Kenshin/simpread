@@ -117,8 +117,10 @@ const cssinjs_panel = () => {
               right: '32px',
               bottom: '185px',
 
-              minWidth: '480px',
+              minWidth: '380px',
               minHeight: '300px',
+              maxWidth: '500px',
+              width: '100%',
 
               margin: 0,
               padding: '39px 24px 0',
@@ -133,7 +135,7 @@ const cssinjs_panel = () => {
 
               opacity: 0,
               visibility: 'hidden',
-              transition: 'opacity 1s ease',
+              transition: 'opacity 300ms ease',
 
               zIndex: 2147483647,
           },
@@ -154,6 +156,17 @@ const cssinjs_panel = () => {
             width: '100%',
 
             cursor: 'pointer',
+          },
+
+          panel_tab_label: {
+            display: '-webkit-box',
+            flexShrink: 1,
+
+            WebkitLineClamp: 1,
+            '-webkit-box-orient': 'vertical',
+
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
           },
 
           panel_border: {
@@ -180,6 +193,7 @@ const cssinjs_panel = () => {
           groups: {
             display: 'block',
             width: '100%',
+            overflowY: 'auto',
           },
 
           group: {
@@ -218,42 +232,53 @@ class Panel extends React.Component {
         const style   = { ...this.style };
         let   $target = $( event.target ),
               active  = $target.attr( "active" ),
+              idx     = $target.attr( "idx" ),
               tag     = event.target.tagName.toLowerCase();
         while ( tag  != "panel-tab" ) {
             $target   = $target.parent();
             active    = $target.attr( "active" );
+            idx       = $target.attr( "idx" );
             tag       = $target[0].tagName.toLowerCase();
         }
         if ( active == "false" ) {
-            const $others = $( "panel-tab[active=true]"   ),
-                    $group  = $( "panel-group[active=true]" );
+            const $others = $( "panel-tab[active=true]" );
             $target.attr( "active", true );
             $target.find( "panel-border" ).css({ ...style.panel_border, ...style.panel_border_active });
 
             $others.attr( "active", false );
             $others.find( "panel-border" ).css({ ...style.panel_border });
 
-            $( "panel-group[active=false]" ).attr( "active", true ).css({ ...style.group, ...style.group_active });
-            $group.attr( "active", false ).css({ ...style.group });
+            $( `panel-group[idx=${idx}]`  ).attr( "active", true ).css({ ...style.group, ...style.group_active });
+            $( `panel-group[idx!=${idx}]` ).attr( "active", false ).css({ ...style.group });
         }
     }
 
     autoHeight() {
-        let height = 0;
+        let maxHeight = 0;
         $( "panel-groups" ).children().map( ( idx, item ) => {
-            if ( height == 0 ) {
-                height = $(item).height();
-            } else if ( $(item).height() > height ) {
-                height = $(item).height();
-            } else if ( $(item).height() <= height ) {
-                $(item).height( height );
+            if ( maxHeight == 0 ) {
+                maxHeight = $(item).height();
+            } else if ( $(item).height() > maxHeight ) {
+                maxHeight = $(item).height();
             }
         });
+        $( "panel-groups" ).height( maxHeight );
+    }
+
+    offsetHeight() {
+        const $target = $( this.refs.panel ),
+              offset  = $target.position().top,
+              $groups = $target.find( "panel-groups" ),
+              height  = $groups.height();
+        if ( offset < 0 ) {
+            $groups.height( height + offset - 32 ).css({ "padding-right": "20px" });
+        }
     }
 
     componentDidMount() {
-        setTimeout( ()=>$( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" ), 50 );
+        $( this.refs.panel ).css( "opacity", 1 ).css( "visibility", "visible" );
         this.props.autoHeight == false && this.autoHeight();
+        this.offsetHeight();
         this.props.onOpen();
     }
 
@@ -270,13 +295,13 @@ class Panel extends React.Component {
               active_group  = { ...style.group, ...style.group_active },
               events        = this.props.tabAutoSel ? { onMouseEnter: evt => this.onTabChange(evt) } : { onClick: evt => this.onTabChange(evt) },
               tabs          = this.props.items.map( ( item, idx ) => {
-                return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } { ...events } >
-                        <span>{item}</span>
+                return <panel-tab style={ style.panel_tab } active={ idx == 0 ? "true" : "false" } idx={ idx } { ...events } >
+                        <span style={ style.panel_tab_label }>{item}</span>
                         <panel-border style={ idx == 0 ? active_border : { ...style.panel_border } }></panel-border>
                     </panel-tab>;
              }),
              groups         = this.props.children.map( ( child, idx ) => {
-                return <panel-group style={ idx == 0 ? active_group : { ...style.group } } active={ idx == 0 ? "true" : "false" } >{child}</panel-group>;
+                return <panel-group style={ idx == 0 ? active_group : { ...style.group } } active={ idx == 0 ? "true" : "false" } idx={ idx }>{child}</panel-group>;
              });
 
         return (
@@ -434,25 +459,24 @@ export default class Fap extends React.Component {
         }
     }
 
+    panelBgEventHandler( event ) {
+        if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
+            const $panelbg = $( this.refs.bg ),
+                  style    = { ...this.style };
+            $panelbg.animate({ opacity: 0 },{
+                complete: ()=> {
+                    ReactDOM.unmountComponentAtNode( $panelbg[0] );
+                    $panelbg.css({ ...style.panel_bg });
+                }
+            });
+        }
+    }
+
     panelRender( $panelbg ) {
         if ( $panelbg.length > 0 ) {
             const style = { ...this.style };
             $panelbg.css({ ...style.panel_bg, ...{ "display": "block" , opacity: 1 }});
-            ReactDOM.render( <Panel { ...this.props } onOpen={ ()=>this.onPop( "onOpen" ) } onClose={ ()=>this.onPop( "onClose" ) } />, $panelbg[0] );
-            setTimeout( () => {
-                const evt = this.props.autoHide ? "mouseover" : "click";
-                $panelbg.on( evt, event => {
-                    if ( event.target.tagName.toLowerCase() == "panel-bg" ) {
-                        $panelbg.animate({ opacity: 0 },{
-                            complete: ()=> {
-                                ReactDOM.unmountComponentAtNode( $panelbg[0] );
-                                $panelbg.off( "mouseover" );
-                                $panelbg.css({ ...style.panel_bg });
-                            }
-                        });
-                    }
-                });
-            }, 200 );
+            ReactDOM.render( <Panel { ...this.props } onOpen={ ()=>this.onPop( "onOpen" ) } onClose={ ()=>this.onPop( "onClose" ) }/>, $panelbg[0] );
         }
     }
 
@@ -463,6 +487,12 @@ export default class Fap extends React.Component {
     render() {
         const style = { ...this.style };
         style.spec  = { ...style.origin, ...style.large, ...style.spec_item };
+
+        const evt   = this.props.autoHide ? {
+            onMouseOver: (e)=> this.panelBgEventHandler(e)
+        } : {
+            onClick    : (e)=> this.panelBgEventHandler(e)
+        };
 
         const btn_props = ( id, type, style, { name, color, icon }, icon_style, tooltip, waves )=> {
                 return {
@@ -484,7 +514,7 @@ export default class Fap extends React.Component {
         panel  = <panel-bg ref="bg"></panel-bg>;
 
         return (
-            <fap style={ style.root }>
+            <fap style={ style.root } { ...evt } >
                 { spec   }
                 { anchor }
                 { panel  }

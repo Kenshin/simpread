@@ -121,10 +121,6 @@ function custom( type, props ) {
     });
     let styles = arr.join( "" );
     switch ( type ) {
-        case "global":
-            !origin_read_style && ( origin_read_style = $( "sr-read" ).attr( "style" ) );
-            $( "sr-read" ).attr( "style", origin_read_style + styles );
-            return;
         case "title":
             styles = `sr-rd-title {${styles}}`;
             break;
@@ -201,14 +197,14 @@ function vfyCustom( type, styles ) {
     switch( type ) {
         case "layout":
         case "margin":
-            return styles.global.marginLeft != "" || styles.css != "";
+        case "fontfamily":
+        case "custom":
+            return styles.css != "";
         case "fontsize":
             return styles.title.fontSize != "" ||
                    styles.desc.fontSize != ""  ||
                    styles.art.fontSize != ""   ||
                    styles.css != "";
-        case "fontfamily":
-            return styles.global.fontFamily != "" || styles.css != "";
         case "theme":
             return styles.css.search( "simpread-theme-root" ) != -1;
     }
