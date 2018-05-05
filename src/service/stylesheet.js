@@ -202,6 +202,7 @@ function vfyCustom( type, styles ) {
         case "layout":
         case "margin":
         case "fontfamily":
+        case "custom":
             return styles.css != "";
         case "fontsize":
             return styles.title.fontSize != "" ||
@@ -210,8 +211,6 @@ function vfyCustom( type, styles ) {
                    styles.css != "";
         case "theme":
             return styles.css.search( "simpread-theme-root" ) != -1;
-        default:
-            return styles.css != "";
     }
 }
 
