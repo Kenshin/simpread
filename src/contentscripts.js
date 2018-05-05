@@ -22,6 +22,7 @@ import PureRead  from 'pureread';
 import * as prplugin from 'prplugin';
 
 let pr,                           // pure read object
+    is_blacklist = false,
     current_url  = location.href; // current page url ( when changed page changed )
 
 $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // hack code for firefox
@@ -30,15 +31,52 @@ $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // ha
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
-    bindShortcuts();
-    autoOpen();
+    if ( blacklist() ) {
+        $( "style" ).map( ( idx, item ) => {
+            if ( item.innerText.includes( "simpread"        ) || 
+                 item.innerText.includes( "sr-opt-focus"    ) || 
+                 item.innerText.includes( "sr-rd-theme"     ) || 
+                 item.innerText.includes( "notify-gp"       ) || 
+                 item.innerText.includes( "md-waves-effect" )
+            ) {
+                $(item).remove();
+            }
+        });
+    } else {
+        bindShortcuts();
+        autoOpen();
+    }
 });
+
+/**
+ * Blacklist
+ * 
+ * @return {boolean} true: is blacklist; false: is't blacklist
+ */
+function blacklist() {
+    for ( const item of storage.option.blacklist ) {
+        if ( !item.startsWith( "http" ) ) {
+            if ( location.hostname.includes( item ) ) {
+                is_blacklist = true;
+                break;
+            }
+        } else {
+            if ( location.href == item ) {
+                is_blacklist = true;
+                break;
+            }
+        }
+    }
+    console.log( "current site is blacklist", is_blacklist )
+    return is_blacklist;
+}
 
 /**
  * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "contentscripts runtime Listener", request );
+    if ( is_blacklist ) return;
     switch ( request.type ) {
         case msg.MESSAGE_ACTION.focus_mode:
             if ( storage.option.br_exit ) focus.Exist( false ) ? focus.Exit() : focusMode();
