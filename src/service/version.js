@@ -16,6 +16,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.0.5", "Wed Nov 15 2017 11:39:23 GMT+0800 (CST)" ],
           [ "1.0.6", "Thu Dec 07 2017 14:48:44 GMT+0800 (CST)" ],
           [ "1.1.0", "Sat Dec 23 2017 15:09:30 GMT+0800 (CST)" ],
+          [ "1.1.1", "Sat May 05 2018 09:57:05 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -26,6 +27,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.0.5", "新增「导出 epub，TXT 阅读器，阅读模式增加目录功能，白名单等」，" ],
           [ "1.0.6", "新增「添加新站到阅读模式，导入第三方适配站点等」，" ],
           [ "1.1.0", "新增「站点编辑器，站点适配源，站点管理器等」，" ],
+          [ "1.1.1", "新增「黑名单，全新的控制栏面板等」，" ],
     ]);
 
 /**
@@ -125,6 +127,14 @@ function Verify( curver, data ) {
         delete data.focus.sites;
         delete data.read.sites;
         curver = "1.1.0";
+    }
+
+    if ( curver == "1.1.0" ) {
+        data.read.fap = true;
+        data.read.custom.global.fontFamily && ( data.read.fontfamily = data.read.custom.global.fontFamily );
+        data.read.custom.global.marginLeft && ( data.read.layout     = data.read.custom.global.marginLeft );
+        delete data.read.custom.global;
+        curver = "1.1.1";
     }
 
     /*
