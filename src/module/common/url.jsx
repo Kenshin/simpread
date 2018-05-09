@@ -1,6 +1,6 @@
 console.log( "===== simpread option common: URL =====" )
 
-import * as prplugin from 'prplugin';
+import * as puplugin from 'puplugin';
 
 import TextField from 'textfield';
 
@@ -21,7 +21,7 @@ export default class URL extends React.Component {
     changeURL( event ) {
         let  code = 0;
         const url = event.target.value.trim(),
-              minimatch = prplugin.Plugin( "minimatch" );
+              minimatch = puplugin.Plugin( "minimatch" );
 
         if ( url == "" ) {
             code = -2;

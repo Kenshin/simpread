@@ -300,7 +300,7 @@ const webpack = require( 'webpack' ),
           waves      : __dirname + '/src/vender/mduikit/waves.js',
 
           puread     : __dirname + '/src/vender/puread/pureread.js',
-          prplugin   : __dirname + '/src/vender/puread/plugin.js',
+          puplugin   : __dirname + '/src/vender/puread/plugin.js',
 
         }
       }

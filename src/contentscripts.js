@@ -19,7 +19,7 @@ import {browser} from 'browser';
 import * as watch from 'watch';
 
 import PureRead  from 'puread';
-import * as prplugin from 'prplugin';
+import * as puplugin from 'puplugin';
 
 let pr,                           // pure read object
     is_blacklist = false,
@@ -185,8 +185,8 @@ function readMode() {
 function autoOpen() {
     getCurrent( mode.read );
     if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && util.Exclusion(  prplugin.Plugin( "minimatch" ), storage.current )) ||
-         ( !storage.current.auto && util.Whitelist( prplugin.Plugin( "minimatch" ), storage.current ))
+         ( storage.current.auto && util.Exclusion(  puplugin.Plugin( "minimatch" ), storage.current )) ||
+         ( !storage.current.auto && util.Whitelist( puplugin.Plugin( "minimatch" ), storage.current ))
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
@@ -257,7 +257,7 @@ function browserAction( is_update ) {
 */
 function pRead() {
     pr = new PureRead( storage.sites );
-    pr.AddPlugin( prplugin.Plugin() );
+    pr.AddPlugin( puplugin.Plugin() );
     pr.Getsites();
     storage.puread = pr;
     console.log( "current puread object is   ", pr )
