@@ -75,7 +75,7 @@ export default class AdapteSite {
     }
 
     /**
-     * Add sites from url result( global sites )
+     * Add new sites to this.sites.global( global sites )
      * 
      * @param {object} sites.[array]
      * @return {int} update sites count
