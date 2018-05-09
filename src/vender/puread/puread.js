@@ -24,7 +24,7 @@ export default class PureRead extends AdapteSite {
             beautify  : plugin.beautify,
             stylesheet: plugin.style,
         };
-        super.minimatch = this.plugin.minimatch;
+        super.SetMinimatch( this.plugin.minimatch );
     }
 
     /**

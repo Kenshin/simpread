@@ -29,7 +29,7 @@ export default class AdapteSite {
     /**
      * Set global minimatch
      */
-    set minimatch( value ) {
+    SetMinimatch( value ) {
         minimatch = value;
     }
 
