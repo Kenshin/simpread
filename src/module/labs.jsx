@@ -53,6 +53,11 @@ export default class LabsOpt extends React.Component {
         $( this.refs.whitelist ).velocity( !value ? "slideDown" : "slideUp" );
     }
 
+    blacklist( event ) {
+        this.props.option.blacklist = event.target.value.split("\n");
+        this.props.onChange && this.props.onChange( false );
+    }
+
     componentDidMount() {
         this.exclusionState( this.props.read.auto );
         this.tocState( this.props.read.toc );
@@ -133,6 +138,16 @@ export default class LabsOpt extends React.Component {
                             label="动作栏图标是否改为 「进入/退出 」模式？"
                             desc="包括：聚焦模式和阅读模式，默认（关闭）为「弹出设定对话框」"
                             onChange={ (s)=>this.onChange(s, "option", "br_exit") } />
+                    <div style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>黑名单</div>
+                        <div className="sublabel">加入其中后，不再启动简悦，有别于白名单和排除列表，黑名单则彻底不加载。</div>
+                        <TextField 
+                            multi={ true } rows={8}
+                            placeholder="每行一个，支持： URL， hostname 等。" 
+                            value={ ( this.props.option.blacklist||[] ).join( "\n" ) }
+                            onChange={ (e)=>this.blacklist(e) }
+                        />
+                    </div>
                     <Switch width="100%" checked={ this.props.option.secret }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="同步时是否包含授权服务中的授权码？"
@@ -213,12 +228,13 @@ export default class LabsOpt extends React.Component {
                     </div>
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            desc="白名单与黑名单功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
+                            desc="白名单与排除列表功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
                             label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
                     <div ref="exclusion" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
-                        <div className="label">排除列表（黑名单）</div>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>排除列表</div>
+                        <div className="sublabel">加入其中后将不会自动进入阅读模式，仅当启用「自动进入阅读模式」有效。</div>
                         <TextField 
                             multi={ true } rows={8}
                             placeholder="每行一个，支持： URL, minimatch 等。" 
@@ -228,7 +244,8 @@ export default class LabsOpt extends React.Component {
                     </div>
 
                     <div ref="whitelist" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
-                        <div className="label">白名单</div>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>白名单</div>
+                        <div className="sublabel">加入其中后将自动进入阅读模式，仅当禁用「自动进入阅读模式」有效。</div>
                         <TextField 
                             multi={ true } rows={8}
                             placeholder="每行一个，支持： URL, minimatch 等。" 
