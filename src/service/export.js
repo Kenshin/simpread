@@ -969,6 +969,12 @@ class Kindle {
         });
     }
 
+    Temp() {
+        const url = `${this.host}/${this.id}.html`;
+        console.log( url )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+
     Send() {
         const url = `${this.server}?url=${this.host}/${this.id}.html`;
         console.log( url )
