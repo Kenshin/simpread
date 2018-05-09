@@ -299,7 +299,7 @@ const webpack = require( 'webpack' ),
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
 
-          puread     : __dirname + '/src/vender/puread/pureread.js',
+          puread     : __dirname + '/src/vender/puread/puread.js',
           puplugin   : __dirname + '/src/vender/puread/plugin.js',
 
         }
