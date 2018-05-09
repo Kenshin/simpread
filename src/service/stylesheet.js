@@ -35,7 +35,7 @@ function getColor( value ) {
  * @param  {number} background opacity
  * @return {string} new background color
  */
-function BackgroundColor( bgcolor, opacity ) {
+function backgroundColor( bgcolor, opacity ) {
     const color   = getColor( bgcolor ),
           newval  = `rgba(${color}, ${opacity / 100})`;
     $( bgcls ).css( bgcolorstyl, newval );
@@ -48,7 +48,7 @@ function BackgroundColor( bgcolor, opacity ) {
  * @param  {string} opacity
  * @return {string} new background color or null
  */
-function Opacity( opacity ) {
+function opacity( opacity ) {
     const bgcolor = $( bgcls ).css( bgcolorstyl ),
           color   = getColor( bgcolor ),
           newval  = `rgba(${color}, ${opacity / 100})`;
@@ -196,14 +196,14 @@ function vfyCustom( type, styles ) {
 export {
     iconPath as IconPath,
     getColor as GetColor,
-    BackgroundColor,
-    Opacity,
+    backgroundColor as BgColor,
+    opacity    as Opacity,
     fontFamily as FontFamily,
     fontSize   as FontSize,
     layout     as Layout,
-    custom     as Custom,
-    css        as CSS,
     siteCSS    as SiteCSS,
     preview    as Preview,
+    custom     as Custom,
+    css        as CSS,
     vfyCustom  as VerifyCustom,
 }
