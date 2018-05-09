@@ -1,5 +1,9 @@
 console.log( "=== simpread stylesheet load ===" )
 
+/**
+ * Clone from puread/plugin/stylesheet.js except iconPath
+ */
+
 import {browser} from 'browser';
 
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ];
