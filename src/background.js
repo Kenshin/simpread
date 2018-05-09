@@ -8,7 +8,7 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 
-import PureRead    from 'pureread';
+import PureRead    from 'puread';
 
 /**
  * Sevice: storage Get data form chrome storage

@@ -18,7 +18,7 @@ import * as msg  from 'message';
 import {browser} from 'browser';
 import * as watch from 'watch';
 
-import PureRead  from 'pureread';
+import PureRead  from 'puread';
 import * as prplugin from 'prplugin';
 
 let pr,                           // pure read object
@@ -260,5 +260,5 @@ function pRead() {
     pr.AddPlugin( prplugin.Plugin() );
     pr.Getsites();
     storage.puread = pr;
-    console.log( "current pureread object is   ", pr )
+    console.log( "current puread object is   ", pr )
 }
