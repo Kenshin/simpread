@@ -186,6 +186,15 @@ export default class AdapteSite {
     }
 
     /**
+     * Clear sites
+     * 
+     * @param {string} site type, only include: global, custom. local
+     */
+    Clearsites( type ) {
+        type ? ( this.sites[type] = [] ) : ( this.sites = { global:[], custom:[], local:[] });
+    }
+
+    /**
      * Add urls to origins
      * 
      * @param {json} result json
