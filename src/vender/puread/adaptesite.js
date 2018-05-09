@@ -106,6 +106,21 @@ export default class AdapteSite {
     }
 
     /**
+     * Add all sites to this.sites
+     * 
+     * @param  {object} new sites
+     * @return {object} this.sites
+     */
+    Addallsites( sites ) {
+        this.sites = {
+            global: [ ...sites.global ],
+            custom: [ ...sites.custom ],
+            local : [ ...sites.local  ],
+        };
+        return this.sites;
+    }
+
+    /**
      * Add new site( read only )
      * 
      * @param {string} include: focus, read
