@@ -9,6 +9,7 @@ export default class PureRead extends AdapteSite {
         super( sites );
         this.version = "0.0.2";
         this.html    = {}; // clone site, include: title, desc, include, avatar, paging
+        this.plugin  = {};
     }
 
     /**
@@ -17,10 +18,13 @@ export default class PureRead extends AdapteSite {
      * @param {object} plugin object
      */
     AddPlugin( plugin ) {
-        super.minimatch = plugin.minimatch;
-        this.pangu      = plugin.pangu;
-        this.beautify   = plugin.beautify;
-        this.stylesheet = plugin.style;
+        this.plugin = {
+            minimatch : plugin.minimatch,
+            pangu     : plugin.pangu,
+            beautify  : plugin.beautify,
+            stylesheet: plugin.style,
+        };
+        super.minimatch = this.plugin.minimatch;
     }
 
     /**
@@ -83,11 +87,11 @@ export default class PureRead extends AdapteSite {
      * @param {jquery} jquery
      */
     Beautify( $target ) {
-        if ( this.beautify ) {
-            this.beautify.specbeautify(   this.current.site.name, $target );
-            this.beautify.removeSpareTag( this.current.site.name, $target );
-            this.beautify.htmlbeautify( $target );
-            this.beautify.commbeautify( this.current.site.name, $target );
+        if ( this.plugin.beautify ) {
+            this.plugin.beautify.specbeautify(   this.current.site.name, $target );
+            this.plugin.beautify.removeSpareTag( this.current.site.name, $target );
+            this.plugin.beautify.htmlbeautify( $target );
+            this.plugin.beautify.commbeautify( this.current.site.name, $target );
         }
     }
 
@@ -97,8 +101,8 @@ export default class PureRead extends AdapteSite {
      * @param {string} class name
      */
     Format( cls ) {
-        this.pangu &&
-            this.pangu.spacingElementByClassName( cls );
+        this.plugin.pangu &&
+            this.plugin.pangu.spacingElementByClassName( cls );
     }
 }
 
