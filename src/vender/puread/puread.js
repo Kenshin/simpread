@@ -20,6 +20,7 @@ export default class PureRead extends AdapteSite {
         super.minimatch = plugin.minimatch;
         this.pangu      = plugin.pangu;
         this.beautify   = plugin.beautify;
+        this.stylesheet = plugin.style;
     }
 
     /**
