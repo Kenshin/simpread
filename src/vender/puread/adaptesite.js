@@ -215,7 +215,7 @@ export default class AdapteSite {
      * @param  {object} new sites
      * @return {array} this.sites.custom
      */
-    AddOrigins( new_sites ) {
+    Addorigins( new_sites ) {
         this.sites.custom = [ ...new_sites ];
         return this.sites.custom;
     }
@@ -225,7 +225,7 @@ export default class AdapteSite {
      * 
      * @returns custom.length
      */
-    ClearOrigins() {
+    Clearorigins() {
         const len = this.sites.custom.length;
         this.sites.custom = [];
         return len;
