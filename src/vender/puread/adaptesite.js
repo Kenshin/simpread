@@ -75,7 +75,7 @@ export default class AdapteSite {
     }
 
     /**
-     * Add sites from url result
+     * Add sites from url result( global sites )
      * 
      * @param {object} sites.[array]
      * @return {int} update sites count
@@ -210,7 +210,7 @@ export default class AdapteSite {
     }
 
     /**
-     * Add new sites to this.sites.custom
+     * Add new sites to this.sites.custom( custom sites )
      * 
      * @param  {object} new sites
      * @return {array} this.sites.custom
