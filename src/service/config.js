@@ -214,6 +214,11 @@ const readItems = {
                 "icon" : ss.IconPath("markdown_icon"),
                 "color": "#D4237A",
             },
+            "html" : {
+                "name" : "导出为 HTML",
+                "icon" : ss.IconPath("html_icon"),
+                "color": "#D4237A",
+            },
         },
     },
     "send" : {
@@ -249,6 +254,11 @@ const readItems = {
             "kindle" : {
                 "name" : "保存到 Kindle",
                 "icon" : ss.IconPath("kindle_icon"),
+                "color": "#00BCD4",
+            },
+            "temp" : {
+                "name" : "生成临时页面",
+                "icon" : ss.IconPath("temp_icon"),
                 "color": "#00BCD4",
             },
         },
