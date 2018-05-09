@@ -14,7 +14,7 @@ function iconPath( name ) {
 }
 
 /**
- * Get background color value
+ * Get background color value for focus mode
  * 
  * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
  * @return {string} e.g. 235, 235, 235
@@ -29,7 +29,7 @@ function getColor( value ) {
 };
 
 /**
- * Set focus mode background color
+ * Set focus mode background color for focus mode
  * 
  * @param  {string} background color
  * @param  {number} background opacity
@@ -43,7 +43,7 @@ function BackgroundColor( bgcolor, opacity ) {
 }
 
 /**
- * Set background opacity
+ * Set background opacity for focus mode
  * 
  * @param  {string} opacity
  * @return {string} new background color or null
@@ -61,7 +61,7 @@ function Opacity( opacity ) {
 }
 
 /**
- * Set read mode font family
+ * Set read mode font family for read mode
  * 
  * @param {string} font family name e.g. PingFang SC; Microsoft Yahei
  */
@@ -70,7 +70,7 @@ function fontFamily( family ) {
 }
 
 /**
- * Set read mode font size
+ * Set read mode font size for read mode
  * 
  * @param {string} font size, e.g. 70% 62.5%
  */
@@ -83,7 +83,7 @@ function fontSize( value ) {
 }
 
 /**
- * Set read mode layout width
+ * Set read mode layout width for read mode
  * 
  * @param {string} layout width
  */
@@ -92,10 +92,10 @@ function layout( width ) {
 }
 
 /**
- * Add custom css to <head>
+ * Add custom css to <head> for read mode
  * 
- * @param {string} storage.read.custom[type]
- * @param {object} storage.read.custom
+ * @param {string} read.custom[type]
+ * @param {object} read.custom
  */
 function custom( type, props ) {
     const format = ( name ) => {
@@ -123,8 +123,6 @@ function custom( type, props ) {
             break;
     }
 
-    console.log( "current style is ", styles );
-
     const $target = $( "head" ).find( `style#simpread-custom-${type}` );
     if ( $target.length == 0 ) {
         $( "head" ).append(`<style type="text/css" id="simpread-custom-${type}">${styles}</style>`);
@@ -135,10 +133,10 @@ function custom( type, props ) {
 }
 
 /**
- * Add css to <head>
+ * Add css to <head> for read mode
  * 
- * @param {string} storage.read.custom.css
- * @param {object} storage.read.custom.css value
+ * @param {string} read.custom.css
+ * @param {object} read.custom.css value
  */
 function css( type, styles ) {
     const $target = $( "head" ).find( `style#simpread-custom-${type}` );
@@ -150,7 +148,7 @@ function css( type, styles ) {
 }
 
 /**
- * Add/Remove current site styles( string ) to head
+ * Add/Remove current site styles( string ) to head for read mdoe
  * 
  * @param {string} styles 
  */
@@ -162,7 +160,7 @@ function siteCSS( styles ) {
 /**
  * Add custom to .preview tag
  * 
- * @param {object} storage.read.custom
+ * @param {object} read.custom
  * @param {string} theme backgroud color
  */
 function preview( styles ) {
@@ -176,7 +174,7 @@ function preview( styles ) {
  * Verify custom is exist
  * 
  * @param {string} verify type
- * @param {object} storage.read.custom value
+ * @param {object} read.custom value
  */
 function vfyCustom( type, styles ) {
     switch( type ) {
