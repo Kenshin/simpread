@@ -14,21 +14,6 @@ function iconPath( name ) {
 }
 
 /**
- * Get background opacity value
- * 
- * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
- * @return {string} e.g. 0.901961
- */
-const getOpacity = value => {
-    const arr = value ? value.match( /[0-9.]+(\))$/ig ) : [];
-    if ( arr.length > 0 ) {
-        return arr.join( "" ).replace( ")", "" );
-    } else {
-        return 1;
-    }
-};
-
-/**
  * Get background color value
  * 
  * @param  {string} background-color, e.g. rgba(235, 235, 235, 0.901961)
