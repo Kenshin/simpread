@@ -71,6 +71,7 @@ export default class AdapteSite {
                 const html = readtmpl();
                 if ( html != -1 ) {
                     this.Newsite( "read", html );
+                    this.state = "temp";
                 } else this.current.site = util.clone( site );
             }
         }
