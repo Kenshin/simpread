@@ -68,9 +68,10 @@ export default class AdapteSite {
                 this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
                 this.state        = "adapter";
             } else {
-                const html = readtmpl();
-                if ( html != -1 ) {
-                    this.Newsite( "read", html );
+                const dom = readtmpl();
+                if ( dom != -1 ) {
+                    this.Newsite( "read", dom[0].outerHTML );
+                    this.dom   = dom[0];
                     this.state = "temp";
                 } else this.current.site = util.clone( site );
             }
@@ -332,7 +333,7 @@ function readtxt() {
  * - WordPress
  * - Common( include <article> )
  * 
- * @return {string} html string
+ * @return {jquery} jquery object
  */
 function readtmpl() {
     const $root     = $( "body" ),
@@ -347,7 +348,7 @@ function readtmpl() {
         const $target = $root.find( selector );
         if ( $target.length > 0 ) {
             console.warn( "current selector is", selector );
-            return $target[0].outerHTML;
+            return $target;
         }
     }
     return -1;
