@@ -48,7 +48,7 @@ export default class AdapteSite {
      */
     Getsites() {
         const matching         = [],
-              meta             = metadata();
+              meta             = readmeta();
         this.current.url       = this.url;
         if ( meta ) {
             this.current.auto  = meta.auto;
@@ -263,11 +263,11 @@ export default class AdapteSite {
 }
 
 /**
- * Get metadata, inlcude: txtread and metaread
+ * Get readmeta, inlcude: txtread and metaread
  * 
  * @return {object} meata data or undefined
  */
-function metadata() {
+function readmeta() {
     if ( minimatch( location.href, "file://**/*.txt" ) || minimatch( location.href, "http*://**/*.txt" ) ) {
         return readtxt();
     }
