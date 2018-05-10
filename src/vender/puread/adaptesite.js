@@ -326,10 +326,17 @@ function readtxt() {
 
 /**
  * Read mode template, include:
+ * 
+ * - Hexo
  * - Common( include article)
+ * 
+ * @return {string} html string
  */
 function readtmpl() {
-    if ( $("body").find( "article" ).length > 0 ) {
+    const $root = $( "body" );
+    if ( $root.find( "[itemprop='articleBody']" ).length > 0 ) {
+        return $root.find( "[itemprop='articleBody']" )[0].outerHTML;
+    } else if ( $root.find( "article" ).length > 0 ) {
         return $("body").find( "article" )[0].outerHTML;
     }
     return -1;
