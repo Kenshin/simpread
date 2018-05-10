@@ -336,9 +336,9 @@ function readtxt() {
 function readtmpl() {
     const $root     = $( "body" ),
           selectors = [
+            ".post-content", ".entry-content", ".post-article", ".content-post", ".article-entry", ".article-content",
+            ".article-body", ".markdown-body", ".post", ".content",
             "[itemprop='articleBody']",
-            ".post-content", ".entry-content", ".markdown-body", ".post-article",
-            ".post", ".content",
             "article"
           ];
     for ( const selector of selectors ) {
