@@ -328,16 +328,23 @@ function readtxt() {
  * Read mode template, include:
  * 
  * - Hexo
- * - Common( include article)
+ * - WordPress
+ * - Common( include <article> )
  * 
  * @return {string} html string
  */
 function readtmpl() {
-    const $root = $( "body" );
-    if ( $root.find( "[itemprop='articleBody']" ).length > 0 ) {
-        return $root.find( "[itemprop='articleBody']" )[0].outerHTML;
-    } else if ( $root.find( "article" ).length > 0 ) {
-        return $("body").find( "article" )[0].outerHTML;
+    const $root     = $( "body" ),
+          selectors = [
+            "[itemprop='articleBody']",
+            ".content, .post-content, .entry-content, .post",
+            "article"
+          ];
+    for ( const selector of selectors ) {
+        const $target = $root.find( selector );
+        if ( $target.length > 0 ) {
+            return $target[0].outerHTML;
+        }
     }
     return -1;
 }
