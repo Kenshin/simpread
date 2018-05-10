@@ -337,9 +337,10 @@ function readtmpl() {
     const $root     = $( "body" ),
           selectors = [
             ".post-content", ".entry-content", ".post-article", ".content-post", ".article-entry", ".article-content",
-            ".article-body", ".markdown-body", ".post", ".content",
+            ".article-body", ".markdown-body",
             "[itemprop='articleBody']",
-            "article"
+            "article",
+            ".post", ".content",
           ];
     for ( const selector of selectors ) {
         const $target = $root.find( selector );
