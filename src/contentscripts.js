@@ -139,13 +139,18 @@ function focusMode() {
                 new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
                 return;
             }
-            focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
-                storage.current.site.name == "" && pr.TempMode( mode.focus, result[0].outerHTML );
+            if ( pr.state == "temp" && pr.dom ) {
                 storage.Statistics( mode.focus );
-                focus.Render( result, storage.current.bgcolor );
-            }).fail( () => {
-                new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
-            });
+                focus.Render( $(pr.dom), storage.current.bgcolor );
+            } else {
+                focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
+                    storage.current.site.name == "" && pr.TempMode( mode.focus, result[0].outerHTML );
+                    storage.Statistics( mode.focus );
+                    focus.Render( result, storage.current.bgcolor );
+                }).fail( () => {
+                    new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
+                });
+            }
         }
     });
 }
