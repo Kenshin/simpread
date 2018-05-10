@@ -68,7 +68,10 @@ export default class AdapteSite {
                 this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
                 this.state        = "adapter";
             } else {
-                this.current.site = util.clone( site );
+                const html = readtmpl();
+                if ( html != -1 ) {
+                    this.Newsite( "read", html );
+                } else this.current.site = util.clone( site );
             }
         }
         this.current.site.matching = matching;
@@ -319,6 +322,17 @@ function readtxt() {
     }
     !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".txt", "" )) }</title>` );
     return meta;
+}
+
+/**
+ * Read mode template, include:
+ * - Common( include article)
+ */
+function readtmpl() {
+    if ( $("body").find( "article" ).length > 0 ) {
+        return $("body").find( "article" )[0].outerHTML;
+    }
+    return -1;
 }
 
 /**
