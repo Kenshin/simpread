@@ -66,7 +66,7 @@ class Read extends React.Component {
             ss.Preview( this.props.read.custom );
 
             storage.pr.state == "txt"       && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
-            storage.prcurrent.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
+            storage.pr.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
 
             excludes( $("sr-rd-content"), this.props.wrapper.exclude );
             storage.pr.Beautify( $( "sr-rd-content" ) );
