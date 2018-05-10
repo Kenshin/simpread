@@ -297,7 +297,7 @@ function readmeta() {
         console.assert( idx == -1, "meta read mode error. ", meta )
         return idx == -1 ? meta : undefined;
     } else {
-        console.error( "meta read mode error. ", meta )
+        console.warn( "current not found meta data", meta )
         return undefined;
     }
 }
@@ -344,6 +344,7 @@ function readtmpl() {
     for ( const selector of selectors ) {
         const $target = $root.find( selector );
         if ( $target.length > 0 ) {
+            console.warn( "current selector is", selector );
             return $target[0].outerHTML;
         }
     }
