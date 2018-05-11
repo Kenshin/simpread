@@ -144,7 +144,7 @@ function focusMode() {
                 focus.Render( $(pr.dom), storage.current.bgcolor );
             } else {
                 focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
-                    storage.current.site.name == "" && pr.TempMode( mode.focus, result[0] );
+                    storage.pr.state == "none" && pr.TempMode( mode.focus, result[0] );
                     storage.Statistics( mode.focus );
                     focus.Render( result, storage.current.bgcolor );
                 }).fail( () => {
