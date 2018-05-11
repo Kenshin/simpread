@@ -30,11 +30,13 @@ export default class PureRead extends AdapteSite {
     /**
      * Create temp read mode
      * 
-     * @param {string} html
+     * @param {string} include: read, focus
+     * @param {dom} html dom element
      */
-    TempMode( mode, html ) {
-       this.state        = "temp";
-       this.Newsite( mode, html );
+    TempMode( mode, dom ) {
+       this.state = "temp";
+       this.dom   = dom;
+       this.Newsite( mode, dom.outerHTML );
     }
 
     /**
