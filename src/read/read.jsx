@@ -119,6 +119,22 @@ class Read extends React.Component {
                 type != "custom" ? storage.current[type]=value : storage.current.custom.art[custom]=value;
                 storage.Setcur( storage.current.mode );
                 break;
+            case "remove":
+                new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
+                $( "panel-bg" ).length > 0 && $( "panel-bg" ).trigger( "click" );
+                Highlight().done( dom => {
+                    $(dom).remove();
+                });
+                break;
+            case "highlight":
+                new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
+                this.exit();
+                Highlight().done( dom => {
+                    storage.pr.TempMode( "read", dom );
+                    storage.Statistics( "read" );
+                    Render();
+                });
+                break;
             /*
             case "scroll":
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });

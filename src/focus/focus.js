@@ -58,7 +58,11 @@ var storage  = require( "storage" ).storage,
             .sreffect({ opacity: 1 });
 
         // add control bar
-        fcontrol.Render( ctrlbarjq, bgclsjq );
+        fcontrol.Render( ctrlbarjq, bgclsjq, dom => {
+            storage.pr.dom = dom;
+            storage.Statistics( "focus" );
+            Focus.prototype.Render( $(dom), storage.current.bgcolor );
+        });
 
         // add tooltip and waves
         tooltip.Render( bgclsjq );

@@ -162,6 +162,16 @@ const readItems = {
                 "icon" : ss.IconPath("setting_icon"),
                 "color": "#03A9F4",
             },
+            "highlight" : {
+                "name" : "重新选项高亮区域",
+                "icon" : ss.IconPath("highlight_icon"),
+                "color": "#03A9F4",
+            },
+            "remove" : {
+                "name" : "隐藏任意元素",
+                "icon" : ss.IconPath("remove_icon"),
+                "color": "#03A9F4",
+            },
         },
     },
     "readlater" : {
