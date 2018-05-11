@@ -175,7 +175,7 @@ function readMode() {
             } else {
                 new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
                 read.Highlight().done( dom => {
-                    pr.TempMode( mode.read, dom.outerHTML );
+                    pr.TempMode( mode.read, dom );
                     storage.Statistics( mode.read );
                     read.Render();
                 });
