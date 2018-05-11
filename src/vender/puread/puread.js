@@ -8,8 +8,18 @@ export default class PureRead extends AdapteSite {
     constructor( sites ) {
         super( sites );
         this.version = "0.0.2";
+        this.org_url = location.href;
         this.html    = {}; // clone site, include: title, desc, include, avatar, paging
         this.plugin  = {};
+    }
+
+    /**
+     * Verify current puread is same
+     * 
+     * @return {boolean} true: same; false: not same;
+     */
+    Exist() {
+        return this.org_url == location.href;
     }
 
     /**
