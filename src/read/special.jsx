@@ -28,7 +28,7 @@ export class Multiple extends React.Component {
         const child = contents.map( item => {
             return <sr-rd-mult>
                         <sr-rd-mult-avatar>
-                            <img classN="sr-rd-content-nobeautify" src={ item.url } />
+                            <img src={ item.url } />
                             <span>{ item.name }</span>
                         </sr-rd-mult-avatar>
                         <sr-rd-mult-content dangerouslySetInnerHTML={{__html: item.content }} ></sr-rd-mult-content>

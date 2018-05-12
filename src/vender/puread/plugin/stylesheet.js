@@ -1,21 +1,7 @@
-console.log( "=== simpread stylesheet load ===" )
-
-/**
- * Clone from puread/plugin/stylesheet.js except iconPath
- */
-
-import {browser} from 'browser';
+console.log( "=== PureRead: StyleSheet load ===" )
 
 const [ bgcolorstyl, bgcls ] = [ "background-color", ".simpread-focus-root" ];
 let origin_read_style = "", html_style_bal = "-1";
-
-/**
- * Get chrome extension icon path
- * @param {string} icon name
- */
-function iconPath( name ) {
-    return browser.extension.getURL( `assets/images/${name}.png` )
-}
 
 /**
  * Get background color value for focus mode
@@ -198,8 +184,7 @@ function vfyCustom( type, styles ) {
 }
 
 export {
-    iconPath as IconPath,
-    getColor as GetColor,
+    getColor   as GetColor,
     backgroundColor as BgColor,
     opacity    as Opacity,
     fontFamily as FontFamily,

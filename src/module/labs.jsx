@@ -106,7 +106,7 @@ export default class LabsOpt extends React.Component {
                             arr = arr.concat( storage.pr.Formatsites( result ) );
                         } else new Notify().Render( `导入失败 ${ item }` );
                         if ( idx == max ) {
-                            arr.length > 0 && ( storage.websites.custom = storage.pr.AddOrigins( arr ) );
+                            arr.length > 0 && ( storage.websites.custom = storage.pr.Addorigins( arr ) );
                             console.log( "current storage websites.custom is ", arr );
                             new Notify().Render( `已完成导入，本次共计：${ count } 个站点， ${ arr.length } 条数据。` );
                             this.props.onChange && this.props.onChange( false );
@@ -116,7 +116,7 @@ export default class LabsOpt extends React.Component {
             });
         } else if ( type == "clear" ) {
             new Notify().Render( "snackbar", "只能清除第三方源的适配站点，请问是否清除？", "确认", () => {
-                new Notify().Render( `已完成清除，共计：${ storage.pr.ClearOrigins() } 条数据。` );
+                new Notify().Render( `已完成清除，共计：${ storage.pr.Clearorigins() } 条数据。` );
                 storage.websites.custom = storage.pr.sites.custom;
                 this.props.onChange && this.props.onChange( false );
             });

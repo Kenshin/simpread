@@ -30,7 +30,7 @@ import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
 
-import PureRead   from 'pureread';
+import PureRead   from 'puread';
 
 let tabsItemID = 0;
 
@@ -264,5 +264,5 @@ function sidebarRender() {
 function pRead() {
     storage.puread     = new PureRead( storage.sites );
     storage.pr.origins = storage.option.origins;
-    console.log( "current pureread object is   ", storage.pr )
+    console.log( "current puread object is   ", storage.pr )
 }

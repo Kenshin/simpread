@@ -12,7 +12,7 @@ export default class FocusOpt extends React.Component {
 
     changeBgColor( bgcolor, $target ) {
         bgcolor = $target.css( "background-color" );
-        this.props.option.bgcolor = ss.BackgroundColor( bgcolor, this.props.option.opacity );
+        this.props.option.bgcolor = ss.BgColor( bgcolor, this.props.option.opacity );
         console.log( "this.props.option.bgcolor = ", this.props.option.bgcolor )
     }
 

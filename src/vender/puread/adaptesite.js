@@ -29,7 +29,7 @@ export default class AdapteSite {
     /**
      * Set global minimatch
      */
-    set minimatch( value ) {
+    SetMinimatch( value ) {
         minimatch = value;
     }
 
@@ -48,7 +48,7 @@ export default class AdapteSite {
      */
     Getsites() {
         const matching         = [],
-              meta             = metadata();
+              meta             = readmeta();
         this.current.url       = this.url;
         if ( meta ) {
             this.current.auto  = meta.auto;
@@ -68,14 +68,25 @@ export default class AdapteSite {
                 this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
                 this.state        = "adapter";
             } else {
-                this.current.site = util.clone( site );
+                const obj = readmulti();
+                if ( obj != -1 ) {
+                    this.Newmultisite( "read", obj );
+                    this.state = "temp";
+                } else {
+                    const $dom = readtmpl();
+                    if ( $dom != -1 ) {
+                        this.Newsite( "read", $dom[0].outerHTML );
+                        this.dom   = $dom[0];
+                        this.state = "temp";
+                    } else this.current.site = util.clone( site );
+                }
             }
         }
         this.current.site.matching = matching;
     }
 
     /**
-     * Add sites from url result
+     * Add new sites to this.sites.global( global sites )
      * 
      * @param {object} sites.[array]
      * @return {int} update sites count
@@ -95,6 +106,32 @@ export default class AdapteSite {
     }
 
     /**
+     * Add new sites to this.sites.local( local sites )
+     * 
+     * @param  {object} new sites
+     * @return {array} this.sites.local
+     */
+    Addlocalsites( new_sites ) {
+        this.sites.local = [ ...new_sites ];
+        return this.sites.local;
+    }
+
+    /**
+     * Add all sites to this.sites
+     * 
+     * @param  {object} new sites
+     * @return {object} this.sites
+     */
+    Addallsites( sites ) {
+        this.sites = {
+            global: [ ...sites.global ],
+            custom: [ ...sites.custom ],
+            local : [ ...sites.local  ],
+        };
+        return this.sites;
+    }
+
+    /**
      * Add new site( read only )
      * 
      * @param {string} include: focus, read
@@ -107,6 +144,20 @@ export default class AdapteSite {
         this.current.url  = new_site.url;
         this.current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
         console.log( "【read only】current site object is ", this.current )
+    }
+
+    /**
+     * Add new multi-site( read only )
+     * 
+     * @param {string} include: focus, read
+     * @param {object} multi-page, avator, include
+     */
+    Newmultisite( mode, multi ) {
+        const new_site    = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: multi.include, exclude: [], avatar: multi.avatar } };
+        this.current.mode = new_site.mode,
+        this.current.url  = new_site.url;
+        this.current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
+        console.log( "【read only】current multi-site object is ", this.current )
     }
 
     /**
@@ -186,6 +237,15 @@ export default class AdapteSite {
     }
 
     /**
+     * Clear sites
+     * 
+     * @param {string} site type, only include: global, custom. local
+     */
+    Clearsites( type ) {
+        type ? ( this.sites[type] = [] ) : ( this.sites = { global:[], custom:[], local:[] });
+    }
+
+    /**
      * Add urls to origins
      * 
      * @param {json} result json
@@ -201,12 +261,12 @@ export default class AdapteSite {
     }
 
     /**
-     * Add new sites to this.sites.custom
+     * Add new sites to this.sites.custom( custom sites )
      * 
      * @param  {object} new sites
      * @return {array} this.sites.custom
      */
-    AddOrigins( new_sites ) {
+    Addorigins( new_sites ) {
         this.sites.custom = [ ...new_sites ];
         return this.sites.custom;
     }
@@ -216,7 +276,7 @@ export default class AdapteSite {
      * 
      * @returns custom.length
      */
-    ClearOrigins() {
+    Clearorigins() {
         const len = this.sites.custom.length;
         this.sites.custom = [];
         return len;
@@ -225,11 +285,11 @@ export default class AdapteSite {
 }
 
 /**
- * Get metadata, inlcude: txtread and metaread
+ * Get readmeta, inlcude: txtread and metaread
  * 
  * @return {object} meata data or undefined
  */
-function metadata() {
+function readmeta() {
     if ( minimatch( location.href, "file://**/*.txt" ) || minimatch( location.href, "http*://**/*.txt" ) ) {
         return readtxt();
     }
@@ -259,7 +319,7 @@ function metadata() {
         console.assert( idx == -1, "meta read mode error. ", meta )
         return idx == -1 ? meta : undefined;
     } else {
-        console.error( "meta read mode error. ", meta )
+        console.warn( "current not found meta data", meta )
         return undefined;
     }
 }
@@ -284,6 +344,65 @@ function readtxt() {
     }
     !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".txt", "" )) }</title>` );
     return meta;
+}
+
+/**
+ * Read mode template, include:
+ * 
+ * - Hexo
+ * - WordPress
+ * - Common( include <article> )
+ * 
+ * @return {jquery} jquery object
+ */
+function readtmpl() {
+    const $root     = $( "body" ),
+          selectors = [
+            ".post-content", ".entry-content", ".post-article", ".content-post", ".article-entry", ".article-content",
+            ".article-body", ".markdown-body",
+            "[itemprop='articleBody']",
+            "article",
+            ".post", ".content",
+          ];
+    for ( const selector of selectors ) {
+        const $target = $root.find( selector );
+        if ( $target.length > 0 ) {
+            console.warn( "current selector is", selector );
+            return $target;
+        }
+    }
+    return -1;
+}
+
+/**
+ * Read mode multi template, include:
+ * 
+ * - Discuz
+ * - Discourse
+ * 
+ * @return {object} true: object; false: -1
+ */
+function readmulti() {
+    if ( location.pathname.includes( "thread" ) || location.pathname.includes( "forum.php" ) ) {
+        if ( $('.t_f').length > 0 && $('.favatar').find('.authi').length > 0 && $('.avatar').find('img').length > 0 ) {
+            return {
+                avatar: [
+                    {"name" : "[[{$('.favatar').find('.authi')}]]"},
+                    {"url"  : "[[{$('.avatar').find('img')}]]"}
+                  ],
+                  include: "[[{$('.t_f')}]]"
+            };
+        }
+    } else if ( /\/t\/[\w-]+\/\d+/.test( location.pathname ) && $('meta[name=generator]').attr("content").includes("discourse") ) {
+        return {
+            avatar: [
+                {"name" : "[[{$('.topic-avatar').find('.a[data-user-card]')}]]"},
+                {"url"  : "[[{$('.topic-avatar').find('img')}]]"}
+              ],
+              include: "[[{$('.cooked')}]]"
+        };
+    }
+    return -1;
 }
 
 /**

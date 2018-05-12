@@ -8,10 +8,11 @@ import * as output from 'output';
 import * as watch  from 'watch';
 import {browser,br}from 'browser';
 import * as msg    from 'message';
+import * as highlight from 'highlight';
 
 import Fab         from 'fab';
 
-let timer, $root, selector;
+let timer, $root, selector, callback;
 
 const tooltip_options = {
     target   : "name",
@@ -47,6 +48,19 @@ class FControl extends React.Component {
                     break;
                 case "siteeditor":
                     se.Render();
+                    break;
+                case "remove":
+                    new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
+                    highlight.Start().done( dom => {
+                        $(dom).remove();
+                    });
+                    break;
+                case "highlight":
+                    new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
+                    ReactDOM.unmountComponentAtNode( getRoot() );
+                    highlight.Start().done( dom => {
+                        callback && callback( dom );
+                    });
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
@@ -90,10 +104,12 @@ const fcontrol = new FControl();
 /**
  * Render
  * 
- * @param {string} class name, e.g. .xxx
- * @param {string} class name, e.g. .xxx
+ * @param {string}   class name, e.g. .xxx
+ * @param {string}   class name, e.g. .xxx
+ * @param {function} callback
  */
-function Render( root, finder ) {
+function Render( root, finder, cb ) {
+    callback = cb;
     selector = finder;
     $root = $(root);
     ReactDOM.render( <FControl show={ storage.current.controlbar } />, getRoot() );

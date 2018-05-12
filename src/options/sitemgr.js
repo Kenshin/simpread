@@ -23,7 +23,7 @@ import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
 import * as watch from 'watch';
 
-import PureRead   from 'pureread';
+import PureRead   from 'puread';
 
 let cur_site, org_site, pr,
     state = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty0
@@ -44,7 +44,7 @@ storage.Read( () => {
     $( "body" ).velocity({ opacity: 1 }, { duration: 1000, complete: ()=> {
         $( "body" ).removeAttr( "style" );
     }});
-    console.log( "current pureread object is   ", pr )
+    console.log( "current puread object is   ", pr )
 }); 
 
 /**

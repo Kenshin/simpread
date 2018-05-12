@@ -19,21 +19,23 @@ function start() {
             }
             $prev = $( event.target );
     };
-    $( "body" ).one( "click", event => {
+    $( "html" ).one( "click", event => {
         if ( !$prev ) return;
         $( event.target ).removeClass( highlight_class );
-        $( "body"       ).off( "mousemove", mousemoveEvent );
+        $( "html"       ).off( "mousemove", mousemoveEvent );
         $prev = undefined;
         dtd.resolve( event.target );
     });
-    $( "body" ).one( "keydown", event => {
+    $( "html" ).one( "keydown", event => {
         if ( event.keyCode == 27 && $prev ) {
-            $( event.target ).find( `.${highlight_class}` ).removeClass( highlight_class );
-            $( "body"       ).off( "mousemove", mousemoveEvent );
+            $( "html" ).find( `.${highlight_class}` ).removeClass( highlight_class );
+            $( "html" ).off( "mousemove", mousemoveEvent );
             $prev = undefined;
+            event.preventDefault();
+            return false;
         }
     });
-    $( "body" ).on( "mousemove", mousemoveEvent );
+    $( "html" ).on( "mousemove", mousemoveEvent );
     return dtd;
 }
 

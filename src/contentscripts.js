@@ -18,8 +18,8 @@ import * as msg  from 'message';
 import {browser} from 'browser';
 import * as watch from 'watch';
 
-import PureRead  from 'pureread';
-import * as prplugin from 'prplugin';
+import PureRead  from 'puread';
+import * as puplugin from 'puplugin';
 
 let pr,                           // pure read object
     is_blacklist = false,
@@ -139,13 +139,18 @@ function focusMode() {
                 new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
                 return;
             }
-            focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
-                storage.current.site.name == "" && pr.TempMode( mode.focus, result[0].outerHTML );
+            if ( pr.state == "temp" && pr.dom ) {
                 storage.Statistics( mode.focus );
-                focus.Render( result, storage.current.bgcolor );
-            }).fail( () => {
-                new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
-            });
+                focus.Render( $(pr.dom), storage.current.bgcolor );
+            } else {
+                focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
+                    storage.pr.state == "none" && pr.TempMode( mode.focus, result[0] );
+                    storage.Statistics( mode.focus );
+                    focus.Render( result, storage.current.bgcolor );
+                }).fail( () => {
+                    new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
+                });
+            }
         }
     });
 }
@@ -167,10 +172,13 @@ function readMode() {
             if ( storage.current.site.name != "" ) {
                 storage.Statistics( mode.read );
                 read.Render();
+            } else if ( pr.state == "temp" && pr.dom ) {
+                storage.Statistics( mode.read );
+                read.Render();
             } else {
                 new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
                 read.Highlight().done( dom => {
-                    pr.TempMode( mode.read, dom.outerHTML );
+                    pr.TempMode( mode.read, dom );
                     storage.Statistics( mode.read );
                     read.Render();
                 });
@@ -185,8 +193,8 @@ function readMode() {
 function autoOpen() {
     getCurrent( mode.read );
     if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && util.Exclusion(  prplugin.Plugin( "minimatch" ), storage.current )) ||
-         ( !storage.current.auto && util.Whitelist( prplugin.Plugin( "minimatch" ), storage.current ))
+         ( storage.current.auto && util.Exclusion(  puplugin.Plugin( "minimatch" ), storage.current )) ||
+         ( !storage.current.auto && util.Whitelist( puplugin.Plugin( "minimatch" ), storage.current ))
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
@@ -234,7 +242,7 @@ function entry( current, other, ...str ) {
  */
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
-        pRead();
+        ( !pr || !pr.Exist() ) && pRead();
         storage.Getcur( mode, pr.current.site );
     }
 }
@@ -257,8 +265,8 @@ function browserAction( is_update ) {
 */
 function pRead() {
     pr = new PureRead( storage.sites );
-    pr.AddPlugin( prplugin.Plugin() );
+    pr.AddPlugin( puplugin.Plugin() );
     pr.Getsites();
     storage.puread = pr;
-    console.log( "current pureread object is   ", pr )
+    console.log( "current puread object is   ", pr )
 }

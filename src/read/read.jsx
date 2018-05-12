@@ -47,7 +47,7 @@ class Read extends React.Component {
             new Notify().Render( 2, msg );
             this.componentWillUnmount();
             this.props.read.highlight == true && Highlight().done( dom => {
-                storage.pr.TempMode( "read", dom.outerHTML );
+                storage.pr.TempMode( "read", dom );
                 storage.Statistics( "read" );
                 Render();
             });
@@ -66,7 +66,7 @@ class Read extends React.Component {
             ss.Preview( this.props.read.custom );
 
             storage.pr.state == "txt"       && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
-            storage.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
+            storage.pr.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
 
             excludes( $("sr-rd-content"), this.props.wrapper.exclude );
             storage.pr.Beautify( $( "sr-rd-content" ) );
@@ -119,6 +119,22 @@ class Read extends React.Component {
                 type != "custom" ? storage.current[type]=value : storage.current.custom.art[custom]=value;
                 storage.Setcur( storage.current.mode );
                 break;
+            case "remove":
+                new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
+                $( "panel-bg" ).length > 0 && $( "panel-bg" ).trigger( "click" );
+                Highlight().done( dom => {
+                    $(dom).remove();
+                });
+                break;
+            case "highlight":
+                new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
+                this.exit();
+                Highlight().done( dom => {
+                    storage.pr.TempMode( "read", dom );
+                    storage.Statistics( "read" );
+                    Render();
+                });
+                break;
             /*
             case "scroll":
                 $( "sr-read" ).velocity( "scroll", { offset: $( "body" ).scrollTop() + value });
@@ -164,7 +180,7 @@ class Read extends React.Component {
  */
 function Render() {
     storage.pr.ReadMode();
-    console.log( "current pureread object is   ", storage.pr )
+    console.log( "current puread object is   ", storage.pr )
     ReactDOM.render( <Read read={ storage.current } wrapper={ storage.pr.html } />, getReadRoot() );
 }
 
