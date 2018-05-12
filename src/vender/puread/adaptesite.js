@@ -68,8 +68,9 @@ export default class AdapteSite {
                 this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
                 this.state        = "adapter";
             } else {
-                if ( readmulti() ) {
-                    this.Newmultisite( "read" );
+                const obj = readmulti();
+                if ( obj != -1 ) {
+                    this.Newmultisite( "read", obj );
                     this.state = "temp";
                 } else {
                     const $dom = readtmpl();
@@ -149,13 +150,10 @@ export default class AdapteSite {
      * Add new multi-site( read only )
      * 
      * @param {string} include: focus, read
+     * @param {object} multi-page, avator, include
      */
-    Newmultisite( mode ) {
-        const avatar      = [
-                {"name" : "[[{$('.favatar').find('.authi')}]]"},
-                {"url"  : "[[{$('.avatar').find('img')}]]"}
-              ],
-              new_site    = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "[[{$('.t_f')}]]", exclude: [], avatar } };
+    Newmultisite( mode, multi ) {
+        const new_site    = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: multi.include, exclude: [], avatar: multi.avatar } };
         this.current.mode = new_site.mode,
         this.current.url  = new_site.url;
         this.current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
@@ -381,15 +379,21 @@ function readtmpl() {
  * 
  * - Discuz
  * 
- * @return {boolen}
+ * @return {number}
  */
 function readmulti() {
     if ( location.pathname.includes( "thread" ) || location.pathname.includes( "forum.php" ) ) {
         if ( $('.t_f').length > 0 && $('.favatar').find('.authi').length > 0 && $('.avatar').find('img').length > 0 ) {
-            return true;
+            return {
+                avatar: [
+                    {"name" : "[[{$('.favatar').find('.authi')}]]"},
+                    {"url"  : "[[{$('.avatar').find('img')}]]"}
+                  ],
+                  include: "[[{$('.t_f')}]]"
+            };
         }
     }
-    return false;
+    return -1;
 }
 
 /**
