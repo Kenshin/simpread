@@ -68,12 +68,17 @@ export default class AdapteSite {
                 this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
                 this.state        = "adapter";
             } else {
-                const $dom = readtmpl();
-                if ( $dom != -1 ) {
-                    this.Newsite( "read", $dom[0].outerHTML );
-                    this.dom   = $dom[0];
+                if ( readmulti() ) {
+                    this.Newmultisite( "read" );
                     this.state = "temp";
-                } else this.current.site = util.clone( site );
+                } else {
+                    const $dom = readtmpl();
+                    if ( $dom != -1 ) {
+                        this.Newsite( "read", $dom[0].outerHTML );
+                        this.dom   = $dom[0];
+                        this.state = "temp";
+                    } else this.current.site = util.clone( site );
+                }
             }
         }
         this.current.site.matching = matching;
@@ -138,6 +143,23 @@ export default class AdapteSite {
         this.current.url  = new_site.url;
         this.current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
         console.log( "【read only】current site object is ", this.current )
+    }
+
+    /**
+     * Add new multi-site( read only )
+     * 
+     * @param {string} include: focus, read
+     */
+    Newmultisite( mode ) {
+        const avatar      = [
+                {"name" : "[[{$('.favatar').find('.authi')}]]"},
+                {"url"  : "[[{$('.avatar').find('img')}]]"}
+              ],
+              new_site    = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "[[{$('.t_f')}]]", exclude: [], avatar } };
+        this.current.mode = new_site.mode,
+        this.current.url  = new_site.url;
+        this.current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
+        console.log( "【read only】current multi-site object is ", this.current )
     }
 
     /**
@@ -352,6 +374,22 @@ function readtmpl() {
         }
     }
     return -1;
+}
+
+/**
+ * Read mode multi template, include:
+ * 
+ * - Discuz
+ * 
+ * @return {boolen}
+ */
+function readmulti() {
+    if ( location.pathname.includes( "thread" ) || location.pathname.includes( "forum.php" ) ) {
+        if ( $('.t_f').length > 0 && $('.favatar').find('.authi').length > 0 && $('.avatar').find('img').length > 0 ) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
