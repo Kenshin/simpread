@@ -378,8 +378,9 @@ function readtmpl() {
  * Read mode multi template, include:
  * 
  * - Discuz
+ * - Discourse
  * 
- * @return {number}
+ * @return {object} true: object; false: -1
  */
 function readmulti() {
     if ( location.pathname.includes( "thread" ) || location.pathname.includes( "forum.php" ) ) {
@@ -392,6 +393,14 @@ function readmulti() {
                   include: "[[{$('.t_f')}]]"
             };
         }
+    } else if ( /\/t\/[\w-]+\/\d+/.test( location.pathname ) && $('meta[name=generator]').attr("content").includes("discourse") ) {
+        return {
+            avatar: [
+                {"name" : "[[{$('.topic-avatar').find('.a[data-user-card]')}]]"},
+                {"url"  : "[[{$('.topic-avatar').find('img')}]]"}
+              ],
+              include: "[[{$('.cooked')}]]"
+        };
     }
     return -1;
 }
