@@ -421,6 +421,14 @@ body {
     font-size: 1.5rem;
 }
 
+.main .downloads .jsbox-platform {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-size: 1.5rem;
+}
+
 .main .downloads .platform img {
     width: 90px;
 }
@@ -498,7 +506,6 @@ body {
         background-color: #0c9ce0;
     }
 
-
     &.userscript {
         font-size: 2.2rem;
         background-color: rgba(0, 72, 91, .8);
@@ -507,6 +514,17 @@ body {
 
     &.userscript:hover {
         background-color: #00485b;
+        box-shadow: rgba(0, 0, 0, .3) 0px 5px 5px, rgba(0, 0, 0, .3) 0px 5px 5px;
+    }
+
+    &.jsbox {
+        font-size: 2.2rem;
+        background-color: #157efb;
+        @apply --large-button;
+    }
+
+    &.jsbox:hover {
+        background-color: #0c7bff;
         box-shadow: rgba(0, 0, 0, .3) 0px 5px 5px, rgba(0, 0, 0, .3) 0px 5px 5px;
     }
 }
