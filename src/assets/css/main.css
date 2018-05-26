@@ -1122,6 +1122,7 @@ body {
     align-items: center;
 }
 
+.subtitle,
 .update .info blockquote {
     margin: 20px 0;
     padding: 0 1em;
