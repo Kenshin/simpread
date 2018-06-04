@@ -136,7 +136,7 @@ function Verify( curver, data ) {
         data.read.custom.global.marginLeft && ( data.read.layout     = data.read.custom.global.marginLeft );
         delete data.read.custom.global;
 
-        data.statistics = {"focus":0,"read":0,"service":{"linnk":0,"instapaper":0,"pocket":0,"readlater":0,"epub":0,"pdf":0,"png":0,"md":0,"html":0,"evernote":0,"yinxiang":0,"dropbox":0,"onenote":0,"gdrive":0,"kindle":0,"temp":0}}
+        data.statistics = {"focus":0,"read":0,"service":{"linnk":0,"instapaper":0,"pocket":0,"readlater":0,"epub":0,"pdf":0,"png":0,"markdown":0,"html":0,"evernote":0,"yinxiang":0,"dropbox":0,"onenote":0,"gdrive":0,"kindle":0,"temp":0}}
         data.statistics.focus = data.option.focus;
         data.statistics.read  = data.option.read;
         delete data.option.focus;
