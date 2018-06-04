@@ -213,7 +213,7 @@ function tabsRender( color ) {
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
-                    <section><About option={ storage.option } site={ storage.simpread.sites.length } /></section>
+                    <section><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );

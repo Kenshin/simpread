@@ -152,7 +152,7 @@ export default class About extends React.Component {
                 <div>
                     <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的初衷：还原一个干净的阅读空间，提升你的阅读体验。<br/>
                     截至到目前为止，简悦已经适配了 <spn style={ style.stat }>{ this.props.site }个</spn> 网址，详细请看 <a style={ style.link } href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">这里</a>。<br/>
-                    自从 <span style={ style.stat }>{ this.props.option.create && this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <spn style={ style.stat }>{ this.props.option.focus }次</spn> 聚焦模式，以及 <span style={ style.stat }>{ this.props.option.read }次</span> 阅读模式。<br/>
+                    自从 <span style={ style.stat }>{ this.props.option.create && this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <spn style={ style.stat }>{ this.props.statistics.focus }次</spn> 聚焦模式，以及 <span style={ style.stat }>{ this.props.statistics.read }次</span> 阅读模式。<br/>
                     如果觉得它还不错，希望可以给我 <a style={ style.link } href={href} target="_blank">投票</a> 或 <a style={ style.link } href="https://github.com/kenshin/simpread#请杯咖啡" target="_blank">请我喝杯咖啡</a>，这是对简悦的最大鼓励。<br/>
                     通过下方的分享，让更多人知道 <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的存在。<br/>
                     现在就加入 <a style={ style.link } href="https://t.me/simpread">Telegram</a> 群，获取简悦的第一手资料。
