@@ -118,7 +118,7 @@ export default class CommonOpt extends React.Component {
                         } else {
                             if ( result == 0 ) {
                                 const obj = storage.Verify( json );
-                                if ( obj.option.code != 0 || obj.focus.code != 0 || obj.read.code != 0 ) {
+                                if ( obj.option.code != 0 || obj.focus.code != 0 || obj.read.code != 0 || obj.stat.code != 0 ) {
                                     new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
                                     return;
                                 }

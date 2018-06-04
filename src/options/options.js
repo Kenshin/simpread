@@ -213,7 +213,7 @@ function tabsRender( color ) {
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
-                    <section><About option={ storage.option } site={ storage.simpread.sites.length } /></section>
+                    <section><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );
@@ -266,3 +266,16 @@ function pRead() {
     storage.pr.origins = storage.option.origins;
     console.log( "current puread object is   ", storage.pr )
 }
+
+/**
+ * Google analytics
+ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-405976-12']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
