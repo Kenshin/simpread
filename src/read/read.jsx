@@ -48,7 +48,7 @@ class Read extends React.Component {
             this.componentWillUnmount();
             this.props.read.highlight == true && Highlight().done( dom => {
                 storage.pr.TempMode( "read", dom );
-                storage.Statistics( "read" );
+                //storage.Statistics( "read" );
                 Render();
             });
         } else {
@@ -79,6 +79,7 @@ class Read extends React.Component {
             kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
+            storage.Statistics( "read" );
         }
     }
 
@@ -131,7 +132,7 @@ class Read extends React.Component {
                 this.exit();
                 Highlight().done( dom => {
                     storage.pr.TempMode( "read", dom );
-                    storage.Statistics( "read" );
+                    //storage.Statistics( "read" );
                     Render();
                 });
                 break;

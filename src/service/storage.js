@@ -510,13 +510,16 @@ class Storage {
      * Statistics simpread same info
      * 
      * @param {string} include: create, focus, read
+     * @param {string} include: service type, e.g. pdf png onenote
      */
-    Statistics( type ) {
+    Statistics( type, is_service ) {
         if ( type == "create" ) {
             simpread.option.create = now();
         } else {
-            simpread.option[ type ] = simpread.option[ type ] + 1;
+            //simpread.option[ type ] = simpread.option[ type ] + 1;
+            is_service ? simpread.statistics.service[ type ]++ : simpread.statistics[ type ]++;
         }
+        console.log( "current statistics is ", simpread.statistics )
         save( undefined, type == "create" );
     }
 
