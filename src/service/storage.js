@@ -516,7 +516,6 @@ class Storage {
         if ( type == "create" ) {
             simpread.option.create = now();
         } else {
-            //simpread.option[ type ] = simpread.option[ type ] + 1;
             is_service ? simpread.statistics.service[ type ]++ : simpread.statistics[ type ]++;
         }
         console.log( "current statistics is ", simpread.statistics )

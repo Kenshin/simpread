@@ -60,7 +60,6 @@ var storage  = require( "storage" ).storage,
         // add control bar
         fcontrol.Render( ctrlbarjq, bgclsjq, dom => {
             storage.pr.dom = dom;
-            //storage.Statistics( "focus" );
             Focus.prototype.Render( $(dom), storage.current.bgcolor );
         });
 
