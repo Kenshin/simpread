@@ -41,6 +41,7 @@ function action( type, title, desc, content ) {
         }
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
     } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html" ].includes( type ) ) {
+        storage.Statistics( "service", type );
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
@@ -125,8 +126,8 @@ function action( type, title, desc, content ) {
         }
     } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) ) {
         const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive } = exp,
-        id    = type == "yinxiang" ? "evernote" : type;
-
+              id      = type == "yinxiang" ? "evernote" : type;
+        storage.Statistics( "service", type );
         const service = type => {
             switch( type ) {
                 case "dropbox":
