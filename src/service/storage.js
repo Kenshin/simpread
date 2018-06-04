@@ -104,8 +104,8 @@ const name = "simpread",
         create    : "",
         update    : "",
         sync      : "",
-        focus     : 0,
-        read      : 0,
+        //focus   : 0,
+        //read    : 0,
         esc       : true,
         br_exit   : false,
         secret    : false,
@@ -119,6 +119,28 @@ const name = "simpread",
         blacklist : [
             "google.com",
         ]
+    },
+    statistics = {
+        "focus"   : 0,
+        "read"    : 0,
+        "service" : {
+            "linnk"      : 0,
+            "instapaper" : 0,
+            "pocket"     : 0,
+            "readlater"  : 0,
+            "epub"       : 0,
+            "pdf"        : 0,
+            "png"        : 0,
+            "md"         : 0,
+            "html"       : 0,
+            "evernote"   : 0,
+            "yinxiang"   : 0,
+            "dropbox"    : 0,
+            "onenote"    : 0,
+            "gdrive"     : 0,
+            "kindle"     : 0,
+            "temp"       : 0,
+        }
     },
     unread = {
         idx       : 0,
@@ -142,7 +164,8 @@ let current  = {},
         websites: {
             custom : [],
             local  : [], // include focus.sites and read.sites
-        }
+        },
+        statistics
     },
     secret = {
         version   : "2017-11-22",
@@ -251,6 +274,15 @@ class Storage {
      */
     get simpread() {
         return { ...simpread };
+    }
+
+    /**
+     * Get statistics
+     * 
+     * @return {object} statistics object
+     */
+    get statistics() {
+        return simpread.statistics;
     }
 
     /**
@@ -555,10 +587,11 @@ class Storage {
 
         let opt  = valid( "option", option ),
             focu = valid( "focus",  focus ),
-            rd   = valid( "read",   read );
+            rd   = valid( "read",    read ),
+            stat = valid( "statistics", statistics );
 
-        console.log( "storage.Verify() result ", opt, focu, rd )
-        return { option: opt, focus: focu, read: rd };
+        console.log( "storage.Verify() result ", opt, focu, rd, stat )
+        return { option: opt, focus: focu, read: rd, stat: stat };
     }
 
     /**
@@ -608,6 +641,7 @@ class Storage {
             focus   : { ...this.focus  },
             read    : { ...this.read   },
             websites: { ...this.websites },
+            statistics: { ...this.statistics },
             unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });
