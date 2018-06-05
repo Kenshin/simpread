@@ -252,6 +252,8 @@ export default class Slider extends React.Component {
         max         : 100,
         step        : 0,
         value       : 0,
+        // style
+        width       : undefined,
         // slider
         precentColor: undefined,
         thumbColor  : undefined,
@@ -269,6 +271,8 @@ export default class Slider extends React.Component {
         max         : React.PropTypes.number,
         step        : React.PropTypes.number,
         value       : React.PropTypes.number,
+
+        width       : React.PropTypes.string,
 
         precentColor: React.PropTypes.string,
         thumbColor  : React.PropTypes.string,
@@ -353,6 +357,7 @@ export default class Slider extends React.Component {
     componentDidMount() {
         this.refs.range.value = this.props.value;
         this.refs.input.value = this.props.value;
+        this.props.width     && $( this.refs.range ).width( this.props.width );
         setTimeout( () => this.lineWidth( this.props.value ), 100 );
     }
 
