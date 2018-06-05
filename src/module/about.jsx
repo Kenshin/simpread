@@ -120,18 +120,18 @@ urls = {
 
 export default class About extends React.Component {
 
-    mouseOver() {
+    mouseOver( event ) {
         $( event.target ).css({ ...style.share_icon_over });
     }
 
-    mouseOut() {
+    mouseOut( event ) {
         $( event.target ).css({ ...style.share_icon });
     }
 
     render() {
         const events = {
-            onMouseOver: ()=>this.mouseOver(),
-            onMouseOut: ()=>this.mouseOut(),
+            onMouseOver: (e)=>this.mouseOver(e),
+            onMouseOut: (e)=>this.mouseOut(e),
         },
             href = br.isFirefox() ? "https://addons.mozilla.org/addon/simpread?src=external-ext" : "https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/reviews";
         return (
