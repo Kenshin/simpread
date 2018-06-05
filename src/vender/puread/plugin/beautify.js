@@ -318,8 +318,10 @@ function commbeautify( name, $target ) {
                       $img.css( "zoom", "0.6" );
                   }
                   else if ( $img[0].clientHeight > 620 ) {
-                      $img.attr( "height", 620 );
-                      if ( $img[0].clientWidth < $("sr-rd-content").width()) $img.css({ "width":"auto" });
+                    if ( /win|mac/i.test(navigator.platform) ) {
+                        $img.attr( "height", 620 );
+                        if ( $img[0].clientWidth < $("sr-rd-content").width()) $img.css({ "width":"auto" });
+                    }
                   }
                   if ( $img[0].clientWidth > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               },
@@ -340,10 +342,15 @@ function commbeautify( name, $target ) {
         newsrc = jianshu ? jianshu : newsrc;
         !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
         $img.attr( "src", newsrc )
-            .one( "load",  ()=>fixOverflowImgsize() )
-            .one( "error", ()=>loaderrorHandle()    )
             .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );
+        if ( !/win|mac/i.test(navigator.platform) ) {
+            $img.on( "load",  ()=>fixOverflowImgsize() )
+                .on( "error", ()=>loaderrorHandle()    );
+        } else {
+            $img.one( "load",  ()=>fixOverflowImgsize() )
+                .one( "error", ()=>loaderrorHandle()    );
+        }
     });
     $target.find( "sr-blockquote" ).map( ( index, item ) => {
         const $target = $(item),
