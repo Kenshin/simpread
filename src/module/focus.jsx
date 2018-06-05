@@ -29,6 +29,7 @@ export default class FocusOpt extends React.Component {
     }
 
     render() {
+        const slider_width = location.protocol.includes( "extension" ) ? "565.8px" : undefined;
         return (
             <sr-opt-focus>
                 <sr-opt-gp>
@@ -37,7 +38,7 @@ export default class FocusOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>透明度</sr-opt-label>
-                    <Slider min="50" max="95" step="1" value={ this.props.option.opacity } onChange={ (v)=>this.changeOpacity(v) }/>
+                    <Slider min="50" max="95" step="1" width={slider_width} value={ this.props.option.opacity } onChange={ (v)=>this.changeOpacity(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
