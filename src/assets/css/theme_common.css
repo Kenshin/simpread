@@ -58,6 +58,13 @@ sr-rd-content a {
     vertical-align: initial;
 }
 
+sr-rd-content a, sr-rd-content a:link {
+    color: inherit;
+    font-size: initial;
+    font-weight: inherit;
+    border:none;
+}
+
 sr-rd-content a:hover {
     background: transparent;
 }
@@ -225,6 +232,7 @@ sr-rd-mult {
     padding: 16px 0 24px;
 
     width: 100%;
+    min-width: 840.72px;
 
     background-color: #fafafa;
 
@@ -242,6 +250,7 @@ sr-rd-mult sr-rd-mult-content {
     flex-direction: column;
 
     padding: 0 16px 0;
+    overflow: auto;
 }
 
 sr-rd-mult sr-rd-mult-avatar {
