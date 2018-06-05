@@ -232,6 +232,13 @@ function specbeautify( name, $target ) {
                 $target.html( $div );
             });
             break;
+        case "medium.com":
+            $target.find( "figure" ).map( ( index, item ) => {
+                const $target = $(item),
+                      $img    = $target.find( "img" );
+                $target.replaceWith( `<div class="sr-rd-content-center"><img class="sr-rd-content-nobeautify" src="${ $img.attr('data-src') }" style="max-width:100%"></div>` );
+            });
+            break;
     }
 }
 
