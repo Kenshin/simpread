@@ -319,6 +319,7 @@ toc outline a:visited,
 toc outline a:focus
 {
     color: inherit;
+    font-size: 11px;
     text-decoration: none!important;
 }
 
