@@ -235,7 +235,6 @@ const webpack = require( 'webpack' ),
 
       resolve: {
         alias : {
-
           notify_css : __dirname + '/src/vender/notify/notify.css',
           carous_css : __dirname + '/src/vender/carousel/carousel.css',
 
@@ -316,8 +315,8 @@ const webpack = require( 'webpack' ),
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
 
-          pureread   : __dirname + '/src/vender/pureread/pureread.js',
-          prplugin   : __dirname + '/src/vender/pureread/plugin.js',
+          puread     : __dirname + '/src/vender/puread/puread.js',
+          puplugin   : __dirname + '/src/vender/puread/plugin.js',
 
         }
       }
