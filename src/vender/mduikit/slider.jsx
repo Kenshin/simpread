@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Slider
  * 
- * @version : 0.0.1
- * @update  : 2018/04/21
+ * @version : 0.0.2
+ * @update  : 2018/06/05
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -353,7 +353,7 @@ export default class Slider extends React.Component {
     componentDidMount() {
         this.refs.range.value = this.props.value;
         this.refs.input.value = this.props.value;
-        this.lineWidth( this.props.value );
+        setTimeout( () => this.lineWidth( this.props.value ), 100 );
     }
 
     render() {
