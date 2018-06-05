@@ -18,10 +18,11 @@ import * as msg  from 'message';
 import {browser} from 'browser';
 import * as watch from 'watch';
 
-import PureRead  from 'pureread';
-import * as prplugin from 'prplugin';
+import PureRead  from 'puread';
+import * as puplugin from 'puplugin';
 
 let pr,                           // pure read object
+    is_blacklist = false,
     storage_load = false,         // only usage firefox on windows
     current_url  = location.href; // current page url ( when changed page changed )
 
@@ -32,16 +33,53 @@ $.fn.sreffect = $.fn.velocity == undefined ? $.fn.animate : $.fn.velocity; // ha
  */
 /*
 storage.Read( () => {
-    bindShortcuts();
-    autoOpen();
+    if ( blacklist() ) {
+        $( "style" ).map( ( idx, item ) => {
+            if ( item.innerText.includes( "simpread"        ) || 
+                 item.innerText.includes( "sr-opt-focus"    ) || 
+                 item.innerText.includes( "sr-rd-theme"     ) || 
+                 item.innerText.includes( "notify-gp"       ) || 
+                 item.innerText.includes( "md-waves-effect" )
+            ) {
+                $(item).remove();
+            }
+        });
+    } else {
+        bindShortcuts();
+        autoOpen();
+    }
 });
 */
+
+/**
+ * Blacklist
+ * 
+ * @return {boolean} true: is blacklist; false: is't blacklist
+ */
+function blacklist() {
+    for ( const item of storage.option.blacklist ) {
+        if ( !item.startsWith( "http" ) ) {
+            if ( location.hostname.includes( item ) ) {
+                is_blacklist = true;
+                break;
+            }
+        } else {
+            if ( location.href == item ) {
+                is_blacklist = true;
+                break;
+            }
+        }
+    }
+    console.log( "current site is blacklist", is_blacklist )
+    return is_blacklist;
+}
 
 /**
  * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "contentscripts runtime Listener", request );
+    if ( is_blacklist ) return;
     switch ( request.type ) {
         case msg.MESSAGE_ACTION.focus_mode:
             if ( storage.option.br_exit ) focus.Exist( false ) ? focus.Exit() : focusMode();
@@ -71,8 +109,21 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.storage:
             if ( storage_load ) return;
             storage.WriteAsync( request.value.simpread, request.value.secret );
-            bindShortcuts();
-            autoOpen();
+            if ( blacklist() ) {
+                $( "style" ).map( ( idx, item ) => {
+                    if ( item.innerText.includes( "simpread"        ) || 
+                         item.innerText.includes( "sr-opt-focus"    ) || 
+                         item.innerText.includes( "sr-rd-theme"     ) || 
+                         item.innerText.includes( "notify-gp"       ) || 
+                         item.innerText.includes( "md-waves-effect" )
+                    ) {
+                        $(item).remove();
+                    }
+                });
+            } else {
+                bindShortcuts();
+                autoOpen();
+            }
             browserAction( false );
             storage_load = true;
             break;
@@ -112,13 +163,16 @@ function focusMode() {
                 new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
                 return;
             }
-            focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
-                storage.current.site.name == "" && pr.TempMode( mode.focus, result[0].outerHTML );
-                storage.Statistics( mode.focus );
-                focus.Render( result, storage.current.bgcolor );
-            }).fail( () => {
-                new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
-            });
+            if ( pr.state == "temp" && pr.dom ) {
+                focus.Render( $(pr.dom), storage.current.bgcolor );
+            } else {
+                focus.GetFocus( pr.Include(), storage.current.site.include ).done( result => {
+                    storage.pr.state == "none" && pr.TempMode( mode.focus, result[0] );
+                    focus.Render( result, storage.current.bgcolor );
+                }).fail( () => {
+                    new Notify().Render( 2, "当前并未获取任何正文，请重新选取。" );
+                });
+            }
         }
     });
 }
@@ -138,13 +192,13 @@ function readMode() {
         } else {
             getCurrent( mode.read );
             if ( storage.current.site.name != "" ) {
-                storage.Statistics( mode.read );
+                read.Render();
+            } else if ( pr.state == "temp" && pr.dom ) {
                 read.Render();
             } else {
                 new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
                 read.Highlight().done( dom => {
-                    pr.TempMode( mode.read, dom.outerHTML );
-                    storage.Statistics( mode.read );
+                    pr.TempMode( mode.read, dom );
                     read.Render();
                 });
             }
@@ -158,8 +212,8 @@ function readMode() {
 function autoOpen() {
     getCurrent( mode.read );
     if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && util.Exclusion(  prplugin.Plugin( "minimatch" ), storage.current )) ||
-         ( !storage.current.auto && util.Whitelist( prplugin.Plugin( "minimatch" ), storage.current ))
+         ( storage.current.auto && util.Exclusion(  puplugin.Plugin( "minimatch" ), storage.current )) ||
+         ( !storage.current.auto && util.Whitelist( puplugin.Plugin( "minimatch" ), storage.current ))
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
@@ -185,7 +239,7 @@ function autoOpen() {
 
 /**
  * Focus and Read mode entry
- *
+ * 
  * @param  {object}  current mode object
  * @param  {object}  other   mode object
  * @param  {array}   render str
@@ -202,19 +256,19 @@ function entry( current, other, ...str ) {
 
 /**
  * Get storage.current
- *
+ * 
  * @param {string} value is mode.focus or mode.read or undefined
  */
 function getCurrent( mode ) {
     if ( mode && storage.VerifyCur( mode ) ) {
-        pRead();
+        ( !pr || !pr.Exist() ) && pRead();
         storage.Getcur( mode, pr.current.site );
     }
 }
 
 /**
  * Browser action
- *
+ * 
  * @param {boolean} when set icon is_update = true
  */
 function browserAction( is_update ) {
@@ -225,13 +279,13 @@ function browserAction( is_update ) {
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: storage.current.site.name == "" ? -1 : 0 , url: window.location.href } ));
 }
 
-/**
+/** 
  * Pure Read
 */
 function pRead() {
     pr = new PureRead( storage.sites );
-    pr.AddPlugin( prplugin.Plugin() );
+    pr.AddPlugin( puplugin.Plugin() );
     pr.Getsites();
     storage.puread = pr;
-    console.log( "current pureread object is   ", pr )
+    console.log( "current puread object is   ", pr )
 }

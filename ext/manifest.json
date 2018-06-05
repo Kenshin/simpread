@@ -1,7 +1,7 @@
 {
   "name"            : "__MSG_extension_name__",
   "default_locale"  : "zh_CN",
-  "version"         : "1.1.0.3024",
+  "version"         : "1.1.1",
   "short_name"      : "SimpRead",
   "description"     : "__MSG_ext_extension_desc__",
   "homepage_url"    : "http://ksria.com/simpread",
@@ -54,5 +54,6 @@
     "/assets/images/*",
     "website_list.json"
   ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "manifest_version": 2
 }

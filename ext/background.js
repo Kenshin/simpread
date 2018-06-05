@@ -3,12 +3,12 @@ console.log( "=== simpread background load ===" )
 import local       from 'local';
 import { storage } from 'storage';
 import * as msg    from 'message';
-import {browser,br}from 'browser';
+import {browser}   from 'browser';
 import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 
-import PureRead    from 'pureread';
+import PureRead    from 'puread';
 
 /**
  * Sevice: storage Get data form chrome storage
@@ -39,10 +39,10 @@ storage.Read( () => {
             });
         });
         // only firefox and only usage 1.1.0.3024
-        if ( ver.version == storage.version && ver.sub_ver == "3024" && !localStorage["bg-3024"] ) {
-            browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
-            localStorage["bg-3024"] = ver.sub_ver;
-        }
+        //if ( ver.version == storage.version && ver.sub_ver == "3024" && !localStorage["bg-3024"] ) {
+        //    browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
+        //    localStorage["bg-3024"] = ver.sub_ver;
+        //}
     }
     menu.CreateAll();
 });
@@ -179,7 +179,7 @@ browser.pageAction.onClicked.addListener( function( tab ) {
 
 /**
  * Get current tab object
- *
+ * 
  * @param {object}   query
  * @param {function} callback
  */
@@ -191,7 +191,7 @@ function getCurTab( query, callback ) {
 
 /**
  * Set page action icon and context menu
- *
+ * 
  * @param {int} tab.id
  * @param {int} -1: disable icon;
  */

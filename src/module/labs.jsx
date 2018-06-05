@@ -34,12 +34,12 @@ export default class LabsOpt extends React.Component {
         model == "read" && state == "toc"  && this.tocState( value );
     }
 
-    changeExclusion() {
+    changeExclusion( event ) {
         this.props.read.exclusion = event.target.value.split("\n");
         this.props.onChange && this.props.onChange( false );
     }
 
-    changeWhitelist() {
+    changeWhitelist( event ) {
         this.props.read.whitelist = event.target.value.split("\n");
         this.props.onChange && this.props.onChange( false );
     }
@@ -239,7 +239,7 @@ export default class LabsOpt extends React.Component {
                             multi={ true } rows={8}
                             placeholder="每行一个，支持： URL, minimatch 等。" 
                             value={ ( this.props.read.exclusion||[] ).join( "\n" ) }
-                            onChange={ ()=>this.changeExclusion() }
+                            onChange={ (e)=>this.changeExclusion(e) }
                         />
                     </div>
 
@@ -250,7 +250,7 @@ export default class LabsOpt extends React.Component {
                             multi={ true } rows={8}
                             placeholder="每行一个，支持： URL, minimatch 等。" 
                             value={ ( this.props.read.whitelist||[] ).join( "\n" ) }
-                            onChange={ ()=>this.changeWhitelist() }
+                            onChange={ (e)=>this.changeWhitelist(e) }
                         />
                     </div>
                 </div>

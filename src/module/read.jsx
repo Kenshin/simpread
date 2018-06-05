@@ -76,6 +76,7 @@ export default class ReadOpt extends React.Component {
     }
 
     render() {
+        const slider_width = location.protocol.includes( "extension" ) ? "565.8px" : undefined;
         return (
             <sr-opt-read>
                 <sr-opt-gp>
@@ -95,27 +96,27 @@ export default class ReadOpt extends React.Component {
                 </sr-opt-gp>
                 <sr-opt-gp>
                 <sr-opt-label>字体大小</sr-opt-label>
-                    <Slider min="45" max="100" step="1" value={ this.parse( this.props.option.fontsize == "" ? "60%" : this.props.option.fontsize ) } onChange={ (v)=>this.changeFontsize(v) }/>
+                    <Slider min="45" max="100" step="1" width={slider_width} value={ this.parse( this.props.option.fontsize == "" ? "60%" : this.props.option.fontsize ) } onChange={ (v)=>this.changeFontsize(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>版面宽度</sr-opt-label>
-                    <Slider min="70" max="100" step="1" value={ 100 - this.parse( this.props.option.layout == "" ? "20%" : this.props.option.layout ) } onChange={ (v)=>this.changeLayout(v) }/>
+                    <Slider min="70" max="100" step="1" width={slider_width} value={ 100 - this.parse( this.props.option.layout == "" ? "20%" : this.props.option.layout ) } onChange={ (v)=>this.changeLayout(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>字间距</sr-opt-label>
-                    <Slider min="0" max="10" step="1" value={ this.parse( this.props.option.custom.art.letterSpacing ) } onChange={ (v)=>this.changeStyle(v, "letterSpacing") }/>
+                    <Slider min="0" max="10" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.letterSpacing ) } onChange={ (v)=>this.changeStyle(v, "letterSpacing") }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>行间距</sr-opt-label>
-                    <Slider min="0" max="5" step="1" value={ this.parse( this.props.option.custom.art.lineHeight ) } onChange={ (v)=>this.changeStyle(v, "lineHeight") }/>
+                    <Slider min="0" max="5" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.lineHeight ) } onChange={ (v)=>this.changeStyle(v, "lineHeight") }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>单词间距</sr-opt-label>
-                    <Slider min="0" max="10" step="1" value={ this.parse( this.props.option.custom.art.wordSpacing ) } onChange={ (v)=>this.changeStyle(v, "wordSpacing") }/>
+                    <Slider min="0" max="10" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.wordSpacing ) } onChange={ (v)=>this.changeStyle(v, "wordSpacing") }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
                     <sr-opt-label>首行缩进</sr-opt-label>
-                    <Slider min="0" max="30" step="1" value={ this.parse( this.props.option.custom.art.textIndent ) } onChange={ (v)=>this.changeStyle(v, "textIndent") }/>
+                    <Slider min="0" max="30" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.textIndent ) } onChange={ (v)=>this.changeStyle(v, "textIndent") }/>
                 </sr-opt-gp>
             </sr-opt-read>
         )
