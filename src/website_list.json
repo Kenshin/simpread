@@ -2597,6 +2597,15 @@
             "<div class='aimg_tip'>"
         ]
     },{
+        "name"    : "voice.hupu.com",
+        "url"     : "http*://voice.hupu.com/*/*.html",
+        "title"   : "<h1 class='headline'>",
+        "desc"    : "",
+        "include" : "<div class='artical-content-read'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "bbs.hupu.com",
         "url"     : "https://bbs.hupu.com/*.html",
         "title"   : "<h1 id='j_data'>",
@@ -2604,6 +2613,10 @@
         "avatar"  : [
             {"name" : "[[{$('.author').find('.left a')}]]"},
             {"url"  : "[[{$('.user').find('img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('a.prevPage').attr('href')}]]"},
+            {"next" : "[[{$('a.nextPage').attr('href')}]]"}
         ],
         "include" : "[[{$('table.case')}]]",
         "exclude" : [

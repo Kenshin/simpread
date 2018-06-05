@@ -165,7 +165,7 @@ export default class CommonOpt extends React.Component {
     }
 
     newsites() {
-        storage.GetRemote( "remote", ( result, error ) => {
+        storage.GetRemote( "local", ( result, error ) => {
             if ( !error ) {
                 const count = storage.pr.Addsites( result );
                 storage.Writesite( storage.pr.sites, () => {
