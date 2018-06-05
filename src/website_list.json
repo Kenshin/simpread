@@ -2597,6 +2597,15 @@
             "<div class='aimg_tip'>"
         ]
     },{
+        "name"    : "worldcup.fifa.com",
+        "url"     : "http*://www.fifa.com/worldcup/news/*",
+        "title"   : "<h1 class='d3-o-article__title'>",
+        "desc"    : "",
+        "include" : "<div class='d3-o-article__body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "voice.hupu.com",
         "url"     : "http*://voice.hupu.com/*/*.html",
         "title"   : "<h1 class='headline'>",

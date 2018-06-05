@@ -239,6 +239,10 @@ function specbeautify( name, $target ) {
                 $target.replaceWith( `<div class="sr-rd-content-center"><img class="sr-rd-content-nobeautify" src="${ $img.attr('data-src') }" style="max-width:100%"></div>` );
             });
             break;
+        case "worldcup.fifa.com":
+            $target.find( "iframe" ).css({ width: "790px", height: "450px" });
+            $target.find( "div" ).removeClass();
+            break;
     }
 }
 
