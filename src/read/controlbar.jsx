@@ -81,6 +81,9 @@ export default class ReadCtlbar extends React.Component {
                     th.Change( th.names[i] );
                     this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
                     break;
+                case type.startsWith( "dyslexia" ):
+                    output.Action( type, $( "sr-rd-title" ).text(), "", $( "sr-rd-content" ).text() );
+                    break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
                         [ "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {

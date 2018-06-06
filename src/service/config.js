@@ -273,6 +273,23 @@ const readItems = {
             },
         },
     },
+    "dyslexia" : {
+        "name" : "无障碍",
+        "icon" : ss.IconPath("dyslexia_icon"),
+        "color": "#90ee02",
+        "items": {
+            "dyslexia_speak" : {
+                "name" : "播放声音",
+                "icon" : ss.IconPath("speak_icon"),
+                "color": "#90ee02",
+            },
+            "dyslexia_speak_stop" : {
+                "name" : "停止播放",
+                "icon" : ss.IconPath("speak_stop_icon"),
+                "color": "#90ee02",
+            },
+        },
+    },
     "share" : {
         "name" : "共享",
         "icon" : ss.IconPath("share_icon"),

@@ -172,7 +172,14 @@ function action( type, title, desc, content ) {
         exp.VerifySvcWrapper( storage, exp[id], type, exp.Name( type ), new Notify() )
         .done( result => service( result ));
 
-    } else {
+    } else if ( type.startsWith( "dyslexia" ) ) {
+        if ( type.endsWith( "speak" ) ) {
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.speak, { content: `标题 ${title} 正文 ${content}` } ));
+        } else {
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.speak_stop ));
+        }
+    }
+    else {
         new Notify().Render( 2, "当前模式下，不支持此功能。" );
     }
 }

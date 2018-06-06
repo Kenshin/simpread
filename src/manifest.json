@@ -14,7 +14,8 @@
   "permissions"     : [
     "contextMenus",
     "tabs",
-    "storage"
+    "storage",
+    "tts"
   ],
   "background": {
     "scripts"       : [ "/bundle/common.js", "/bundle/background.js" ]

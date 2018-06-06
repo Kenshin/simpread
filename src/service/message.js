@@ -17,6 +17,9 @@ const action = {
     auth_success   : "auth_success",
     export         : "export",
     redirect_uri   : "redirect_uri",
+    // dyslexia
+    speak          : "speak",
+    speak_stop     : "speak_stop",
 };
 
 /**

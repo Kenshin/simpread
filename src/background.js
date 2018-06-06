@@ -110,6 +110,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 }
             });
             break;
+        case msg.MESSAGE_ACTION.speak:
+            browser.tts.speak( request.value.content );
+            break;
+        case msg.MESSAGE_ACTION.speak_stop:
+            browser.tts.stop();
+            break;
     }
 });
 
