@@ -312,6 +312,7 @@ function commbeautify( name, $target ) {
               zuimei  = $target.attr( "data-original" ),
               cnbeta  = $target.attr( "original" ),
               jianshu = $target.attr( "data-original-src" ),
+              sina    = $target.attr( "real_src" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
                   if ( $img[0].clientWidth > 1000 ) {
@@ -340,6 +341,7 @@ function commbeautify( name, $target ) {
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
         newsrc = jianshu ? jianshu : newsrc;
+        newsrc = sina    ? sina    : newsrc;
         // hack code
         location.host.includes( "infoq.com" ) && ( newsrc = src );
         !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
