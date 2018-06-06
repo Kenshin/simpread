@@ -27,8 +27,12 @@ const rdcls   = "simpread-read-root",
 const Footer = () => {
     return (
         <sr-rd-footer>
-            <sr-rd-footer-text>全文完</sr-rd-footer-text>
-            <sr-rd-footer-copywrite>本文由 简悦 <a href="http://ksria.com/simpread" target="_blank">SimpRead</a> 优化，用以提升阅读体验。</sr-rd-footer-copywrite>
+            <sr-rd-footer-group>
+                <sr-rd-footer-line></sr-rd-footer-line>
+                <sr-rd-footer-text>全文完</sr-rd-footer-text>
+                <sr-rd-footer-line></sr-rd-footer-line>
+            </sr-rd-footer-group>
+            <sr-rd-footer-copywrite>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验。</sr-rd-footer-copywrite>
         </sr-rd-footer>
     )
 }

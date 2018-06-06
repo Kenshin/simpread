@@ -125,50 +125,31 @@ sr-rd-content-error {
 }
 
 sr-rd-footer {
-    display: block;
+    display: flex;
+    flex-direction: column;
 
-    margin-top: 10px;
-    padding: 40px 0 30px;
+    font-size: 14px;
+}
 
-    text-align: center;
+sr-rd-footer-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
+sr-rd-footer-line {
+    width: 100%;
     border-top: 1px solid #E0E0E0;
-    clear: both;
 }
 
 sr-rd-footer-text {
-    display: block;
-
-    width: 100px;
-
-    margin: 20px auto;
-    padding: 10px 20px;
-
-    color: #fff;
-    background: #424242;
-
-    border-radius: 5px;
-
-    font-size: 20px;
-    text-align: center;
-
-    box-sizing: border-box;
+    min-width: 150px;
 }
 
 sr-rd-footer-copywrite {
-    display: block;
-
-    padding: 0;
-    margin-bottom: 20px;
-
-    min-height: 24px;
-
-    color: #787878;
-
-    font-size: 17px;
-    font-weight: 700;
-
-    box-sizing: border-box;
+    margin: 10px 0 20px 0;
+    color: inherit;
 }
 
 sr-rd-footer-copywrite a,
@@ -176,10 +157,9 @@ sr-rd-footer-copywrite a:link {
     margin: 0;
     padding: 0;
 
-    color: #787878;
+    color: inherit;
     background-color: transparent;
 
-    font-size: 17px;
     line-height: initial;
     text-decoration: none;
     vertical-align: initial;
@@ -190,7 +170,7 @@ sr-rd-footer-copywrite a:link {
 sr-rd-footer-copywrite a:hover,
 sr-rd-footer-copywrite a:focus,
 sr-rd-footer a:active {
-    color: #787878;
+    color: inherit;
     text-decoration: underline;
 }
 
