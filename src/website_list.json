@@ -1268,8 +1268,8 @@
             ""
         ]
     },{
-        "name"    : "readme.github.com",
-        "url"     : "https://github.com/**/*/README*.md",
+        "name"    : "markdown.github.com",
+        "url"     : "https://github.com/**/*/*.md",
         "title"   : "[[{$('title').text()}]]",
         "desc"    : "",
         "include" : "<article class='markdown-body'>",
