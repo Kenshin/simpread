@@ -105,12 +105,12 @@ const keyboard = {
         },
     },
     "控制栏 - 无障碍" : {
-        st: {
+        ts: {
             "kbd"  : "ts",
             "type" : "dyslexia_speak",
             "desc" : "开始朗读",
         },
-        se: {
+        tt: {
             "kbd"  : "tt",
             "type" : "dyslexia_speak_stop",
             "desc" : "停止朗读",
@@ -126,6 +126,16 @@ const keyboard = {
             "kbd"  : "se",
             "type" : "siteeditor",
             "desc" : "站点编辑器",
+        },
+        hl: {
+            "kbd"  : "hl",
+            "type" : "highlight",
+            "desc" : "重新选择高亮",
+        },
+        cl: {
+            "kbd"  : "cl",
+            "type" : "remove",
+            "desc" : "隐藏任意元素",
         },
     },
 };
