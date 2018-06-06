@@ -1065,8 +1065,9 @@
         "desc"    : "",
         "include" : "<div class='article_content'>",
         "exclude" : [
-            ""
-        ]
+            "<div class='meau-gotop-box'>"
+        ],
+        "css"     : ".markdown_views pre code{background-color:transparent!important;}"
     },{
         "name"    : "lib.csdn.net",
         "url"     : "http*://lib.csdn.net/article/*/*",
