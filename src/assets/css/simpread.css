@@ -253,7 +253,7 @@ sr-rd-crlbar.controlbar:hover {
  */
 toc-bg {
     position: fixed;
-    right: 0;
+    left: 0;
     top: 0;
     width: 300px;
     height: 500px;
@@ -281,7 +281,7 @@ toc * {
 
 toc {
     position: fixed;
-    right: 0;
+    left: 0;
     top: 100px;
 
     display: flex;
@@ -351,7 +351,7 @@ toc outline a.toc-outline-theme-night {
 toc outline active {
     position: absolute;
 
-    left: 0;
+    right: 0;
     top: 0;
     bottom: 0;
 

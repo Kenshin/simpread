@@ -46,6 +46,10 @@ class TOC extends React.Component {
                 menuItems.filter("[href='#"+id+"']").parent().find( "active" ).addClass( "toc-outline-active" );
             }
         });
+
+        $( "outline" ).map( ( idx, item ) => {
+            $(item).width( 180 - parseInt( $(item).css("padding-left") ) );
+        })
     }
 
     render() {
