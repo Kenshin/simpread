@@ -499,7 +499,7 @@ readLabels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月�
  */
 const focusItems = ( items => {
     const news = { ...items },
-          dels = [ "theme", "fontfamily", "fontsize", "layout" ];
+          dels = [ "theme", "fontfamily", "fontsize", "layout", "dyslexia" ];
     dels.forEach( del => delete news[ del ] );
     news.top = {
         "name" : "返回顶部",
