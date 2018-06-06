@@ -127,6 +127,8 @@ export default class ReadCtlbar extends React.Component {
         if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
             delete conf.readItems.option;
         }
+        // hack code
+        !/chrome/ig.test( navigator.userAgent ) && ( delete conf.readItems.dyslexia );
     }
 
     constructor( props ) {
@@ -134,7 +136,7 @@ export default class ReadCtlbar extends React.Component {
     }
 
     render() {
-         const Controlbar = storage.current.fap ? 
+        const Controlbar = storage.current.fap ? 
             <Fap items={ [ "样式", "动作" ] } autoHide={ false }
                 waves="md-waves-effect md-waves-circle md-waves-float" 
                 onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }
