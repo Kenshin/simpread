@@ -110,6 +110,7 @@ read-process {
 
     background-color: #64B5F6;
     transition: width 2s;
+    z-index: 20000;
 }
 
 sr-rd-content-error {
