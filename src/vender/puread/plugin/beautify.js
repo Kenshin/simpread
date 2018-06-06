@@ -340,6 +340,8 @@ function commbeautify( name, $target ) {
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
         newsrc = jianshu ? jianshu : newsrc;
+        // hack code
+        location.host.includes( "infoq.com" ) && ( newsrc = src );
         !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
         $img.attr( "src", newsrc )
             .replaceAll( $target )

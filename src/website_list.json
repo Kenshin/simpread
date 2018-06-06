@@ -888,6 +888,11 @@
             "<div id='editCommentPopup'>",
             "<div id='messagePopup'>",
             "<div id='responseContent'>",
+            "<div class='related'>",
+            "<div class='comment_here'>",
+            "<script>",
+            "<div class='all_comments'>",
+            "<div class='comments'>",
             "[['<p>对本文的审校</p>']]",
             "[['<p>中文站投稿或者参与内容翻译工作</p>']]",
             "[['<b>QCon北京2017</b>']]"
@@ -899,7 +904,12 @@
         "desc"    : "",
         "include" : "<div class='text_info'>",
         "exclude" : [
-            "<div class='random_links'>"
+            "<div class='random_links'>",
+            "<div class='related'>",
+            "<div class='comment_here'>",
+            "<script>",
+            "<div class='all_comments'>",
+            "<div class='comments'>"
         ]
     },{
         "name"    : "segmentfault.com",
