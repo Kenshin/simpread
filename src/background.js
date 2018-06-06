@@ -103,7 +103,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.auth_success:
             getCurTab( { url: request.value.url }, tabs => {
                 if ( tabs && tabs.length > 0 ) {
-                    chrome.tabs.remove( tabs[0].id );
+                    browser.tabs.remove( tabs[0].id );
                     getCurTab( { "active": true }, tabs => {
                         tabs.forEach( tab => browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.export, {type: request.value.name.toLowerCase()} )) );
                     });
@@ -150,7 +150,7 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
                 const opts = tabs.find( tab => tab.url.includes( browser.extension.getURL( "options/options.html" ) ));
                 if ( opts ) {
                     browser.tabs.sendMessage( opts.id, msg.Add( msg.MESSAGE_ACTION.redirect_uri, { uri: tab.url, id } ));
-                    chrome.tabs.remove( tabId );
+                    browser.tabs.remove( tabId );
                 }
             });
         }
