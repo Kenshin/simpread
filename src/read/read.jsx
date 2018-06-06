@@ -71,7 +71,7 @@ class Read extends React.Component {
             storage.pr.Beautify( $( "sr-rd-content" ) );
             storage.pr.Format( rdcls );
 
-            this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+            !this.props.wrapper.avatar && this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
             this.props.read.site.css && this.props.read.site.css.length > 0 &&
                 ss.SiteCSS( this.props.read.site.css );
 
