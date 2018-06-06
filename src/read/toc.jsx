@@ -101,7 +101,7 @@ function Render( root, $target, theme, hidden ) {
     });
     console.log( "current toc is ", table )
     $( root ).append( `<toc-bg class=${cls}></tocbg>` );
-    table.length > 0 && ReactDOM.render( <TOC table={ table } theme={ theme } />, $( "toc-bg" )[0] );
+    table.length > 1 && ReactDOM.render( <TOC table={ table } theme={ theme } />, $( "toc-bg" )[0] );
 }
 
 export {
