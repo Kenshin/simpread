@@ -104,6 +104,18 @@ const keyboard = {
             "desc" : "保存到 稍后读",
         },
     },
+    "控制栏 - 无障碍" : {
+        st: {
+            "kbd"  : "ts",
+            "type" : "dyslexia_speak",
+            "desc" : "开始朗读",
+        },
+        se: {
+            "kbd"  : "tt",
+            "type" : "dyslexia_speak_stop",
+            "desc" : "停止朗读",
+        },
+    },
     "控制栏 - 设定" : {
         st: {
             "kbd"  : "st",
