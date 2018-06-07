@@ -88,10 +88,10 @@ storage.Read( first => {
     tt.Render( "body" );
     waves.Render({ root: "body" });
     // only firefox and only usage 1.1.0.3024
-    if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
-        welcomeRender( true );
-        localStorage["opt-3024"] = ver.sub_ver;
-    }
+    //if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
+    //    welcomeRender( true );
+    //    localStorage["opt-3024"] = ver.sub_ver;
+    //}
 });
 
 /**
