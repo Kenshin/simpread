@@ -167,7 +167,9 @@ export default class CommonOpt extends React.Component {
     }
 
     newsites() {
+        const notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
         storage.GetRemote( "remote", ( result, error ) => {
+            notify.complete();
             if ( !error ) {
                 const count = storage.pr.Addsites( result );
                 storage.Writesite( storage.pr.sites, () => {
