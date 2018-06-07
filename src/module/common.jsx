@@ -22,9 +22,10 @@ export default class CommonOpt extends React.Component {
     };
 
     sync() {
+        let notify;
         const dbx = exp.dropbox,
         read      = () => {
-            new Notify().Render( "数据同步中，请稍等..." );
+            notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
                     storage.option.sync = Now();
@@ -37,6 +38,7 @@ export default class CommonOpt extends React.Component {
             });
         },
         callback = ( type, result, error ) => {
+            notify.complete();
             switch ( type ) {
                 case "write":
                     !error ? ( location.href = location.origin + location.pathname + "?simpread_mode=sync" ) :
