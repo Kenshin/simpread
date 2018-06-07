@@ -1054,7 +1054,7 @@ function verifyService( storage, service, type, name, notify, auto = true ) {
     storage.Safe( ()=> {
         if ( storage.secret[type].access_token ) {
             Object.keys( storage.secret[type] ).forEach( item => service[item] = storage.secret[type][item] );
-            noti = notify.Render({ content: `开始保存到 ${name}，请稍等...`, state: "loading" });
+            type != "linnk" && ( noti = notify.Render({ content: `开始保存到 ${name}，请稍等...`, state: "loading" }));
             dtd.resolve( type );
         } else {
             auto ? notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{

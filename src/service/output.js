@@ -142,7 +142,9 @@ function action( type, title, desc, content ) {
                     instapaper.Add( window.location.href, title, desc, ( result, error ) => exp.svcCbWrapper( result, error, instapaper.name, type, new Notify() ));
                     break;
                 case "linnk":
+                    const notify = new Notify().Render({ content: `开始保存到 Linnk，请稍等...`, state: "loading" });
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
+                        notify.complete();
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
                             linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, type, new Notify() ));
