@@ -32,7 +32,8 @@ import * as welc  from 'welcome';
 
 import PureRead   from 'puread';
 
-let tabsItemID = 0;
+let tabsItemID   = 0,
+    website_sync = false; // when first and update checked versions.json
 
 /**
  * Add parallax scroll
@@ -82,10 +83,10 @@ storage.Read( first => {
     firstLoad( first );
     sidebarRender();
     navRender();
+    vernotify( first );
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
-    vernotify( first );
     // only firefox and only usage 1.1.0.3024
     if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
         welcomeRender( true );
@@ -135,6 +136,7 @@ function vernotify( first ) {
             watch.SendMessage( "version", true );
             welcomeRender( false, version );
         }
+        website_sync = true;
         history.pushState( "", "", "/options/options.html" );
     }
 }
@@ -191,7 +193,7 @@ function tabsRender( color ) {
                     items={ conf.tabsItem }
                     onChange={ ( $p, $t, evt )=>tabsOnChange( $p, $t, evt ) }>
                     <section>
-                        <CommonOpt backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
+                        <CommonOpt website_sync={website_sync} backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
                     <section>
                         <FocusOpt option={ storage.focus } />

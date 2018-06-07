@@ -201,6 +201,17 @@ export default class CommonOpt extends React.Component {
         }, secret ): callback();
     }
 
+    componentDidMount() {
+        if ( this.props.website_sync ) {
+            storage.GetRemote( "versions", ( result, error ) => {
+                if ( !error && result.website == true ) {
+                    new Notify().Render( "正在获取最新的适配列表，请稍等..." );
+                    this.newsites();
+                }
+            });
+        }
+    }
+
     render() {
         return(
             <div style={{ width: '100%' }}>
