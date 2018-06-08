@@ -115,7 +115,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 }
             });
             break;
-    }
+        case msg.MESSAGE_ACTION.track:
+            tracked( request.value );
+            break;
+        }
 });
 
 /**
@@ -214,3 +217,31 @@ function setMenuAndIcon( id, code ) {
  * Listen browser page action
  */
 browser.browserAction.onClicked.addListener( () => browser.runtime.openOptionsPage() );
+
+/**
+ * Track
+ * 
+ * @param {object} google analytics track object
+ */
+function tracked({ eventCategory, eventAction, eventLabel }) {
+    console.log( "current track is", eventCategory, eventAction, eventLabel )
+    ga( 'send', {
+        hitType      : 'event',
+        eventCategory,
+        eventAction,
+        eventLabel
+    });
+}
+
+/**
+ * Google analytics
+ */
+analytics();
+function analytics() {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-405976-12', 'auto');
+    ga('send', 'pageview');
+}
