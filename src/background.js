@@ -110,6 +110,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 }
             });
             break;
+        case msg.MESSAGE_ACTION.track:
+            tracked( request.value );
+            break;
         case msg.MESSAGE_ACTION.speak:
             browser.tts.speak( request.value.content );
             break;
@@ -205,6 +208,21 @@ function setMenuAndIcon( id, code ) {
         menu.Update( "read" );
     }
     browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/icon16${icon}.png` ) });
+}
+
+/**
+ * Track
+ * 
+ * @param {object} google analytics track object
+ */
+function tracked({ eventCategory, eventAction, eventLabel }) {
+    console.log( "current track is", eventCategory, eventAction, eventLabel )
+    ga( 'send', {
+        hitType      : 'event',
+        eventCategory,
+        eventAction,
+        eventLabel
+    });
 }
 
 /**

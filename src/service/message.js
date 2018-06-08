@@ -20,6 +20,8 @@ const action = {
     // dyslexia
     speak          : "speak",
     speak_stop     : "speak_stop",
+    // track
+    track          : "track",
 };
 
 /**

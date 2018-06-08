@@ -137,6 +137,7 @@ function vernotify( first ) {
             welcomeRender( false, version );
         }
         website_sync = true;
+        browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });
         history.pushState( "", "", "/options/options.html" );
     }
 }

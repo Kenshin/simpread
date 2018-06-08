@@ -513,7 +513,7 @@ class Storage {
     /**
      * Statistics simpread same info
      * 
-     * @param {string} include: create, focus, read
+     * @param {string} include: create, focus, read, service
      * @param {string} include: service type, e.g. pdf png onenote
      */
     Statistics( type, service ) {
@@ -523,6 +523,7 @@ class Storage {
             service ? simpread.statistics.service[ service ]++ : simpread.statistics[ type ]++;
         }
         console.log( "current statistics is ", simpread.statistics )
+        browser.runtime.sendMessage({ type: "track", value: { eventAction: type, eventCategory: "read mode", eventLabel: "click" } });
         save( undefined, type == "create" );
     }
 
