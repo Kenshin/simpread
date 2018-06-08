@@ -134,7 +134,7 @@ export default class About extends React.Component {
                 </div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
-                        <a style={style.href} target="_blank" href="https://twitter.com/wanglei001">可以在 Twitter</a> 或 <a style={style.href} target="_blank" href="https://weibo.com/23784148">微博</a> 上关注我
+                        <a style={style.href} target="_blank" href="https://twitter.com/wanglei001">可以在 Twitter</a> 或 <a style={style.href} target="_blank" href="https://weibo.com/23784148">新浪微博</a> 上关注我
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>
