@@ -160,9 +160,12 @@ sr-rd-footer-copywrite a:link {
     color: inherit;
     background-color: transparent;
 
+    font-size: inherit!important;
     line-height: initial;
     text-decoration: none;
     vertical-align: initial;
+
+    border: none!important;
 
     box-sizing: border-box;
 }
