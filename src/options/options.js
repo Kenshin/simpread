@@ -178,7 +178,7 @@ function welcomeRender( first, version ) {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
-    idx == 3 ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
+    ( idx == 3 || idx == 5 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -216,7 +216,7 @@ function tabsRender( color ) {
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
-                    <section><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } /></section>
+                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } /></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );
