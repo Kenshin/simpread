@@ -138,6 +138,32 @@ export default class About extends React.Component {
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>
+
+                <div className="label">其它作品</div>
+                <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
+                    <div className="more">
+                        <a style={style.href} target="_blank" href="http://ksria.com/gnvm">GNVM - 使用 Go 语言编写的 Node.js 多版本管理器</a>
+                        <span style={{ bottom: "11px" }} className="arrow"></span>
+                    </div>
+                </div>
+                <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
+                    <div className="more">
+                        <a style={style.href} target="_blank" href="http://ksria.com/emoji">+Emoji - 一个 简单、可靠、纯粹、中文语义化的 Emoji 扩展</a>
+                        <span style={{ bottom: "11px" }} className="arrow"></span>
+                    </div>
+                </div>
+                <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
+                    <div className="more">
+                        <a style={style.href} target="_blank" href="http://ksria.com/sov2ex">SOV2EX - 一个便捷的 V2EX 站内搜索引擎（前端界面）</a>
+                        <span style={{ bottom: "11px" }} className="arrow"></span>
+                    </div>
+                </div>
+                <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
+                    <div className="more">
+                        <a style={style.href} target="_blank" href="http://ksria.com/simptab">简 Tab - 极简的 Chrome 新标签页扩展，望你每次打开都有好心情</a>
+                        <span style={{ bottom: "11px" }} className="arrow"></span>
+                    </div>
+                </div>
             </div>
         )
     }
