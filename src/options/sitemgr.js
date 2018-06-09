@@ -12,7 +12,7 @@ import Notify     from 'notify';
 
 import TextField  from 'textfield';
 import Button     from 'button';
-import Dropdown   from 'dropdown';
+import AC         from 'ac';
 
 import * as waves from 'waves';
 import * as tt    from 'tooltip';
@@ -106,9 +106,9 @@ function controlbarRender() {
         };
     const doms = <div>
                     <group className="lab">
-                        <Dropdown name={ `官方主适配源（${storage.sites.global.length} 条）` } width="100%" waves="md-waves-effect" items={ formatsites( storage.sites.global ) } onChange={ v=>getCursite( "global", v) } />
-                        <Dropdown name={ `第三方适配源（${storage.sites.custom.length} 条）` } width="100%" waves="md-waves-effect" items={ formatsites( storage.sites.custom ) } onChange={ v=>getCursite( "custom", v) } />
-                        <Dropdown name={ `自定义适配源（${storage.sites.local.length} 条）`  } width="100%" waves="md-waves-effect" items={ formatsites( storage.sites.local  ) } onChange={ v=>getCursite( "local",  v) } />
+                        <group><AC placeholder={ `官方适配源（${storage.sites.global.length} 条）`} items={ formatsites( storage.sites.global  )} onChange={ v=>getCursite( "global",  v) } /></group>
+                        <group><AC placeholder={ `第三方适配源（${storage.sites.custom.length} 条）` } items={ formatsites( storage.sites.custom  )} onChange={ v=>getCursite( "custom",  v) } /></group>
+                        <group><AC placeholder={ `自定义适配源（${storage.sites.local.length} 条）` } items={ formatsites( storage.sites.local  )} onChange={ v=>getCursite( "local",  v) } /></group>
                     </group>
                     <group className="lab">
                         <group>

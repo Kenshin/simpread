@@ -46,6 +46,10 @@ class TOC extends React.Component {
                 menuItems.filter("[href='#"+id+"']").parent().find( "active" ).addClass( "toc-outline-active" );
             }
         });
+
+        $( "outline" ).map( ( idx, item ) => {
+            $(item).width( 180 - parseInt( $(item).css("padding-left") ) );
+        })
     }
 
     render() {
@@ -75,6 +79,11 @@ class TOC extends React.Component {
  * @param {boolen} hidden
  */
 function Render( root, $target, theme, hidden ) {
+
+    // hack code
+    if ( location.host.includes( "blog.csdn.net"  )) return;
+    if ( location.host.includes( "post.smzdm.com" )) return;
+
     const table = [],
           cls   = hidden ? "toc-bg-hidden" : "";
     $target.find( "h1, h2, h3, h4" ).map( ( idx, item) => {
@@ -92,7 +101,7 @@ function Render( root, $target, theme, hidden ) {
     });
     console.log( "current toc is ", table )
     $( root ).append( `<toc-bg class=${cls}></tocbg>` );
-    table.length > 0 && ReactDOM.render( <TOC table={ table } theme={ theme } />, $( "toc-bg" )[0] );
+    table.length > 1 && ReactDOM.render( <TOC table={ table } theme={ theme } />, $( "toc-bg" )[0] );
 }
 
 export {

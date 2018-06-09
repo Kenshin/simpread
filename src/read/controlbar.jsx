@@ -81,6 +81,9 @@ export default class ReadCtlbar extends React.Component {
                     th.Change( th.names[i] );
                     this.props.onAction && this.props.onAction( type.split( "_" )[0], th.theme );
                     break;
+                case type.startsWith( "dyslexia" ):
+                    output.Action( type, $( "sr-rd-title" ).text(), "", $( "sr-rd-content" ).text() );
+                    break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
                         [ "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
@@ -124,6 +127,8 @@ export default class ReadCtlbar extends React.Component {
         if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
             delete conf.readItems.option;
         }
+        // hack code
+        !/chrome/ig.test( navigator.userAgent ) && ( delete conf.readItems.dyslexia );
     }
 
     constructor( props ) {
@@ -131,7 +136,7 @@ export default class ReadCtlbar extends React.Component {
     }
 
     render() {
-         const Controlbar = storage.current.fap ? 
+        const Controlbar = storage.current.fap ? 
             <Fap items={ [ "样式", "动作" ] } autoHide={ false }
                 waves="md-waves-effect md-waves-circle md-waves-float" 
                 onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }

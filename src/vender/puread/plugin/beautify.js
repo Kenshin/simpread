@@ -232,6 +232,17 @@ function specbeautify( name, $target ) {
                 $target.html( $div );
             });
             break;
+        case "medium.com":
+            $target.find( "figure" ).map( ( index, item ) => {
+                const $target = $(item),
+                      $img    = $target.find( "img" );
+                $target.replaceWith( `<div class="sr-rd-content-center"><img class="sr-rd-content-nobeautify" src="${ $img.attr('data-src') }" style="max-width:100%"></div>` );
+            });
+            break;
+        case "worldcup.fifa.com":
+            $target.find( "iframe" ).css({ width: "790px", height: "450px" });
+            $target.find( "div" ).removeClass();
+            break;
     }
 }
 
@@ -301,14 +312,17 @@ function commbeautify( name, $target ) {
               zuimei  = $target.attr( "data-original" ),
               cnbeta  = $target.attr( "original" ),
               jianshu = $target.attr( "data-original-src" ),
+              sina    = $target.attr( "real_src" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
                   if ( $img[0].clientWidth > 1000 ) {
                       $img.css( "zoom", "0.6" );
                   }
                   else if ( $img[0].clientHeight > 620 ) {
-                      $img.attr( "height", 620 );
-                      if ( $img[0].clientWidth < $("sr-rd-content").width()) $img.css({ "width":"auto" });
+                    if ( /win|mac/i.test(navigator.platform) ) {
+                        $img.attr( "height", 620 );
+                        if ( $img[0].clientWidth < $("sr-rd-content").width()) $img.css({ "width":"auto" });
+                    }
                   }
                   if ( $img[0].clientWidth > $("sr-rd-content").width()) $img.addClass( "sr-rd-content-img" );
               },
@@ -327,12 +341,20 @@ function commbeautify( name, $target ) {
         newsrc = lazysrc ? lazysrc : newsrc;
         newsrc = zuimei  ? zuimei  : newsrc;
         newsrc = jianshu ? jianshu : newsrc;
+        newsrc = sina    ? sina    : newsrc;
+        // hack code
+        location.host.includes( "infoq.com" ) && ( newsrc = src );
         !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
         $img.attr( "src", newsrc )
-            .one( "load",  ()=>fixOverflowImgsize() )
-            .one( "error", ()=>loaderrorHandle()    )
             .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );
+        if ( !/win|mac/i.test(navigator.platform) ) {
+            $img.on( "load",  ()=>fixOverflowImgsize() )
+                .on( "error", ()=>loaderrorHandle()    );
+        } else {
+            $img.one( "load",  ()=>fixOverflowImgsize() )
+                .one( "error", ()=>loaderrorHandle()    );
+        }
     });
     $target.find( "sr-blockquote" ).map( ( index, item ) => {
         const $target = $(item),

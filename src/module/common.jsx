@@ -22,9 +22,10 @@ export default class CommonOpt extends React.Component {
     };
 
     sync() {
+        let notify;
         const dbx = exp.dropbox,
         read      = () => {
-            new Notify().Render( "数据同步中，请稍等..." );
+            notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
                     storage.option.sync = Now();
@@ -37,6 +38,7 @@ export default class CommonOpt extends React.Component {
             });
         },
         callback = ( type, result, error ) => {
+            notify.complete();
             switch ( type ) {
                 case "write":
                     !error ? ( location.href = location.origin + location.pathname + "?simpread_mode=sync" ) :
@@ -165,7 +167,9 @@ export default class CommonOpt extends React.Component {
     }
 
     newsites() {
+        const notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
         storage.GetRemote( "remote", ( result, error ) => {
+            notify.complete();
             if ( !error ) {
                 const count = storage.pr.Addsites( result );
                 storage.Writesite( storage.pr.sites, () => {
@@ -199,6 +203,17 @@ export default class CommonOpt extends React.Component {
         state && !$.isEmptyObject( secret ) ? storage.Safe( ()=>{
             callback();
         }, secret ): callback();
+    }
+
+    componentDidMount() {
+        if ( this.props.website_sync ) {
+            storage.GetRemote( "versions", ( result, error ) => {
+                if ( !error && result.website == true ) {
+                    new Notify().Render( "正在获取最新的适配列表，请稍等..." );
+                    this.newsites();
+                }
+            });
+        }
     }
 
     render() {
