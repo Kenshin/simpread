@@ -27,7 +27,7 @@ const style = {
         minHeight: '400px',
 
         width: '650px',
-        height: '630px',
+        height: '660px',
 
         backgroundColor: '#fff',
 
@@ -170,7 +170,7 @@ class Welcome extends React.Component {
 
                     { !br.isFirefox() && <div className="carousel-item chrome" id="start">
                         <section style={ style.section }>
-                            <img src={ ss.IconPath( "welcome" )}/>
+                            <img src="http://ksria.qiniudn.com/snap11.png" style={{width:"100%"}}/>
                             <h2 style={{ ...style.h2, ...{ 'margin-bottom': 0 } }}>{ this.props.first ? "欢迎使用 简悦": "简悦 已升至最新版" }</h2>
                             <div style={ style.desc }>
                                 让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。<br/>
@@ -201,6 +201,7 @@ class Welcome extends React.Component {
                             </div>
                         </section>
                     </div>
+
                     <div className="carousel-item" id="1.1.0">
                         <section style={ style.section }>
                             <img src={ ss.IconPath( "welcome-setting" )}/>
@@ -221,6 +222,29 @@ class Welcome extends React.Component {
                                 支持下载 <strong>PDF · PNG · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a></strong> 到本地 以及 发送到 <strong><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a></strong>。<br/>
                                 支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
                                 发送页面链接到 <strong>Pocket · Instapaper · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
+                            </div>
+                        </section>
+                    </div>
+
+                    <div className="carousel-item" id="1.1.1">
+                        <section style={ style.section }>
+                            <img src="http://ksria.qiniudn.com/snap44.png?sdfasdf" style={{width:"100%"}}/>
+                            <h2 style={ style.h2 }>全新的控制栏面板，全部功能「一览无余」</h2>
+                            <div style={ style.desc }>
+                                「告别」传统、单一的控制栏<br/>
+                                主题、字体样式、大小、版面布局更改一键完成。<br/>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div className="carousel-item" id="1.1.1">
+                        <section style={ style.section }>
+                            <img src="http://ksria.qiniudn.com/snap55.png" style={{width:"100%"}}/>
+                            <h2 style={ style.h2 }>更智能的正文提取功能</h2>
+                            <div style={ style.desc }>
+                                从现在开始，简悦可以识别出 Wordpress · Hexo · Ghost · <br/>
+                                Discuz 等博客 / 论坛的页面了！<br/>
+                                甚至，只要是结构良好的页面，（无需适配）自动生成阅读模式，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
                             </div>
                         </section>
                     </div>
