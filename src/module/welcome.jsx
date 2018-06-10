@@ -27,7 +27,7 @@ const style = {
         minHeight: '400px',
 
         width: '650px',
-        height: '660px',
+        height: '600px',
 
         backgroundColor: '#fff',
 
@@ -63,6 +63,11 @@ const style = {
 
         lineHeight: '32px',
         textAlign: 'center',
+    },
+
+    img: {
+        width: '100%',
+        marginTop: '-82px',
     },
 
     gif : {
@@ -170,7 +175,7 @@ class Welcome extends React.Component {
 
                     { !br.isFirefox() && <div className="carousel-item chrome" id="start">
                         <section style={ style.section }>
-                            <img src="http://ksria.qiniudn.com/snap11.png" style={{width:"100%"}}/>
+                        <img src={ ss.IconPath( "welcome" )} style={ style.img }/>
                             <h2 style={{ ...style.h2, ...{ 'margin-bottom': 0 } }}>{ this.props.first ? "欢迎使用 简悦": "简悦 已升至最新版" }</h2>
                             <div style={ style.desc }>
                                 让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。<br/>
@@ -228,7 +233,7 @@ class Welcome extends React.Component {
 
                     <div className="carousel-item" id="1.1.1">
                         <section style={ style.section }>
-                            <img src="http://ksria.qiniudn.com/snap44.png?sdfasdf" style={{width:"100%"}}/>
+                            <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-fap.png" style={ style.img }/>
                             <h2 style={ style.h2 }>全新的控制栏面板，全部功能「一览无余」</h2>
                             <div style={ style.desc }>
                                 「告别」传统、单一的控制栏<br/>
@@ -239,7 +244,7 @@ class Welcome extends React.Component {
 
                     <div className="carousel-item" id="1.1.1">
                         <section style={ style.section }>
-                            <img src="http://ksria.qiniudn.com/snap55.png" style={{width:"100%"}}/>
+                            <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-adapter.png" style={ style.img }/>
                             <h2 style={ style.h2 }>更智能的正文提取功能</h2>
                             <div style={ style.desc }>
                                 从现在开始，简悦可以识别出 Wordpress · Hexo · Ghost · <br/>
@@ -251,7 +256,7 @@ class Welcome extends React.Component {
 
                     <div className="carousel-item" id="end">
                         <section style={ style.section }>
-                            <img src={ ss.IconPath( "welcome-others" )}/>
+                        <img src={ ss.IconPath( "welcome-others" )} style={ style.img }/>
                             <h2 style={ style.h2 }>更多功能 等你发现！</h2>
                         </section>
                     </div>
