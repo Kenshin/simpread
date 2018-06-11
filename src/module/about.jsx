@@ -91,7 +91,7 @@ export default class About extends React.Component {
 
                 <div className="label">帮助</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
-                    <div className="more">
+                    <div className="more" style={{cursor: 'default'}}>
                         <div><a style={style.href} target="_blank" href="http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png">如果简悦可以解决你在阅读上痛点，可以请我喝杯咖啡</a></div>
                         <span className="desc">简悦是一个免费且开源的项目</span>
                         <span className="arrow"></span>
@@ -111,14 +111,14 @@ export default class About extends React.Component {
                 </div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
-                        <a style={style.href} onClick={()=>this.props.onClick("welcome")}><b>重看引导页面</b> 或者 <a style={style.href} target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.1.html"><b>重看当前版本</b></a> 的功能介绍</a>
+                        <a style={style.href}><b onClick={()=>this.props.onClick("welcome")}>重看引导页面</b> 或者 <a style={style.href} target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.1.html"><b>重看当前版本</b></a> 的功能介绍</a>
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>
 
                 <div className="label">其它平台的简悦</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
-                    <div className="more">
+                    <div className="more" style={{cursor: 'default'}}>
                         <div><a style={style.href} target="_blank" href="http://ksria.com/simpread/#downloads">简悦已经上线了 Firefox 版，UserScript 版，JSBox 版，总有一款适合你</a></div>
                         <span className="desc">包括但不限于：Chrome · Firefox · Safari · Apple Safari · Microsoft Edge · Opera · iPhone · iPad</span>
                         <span className="arrow"></span>
@@ -140,7 +140,7 @@ export default class About extends React.Component {
                 </div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
-                        <a style={style.href} target="_blank" href="https://twitter.com/wanglei001">可以在 Twitter</a> 或 <a style={style.href} target="_blank" href="https://weibo.com/23784148">新浪微博</a> 上关注我
+                        <a style={style.href} target="_blank" href="https://twitter.com/wanglei001">可以在 <b>Twitter</b></a> 或 <a style={style.href} target="_blank" href="https://weibo.com/23784148"><b>新浪微博</b></a> 上关注我
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>
