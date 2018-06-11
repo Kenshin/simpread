@@ -238,7 +238,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                        { !first && version == "1.1.1" && 
+                    { !first && version == "1.1.1" && 
                         <div className="carousel-item" id="1.1.1">
                             <section style={ style.section }>
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-adapter.png" style={ style.img }/>
