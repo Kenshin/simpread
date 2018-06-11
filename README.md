@@ -74,7 +74,7 @@
 - 稍后读
 
 #### 截图：
-![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/visual%20effect.jpg)
+![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-1.png)
 ![简悦 - 阅读模式](http://ojec5ddd5.bkt.clouddn.com/read%20mode.png)  
 
 #### 照片集：
