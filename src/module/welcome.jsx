@@ -214,12 +214,12 @@ class Welcome extends React.Component {
                     { first &&
                         <div className="carousel-item" id="1.0.3">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service-v2.png" style={ style.img }/>
+                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service-v2.png?201806111215" style={ style.img }/>
                                 <h2 style={ style.h2 }>连接你的生产力工具</h2>
                                 <div style={ style.desc }>
-                                    支持下载 <strong>PDF · PNG · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a></strong> 到本地 以及 发送到 <strong><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a></strong>。<br/>
-                                    支持输出到 <strong>Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。</strong><br/>
-                                    发送页面链接到 <strong>Pocket · Instapaper · Linnk</strong> ，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
+                                    支持下载 HTML · PDF · Markdown · PNG · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a> 到本地 以及 发送到 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a>。<br/>
+                                    支持输出到 Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。<br/>
+                                    发送页面链接到 Pocket · Instapaper · Linnk，详细 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
                                 </div>
                             </section>
                         </div> }
@@ -227,7 +227,7 @@ class Welcome extends React.Component {
                     { first &&
                         <div className="carousel-item" id="1.1.0">
                             <section style={ style.section }>
-                                <img src={ ss.IconPath( "welcome-setting" )}/>
+                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-custom.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>站点编辑器 · 站点适配源 · 站点管理器</h2>
                                 <div style={ style.desc }>
                                     页面上任意元素均可隐藏，更支持编程，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8" target="_blank">站点编辑器</a><br/>
