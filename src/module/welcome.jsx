@@ -214,7 +214,7 @@ class Welcome extends React.Component {
                     { first &&
                         <div className="carousel-item" id="1.0.3">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
+                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service-v2.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>连接你的生产力工具</h2>
                                 <div style={ style.desc }>
                                     支持下载 <strong>PDF · PNG · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a></strong> 到本地 以及 发送到 <strong><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a></strong>。<br/>
