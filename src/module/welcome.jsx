@@ -211,7 +211,7 @@ class Welcome extends React.Component {
                             </section>
                     </div> }
 
-                    { !first && version == "1.0.3" && 
+                    { first &&
                         <div className="carousel-item" id="1.0.3">
                             <section style={ style.section }>
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service.png"/>
@@ -224,7 +224,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                    { !first && version == "1.1.0" && 
+                    { first &&
                         <div className="carousel-item" id="1.1.0">
                             <section style={ style.section }>
                                 <img src={ ss.IconPath( "welcome-setting" )}/>
