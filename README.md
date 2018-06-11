@@ -75,7 +75,7 @@
 
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-1.png)
-![简悦 - 阅读模式](http://ojec5ddd5.bkt.clouddn.com/read%20mode.png)  
+![简悦 - 阅读模式](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-2.png)  
 
 #### 照片集：
 > 包含了 `稍后读` `阅读模式 · 设置界面` `导出到生产力工具` `发送到 Kindle` `自定义样式` `同步配置` `论坛类页面 · 分页` 等功能的截图（动图）
