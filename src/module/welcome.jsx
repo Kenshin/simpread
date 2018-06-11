@@ -162,29 +162,17 @@ class Welcome extends React.Component {
             <welcome style={ style.root }>
                 <div className="carousel carousel-slider" data-indicators="true">
 
-                    { br.isFirefox() && <div className="carousel-item firefox" id="start">
-                        <section style={ style.section }>
-                            <img src={ ss.IconPath( "welcome-firefox" )}/>
-                            <h2 style={{ ...style.h2, ...{ 'margin-bottom': 0 } }}>{ this.props.first ? "久等了，简悦已登录 Firefox": "简悦 已升至最新版" }</h2>
-                            <div style={ style.desc }>
-                                Chrome 好评率超过 99% 的阅读模式现已来到 Firefox。<br/>
-                                去掉干扰元素，提升阅读体验，<strong style={ style.strong }>「简」</strong>单阅读，愉<strong style={ style.strong }>「悦」</strong>心情。<br/>
-                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8">数百种类型</a></strong> 的网站。
-                            </div>
-                        </section>
-                    </div> }
-
-                    { !br.isFirefox() && <div className="carousel-item chrome" id="start">
+                    <div className="carousel-item chrome" id="start">
                         <section style={ style.section }>
                         <img src={ ss.IconPath( "welcome" )} style={ style.img }/>
                             <h2 style={{ ...style.h2, ...{ 'margin-bottom': 0 } }}>{ this.props.first ? "欢迎使用 简悦": "简悦 已升至最新版" }</h2>
                             <div style={ style.desc }>
-                                让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。<br/>
+                                { br.isFirefox() ? "Chrome 好评率超过 99% 的阅读模式现已来到 Firefox。" : "让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。" }<br/>
                                 去掉干扰元素，提升阅读体验，<strong style={ style.strong }>「简」</strong>单阅读，愉<strong style={ style.strong }>「悦」</strong>心情。<br/>
                                 为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8">数百种类型</a></strong> 的网站。
                             </div>
                         </section>
-                    </div> }
+                    </div>
 
                     { first &&
                         <div className="carousel-item">
