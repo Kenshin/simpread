@@ -189,27 +189,16 @@ class Welcome extends React.Component {
                     { first &&
                         <div className="carousel-item">
                             <section style={ style.section }>
-                                <img src={ ss.IconPath( "welcome-read" )}/>
-                                <h2 style={ style.h2 }>阅读模式</h2>
+                                <img src={ ss.IconPath( "welcome-mode" )} style={ style.img }/>
+                                <h2 style={ style.h2 }>阅读模式 与 聚焦模式</h2>
                                 <div style={ style.desc }>
-                                    简悦 <strong>独有功能</strong>，自动提取适配页面的标题、描述、正文、媒体等资源。<br/>
-                                    更多阅读场景，包括：<a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F">临时阅读</a> · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/TXT-%E9%98%85%E8%AF%BB%E5%99%A8">TXT 阅读器</a> · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E4%B8%BB%E5%8A%A8%E9%80%82%E9%85%8D%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F">主动适配模式</a>。<br/>
-                                    支持 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F">自定义 CSS</a> 以及 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%AE%BA%E5%9D%9B%E7%B1%BB%E9%A1%B5%E9%9D%A2%E5%8F%8A%E5%88%86%E9%A1%B5">论坛类页面 / 分页</a>。<br/>
+                                    阅读模式： <strong>独有功能</strong>，自动提取适配页面的标题、描述、正文、媒体等资源。<br/>
+                                    支持 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F">临时阅读</a> · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/TXT-%E9%98%85%E8%AF%BB%E5%99%A8">TXT 阅读器</a> · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E4%B8%BB%E5%8A%A8%E9%80%82%E9%85%8D%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F">主动适配模式</a> · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%99%BA%E8%83%BD%E8%AF%86%E5%88%AB%E6%A8%A1%E5%BC%8F">智能识别正文</a>
+                                    · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E8%AE%BA%E5%9D%9B%E7%B1%BB%E9%A1%B5%E9%9D%A2%E5%8F%8A%E5%88%86%E9%A1%B5">论坛类页面 / 分页</a>。<br/>
+                                    聚焦模式：高亮鼠标所在的文章段落，不改变当前页面的结构，适合未适配的网站。<br/>
                                 </div>
                             </section>
                         </div> }
-
-                    { first &&
-                        <div className="carousel-item">
-                            <section style={ style.section }>
-                                <img src={ ss.IconPath( "welcome-focus" )}/>
-                                <h2 style={ style.h2 }>聚焦模式</h2>
-                                <div style={ style.desc }>
-                                    高亮鼠标所在的文章段落，不改变当前页面的结构，适合未适配的网站。<br/>
-                                    除此以外，包含 <strong>阅读模式的全部功能</strong>。
-                                </div>
-                            </section>
-                    </div> }
 
                     { first &&
                         <div className="carousel-item" id="1.0.3">
@@ -227,7 +216,7 @@ class Welcome extends React.Component {
                     { first &&
                         <div className="carousel-item" id="1.1.0">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-custom.png" style={ style.img }/>
+                                <img src={ ss.IconPath( "welcome-custom" )} style={ style.img }/>
                                 <h2 style={ style.h2 }>站点编辑器 · 站点适配源 · 站点管理器</h2>
                                 <div style={ style.desc }>
                                     页面上任意元素均可隐藏，更支持编程，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8" target="_blank">站点编辑器</a><br/>
