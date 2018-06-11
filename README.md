@@ -42,6 +42,9 @@
 - 主动适配：  
   通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
 
+- 智能适配：  
+  自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面以及只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [智能适配](https://github.com/kenshin/simpread/wiki/智能适配模式)
+
 - 站点适配源：  
   包括：`官方（主）适配源` `官方（次）适配源以及第三方适配源` `本地适配源` 并支持导入第三方适配源，详细请看 [站点适配源](https://github.com/Kenshin/simpread/wiki/站点适配源)
 
@@ -56,7 +59,7 @@
 
 - 丰富的导出功能，包括：
 
-  - 导出 [Markdown](https://github.com/Kenshin/simpread#感谢) · `PNG` · `PDF` · [epub](https://github.com/Kenshin/simpread/wiki/发送到-epub)
+  - 导出 [Markdown](https://github.com/Kenshin/simpread#感谢) · `HTML` · `PNG` · `PDF` · [epub](https://github.com/Kenshin/simpread/wiki/发送到-epub)
 
   - 发送阅读模式优化后的页面到 `Kindle`，详细配置 [请看这里](https://github.com/Kenshin/simpread/wiki/发送到-Kindle)
 
@@ -66,7 +69,7 @@
 
 - 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](https://github.com/kenshin/simpread/wiki/快捷键) 等；
 
-- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](https://github.com/kenshin/simpread/wiki/faq#白名单) 以及 [黑名单（排除列表）](https://github.com/kenshin/simpread/wiki/faq#排除列表) 等
+- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](https://github.com/kenshin/simpread/wiki/faq#白名单) 以及 [排除列表](https://github.com/kenshin/simpread/wiki/faq#排除列表) 等
 
 - 稍后读
 
