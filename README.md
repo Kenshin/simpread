@@ -75,7 +75,6 @@
 
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-1.png)
-![简悦 - 阅读模式](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-2.png)  
 ![多种导出方式](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-3.png)  
 ![定制化，可编程](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-4.png)  
 
