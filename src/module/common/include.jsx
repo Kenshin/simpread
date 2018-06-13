@@ -19,7 +19,7 @@ export default class Include extends React.Component {
         error : ""
     };
 
-    changeInclude() {
+    changeInclude( event ) {
         let code = 0;
         if ( this.props.mode == "read" && event.target.value.trim() == "" ) {
             code = -2;
@@ -42,7 +42,7 @@ export default class Include extends React.Component {
                 floatingtext="高亮区域" 
                 value={ this.props.include }
                 errortext={ this.state.error }
-                onChange={ ()=>this.changeInclude() }
+                onChange={ evt=>this.changeInclude(evt) }
             />
         )
     }

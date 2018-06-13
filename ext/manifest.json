@@ -1,0 +1,59 @@
+{
+  "name"            : "__MSG_extension_name__",
+  "default_locale"  : "zh_CN",
+  "version"         : "1.1.1",
+  "short_name"      : "SimpRead",
+  "description"     : "__MSG_ext_extension_desc__",
+  "homepage_url"    : "http://ksria.com/simpread",
+  "author"          : "Kenshin Wang <kenshin@ksria.com>",
+  "icons" : {
+    "16"            : "assets/images/icon16.png",
+    "48"            : "assets/images/icon48.png",
+    "128"           : "assets/images/icon128.png"
+  },
+  "permissions"     : [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "downloads",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts"       : [ "/bundle/common.js", "/bundle/background.js" ]
+  },
+  "content_scripts" : [
+    {
+      "matches"     : [ "http://*/*", "https://*/*", "file:///*/*.txt" ],
+      "exclude_matches": [ "http://localhost/*", "https://simpread.herokuapp.com/view/*" ],
+      "js"          : [
+        "/bundle/common.js",
+        "/bundle/vendors.js",
+        "/bundle/contentscripts.js"
+       ],
+      "run_at"      : "document_end"
+    }
+  ],
+  "browser_action"  : {
+    "browser_style" : true,
+    "default_title" : "简悦 - 打开选项页",
+    "default_icon"  : {
+      "16"          : "assets/images/icon48.png"
+    }
+  },
+  "page_action"     : {
+    "browser_style" : true,
+    "default_icon"  : {
+      "16"          : "assets/images/icon16.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "/assets/images/*",
+    "website_list.json"
+  ],
+  "content_security_policy" : "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

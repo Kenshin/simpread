@@ -2,10 +2,8 @@ console.log( "=== simpread storage load ===" )
 
 import "babel-polyfill";
 
-import * as st        from 'site';
-import {browser}      from 'browser';
+import {browser, br}  from 'browser';
 import {version}      from 'version';
-import { verifyHtml } from 'util';
 
 /**
  * Read and Write Chrome storage
@@ -16,6 +14,7 @@ import { verifyHtml } from 'util';
 const name = "simpread",
     remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json",
     origins= "http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json",
+    versions= "http://ojec5ddd5.bkt.clouddn.com/versions.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",
@@ -50,6 +49,7 @@ const name = "simpread",
         progress  : true,
         auto      : false,
         controlbar: true,
+        fap       : true,
         highlight : true,
         shortcuts : "A A",
         toc       : true,
@@ -64,11 +64,12 @@ const name = "simpread",
         layout    : "",  // default 20%
         //sites     : [],  // e.g. [ "<url>", site ]
         custom    : {
-            global: {
-                fontFamily : "",
-                marginLeft : "",
-                marginRight: "",
-            },
+            // remove by 1.1.1
+            //global: {
+            //    fontFamily : "",
+            //    marginLeft : "",
+            //    marginRight: "",
+            //},
             title : {
                 fontFamily : "",
                 fontSize   : "",
@@ -104,8 +105,8 @@ const name = "simpread",
         create    : "",
         update    : "",
         sync      : "",
-        focus     : 0,
-        read      : 0,
+        //focus   : 0,
+        //read    : 0,
         esc       : true,
         br_exit   : false,
         secret    : false,
@@ -116,6 +117,31 @@ const name = "simpread",
             list  : false,
         },
         origins   : [],
+        blacklist : [
+            "google.com",
+        ]
+    },
+    statistics = {
+        "focus"   : 0,
+        "read"    : 0,
+        "service" : {
+            "linnk"      : 0,
+            "instapaper" : 0,
+            "pocket"     : 0,
+            "readlater"  : 0,
+            "epub"       : 0,
+            "pdf"        : 0,
+            "png"        : 0,
+            "markdown"   : 0,
+            "html"       : 0,
+            "evernote"   : 0,
+            "yinxiang"   : 0,
+            "dropbox"    : 0,
+            "onenote"    : 0,
+            "gdrive"     : 0,
+            "kindle"     : 0,
+            "temp"       : 0,
+        }
     },
     unread = {
         idx       : 0,
@@ -139,7 +165,8 @@ let current  = {},
         websites: {
             custom : [],
             local  : [], // include focus.sites and read.sites
-        }
+        },
+        statistics
     },
     secret = {
         version   : "2017-11-22",
@@ -251,6 +278,15 @@ class Storage {
     }
 
     /**
+     * Get statistics
+     * 
+     * @return {object} statistics object
+     */
+    get statistics() {
+        return simpread.statistics;
+    }
+
+    /**
      * Get secret data structure
      * 
      * @return {object} secret object
@@ -282,6 +318,24 @@ class Storage {
     }
 
     /**
+     * Set puread object
+     * 
+     * @param {object} pure read
+     */
+    set puread( value ) {
+        this.pr = value;
+    }
+
+    /**
+     * Get puread object
+     * 
+     * @return {object} pure read
+     */
+    get puread() {
+        return this.pr;
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
@@ -300,6 +354,52 @@ class Storage {
     }
 
     /**
+     * Read storage usage aync only firefox
+     * 
+     * @param {func} callback 
+     */
+    ReadAsync( callback ) {
+        const db = browser.storage.local.get();
+        const safesave = obj => {
+            if ( secret && secret.version != obj.version ) {
+                obj.version = secret.version;
+                Object.keys( secret ).forEach( item => {
+                    obj[item] == undefined && ( obj[item] = secret[item] );
+                });
+            }
+            return { ...obj };
+        };
+        db.then( result => {
+            let firstload = true;
+            if ( result && !$.isEmptyObject( result )) {
+                secret    = result[ "secret" ] && safesave( result[ "secret" ]);
+                simpread  = result[name];
+                firstload = false;
+            }
+            origin = clone( simpread );
+            callback( simpread, secret );
+            console.log( "chrome storage read success!", simpread, origin, result );
+        }, error => {
+            console.log(`Error: ${error}`);
+        });
+    }
+
+    /**
+     * Write Object only firefox
+     * 
+     * @param {object} simpread object 
+     * @param {object} secret object 
+     */
+    WriteAsync( simp, sec ) {
+        simpread  = simp;
+        origin    = clone( simpread );
+        sec && ( secret = sec );
+        browser.storage.local.set( { ["secret"] : secret }, () => {
+            console.log( "firefox storage safe set success!", secret );
+        });
+    }
+
+    /**
      * Set simpread object to chrome storage
      * 
      * @param {function} callback
@@ -311,15 +411,23 @@ class Storage {
     }
 
     /**
-     * Get current object, current object structure include:
+     * Set simpread sites to chrome storage
      * 
-     * @param {string} @see mode
-     * @param {object} include: meta read and txt read
+     * @param {object} all sites, @see this.sites
+     * @param {function} callback
      */
-    Getcur( key, meta ) {
+    Writesite( sites, callback ) {
+        simpread.sites           = sites.global;
+        simpread.websites.custom = sites.custom;
+        simpread.websites.local  = sites.local;
+        callback && save( callback, true );
+    }
+
+    Getcur( key, site ) {
         current      = swap( simpread[key], {} );
+        current.url  = site.url;
         current.mode = key;
-        this.Getsites( current, meta );
+        current.site = site;
         curori       = { ...current };
         curori.site  = { ...current.site };
         console.log( "current site object is ", current )
@@ -329,10 +437,8 @@ class Storage {
      * Set current to simpread[key]
      * 
      * @param {string} @see mode
-     * @param {boolean} is true update site
      */
-    Setcur( key, site_update = false ) {
-        site_update && this.Setsite();
+    Setcur( key ) {
         swap( current, simpread[key] );
         save( undefined, true );
     }
@@ -343,8 +449,8 @@ class Storage {
      * @param {string} @see mode
      */
     VerifyCur( type ) {
-        return ( current.mode && current.mode != type ) ||
-               ( current.url  && current.url != getURI() ) ||
+        return current.mode != type    ||
+               current.url != getURI() ||
                $.isEmptyObject( current );
     }
 
@@ -372,279 +478,52 @@ class Storage {
     }
 
     /**
-     * Set adapter site
-     */
-    Setsite() {
-        let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
-        idx == -1 && ( idx = simpread.websites.local.length );
-        simpread.websites.local.splice( idx, 1, [ current.url, current.site ] );
-    }
-
-    /**
-     * Get site from url
+     * Get remote from type
      * 
-     * @param {string} include: global, custom, local
-     * @param {string} url 
+     * @param {string} include: local, remote, origins, versions and <urls>
+     * @param {func} callback
      */
-    Getsite( type, url ) {
-        let sites;
-        if ( type == "global" ) {
-            sites = simpread.sites;
-        } else sites = simpread.websites[type];
-        return sites.find( item => item[0] == url );
-    }
-
-    /**
-     * Get adapter site(s)
-     * include: url, site props
-     * 
-     * @param {object} storage.current
-     * @param {object} include: meta read and txt read
-     */
-    Getsites( current, meta ) {
-        const   url       = getURI(),
-                matching  = [];
-        current.url       = url;
-        if ( meta ) {
-            current.auto  = meta.auto;
-            current.url   = meta.url;
-            delete meta.auto;
-            delete meta.url;
-            current.site  = { ...meta };
-        } else {
-            st.Getsite( "local",  new Map( simpread.websites.local  ), url, matching );
-            st.Getsite( "global", new Map( simpread.sites           ), url, matching );
-            st.Getsite( "custom", new Map( simpread.websites.custom ), url, matching );
-            if ( matching.length > 0 ) {
-                const found  = matching[0];
-                current.url  = found[0];
-                current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
-            } else {
-                current.site = clone( site );
-            }
+    async GetRemote( type, callback ) {
+        let url;
+        switch ( type ) {
+            case "local":
+                url = local;
+                break;
+            case "remote":
+                url = remote;
+                break;
+            case "origins":
+                url = origins;
+                break;
+            case "versions":
+                url = versions;
+                break;
+            default:
+                url = type;
         }
-        current.site.matching = matching;
-    }
-
-    /**
-     * Safe site, add all site props
-     * 
-     * @param {object} modify site 
-     * @param {string} target include: global custom local
-     * @param {string} url 
-     * @returns {object} site
-     */
-    Safesite( site, target, url ) {
-        site.url    = url;
-        site.target = target;
-        site.name  == "" && ( site.name = "tempread::" );
-        ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
-        ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
-        return site;
-    }
-
-    /**
-     * Clean useless site props
-     * 
-     * @param   {object} site
-     * @returns {object} site
-    */
-    Cleansite( site ) {
-       delete site.url;
-       delete site.html;
-       delete site.target;
-       delete site.matching;
-       site.avatar && site.avatar.length > 0 && site.avatar[0].name == "" && delete site.avatar;
-       site.paging && site.paging.length > 0 && site.paging[0].prev == "" && delete site.paging;
-       return site;
-    }
-
-    /**
-     * Find site, code include:
-     * 
-     * - -1: not found
-     * -  1: simpread.site
-     * -  2: simpread.read.site
-     * -  3: meta data
-     * 
-     * @param {object} meta data
-     */
-    /*
-    Findsite( meta ) {
-        const url = getURI();
-        if ( meta ) {
-            stcode = 3;
-        } else {
-            let arr = st.Getsite( new Map( simpread.sites ), url );
-            stcode = -1;
-            if ( arr ) {
-                stcode = 1;
-            } else {
-                arr = st.Getsite( new Map( simpread.websites.local ), url );
-                arr && arr[0].name != "" && ( stcode = 2 );
-            }
-        }
-    }
-    */
-
-    /**
-     * Add new site( read only )
-     * 
-     * @param {string} include: focus, read
-     * @param {string} when read html is dom.outerHTML
-     */
-    Newsite( mode, html ) {
-        const new_site = { mode, url: window.location.href, site: { name: `tempread::${window.location.host}`, title: "<title>", desc: "", include: "", exclude: [] } };
-        html && ( new_site.site.html = html );
-        current.mode = new_site.mode,
-        current.url  = new_site.url;
-        current.site = this.Safesite({ ...new_site.site }, "local", new_site.url );
-        console.log( "【read only】current site object is ", current )
-    }
-
-    /**
-     * Update url and site from param
-     * 
-     * @param {object} new site
-     * @param {func}   callback
-     */
-    Updatesite( site, callback ) {
-        current.url  = site.url;
-        current.site = { ...site };
-        this.Cleansite( current.site );
-        this.Setsite();
-        save( callback, true );
-    }
-
-    /**
-     * Clone current site
-     * 
-     * @return {object} new site
-     */
-    /*
-    Clonesite() {
-        const site = { ...current.site };
-        site.url   = current.url;
-        site.name  == "" && ( site.name = "tempread::" + location.host );
-        ( !site.avatar || site.avatar.length == 0 ) && ( site.avatar = [{ name: "" }, { url: ""  }]);
-        ( !site.paging || site.paging.length == 0 ) && ( site.paging = [{ prev: "" }, { next: "" }]);
-        return site;
-    }
-    */
-
-    /**
-     * Delete site from simpread.websites.local
-     * 
-     * @param {object} site
-     * @param {func}   callback, -1: not exist, -2: not local, > 0: exist
-     */
-    Deletesite( site, callback ) {
-        if ( site.target == "local" ) {
-            let idx = simpread.websites.local.findIndex( item => item[0] == curori.url );
-            idx != -1 && simpread.websites.local.splice( idx, 1 );
-            idx != -1 ?  save( callback, true ) : callback( idx );
-        } else callback( -2 );
-    }
-
-    /**
-     * Get local/remote JSON usage async
-     * 
-     * @param {string}    url, e.g. chrome-extension://xxxx/website_list.json or http://xxxx.xx/website_list.json
-     * @return {function} callback, param1: object; param2: error
-     */
-    async GetNewsites( type, callback ) {
         try {
-            const url    = type === "remote" ? remote : local,
-                response = await fetch( url + "?_=" + Math.round(+new Date()) ),
-                newsites = await response.json(),
-                len      = simpread.sites.length;
-            let count    = 0;
-            if ( len == 0 ) {
-                simpread.sites = formatSites( newsites );
-                count          = simpread.sites.length;
-                save( undefined, type );
-            }
-            else {
-                count = addsites( formatSites( newsites )).count;
-                save( undefined, type );
-            }
-            callback && callback( { count }, undefined );
-        } catch ( error ) {
-            console.error( error );
-            callback && callback( {}, error );
-        }
-    }
-
-    /**
-     * Get origins from http://xxxx.xx/website_list_origins.json
-     * 
-     * @param {func} callback 
-     */
-    async GetOrigins( callback ) {
-        try {
-            const response = await fetch( origins + "?_=" + Math.round(+new Date()) ),
+            const response = await fetch( url + "?_=" + Math.round(+new Date()) ),
                   result   = await response.json();
-            if ( result && result.origins.length > 0 ) {
-                const urls = result.origins.map( item => item.url );
-                callback( urls );
-            } else callback( undefined, "error" );
+            result ? callback( result ) : callback( undefined, "error" );
         } catch ( error ) {
             callback( undefined, "error" );
         }
     }
 
     /**
-     * Load origins from url
-     * 
-     * @param {string} url
-     * @param {func} callback 
-     */
-    async LoadOrigin( url, callback ) {
-        try {
-            const response = await fetch( url + "?_=" + Math.round(+new Date()) ),
-                  result   = await response.json(),
-                  len      = result.sites.length;
-            let count      = 0;
-            if ( result && len > 0 ) {
-                const arr = formatSites( result );
-                callback( { url, sites: arr }, undefined );
-            } else callback( { url }, "error" );
-        } catch ( error ) {
-            callback( { url }, error );
-        }
-    }
-
-    /**
-     * Add new sites to simpread.websites.custom
-     * 
-     * @param {object} new sites
-     */
-    AddOrigins( new_sites ) {
-        simpread.websites.custom = [ ...new_sites ];
-    }
-
-    /**
-     * Clear origins
-     * 
-     * @returns custom.length
-     */
-    ClearOrigins() {
-        const len = simpread.websites.custom.length;
-        simpread.websites.custom = [];
-        return len;
-    }
-
-    /**
      * Statistics simpread same info
      * 
-     * @param {string} include: create, focus, read
+     * @param {string} include: create, focus, read, service
+     * @param {string} include: service type, e.g. pdf png onenote
      */
-    Statistics( type ) {
+    Statistics( type, service ) {
         if ( type == "create" ) {
             simpread.option.create = now();
         } else {
-            simpread.option[ type ] = simpread.option[ type ] + 1;
+            service ? simpread.statistics.service[ service ]++ : simpread.statistics[ type ]++;
         }
+        console.log( "current statistics is ", simpread.statistics )
+        browser.runtime.sendMessage({ type: "track", value: { eventAction: type, eventCategory: "read mode", eventLabel: "click" } });
         save( undefined, type == "create" );
     }
 
@@ -715,10 +594,11 @@ class Storage {
 
         let opt  = valid( "option", option ),
             focu = valid( "focus",  focus ),
-            rd   = valid( "read",   read );
+            rd   = valid( "read",    read ),
+            stat = valid( "statistics", statistics );
 
-        console.log( "storage.Verify() result ", opt, focu, rd )
-        return { option: opt, focus: focu, read: rd };
+        console.log( "storage.Verify() result ", opt, focu, rd, stat )
+        return { option: opt, focus: focu, read: rd, stat: stat };
     }
 
     /**
@@ -744,11 +624,15 @@ class Storage {
                 callback && callback();
             });
         } else {
-            browser.storage.local.get( ["secret"], result => {
-                console.log( "chrome storage safe get success!", result );
-                result && !$.isEmptyObject( result ) && ( secret = safesave( result["secret"] ));
+            if ( br.isFirefox() && window.location.protocol != "moz-extension:" ) {
                 callback && callback();
-            });
+            } else {
+                browser.storage.local.get( ["secret"], result => {
+                    console.log( "chrome storage safe get success!", result );
+                    result && !$.isEmptyObject( result ) && ( secret = safesave( result["secret"] ));
+                    callback && callback();
+                });
+            }
         }
     }
 
@@ -764,6 +648,7 @@ class Storage {
             focus   : { ...this.focus  },
             read    : { ...this.read   },
             websites: { ...this.websites },
+            statistics: { ...this.statistics },
             unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });
@@ -777,7 +662,7 @@ class Storage {
      */
     Restore( key ) {
         simpread[key] = clone( origin[key] );
-        this.Getcur( key );
+        this.Getcur( key, curori.site );
     }
 
     /**
@@ -854,80 +739,6 @@ function clone( target ) {
 }
 
 /**
- * Format sites object from local or remote json file
- * 
- * @param  {object} sites.[array]
- * @return {array} foramat e.g. [[ <url>, object ],[ <url>, object ]]
- */
-function formatSites( result ) {
-    const format = new Map();
-    for ( let site of result.sites ) {
-        if ( verifysite( site ) != 0 ) continue;
-        const url = site.url;
-        delete site.url;
-        format.set( url, site );
-    }
-    return [ ...format ];
-}
-
-/**
- * Add new sites to old sites
- * 
- * @param  {array}  new sites from local or remote
- * @return {object} count: new sites; forced: update sites( discard, all site must be forced update)
- */
-function addsites( newsites ) {
-    const oldsites = new Map( simpread.sites ),
-          urls     = [ ...oldsites.keys() ];
-    let   [ count, forced ] = [ 0, 0 ];
-    newsites.map( site => {
-        if ( !urls.includes( site[0] ) ) {
-            count++;
-        } else if ( urls.includes( site[0] )) {
-            forced++;
-        }
-    });
-    simpread.sites = newsites;
-    return { count, forced };
-}
-
-/**
- * Verify site validity, include:
- * - name, url, include, error is -1
- * - title include desc, error is -2
- * - paging, error is -3 ~ -6
- * - avatar, error is -7 ~ -10
- * 
- * @param {object} site 
- */
-function verifysite( site ) {
-    if ( !site.name || !site.url || !site.include ) return -1;
-    if ( verifyHtml( site.title   )[0] == -1 ||
-         verifyHtml( site.include )[0] == -1 ||
-         verifyHtml( site.desc    )[0] == -1
-        ) {
-        return -2;
-    }
-    if ( site.paging ) {
-        if ( site.paging.length != 2 ) return -3;
-        if ( !site.paging[0].prev )    return -4;
-        if ( !site.paging[1].next )    return -5;
-        if ( verifyHtml( site.paging[0].prev )[0] == -1 || verifyHtml( site.paging[1].next )[0] == -1 ) {
-            return -6;
-        }
-    }
-    if ( site.avatar ) {
-        if ( site.avatar.length != 2 ) return -7;
-        if ( !site.avatar[0].name )    return -8;
-        if ( !site.avatar[1].url  )    return -9;
-        if ( verifyHtml( site.avatar[0].name )[0] == -1 || verifyHtml( site.avatar[1].url )[0] == -1 ) {
-            return -10;
-        }
-    }
-    return 0;
-}
-
-/**
  * Call chrome storage set
  * 
  * @param {function} callback
@@ -956,7 +767,7 @@ function now() {
 }
 
 /**
- * Get URI
+ * Get URI from puread/util getURI()
  * 
  * @return {string} e.g. current site url is http://www.cnbeta.com/articles/1234.html return http://www.cnbeta.com/articles/
  */

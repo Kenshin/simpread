@@ -30,6 +30,7 @@ export default class Auth extends React.Component {
     }
 
     onChange( state, value, flag ) {
+        let notify;
         const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive } = exp,
             clear = ( id, name ) => {
                 Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
@@ -39,6 +40,7 @@ export default class Auth extends React.Component {
                 }, storage.secret );
             },
             success = ( id, name, data ) => {
+                notify && notify.complete();
                 Object.keys( data ).forEach( item => storage.secret[id][item] = data[item] );
                 storage.Safe( () => {
                     new Notify().Render( `已成功授权 ${name} 。` );
@@ -53,6 +55,7 @@ export default class Auth extends React.Component {
                 }, storage.secret );
             },
             failed = ( error, id, name ) => {
+                notify && notify.complete();
                 console.error( `${name} auth faild, error: ${error}` )
                 new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
                 storage.secret[state].access_token = "";
@@ -93,7 +96,7 @@ export default class Auth extends React.Component {
                     .fail( error => failed( error, dropbox.id, dropbox.name ));
                 break;
             case "pocket":
-                new Notify().Render( `开始对 ${ pocket.name } 进行授权，请稍等...` );
+                notify = new Notify().Render({ content: `开始对 ${ pocket.name } 进行授权，请稍等...`, state: "loading" });
                 pocket.Request( ( result, error ) => {
                     if ( error ) failed( error, pocket.id, pocket.name );
                     else {
@@ -136,7 +139,7 @@ export default class Auth extends React.Component {
             case "evernote":
                 evernote.env     = state;
                 evernote.sandbox = false;
-                new Notify().Render( `开始对 ${ evernote.name } 进行授权，请稍等...` );
+                notify = new Notify().Render({ content: `开始对 ${ evernote.name } 进行授权，请稍等...`, state: "loading" });
                 evernote.New().RequestToken( ( result, error ) => {
                     if ( error ) failed( error, evernote.id, evernote.name );
                     else {

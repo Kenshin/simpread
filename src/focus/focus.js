@@ -27,10 +27,9 @@ var storage  = require( "storage" ).storage,
      * Add focus mode
      * 
      * @param {jquery} jquery object
-     * @param {array}  exclude html array
      * @param {string} background color style
      */
-    Focus.prototype.Render = function( $target, exclude, bgcolor ) {
+    Focus.prototype.Render = function( $target, bgcolor ) {
         console.log( "=== simpread focus add ===" );
         this.$target = $target;
 
@@ -38,7 +37,7 @@ var storage  = require( "storage" ).storage,
         includeStyle( $target, focusstyle, focuscls, "add" );
 
         // set exclude style
-        excludeStyle( $target, exclude, "delete" );
+        excludeStyle( $target, "delete" );
 
         // add simpread-focus-mask
         $parent = $target.parent();
@@ -56,24 +55,28 @@ var storage  = require( "storage" ).storage,
         // add background color
         $( bgclsjq )
             .css({ "background-color" : bgcolor })
-            .velocity({ opacity: 1 });
+            .sreffect({ opacity: 1 });
 
         // add control bar
-        fcontrol.Render( ctrlbarjq, bgclsjq );
+        fcontrol.Render( ctrlbarjq, bgclsjq, dom => {
+            storage.pr.dom = dom;
+            Focus.prototype.Render( $(dom), storage.current.bgcolor );
+        });
 
         // add tooltip and waves
         tooltip.Render( bgclsjq );
         waves.Render({ root: bgclsjq });
+        storage.Statistics( "focus" );
 
         // click mask remove it
         $( bgclsjq ).on( "click", function( event, data ) {
             if ( ( event.target.tagName.toLowerCase() == "i" && event.target.id !="exit" ) ||
                 $( event.currentTarget ).attr("class") != bgcls ||
                 ( !storage.current.mask && !data )) return;
-             $( bgclsjq ).velocity({ opacity: 0 }, {
+             $( bgclsjq ).sreffect({ opacity: 0 }, {
                  complete: ()=> {
                     includeStyle( $target, focusstyle, focuscls, "delete" );
-                    excludeStyle( $target, exclude, "add" );
+                    excludeStyle( $target, "add" );
                     tooltip.Exit( bgclsjq );
                     $( ctrlbarjq ).remove();
                     $( bgclsjq   ).remove();
@@ -98,30 +101,13 @@ var storage  = require( "storage" ).storage,
     /**
      * Get focus
      * 
+     * @param {jquery} focus jquery object
      * @param {string} storage.current.site.include
      * @return {jquery} focus jquery object or undefined
      */
-    Focus.prototype.GetFocus = function( include ) {
-        var $focus = [],
-            dtd    = $.Deferred(),
-            sel, range, node, tag,
-            target;
-        target = util.selector( include );
-        try {
-            if ( util.specTest( target ) ) {
-                const [ value, state ] = util.specAction( include );
-                if ( state == 0 ) {
-                    include = include.replace( /\[\[{\$\(|}\]\]|\).html\(\)/g, "" );
-                    $focus  = $( util.specAction( `[[[${include}]]]` )[0] );
-                } else if ( state == 3 ) {
-                    $focus  = value;
-                }
-            } else if ( target ) {
-                $focus = $( "body" ).find( target );
-            }
-        } catch ( error ) {
-            console.error( "Get $focus failed", error )
-        }
+    Focus.prototype.GetFocus = function( $focus, include ) {
+        var dtd    = $.Deferred(),
+            sel, range, node, tag;
         if ( storage.current.highlight && $focus.length == 0 ) {
             new Notify().Render( "已启动手动聚焦模式，请移动鼠标进行选择，支持 ESC 退出。" );
             highlight.Start().done( result => {
@@ -205,11 +191,10 @@ function includeStyle( $target, style, cls, type ) {
  * Set exclude style
  * 
  * @param {jquery} jquery object
- * @param {array}  hidden html
  * @param {string} include: 'add' 'delete'
  */
-function excludeStyle( $target, exclude, type ) {
-    const tags = util.exclude( $target, exclude );
+function excludeStyle( $target, type ) {
+    const tags = storage.pr.Exclude( $target );
     if ( type == "delete" )   $target.find( tags ).hide();
     else if ( type == "add" ) $target.find( tags ).show();
 }

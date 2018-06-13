@@ -8,24 +8,35 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 
+import PureRead    from 'puread';
+
 /**
  * Sevice: storage Get data form chrome storage
  */
 storage.Read( () => {
+    storage.puread = new PureRead( storage.sites );
     if ( local.Firstload() ) {
         local.Version( ver.version );
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#firstload?ver=" + ver.version ) });
     }
     else {
-        !local.Count() && storage.GetNewsites( "remote", getNewsitesHandler );
-        ver.version != storage.version && storage.GetNewsites( "local", result => {
-            ver.version != storage.version &&
+       !local.Count() && storage.GetRemote( "remote", ( result, error ) => {
+            if ( !error ) {
+                storage.pr.Addsites( result );
+                storage.Writesite( storage.pr.sites, getNewsitesHandler );
+            }
+        });
+        ver.version != storage.version && storage.GetRemote( "local", ( result, error ) => {
+            storage.pr.Addsites( result );
+            storage.Writesite( storage.pr.sites, () => {
+                ver.version != storage.version &&
                 storage.Fix( storage.read.sites, storage.version, ver.version, storage.focus.sites );
-            ver.version != storage.version && storage.Write( () => {
-                    local.Version( ver.version );
-                    browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
+                ver.version != storage.version && storage.Write( () => {
+                        local.Version( ver.version );
+                        browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?ver=" + ver.version ) });
                 }, ver.Verify( storage.version, storage.simpread ) );
-            getNewsitesHandler( result );
+                getNewsitesHandler( result );
+            });
         });
     }
     menu.CreateAll();
@@ -92,12 +103,21 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.auth_success:
             getCurTab( { url: request.value.url }, tabs => {
                 if ( tabs && tabs.length > 0 ) {
-                    chrome.tabs.remove( tabs[0].id );
+                    browser.tabs.remove( tabs[0].id );
                     getCurTab( { "active": true }, tabs => {
                         tabs.forEach( tab => browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.export, {type: request.value.name.toLowerCase()} )) );
                     });
                 }
             });
+            break;
+        case msg.MESSAGE_ACTION.track:
+            tracked( request.value );
+            break;
+        case msg.MESSAGE_ACTION.speak:
+            browser.tts.speak( request.value.content );
+            break;
+        case msg.MESSAGE_ACTION.speak_stop:
+            browser.tts.stop();
             break;
     }
 });
@@ -133,7 +153,7 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
                 const opts = tabs.find( tab => tab.url.includes( browser.extension.getURL( "options/options.html" ) ));
                 if ( opts ) {
                     browser.tabs.sendMessage( opts.id, msg.Add( msg.MESSAGE_ACTION.redirect_uri, { uri: tab.url, id } ));
-                    chrome.tabs.remove( tabId );
+                    browser.tabs.remove( tabId );
                 }
             });
         }
@@ -188,4 +208,32 @@ function setMenuAndIcon( id, code ) {
         menu.Update( "read" );
     }
     browser.pageAction.setIcon({ tabId: id, path: browser.extension.getURL( `assets/images/icon16${icon}.png` ) });
+}
+
+/**
+ * Track
+ * 
+ * @param {object} google analytics track object
+ */
+function tracked({ eventCategory, eventAction, eventLabel }) {
+    console.log( "current track is", eventCategory, eventAction, eventLabel )
+    ga( 'send', {
+        hitType      : 'event',
+        eventCategory,
+        eventAction,
+        eventLabel
+    });
+}
+
+/**
+ * Google analytics
+ */
+analytics();
+function analytics() {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-405976-12', 'auto');
+    ga('send', 'pageview');
 }

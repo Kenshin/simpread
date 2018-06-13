@@ -34,12 +34,12 @@ export default class LabsOpt extends React.Component {
         model == "read" && state == "toc"  && this.tocState( value );
     }
 
-    changeExclusion() {
+    changeExclusion( event ) {
         this.props.read.exclusion = event.target.value.split("\n");
         this.props.onChange && this.props.onChange( false );
     }
 
-    changeWhitelist() {
+    changeWhitelist( event ) {
         this.props.read.whitelist = event.target.value.split("\n");
         this.props.onChange && this.props.onChange( false );
     }
@@ -51,6 +51,11 @@ export default class LabsOpt extends React.Component {
     exclusionState( value ) {
         $( this.refs.exclusion  ).velocity( value ? "slideDown" : "slideUp" );
         $( this.refs.whitelist ).velocity( !value ? "slideDown" : "slideUp" );
+    }
+
+    blacklist( event ) {
+        this.props.option.blacklist = event.target.value.split("\n");
+        this.props.onChange && this.props.onChange( false );
     }
 
     componentDidMount() {
@@ -65,19 +70,16 @@ export default class LabsOpt extends React.Component {
 
     changeOrigins() {
         this.props.option.origins = event.target.value.split("\n");
+        storage.pr.origins        = this.props.option.origins;
         this.props.onChange && this.props.onChange( false );
     }
 
     origins( type ) {
         if ( type == "origins" ) {
-            storage.GetOrigins( ( result, error ) => {
+            storage.GetRemote( "origins", ( result, error ) => {
                 if ( error ) new Notify().Render( 2, "获取失败，请稍后重新加载。" );
                 else {
-                    const urls = new Set( this.props.option.origins.concat( result ) );
-                    urls.forEach( item => {
-                        if ( item.trim() == "" || !item.trim().startsWith( "http" ) || !item.trim().endsWith( ".json" ) ) urls.delete( item );
-                    });
-                    this.props.option.origins = [ ...urls ];
+                    this.props.option.origins = storage.pr.Origins( result );
                     this.props.onChange && this.props.onChange( false );
                     $( this.refs.origins ).find( "textarea" ).val( this.props.option.origins.join( "\n" ) );
                     new Notify().Render( "官方源加载成功。" );
@@ -97,13 +99,14 @@ export default class LabsOpt extends React.Component {
                     new Notify().Render( "已剔除掉不符合规范的第三方源。" );
                 }
                 this.props.option.origins.forEach( item => {
-                    storage.LoadOrigin( item, ( result, error ) => {
+                    storage.GetRemote( item, ( result, error ) => {
                         idx++;
-                        !error && count++;
-                        !error && ( arr = arr.concat( result.sites ));
-                        error  && new Notify().Render( `导入失败 ${ result.url }` );
+                        if ( result && result.sites.length > 0 ) {
+                            count++;
+                            arr = arr.concat( storage.pr.Formatsites( result ) );
+                        } else new Notify().Render( `导入失败 ${ item }` );
                         if ( idx == max ) {
-                            arr.length > 0 && storage.AddOrigins( arr );
+                            arr.length > 0 && ( storage.websites.custom = storage.pr.Addorigins( arr ) );
                             console.log( "current storage websites.custom is ", arr );
                             new Notify().Render( `已完成导入，本次共计：${ count } 个站点， ${ arr.length } 条数据。` );
                             this.props.onChange && this.props.onChange( false );
@@ -113,7 +116,8 @@ export default class LabsOpt extends React.Component {
             });
         } else if ( type == "clear" ) {
             new Notify().Render( "snackbar", "只能清除第三方源的适配站点，请问是否清除？", "确认", () => {
-                new Notify().Render( `已完成清除，共计：${ storage.ClearOrigins() } 条数据。` );
+                new Notify().Render( `已完成清除，共计：${ storage.pr.Clearorigins() } 条数据。` );
+                storage.websites.custom = storage.pr.sites.custom;
                 this.props.onChange && this.props.onChange( false );
             });
         }
@@ -134,6 +138,16 @@ export default class LabsOpt extends React.Component {
                             label="动作栏图标是否改为 「进入/退出 」模式？"
                             desc="包括：聚焦模式和阅读模式，默认（关闭）为「弹出设定对话框」"
                             onChange={ (s)=>this.onChange(s, "option", "br_exit") } />
+                    <div style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>黑名单</div>
+                        <div className="sublabel">加入其中后，不再启动简悦，有别于白名单和排除列表，黑名单则彻底不加载。</div>
+                        <TextField 
+                            multi={ true } rows={8}
+                            placeholder="每行一个，支持： URL， hostname 等。" 
+                            value={ ( this.props.option.blacklist||[] ).join( "\n" ) }
+                            onChange={ (e)=>this.blacklist(e) }
+                        />
+                    </div>
                     <Switch width="100%" checked={ this.props.option.secret }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="同步时是否包含授权服务中的授权码？"
@@ -190,6 +204,11 @@ export default class LabsOpt extends React.Component {
                             label="是否一直显示右下角的控制栏？"
                             desc="关闭意味着「鼠标移上时才显示」"
                             onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
+                    <Switch width="100%" checked={ this.props.read.fap }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否启用高级控制栏面板？"
+                            desc="关闭意味着「使用浮动控制栏」"
+                            onChange={ (s)=>this.onChange(s, "read", "fap") } />
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="是否启动临时阅读模式？"
@@ -209,27 +228,29 @@ export default class LabsOpt extends React.Component {
                     </div>
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            desc="白名单与黑名单功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
+                            desc="白名单与排除列表功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
                             label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
                     <div ref="exclusion" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
-                        <div className="label">排除列表（黑名单）</div>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>排除列表</div>
+                        <div className="sublabel">加入其中后将不会自动进入阅读模式，仅当启用「自动进入阅读模式」有效。</div>
                         <TextField 
                             multi={ true } rows={8}
                             placeholder="每行一个，支持： URL, minimatch 等。" 
                             value={ ( this.props.read.exclusion||[] ).join( "\n" ) }
-                            onChange={ ()=>this.changeExclusion() }
+                            onChange={ (e)=>this.changeExclusion(e) }
                         />
                     </div>
 
                     <div ref="whitelist" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
-                        <div className="label">白名单</div>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>白名单</div>
+                        <div className="sublabel">加入其中后将自动进入阅读模式，仅当禁用「自动进入阅读模式」有效。</div>
                         <TextField 
                             multi={ true } rows={8}
                             placeholder="每行一个，支持： URL, minimatch 等。" 
                             value={ ( this.props.read.whitelist||[] ).join( "\n" ) }
-                            onChange={ ()=>this.changeWhitelist() }
+                            onChange={ (e)=>this.changeWhitelist(e) }
                         />
                     </div>
                 </div>

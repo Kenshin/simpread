@@ -1,6 +1,6 @@
 console.log( "===== simpread option common: URL =====" )
 
-import minimatch from 'minimatch';
+import * as puplugin from 'puplugin';
 
 import TextField from 'textfield';
 
@@ -18,16 +18,18 @@ export default class URL extends React.Component {
         error : ""
     };
 
-    changeURL() {
+    changeURL( event ) {
         let  code = 0;
-        const url = event.target.value.trim();
+        const url = event.target.value.trim(),
+              minimatch = puplugin.Plugin( "minimatch" );
+
         if ( url == "" ) {
             code = -2;
             this.setState({ error : "当前输入不能为空。" });
         }  else if ( !/^http(s)?:\/\//.test( url ) ) {
             code = -1;
             this.setState({ error : "请输入有效的 url " });
-        } else if ( location.protocol != "chrome-extension:" && !minimatch( window.location.href, url ) && url != this.props.url ) {
+        } else if ( location.protocol.startsWith( "http" ) && !minimatch( window.location.href, url ) && url != this.props.url ) {
             code = -1;
             this.setState({ error : "请输入与当前网址匹配的域名，支持 minimatch " });
         } else {
@@ -44,7 +46,7 @@ export default class URL extends React.Component {
                 floatingtext="域名" 
                 value={ this.props.url }
                 errortext={ this.state.error }
-                onChange={ ()=>this.changeURL() }
+                onChange={ evt=>this.changeURL(evt) }
             />
         )
     }

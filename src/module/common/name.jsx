@@ -12,7 +12,7 @@ export default class Name extends React.Component {
         error : ""
     };
 
-    changeName() {
+    changeName( event ) {
         let   code = 0;
         const name = event.target.value.trim();
         //if ( names.includes( name ) && name != this.props.name ) {
@@ -40,7 +40,7 @@ export default class Name extends React.Component {
                 floatingtext="标识" 
                 value={ this.props.name }
                 errortext={ this.state.error }
-                onChange={ ()=>this.changeName() }
+                onChange={ evt=>this.changeName(evt) }
             />
         )
     }

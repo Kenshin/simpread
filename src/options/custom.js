@@ -3,7 +3,7 @@ console.log( "==== simpread options page: custom load ====" )
 import '../assets/css/simpread.css';
 import '../assets/css/options_page.css';
 import '../assets/css/options_custom.css';
-import '../vender/notify/notify.css';
+import 'notify_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
@@ -82,9 +82,12 @@ function propertyRender() {
     },
     change     = ( type, props, value ) => {
         typeof value == "string" && ( value = value.trim());
-        if ( props ) {
+        if ( type == "global" ) {
+            props == "Layout" && ( value = `${ 100 - value }%` );
+            ss[props]( value );
+            storage.read[props.toLowerCase()] = value;
+        } else if ( props ) {
             cur_custom[type][props] = value;
-            props == "marginLeft" && ( cur_custom[type]["marginRight"] = value );
             props == "textShadow" && ( cur_custom[type]["textShadow"]  = value ? "0 1px rgba(0,0,0,0.3)" : "" );
             ss.Custom( type, cur_custom[type] );
         } else {
@@ -140,17 +143,17 @@ function propertyRender() {
                                 multi={ false }
                                 floatingtext="字体样式"
                                 placeholder="支持 CSS3 font-family 值"
-                                value = { cur_custom.global.fontFamily }
-                                onChange={ (evt)=>change( "global", "fontFamily", evt.target.value ) }
+                                value = { storage.read.fontfamily }
+                                onChange={ (evt)=>change( "global", "FontFamily", evt.target.value ) }
                             />
                         </group>
                         <group>
                             <TextField 
                                 multi={ false }
                                 floatingtext="版面布局"
-                                placeholder="支持 CSS3 margin-left, margin-right 值"
-                                value = { cur_custom.global.marginLeft }
-                                onChange={ (evt)=>change( "global", "marginLeft", evt.target.value ) }
+                                placeholder="仅支持百分比的数值，取值范围 70 ~ 100"
+                                value = { 100 - parseInt( storage.read.layout == "" ? 20 : storage.read.layout ) }
+                                onChange={ (evt)=>change( "global", "Layout", evt.target.value ) }
                             />
                         </group>
                     </group>

@@ -5,7 +5,8 @@ import {browser} from 'browser';
 /**
  * Manifest.json version
  */
-const version  = browser.runtime.getManifest().version,
+const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),           // get x.x.x,
+      sub_ver  = browser.runtime.getManifest().version.replace( /(\d{1,2}.){2}\d.?/, "" ), // get *.*.*.xxxx
       versions = new Map([
           [ "1.0.0", "Sun Jun 11 2017 12:30:00 GMT+0800 (CST)" ],
           [ "1.0.1", "Fri Jun 30 2017 09:27:18 GMT+0800 (CST)" ],
@@ -15,6 +16,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.5", "Wed Nov 15 2017 11:39:23 GMT+0800 (CST)" ],
           [ "1.0.6", "Thu Dec 07 2017 14:48:44 GMT+0800 (CST)" ],
           [ "1.1.0", "Sat Dec 23 2017 15:09:30 GMT+0800 (CST)" ],
+          [ "1.1.1", "Mon Jun 11 2018 15:10:12 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -25,6 +27,7 @@ const version  = browser.runtime.getManifest().version,
           [ "1.0.5", "新增「导出 epub，TXT 阅读器，阅读模式增加目录功能，白名单等」，" ],
           [ "1.0.6", "新增「添加新站到阅读模式，导入第三方适配站点等」，" ],
           [ "1.1.0", "新增「站点编辑器，站点适配源，站点管理器等」，" ],
+          [ "1.1.1", "新增「黑名单，全新的控制栏面板，更丰富的中文定制化，无障碍阅读等」，" ],
     ]);
 
 /**
@@ -126,6 +129,21 @@ function Verify( curver, data ) {
         curver = "1.1.0";
     }
 
+    if ( curver == "1.1.0" ) {
+        data.option.blacklist = [ "google.com" ];
+        data.read.fap         = true;
+        data.read.custom.global.fontFamily && ( data.read.fontfamily = data.read.custom.global.fontFamily );
+        data.read.custom.global.marginLeft && ( data.read.layout     = data.read.custom.global.marginLeft );
+        delete data.read.custom.global;
+
+        data.statistics = {"focus":0,"read":0,"service":{"linnk":0,"instapaper":0,"pocket":0,"readlater":0,"epub":0,"pdf":0,"png":0,"markdown":0,"html":0,"evernote":0,"yinxiang":0,"dropbox":0,"onenote":0,"gdrive":0,"kindle":0,"temp":0}}
+        data.statistics.focus = data.option.focus;
+        data.statistics.read  = data.option.read;
+        delete data.option.focus;
+        delete data.option.read;
+        curver = "1.1.1";
+    }
+
     /*
     if ( curver == "1.0.1" ) {
         data.option.pocket = { "consumer": "", "access": "" };
@@ -175,6 +193,7 @@ function Compare( target ) {
 
 export {
     version,
+    sub_ver,
     Verify,
     Notify,
     Compare,

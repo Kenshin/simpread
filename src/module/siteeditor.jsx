@@ -42,14 +42,16 @@ class SiteEditor extends React.Component {
             return;
         }
         new Notify().Render( "是否删除当前适配站点？", "删除", () => {
-            storage.Deletesite( site, result => {
-                if      ( result == -1 ) new Notify().Render( 2, `此站已被删除，请勿重复操作。` );
-                else if ( result == -2 ) new Notify().Render( 3, `<a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>无法删除</a> 当前站点，如不想显示请加入黑名单。` );
-                else {
-                    new Notify().Render( "删除成功，如需生效，请刷新本页。" );
-                    watch.SendMessage( "site", true );
-                }
-            });
+            site.target != "local" ? new Notify().Render( 3, `<a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>无法删除</a> 当前站点，如不想显示请加入黑名单。` ) :
+                storage.pr.Deletesite( "local", site.url, result => {
+                    if ( result == -1 ) new Notify().Render( 2, `此站已被删除，请勿重复操作。` );
+                    else {
+                        storage.Writesite(storage.pr.sites, () => {
+                            new Notify().Render( "删除成功，如需生效，请刷新本页。" );
+                            watch.SendMessage( "site", true );
+                        });
+                    }
+                });
         });
     }
 
@@ -73,7 +75,8 @@ class SiteEditor extends React.Component {
         } else if ( site.include.trim() == "" ) {
             new Notify().Render( 2, "高亮区域不能为空。" );
         } else {
-            storage.Updatesite( site, () => {
+            storage.pr.Updatesite( "local", storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
+            storage.Writesite( storage.pr.sites, () => {
                 new Notify().Render( 0, "更新成功，页面刷新后生效！" );
                 watch.SendMessage( "site", true );
             });
@@ -86,7 +89,7 @@ class SiteEditor extends React.Component {
     }
 
     render() {
-        site = { ...storage.current.site };
+        site = { ...storage.pr.current.site };
         return (
             <dia.Dialog>
                 <dia.Content>
@@ -107,12 +110,11 @@ class SiteEditor extends React.Component {
  * Modals Render
  */
 function Render() {
-    const name = storage.current.site.name;
     switch ( true ) {
-        case name.startsWith( "metaread::" ):
+        case storage.pr.state == "meta":
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/主动适配阅读模式' target='_blank'>主动适配阅读模式</a>，并不能使用设定功能。" )
             break;
-        case name.startsWith( "txtread::" ):
+        case storage.pr.state == "txt":
             new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
             break;
         default:

@@ -5,14 +5,14 @@ import '../assets/css/option.css';
 import '../assets/css/options_page.css';
 import '../assets/css/options_custom.css';
 import '../assets/css/options_sitemgr.css';
-import '../vender/notify/notify.css';
+import 'notify_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
 
 import TextField  from 'textfield';
 import Button     from 'button';
-import Dropdown   from 'dropdown';
+import AC         from 'ac';
 
 import * as waves from 'waves';
 import * as tt    from 'tooltip';
@@ -23,7 +23,9 @@ import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
 import * as watch from 'watch';
 
-let cur_site, org_site,
+import PureRead   from 'puread';
+
+let cur_site, org_site, pr,
     state = { name: 0, url: 0, title: 0, desc: 0, include: 0, exclude: 0, avatar:{ name: 0, url: 0 }, paging: { prev:0, next: 0} }; // 0: success -1: faield -2: not empty0
 
 /**
@@ -34,6 +36,7 @@ let cur_site, org_site,
  */
 storage.Read( () => {
     console.log( "simpread storage get success!", storage.sites );
+    pr = new PureRead( storage.sites );
     navRender();
     controlbarRender();
     tt.Render( "body" );
@@ -41,6 +44,7 @@ storage.Read( () => {
     $( "body" ).velocity({ opacity: 1 }, { duration: 1000, complete: ()=> {
         $( "body" ).removeAttr( "style" );
     }});
+    console.log( "current puread object is   ", pr )
 }); 
 
 /**
@@ -59,7 +63,7 @@ function navRender() {
  */
 function controlbarRender() {
     const getCursite = ( type, value ) => {
-            const site = storage.Getsite( type, value );
+            const site = pr.Getsite( type, value );
             org_site   = [ site[0], site[1] ];
             site.length > 0 && siteeditorRender( site[0], site[1], type );
         },
@@ -82,22 +86,19 @@ function controlbarRender() {
 
             const key = cur_site.target,
                   url = cur_site.url,
-                  site= storage.Cleansite({ ...cur_site });
-            let idx   = storage.sites[key].findIndex( item => item[0] == org_site[0] ),
-                flag  = -1;
+                  site= pr.Cleansite({ ...cur_site });
+            let flag  = -1;
 
             if ( type == "update" ) {
-                idx == -1 && ( idx = storage.sites[key].length );
-                storage.sites[key].splice( idx, 1, [ url, site ] );
+                pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
                 org_site = [ url, site ];
                 flag = 0;
             } else {
-                if ( idx != -1 ) {
-                    storage.sites[key].splice( idx, 1 );
-                    flag = 1;
-                } else new Notify().Render( "当前站点已删除，请勿重复提交。" );
+               pr.Deletesite( key, org_site[0], result => {
+                   result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
+               });
             }
-            flag != -1 && storage.Write( ()=> {
+            flag != -1 && storage.Writesite( pr.sites, ()=> {
                 console.log( "current site is ", cur_site, org_site )
                 watch.SendMessage( "site", true );
                 new Notify().Render( `当前站点${ flag == 0 ? "更新" : "删除" }成功，请刷新本页。` );
@@ -105,9 +106,9 @@ function controlbarRender() {
         };
     const doms = <div>
                     <group className="lab">
-                        <Dropdown name={ `官方主适配源（${storage.sites.global.length} 条）` } width="100%" waves="md-waves-effect" items={ formatsites( storage.sites.global ) } onChange={ v=>getCursite( "global", v) } />
-                        <Dropdown name={ `第三方适配源（${storage.sites.custom.length} 条）` } width="100%" waves="md-waves-effect" items={ formatsites( storage.sites.custom ) } onChange={ v=>getCursite( "custom", v) } />
-                        <Dropdown name={ `自定义适配源（${storage.sites.local.length} 条）`  } width="100%" waves="md-waves-effect" items={ formatsites( storage.sites.local  ) } onChange={ v=>getCursite( "local",  v) } />
+                        <group><AC placeholder={ `官方适配源（${storage.sites.global.length} 条）`} items={ formatsites( storage.sites.global  )} onChange={ v=>getCursite( "global",  v) } /></group>
+                        <group><AC placeholder={ `第三方适配源（${storage.sites.custom.length} 条）` } items={ formatsites( storage.sites.custom  )} onChange={ v=>getCursite( "custom",  v) } /></group>
+                        <group><AC placeholder={ `自定义适配源（${storage.sites.local.length} 条）` } items={ formatsites( storage.sites.local  )} onChange={ v=>getCursite( "local",  v) } /></group>
                     </group>
                     <group className="lab">
                         <group>
@@ -144,7 +145,7 @@ function siteeditorRender( url, site, type ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
 
-    cur_site   = storage.Safesite( site, type, url );
+    cur_site   = pr.Safesite( site, type, url );
 
     const doms = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );

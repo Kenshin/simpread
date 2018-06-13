@@ -2,7 +2,7 @@ console.log( "===== simpread option common: ThemeSel =====" )
 
 export default class ThemeSel extends React.Component {
 
-    changeBgColor () {
+    changeBgColor( event ) {
         if ( event.target.tagName.toLowerCase() == "sr-opt-theme" ) {
             const target     = event.target,
                   $target    = $(target),
@@ -24,7 +24,7 @@ export default class ThemeSel extends React.Component {
 
     render() {
         return (
-            <sr-opt-themes onClick={ ()=> this.changeBgColor() }>
+            <sr-opt-themes onClick={ evt=> this.changeBgColor(evt) }>
                 { this.props.themes.map( (theme,idx) => <sr-opt-theme style={{backgroundColor: `rgba( ${theme} )`}} name={ this.props.names[idx] } data-tooltip={ this.props.labels[idx] } data-tooltip-position="bottom" data-tooltip-delay="50"></sr-opt-theme> )}
             </sr-opt-themes>
         )

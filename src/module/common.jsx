@@ -9,6 +9,7 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 import * as exp    from 'export';
+import {br}        from 'browser';
 
 export default class CommonOpt extends React.Component {
 
@@ -21,9 +22,10 @@ export default class CommonOpt extends React.Component {
     };
 
     sync() {
+        let notify;
         const dbx = exp.dropbox,
         read      = () => {
-            new Notify().Render( "数据同步中，请稍等..." );
+            notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
                     storage.option.sync = Now();
@@ -36,6 +38,7 @@ export default class CommonOpt extends React.Component {
             });
         },
         callback = ( type, result, error ) => {
+            notify.complete();
             switch ( type ) {
                 case "write":
                     !error ? ( location.href = location.origin + location.pathname + "?simpread_mode=sync" ) :
@@ -117,7 +120,7 @@ export default class CommonOpt extends React.Component {
                         } else {
                             if ( result == 0 ) {
                                 const obj = storage.Verify( json );
-                                if ( obj.option.code != 0 || obj.focus.code != 0 || obj.read.code != 0 ) {
+                                if ( obj.option.code != 0 || obj.focus.code != 0 || obj.read.code != 0 || obj.stat.code != 0 ) {
                                     new Notify().Render( 2, "上传失败，配置项不匹配，请重新上传。" );
                                     return;
                                 }
@@ -155,15 +158,24 @@ export default class CommonOpt extends React.Component {
     }
 
     export() {
-        const data = "data:text/json;charset=utf-8," + encodeURIComponent( storage.Export() );
-        exp.Download( data, `simpread-config-${Now()}.json` );
+        if ( br.isFirefox() ) {
+            exp.PrDownload( storage.Export(), `simpread-config.json` );
+        } else {
+            const data = "data:text/json;charset=utf-8," + encodeURIComponent( storage.Export() );
+            exp.Download( data, `simpread-config-${Now()}.json` );
+        }
     }
 
     newsites() {
-        storage.GetNewsites( "remote", ( { count }, error ) => {
+        const notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
+        storage.GetRemote( "remote", ( result, error ) => {
+            notify.complete();
             if ( !error ) {
-                watch.SendMessage( "site", true );
-                count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
+                const count = storage.pr.Addsites( result );
+                storage.Writesite( storage.pr.sites, () => {
+                    watch.SendMessage( "site", true );
+                    count == 0 ? new Notify().Render( "适配列表已同步至最新版本。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点。` );
+                });
             } else {
                 new Notify().Render( 3, `同步时发生了一些问题，并不会影响本地配置文件，请稍后再试！` );
             }
@@ -191,6 +203,17 @@ export default class CommonOpt extends React.Component {
         state && !$.isEmptyObject( secret ) ? storage.Safe( ()=>{
             callback();
         }, secret ): callback();
+    }
+
+    componentDidMount() {
+        if ( this.props.website_sync ) {
+            storage.GetRemote( "versions", ( result, error ) => {
+                if ( !error && result.website == true ) {
+                    new Notify().Render( "正在获取最新的适配列表，请稍等..." );
+                    this.newsites();
+                }
+            });
+        }
     }
 
     render() {

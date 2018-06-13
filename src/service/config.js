@@ -104,6 +104,18 @@ const keyboard = {
             "desc" : "保存到 稍后读",
         },
     },
+    "控制栏 - 无障碍" : {
+        ts: {
+            "kbd"  : "ts",
+            "type" : "dyslexia_speak",
+            "desc" : "开始朗读",
+        },
+        tt: {
+            "kbd"  : "tt",
+            "type" : "dyslexia_speak_stop",
+            "desc" : "停止朗读",
+        },
+    },
     "控制栏 - 设定" : {
         st: {
             "kbd"  : "st",
@@ -114,6 +126,16 @@ const keyboard = {
             "kbd"  : "se",
             "type" : "siteeditor",
             "desc" : "站点编辑器",
+        },
+        hl: {
+            "kbd"  : "hl",
+            "type" : "highlight",
+            "desc" : "重新选择高亮",
+        },
+        cl: {
+            "kbd"  : "cl",
+            "type" : "remove",
+            "desc" : "隐藏任意元素",
         },
     },
 };
@@ -160,6 +182,16 @@ const readItems = {
             "setting" : {
                 "name" : "设定",
                 "icon" : ss.IconPath("setting_icon"),
+                "color": "#03A9F4",
+            },
+            "highlight" : {
+                "name" : "重新选项高亮区域",
+                "icon" : ss.IconPath("highlight_icon"),
+                "color": "#03A9F4",
+            },
+            "remove" : {
+                "name" : "隐藏任意元素",
+                "icon" : ss.IconPath("remove_icon"),
                 "color": "#03A9F4",
             },
         },
@@ -214,6 +246,11 @@ const readItems = {
                 "icon" : ss.IconPath("markdown_icon"),
                 "color": "#D4237A",
             },
+            "html" : {
+                "name" : "导出为 HTML",
+                "icon" : ss.IconPath("html_icon"),
+                "color": "#D4237A",
+            },
         },
     },
     "send" : {
@@ -251,37 +288,59 @@ const readItems = {
                 "icon" : ss.IconPath("kindle_icon"),
                 "color": "#00BCD4",
             },
+            "temp" : {
+                "name" : "生成临时页面",
+                "icon" : ss.IconPath("temp_icon"),
+                "color": "#00BCD4",
+            },
+        },
+    },
+    "dyslexia" : {
+        "name" : "无障碍",
+        "icon" : ss.IconPath("dyslexia_icon"),
+        "color": "#90ee02",
+        "items": {
+            "dyslexia_speak" : {
+                "name" : "播放声音",
+                "icon" : ss.IconPath("speak_icon"),
+                "color": "#90ee02",
+            },
+            "dyslexia_speak_stop" : {
+                "name" : "停止播放",
+                "icon" : ss.IconPath("speak_stop_icon"),
+                "color": "#90ee02",
+            },
         },
     },
     "share" : {
         "name" : "共享",
         "icon" : ss.IconPath("share_icon"),
-        "color": "#8BC34A",
+        "color": "#3f51b5",
         "items": {
+            "share_gplus" : {
+                "name" : "Google G+",
+                "icon" : ss.IconPath("share_gplus_icon"),
+                "color": "#DD4B39",
+            },
             "share_facebook" : {
                 "name" : "Facebook",
                 "icon" : ss.IconPath("share_facebook_icon"),
                 "color": "#3B5998",
+            },
+            "share_telegram" : {
+                "name" : "Telegram",
+                "icon" : ss.IconPath("share_telegram_icon"),
+                "color": "#0088CC",
             },
             "share_twitter" : {
                 "name" : "Twitter",
                 "icon" : ss.IconPath("share_twitter_icon"),
                 "color": "#1DA1F2",
             },
-            "share_gplus" : {
-                "name" : "Google G+",
-                "icon" : ss.IconPath("share_gplus_icon"),
-                "color": "#DD4B39",
-            },
             "share_weibo" : {
                 "name" : "新浪微博",
                 "icon" : ss.IconPath("share_weibo_icon"),
-                "color": "#8BC34A",
-            },
-            "share_telegram" : {
-                "name" : "Telegram",
-                "icon" : ss.IconPath("share_telegram_icon"),
-                "color": "#0088CC",
+                "color": "#E6162D",
             },
         },
     },
@@ -422,6 +481,18 @@ const fontfamily = [{
         style : {
             text: { fontFamily: "Source Han Sans CN" }
         }
+    },{
+        value : "Noto Serif CJK SC, Source Han Serif SC, Source Han Serif CN",
+        name  : "思源宋体",
+        style : {
+            text: { fontFamily: "Noto Serif CJK SC, Source Han Serif SC, Source Han Serif CN" }
+        }
+    },{
+        value : "",
+        name  : "自定义字体",
+        style : {
+            text: { fontFamily: "default" }
+        }
     }],
     fontsize = [{
         value : "62.5%",
@@ -450,7 +521,7 @@ readLabels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月�
  */
 const focusItems = ( items => {
     const news = { ...items },
-          dels = [ "theme", "fontfamily", "fontsize", "layout" ];
+          dels = [ "theme", "fontfamily", "fontsize", "layout", "dyslexia" ];
     dels.forEach( del => delete news[ del ] );
     news.top = {
         "name" : "返回顶部",

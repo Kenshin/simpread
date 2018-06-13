@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Button
  * 
- * @version : 0.0.2
- * @update  : 2017/10/14
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit-ui
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,8 +11,6 @@
  */
 
 console.log( "==== simpread component: Button ====" )
-
-let current = {}, $mask, style, styles = new Map();
 
 const raisedstyle = {
         color           : "rgba(255, 255, 255, .7)",
@@ -187,19 +185,20 @@ export default class Button extends React.Component {
     }
 
     state = {
-        id : Math.round(+new Date()),
-        color: ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type != "raised" ),
+        color          : ((bool)=>bool ? flatstyle.color : raisedstyle.color)( this.props.type != "raised" ),
         backgroundColor: ((bool)=>bool ? flatstyle.backgroundColor : raisedstyle.backgroundColor)( this.props.type != "raised" ),
-        hoverColor: ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
+        hoverColor     : ((bool)=>bool ? flatstyle.hoverColor : raisedstyle.hoverColor)( this.props.type != "raised" ),
     }
 
+    style = cssinjs()
+
     onMouseOver() {
-        [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
+        const [ style, $mask ] = [ { ...this.style }, $( this.refs.mask ) ];
         $mask.css( "background-color", this.state.hoverColor );
     }
 
     onMouseOut() {
-        [ style, $mask ] = [ styles.get( this.state.id ), $( this.refs.mask ) ];
+        const [ style, $mask ] = [ { ...this.style }, $( this.refs.mask ) ];
         $mask.css({ ...style.mask });
     }
 
@@ -208,16 +207,14 @@ export default class Button extends React.Component {
     }
 
     componentWillMount() {
-        this.props.color != "" && this.setState({ color: this.props.color });
+        this.props.color != ""           && this.setState({ color: this.props.color });
         this.props.backgroundColor != "" && this.setState({ backgroundColor: this.props.backgroundColor });
-        this.props.hoverColor != "" && this.setState({ hoverColor: this.props.hoverColor });
+        this.props.hoverColor != ""      && this.setState({ hoverColor: this.props.hoverColor });
     }
 
     render() {
-        styles.set( this.state.id, { ...cssinjs() } );
-        style = styles.get( this.state.id );
-
-        current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
+        const style   = $.extend( true, {}, this.style );
+        let   current = this.props.type == "raised" ? { ...style.raised } : { ...style.flat };
         current.color = this.state.color;
         current.backgroundColor = this.state.backgroundColor;
 

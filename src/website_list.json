@@ -12,6 +12,17 @@
             "<div class='article-relation'>"
         ]
     },{
+        "name"    : "m.qdaily.com",
+        "url"     : "http*://m.qdaily.com/mobile/articles/*.html",
+        "title"   : "<title>",
+        "desc"    : "<div class='excerpt'>",
+        "include" : "<div class='detail'>",
+        "exclude" : [
+            "<div class='author-share'>",
+            "<div class='icon-pics'>",
+            "<div class='embed-control'>"
+        ]
+    },{
         "name"    : "qdaily.com",
         "url"     : "http://www.qdaily.com/articles/",
         "title"   : "<h2 class='title'>",
@@ -72,7 +83,13 @@
         "desc"    : "",
         "include" : "<article>",
         "exclude" : [
-            ""
+            "<div class='entry-header'>",
+            "<div class='entry-meta'>",
+            "<a class='entry-comment-number'>",
+            "<div class='article-header'>",
+            "<div class='article-jiong-banner'>",
+            "<div class='popup'>",
+            "<div class='article-sns-tool'>"
         ]
     },{
         "name"    : "minapp.ifanr.com",
@@ -83,6 +100,13 @@
         "exclude" : [
             "[['<span>本文由知晓程序授权转载</span>']]",
             "[[/src=\\S+(new_zx-1)\\S+'/]]",
+            "<div class='entry-header'>",
+            "<div class='entry-meta'>",
+            "<a class='entry-comment-number'>",
+            "<div class='article-header'>",
+            "<div class='article-jiong-banner'>",
+            "<div class='popup'>",
+            "<div class='article-sns-tool'>",
             "[[/src=\\S+(zxcx-qun-1)\\S+'/]]"
         ]
     },{
@@ -96,6 +120,13 @@
             "[['<strong>本文由让手机更好用</strong>']]",
             "[[/src=\\S+(AppSo-qrcode-signature)\\S+'/]]",
             "[['<strong>▽</strong>']]",
+            "<div class='entry-header'>",
+            "<div class='entry-meta'>",
+            "<a class='entry-comment-number'>",
+            "<div class='article-header'>",
+            "<div class='article-jiong-banner'>",
+            "<div class='popup'>",
+            "<div class='article-sns-tool'>",
             "[[/src=\\S+(banner2)\\S+'/]]"
         ]
     },{
@@ -135,6 +166,15 @@
             "[['<span>快速关注知晓程序</span>']]",
             "[['<strong>本文由知晓程序原创出品</strong>']]",
             "[['<strong>爱范儿旗下专注于小程序生态的公众号</strong>']]",
+            "<div class='entry-header'>",
+            "<div class='entry-meta'>",
+            "<a class='entry-comment-number'>",
+            "<div class='article-header'>",
+            "<div class='entry-content__tags'>",
+            "<div class='article-info'>",
+            "<div class='article-jiong-banner'>",
+            "<div class='popup'>",
+            "<div class='article-sns-tool'>",
             "[[/src=\\S+(zxcx-1)\\S+'/]]"
         ]
     },{
@@ -146,6 +186,17 @@
         "exclude" : [
             "[['<strong>本文由知晓程序</strong>']]",
             "[[/src=\\S+(zxcx_0208)\\S+'/]]"
+        ]
+    },{
+        "name"    : "io.sspai.com",
+        "url"     : "https://ios.sspai.com/**/*/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='article-content'>",
+        "exclude" : [
+            "<span class='ss-app-card'>",
+            "<div class='ss-left'>",
+            "<div class='ss-right'>"
         ]
     },{
         "name"    : "sspai.com",
@@ -161,11 +212,20 @@
             "[[/src=\\S+(342459.png)\\S+'/]]"
         ]
     },{
+        "name"    : "m.dgtle.com",
+        "url"     : "http*://www.dgtle.com/portal.php*",
+        "title"   : "<h1 class='cr_h1title'>",
+        "desc"    : "",
+        "include" : "<div id='view_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "dgtle.com",
         "url"     : "http*://www.dgtle.com/article-*.html",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "<div class='view_content'>",
+        "include" : "[[{$('.view_content').html()||$('#view_content').html()}]]",
         "exclude" : [
             "<div id='comments_top'>",
             "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
@@ -235,7 +295,7 @@
         "url"     : "http://www.jianshu.com/p/",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
-        "include" : "<div class='show-content'>",
+        "include" : "<div class='show-content-free'>",
         "exclude" : [
             ""
         ]
@@ -251,7 +311,7 @@
     },{
         "name"    : "mp.weixin.qq.com",
         "url"     : "http://mp.weixin.qq.com/*",
-        "title"   : "<h2 id='activity-name'>",
+        "title"   : "[[{$('.rich_media_title_ios').text()||document.getElementById('activity-name').lastChild.data}]]",
         "desc"    : "",
         "include" : "<div id='js_content'>",
         "exclude" : [
@@ -318,6 +378,15 @@
             ""
         ]
     },{
+        "name"    : "m.douban.com",
+        "url"     : "https://m.douban.com/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "douban.com",
         "url"     : "https://www.douban.com/*",
         "title"   : "<title>",
@@ -344,6 +413,22 @@
         "exclude" : [
             "[['<span>公众号：雷锋网</span>']]",
             "[['<p>未经授权禁止转载</p>']]"
+        ]
+    },{
+        "name"    : "m.tmtpost.com",
+        "url"     : "http://m.tmtpost.com/*.html",
+        "title"   : "<h1>",
+        "desc"    : "<p class='post-abstract'>",
+        "include" : "<article>",
+        "exclude" : [
+            "<h1>",
+            "<div class='post-info'>",
+            "<p class='post-abstract'>",
+            "<div class='pro_icon'>",
+            "<div class='pro_intro tc'>",
+            "[['<strong>更多精彩内容</strong>']]",
+            "[['<strong>关注钛媒体微信号</strong>']]",
+            "[[/src=\\S+(wzny_ewm)\\S+'/]]"
         ]
     },{
         "name"    : "tmtpost.com",
@@ -393,14 +478,27 @@
     },{
         "name"    : "appinn.com",
         "url"     : "http*://www.appinn.com/*/",
+        "title"   : "[[{$('.entry-title').text()||$('.post-title').text()}]]",
+        "desc"    : "",
+        "include" : "[[{$('.entry-content').html()||$('#content-area').html()}]]",
+        "exclude" : [
+            "<div class='open_social_box'>",
+            "<div class='os-share-box'>",
+            "<div class='sharing-options'>",
+            "<div class='wptouch-custom-showcase'>",
+            "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]",
+            "[[/src=\\S+(down)\\S+'/]]"
+        ]
+    },{
+        "name"    : "free.apprcn.com",
+        "url"     : "http*://free.apprcn.com/*",
         "title"   : "<h2 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
         "exclude" : [
-            "<div class='open_social_box'>",
-            "<div class='os-share-box'>",
-            "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]",
-            "[[/src=\\S+(down)\\S+'/]]"
+            "<div class='wumii-hook'>",
+            "<div id='wumiiDisplayDiv'>",
+            "<div id='wp-share-list-container'>"
         ]
     },{
         "name"    : "apprcn.com",
@@ -437,6 +535,15 @@
         "title"   : "<h2 class='entry-title'>",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "m.weibo.cn",
+        "url"     : "http*://m.weibo.cn/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='weibo-text'>",
         "exclude" : [
             ""
         ]
@@ -781,6 +888,11 @@
             "<div id='editCommentPopup'>",
             "<div id='messagePopup'>",
             "<div id='responseContent'>",
+            "<div class='related'>",
+            "<div class='comment_here'>",
+            "<script>",
+            "<div class='all_comments'>",
+            "<div class='comments'>",
             "[['<p>对本文的审校</p>']]",
             "[['<p>中文站投稿或者参与内容翻译工作</p>']]",
             "[['<b>QCon北京2017</b>']]"
@@ -792,7 +904,12 @@
         "desc"    : "",
         "include" : "<div class='text_info'>",
         "exclude" : [
-            "<div class='random_links'>"
+            "<div class='random_links'>",
+            "<div class='related'>",
+            "<div class='comment_here'>",
+            "<script>",
+            "<div class='all_comments'>",
+            "<div class='comments'>"
         ]
     },{
         "name"    : "segmentfault.com",
@@ -946,10 +1063,11 @@
         "url"     : "http*://blog.csdn.net/*/article/details/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div id='article_content'>",
+        "include" : "<div class='article_content'>",
         "exclude" : [
-            ""
-        ]
+            "<div class='meau-gotop-box'>"
+        ],
+        "css"     : ".markdown_views pre code{background-color:transparent!important;}"
     },{
         "name"    : "lib.csdn.net",
         "url"     : "http*://lib.csdn.net/article/*/*",
@@ -1268,8 +1386,8 @@
             ""
         ]
     },{
-        "name"    : "readme.github.com",
-        "url"     : "https://github.com/**/*/README*.md",
+        "name"    : "markdown.github.com",
+        "url"     : "https://github.com/**/*/*.md",
         "title"   : "[[{$('title').text()}]]",
         "desc"    : "",
         "include" : "<article class='markdown-body'>",
@@ -1579,6 +1697,20 @@
             ""
         ]
     },{
+        "name"    : "questions.stackoverflow.com",
+        "url"     : "https://stackoverflow.com/questions/**/*",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.post-text')}]]",
+        "exclude" : [
+            ""
+        ],
+        "css": "code { background-color: transparent; }"
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -1587,6 +1719,17 @@
         "exclude" : [
             "<div class='wumii-hook'>",
             "[[/src=\\S+(pixel)\\S+'/]]"
+        ]
+    },{
+        "name"    : "m.thepaper.cn",
+        "url"     : "http://m.thepaper.cn/newsDetail_*",
+        "title"   : "<h1 class='t_newsinfo'>",
+        "desc"    : "",
+        "include" : "<div class='news_part_limit'>",
+        "exclude" : [
+            "<div class='news_bl'>",
+            "<div id='clickForMore'>",
+            "<div class='relations_div'>"
         ]
     },{
         "name"    : "thepaper.cn",
@@ -1709,6 +1852,15 @@
         "include" : "<div id='Main_Content_Val'>",
         "exclude" : [
              "[[/src=\\S+(favicon)\\S+'/]]"
+        ]
+    },{
+        "name"    : "m.ithome.com",
+        "url"     : "http*://wap.ithome.com/html/*.htm",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='paragraph'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "ithome.com",
@@ -1869,8 +2021,72 @@
             ""
         ]
     },{
+        "name"    : "duozhi.com",
+        "url"     : "http*://www.duozhi.com/**/*.shtml",
+        "title"   : "<h1 class='subject-title'>",
+        "desc"    : "",
+        "include" : "<div class='subject-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "app.myzaker.com",
+        "url"     : "http*://app.myzaker.com/news/article.php*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='content'>",
+        "exclude" : [
+            "<p id='ID_disclaimer'>"
+        ]
+    },{
+        "name"    : "m.kankanews.com",
+        "url"     : "http*://m.kankanews.com/n/**/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<p class='download'>"
+        ]
+    },{
+        "name"    : "kankanews.com",
+        "url"     : "http*://www.kankanews.com/a/**/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='textBody'>",
+        "exclude" : [
+            "<p id='kankan_bq'>"
+        ]
+    },{
+        "name"    : "cbnweek.com",
+        "url"     : "https://www.cbnweek.com/articles/normal/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ".image-placeholder{background:transparent;padding-bottom:0!important}"
+    },{
+        "name"    : "user.guancha.cn",
+        "url"     : "http://user.guancha.cn/main/content?id=*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-txt'>",
+        "exclude" : [
+            "<ul class='pagination'>"
+        ]
+    },{
+        "name"    : "guancha.cn",
+        "url"     : "http://www.guancha.cn/*/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='all-txt'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "article.myzaker.com",
-        "url"     : "http://www.myzaker.com/article/*/",
+        "url"     : "http*://www.myzaker.com/article/*/",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class='article_content'>",
@@ -1894,6 +2110,15 @@
         "include" : "<div class='left_zw'>",
         "exclude" : [
             "<table>"
+        ]
+    },{
+        "name"    : "m.toutiaocdn.com",
+        "url"     : "http*://m.toutiaocdn.com/*",
+        "title"   : "<h1 class='article__title'>",
+        "desc"    : "",
+        "include" : "<div class='article__content'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "toutiao.com",
@@ -2043,6 +2268,15 @@
             "<p class='titdd-Article'>",
             "<div class='wxdigi'>",
             "<a id='backqqcom'>"
+        ]
+    },{
+        "name"    : "m.qq.com",
+        "url"     : "http*://xw.qq.com/*/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article_body'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "qq.com",
@@ -2392,6 +2626,24 @@
             "<div class='aimg_tip'>"
         ]
     },{
+        "name"    : "worldcup.fifa.com",
+        "url"     : "http*://www.fifa.com/worldcup/news/*",
+        "title"   : "<h1 class='d3-o-article__title'>",
+        "desc"    : "",
+        "include" : "<div class='d3-o-article__body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "voice.hupu.com",
+        "url"     : "http*://voice.hupu.com/*/*.html",
+        "title"   : "<h1 class='headline'>",
+        "desc"    : "",
+        "include" : "<div class='artical-content-read'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "bbs.hupu.com",
         "url"     : "https://bbs.hupu.com/*.html",
         "title"   : "<h1 id='j_data'>",
@@ -2399,6 +2651,10 @@
         "avatar"  : [
             {"name" : "[[{$('.author').find('.left a')}]]"},
             {"url"  : "[[{$('.user').find('img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('a.prevPage').attr('href')}]]"},
+            {"next" : "[[{$('a.nextPage').attr('href')}]]"}
         ],
         "include" : "[[{$('table.case')}]]",
         "exclude" : [
@@ -2510,7 +2766,7 @@
         ]
     },{
         "name"    : "37zw.net",
-        "url"     : "http://www.37zw.net/**/*.html",
+        "url"     : "http*://www.37zw.net/**/*.html",
         "paging"  : [
             {"prev" : "[[{$($('.bottem2').find('a')[1]).attr('href')}]]"},
             {"next" : "[[{$($('.bottem2').find('a')[3]).attr('href')}]]"}
@@ -2529,6 +2785,49 @@
         "include" : "[[{$('.content').html()||$('.text').html()}]]",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "pin-cong.com",
+        "url"     : "https://www.pin-cong.com/p/*",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.post-text')}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "bbs.tianya.cn",
+        "url"     : "http://bbs.tianya.cn/*.shtml",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('.js-keyboard-prev').attr('href')}]]"},
+            {"next" : "[[{$('.js-keyboard-next').attr('href')}]]"}
+        ],
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[{$('.bbs-content')}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "applysquare.com",
+        "url"     : "https://www.applysquare.com/topic-cn/*",
+        "avatar"  : [
+            {"name" : "[[{$('.user-details').find('a')}]]"},
+            {"url"  : "[[{$('.gravatar-wrapper-32').find('img')}]]"}
+        ],
+        "title"   : "<div class='thread-title'>",
+        "desc"    : "",
+        "include" : "[[{$('.qa-html-content')}]]",
+        "exclude" : [
+            "<span class='show-content'>"
         ]
     }]
 }

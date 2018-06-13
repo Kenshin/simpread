@@ -11,16 +11,22 @@ const action = {
     menu           : "menu",
     updated        : "updated",
     save_verify    : "save_verify",
+    storage        : "storage",         // only firefox
     // about export and auth
     auth           : "auth",
     auth_success   : "auth_success",
     export         : "export",
     redirect_uri   : "redirect_uri",
+    // dyslexia
+    speak          : "speak",
+    speak_stop     : "speak_stop",
+    // track
+    track          : "track",
 };
 
 /**
  * Add message object
- * 
+ *
  * @param {string} @see action
  * @param {object} { code,url }
  */

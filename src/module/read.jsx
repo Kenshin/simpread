@@ -1,17 +1,16 @@
 console.log( "===== simpread option read mode load =====" )
 
-import { verifyHtml } from 'util';
 import th             from 'theme';
 import * as ss        from 'stylesheet';
 import * as conf      from 'config';
 
 import TextField      from 'textfield';
 import SelectField    from 'selectfield';
+import Slider         from 'slider';
+import AC             from 'ac';
 
 import ThemeSel       from 'themesel';
 import Shortcuts      from 'shortcuts';
-import Include        from 'include';
-import Exclude        from 'exclude';
 
 const getName = ( value, items ) => {
     for ( const item of items ) {
@@ -22,97 +21,62 @@ const getName = ( value, items ) => {
 
 export default class ReadOpt extends React.Component {
 
-    state = {
-        errtitle : "",
-        errdesc  : "",
-    };
+    parse( value ) {
+        const news = parseInt( value );
+        return isNaN(news) ? 0 : news;
+    }
 
     changeBgColor( theme ) {
-        if ( !ss.VerifyCustom( "theme", this.props.option.custom ) ) {
-            this.props.option.theme = theme;
-            th.Change( this.props.option.theme );
-            console.log( "this.props.option.theme = ", this.props.option.theme )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
-        }
+        this.props.option.theme = theme;
+        th.Change( this.props.option.theme );
+        this.props.onChange && this.props.onChange( `theme_${theme}` );
+        console.log( "this.props.option.theme = ", this.props.option.theme )
     }
 
     changeShortcuts( shortcuts ) {
         this.props.option.shortcuts = shortcuts;
+        this.props.onChange && this.props.onChange( `shortcuts_${shortcuts}` );
         console.log( "this.props.option.shortcuts = ", this.props.option.shortcuts )
     }
 
-    changeFontfamily( value, name ) {
-        if ( !ss.VerifyCustom( "fontfamily", this.props.option.custom ) ) {
-            ss.FontFamily( value );
-            this.props.option.fontfamily = value;
-            console.log( "this.props.option.fontfamily = ", value, name )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
-        }
+    changeFontfamily( name, value ) {
+        value.trim() == "" && ( value = "default" );
+        conf.fontfamily.forEach( obj => {
+            return obj.name == name && ( value = obj.value );
+        })
+        ss.FontFamily( value );
+        this.props.option.fontfamily = value;
+        this.props.onChange && this.props.onChange( `fontfamily_${value}` );
+        console.log( "this.props.option.fontfamily = ", value, name )
     }
 
-    changeFontsize( value, name ) {
-        if ( !ss.VerifyCustom( "fontsize", this.props.option.custom ) ) {
-            ss.FontSize( value );
-            this.props.option.fontsize = value;
-            console.log( "this.props.option.fontsize = ", value, name )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>' );
-        }
+    changeFontsize( value ) {
+        this.props.option.fontsize = value + "%";
+        ss.FontSize( this.props.option.fontsize );
+        this.props.onChange && this.props.onChange( `fontsize_${this.props.option.fontsize}` );
+        console.log( "this.props.option.fontsize = ", this.props.option.fontsize )
     }
 
-    changeLayout( value, name ) {
-        if ( !ss.VerifyCustom( "margin", this.props.option.custom ) ) {
-            ss.Layout( value );
-            this.props.option.layout = value;
-            console.log( "this.props.option.layout = ", value, name )
-        } else {
-            new Notify().Render( '由于已使用 自定义样式，因此当前操作无效，详细说明 <a href="https://github.com/Kenshin/simpread/wiki/自定义样式" target="_blank">请看这里</a>。' );
-        }
+    changeLayout( value ) {
+        this.props.option.layout = `${ 100 - value }%`;
+        ss.Layout( this.props.option.layout );
+        this.props.onChange && this.props.onChange( `layout_${this.props.option.layout}` );
+        console.log( "this.props.option.layout = ", this.props.option.layout )
     }
 
-    changeTitle() {
-        if ( event.target.value.trim() == "" ) {
-            this.props.flag.title = -2;
-            this.setState({ errtitle : "当前输入不能为空。" });
-        }
-        else if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
-            this.setState({ errtitle : "" });
-            this.props.option.site.title = event.target.value.trim();
-            this.props.flag.title = 0;
-            console.log( "this.props.option.site.title = ", this.props.option.site.title )
-        } else {
-            this.props.flag.title = -1;
-            this.setState({ errtitle : "当前输入为非法。" });
-        }
-    }
-
-    changeDesc() {
-        if ( verifyHtml( event.target.value.trim() )[0] != -1 ) {
-            this.setState({ errdesc : "" });
-            this.props.option.site.desc = event.target.value.trim();
-            this.props.flag.desc = 0;
-            console.log( "this.props.option.site.desc = ", this.props.option.site.desc )
-        } else {
-            this.props.flag.desc = -1;
-            this.setState({ errdesc : "当前输入为非法。" });
-        }
-    }
-
-    changeInclude( value, code ) {
-        this.props.option.site.include = value;
-        this.props.flag.include        = code;
-        console.log( "this.props.option.site.include = ", this.props.option.site.include )
-    }
-
-    changeExclude( value, code ) {
-        this.props.option.site.exclude = value;
-        this.props.flag.exclude        = code;
-        console.log( "this.props.option.site.exclude = ", this.props.option.site.exclude )
+    changeStyle( value, type ) {
+        let news = value
+        if ( value == 0 ) {
+            news = "";
+        } else news = type != "lineHeight" ? value + "px" : value;
+        this.props.option.custom.art[type] = news;
+        ss.Custom( "art", this.props.option.custom.art );
+        this.props.onChange && this.props.onChange( `custom_${this.props.option.custom.art[type]}`, type );
+        console.log( "this.props.option.custom.art", this.props.option.custom.art[type] )
     }
 
     render() {
+        const slider_width = location.protocol.includes( "extension" ) ? "565.8px" : undefined;
         return (
             <sr-opt-read>
                 <sr-opt-gp>
@@ -123,56 +87,37 @@ export default class ReadOpt extends React.Component {
                     <Shortcuts shortcuts={ this.props.option.shortcuts } changeShortcuts={ val=>this.changeShortcuts(val) } />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="md-waves-effect"
-                        name={ getName( this.props.option.fontfamily, conf.fontfamily )} items={ conf.fontfamily }
-                        floatingtext="字体类型" placeholder="默认为 系统类型"
-                        onChange={ (v,n)=>this.changeFontfamily(v,n) }
+                    <sr-opt-label>字体类型</sr-opt-label>
+                    <AC value={ this.props.option.fontfamily }
+                        placeholder="请输入 font-family 值"
+                        items={ conf.fontfamily }
+                        onChange={ (n,v)=>this.changeFontfamily(n,v) }
                     />
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="md-waves-effect"
-                        name={ getName( this.props.option.fontsize, conf.fontsize )} items={ conf.fontsize }
-                        floatingtext="字体大小" placeholder="默认为 正常"
-                        onChange={ (v,n)=>this.changeFontsize(v,n) }
-                    />
+                <sr-opt-label>字体大小</sr-opt-label>
+                    <Slider min="45" max="100" step="1" width={slider_width} value={ this.parse( this.props.option.fontsize == "" ? "60%" : this.props.option.fontsize ) } onChange={ (v)=>this.changeFontsize(v) }/>
                 </sr-opt-gp>
                 <sr-opt-gp>
-                    <SelectField waves="md-waves-effect"
-                        name={ getName( this.props.option.layout, conf.layout )} items={ conf.layout }
-                        floatingtext="版面布局" placeholder="默认为 正常"
-                        onChange={ (v,n)=>this.changeLayout(v,n) }
-                    />
+                    <sr-opt-label>版面宽度</sr-opt-label>
+                    <Slider min="70" max="100" step="1" width={slider_width} value={ 100 - this.parse( this.props.option.layout == "" ? "20%" : this.props.option.layout ) } onChange={ (v)=>this.changeLayout(v) }/>
                 </sr-opt-gp>
-                { this.props.option.site &&
-                <sr-opt-items>
-                    <sr-opt-gp>
-                        <TextField 
-                            multi={ false }
-                            floatingtext="标题"
-                            placeholder="必填，不可为空。"
-                            value={ this.props.option.site.title }
-                            errortext={ this.state.errtitle }
-                            onChange={ ()=>this.changeTitle() }
-                        />
-                    </sr-opt-gp>
-                    <sr-opt-gp>
-                        <TextField 
-                                multi={ false }
-                                placeholder="默认为空。"
-                                floatingtext="描述"
-                                value={ this.props.option.site.desc }
-                                errortext={ this.state.errdesc }
-                                onChange={ ()=>this.changeDesc() }
-                        />
-                    </sr-opt-gp>
-                    <sr-opt-gp>
-                        <Include mode="read" include={ this.props.option.site.include } changeInclude={ (v,c)=>this.changeInclude(v,c) } />
-                    </sr-opt-gp>
-                    <sr-opt-gp>
-                        <Exclude exclude={ this.props.option.site.exclude } changeExclude={ (v,c)=>this.changeExclude(v,c) } />
-                    </sr-opt-gp>
-                </sr-opt-items>
-                }
+                <sr-opt-gp>
+                    <sr-opt-label>字间距</sr-opt-label>
+                    <Slider min="0" max="10" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.letterSpacing ) } onChange={ (v)=>this.changeStyle(v, "letterSpacing") }/>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>行间距</sr-opt-label>
+                    <Slider min="0" max="5" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.lineHeight ) } onChange={ (v)=>this.changeStyle(v, "lineHeight") }/>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>单词间距</sr-opt-label>
+                    <Slider min="0" max="10" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.wordSpacing ) } onChange={ (v)=>this.changeStyle(v, "wordSpacing") }/>
+                </sr-opt-gp>
+                <sr-opt-gp>
+                    <sr-opt-label>首行缩进</sr-opt-label>
+                    <Slider min="0" max="30" step="1" width={slider_width} value={ this.parse( this.props.option.custom.art.textIndent ) } onChange={ (v)=>this.changeStyle(v, "textIndent") }/>
+                </sr-opt-gp>
             </sr-opt-read>
         )
     }

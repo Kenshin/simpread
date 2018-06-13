@@ -2,7 +2,7 @@ console.log( "==== simpread options page load ====" )
 
 import '../assets/css/options_page.css';
 import '../assets/css/option.css';
-import '../vender/notify/notify.css';
+import 'notify_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
@@ -18,7 +18,7 @@ import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
 import * as watch from 'watch';
-import {browser}  from 'browser';
+import {browser,br}from 'browser';
 import * as msg   from 'message';
 import * as exp   from 'export';
 
@@ -30,7 +30,10 @@ import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
 
-let tabsItemID = 0;
+import PureRead   from 'puread';
+
+let tabsItemID   = 0,
+    website_sync = false; // when first and update checked versions.json
 
 /**
  * Add parallax scroll
@@ -75,14 +78,20 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
+    pRead();
     hashnotify();
     firstLoad( first );
     sidebarRender();
     navRender();
+    vernotify( first );
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
-    vernotify( first );
+    // only firefox and only usage 1.1.0.3024
+    //if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
+    //    welcomeRender( true );
+    //    localStorage["opt-3024"] = ver.sub_ver;
+    //}
 });
 
 /**
@@ -127,6 +136,8 @@ function vernotify( first ) {
             watch.SendMessage( "version", true );
             welcomeRender( false, version );
         }
+        website_sync = true;
+        browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });
         history.pushState( "", "", "/options/options.html" );
     }
 }
@@ -137,9 +148,11 @@ function vernotify( first ) {
  * @param {bool} is first load
  */
 function firstLoad( first ) {
-    first && storage.GetNewsites( "local", ( _, error ) => {
-        error  && new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
-        !error && storage.Statistics( "create" );
+    first && storage.GetRemote( "local", ( result, error ) => {
+        if ( !error ) {
+            storage.pr.Addsites( result );
+            storage.Writesite( storage.pr.sites, () => storage.Statistics( "create" ) );
+        } else new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
     });
     window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true );
 }
@@ -165,7 +178,7 @@ function welcomeRender( first, version ) {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
-    idx == 3 ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
+    ( idx == 3 || idx == 5 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -181,7 +194,7 @@ function tabsRender( color ) {
                     items={ conf.tabsItem }
                     onChange={ ( $p, $t, evt )=>tabsOnChange( $p, $t, evt ) }>
                     <section>
-                        <CommonOpt backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
+                        <CommonOpt website_sync={website_sync} backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
                     <section>
                         <FocusOpt option={ storage.focus } />
@@ -203,7 +216,7 @@ function tabsRender( color ) {
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
-                    <section><About option={ storage.option } site={ storage.simpread.sites.length } /></section>
+                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true)}/></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );
@@ -246,4 +259,13 @@ function sidebarRender() {
                              waves="md-waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
+}
+
+/** 
+ * Pure Read
+*/
+function pRead() {
+    storage.puread     = new PureRead( storage.sites );
+    storage.pr.origins = storage.option.origins;
+    console.log( "current puread object is   ", storage.pr )
 }

@@ -6,12 +6,13 @@ import * as conf   from 'config';
 import { storage } from 'storage';
 import * as output from 'output';
 import * as watch  from 'watch';
-import {browser}   from 'browser';
+import {browser,br}from 'browser';
 import * as msg    from 'message';
+import * as highlight from 'highlight';
 
 import Fab         from 'fab';
 
-let timer, $root, selector;
+let timer, $root, selector, callback;
 
 const tooltip_options = {
     target   : "name",
@@ -26,7 +27,7 @@ class FControl extends React.Component {
             if ( request.type == msg.MESSAGE_ACTION.export ) {
                 console.log( "controlbar runtime Listener", request );
                 new Notify().Render( "已重新授权成功！" );
-                this.onAction( undefined, request.value.type );
+                br.isFirefox() ? new Notify().Render( "请刷新本页才能生效。" ) : this.onAction( undefined, request.value.type );
             }
         });
     }
@@ -48,9 +49,22 @@ class FControl extends React.Component {
                 case "siteeditor":
                     se.Render();
                     break;
+                case "remove":
+                    new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
+                    highlight.Start().done( dom => {
+                        $(dom).remove();
+                    });
+                    break;
+                case "highlight":
+                    new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
+                    ReactDOM.unmountComponentAtNode( getRoot() );
+                    highlight.Start().done( dom => {
+                        callback && callback( dom );
+                    });
+                    break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                         [ "save", "markdown", "png", "epub", "pdf", "kindle", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
+                         [ "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
                         const [ title, desc, content ] = [ $( "head title" ).text().trim(), "", $( ".simpread-focus-highlight" ).html().trim() ];
                         output.Action( type, title, desc, content );
                     }
@@ -78,7 +92,7 @@ class FControl extends React.Component {
 
     render() {
         return (
-            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": 2147483645 }}>
+            <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": 2147483647 }}>
                 <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )
@@ -90,10 +104,12 @@ const fcontrol = new FControl();
 /**
  * Render
  * 
- * @param {string} class name, e.g. .xxx
- * @param {string} class name, e.g. .xxx
+ * @param {string}   class name, e.g. .xxx
+ * @param {string}   class name, e.g. .xxx
+ * @param {function} callback
  */
-function Render( root, finder ) {
+function Render( root, finder, cb ) {
+    callback = cb;
     selector = finder;
     $root = $(root);
     ReactDOM.render( <FControl show={ storage.current.controlbar } />, getRoot() );

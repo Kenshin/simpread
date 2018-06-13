@@ -85,6 +85,23 @@ function download( data, name ) {
 }
 
 /**
+ * Downlaod
+ * 
+ * @param {string} origin data
+ * @param {string} name
+ */
+function prueDownload( data, name ) {
+    const blob = new Blob([data], {
+        type: "text/plain;charset=utf-8"
+    });
+    const url = URL.createObjectURL(blob);
+    browser.downloads.download({
+        url     : url,
+        filename: name,
+    });
+}
+
+/**
  * Dis contented serice
  * 
  * @param {string} service id 
@@ -952,6 +969,12 @@ class Kindle {
         });
     }
 
+    Temp() {
+        const url = `${this.host}/${this.id}.html`;
+        console.log( url )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+
     Send() {
         const url = `${this.server}?url=${this.host}/${this.id}.html`;
         console.log( url )
@@ -994,6 +1017,8 @@ function mdWrapper( content, name, notify ) {
     return dtd;
 }
 
+let noti; // notify variable
+
 /**
  * Service callback wrapper
  * 
@@ -1004,6 +1029,7 @@ function mdWrapper( content, name, notify ) {
  * @param {object} notify
  */
 function serviceCallback( result, error, name, type, notify ) {
+    noti.complete();
     !error && notify.Render( `已成功保存到 ${name}！` );
     error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
     if ( error && error.includes( "重新授权" )) {
@@ -1028,7 +1054,7 @@ function verifyService( storage, service, type, name, notify, auto = true ) {
     storage.Safe( ()=> {
         if ( storage.secret[type].access_token ) {
             Object.keys( storage.secret[type] ).forEach( item => service[item] = storage.secret[type][item] );
-            notify.Render( `开始保存到 ${name}，请稍等...` );
+            type != "linnk" && ( noti = notify.Render({ content: `开始保存到 ${name}，请稍等...`, state: "loading" }));
             dtd.resolve( type );
         } else {
             auto ? notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
@@ -1056,6 +1082,7 @@ export {
     epub     as Epub,
     markdown as Markdown,
     download as Download,
+    prueDownload as PrDownload,
     unlink   as Unlink,
     name     as Name,
     dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,

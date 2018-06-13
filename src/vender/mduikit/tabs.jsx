@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Tabs
  * 
- * @version : 0.0.1
- * @update  : 2017/04/07
+ * @version : 0.0.3
+ * @update  : 2018/04/26
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -11,8 +11,6 @@
  */
 
 console.log( "==== simpread component: Tabs ====" )
-
-let styles = new Map();
 
 const color           = 'rgba(255, 255, 255, .7)',
       secondary_color = "rgba(204, 204, 204, 1)",
@@ -181,7 +179,7 @@ const TabLabel = ( props ) => {
         style.icon.display = "none";
     }
     return (
-        <tab-label style={ style.label } class={ props.waves } active={ props.active } onClick={ !disable && ( ()=>props.onClick() )}>
+        <tab-label style={ style.label } class={ props.waves } active={ props.active } onClick={ !disable && ( evt=>props.onClick(evt) )}>
             <a style={ style.link }
                id={ props.idx } href={ route } target={ target }
                data-tooltip={ tooltip } data-tooltip-position={ props.tooltip.position } data-tooltip-delay={ props.tooltip.delay }
@@ -253,15 +251,13 @@ export default class Tabs extends React.Component {
         onChange : React.PropTypes.func,
     };
 
-    state = {
-        id : Math.round(+new Date()),
-    }
+    style = cssinjs();
 
     componentWillUnmount() {
         $( "tabs" ).remove();
     }
 
-    tabLabelOnClick() {
+    tabLabelOnClick( event ) {
         let $target = $( event.target );
 
         if($target.is("tab-label")) {
@@ -275,7 +271,7 @@ export default class Tabs extends React.Component {
         const href = $target.attr('href');
         if(!href.startsWith( "#" )) { return; }
 
-        const style   = styles.get( this.state.id ),
+        const style = { ...this.style },
             idx     = $target.attr( "id" ),
             value   = $target.attr( "value" ),
             name    = $target.text(),
@@ -300,10 +296,8 @@ export default class Tabs extends React.Component {
     }
 
     render() {
-        const style = { ...cssinjs() };
-        styles.set( this.state.id, style );
-
-        const { items, color, activeColor, bgColor, headerStyle, groupsStyle, borderStyle, children, ...others } = this.props;
+        const style = { ...this.style },
+              { items, color, activeColor, bgColor, headerStyle, groupsStyle, borderStyle, children, ...others } = this.props;
 
         color       && ( style.label.color = color );
         bgColor     && ( style.header.backgroundColor = bgColor );
@@ -327,7 +321,7 @@ export default class Tabs extends React.Component {
                   return <TabLabel idx={ idx }
                                    { ...item } { ...others }
                                    style={ label_style }
-                                   onClick={ ()=> this.tabLabelOnClick() } />;
+                                   onClick={ evt=> this.tabLabelOnClick(evt) } />;
               }),
               tabHeader = tabLabel && <tab-header style={ style.header }>{ tabLabel }<tab-shadow style={ style.shadow }></tab-shadow></tab-header>;
 
