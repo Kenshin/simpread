@@ -1386,8 +1386,8 @@
             ""
         ]
     },{
-        "name"    : "readme.github.com",
-        "url"     : "https://github.com/**/*/README*.md",
+        "name"    : "markdown.github.com",
+        "url"     : "https://github.com/**/*/*.md",
         "title"   : "[[{$('title').text()}]]",
         "desc"    : "",
         "include" : "<article class='markdown-body'>",
@@ -2066,6 +2066,24 @@
             ""
         ],
         "css"     : ".image-placeholder{background:transparent;padding-bottom:0!important}"
+    },{
+        "name"    : "user.guancha.cn",
+        "url"     : "http://user.guancha.cn/main/content?id=*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-txt'>",
+        "exclude" : [
+            "<ul class='pagination'>"
+        ]
+    },{
+        "name"    : "guancha.cn",
+        "url"     : "http://www.guancha.cn/*/*.shtml",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='all-txt'>",
+        "exclude" : [
+            ""
+        ]
     },{
         "name"    : "article.myzaker.com",
         "url"     : "http*://www.myzaker.com/article/*/",
