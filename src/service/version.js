@@ -17,6 +17,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.0.6", "Thu Dec 07 2017 14:48:44 GMT+0800 (CST)" ],
           [ "1.1.0", "Sat Dec 23 2017 15:09:30 GMT+0800 (CST)" ],
           [ "1.1.1", "Mon Jun 11 2018 15:10:12 GMT+0800 (CST)" ],
+          [ "1.1.2", "Tue Jun 19 2018 14:15:12 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -28,6 +29,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.0.6", "新增「添加新站到阅读模式，导入第三方适配站点等」，" ],
           [ "1.1.0", "新增「站点编辑器，站点适配源，站点管理器等」，" ],
           [ "1.1.1", "新增「黑名单，全新的控制栏面板，更丰富的中文定制化，无障碍阅读等」，" ],
+          [ "1.1.2", "新增「扩展中心，站点集市等」，" ],
     ]);
 
 /**
@@ -142,6 +144,11 @@ function Verify( curver, data ) {
         delete data.option.focus;
         delete data.option.read;
         curver = "1.1.1";
+    }
+
+    if ( curver == "1.1.1" ) {
+        data.user = { "uid": "","name": "","email": "","avatar": "","permission": "" };
+        curver = "1.1.2";
     }
 
     /*

@@ -1,7 +1,7 @@
 {
   "name"            : "__MSG_extension_name__",
   "default_locale"  : "en",
-  "version"         : "1.1.1",
+  "version"         : "1.1.2",
   "short_name"      : "SimpRead",
   "description"     : "__MSG_extension_desc__",
   "homepage_url"    : "http://ksria.com/simpread",

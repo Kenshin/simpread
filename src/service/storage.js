@@ -143,6 +143,13 @@ const name = "simpread",
             "temp"       : 0,
         }
     },
+    user   = {
+        uid       : "",
+        name      : "",
+        email     : "",
+        avatar    : "",
+        permission: "",
+    },
     unread = {
         idx       : 0,
         create    : "",
@@ -166,7 +173,8 @@ let current  = {},
             custom : [],
             local  : [], // include focus.sites and read.sites
         },
-        statistics
+        statistics,
+        user,
     },
     secret = {
         version   : "2017-11-22",
@@ -284,6 +292,15 @@ class Storage {
      */
     get statistics() {
         return simpread.statistics;
+    }
+
+    /**
+     * Get user info
+     * 
+     * @return {object} user object
+     */
+    get user() {
+        return simpread.user;
     }
 
     /**
@@ -649,6 +666,7 @@ class Storage {
             read    : { ...this.read   },
             websites: { ...this.websites },
             statistics: { ...this.statistics },
+            user    : { ...this.user },
             unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });

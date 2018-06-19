@@ -29,6 +29,7 @@ import LabsOpt    from 'labsopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
+import * as plug  from 'plugin';
 
 import PureRead   from 'puread';
 
@@ -87,6 +88,8 @@ storage.Read( first => {
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
+    // hack code. usage 1.1.2
+    storage.user.uid == "" && setUserUID();
     // only firefox and only usage 1.1.0.3024
     //if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
     //    welcomeRender( true );
@@ -259,6 +262,17 @@ function sidebarRender() {
                              waves="md-waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
+}
+
+/**
+ * set user uid
+ */
+function setUserUID() {
+    storage.user.uid = plug.ID( "user" );
+    storage.Write( () => {
+        console.log( "current user info create!" )
+        watch.SendMessage( "option", true );
+    }, storage.simpread );
 }
 
 /** 
