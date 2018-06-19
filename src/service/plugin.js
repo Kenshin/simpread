@@ -20,8 +20,15 @@ function generateID( type ) {
     }
 }
 
+/**
+ * Install plugin
+ * 
+ * @param {string} plugin id. e.g. kw36BtjGu0
+ */
 function install( id ) {
-
+    $.get( `http://simpread.ksria.cn/plugins/${id}.srplug`, result => {
+        console.log( "adfadfadf", result )
+    });
 }
 
 /**

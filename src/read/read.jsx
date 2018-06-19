@@ -107,6 +107,7 @@ class Read extends React.Component {
                 style     : "sr-plugin-count{position:fixed;display:block;left:5px;bottom:5px;font-size:12px}",
                 script    : "var count=$content.text().length,html='<sr-plugin-count> 共计：'+count+' 个字 </sr-plugin-count>';$content.append(html);",
             };
+            plug.Install( "kw36BtjGu0" );
             plug.Exec( plugin );
         }
     }
