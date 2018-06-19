@@ -25,7 +25,30 @@ function install( id ) {
 }
 
 function exec( str ) {
+    ( function ( $$version, $title, $desc, $content, $footer, $process, $toc, SR_addStyle ) {
+        const count = $content.text().length,
+              styles= `sr-plugin-count {
+                            position: fixed;
+                            display: block;
+                            left: 5px;
+                            bottom: 5px;
+                            font-size: 12px;
+                      }`,
+              html  = `<sr-plugin-count>
+                        共计：${count} 个字
+                     </sr-plugin-count>`;
+        $content.append( html );
+        SR_addStyle( styles );
+    })( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), addStyle );
+}
 
+/**
+ * Add style
+ * 
+ * @param {string} add css to head
+ */
+function addStyle( str ) {
+    $( "head" ).append(`<style type="text/css">${str}</style>`);
 }
 
 export {
