@@ -224,6 +224,7 @@ const webpack = require( 'webpack' ),
 
           markdown   : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
           epubpress  : __dirname + '/node_modules/epub-press-js/build/index.js',
+          nanoid     : __dirname + '/node_modules/nanoid/generate.js',
 
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
@@ -248,6 +249,7 @@ const webpack = require( 'webpack' ),
           export     : __dirname + '/src/service/export.js',
           highlight  : __dirname + '/src/service/highlight.js',
           output     : __dirname + '/src/service/output.js',
+          plugin     : __dirname + '/src/service/plugin.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',

@@ -29,6 +29,7 @@ import LabsOpt    from 'labsopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
+import * as plug  from 'plugin';
 
 import PureRead   from 'puread';
 
@@ -259,6 +260,13 @@ function sidebarRender() {
                              waves="md-waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
+}
+
+/**
+ * set user uid
+ */
+function setUserUID() {
+    // TO-DO
 }
 
 /** 
