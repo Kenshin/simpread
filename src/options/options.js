@@ -88,6 +88,8 @@ storage.Read( first => {
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
+    // hack code. usage 1.1.2
+    storage.user.uid == "" && setUserUID();
     // only firefox and only usage 1.1.0.3024
     //if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
     //    welcomeRender( true );
@@ -266,7 +268,11 @@ function sidebarRender() {
  * set user uid
  */
 function setUserUID() {
-    // TO-DO
+    storage.user.uid = plug.ID( "user" );
+    storage.Write( () => {
+        console.log( "current user info create!" )
+        watch.SendMessage( "option", true );
+    }, storage.simpread );
 }
 
 /** 
