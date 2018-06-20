@@ -29,6 +29,7 @@ function generateID( type ) {
  */
 function install( id, url, callback ) {
     url = id ? `http://simpread.ksria.cn/plugins/${id}.srplug` : url;
+    console.log( "install url is", url )
     $.get( url , callback );
 }
 
