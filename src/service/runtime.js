@@ -24,12 +24,12 @@ function generateID( type ) {
 /**
  * Install plugin
  * 
- * @param {string} plugin id. e.g. kw36BtjGu0
+ * @param {string} id  e.g. kw36BtjGu0
+ * @param {string} url
  */
-function install( id ) {
-    $.get( `http://simpread.ksria.cn/plugins/${id}.srplug`, result => {
-        console.log( "adfadfadf", result )
-    });
+function install( id, url, callback ) {
+    url = id ? `http://simpread.ksria.cn/plugins/${id}.srplug` : url;
+    $.get( url , callback );
 }
 
 /**
