@@ -119,7 +119,8 @@ const name = "simpread",
         origins   : [],
         blacklist : [
             "google.com",
-        ]
+        ],
+        plugins   : [], // plugin id, e.g. kw36BtjGu0
     },
     statistics = {
         "focus"   : 0,
@@ -176,7 +177,8 @@ let current  = {},
         statistics,
         user,
     },
-    secret = {
+    plugins  = {},
+    secret   = {
         version   : "2017-11-22",
         "dropbox" : {
             "access_token": ""
@@ -310,6 +312,15 @@ class Storage {
      */
     get secret() {
         return secret;
+    }
+
+    /**
+     * Get plugins data structure
+     * 
+     * @return {object} plugins object
+     */
+    get plugins() {
+        return plugins;
     }
 
     /**
@@ -650,6 +661,28 @@ class Storage {
                     callback && callback();
                 });
             }
+        }
+    }
+
+    /**
+     * Plugins set/get, plugins not import/export
+     * 
+     * @param {object}   plugins
+     * @param {function} callback
+     */
+    Plugins( callback, data ) {
+        if ( data ) {
+            plugins = { ...data };
+            browser.storage.local.set( { ["plugins"] : plugins }, () => {
+                console.log( "chrome storage plugins set success!", plugins );
+                callback && callback();
+            });
+        } else {
+            browser.storage.local.get( ["plugins"], result => {
+                console.log( "chrome storage plugins get success!", result );
+                result && !$.isEmptyObject( result ) && ( plugins = result["plugins"] );
+                callback && callback();
+            });
         }
     }
 
