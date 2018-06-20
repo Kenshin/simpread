@@ -38,6 +38,21 @@ export default class PluginsOpt extends React.Component {
         }
     }
 
+    clear() {
+        new Notify().Render({ mode: "snackbar", content: "是否清除本地全部插件？", action: "是的", cancel: "取消", callback: type => {
+            if ( type == "action" ) {
+                storage.option.plugins = [];
+                storage.Write();
+                storage.Plugins( () => {
+                    new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
+                        location.href = location.origin + location.pathname + "#plugins";
+                        location.reload();
+                    });
+                }, {} );
+            }
+        }});
+    }
+
     componentWillMount() {
         storage.Plugins( () => {
             storage.option.plugins = Object.keys( storage.plugins );
@@ -64,7 +79,7 @@ export default class PluginsOpt extends React.Component {
                                 icon={ ss.IconPath( "clear_icon" ) }
                                 color="#fff" backgroundColor="#757575"
                                 waves="md-waves-effect md-waves-button"
-                                />
+                                onClick={ ()=>this.clear() } />
                     </div>
                 </div>
 
