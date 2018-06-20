@@ -85,30 +85,11 @@ class Read extends React.Component {
             waves.Render({ root: rdclsjq });
             storage.Statistics( "read" );
 
-            // test code
-            const plugin = {
-                user      : {
-                    uid   : "vdmq0t08-ehpe-v5x6-168w-r9e2xg25lung",
-                    name  : "Kenshin Wang",
-                    email : "kenshin@ksria.com",
-                },
-                version   : "0.0.1",
-                id        : "kw36BtjGu0",
-                name      : "为阅读模式增加字数统计。",
-                icon      : {
-                    type    : "",
-                    bgColor : "#2196f3",
-                },
-                create    : "Tue Jun 19 2018 17:08:18 GMT+0800 (CST)",
-                update    : "",
-                global    : true,
-                category  : 0,
-                site      : "",
-                style     : "sr-plugin-count{position:fixed;display:block;left:5px;bottom:5px;font-size:12px}",
-                script    : "var count=$content.text().length,html='<sr-plugin-count> 共计：'+count+' 个字 </sr-plugin-count>';$content.append(html);",
-            };
-            run.Install( "kw36BtjGu0" );
-            run.Exec( plugin );
+            storage.Plugins( () => {
+                storage.option.plugins.forEach( id => {
+                    storage.plugins[id] && run.Exec( storage.plugins[id] );
+                });
+            });
         }
     }
 
