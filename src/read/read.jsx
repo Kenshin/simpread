@@ -14,7 +14,7 @@ import * as ss            from 'stylesheet';
 import {browser}          from 'browser';
 import * as msg           from 'message';
 import * as highlight     from 'highlight';
-import * as plug          from 'plugin';
+import * as run           from 'runtime';
 
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
@@ -107,8 +107,8 @@ class Read extends React.Component {
                 style     : "sr-plugin-count{position:fixed;display:block;left:5px;bottom:5px;font-size:12px}",
                 script    : "var count=$content.text().length,html='<sr-plugin-count> 共计：'+count+' 个字 </sr-plugin-count>';$content.append(html);",
             };
-            plug.Install( "kw36BtjGu0" );
-            plug.Exec( plugin );
+            run.Install( "kw36BtjGu0" );
+            run.Exec( plugin );
         }
     }
 

@@ -29,7 +29,7 @@ import LabsOpt    from 'labsopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
-import * as plug  from 'plugin';
+import * as run   from 'runtime';
 
 import PureRead   from 'puread';
 
@@ -268,7 +268,7 @@ function sidebarRender() {
  * set user uid
  */
 function setUserUID() {
-    storage.user.uid = plug.ID( "user" );
+    storage.user.uid = run.ID( "user" );
     storage.Write( () => {
         console.log( "current user info create!" )
         watch.SendMessage( "option", true );

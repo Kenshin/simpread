@@ -1,3 +1,4 @@
+console.log( "=== simpread runtime load ===" )
 
 import nanoid from 'nanoid';
 

@@ -249,7 +249,7 @@ const webpack = require( 'webpack' ),
           export     : __dirname + '/src/service/export.js',
           highlight  : __dirname + '/src/service/highlight.js',
           output     : __dirname + '/src/service/output.js',
-          plugin     : __dirname + '/src/service/plugin.js',
+          runtime    : __dirname + '/src/service/runtime.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
