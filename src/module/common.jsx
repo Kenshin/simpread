@@ -240,7 +240,7 @@ export default class CommonOpt extends React.Component {
                 </div>
                 <div style={{ display: 'inline-flex', width: '100%' }}>
                     <Button type="raised" text="手动同步适配列表" width="100%"
-                            icon={ ss.IconPath( "website_icon" ) }
+                            icon={ ss.IconPath( "update_icon" ) }
                             color="#fff" backgroundColor="#2196F3"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.newsites() } />
