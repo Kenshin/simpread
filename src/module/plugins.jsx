@@ -16,7 +16,11 @@ export default class PluginsOpt extends React.Component {
                     const install = () => {
                         storage.plugins[result.id] = result;
                         storage.Plugins( result => {
-                            new Notify().Render( "当前插件已安装成功。" );
+                            new Notify().Render( "当前插件已安装成功，2 秒后自动刷新当前页面。" );
+                            setTimeout( ()=> {
+                                location.href = location.origin + location.pathname + "#plugins";
+                                location.reload();
+                            }, 2000 );
                         }, storage.plugins );
                     };
                     result = JSON.parse( result );
@@ -75,7 +79,7 @@ export default class PluginsOpt extends React.Component {
                                 color="#fff" backgroundColor="#FF5252"
                                 waves="md-waves-effect md-waves-button"
                                 />
-                        <Button type="raised" text="删除本地全部插件" width="100%"
+                        <Button type="raised" text="清除本地全部插件" width="100%"
                                 icon={ ss.IconPath( "clear_icon" ) }
                                 color="#fff" backgroundColor="#757575"
                                 waves="md-waves-effect md-waves-button"
