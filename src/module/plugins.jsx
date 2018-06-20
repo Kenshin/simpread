@@ -25,7 +25,6 @@ export default class PluginsOpt extends React.Component {
                             }, 2000 );
                         }, storage.plugins );
                     };
-                    result = JSON.parse( result );
                     if ( !storage.option.plugins.includes( result.id ) ) {
                         install();
                         storage.option.plugins.push( result.id );
@@ -63,6 +62,29 @@ export default class PluginsOpt extends React.Component {
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins" }));
     }
 
+    update() {
+        let is_update = false, count = 0;
+        storage.option.plugins.forEach( id => {
+            run.Install( id, undefined, result => {
+                count++;
+                if ( storage.plugins[id].version != result.version ) {
+                    storage.plugins[result.id] = result;
+                    storage.Plugins( result => {
+                        is_update = true;
+                        count == storage.option.plugins.length && complete();
+                    }, storage.plugins );
+                }
+            });
+        });
+        const complete = () => {
+            if ( is_update ) {
+                new Notify().Render( "本地插件已全部更新完毕。" );
+            } else {
+                new Notify().Render( "无任何可用更新。" );
+            }
+        }
+    }
+
     componentWillMount() {
         storage.Plugins( () => {
             storage.option.plugins = Object.keys( storage.plugins );
@@ -84,7 +106,7 @@ export default class PluginsOpt extends React.Component {
                                 icon={ ss.IconPath( "update_icon" ) }
                                 color="#fff" backgroundColor="#FF5252"
                                 waves="md-waves-effect md-waves-button"
-                                />
+                                onClick={ ()=>this.update() } />
                         <Button type="raised" text="清除本地全部插件" width="100%"
                                 icon={ ss.IconPath( "clear_icon" ) }
                                 color="#fff" backgroundColor="#757575"
