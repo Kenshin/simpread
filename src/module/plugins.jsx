@@ -3,6 +3,8 @@ console.log( "===== simpread option labs load =====" )
 import {storage} from 'storage';
 import * as run  from 'runtime';
 import * as ss   from 'stylesheet';
+import {browser} from 'browser';
+import * as msg  from 'message';
 
 import Button    from 'button';
 
@@ -57,6 +59,10 @@ export default class PluginsOpt extends React.Component {
         }});
     }
 
+    addmore() {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins" }));
+    }
+
     componentWillMount() {
         storage.Plugins( () => {
             storage.option.plugins = Object.keys( storage.plugins );
@@ -72,7 +78,7 @@ export default class PluginsOpt extends React.Component {
                     <Button type="raised" text="查看并获取更多的插件"
                         color="#fff" backgroundColor="#00BCD4"
                         waves="md-waves-effect md-waves-button"
-                        />
+                        onClick={ ()=>this.addmore() } />
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="更新本地全部插件" width="100%"
                                 icon={ ss.IconPath( "update_icon" ) }
