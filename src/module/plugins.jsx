@@ -85,9 +85,21 @@ export default class PluginsOpt extends React.Component {
         }
     }
 
+    import() {
+        let count = 0;
+        storage.option.plugins.forEach( id => {
+            run.Install( id, undefined, result => {
+                count++;
+                storage.plugins[result.id] = result;
+                storage.Plugins( result => {
+                    count == storage.option.plugins.length && new Notify().Render( "本地插件已全部导入完毕。" );
+                }, storage.plugins );
+            });
+        });
+    }
+
     componentWillMount() {
         storage.Plugins( () => {
-            storage.option.plugins = Object.keys( storage.plugins );
             this.install();
         })
     }
@@ -97,10 +109,18 @@ export default class PluginsOpt extends React.Component {
             <div id="labs" style={{ width: '100%' }}>
                 <div className="label">全局</div>
                 <div className="lab">
-                    <Button type="raised" text="查看并获取更多的插件"
-                        color="#fff" backgroundColor="#00BCD4"
-                        waves="md-waves-effect md-waves-button"
-                        onClick={ ()=>this.addmore() } />
+                    <div style={{ display: 'inline-flex', width: '100%' }}>
+                        <Button type="raised" text="从配置文件导入插件" width="100%"
+                            icon={ ss.IconPath( "import_icon" ) }
+                            color="#fff" backgroundColor="#00BCD4"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.import() } />
+                        <Button type="raised" text="查看并获取更多的插件" width="100%"
+                            icon={ ss.IconPath( "export_icon" ) }
+                            color="#fff" backgroundColor="#00BCD4"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.addmore() } />
+                    </div>
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="更新本地全部插件" width="100%"
                                 icon={ ss.IconPath( "update_icon" ) }

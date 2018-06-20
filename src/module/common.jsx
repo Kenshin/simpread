@@ -133,6 +133,8 @@ export default class CommonOpt extends React.Component {
                             menu.Refresh( json.option.menu );
                             json.option.origins && json.option.origins.length > 0 &&
                                 new Notify().Render( "导入的配置文件包含了第三方源，请通过手动导入。" );
+                            json.option.plugins && json.option.plugins.length > 0 &&
+                                new Notify().Render( "导入的配置文件包含了插件，请通过手动导入。" );
                             this.importsecret( json.option.secret, { ...json.secret }, () => {
                                 delete json.secret;
                                 storage.Write( ()=> {
