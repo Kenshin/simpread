@@ -583,8 +583,8 @@ const tabsItem = [{
         value: "help",
         route: "https://github.com/kenshin/simpread/wiki",
 }],
-    headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#7986CB", "#56d1d8", "#BA68C8", "#4DB6AC" ],
-    topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#3F51B5", "#61ccd2", "#9C27B0", "#009688" ],
+    headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#7986CB", "#4DD0E1", "#BA68C8", "#4DB6AC" ],
+    topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#3F51B5", "#00BCD4", "#9C27B0", "#009688" ],
     menuItem      = tabsItem.map( ( item, idx ) => {
        const menu = { ...item };
        switch ( idx ) {
