@@ -32,7 +32,8 @@ class Card extends React.Component {
     }
 
     enable() {
-
+        this.props.plugin.enable = this.props.plugin.enable == undefined || this.props.plugin.enable ? false : true;
+        this.props.onChange( "update" );
     }
 
     addmore() {
@@ -40,6 +41,7 @@ class Card extends React.Component {
     }
 
     render() {
+        const enable = this.props.plugin.enable == undefined || this.props.plugin.enable ? true : false;
         return (
             <card>
                 <card-header style={{ backgroundColor: this.props.plugin.icon.bgColor }}>
@@ -50,30 +52,30 @@ class Card extends React.Component {
                     <note>{ this.props.plugin.name }</note>
                 </card-content>
                 <card-footer>
-                        <Button shape="circle" type="flat"
-                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
-                                tooltip={{ text: "禁用当前插件" }}
-                                fontIcon='<i class="fas fa-eye-slash"></i>'
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>this.enable() } />
-                        <Button shape="circle" type="flat"
-                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
-                                tooltip={{ text: "删除当前插件" }}
-                                fontIcon='<i class="fas fa-trash-alt"></i>'
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>this.delete() } />
-                        <Button shape="circle" type="flat"
-                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
-                                tooltip={{ text: "更新当前插件到最新版本" }}
-                                fontIcon='<i class="fas fa-cloud"></i>'
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>this.update() } />
-                        <Button shape="circle" type="flat"
-                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
-                                tooltip={{ text: "打开插件中心" }}
-                                fontIcon='<i class="fas fa-ellipsis-h"></i>'
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>this.addmore() } />
+                    <Button shape="circle" type="flat"
+                            color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                            tooltip={{ text: enable == true ? "禁用当前插件" : "启用当前插件" }}
+                            fontIcon={`<i class="fas fa-eye${ enable ? "" : "-slash" }"></i>`}
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.enable() } />
+                    <Button shape="circle" type="flat"
+                            color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                            tooltip={{ text: "删除当前插件" }}
+                            fontIcon='<i class="fas fa-trash-alt"></i>'
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.delete() } />
+                    <Button shape="circle" type="flat"
+                            color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                            tooltip={{ text: "更新当前插件到最新版本" }}
+                            fontIcon='<i class="fas fa-cloud"></i>'
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.update() } />
+                    <Button shape="circle" type="flat"
+                            color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                            tooltip={{ text: "打开插件中心" }}
+                            fontIcon='<i class="fas fa-ellipsis-h"></i>'
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.addmore() } />
                 </card-footer>
             </card>
         )
@@ -200,7 +202,8 @@ export default class PluginsOpt extends React.Component {
     onChange( type ) {
         storage.Write();
         storage.Plugins( () => {
-            type == "delete" && new Notify().Render( "已删除成功。" );
+            type == "delete" && new Notify().Render( "当前插件已删除成功。" );
+            type == "update" && new Notify().Render( "当前插件已更新成功。" );
             this.setState({ plugins: Object.values( storage.plugins ) });
         }, storage.plugins );
     }
