@@ -12,6 +12,7 @@ import { storage } from 'storage';
 
 import ReadOpt     from 'readopt';
 import Actionbar   from 'actionbar';
+import Pluginbar   from 'pluginbar';
 
 import Fab         from 'fab';
 import Fap         from 'fap'
@@ -137,12 +138,13 @@ export default class ReadCtlbar extends React.Component {
 
     render() {
         const Controlbar = storage.current.fap ? 
-            <Fap items={ [ "样式", "动作" ] } autoHide={ false }
+            <Fap items={ [ "样式", "动作", "插件" ] } autoHide={ false }
                 waves="md-waves-effect md-waves-circle md-waves-float" 
                 onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }
                 onAction={ (event, type)=>this.onAction(event, type ) }>
                 <ReadOpt option={ storage.current } onChange={ (t,c)=>this.onChange(t,c)}/>
                 <Actionbar items={ conf.readItems } onAction={ (type)=>this.onAction(undefined, type ) }/>
+                <Pluginbar />
             </Fap>
             :
             <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
