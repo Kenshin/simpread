@@ -104,7 +104,7 @@ export default class PluginsOpt extends React.Component {
         plugins: []
     };
 
-    install() {
+    initialize() {
         if ( decodeURIComponent( location.href ).includes( "#plugins?install=http://simpread.ksria.cn/plugins" ) ) {
             const url = decodeURIComponent( location.hash ).replace( "#plugins?install=", "" );
             run.Install( undefined, url, result => {
@@ -198,7 +198,7 @@ export default class PluginsOpt extends React.Component {
 
     componentWillMount() {
         storage.Plugins( () => {
-            this.install();
+            this.initialize();
             this.setState({ plugins: Object.values( storage.plugins ) });
         });
     }
