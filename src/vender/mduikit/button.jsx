@@ -261,11 +261,13 @@ export default class Button extends React.Component {
             ( style.root = { ...style.root, ...this.props.style } );
 
         this.props.text  == "" && ( style.text.display = "none" );
-        
+
         if ( this.props.fontIcon != "" ) {
-            style.icon = style.font_icon;
-            style.icon.color = style.color;
+            style.icon         = { ...style.font_icon };
+            style.icon.display = "flex";
+            style.icon.color   = style.color;
         } else this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+
         this.props.order == "after" && ( style.icon.order = 1 );
         this.props.width && ( style.root.width = this.props.width );
 
