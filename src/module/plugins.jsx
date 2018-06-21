@@ -33,7 +33,7 @@ class Card extends React.Component {
 
     enable() {
         this.props.plugin.enable = this.props.plugin.enable == undefined || this.props.plugin.enable ? false : true;
-        this.props.onChange( "update" );
+        this.props.onChange( "enable" );
     }
 
     addmore() {
@@ -203,7 +203,7 @@ export default class PluginsOpt extends React.Component {
         storage.Write();
         storage.Plugins( () => {
             type == "delete" && new Notify().Render( "当前插件已删除成功。" );
-            type == "update" && new Notify().Render( "当前插件已更新成功。" );
+            type == "enable" && new Notify().Render( "当前插件已更改成功。" );
             this.setState({ plugins: Object.values( storage.plugins ) });
         }, storage.plugins );
     }
