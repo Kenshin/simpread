@@ -60,11 +60,13 @@ class Card extends React.Component {
                     <div style={{width: '100%', display: 'flex', 'justify-content': 'flex-end'}}>
                         <Button shape="circle" type="flat"
                                 color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                                tooltip={{ text: "更新当前插件到最新版本" }}
                                 fontIcon='<i class="fas fa-cloud"></i>'
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.update() } />
                         <Button shape="circle" type="flat"
                                 color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                                tooltip={{ text: "打开插件中心" }}
                                 fontIcon='<i class="fas fa-ellipsis-h"></i>'
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.addmore() } />
