@@ -18,6 +18,22 @@ class Card extends React.Component {
         plugin         : React.PropTypes.object,
     };
 
+    update() {
+
+    }
+
+    delete() {
+
+    }
+
+    enable() {
+
+    }
+
+    addmore() {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins" }));
+    }
+
     render() {
         return (
             <card>
@@ -29,6 +45,28 @@ class Card extends React.Component {
                     <note>{ this.props.plugin.name }</note>
                 </card-content>
                 <card-footer>
+                    <Button type="flat" text="禁用"
+                            style={{minWidth: '48px' }}
+                            color="#6200ee"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.enable() } />
+                    <Button type="flat" text="删除"
+                            style={{minWidth: '48px'}}
+                            color="#6200ee"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.delete() } />
+                    <div style={{width: '100%', display: 'flex', 'justify-content': 'flex-end'}}>
+                        <Button shape="circle" type="flat"
+                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                                fontIcon='<i class="fas fa-cloud"></i>'
+                                waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>this.update() } />
+                        <Button shape="circle" type="flat"
+                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                                fontIcon='<i class="fas fa-ellipsis-h"></i>'
+                                waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>this.addmore() } />
+                    </div>
                 </card-footer>
             </card>
         )
