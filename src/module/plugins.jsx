@@ -45,16 +45,18 @@ class Card extends React.Component {
                     <note>{ this.props.plugin.name }</note>
                 </card-content>
                 <card-footer>
-                    <Button type="flat" text="禁用"
-                            style={{minWidth: '48px' }}
-                            color="#6200ee"
-                            waves="md-waves-effect md-waves-button"
-                            onClick={ ()=>this.enable() } />
-                    <Button type="flat" text="删除"
-                            style={{minWidth: '48px'}}
-                            color="#6200ee"
-                            waves="md-waves-effect md-waves-button"
-                            onClick={ ()=>this.delete() } />
+                    <div style={{height: '48px', display: 'flex', 'flex-direction': 'row' }}>
+                        <Button type="flat" text="禁用"
+                                style={{minWidth: '48px'}}
+                                color="#6200ee"
+                                waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>this.enable() } />
+                        <Button type="flat" text="删除"
+                                style={{minWidth: '48px'}}
+                                color="#6200ee"
+                                waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>this.delete() } />
+                    </div>
                     <div style={{width: '100%', display: 'flex', 'justify-content': 'flex-end'}}>
                         <Button shape="circle" type="flat"
                                 color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
