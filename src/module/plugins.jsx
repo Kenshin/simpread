@@ -130,7 +130,7 @@ export default class PluginsOpt extends React.Component {
                         install();
                         storage.option.plugins.push( result.id );
                         storage.Write();
-                } else if ( storage.plugins[result.id].version != result.version ) {
+                    } else if ( storage.plugins[result.id].version != result.version ) {
                         new Notify().Render({ content: "本地版本与安装版本不一致，是否重新安装？", action: "安装", cancel: "取消", callback: type => {
                             type == "action" && install();
                         }});
