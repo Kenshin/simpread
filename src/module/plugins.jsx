@@ -45,19 +45,18 @@ class Card extends React.Component {
                     <note>{ this.props.plugin.name }</note>
                 </card-content>
                 <card-footer>
-                    <div style={{height: '48px', display: 'flex', 'flex-direction': 'row' }}>
-                        <Button type="flat" text="禁用"
-                                style={{minWidth: '48px'}}
-                                color="#6200ee"
+                        <Button shape="circle" type="flat"
+                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                                tooltip={{ text: "禁用当前插件" }}
+                                fontIcon='<i class="fas fa-eye-slash"></i>'
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.enable() } />
-                        <Button type="flat" text="删除"
-                                style={{minWidth: '48px'}}
-                                color="#6200ee"
+                        <Button shape="circle" type="flat"
+                                color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                                tooltip={{ text: "删除当前插件" }}
+                                fontIcon='<i class="fas fa-trash-alt"></i>'
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.delete() } />
-                    </div>
-                    <div style={{width: '100%', display: 'flex', 'justify-content': 'flex-end'}}>
                         <Button shape="circle" type="flat"
                                 color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
                                 tooltip={{ text: "更新当前插件到最新版本" }}
@@ -70,7 +69,6 @@ class Card extends React.Component {
                                 fontIcon='<i class="fas fa-ellipsis-h"></i>'
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.addmore() } />
-                    </div>
                 </card-footer>
             </card>
         )
