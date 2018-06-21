@@ -37,7 +37,7 @@ class Card extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins" }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins/detail/" + this.props.plugin.id }));
     }
 
     render() {
@@ -72,7 +72,7 @@ class Card extends React.Component {
                             onClick={ ()=>this.update() } />
                     <Button shape="circle" type="flat"
                             color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
-                            tooltip={{ text: "打开插件中心" }}
+                            tooltip={{ text: "查看当前插件的详细信息" }}
                             fontIcon='<i class="fas fa-ellipsis-h"></i>'
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.addmore() } />
