@@ -23,7 +23,12 @@ class Card extends React.Component {
     }
 
     delete() {
-        this.props.onChange( "save" );
+        new Notify().Render({ mode:"snackbar", content: "是否删除当前插件？", action: "确认", cancel: "取消", callback: type => {
+            if ( type == "cancel" ) return;
+            delete storage.plugins[ this.props.plugin.id ];
+            storage.option.plugins = Object.keys( storage.plugins );
+            this.props.onChange( "delete" );
+        }});
     }
 
     enable() {
@@ -193,7 +198,11 @@ export default class PluginsOpt extends React.Component {
     }
 
     onChange( type ) {
-
+        storage.Write();
+        storage.Plugins( () => {
+            type == "delete" && new Notify().Render( "已删除成功。" );
+            this.setState({ plugins: Object.values( storage.plugins ) });
+        }, storage.plugins );
     }
 
     componentWillMount() {
