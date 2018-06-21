@@ -19,11 +19,11 @@ class Card extends React.Component {
     };
 
     update() {
-
+        this.props.onChange( "update" );
     }
 
     delete() {
-
+        this.props.onChange( "save" );
     }
 
     enable() {
@@ -83,12 +83,13 @@ class Cards extends React.Component {
 
     static propTypes = {
         plugins         : React.PropTypes.array,
+        onChange        : React.PropTypes.func,
     };
 
     render() {
         const card = this.props.plugins.length > 0 ? this.props.plugins.map( ( item, idx ) => {
             return (
-                <Card plugin={ item } />
+                <Card plugin={ item } onChange={t=>this.props.onChange(t)} />
             )
         }) : <card-empty><a href="http://simpread.ksria.cn/plugins" target="_blank">没有任何扩展，点击打开扩展中心添加。</a></card-empty>;
         return (
@@ -191,6 +192,10 @@ export default class PluginsOpt extends React.Component {
         });
     }
 
+    onChange( type ) {
+
+    }
+
     componentWillMount() {
         storage.Plugins( () => {
             this.install();
@@ -231,7 +236,7 @@ export default class PluginsOpt extends React.Component {
 
                 <div className="label">管理</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
-                    <Cards plugins={ this.state.plugins } />
+                    <Cards plugins={ this.state.plugins } onChange={ t=>this.onChange(t) } />
                 </div>
 
             </div>
