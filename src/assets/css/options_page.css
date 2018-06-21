@@ -239,6 +239,11 @@ a {
     background-repeat: no-repeat;
 }
 
+cards {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 card {
     display: flex;
     flex-direction: column;
@@ -330,4 +335,16 @@ card-footer {
 
     width: 100%;
     height: 52px;
+}
+
+card-empty {
+    width: 100%;
+    padding: 50px;
+}
+
+card-empty a {
+    color: #9b9b9b;
+
+    font-size: 30px;
+    font-weight: 500;
 }
