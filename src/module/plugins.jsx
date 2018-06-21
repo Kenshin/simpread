@@ -19,7 +19,16 @@ class Card extends React.Component {
     };
 
     update() {
-        this.props.onChange( "update" );
+        run.Install( this.props.plugin.id, undefined, result => {
+            if ( result ) {
+                if ( this.props.plugin.version != result.version ) {
+                    storage.plugins[this.props.plugin.id] = result;
+                    this.props.onChange( "update" );
+                } else {
+                    new Notify().Render( "当前插件为最新版，无需更新。" );
+                }
+            }
+        });
     }
 
     delete() {
@@ -202,6 +211,7 @@ export default class PluginsOpt extends React.Component {
     onChange( type ) {
         storage.Write();
         storage.Plugins( () => {
+            type == "update" && new Notify().Render( "当前插件已更新成功。" );
             type == "delete" && new Notify().Render( "当前插件已删除成功。" );
             type == "enable" && new Notify().Render( "当前插件已更改成功。" );
             this.setState({ plugins: Object.values( storage.plugins ) });
