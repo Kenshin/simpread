@@ -39,6 +39,7 @@ function install( id, url, callback ) {
  * @param {object} plugin object
  */
 function exec( plugin ) {
+    if ( plugin.enable == false ) return;
     new Function( func( plugin.script ) )();
     plugin.style != "" && addStyle( plugin.style );
 }
