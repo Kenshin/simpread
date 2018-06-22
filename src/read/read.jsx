@@ -43,6 +43,8 @@ class Read extends React.Component {
     componentWillMount() {
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
+        // hack code
+        storage.current.fap && $( "head" ).append( '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">' );
     }
 
     async componentDidMount() {
