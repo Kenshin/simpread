@@ -14,9 +14,6 @@ export default class Pluginbar extends React.Component {
 
     getCategory() {
         Object.values( storage.plugins ).forEach( ( item, idx ) => {
-            // test code
-            idx == 0 && ( item.category = "通用" );
-            idx == 1 && ( item.category = "美化" );
 
             if ( this.category[item.category] ) {
                 this.category[item.category].push( item );
