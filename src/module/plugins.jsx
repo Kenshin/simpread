@@ -213,8 +213,11 @@ export default class PluginsOpt extends React.Component {
         });
         const complete = () => {
             storage.Plugins( result => {
-                new Notify().Render( "本地插件已全部导入完毕。" );
-                this.setState({ plugins: Object.values( storage.plugins ) });
+                storage.option.plugins = Object.keys( storage.plugins );
+                storage.Write( () => {
+                    new Notify().Render( "已从配置文件导入完毕。" );
+                    this.setState({ plugins: Object.values( storage.plugins ) });
+                });
             }, storage.plugins );
         }
     }
