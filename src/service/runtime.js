@@ -29,8 +29,11 @@ function generateID( type ) {
  */
 function install( id, url, callback ) {
     url = id ? `http://simpread.ksria.cn/plugins/${id}.srplug` : url;
+    url = url + `?${+new Date()}`;
     console.log( "install url is", url )
-    $.getJSON( url , callback );
+    $.ajax({ url, dataType: "json" })
+    .done( result => callback( result, undefined  ))
+    .fail( ()     => callback( undefined, "error" ));
 }
 
 /**
