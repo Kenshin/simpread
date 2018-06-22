@@ -209,8 +209,8 @@ export default class PluginsOpt extends React.Component {
                     return;
                 }
                 count++;
-                count == storage.option.plugins.length && complete();
                 storage.plugins[result.id] = result;
+                count == storage.option.plugins.length && complete();
             });
         });
         const complete = () => {
