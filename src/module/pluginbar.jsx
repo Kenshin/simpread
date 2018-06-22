@@ -33,11 +33,9 @@ export default class Pluginbar extends React.Component {
         plugin.enable = !plugin.enable;
         storage.Plugins( () => {
             new Notify().Render( "当前插件已" + ( plugin.enable ? "启用" : "禁用" ) + "，请重新进入阅读模式以便生效。" );
-            //this.category = {};
-            //this.getCategory();
-            //const bgColor = ( plugin.enable == undefined || plugin.enable == true ) ? plugin.icon.bgColor : "#c3c6c7";
-            //console.log( $( this.refs[id] )[0] )
-            //$( this.refs[id] ).css( "background-color", bgColor );
+            // hack code
+            const bgColor = ( plugin.enable == undefined || plugin.enable == true ) ? plugin.icon.bgColor : "#c3c6c7";
+            $( this.refs[id].refs.mask ).parent().css( "background-color", bgColor );
         }, storage.plugins );
     }
 
@@ -54,10 +52,10 @@ export default class Pluginbar extends React.Component {
             const actions = this.category[item].map( plugin => {
                 const bgColor = ( plugin.enable == undefined || plugin.enable == true ) ? plugin.icon.bgColor : "#c3c6c7";
                 return (
-                    <Button id={ plugin.id }
+                    <Button ref={plugin.id}
                             shape="circle" type="flat"
                             color={ plugin.icon.color } backgroundColor={ bgColor }
-                            tooltip={{ text: plugin.enable == true ? "禁用当前插件" : "启用当前插件" }}
+                            tooltip={{ text: plugin.name }}
                             fontIcon={ plugin.icon.type }
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.enable(plugin.id) } />
