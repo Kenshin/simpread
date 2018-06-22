@@ -209,12 +209,16 @@ export default class PluginsOpt extends React.Component {
                     return;
                 }
                 count++;
+                count == storage.option.plugins.length && complete();
                 storage.plugins[result.id] = result;
-                storage.Plugins( result => {
-                    count == storage.option.plugins.length && new Notify().Render( "本地插件已全部导入完毕。" );
-                }, storage.plugins );
             });
         });
+        const complete = () => {
+            storage.Plugins( result => {
+                new Notify().Render( "本地插件已全部导入完毕。" );
+                this.setState({ plugins: Object.values( storage.plugins ) });
+            }, storage.plugins );
+        }
     }
 
     onChange( type ) {
