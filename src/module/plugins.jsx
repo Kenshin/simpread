@@ -179,16 +179,17 @@ export default class PluginsOpt extends React.Component {
                 count++;
                 if ( storage.plugins[id].version != result.version ) {
                     storage.plugins[result.id] = result;
-                    storage.Plugins( result => {
-                        is_update = true;
-                        count == storage.option.plugins.length && complete();
-                    }, storage.plugins );
+                    is_update = true;
                 }
+                count == storage.option.plugins.length && complete();
             });
         });
         const complete = () => {
             if ( is_update ) {
-                new Notify().Render( "本地插件已全部更新完毕。" );
+                storage.Plugins( result => {
+                    new Notify().Render( "本地插件已全部更新完毕。" );
+                    this.setState({ plugins: Object.values( storage.plugins ) });
+                }, storage.plugins );
             } else {
                 new Notify().Render( "无任何可用更新。" );
             }
