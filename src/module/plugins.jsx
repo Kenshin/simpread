@@ -27,7 +27,7 @@ class Card extends React.Component {
                 } else {
                     new Notify().Render( "当前插件为最新版，无需更新。" );
                 }
-            }
+            } else new Notify().Render( 2, "更新失败，请稍后再试。" );
         });
     }
 
@@ -148,7 +148,7 @@ export default class PluginsOpt extends React.Component {
                             type == "action" && install();
                         }});
                     }
-                }
+                } else new Notify().Render( 2, url + "获取失败，请稍后再试。" );
             });
         }
     }
@@ -176,11 +176,15 @@ export default class PluginsOpt extends React.Component {
         let is_update = false, count = 0;
         storage.option.plugins.forEach( id => {
             run.Install( id, undefined, result => {
-                count++;
-                if ( storage.plugins[id].version != result.version ) {
-                    storage.plugins[result.id] = result;
-                    is_update = true;
+                if ( !result ) {
+                    new Notify().Render( 2, id + "获取失败，请稍后再试。" );
+                    return;
                 }
+                count++;
+                    if ( storage.plugins[id].version != result.version ) {
+                        storage.plugins[result.id] = result;
+                        is_update = true;
+                    }
                 count == storage.option.plugins.length && complete();
             });
         });
@@ -200,6 +204,10 @@ export default class PluginsOpt extends React.Component {
         let count = 0;
         storage.option.plugins.forEach( id => {
             run.Install( id, undefined, result => {
+                if ( !result ) {
+                    new Notify().Render( 2, id + "获取失败，请稍后再试。" );
+                    return;
+                }
                 count++;
                 storage.plugins[result.id] = result;
                 storage.Plugins( result => {
