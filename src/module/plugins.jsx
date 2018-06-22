@@ -243,12 +243,13 @@ export default class PluginsOpt extends React.Component {
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="从配置文件导入插件" width="100%"
+                            tooltip={{ text: "注意：本操作并不能更新本地插件。" }}
                             icon={ ss.IconPath( "import_icon" ) }
                             color="#fff" backgroundColor="#00BCD4"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.import() } />
                         <Button type="raised" text="查看并获取更多的插件" width="100%"
-                            icon={ ss.IconPath( "export_icon" ) }
+                            fontIcon={`<i class="fas fa-external-link-square-alt"></i>`}
                             color="#fff" backgroundColor="#00BCD4"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.addmore() } />
