@@ -39,10 +39,15 @@ function install( id, url, callback ) {
 /**
  * Execute
  * 
+ * @param {string} state, include: read_start, read_loading, read_complete, read_end
+ * @param {string} site name, inlcude: "", "xxx", "xxx, yyy"
  * @param {object} plugin object
  */
-function exec( plugin ) {
+function exec( state, site, plugin ) {
     if ( plugin.enable == false ) return;
+    if ( plugin.run_at != state ) return;
+    if ( plugin.site   != "" && !plugin.site.split(",").includes( site ) ) return;
+    console.log( "current plugin is running", plugin )
     new Function( func( plugin.script ) )();
     plugin.style != "" && addStyle( plugin.style );
 }
