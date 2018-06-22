@@ -41,6 +41,7 @@ const Footer = () => {
 class Read extends React.Component {
 
     componentWillMount() {
+        loadPlugins( "read_start" );
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
         // hack code
@@ -87,15 +88,12 @@ class Read extends React.Component {
             waves.Render({ root: rdclsjq });
             storage.Statistics( "read" );
 
-            storage.Plugins( () => {
-                storage.option.plugins.forEach( id => {
-                    storage.plugins[id] && run.Exec( storage.plugins[id] );
-                });
-            });
+            loadPlugins( "read_complete" );
         }
     }
 
     componentWillUnmount() {
+        loadPlugins( "read_end" );
         ss.FontSize( "" );
         $root.removeClass( theme )
              .removeClass( "simpread-font" );
@@ -255,6 +253,19 @@ function getReadRoot() {
 function excludes( $target, exclude ) {
     const tags = storage.pr.Exclude( $target );
     $target.find( tags ).remove();
+}
+
+/**
+ * Load plugins from storage and exec
+ * 
+ * @param {string} state include: plugin.run_at
+ */
+function loadPlugins( state ) {
+    storage.Plugins( () => {
+        storage.option.plugins.forEach( id => {
+            storage.plugins[id] && run.Exec( state, storage.current.site.name, storage.plugins[id] );
+        });
+    });
 }
 
 export { Render, Exist, Exit, Highlight };
