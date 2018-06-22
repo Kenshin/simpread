@@ -120,37 +120,35 @@ export default class PluginsOpt extends React.Component {
         plugins: []
     };
 
-    initialize() {
-        if ( decodeURIComponent( location.href ).includes( "#plugins?install=http://simpread.ksria.cn/plugins" ) ) {
-            const url = decodeURIComponent( location.hash ).replace( "#plugins?install=", "" );
-            run.Install( undefined, url, result => {
-                if ( result ) {
-                    const install = () => {
-                        storage.plugins[result.id] = result;
-                        storage.Plugins( result => {
-                            new Notify().Render( "当前插件已安装成功，2 秒后自动刷新当前页面。" );
-                            setTimeout( ()=> {
-                                location.href = location.origin + location.pathname + "#plugins";
-                                location.reload();
-                            }, 2000 );
-                        }, storage.plugins );
-                    };
-                    if ( !storage.option.plugins.includes( result.id ) ) {
-                        install();
-                        storage.option.plugins.push( result.id );
-                        storage.Write();
-                    } else if ( storage.plugins[result.id].version != result.version ) {
-                        new Notify().Render({ content: "本地版本与安装版本不一致，是否重新安装？", action: "安装", cancel: "取消", callback: type => {
-                            type == "action" && install();
-                        }});
-                    } else {
-                        new Notify().Render({ content: "本地版本与安装版本一致，是否重新安装？", action: "安装", cancel: "取消", callback: type => {
-                            type == "action" && install();
-                        }});
-                    }
-                } else new Notify().Render( 2, url + "获取失败，请稍后再试。" );
-            });
-        }
+    install() {
+        const url = decodeURIComponent( location.hash ).replace( "#plugins?install=", "" );
+        run.Install( undefined, url, result => {
+            if ( result ) {
+                const add = () => {
+                    storage.plugins[result.id] = result;
+                    storage.Plugins( result => {
+                        new Notify().Render( "当前插件已安装成功，2 秒后自动刷新当前页面。" );
+                        setTimeout( ()=> {
+                            location.href = location.origin + location.pathname + "#plugins";
+                            location.reload();
+                        }, 2000 );
+                    }, storage.plugins );
+                };
+                if ( !storage.option.plugins.includes( result.id ) ) {
+                    add();
+                    storage.option.plugins.push( result.id );
+                    storage.Write();
+                } else if ( storage.plugins[result.id].version != result.version ) {
+                    new Notify().Render({ content: "本地版本与安装版本不一致，是否重新安装？", action: "安装", cancel: "取消", callback: type => {
+                        type == "action" && add();
+                    }});
+                } else {
+                    new Notify().Render({ content: "本地版本与安装版本一致，是否重新安装？", action: "安装", cancel: "取消", callback: type => {
+                        type == "action" && add();
+                    }});
+                }
+            } else new Notify().Render( 2, url + "获取失败，请稍后再试。" );
+        });
     }
 
     clear() {
@@ -233,7 +231,7 @@ export default class PluginsOpt extends React.Component {
 
     componentWillMount() {
         storage.Plugins( () => {
-            this.initialize();
+            decodeURIComponent( location.href ).includes( "#plugins?install=http://simpread.ksria.cn/plugins" ) && this.install();
             this.setState({ plugins: Object.values( storage.plugins ) });
         });
     }
