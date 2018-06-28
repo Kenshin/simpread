@@ -46,7 +46,7 @@ class Card extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins/detail/" + this.props.plugin.id }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins/details/" + this.props.plugin.id }));
     }
 
     render() {
