@@ -28,7 +28,7 @@ function generateID( type ) {
  * @param {string} url
  */
 function install( id, url, callback ) {
-    url = id ? `http://simpread.ksria.cn/plugins/${id}.srplug` : url;
+    url = id ? `http://simpread.ksria.cn/plugins/srplug/${id}.srplug` : url;
     url = url + `?${+new Date()}`;
     console.log( "install url is", url )
     $.ajax({ url, dataType: "json" })
