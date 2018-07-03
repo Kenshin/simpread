@@ -121,8 +121,8 @@ export default class PluginsOpt extends React.Component {
     };
 
     install() {
-        const url = decodeURIComponent( location.hash ).replace( "#plugins?install=", "" );
-        run.Install( undefined, url, result => {
+        const id = decodeURIComponent( location.hash ).replace( "#plugins?install=", "" );
+        run.Install( id, undefined, result => {
             if ( result ) {
                 const add = () => {
                     storage.plugins[result.id] = result;
@@ -147,7 +147,7 @@ export default class PluginsOpt extends React.Component {
                         type == "action" && add();
                     }});
                 }
-            } else new Notify().Render( 2, url + "获取失败，请稍后再试。" );
+            } else new Notify().Render( 2, id + " 获取失败，请稍后再试。" );
         });
     }
 
@@ -234,7 +234,7 @@ export default class PluginsOpt extends React.Component {
 
     componentWillMount() {
         storage.Plugins( () => {
-            decodeURIComponent( location.href ).includes( "#plugins?install=http://simpread.ksria.cn/plugins" ) && this.install();
+            decodeURIComponent( location.href ).includes( "#plugins?install=" ) && this.install();
             this.setState({ plugins: Object.values( storage.plugins ) });
         });
     }

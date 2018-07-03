@@ -156,8 +156,8 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
                     browser.tabs.remove( tabId );
                 }
             });
-        } else if ( tab.url.startsWith( "http://ksria.com/simpread/install.html" )) {
-            const url = tab.url.replace( "http://ksria.com/simpread/install.html?url=", "" );
+        } else if ( tab.url.startsWith( "http://simpread.ksria.cn/plugins/install/" )) {
+            const url = tab.url.replace( "http://simpread.ksria.cn/plugins/install/", "" );
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#plugins?install=" + encodeURIComponent(url) ) });
             browser.tabs.remove( tabId );
         }
