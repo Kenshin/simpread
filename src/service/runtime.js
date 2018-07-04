@@ -72,6 +72,19 @@ function addStyle( str ) {
     $( "head" ).append(`<style type="text/css">${str}</style>`);
 }
 
+/**
+ * Test Plugin
+ * 
+ * @param {func} style func
+ * @param {func} plugin func
+ */
+function testPlugin( style, plugin ) {
+    style  && addStyle( style() );
+    plugin && plugin( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ) );
+}
+
+window.simpread = { testPlugin };
+
 export {
     install as Install,
     exec    as Exec,
