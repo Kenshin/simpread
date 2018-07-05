@@ -238,6 +238,8 @@ export default class PluginsOpt extends React.Component {
     }
 
     componentWillMount() {
+        $( "head" ).append( '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp" crossorigin="anonymous">' );
+        $( "head" ).append( '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">' );
         storage.Plugins( () => {
             decodeURIComponent( location.href ).includes( "#plugins?install=" ) && this.install();
             this.setState({ plugins: Object.values( storage.plugins ) });
