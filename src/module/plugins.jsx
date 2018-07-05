@@ -204,18 +204,21 @@ export default class PluginsOpt extends React.Component {
     }
 
     import() {
-        let count = 0;
-        storage.option.plugins.forEach( id => {
-            run.Install( id, undefined, result => {
-                if ( !result ) {
-                    new Notify().Render( 2, id + "获取失败，请稍后再试。" );
-                    return;
-                }
-                count++;
-                storage.plugins[result.id] = result;
-                count == storage.option.plugins.length && complete();
+        new Notify().Render({ mode:"snackbar", content: "导入意味着从配置文件覆盖当前的插件！", action: "确认", cancel: "取消", callback: type => {
+            if ( type == "cancel" ) return;
+            let count = 0;
+            storage.option.plugins.forEach( id => {
+                run.Install( id, undefined, result => {
+                    if ( !result ) {
+                        new Notify().Render( 2, id + "获取失败，请稍后再试。" );
+                        return;
+                    }
+                    count++;
+                    storage.plugins[result.id] = result;
+                    count == storage.option.plugins.length && complete();
+                });
             });
-        });
+        }});
         const complete = () => {
             storage.Plugins( result => {
                 storage.option.plugins = Object.keys( storage.plugins );
