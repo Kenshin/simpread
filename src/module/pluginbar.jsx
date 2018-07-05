@@ -25,6 +25,7 @@ export default class Pluginbar extends React.Component {
     }
 
     enable( id ) {
+        console.log( id, storage.plugins[id].enable )
         const plugin  = storage.plugins[id];
         plugin.enable = !plugin.enable;
         storage.Plugins( () => {
@@ -47,6 +48,7 @@ export default class Pluginbar extends React.Component {
 
             const actions = this.category[item].map( plugin => {
                 const bgColor = ( plugin.enable == undefined || plugin.enable == true ) ? plugin.icon.bgColor : "#c3c6c7";
+                plugin.enable == undefined && ( plugin.enable = true );
                 return (
                     <Button ref={plugin.id}
                             shape="circle" type="flat"
