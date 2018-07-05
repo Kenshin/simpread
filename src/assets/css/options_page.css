@@ -339,6 +339,10 @@ card-footer {
     height: 52px;
 }
 
+card-footer i {
+    font-size: 16px;
+}
+
 card-empty {
     width: 100%;
     padding: 50px;
