@@ -5,6 +5,7 @@ import * as run  from 'runtime';
 import * as ss   from 'stylesheet';
 import {browser} from 'browser';
 import * as msg  from 'message';
+import * as watch from 'watch';
 
 import Button    from 'button';
 
@@ -120,6 +121,10 @@ export default class PluginsOpt extends React.Component {
         plugins: []
     };
 
+    writecb() {
+        watch.SendMessage( "option", true );
+    }
+
     install() {
         const id = decodeURIComponent( location.hash ).replace( "#plugins?install=", "" );
         run.Install( id, undefined, result => {
@@ -137,7 +142,7 @@ export default class PluginsOpt extends React.Component {
                 if ( !storage.option.plugins.includes( result.id ) ) {
                     add();
                     storage.option.plugins.push( result.id );
-                    storage.Write();
+                    storage.Write( this.writecb );
                 } else if ( storage.plugins[result.id].version != result.version ) {
                     new Notify().Render({ content: "本地版本与安装版本不一致，是否重新安装？", action: "安装", cancel: "取消", callback: type => {
                         type == "action" && add();
@@ -155,7 +160,7 @@ export default class PluginsOpt extends React.Component {
         new Notify().Render({ mode: "snackbar", content: "是否清除本地全部插件？", action: "是的", cancel: "取消", callback: type => {
             if ( type == "action" ) {
                 storage.option.plugins = [];
-                storage.Write();
+                storage.Write( this.writecb );
                 storage.Plugins( () => {
                     new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
                         location.href = location.origin + location.pathname + "#plugins";
@@ -223,7 +228,7 @@ export default class PluginsOpt extends React.Component {
     }
 
     onChange( type ) {
-        storage.Write();
+        storage.Write( this.writecb );
         storage.Plugins( () => {
             type == "update" && new Notify().Render( "当前插件已更新成功。" );
             type == "delete" && new Notify().Render( "当前插件已删除成功。" );
