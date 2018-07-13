@@ -1,6 +1,8 @@
 console.log( "=== simpread runtime load ===" )
 
-import nanoid from 'nanoid';
+import nanoid    from 'nanoid';
+import {browser} from 'browser';
+import {storage, Clone} from 'storage';
 
 /**
  * Generate ID
@@ -58,9 +60,13 @@ function exec( state, site, plugin ) {
  * @param {string} source 
  */
 function func( source ) {
-    return `( function ( $$version, $title, $desc, $content, $footer, $process, $toc ) {
+    window.Notify  = Notify;
+    window.browser = browser;
+    window.current = Clone( storage.pr.current );
+    window.read    = Clone( storage.read );
+    return `( function ( $$version, $title, $desc, $content, $footer, $process, $toc, Notify, browser, $$current, $$read ) {
         ${ source }
-    })( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ) );`
+    })( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, browser, current, read );`
 }
 
 /**
@@ -80,7 +86,7 @@ function addStyle( str ) {
  */
 function testPlugin( style, plugin ) {
     style  && addStyle( style() );
-    plugin && plugin( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ) );
+    plugin && plugin( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, browser, storage.pr.current, storage.read );
 }
 
 window.simpread = { testPlugin };
