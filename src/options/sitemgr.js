@@ -135,7 +135,7 @@ function controlbarRender() {
                         </group>
                     </group>
                     <group className="lab">
-                        <Import uid={ storage.user.uid } />
+                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } />
                     </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );
