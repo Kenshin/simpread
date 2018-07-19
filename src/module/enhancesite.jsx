@@ -4,6 +4,8 @@ import TextField   from 'textfield';
 import Button      from 'button';
 import Dropdown    from 'dropdown';
 
+import {storage}   from 'storage';
+
 let notify, secret, cur_user = {}, ori_user = {};
 
 function loadingState( state, str ) {
@@ -93,6 +95,10 @@ export default class Import extends React.Component {
             type == "action" && this.login();
             return;
         }});
+        if ( !storage.site ) {
+            new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
+            return;
+        }
     }
 
     render() {
