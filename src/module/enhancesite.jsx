@@ -64,15 +64,34 @@ export default class Import extends React.Component {
                 cur_user = result.data;
                 ori_user = $.extend( true, {}, cur_user );
                 console.log( "current user is ", cur_user )
+                this.getSites( this.props.uid, "all" );
             } else if ( result.code == 401 ) {
                 loadingState( "faile", "管理员登陆失败，请验证管理员密匙！" );
             } else loadingState( "faile", "获取后台服务失败，请稍后再试！" );
         }).fail( fail );
     }
 
-    import() {
+    getSites( uid, id ) {
+        loadingState( "init" );
+        $.ajax({
+            url     : getService( "/sites/service/get/" + id ),
+            data    : { uid },
+            type    : "POST",
+        }).done( ( result, textStatus, jqXHR ) => {
+            loadingState( "success", "获取当前用户全部站点" );
+            console.log( "asdfadfadfs", result )
+            if ( result.code == 200 ) {
+                // TO-DO
+            } else if ( result.code == 404 ) {
+                loadingState( "faile", "当前用户没有任何站点，可以先新建 或 上传一个站点。" );
+            } else loadingState( "faile", "获取当前用户的站点获取失败，请稍后再试！" );
+        }).fail( fail );
+    }
+
+    update() {
         $.isEmptyObject( cur_user ) && new Notify().Render({ mode: "snackbar", content: "需要先登录到服务器后才能提交！", action: "登录", cancel: "取消", callback: type => {
             type == "action" && this.login();
+            return;
         }});
     }
 
@@ -89,7 +108,7 @@ export default class Import extends React.Component {
                     style={{ "margin": "0 0 25px 0" }} width="100%"
                     color="#fff" backgroundColor="#4CAF50"
                     waves="md-waves-effect md-waves-button"
-                    onClick={ ()=>this.import() } />
+                    onClick={ ()=>this.update() } />
                     { this.state.login ?
                         <Button type="raised" text="退出登录"
                             style={{ "margin": "25px 0 0 0" }} width="100%"
