@@ -104,22 +104,22 @@ export default class Import extends React.Component {
                         onChange={ event=>this.onSecretChange( event )}
                     />
                 </div>
+                { this.state.login ?
+                    <Button type="raised" text="退出登录"
+                        style={{ "margin": "0 0 25px 0" }} width="100%"
+                        color="#fff" backgroundColor="#1976d2"
+                        waves="md-waves-effect md-waves-button"
+                        onClick={ ()=>this.logout() } /> :
+                    <Button type="raised" text="登录到服务器"
+                        style={{ "margin": "25px 0 0 0" }} width="100%"
+                        color="#fff" backgroundColor="#FF5252"
+                        waves="md-waves-effect md-waves-button"
+                        onClick={ ()=>this.login() } /> }
                 <Button type="raised" text="提交新站到服务器"
-                    style={{ "margin": "0 0 25px 0" }} width="100%"
+                    style={{ "margin": "25px 0 0 0" }} width="100%"
                     color="#fff" backgroundColor="#4CAF50"
                     waves="md-waves-effect md-waves-button"
                     onClick={ ()=>this.update() } />
-                    { this.state.login ?
-                        <Button type="raised" text="退出登录"
-                            style={{ "margin": "25px 0 0 0" }} width="100%"
-                            color="#fff" backgroundColor="#1976d2"
-                            waves="md-waves-effect md-waves-button"
-                            onClick={ ()=>this.logout() } /> :
-                        <Button type="raised" text="登录到服务器"
-                            style={{ "margin": "25px 0 0 0" }} width="100%"
-                            color="#fff" backgroundColor="#FF5252"
-                            waves="md-waves-effect md-waves-button"
-                            onClick={ ()=>this.login() } /> }
             </div>
         )
     }
