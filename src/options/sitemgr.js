@@ -18,6 +18,7 @@ import * as waves from 'waves';
 import * as tt    from 'tooltip';
 
 import Editor     from 'editor';
+import Import     from 'enhancesite';
 
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
@@ -132,6 +133,9 @@ function controlbarRender() {
                                     waves="md-waves-effect md-waves-button"
                                     onClick={ ()=>remove() } />
                         </group>
+                    </group>
+                    <group className="lab">
+                        <Import uid={ storage.user.uid } />
                     </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );
