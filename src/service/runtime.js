@@ -20,6 +20,8 @@ function generateID( type ) {
         return `${first}-${second}-${third}-${fourth}-${fifth}`;
     } else if ( type == "plugin" ) {
         return nanoid( "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10 );
+    } else if ( type == "site" ) {
+        return nanoid( "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 10 );
     }
 }
 
