@@ -81,34 +81,34 @@ class SiteInfo extends React.Component {
                     />
                     <span className="space"></span>
                     <TextField value={ site_info.title }
-                        multi={ false } floatingtext="当前站点名称" disable={true}
+                        multi={ false } floatingtext="当前站点名称" disable={false}
                         onChange={ event=>this.onChange( "title", event )}
                     />
                 </div>
                 <div className="row box-large">
                     <TextField value={ site_info.create }
-                        multi={ false } floatingtext="建立时间" disable={false}
+                        multi={ false } floatingtext="建立时间" disable={true}
                         onChange={ event=>this.onChange( "create", event )}
                     />
                     <span className="space"></span>
                     <TextField value={ site_info.update == "" ? "没有任何更新时间" : site_info.update }
-                        multi={ false } floatingtext="更新时间" disable={false}
+                        multi={ false } floatingtext="更新时间" disable={true}
                         onChange={ event=>this.onChange( "update", event )}
                     />
                 </div>
                 <div className="row box-large">
                     <TextField value={ site_info.color }
-                        multi={ false } floatingtext="前景色" disable={true}
+                        multi={ false } floatingtext="前景色" disable={false}
                         onChange={ event=>this.onChange( "color", event )}
                     />
                     <span className="space"></span>
                     <TextField value={ site_info.bgColor }
-                        multi={ false } floatingtext="背景色" disable={true}
+                        multi={ false } floatingtext="背景色" disable={false}
                         onChange={ event=>this.onChange( "bgColor", event )}
                     />
                 </div>
                 <div className="row box-large">
-                    <TextField value={ site_info.global }
+                    <TextField value={ site_info.global ? "当前站点已经审核通过" : "当前站点未经审核" }
                         multi={ false } floatingtext="是否已经审核" disable={true}
                     />
                     <span className="space"></span>
