@@ -5,8 +5,19 @@ import Button      from 'button';
 import Dropdown    from 'dropdown';
 
 import {storage}   from 'storage';
+import * as run    from 'runtime';
 
-let notify, secret, cur_user = {}, ori_user = {};
+let notify, secret, cur_user = {}, ori_user = {}, site_info = {};
+
+const category = [
+    {name: "科技媒体", value: "科技媒体"},
+    {name: "传统媒体", value: "传统媒体"},
+    {name: "新闻", value: "新闻"},
+    {name: "技术", value: "技术"},
+    {name: "博客", value: "博客"},
+    {name: "论坛", value: "论坛"},
+    {name: "其它", value: "其它"},
+];
 
 function loadingState( state, str ) {
     if ( state == "init" ) {
@@ -41,6 +52,71 @@ function getService( method ) {
 function fail( xhr, textStatus, error ) {
     console.error( xhr, status, error )
     loadingState( "fail" );
+}
+
+/**
+ * Site info Render
+ */
+function siteinfoRender() {
+    $( ".siteinfo" ).removeClass( 'hide' ).empty();
+    ReactDOM.render( <SiteInfo />, $( ".siteinfo" )[0] );
+}
+
+class SiteInfo extends React.Component {
+
+    onChange( id, event ) {
+        site_info[id] = event.target.value
+    }
+
+    onDropdownChange( value ) {
+        site_info.category = value;
+    }
+
+    render() {
+        return(
+            <div>
+                <div className="row box-large">
+                    <TextField value={ site_info.id }
+                        multi={ false } floatingtext="ID" disable={true}
+                    />
+                    <span className="space"></span>
+                    <TextField value={ site_info.title }
+                        multi={ false } floatingtext="当前站点名称" disable={true}
+                        onChange={ event=>this.onChange( "title", event )}
+                    />
+                </div>
+                <div className="row box-large">
+                    <TextField value={ site_info.create }
+                        multi={ false } floatingtext="建立时间" disable={false}
+                        onChange={ event=>this.onChange( "create", event )}
+                    />
+                    <span className="space"></span>
+                    <TextField value={ site_info.update == "" ? "没有任何更新时间" : site_info.update }
+                        multi={ false } floatingtext="更新时间" disable={false}
+                        onChange={ event=>this.onChange( "update", event )}
+                    />
+                </div>
+                <div className="row box-large">
+                    <TextField value={ site_info.color }
+                        multi={ false } floatingtext="前景色" disable={true}
+                        onChange={ event=>this.onChange( "color", event )}
+                    />
+                    <span className="space"></span>
+                    <TextField value={ site_info.bgColor }
+                        multi={ false } floatingtext="背景色" disable={true}
+                        onChange={ event=>this.onChange( "bgColor", event )}
+                    />
+                </div>
+                <div className="row box-large">
+                    <TextField value={ site_info.global }
+                        multi={ false } floatingtext="是否已经审核" disable={true}
+                    />
+                    <span className="space"></span>
+                    <Dropdown name={ site_info.category } items={ category } width="100%" onChange={(v)=>this.onDropdownChange(v)} />
+                </div>
+            </div>
+        )
+    }
 }
 
 export default class Import extends React.Component {
@@ -98,9 +174,15 @@ export default class Import extends React.Component {
         if ( !storage.site ) {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
-        } else if ( !storage.site.title ) {
-            // TO-DO
         }
+        if ( !storage.site.info ) {
+            new Notify().Render( "上传站点时需要录入一些必要信息。" );
+            site_info = {id: run.ID("site"), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
+            storage.site.info = site_info;
+            siteinfoRender();
+            return;
+        }
+        console.log( "adfasasdf", storage.site.info )
     }
 
     logout() {
