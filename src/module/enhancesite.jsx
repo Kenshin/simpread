@@ -98,7 +98,13 @@ export default class Import extends React.Component {
         if ( !storage.site ) {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
+        } else if ( !storage.site.title ) {
+            // TO-DO
         }
+    }
+
+    logout() {
+        location.reload();
     }
 
     render() {
@@ -112,7 +118,7 @@ export default class Import extends React.Component {
                 </div>
                 { this.state.login ?
                     <Button type="raised" text="退出登录"
-                        style={{ "margin": "0 0 25px 0" }} width="100%"
+                        style={{ "margin": "25px 0 0 0" }} width="100%"
                         color="#fff" backgroundColor="#1976d2"
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.logout() } /> :
