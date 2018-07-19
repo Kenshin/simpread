@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Button
  * 
- * @version : 0.0.3
- * @update  : 2018/04/26
+ * @version : 0.0.4
+ * @update  : 2018/06/21
  * @homepage: https://github.com/kenshin/mduikit-ui
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -122,6 +122,23 @@ const cssinjs = () => {
             backgroundRepeat: 'no-repeat',
         },
 
+        font_icon: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+
+            fontSize: '18px',
+            color: '#fff',
+
+            order: -1,
+            display: 'block',
+
+            width: '24px',
+            height: '24px',
+
+            border: 'none',
+        },
+
         circle: {
             borderRadius: '50%',
         },
@@ -151,6 +168,7 @@ export default class Button extends React.Component {
         text    : "",
         disable : false,
         icon    : "",
+        fontIcon: "",
         order   : "before",
         type    : "flat",
         mode    : "primary",
@@ -170,6 +188,7 @@ export default class Button extends React.Component {
         text    : React.PropTypes.string,
         disable : React.PropTypes.bool,
         icon    : React.PropTypes.string,
+        fontIcon: React.PropTypes.string,
         order   : React.PropTypes.oneOf([ "before", "after" ]),
         type    : React.PropTypes.oneOf([ "flat", "raised" ]),
         mode    : React.PropTypes.oneOf([ "primary", "secondary" ]),
@@ -218,7 +237,7 @@ export default class Button extends React.Component {
         current.color = this.state.color;
         current.backgroundColor = this.state.backgroundColor;
 
-        if ( this.props.text == "" && this.props.icon != "" ) {
+        if ( this.props.text == "" && ( this.props.icon != "" || this.props.fontIcon != "" )) {
             delete style.normal_root.minWidth;
             delete style.normal_root.borderRadius;
             style.normal_root.width = style.normal_root.height;
@@ -242,7 +261,13 @@ export default class Button extends React.Component {
             ( style.root = { ...style.root, ...this.props.style } );
 
         this.props.text  == "" && ( style.text.display = "none" );
-        this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+
+        if ( this.props.fontIcon != "" ) {
+            style.icon         = { ...style.font_icon };
+            style.icon.display = "flex";
+            style.icon.color   = style.color;
+        } else this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+
         this.props.order == "after" && ( style.icon.order = 1 );
         this.props.width && ( style.root.width = this.props.width );
 
@@ -261,7 +286,7 @@ export default class Button extends React.Component {
                 { ...events }>
                 <button-mask ref="mask" style={ style.mask }>
                     <button-span style={ style.span }>
-                        <button-icon style={ style.icon }></button-icon>
+                        <button-icon style={ style.icon } dangerouslySetInnerHTML={{__html: this.props.fontIcon }} ></button-icon>
                         <button-text style={ style.text }>{ this.props.text }</button-text>
                     </button-span>
                 </button-mask>

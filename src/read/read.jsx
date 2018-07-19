@@ -14,6 +14,7 @@ import * as ss            from 'stylesheet';
 import {browser}          from 'browser';
 import * as msg           from 'message';
 import * as highlight     from 'highlight';
+import * as run           from 'runtime';
 
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
@@ -40,8 +41,15 @@ const Footer = () => {
 class Read extends React.Component {
 
     componentWillMount() {
+        loadPlugins( "read_start" );
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
+        // hack code
+        //storage.current.fap && $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">' );
+        if ( storage.current.fap ) {
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp" crossorigin="anonymous">' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">' );
+        }
     }
 
     async componentDidMount() {
@@ -83,10 +91,13 @@ class Read extends React.Component {
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
             storage.Statistics( "read" );
+
+            loadPlugins( "read_complete" );
         }
     }
 
     componentWillUnmount() {
+        loadPlugins( "read_end" );
         ss.FontSize( "" );
         $root.removeClass( theme )
              .removeClass( "simpread-font" );
@@ -246,6 +257,19 @@ function getReadRoot() {
 function excludes( $target, exclude ) {
     const tags = storage.pr.Exclude( $target );
     $target.find( tags ).remove();
+}
+
+/**
+ * Load plugins from storage and exec
+ * 
+ * @param {string} state include: plugin.run_at
+ */
+function loadPlugins( state ) {
+    storage.Plugins( () => {
+        storage.option.plugins.forEach( id => {
+            storage.plugins[id] && run.Exec( state, storage.current.site.name, storage.plugins[id] );
+        });
+    });
 }
 
 export { Render, Exist, Exit, Highlight };

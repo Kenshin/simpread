@@ -81,8 +81,8 @@ class TOC extends React.Component {
 function Render( root, $target, theme, hidden ) {
 
     // hack code
-    if ( location.host.includes( "blog.csdn.net"  )) return;
-    if ( location.host.includes( "post.smzdm.com" )) return;
+    //if ( location.host.includes( "blog.csdn.net"  )) return;
+    //if ( location.host.includes( "post.smzdm.com" )) return;
 
     const table = [],
           cls   = hidden ? "toc-bg-hidden" : "";

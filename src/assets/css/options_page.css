@@ -3,7 +3,7 @@
   --text-color: #333;
   --secondary-color: color(#333 alpha(-30%));
   --background-color: #fff;
-  --width: 740px;
+  --width: 835px;
 }
 
 * {
@@ -237,4 +237,120 @@ a {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAV1BMVEUAAAD////ExMS2tra/v7/Dw8O8vLzCwsK5ubnCwsK6urq+vr68vLy9vb29vb28vLy9vb29vb29vb29vb29vb29vb29vb29vb2+vr6+vr69vb29vb29vb2oiyseAAAAHHRSTlMAAQ0OEBETFRYZGkpMg8rLzM7R0tPW19je4uTlotOuxwAAAAFiS0dEAf8CLd4AAAB1SURBVCjPrdLHDoAgEATQUbH33vb/v1PEEnVXT85pM48QCAC/JhloC3AOJiO9wDms8UoZdN9KEHZUuAKEPeUuOGw9h0j36nqPHVi/g19RE9y3NoNenylwcGqqfQiANFMQwbIhAz/lB0z0yHg81Hzvp/jfj7AA4P8P+rUn4dEAAAAASUVORK5CYII=);
     background-position: center;
     background-repeat: no-repeat;
+}
+
+cards {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+card {
+    display: flex;
+    flex-direction: column;
+
+    margin: 6px;
+
+    width: 259px;
+
+    color: rgba(51, 51, 51, .87);
+    background-color: #fff;
+
+    border-radius: 2px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+
+    transition: all .25s ease-out;
+}
+
+card:hover {
+    box-shadow: 0 10px 20px 0 rgba(168,182,191,0.6);
+    transform: translateY(-1px);
+}
+
+card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 196px;
+
+    background-color: #40C4FF;
+}
+
+card-header icon {
+    display: block;
+
+    width: 100px;
+    height: 100px;
+
+    font-size: 80px;
+}
+
+card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 134px;
+
+    padding: 16px;
+}
+
+card-content title {
+    display: block;
+
+    font-size: 20px;
+    font-weight: 500;
+
+    height: 32px;
+    line-height: 32px;
+}
+
+card-content desc {
+    display: block;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    height: 22px;
+    line-height: 22px;
+}
+
+card-content note {
+    display: block;
+
+    margin-top: 16px;
+
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 20px;
+}
+
+card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    width: 100%;
+    height: 52px;
+}
+
+card-footer i {
+    font-size: 16px;
+}
+
+card-empty {
+    width: 100%;
+    padding: 50px;
+}
+
+card-empty a {
+    color: #9b9b9b;
+
+    font-size: 30px;
+    font-weight: 500;
 }
