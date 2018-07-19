@@ -1,8 +1,8 @@
 /*!
  * React Material Design: StateButton
  * 
- * @version : 0.0.1
- * @update  : 2018/04/24
+ * @version : 0.0.2
+ * @update  : 2018/06/27
  * @homepage: https://github.com/kenshin/mduikit-ui
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -121,6 +121,23 @@ const raisedstyle = {
                 border: 'none',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
+            },
+
+            font_icon: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+
+                fontSize: '18px',
+                color: '#fff',
+
+                order: -1,
+                display: 'block',
+
+                width: '24px',
+                height: '24px',
+
+                border: 'none',
             },
 
         }
@@ -298,6 +315,7 @@ export default class StateButton extends React.Component {
         text    : "",
         disable : false,
         icon    : "",
+        fontIcon: "",
         order   : "before",
         type    : "flat",
         mode    : "primary",
@@ -325,6 +343,7 @@ export default class StateButton extends React.Component {
         text    : React.PropTypes.string,
         disable : React.PropTypes.bool,
         icon    : React.PropTypes.string,
+        fontIcon: React.PropTypes.string,
         order   : React.PropTypes.oneOf([ "before", "after" ]),
         type    : React.PropTypes.oneOf([ "flat", "raised" ]),
         mode    : React.PropTypes.oneOf([ "primary", "secondary" ]),
@@ -430,7 +449,12 @@ export default class StateButton extends React.Component {
 
         this.props.style            && ( style.root = { ...style.root, ...this.props.style } );
 
-        this.props.icon  != ""       ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+        if ( this.props.fontIcon != "" ) {
+            style.icon         = { ...style.font_icon };
+            style.icon.display = "flex";
+            style.icon.color   = style.color;
+        } else this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
+        //     this.props.icon  != "" ? ( style.icon.backgroundImage = `url(${this.props.icon})` ) : ( style.icon.display = "none" );
         this.props.text  == ""      && ( style.text.display = "none" );
         this.props.order == "after" && ( style.icon.order = 1 );
         this.props.width            && ( style.root.width = this.props.width );
@@ -463,7 +487,7 @@ export default class StateButton extends React.Component {
                         <SVG state={ this.state.state } { ...this.props }/>
                     </button-svg>
                     <button-span style={ style.span }>
-                        <button-icon style={ style.icon }></button-icon>
+                        <button-icon style={ style.icon }  dangerouslySetInnerHTML={{__html: this.props.fontIcon }} ></button-icon>
                         <button-text style={ style.text }>{ this.props.text }</button-text>
                     </button-span>
                 </button-mask>

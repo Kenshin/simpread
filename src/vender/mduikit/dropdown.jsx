@@ -1,13 +1,13 @@
 /*!
  * React Material Design: Dropdown
  * 
- * @version : 0.0.2
- * @update  : 2018/04/26
+ * @version : 0.0.3
+ * @update  : 2018/06/27
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
  * 
- * @copyright 2017
+ * @copyright 2018
  */
 
 console.log( "==== simpread component: Dropdown ====" )
@@ -36,8 +36,11 @@ const cssinjs = () => {
             hidden : 'none',
             root: {},
             root_normal: {
-                display,
                 position: 'relative',
+
+                display: 'flex',
+                alignItems: 'center',
+
                 margin: 0,
                 padding: 0,
 
@@ -58,7 +61,10 @@ const cssinjs = () => {
                 display,
 
                 margin: 0,
-                padding: "8px 24px 8px 16px",
+                padding: "8px 24px 8px 0",
+
+                width: '100%',
+                textAlign: 'left',
             },
 
             icon: {
@@ -68,7 +74,7 @@ const cssinjs = () => {
                 width: '24px',
                 height: '24px',
 
-                top: '1px',
+                top: '6px',
                 right: 0,
 
                 border: 'none',
