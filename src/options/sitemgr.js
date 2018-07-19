@@ -135,7 +135,7 @@ function controlbarRender() {
                         </group>
                     </group>
                     <group className="lab">
-                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } />
+                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } site={ cur_site } />
                     </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );
@@ -145,14 +145,12 @@ function controlbarRender() {
  * siteeditor Render
  */
 function siteeditorRender( url, site, type ) {
-
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
-
     cur_site   = pr.Safesite( site, type, url );
-
     const doms = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
+    console.log( "current site is ", cur_site )
 }
 
 /**
