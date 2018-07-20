@@ -50,8 +50,9 @@ storage.Read( () => {
 
 // hack code
 window.addEventListener( "sitechanged", event => {
-    const [ url, site, type ] = [ event.data.url, event.data, event.data.target ];
-    siteeditorRender( url, site, type );
+    const [ url, site, type, info ] = [ event.data.site.url, event.data.site, event.data.site.target, event.data.info ];
+    org_site = [ url, site ];
+    siteeditorRender( url, site, type, info );
 });
 
 /**
@@ -156,11 +157,12 @@ function controlbarRender() {
 /**
  * siteeditor Render
  */
-function siteeditorRender( url, site, type ) {
+function siteeditorRender( url, site, type, info ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
     cur_site     = pr.Safesite( site, type, url );
     storage.site = cur_site;
+    info && ( storage.site.info = info );
     const doms   = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
     console.log( "current site is ", cur_site )
