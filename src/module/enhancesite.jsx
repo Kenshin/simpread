@@ -90,6 +90,10 @@ class Sites extends React.Component {
     onChange( value, name ) {
         if ( !$.isEmptyObject( user_sites[value] )) {
             console.log( "adfasdfasdf", user_sites[value] )
+            const temp = user_sites[value];
+            site_info  = JSON.parse(JSON.stringify(temp));
+            delete site_info.site;
+            siteinfoRender();
         } else new Notify().Render( 2, "获取站点信息时发生了错误，请重新绑定获取。" );
     }
 
