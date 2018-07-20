@@ -78,6 +78,9 @@ function controlbarRender() {
         remove = () => {
             new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete" ));
         },
+        update = () => {
+            save( "update" );
+        },
         save = type => {
             if ( !cur_site ) {
                 new Notify().Render( 2, "请选择一个站点源。" );
@@ -135,7 +138,7 @@ function controlbarRender() {
                         </group>
                     </group>
                     <group className="lab">
-                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } />
+                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } onChange={()=>update()} />
                     </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );

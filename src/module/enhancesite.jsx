@@ -166,6 +166,26 @@ export default class Import extends React.Component {
         }).fail( fail );
     }
 
+    insert( method, site ) {
+        loadingState( "init" );
+        $.ajax({
+            url     : getService( "/sites/service/" + method ),
+            type    : "POST",
+            data    : site,
+        }).done( ( result, textStatus, jqXHR ) => {
+            loadingState( "success", "已提交" );
+            if ( result.code == 201 ) {
+                storage.site.info.id     = result.data.id;
+                storage.site.info.create = result.data.create;
+                storage.site.info.update = result.data.update;
+                delete storage.site.info.global;
+                delete storage.site.info.release;
+                siteinfoRender();
+                this.props.onChange && this.props.onChange();
+            } else loadingState( "faile", "提交失败，请稍后再试！" );
+        }).fail( fail );
+    }
+
     update() {
         $.isEmptyObject( cur_user ) && new Notify().Render({ mode: "snackbar", content: "需要先登录到服务器后才能提交！", action: "登录", cancel: "取消", callback: type => {
             type == "action" && this.login();
@@ -177,12 +197,22 @@ export default class Import extends React.Component {
         }
         if ( !storage.site.info ) {
             new Notify().Render( "上传站点时需要录入一些必要信息。" );
-            site_info = {id: run.ID("site"), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
+            site_info = {id: "new::" + run.ID("site"), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
             storage.site.info = site_info;
             siteinfoRender();
             return;
+        } else {
+            // TO-DO site_info verify
+            const temp   = JSON.parse(JSON.stringify(storage.site)),
+                  update = temp.info,
+                  method = update.id.startsWith( "new::" ) ? "add" : "update";
+            delete temp.info;
+            update.uid   = cur_user.uid;
+            update.id    = update.id.replace( /^new::/, "" );
+            update.site  = temp;
+            this.insert( method, update );
         }
-        console.log( "adfasasdf", storage.site.info )
+        console.log( "current site is ", storage.site.info )
     }
 
     logout() {
