@@ -46,7 +46,13 @@ storage.Read( () => {
         $( "body" ).removeAttr( "style" );
     }});
     console.log( "current puread object is   ", pr )
-}); 
+});
+
+// hack code
+window.addEventListener( "sitechanged", event => {
+    const [ url, site, type ] = [ event.data.url, event.data, event.data.target ];
+    siteeditorRender( url, site, type );
+});
 
 /**
  * navigation Render
@@ -153,9 +159,9 @@ function controlbarRender() {
 function siteeditorRender( url, site, type ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
-    cur_site   = pr.Safesite( site, type, url );
+    cur_site     = pr.Safesite( site, type, url );
     storage.site = cur_site;
-    const doms = <Editor site={ cur_site } state={ state } />;
+    const doms   = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
     console.log( "current site is ", cur_site )
 }
