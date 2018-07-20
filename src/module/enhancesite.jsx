@@ -226,7 +226,7 @@ export default class Import extends React.Component {
                 delete storage.site.info.global;
                 delete storage.site.info.release;
                 siteinfoRender();
-                this.props.onChange && this.props.onChange();
+                this.props.onUpdate && this.props.onUpdate();
             } else loadingState( "faile", "提交失败，请稍后再试！" );
         }).fail( fail );
     }

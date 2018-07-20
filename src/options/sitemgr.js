@@ -141,7 +141,7 @@ function controlbarRender() {
                         <div className="sites"></div>
                     </group>
                     <group className="lab">
-                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } onChange={()=>update()} />
+                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } onUpdate={()=>update()} />
                     </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );
