@@ -209,7 +209,7 @@ export default class Import extends React.Component {
                         color="#fff" backgroundColor="#FF5252"
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.login() } /> }
-                <Button type="raised" text="提交新站到服务器"
+                <Button type="raised" text="提交到服务器"
                     style={{ "margin": "25px 0 0 0" }} width="100%"
                     color="#fff" backgroundColor="#4CAF50"
                     waves="md-waves-effect md-waves-button"
