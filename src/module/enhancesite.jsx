@@ -7,7 +7,7 @@ import Dropdown    from 'dropdown';
 import {storage}   from 'storage';
 import * as run    from 'runtime';
 
-let notify, secret, cur_user = {}, ori_user = {}, site_info = {};
+let notify, secret, cur_user = {}, ori_user = {}, site_info = {}, user_sites = {};
 
 const category = [
     {name: "科技媒体", value: "科技媒体"},
@@ -55,11 +55,52 @@ function fail( xhr, textStatus, error ) {
 }
 
 /**
+ * Get sites {name,value} items
+ * 
+ * @param {object} sites object
+ */
+function getSites( sites ) {
+    let items = [];
+    Object.keys( sites ).forEach( idx => {
+        const desc = sites[idx].global == true ? "" : "（未审核）"
+        items.push({ name: sites[idx].title + desc, value: idx });
+    })
+    return items;
+}
+
+/**
  * Site info Render
  */
 function siteinfoRender() {
     $( ".siteinfo" ).removeClass( 'hide' ).empty();
     ReactDOM.render( <SiteInfo />, $( ".siteinfo" )[0] );
+}
+
+/**
+ * Sites Render
+ */
+function sitesRender() {
+    $( ".property .sites" ).empty();
+    $( ".property .sites" ).parent().removeAttr("style");
+    ReactDOM.render( <Sites sites={ getSites( user_sites ) } />, $( ".property .sites" )[0] );
+}
+
+class Sites extends React.Component {
+
+    onChange( value, name ) {
+        if ( !$.isEmptyObject( user_sites[value] )) {
+            console.log( "adfasdfasdf", user_sites[value] )
+        } else new Notify().Render( 2, "获取站点信息时发生了错误，请重新绑定获取。" );
+    }
+
+    render() {
+        const items = this.props.sites;
+        return (
+            items.length > 0 ? <div>
+                <Dropdown name={ `共计 ${items.length} 条数据，下拉查看详细信息` } items={ items } width="100%" onChange={ (v,n)=>this.onChange(v,n) } />
+            </div> : <div></div>
+        )
+    }
 }
 
 class SiteInfo extends React.Component {
@@ -157,9 +198,9 @@ export default class Import extends React.Component {
             type    : "POST",
         }).done( ( result, textStatus, jqXHR ) => {
             loadingState( "success", "获取当前用户全部站点" );
-            console.log( "asdfadfadfs", result )
             if ( result.code == 200 ) {
-                // TO-DO
+                user_sites = result.data;
+                sitesRender();
             } else if ( result.code == 404 ) {
                 loadingState( "faile", "当前用户没有任何站点，可以先新建 或 上传一个站点。" );
             } else loadingState( "faile", "获取当前用户的站点获取失败，请稍后再试！" );
