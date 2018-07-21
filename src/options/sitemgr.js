@@ -55,6 +55,14 @@ window.addEventListener( "sitechanged", event => {
     siteeditorRender( url, site, type, info );
 });
 
+// hack code
+function changeSiteinfo( info ) {
+    const evt  = document.createEvent("Event");
+    evt.data   = { info };
+    evt.initEvent( "siteinfochanged", true, false );
+    window.dispatchEvent( evt );
+}
+
 /**
  * navigation Render
  */
@@ -74,6 +82,7 @@ function controlbarRender() {
             const site = pr.Getsite( type, value );
             org_site   = [ site[0], site[1] ];
             site.length > 0 && siteeditorRender( site[0], site[1], type );
+            site.length > 0 && changeSiteinfo( site[1].info );
         },
         add   = () => {
             const msg = cur_site ? "是否覆盖当前站点并新建立一个？" : "是否建立一个新站？";

@@ -33,6 +33,12 @@ function loadingState( state, str ) {
     }
 }
 
+// hack code
+window.addEventListener( "siteinfochanged", event => {
+    site_info = event.data.info;
+    siteinfoRender();
+});
+
 /**
  * Generate ID
  */
@@ -93,8 +99,12 @@ function siteinfoEmptyRender() {
  * Site info Render
  */
 function siteinfoRender() {
-    $( ".siteinfo" ).removeClass( 'hide' ).empty();
-    ReactDOM.render( <SiteInfo />, $( ".siteinfo" )[0] );
+    if ( site_info == undefined || $.isEmptyObject( site_info ) ) {
+        $( ".siteinfo" ).addClass( 'hide' ).empty();
+    } else {
+        $( ".siteinfo" ).removeClass( 'hide' ).empty();
+        ReactDOM.render( <SiteInfo />, $( ".siteinfo" )[0] );
+    }
 }
 
 /**
