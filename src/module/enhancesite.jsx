@@ -190,7 +190,7 @@ class SiteInfo extends React.Component {
                     />
                 </div>
                 <div className="row box-large">
-                    <TextField value={ site_info.global ? "当前站点已经审核通过" : "当前站点未经审核" }
+                    <TextField value={ site_info.global == true || site_info.global == "true" ? "当前站点已经审核通过" : "当前站点未经审核" }
                         multi={ false } floatingtext="是否已经审核" disable={true}
                     />
                     <span className="space"></span>
