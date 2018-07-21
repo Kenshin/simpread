@@ -109,6 +109,15 @@ function controlbarRender() {
                   site= pr.Cleansite({ ...cur_site });
             let flag  = -1;
 
+            if ( site.info && state != "remote" && ( type == "update" || type == "delete" )) {
+                if ( site.info.id.substr(0,8) == storage.user.uid.substr(0,8) ) {
+                    setTimeout( ()=>new Notify().Render( 2, "当前站有远程数据，请保持同步更新。" ), 500 );
+                } else {
+                    // other user site
+                    // TO-DO
+                }
+            }
+
             if ( type == "update" ) {
                 pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
                 org_site = [ url, site ];
