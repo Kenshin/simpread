@@ -34,6 +34,13 @@ function loadingState( state, str ) {
 }
 
 /**
+ * Generate ID
+ */
+function generateID() {
+    return cur_user.uid.substr( 0, 8 ) + "-" + run.ID( "site" );
+}
+
+/**
  * Get serivce url
  * 
  * @param {string} method name
@@ -294,7 +301,7 @@ export default class Import extends React.Component {
         }
         if ( !storage.site.info ) {
             new Notify().Render( "上传站点时需要录入一些必要信息。" );
-            site_info = {id: "new::" + run.ID("site"), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
+            site_info = {id: "new::" + generateID(), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
             storage.site.info = site_info;
             siteinfoRender();
             return;
