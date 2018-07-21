@@ -129,8 +129,6 @@ class Sites extends React.Component {
             }
             evt.initEvent( "sitechanged", true, false );
             window.dispatchEvent( evt );
-
-
         } else new Notify().Render( 2, "获取站点信息时发生了错误，请重新绑定获取。" );
     }
 
