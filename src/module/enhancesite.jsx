@@ -306,7 +306,7 @@ export default class Import extends React.Component {
             siteinfoRender();
             return;
         } else {
-            // TO-DO site_info verify
+            site_info.title == "" && new Notify().Render( 2, "请最好填入当作站点的名称，这样能加快审核进度。" );
             const temp   = JSON.parse(JSON.stringify(storage.site)),
                   update = temp.info,
                   method = update.id.startsWith( "new::" ) ? "add" : "update";
