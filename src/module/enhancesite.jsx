@@ -101,6 +101,7 @@ function siteinfoRender() {
  * Sites Render
  */
 function sitesRender() {
+    console.log( "current user all sites ", user_sites )
     $( ".property .sites" ).empty();
     if ( $.isEmptyObject( user_sites ) ) {
         $( ".property .sites" ).parent().hide();
@@ -258,12 +259,17 @@ export default class Import extends React.Component {
         }).done( ( result, textStatus, jqXHR ) => {
             loadingState( "success", "已提交" );
             if ( result.code == 201 ) {
+
                 storage.site.info.id     = result.data.id;
                 storage.site.info.create = result.data.create;
                 storage.site.info.update = result.data.update;
                 delete storage.site.info.global;
                 delete storage.site.info.release;
                 siteinfoRender();
+
+                user_sites[result.data.id] = result.data;
+                sitesRender();
+
                 this.props.onUpdate && this.props.onUpdate( "update" );
             } else loadingState( "faile", "提交失败，请稍后再试！" );
         }).fail( fail );
