@@ -94,10 +94,10 @@ function controlbarRender() {
         remove = () => {
             new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete" ));
         },
-        update = ( type ) => {
-            save( type );
+        remote = ( type ) => {
+            save( type, "remote" );
         },
-        save = type => {
+        save = ( type, state ) => {
             if ( !cur_site ) {
                 new Notify().Render( 2, "请选择一个站点源。" );
                 return;
@@ -162,7 +162,7 @@ function controlbarRender() {
                         <div className="sites"></div>
                     </group>
                     <group className="lab">
-                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } onUpdate={ t=>update(t)} />
+                        <Import uid={ storage.user.uid } onUpdate={ t=>remote(t)} />
                     </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );
