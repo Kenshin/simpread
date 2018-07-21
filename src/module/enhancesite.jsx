@@ -69,6 +69,20 @@ function getSites( sites ) {
 }
 
 /**
+ * Editor Plugin Empty Render
+ */
+function editorEmptyRender() {
+    $( ".preview" ).html( `<div class="empty"><span class="icon"></span><span>当前未选择任何适配站点</span></div>` );
+}
+
+/**
+ * Site info Empty Render
+ */
+function siteinfoEmptyRender() {
+    $( ".siteinfo" ).addClass( 'hide' );
+}
+
+/**
  * Site info Render
  */
 function siteinfoRender() {
@@ -81,8 +95,12 @@ function siteinfoRender() {
  */
 function sitesRender() {
     $( ".property .sites" ).empty();
-    $( ".property .sites" ).parent().removeAttr("style");
-    ReactDOM.render( <Sites sites={ getSites( user_sites ) } />, $( ".property .sites" )[0] );
+    if ( $.isEmptyObject( user_sites ) ) {
+        $( ".property .sites" ).parent().hide();
+    } else {
+        $( ".property .sites" ).parent().removeAttr("style");
+        ReactDOM.render( <Sites sites={ getSites( user_sites ) } />, $( ".property .sites" )[0] );
+    }
 }
 
 class Sites extends React.Component {
@@ -214,7 +232,9 @@ export default class Import extends React.Component {
         }).done( ( result, textStatus, jqXHR ) => {
             loadingState( "success", "获取当前用户全部站点" );
             if ( result.code == 200 ) {
-                user_sites = result.data;
+                result.data.forEach( item => {
+                    user_sites[item.id] = item;
+                });
                 sitesRender();
             } else if ( result.code == 404 ) {
                 loadingState( "faile", "当前用户没有任何站点，可以先新建 或 上传一个站点。" );
@@ -237,8 +257,29 @@ export default class Import extends React.Component {
                 delete storage.site.info.global;
                 delete storage.site.info.release;
                 siteinfoRender();
-                this.props.onUpdate && this.props.onUpdate();
+                this.props.onUpdate && this.props.onUpdate( "update" );
             } else loadingState( "faile", "提交失败，请稍后再试！" );
+        }).fail( fail );
+    }
+
+    delete( id ) {
+        loadingState( "init" );
+        $.ajax({
+            url     : getService( "/sites/service/delete/" + id ),
+            type    : "POST",
+            data    : { uid: cur_user.uid },
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( result.code == 204 ) {
+                loadingState( "success", "已删除" );
+                delete user_sites[site_info.id];
+                sitesRender();
+                editorEmptyRender();
+                siteinfoEmptyRender();
+                this.props.onUpdate && this.props.onUpdate( "safe" );
+                new Notify().Render({ mode: "snackbar", content: "是否也删除本地站？", action: "确认", cancel: "取消", callback: type => {
+                    type != "cancel"  && this.props.onUpdate && this.props.onUpdate( "delete"  );
+                }});
+            } else loadingState( "faile", "删除失败，请稍后再试！" );
         }).fail( fail );
     }
 
@@ -271,6 +312,21 @@ export default class Import extends React.Component {
         console.log( "current site is ", storage.site.info )
     }
 
+    remove() {
+        if ( !storage.site || $.isEmptyObject( site_info )) {
+            new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
+            return;
+        }
+        if ( site_info.release == true || site_info.global == true ) {
+            new Notify().Render( "当前站点已审核通过，无法删除，请联络管理员。" );
+            return;
+        }
+        new Notify().Render({ mode: "snackbar", content: "确定（从服务器上）删除当前站点？", action: "确认", cancel: "取消", callback: type => {
+            if ( type == "cancel" ) return;
+            this.delete( site_info.id );
+        }});
+    }
+
     logout() {
         location.reload();
     }
@@ -300,6 +356,12 @@ export default class Import extends React.Component {
                     color="#fff" backgroundColor="#4CAF50"
                     waves="md-waves-effect md-waves-button"
                     onClick={ ()=>this.update() } />
+                { this.state.login && 
+                <Button type="raised" text="删除当前站点"
+                    style={{ "margin": "25px 0 0 0" }} width="100%"
+                    color="#fff" backgroundColor="#1976d2"
+                    waves="md-waves-effect md-waves-button"
+                    onClick={ ()=>this.remove() } />}
             </div>
         )
     }
