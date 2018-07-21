@@ -43,7 +43,7 @@ window.addEventListener( "siteinfochanged", event => {
  * Generate ID
  */
 function generateID() {
-    return cur_user.uid.substr( 0, 8 ) + "-" + run.ID( "site" );
+    return storage.user.uid.substr( 0, 8 ) + "-" + run.ID( "site" );
 }
 
 /**
@@ -305,10 +305,13 @@ export default class Import extends React.Component {
     }
 
     update() {
-        $.isEmptyObject( cur_user ) && new Notify().Render({ mode: "snackbar", content: "需要先登录到服务器后才能提交！", action: "登录", cancel: "取消", callback: type => {
-            type == "action" && this.login();
+        if ( $.isEmptyObject( cur_user ) ) {
+            new Notify().Render({ mode: "snackbar", content: "需要先登录到服务器后才能提交！", action: "登录", cancel: "取消", callback: type => {
+                type == "action" && this.login();
+                return;
+            }});
             return;
-        }});
+        }
         if ( !storage.site ) {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
