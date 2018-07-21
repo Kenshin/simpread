@@ -304,9 +304,9 @@ export default class Import extends React.Component {
             site_info = {id: "new::" + generateID(), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
             storage.site.info = site_info;
             siteinfoRender();
-            return;
+        } else if ( site_info.title == "" ) {
+            new Notify().Render( 2, "请最好填入当作站点的名称。" )
         } else {
-            site_info.title == "" && new Notify().Render( 2, "请最好填入当作站点的名称，这样能加快审核进度。" );
             const temp   = JSON.parse(JSON.stringify(storage.site)),
                   update = temp.info,
                   method = update.id.startsWith( "new::" ) ? "add" : "update";
@@ -349,12 +349,12 @@ export default class Import extends React.Component {
                 </div>
                 { this.state.login ?
                     <Button type="raised" text="退出登录"
-                        style={{ "margin": "25px 0 0 0" }} width="100%"
+                        style={{ "margin": "0" }} width="100%"
                         color="#fff" backgroundColor="#1976d2"
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.logout() } /> :
                     <Button type="raised" text="登录到服务器"
-                        style={{ "margin": "25px 0 0 0" }} width="100%"
+                        style={{ "margin": "0" }} width="100%"
                         color="#fff" backgroundColor="#FF5252"
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.login() } /> }
