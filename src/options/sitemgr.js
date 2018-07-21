@@ -85,8 +85,8 @@ function controlbarRender() {
         remove = () => {
             new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete" ));
         },
-        update = () => {
-            save( "update" );
+        update = ( type ) => {
+            save( type );
         },
         save = type => {
             if ( !cur_site ) {
@@ -101,6 +101,11 @@ function controlbarRender() {
             let flag  = -1;
 
             if ( type == "update" ) {
+                pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
+                org_site = [ url, site ];
+                flag = 0;
+            } else if ( type == "safe" ) {
+                delete site.info;
                 pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
                 org_site = [ url, site ];
                 flag = 0;
@@ -148,7 +153,7 @@ function controlbarRender() {
                         <div className="sites"></div>
                     </group>
                     <group className="lab">
-                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } onUpdate={()=>update()} />
+                        <Import uid={ "ccf253lu-wxq1-gm47-o9sv-yg38dxc5h9qv" } onUpdate={ t=>update(t)} />
                     </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );
