@@ -341,11 +341,11 @@ export default class Import extends React.Component {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
         }
-        if ( site_info.release == true || site_info.global == true ) {
+        if ( site_info.release == true && cur_user.rule != 0 ) {
             new Notify().Render( "当前站点已审核通过，无法删除，请联络管理员。" );
             return;
         }
-        new Notify().Render({ mode: "snackbar", content: "确定（从服务器上）删除当前站点？", action: "确认", cancel: "取消", callback: type => {
+        new Notify().Render({ mode: "snackbar", content: "确定（从服务器上）删除（包括以审核的表）？", action: "确认", cancel: "取消", callback: type => {
             if ( type == "cancel" ) return;
             this.delete( site_info.id );
         }});
