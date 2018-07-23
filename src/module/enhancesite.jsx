@@ -228,11 +228,11 @@ export default class Import extends React.Component {
         }).done( ( result, textStatus, jqXHR ) => {
             if ( result.code == 200 ) {
                 loadingState( "success", "登录" );
-                this.setState({ login: true });
                 cur_user = result.data;
                 ori_user = $.extend( true, {}, cur_user );
                 console.log( "current user is ", cur_user )
                 this.getSites( this.props.uid, "all" );
+                this.setState({ login: true });
             } else if ( result.code == 401 ) {
                 loadingState( "faile", "管理员登陆失败，请验证管理员密匙！" );
             } else loadingState( "faile", "获取后台服务失败，请稍后再试！" );
@@ -351,6 +351,36 @@ export default class Import extends React.Component {
         }});
     }
 
+    permit() {
+        if ( !storage.site || $.isEmptyObject( site_info )) {
+            new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
+            return;
+        }
+        if ( site_info.global == true || site_info.global == "true" ) {
+            new Notify().Render( "当前站点已经审核通过，请勿重复提交" );
+            return;
+        }
+        new Notify().Render( "snackbar", "是否确认审核通过？", "确认", () => {
+            loadingState( "init" );
+            $.ajax({
+                url     : getService( "/sites/service/permit/" + site_info.id ),
+                type    : "GET",
+            }).done( ( result, textStatus, jqXHR ) => {
+                if ( result.code == 201 ) {
+                    loadingState( "success", "当前站点已审核" );
+                    console.log( result.data )
+
+                    user_sites[result.data.id] = result.data;
+                    sitesRender();
+
+                    site_info         = result.data;
+                    storage.site.info = site_info;
+                    siteinfoRender();
+                } else loadingState( "faile", "删除失败，请稍后再试！" );
+            }).fail( fail );
+        });
+    }
+
     logout() {
         location.reload();
     }
@@ -380,6 +410,12 @@ export default class Import extends React.Component {
                     color="#fff" backgroundColor="#4CAF50"
                     waves="md-waves-effect md-waves-button"
                     onClick={ ()=>this.update() } />
+                { this.state.login && cur_user.rule == 0 && 
+                <Button type="raised" text="审核当前站点"
+                    style={{ "margin": "25px 0 0 0" }} width="100%"
+                    color="#fff" backgroundColor="#3F51B5"
+                    waves="md-waves-effect md-waves-button"
+                    onClick={ ()=>this.permit() } />}
                 { this.state.login && 
                 <Button type="raised" text="删除当前站点"
                     style={{ "margin": "25px 0 0 0" }} width="100%"
