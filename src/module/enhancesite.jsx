@@ -322,7 +322,8 @@ export default class Import extends React.Component {
         }
         if ( !storage.site.info ) {
             new Notify().Render( "上传站点时需要录入一些必要信息。" );
-            site_info = {id: "new::" + generateID(), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
+            site_info         = { domain: run.ID( "site" ), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
+            site_info.id      = "new::" + storage.user.uid.substr( 0, 8 ) + "-" + site_info.domain;
             storage.site.info = site_info;
             siteinfoRender();
         } else if ( site_info.title == "" ) {
