@@ -260,6 +260,10 @@ export default class Import extends React.Component {
 
     insert( method, site ) {
         loadingState( "init" );
+        if ( site.id.substr(0,8) != cur_user.uid.substr(0,8) ) {
+            new Notify().Render( 2, "注意：当前站并不是（管理员）的站。" );
+            delete site.uid;
+        }
         $.ajax({
             url     : getService( "/sites/service/" + method ),
             type    : "POST",
