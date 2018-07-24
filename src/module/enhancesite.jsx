@@ -309,6 +309,16 @@ export default class Import extends React.Component {
     }
 
     update() {
+        const insert = () => {
+            const temp   = JSON.parse(JSON.stringify(storage.site)),
+                  update = temp.info,
+                  method = update.id.startsWith( "new::" ) ? "add" : "update";
+            delete temp.info;
+            update.uid   = cur_user.uid;
+            update.id    = update.id.replace( /^new::/, "" );
+            update.site  = temp;
+            this.insert( method, update );
+        }
         if ( $.isEmptyObject( cur_user ) ) {
             new Notify().Render({ mode: "snackbar", content: "需要先登录到服务器后才能提交！", action: "登录", cancel: "取消", callback: type => {
                 type == "action" && this.login();
@@ -329,14 +339,13 @@ export default class Import extends React.Component {
         } else if ( site_info.title == "" ) {
             new Notify().Render( 2, "请最好填入当作站点的名称。" )
         } else {
-            const temp   = JSON.parse(JSON.stringify(storage.site)),
-                  update = temp.info,
-                  method = update.id.startsWith( "new::" ) ? "add" : "update";
-            delete temp.info;
-            update.uid   = cur_user.uid;
-            update.id    = update.id.replace( /^new::/, "" );
-            update.site  = temp;
-            this.insert( method, update );
+            if ( !storage.site.info.id.startsWith( "new::" ) && storage.site.info.id.substr(0,8) != cur_user.uid.substr(0,8) ) {
+                new Notify().Render({ mode: "snackbar", content: "当前站点并不是由你建立，确定修改？", action: "确定", cancel: "取消", callback: type => {
+                    if ( type == "cancel" ) return;
+                    site_info.id = "new::" + storage.user.uid.substr( 0, 8 ) + "-" + site_info.domain;
+                    insert();
+                }});
+            } else insert();
         }
         console.log( "current site is ", storage.site.info )
     }
