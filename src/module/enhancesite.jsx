@@ -40,13 +40,6 @@ window.addEventListener( "siteinfochanged", event => {
 });
 
 /**
- * Generate ID
- */
-function generateID() {
-    return storage.user.uid.substr( 0, 8 ) + "-" + run.ID( "site" );
-}
-
-/**
  * Get serivce url
  * 
  * @param {string} method name
