@@ -184,6 +184,7 @@ function siteeditorRender( url, site, type, info ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
     cur_site     = pr.Safesite( site, type, url );
+    // hack code
     storage.site = cur_site;
     info && ( storage.site.info = info );
     const doms   = <Editor site={ cur_site } state={ state } />;
