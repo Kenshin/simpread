@@ -323,6 +323,10 @@ export default class Import extends React.Component {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
         }
+        if ( storage.remote.name == "tempread::" ) {
+            new Notify().Render( 2, "新建的站需要保存刷新后才能提交！" );
+            return;
+        }
         if ( !storage.remote.info ) {
             new Notify().Render( "上传站点时需要录入一些必要信息。" );
             site_info         = { domain: run.ID( "site" ), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
