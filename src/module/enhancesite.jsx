@@ -293,9 +293,9 @@ export default class Import extends React.Component {
                 sitesRender();
                 editorEmptyRender();
                 siteinfoEmptyRender();
-                this.props.onUpdate && this.props.onUpdate( "safe" );
+                //this.props.onUpdate && this.props.onUpdate( "safe" );
                 new Notify().Render({ mode: "snackbar", content: "是否也删除本地站？", action: "确认", cancel: "取消", callback: type => {
-                    type != "cancel"  && this.props.onUpdate && this.props.onUpdate( "delete"  );
+                    type != "cancel"  && this.props.onUpdate && this.props.onUpdate( "delete" );
                 }});
             } else loadingState( "faile", "删除失败，请稍后再试！" );
         }).fail( fail );
