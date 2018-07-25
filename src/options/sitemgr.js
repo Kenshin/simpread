@@ -119,7 +119,7 @@ function controlbarRender() {
             }
 
             if ( type == "update" && state == "remote" ) {
-                site.info = { ...storage.site.info };
+                site.info = { ...storage.remote.info };
                 if ( cur_site.target == "global" ) {
                     pr.Updatesite( "custom", org_site[0], [ url, pr.Cleansite(site) ] );
                 } else if ( cur_site.target == "local" ) {
@@ -203,9 +203,11 @@ function siteeditorRender( url, site, type, info ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
     cur_site     = pr.Safesite( site, type, url );
-    // hack code
-    storage.site = JSON.parse(JSON.stringify( cur_site ));
-    info && ( storage.site.info = info );
+
+    // set remote site( include info )
+    storage.remote = JSON.parse(JSON.stringify( cur_site ));
+    info && ( storage.remote.info = info );
+
     const doms   = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
     console.log( "current site is ", cur_site )

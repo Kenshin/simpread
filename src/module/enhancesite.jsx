@@ -265,11 +265,11 @@ export default class Import extends React.Component {
             loadingState( "success", "已提交" );
             if ( result.code == 201 ) {
 
-                storage.site.info.id     = result.data.id;
-                storage.site.info.create = result.data.create;
-                storage.site.info.update = result.data.update;
-                delete storage.site.info.global;
-                delete storage.site.info.release;
+                storage.remote.info.id     = result.data.id;
+                storage.remote.info.create = result.data.create;
+                storage.remote.info.update = result.data.update;
+                delete storage.remote.info.global;
+                delete storage.remote.info.release;
                 siteinfoRender();
 
                 user_sites[result.data.id] = result.data;
@@ -303,7 +303,7 @@ export default class Import extends React.Component {
 
     update() {
         const insert = () => {
-            const temp   = JSON.parse(JSON.stringify(storage.site)),
+            const temp   = JSON.parse(JSON.stringify(storage.remote)),
                   update = temp.info,
                   method = update.id.startsWith( "new::" ) ? "add" : "update";
             delete temp.info;
@@ -319,20 +319,20 @@ export default class Import extends React.Component {
             }});
             return;
         }
-        if ( !storage.site ) {
+        if ( !storage.remote ) {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
         }
-        if ( !storage.site.info ) {
+        if ( !storage.remote.info ) {
             new Notify().Render( "上传站点时需要录入一些必要信息。" );
             site_info         = { domain: run.ID( "site" ), title: "", category: "其它", create: "<无需填写，自动生成>", update: "", global: false, release: false, color: "#fff", bgColor: "#00bcd4" };
             site_info.id      = "new::" + storage.user.uid.substr( 0, 8 ) + "-" + site_info.domain;
-            storage.site.info = site_info;
+            storage.remote.info = site_info;
             siteinfoRender();
         } else if ( site_info.title == "" ) {
             new Notify().Render( 2, "请最好填入当作站点的名称。" )
         } else {
-            if ( !storage.site.info.id.startsWith( "new::" ) && storage.site.info.id.substr(0,8) != cur_user.uid.substr(0,8) ) {
+            if ( !storage.remote.info.id.startsWith( "new::" ) && storage.remote.info.id.substr(0,8) != cur_user.uid.substr(0,8) ) {
                 new Notify().Render({ mode: "snackbar", content: "当前站点并不是由你建立，确定修改？", action: "确定", cancel: "取消", callback: type => {
                     if ( type == "cancel" ) return;
                     site_info.id = "new::" + storage.user.uid.substr( 0, 8 ) + "-" + site_info.domain;
@@ -340,11 +340,11 @@ export default class Import extends React.Component {
                 }});
             } else insert();
         }
-        console.log( "current site is ", storage.site.info )
+        console.log( "current site is ", storage.remote.info )
     }
 
     remove() {
-        if ( !storage.site || $.isEmptyObject( site_info )) {
+        if ( !storage.remote || $.isEmptyObject( site_info )) {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
         }
@@ -359,7 +359,7 @@ export default class Import extends React.Component {
     }
 
     permit() {
-        if ( !storage.site || $.isEmptyObject( site_info )) {
+        if ( !storage.remote || $.isEmptyObject( site_info )) {
             new Notify().Render( "当前没有选择站点，请通过 新建 或选择一个本地站点。" );
             return;
         }
@@ -380,8 +380,8 @@ export default class Import extends React.Component {
                     user_sites[result.data.id] = result.data;
                     sitesRender();
 
-                    site_info         = result.data;
-                    storage.site.info = site_info;
+                    site_info           = result.data;
+                    storage.remote.info = site_info;
                     siteinfoRender();
                 } else loadingState( "faile", "删除失败，请稍后再试！" );
             }).fail( fail );
