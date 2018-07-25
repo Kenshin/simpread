@@ -92,7 +92,7 @@ function controlbarRender() {
             });
         },
         remove = () => {
-            new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete" ));
+            new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete", "remote" ));
         },
         remote = ( type ) => {
             save( type, "remote" );
@@ -118,15 +118,34 @@ function controlbarRender() {
                 }
             }
 
-            if ( type == "update" ) {
+            if ( type == "update" && state == "remote" ) {
+                site.info = { ...storage.site.info };
+                if ( cur_site.target == "global" ) {
+                    pr.Updatesite( "custom", org_site[0], [ url, pr.Cleansite(site) ] );
+                } else if ( cur_site.target == "local" ) {
+                    pr.Deletesite( "local", org_site[0], result => {
+                        pr.Updatesite( "custom", org_site[0], [ url, pr.Cleansite(site) ] );
+                    });
+                }
+                org_site = [ url, site ];
+                flag = 0;
+                setTimeout( () => new Notify().Render( 2, "当前站提交时会自动增加到「自定义适配源」！" ), 500 );
+            } else if ( type == "delete" && state == "remote" ) {
+                pr.Deletesite( "custom", org_site[0], result => {
+                    result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
+                });
+            } else if ( type == "update" ) {
                 pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
                 org_site = [ url, site ];
                 flag = 0;
+            /*
             } else if ( type == "safe" ) {
                 delete site.info;
                 pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
                 org_site = [ url, site ];
                 flag = 0;
+            }
+            */
             } else {
                pr.Deletesite( key, org_site[0], result => {
                    result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
@@ -185,7 +204,7 @@ function siteeditorRender( url, site, type, info ) {
         $( ".custom .preview" ).empty();
     cur_site     = pr.Safesite( site, type, url );
     // hack code
-    storage.site = cur_site;
+    storage.site = JSON.parse(JSON.stringify( cur_site ));
     info && ( storage.site.info = info );
     const doms   = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
