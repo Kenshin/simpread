@@ -92,7 +92,7 @@ function controlbarRender() {
             });
         },
         remove = () => {
-            new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete", "remote" ));
+            new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete" ));
         },
         remote = ( type ) => {
             save( type, "remote" );
@@ -109,7 +109,7 @@ function controlbarRender() {
                   site= pr.Cleansite({ ...cur_site });
             let flag  = -1;
 
-            if ( site.info && state != "remote" && site.target == "custom" &&( type == "update" || type == "delete" )) {
+            if ( site.info && state != "remote" && cur_site.target == "custom" &&( type == "update" || type == "delete" )) {
                 if ( site.info.id.substr(0,8) == storage.user.uid.substr(0,8) ) {
                     setTimeout( ()=>new Notify().Render( 2, "当前站有远程数据，请保持同步更新。" ), 500 );
                 }
