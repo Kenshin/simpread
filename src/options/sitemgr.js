@@ -204,6 +204,7 @@ function siteeditorRender( url, site, type, info ) {
     // set remote site( include info )
     storage.remote = JSON.parse(JSON.stringify( cur_site ));
     info && ( storage.remote.info = info );
+    changeSiteinfo( storage.remote.info );
 
     const doms   = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
