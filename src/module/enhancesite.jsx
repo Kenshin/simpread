@@ -310,6 +310,7 @@ export default class Import extends React.Component {
             update.uid   = cur_user.uid;
             update.id    = update.id.replace( /^new::/, "" );
             update.site  = temp;
+            delete update.site.target;
             this.insert( method, update );
         }
         if ( $.isEmptyObject( cur_user ) ) {
