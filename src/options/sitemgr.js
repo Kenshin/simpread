@@ -129,7 +129,7 @@ function controlbarRender() {
                 }
                 org_site = [ url, site ];
                 flag = 0;
-                setTimeout( () => new Notify().Render( 2, "当前站提交时会自动增加到「自定义适配源」！" ), 500 );
+                setTimeout( () => new Notify().Render( 2, "当前站提交时会自动增加到「第三方适配源」！" ), 500 );
             } else if ( type == "delete" && state == "remote" ) {
                 pr.Deletesite( "custom", org_site[0], result => {
                     result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
