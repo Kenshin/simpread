@@ -46,7 +46,7 @@ window.addEventListener( "siteinfochanged", event => {
  */
 function getService( method ) {
     //return ( location.hostname != "simpread.ksria.cn" ? "http://localhost:3000" : "http://simpread.ksria.cn" ) + method;
-    return  "http://simpread.ksria.cn" + method;
+    return "http://simpread.ksria.cn" + method;
 }
 
 /**
