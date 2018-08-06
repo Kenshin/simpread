@@ -341,7 +341,9 @@ export default class Import extends React.Component {
             if ( !storage.remote.info.id.startsWith( "new::" ) && storage.remote.info.id.substr(0,8) != cur_user.uid.substr(0,8) ) {
                 new Notify().Render({ mode: "snackbar", content: "当前站点并不是由你建立，确定修改？", action: "确定", cancel: "取消", callback: type => {
                     if ( type == "cancel" ) return;
-                    site_info.id = "new::" + storage.user.uid.substr( 0, 8 ) + "-" + site_info.domain;
+                    site_info.id        = "new::" + storage.user.uid.substr( 0, 8 ) + "-" + site_info.domain;
+                    site_info.release   = false;
+                    site_info.global    = false
                     storage.remote.info = site_info;
                     insert();
                 }});
