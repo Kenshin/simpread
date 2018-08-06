@@ -202,7 +202,8 @@ function siteeditorRender( url, site, type, info ) {
     cur_site     = pr.Safesite( site, type, url );
 
     // set remote site( include info )
-    storage.remote = JSON.parse(JSON.stringify( cur_site ));
+    //storage.remote = JSON.parse(JSON.stringify( cur_site ));
+    storage.remote = cur_site;
     info && ( storage.remote.info = info );
     changeSiteinfo( storage.remote.info );
 
