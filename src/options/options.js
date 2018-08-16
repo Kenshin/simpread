@@ -27,6 +27,7 @@ import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
 import LabsOpt    from 'labsopt';
 import PluginsOpt from 'pluginsopt';
+import SitesOpts  from 'sitesopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
@@ -225,8 +226,8 @@ function tabsRender( color ) {
                     <section style={{ 'padding': '0;' }}>
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
-                    <section>
-                        站点集市
+                    <section style={{ 'padding': '0;' }}>
+                        <SitesOpts />
                     </section>
                     <section style={{ 'padding': '0;' }}>
                         <PluginsOpt />
