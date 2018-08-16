@@ -556,8 +556,8 @@ const tabsItem = [{
         route: "#common",
     },{
         name: "基础设定",
-        value: "focus",
-        route: "#focus",
+        value: "simple",
+        route: "#simple",
     },{
         name: "高级设定",
         value: "labs",
