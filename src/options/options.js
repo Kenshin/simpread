@@ -182,7 +182,7 @@ function welcomeRender( first, version ) {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
-    ( idx == 3 || idx == 4 || idx == 6 || idx == 1 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
+    ( idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 6 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -222,11 +222,11 @@ function tabsRender( color ) {
                             </div>
                         </div>
                     </section>
-                    <section>
-                        
-                    </section>
                     <section style={{ 'padding': '0;' }}>
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
+                    </section>
+                    <section>
+                        站点集市
                     </section>
                     <section style={{ 'padding': '0;' }}>
                         <PluginsOpt />

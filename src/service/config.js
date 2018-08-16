@@ -559,13 +559,13 @@ const tabsItem = [{
         value: "focus",
         route: "#focus",
     },{
-        name: "阅读模式",
-        value: "read",
-        route: "#read",
-    },{
         name: "高级设定",
         value: "labs",
         route: "#labs",
+    },{
+        name: "站点集市",
+        value: "sites",
+        route: "#sites",
     },{
         name: "插件管理",
         value: "plugins",
