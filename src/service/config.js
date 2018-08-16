@@ -563,7 +563,7 @@ const tabsItem = [{
         value: "labs",
         route: "#labs",
     },{
-        name: "站点集市",
+        name: "站点管理",
         value: "sites",
         route: "#sites",
     },{
