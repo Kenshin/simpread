@@ -555,7 +555,7 @@ const tabsItem = [{
         active : true,
         route: "#common",
     },{
-        name: "聚焦模式",
+        name: "基础设定",
         value: "focus",
         route: "#focus",
     },{
