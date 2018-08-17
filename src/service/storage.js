@@ -171,6 +171,7 @@ let current  = {},
         unrdist : [],
         sites   : [],
         websites: {
+            person : [],
             custom : [],
             local  : [], // include focus.sites and read.sites
         },
@@ -331,6 +332,7 @@ class Storage {
     get sites() {
         return {
             global: simpread.sites,
+            person: simpread.websites.person,
             custom: simpread.websites.custom,
             local : simpread.websites.local,
         }
@@ -446,6 +448,7 @@ class Storage {
      */
     Writesite( sites, callback ) {
         simpread.sites           = sites.global;
+        simpread.websites.person = sites.person;
         simpread.websites.custom = sites.custom;
         simpread.websites.local  = sites.local;
         callback && save( callback, true );

@@ -149,6 +149,7 @@ function Verify( curver, data ) {
     if ( curver == "1.1.1" ) {
         data.user = { "uid": "","name": "","email": "","avatar": "","permission": "" };
         data.option.plugins = [];
+        data.websites.person = [];
         curver = "1.1.2";
     }
 
