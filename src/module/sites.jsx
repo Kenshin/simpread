@@ -69,7 +69,7 @@ export default class SitesOpts extends React.Component {
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
-                <div className="label">站点适配源</div>
+                <div className="label">第三方适配源</div>
                 <div ref="origins" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }} className="lab">
                     <TextField 
                         multi={ true } rows={8}
@@ -78,17 +78,17 @@ export default class SitesOpts extends React.Component {
                         onChange={ ()=>this.changeOrigins() }
                     />
                     <div style={{ "display": "flex" }}>
-                        <Button type="raised" text="加载官方适配列表"
+                        <Button type="raised" text="加载第三方适配列表"
                             width="100%" style={{ "margin": "0" }}
                             color="#fff" backgroundColor="#4CAF50"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.origins( "origins" ) } />
-                        <Button type="raised" text="导入到适配列表"
+                        <Button type="raised" text="导入到第三方适配列表"
                             width="100%" style={{ "margin": "0 10px" }}
                             color="#fff" backgroundColor="rgb(103, 58, 183)"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.origins( "import" ) } />
-                        <Button type="raised" text="清除适配列表" 
+                        <Button type="raised" text="清除第三方适配列表" 
                             width="100%" style={{ "margin": "0" }}
                             color="#fff" backgroundColor="#FF5252"
                             waves="md-waves-effect md-waves-button"
@@ -96,8 +96,8 @@ export default class SitesOpts extends React.Component {
                     </div>
                     <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('sitemgr') }>
                         <div className="more">
-                            <div>适配站点编辑器</div>
-                            <span className="desc">可以编辑全部的自定义适配站点。</span>
+                            <div>站点管理器</div>
+                            <span className="desc">可以编辑全部的适配站点，包括：全局、站点集市、第三方适配源、本地适配源。</span>
                             <span className="arrow" style={{ 'bottom': '13px' }}></span>
                         </div>
                     </div>
