@@ -175,7 +175,7 @@ export default class SitesOpts extends React.Component {
                       return site[1].info.id == news.id;
                   }),
                   update = () => {
-                      const url  = old[0][0],
+                      const url  = old.length > 0 ? old[0][0] : news.site.url,
                             site = { ...news.site };
 
                       delete news.user;
@@ -196,7 +196,7 @@ export default class SitesOpts extends React.Component {
                         }, 2000 );
                     });
                   };
-            if ( old == undefined ) {
+            if ( old.length == 0 ) {
                 update();
             } else if ( news.create != old[0][1].info.create ) {
                 new Notify().Render({ content: "本地版本与安装版本不一致，是否安装新版本？", action: "安装", cancel: "取消", callback: type => {
