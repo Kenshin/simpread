@@ -10,11 +10,11 @@ import Button    from 'button';
 class Card extends React.Component {
 
     static defaultProps = {
-        site         : {},
+        info         : {},
     };
 
     static propTypes = {
-        site         : React.PropTypes.object,
+        info         : React.PropTypes.object,
     };
 
     update() {
@@ -26,14 +26,14 @@ class Card extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.site.domain }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.info.domain }));
     }
 
     render() {
         return (
             <card>
-                <card-header style={{ backgroundColor: this.props.site.bgColor }}>
-                    <title style={{ color: this.props.site.color }}>{ this.props.site.title }</title>
+                <card-header style={{ backgroundColor: this.props.info.bgColor }}>
+                    <title style={{ color: this.props.info.color }}>{ this.props.info.title }</title>
                 </card-header>
                 <card-footer>
                     <Button shape="circle" type="flat"
@@ -69,7 +69,7 @@ class Cards extends React.Component {
     render() {
         const card = storage.pr.sites.person.length > 0 ? storage.pr.sites.person.map( item => {
             return (
-                <Card site={ item[1].info } onChange={t=>this.props.onChange(t)} />
+                <Card info={ item[1].info } onChange={t=>this.props.onChange(t)} />
             )
         }) : <card-empty><a href="http://simpread.ksria.cn/sites" target="_blank">没有任何站点，点击打开「站点集市」添加。</a></card-empty>;
         return (
