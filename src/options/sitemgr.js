@@ -109,7 +109,7 @@ function controlbarRender() {
                   site= pr.Cleansite({ ...cur_site });
             let flag  = -1;
 
-            if ( site.info && state != "remote" && cur_site.target == "custom" &&( type == "update" || type == "delete" )) {
+            if ( site.info && state != "remote" && cur_site.target == "person" &&( type == "update" || type == "delete" )) {
                 if ( site.info.id.substr(0,8) == storage.user.uid.substr(0,8) ) {
                     setTimeout( ()=>new Notify().Render( 2, "当前站有远程数据，请保持同步更新。" ), 500 );
                 }
@@ -118,17 +118,17 @@ function controlbarRender() {
             if ( type == "update" && state == "remote" ) {
                 site.info = { ...storage.remote.info };
                 if ( cur_site.target == "global" ) {
-                    pr.Updatesite( "custom", org_site[0], [ url, pr.Cleansite(site) ] );
-                } else if ( cur_site.target == "local" ) {
-                    pr.Deletesite( "local", org_site[0], result => {
-                        pr.Updatesite( "custom", org_site[0], [ url, pr.Cleansite(site) ] );
+                    pr.Updatesite( "person", org_site[0], [ url, pr.Cleansite(site) ] );
+                } else if ( cur_site.target == "local" || cur_site.target == "custom" ) {
+                    pr.Deletesite( cur_site.target, org_site[0], result => {
+                        pr.Updatesite( "person", org_site[0], [ url, pr.Cleansite(site) ] );
                     });
                 }
                 org_site = [ url, site ];
                 flag = 0;
-                setTimeout( () => new Notify().Render( 2, "当前站提交时会自动增加到「第三方适配源」！" ), 500 );
+                setTimeout( () => new Notify().Render( 2, "当前站提交时会自动增加到「站点集市适配源」！" ), 500 );
             } else if ( type == "delete" && state == "remote" ) {
-                pr.Deletesite( "custom", org_site[0], result => {
+                pr.Deletesite( "person", org_site[0], result => {
                     result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
                 });
             } else if ( type == "update" ) {
@@ -157,6 +157,7 @@ function controlbarRender() {
     const doms = <div>
                     <group className="lab">
                         <group><AC placeholder={ `官方适配源（${storage.sites.global.length} 条）`} items={ formatsites( storage.sites.global  )} onChange={ v=>getCursite( "global",  v) } /></group>
+                        <group><AC placeholder={ `站点集市适配源（${storage.sites.person.length} 条）` } items={ formatsites( storage.sites.person  )} onChange={ v=>getCursite( "person",  v) } /></group>
                         <group><AC placeholder={ `第三方适配源（${storage.sites.custom.length} 条）` } items={ formatsites( storage.sites.custom  )} onChange={ v=>getCursite( "custom",  v) } /></group>
                         <group><AC placeholder={ `自定义适配源（${storage.sites.local.length} 条）` } items={ formatsites( storage.sites.local  )} onChange={ v=>getCursite( "local",  v) } /></group>
                     </group>
