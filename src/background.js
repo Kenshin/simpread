@@ -160,6 +160,10 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
             const url = tab.url.replace( "http://simpread.ksria.cn/plugins/install/", "" );
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#plugins?install=" + encodeURIComponent(url) ) });
             browser.tabs.remove( tabId );
+        } else if ( tab.url.startsWith( "http://simpread.ksria.cn/sites/install/" )) {
+            const url = tab.url.replace( "http://simpread.ksria.cn/sites/install/", "" );
+            browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?install=" + encodeURIComponent(url) ) });
+            browser.tabs.remove( tabId );
         }
 
         if ( !tab.url.startsWith( "chrome://" ) ) {

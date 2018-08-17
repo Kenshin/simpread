@@ -165,6 +165,57 @@ export default class SitesOpts extends React.Component {
         console.log( type )
     }
 
+    install() {
+        try {
+            const url  = decodeURIComponent( location.hash ).replace( "#sites?install=", "" ),
+                  arr  = url.split( "?site=" ),
+                  id   = arr[0],
+                  news = JSON.parse( decodeURI( arr[1] )),
+                  old  = storage.pr.sites.person.filter( site => {
+                      return site[1].info.id == news.id;
+                  }),
+                  add = () => {
+                      const url  = old[0][0],
+                            site = { ...news.site };
+
+                      delete news.user;
+                      delete news.site;
+                      delete news.view;
+                      delete news.download;
+                      delete news.href;
+                      site.info = news;
+
+                      storage.pr.Updatesite( "person", url, [ url, storage.pr.Cleansite(site) ] );
+                      storage.Writesite( storage.pr.sites, ()=> {
+                        console.log( "current site is ", storage.pr.sites )
+                        watch.SendMessage( "site", true );
+                        new Notify().Render( "当前站点已安装成功，2 秒后自动刷新当前页面。" );
+                        setTimeout( ()=> {
+                            location.href = location.origin + location.pathname + "#sites";
+                            location.reload();
+                        }, 2000 );
+                    });
+                  };
+            if ( old == undefined ) {
+                add();
+            } else if ( news.create != old[0][1].info.create ) {
+                new Notify().Render({ content: "本地版本与安装版本不一致，是否安装新版本？", action: "安装", cancel: "取消", callback: type => {
+                    type == "action" && add();
+                }});
+            } else {
+                new Notify().Render({ content: "是否重新当前站点安装？", action: "安装", cancel: "取消", callback: type => {
+                    type == "action" && add();
+                }});
+            }
+        } catch( error ) {
+            new Notify().Render( 2, "获取失败，请稍后再试。" );
+        }
+    }
+
+    componentWillMount() {
+        decodeURIComponent( location.href ).includes( "#sites?install=" ) && this.install();
+    }
+
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
