@@ -174,7 +174,7 @@ export default class SitesOpts extends React.Component {
                   old  = storage.pr.sites.person.filter( site => {
                       return site[1].info.id == news.id;
                   }),
-                  add = () => {
+                  update = () => {
                       const url  = old[0][0],
                             site = { ...news.site };
 
@@ -197,14 +197,14 @@ export default class SitesOpts extends React.Component {
                     });
                   };
             if ( old == undefined ) {
-                add();
+                update();
             } else if ( news.create != old[0][1].info.create ) {
                 new Notify().Render({ content: "本地版本与安装版本不一致，是否安装新版本？", action: "安装", cancel: "取消", callback: type => {
-                    type == "action" && add();
+                    type == "action" && update();
                 }});
             } else {
                 new Notify().Render({ content: "是否重新当前站点安装？", action: "安装", cancel: "取消", callback: type => {
-                    type == "action" && add();
+                    type == "action" && update();
                 }});
             }
         } catch( error ) {
