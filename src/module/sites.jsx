@@ -4,6 +4,7 @@ import {storage} from 'storage';
 import {browser} from 'browser';
 import * as msg  from 'message';
 import * as watch from 'watch';
+import * as ss   from 'stylesheet';
 
 import TextField from 'textfield';
 import Button    from 'button';
@@ -165,6 +166,10 @@ export default class SitesOpts extends React.Component {
         console.log( type )
     }
 
+    addmore() {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites" }));
+    }
+
     install() {
         try {
             const url  = decodeURIComponent( location.hash ).replace( "#sites?install=", "" ),
@@ -250,6 +255,17 @@ export default class SitesOpts extends React.Component {
                             <span className="desc">可以编辑全部的适配站点，包括：官方适配源、站点集市适配源、第三方适配源、本地适配源。</span>
                             <span className="arrow" style={{ 'bottom': '13px' }}></span>
                         </div>
+                    </div>
+                </div>
+
+                <div className="label">管理</div>
+                <div className="lab">
+                    <div style={{ display: 'inline-flex', width: '100%' }}>
+                        <Button type="raised" text="打开「站点集市」" width="100%"
+                            fontIcon={`<i class="fas fa-external-link-square-alt"></i>`}
+                            color="#fff" backgroundColor="rgb(103, 58, 183)"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.addmore() } />
                     </div>
                 </div>
 
