@@ -166,6 +166,23 @@ export default class SitesOpts extends React.Component {
         console.log( type )
     }
 
+    clear() {
+        new Notify().Render({ mode: "snackbar", content: "是否清除「站点集市」的全部站点？", action: "是的", cancel: "取消", callback: type => {
+            if ( type == "action" ) {
+                storage.pr.sites.person = [];
+                storage.Writesite( storage.pr.sites, ()=> {
+                    console.log( "current site is ", storage.pr.sites )
+                    watch.SendMessage( "site", true );
+                    new Notify().Render( "已清除成功，2 秒后自动刷新当前页面。" );
+                    setTimeout( ()=> {
+                        location.href = location.origin + location.pathname + "#sites";
+                        location.reload();
+                    }, 2000 );
+                });
+            }
+        }});
+    }
+
     addmore() {
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites" }));
     }
@@ -266,6 +283,11 @@ export default class SitesOpts extends React.Component {
                             color="#fff" backgroundColor="rgb(103, 58, 183)"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.addmore() } />
+                        <Button type="raised" text="清除「站点集市」的全部站点" width="100%"
+                                icon={ ss.IconPath( "clear_icon" ) }
+                                color="#fff" backgroundColor="#757575"
+                                waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>this.clear() } />
                     </div>
                 </div>
 
