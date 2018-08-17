@@ -19,7 +19,7 @@ class Card extends React.Component {
     };
 
     update() {
-        
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.info.domain + "?type=update" }));
     }
 
     delete() {
