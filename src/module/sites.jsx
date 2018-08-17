@@ -1,9 +1,82 @@
 console.log( "===== simpread option sites load =====" )
 
 import {storage} from 'storage';
+import {browser} from 'browser';
+import * as msg  from 'message';
 
 import TextField from 'textfield';
 import Button    from 'button';
+
+class Card extends React.Component {
+
+    static defaultProps = {
+        site         : {},
+    };
+
+    static propTypes = {
+        site         : React.PropTypes.object,
+    };
+
+    update() {
+        
+    }
+
+    delete() {
+        
+    }
+
+    addmore() {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.site.domain }));
+    }
+
+    render() {
+        return (
+            <card>
+                <card-header style={{ backgroundColor: this.props.site.bgColor }}>
+                    <title style={{ color: this.props.site.color }}>{ this.props.site.title }</title>
+                </card-header>
+                <card-footer>
+                    <Button shape="circle" type="flat"
+                            color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                            tooltip={{ text: "删除当前站点" }}
+                            fontIcon='<i class="fas fa-trash-alt"></i>'
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.delete() } />
+                    <Button shape="circle" type="flat"
+                            color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                            tooltip={{ text: "更新当前站点到最新版本" }}
+                            fontIcon='<i class="fas fa-cloud"></i>'
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.update() } />
+                    <Button shape="circle" type="flat"
+                            color="#c3c6c7" hoverColor="rgba( 153, 153, 153, .1)"
+                            tooltip={{ text: "查看当前站点的详细信息" }}
+                            fontIcon='<i class="fas fa-ellipsis-h"></i>'
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.addmore() } />
+                </card-footer>
+            </card>
+        )
+    }
+}
+
+class Cards extends React.Component {
+
+    static propTypes = {
+        onChange        : React.PropTypes.func,
+    };
+
+    render() {
+        const card = storage.pr.sites.person.length > 0 ? storage.pr.sites.person.map( item => {
+            return (
+                <Card site={ item[1].info } onChange={t=>this.props.onChange(t)} />
+            )
+        }) : <card-empty><a href="http://simpread.ksria.cn/sites" target="_blank">没有任何站点，点击打开「站点集市」添加。</a></card-empty>;
+        return (
+            <cards>{ card }</cards>
+        )
+    }
+}
 
 export default class SitesOpts extends React.Component {
 
@@ -66,6 +139,10 @@ export default class SitesOpts extends React.Component {
         }
     }
 
+    onChange( type ) {
+        console.log( type )
+    }
+
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
@@ -101,6 +178,11 @@ export default class SitesOpts extends React.Component {
                             <span className="arrow" style={{ 'bottom': '13px' }}></span>
                         </div>
                     </div>
+                </div>
+
+                <div className="label">站点集市</div>
+                <div style={{ 'padding-top': '10px' }} className="lab">
+                    <Cards onChange={ t=>this.onChange(t) } />
                 </div>
             </div>
         )
