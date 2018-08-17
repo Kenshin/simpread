@@ -79,6 +79,7 @@ function navRender() {
  */
 function controlbarRender() {
     const getCursite = ( type, value ) => {
+            if ( value == "" ) return;
             const site = pr.Getsite( type, value );
             org_site   = [ site[0], site[1] ];
             site.length > 0 && siteeditorRender( site[0], site[1], type );
