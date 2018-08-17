@@ -3,6 +3,7 @@ console.log( "===== simpread option sites load =====" )
 import {storage} from 'storage';
 import {browser} from 'browser';
 import * as msg  from 'message';
+import * as watch from 'watch';
 
 import TextField from 'textfield';
 import Button    from 'button';
@@ -22,7 +23,18 @@ class Card extends React.Component {
     }
 
     delete() {
-        
+        new Notify().Render({ mode:"snackbar", content: "是否删除当前站点？", action: "确认", cancel: "取消", callback: type => {
+            if ( type == "cancel" ) return;
+            storage.pr.Deletesite( "person", this.props.url, flag => {
+                flag == -1 && new Notify().Render( "当前站点已删除，请勿重复提交。" );
+                flag != -1 && storage.Writesite( storage.pr.sites, ()=> {
+                    console.log( "current site is ", storage.pr.sites )
+                    watch.SendMessage( "site", true );
+                    new Notify().Render( "删除成功。" );
+                    this.props.onChange( "delete" );
+                });
+            });
+        }});
     }
 
     addmore() {
@@ -62,14 +74,24 @@ class Card extends React.Component {
 
 class Cards extends React.Component {
 
+    state = {
+        sites    : storage.pr.sites.person
+    }
+
     static propTypes = {
-        onChange        : React.PropTypes.func,
+        onChange : React.PropTypes.func,
     };
 
+    onChange( type ) {
+        this.setState({
+            sites: storage.pr.sites.person
+        });
+    }
+
     render() {
-        const card = storage.pr.sites.person.length > 0 ? storage.pr.sites.person.map( item => {
+        const card = this.state.sites.length > 0 ? this.state.sites.map( item => {
             return (
-                <Card info={ item[1].info } onChange={t=>this.props.onChange(t)} />
+                <Card url={ item[0] } info={ item[1].info } onChange={t=>this.onChange(t)} />
             )
         }) : <card-empty><a href="http://simpread.ksria.cn/sites" target="_blank">没有任何站点，点击打开「站点集市」添加。</a></card-empty>;
         return (
