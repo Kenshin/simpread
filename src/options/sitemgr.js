@@ -68,7 +68,7 @@ function changeSiteinfo( info ) {
  */
 function navRender() {
     const navClick = () => {
-        location.href = location.origin + "/options/options.html#labs";
+        location.href = location.origin + "/options/options.html#sites";
     };
     const button = <Button waves="md-waves-effect md-waves-circle" hoverColor="transparent" icon={ ss.IconPath( "gohome_icon" ) } onClick={ ()=>navClick() } />;
     ReactDOM.render( button, $( ".header .nav" )[0] );

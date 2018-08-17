@@ -227,7 +227,7 @@ function tabsRender( color ) {
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
                     <section style={{ 'padding': '0;' }}>
-                        <SitesOpts />
+                        <SitesOpts option={ storage.option } onChange={ (s)=>save(s) } />
                     </section>
                     <section style={{ 'padding': '0;' }}>
                         <PluginsOpt />
