@@ -46,7 +46,6 @@ export default class Sitebar extends React.Component {
                 });
             }
         });
-        console.log( "asdfasdf", storage.pr.sites )
         storage.Writesite( storage.pr.sites, ()=> {
             console.log( "current site is ", storage.pr.sites )
             watch.SendMessage( "site", true );
