@@ -69,15 +69,14 @@ export default class Sitebar extends React.Component {
         const child = Object.keys( this.state.category ).map( item => {
             const label   = this.props.labels[item];
             const actions = this.state.category[item].map( arr => {
-                const [ url, site, type ] = [ arr[0], arr[1], arr[2] ],
+                const [ site, type ] = [ arr[1], arr[2] ],
                       color   = type != "person" ? "#fff" : site.info.color,
                       bgColor = type != "person" ? this.props.bgColors[type] : site.info.bgColor;
                 return (
-                    <Button ref={ "url" }
-                            shape="circle" type="flat"
+                    <Button shape="circle" type="flat"
                             color={ color } backgroundColor={ bgColor }
                             fontIcon={ this.props.icons[type] }
-                            tooltip={{ text: `点击后默认进入当前站点` }}
+                            tooltip={{ text: site.info ? site.info.title : "点击后默认进入当前站点" }}
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.active( arr ) } />
                 )
