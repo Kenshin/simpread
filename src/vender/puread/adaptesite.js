@@ -75,6 +75,7 @@ export default class AdapteSite {
                 });
                 if ( !found ) {
                     const found       = matching[0];
+                    found[1].active   = true;
                     this.current.url  = found[0];
                     this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
                     this.state        = "adapter";
