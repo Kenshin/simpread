@@ -1,6 +1,7 @@
 console.log( "=== simpread site bar load ===" )
 
 import {storage} from 'storage';
+import * as watch from 'watch';
 
 import Button    from 'button';
 
@@ -30,7 +31,27 @@ export default class Sitebar extends React.Component {
         category: []
     };
 
-    enable( obj ) {
+    active( obj ) {
+        const target = obj.pop();
+        Object.keys( storage.pr.sites ).forEach( key => {
+            if ( key == target ) {
+                storage.pr.sites[target].forEach( item => {
+                    if ( JSON.stringify( item ) == JSON.stringify( obj ) ) {
+                        item[1].active = true;
+                    } else delete item[1].active;
+                });
+            } else {
+                storage.pr.sites[key].forEach( item => {
+                    delete item[1].active;
+                });
+            }
+        });
+        console.log( "asdfasdf", storage.pr.sites )
+        storage.Writesite( storage.pr.sites, ()=> {
+            console.log( "current site is ", storage.pr.sites )
+            watch.SendMessage( "site", true );
+            new Notify().Render( "已成功切到换到此适配站点，请刷新本页。" );
+        });
     }
 
     componentWillMount() {
@@ -42,7 +63,6 @@ export default class Sitebar extends React.Component {
                 category[item[2]] = [ item ];
             }
         });
-        console.log( category )
         this.setState({ category });
     }
 
@@ -60,7 +80,7 @@ export default class Sitebar extends React.Component {
                             fontIcon={ this.props.icons[type] }
                             tooltip={{ text: `点击后默认进入当前站点` }}
                             waves="md-waves-effect md-waves-button"
-                            onClick={ ()=>this.enable( arr ) } />
+                            onClick={ ()=>this.active( arr ) } />
                 )
             });
 
