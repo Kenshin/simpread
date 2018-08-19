@@ -64,10 +64,21 @@ export default class AdapteSite {
             getsite( "person", new Map( this.sites.person ), this.url, matching );
             getsite( "custom", new Map( this.sites.custom ), this.url, matching );
             if ( matching.length > 0 ) {
-                const found       = matching[0];
-                this.current.url  = found[0];
-                this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
-                this.state        = "adapter";
+                let found;
+                matching.forEach( site => {
+                    if ( site[1].active ) {
+                        found             = site;
+                        this.current.url  = found[0];
+                        this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
+                        this.state        = "adapter";
+                    }
+                });
+                if ( !found ) {
+                    const found       = matching[0];
+                    this.current.url  = found[0];
+                    this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
+                    this.state        = "adapter";
+                }
             } else {
                 const obj = readmulti();
                 if ( obj != -1 ) {
