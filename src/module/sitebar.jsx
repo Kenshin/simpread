@@ -55,6 +55,7 @@ export default class Sitebar extends React.Component {
 
     componentWillMount() {
         const category = {};
+        !storage.pr.current.site.matching && ( storage.pr.current.site.matching = [] );
         storage.pr.current.site.matching.forEach( item => {
             if ( category[item[2]] ) {
                 category[item[2]].push( item );
@@ -90,6 +91,10 @@ export default class Sitebar extends React.Component {
                 </sr-opt-gp>
             )
         });
+
+        if ( child.length == 0 ) {
+            child.push( <site-bar-empty style={{'font-size':'17px!important','color': 'rgba(51, 51, 51, 0.87)!important'}}>当前模式下无适配站点</site-bar-empty> );
+        }
 
         return (
             <site-bar>{child}</site-bar>
