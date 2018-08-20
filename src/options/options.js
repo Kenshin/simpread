@@ -27,6 +27,7 @@ import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
 import LabsOpt    from 'labsopt';
 import PluginsOpt from 'pluginsopt';
+import SitesOpts  from 'sitesopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
@@ -182,7 +183,7 @@ function welcomeRender( first, version ) {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
-    ( idx == 3 || idx == 4 || idx == 6 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
+    ( idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 6 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -200,24 +201,33 @@ function tabsRender( color ) {
                     <section>
                         <CommonOpt website_sync={website_sync} backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
-                    <section>
-                        <FocusOpt option={ storage.focus } />
-                        <Button type="raised" width="100%" text="保 存"
-                                color="#fff" backgroundColor={ conf.topColors[1] }
-                                icon={ ss.IconPath( "save_icon" ) }
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( true ) } />
-                    </section>
-                    <section>
-                        <ReadOpt option={ storage.read } />
-                        <Button type="raised" width="100%" text="保 存"
-                                color="#fff" backgroundColor={ conf.topColors[2] }
-                                icon={ ss.IconPath( "save_icon" ) }
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( true ) } />
+                    <section style={{ 'padding': '0;' }}>
+                        <div id="labs" style={{ width: '100%' }}>
+                            <div className="label">聚焦模式</div>
+                            <div className="lab" style={{ 'padding': '30px 30px 10px 10px' }}>
+                                <FocusOpt option={ storage.focus } />
+                                <Button type="raised" width="100%" text="保 存"
+                                        color="#fff" backgroundColor={ conf.topColors[1] }
+                                        icon={ ss.IconPath( "save_icon" ) }
+                                        waves="md-waves-effect md-waves-button"
+                                        onClick={ ()=>save( true ) } />
+                            </div>
+                            <div className="label">阅读模式</div>
+                            <div className="lab" style={{ 'padding': '30px 30px 10px 10px' }}>
+                                <ReadOpt option={ storage.read } />
+                                <Button type="raised" width="100%" text="保 存"
+                                        color="#fff" backgroundColor={ conf.topColors[1] }
+                                        icon={ ss.IconPath( "save_icon" ) }
+                                        waves="md-waves-effect md-waves-button"
+                                        onClick={ ()=>save( true ) } />
+                            </div>
+                        </div>
                     </section>
                     <section style={{ 'padding': '0;' }}>
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
+                    </section>
+                    <section style={{ 'padding': '0;' }}>
+                        <SitesOpts option={ storage.option } onChange={ (s)=>save(s) } />
                     </section>
                     <section style={{ 'padding': '0;' }}>
                         <PluginsOpt />

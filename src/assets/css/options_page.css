@@ -278,6 +278,15 @@ card-header {
     background-color: #40C4FF;
 }
 
+card-header title {
+    display: block;
+
+    font-size: 30px;
+    font-weight: 500;
+
+    line-height: 30px;
+}
+
 card-header icon {
     display: block;
 

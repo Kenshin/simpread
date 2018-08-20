@@ -18,6 +18,7 @@ import * as waves from 'waves';
 import * as tt    from 'tooltip';
 
 import Editor     from 'editor';
+import Import     from 'enhancesite';
 
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
@@ -45,14 +46,29 @@ storage.Read( () => {
         $( "body" ).removeAttr( "style" );
     }});
     console.log( "current puread object is   ", pr )
-}); 
+});
+
+// hack code
+window.addEventListener( "sitechanged", event => {
+    const [ url, site, type, info ] = [ event.data.site.url, event.data.site, event.data.site.target, event.data.info ];
+    org_site = [ url, site ];
+    siteeditorRender( url, site, type, info );
+});
+
+// hack code
+function changeSiteinfo( info ) {
+    const evt  = document.createEvent("Event");
+    evt.data   = { info };
+    evt.initEvent( "siteinfochanged", true, false );
+    window.dispatchEvent( evt );
+}
 
 /**
  * navigation Render
  */
 function navRender() {
     const navClick = () => {
-        location.href = location.origin + "/options/options.html#labs";
+        location.href = location.origin + "/options/options.html#sites";
     };
     const button = <Button waves="md-waves-effect md-waves-circle" hoverColor="transparent" icon={ ss.IconPath( "gohome_icon" ) } onClick={ ()=>navClick() } />;
     ReactDOM.render( button, $( ".header .nav" )[0] );
@@ -63,9 +79,11 @@ function navRender() {
  */
 function controlbarRender() {
     const getCursite = ( type, value ) => {
+            if ( value == "" ) return;
             const site = pr.Getsite( type, value );
             org_site   = [ site[0], site[1] ];
             site.length > 0 && siteeditorRender( site[0], site[1], type );
+            site.length > 0 && changeSiteinfo( site[1].info );
         },
         add   = () => {
             const msg = cur_site ? "是否覆盖当前站点并新建立一个？" : "是否建立一个新站？";
@@ -77,7 +95,10 @@ function controlbarRender() {
         remove = () => {
             new Notify().Render( "snackbar", "是否删除当前站点？", "删除", () => save( "delete" ));
         },
-        save = type => {
+        remote = ( type ) => {
+            save( type, "remote" );
+        },
+        save = ( type, state ) => {
             if ( !cur_site ) {
                 new Notify().Render( 2, "请选择一个站点源。" );
                 return;
@@ -89,10 +110,40 @@ function controlbarRender() {
                   site= pr.Cleansite({ ...cur_site });
             let flag  = -1;
 
-            if ( type == "update" ) {
+            if ( site.info && state != "remote" && cur_site.target == "person" &&( type == "update" || type == "delete" )) {
+                if ( site.info.id.substr(0,8) == storage.user.uid.substr(0,8) ) {
+                    setTimeout( ()=>new Notify().Render( 2, "当前站有远程数据，请保持同步更新。" ), 500 );
+                }
+            }
+
+            if ( type == "update" && state == "remote" ) {
+                site.info = { ...storage.remote.info };
+                if ( cur_site.target == "global" ) {
+                    pr.Updatesite( "person", org_site[0], [ url, pr.Cleansite(site) ] );
+                } else if ( cur_site.target == "local" || cur_site.target == "custom" ) {
+                    pr.Deletesite( cur_site.target, org_site[0], result => {
+                        pr.Updatesite( "person", org_site[0], [ url, pr.Cleansite(site) ] );
+                    });
+                }
+                org_site = [ url, site ];
+                flag = 0;
+                setTimeout( () => new Notify().Render( 2, "当前站提交时会自动增加到「站点集市适配源」！" ), 500 );
+            } else if ( type == "delete" && state == "remote" ) {
+                pr.Deletesite( "person", org_site[0], result => {
+                    result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
+                });
+            } else if ( type == "update" ) {
                 pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
                 org_site = [ url, site ];
                 flag = 0;
+            /*
+            } else if ( type == "safe" ) {
+                delete site.info;
+                pr.Updatesite( key, org_site[0], [ url, pr.Cleansite(site) ] );
+                org_site = [ url, site ];
+                flag = 0;
+            }
+            */
             } else {
                pr.Deletesite( key, org_site[0], result => {
                    result != -1 ? flag = 1 : new Notify().Render( "当前站点已删除，请勿重复提交。" );
@@ -107,6 +158,7 @@ function controlbarRender() {
     const doms = <div>
                     <group className="lab">
                         <group><AC placeholder={ `官方适配源（${storage.sites.global.length} 条）`} items={ formatsites( storage.sites.global  )} onChange={ v=>getCursite( "global",  v) } /></group>
+                        <group><AC placeholder={ `站点集市适配源（${storage.sites.person.length} 条）` } items={ formatsites( storage.sites.person  )} onChange={ v=>getCursite( "person",  v) } /></group>
                         <group><AC placeholder={ `第三方适配源（${storage.sites.custom.length} 条）` } items={ formatsites( storage.sites.custom  )} onChange={ v=>getCursite( "custom",  v) } /></group>
                         <group><AC placeholder={ `自定义适配源（${storage.sites.local.length} 条）` } items={ formatsites( storage.sites.local  )} onChange={ v=>getCursite( "local",  v) } /></group>
                     </group>
@@ -133,6 +185,12 @@ function controlbarRender() {
                                     onClick={ ()=>remove() } />
                         </group>
                     </group>
+                    <group className="lab" style={{display:"none"}}>
+                        <div className="sites"></div>
+                    </group>
+                    <group className="lab">
+                        <Import uid={ storage.user.uid } onUpdate={ t=>remote(t)} />
+                    </group>
                  </div>;
     ReactDOM.render( doms, $( ".custom .property" )[0] );
 }
@@ -140,15 +198,20 @@ function controlbarRender() {
 /**
  * siteeditor Render
  */
-function siteeditorRender( url, site, type ) {
-
+function siteeditorRender( url, site, type, info ) {
     $( "sr-opt-read" ).length > 0 &&
         $( ".custom .preview" ).empty();
+    cur_site     = pr.Safesite( site, type, url );
 
-    cur_site   = pr.Safesite( site, type, url );
+    // set remote site( include info )
+    //storage.remote = JSON.parse(JSON.stringify( cur_site ));
+    storage.remote = cur_site;
+    info && ( storage.remote.info = info );
+    changeSiteinfo( storage.remote.info );
 
-    const doms = <Editor site={ cur_site } state={ state } />;
+    const doms   = <Editor site={ cur_site } state={ state } />;
     ReactDOM.render( doms, $( ".custom .preview" )[0] );
+    console.log( "current site is ", cur_site )
 }
 
 /**

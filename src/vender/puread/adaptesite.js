@@ -20,7 +20,7 @@ export default class AdapteSite {
 
     constructor( sites = { global:[], custom:[], local:[] } ) {
         this.url     = util.getURI();
-        this.sites   = sites;   // include: global, custom, local
+        this.sites   = sites;   // include: global, custom, local, person
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
         this.origins = [];
@@ -61,12 +61,25 @@ export default class AdapteSite {
         } else {
             getsite( "local",  new Map( this.sites.local  ), this.url, matching );
             getsite( "global", new Map( this.sites.global ), this.url, matching );
+            getsite( "person", new Map( this.sites.person ), this.url, matching );
             getsite( "custom", new Map( this.sites.custom ), this.url, matching );
             if ( matching.length > 0 ) {
-                const found       = matching[0];
-                this.current.url  = found[0];
-                this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
-                this.state        = "adapter";
+                let found;
+                matching.forEach( site => {
+                    if ( site[1].active ) {
+                        found             = site;
+                        this.current.url  = found[0];
+                        this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
+                        this.state        = "adapter";
+                    }
+                });
+                if ( !found ) {
+                    const found       = matching[0];
+                    found[1].active   = true;
+                    this.current.url  = found[0];
+                    this.current.site = this.Safesite({ ...found[1] }, found[2], found[0] );
+                    this.state        = "adapter";
+                }
             } else {
                 const obj = readmulti();
                 if ( obj != -1 ) {
@@ -125,6 +138,7 @@ export default class AdapteSite {
     Addallsites( sites ) {
         this.sites = {
             global: [ ...sites.global ],
+            person: [ ...sites.person ],
             custom: [ ...sites.custom ],
             local : [ ...sites.local  ],
         };

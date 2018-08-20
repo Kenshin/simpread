@@ -37,13 +37,16 @@ class SiteEditor extends React.Component {
 
     delete() {
         console.log( "siteeditor click delete button.", storage.current.site )
+        /*
         if ( site.target != "local" ) {
             new Notify().Render( 2, `只能删除 <a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>本地站点</a> ，如需要请使用 站点管理器 删除。` );
             return;
         }
+        */
         new Notify().Render( "是否删除当前适配站点？", "删除", () => {
-            site.target != "local" ? new Notify().Render( 3, `<a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>无法删除</a> 当前站点，如不想显示请加入黑名单。` ) :
-                storage.pr.Deletesite( "local", site.url, result => {
+            //site.target != "local" ? new Notify().Render( 3, `<a href='https://github.com/Kenshin/simpread/wiki/FAQ#%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E7%AB%99%E7%82%B9' target='_blank'>无法删除</a> 当前站点，如不想显示请加入黑名单。` ) :
+            site.name.startsWith( "tempread::" ) ? new Notify().Render( 2, `当前站点为自动识别，无误删除。` ) :
+                storage.pr.Deletesite( storage.current.site.target, site.url, result => {
                     if ( result == -1 ) new Notify().Render( 2, `此站已被删除，请勿重复操作。` );
                     else {
                         storage.Writesite(storage.pr.sites, () => {
@@ -75,7 +78,7 @@ class SiteEditor extends React.Component {
         } else if ( site.include.trim() == "" ) {
             new Notify().Render( 2, "高亮区域不能为空。" );
         } else {
-            storage.pr.Updatesite( "local", storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
+            storage.pr.Updatesite( storage.current.site.target, storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
             storage.Writesite( storage.pr.sites, () => {
                 new Notify().Render( 0, "更新成功，页面刷新后生效！" );
                 watch.SendMessage( "site", true );
