@@ -252,7 +252,7 @@ export default class PluginsOpt extends React.Component {
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
-                <div className="label">全局</div>
+                <div className="label">管理</div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="从配置文件导入插件" width="100%"
@@ -281,7 +281,7 @@ export default class PluginsOpt extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">管理</div>
+                <div className="label">已安装</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards plugins={ this.state.plugins } onChange={ t=>this.onChange(t) } />
                 </div>

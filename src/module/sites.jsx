@@ -291,7 +291,7 @@ export default class SitesOpts extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">站点集市</div>
+                <div className="label">已安装</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards onChange={ t=>this.onChange(t) } />
                 </div>
