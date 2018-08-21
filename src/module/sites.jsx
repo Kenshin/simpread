@@ -254,8 +254,8 @@ export default class SitesOpts extends React.Component {
                     watch.SendMessage( "site", true );
                 });
             } else if ( result.code == 404 ) {
-                new Notify().Render( "无任何可用更新，当前网址已记录，2 秒后页面将会关闭！" );
-                setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=failed", 2000 );
+                new Notify().Render( "无任何可用更新，2 秒后页面将会关闭！" );
+                setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=pending", 2000 );
             } else {
                 new Notify().Render( 2, "暂时无法使用此功能，请稍候再试，2 秒后页面将会关闭！" );
                 setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=failed", 2000 );

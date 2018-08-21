@@ -178,6 +178,10 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
             upTabId > 0 && chrome.tabs.reload( upTabId, () => { upTabId == -1; });
         } else if ( tab.url == browser.runtime.getURL( "options/options.html#sites?update=failed" ) ) {
             browser.tabs.remove( tabId );
+        } else if ( tab.url == browser.runtime.getURL( "options/options.html#sites?update=pending" ) ) {
+            browser.tabs.remove( tabId );
+            upTabId > 0 && browser.tabs.sendMessage( upTabId, msg.Add( msg.MESSAGE_ACTION.pending_site ));
+            upTabId == -1;
         }
 
         if ( !tab.url.startsWith( "chrome://" ) ) {

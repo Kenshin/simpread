@@ -24,6 +24,7 @@ const action = {
     track          : "track",
     // site
     update_site    : "update_site",
+    pending_site   : "pending_site",
 };
 
 /**
