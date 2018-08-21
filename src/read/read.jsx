@@ -58,7 +58,7 @@ class Read extends React.Component {
             new Notify().Render({ content: "当前页面结构改变导致不匹配阅读模式，接下来请选择？", action: "更新", cancel: "高亮", callback: type => {
                 if ( type == "action" ) {
                     new Notify().Render( "2 秒钟后将会自动查找更新，请勿关闭此页面..." );
-                    setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.update_site, { site: storage.pr.current.site } )), 2000 );
+                    setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.update_site, { url: location.href, site: storage.pr.current.site } )), 2000 );
                 } else {
                     this.props.read.highlight == true ? setTimeout( () => {
                         Highlight().done( dom => {

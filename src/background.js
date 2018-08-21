@@ -10,6 +10,9 @@ import * as watch  from 'watch';
 
 import PureRead    from 'puread';
 
+// global update site tab id
+let upTabId = -1;
+
 /**
  * Sevice: storage Get data form chrome storage
  */
@@ -101,7 +104,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#labs?auth=" + request.value.name.toLowerCase() ) });
             break;
         case msg.MESSAGE_ACTION.update_site:
-            browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?update=" + encodeURI( JSON.stringify( request.value.site ))) });
+            getCurTab({ active: true, url: request.value.url }, tabs => {
+                tabs.length > 0 && ( upTabId = tabs[0].id );
+                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?update=" + encodeURI( JSON.stringify( request.value.site ))) });
+            });
             break;
         case msg.MESSAGE_ACTION.auth_success:
             getCurTab( { url: request.value.url }, tabs => {
@@ -169,6 +175,7 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
             browser.tabs.remove( tabId );
         } else if ( tab.url == browser.runtime.getURL( "options/options.html#sites?update=success" ) ) {
             browser.tabs.remove( tabId );
+            upTabId > 0 && chrome.tabs.reload( upTabId, () => { upTabId == -1; });
         } else if ( tab.url == browser.runtime.getURL( "options/options.html#sites?update=failed" ) ) {
             browser.tabs.remove( tabId );
         }
