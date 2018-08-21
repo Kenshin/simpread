@@ -73,7 +73,7 @@ class Read extends React.Component {
             } else {
                 new Notify().Render({ content: "更新后仍无法适配此页面，是否提交？", action: "是的", cancel: "取消", callback: type => {
                     if ( type == "cancel" ) return;
-                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid }));
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed" }));
                 }});
             }
             localStorage.removeItem( "sr-update-site" );
