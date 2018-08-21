@@ -67,7 +67,7 @@ class Read extends React.Component {
                                 storage.pr.TempMode( "read", dom );
                                 Render();
                             });
-                        }, 1000 ) : new Notify().Render( `请先开启 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a> 选项！` );
+                        }, 200 ) : new Notify().Render( `请先开启 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a> 选项！` );
                     }
                 }});
             } else {
