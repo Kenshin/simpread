@@ -241,22 +241,24 @@ export default class SitesOpts extends React.Component {
               site     = storage.pr.Cleansite( { ...org_site } );
         site.url       = org_site.url;
         $.ajax({
-            url: "http://simpread.ksria.cn/sites/service/query",
+            url: "http://localhost:3000/sites/service/query",
             method: "POST",
             data:{ type, site }
         }).done( ( result, textStatus, jqXHR ) => {
            console.log( result.site )
-           if ( result.site ) {
+           if ( result.code == 200 ) {
                 storage.pr.Updatesite( type, org_site.url, [ result.site.url, storage.pr.Cleansite( result.site ) ]);
                 storage.Writesite( storage.pr.sites, () => {
                     new Notify().Render( 0, "更新成功，2 秒后自动关闭页面，失效的页面会自动刷新。" );
                     setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=success", 2000 );
                     watch.SendMessage( "site", true );
                 });
-           } else {
-                new Notify().Render( 2, "无任何可用更新，当前网址已记录，2 秒后页面将会关闭！" );
+            } else if ( result.code == 404 ) {
+                new Notify().Render( "无任何可用更新，当前网址已记录，2 秒后页面将会关闭！" );
                 setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=failed", 2000 );
-                watch.SendMessage( "site", true );
+            } else {
+                new Notify().Render( 2, "暂时无法使用此功能，请稍候再试，2 秒后页面将会关闭！" );
+                setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=failed", 2000 );
            }
         }).fail( error => {
             new Notify().Render( 2, "自动更新出现错误，请稍后再试！" );
