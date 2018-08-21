@@ -73,13 +73,7 @@ class Read extends React.Component {
             } else {
                 new Notify().Render({ content: "更新后仍无法适配此页面，是否提交？", action: "是的", cancel: "取消", callback: type => {
                     if ( type == "cancel" ) return;
-                    $.ajax({
-                        url   : storage.service + "/sites/service/pending",
-                        method: "POST",
-                        data  :{ url: location.href, site: storage.pr.current.site, uid: storage.user.uid }
-                    }).done( ( result, textStatus, jqXHR ) => {
-                       new Notify().Render( "提交成功，谢谢对简悦作出的贡献！" );
-                    }).fail( error => new Notify().Render( 2, "提交失败，请稍后再试！" ) );
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.pending, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid }));
                 }});
             }
             localStorage.removeItem( "sr-update-site" );

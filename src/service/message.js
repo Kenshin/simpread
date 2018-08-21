@@ -25,6 +25,7 @@ const action = {
     // site
     update_site    : "update_site",
     pending_site   : "pending_site",
+    pending        : "pending",
 };
 
 /**
