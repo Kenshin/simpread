@@ -74,7 +74,7 @@ class Read extends React.Component {
                 new Notify().Render({ content: "更新后仍无法适配此页面，是否提交？", action: "是的", cancel: "取消", callback: type => {
                     if ( type == "cancel" ) return;
                     $.ajax({
-                        url   : "http://localhost:3000/sites/service/pending",
+                        url   : storage.service + "/sites/service/pending",
                         method: "POST",
                         data  :{ url: location.href, site: storage.pr.current.site, uid: storage.user.uid }
                     }).done( ( result, textStatus, jqXHR ) => {

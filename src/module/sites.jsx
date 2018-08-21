@@ -241,7 +241,7 @@ export default class SitesOpts extends React.Component {
               site     = storage.pr.Cleansite( { ...org_site } );
         site.url       = org_site.url;
         $.ajax({
-            url: "http://localhost:3000/sites/service/query",
+            url: storage.service + "/sites/service/query",
             method: "POST",
             data:{ type, site }
         }).done( ( result, textStatus, jqXHR ) => {
