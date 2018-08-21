@@ -106,7 +106,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.pending_site:
             new Notify().Render({ content: "是否提交，以便更好的适配此页面？", action: "是的", cancel: "取消", callback: type => {
                 if ( type == "cancel" ) return;
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.pending, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid }));
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid }));
             }});
             localStorage.removeItem( "sr-update-site" );
             break;

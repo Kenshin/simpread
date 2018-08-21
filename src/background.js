@@ -109,7 +109,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?update=" + encodeURI( JSON.stringify( request.value.site ))) });
             });
             break;
-        case msg.MESSAGE_ACTION.pending:
+        case msg.MESSAGE_ACTION.save_site:
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?pending=" + encodeURI( JSON.stringify( request.value ))) });
             break;
         case msg.MESSAGE_ACTION.auth_success:
