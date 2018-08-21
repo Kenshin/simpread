@@ -140,7 +140,8 @@ class Read extends React.Component {
                 modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                 break;
             case "siteeditor":
-                se.Render();
+                $( "panel-bg" ).length > 0 && $( "panel-bg" )[0].click();
+                setTimeout( ()=>se.Render(), 500 );
                 break;
             case "fontfamily":
             case "fontsize":
