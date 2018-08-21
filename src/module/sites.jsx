@@ -241,7 +241,7 @@ export default class SitesOpts extends React.Component {
               site     = storage.pr.Cleansite( { ...org_site } );
         site.url       = org_site.url;
         $.ajax({
-            url: "http://localhost:3000/sites/service/query",
+            url: "http://simpread.ksria.cn/sites/service/query",
             method: "POST",
             data:{ type, site }
         }).done( ( result, textStatus, jqXHR ) => {
@@ -249,7 +249,7 @@ export default class SitesOpts extends React.Component {
            if ( result.site ) {
                 storage.pr.Updatesite( type, org_site.url, [ result.site.url, storage.pr.Cleansite( result.site ) ]);
                 storage.Writesite( storage.pr.sites, () => {
-                    new Notify().Render( 0, "更新成功，2 秒后自动关闭页面，请手动刷新失效的页面。" );
+                    new Notify().Render( 0, "更新成功，2 秒后自动关闭页面，失效的页面会自动刷新。" );
                     setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=success", 2000 );
                     watch.SendMessage( "site", true );
                 });
@@ -259,7 +259,7 @@ export default class SitesOpts extends React.Component {
                 watch.SendMessage( "site", true );
            }
         }).fail( error => {
-            console.log( error )
+            new Notify().Render( 2, "自动更新出现错误，请稍后再试！" );
         });
     }
 
