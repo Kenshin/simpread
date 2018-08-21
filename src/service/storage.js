@@ -366,6 +366,16 @@ class Storage {
     }
 
     /**
+     * Get service url
+     * 
+     * @return {string} url
+     */
+    get service() {
+        return "http://localhost:3000";
+        //return "http://simpread.ksria.cn";
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
