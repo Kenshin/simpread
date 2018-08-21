@@ -100,6 +100,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.auth:
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#labs?auth=" + request.value.name.toLowerCase() ) });
             break;
+        case msg.MESSAGE_ACTION.update_site:
+            browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?update=" + encodeURI( JSON.stringify( request.value.site ))) });
+            break;
         case msg.MESSAGE_ACTION.auth_success:
             getCurTab( { url: request.value.url }, tabs => {
                 if ( tabs && tabs.length > 0 ) {
@@ -163,6 +166,10 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
         } else if ( tab.url.startsWith( "http://simpread.ksria.cn/sites/install/" )) {
             const url = tab.url.replace( "http://simpread.ksria.cn/sites/install/", "" );
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?install=" + encodeURIComponent(url) ) });
+            browser.tabs.remove( tabId );
+        } else if ( tab.url == browser.runtime.getURL( "options/options.html#sites?update=success" ) ) {
+            browser.tabs.remove( tabId );
+        } else if ( tab.url == browser.runtime.getURL( "options/options.html#sites?update=failed" ) ) {
             browser.tabs.remove( tabId );
         }
 

@@ -22,6 +22,8 @@ const action = {
     speak_stop     : "speak_stop",
     // track
     track          : "track",
+    // site
+    update_site    : "update_site",
 };
 
 /**

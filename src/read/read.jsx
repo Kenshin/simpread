@@ -54,6 +54,7 @@ class Read extends React.Component {
 
     async componentDidMount() {
         if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
+            /*
             let msg = `当前页面结构改变导致不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>`;
             this.props.read.highlight == true && ( msg += `，已启动 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。` )
             new Notify().Render( 2, msg );
@@ -62,6 +63,21 @@ class Read extends React.Component {
                 storage.pr.TempMode( "read", dom );
                 Render();
             });
+            */
+            this.componentWillUnmount();
+            new Notify().Render({ content: "当前页面结构改变导致不匹配阅读模式，接下来请选择？", action: "更新", cancel: "高亮", callback: type => {
+                if ( type == "action" ) {
+                    new Notify().Render( "2 秒钟后将会自动查找更新，请勿关闭此页面..." );
+                    setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.update_site, { site: storage.pr.current.site } )), 2000 );
+                } else {
+                    this.props.read.highlight == true ? setTimeout( () => {
+                        Highlight().done( dom => {
+                            storage.pr.TempMode( "read", dom );
+                            Render();
+                        });
+                    }, 1000 ) : new Notify().Render( `请先开启 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a> 选项！` );
+                }
+            }});
         } else {
             $root
             .addClass( "simpread-font" )

@@ -234,8 +234,38 @@ export default class SitesOpts extends React.Component {
         }
     }
 
+    update() {
+        const url      = decodeURIComponent( location.hash ).replace( "#sites?update=", "" ),
+              org_site = JSON.parse( url ),
+              type     = org_site.target,
+              site     = storage.pr.Cleansite( { ...org_site } );
+        site.url       = org_site.url;
+        $.ajax({
+            url: "http://localhost:3000/sites/service/query",
+            method: "POST",
+            data:{ type, site }
+        }).done( ( result, textStatus, jqXHR ) => {
+           console.log( result.site )
+           if ( result.site ) {
+                storage.pr.Updatesite( type, org_site.url, [ result.site.url, storage.pr.Cleansite( result.site ) ]);
+                storage.Writesite( storage.pr.sites, () => {
+                    new Notify().Render( 0, "更新成功，2 秒后自动关闭页面，请手动刷新失效的页面。" );
+                    setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=success", 2000 );
+                    watch.SendMessage( "site", true );
+                });
+           } else {
+                new Notify().Render( 2, "无任何可用更新，当前网址已记录，2 秒后页面将会关闭！" );
+                setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=failed", 2000 );
+                watch.SendMessage( "site", true );
+           }
+        }).fail( error => {
+            console.log( error )
+        });
+    }
+
     componentWillMount() {
         decodeURIComponent( location.href ).includes( "#sites?install=" ) && this.install();
+        decodeURIComponent( location.href ).includes( "#sites?update="  ) && this.update();
     }
 
     render() {
