@@ -26,6 +26,7 @@ const action = {
     update_site    : "update_site",
     pending_site   : "pending_site",
     save_site      : "save_site",
+    temp_site      : "temp_site",
 };
 
 /**

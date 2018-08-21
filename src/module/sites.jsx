@@ -280,10 +280,26 @@ export default class SitesOpts extends React.Component {
         });
     }
 
+    temp() {
+        const url  = decodeURIComponent( location.hash ).replace( "#sites?temp=", "" ),
+              data = JSON.parse( url );
+        $.ajax({
+            url   : storage.service + "/sites/service/pending",
+            method: "POST",
+            data,
+        }).done( ( result, textStatus, jqXHR ) => {
+            new Notify().Render( "提交成功，谢谢对简悦作出的贡献，2 秒后页面将会关闭！" );
+            setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=complete", 2000 );
+        }).fail( error => {
+            new Notify().Render( 2, "自动更新出现错误，请稍后再试！" );
+        });
+    }
+
     componentWillMount() {
         decodeURIComponent( location.href ).includes( "#sites?install=" ) && this.install();
         decodeURIComponent( location.href ).includes( "#sites?update="  ) && this.update();
         decodeURIComponent( location.href ).includes( "#sites?pending=" ) && this.pending();
+        decodeURIComponent( location.href ).includes( "#sites?temp="    ) && this.temp();
     }
 
     render() {

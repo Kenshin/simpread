@@ -112,6 +112,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.save_site:
             browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?pending=" + encodeURI( JSON.stringify( request.value ))) });
             break;
+        case msg.MESSAGE_ACTION.temp_site:
+            browser.tabs.create({ url: browser.extension.getURL( "options/options.html#sites?temp=" + encodeURI( JSON.stringify( request.value ))) });
+            break;
         case msg.MESSAGE_ACTION.auth_success:
             getCurTab( { url: request.value.url }, tabs => {
                 if ( tabs && tabs.length > 0 ) {
