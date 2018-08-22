@@ -23,6 +23,11 @@ const keyboard = {
             "kbd"  : "ep",
             "type" : "epub",
             "desc" : "导出为 epub",
+        },
+        hm: {
+            "kbd"  : "hm",
+            "type" : "html",
+            "desc" : "导出为 HTML",
         }
     },
     "控制栏 - 其它" : {
@@ -102,6 +107,11 @@ const keyboard = {
             "kbd"  : "rl",
             "type" : "save",
             "desc" : "保存到 稍后读",
+        },
+        tm: {
+            "kbd"  : "tm",
+            "type" : "temp",
+            "desc" : "生成临时页面",
         },
     },
     "控制栏 - 无障碍" : {
