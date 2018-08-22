@@ -63,7 +63,7 @@ function html2enml( html, url ) {
 
     try {
         str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
-        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex)="[\w- ]+"/g, "" )
+        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex|name)="[\S]+"/g, "" )
                 //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
                 .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
                 .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
