@@ -90,7 +90,7 @@ class Cards extends React.Component {
     }
 
     render() {
-        const card = this.state.sites.length > 0 ? this.state.sites.map( item => {
+        const card = this.state.sites && this.state.sites.length > 0 ? this.state.sites.map( item => {
             return (
                 <Card url={ item[0] } info={ item[1].info } onChange={t=>this.onChange(t)} />
             )
