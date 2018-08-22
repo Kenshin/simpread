@@ -147,6 +147,11 @@ const keyboard = {
             "type" : "remove",
             "desc" : "隐藏任意元素",
         },
+        tr: {
+            "kbd"  : "tr",
+            "type" : "tempread",
+            "desc" : "提交临时阅读模式",
+        },
     },
 };
 
@@ -202,6 +207,11 @@ const readItems = {
             "remove" : {
                 "name" : "隐藏任意元素",
                 "icon" : ss.IconPath("remove_icon"),
+                "color": "#03A9F4",
+            },
+            "tempread": {
+                "name" : "提交临时阅读模式",
+                "icon" : ss.IconPath("tempread_icon"),
                 "color": "#03A9F4",
             },
         },

@@ -86,6 +86,17 @@ export default class ReadCtlbar extends React.Component {
                 case type.startsWith( "dyslexia" ):
                     output.Action( type, $( "sr-rd-title" ).text(), "", $( "sr-rd-content" ).text() );
                     break;
+                case type == "tempread":
+                    if ( storage.pr.state != "temp" ) {
+                        new Notify().Render( "此功能只限临时阅读模式时使用。" );
+                        return;
+                    }
+                    // hack code
+                    const news = { ...storage.pr.current.site };
+                    storage.pr.dom && ( news.include = storage.pr.dom.outerHTML.replace( storage.pr.dom.innerHTML, "" ).replace( /<\/\S+>$/i, "" ));
+                    delete news.html;
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.temp_site, { url: location.href, site: news, uid: storage.user.uid, type: "temp" }));
+                    break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
                         [ "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
