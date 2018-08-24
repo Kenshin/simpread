@@ -122,7 +122,9 @@ function md2enml( result ) {
  * @return {string} format str
  */
 function multi2enml( str ) {
-    return str.replace( / data-\S+">/ig, ">" ).replace( /sr-[\w-]+/ig, "div" );
+    return str.replace( / data-\S+">/ig, ">" )
+              .replace( /sr-[\w-]+/ig, "div" )
+              .replace( /dangerouslysetinnerhtml="\[object Object\]"/ig, "" );
 }
 
 /**
