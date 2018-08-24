@@ -102,6 +102,13 @@ function html2enml( html, url ) {
     }
 }
 
+function md2enml( result ) {
+    result = result.replace( /</ig, "&lt;" ).replace( />/ig, "&gt;" );
+    let str = "";
+    result.split( "\n" ).forEach( item => str += `<div>${item}</div>` );
+    return str;
+}
+
 /**
  * Clear Html to MD, erorr <tag>
  * 
@@ -149,6 +156,7 @@ function whitelist( minimatch, data ) {
 export {
     verifyHtml     as verifyHtml,
     html2enml      as HTML2ENML,
+    md2enml        as MD2ENML,
     clearMD        as ClearMD,
     exclusion      as Exclusion,
     whitelist      as Whitelist,
