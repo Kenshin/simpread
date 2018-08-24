@@ -102,6 +102,12 @@ function html2enml( html, url ) {
     }
 }
 
+/**
+ * Markdown to ENML
+ * 
+ * @param {string} str
+ * @return {string} format str
+ */
 function md2enml( result ) {
     result = result.replace( /</ig, "&lt;" ).replace( />/ig, "&gt;" );
     let str = "";
