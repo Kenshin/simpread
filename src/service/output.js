@@ -161,14 +161,17 @@ function action( type, title, desc, content ) {
                     evernote.Add( title, util.HTML2ENML( content, window.location.href ), ( result, error ) => {
                         exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
                         if ( error == "error" ) {
-                            new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
-                            new Notify().Render({ content: "是否以 Markdown 格式保存？", action: "是的", cancel: "取消", callback: action => {
+                            new Notify().Render({ content: "导出失败，是否以 Markdown 格式保存？", action: "是的", cancel: "取消", callback: action => {
                                 if ( action == "cancel" ) return;
                                 new Notify().Render({ content: "转换为 Markdown 并保存中，请稍等...", delay: 2000 } );
                                 exp.MDWrapper( util.ClearMD( content, false ), undefined, new Notify() ).done( result => {
                                     content = util.MD2ENML( result );
                                     service( type );
                                 });
+                            }});
+                            new Notify().Render({ content: `此功能为实验性功能，是否提交当前站点？`, action: "是的", cancel: "取消", callback: type => {
+                                if ( type == "cancel" ) return;
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "evernote" }));
                             }});
                         }
                     });
