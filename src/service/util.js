@@ -116,6 +116,16 @@ function md2enml( result ) {
 }
 
 /**
+ * Multi to ENML
+ * 
+ * @param {string} str
+ * @return {string} format str
+ */
+function multi2enml( str ) {
+    return str.replace( / data-\S+">/ig, ">" ).replace( /sr-[\w-]+/ig, "div" );
+}
+
+/**
  * Clear Html to MD, erorr <tag>
  * 
  * @param {string} convert string
@@ -166,6 +176,7 @@ export {
     verifyHtml     as verifyHtml,
     html2enml      as HTML2ENML,
     md2enml        as MD2ENML,
+    multi2enml     as MULTI2ENML,
     clearMD        as ClearMD,
     exclusion      as Exclusion,
     whitelist      as Whitelist,
