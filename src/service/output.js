@@ -52,6 +52,7 @@ function action( type, title, desc, content ) {
                 break;
             case "markdown":
                 const md = "simpread-" + title + ".md";
+                storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                 exp.MDWrapper( util.ClearMD( content ), md, new Notify() );
                 break;
             case "png":
@@ -131,6 +132,7 @@ function action( type, title, desc, content ) {
         const service = type => {
             switch( type ) {
                 case "dropbox":
+                    storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                     exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
                         dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, type, new Notify() ), "md/" );
                     });
@@ -175,6 +177,7 @@ function action( type, title, desc, content ) {
                     onenote.Add( onenote.Wrapper( window.location.href, title, content ), ( result, error ) => exp.svcCbWrapper( result, error, onenote.name, type, new Notify() ));
                     break;
                 case "gdrive":
+                    storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                     exp.MDWrapper( util.ClearMD( content), undefined, new Notify() ).done( result => {
                         gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, type, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
                     });
