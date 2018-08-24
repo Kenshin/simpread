@@ -157,7 +157,17 @@ function action( type, title, desc, content ) {
                     evernote.sandbox = false;
                     evernote.Add( title, util.HTML2ENML( content, window.location.href ), ( result, error ) => {
                         exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
-                        error == "error" && new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
+                        if ( error == "error" ) {
+                            new Notify().Render( `此功能为实验性功能，报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>，建议使用 Onenote 更完美的保存页面。` );
+                            new Notify().Render({ content: "是否以 Markdown 格式保存？", action: "是的", cancel: "取消", callback: action => {
+                                if ( action == "cancel" ) return;
+                                new Notify().Render({ content: "转换为 Markdown 并保存中，请稍等...", delay: 2000 } );
+                                exp.MDWrapper( util.ClearMD( content, false ), undefined, new Notify() ).done( result => {
+                                    content = util.MD2ENML( result );
+                                    service( type );
+                                });
+                            }});
+                        }
                     });
                     break;
                 case "onenote":
