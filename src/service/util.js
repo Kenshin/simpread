@@ -46,16 +46,32 @@ function specTest( content ) {
  */
 function html2enml( html, url ) {
     let $target, str;
-    const tags = [ "figure", "sup", "hr", "section", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ];
-    
+    const tags = [ "figure", "sup", "hr", "section", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ],
+          good = [ "a", "abbr", "acronym", "address", "area", "b", "bdo", "big", "blockquote", "br", "caption", "center", "cite", "code", "col", "colgroup", "dd", "del", "dfn", "div", "dl", "dt", "em", "font", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li", "map", "ol", "p", "pre", "q", "s", "samp", "small", "span", "strike", "strong", "sub", "sup", "table", "tbody", "td", "tfoot", "th", "thead", "title", "tr", "tt", "u", "ul", "var", "xmp"];
+
     $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
     $target = $( "#simpread-en" );
     $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
         $( "<div>" ).attr( "style", `width: ${item.naturalWidth}px; height:${item.naturalHeight}px; background: url(${item.src})` )
         .replaceAll( $(item) );
     });
-    $target.find( tags.join( "," ) ).map( ( index, item ) => {
-        $( "<div>" ).html( $(item).html() ).replaceAll( $(item) );
+    // remove element all atrr
+    $target.find( "*" ).map( ( index, item ) => {
+        const tag = item.tagName.toLowerCase();
+        if ( tag.startsWith( "sr" ) && /sr-\S[^>]+/ig.test( tag )) {
+            $(item).remove();
+        }
+        else if ( item.attributes.length > 0 ) {
+            for ( let i = item.attributes.length - 1; i >= 0; i-- ) {
+                const name = item.attributes[i].name;
+                if ( tag == "a" && name == "href" ) {
+                    let value = item.attributes[i].value;
+                    value.startsWith( "//" ) && ( item.attributes[i].value += location.protocol );
+                    continue;
+                }
+                item.removeAttribute( name )
+            }
+        }
     });
     $target.find( tags.join( "," ) ).remove();
     str = $target.html();
@@ -63,7 +79,7 @@ function html2enml( html, url ) {
 
     try {
         str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码，原文地址 <a href="${url}" target="_blank">${url}</a></blockquote><hr></hr><br></br>` + str;
-        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex|name)="[\S]+"/g, "" )
+        str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex|name)="[\S ][^"]+"/g, "" )
                 //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
                 .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
                 .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
@@ -76,6 +92,7 @@ function html2enml( html, url ) {
                 .replace( /<\/figcaption>/ig, "" )                         // </figcaption>
                 .replace( /<\/br>/ig, "" )                                 // </br>
                 .replace( /<br>/ig, "<br></br>" )
+                .replace( / >/ig, ">" )
                 .replace( /<\/p>/ig, "<br></br>" );
 
         return str;
