@@ -153,10 +153,9 @@ function action( type, title, desc, content ) {
                     break;
                 case "evernote":
                 case "yinxiang":
-                    console.log( "asfasdf", storage.pr.state )
                     evernote.env     = type;
                     evernote.sandbox = false;
-                    storage.pr.current.site.type == "multi" && ( content = util.MULTI2ENML( content ) );
+                    storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                     evernote.Add( title, util.HTML2ENML( content, window.location.href ), ( result, error ) => {
                         exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
                         if ( error == "error" ) {
