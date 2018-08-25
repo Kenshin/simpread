@@ -20,7 +20,7 @@ class Card extends React.Component {
     };
 
     update() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.info.domain + "?type=update" }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/sites/details/" + this.props.info.domain + "?type=update" }));
     }
 
     delete() {
@@ -39,7 +39,7 @@ class Card extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.info.domain }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/sites/details/" + this.props.info.domain }));
     }
 
     render() {
@@ -94,7 +94,7 @@ class Cards extends React.Component {
             return (
                 <Card url={ item[0] } info={ item[1].info } onChange={t=>this.onChange(t)} />
             )
-        }) : <card-empty><a href="http://simpread.ksria.cn/sites" target="_blank">没有任何站点，点击打开「站点集市」添加。</a></card-empty>;
+        }) : <card-empty><a href="https://simpread.ksria.cn/sites" target="_blank">没有任何站点，点击打开「站点集市」添加。</a></card-empty>;
         return (
             <cards>{ card }</cards>
         )
@@ -184,7 +184,7 @@ export default class SitesOpts extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites" }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/sites" }));
     }
 
     install() {

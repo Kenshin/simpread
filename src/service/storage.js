@@ -372,7 +372,7 @@ class Storage {
      */
     get service() {
         //return "http://localhost:3000";
-        return "http://simpread.ksria.cn";
+        return "https://simpread.ksria.cn";
     }
 
     /**
