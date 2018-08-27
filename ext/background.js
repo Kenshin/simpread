@@ -190,8 +190,8 @@ browser.tabs.onUpdated.addListener( function( tabId, changeInfo, tab ) {
 
         if ( !tab.url.startsWith( "moz-extension://" ) ) {
             browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.tab_selected, { is_update: true } ));
-            storage.ReadAsync( ( simpread, secret ) => {
-                browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.storage, { simpread, secret } ));
+            storage.ReadAsync( ( simpread, secret, plugins ) => {
+                browser.tabs.sendMessage( tabId, msg.Add( msg.MESSAGE_ACTION.storage, { simpread, secret, plugins } ));
             });
         } else {
             setMenuAndIcon( tab.id, -1 );

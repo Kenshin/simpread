@@ -108,7 +108,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             break;
         case msg.MESSAGE_ACTION.storage:
             if ( storage_load ) return;
-            storage.WriteAsync( request.value.simpread, request.value.secret );
+            storage.WriteAsync( request.value.simpread, request.value.secret, request.value.plugins );
             if ( blacklist() ) {
                 $( "style" ).map( ( idx, item ) => {
                     if ( item.innerText.includes( "simpread"        ) || 
