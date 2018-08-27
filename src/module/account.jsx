@@ -72,20 +72,20 @@ export default class AccountOpt extends React.Component {
                             floatingtext="昵称" 
                             placeholder="只能包含中英文 + 数字 + 中间的空格" 
                             errortext={ this.state.name_err }
-                            value={ this.props.user.name } onChange={ e=>this.onChangeName(e) } />
+                            value={ this.props.user.name } onChange={ e=>this.onChangeName(e) } disable={false} />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField 
                             floatingtext="邮箱" 
                             placeholder="请使用真是且有效的邮箱地址" 
                             errortext={ this.state.email_err }
-                            value={ this.props.user.email } onChange={ e=>this.onChangeEmail(e) } />
+                            value={ this.props.user.email } onChange={ e=>this.onChangeEmail(e) } disable={false} />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField 
                             floatingtext="联络方式" 
                             placeholder="微博 / 微信 等一切可以联络到你的方式" 
-                            value={ this.props.user.contact } onChange={ e=>this.onChangeContact(e) } />
+                            value={ this.props.user.contact } onChange={ e=>this.onChangeContact(e) } disable={false} />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <Button text="保 存" 
