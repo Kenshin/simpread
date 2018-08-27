@@ -50,6 +50,20 @@ export default class AccountOpt extends React.Component {
                 watch.SendMessage( "option", true );
             }, storage.simpread );
         }
+        window.location.hash && window.location.hash.startsWith( "#firstload" ) && this.add();
+    }
+
+    add() {
+        storage.user.uid = run.ID( "user" );
+        $.ajax({
+            url   : storage.service + "/users/service/add/",
+            method: "POST",
+            data  : storage.user
+        }).done( ( result, textStatus, jqXHR ) => {
+            console.log( "create user success " )
+        }).fail( error => {
+            console.log( "create user failed ", error )
+        });
     }
 
     save() {
