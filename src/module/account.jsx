@@ -3,6 +3,7 @@ console.log( "===== simpread option account load =====" )
 import {storage} from 'storage';
 import * as ss   from 'stylesheet';
 import * as watch from 'watch';
+import * as run   from 'runtime';
 
 import TextField from 'textfield';
 import Button    from 'button';
@@ -15,6 +16,7 @@ export default class AccountOpt extends React.Component {
     }
 
     state = {
+        uid_err  : "",
         name_err : "",
         email_err: "",
     };
@@ -37,6 +39,17 @@ export default class AccountOpt extends React.Component {
 
     onChangeContact( event ) {
         storage.user.contact = event.target.value.trim();
+    }
+
+    componentWillMount() {
+        if ( storage.user.uid == "" ) {
+            storage.user.uid = run.ID( "user" );
+            storage.Write( () => {
+                console.log( "current user info is ", storage.user )
+                this.setState({ uid_err : "" });
+                watch.SendMessage( "option", true );
+            }, storage.simpread );
+        }
     }
 
     save() {
@@ -82,6 +95,7 @@ export default class AccountOpt extends React.Component {
                         <TextField 
                             floatingtext="标识" 
                             placeholder="系统自动生成，不可更改" 
+                            errortext={ this.state.uid_err }
                             value={ this.props.user.uid } disable={true} />
                     </sr-opt-gp>
                     <sr-opt-gp>
