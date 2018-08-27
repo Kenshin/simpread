@@ -50,11 +50,10 @@ export default class AccountOpt extends React.Component {
                 watch.SendMessage( "option", true );
             }, storage.simpread );
         }
-        window.location.hash && window.location.hash.startsWith( "#firstload" ) && this.add();
+        ( this.props.load.first || this.props.load.update ) && this.add();
     }
 
     add() {
-        storage.user.uid = run.ID( "user" );
         $.ajax({
             url   : storage.service + "/users/service/add/",
             method: "POST",

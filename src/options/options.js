@@ -36,6 +36,7 @@ import * as welc  from 'welcome';
 import PureRead   from 'puread';
 
 let tabsItemID   = 0,
+    loadState    = { first: false, update: false },
     website_sync = false; // when first and update checked versions.json
 
 /**
@@ -135,8 +136,10 @@ function vernotify( first ) {
 
         new Notify().Render( "简悦 版本提示", msg );
 
+        loadState = { first: true };
         if ( hash.startsWith( "#update?ver=" )) {
             watch.SendMessage( "version", true );
+            loadState = { first: true, update: true };
             welcomeRender( false, version );
         }
         website_sync = true;
@@ -232,7 +235,7 @@ function tabsRender( color ) {
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
                     <section style={{ 'padding': '0;' }}>
-                        <AccountOps user={ storage.user } />
+                        <AccountOps user={ storage.user } load={ loadState } />
                     </section>
                     <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true)}/></section>
                 </Tabs>,
