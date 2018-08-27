@@ -436,8 +436,8 @@ class Storage {
     WriteAsync( simp, sec, plugs ) {
         simpread  = simp;
         origin    = clone( simpread );
-        sec && ( secret    = sec );
-        plugs && ( plugins = plugs );
+        sec   && ( secret  = sec    );
+        plugs && ( plugins = plugs  );
         browser.storage.local.set( { ["secret"] : secret }, () => {
             console.log( "firefox storage secret set success!", secret );
         });
