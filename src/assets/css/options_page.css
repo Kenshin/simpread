@@ -363,3 +363,22 @@ card-empty a {
     font-size: 30px;
     font-weight: 500;
 }
+
+.avatar {
+    margin: 10px;
+    padding: 5px;
+
+    width: 100px;
+    height: 100px;
+    line-height: 80px;
+
+    font-size: 50px;
+    font-weight: bold;
+
+    color: #fff;
+    background-color: rgb(111, 122, 155);
+
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 20px 0 rgba(168,182,191,0.6);
+}
