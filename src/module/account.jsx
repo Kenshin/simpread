@@ -13,6 +13,35 @@ export default class AccountOpt extends React.Component {
         idx   : "abcdefghijklmnopqrstuvwxyz0123456789",
     }
 
+    state = {
+        name_err : "",
+        email_err: "",
+    };
+
+    onChangeName( event ) {
+        const value = event.target.value;
+        if ( /^([\u2E80-\u9FFFA-Za-z0-9]+)([ ]?)([\u2E80-\u9FFFA-Za-z0-9]*)$/ig.test( value ) ) {
+            storage.user.name = value;
+            this.setState({ name_err : "" });
+        } else {
+            this.setState({ name_err : "只能包含中英文 + 数字 + 中间的空格" });
+        }
+    }
+
+    onChangeEmail( event ) {
+        const value = event.target.value;
+        if ( /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ig.test( value ) ) {
+            storage.user.email = value;
+            this.setState({ email_err : "" });
+        } else {
+            this.setState({ email_err : "请确保输入正确的 Email 地址" });
+        }
+    }
+
+    onChangeContact( event ) {
+        storage.user.contact = event.target.value.trim();
+    }
+
     save() {
 
     }
@@ -42,19 +71,21 @@ export default class AccountOpt extends React.Component {
                         <TextField 
                             floatingtext="昵称" 
                             placeholder="只能包含中英文 + 数字 + 中间的空格" 
-                            value={ this.props.user.name } />
+                            errortext={ this.state.name_err }
+                            value={ this.props.user.name } onChange={ e=>this.onChangeName(e) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField 
                             floatingtext="邮箱" 
                             placeholder="请使用真是且有效的邮箱地址" 
-                            value={ this.props.user.email }/>
+                            errortext={ this.state.email_err }
+                            value={ this.props.user.email } onChange={ e=>this.onChangeEmail(e) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField 
                             floatingtext="联络方式" 
                             placeholder="微博 / 微信 等一切可以联络到你的方式" 
-                            value={ this.props.user.contact }/>
+                            value={ this.props.user.contact } onChange={ e=>this.onChangeContact(e) } />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <Button text="保 存" 
