@@ -44,6 +44,13 @@ export default class AccountOpt extends React.Component {
     }
 
     save() {
+        if ( storage.user.name.trim() == "" ) {
+            this.setState({ name_err : "昵称不能为空" });
+            return;
+        } else if ( storage.user.email.trim() == "" ) {
+            this.setState({ email_err : "昵称不能为空" });
+            return;
+        }
         $.ajax({
             url   : storage.service + "/users/service/update/" + storage.user.uid,
             method: "POST",
