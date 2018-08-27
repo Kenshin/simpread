@@ -415,10 +415,11 @@ class Storage {
             if ( result && !$.isEmptyObject( result )) {
                 secret    = result[ "secret" ] && safesave( result[ "secret" ]);
                 simpread  = result[name];
+                plugins   = result["plugins"];
                 firstload = false;
             }
             origin = clone( simpread );
-            callback( simpread, secret );
+            callback( simpread, secret, plugins );
             console.log( "chrome storage read success!", simpread, origin, result );
         }, error => {
             console.log(`Error: ${error}`);
@@ -430,13 +431,18 @@ class Storage {
      * 
      * @param {object} simpread object 
      * @param {object} secret object 
+     * @param {object} plugins object 
      */
-    WriteAsync( simp, sec ) {
+    WriteAsync( simp, sec, plugs ) {
         simpread  = simp;
         origin    = clone( simpread );
-        sec && ( secret = sec );
+        sec && ( secret    = sec );
+        plugs && ( plugins = plugs );
         browser.storage.local.set( { ["secret"] : secret }, () => {
-            console.log( "firefox storage safe set success!", secret );
+            console.log( "firefox storage secret set success!", secret );
+        });
+        browser.storage.local.set( { ["plugins"] : plugins }, () => {
+            console.log( "firefox storage plugins set success!", plugins );
         });
     }
 
