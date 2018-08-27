@@ -2,6 +2,7 @@ console.log( "===== simpread option account load =====" )
 
 import {storage} from 'storage';
 import * as ss   from 'stylesheet';
+import * as watch from 'watch';
 
 import TextField from 'textfield';
 import Button    from 'button';
@@ -43,7 +44,20 @@ export default class AccountOpt extends React.Component {
     }
 
     save() {
-
+        $.ajax({
+            url   : storage.service + "/users/service/update/" + storage.user.uid,
+            method: "POST",
+            data  : storage.user
+        }).done( ( result, textStatus, jqXHR ) => {
+            result.code == 201 ? 
+                storage.Write( ()=> {
+                    watch.SendMessage( "option", true );
+                    new Notify().Render( "更新成功，请刷新本页！" );
+                }) :
+                new Notify().Render( 2, "更新出现错误，请稍后再试！" );
+        }).fail( error => {
+            new Notify().Render( 2, "更新出现错误，请稍后再试！" );
+        });
     }
 
     render() {
