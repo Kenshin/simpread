@@ -73,7 +73,7 @@ export default class AccountOpt extends React.Component {
                 <div className="label">用户信息</div>
                 <div className="lab" style={{'padding-top': '25px'}}>
                     <sr-opt-gp style={{'justify-content': 'center'}}>
-                        { avatar && <span className="avatar" style={{ "background-color": color }}>{ avatar }</span> }
+                        { avatar && <span className="avatar" style={{ "background-color": color }}>{ avatar.toUpperCase() }</span> }
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField 
