@@ -22,21 +22,17 @@ export default class AccountOpt extends React.Component {
     onChangeName( event ) {
         const value = event.target.value;
         if ( /^([\u2E80-\u9FFFA-Za-z0-9]+)([ ]?)([\u2E80-\u9FFFA-Za-z0-9]*)$/ig.test( value ) ) {
-            storage.user.name = value;
             this.setState({ name_err : "" });
-        } else {
-            this.setState({ name_err : "只能包含中英文 + 数字 + 中间的空格" });
-        }
+        } else this.setState({ name_err : "只能包含中英文 + 数字 + 中间的空格" });
+        storage.user.name = value;
     }
 
     onChangeEmail( event ) {
         const value = event.target.value;
         if ( /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ig.test( value ) ) {
-            storage.user.email = value;
             this.setState({ email_err : "" });
-        } else {
-            this.setState({ email_err : "请确保输入正确的 Email 地址" });
-        }
+        } else this.setState({ email_err : "请确保输入正确的 Email 地址" });
+        storage.user.email = value;
     }
 
     onChangeContact( event ) {
