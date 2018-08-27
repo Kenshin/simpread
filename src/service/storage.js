@@ -147,6 +147,7 @@ const name = "simpread",
     user   = {
         uid       : "",
         name      : "",
+        contact   : "",
         email     : "",
         avatar    : "",
         permission: "",
