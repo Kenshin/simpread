@@ -195,7 +195,7 @@ function keyboradmap() {
     });
     const tmpl    = `
     <kbd-mapping>
-        <kbd-map-title>简悦快捷键一览</kbd-map-title>
+        <kbd-map-title>快捷键一览</kbd-map-title>
         <kbd-maps>
             <kbd-maps-group>
                 <kbd-maps-title>全局</kbd-maps-title>

@@ -93,7 +93,7 @@ export default class Sitebar extends React.Component {
         });
 
         if ( child.length == 0 ) {
-            child.push( <site-bar-empty style={{'font-size':'17px!important','color': 'rgba(51, 51, 51, 0.87)!important'}}>当前模式下无适配站点</site-bar-empty> );
+            child.push( <site-bar-empty style={{'font-size':'17px!important','color': 'rgba(51, 51, 51, 0.87)!important'}}>当前模式下无法使用此功能</site-bar-empty> );
         }
 
         return (

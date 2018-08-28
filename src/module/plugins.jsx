@@ -47,7 +47,7 @@ class Card extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins/details/" + this.props.plugin.id }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/plugins/details/" + this.props.plugin.id }));
     }
 
     render() {
@@ -108,7 +108,7 @@ class Cards extends React.Component {
             return (
                 <Card plugin={ item } onChange={t=>this.props.onChange(t)} />
             )
-        }) : <card-empty><a href="http://simpread.ksria.cn/plugins" target="_blank">没有任何扩展，点击打开扩展中心添加。</a></card-empty>;
+        }) : <card-empty><a href="https://simpread.ksria.cn/plugins" target="_blank">没有任何扩展，点击打开扩展中心添加。</a></card-empty>;
         return (
             <cards>{ card }</cards>
         )
@@ -172,7 +172,7 @@ export default class PluginsOpt extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/plugins" }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/plugins" }));
     }
 
     update() {
@@ -252,7 +252,7 @@ export default class PluginsOpt extends React.Component {
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
-                <div className="label">全局</div>
+                <div className="label">管理</div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="从配置文件导入插件" width="100%"
@@ -281,7 +281,7 @@ export default class PluginsOpt extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">管理</div>
+                <div className="label">已安装</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards plugins={ this.state.plugins } onChange={ t=>this.onChange(t) } />
                 </div>

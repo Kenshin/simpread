@@ -20,7 +20,7 @@ class Card extends React.Component {
     };
 
     update() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.info.domain + "?type=update" }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/sites/details/" + this.props.info.domain + "?type=update" }));
     }
 
     delete() {
@@ -39,7 +39,7 @@ class Card extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites/details/" + this.props.info.domain }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/sites/details/" + this.props.info.domain }));
     }
 
     render() {
@@ -90,11 +90,11 @@ class Cards extends React.Component {
     }
 
     render() {
-        const card = this.state.sites.length > 0 ? this.state.sites.map( item => {
+        const card = this.state.sites && this.state.sites.length > 0 ? this.state.sites.map( item => {
             return (
                 <Card url={ item[0] } info={ item[1].info } onChange={t=>this.onChange(t)} />
             )
-        }) : <card-empty><a href="http://simpread.ksria.cn/sites" target="_blank">没有任何站点，点击打开「站点集市」添加。</a></card-empty>;
+        }) : <card-empty><a href="https://simpread.ksria.cn/sites" target="_blank">没有任何站点，点击打开「站点集市」添加。</a></card-empty>;
         return (
             <cards>{ card }</cards>
         )
@@ -184,7 +184,7 @@ export default class SitesOpts extends React.Component {
     }
 
     addmore() {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://simpread.ksria.cn/sites" }));
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://simpread.ksria.cn/sites" }));
     }
 
     install() {
@@ -234,8 +234,72 @@ export default class SitesOpts extends React.Component {
         }
     }
 
+    update() {
+        const url      = decodeURIComponent( location.hash ).replace( "#sites?update=", "" ),
+              org_site = JSON.parse( url ),
+              type     = org_site.target,
+              site     = storage.pr.Cleansite( { ...org_site } );
+        site.url       = org_site.url;
+        $.ajax({
+            url: storage.service + "/sites/service/query",
+            method: "POST",
+            data:{ type, site }
+        }).done( ( result, textStatus, jqXHR ) => {
+           console.log( result.site )
+           if ( result.code == 200 ) {
+                storage.pr.Updatesite( type, org_site.url, [ result.site.url, storage.pr.Cleansite( result.site ) ]);
+                storage.Writesite( storage.pr.sites, () => {
+                    new Notify().Render( 0, "更新成功，2 秒后自动关闭页面，失效的页面会自动刷新。" );
+                    setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=success", 2000 );
+                    watch.SendMessage( "site", true );
+                });
+            } else if ( result.code == 404 ) {
+                new Notify().Render( "无任何可用更新，2 秒后页面将会关闭！" );
+                setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=pending", 2000 );
+            } else {
+                new Notify().Render( 2, "暂时无法使用此功能，请稍候再试，2 秒后页面将会关闭！" );
+                setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=failed", 2000 );
+           }
+        }).fail( error => {
+            new Notify().Render( 2, "自动更新出现错误，请稍后再试！" );
+        });
+    }
+
+    pending() {
+        const url  = decodeURIComponent( location.hash ).replace( "#sites?pending=", "" ),
+              data = JSON.parse( url );
+        $.ajax({
+            url   : storage.service + "/sites/service/pending",
+            method: "POST",
+            data,
+        }).done( ( result, textStatus, jqXHR ) => {
+            new Notify().Render( "提交成功，谢谢对简悦作出的贡献，2 秒后页面将会关闭！" );
+            setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=complete", 2000 );
+        }).fail( error => {
+            new Notify().Render( 2, "自动更新出现错误，请稍后再试！" );
+        });
+    }
+
+    temp() {
+        const url  = decodeURIComponent( location.hash ).replace( "#sites?temp=", "" ),
+              data = JSON.parse( url );
+        $.ajax({
+            url   : storage.service + "/sites/service/pending",
+            method: "POST",
+            data,
+        }).done( ( result, textStatus, jqXHR ) => {
+            new Notify().Render( "提交成功，谢谢对简悦作出的贡献，2 秒后页面将会关闭！" );
+            setTimeout( ()=>location.href = location.protocol + location.pathname + "#sites?update=complete", 2000 );
+        }).fail( error => {
+            new Notify().Render( 2, "自动更新出现错误，请稍后再试！" );
+        });
+    }
+
     componentWillMount() {
         decodeURIComponent( location.href ).includes( "#sites?install=" ) && this.install();
+        decodeURIComponent( location.href ).includes( "#sites?update="  ) && this.update();
+        decodeURIComponent( location.href ).includes( "#sites?pending=" ) && this.pending();
+        decodeURIComponent( location.href ).includes( "#sites?temp="    ) && this.temp();
     }
 
     render() {
@@ -291,7 +355,7 @@ export default class SitesOpts extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">站点集市</div>
+                <div className="label">已安装</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards onChange={ t=>this.onChange(t) } />
                 </div>

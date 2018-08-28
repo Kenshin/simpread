@@ -28,14 +28,15 @@ import CommonOpt  from 'commonopt';
 import LabsOpt    from 'labsopt';
 import PluginsOpt from 'pluginsopt';
 import SitesOpts  from 'sitesopt';
+import AccountOps from 'accountopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
-import * as run   from 'runtime';
 
 import PureRead   from 'puread';
 
 let tabsItemID   = 0,
+    loadState    = { first: false, update: false },
     website_sync = false; // when first and update checked versions.json
 
 /**
@@ -90,8 +91,6 @@ storage.Read( first => {
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
-    // hack code. usage 1.1.2
-    storage.user.uid == "" && setUserUID();
     // only firefox and only usage 1.1.0.3024
     //if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
     //    welcomeRender( true );
@@ -137,8 +136,10 @@ function vernotify( first ) {
 
         new Notify().Render( "简悦 版本提示", msg );
 
+        loadState = { first: true };
         if ( hash.startsWith( "#update?ver=" )) {
             watch.SendMessage( "version", true );
+            loadState = { first: true, update: true };
             welcomeRender( false, version );
         }
         website_sync = true;
@@ -183,7 +184,7 @@ function welcomeRender( first, version ) {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
-    ( idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 6 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
+    ( idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 6 || idx == 7 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -233,6 +234,9 @@ function tabsRender( color ) {
                         <PluginsOpt />
                     </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
+                    <section style={{ 'padding': '0;' }}>
+                        <AccountOps user={ storage.user } load={ loadState } />
+                    </section>
                     <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true)}/></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
@@ -276,17 +280,6 @@ function sidebarRender() {
                              waves="md-waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
-}
-
-/**
- * set user uid
- */
-function setUserUID() {
-    storage.user.uid = run.ID( "user" );
-    storage.Write( () => {
-        console.log( "current user info create!" )
-        watch.SendMessage( "option", true );
-    }, storage.simpread );
 }
 
 /** 

@@ -2,6 +2,8 @@ console.log( "=== simpread option siteeditor ===" )
 
 import { storage }  from 'storage';
 import * as watch   from 'watch';
+import {browser}    from 'browser';
+import * as msg     from 'message';
 
 import Editor       from 'editor';
 
@@ -86,6 +88,12 @@ class SiteEditor extends React.Component {
         }
     }
 
+    submit() {
+        const news = { ...site };
+        delete news.html;
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.temp_site, { url: location.href, site: news, uid: storage.user.uid, type: "temp" }));
+    }
+
     componentDidMount() {
         waves.Render({ root: rootjq });
         tooltip.Render( rootjq );
@@ -93,6 +101,9 @@ class SiteEditor extends React.Component {
 
     render() {
         site = { ...storage.pr.current.site };
+        if ( storage.pr.state == "temp" ) {
+            storage.pr.dom && ( site.include = storage.pr.dom.outerHTML.replace( storage.pr.dom.innerHTML, "" ).replace( /<\/\S+>$/i, "" ));
+        }
         return (
             <dia.Dialog>
                 <dia.Content>
@@ -100,7 +111,9 @@ class SiteEditor extends React.Component {
                 </dia.Content>
                 <dia.Footer>
                     <Button text="删 除" waves="md-waves-effect" color="#fff" backgroundColor="#F44336" onClick={ ()=>this.action( "delete" ) } />
-                    <div style={{ width: "100%" }}></div>
+                    { storage.pr.state == "temp" ?
+                        <Button text="提交临时阅读模式" waves="md-waves-effect" color="#fff" backgroundColor="#4CAF50" width="100%" onClick={ ()=>this.submit() } /> :
+                        <div style={{ width: "100%" }}></div> }
                     <Button text="退 出" mode="secondary" waves="md-waves-effect" onClick={ ()=>this.close() } />
                     <Button text="保 存" waves="md-waves-effect" onClick={ ()=>this.action( "save" ) } />
                 </dia.Footer>

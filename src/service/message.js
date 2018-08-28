@@ -22,6 +22,11 @@ const action = {
     speak_stop     : "speak_stop",
     // track
     track          : "track",
+    // site
+    update_site    : "update_site",
+    pending_site   : "pending_site",
+    save_site      : "save_site",
+    temp_site      : "temp_site",
 };
 
 /**

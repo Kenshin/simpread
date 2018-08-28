@@ -185,7 +185,7 @@ export default class CommonOpt extends React.Component {
     }
 
     clear() {
-        new Notify().Render( "snackbar", "是否清除掉本地配置文件？", "同意 ", () => {
+        new Notify().Render( "snackbar", "是否清除掉（已包含账户信息）本地配置文件？", "同意 ", () => {
             storage.Clear( "local", () => {
                 new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
                     location.href = location.origin + location.pathname + "?simpread_mode=clear";
