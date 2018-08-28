@@ -46,13 +46,19 @@
   自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面以及只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [智能适配](https://github.com/kenshin/simpread/wiki/智能适配模式)
 
 - 站点适配源：  
-  包括：`官方（主）适配源` `官方（次）适配源以及第三方适配源` `本地适配源` 并支持导入第三方适配源，详细请看 [站点适配源](https://github.com/Kenshin/simpread/wiki/站点适配源)
+  包括：`官方（主）适配源` `第三方适配源（支持导入第三方适配源）` `站点集市适配源` `本地适配源`，详细请看 [站点适配源](https://github.com/Kenshin/simpread/wiki/站点适配源)
 
 - 站点编辑器：  
   页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
 
 - 站点管理器：  
   可管理全部的适配站点，详细请看 [站点管理器](https://github.com/kenshin/simpread/wiki/站点管理器)
+
+- 站点集市：  
+  上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
+
+- 插件系统；  
+  现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) 如何编写插件请看 → [说明文档](https://github.com/Kenshin/simpread/wiki/插件系统)
 
 - 多种主题：  
   `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
@@ -71,7 +77,7 @@
 
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](https://github.com/kenshin/simpread/wiki/faq#白名单) 以及 [排除列表](https://github.com/kenshin/simpread/wiki/faq#排除列表) 等
 
-- 稍后读
+- 稍后读；
 
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-1.png)
