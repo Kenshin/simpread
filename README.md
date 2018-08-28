@@ -54,10 +54,10 @@
 - 站点管理器：  
   可管理全部的适配站点，详细请看 [站点管理器](https://github.com/kenshin/simpread/wiki/站点管理器)
 
-- 站点集市：  
+- ![Imgur](https://i.imgur.com/G1nQZxr.png) 站点集市：  
   上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
 
-- 插件系统：  
+- ![Imgur](https://i.imgur.com/G1nQZxr.png) 插件系统：  
   现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) ，如何编写插件请看 → [说明文档](https://github.com/Kenshin/simpread/wiki/插件系统)
 
 - 多种主题：  
