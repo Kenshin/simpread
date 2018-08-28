@@ -46,7 +46,7 @@ function specTest( content ) {
  */
 function html2enml( html, url ) {
     let $target, str;
-    const tags = [ "figure", "sup", "hr", "section", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ],
+    const bad  = [ "sup", "hr", "section", "applet", "base", "basefont", "bgsound", "blink", "body", "button", "dir", "embed", "fieldset", "form", "frame", "frameset", "head", "html", "iframe", "ilayer", "input", "isindex", "label", "layer", "legend", "link", "marquee", "menu", "meta", "noframes", "noscript", "object", "optgroup", "option", "param", "plaintext", "script", "select", "style", "textarea", "xml" ],
           good = [ "a", "abbr", "acronym", "address", "area", "b", "bdo", "big", "blockquote", "br", "caption", "center", "cite", "code", "col", "colgroup", "dd", "del", "dfn", "div", "dl", "dt", "em", "font", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li", "map", "ol", "p", "pre", "q", "s", "samp", "small", "span", "strike", "strong", "sub", "sup", "table", "tbody", "td", "tfoot", "th", "thead", "title", "tr", "tt", "u", "ul", "var", "xmp"];
 
     $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
@@ -54,6 +54,7 @@ function html2enml( html, url ) {
     $target.find( "img" ).map( ( index, item ) => {
         $( '<simpread-img></simpread-img>' ).attr({ src: item.src, style: "max-width:100%;height:auto;" }).replaceAll( $(item) );
     });
+    $target.find( bad.join( "," ) ).remove();
     // remove element all atrr
     $target.find( "*" ).map( ( index, item ) => {
         const tag = item.tagName.toLowerCase();
@@ -74,7 +75,6 @@ function html2enml( html, url ) {
             }
         }
     });
-    $target.find( tags.join( "," ) ).remove();
     str = $target.html();
     $target.remove();
 
@@ -91,8 +91,10 @@ function html2enml( html, url ) {
                 .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
                 .replace( /sr-blockquote/ig, "blockquote" )                // sr-blockquote to blockquote
                 .replace( /<p[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" )          // <p> || <p > || <p xxx="xxx">
-                .replace( /<figcaption[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" ) // <figcaption >
-                .replace( /<\/figcaption>/ig, "" )                         // </figcaption>
+                //.replace( /<figcaption[ -\w*= \w=\-.:\/\/?!;+"]*>/ig, "" ) // <figcaption >
+                //.replace( /<\/figcaption>/ig, "" )                        // </figcaption>
+                .replace( /<(figcaption|figure)/ig, "<div" )               // <figcaption|figure>  → <div>
+                .replace( /<\/(figcaption|figure)>/ig, "</div>" )          // </figcaption|figure> → </div>
                 .replace( /<\/br>/ig, "" )                                 // </br>
                 .replace( /<br>/ig, "<br></br>" )
                 .replace( / >/ig, ">" )
