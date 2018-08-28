@@ -51,9 +51,8 @@ function html2enml( html, url ) {
 
     $( "html" ).append( `<div id="simpread-en" style="display: none;">${html}</div>` );
     $target = $( "#simpread-en" );
-    $target.find( "img:not(.sr-rd-content-nobeautify)" ).map( ( index, item ) => {
-        $( "<div>" ).attr( "style", `width: ${item.naturalWidth}px; height:${item.naturalHeight}px; background: url(${item.src})` )
-        .replaceAll( $(item) );
+    $target.find( "img" ).map( ( index, item ) => {
+        $( '<simpread-img></simpread-img>' ).attr({ src: item.src, style: "max-width:100%;height:auto;" }).replaceAll( $(item) );
     });
     // remove element all atrr
     $target.find( "*" ).map( ( index, item ) => {
@@ -67,6 +66,8 @@ function html2enml( html, url ) {
                 if ( tag == "a" && name == "href" ) {
                     let value = item.attributes[i].value;
                     value.startsWith( "//" ) && ( item.attributes[i].value += location.protocol );
+                    continue;
+                } else if ( tag == "simpread-img" ) {
                     continue;
                 }
                 item.removeAttribute( name )
@@ -83,7 +84,9 @@ function html2enml( html, url ) {
                 //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
                 .replace( /label=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // label="xxxx"
                 .replace( / finallycleanhtml=[\u4e00-\u9fa5 \w="-:\/\/:#;]+"/ig, "" )  // finallycleanhtml="xxxx"
-                .replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                  // <img>
+                //.replace( /<img[ \w="-:\/\/?!]+>/ig, "" )                // <img>
+                .replace( /<simpread-img/ig, "<img" )                      // <simpread-img>  → <img>
+                .replace( /<\/simpread-img>/ig, "</img>" )                 // </simpread-img> → </img>
                 .replace( /data[-\w]*=[ \w=\-.:\/\/?!;+"]+"[ ]?/ig, "" )   // data="xxx" || data-xxx="xxx"
                 .replace( /href="javascript:[\w()"]+/ig, "" )              // href="javascript:xxx"
                 .replace( /sr-blockquote/ig, "blockquote" )                // sr-blockquote to blockquote

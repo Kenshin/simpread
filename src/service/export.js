@@ -539,7 +539,8 @@ class Evernote {
 
     get server() {
         //return this.sandbox ? "http://localhost:3000/evernote" : "https://simpread.herokuapp.com/evernote";
-        return "https://simpread.herokuapp.com/evernote";
+        //return "https://simpread.herokuapp.com/evernote";
+        return "http://localhost:3000/evernote";
     }
 
     get china() {
