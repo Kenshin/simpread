@@ -58,7 +58,7 @@
   上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
 
 - 插件系统；  
-  现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) 如何编写插件请看 → [说明文档](https://github.com/Kenshin/simpread/wiki/插件系统)
+  现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) ，如何编写插件请看 → [说明文档](https://github.com/Kenshin/simpread/wiki/插件系统)
 
 - 多种主题：  
   `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
