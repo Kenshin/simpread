@@ -239,6 +239,32 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
+                    { !first && version == "1.1.2" && 
+                        <div className="carousel-item" id="1.1.2">
+                            <section style={ style.section }>
+                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-plugins.png" style={ style.img }/>
+                                <h2 style={ style.h2 }>插件系统</h2>
+                                <div style={ style.desc }>
+                                    1.1.2 增加了全新的插件系统 <br/>
+                                    可以使用 JavaScript 编写基于「简悦」的插件了，详细说明请看 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F">说明文档</a><br/>
+                                    现在就安装适合你的插件吧 → <a target="_blank" href="https://simpread.ksria.cn/plugins/">插件中心</a> 。
+                                </div>
+                            </section>
+                        </div> }
+
+                    { !first && version == "1.1.2" && 
+                        <div className="carousel-item" id="1.1.2">
+                            <section style={ style.section }>
+                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-sites.png" style={ style.img }/>
+                                <h2 style={ style.h2 }>站点集市</h2>
+                                <div style={ style.desc }>
+                                    方便提交，让你的站点为数以万计的简悦用户使用<br/>
+                                    官方主适配源、官方次适配源、本地适配源、站点集市适配源一站式浏览<br/>
+                                    现在就访问 <a target="_blank" href="https://simpread.ksria.cn/sites/">站点集市</a> 吧，看看有什么增加的新适配站点。
+                                </div>
+                            </section>
+                        </div> }
+
                     <div className="carousel-item" id="end">
                         <section style={ style.section }>
                         <img src={ ss.IconPath( "welcome-others" )} style={ style.img }/>
