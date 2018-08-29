@@ -45,6 +45,16 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         },
       }),
 
+        new HtmlWebpackPlugin({
+          filename: '500.html',
+          template: 'src/500.html',
+          inject: true,
+          minify: {
+            collapseWhitespace: true,
+          },
+        }),
+
+
       new HtmlWebpackPlugin({
         filename: 'auth.html',
         template: 'src/auth.html',
