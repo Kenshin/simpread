@@ -214,7 +214,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                    { !first && version == "1.1.1" && 
+                    { (( !first && version == "1.1.1" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.1">
                             <section style={ style.section }>
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-fap.png" style={ style.img }/>
@@ -226,7 +226,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                    { !first && version == "1.1.1" && 
+                    { (( !first && version == "1.1.1" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.1">
                             <section style={ style.section }>
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-adapter.png" style={ style.img }/>
@@ -239,7 +239,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                    { !first && version == "1.1.2" && 
+                    { (( !first && version == "1.1.2" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.2">
                             <section style={ style.section }>
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-plugins.png" style={ style.img }/>
@@ -252,7 +252,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                    { !first && version == "1.1.2" && 
+                    { (( !first && version == "1.1.2" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.2">
                             <section style={ style.section }>
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-sites.png" style={ style.img }/>
