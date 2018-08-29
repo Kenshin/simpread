@@ -245,7 +245,7 @@ class Welcome extends React.Component {
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-plugins.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>插件系统</h2>
                                 <div style={ style.desc }>
-                                    1.1.2 增加了全新的插件系统 <br/>
+                                    字数统计，点击查看大图（Lightbox），划词翻译一个不能少。 <br/>
                                     可以使用 JavaScript 编写基于「简悦」的插件了，详细说明请看 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F">说明文档</a><br/>
                                     现在就安装适合你的插件吧 → <a target="_blank" href="https://simpread.ksria.cn/plugins/">插件中心</a> 。
                                 </div>
