@@ -91,6 +91,7 @@ storage.Read( first => {
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
+    welcomeRender( true, "all" )
     // only firefox and only usage 1.1.0.3024
     //if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
     //    welcomeRender( true );
