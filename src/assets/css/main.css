@@ -250,7 +250,6 @@ body {
         font-size: inherit;
         border-bottom: 1px solid rgba(51, 51, 51, 0.7);
         text-decoration: none;
-        cursor: help;
         font-weight: 400;
     }
 }
@@ -279,7 +278,6 @@ body {
             font-size: inherit;
             border-bottom: 1px solid rgba(51, 51, 51, 0.7);
             text-decoration: none;
-            cursor: help;
             font-weight: 400;
         }
     }
@@ -297,7 +295,6 @@ body {
         & a {
             color: inherit;
             text-decoration: none;
-            cursor: help;
         }
     }
 }
