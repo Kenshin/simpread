@@ -84,7 +84,7 @@ export default class About extends React.Component {
 
                     <div>
                         <a style={ style.link } href="http://ksria.com/simpread">简悦</a> 的初衷：还原一个干净的阅读空间，提升你的阅读体验。<br/>
-                        截至到目前为止，简悦已经适配了 <spn style={ style.stat }>{ this.props.site }</spn> 类网址，详细请看 <a style={ style.link } href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8" target="_blank">这里</a>。<br/>
+                        截至到目前为止，简悦已经适配了 <spn style={ style.stat }>{ this.props.site }</spn> 类网址，详细请看 <a style={ style.link } href="https://simpread.ksria.cn/sites/" target="_blank">这里</a>。<br/>
                         自从 <span style={ style.stat }>{ this.props.option.create && this.props.option.create.split(" ")[0] }</span> 安装后，共使用了 <spn style={ style.stat }>{ this.props.statistics.focus }次</spn> 聚焦模式，以及 <span style={ style.stat }>{ this.props.statistics.read }次</span> 阅读模式。<br/>
                         </div>
                 </div>
