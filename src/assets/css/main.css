@@ -457,6 +457,10 @@ body {
             background-image: url( '../icons/download_qq.png' );
         }
 
+        &.sogou {
+            background-image: url( '../icons/download_qq.png' );
+        }
+
         &.lite {
             width: 233px;
             background-image: url( '../icons/download_userscript.png' );
@@ -501,6 +505,10 @@ body {
 
     &.qq:hover {
         background-color: #0c9ce0;
+    }
+
+    &.sogou:hover {
+        background-color: #42A5F5;
     }
 
     &.userscript {
