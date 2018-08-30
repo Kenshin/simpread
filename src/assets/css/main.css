@@ -1155,6 +1155,7 @@ body {
 }
 
 .update .info a {
+    padding-left: 2px;
     padding-bottom: 0;
 
     font-size: inherit;
