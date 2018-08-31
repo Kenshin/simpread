@@ -259,7 +259,7 @@ class Welcome extends React.Component {
                                 <h2 style={ style.h2 }>站点集市</h2>
                                 <div style={ style.desc }>
                                     方便提交，让你的站点为数以万计的简悦用户使用<br/>
-                                    官方主适配源、官方次适配源、本地适配源、站点集市适配源一站式浏览<br/>
+                                    官方主适配源、第三方适配源、站点集市适配源、自定义适配源一站式浏览<br/>
                                     现在就访问 <a target="_blank" href="https://simpread.ksria.cn/sites/">站点集市</a> 吧，看看有什么增加的新适配站点。
                                 </div>
                             </section>

@@ -333,7 +333,7 @@ export default class SitesOpts extends React.Component {
                     <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('sitemgr') }>
                         <div className="more">
                             <div>站点管理器</div>
-                            <span className="desc">可以编辑全部的适配站点，包括：官方适配源、站点集市适配源、第三方适配源、本地适配源。</span>
+                            <span className="desc">可以编辑全部的适配站点，包括：官方适配源、站点集市适配源、第三方适配源、自定义适配源。</span>
                             <span className="arrow" style={{ 'bottom': '13px' }}></span>
                         </div>
                     </div>
