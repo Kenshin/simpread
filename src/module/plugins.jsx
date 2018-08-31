@@ -204,6 +204,10 @@ export default class PluginsOpt extends React.Component {
     }
 
     import() {
+        if ( storage.option.plugins.length == 0 ) {
+            new Notify().Render( "当前配置文件没有任何插件。" );
+            return;
+        }
         new Notify().Render({ mode:"snackbar", content: "导入意味着从配置文件覆盖当前的插件！", action: "确认", cancel: "取消", callback: type => {
             if ( type == "cancel" ) return;
             let count = 0;
