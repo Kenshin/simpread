@@ -138,10 +138,12 @@ export default class CommonOpt extends React.Component {
                             this.importsecret( json.option.secret, { ...json.secret }, () => {
                                 delete json.secret;
                                 storage.Write( ()=> {
-                                    watch.SendMessage( "import", true );
-                                    new Notify().Render( "snackbar", "导入成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
-                                        location.href = location.origin + location.pathname + "?simpread_mode=reload";
-                                    });
+                                    storage.Plugins( () => {
+                                        watch.SendMessage( "import", true );
+                                        new Notify().Render( "snackbar", "导入成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
+                                            location.href = location.origin + location.pathname + "?simpread_mode=reload";
+                                        });
+                                    }, {} );
                                 }, json );
                             });
                         }
