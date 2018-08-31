@@ -15,7 +15,7 @@ export default class Sitebar extends React.Component {
         },
         labels: {
             "global": "官方适配源",
-            "person": "站点集市",
+            "person": "站点集市适配源",
             "custom": "第三方适配源",
             "local": "自定义适配源",
         },
