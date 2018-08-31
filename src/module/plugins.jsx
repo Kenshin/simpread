@@ -108,7 +108,7 @@ class Cards extends React.Component {
             return (
                 <Card plugin={ item } onChange={t=>this.props.onChange(t)} />
             )
-        }) : <card-empty><a href="https://simpread.ksria.cn/plugins" target="_blank">没有任何扩展，点击打开扩展中心添加。</a></card-empty>;
+        }) : <card-empty><a href="https://simpread.ksria.cn/plugins" target="_blank">没有任何插件，点击打开「插件中心」添加。</a></card-empty>;
         return (
             <cards>{ card }</cards>
         )
