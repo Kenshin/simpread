@@ -50,10 +50,10 @@ export default class AccountOpt extends React.Component {
                 watch.SendMessage( "option", true );
             }, storage.simpread );
         }
-        this.props.load.first && this.state();
+        this.props.load.first && this.stat();
     }
 
-    state() {
+    stat() {
         $.ajax({
             url   : storage.service + "/stats/service/count/",
             method: "POST",
