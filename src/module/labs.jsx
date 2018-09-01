@@ -166,7 +166,7 @@ export default class LabsOpt extends React.Component {
                     <div ref="toc">
                         <Switch width="100%" checked={ this.props.read.toc_hide }
                                 thumbedColor="#3F51B5" trackedColor="#7986CB"
-                                label="大纲（目录）是否开启「鼠标移动到右上角」自动显示？"
+                                label="大纲（目录）是否开启「鼠标移动到左上角」自动显示？"
                                 desc="关闭意味着「一直显示」"
                                 onChange={ (s)=>this.onChange(s, "read", "toc_hide") } />
                     </div>

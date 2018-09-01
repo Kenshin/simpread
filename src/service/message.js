@@ -8,6 +8,7 @@ const action = {
     browser_click  : "browser_click",
     tab_selected   : "tab_selected",
     new_tab        : "new_tab",
+    close_tab      : "close_tab",
     menu           : "menu",
     updated        : "updated",
     save_verify    : "save_verify",

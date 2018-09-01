@@ -1021,7 +1021,7 @@
         "url"     : "https://my.oschina.net/**/*/blog/*",
         "title"   : "<title>",
         "desc"    : "<div class='blog-abstract'>",
-        "include" : "<div class='BlogContent'>",
+        "include" : "<div id='articleContent'>",
         "exclude" : [
             ""
         ]
@@ -1030,7 +1030,7 @@
         "url"     : "https://www.oschina.net/news/**/*",
         "title"   : "<h1>",
         "desc"    : "",
-        "include" : "<div class='editor-viewer'>",
+        "include" : "<div id='articleContent'>",
         "exclude" : [
             "[[/src=\\S+(hot3)\\S+'/]]",
             "<div class='thumb'>"

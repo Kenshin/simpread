@@ -88,6 +88,14 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.new_tab:
             browser.tabs.create({ url: request.value.url });
             break;
+        case msg.MESSAGE_ACTION.close_tab:
+            getCurTab( { "active": true }, tabs => {
+                tabs.forEach( tab => {
+                    tab.active && tab.url == request.value.url &&
+                        browser.tabs.remove( tab.id );
+                });
+            });
+            break;
         case msg.MESSAGE_ACTION.menu:
             const { id, value } = request.value;
             // hack code refresh options menu changed, and not saved storage

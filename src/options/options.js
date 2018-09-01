@@ -160,7 +160,7 @@ function firstLoad( first ) {
             storage.Writesite( storage.pr.sites, () => storage.Statistics( "create" ) );
         } else new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
     });
-    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true );
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true, "all" );
 }
 
 /**
@@ -237,7 +237,7 @@ function tabsRender( color ) {
                     <section style={{ 'padding': '0;' }}>
                         <AccountOps user={ storage.user } load={ loadState } />
                     </section>
-                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true)}/></section>
+                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true,"all")}/></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );

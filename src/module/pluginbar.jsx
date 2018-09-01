@@ -68,6 +68,10 @@ export default class Pluginbar extends React.Component {
             )
         });
 
+        if ( child.length == 0 ) {
+            child.push( <plugin-bar-empty style={{'font-size':'17px!important','color': 'rgba(51, 51, 51, 0.87)!important'}} dangerouslySetInnerHTML={{__html: `暂无任何可用插件<br>请通过「选项页 → 插件管理」添加。` }}></plugin-bar-empty> );
+        }
+
         return (
             <plugin-bar>{child}</plugin-bar>
         )
