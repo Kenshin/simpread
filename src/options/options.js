@@ -26,6 +26,9 @@ import FocusOpt   from 'focusopt';
 import ReadOpt    from 'readopt';
 import CommonOpt  from 'commonopt';
 import LabsOpt    from 'labsopt';
+import PluginsOpt from 'pluginsopt';
+import SitesOpts  from 'sitesopt';
+import AccountOps from 'accountopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
@@ -33,6 +36,7 @@ import * as welc  from 'welcome';
 import PureRead   from 'puread';
 
 let tabsItemID   = 0,
+    loadState    = { first: false, update: false },
     website_sync = false; // when first and update checked versions.json
 
 /**
@@ -132,8 +136,10 @@ function vernotify( first ) {
 
         new Notify().Render( "简悦 版本提示", msg );
 
+        loadState = { first: true };
         if ( hash.startsWith( "#update?ver=" )) {
             watch.SendMessage( "version", true );
+            loadState = { first: true, update: true };
             welcomeRender( false, version );
         }
         website_sync = true;
@@ -154,7 +160,7 @@ function firstLoad( first ) {
             storage.Writesite( storage.pr.sites, () => storage.Statistics( "create" ) );
         } else new Notify().Render( 0, "本地更新出现错误，请选择手动点击 同步配置列表" );
     });
-    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true );
+    window.location.hash && window.location.hash.startsWith( "#firstload" ) && first && welcomeRender( true, "all" );
 }
 
 /**
@@ -178,7 +184,7 @@ function welcomeRender( first, version ) {
 function mainRender( idx ) {
     $( ".top" ).css( "background-color", conf.topColors[idx] );
     $( ".header" ).css( "background-color", conf.topColors[idx] ).find( ".title" ).text( conf.tabsItem[idx].name );
-    ( idx == 3 || idx == 5 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
+    ( idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 6 || idx == 7 ) ? $( '.main' ).addClass( "main_labs" ) : $( '.main' ).removeClass( "main_labs" );
     tabsRender( conf.headerColors[ idx ] );
 }
 
@@ -196,27 +202,42 @@ function tabsRender( color ) {
                     <section>
                         <CommonOpt website_sync={website_sync} backgroundColor={ conf.topColors[0] } sync={ ()=> refresh() } />
                     </section>
-                    <section>
-                        <FocusOpt option={ storage.focus } />
-                        <Button type="raised" width="100%" text="保 存"
-                                color="#fff" backgroundColor={ conf.topColors[1] }
-                                icon={ ss.IconPath( "save_icon" ) }
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( true ) } />
-                    </section>
-                    <section>
-                        <ReadOpt option={ storage.read } />
-                        <Button type="raised" width="100%" text="保 存"
-                                color="#fff" backgroundColor={ conf.topColors[2] }
-                                icon={ ss.IconPath( "save_icon" ) }
-                                waves="md-waves-effect md-waves-button"
-                                onClick={ ()=>save( true ) } />
+                    <section style={{ 'padding': '0;' }}>
+                        <div id="labs" style={{ width: '100%' }}>
+                            <div className="label">聚焦模式</div>
+                            <div className="lab" style={{ 'padding': '30px 30px 10px 10px' }}>
+                                <FocusOpt option={ storage.focus } />
+                                <Button type="raised" width="100%" text="保 存"
+                                        color="#fff" backgroundColor={ conf.topColors[1] }
+                                        icon={ ss.IconPath( "save_icon" ) }
+                                        waves="md-waves-effect md-waves-button"
+                                        onClick={ ()=>save( true ) } />
+                            </div>
+                            <div className="label">阅读模式</div>
+                            <div className="lab" style={{ 'padding': '30px 30px 10px 10px' }}>
+                                <ReadOpt option={ storage.read } />
+                                <Button type="raised" width="100%" text="保 存"
+                                        color="#fff" backgroundColor={ conf.topColors[1] }
+                                        icon={ ss.IconPath( "save_icon" ) }
+                                        waves="md-waves-effect md-waves-button"
+                                        onClick={ ()=>save( true ) } />
+                            </div>
+                        </div>
                     </section>
                     <section style={{ 'padding': '0;' }}>
                         <LabsOpt option={ storage.option } read={ storage.read } focus={ storage.focus } onChange={ (s)=>save(s) } />
                     </section>
+                    <section style={{ 'padding': '0;' }}>
+                        <SitesOpts option={ storage.option } onChange={ (s)=>save(s) } />
+                    </section>
+                    <section style={{ 'padding': '0;' }}>
+                        <PluginsOpt />
+                    </section>
                     <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
-                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true)}/></section>
+                    <section style={{ 'padding': '0;' }}>
+                        <AccountOps user={ storage.user } load={ loadState } />
+                    </section>
+                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true,"all")}/></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );

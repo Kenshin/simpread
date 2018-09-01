@@ -1,8 +1,8 @@
 /*!
  * React Material Design: TextField
  * 
- * @version : 0.0.2
- * @update  : 2018/04/26
+ * @version : 0.0.3
+ * @update  : 2018/06/27
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -91,6 +91,13 @@ const [ MIN_ROWS, steps ] = [ 3, 24 ],
                 WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
                 WebkitAppearance: 'textfield',
             },
+
+            disable: {
+                color: secondary_color,
+                cursor: "no-drop",
+            },
+
+            disable_border: '1px dotted rgba(224, 224, 224, 1);',
 
             border : {
                 display,
@@ -211,6 +218,7 @@ export default class TextField extends React.Component {
         multi       : false,
         rows        : MIN_ROWS + 1,
         password    : false,
+        disable     : false,
         value       : "",
         override    : false,
         placeholder : "",
@@ -223,6 +231,7 @@ export default class TextField extends React.Component {
         multi       : React.PropTypes.bool,
         rows        : React.PropTypes.number,
         password    : React.PropTypes.bool,
+        disable     : React.PropTypes.bool,
         value       : React.PropTypes.string,
         override    : React.PropTypes.bool,
         placeholder : React.PropTypes.string,
@@ -290,6 +299,11 @@ export default class TextField extends React.Component {
         }
         style.float = this.props.placeholder == "" && this.props.value == "" ? style.float_normal : { ...style.float_normal, ...style.float_focus }
         style.state = this.props.errortext   == "" ? style.state_normal : { ...style.state_normal, ...style.state_error };
+        if ( this.props.disable ) {
+            style.input   = { ...style.input, ...style.disable };
+            style.textarea = { ...style.textarea, ...style.disable };
+            style.border.borderBottom = style.disable_border;
+        }
     }
 
     componentDidMount() {
@@ -307,12 +321,12 @@ export default class TextField extends React.Component {
         style   = styles.get(this.state.id),
         tooltip = this.props.tooltip,
         element = this.props.multi ? (
-            <textarea ref="target" 
+            <textarea ref="target" disabled={ this.props.disable }
                        style={ style.textarea }
                        { ...props }
             />
         ) : (
-            <input ref="target" 
+            <input ref="target" disabled={ this.props.disable }
                        style={ style.input }
                        type={ this.state.type } 
                        { ...props }

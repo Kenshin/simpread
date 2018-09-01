@@ -133,13 +133,17 @@ export default class CommonOpt extends React.Component {
                             menu.Refresh( json.option.menu );
                             json.option.origins && json.option.origins.length > 0 &&
                                 new Notify().Render( "导入的配置文件包含了第三方源，请通过手动导入。" );
+                            json.option.plugins && json.option.plugins.length > 0 &&
+                                new Notify().Render( "导入的配置文件包含了插件，请通过手动导入。" );
                             this.importsecret( json.option.secret, { ...json.secret }, () => {
                                 delete json.secret;
                                 storage.Write( ()=> {
-                                    watch.SendMessage( "import", true );
-                                    new Notify().Render( "snackbar", "导入成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
-                                        location.href = location.origin + location.pathname + "?simpread_mode=reload";
-                                    });
+                                    storage.Plugins( () => {
+                                        watch.SendMessage( "import", true );
+                                        new Notify().Render( "snackbar", "导入成功，请刷新当前页面，以便新配置文件生效。", "刷新", () => {
+                                            location.href = location.origin + location.pathname + "?simpread_mode=reload";
+                                        });
+                                    }, {} );
                                 }, json );
                             });
                         }
@@ -183,7 +187,7 @@ export default class CommonOpt extends React.Component {
     }
 
     clear() {
-        new Notify().Render( "snackbar", "是否清除掉本地配置文件？", "同意 ", () => {
+        new Notify().Render( "snackbar", "是否清除掉（已包含账户信息）本地配置文件？", "同意 ", () => {
             storage.Clear( "local", () => {
                 new Notify().Render( "snackbar", "清除成功，此页面需刷新后才能生效！", "刷新 ", ()=>{
                     location.href = location.origin + location.pathname + "?simpread_mode=clear";
@@ -240,7 +244,7 @@ export default class CommonOpt extends React.Component {
                 </div>
                 <div style={{ display: 'inline-flex', width: '100%' }}>
                     <Button type="raised" text="手动同步适配列表" width="100%"
-                            icon={ ss.IconPath( "website_icon" ) }
+                            icon={ ss.IconPath( "update_icon" ) }
                             color="#fff" backgroundColor="#2196F3"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.newsites() } />

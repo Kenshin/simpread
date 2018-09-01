@@ -1031,7 +1031,7 @@ let noti; // notify variable
 function serviceCallback( result, error, name, type, notify ) {
     noti.complete();
     !error && notify.Render( `已成功保存到 ${name}！` );
-    error  && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
+    ![ "evernote", "yinxiang" ].includes( type ) && error && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
     if ( error && error.includes( "重新授权" )) {
         notify.Clone().Render( "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
         setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );

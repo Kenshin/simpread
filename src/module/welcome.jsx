@@ -169,7 +169,7 @@ class Welcome extends React.Component {
                             <div style={ style.desc }>
                                 { br.isFirefox() ? "Chrome 好评率超过 99% 的阅读模式现已来到 Firefox。" : "让你瞬间进入沉浸式阅读的 Chrome 扩展，类似 Safari 的阅读模式。" }<br/>
                                 去掉干扰元素，提升阅读体验，<strong style={ style.strong }>「简」</strong>单阅读，愉<strong style={ style.strong }>「悦」</strong>心情。<br/>
-                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }><a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E9%80%82%E9%85%8D%E7%AB%99%E7%82%B9%E5%88%97%E8%A1%A8">数百种类型</a></strong> 的网站。
+                                为了达到 <strong style={ style.strong }>「完美」</strong> 的阅读模式，简悦适配了 <strong style={ style.strong }><a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a></strong> 的网站。
                             </div>
                         </section>
                     </div>
@@ -226,7 +226,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                    { !first && version == "1.1.1" && 
+                    { (( !first && version == "1.1.1" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.1">
                             <section style={ style.section }>
                                 <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-adapter.png" style={ style.img }/>
@@ -235,6 +235,32 @@ class Welcome extends React.Component {
                                     从现在开始，简悦可以识别出 Wordpress · Hexo · Ghost · <br/>
                                     Discuz 等博客 / 论坛的页面了！<br/>
                                     甚至，只要是结构良好的页面，（无需适配）自动生成阅读模式，详细 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/智能适配模式">请看这里</a> 。
+                                </div>
+                            </section>
+                        </div> }
+
+                    { (( !first && version == "1.1.2" ) || version == "all" ) && 
+                        <div className="carousel-item" id="1.1.2">
+                            <section style={ style.section }>
+                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-plugins.png" style={ style.img }/>
+                                <h2 style={ style.h2 }>插件系统</h2>
+                                <div style={ style.desc }>
+                                    <a target="_blank" href="https://simpread.ksria.cn/plugins/details/kw36BtjGu0">字数统计</a> · <a target="_blank" href="https://simpread.ksria.cn/plugins/details/VQOZdNET2d">点击查看大图（Lightbox）</a> · <a target="_blank" href="https://simpread.ksria.cn/plugins/details/ohnTKVHz4a">划词翻译</a> 一个不能少。 <br/>
+                                    可以使用 JavaScript 编写基于「简悦」的插件了，详细说明请看 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F">说明文档</a><br/>
+                                    现在就安装适合你的插件吧 → <a target="_blank" href="https://simpread.ksria.cn/plugins/">插件中心</a> 。
+                                </div>
+                            </section>
+                        </div> }
+
+                    { (( !first && version == "1.1.2" ) || version == "all" ) && 
+                        <div className="carousel-item" id="1.1.2">
+                            <section style={ style.section }>
+                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-sites.png" style={ style.img }/>
+                                <h2 style={ style.h2 }>站点集市</h2>
+                                <div style={ style.desc }>
+                                    方便提交，让你的站点为数以万计的简悦用户使用<br/>
+                                    官方主适配源、第三方适配源、站点集市适配源、自定义适配源一站式浏览<br/>
+                                    现在就访问 <a target="_blank" href="https://simpread.ksria.cn/sites/">站点集市</a> 吧，看看有什么增加的新适配站点。
                                 </div>
                             </section>
                         </div> }

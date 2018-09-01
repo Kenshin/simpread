@@ -23,6 +23,11 @@ const keyboard = {
             "kbd"  : "ep",
             "type" : "epub",
             "desc" : "导出为 epub",
+        },
+        hm: {
+            "kbd"  : "hm",
+            "type" : "html",
+            "desc" : "导出为 HTML",
         }
     },
     "控制栏 - 其它" : {
@@ -103,6 +108,11 @@ const keyboard = {
             "type" : "save",
             "desc" : "保存到 稍后读",
         },
+        tm: {
+            "kbd"  : "tm",
+            "type" : "temp",
+            "desc" : "生成临时页面",
+        },
     },
     "控制栏 - 无障碍" : {
         ts: {
@@ -136,6 +146,11 @@ const keyboard = {
             "kbd"  : "cl",
             "type" : "remove",
             "desc" : "隐藏任意元素",
+        },
+        tr: {
+            "kbd"  : "tr",
+            "type" : "tempread",
+            "desc" : "提交临时阅读模式",
         },
     },
 };
@@ -192,6 +207,11 @@ const readItems = {
             "remove" : {
                 "name" : "隐藏任意元素",
                 "icon" : ss.IconPath("remove_icon"),
+                "color": "#03A9F4",
+            },
+            "tempread": {
+                "name" : "提交临时阅读模式",
+                "icon" : ss.IconPath("tempread_icon"),
                 "color": "#03A9F4",
             },
         },
@@ -555,32 +575,36 @@ const tabsItem = [{
         active : true,
         route: "#common",
     },{
-        name: "聚焦模式",
-        value: "focus",
-        route: "#focus",
-    },{
-        name: "阅读模式",
-        value: "read",
-        route: "#read",
+        name: "基础设定",
+        value: "simple",
+        route: "#simple",
     },{
         name: "高级设定",
         value: "labs",
         route: "#labs",
     },{
+        name: "站点管理",
+        value: "sites",
+        route: "#sites",
+    },{
+        name: "插件管理",
+        value: "plugins",
+        route: "#plugins",
+    },{
         name: "稍后读",
         value: "later",
         route: "#later",
     },{
+        name: "账户",
+        value: "account",
+        route: "#account",
+    },{
         name: "关于",
         value: "about",
         route: "#about",
-    },{
-        name: "新手入门",
-        value: "help",
-        route: "https://github.com/kenshin/simpread/wiki",
 }],
-    headerColors  = [ "#64B5F6", "#81C784", "#9575CD", "#7986CB", "#BA68C8", "#4DB6AC" ],
-    topColors     = [ "#2196F3", "#4CAF50", "#673AB7", "#3F51B5", "#9C27B0", "#009688" ],
+    headerColors  = [ "#64B5F6", "#81C784", "#7986CB", "#9575CD", "#4DD0E1", "#BA68C8", "#989fb5", "#4DB6AC" ],
+    topColors     = [ "#2196F3", "#4CAF50", "#3F51B5", "#673AB7", "#00BCD4", "#9C27B0", "#6f7a9b", "#009688" ],
     menuItem      = tabsItem.map( ( item, idx ) => {
        const menu = { ...item };
        switch ( idx ) {
@@ -598,12 +622,15 @@ const tabsItem = [{
                 menu.icon = ss.IconPath( "labs_icon" );
                 break;
             case 4:
-                menu.icon = ss.IconPath( "read_later_icon" );
+                menu.icon = ss.IconPath( "plugins_icon" );
                 break;
             case 5:
-                menu.icon = ss.IconPath( "about_icon" );
+                menu.icon = ss.IconPath( "read_later_icon" );
                 break;
             case 6:
+                menu.icon = ss.IconPath( "about_icon" );
+                break;
+            case 7:
                 menu.icon = ss.IconPath( "help_icon" );
                 break;
        }

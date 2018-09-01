@@ -3,12 +3,12 @@
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.1-blue.svg"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.2-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
 </p>
 <p align="center">
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
-   <a href="http://ksria.com/simpread/crx/1.1.1/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
+   <a href="http://ksria.com/simpread/crx/1.1.2/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
    <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://i.imgur.com/JFhxHeR.png"></a>
    <a target="_blank" href="https://xteko.com/redir?url=http://ojec5ddd5.bkt.clouddn.com/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6"><img src="https://i.imgur.com/zZeOllB.png"></a>
@@ -17,7 +17,7 @@
 ***
 
 #### 马上使用：
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.1/simpread.crx)
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.2/simpread.crx)
 * [Firefox 扩展中心](https://addons.mozilla.org/zh-CN/firefox/addon/simpread) 
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 * [iOS（ iPhone / iPad ）版](https://xteko.com/redir?url=http://ojec5ddd5.bkt.clouddn.com/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](https://github.com/Kenshin/simpread/wiki/JSBox)
@@ -46,13 +46,19 @@
   自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面以及只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [智能适配](https://github.com/kenshin/simpread/wiki/智能适配模式)
 
 - 站点适配源：  
-  包括：`官方（主）适配源` `官方（次）适配源以及第三方适配源` `本地适配源` 并支持导入第三方适配源，详细请看 [站点适配源](https://github.com/Kenshin/simpread/wiki/站点适配源)
+  包括：`官方（主）适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](https://github.com/Kenshin/simpread/wiki/站点适配源)
 
 - 站点编辑器：  
   页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
 
 - 站点管理器：  
   可管理全部的适配站点，详细请看 [站点管理器](https://github.com/kenshin/simpread/wiki/站点管理器)
+
+- ![Imgur](https://i.imgur.com/G1nQZxr.png) 站点集市：  
+  上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
+
+- ![Imgur](https://i.imgur.com/G1nQZxr.png) 插件系统：  
+  现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) ，如何编写插件请看 → [说明文档](https://github.com/Kenshin/simpread/wiki/插件系统)
 
 - 多种主题：  
   `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
@@ -71,7 +77,7 @@
 
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](https://github.com/kenshin/simpread/wiki/faq#白名单) 以及 [排除列表](https://github.com/kenshin/simpread/wiki/faq#排除列表) 等
 
-- 稍后读
+- 稍后读；
 
 #### 截图：
 ![简单阅读，愉悦心情！](http://ojec5ddd5.bkt.clouddn.com/welcome-readme-1.png)
@@ -84,7 +90,7 @@
 * <http://ksria.com/simpread/gallery/>
 
 #### 全部功能：
-![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.1.1.png)
+![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.1.2.png)
 
 #### 如何使用（阅读模式）：
 
@@ -176,11 +182,11 @@ _如发现下图显示不全，请直接访问 http://ojec5ddd5.bkt.clouddn.com/
 <!-- Link -->
 [www-badge]:        https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg
 [www-link]:         http://ksria.com/simpread
-[version-badge]:    https://img.shields.io/badge/lastest_version-1.1.1-blue.svg
+[version-badge]:    https://img.shields.io/badge/lastest_version-1.1.2-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
-[offline-link]:     http://ksria.com/simpread/crx/1.1.1/simpread.crx
+[offline-link]:     http://ksria.com/simpread/crx/1.1.2/simpread.crx
 [license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
 [license-link]:     https://opensource.org/licenses/MIT

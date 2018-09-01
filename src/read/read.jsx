@@ -14,6 +14,7 @@ import * as ss            from 'stylesheet';
 import {browser}          from 'browser';
 import * as msg           from 'message';
 import * as highlight     from 'highlight';
+import * as run           from 'runtime';
 
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
@@ -40,20 +41,42 @@ const Footer = () => {
 class Read extends React.Component {
 
     componentWillMount() {
+        loadPlugins( "read_start" );
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
+        // hack code
+        //storage.current.fap && $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">' );
+        if ( storage.current.fap ) {
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp" crossorigin="anonymous">' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">' );
+        }
     }
 
     async componentDidMount() {
         if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
-            let msg = `当前页面结构改变导致不匹配阅读模式，请报告 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">此页面</a>`;
-            this.props.read.highlight == true && ( msg += `，已启动 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。` )
-            new Notify().Render( 2, msg );
             this.componentWillUnmount();
-            this.props.read.highlight == true && Highlight().done( dom => {
-                storage.pr.TempMode( "read", dom );
-                Render();
-            });
+            if ( ! localStorage["sr-update-site"] ) {
+                new Notify().Render({ content: "当前页面结构改变导致不匹配阅读模式，接下来请选择？", action: "更新", cancel: "高亮", callback: type => {
+                    if ( type == "action" ) {
+                        new Notify().Render( "2 秒钟后将会自动查找更新，请勿关闭此页面..." );
+                        localStorage["sr-update-site"] = true;
+                        setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.update_site, { url: location.href, site: storage.pr.current.site } )), 2000 );
+                    } else {
+                        this.props.read.highlight == true ? setTimeout( () => {
+                            Highlight().done( dom => {
+                                storage.pr.TempMode( "read", dom );
+                                Render();
+                            });
+                        }, 200 ) : new Notify().Render( `请先开启 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a> 选项！` );
+                    }
+                }});
+            } else {
+                new Notify().Render({ content: "更新后仍无法适配此页面，是否提交？", action: "是的", cancel: "取消", callback: type => {
+                    if ( type == "cancel" ) return;
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed" }));
+                }});
+            }
+            localStorage.removeItem( "sr-update-site" );
         } else {
             $root
             .addClass( "simpread-font" )
@@ -83,10 +106,15 @@ class Read extends React.Component {
             tooltip.Render( rdclsjq );
             waves.Render({ root: rdclsjq });
             storage.Statistics( "read" );
+
+            loadPlugins( "read_complete" );
+
+            localStorage.removeItem( "sr-update-site" );
         }
     }
 
     componentWillUnmount() {
+        loadPlugins( "read_end" );
         ss.FontSize( "" );
         $root.removeClass( theme )
              .removeClass( "simpread-font" );
@@ -112,7 +140,8 @@ class Read extends React.Component {
                 modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                 break;
             case "siteeditor":
-                se.Render();
+                $( "panel-bg" ).length > 0 && $( "panel-bg" )[0].click();
+                setTimeout( ()=>se.Render(), 500 );
                 break;
             case "fontfamily":
             case "fontsize":
@@ -246,6 +275,19 @@ function getReadRoot() {
 function excludes( $target, exclude ) {
     const tags = storage.pr.Exclude( $target );
     $target.find( tags ).remove();
+}
+
+/**
+ * Load plugins from storage and exec
+ * 
+ * @param {string} state include: plugin.run_at
+ */
+function loadPlugins( state ) {
+    storage.Plugins( () => {
+        storage.option.plugins.forEach( id => {
+            storage.plugins[id] && run.Exec( state, storage.current.site.name, storage.plugins[id] );
+        });
+    });
 }
 
 export { Render, Exist, Exit, Highlight };

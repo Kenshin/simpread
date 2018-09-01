@@ -76,7 +76,7 @@ export default class ReadOpt extends React.Component {
     }
 
     render() {
-        const slider_width = location.protocol.includes( "extension" ) ? "565.8px" : undefined;
+        const slider_width = location.protocol.includes( "extension" ) ? "660.09px" : undefined;
         return (
             <sr-opt-read>
                 <sr-opt-gp>

@@ -119,7 +119,8 @@ const name = "simpread",
         origins   : [],
         blacklist : [
             "google.com",
-        ]
+        ],
+        plugins   : [], // plugin id, e.g. kw36BtjGu0
     },
     statistics = {
         "focus"   : 0,
@@ -143,6 +144,14 @@ const name = "simpread",
             "temp"       : 0,
         }
     },
+    user   = {
+        uid       : "",
+        name      : "",
+        contact   : "",
+        email     : "",
+        avatar    : "",
+        permission: "",
+    },
     unread = {
         idx       : 0,
         create    : "",
@@ -163,12 +172,15 @@ let current  = {},
         unrdist : [],
         sites   : [],
         websites: {
+            person : [],
             custom : [],
             local  : [], // include focus.sites and read.sites
         },
-        statistics
+        statistics,
+        user,
     },
-    secret = {
+    plugins  = {},
+    secret   = {
         version   : "2017-11-22",
         "dropbox" : {
             "access_token": ""
@@ -287,12 +299,30 @@ class Storage {
     }
 
     /**
+     * Get user info
+     * 
+     * @return {object} user object
+     */
+    get user() {
+        return simpread.user;
+    }
+
+    /**
      * Get secret data structure
      * 
      * @return {object} secret object
      */
     get secret() {
         return secret;
+    }
+
+    /**
+     * Get plugins data structure
+     * 
+     * @return {object} plugins object
+     */
+    get plugins() {
+        return plugins;
     }
 
     /**
@@ -303,6 +333,7 @@ class Storage {
     get sites() {
         return {
             global: simpread.sites,
+            person: simpread.websites.person,
             custom: simpread.websites.custom,
             local : simpread.websites.local,
         }
@@ -333,6 +364,16 @@ class Storage {
      */
     get puread() {
         return this.pr;
+    }
+
+    /**
+     * Get service url
+     * 
+     * @return {string} url
+     */
+    get service() {
+        //return "http://localhost:3000";
+        return "https://simpread.ksria.cn";
     }
 
     /**
@@ -374,10 +415,11 @@ class Storage {
             if ( result && !$.isEmptyObject( result )) {
                 secret    = result[ "secret" ] && safesave( result[ "secret" ]);
                 simpread  = result[name];
+                plugins   = result["plugins"];
                 firstload = false;
             }
             origin = clone( simpread );
-            callback( simpread, secret );
+            callback( simpread, secret, plugins );
             console.log( "chrome storage read success!", simpread, origin, result );
         }, error => {
             console.log(`Error: ${error}`);
@@ -389,13 +431,18 @@ class Storage {
      * 
      * @param {object} simpread object 
      * @param {object} secret object 
+     * @param {object} plugins object 
      */
-    WriteAsync( simp, sec ) {
+    WriteAsync( simp, sec, plugs ) {
         simpread  = simp;
         origin    = clone( simpread );
-        sec && ( secret = sec );
+        sec   && ( secret  = sec    );
+        plugs && ( plugins = plugs  );
         browser.storage.local.set( { ["secret"] : secret }, () => {
-            console.log( "firefox storage safe set success!", secret );
+            console.log( "firefox storage secret set success!", secret );
+        });
+        browser.storage.local.set( { ["plugins"] : plugins }, () => {
+            console.log( "firefox storage plugins set success!", plugins );
         });
     }
 
@@ -418,6 +465,7 @@ class Storage {
      */
     Writesite( sites, callback ) {
         simpread.sites           = sites.global;
+        simpread.websites.person = sites.person;
         simpread.websites.custom = sites.custom;
         simpread.websites.local  = sites.local;
         callback && save( callback, true );
@@ -637,6 +685,28 @@ class Storage {
     }
 
     /**
+     * Plugins set/get, plugins not import/export
+     * 
+     * @param {object}   plugins
+     * @param {function} callback
+     */
+    Plugins( callback, data ) {
+        if ( data ) {
+            plugins = { ...data };
+            browser.storage.local.set( { ["plugins"] : plugins }, () => {
+                console.log( "chrome storage plugins set success!", plugins );
+                callback && callback();
+            });
+        } else {
+            browser.storage.local.get( ["plugins"], result => {
+                console.log( "chrome storage plugins get success!", result );
+                result && !$.isEmptyObject( result ) && ( plugins = result["plugins"] );
+                callback && callback();
+            });
+        }
+    }
+
+    /**
      * Export, only include: version, option, focus, read, unrdist
      * 
      * @return {string} object json stringify
@@ -649,6 +719,7 @@ class Storage {
             read    : { ...this.read   },
             websites: { ...this.websites },
             statistics: { ...this.statistics },
+            user    : { ...this.user },
             unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });
