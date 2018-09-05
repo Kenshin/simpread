@@ -54,10 +54,10 @@
 - 站点管理器：  
   可管理全部的适配站点，详细请看 [站点管理器](https://github.com/kenshin/simpread/wiki/站点管理器)
 
-- ![Imgur](https://i.imgur.com/G1nQZxr.png) 站点集市：  
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 站点集市：  
   上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
 
-- ![Imgur](https://i.imgur.com/G1nQZxr.png) 插件系统：  
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 插件系统：  
   现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) ，如何编写插件请看 → [说明文档](https://github.com/Kenshin/simpread/wiki/插件系统)
 
 - 多种主题：  
@@ -112,12 +112,14 @@
 
 #### 提交新站：
 
-* 方式1：通过 **提交 issues** 的方式（不要使用 `pr` 方式），请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；  
+* 方式1：通过 **提交到 站点集市** 的方式，详细请看 [站点管理器 · 上传](https://github.com/Kenshin/simpread/wiki/站点管理器#上传)
+
+* 方式2：通过 **提交 issues** 的方式（不要使用 `pr` 方式），请提交网址 [到这里](https://github.com/kenshin/simpread/labels/new%20site)；  
   > 当适配完成后关闭此 `issues`，之后通过 `简悦` → `选项` → `手动同步适配列表` 更新；
 
-* 方式2：通过 **新增站点编辑器** 的方式（适合逐一添加单个新站），详细说明 [请看这里](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E5%A6%82%E4%BD%95%E6%96%B0%E5%A2%9E%E4%BF%AE%E6%94%B9)；
+* 方式3：通过 **新增站点编辑器** 的方式（适合逐一添加单个新站），详细说明 [请看这里](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8#%E5%A6%82%E4%BD%95%E6%96%B0%E5%A2%9E%E4%BF%AE%E6%94%B9)；
 
-* 方式3：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90#%E5%A6%82%E4%BD%95%E6%8F%90%E4%BA%A4%E5%88%B0%E7%AE%80%E6%82%A6%E7%9A%84%E5%AE%98%E6%96%B9%E6%AC%A1%E9%80%82%E9%85%8D%E6%BA%90)
+* 方式4：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90#%E5%A6%82%E4%BD%95%E6%8F%90%E4%BA%A4%E5%88%B0%E7%AE%80%E6%82%A6%E7%9A%84%E5%AE%98%E6%96%B9%E6%AC%A1%E9%80%82%E9%85%8D%E6%BA%90)
 
 * 更多说明请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器) [站点管理](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%AE%A1%E7%90%86%E5%99%A8) [站点适配源](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90)；
 
