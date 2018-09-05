@@ -1,0 +1,212 @@
+# 注意：由于 1.1.2 版增加了 [站点集市](https://simpread.ksria.cn/sites/)，请前往 [站点集市](%E7%AB%99%E7%82%B9%E9%9B%86%E5%B8%82) 查看，以下内容将不会再更新。
+
+***
+
+> 由于有些 URL 区分 子域名 或 路径，如 http://www.ifanr.com/minapp/ http://www.ifanr.com/data/ http://www.ifanr.com/app/ http://www.ifanr.com/dasheng/ 等，以下的网址只列出了主域名。
+
+> 以下是这些网址的整理，请使用 `ctrl + F` / `control + F` 进行检索。
+
+***
+
+官方（主）适配源
+---
+> 截至到目前为止，简悦已经适配了 249 类网址，详细请看 [这里](http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json)
+
+- <http://cnbeta.com/>
+- <http://www.qdaily.com/>
+- <http://36kr.com/>
+- <http://www.pingwest.com/>
+- <http://www.jiemian.com/>
+- <http://www.ifanr.com/>
+- <https://minapp.com/>
+- <https://sspai.com/>
+- <http://www.dgtle.com/>
+- <https://zhuanlan.zhihu.com/>
+- <http://dudu.zhihu.com/>
+- <https://daily.zhihu.com/>
+- <https://www.zhihu.com/>
+- <http://www.geekpark.net/>
+- <http://www.jianshu.com/>
+- <http://www.waerfa.com/>
+- <http://mp.weixin.qq.com/>
+- <http://www.guokr.com/>
+- <http://zuimeia.com/>
+- <https://www.huxiu.com/>
+- <https://www.douban.com/>
+- <https://www.bilibili.com/read/home>
+- <http://www.yixieshi.com/>
+- <https://moment.douban.com/>
+- <http://qingmang.me/>
+- <https://www.leiphone.com/>
+- <http://www.tmtpost.com/>
+- <http://songshuhui.net/>
+- <http://www.infzm.com/>
+- <http://www.nationalgeographic.com.cn/>
+- <http://www.appinn.com/>
+- <http://www.apprcn.com/>
+- <http://www.playpcesor.com/>
+- <https://steachs.com/>
+- <http://www.azofreeware.com/>
+- <http://weibo.com/>
+- <http://www.leikeji.com/>
+- <https://xueqiu.com/>
+- <http://107cine.com/>
+- <http://jiemi.baike.com/>
+- <https://wikipedia.org/>
+- <http://www.pmcaff.com/>
+- <http://dxy.cn/>
+- <http://www.adquan.com/>
+- <http://www.mafengwo.cn>
+- <http://chuansong.me/>
+- <http://blog.jobbole.com/>
+- <http://top.jobbole.com/>
+- <https://cnodejs.org/>
+- <https://www.w3cplus.com/>
+- <https://www.w3cways.com/>
+- <http://div.io/>
+- <https://news.aotu.io/>
+- <https://aotu.io/>
+- <https://ruby-china.org/>
+- <http://www.infoq.com/>
+- <https://segmentfault.com/>
+- <https://juejin.im/>
+- <https://www.qianduan.net/>
+- <http://www.importnew.com/>
+- <http://www.solidot.org/>
+- <http://ifeve.com/>
+- <https://www.oschina.net/>
+- <https://my.oschina.net/>
+- <https://www.oschina.net/>
+- <http://geek.csdn.net/>
+- <http://blog.csdn.net/>
+- <http://lib.csdn.net/>
+- <https://hacpai.com/>
+- <http://www.freebuf.com/>
+- <http://www.ruanyifeng.com/>
+- <https://www.v2ex.com/>
+- <https://news.cnblogs.com/>
+- <http://www.cnblogs.com/>
+- <http://www.tuicool.com/>
+- <https://www.w3ctech.com/>
+- <http://www.html-js.com/>
+- <http://www.open-open.com/>
+- <http://colobu.com/>
+- <http://liqi.io/>
+- <http://www.daqianduan.com/>
+- <http://caibaojian.com/>
+- <http://hao.caibaojian.com/>
+- <http://xfenglin.com/>
+- <https://www.ibm.com/>
+- <http://www.guanggoo.com/>
+- <http://www.ctolib.com/>
+- <http://www.zuojj.com/>
+- <http://wkee.net/>
+- <https://xituqu.com/>
+- <http://www.linuxsight.com/>
+- <https://coyee.com/>
+- <http://www.36dsj.com/>
+- <http://www.cocoachina.com/>
+- <http://dataunion.org/>
+- <https://linux.cn/>
+- <http://www.techug.com/>
+- <http://www.ituring.com.cn/>
+- <https://github.com/>
+- <https://msdn.microsoft.com/>
+- <https://docs.microsoft.com/>
+- <https://developer.mozilla.org>
+- <http://www.edaoe.com>
+- <http://www.52im.net>
+- <http://www.chinabyte.com/>
+- <http://wiki.jikexueyuan.com>
+- <http://www.uisdc.com/>
+- <http://ourcoders.com/>
+- <https://www.kancloud.cn/>
+- <https://wanqu.co/blog?s=top>
+- <http://www.codedata.cn/>
+- <https://blog.codingnow.com>
+- <https://coolshell.cn/>
+- <http://www.voidcn.com/>
+- <http://www.thepaper.cn/>
+- <http://www.vice.cn/>
+- <http://jandan.net/>
+- <http://post.smzdm.com/>
+- <http://news.mydrivers.com/>
+- <http://www.ftchinese.com/>
+- <http://young.ifeng.com/>
+- <http://ifeng.com/>
+- <http://news.mtime.com/>
+- <http://feng.com/>
+- <http://caixin.com/>
+- <https://www.ithome.com/>
+- <http://news.sohu.com/>
+- <http://www.sohu.com/>
+- <http://news.sina.com.cn/>
+- <http://tech.sina.com.cn/>
+- <http://finance.sina.com.cn/>
+- <http://people.com.cn/>
+- <https://www.toutiao.com/>
+- <http://www.chinanews.com/>
+- <https://news.mindynode.com/>
+- <http://www.huanqiu.com/>
+- <http://www.8btc.com/>
+- <http://www.cwzg.cn/>
+- <http://www.yidianzixun.com/>
+- <http://reader.s-reader.com>
+- <http://news.163.com/>
+- <http://renjian.163.com/>
+- <http://163.com/>
+- <http://mi.techweb.com.cn/>
+- <http://www.techweb.com.cn/>
+- <http://www.donews.com/>
+- <http://newseed.pedaily.cn/>
+- <http://digi.tech.qq.com/>
+- <http://qq.com/>
+- <http://view.inews.qq.com/>
+- <http://view.news.qq.com/>
+- <http://news.china.com.cn/>
+- <http://nlc.vip.qikan.com/text/text.aspx>
+- <http://zhidx.com/>
+- <http://www.iheima.com/>
+- <http://www.pintu360.com/>
+- <http://tech2ipo.com/>
+- <http://column.iresearch.cn/>
+- <http://news.iresearch.cn/>
+- <http://www.lanjingtmt.com/>
+- <http://www.timetimetime.net/>
+- <http://www.mifengtd.cn/>
+- <http://www.vgtime.com/>
+- <http://www.keke289.com/>
+- <http://www.ebrun.com/>
+- <http://www.cokeji.com/>
+- <http://www.199it.com/>
+- <http://www.aliresearch.com/>
+- <http://cn.engadget.com/>
+- <https://www.chinaventure.com.cn/>
+- <https://baijia.baidu.com/>
+- <http://jingyan.baidu.com>
+- <http://www.g-cores.com/>
+- <https://tieba.baidu.com/>
+- <https://www.chiphell.com/>
+- <https://bbs.hupu.com/>
+- <http://www.qu.la/>
+- <http://www.biquge.com.tw/>
+- <http://www.xxbiquge.com/>
+- <http://www.biquge5200.com/>
+- <http://www.piaotian.com/>
+- <http://www.zanghaihua.org/>
+- <https://www.qidian.com/>
+- <http://www.lofter.com>
+- <https://readhub.me/>
+- <http://qgc.qq.com>
+- <http://www.williamlong.info/>
+
+官方（次）适配源
+---
+> 此列表中的内容均为社区整理，详细说明请看 [站点适配源 - 如何提交](%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90#%E5%A6%82%E4%BD%95%E6%8F%90%E4%BA%A4%E5%88%B0%E7%AE%80%E6%82%A6%E7%9A%84%E5%AE%98%E6%96%B9%E6%AC%A1%E9%80%82%E9%85%8D%E6%BA%90)
+
+分类：
+
+- 英文类 http://ojec5ddd5.bkt.clouddn.com/origins/website_list_en.json
+
+- 繁体类 http://ojec5ddd5.bkt.clouddn.com/origins/website_list_tw.json
+

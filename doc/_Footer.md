@@ -1,0 +1,1 @@
+简悦（SimpRead）- 让你瞬间进入沉浸式阅读的 Chrome 扩展。  © 2017 [ksria.com](http://ksria.com/simpread) by [Kenshin Wang](http://kenshin.wang/)
