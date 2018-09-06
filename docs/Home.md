@@ -1,9 +1,5 @@
 简悦 SimpRead - 帮助中心
 =======
-**为了更好的阅读文档，请先安装 [Github Wiki](https://simpread.ksria.cn/sites/details/BwMjbvozQH) 适配站点。**
-
-***
-
 简悦的各种平台（Platform）
 ---
 
