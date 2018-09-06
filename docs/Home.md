@@ -1,5 +1,8 @@
 简悦 SimpRead - 帮助中心
 =======
+**为了更好的阅读文档，请先安装 [Github Wiki](https://simpread.ksria.cn/sites/details/BwMjbvozQH) 适配站点。**
+
+***
 
 简悦的各种平台（Platform）
 ---
@@ -11,16 +14,13 @@
 - [iPhone   ·  iPad → JSBox 版](http://ksria.com/simpread/#jsbox)
 
 ***
-**为了更好的阅读文档，请先安装 [Github Wiki](https://simpread.ksria.cn/sites/details/BwMjbvozQH) 适配站点。**
-***
 
 文档中心
 ---
 
 - [新手入门](入门指南（-操作指引-）)
 
-- [常见问题](faq)
-- [体验版](%E6%B5%8B%E8%AF%95%E7%89%88)
+- [常见问题](FAQ)
 
 基础功能
 ---
@@ -77,14 +77,22 @@
 
 - [待决站点](%E5%BE%85%E5%86%B3%E7%AB%99%E7%82%B9) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
 
+全功能
+---
+
+![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.1.2.png)
+
 联络方式
 ---
 
 - [邮件](kenshin@ksria.com)
 
 - [Telegram](https://t.me/simpread)
+
 - [微博](http://weibo.com/23784148)
+
 - 提交问题到 [Github](https://github.com/Kenshin/simpread/issues/new)
+
 - 提交问题到 [Webstore](https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/support)
 ***
 
