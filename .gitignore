@@ -1,6 +1,7 @@
 # for common
 node_modules/**
 publish/**
+.vscode/**
 
 # for chrome
 src/bundle/**
