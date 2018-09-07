@@ -3,6 +3,7 @@ node_modules/**
 src/bundle/**
 publish/**
 ext/**
+.vscode/**
 
 # for mac
 **/.DS_Store
