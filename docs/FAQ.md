@@ -20,6 +20,7 @@
 
 - [发送到 Kindle](#%E5%8F%91%E9%80%81%E5%88%B0-kindle)
 
+- [更新](#更新)
 
 ***
 
@@ -96,6 +97,11 @@
 
 解决方案：
 > 可以去 [插件中心](https://simpread.ksria.cn/plugins)，看看是否有替代的，例如：[划词翻译](https://simpread.ksria.cn/plugins/details/ohnTKVHz4a) [Lightbox](https://simpread.ksria.cn/plugins/details/VQOZdNET2d) 等，同时简悦支持了大量的 [快捷键](快捷键) 操作，也能在一定程度上解决快捷键的问题。
+
+更新
+---
+
+包含了：扩展、配置文件、适配列表、插件等全部的更新，请 [访问这里](更新)
 
 自定义样式
 ---
