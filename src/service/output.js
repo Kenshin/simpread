@@ -105,7 +105,7 @@ function action( type, title, desc, content ) {
                             case "html":
                                 new Notify().Render( "保存成功，开始下载..." );
                                 $.get( `${exp.kindle.host}/${exp.kindle.id}.html`, result => {
-                                    result = result.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://ojec5ddd5.bkt.clouddn.com/puread/' )
+                                    result = result.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://sr.ksria.cn/puread/' )
                                     exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(result), `simpread-${title}.html` );
                                 });
                                 break;

@@ -12,9 +12,9 @@ import {version}      from 'version';
  */
 
 const name = "simpread",
-    remote = "http://ojec5ddd5.bkt.clouddn.com/website_list_v3.json",
-    origins= "http://ojec5ddd5.bkt.clouddn.com/website_list_origins.json",
-    versions= "http://ojec5ddd5.bkt.clouddn.com/versions.json",
+    remote = "http://sr.ksria.cn/website_list_v3.json",
+    origins= "http://sr.ksria.cn/website_list_origins.json",
+    versions= "http://sr.ksria.cn/versions.json",
     local  = browser.extension.getURL( "website_list.json" ),
     mode   = {
         focus     : "focus",

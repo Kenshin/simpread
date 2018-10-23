@@ -191,7 +191,7 @@ class Welcome extends React.Component {
                     { first &&
                         <div className="carousel-item" id="1.0.3">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-service-v2.png?201806111215" style={ style.img }/>
+                                <img src="http://sr.ksria.cn/welcome-service-v2.png?201806111215" style={ style.img }/>
                                 <h2 style={ style.h2 }>连接你的生产力工具</h2>
                                 <div style={ style.desc }>
                                     支持下载 HTML · PDF · Markdown · PNG · <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a> 到本地 以及 发送到 <a target="_blank" href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a>。<br/>
@@ -217,7 +217,7 @@ class Welcome extends React.Component {
                     { !first && version == "1.1.1" && 
                         <div className="carousel-item" id="1.1.1">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-fap.png" style={ style.img }/>
+                                <img src="http://sr.ksria.cn/welcome-fap.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>全新的控制栏面板</h2>
                                 <div style={ style.desc }>
                                     「告别」传统、单一的控制栏，全部功能「一览无余」<br/>
@@ -229,7 +229,7 @@ class Welcome extends React.Component {
                     { (( !first && version == "1.1.1" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.1">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-adapter.png" style={ style.img }/>
+                                <img src="http://sr.ksria.cn/welcome-adapter.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>更智能的正文提取功能</h2>
                                 <div style={ style.desc }>
                                     从现在开始，简悦可以识别出 Wordpress · Hexo · Ghost · <br/>
@@ -242,7 +242,7 @@ class Welcome extends React.Component {
                     { (( !first && version == "1.1.2" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.2">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-plugins.png" style={ style.img }/>
+                                <img src="http://sr.ksria.cn/welcome-plugins.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>插件系统</h2>
                                 <div style={ style.desc }>
                                     <a target="_blank" href="https://simpread.ksria.cn/plugins/details/kw36BtjGu0">字数统计</a> · <a target="_blank" href="https://simpread.ksria.cn/plugins/details/VQOZdNET2d">点击查看大图（Lightbox）</a> · <a target="_blank" href="https://simpread.ksria.cn/plugins/details/ohnTKVHz4a">划词翻译</a> 一个不能少。 <br/>
@@ -255,7 +255,7 @@ class Welcome extends React.Component {
                     { (( !first && version == "1.1.2" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.2">
                             <section style={ style.section }>
-                                <img src="http://ojec5ddd5.bkt.clouddn.com/welcome-sites.png" style={ style.img }/>
+                                <img src="http://sr.ksria.cn/welcome-sites.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>站点集市</h2>
                                 <div style={ style.desc }>
                                     方便提交，让你的站点为数以万计的简悦用户使用<br/>
