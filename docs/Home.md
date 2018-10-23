@@ -78,7 +78,7 @@
 全功能
 ---
 
-![功能一览](http://ojec5ddd5.bkt.clouddn.com/feature%201.1.2.png)
+![功能一览](http://sr.ksria.cn/feature%201.1.2.png)
 
 联络方式
 ---

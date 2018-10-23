@@ -2,9 +2,9 @@
 ***
 
 ### 一览
-> 如果下图无法显示请看 [Send to Kindle](http://ojec5ddd5.bkt.clouddn.com/send%20to%20kindle.gif)
+> 如果下图无法显示请看 [Send to Kindle](http://sr.ksria.cn/send%20to%20kindle.gif)
 
-![Send to Kindle](http://ojec5ddd5.bkt.clouddn.com/send%20to%20kindle.gif)
+![Send to Kindle](http://sr.ksria.cn/send%20to%20kindle.gif)
 
 ### 含义
 此功能是将由简悦优化后的 `阅读模式` 的页面发送到 Kindle 上，而非（转换前）原文。
@@ -29,7 +29,7 @@
   ![Imgur](http://i.imgur.com/tn7xO5q.png)
 
 - 点击 `Send!` 即可，如之前的配置没有问题的话，将会在 Kindle 的后台看到如下内容：  
-  ![](http://ojec5ddd5.bkt.clouddn.com/send%20to%20kindle.png)
+  ![](http://sr.ksria.cn/send%20to%20kindle.png)
 
 ### 注意
 - 生成后的页面，如 `https://simpread.herokuapp.com/view/20170823xxxxxx.html` 并不会长久存在，超时后会自动删除。

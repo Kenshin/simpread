@@ -1,4 +1,4 @@
-![Imgur](http://ojec5ddd5.bkt.clouddn.com/cover@jsbox.png)
+![Imgur](http://sr.ksria.cn/cover@jsbox.png)
 
 ## 官网
 
@@ -6,8 +6,8 @@
 
 ## 下载地址
 
-- **简悦** [下载地址](https://xteko.com/redir?url=http://ojec5ddd5.bkt.clouddn.com/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 
-- **简悦 · 阅读器** [下载地址](https://xteko.com/redir?url=http://ojec5ddd5.bkt.clouddn.com/jsbox/simpread-reader.box?201805251238&name=%E7%AE%80%E6%82%A6%20%C2%B7%20%E9%98%85%E8%AF%BB%E5%99%A8)
+- **简悦** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 
+- **简悦 · 阅读器** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-reader.box?201805251238&name=%E7%AE%80%E6%82%A6%20%C2%B7%20%E9%98%85%E8%AF%BB%E5%99%A8)
 
 ## 简悦 iOS with JSBox 是什么
 
@@ -47,11 +47,11 @@
 
 ## 操作视频
 
-- 初始化设定 [动图](https://i.imgur.com/oTD6Q7F.gif) [视频](http://ojec5ddd5.bkt.clouddn.com/setting@jsbox.mov)
-- 安装简悦 · 阅读器 [动图](https://i.imgur.com/2qRdMJZ.gif) [视频](http://ojec5ddd5.bkt.clouddn.com/reader@jsbox.mov)
-- 从 Safari 进入阅读模式 [动图](https://i.imgur.com/6xsd4dZ.gif) [视频](http://ojec5ddd5.bkt.clouddn.com/share%20to%20safari@jsbox.mov)
-- 从任意 App 通过分享到 「打开阅读器」进入阅读模式 [动图](https://i.imgur.com/rShmzQu.gif) [视频](http://ojec5ddd5.bkt.clouddn.com/share%20to%20reader@jsbox.mov)
-- 复制 URL 后直接打开 阅读器 [动图](https://i.imgur.com/qRKLCr0.gif) [视频](http://ojec5ddd5.bkt.clouddn.com/clipboard%20to%20reader@jsbox.mov)
+- 初始化设定 [动图](https://i.imgur.com/oTD6Q7F.gif) [视频](http://sr.ksria.cn/setting@jsbox.mov)
+- 安装简悦 · 阅读器 [动图](https://i.imgur.com/2qRdMJZ.gif) [视频](http://sr.ksria.cn/reader@jsbox.mov)
+- 从 Safari 进入阅读模式 [动图](https://i.imgur.com/6xsd4dZ.gif) [视频](http://sr.ksria.cn/share%20to%20safari@jsbox.mov)
+- 从任意 App 通过分享到 「打开阅读器」进入阅读模式 [动图](https://i.imgur.com/rShmzQu.gif) [视频](http://sr.ksria.cn/share%20to%20reader@jsbox.mov)
+- 复制 URL 后直接打开 阅读器 [动图](https://i.imgur.com/qRKLCr0.gif) [视频](http://sr.ksria.cn/clipboard%20to%20reader@jsbox.mov)
 
 ## 配置指南
 
