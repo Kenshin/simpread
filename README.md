@@ -11,7 +11,7 @@
    <a href="http://ksria.com/simpread/crx/1.1.2/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
    <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://i.imgur.com/JFhxHeR.png"></a>
-   <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6"><img src="https://i.imgur.com/zZeOllB.png"></a>
+   <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.2.box?201810231502&name=%E7%AE%80%E6%82%A6"><img src="https://i.imgur.com/zZeOllB.png"></a>
 </p>
 
 ***
