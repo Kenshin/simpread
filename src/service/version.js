@@ -177,7 +177,7 @@ function Verify( curver, data ) {
 function Notify( first, type, ver ) {
     const str    = type == "firstload" ? "安装" : "更新",
           detail = type == "firstload" ? "" : details.get(ver),
-          link   = first ? `${detail}如何使用请看 <a href="https://github.com/Kenshin/simpread/wiki/" target="_blank">入门指南</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
+          link   = first ? `${detail}如何使用请看 <a href="http://ksria.com/simpread/docs/#/" target="_blank">文档中心</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
     return `${str} 到最新版本 ${ver} ，${ link }`;
 }
 

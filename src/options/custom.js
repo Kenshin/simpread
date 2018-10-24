@@ -123,7 +123,7 @@ function propertyRender() {
                     <group className="lab">
                         <h1>帮助</h1>
                         <group>
-                            <p>如何自定义样式，详细 <a href="https://github.com/Kenshin/simpread/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F" target="_blank">请看这里</a><br/>
+                            <p>如何自定义样式，详细 <a href="http://ksria.com/simpread/docs/#/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F" target="_blank">请看这里</a><br/>
                             独乐乐不如众乐乐！ <a href="https://github.com/Kenshin/simpread/issues/71" target="_blank">分享你的主题</a></p>
                         </group>
                     </group>

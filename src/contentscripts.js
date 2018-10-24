@@ -143,7 +143,7 @@ function focusMode() {
         } else {
             getCurrent( mode.focus );
             if ( storage.current.site.name.startsWith( "txtread:" ) ) {
-                new Notify().Render( "当前为 <a href='https://github.com/Kenshin/simpread/wiki/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
+                new Notify().Render( "当前为 <a href='http://ksria.com/simpread/docs/#/TXT-阅读器' target='_blank'>TXT 阅读器模式</a>，并不能使用设定功能。" )
                 return;
             }
             if ( pr.state == "temp" && pr.dom ) {
@@ -179,7 +179,7 @@ function readMode() {
             } else if ( pr.state == "temp" && pr.dom ) {
                 read.Render();
             } else {
-                new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='https://github.com/Kenshin/simpread/wiki/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+                new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
                 read.Highlight().done( dom => {
                     pr.TempMode( mode.read, dom );
                     read.Render();
