@@ -71,10 +71,10 @@ function action( type, title, desc, content ) {
                 }
                 break;
             case "epub":
-                new Notify().Render( `当前使用了第三方 <a href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-epub" target="_blank">epub.press</a> 服务，开始转码生成 epub 请稍等...` );
+                new Notify().Render( `当前使用了第三方 <a href="http://ksria.com/simpread/docs/#/发送到-Epub" target="_blank">epub.press</a> 服务，开始转码生成 epub 请稍等...` );
                 exp.Epub( content, window.location.href, title, desc, success => {
                     success  && new Notify().Render( 0, "转换成功，马上开始下载，请稍等。" );
-                    !success && new Notify().Render( 2, `转换失败，这是一个实验性功能，不一定能导出成功，详细请看 <a href="https://github.com/Kenshin/simpread/wiki/%E5%8F%91%E9%80%81%E5%88%B0-epub" target="_blank">epub.press</a>` );
+                    !success && new Notify().Render( 2, `转换失败，这是一个实验性功能，不一定能导出成功，详细请看 <a href="http://ksria.com/simpread/docs/#/发送到-Epub" target="_blank">epub.press</a>` );
                 });
                 break;
             case "html":
@@ -105,7 +105,7 @@ function action( type, title, desc, content ) {
                             case "html":
                                 new Notify().Render( "保存成功，开始下载..." );
                                 $.get( `${exp.kindle.host}/${exp.kindle.id}.html`, result => {
-                                    result = result.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://ojec5ddd5.bkt.clouddn.com/puread/' )
+                                    result = result.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://sr.ksria.cn/puread/' )
                                     exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(result), `simpread-${title}.html` );
                                 });
                                 break;

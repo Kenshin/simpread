@@ -92,7 +92,7 @@ export default class About extends React.Component {
                 <div className="label">帮助</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more" style={{cursor: 'default'}}>
-                        <div><a style={style.href} target="_blank" href="http://ojec5ddd5.bkt.clouddn.com/zhifu_m2.png">如果简悦可以解决你在阅读上痛点，可以请我喝杯咖啡</a></div>
+                        <div><a style={style.href} target="_blank" href="http://sr.ksria.cn/zhifu_m2.png">如果简悦可以解决你在阅读上痛点，可以请我喝杯咖啡</a></div>
                         <span className="desc">简悦是一个免费且开源的项目</span>
                         <span className="arrow"></span>
                     </div>
@@ -111,7 +111,7 @@ export default class About extends React.Component {
                 </div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
-                        <a style={style.href} target="_blank" href="https://github.com/Kenshin/simpread/wiki">第一次使用简悦？或者并不了解「阅读模式」请前往 <b>新手入门</b></a>
+                        <a style={style.href} target="_blank" href="http://ksria.com/simpread/docs/#/入门指南（-操作指引-）">第一次使用简悦？或者并不了解「阅读模式」请前往 <b>新手入门</b></a>
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>
