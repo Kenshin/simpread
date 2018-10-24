@@ -1,7 +1,7 @@
 <p align="center"><img src="http://sr.ksria.cn/logo%20bigger.png" /></p>
 <h1 align="center">简悦 - SimpRead</h1>
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
-<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://github.com/kenshin/simpread/wiki/适配站点列表">数百种类型</a> 的网站，因此诞生了简悦。</p>
+<p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
    <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.2-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
@@ -23,36 +23,36 @@
 * [iOS（ iPhone / iPad ）版](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](https://github.com/Kenshin/simpread/wiki/JSBox)
 
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
-* 不同简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](https://github.com/kenshin/simpread/wiki) 。
+* 不同简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](http://ksria.com/simpread/docs/#) 。
 
 #### 主要功能一览：
 - [聚焦模式](https://github.com/Kenshin/simpread/wiki/%E8%81%9A%E7%84%A6%E6%A8%A1%E5%BC%8F)：  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
 - [阅读模式](https://github.com/Kenshin/simpread/wiki/%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F/)：  
-  简悦 `原创` 功能，逐一适配了 [数百种类型](https://github.com/kenshin/simpread/wiki/适配站点列表) 的网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
+  简悦 `原创` 功能，逐一适配了 [数百种类型](https://simpread.ksria.cn/sites/) 的网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
   * 支持 `自动生成目录` [TXT 阅读器](https://github.com/Kenshin/simpread/wiki/txt-%E9%98%85%E8%AF%BB%E5%99%A8) [论坛类页面及分页](https://github.com/Kenshin/simpread/wiki/%E8%AE%BA%E5%9D%9B%E7%B1%BB%E9%A1%B5%E9%9D%A2%E5%8F%8A%E5%88%86%E9%A1%B5) 如：知乎 · 百度贴吧等
 
   * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](https://github.com/Kenshin/simpread/wiki/自定义样式)
 
 - 临时阅读模式：  
-  将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](https://github.com/kenshin/simpread/wiki/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#temp-read-mode)
+  将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](http://ksria.com/simpread/docs/#/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#temp-read-mode)
 
 - 主动适配：  
-  通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](https://github.com/kenshin/simpread/wiki/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
+  通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](http://ksria.com/simpread/docs/#/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
 
 - 智能适配：  
-  自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面以及只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [智能适配](https://github.com/kenshin/simpread/wiki/智能适配模式)
+  自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面以及只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [智能适配](http://ksria.com/simpread/docs/#/智能适配模式)
 
 - 站点适配源：  
   包括：`官方（主）适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](https://github.com/Kenshin/simpread/wiki/站点适配源)
 
 - 站点编辑器：  
-  页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器)
+  页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器)
 
 - 站点管理器：  
-  可管理全部的适配站点，详细请看 [站点管理器](https://github.com/kenshin/simpread/wiki/站点管理器)
+  可管理全部的适配站点，详细请看 [站点管理器](http://ksria.com/simpread/docs/#/站点管理器)
 
 - ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 站点集市：  
   上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
@@ -73,9 +73,9 @@
 
   - 导出到生产力工具，包括：`Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [授权服务](https://github.com/Kenshin/simpread/wiki/授权服务)
 
-- 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](https://github.com/kenshin/simpread/wiki/快捷键) 等；
+- 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](http://ksria.com/simpread/docs/#/快捷键) 等；
 
-- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](https://github.com/kenshin/simpread/wiki/faq#白名单) 以及 [排除列表](https://github.com/kenshin/simpread/wiki/faq#排除列表) 等
+- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](http://ksria.com/simpread/docs/#/FAQ?id=白名单) 以及 [排除列表](http://ksria.com/simpread/docs/#/FAQ?id=排除列表) 等
 
 - 稍后读；
 
@@ -121,7 +121,7 @@
 
 * 方式4：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90#%E5%A6%82%E4%BD%95%E6%8F%90%E4%BA%A4%E5%88%B0%E7%AE%80%E6%82%A6%E7%9A%84%E5%AE%98%E6%96%B9%E6%AC%A1%E9%80%82%E9%85%8D%E6%BA%90)
 
-* 更多说明请看 [站点编辑器](https://github.com/kenshin/simpread/wiki/站点编辑器) [站点管理](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E7%AE%A1%E7%90%86%E5%99%A8) [站点适配源](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90)；
+* 更多说明请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器) [站点管理](http://ksria.com/simpread/docs/#/站点管理器) [站点适配源](https://github.com/Kenshin/simpread/wiki/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90)；
 
 #### Chrome / Firefox / 轻阅版（UserScript）功能差别：
 ![Chrome / Firefox / 轻阅版（UserScript）功能差别](https://i.imgur.com/z4WI7uK.png)
@@ -131,9 +131,9 @@
 
 #### 相关链接：
 * [更新日志](http://ksria.com/simpread/changelog.html)
-* [帮助中心](https://github.com/kenshin/simpread/wiki)
-* [新手入门](https://github.com/kenshin/simpread/wiki/入门指南（-操作指引-）)
-* [常见问题](https://github.com/kenshin/simpread/wiki/faq)
+* [帮助中心](http://ksria.com/simpread/docs/#)
+* [新手入门](http://ksria.com/simpread/docs/#/入门指南（-操作指引-）)
+* [常见问题](http://ksria.com/simpread/docs/#/FAQ)
 * [反馈](https://github.com/kenshin/simpread/issues)
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
