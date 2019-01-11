@@ -344,7 +344,21 @@ function commbeautify( name, $target ) {
         newsrc = sina    ? sina    : newsrc;
         // hack code
         location.host.includes( "infoq.com" ) && ( newsrc = src );
-        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
+        
+        if (newsrc.startsWith( "//" )) {
+            newsrc = location.protocol + newsrc;
+        } else if (newsrc.startsWith( "../" )) {
+            let newdir = location.href;
+            while (newsrc.startsWith('../')) {
+                newsrc = newsrc.substr(3);
+                newdir = newdir.replace(/[\w-.]+$/, '')
+                               .replace(/[\w-.]+\/$/, '');
+            }
+            newsrc = newdir + newsrc;
+        } else {
+            newsrc = location.origin + newsrc;
+		}
+        
         $img.attr( "src", newsrc )
             .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );
