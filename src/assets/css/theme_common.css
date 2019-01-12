@@ -3,7 +3,7 @@
  * .simpread-theme-root
  * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, code, sr-blockquote, ul ol
  */
- 
+
 .simpread-theme-root {
     font-size: 62.5%!important;
 }
@@ -126,8 +126,11 @@ sr-rd-content ol {
 
 sr-rd-content ul li, sr-rd-content ol li {
     font-size: inherit;
-    list-style: disc;
     margin: 0 0 1.2em 0;
+}
+
+sr-rd-content ul li {
+    list-style: disc;
 }
 
 sr-rd-content ul li *, sr-rd-content ol li * {

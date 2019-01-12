@@ -2,7 +2,7 @@ console.log( "=== PureRead: Beautify load ===" )
 
 /**
  * Beautify html
- * 
+ *
  * @param {string} storage.current.site.name
  */
 function specbeautify( name, $target ) {
@@ -248,7 +248,7 @@ function specbeautify( name, $target ) {
 
 /**
  * Remove spare tag
- * 
+ *
  * @param {string} storage.current.site.name
  * @param {jquery} jquery object
  */
@@ -271,10 +271,10 @@ function removeSpareTag( name, $target ) {
 
 /**
  * Beautify html, incldue:
- * 
+ *
  * - change all <blockquote> to <sr-blockquote>
  * - remove useless <br>
- * 
+ *
  * @param {jquery} jquery object
  */
 function htmlbeautify( $target ) {
@@ -299,7 +299,7 @@ function htmlbeautify( $target ) {
  * - task: all hr tag add simpread-hidden class
  * - task: all pre/code tag remove class
  * - task: all a tag remove style
- * 
+ *
  * @param {jquery}
  */
 function commbeautify( name, $target ) {
@@ -344,7 +344,21 @@ function commbeautify( name, $target ) {
         newsrc = sina    ? sina    : newsrc;
         // hack code
         location.host.includes( "infoq.com" ) && ( newsrc = src );
-        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
+
+        if (newsrc.startsWith( "//" )) {
+            newsrc = location.protocol + newsrc;
+        } else if (newsrc.startsWith( "../" )) {
+            let newdir = location.href;
+            while (newsrc.startsWith('../')) {
+                newsrc = newsrc.substr(3);
+                newdir = newdir.replace(/[^\/]+$/, '')
+                    .replace(/[^\/]+\/$/, '');
+            }
+            newsrc = newdir + newsrc;
+        } else {
+            newsrc = location.origin + newsrc;
+        }
+
         $img.attr( "src", newsrc )
             .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );
