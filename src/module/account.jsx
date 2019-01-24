@@ -121,14 +121,14 @@ export default class AccountOpt extends React.Component {
                     <sr-opt-gp>
                         <TextField 
                             floatingtext="邮箱" 
-                            placeholder="请使用真是且有效的邮箱地址" 
+                            placeholder="请使用真实且有效的邮箱地址" 
                             errortext={ this.state.email_err }
                             value={ this.props.user.email } onChange={ e=>this.onChangeEmail(e) } disable={false} />
                     </sr-opt-gp>
                     <sr-opt-gp>
                         <TextField 
                             floatingtext="联络方式" 
-                            placeholder="微博 / 微信 等一切可以联络到你的方式" 
+                            placeholder="微博 / 微信 等一切可以联络到你的方式" 
                             value={ this.props.user.contact } onChange={ e=>this.onChangeContact(e) } disable={false} />
                     </sr-opt-gp>
                     <sr-opt-gp>
