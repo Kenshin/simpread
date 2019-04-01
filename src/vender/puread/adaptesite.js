@@ -14,7 +14,7 @@ const site   = {
     avatar    : [],
     paging    : [],
 };
-let minimatch;
+let minimatch, reability;
 
 export default class AdapteSite {
 
@@ -31,6 +31,10 @@ export default class AdapteSite {
      */
     SetMinimatch( value ) {
         minimatch = value;
+    }
+
+    SetReability( value ) {
+        reability = value;
     }
 
     /**
@@ -86,12 +90,30 @@ export default class AdapteSite {
                     this.Newmultisite( "read", obj );
                     this.state = "temp";
                 } else {
-                    const $dom = readtmpl();
-                    if ( $dom != -1 ) {
-                        this.Newsite( "read", $dom[0].outerHTML );
-                        this.dom   = $dom[0];
-                        this.state = "temp";
-                    } else this.current.site = util.clone( site );
+                    try {
+                        const location = document.location,
+                              uri      = {
+                                    spec: location.href,
+                                    host: location.host,
+                                    prePath: location.protocol + "//" + location.host,
+                                    scheme: location.protocol.substr(0, location.protocol.indexOf(":")),
+                                    pathBase: location.protocol + "//" + location.host + location.pathname.substr(0, location.pathname.lastIndexOf("/") + 1)
+                                },
+                                article = new reability.Readability( uri, document.cloneNode(true) ).parse();
+                        if ( article && article.content != "" ) {
+                            console.warn( "current parse is Readability", article )
+                            this.Newsite( "read", article.content );
+                            this.dom   = $(article.content)[0];
+                            this.state = "temp";
+                        } else throw "Readability error";
+                    } catch ( error ) {
+                        const $dom = readtmpl();
+                        if ( $dom != -1 ) {
+                            this.Newsite( "read", $dom[0].outerHTML );
+                            this.dom   = $dom[0];
+                            this.state = "temp";
+                        } else this.current.site = util.clone( site );
+                    }
                 }
             }
         }

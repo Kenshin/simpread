@@ -7,7 +7,7 @@ export default class PureRead extends AdapteSite {
 
     constructor( sites ) {
         super( sites );
-        this.version = "0.0.2";
+        this.version = "0.0.3";
         this.org_url = location.href;
         this.html    = {}; // clone site, include: title, desc, include, avatar, paging
         this.plugin  = {};
@@ -33,8 +33,10 @@ export default class PureRead extends AdapteSite {
             pangu     : plugin.pangu,
             beautify  : plugin.beautify,
             stylesheet: plugin.style,
+            reability : plugin.reability,
         };
         super.SetMinimatch( this.plugin.minimatch );
+        super.SetReability( this.plugin.reability );
     }
 
     /**
