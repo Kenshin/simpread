@@ -131,7 +131,7 @@ function wrap( site ) {
           title     = util.selector( site.title == "" ? "<title>" : site.title ),
           desc      = util.selector( site.desc    ),
           include   = util.selector( site.include );
-    wrapper.title   = query( title );
+    wrapper.title   = site.title == "" || site.title == "<title>" ? $( "head title" ).text() : query( title );
     wrapper.desc    = query( desc  );
     wrapper.include = site.include == "" && site.html != "" ? site.html : query( include, "html" );
     wrapper.avatar && wrapper.avatar.length > 0  && wrapper.avatar[0].name == "" && delete wrapper.avatar;
