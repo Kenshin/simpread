@@ -11,7 +11,7 @@ const plugins = {
     minimatch: minimatch,
     beautify : be,
     style    : ss,
-    reability: rda,
+    rdability: rda,
 };
 
 /**

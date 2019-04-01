@@ -33,10 +33,10 @@ export default class PureRead extends AdapteSite {
             pangu     : plugin.pangu,
             beautify  : plugin.beautify,
             stylesheet: plugin.style,
-            reability : plugin.reability,
+            rdability : plugin.rdability,
         };
         super.SetMinimatch( this.plugin.minimatch );
-        super.SetRdability( this.plugin.reability );
+        super.SetRdability( this.plugin.rdability );
     }
 
     /**
