@@ -33,10 +33,16 @@ export default class AdapteSite {
         minimatch = value;
     }
 
+    /**
+     * Set global rdability
+     */
     SetRdability( value ) {
         rdability = value;
     }
 
+    /**
+     * Not adapter usage mozilla readability and readtmpl
+     */
     Readability() {
         try {
             const location = document.location,
