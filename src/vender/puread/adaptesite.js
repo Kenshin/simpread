@@ -14,7 +14,7 @@ const site   = {
     avatar    : [],
     paging    : [],
 };
-let minimatch, reability;
+let minimatch, rdability;
 
 export default class AdapteSite {
 
@@ -34,7 +34,7 @@ export default class AdapteSite {
     }
 
     SetReability( value ) {
-        reability = value;
+        rdability = value;
     }
 
     Readability() {
@@ -47,7 +47,7 @@ export default class AdapteSite {
                         scheme: location.protocol.substr(0, location.protocol.indexOf(":")),
                         pathBase: location.protocol + "//" + location.host + location.pathname.substr(0, location.pathname.lastIndexOf("/") + 1)
                     },
-                    article = new reability.Readability( uri, document.cloneNode(true) ).parse();
+                    article = new rdability.Readability( uri, document.cloneNode(true) ).parse();
             if ( article && article.content != "" ) {
                 console.warn( "current parse is Readability", article )
                 this.Newsite( "read", article.content );
