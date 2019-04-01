@@ -212,6 +212,10 @@ class Read extends React.Component {
  */
 function Render() {
     storage.pr.ReadMode();
+    if ( storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
+        storage.pr.Readability();
+        storage.pr.ReadMode();
+    }
     console.log( "current puread object is   ", storage.pr )
     ReactDOM.render( <Read read={ storage.current } wrapper={ storage.pr.html } />, getReadRoot() );
 }
