@@ -33,7 +33,7 @@ export default class AdapteSite {
         minimatch = value;
     }
 
-    SetReability( value ) {
+    SetRdability( value ) {
         rdability = value;
     }
 

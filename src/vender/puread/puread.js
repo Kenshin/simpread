@@ -36,7 +36,7 @@ export default class PureRead extends AdapteSite {
             reability : plugin.reability,
         };
         super.SetMinimatch( this.plugin.minimatch );
-        super.SetReability( this.plugin.reability );
+        super.SetRdability( this.plugin.reability );
     }
 
     /**
