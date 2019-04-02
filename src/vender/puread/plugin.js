@@ -4,12 +4,14 @@ import pangu     from './plugin/pangu.min';
 import minimatch from './plugin/minimatch';
 import * as be   from './plugin/beautify';
 import * as ss   from './plugin/stylesheet';
+import * as rda  from './plugin/readability';
 
 const plugins = {
     pangu    : pangu,
     minimatch: minimatch,
     beautify : be,
     style    : ss,
+    rdability: rda,
 };
 
 /**

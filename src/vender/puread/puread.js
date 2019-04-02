@@ -7,7 +7,7 @@ export default class PureRead extends AdapteSite {
 
     constructor( sites ) {
         super( sites );
-        this.version = "0.0.2";
+        this.version = "0.0.3";
         this.org_url = location.href;
         this.html    = {}; // clone site, include: title, desc, include, avatar, paging
         this.plugin  = {};
@@ -33,8 +33,10 @@ export default class PureRead extends AdapteSite {
             pangu     : plugin.pangu,
             beautify  : plugin.beautify,
             stylesheet: plugin.style,
+            rdability : plugin.rdability,
         };
         super.SetMinimatch( this.plugin.minimatch );
+        super.SetRdability( this.plugin.rdability );
     }
 
     /**
@@ -129,7 +131,7 @@ function wrap( site ) {
           title     = util.selector( site.title == "" ? "<title>" : site.title ),
           desc      = util.selector( site.desc    ),
           include   = util.selector( site.include );
-    wrapper.title   = query( title );
+    wrapper.title   = site.title == "" || site.title == "<title>" ? $( "head title" ).text() : query( title );
     wrapper.desc    = query( desc  );
     wrapper.include = site.include == "" && site.html != "" ? site.html : query( include, "html" );
     wrapper.avatar && wrapper.avatar.length > 0  && wrapper.avatar[0].name == "" && delete wrapper.avatar;
