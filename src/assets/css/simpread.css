@@ -470,7 +470,6 @@ sharecard-head {
     margin: 25px;
 
     color: #fff;
-    background-color: rgb(33, 150, 243);
 
     border-radius: 10px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.15);
@@ -517,11 +516,15 @@ sharecard-content {
 
     font-size: 20px;
     text-align: left;
+
+    background-color: rgb(33, 150, 243);
 }
 
 sharecard-via {
-    font-size: 10px;
     padding: 10px;
+    font-size: 10px;
+
+    background-color: rgb(33, 150, 243);
 }
 
 sharecard-footer {
