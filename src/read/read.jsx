@@ -212,7 +212,7 @@ class Read extends React.Component {
  */
 function Render() {
     storage.pr.ReadMode();
-    if ( storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
+    if ( typeof storage.pr.html.include == "string" && storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
         storage.pr.Readability();
         storage.pr.ReadMode();
     }
