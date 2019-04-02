@@ -362,6 +362,11 @@ const readItems = {
                 "icon" : ss.IconPath("share_weibo_icon"),
                 "color": "#E6162D",
             },
+            "share_card" : {
+                "name" : "分享卡",
+                "icon" : ss.IconPath("share_card_icon"),
+                "color": "#0f4137",
+            },
         },
     },
     /*

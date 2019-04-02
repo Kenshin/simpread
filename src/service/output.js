@@ -38,6 +38,9 @@ function action( type, title, desc, content ) {
             case "telegram":
                 url = `https://t.me/share/url?url=${ window.location.href }`;
                 break;
+            case "card":
+                //TO-DO
+                break;
         }
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
     } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html" ].includes( type ) ) {
