@@ -6,6 +6,7 @@ import { storage } from 'storage';
 import {browser}   from 'browser';
 import * as msg    from 'message';
 import * as highlight from 'highlight';
+import * as share  from 'sharecard';
 
 /**
  * Controlbar common action, include:
@@ -44,6 +45,7 @@ function action( type, title, desc, content ) {
                 $("sr-rd-crlbar").find("panel-bg")[0].click();
                 highlight.Annotate().done( txt => {
                     console.log(txt);
+                    txt != "" && share.Render( "sr-read", title, txt );
                 });
                 break;
         }
