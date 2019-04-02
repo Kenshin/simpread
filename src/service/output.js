@@ -5,6 +5,7 @@ import * as exp    from 'export';
 import { storage } from 'storage';
 import {browser}   from 'browser';
 import * as msg    from 'message';
+import * as highlight from 'highlight';
 
 /**
  * Controlbar common action, include:
@@ -39,10 +40,14 @@ function action( type, title, desc, content ) {
                 url = `https://t.me/share/url?url=${ window.location.href }`;
                 break;
             case "card":
-                //TO-DO
+                new Notify().Render( "已启动分享卡标注功能，请在页面标注，生成分享卡。" );
+                $("sr-rd-crlbar").find("panel-bg")[0].click();
+                highlight.Annotate().done( txt => {
+                    console.log(txt);
+                });
                 break;
         }
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
+        type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
     } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html" ].includes( type ) ) {
         storage.Statistics( "service", type );
         switch ( type ) {
