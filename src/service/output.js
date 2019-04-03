@@ -44,7 +44,6 @@ function action( type, title, desc, content ) {
                 new Notify().Render( "已启动分享卡标注功能，请在页面标注，生成分享卡。" );
                 $("sr-rd-crlbar").find("panel-bg")[0].click();
                 highlight.Annotate().done( txt => {
-                    console.log(txt);
                     txt != "" && share.Render( "sr-read", title, txt );
                 });
                 break;
