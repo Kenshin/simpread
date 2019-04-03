@@ -516,10 +516,15 @@ sharecard-top span.logos {
 sharecard-content {
     padding: 15px;
 
+    max-height: 500px;
+
     font-size: 20px;
     text-align: left;
 
     background-color: rgb(33, 150, 243);
+
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 sharecard-via {

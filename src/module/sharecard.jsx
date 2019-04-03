@@ -52,7 +52,7 @@ class ShareCard extends React.Component {
 
 function Render( root, title, txt ) {
     $( root ).append( `<sharecard-bg></sharecard-bg>` );
-    ReactDOM.render( <ShareCard title={ title } content={ txt.replace("\n", "<br>")} />, $( "sharecard-bg" )[0] )
+    ReactDOM.render( <ShareCard title={ title } content={ txt.replace(/\n/ig, "<br>" )} />, $( "sharecard-bg" )[0] )
 }
 
 export {
