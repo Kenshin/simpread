@@ -1,3 +1,4 @@
+console.log( "=== simpread share card load ===" )
 
 import * as exp from 'export';
 import * as ss  from 'stylesheet';
