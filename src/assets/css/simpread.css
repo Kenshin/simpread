@@ -483,7 +483,9 @@ sharecard-card {
 sharecard-top {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+
+    padding-right: 5px;
 
     height: 65px;
     background-color: #fff;
@@ -494,6 +496,11 @@ sharecard-top {
 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+sharecard-top div {
+    display: flex;
+    align-items: center;
 }
 
 sharecard-top span.logos {

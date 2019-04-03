@@ -6,9 +6,9 @@ class ShareCard extends React.Component{
             <sharecard>
                 <sharecard-head>
                     <sharecard-card>
-                        <sharecard-top><span className="logos"></span>简 悦</sharecard-top>
-                        <sharecard-content>{ this.props.content }</sharecard-content>
-                        <sharecard-via>{ this.props.title }</sharecard-via>
+                        <sharecard-top><div><span className="logos"></span>简 悦</div><div>分享卡</div></sharecard-top>
+                        <sharecard-content dangerouslySetInnerHTML={{__html: this.props.content }}></sharecard-content>
+                        <sharecard-via>摘自 《{ this.props.title }》</sharecard-via>
                         <sharecard-footer></sharecard-footer>
                     </sharecard-card>
                 </sharecard-head>
