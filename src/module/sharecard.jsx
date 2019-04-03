@@ -29,7 +29,7 @@ class ShareCard extends React.Component {
                         <sharecard-top><span className="logos"></span>简 悦</sharecard-top>
                         <sharecard-content dangerouslySetInnerHTML={{__html: this.props.content }}></sharecard-content>
                         <sharecard-via>摘自 《{ this.props.title }》</sharecard-via>
-                        <sharecard-footer><div><span className="qrcode"></span><span dangerouslySetInnerHTML={{__html: "长按扫码<br>获取简悦" }}></span></div><div>还原阅读本质 · 提升阅读体验</div></sharecard-footer>
+                        <sharecard-footer><div><span className="qrcode"></span><span style={{ display: "none" }} dangerouslySetInnerHTML={{__html: "长按扫码<br>获取简悦" }}></span></div><div>还原阅读本质 · 提升阅读体验</div></sharecard-footer>
                     </sharecard-card>
                 </sharecard-head>
                 <sharecard-control>

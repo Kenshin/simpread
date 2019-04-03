@@ -533,7 +533,7 @@ sharecard-footer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     padding-right: 5px;
 
