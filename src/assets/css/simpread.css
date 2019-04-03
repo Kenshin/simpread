@@ -571,6 +571,9 @@ sharecard-footer span.qrcode {
 sharecard-control {
     display: flex;
     flex-direction: row;
+    align-items: center;
+
+    padding: 0 19px;
 
     height: 80px;
     background-color: #fff;

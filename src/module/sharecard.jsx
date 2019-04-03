@@ -1,6 +1,26 @@
 
+import * as exp from 'export';
+import * as ss  from 'stylesheet';
 
-class ShareCard extends React.Component{
+import Button   from 'button';
+
+class ShareCard extends React.Component {
+
+    download() {
+        exp.PNG( $("sharecard-card")[0] , `simpread-${ this.props.title }.png`, result => {
+            !result && new Notify().Render( 2, "下载失败，请稍后再试！" );
+            result  && this.exit();
+        });
+    }
+
+    exit() {
+        ReactDOM.unmountComponentAtNode( $( "sharecard-bg" )[0] );
+    }
+
+    componentWillUnmount() {
+        $( "sharecard-bg" ).remove();
+    }
+
     render() {
         return (
             <sharecard>
@@ -13,6 +33,16 @@ class ShareCard extends React.Component{
                     </sharecard-card>
                 </sharecard-head>
                 <sharecard-control>
+                    <Button type="raised" text="保 存" width="100%"
+                            color="#fff" backgroundColor="#2196F3"
+                            icon={ ss.IconPath( "save_icon" ) }
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.download() } />
+                    <Button type="raised" text="关 闭" width="100%"
+                            fontIcon={ `<i class="fas fa-window-close"></i>` }
+                            color="#fff" backgroundColor="#2196F3"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.exit() } />
                 </sharecard-control>
             </sharecard>
         )
