@@ -39,6 +39,28 @@ function start() {
     return dtd;
 }
 
+function annotate() {
+    const dtd = $.Deferred();
+    $( "html" ).one( "mouseup", event => {
+        let userSelection;
+        if ( window.getSelection ) {
+            userSelection = window.getSelection();
+        } else if ( document.selection ) {
+            userSelection = document.selection.createRange();
+        }
+        let selectedText = userSelection;
+        if (userSelection.text) selectedText = userSelection.text;
+
+        if ( selectedText != '' ) {
+            selectedText = "" + selectedText + "";
+            window.getSelection().removeAllRanges();
+            dtd.resolve( selectedText );
+        }
+    });
+    return dtd;
+}
+
 export {
     start as Start,
+    annotate as Annotate,
 }
