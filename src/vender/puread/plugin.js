@@ -5,6 +5,7 @@ import minimatch from './plugin/minimatch';
 import * as be   from './plugin/beautify';
 import * as ss   from './plugin/stylesheet';
 import * as rda  from './plugin/readability';
+import * as md   from './plugin/showdown.min';
 
 const plugins = {
     pangu    : pangu,
@@ -12,6 +13,7 @@ const plugins = {
     beautify : be,
     style    : ss,
     rdability: rda,
+    markdown : md,
 };
 
 /**

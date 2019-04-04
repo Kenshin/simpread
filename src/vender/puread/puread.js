@@ -34,9 +34,11 @@ export default class PureRead extends AdapteSite {
             beautify  : plugin.beautify,
             stylesheet: plugin.style,
             rdability : plugin.rdability,
+            markdown :  plugin.markdown,
         };
         super.SetMinimatch( this.plugin.minimatch );
         super.SetRdability( this.plugin.rdability );
+        super.SetMarkdown(  this.plugin.markdown  );
     }
 
     /**

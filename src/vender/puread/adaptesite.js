@@ -14,7 +14,7 @@ const site   = {
     avatar    : [],
     paging    : [],
 };
-let minimatch, rdability;
+let minimatch, rdability, markdown;
 
 export default class AdapteSite {
 
@@ -38,6 +38,13 @@ export default class AdapteSite {
      */
     SetRdability( value ) {
         rdability = value;
+    }
+
+    /**
+     * Set global markdown
+     */
+    SetMarkdown( value ) {
+        markdown = value;
     }
 
     /**
@@ -339,6 +346,9 @@ function readmeta() {
     if ( minimatch( location.href, "file://**/*.txt" ) || minimatch( location.href, "http*://**/*.txt" ) ) {
         return readtxt();
     }
+    if ( minimatch( location.href, "file://**/*.md" ) || minimatch( location.href, "http*://**/*.md" ) ) {
+        return readmd();
+    }
     const reg  = /<\S+ (class|id)=("|')?[\w-_=;:' ]+("|')?>?$|<[^/][-_a-zA-Z0-9]+>?$/ig, // from util.verifyHtml()
           meta = {
             name   : $( "meta[name='simpread:name']"    ).attr( "content" ),
@@ -389,6 +399,27 @@ function readtxt() {
         meta.html    = $( "body pre" ).html().replace( /\n/ig, "<br>" );
     }
     !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".txt", "" )) }</title>` );
+    return meta;
+}
+
+/**
+ * Read Markdown, include: file and http
+ */
+function readmd() {
+    const title = location.pathname.split( "/" ).pop(),
+          type  = location.protocol == "file:" ? "local" : "remote",
+          meta  = {
+            name   : `txtread::${type}`,
+            title  : "<title>",
+            desc   : "",
+            include: "",
+            auto   : false,
+            exclude: [],
+    };
+    const converter = new markdown.Converter(),
+          html      = converter.makeHtml( $( "body pre" ).text() );
+    meta.html    = html;
+    !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".md", "" )) }</title>` );
     return meta;
 }
 
