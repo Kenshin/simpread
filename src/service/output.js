@@ -42,9 +42,9 @@ function action( type, title, desc, content ) {
                 break;
             case "card":
                 new Notify().Render( "已启动分享卡标注功能，请在页面标注，生成分享卡。" );
-                $("sr-rd-crlbar").find("panel-bg")[0].click();
+                $("sr-rd-crlbar").find("panel-bg").length > 0 && $("sr-rd-crlbar").find("panel-bg")[0].click();
                 highlight.Annotate().done( txt => {
-                    txt != "" && share.Render( "sr-read", title, txt );
+                    txt != "" && share.Render( storage.current.mode == "focus" ? "html" : "sr-read", title, txt );
                 });
                 break;
         }
