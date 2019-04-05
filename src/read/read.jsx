@@ -54,6 +54,7 @@ class Read extends React.Component {
 
     async componentDidMount() {
         if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
+            // Puread level to III,can't work this flow.
             this.componentWillUnmount();
             if ( ! localStorage["sr-update-site"] ) {
                 new Notify().Render({ content: "当前页面结构改变导致不匹配阅读模式，接下来请选择？", action: "更新", cancel: "高亮", callback: type => {
@@ -109,6 +110,7 @@ class Read extends React.Component {
 
             loadPlugins( "read_complete" );
 
+            // Puread level to III,can't work this flow.
             //localStorage.removeItem( "sr-update-site" );
         }
     }
