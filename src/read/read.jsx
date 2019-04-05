@@ -89,6 +89,10 @@ class Read extends React.Component {
             this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
             this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
             this.props.read.layout     && ss.Layout( this.props.read.layout );
+            this.props.read.site.css   && this.props.read.site.css.length > 0
+                && ss.SiteCSS( this.props.read.site.css );
+            !this.props.wrapper.avatar && this.props.read.toc 
+                && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
             ss.Preview( this.props.read.custom );
 
             storage.pr.state == "txt"       && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
@@ -98,10 +102,6 @@ class Read extends React.Component {
             excludes( $("sr-rd-content"), this.props.wrapper.exclude );
             storage.pr.Beautify( $( "sr-rd-content" ) );
             storage.pr.Format( rdcls );
-
-            !this.props.wrapper.avatar && this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
-            this.props.read.site.css && this.props.read.site.css.length > 0 &&
-                ss.SiteCSS( this.props.read.site.css );
 
             kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
