@@ -217,6 +217,17 @@ sr-rd-content p code {
     -webkit-box-orient: vertical;
 }
 
+.sr-rd-content-center-small {
+    display: inline-flex;
+}
+
+.sr-rd-content-center-small img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+}
+
 .sr-rd-content-nobeautify {
     margin: 0;
     padding: 0;

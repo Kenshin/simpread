@@ -315,10 +315,11 @@ function commbeautify( name, $target ) {
               sina    = $target.attr( "real_src" ),
               fixOverflowImgsize = () => {
                   $img.removeClass( "sr-rd-content-img-load" );
-                  if ( $img[0].clientWidth > 1000 ) {
+                  if ( $img[0].clientWidth < 400 ) {
+                      $img.parent().removeClass( "sr-rd-content-center" ).addClass( "sr-rd-content-center-small" );
+                  } else if ( $img[0].clientWidth > 1000 ) {
                       $img.css( "zoom", "0.6" );
-                  }
-                  else if ( $img[0].clientHeight > 620 ) {
+                  } else if ( $img[0].clientHeight > 620 ) {
                     if ( /win|mac/i.test(navigator.platform) ) {
                         $img.attr( "height", 620 );
                         if ( $img[0].clientWidth < $("sr-rd-content").width()) $img.css({ "width":"auto" });
