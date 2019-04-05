@@ -175,16 +175,6 @@ function preview( styles ) {
 }
 
 /**
- * Add markdown css to <head> for read mode
- * 
- */
-function mdStyle() {
-    const styles = 'sr-rd-content{line-height:initial!important}sr-rd-content h1,sr-rd-content h2,sr-rd-content h3,sr-rd-content h4,sr-rd-content h5{margin:0!important;padding:0!important}sr-rd-content p{margin:0!important}sr-rd-content ol,sr-rd-content ul{margin-bottom:0!important;line-height:0!important}sr-rd-content sr-blockquote{padding-top:0!important;padding-bottom:0!important;line-height:.5}sr-rd-content sr-blockquote *{line-height:1.8!important}sr-rd-content ol li,sr-rd-content ol li *,sr-rd-content ul li,sr-rd-content ul li *{}';
-    $( "head" ).find( "#simpread-custom-markdown" ).length == 0 &&
-        $( "head" ).append(`<style type="text/css" id="simpread-custom-markdown">${styles}</style>`);
-}
-
-/**
  * Verify custom is exist
  * 
  * @param {string} verify type
@@ -220,5 +210,4 @@ export {
     custom     as Custom,
     css        as CSS,
     vfyCustom  as VerifyCustom,
-    mdStyle    as MDStyle,
 }
