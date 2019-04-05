@@ -92,6 +92,7 @@ class Read extends React.Component {
             ss.Preview( this.props.read.custom );
 
             storage.pr.state == "txt"       && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
+            storage.pr.state == "txt"       && location.href.endsWith( ".md" ) && ss.MDStyle();
             storage.pr.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
 
             excludes( $("sr-rd-content"), this.props.wrapper.exclude );
@@ -109,7 +110,6 @@ class Read extends React.Component {
 
             loadPlugins( "read_complete" );
 
-            storage.pr.state == "txt" && location.href.endsWith( ".md" ) && ss.MDStyle();
             localStorage && localStorage.removeItem( "sr-update-site" );
         }
     }
