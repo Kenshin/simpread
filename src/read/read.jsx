@@ -109,7 +109,7 @@ class Read extends React.Component {
 
             loadPlugins( "read_complete" );
 
-            localStorage && localStorage.removeItem( "sr-update-site" );
+            //localStorage.removeItem( "sr-update-site" );
         }
     }
 

@@ -126,19 +126,23 @@ export default class ReadCtlbar extends React.Component {
     }
 
     componentWillMount() {
-        if ( storage.current.fap ) {
-            delete conf.readItems.exit;
-            delete conf.readItems.option.items.setting;
-        }
-        if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
-            delete conf.readItems.download;
-            delete conf.readItems.readlater;
-            delete conf.readItems.send;
-            delete conf.readItems.share;
-            delete conf.readItems.option;
-        }
-        if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
-            delete conf.readItems.option;
+        try {
+            if ( storage.current.fap ) {
+                delete conf.readItems.exit;
+                delete conf.readItems.option.items.setting;
+            }
+            if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
+                delete conf.readItems.download;
+                delete conf.readItems.readlater;
+                delete conf.readItems.send;
+                delete conf.readItems.share;
+                delete conf.readItems.option;
+            }
+            if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
+                delete conf.readItems.option;
+            }
+        } catch ( err ) {
+            // TO-DO
         }
         // hack code
         !/chrome/ig.test( navigator.userAgent ) && ( delete conf.readItems.dyslexia );
