@@ -79,12 +79,12 @@ class Read extends React.Component {
             localStorage.removeItem( "sr-update-site" );
         } else {
             $root
-            .addClass( "simpread-font" )
-            .addClass( theme )
-            .find( rdclsjq )
+                .addClass( "simpread-font" )
                 .addClass( theme )
-                .sreffect( { opacity: 1 }, { delay: 100 })
-                .addClass( "simpread-read-root-show" );
+                .find( rdclsjq )
+                    .addClass( theme )
+                    .sreffect( { opacity: 1 }, { delay: 100 })
+                    .addClass( "simpread-read-root-show" );
 
             this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
             this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
