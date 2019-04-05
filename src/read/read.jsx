@@ -109,6 +109,7 @@ class Read extends React.Component {
 
             loadPlugins( "read_complete" );
 
+            storage.pr.state == "txt" && location.href.endsWith( ".md" ) && ss.MDStyle();
             localStorage.removeItem( "sr-update-site" );
         }
     }
