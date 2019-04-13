@@ -14,23 +14,24 @@ const site   = {
     avatar    : [],
     paging    : [],
 };
-let minimatch, rdability, markdown, current_url;
+let minimatch, rdability, markdown, host_href;
 
 export default class AdapteSite {
 
     constructor( sites = { global:[], custom:[], local:[] } ) {
         this.url     = util.getURI();
-        this.sites   = sites;   // include: global, custom, local, person
+        this.sites   = sites;         // include: global, custom, local, person
         this.current = {};
-        this.state   = "none";  // include: meta, txt, adapter, none, temp
+        this.state   = "none";        // include: meta, txt, adapter, none, temp
         this.origins = [];
-        current_url  = this.url;// origin url not changed
+        host_href    = location.href; // origin url
     }
 
     /**
      * Set url
      */
     SetURL( value ) {
+        /*
         const uri = util.getLocation( value );
         // Clone util.getURI() source
         const name = (pathname) => {
@@ -39,7 +40,8 @@ export default class AdapteSite {
             },
             path    = name( uri.pathname );
         this.url    = `${ uri.protocol }//${ uri.hostname }${ path }/`;
-        current_url = value;
+        */
+        host_href = value;
     }
 
     /**
@@ -538,7 +540,7 @@ function getsite( type, sites, url, matching = [] ) {
                 return names.replace( "www.", "" );
             }
           },
-          local    = util.getLocation( current_url ),
+          local    = util.getLocation( host_href ),
           urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
           uri      = arr[1].replace( "www.", "" ),
