@@ -350,7 +350,7 @@ function commbeautify( name, $target ) {
         newsrc = jianshu ? jianshu : newsrc;
         newsrc = sina    ? sina    : newsrc;
         //newsrc = getImgAbsolutePath( newsrc );
-        if ( newsrc && !src.startsWith( 'http' ) && !src.startsWith( 'data' ) ) {
+        if ( newsrc && !newsrc.startsWith( 'http' ) && !newsrc.startsWith( 'data' ) ) {
             newsrc = getImgAbsolutePath2( newsrc, location.href );
         }
 

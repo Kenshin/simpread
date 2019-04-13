@@ -31,17 +31,15 @@ export default class AdapteSite {
      * Set url
      */
     SetURL( value ) {
-        /*
         const uri = util.getLocation( value );
         // Clone util.getURI() source
         const name = (pathname) => {
                 pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
                 return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
             },
-            path    = name( uri.pathname );
-        this.url    = `${ uri.protocol }//${ uri.hostname }${ path }/`;
-        */
-        host_href = value;
+            path   = name( uri.pathname );
+        this.url   = `${ uri.protocol }//${ uri.hostname }${ path }/`;
+        host_href  = value;
     }
 
     /**
