@@ -7,7 +7,7 @@ export default class PureRead extends AdapteSite {
 
     constructor( sites ) {
         super( sites );
-        this.version = "0.0.3";
+        this.version = "0.0.4 build 0413";
         this.org_url = location.href;
         this.html    = {}; // clone site, include: title, desc, include, avatar, paging
         this.plugin  = {};

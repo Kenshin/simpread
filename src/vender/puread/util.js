@@ -25,6 +25,31 @@ function getURI() {
 }
 
 /**
+ * Get url and parser location
+ * 
+ * @param {string} url 
+ */
+function getLocation( href ) {
+    if ( document ) {
+        const a = document.createElement( "a" );
+        a.href  = href;
+        return a;
+    } else {
+        const match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+        return match && {
+            href    : href,
+            protocol: match[1],
+            host    : match[2],
+            hostname: match[3],
+            port    : match[4],
+            pathname: match[5],
+            search  : match[6],
+            hash    : match[7]
+        }
+    }
+}
+
+/**
  * Verify html
  * 
  * @param  {string} input include html tag, e.g.:
@@ -134,6 +159,7 @@ function specAction( content ) {
 export {
     clone,
     getURI,
+    getLocation,
     verifyHtml,
     selector,
     specTest,

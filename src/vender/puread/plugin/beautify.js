@@ -332,7 +332,13 @@ function commbeautify( name, $target ) {
                   if ( $img.parent().hasClass( "sr-rd-content-center" )) {
                       $img.parent().removeAttr( "class" ).addClass( "simpread-hidden" );
                   }
-              };
+              },
+              getImgAbsolutePath  = path => {
+                const link = document.createElement( "a" );
+                link.href  = path;
+                return link.protocol + "//" + link.host + link.pathname + link.search + link.hash;
+              },
+              getImgAbsolutePath2 = (url,base) => {if('string'!==typeof url||!url){return null}else if(url.match(/^[a-z]+\:\/\//i)){return url}else if(url.match(/^\/\//)){return'http:'+url}else if(url.match(/^[a-z]+\:/i)){return url}else if('string'!==typeof base){var a=document.createElement('a');a.href=url;if(!a.pathname){return null}return'http://'+url}else{base=getImgAbsolutePath2(base);if(base===null){return null}}var a=document.createElement('a');a.href=base;if(url[0]==='/'){base=[]}else{base=a.pathname.split('/');base.pop()}url=url.split('/');for(var i=0;i<url.length;++i){if(url[i]==='.'){continue}if(url[i]==='..'){if('undefined'===typeof base.pop()||base.length===0){return null}}else{base.push(url[i])}}return a.protocol+'//'+a.hostname+base.join('/')}
         let  newsrc,
              $parent = $target.parent(),
              tagname = $parent[0].tagName.toLowerCase();
@@ -343,9 +349,15 @@ function commbeautify( name, $target ) {
         newsrc = zuimei  ? zuimei  : newsrc;
         newsrc = jianshu ? jianshu : newsrc;
         newsrc = sina    ? sina    : newsrc;
+        //newsrc = getImgAbsolutePath( newsrc );
+        if ( newsrc && !src.startsWith( 'http' ) && !src.startsWith( 'data' ) ) {
+            newsrc = getImgAbsolutePath2( newsrc, location.href );
+        }
+
         // hack code
-        location.host.includes( "infoq.com" ) && ( newsrc = src );
-        !newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
+        //location.host.includes( "infoq.com" ) && ( newsrc = src );
+        //!newsrc.startsWith( "http" ) && ( newsrc = newsrc.startsWith( "//" ) ? location.protocol + newsrc : location.origin + newsrc );
+
         $img.attr( "src", newsrc )
             .replaceAll( $target )
             .wrap( "<div class='sr-rd-content-center'></div>" );

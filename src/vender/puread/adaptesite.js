@@ -14,7 +14,7 @@ const site   = {
     avatar    : [],
     paging    : [],
 };
-let minimatch, rdability, markdown;
+let minimatch, rdability, markdown, current_url;
 
 export default class AdapteSite {
 
@@ -24,6 +24,22 @@ export default class AdapteSite {
         this.current = {};
         this.state   = "none";  // include: meta, txt, adapter, none, temp
         this.origins = [];
+        current_url  = this.url;// origin url not changed
+    }
+
+    /**
+     * Set url
+     */
+    SetURL( value ) {
+        const uri = util.getLocation( value );
+        // Clone util.getURI() source
+        const name = (pathname) => {
+                pathname = pathname != "/" && pathname.endsWith("/") ? pathname = pathname.replace( /\/$/, "" ) : pathname;
+                return pathname.replace( /\/[%@#.~a-zA-Z0-9_-]+$|^\/$/g, "" );
+            },
+            path    = name( uri.pathname );
+        this.url    = `${ uri.protocol }//${ uri.hostname }${ path }/`;
+        current_url = value;
     }
 
     /**
@@ -54,10 +70,10 @@ export default class AdapteSite {
         try {
             const location = document.location,
                   uri      = {
-                        spec: location.href,
-                        host: location.host,
-                        prePath: location.protocol + "//" + location.host,
-                        scheme: location.protocol.substr(0, location.protocol.indexOf(":")),
+                        spec    : location.href,
+                        host    : location.host,
+                        prePath : location.protocol + "//" + location.host,
+                        scheme  : location.protocol.substr(0, location.protocol.indexOf(":")),
                         pathBase: location.protocol + "//" + location.host + location.pathname.substr(0, location.pathname.lastIndexOf("/") + 1)
                     },
                     article = new rdability.Readability( uri, document.cloneNode(true) ).parse();
@@ -522,11 +538,12 @@ function getsite( type, sites, url, matching = [] ) {
                 return names.replace( "www.", "" );
             }
           },
+          local    = util.getLocation( current_url ),
           urls     = [ ...sites.keys() ],
           arr      = url.match( /[.a-zA-z0-9-_]+/g ),
           uri      = arr[1].replace( "www.", "" ),
-          hostname = domain( window.location.hostname ),
-          isroot   = ()=>window.location.pathname == "/" || /\/(default|index|portal).[0-9a-zA-Z]+$/.test(window.location.pathname);
+          hostname = domain( local.hostname ),
+          isroot   = ()=>local.pathname == "/" || /\/(default|index|portal).[0-9a-zA-Z]+$/.test(local.pathname);
     for ( const cur of urls ) {
         const name   = sites.get(cur).name,
               sufname= domain( name );
@@ -535,7 +552,7 @@ function getsite( type, sites, url, matching = [] ) {
         } else if ( cur.match( /\*/g ) && cur.match( /\*/g ).length == 1 && !isroot() && cur.endsWith( "*" ) && uri.includes( sufname ) && hostname == sufname && url.includes( name ) ) {
             // e.g. https://www.douban.com/* http://mp.weixin.qq.com/*
             matching.push( [ cur, util.clone( sites.get( cur )), type ] );
-        } else if ( minimatch( window.location.origin + window.location.pathname, cur ) ) {
+        } else if ( minimatch( local.origin + local.pathname, cur ) ) {
             matching.push( [ cur, util.clone( sites.get( cur )), type ] );
         }
     }
