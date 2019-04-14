@@ -432,7 +432,7 @@ function readmd() {
             auto   : false,
             exclude: [],
     };
-    const converter = new markdown.Converter(),
+    const converter = new markdown.default.Converter(),
           html      = converter.makeHtml( $( "body pre" ).text() );
     meta.html    = html;
     !$( "title" ).html() && $( "head" ).append( `<title>${ decodeURI(title.replace( ".md", "" )) }</title>` );
