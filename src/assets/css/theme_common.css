@@ -268,6 +268,8 @@ sr-rd-mult sr-rd-mult-avatar {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    margin: 0 15px;
 }
 
 sr-rd-mult sr-rd-mult-avatar span {
