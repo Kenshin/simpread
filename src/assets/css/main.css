@@ -125,6 +125,9 @@ body {
 
 .top ul li a {
     @apply --white-link;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .top ul li a:hover {
