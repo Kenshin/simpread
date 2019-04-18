@@ -145,10 +145,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         // copy files
         plugins.push(
           new CopyWebpackPlugin([
-              { context: 'src/assets/favicon/', from : "*" , to : './assets/favicon' },
               { context: 'src/assets/images/',  from : "*" , to : './assets/images' },
-              { context: 'src/assets/css/fas',  from : "*" , to : './assets/css/fas' },
-              { context: 'src/assets/css/webfonts',  from : "*" , to : './assets/css/webfonts' },
           ])
         );
 
