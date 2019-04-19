@@ -737,6 +737,25 @@ body {
 }
 
 /**
+ * iPad pro 12 and below
+ */
+ @media only screen and (max-width: 1024px) {
+
+    .navigator .nav-feature,
+    .navigator .nav-gallery {
+        display: none;
+    }
+
+    .top ul li {
+        margin: 0 15px;
+    }
+
+    .top ul li:last-child {
+        margin-right: 0;
+    }
+}
+
+/**
  *  Changelog page
  */
 .container {
