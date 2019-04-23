@@ -4,7 +4,7 @@
  * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, code, sr-blockquote, ul ol
  */
  
-.simpread-theme-root {
+ .simpread-theme-root {
     font-size: 62.5%!important;
 }
 
@@ -184,6 +184,14 @@ sr-rd-content pre code {
 
 sr-rd-content pre code * {
     font-size: 1.1rem;
+}
+
+sr-rd-content pre p {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 sr-rd-content li code,
