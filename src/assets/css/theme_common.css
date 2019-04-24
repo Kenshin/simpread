@@ -206,6 +206,14 @@ sr-rd-content p code {
     font-size: 1.1rem;
 }
 
+sr-rd-content mark {
+    margin: 0 5px;
+    padding: 2px;
+
+    background: #fffdd1;
+    border-bottom: 1px solid #ffedce;
+}
+
 .sr-rd-content-img {
     width: 90%;
     height: auto;
