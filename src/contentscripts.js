@@ -267,6 +267,8 @@ function browserAction( is_update ) {
 */
 function pRead() {
     pr = new PureRead( storage.sites );
+    pr.cleanup = storage.read.cleanup == undefined ? true  : storage.read.cleanup;
+    pr.pure    = storage.read.pure    == undefined ? false : storage.read.pure;
     pr.AddPlugin( puplugin.Plugin() );
     pr.Getsites();
     storage.puread = pr;
