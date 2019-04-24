@@ -13,8 +13,13 @@ sr-rd-title, sr-rd-desc, sr-rd-content {
 }
 
 sr-rd-title {
-    text-rendering: optimizelegibility;
+    display: -webkit-box;
     margin: 1em 0px 0.5em;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    text-rendering: optimizelegibility;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 sr-rd-content {
