@@ -213,13 +213,41 @@ class Read extends React.Component {
  * 
  */
 function Render() {
-    storage.pr.ReadMode();
-    if ( typeof storage.pr.html.include == "string" && storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
-        storage.pr.Readability();
+    const render = () => {
         storage.pr.ReadMode();
+        ReactDOM.render( <Read read={ storage.current } wrapper={ storage.pr.html } />, getReadRoot() );
+    };
+    if ( storage.pr.isMathJax() && storage.pr.state == "temp" ) {
+        console.warn( '=== MathJax Mode ===' )
+        const dom = storage.pr.MathJaxMode();
+        console.log( 'current get dom is ', dom )
+        if ( typeof dom == "undefined" ) {
+            new Notify().Render( "智能感知失败，请移动鼠标框选。" );
+            Highlight().done( dom => {
+                storage.pr.TempMode( "read", dom );
+                render();
+            });
+            return;
+        } else if ( typeof dom == "string" ) {
+            const html = storage.pr.GetDom( dom, "html" );
+            storage.pr.Newsite( "read", html );
+            render();
+        } else {
+            storage.pr.TempMode( "read", dom[0] );
+            render();
+        }
+    } else {
+        console.warn( '=== Normal( Right ) ReadMode ===' )
+        render();
+    }
+
+    if ( typeof storage.pr.html.include == "string" && storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
+        console.warn( '=== Adapter failed call Readability View ===' )
+        storage.pr.Readability();
+        render();
     }
     console.log( "current puread object is   ", storage.pr )
-    ReactDOM.render( <Read read={ storage.current } wrapper={ storage.pr.html } />, getReadRoot() );
+    render();
 }
 
 /**
