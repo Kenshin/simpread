@@ -211,10 +211,10 @@ class Read extends React.Component {
 /**
  * Render entry
  * 
- * @param {boolean} when true, @see mathJaxMode
+ * @param {boolean} true: call mathJaxMode(); false: @see mathJaxMode
  */
-function Render( notMathjax = false ) {
-    !notMathjax && mathJaxMode();
+function Render( callMathjax = true ) {
+    callMathjax && mathJaxMode();
     storage.pr.ReadMode();
     if ( typeof storage.pr.html.include == "string" && storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
         console.warn( '=== Adapter failed call Readability View ===' )
@@ -275,7 +275,7 @@ function mathJaxMode() {
             new Notify().Render( "智能感知失败，请移动鼠标框选。" );
             Highlight().done( dom => {
                 storage.pr.TempMode( "read", dom );
-                Render( true );
+                Render( false );
             });
         } else if ( typeof dom == "string" ) {
             const html = storage.pr.GetDom( dom, "html" );
