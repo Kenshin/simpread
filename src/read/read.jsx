@@ -220,7 +220,7 @@ function Render( callMathjax = true ) {
         console.warn( '=== Adapter failed call Readability View ===' )
         storage.pr.Readability();
         storage.pr.ReadMode();
-    } else console.warn( '=== Normal( Right ) Read mode ===' )
+    } else console.warn( '=== Normal Read mode ===' )
     console.warn( "=== Current PuRead object is ===", storage.pr )
     ReactDOM.render( <Read read={ storage.current } wrapper={ storage.pr.html } />, getReadRoot() );
 }
