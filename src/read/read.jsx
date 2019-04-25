@@ -274,16 +274,12 @@ function mathJaxMode() {
             new Notify().Render( "智能感知失败，请移动鼠标框选。" );
             Highlight().done( dom => {
                 storage.pr.TempMode( "read", dom );
-                Render();
             });
-            return;
         } else if ( typeof dom == "string" ) {
             const html = storage.pr.GetDom( dom, "html" );
             storage.pr.Newsite( "read", html );
-            Render();
         } else {
             storage.pr.TempMode( "read", dom[0] );
-            Render();
         }
     }
 }
