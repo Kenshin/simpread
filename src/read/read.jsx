@@ -54,6 +54,7 @@ class Read extends React.Component {
 
     async componentDidMount() {
         if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
+            // Puread level to III,can't work this flow.
             this.componentWillUnmount();
             if ( ! localStorage["sr-update-site"] ) {
                 new Notify().Render({ content: "当前页面结构改变导致不匹配阅读模式，接下来请选择？", action: "更新", cancel: "高亮", callback: type => {
@@ -79,28 +80,28 @@ class Read extends React.Component {
             localStorage.removeItem( "sr-update-site" );
         } else {
             $root
-            .addClass( "simpread-font" )
-            .addClass( theme )
-            .find( rdclsjq )
+                .addClass( "simpread-font" )
                 .addClass( theme )
-                .sreffect( { opacity: 1 }, { delay: 100 })
-                .addClass( "simpread-read-root-show" );
+                .find( rdclsjq )
+                    .addClass( theme )
+                    .sreffect( { opacity: 1 }, { delay: 100 })
+                    .addClass( "simpread-read-root-show" );
 
             this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
             this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
             this.props.read.layout     && ss.Layout( this.props.read.layout );
+            this.props.read.site.css   && this.props.read.site.css.length > 0
+                && ss.SiteCSS( this.props.read.site.css );
+            !this.props.wrapper.avatar && this.props.read.toc 
+                && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
             ss.Preview( this.props.read.custom );
 
-            storage.pr.state == "txt"       && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
+            storage.pr.state == "txt"          && !location.href.endsWith( ".md" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
             storage.pr.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
 
             excludes( $("sr-rd-content"), this.props.wrapper.exclude );
             storage.pr.Beautify( $( "sr-rd-content" ) );
             storage.pr.Format( rdcls );
-
-            !this.props.wrapper.avatar && this.props.read.toc && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
-            this.props.read.site.css && this.props.read.site.css.length > 0 &&
-                ss.SiteCSS( this.props.read.site.css );
 
             kbd.Render( $( "sr-rd-content" ));
             tooltip.Render( rdclsjq );
@@ -109,7 +110,8 @@ class Read extends React.Component {
 
             loadPlugins( "read_complete" );
 
-            localStorage.removeItem( "sr-update-site" );
+            // Puread level to III,can't work this flow.
+            //localStorage.removeItem( "sr-update-site" );
         }
     }
 
@@ -209,14 +211,17 @@ class Read extends React.Component {
 /**
  * Render entry
  * 
+ * @param {boolean} true: call mathJaxMode(); false: @see mathJaxMode
  */
-function Render() {
+function Render( callMathjax = true ) {
+    callMathjax && mathJaxMode();
     storage.pr.ReadMode();
     if ( typeof storage.pr.html.include == "string" && storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
+        console.warn( '=== Adapter failed call Readability View ===' )
         storage.pr.Readability();
         storage.pr.ReadMode();
-    }
-    console.log( "current puread object is   ", storage.pr )
+    } else console.warn( '=== Normal Read mode ===' )
+    console.warn( "=== Current PuRead object is ===", storage.pr )
     ReactDOM.render( <Read read={ storage.current } wrapper={ storage.pr.html } />, getReadRoot() );
 }
 
@@ -256,6 +261,29 @@ function Exit() {
             ReactDOM.unmountComponentAtNode( getReadRoot() );
         }
     }).addClass( "simpread-read-root-hide" );
+}
+
+/**
+ * MathJax Mode
+ */
+function mathJaxMode() {
+    if ( storage.pr.isMathJax() && storage.pr.state == "temp" ) {
+        console.warn( '=== MathJax Mode ===' )
+        const dom = storage.pr.MathJaxMode();
+        console.log( 'current get dom is ', dom )
+        if ( typeof dom == "undefined" ) {
+            new Notify().Render( "智能感知失败，请移动鼠标框选。" );
+            Highlight().done( dom => {
+                storage.pr.TempMode( "read", dom );
+                Render( false );
+            });
+        } else if ( typeof dom == "string" ) {
+            const html = storage.pr.GetDom( dom, "html" );
+            storage.pr.Newsite( "read", html );
+        } else {
+            storage.pr.TempMode( "read", dom[0] );
+        }
+    }
 }
 
 /**

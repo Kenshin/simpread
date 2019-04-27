@@ -22,7 +22,7 @@
   },
   "content_scripts" : [
     {
-      "matches"     : [ "http://*/*", "https://*/*", "file:///*/*.txt" ],
+      "matches"     : [ "http://*/*", "https://*/*", "file:///*/*.txt", "file:///*/*.md" ],
       "exclude_matches": [ "http://localhost/*", "https://simpread.herokuapp.com/view/*" ],
       "js"          : [
         "/bundle/common.js",
