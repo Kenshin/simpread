@@ -55,7 +55,7 @@ storage.Read( () => {
  */
 function blacklist() {
     for ( const item of storage.option.blacklist ) {
-        if ( !item.startsWith( "http" ) ) {
+        if ( item.trim() != "" && !item.startsWith( "http" ) ) {
             if ( location.hostname.includes( item ) ) {
                 is_blacklist = true;
                 break;
