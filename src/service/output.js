@@ -113,9 +113,11 @@ function action( type, title, desc, content ) {
                                 break;
                             case "html":
                                 new Notify().Render( "保存成功，开始下载..." );
-                                $.get( `${exp.kindle.host}/${exp.kindle.id}.html`, result => {
-                                    result = result.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://sr.ksria.cn/puread/' )
-                                    exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(result), `simpread-${title}.html` );
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings: { url: `${exp.kindle.host}/${exp.kindle.id}.html`, type: "GET" }}), result => {
+                                    if ( result && result.done != "" ) {
+                                        result = result.done.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://sr.ksria.cn/puread/' )
+                                        exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(result), `simpread-${title}.html` );
+                                    } else new Notify().Render( 2, "导出出现问题，请稍后再试。" );
                                 });
                                 break;
                         }
