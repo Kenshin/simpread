@@ -33,7 +33,10 @@ const Footer = () => {
                 <sr-rd-footer-text>全文完</sr-rd-footer-text>
                 <sr-rd-footer-line></sr-rd-footer-line>
             </sr-rd-footer-group>
-            <sr-rd-footer-copywrite>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验。</sr-rd-footer-copywrite>
+            <sr-rd-footer-copywrite>
+                <div>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验。</div>
+                <div className="second">本文使用了 <abbr>全新的简悦词法分析引擎<sup>beta</sup></abbr>，<a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">点击这里</a> <sup>查看详细说明及如何关闭</sup></div>
+            </sr-rd-footer-copywrite>
         </sr-rd-footer>
     )
 }

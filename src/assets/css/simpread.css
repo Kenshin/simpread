@@ -148,8 +148,18 @@ sr-rd-footer-text {
 }
 
 sr-rd-footer-copywrite {
-    margin: 10px 0 20px 0;
+    margin: 10px 0 0 0;
     color: inherit;
+}
+
+sr-rd-footer-copywrite .second {
+    margin-top: 20px;
+}
+
+sr-rd-footer-copywrite abbr {
+    font-variant: normal;
+    text-decoration: none;
+    /*border-bottom: 1px dotted;*/
 }
 
 sr-rd-footer-copywrite a,
@@ -166,6 +176,7 @@ sr-rd-footer-copywrite a:link {
     vertical-align: initial;
 
     border: none!important;
+    /*border-bottom: 1px dotted!important;*/
 
     box-sizing: border-box;
 }
@@ -174,7 +185,8 @@ sr-rd-footer-copywrite a:hover,
 sr-rd-footer-copywrite a:focus,
 sr-rd-footer a:active {
     color: inherit;
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 1px dotted!important;
 }
 
 /**
