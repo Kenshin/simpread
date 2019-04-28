@@ -39,8 +39,8 @@ const Footer = () => {
                 <div>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验</div>
                 <div className="second">使用了 <abbr>全新的简悦词法分析引擎<sup>beta</sup></abbr>，<a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">点击查看</a>详细说明</div>
                 <div className="third">
-                    <a className="sr-icon good sr-top" data-tooltips="觉得不错？请帮忙投票 😄" data-position="up" target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll" dangerouslySetInnerHTML={{__html: good_icon }} ></a>
-                    <a className="sr-icon bad sr-top" data-tooltips="有待改进，请帮忙吐槽 😄" data-position="up" target="_blank" href="" dangerouslySetInnerHTML={{__html: bad_icon  }} ></a>
+                    <a className="sr-icon good sr-top" data-sr-mini-tooltip="觉得不错？请帮忙投票 😄" data-position="up" target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll" dangerouslySetInnerHTML={{__html: good_icon }} ></a>
+                    <a className="sr-icon bad sr-top" data-sr-mini-tooltip="有待改进，请帮忙吐槽 😄" data-position="up" target="_blank" href="" dangerouslySetInnerHTML={{__html: bad_icon  }} ></a>
                 </div>
             </sr-rd-footer-copywrite>
         </sr-rd-footer>
