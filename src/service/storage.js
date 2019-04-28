@@ -117,6 +117,7 @@ const name = "simpread",
             list  : false,
             whitelist: false,
             exclusion: false,
+            blacklist: false,
         },
         origins   : [],
         blacklist : [

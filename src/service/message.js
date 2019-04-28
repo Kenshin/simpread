@@ -12,6 +12,7 @@ const action = {
     menu           : "menu",
     menu_whitelist : "menu_whitelist",
     menu_exclusion : "menu_exclusion",
+    menu_blacklist : "menu_blacklist",
     updated        : "updated",
     save_verify    : "save_verify",
     storage        : "storage",         // only firefox

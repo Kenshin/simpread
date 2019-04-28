@@ -113,12 +113,16 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             break;
         case msg.MESSAGE_ACTION.menu_whitelist:
         case msg.MESSAGE_ACTION.menu_exclusion:
+        case msg.MESSAGE_ACTION.menu_blacklist:
             if ( request.type == msg.MESSAGE_ACTION.menu_whitelist ) {
                 storage.read.whitelist.push( request.value.url );
                 new Notify().Render( "已加入到白名单。" );
             } else if ( request.type == msg.MESSAGE_ACTION.menu_exclusion ) {
                 storage.read.exclusion.push( request.value.url );
                 new Notify().Render( "已加入到排除列表。" );
+            } else if ( request.type == msg.MESSAGE_ACTION.menu_blacklist ) {
+                storage.option.blacklist.push( request.value.url );
+                new Notify().Render( "已加入到黑名单。" );
             }
             storage.Write( () => {
                 watch.SendMessage( "option", true );
