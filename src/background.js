@@ -64,6 +64,8 @@ menu.OnClicked( ( info, tab ) => {
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#later" ) });
     } else if ( info.menuItemId == "whitelist" ) {
         browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_whitelist, {url: info.pageUrl } ));
+    } else if ( info.menuItemId == "exclusion" ) {
+        browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_exclusion, {url: info.pageUrl } ));
     } else {
         if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
     }

@@ -112,9 +112,15 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             localStorage.removeItem( "sr-update-site" );
             break;
         case msg.MESSAGE_ACTION.menu_whitelist:
-            storage.read.whitelist.push( request.value.url );
-            storage.Write( () => {
+        case msg.MESSAGE_ACTION.menu_exclusion:
+            if ( request.type == msg.MESSAGE_ACTION.menu_whitelist ) {
+                storage.read.whitelist.push( request.value.url );
                 new Notify().Render( "已加入到白名单。" );
+            } else if ( request.type == msg.MESSAGE_ACTION.menu_exclusion ) {
+                storage.read.exclusion.push( request.value.url );
+                new Notify().Render( "已加入到排除列表。" );
+            }
+            storage.Write( () => {
                 watch.SendMessage( "option", true );
             });
             break;

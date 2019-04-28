@@ -11,6 +11,7 @@ const action = {
     close_tab      : "close_tab",
     menu           : "menu",
     menu_whitelist : "menu_whitelist",
+    menu_exclusion : "menu_exclusion",
     updated        : "updated",
     save_verify    : "save_verify",
     storage        : "storage",         // only firefox
