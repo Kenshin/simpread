@@ -411,6 +411,7 @@ kbd-mapping {
 
     display: flex;
     flex-direction: column;
+    flex-flow: row;
 
     width: 500px;
     height: 550px;
@@ -424,12 +425,14 @@ kbd-mapping {
 
 kbd-maps {
     display: flex;
-    flex-flow: column wrap;    
+    flex-flow: column wrap;
+    margin-top: 40px;
 }
 
 kbd-mapping kbd-map-title {
+    position: absolute;
     margin: 5px 0;
-    
+    width: 100%;
     font-size: 14px;
     font-weight: bold;
 }

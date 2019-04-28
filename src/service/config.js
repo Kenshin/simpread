@@ -127,6 +127,11 @@ const keyboard = {
         },
     },
     "控制栏 - 设定" : {
+        fu: {
+            "kbd"  : "fu",
+            "type" : "fullscreen",
+            "desc" : "全屏",
+        },
         st: {
             "kbd"  : "st",
             "type" : "setting",
