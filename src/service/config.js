@@ -189,6 +189,11 @@ const readItems = {
         "icon" : ss.IconPath("option_icon"),
         "color": "#03A9F4",
         "items": {
+            "fullscreen" : {
+                "name" : "全屏",
+                "icon" : ss.IconPath("fullscreen_icon"),
+                "color": "#03A9F4",
+            },
             "siteeditor" : {
                 "name" : "站点编辑器",
                 "icon" : ss.IconPath("siteeditor_icon"),

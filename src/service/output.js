@@ -22,6 +22,8 @@ import * as share  from 'sharecard';
  */
 function action( type, title, desc, content ) {
 
+    console.log( "output: Action is ", type )
+
     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) ) {
         let url = "";
         switch ( type.split("_")[1] ) {
@@ -208,6 +210,8 @@ function action( type, title, desc, content ) {
         } else {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.speak_stop ));
         }
+    } else if ( type.startsWith( "fullscreen" ) ) {
+        document.documentElement.requestFullscreen();
     }
     else {
         new Notify().Render( 2, "当前模式下，不支持此功能。" );
