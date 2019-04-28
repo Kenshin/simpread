@@ -12,6 +12,7 @@ const context = {
         read  : { id: "", menu: {} },
         link  : { id: "", menu: {} },
         list  : { id: "", menu: {} },
+        whitelist : { id: "", menu: {} },
     },
     menu = {
         "type"     : "normal",
@@ -23,6 +24,7 @@ Object.assign( context.focus.menu, menu, { id: "focus", "title" : "聚焦模式"
 Object.assign( context.read.menu,  menu, { id: "read",  "title" : "阅读模式" });
 Object.assign( context.list.menu,  menu, { id: "list",  "title" : "打开稍后读" });
 Object.assign( context.link.menu,  menu, { id: "link",  "title" : "使用阅读模式打开此链接", contexts: [ "link" ] });
+Object.assign( context.whitelist.menu,  menu, { id: "whitelist", "title" : "将当前页面加入到白名单" });
 
 /**
  * Listen contextMenus message
@@ -46,6 +48,9 @@ function createAll() {
 
     storage.option.menu.list &&
         ( context.list.id  = browser.contextMenus.create( context.list.menu ));
+
+    storage.option.menu.whitelist &&
+        ( context.whitelist.id  = browser.contextMenus.create( context.whitelist.menu ));
 }
 
 /**

@@ -111,6 +111,13 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             }});
             localStorage.removeItem( "sr-update-site" );
             break;
+        case msg.MESSAGE_ACTION.menu_whitelist:
+            storage.read.whitelist.push( request.value.url );
+            storage.Write( () => {
+                new Notify().Render( "已加入到白名单。" );
+                watch.SendMessage( "option", true );
+            });
+            break;
     }
 });
 

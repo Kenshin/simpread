@@ -10,6 +10,7 @@ const action = {
     new_tab        : "new_tab",
     close_tab      : "close_tab",
     menu           : "menu",
+    menu_whitelist : "menu_whitelist",
     updated        : "updated",
     save_verify    : "save_verify",
     storage        : "storage",         // only firefox
