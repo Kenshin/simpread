@@ -32,6 +32,7 @@ const Footer = () => {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings: { url: storage.service + "/sites/service/pending", type: "POST", data:{url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed"} }}), result => {
                 console.log( 'Add stat sites', result )
             });
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://wj.qq.com/s2/3611463/7260/" }));
           };
     return (
         <sr-rd-footer>
