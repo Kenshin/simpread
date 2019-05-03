@@ -181,6 +181,7 @@ sr-rd-footer-copywrite .sr-icon {
     opacity: .8;
 
     transition: opacity .5s ease;
+    cursor: pointer;
 }
 
 sr-rd-footer-copywrite .sr-icon:hover {
