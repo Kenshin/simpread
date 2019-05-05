@@ -202,21 +202,25 @@ function Compare( target ) {
 
 /**
  * Fix subver config
+ * 
+ * @param {string} patch version e.g. 1025 / 5005
+ * @param {object} @see simpread
  */
-function FixSubver( target ) {
-    if ( sub_ver == "1025" ) {
-        target.read.cleanup == undefined && ( target.read.cleanup = true );
-        target.read.pure    == undefined && ( target.read.pure    = true );
-        target.option.menu.whitelist == undefined && ( target.option.menu.whitelist = false );
-        target.option.menu.exclusion == undefined && ( target.option.menu.exclusion = false );
-        target.option.menu.blacklist == undefined && ( target.option.menu.blacklist = false );
+function FixSubver( patch, target ) {
+    if ( patch == "5005" ) {
+        target.read.cleanup = true;
+        target.read.pure    = true;
+        target.option.menu.whitelist = false;
+        target.option.menu.exclusion = false;
+        target.option.menu.blacklist = false;
     }
+    target.patch = patch;
     return target;
 }
 
 export {
     version,
-    sub_ver,
+    sub_ver as patch,
     Verify,
     Notify,
     Compare,
