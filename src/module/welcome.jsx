@@ -268,14 +268,16 @@ class Welcome extends React.Component {
                         { !first &&
                             <div className="carousel-item" id="5005">
                                 <section style={ style.section }>
-                                    <img src={ ss.IconPath( "welcome-custom" )} style={ style.img }/>
-                                    <h2 style={ style.h2 }>全新的词法分析引擎</h2>
+                                <img src="http://sr.ksria.cn/welcome-puread-ii.png" style={ style.img }/>
+                                    <h2 style={ style.h2 }>词法分析引擎 2.0</h2>
                                     <div style={ style.desc }>
-                                        
+                                        更加智能，更加专业，Markdown / LaTeX / 代码段 均不在话下<br/>
+                                        重新整理并根据更适合中文阅读的方式排版，让你爱上在 PC 阅读文章<br/>
+                                        详细说明请看 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">词法分析引擎</a>
                                     </div>
                                 </section>
                             </div> }
-    
+
                     <div className="carousel-item" id="end">
                         <section style={ style.section }>
                         <img src={ ss.IconPath( "welcome-others" )} style={ style.img }/>
