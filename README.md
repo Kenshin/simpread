@@ -34,7 +34,7 @@
 
   * 支持 `自动生成目录` [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) [论坛类页面及分页](http://ksria.com/simpread/docs/#/论坛类页面及分页) 如：知乎 · 百度贴吧等
 
-  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 `LaTeX` [LaTeX](http://ksria.com/simpread/docs/#/LaTeX-阅读器) [Markdown](http://ksria.com/simpread/docs/#/Markdown) 
+  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 [LaTeX](http://ksria.com/simpread/docs/#/LaTeX-阅读器) · [Markdown](http://ksria.com/simpread/docs/#/Markdown) 
 
   * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](http://ksria.com/simpread/docs/#/自定义样式)
 
