@@ -41,6 +41,10 @@ storage.Read( () => {
                 getNewsitesHandler( result );
             });
         });
+        ver.version == storage.version && ver.patch != storage.patch &&
+            storage.Write(()=> {
+                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?patch=" + ver.patch ) });
+            }, ver.FixSubver( ver.patch, storage.simpread ));
     }
     menu.CreateAll();
 });
