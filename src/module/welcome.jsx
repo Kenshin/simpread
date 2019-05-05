@@ -282,6 +282,10 @@ class Welcome extends React.Component {
                         <section style={ style.section }>
                         <img src={ ss.IconPath( "welcome-others" )} style={ style.img }/>
                             <h2 style={ style.h2 }>更多功能 等你发现！</h2>
+                            { !first && version == "5005" && <div style={ style.desc }>
+                                分享卡，右键菜单添加 「白名单 / 排除列表 / 黑名单」等<br/>
+                                详细说明请看 <a target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.2.5005.html">更新日志</a>
+                            </div> }
                         </section>
                     </div>
                 </div>
