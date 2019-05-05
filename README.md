@@ -34,6 +34,8 @@
 
   * 支持 `自动生成目录` [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) [论坛类页面及分页](http://ksria.com/simpread/docs/#/论坛类页面及分页) 如：知乎 · 百度贴吧等
 
+  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 `LaTeX` [LaTeX](http://ksria.com/simpread/docs/#/LaTeX-阅读器) [Markdown](http://ksria.com/simpread/docs/#/Markdown) 
+
   * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](http://ksria.com/simpread/docs/#/自定义样式)
 
 - 临时阅读模式：  
@@ -44,6 +46,8 @@
 
 - 智能适配：  
   自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面以及只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [智能适配](http://ksria.com/simpread/docs/#/智能适配模式)
+
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 全新的 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」。
 
 - 站点适配源：  
   包括：`官方（主）适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
