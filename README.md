@@ -33,8 +33,10 @@
   简悦 `原创` 功能，逐一适配了 [数百种类型](https://simpread.ksria.cn/sites/) 的网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
   * 支持 `自动生成目录` 
-  
-  * 支持 [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) · [论坛类页面及分页](http://ksria.com/simpread/docs/#/论坛类页面及分页) 如：知乎 · 百度贴吧等
+
+  * 支持 [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) 
+
+  * 支持 [论坛类页面及分页](http://ksria.com/simpread/docs/#/论坛类页面及分页) 如：知乎 · 百度贴吧等
 
   * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 [LaTeX 解析](http://ksria.com/simpread/docs/#/LaTeX-阅读器) · [Markdown 阅读器](http://ksria.com/simpread/docs/#/Markdown) 
 
