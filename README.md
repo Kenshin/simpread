@@ -161,7 +161,7 @@
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
 - Icon from <http://iconfont.cn>
-- [Welcome PuRead II](http://sr.ksria.cn/welcome-puread-ii.png) via <https://www.freepik.com/free-vector/it-specialists-upgrading-operating-system-illustration_4332393.htm>
+- [Welcome PuRead II](http://sr.ksria.cn/welcome-puread-ii.png) via [www.freepik.com](https://www.freepik.com/free-vector/it-specialists-upgrading-operating-system-illustration_4332393.htm)
 - Mockup Design usage <http://magicmockups.com/>
 - Material Design usage <https://material.io/guidelines/>
 - Mind Maps <https://coggle.it/>
