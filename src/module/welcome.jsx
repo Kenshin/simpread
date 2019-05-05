@@ -265,6 +265,17 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
+                        { !first &&
+                            <div className="carousel-item" id="5005">
+                                <section style={ style.section }>
+                                    <img src={ ss.IconPath( "welcome-custom" )} style={ style.img }/>
+                                    <h2 style={ style.h2 }>全新的词法分析引擎</h2>
+                                    <div style={ style.desc }>
+                                        
+                                    </div>
+                                </section>
+                            </div> }
+    
                     <div className="carousel-item" id="end">
                         <section style={ style.section }>
                         <img src={ ss.IconPath( "welcome-others" )} style={ style.img }/>
