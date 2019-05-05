@@ -62,10 +62,33 @@ menu.OnClicked( ( info, tab ) => {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
     } else if ( info.menuItemId == "list" ) {
         browser.tabs.create({ url: browser.extension.getURL( "options/options.html#later" ) });
+    } else if ( info.menuItemId == "whitelist" ) {
+        browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_whitelist, {url: info.pageUrl } ));
+    } else if ( info.menuItemId == "exclusion" ) {
+        browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_exclusion, {url: info.pageUrl } ));
+    } else if ( info.menuItemId == "blacklist" ) {
+        browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_blacklist, {url: info.pageUrl } ));
     } else {
         if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
     }
 });
+
+/**
+ * Listen runtime message, include: `corb`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+        if ( request.type == msg.MESSAGE_ACTION.CORB ) {
+            $.ajax( request.value.settings )
+                .done( result => {
+                    sendResponse({ done: result });
+                })
+                .fail( ( jqXHR, textStatus, errorThrown ) => {
+                    sendResponse({ fail: { jqXHR, textStatus, errorThrown }});
+                });
+        }
+        return true;
+    }
+);
 
 /**
  * Listen runtime message, include: `shortcuts` `browser_action`

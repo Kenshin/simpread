@@ -56,6 +56,8 @@ const name = "simpread",
         toc_hide  : true,
         theme     : "github",
         fontfamily: "default",
+        cleanup   : true,
+        pure      : true,
         whitelist : [],
         exclusion : [
             "v2ex.com","issue.github.com","readme.github.com","question.zhihu.com","douban.com","nationalgeographic.com.cn","tech.163.com","docs.microsoft.com","msdn.microsoft.com","baijia.baidu.com","code.oschina.net","http://www.ifanr.com","http://www.ifanr.com/news","http://www.ifanr.com/app","http://www.ifanr.com/minapp","http://www.ifanr.com/dasheng","http://www.ifanr.com/data","https://www.ifanr.com/app","http://www.ifanr.com/weizhizao","http://www.thepaper.cn","http://www.pingwest.com","http://tech2ipo.com","https://www.waerfa.com/social"
@@ -115,6 +117,9 @@ const name = "simpread",
             read  : true,
             link  : true,
             list  : false,
+            whitelist: false,
+            exclusion: false,
+            blacklist: false,
         },
         origins   : [],
         blacklist : [

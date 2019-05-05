@@ -123,6 +123,18 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示「打开稍后读」？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "list" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.whitelist }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入白名单」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "whitelist" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.exclusion }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入到排除列表」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "exclusion" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.blacklist }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入到黑名单」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "blacklist" ) } />
                 </div>
 
                 <div className="label">聚焦模式</div>

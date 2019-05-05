@@ -26,6 +26,14 @@ const rdcls   = "simpread-read-root",
       theme   = "simpread-theme-root";
 
 const Footer = () => {
+    const good_icon = '<svg t="1556354786433" viewBox="0 0 1024 1024" version="1.1" width="33" height="33"><defs><style type="text/css"></style></defs><path d="M859.8 191.2c-80.8-84.2-212-84.2-292.8 0L512 248.2l-55-57.2c-81-84.2-212-84.2-292.8 0-91 94.6-91 248.2 0 342.8L512 896l347.8-362C950.8 439.4 950.8 285.8 859.8 191.2z" p-id="6225" fill="#8C8C8C"></path></svg>',
+          bad_icon  = '<svg t="1556354650943" viewBox="0 0 1024 1024" version="1.1" p-id="5899" width="33" height="33"><defs><style type="text/css"></style></defs><path d="M458 576c2-36 0-76 16-110 4-10 2-20 2-30-8-42-28-80-30-120 0-2.78 2.008-9.542 2.01-12.314-6.432 4.468-15.214 8.048-22.01 10.314-40 12-35.02 5.146-69.02 27.146l-23.866 14.456c32.686-35.878 77.056-49.562 113.05-77.428 0.388-30.876 1.716-61.354 6.274-91.68C371.22 106.992 243.57 108.536 164.246 191.14c-90.994 94.688-90.994 248.202 0 342.89l305.698 318.192c-0.17-21.312-0.886-42.352-3.944-62.222C454 718 458 648 458 576z" p-id="5900" fill="#8C8C8C"></path><path d="M644 602c-22-52-66-88-126-100-1.7 0-3.758-1.086-5.872-2.638-0.046 0.214-0.082 0.426-0.128 0.638-22 96-46 188-42 284 0 24.454 7.966 50.234 7.666 76.262L512 896l208-216.5C690.306 658.542 660.856 637.242 644 602z" p-id="5901" fill="#8C8C8C"></path><path d="M859.748 191.14c-80.852-84.188-211.978-84.188-292.816 0L528 230.806c0.15 26.35 0.426 52.404-6 77.194-4 20-38 38-32 62 6.006 26.426 16.332 51.41 21.464 77.118C542.028 464.168 569.542 485.792 594 512c45.602 53.532 75.494 114.918 130.566 162.742l135.182-140.71C950.75 439.342 950.75 285.828 859.748 191.14z" p-id="5902" fill="#8C8C8C"></path></svg>',
+          onClick   = () => {
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings: { url: storage.service + "/sites/service/pending", type: "POST", data:{url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed"} }}), result => {
+                console.log( 'Add stat sites', result )
+            });
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "https://wj.qq.com/s2/3611463/7260/" }));
+          };
     return (
         <sr-rd-footer>
             <sr-rd-footer-group>
@@ -33,7 +41,14 @@ const Footer = () => {
                 <sr-rd-footer-text>全文完</sr-rd-footer-text>
                 <sr-rd-footer-line></sr-rd-footer-line>
             </sr-rd-footer-group>
-            <sr-rd-footer-copywrite>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验。</sr-rd-footer-copywrite>
+            <sr-rd-footer-copywrite>
+                <div>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 优化，用以提升阅读体验</div>
+                <div className="second">使用了 <abbr>全新的简悦词法分析引擎<sup>beta</sup></abbr>，<a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">点击查看</a>详细说明</div>
+                <div className="third">
+                    <a className="sr-icon good sr-top" data-sr-mini-tooltip="觉得不错？请帮忙投票 😄" data-position="up" target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews" dangerouslySetInnerHTML={{__html: good_icon }} ></a>
+                    <a className="sr-icon bad sr-top" data-sr-mini-tooltip="有待改进，请帮忙吐槽 😄" data-position="up" target="_blank" onClick={ ()=>onClick() } dangerouslySetInnerHTML={{__html: bad_icon  }} ></a>
+                </div>
+            </sr-rd-footer-copywrite>
         </sr-rd-footer>
     )
 }

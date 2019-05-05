@@ -306,6 +306,7 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/vender/mduikit/dialog.jsx',
           slider     : __dirname + '/src/vender/mduikit/slider.jsx',
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
+          mintooltip : __dirname + '/src/vender/mduikit/mintooltip.css',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
 
           puread     : __dirname + '/src/vender/puread/puread.min.js',
