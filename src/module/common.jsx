@@ -112,7 +112,7 @@ export default class CommonOpt extends React.Component {
             onload = event => {
                 if ( event && event.target && event.target.result ) {
                     try {
-                        let json     = ver.FixSubver( JSON.parse( event.target.result ));
+                        let json     = ver.FixSubver( ver.patch, JSON.parse( event.target.result ));
                         const result = ver.Compare( json.version );
                         if ( result < 0 ) {
                             result == -1 && new Notify().Render( 2, "上传失败，当前版本太低，请升级简悦。" );
