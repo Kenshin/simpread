@@ -29,14 +29,21 @@
 
 > 以下这些阅读模式的形态，均为简悦独有的方式
 
+- [词法分析引擎](词法分析引擎) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
+
 - [论坛类页面及分页](%E8%AE%BA%E5%9D%9B%E7%B1%BB%E9%A1%B5%E9%9D%A2%E5%8F%8A%E5%88%86%E9%A1%B5)
 
 - [主动适配阅读模式](%E4%B8%BB%E5%8A%A8%E9%80%82%E9%85%8D%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F)
 
-- [智能匹配模式](%E6%99%BA%E8%83%BD%E9%80%82%E9%85%8D%E6%A8%A1%E5%BC%8F)
-
 - [临时阅读模式](临时阅读模式)
+
 - [TXT 阅读器](TXT-%E9%98%85%E8%AF%BB%E5%99%A8)
+
+- [LaTeX 阅读器](词法分析引擎?id=LaTeX识别) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
+
+- [Markdown 阅读器](词法分析引擎?id=Markdown识别) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
+
+- [代码段的高亮](词法分析引擎?id=代码段的高亮) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
 
 进阶功能
 ---
@@ -50,6 +57,7 @@
 
 - [导出到本地](%E4%BF%9D%E5%AD%98%E5%88%B0%E6%9C%AC%E5%9C%B0)
    - [保存到 Epub](%E5%8F%91%E9%80%81%E5%88%B0-Epub)
+   - [分享卡](分享卡)
 
 - [导出到生产力工具](%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1)
    - [导出到 Kindle](%E5%8F%91%E9%80%81%E5%88%B0-Kindle)
