@@ -153,6 +153,10 @@ function Verify( curver, data ) {
         curver = "1.1.2";
     }
 
+    if ( curver == "1.1.2" ) {
+        data.patch != ver.patch && FixSubver( ver.patch, data );
+    }
+
     /*
     if ( curver == "1.0.1" ) {
         data.option.pocket = { "consumer": "", "access": "" };
