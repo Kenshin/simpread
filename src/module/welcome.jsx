@@ -232,9 +232,9 @@ class Welcome extends React.Component {
                                 <img src="http://sr.ksria.cn/welcome-adapter.png" style={ style.img }/>
                                 <h2 style={ style.h2 }>更智能的正文提取功能</h2>
                                 <div style={ style.desc }>
-                                    从现在开始，简悦可以识别出 Wordpress · Hexo · Ghost · <br/>
-                                    Discuz 等博客 / 论坛的页面了！<br/>
-                                    甚至，只要是结构良好的页面，（无需适配）自动生成阅读模式，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/智能适配模式">请看这里</a> 。
+                                    全新的 <b>词法分析引擎</b><sup>2.0</sup>，简悦可以识别出 Markdown · LaTeX · 代码段<br/>
+                                    Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面了！<br/>
+                                    甚至，只要是结构良好的页面，（无需适配）自动生成阅读模式，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">请看这里</a> 。
                                 </div>
                             </section>
                         </div> }
