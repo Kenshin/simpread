@@ -213,6 +213,7 @@ function FixSubver( patch, target ) {
         target.option.menu.whitelist == undefined && ( target.option.menu.whitelist = false );
         target.option.menu.exclusion == undefined && ( target.option.menu.exclusion = false );
         target.option.menu.blacklist == undefined && ( target.option.menu.blacklist = false );
+        target.option.menu.unrdist   == undefined && ( target.option.menu.unrdist   = false );
     }
     target.patch = patch;
     return target;

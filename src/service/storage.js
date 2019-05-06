@@ -120,6 +120,7 @@ const name = "simpread",
             whitelist: false,
             exclusion: false,
             blacklist: false,
+            unrdist: false,
         },
         origins   : [],
         blacklist : [
