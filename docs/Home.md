@@ -39,9 +39,9 @@
 
 - [TXT 阅读器](TXT-%E9%98%85%E8%AF%BB%E5%99%A8)
 
-- [LaTeX 阅读器](词法分析引擎?id=LaTeX识别) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
+- [LaTeX 阅读器](词法分析引擎?id=LaTeX-识别) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
 
-- [Markdown 阅读器](词法分析引擎?id=Markdown识别) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
+- [Markdown 阅读器](词法分析引擎?id=Markdown-识别) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
 
 - [代码段的高亮](词法分析引擎?id=代码段的高亮) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
 
