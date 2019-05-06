@@ -154,7 +154,7 @@ function Verify( curver, data ) {
     }
 
     if ( curver == "1.1.2" ) {
-        data.patch != ver.patch && FixSubver( ver.patch, data );
+        data.patch != sub_ver && FixSubver( sub_ver, data );
     }
 
     /*
