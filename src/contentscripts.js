@@ -125,7 +125,6 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 storage.option.blacklist.push( request.value.url );
                 new Notify().Render( "已加入到黑名单。" );
             } else if ( request.type == msg.MESSAGE_ACTION.menu_unrdist ) {
-                console.log( 'asdfasdfasdfasdfasdf' )
                 storage.UnRead( "add", { url: request.value.url, title: $("head").find("title").text() , desc: "" }, success => {
                     success  && new Notify().Render( 0, "成功加入未读列表。" );
                     !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
