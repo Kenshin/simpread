@@ -18,6 +18,10 @@
 
 - [常见问题](FAQ)
 
+- [简悦的入门指引](http://kenshin.wang/blog/#/posts/13) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
+
+- 为了让简悦变得更好，请帮忙 [问卷调查](https://wj.qq.com/s2/3611463/7260/) 
+
 基础功能
 ---
 - [聚焦模式](%E8%81%9A%E7%84%A6%E6%A8%A1%E5%BC%8F)
@@ -104,6 +108,7 @@
 
 简悦的开发故事
 ---
+
 - [简悦 1.0.0，沉浸式阅读的 Chrome 扩展](https://sspai.com/post/39491)
 
 - [简悦 1.0.1，虽是一小步，却带来了大家期盼的功能](https://sspai.com/post/39831)
