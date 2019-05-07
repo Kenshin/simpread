@@ -145,6 +145,10 @@ function vernotify( first ) {
         website_sync = true;
         browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });
         history.pushState( "", "", "/options/options.html" );
+    } else if ( hash.startsWith( "#update?patch=" ) ) {
+        const patch = hash.match( /[0-9\.]+/ )[0];
+        patch == "5005" && welcomeRender( false, patch );
+        history.pushState( "", "", "/options/options.html" );
     }
 }
 

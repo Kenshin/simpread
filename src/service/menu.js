@@ -15,6 +15,7 @@ const context = {
         whitelist : { id: "", menu: {} },
         exclusion : { id: "", menu: {} },
         blacklist : { id: "", menu: {} },
+        unrdist   : { id: "", menu: {} },
     },
     menu = {
         "type"     : "normal",
@@ -29,6 +30,7 @@ Object.assign( context.link.menu,  menu, { id: "link",  "title" : "使用阅读�
 Object.assign( context.whitelist.menu,  menu, { id: "whitelist", "title" : "将当前页面加入到白名单" });
 Object.assign( context.exclusion.menu,  menu, { id: "exclusion", "title" : "将当前页面加入到排除列表" });
 Object.assign( context.blacklist.menu,  menu, { id: "blacklist", "title" : "将当前页面加入到黑名单" });
+Object.assign( context.unrdist.menu,    menu, { id: "unrdist",   "title" : "将当前页面加入稍后读" });
 
 /**
  * Listen contextMenus message
@@ -61,6 +63,9 @@ function createAll() {
 
     storage.option.menu.blacklist &&
         ( context.blacklist.id  = browser.contextMenus.create( context.blacklist.menu ));
+
+    storage.option.menu.unrdist &&
+        ( context.unrdist.id  = browser.contextMenus.create( context.unrdist.menu ));
 }
 
 /**

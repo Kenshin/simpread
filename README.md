@@ -32,7 +32,15 @@
 - [阅读模式](http://ksria.com/simpread/docs/#/阅读模式)：  
   简悦 `原创` 功能，逐一适配了 [数百种类型](https://simpread.ksria.cn/sites/) 的网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
-  * 支持 `自动生成目录` [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) [论坛类页面及分页](http://ksria.com/simpread/docs/#/论坛类页面及分页) 如：知乎 · 百度贴吧等
+  * 支持 `自动生成目录` 
+
+  * 支持 [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) 
+
+  * 支持 [论坛类页面及分页](http://ksria.com/simpread/docs/#/论坛类页面及分页) 如：知乎 · 百度贴吧等
+
+  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 [代码段的高亮](http://ksria.com/simpread/docs/#/代码段的高亮)，包含了大部分常见的网站
+
+  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 [LaTeX 解析](http://ksria.com/simpread/docs/#/LaTeX-阅读器) · [Markdown 阅读器](http://ksria.com/simpread/docs/#/Markdown-阅读器) 
 
   * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](http://ksria.com/simpread/docs/#/自定义样式)
 
@@ -43,7 +51,8 @@
   通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](http://ksria.com/simpread/docs/#/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
 
 - 智能适配：  
-  自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面以及只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [智能适配](http://ksria.com/simpread/docs/#/智能适配模式)
+
+  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 全新的 `词法分析引擎`，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」，不仅能自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面，甚至于只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)
 
 - 站点适配源：  
   包括：`官方（主）适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
@@ -153,6 +162,7 @@
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
 - Icon from <http://iconfont.cn>
+- [Welcome PuRead II](http://sr.ksria.cn/welcome-puread-ii.png) via [www.freepik.com](https://www.freepik.com/free-vector/it-specialists-upgrading-operating-system-illustration_4332393.htm)
 - Mockup Design usage <http://magicmockups.com/>
 - Material Design usage <https://material.io/guidelines/>
 - Mind Maps <https://coggle.it/>

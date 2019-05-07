@@ -153,6 +153,10 @@ function Verify( curver, data ) {
         curver = "1.1.2";
     }
 
+    if ( curver == "1.1.2" ) {
+        data.patch != sub_ver && FixSubver( sub_ver, data );
+    }
+
     /*
     if ( curver == "1.0.1" ) {
         data.option.pocket = { "consumer": "", "access": "" };
@@ -202,21 +206,26 @@ function Compare( target ) {
 
 /**
  * Fix subver config
+ * 
+ * @param {string} patch version e.g. 1025 / 5005
+ * @param {object} @see simpread
  */
-function FixSubver( target ) {
-    if ( sub_ver == "1025" ) {
+function FixSubver( patch, target ) {
+    if ( patch == "5005" ) {
         target.read.cleanup == undefined && ( target.read.cleanup = true );
         target.read.pure    == undefined && ( target.read.pure    = true );
         target.option.menu.whitelist == undefined && ( target.option.menu.whitelist = false );
         target.option.menu.exclusion == undefined && ( target.option.menu.exclusion = false );
         target.option.menu.blacklist == undefined && ( target.option.menu.blacklist = false );
+        target.option.menu.unrdist   == undefined && ( target.option.menu.unrdist   = false );
     }
+    target.patch = patch;
     return target;
 }
 
 export {
     version,
-    sub_ver,
+    sub_ver as patch,
     Verify,
     Notify,
     Compare,

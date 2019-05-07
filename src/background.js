@@ -41,6 +41,10 @@ storage.Read( () => {
                 getNewsitesHandler( result );
             });
         });
+        ver.version == storage.version && ver.patch != storage.patch &&
+            storage.Write(()=> {
+                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?patch=" + ver.patch ) });
+            }, ver.FixSubver( ver.patch, storage.simpread ));
     }
     menu.CreateAll();
 });
@@ -68,6 +72,8 @@ menu.OnClicked( ( info, tab ) => {
         browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_exclusion, {url: info.pageUrl } ));
     } else if ( info.menuItemId == "blacklist" ) {
         browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_blacklist, {url: info.pageUrl } ));
+    } else if ( info.menuItemId == "unrdist" ) {
+        browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_unrdist, {url: info.pageUrl } ));
     } else {
         if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
     }
