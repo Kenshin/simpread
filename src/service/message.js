@@ -10,6 +10,10 @@ const action = {
     new_tab        : "new_tab",
     close_tab      : "close_tab",
     menu           : "menu",
+    menu_whitelist : "menu_whitelist",
+    menu_exclusion : "menu_exclusion",
+    menu_blacklist : "menu_blacklist",
+    menu_unrdist   : "menu_unrdist",
     updated        : "updated",
     save_verify    : "save_verify",
     storage        : "storage",         // only firefox
@@ -28,6 +32,8 @@ const action = {
     pending_site   : "pending_site",
     save_site      : "save_site",
     temp_site      : "temp_site",
+    // corb
+    CORB           : "corb",
 };
 
 /**

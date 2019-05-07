@@ -32,6 +32,7 @@ export default class LabsOpt extends React.Component {
         this.props.onChange && this.props.onChange( true );
         model == "read" && state == "auto" && this.exclusionState( value );
         model == "read" && state == "toc"  && this.tocState( value );
+        model == "read" && state == "cleanup" && this.cleanupState( value );
     }
 
     changeExclusion( event ) {
@@ -48,6 +49,10 @@ export default class LabsOpt extends React.Component {
         $( this.refs.toc ).velocity( value ? "slideDown" : "slideUp" );
     }
 
+    cleanupState( value ) {
+        $( this.refs.cleanup ).velocity( value ? "slideDown" : "slideUp" );
+    }
+
     exclusionState( value ) {
         $( this.refs.exclusion  ).velocity( value ? "slideDown" : "slideUp" );
         $( this.refs.whitelist ).velocity( !value ? "slideDown" : "slideUp" );
@@ -61,6 +66,7 @@ export default class LabsOpt extends React.Component {
     componentDidMount() {
         this.exclusionState( this.props.read.auto );
         this.tocState( this.props.read.toc );
+        this.cleanupState( this.props.read.cleanup == undefined ? true : this.props.read.cleanup );
     }
 
     onClick( state ) {
@@ -117,6 +123,22 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示「打开稍后读」？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "list" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.whitelist }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入白名单」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "whitelist" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.exclusion }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入到排除列表」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "exclusion" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.blacklist }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入到黑名单」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "blacklist" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.unrdist }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入到稍后读」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "unrdist" ) } />
                 </div>
 
                 <div className="label">聚焦模式</div>
@@ -196,6 +218,22 @@ export default class LabsOpt extends React.Component {
                             value={ ( this.props.read.whitelist||[] ).join( "\n" ) }
                             onChange={ (e)=>this.changeWhitelist(e) }
                         />
+                    </div>
+                </div>
+
+                <div className="label">词法分析引擎 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>测试版</a></div>
+                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
+                    <Switch width="100%" checked={ this.props.read.cleanup == undefined ? true : this.props.read.cleanup }
+                                thumbedColor="#3F51B5" trackedColor="#7986CB"
+                                label="是否启用增强解析模式？"
+                                desc="增强解析模式会对版面重新设计，包括：去除多余空格、优化版面结构等，此功能为测试版，遇到解析失败时，请关闭此功能。"
+                                onChange={ (s)=>this.onChange(s, "read", "cleanup") } />
+                    <div ref="cleanup" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
+                        <Switch width="100%" checked={ this.props.read.pure }
+                                thumbedColor="#3F51B5" trackedColor="#7986CB"
+                                label="纯粹模式"
+                                desc="比【增强解析模式】还要彻底优化版本，包括：字形、颜色、字号、代码段等，专治页面及不规范，如：微信订阅号，CSDN 等。"
+                                onChange={ (s)=>this.onChange(s, "read", "pure") } />
                     </div>
                 </div>
 

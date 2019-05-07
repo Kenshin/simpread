@@ -5,6 +5,8 @@ import * as exp    from 'export';
 import { storage } from 'storage';
 import {browser}   from 'browser';
 import * as msg    from 'message';
+import * as highlight from 'highlight';
+import * as share  from 'sharecard';
 
 /**
  * Controlbar common action, include:
@@ -19,6 +21,8 @@ import * as msg    from 'message';
  * @param {string} current page: content 
  */
 function action( type, title, desc, content ) {
+
+    console.log( "output: Action is ", type )
 
     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) ) {
         let url = "";
@@ -38,8 +42,15 @@ function action( type, title, desc, content ) {
             case "telegram":
                 url = `https://t.me/share/url?url=${ window.location.href }`;
                 break;
+            case "card":
+                new Notify().Render( "已启动分享卡标注功能，请在页面标注，生成分享卡。" );
+                $("sr-rd-crlbar").find("panel-bg").length > 0 && $("sr-rd-crlbar").find("panel-bg")[0].click();
+                highlight.Annotate().done( txt => {
+                    txt != "" && share.Render( storage.current.mode == "focus" ? "html" : "sr-read", title, txt );
+                });
+                break;
         }
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
+        type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
     } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html" ].includes( type ) ) {
         storage.Statistics( "service", type );
         switch ( type ) {
@@ -104,9 +115,11 @@ function action( type, title, desc, content ) {
                                 break;
                             case "html":
                                 new Notify().Render( "保存成功，开始下载..." );
-                                $.get( `${exp.kindle.host}/${exp.kindle.id}.html`, result => {
-                                    result = result.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://sr.ksria.cn/puread/' )
-                                    exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(result), `simpread-${title}.html` );
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings: { url: `${exp.kindle.host}/${exp.kindle.id}.html`, type: "GET" }}), result => {
+                                    if ( result && result.done != "" ) {
+                                        result = result.done.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://sr.ksria.cn/puread/' )
+                                        exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(result), `simpread-${title}.html` );
+                                    } else new Notify().Render( 2, "导出出现问题，请稍后再试。" );
                                 });
                                 break;
                         }
@@ -197,6 +210,8 @@ function action( type, title, desc, content ) {
         } else {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.speak_stop ));
         }
+    } else if ( type.startsWith( "fullscreen" ) ) {
+        document.documentElement.requestFullscreen();
     }
     else {
         new Notify().Render( 2, "当前模式下，不支持此功能。" );

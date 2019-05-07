@@ -3,6 +3,7 @@ console.log( "=== simpread contentscripts load ===" )
 import './assets/css/simpread.css';
 import './assets/css/option.css';
 import 'notify_css';
+import 'mintooltip';
 
 import Velocity  from 'velocity';
 import Notify    from 'notify';
@@ -55,7 +56,7 @@ storage.Read( () => {
  */
 function blacklist() {
     for ( const item of storage.option.blacklist ) {
-        if ( !item.startsWith( "http" ) ) {
+        if ( item.trim() != "" && !item.startsWith( "http" ) ) {
             if ( location.hostname.includes( item ) ) {
                 is_blacklist = true;
                 break;
@@ -109,6 +110,29 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed" }));
             }});
             localStorage.removeItem( "sr-update-site" );
+            break;
+        case msg.MESSAGE_ACTION.menu_whitelist:
+        case msg.MESSAGE_ACTION.menu_exclusion:
+        case msg.MESSAGE_ACTION.menu_blacklist:
+        case msg.MESSAGE_ACTION.menu_unrdist:
+            if ( request.type == msg.MESSAGE_ACTION.menu_whitelist ) {
+                storage.read.whitelist.push( request.value.url );
+                new Notify().Render( "已加入到白名单。" );
+            } else if ( request.type == msg.MESSAGE_ACTION.menu_exclusion ) {
+                storage.read.exclusion.push( request.value.url );
+                new Notify().Render( "已加入到排除列表。" );
+            } else if ( request.type == msg.MESSAGE_ACTION.menu_blacklist ) {
+                storage.option.blacklist.push( request.value.url );
+                new Notify().Render( "已加入到黑名单。" );
+            } else if ( request.type == msg.MESSAGE_ACTION.menu_unrdist ) {
+                storage.UnRead( "add", { url: request.value.url, title: $("head").find("title").text() , desc: "" }, success => {
+                    success  && new Notify().Render( 0, "成功加入未读列表。" );
+                    !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
+                });
+            }
+            storage.Write( () => {
+                watch.SendMessage( "option", true );
+            });
             break;
     }
 });
@@ -267,6 +291,8 @@ function browserAction( is_update ) {
 */
 function pRead() {
     pr = new PureRead( storage.sites );
+    pr.cleanup = storage.read.cleanup == undefined ? true  : storage.read.cleanup;
+    pr.pure    = storage.read.pure    == undefined ? false : storage.read.pure;
     pr.AddPlugin( puplugin.Plugin() );
     pr.Getsites();
     storage.puread = pr;

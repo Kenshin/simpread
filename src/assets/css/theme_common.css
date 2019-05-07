@@ -4,7 +4,7 @@
  * sr-rd-title, sr-rd-desc, sr-rd-content, p, div, a, img, pre, code, sr-blockquote, ul ol
  */
  
-.simpread-theme-root {
+ .simpread-theme-root {
     font-size: 62.5%!important;
 }
 
@@ -13,8 +13,13 @@ sr-rd-title, sr-rd-desc, sr-rd-content {
 }
 
 sr-rd-title {
-    text-rendering: optimizelegibility;
+    display: -webkit-box;
     margin: 1em 0px 0.5em;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    text-rendering: optimizelegibility;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 sr-rd-content {
@@ -186,11 +191,27 @@ sr-rd-content pre code * {
     font-size: 1.1rem;
 }
 
+sr-rd-content pre p {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
 sr-rd-content li code,
 sr-rd-content p code {
     margin: 0 4px;
     padding: 2px 4px;
     font-size: 1.1rem;
+}
+
+sr-rd-content mark {
+    margin: 0 5px;
+    padding: 2px;
+
+    background: #fffdd1;
+    border-bottom: 1px solid #ffedce;
 }
 
 .sr-rd-content-img {
@@ -215,6 +236,17 @@ sr-rd-content p code {
     -webkit-box-align: center;
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
+}
+
+.sr-rd-content-center-small {
+    display: inline-flex;
+}
+
+.sr-rd-content-center-small img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
 }
 
 .sr-rd-content-nobeautify {
@@ -257,6 +289,8 @@ sr-rd-mult sr-rd-mult-avatar {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    margin: 0 15px;
 }
 
 sr-rd-mult sr-rd-mult-avatar span {

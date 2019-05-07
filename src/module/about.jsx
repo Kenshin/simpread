@@ -117,7 +117,7 @@ export default class About extends React.Component {
                 </div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
-                        <a style={style.href}><b onClick={()=>this.props.onClick("welcome")}>重看引导页面</b> 或者 <a style={style.href} target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.2.html"><b>重看当前版本</b></a> 的功能介绍</a>
+                        <a style={style.href}><b onClick={()=>this.props.onClick("welcome")}>重看引导页面</b> 或者 <a style={style.href} target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.2.5005.html"><b>重看当前版本</b></a> 的功能介绍</a>
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>

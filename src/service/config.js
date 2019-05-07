@@ -127,6 +127,11 @@ const keyboard = {
         },
     },
     "控制栏 - 设定" : {
+        fu: {
+            "kbd"  : "fu",
+            "type" : "fullscreen",
+            "desc" : "全屏",
+        },
         st: {
             "kbd"  : "st",
             "type" : "setting",
@@ -189,6 +194,11 @@ const readItems = {
         "icon" : ss.IconPath("option_icon"),
         "color": "#03A9F4",
         "items": {
+            "fullscreen" : {
+                "name" : "全屏",
+                "icon" : ss.IconPath("fullscreen_icon"),
+                "color": "#03A9F4",
+            },
             "siteeditor" : {
                 "name" : "站点编辑器",
                 "icon" : ss.IconPath("siteeditor_icon"),
@@ -361,6 +371,11 @@ const readItems = {
                 "name" : "新浪微博",
                 "icon" : ss.IconPath("share_weibo_icon"),
                 "color": "#E6162D",
+            },
+            "share_card" : {
+                "name" : "分享卡",
+                "icon" : ss.IconPath("share_card_icon"),
+                "color": "#0f4137",
             },
         },
     },

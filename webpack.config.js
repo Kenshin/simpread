@@ -278,6 +278,7 @@ const webpack = require( 'webpack' ),
           pluginbar  : __dirname + '/src/module/pluginbar.jsx',
           sitebar    : __dirname + '/src/module/sitebar.jsx',
           enhancesite: __dirname + '/src/module/enhancesite.jsx',
+          sharecard  : __dirname + '/src/module/sharecard.jsx',
           editor     : __dirname + '/src/module/common/editor.jsx',
           themesel   : __dirname + '/src/module/common/theme.jsx',
           shortcuts  : __dirname + '/src/module/common/shortcuts.jsx',
@@ -305,10 +306,11 @@ const webpack = require( 'webpack' ),
           dialog     : __dirname + '/src/vender/mduikit/dialog.jsx',
           slider     : __dirname + '/src/vender/mduikit/slider.jsx',
           tooltip    : __dirname + '/src/vender/mduikit/tooltip.jsx',
+          mintooltip : __dirname + '/src/vender/mduikit/mintooltip.css',
           waves      : __dirname + '/src/vender/mduikit/waves.js',
 
-          puread     : __dirname + '/src/vender/puread/puread.js',
-          puplugin   : __dirname + '/src/vender/puread/plugin.js',
+          puread     : __dirname + '/src/vender/puread/puread.min.js',
+          puplugin   : __dirname + '/src/vender/puread/puplugin.min.js',
 
         }
       }
