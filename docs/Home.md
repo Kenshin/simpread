@@ -14,11 +14,9 @@
 文档中心
 ---
 
-- [新手入门](入门指南（-操作指引-）)
+- [新手入门](入门指南（-操作指引-）) & [基础/进阶操作介绍](http://kenshin.wang/blog/#/posts/13)
 
 - [常见问题](FAQ)
-
-- [简悦的入门指引](http://kenshin.wang/blog/#/posts/13) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
 
 - 为了让简悦变得更好，请帮忙 [问卷调查](https://wj.qq.com/s2/3611463/7260/) 
 
@@ -49,11 +47,26 @@
 
 - [代码段的高亮](词法分析引擎?id=代码段的高亮) ![new.png](https://i.loli.net/2018/09/03/5b8caea95e852.png) 
 
-进阶功能
+辅助功能
 ---
-- [快捷键](%E5%BF%AB%E6%8D%B7%E9%94%AE)
+- [黑名单](http://ksria.com/simpread/docs/#/FAQ?id=黑名单)
+
+- [白名单](http://ksria.com/simpread/docs/#/FAQ?id=白名单)
+
+- [排除列表](http://ksria.com/simpread/docs/#/FAQ?id=排除列表)
+
+- [右键菜单](右键菜单)
+
+- [快捷键](快捷键)
+
+- [分享卡](分享卡)
 
 - [浮动动作面板](%E6%B5%AE%E5%8A%A8%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF%EF%BC%88FAP%EF%BC%89%E4%B8%8E%E6%B5%AE%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%A0%8F%EF%BC%88FAB%EF%BC%89)
+
+- [稍后读](稍后读)
+
+进阶功能
+---
 
 - [自定义样式](%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F)
 
@@ -61,7 +74,6 @@
 
 - [导出到本地](%E4%BF%9D%E5%AD%98%E5%88%B0%E6%9C%AC%E5%9C%B0)
    - [保存到 Epub](%E5%8F%91%E9%80%81%E5%88%B0-Epub)
-   - [分享卡](分享卡)
 
 - [导出到生产力工具](%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1)
    - [导出到 Kindle](%E5%8F%91%E9%80%81%E5%88%B0-Kindle)
