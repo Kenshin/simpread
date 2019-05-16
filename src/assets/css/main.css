@@ -940,6 +940,7 @@ body {
     @apply --white-link;
     font-size: inherit;
     color: var(--text-color);
+    border-bottom: 1px dotted;
 }
 
 .version .details li a:hover {
