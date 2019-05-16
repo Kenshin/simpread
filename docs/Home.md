@@ -49,11 +49,20 @@
 
 辅助功能
 ---
+
+- [临时页面](临时页面)
+
 - [黑名单](http://ksria.com/simpread/docs/#/FAQ?id=黑名单)
 
 - [白名单](http://ksria.com/simpread/docs/#/FAQ?id=白名单)
 
 - [排除列表](http://ksria.com/simpread/docs/#/FAQ?id=排除列表)
+
+- [阅读进度](阅读进度)
+
+- [目录](目录)
+
+- [重新高亮](重新高亮)
 
 - [右键菜单](右键菜单)
 
@@ -69,8 +78,6 @@
 ---
 
 - [自定义样式](%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%B7%E5%BC%8F)
-
-- [临时页面](临时页面)
 
 - [导出到本地](%E4%BF%9D%E5%AD%98%E5%88%B0%E6%9C%AC%E5%9C%B0)
    - [保存到 Epub](%E5%8F%91%E9%80%81%E5%88%B0-Epub)

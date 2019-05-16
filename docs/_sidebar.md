@@ -15,9 +15,13 @@
   * [Markdown 阅读器](词法分析引擎?id=Markdown-识别)
   * [代码段的高亮](词法分析引擎?id=代码段的高亮)
 * **辅助功能**
+  * [临时页面](临时页面)
   * [黑名单](http://ksria.com/simpread/docs/#/FAQ?id=黑名单)
   * [白名单](http://ksria.com/simpread/docs/#/FAQ?id=白名单)
   * [排除列表](http://ksria.com/simpread/docs/#/FAQ?id=排除列表)
+  * [阅读进度](阅读进度)
+  * [目录](目录)
+  * [重新高亮](重新高亮)
   * [右键菜单](右键菜单)
   * [快捷键](快捷键)
   * [分享卡](分享卡)
