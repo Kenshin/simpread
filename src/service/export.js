@@ -983,6 +983,57 @@ class Kindle {
 }
 
 /**
+ * Onenote
+ * 
+ * @class
+ */
+class Jianguo {
+
+    get id()   { return "jianguo"; }
+    get name() { return name( this.id ); }
+
+    get url() {
+        return "https://dav.jianguoyun.com/dav/";
+    }
+
+    get root() {
+        return "SimpRead";
+    }
+
+    get folder() {
+        return "md";
+    }
+
+    Auth( user, password, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV, {
+            url: this.url,
+            user,
+            password,
+            method: {
+                type: "folder",
+                root: this.root,
+                folder: this.folder,
+            },
+        }), callback );
+    }
+
+    Add( user, password, name, content, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV, {
+            url: this.url,
+            user,
+            password,
+            method: {
+                type: "file",
+                root: this.root,
+                folder: this.folder,
+                name,
+                content
+            },
+        }), callback );
+    }
+}
+
+/**
  * Get name
  * 
  * @param  {string} service type
@@ -996,8 +1047,10 @@ function name( type ) {
         return "印象笔记";
     } else if ( type == "gdrive" ) {
         return "Google 云端硬盘";
+    } else if ( type == "jianguo" ) {
+        return "坚果云";
     }
-    return type;
+return type;
 }
 
 /**
@@ -1074,6 +1127,7 @@ const dropbox  = new Dropbox(),
       evernote = new Evernote(),
       onenote  = new Onenote(),
       gdrive   = new GDrive(),
+      jianguo  = new Jianguo(),
       kindle   = new Kindle();
 
 export {
@@ -1085,7 +1139,7 @@ export {
     prueDownload as PrDownload,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,
