@@ -217,6 +217,11 @@ let current  = {},
             access_token  : "",
             folder_id     : "",
         },
+        "jianguo"  : {
+            username      : "",
+            password      : "",
+            access_token  : "",
+        },
     };
     //stcode = -1;
 
