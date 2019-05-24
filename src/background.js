@@ -83,18 +83,17 @@ menu.OnClicked( ( info, tab ) => {
  * Listen runtime message, include: `corb`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
-        if ( request.type == msg.MESSAGE_ACTION.CORB ) {
-            $.ajax( request.value.settings )
-                .done( result => {
-                    sendResponse({ done: result });
-                })
-                .fail( ( jqXHR, textStatus, errorThrown ) => {
-                    sendResponse({ fail: { jqXHR, textStatus, errorThrown }});
-                });
-        }
-        return true;
+    if ( request.type == msg.MESSAGE_ACTION.CORB ) {
+        $.ajax( request.value.settings )
+            .done( result => {
+                sendResponse({ done: result });
+            })
+            .fail( ( jqXHR, textStatus, errorThrown ) => {
+                sendResponse({ fail: { jqXHR, textStatus, errorThrown }});
+            });
     }
-);
+    return true;
+});
 
 /**
  * Listen runtime message, include: `shortcuts` `browser_action`
