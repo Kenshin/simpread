@@ -7,6 +7,7 @@ import {browser}   from 'browser';
 import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
+import * as WebDAV from 'webdav';
 
 import PureRead    from 'puread';
 
@@ -93,6 +94,29 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             });
     }
     return true;
+});
+
+/**
+ * Listen runtime message, include: `webdav`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.WebDAV ) {
+        const { url, user, password, method } = request.value;
+        const dav = new WebDAV.Fs( url, user, password );
+        sendResponse({ done: "result" });
+        if ( method.type == "folder" ) {
+            dav.dir( method.root ).mkdir( result => {
+                dav.dir( method.root + "/" + method.folder ).mkdir( result => {
+                    sendResponse({ done: result });
+                });
+            })
+        } else if ( method.type == "file" ) {
+            dav.file( method.root + "/" + method.folder + "/" + method.name ).write( method.content, result => {
+                sendResponse({ done: result, status: result.status });
+            });
+        }
+    }
+    //return true;
 });
 
 /**
