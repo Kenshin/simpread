@@ -138,8 +138,8 @@ function action( type, title, desc, content ) {
                 }
                 break;
         }
-    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) ) {
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive } = exp,
+    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo" ].includes( type ) ) {
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
         const service = type => {
@@ -196,6 +196,15 @@ function action( type, title, desc, content ) {
                     storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                     exp.MDWrapper( util.ClearMD( content), undefined, new Notify() ).done( result => {
                         gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, type, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
+                    });
+                    break;
+                case "jianguo":
+                    exp.MDWrapper( util.ClearMD( content) , undefined, new Notify() ).done( markdown => {
+                        jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, encodeURI( `${title}.md` ), markdown, result => {
+                            //if ( result && result.done ) {
+                            //} else failed( result.error, jianguo.id, jianguo.name );
+                            exp.svcCbWrapper( result, undefined, jianguo.name, type, new Notify() );
+                        });
                     });
                     break;
             }
