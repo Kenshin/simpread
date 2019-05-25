@@ -200,7 +200,8 @@ function action( type, title, desc, content ) {
                     break;
                 case "jianguo":
                     exp.MDWrapper( util.ClearMD( content) , undefined, new Notify() ).done( markdown => {
-                        jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, encodeURI( `${title}.md` ), markdown, result => {
+                        title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
+                        jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${title}.md`, markdown, result => {
                             //if ( result && result.done ) {
                             //} else failed( result.error, jianguo.id, jianguo.name );
                             exp.svcCbWrapper( result, undefined, jianguo.name, type, new Notify() );
