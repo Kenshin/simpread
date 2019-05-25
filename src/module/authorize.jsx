@@ -388,7 +388,7 @@ export default class Auth extends React.Component {
                         <div className="sublabel">简悦支持任意 WebDAV 的服务，包括：Box · TeraCLOUD 等</div>
                         <TextField 
                             multi={ true } rows={8}
-                            placeholder="每行一组，格式为：{ name: '网盘的名称', user: '用户名', password: '密码', url: 'webdav 地址' }" 
+                            placeholder={ `每行一组，格式为：{ "name": "网盘的名称", "user": "用户名", "password": "密码", "url": "webdav 地址" }` } 
                             value={ ( this.state.secret.webdav||[] ).join( "\n" ) }
                             onChange={ (e)=>this.webdavOnChange(e) }
                         />
