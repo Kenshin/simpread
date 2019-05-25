@@ -203,8 +203,9 @@ function action( type, title, desc, content ) {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
                         jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${title}.md`, markdown, result => {
                             let error = undefined;
-                            if ( result && ( result.status == 201 || result.status == 204 )) {
-                            } else error = "导出到坚果云失败，请稍后再试。";
+                            if ( result && ( result.status != 201 && result.status != 204 )) {
+                                error = "导出到坚果云失败，请稍后再试。";
+                            }
                             exp.svcCbWrapper( result, error, jianguo.name, type, new Notify() );
                         });
                     });
