@@ -202,9 +202,10 @@ function action( type, title, desc, content ) {
                     exp.MDWrapper( util.ClearMD( content) , undefined, new Notify() ).done( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
                         jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${title}.md`, markdown, result => {
-                            //if ( result && result.done ) {
-                            //} else failed( result.error, jianguo.id, jianguo.name );
-                            exp.svcCbWrapper( result, undefined, jianguo.name, type, new Notify() );
+                            let error = undefined;
+                            if ( result && ( result.status == 201 || result.status == 204 )) {
+                            } else error = "导出到坚果云失败，请稍后再试。";
+                            exp.svcCbWrapper( result, error, jianguo.name, type, new Notify() );
                         });
                     });
                     break;
