@@ -103,7 +103,6 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
     if ( request.type == msg.MESSAGE_ACTION.WebDAV ) {
         const { url, user, password, method } = request.value;
         const dav = new WebDAV.Fs( url, user, password );
-        sendResponse({ done: "result" });
         if ( method.type == "folder" ) {
             dav.dir( method.root ).mkdir( result => {
                 dav.dir( method.root + "/" + method.folder ).mkdir( result => {
