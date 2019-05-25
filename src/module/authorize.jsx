@@ -188,9 +188,9 @@ export default class Auth extends React.Component {
                 break;
             case "jianguo":
                 jianguo.Auth( this.props.jianguo.username, this.props.jianguo.password, result => {
-                    if ( result && result.done ) {
-                        success( "jianguo", "坚果云", { username: this.props.jianguo.username, password: this.props.jianguo.password } );
-                    } else failed( result.error, jianguo.id, jianguo.name );
+                    if ( result && result.status == 401 ) {
+                        failed( "授权错误，请重新授权。", jianguo.id, jianguo.name );
+                    } else success( "jianguo", "坚果云", { username: this.props.jianguo.username, password: this.props.jianguo.password } );
                 });
                 break;
         }
