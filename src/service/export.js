@@ -1124,7 +1124,7 @@ let noti; // notify variable
  * @param {object} notify
  */
 function serviceCallback( result, error, name, type, notify ) {
-    noti.complete();
+    noti && noti.complete();
     !error && notify.Render( `已成功保存到 ${name}！` );
     ![ "evernote", "yinxiang" ].includes( type ) && error && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
     if ( error && error.includes( "重新授权" )) {
