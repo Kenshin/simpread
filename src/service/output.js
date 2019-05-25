@@ -194,12 +194,12 @@ function action( type, title, desc, content ) {
                     break;
                 case "gdrive":
                     storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
-                    exp.MDWrapper( util.ClearMD( content), undefined, new Notify() ).done( result => {
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
                         gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, type, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
                     });
                     break;
                 case "jianguo":
-                    exp.MDWrapper( util.ClearMD( content) , undefined, new Notify() ).done( markdown => {
+                    exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
                         jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${title}.md`, markdown, result => {
                             let error = undefined;
@@ -230,7 +230,7 @@ function action( type, title, desc, content ) {
             storage.secret.webdav.forEach( item => {
                 item = JSON.parse(item);
                 if ( item.name == id ) {
-                    exp.MDWrapper( util.ClearMD( content) , undefined, new Notify() ).done( markdown => {
+                    exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
                         new Notify().Render( `开始保存到 ${ item.name}，请稍等...` );
                         exp.webdav.Add( item.url, item.user, item.password, `${title}.md`, markdown, result => {
