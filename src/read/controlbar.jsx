@@ -141,6 +141,16 @@ export default class ReadCtlbar extends React.Component {
             if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
                 delete conf.readItems.option;
             }
+            storage.Safe( () => {
+                storage.secret.webdav.forEach( item => {
+                    item = JSON.parse(item);
+                    conf.readItems.send.items[ "webdav_" + item.name ] = {
+                        name: item.name,
+                        icon: ss.IconPath("webdav_icon"),
+                        "color": "#00BCD4",
+                    };
+                });
+            })
         } catch ( err ) {
             // TO-DO
         }
