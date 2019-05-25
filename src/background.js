@@ -122,7 +122,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  * Listen runtime message, include: `webdav`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
-    if ( request.type == msg.MESSAGE_ACTION.WebDAV2 ) {
+    if ( request.type == msg.MESSAGE_ACTION.WebDAV ) {
         const { url, user, password, method } = request.value;
         const dav = new WebDAV.Fs( url, user, password );
         if ( method.type == "folder" ) {

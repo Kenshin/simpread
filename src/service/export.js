@@ -1049,7 +1049,7 @@ class WebDAV {
     }
 
     Auth( url, user, password, callback ) {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV2, {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV, {
             url,
             user,
             password,
@@ -1061,7 +1061,7 @@ class WebDAV {
     }
 
     Add( url, user, password, name, content, callback ) {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV2, {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV, {
             url,
             user,
             password,

@@ -36,7 +36,7 @@ const action = {
     CORB           : "corb",
     // webdav
     jianguo        : "jianguo",
-    WebDAV2        : "WebDAV2",
+    WebDAV         : "webdav",
 };
 
 /**
