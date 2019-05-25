@@ -1006,7 +1006,7 @@ class Jianguo {
     }
 
     Auth( user, password, callback ) {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV, {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.jianguo, {
             url: this.url,
             user,
             password,
@@ -1019,7 +1019,7 @@ class Jianguo {
     }
 
     Add( user, password, name, content, callback ) {
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV, {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.jianguo, {
             url: this.url,
             user,
             password,
