@@ -115,6 +115,7 @@ function unlink( id ) {
         "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
         "onenote" : "https://account.live.com/consent/Manage",
         "gdrive"  : "https://drive.google.com/drive/my-drive",
+        "jianguo" : "http://help.jianguoyun.com/?p=2064",
         "linnk"   : "https://linnk.net/",
     }
     return content[id]
