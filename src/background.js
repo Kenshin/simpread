@@ -119,6 +119,26 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
+ * Listen runtime message, include: `webdav`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.WebDAV2 ) {
+        const { url, user, password, method } = request.value;
+        const dav = new WebDAV.Fs( url, user, password );
+        if ( method.type == "folder" ) {
+            dav.dir( method.root ).mkdir( result => {
+                sendResponse({ done: result, status: result.status });
+            })
+        } else if ( method.type == "file" ) {
+            dav.file( method.root + "/" + method.name ).write( method.content, result => {
+                sendResponse({ done: result, status: result.status });
+            });
+        }
+    }
+    //return true;
+});
+
+/**
  * Listen runtime message, include: `shortcuts` `browser_action`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
