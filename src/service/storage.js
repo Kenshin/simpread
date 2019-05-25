@@ -222,6 +222,7 @@ let current  = {},
             password      : "",
             access_token  : "",
         },
+        "webdav"  : []
     };
     //stcode = -1;
 
