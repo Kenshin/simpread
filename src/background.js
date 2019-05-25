@@ -106,7 +106,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         if ( method.type == "folder" ) {
             dav.dir( method.root ).mkdir( result => {
                 dav.dir( method.root + "/" + method.folder ).mkdir( result => {
-                    sendResponse({ done: result });
+                    sendResponse({ done: result, status: result.status });
                 });
             })
         } else if ( method.type == "file" ) {
