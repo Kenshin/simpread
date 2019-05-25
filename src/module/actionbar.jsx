@@ -43,7 +43,7 @@ export default class Actionbar extends React.Component {
             return (
                 <sr-opt-gp>
                     <sr-opt-label>{action.name}</sr-opt-label>
-                    <actions style={{ display: "flex", margin: "10px 0" }}>{ items }</actions>
+                    <actions style={{ display: "flex", margin: "10px 0", "flex-wrap": "wrap" }}>{ items }</actions>
                 </sr-opt-gp>
             );
         });
