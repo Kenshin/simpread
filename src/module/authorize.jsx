@@ -214,6 +214,31 @@ export default class Auth extends React.Component {
         this.props.jianguo[state] = value;
     }
 
+    webdavOnChange() {
+        this.state.secret.webdav = event.target.value.split("\n");
+        storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
+    }
+
+    webdavAuth() {
+        this.state.secret.webdav.forEach( ( item, idx ) => {
+            try {
+                item = JSON.parse(item);
+                if ( Object.keys( item ).join( "" ).replace( /url|name|password|user/ig, "" ) != "" ) {
+                    throw "error";
+                }
+                exp.webdav.Auth( item.url, item.user, item.password, result => {
+                    if ( result && ( result.status == 201 || result.status == 405 )) {
+                        new Notify().Render( `${item.name} 验证成功。` );
+                    } else {
+                        new Notify().Render( 2, `${item.name} 授权失败，请确认用户名和密码。` );
+                    }
+                });
+            } catch( error ) {
+                new Notify().Render( 2, `第 ${idx+1} 条数据格式错误，请重新输入。` );
+            }
+        });
+    }
+
     componentWillReceiveProps( nextProps ) {
         this.setState({ secret: storage.secret })
     }
@@ -358,6 +383,20 @@ export default class Auth extends React.Component {
                                 onClick={ (s)=>this.onChange( "jianguo", s, "login" ) } />
 
                         </div> }
+
+                        <div className="label" style={{'margin-bottom':' -15px'}}>WebDAV</div>
+                        <div className="sublabel">简悦支持任意 WebDAV 的服务，包括：Box · TeraCLOUD 等</div>
+                        <TextField 
+                            multi={ true } rows={8}
+                            placeholder="每行一组，格式为：{ name: '网盘的名称', user: '用户名', password: '密码', url: 'webdav 地址' }" 
+                            value={ ( this.state.secret.webdav||[] ).join( "\n" ) }
+                            onChange={ (e)=>this.webdavOnChange(e) }
+                        />
+                        <Button type="raised" width="100%" style={{ "margin": "0" }}
+                            text="验证上述 WebDAV 服务"
+                            color="#fff" backgroundColor="#3F51B5"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ (s)=>this.webdavAuth() } />
 
                     </div>;
         }
