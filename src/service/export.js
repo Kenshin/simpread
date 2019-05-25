@@ -767,7 +767,7 @@ class Onenote {
 }
 
 /**
- * Onenote
+ * GDrive
  * 
  * @class
  */
@@ -984,7 +984,7 @@ class Kindle {
 }
 
 /**
- * Onenote
+ * Jianguo
  * 
  * @class
  */
