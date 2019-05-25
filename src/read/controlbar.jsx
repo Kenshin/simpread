@@ -147,7 +147,7 @@ export default class ReadCtlbar extends React.Component {
             }
             storage.Safe( () => {
                 storage.secret.webdav.forEach( item => {
-                    item = JSON.parse(item);
+                    item = JSON.parse( item );
                     conf.readItems.send.items[ "webdav_" + item.name ] = {
                         name: item.name,
                         icon: ss.IconPath("webdav_icon"),

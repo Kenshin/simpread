@@ -228,7 +228,7 @@ function action( type, title, desc, content ) {
         const id = type.replace( "webdav_", "" );
         storage.Safe( () => {
             storage.secret.webdav.forEach( item => {
-                item = JSON.parse(item);
+                item = JSON.parse( item );
                 if ( item.name == id ) {
                     exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );

@@ -222,7 +222,7 @@ export default class Auth extends React.Component {
     webdavAuth() {
         this.state.secret.webdav.forEach( ( item, idx ) => {
             try {
-                item = JSON.parse(item);
+                item = JSON.parse( item );
                 if ( Object.keys( item ).join( "" ).replace( /url|name|password|user/ig, "" ) != "" ) {
                     throw "error";
                 }
