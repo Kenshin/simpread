@@ -1035,6 +1035,47 @@ class Jianguo {
 }
 
 /**
+ * WebDAV
+ * 
+ * @class
+ */
+class WebDAV {
+
+    get id()   { return "webdav"; }
+    get name() { return name( this.id ); }
+
+    get root() {
+        return "/SimpRead";
+    }
+
+    Auth( url, user, password, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV2, {
+            url,
+            user,
+            password,
+            method: {
+                type: "folder",
+                root: this.root,
+            },
+        }), callback );
+    }
+
+    Add( url, user, password, name, content, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.WebDAV2, {
+            url,
+            user,
+            password,
+            method: {
+                type: "file",
+                root: this.root,
+                name,
+                content
+            },
+        }), callback );
+    }
+}
+
+/**
  * Get name
  * 
  * @param  {string} service type
@@ -1129,6 +1170,7 @@ const dropbox  = new Dropbox(),
       onenote  = new Onenote(),
       gdrive   = new GDrive(),
       jianguo  = new Jianguo(),
+      webdav   = new WebDAV(),
       kindle   = new Kindle();
 
 export {
@@ -1140,7 +1182,7 @@ export {
     prueDownload as PrDownload,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, webdav,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,
