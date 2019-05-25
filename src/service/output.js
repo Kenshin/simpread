@@ -224,6 +224,26 @@ function action( type, title, desc, content ) {
         }
     } else if ( type.startsWith( "fullscreen" ) ) {
         document.documentElement.requestFullscreen();
+    } else if ( type.startsWith( "webdav_" ) ) {
+        const id = type.replace( "webdav_", "" );
+        storage.Safe( () => {
+            storage.secret.webdav.forEach( item => {
+                item = JSON.parse(item);
+                if ( item.name == id ) {
+                    exp.MDWrapper( util.ClearMD( content) , undefined, new Notify() ).done( markdown => {
+                        title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
+                        new Notify().Render( `开始保存到 ${ item.name}，请稍等...` );
+                        exp.webdav.Add( item.url, item.user, item.password, `${title}.md`, markdown, result => {
+                            let error = undefined;
+                            if ( result && ( result.status != 201 && result.status != 204 )) {
+                                error = `导出到 ${item.name} 失败，请稍后再试。`;
+                            }
+                            exp.svcCbWrapper( result, error, item.name, type, new Notify() );
+                        });
+                    });
+                }
+            });
+        })
     }
     else {
         new Notify().Render( 2, "当前模式下，不支持此功能。" );
