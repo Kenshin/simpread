@@ -217,6 +217,10 @@ let current  = {},
             access_token  : "",
             folder_id     : "",
         },
+        "yuque"  : {
+            access_token  : "",
+            repos_id: "",
+        },
         "jianguo"  : {
             username      : "",
             password      : "",
