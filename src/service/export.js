@@ -929,61 +929,6 @@ class GDrive {
 }
 
 /**
- * Kindle
- * 
- * @class
- */
-class Kindle {
-
-    constructor() {
-        this.id = "";
-    }
-
-    get host() {
-        //return "http://localhost:3000/view";
-        return "https://simpread.herokuapp.com/view";
-    }
-
-    get server() {
-        return "http://fivefilters.org/kindle-it/send.php";
-    }
-
-    Read( url, title, desc, content, style, callback ) {
-        $.ajax({
-            url     : `${this.host}/read`,
-            type    : "POST",
-            data    : {
-                url,
-                title,
-                desc,
-                content,
-                style,
-            }
-        }).done( ( result, textStatus, jqXHR ) => {
-            if ( textStatus == "success" && result && result.id ) {
-                this.id = result.id;
-                callback( result );
-            } else callback( undefined, "error" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
-        });
-    }
-
-    Temp() {
-        const url = `${this.host}/${this.id}.html`;
-        console.log( url )
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-    }
-
-    Send() {
-        const url = `${this.server}?url=${this.host}/${this.id}.html`;
-        console.log( url )
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
-    }
-}
-
-/**
  * Jianguo
  * 
  * @class
@@ -1072,6 +1017,61 @@ class WebDAV {
                 content
             },
         }), callback );
+    }
+}
+
+/**
+ * Kindle
+ * 
+ * @class
+ */
+class Kindle {
+
+    constructor() {
+        this.id = "";
+    }
+
+    get host() {
+        //return "http://localhost:3000/view";
+        return "https://simpread.herokuapp.com/view";
+    }
+
+    get server() {
+        return "http://fivefilters.org/kindle-it/send.php";
+    }
+
+    Read( url, title, desc, content, style, callback ) {
+        $.ajax({
+            url     : `${this.host}/read`,
+            type    : "POST",
+            data    : {
+                url,
+                title,
+                desc,
+                content,
+                style,
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( textStatus == "success" && result && result.id ) {
+                this.id = result.id;
+                callback( result );
+            } else callback( undefined, "error" );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, textStatus );
+        });
+    }
+
+    Temp() {
+        const url = `${this.host}/${this.id}.html`;
+        console.log( url )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+
+    Send() {
+        const url = `${this.server}?url=${this.host}/${this.id}.html`;
+        console.log( url )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
     }
 }
 
