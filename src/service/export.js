@@ -115,6 +115,7 @@ function unlink( id ) {
         "yinxiang": "https://app.yinxiang.com/AuthorizedServices.action",
         "onenote" : "https://account.live.com/consent/Manage",
         "gdrive"  : "https://drive.google.com/drive/my-drive",
+        "yuque"   : "https://www.yuque.com/yuque/developer/delete-oauth-apps",
         "jianguo" : "http://help.jianguoyun.com/?p=2064",
         "linnk"   : "https://linnk.net/",
     }
@@ -1021,6 +1022,185 @@ class WebDAV {
 }
 
 /**
+ * Yuque
+ * 
+ * @class
+ */
+class Yuque {
+
+    get id()   { return "yuque"; }
+    get name() { return name( this.id ); }
+
+    get client_id() {
+        return "8p4PvTuP02UN7WhLlQrY";
+    }
+
+    get client_secret() {
+        return "kl0LpKR7Tu3EDEJJOjAPEwEAkxeVYrcY5cEEOPeG";
+    }
+
+    get redirect_uri() {
+        //return "https://simpread.herokuapp.com";
+        return "https://kenshin.github.io/simpread/auth.html";
+    }
+
+    get scopes() {
+        return "repo, doc";
+    }
+
+    New() {
+        this.dtd  = $.Deferred();
+        this.code = "";
+        this.access_token = "";
+        this.token_type = "";
+        this.user_id = "";
+        this.repos_id = "";
+        return this;
+    }
+
+    Login() {
+        let url = "https://www.yuque.com/oauth2/authorize?";
+        const params = {
+            client_id    : this.client_id,
+            redirect_uri : this.redirect_uri,
+            scope        : this.scopes,
+            state        : "yuque_authorize",
+            response_type: "code",
+        };
+        Object.keys( params ).forEach( key => {
+            url += `${key}=${params[key]}&`;
+        });
+        url = url.substr( 0, url.length )
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url } ));
+    }
+
+    Accesstoken( url ) {
+        url = url.replace( "http://ksria.com/simpread/auth.html?", "" );
+        if ( url.startsWith( "code" ) ) {
+            this.code = url.replace( "code=", "" ).replace( "&state=yuque_authorize", "" );
+            this.dtd.resolve();
+        } else {
+            this.dtd.reject();
+        }
+    }
+
+    Auth( callback ) {
+        $.ajax({
+            url     : " https://www.yuque.com/oauth2/token",
+            type    : "POST",
+            data    : {
+                client_id     : this.client_id,
+                client_secret : this.client_secret,
+                code          : this.code,
+                grant_type    : "authorization_code",
+                redirect_uri  : this.redirect_uri,
+            }
+        }).done( ( result, textStatus, jqXHR ) => {
+            if ( result ) {
+                this.access_token = result.access_token;
+                this.token_type   = result.token_type;
+                callback( result, undefined );
+            } else {
+                callback( undefined, "error" );
+            }
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, textStatus );
+        });
+    }
+
+    GetUser( callback ) {
+        $.ajax({
+            url     : "https://www.yuque.com/api/v2/user",
+            type    : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                "X-Auth-Token": this.access_token
+            },
+        }).done( ( result, status, xhr ) => {
+            if ( status == "success" ) {
+                this.user_id = result.data.id;
+                callback( result, undefined );
+            } else callback( result, "error" );
+        }).fail( ( xhr, status, error ) => {
+            callback( undefined, error );
+        });
+    }
+
+    GetRepos( callback ) {
+        $.ajax({
+            url     : `https://www.yuque.com/api/v2/users/${this.user_id}/repos`,
+            type    : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                "X-Auth-Token": this.access_token
+            },
+        }).done( ( result, status, xhr ) => {
+            if ( status == "success" ) {
+                result.data.forEach( item => {
+                    if ( item.slug == "simpread" ) {
+                        this.repos_id = item.id;
+                    }
+                });
+                callback( result, undefined );
+            } else callback( result, "error" );
+        }).fail( ( xhr, status, error ) => {
+            callback( undefined, xhr );
+        });
+    }
+
+    CreateRepo( callback ) {
+        const data = {
+            name: "SimpRead",
+            slug: "simpread",
+            description: "来自简悦的收藏",
+            public: 0,
+            type: "Book",
+        };
+        $.ajax({
+            url     : `https://www.yuque.com/api/v2/users/${this.user_id}/repos`,
+            type    : "POST",
+            headers : {
+                "Content-Type": "application/json",
+                "X-Auth-Token": this.access_token
+            },
+            data : JSON.stringify( data )
+        }).done( ( result, status, xhr ) => {
+            if ( status == "success" ) {
+                this.repos_id = result.data.id;
+                callback( result, undefined );
+            } else callback( result, "error" );
+        }).fail( ( xhr, status, error ) => {
+            callback( undefined, xhr );
+        });
+    }
+
+    Add( title, body, callback ) {
+        const data = {
+            title,
+            slug: Math.round(+new Date()),
+            public: 0,
+            body,
+        };
+        $.ajax({
+            url     : `https://www.yuque.com/api/v2/repos/${this.repos_id}/docs`,
+            type    : "POST",
+            headers : {
+                "Content-Type": "application/json",
+                "X-Auth-Token": `${this.access_token}`
+            },
+            data : JSON.stringify( data )
+        }).done( ( result, status, xhr ) => {
+            status == "success" && callback( result, undefined );
+            status != "success" && callback( undefined, "error" );
+        }).fail( ( xhr, status, error ) => {
+            console.error( xhr, status, error )
+            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ this.name } 授权过期，请重新授权。` : "error" );
+        });
+    }
+}
+
+/**
  * Kindle
  * 
  * @class
@@ -1091,6 +1271,8 @@ function name( type ) {
         return "Google 云端硬盘";
     } else if ( type == "jianguo" ) {
         return "坚果云";
+    } else if ( type == "yuque" ) {
+        return "语雀";
     }
 return type;
 }
@@ -1169,6 +1351,7 @@ const dropbox  = new Dropbox(),
       evernote = new Evernote(),
       onenote  = new Onenote(),
       gdrive   = new GDrive(),
+      yuque    = new Yuque(),
       jianguo  = new Jianguo(),
       webdav   = new WebDAV(),
       kindle   = new Kindle();
@@ -1182,7 +1365,7 @@ export {
     prueDownload as PrDownload,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, webdav,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,
