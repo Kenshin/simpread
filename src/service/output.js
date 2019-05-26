@@ -138,8 +138,8 @@ function action( type, title, desc, content ) {
                 }
                 break;
         }
-    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo" ].includes( type ) ) {
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo } = exp,
+    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque" ].includes( type ) ) {
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
         const service = type => {
@@ -208,6 +208,11 @@ function action( type, title, desc, content ) {
                             }
                             exp.svcCbWrapper( result, error, jianguo.name, type, new Notify() );
                         });
+                    });
+                    break;
+                case "yuque":
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                        yuque.Add( title, result,( result, error ) => exp.svcCbWrapper( result, error, yuque.name, type, new Notify() ));
                     });
                     break;
             }
