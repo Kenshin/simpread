@@ -318,6 +318,11 @@ const readItems = {
                 "icon" : ss.IconPath("jianguo_icon"),
                 "color": "#00BCD4",
             },
+            "yuque" : {
+                "name" : "保存到 语雀",
+                "icon" : ss.IconPath("yuque_icon"),
+                "color": "#00BCD4",
+            },
             "kindle" : {
                 "name" : "保存到 Kindle",
                 "icon" : ss.IconPath("kindle_icon"),
