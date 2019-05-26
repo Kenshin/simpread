@@ -36,7 +36,7 @@ export default class Auth extends React.Component {
 
     onChange( state, value, flag ) {
         let notify;
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo } = exp,
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque } = exp,
             clear = ( id, name ) => {
                 Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
                 storage.Safe( ()=> {
@@ -185,6 +185,32 @@ export default class Auth extends React.Component {
                         else success( gdrive.id, gdrive.name, { access_token: gdrive.access_token, folder_id: gdrive.folder_id });
                     });
                 }).fail( error => failed( error, gdrive.id, gdrive.name ));
+                break;
+            case "yuque":
+                yuque.New().Login();
+                yuque.dtd.done( ()=> {
+                    yuque.Auth( ( result, error ) => {
+                        if ( error ) failed( error, yuque.id, yuque.name );
+                        else {
+                            yuque.GetUser( ( result, error ) => {
+                                if ( error ) failed( error, yuque.id, yuque.name );
+                                else {
+                                    yuque.GetRepos( ( result, error ) => {
+                                        if ( error ) failed( error, yuque.id, yuque.name );
+                                        else if ( yuque.repos_id != "" ) {
+                                            success( yuque.id, yuque.name, { access_token: yuque.access_token, repos_id: yuque.repos_id });
+                                        } else {
+                                            yuque.CreateRepo( ( result, error ) => {
+                                                if ( error ) failed( error, yuque.id, yuque.name );
+                                                else success( yuque.id, yuque.name, { access_token: yuque.access_token, repos_id: yuque.repos_id });
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }).fail( error => failed( error, yuque.id, yuque.name ));
                 break;
             case "jianguo":
                 jianguo.Auth( this.props.jianguo.username, this.props.jianguo.password, result => {
@@ -383,6 +409,11 @@ export default class Auth extends React.Component {
                                 onClick={ (s)=>this.onChange( "jianguo", s, "login" ) } />
 
                         </div> }
+
+                        <Switch width="100%" checked={ this.state.secret.yuque.access_token != "" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.yuque.access_token ? "已授权 语雀，是否取消授权？" : "是否连接并授权 语雀 ？" }
+                            onChange={ (s)=>this.onChange( "yuque", s ) } />
 
                         <div className="label" style={{'margin-bottom':' -15px'}}>WebDAV</div>
                         <div className="sublabel">简悦支持任意 WebDAV 的服务，包括：Box · TeraCLOUD 等</div>
