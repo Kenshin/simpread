@@ -108,7 +108,7 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "secret") } />
                     <Switch width="100%" checked={ this.props.option.save_at == "dropbox" ? true : false }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
-                            label={ "当前配置文件保存在 " + ( this.props.option.save_at == "dropbox" ? "Dropbox" : "坚果云" )}
+                            label="保存配置到 Dropbox ？"
                             desc="注意：默认（已勾选状态）保存到 Dropbox ；选否后（非勾选状态）保存到 【坚果云】。"
                             onChange={ (s)=>this.onChange(s, "option", "save_at") } />
                 </div>
