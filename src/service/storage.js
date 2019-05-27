@@ -159,6 +159,10 @@ const name = "simpread",
         avatar    : "",
         permission: "",
     },
+    notice = {
+        latest: 0,
+        read  : []
+    },
     unread = {
         idx       : 0,
         create    : "",
@@ -185,6 +189,7 @@ let current  = {},
             local  : [], // include focus.sites and read.sites
         },
         statistics,
+        notice,
         user,
     },
     plugins  = {},
@@ -287,6 +292,15 @@ class Storage {
      */
     get unrdist() {
         return simpread[ mode.unrdist ];
+    }
+
+    /**
+     * Get notice
+     * 
+     * @return {object} notice
+     */
+    get notice() {
+        return simpread.notice;
     }
 
     /**
@@ -747,6 +761,7 @@ class Storage {
             websites: { ...this.websites },
             statistics: { ...this.statistics },
             user    : { ...this.user },
+            notice  : { ...this.notice },
             unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });
