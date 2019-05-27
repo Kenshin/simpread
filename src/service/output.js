@@ -138,8 +138,8 @@ function action( type, title, desc, content ) {
                 }
                 break;
         }
-    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type ) ) {
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive } = exp,
+    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque" ].includes( type ) ) {
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
         const service = type => {
@@ -194,8 +194,25 @@ function action( type, title, desc, content ) {
                     break;
                 case "gdrive":
                     storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
-                    exp.MDWrapper( util.ClearMD( content), undefined, new Notify() ).done( result => {
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
                         gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, type, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
+                    });
+                    break;
+                case "jianguo":
+                    exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
+                        title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
+                        jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${jianguo.root}/${jianguo.folder}/${title}.md`, markdown, result => {
+                            let error = undefined;
+                            if ( result && ( result.status != 201 && result.status != 204 )) {
+                                error = "导出到坚果云失败，请稍后再试。";
+                            }
+                            exp.svcCbWrapper( result, error, jianguo.name, type, new Notify() );
+                        });
+                    });
+                    break;
+                case "yuque":
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                        yuque.Add( title, result,( result, error ) => exp.svcCbWrapper( result, error, yuque.name, type, new Notify() ));
                     });
                     break;
             }
@@ -212,6 +229,26 @@ function action( type, title, desc, content ) {
         }
     } else if ( type.startsWith( "fullscreen" ) ) {
         document.documentElement.requestFullscreen();
+    } else if ( type.startsWith( "webdav_" ) ) {
+        const id = type.replace( "webdav_", "" );
+        storage.Safe( () => {
+            storage.secret.webdav.forEach( item => {
+                item = JSON.parse( item );
+                if ( item.name == id ) {
+                    exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
+                        title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
+                        new Notify().Render( `开始保存到 ${ item.name}，请稍等...` );
+                        exp.webdav.Add( item.url, item.user, item.password, `${title}.md`, markdown, result => {
+                            let error = undefined;
+                            if ( result && ( result.status != 201 && result.status != 204 )) {
+                                error = `导出到 ${item.name} 失败，请稍后再试。`;
+                            }
+                            exp.svcCbWrapper( result, error, item.name, type, new Notify() );
+                        });
+                    });
+                }
+            });
+        })
     }
     else {
         new Notify().Render( 2, "当前模式下，不支持此功能。" );

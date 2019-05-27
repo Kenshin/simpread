@@ -29,6 +29,9 @@ export default class LabsOpt extends React.Component {
         !child && ( this.props[model][state]=value );
         child  && ( this.props[model][state][child]=value );
         child  && menu.Refresh( this.props[model][state] );
+        if ( model == "option" && state == "save_at" ) {
+            this.props[model][state] = value ? "dropbox" : "jianguo";
+        }
         this.props.onChange && this.props.onChange( true );
         model == "read" && state == "auto" && this.exclusionState( value );
         model == "read" && state == "toc"  && this.tocState( value );
@@ -103,6 +106,11 @@ export default class LabsOpt extends React.Component {
                             label="同步时是否包含授权服务中的授权码？"
                             desc="包括：导出配置文件到本地，默认（关闭）为不同步；启用后，请妥善保管你的授权码"
                             onChange={ (s)=>this.onChange(s, "option", "secret") } />
+                    <Switch width="100%" checked={ this.props.option.save_at == "dropbox" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="保存配置到 Dropbox ？"
+                            desc="注意：默认（已勾选状态）保存到 Dropbox ；选否后（非勾选状态）保存到 【坚果云】。"
+                            onChange={ (s)=>this.onChange(s, "option", "save_at") } />
                 </div>
 
                 <div className="label">右键菜单</div>

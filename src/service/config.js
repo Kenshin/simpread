@@ -83,6 +83,16 @@ const keyboard = {
             "type" : "gdrive",
             "desc" : "保存到 Google 云端硬盘",
         },
+        jg: {
+            "kbd"  : "jg",
+            "type" : "jianguo",
+            "desc" : "保存到 坚果云",
+        },
+        yq: {
+            "kbd"  : "yq",
+            "type" : "yuque",
+            "desc" : "保存到 语雀",
+        },
         kd: {
             "kbd"  : "kd",
             "type" : "kindle",
@@ -300,7 +310,7 @@ const readItems = {
             },
             "dropbox" : {
                 "name" : "保存到 Dropbox",
-                "icon" : ss.IconPath("sync_icon"),
+                "icon" : ss.IconPath("dropbox_icon"),
                 "color": "#00BCD4",
             },
             "onenote" : {
@@ -311,6 +321,16 @@ const readItems = {
             "gdrive" : {
                 "name" : "保存到 Google 云端硬盘",
                 "icon" : ss.IconPath("gdrive_icon"),
+                "color": "#00BCD4",
+            },
+            "jianguo" : {
+                "name" : "保存到 坚果云",
+                "icon" : ss.IconPath("jianguo_icon"),
+                "color": "#00BCD4",
+            },
+            "yuque" : {
+                "name" : "保存到 语雀",
+                "icon" : ss.IconPath("yuque_icon"),
                 "color": "#00BCD4",
             },
             "kindle" : {

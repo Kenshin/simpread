@@ -67,6 +67,8 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             exp[id].Accesstoken( uri );
         } else if ( id == "yinxiang" ) {
             exp.evernote.Accesstoken( uri );
+        } else if ( uri.indexOf( "state=yuque_authorize" ) > 0 ) {
+            exp.yuque.Accesstoken( uri );
         } else {
             id.startsWith( "http://ksria.com/simpread/auth.html?" ) &&
             exp.onenote.Accesstoken( uri );

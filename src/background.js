@@ -7,6 +7,7 @@ import {browser}   from 'browser';
 import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
+import * as WebDAV from 'webdav';
 
 import PureRead    from 'puread';
 
@@ -83,18 +84,63 @@ menu.OnClicked( ( info, tab ) => {
  * Listen runtime message, include: `corb`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
-        if ( request.type == msg.MESSAGE_ACTION.CORB ) {
-            $.ajax( request.value.settings )
-                .done( result => {
-                    sendResponse({ done: result });
-                })
-                .fail( ( jqXHR, textStatus, errorThrown ) => {
-                    sendResponse({ fail: { jqXHR, textStatus, errorThrown }});
-                });
-        }
-        return true;
+    if ( request.type == msg.MESSAGE_ACTION.CORB ) {
+        $.ajax( request.value.settings )
+            .done( result => {
+                sendResponse({ done: result });
+            })
+            .fail( ( jqXHR, textStatus, errorThrown ) => {
+                sendResponse({ fail: { jqXHR, textStatus, errorThrown }});
+            });
     }
-);
+    return true;
+});
+
+/**
+ * Listen runtime message, include: `jianguo`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.jianguo ) {
+        const { url, user, password, method } = request.value;
+        const dav = new WebDAV.Fs( url, user, password );
+        if ( method.type == "folder" ) {
+            dav.dir( method.root ).mkdir( result => {
+                dav.dir( method.root + "/" + method.folder ).mkdir( result => {
+                    sendResponse({ done: result, status: result.status });
+                });
+            })
+        } else if ( method.type == "file" ) {
+            dav.file( method.path ).write( method.content, result => {
+                sendResponse({ done: result, status: result.status });
+            });
+        } else if ( method.type == "read" ) {
+            dav.file( method.path ).read( result => {
+                sendResponse({ done: result.response, status: result.status });
+            });
+        }
+    }
+    //return true;
+});
+
+/**
+ * Listen runtime message, include: `webdav`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.WebDAV ) {
+        const { url, user, password, method } = request.value;
+        const dav = new WebDAV.Fs( url, user, password );
+        if ( method.type == "folder" ) {
+            dav.dir( method.root ).mkdir( result => {
+                sendResponse({ done: result, status: result.status });
+            })
+        } else if ( method.type == "file" ) {
+            dav.file( method.root + "/" + method.name ).write( method.content, result => {
+                sendResponse({ done: result, status: result.status });
+            });
+        }
+    }
+    //return true;
+});
 
 /**
  * Listen runtime message, include: `shortcuts` `browser_action`

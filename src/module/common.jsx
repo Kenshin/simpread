@@ -23,19 +23,42 @@ export default class CommonOpt extends React.Component {
 
     sync() {
         let notify;
-        const dbx = exp.dropbox,
-        read      = () => {
+        const dbx     = exp.dropbox,
+              jianguo = exp.jianguo,
+        write         = () => {
+            storage.option.sync = Now();
+            storage.Write( () => {
+                writeConfig();
+            });
+        },
+        readDropbox   = () => {
             notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
-                    storage.option.sync = Now();
-                    storage.Write( () => {
-                        dbx.Write( dbx.config_name, storage.Export(), callback );
-                    });
+                    write();
                 } else {
                     dbx.Read( dbx.config_name, callback );
                 }
             });
+        },
+        readJianguo   = ( obj ) => {
+            notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
+            jianguo.Read( obj.username, obj.password, jianguo.config_name, result => {
+                if ( result && result.status == 404 ) {
+                   write();
+                } else if ( result && result.status == 200 ) {
+                    callback( "read", result.done );
+                }
+            });
+        },
+        writeConfig   = () => {
+            if ( storage.option.save_at == "dropbox" ) {
+                dbx.Write( dbx.config_name, storage.Export(), callback );
+            } else {
+                jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, jianguo.root + "/" + jianguo.config_name, storage.Export(), result => {
+                    callback( "write", undefined, result && result.status == 204 ? undefined : "error" );
+                });
+            }
         },
         callback = ( type, result, error ) => {
             notify.complete();
@@ -50,11 +73,8 @@ export default class CommonOpt extends React.Component {
                           remote = new Date( json.option.update.replace( /年|月/ig, "-" ).replace( "日", "" ));
                     if ( ver.Compare( json.version ) == 1 ) {
                         new Notify().Render( "本地版本与远程版本不一致，且本地版本较新，是否覆盖远程版本？", "覆盖", () => {
-                            storage.option.sync = Now();
-                            storage.Write( () => {
-                                watch.SendMessage( "import", true );
-                                dbx.Write( dbx.config_name, storage.Export(), callback );
-                            }, storage.simpread );
+                            watch.SendMessage( "import", true );
+                            write();
                         });
                     }
                     else if ( local < remote ) {
@@ -69,11 +89,8 @@ export default class CommonOpt extends React.Component {
                         });
                     } else if ( local > remote ) {
                         new Notify().Render( "本地配置文件较新，是否覆盖远程备份文件？", "覆盖", () => {
-                            storage.option.sync = Now();
-                            storage.Write( () => {
-                                watch.SendMessage( "import", true );
-                                dbx.Write( dbx.config_name, storage.Export(), callback );
-                            }, storage.simpread );
+                            watch.SendMessage( "import", true );
+                            write();
                         });
                     } else {
                         new Notify().Render( "本地与远程数据相同，无需重复同步。" );
@@ -83,26 +100,31 @@ export default class CommonOpt extends React.Component {
         };
 
         storage.Safe( ()=> {
-            const sec_dbx = storage.secret.dropbox;
-            !sec_dbx.access_token ?
-                new Notify().Render( `未对 ${ dbx.name } 授权，请先进行授权操作。`, "授权", () => {
-                    dbx.New().Auth();
-                    dbx.dtd
-                        .done( () => {
-                            sec_dbx.access_token = dbx.access_token;
-                            storage.Safe( () => {
-                                new Notify().Render( "授权成功！" );
-                                read();
-                            }, storage.secret );
-                        })
-                        .fail( error => {
-                            console.error( error )
-                            new Notify().Render( 2, `获取 ${ dbx.name } 授权失败，请重新获取。` );
-                        });
-                }) : ( () => {
-                dbx.access_token = sec_dbx.access_token;
-                read();
-            })();
+            if ( storage.option.save_at == "dropbox" ) {
+                const sec_dbx = storage.secret.dropbox;
+                !sec_dbx.access_token ?
+                    new Notify().Render( `未对 ${ dbx.name } 授权，请先进行授权操作。`, "授权", () => {
+                        dbx.New().Auth();
+                        dbx.dtd
+                            .done( () => {
+                                sec_dbx.access_token = dbx.access_token;
+                                storage.Safe( () => {
+                                    new Notify().Render( "授权成功！" );
+                                    readDropbox();
+                                }, storage.secret );
+                            })
+                            .fail( error => {
+                                console.error( error )
+                                new Notify().Render( 2, `获取 ${ dbx.name } 授权失败，请重新获取。` );
+                            });
+                    }) : ( () => {
+                    dbx.access_token = sec_dbx.access_token;
+                    readDropbox();
+                })();
+            } else {
+                const jianguo = storage.secret.jianguo;
+                !jianguo.access_token ? new Notify().Render( 2, `坚果云未授权，请先 <a href="http://ksria.com/simpread/docs/#/坚果云">授权</a>。` ) : readJianguo( storage.secret.jianguo );
+            }
         });
     }
 
@@ -223,8 +245,8 @@ export default class CommonOpt extends React.Component {
     render() {
         return(
             <div style={{ width: '100%' }}>
-                <Button type="raised" text="同步到你的 Dropbox 账户"
-                        icon={ ss.IconPath( "sync_icon" ) }
+                <Button type="raised" text={ `同步到你的 ${storage.option.save_at == "dropbox" ? "Dropbox" : "坚果云" } 账户` }
+                        icon={ ss.IconPath( storage.option.save_at + "_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="md-waves-effect md-waves-button"
                         tooltip={{ text: this.state.sync }}

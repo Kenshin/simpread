@@ -234,6 +234,7 @@ const webpack = require( 'webpack' ),
           dom2image  : __dirname + '/src/vender/dom2image.min.js',
           filesaver  : __dirname + '/src/vender/filesaver.min.js',
           instapaper : __dirname + '/src/vender/instapaper.js',
+          webdav     : __dirname + '/src/vender/webdav.js',
 
           util       : __dirname + '/src/service/util.js',
           local      : __dirname + '/src/service/local.js',

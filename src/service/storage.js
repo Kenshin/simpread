@@ -107,6 +107,7 @@ const name = "simpread",
         create    : "",
         update    : "",
         sync      : "",
+        save_at   : "dropbox", // include: dropbox | jianguo
         //focus   : 0,
         //read    : 0,
         esc       : true,
@@ -217,6 +218,16 @@ let current  = {},
             access_token  : "",
             folder_id     : "",
         },
+        "yuque"  : {
+            access_token  : "",
+            repos_id: "",
+        },
+        "jianguo"  : {
+            username      : "",
+            password      : "",
+            access_token  : "",
+        },
+        "webdav"  : []
     };
     //stcode = -1;
 

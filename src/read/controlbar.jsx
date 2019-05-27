@@ -97,9 +97,13 @@ export default class ReadCtlbar extends React.Component {
                     delete news.html;
                     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.temp_site, { url: location.href, site: news, uid: storage.user.uid, type: "temp" }));
                     break;
+                case type.startsWith( "webdav_" ) :
+                        const [ title, desc, content ] = [ $( "sr-rd-title" ).text().trim(), $( "sr-rd-desc" ).text().trim(), $( "sr-rd-content" ).html().trim() ];
+                        output.Action( type, title, desc, content );
+                    break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                        [ "fullscreen", "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
+                        [ "fullscreen", "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque" ].includes( type )) {
                         const [ title, desc, content ] = [ $( "sr-rd-title" ).text().trim(), $( "sr-rd-desc" ).text().trim(), $( "sr-rd-content" ).html().trim() ];
                         output.Action( type, title, desc, content );
                     }
@@ -141,6 +145,16 @@ export default class ReadCtlbar extends React.Component {
             if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
                 delete conf.readItems.option;
             }
+            storage.Safe( () => {
+                storage.secret.webdav.forEach( item => {
+                    item = JSON.parse( item );
+                    conf.readItems.send.items[ "webdav_" + item.name ] = {
+                        name: item.name,
+                        icon: ss.IconPath("webdav_icon"),
+                        "color": "#00BCD4",
+                    };
+                });
+            })
         } catch ( err ) {
             // TO-DO
         }
