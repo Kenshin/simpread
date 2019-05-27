@@ -23,15 +23,14 @@ export default class CommonOpt extends React.Component {
 
     sync() {
         let notify;
-        const dbx = exp.dropbox,
+        const dbx     = exp.dropbox,
               jianguo = exp.jianguo,
-        read      = () => {
+        readdropbox   = () => {
             notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
                     storage.option.sync = Now();
                     storage.Write( () => {
-                        //dbx.Write( dbx.config_name, storage.Export(), callback );
                         write();
                     });
                 } else {
@@ -39,7 +38,7 @@ export default class CommonOpt extends React.Component {
                 }
             });
         },
-        readJianguo = ( obj ) => {
+        readJianguo   = ( obj ) => {
             notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             jianguo.Read( obj.username, obj.password, jianguo.config_name, result => {
                 if ( result && result.status == 404 ) {
@@ -77,7 +76,6 @@ export default class CommonOpt extends React.Component {
                             storage.option.sync = Now();
                             storage.Write( () => {
                                 watch.SendMessage( "import", true );
-                                //dbx.Write( dbx.config_name, storage.Export(), callback );
                                 write();
                             }, storage.simpread );
                         });
@@ -97,7 +95,6 @@ export default class CommonOpt extends React.Component {
                             storage.option.sync = Now();
                             storage.Write( () => {
                                 watch.SendMessage( "import", true );
-                                //dbx.Write( dbx.config_name, storage.Export(), callback );
                                 write();
                             }, storage.simpread );
                         });
