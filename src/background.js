@@ -97,7 +97,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Listen runtime message, include: `webdav`
+ * Listen runtime message, include: `jianguo`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     if ( request.type == msg.MESSAGE_ACTION.jianguo ) {
@@ -110,8 +110,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 });
             })
         } else if ( method.type == "file" ) {
-            dav.file( method.root + "/" + method.folder + "/" + method.name ).write( method.content, result => {
+            dav.file( method.path ).write( method.content, result => {
                 sendResponse({ done: result, status: result.status });
+            });
+        } else if ( method.type == "read" ) {
+            dav.file( method.path ).read( result => {
+                sendResponse({ done: result.response, status: result.status });
             });
         }
     }
