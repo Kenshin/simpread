@@ -31,7 +31,7 @@ export default class CommonOpt extends React.Component {
                 if ( result == -1 ) {
                     storage.option.sync = Now();
                     storage.Write( () => {
-                        write();
+                        writeConfig();
                     });
                 } else {
                     dbx.Read( dbx.config_name, callback );
@@ -44,14 +44,14 @@ export default class CommonOpt extends React.Component {
                 if ( result && result.status == 404 ) {
                     storage.option.sync = Now();
                     storage.Write( () => {
-                        write();
+                        writeConfig();
                     });
                 } else if ( result && result.status == 200 ) {
                     callback( "read", result.done );
                 }
             });
         },
-        write = () => {
+        writeConfig   = () => {
             if ( storage.option.save_at == "dropbox" ) {
                 dbx.Write( dbx.config_name, storage.Export(), callback );
             } else {
@@ -76,7 +76,7 @@ export default class CommonOpt extends React.Component {
                             storage.option.sync = Now();
                             storage.Write( () => {
                                 watch.SendMessage( "import", true );
-                                write();
+                                writeConfig();
                             }, storage.simpread );
                         });
                     }
@@ -95,7 +95,7 @@ export default class CommonOpt extends React.Component {
                             storage.option.sync = Now();
                             storage.Write( () => {
                                 watch.SendMessage( "import", true );
-                                write();
+                                writeConfig();
                             }, storage.simpread );
                         });
                     } else {
