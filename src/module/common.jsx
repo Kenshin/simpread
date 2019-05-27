@@ -24,18 +24,42 @@ export default class CommonOpt extends React.Component {
     sync() {
         let notify;
         const dbx = exp.dropbox,
+              jianguo = exp.jianguo,
         read      = () => {
             notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
                     storage.option.sync = Now();
                     storage.Write( () => {
-                        dbx.Write( dbx.config_name, storage.Export(), callback );
+                        //dbx.Write( dbx.config_name, storage.Export(), callback );
+                        write();
                     });
                 } else {
                     dbx.Read( dbx.config_name, callback );
                 }
             });
+        },
+        readJianguo = ( obj ) => {
+            notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
+            jianguo.Read( obj.username, obj.password, jianguo.config_name, result => {
+                if ( result && result.status == 404 ) {
+                    storage.option.sync = Now();
+                    storage.Write( () => {
+                        write();
+                    });
+                } else if ( result && result.status == 200 ) {
+                    callback( "read", result.done );
+                }
+            });
+        },
+        write = () => {
+            if ( storage.option.save_at == "dropbox" ) {
+                dbx.Write( dbx.config_name, storage.Export(), callback );
+            } else {
+                jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, jianguo.root + "/" + jianguo.config_name, storage.Export(), result => {
+                    callback( "write", undefined, result && result.status == 204 ? undefined : "error" );
+                });
+            }
         },
         callback = ( type, result, error ) => {
             notify.complete();
@@ -53,7 +77,8 @@ export default class CommonOpt extends React.Component {
                             storage.option.sync = Now();
                             storage.Write( () => {
                                 watch.SendMessage( "import", true );
-                                dbx.Write( dbx.config_name, storage.Export(), callback );
+                                //dbx.Write( dbx.config_name, storage.Export(), callback );
+                                write();
                             }, storage.simpread );
                         });
                     }
@@ -72,7 +97,8 @@ export default class CommonOpt extends React.Component {
                             storage.option.sync = Now();
                             storage.Write( () => {
                                 watch.SendMessage( "import", true );
-                                dbx.Write( dbx.config_name, storage.Export(), callback );
+                                //dbx.Write( dbx.config_name, storage.Export(), callback );
+                                write();
                             }, storage.simpread );
                         });
                     } else {
@@ -83,26 +109,31 @@ export default class CommonOpt extends React.Component {
         };
 
         storage.Safe( ()=> {
-            const sec_dbx = storage.secret.dropbox;
-            !sec_dbx.access_token ?
-                new Notify().Render( `未对 ${ dbx.name } 授权，请先进行授权操作。`, "授权", () => {
-                    dbx.New().Auth();
-                    dbx.dtd
-                        .done( () => {
-                            sec_dbx.access_token = dbx.access_token;
-                            storage.Safe( () => {
-                                new Notify().Render( "授权成功！" );
-                                read();
-                            }, storage.secret );
-                        })
-                        .fail( error => {
-                            console.error( error )
-                            new Notify().Render( 2, `获取 ${ dbx.name } 授权失败，请重新获取。` );
-                        });
-                }) : ( () => {
-                dbx.access_token = sec_dbx.access_token;
-                read();
-            })();
+            if ( storage.option.save_at == "dropbox" ) {
+                const sec_dbx = storage.secret.dropbox;
+                !sec_dbx.access_token ?
+                    new Notify().Render( `未对 ${ dbx.name } 授权，请先进行授权操作。`, "授权", () => {
+                        dbx.New().Auth();
+                        dbx.dtd
+                            .done( () => {
+                                sec_dbx.access_token = dbx.access_token;
+                                storage.Safe( () => {
+                                    new Notify().Render( "授权成功！" );
+                                    read();
+                                }, storage.secret );
+                            })
+                            .fail( error => {
+                                console.error( error )
+                                new Notify().Render( 2, `获取 ${ dbx.name } 授权失败，请重新获取。` );
+                            });
+                    }) : ( () => {
+                    dbx.access_token = sec_dbx.access_token;
+                    read();
+                })();
+            } else {
+                const jianguo = storage.secret.jianguo;
+                !jianguo.access_token ? new Notify().Render( 2, `坚果云未授权，请先 <a href="http://ksria.com/simpread/docs/#/坚果云">授权</a>。` ) : readJianguo( storage.secret.jianguo );
+            }
         });
     }
 
