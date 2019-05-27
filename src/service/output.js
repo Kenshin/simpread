@@ -201,7 +201,7 @@ function action( type, title, desc, content ) {
                 case "jianguo":
                     exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
-                        jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${title}.md`, markdown, result => {
+                        jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${jianguo.root}/${jianguo.folder}/${title}.md`, markdown, result => {
                             let error = undefined;
                             if ( result && ( result.status != 201 && result.status != 204 )) {
                                 error = "导出到坚果云失败，请稍后再试。";
