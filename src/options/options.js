@@ -320,6 +320,6 @@ function bubbles() {
         }
     });
     $( "body" ).on( "click", ".bubbles", event => {
-        // Open notice.html
+        location.href = location.origin + "/options/notice.html"
     });
 }
