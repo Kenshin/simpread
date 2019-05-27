@@ -748,7 +748,7 @@ class Storage {
     }
 
     /**
-     * Export, only include: version, option, focus, read, unrdist
+     * Export
      * 
      * @return {string} object json stringify
      */

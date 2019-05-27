@@ -77,10 +77,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Entry:
- * - storage get data form chrome storage
- * - waves.Render()
- * - tooltip.Render()
+ * Entry
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
