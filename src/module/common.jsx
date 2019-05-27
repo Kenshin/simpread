@@ -25,14 +25,23 @@ export default class CommonOpt extends React.Component {
         let notify;
         const dbx     = exp.dropbox,
               jianguo = exp.jianguo,
+        write         = () => {
+            storage.option.sync = Now();
+            storage.Write( () => {
+                writeConfig();
+            });
+        },
         readDropbox   = () => {
             notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
+                    /*
                     storage.option.sync = Now();
                     storage.Write( () => {
                         writeConfig();
                     });
+                    */
+                    write();
                 } else {
                     dbx.Read( dbx.config_name, callback );
                 }
@@ -42,10 +51,13 @@ export default class CommonOpt extends React.Component {
             notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             jianguo.Read( obj.username, obj.password, jianguo.config_name, result => {
                 if ( result && result.status == 404 ) {
+                    /*
                     storage.option.sync = Now();
                     storage.Write( () => {
                         writeConfig();
                     });
+                    */
+                   write();
                 } else if ( result && result.status == 200 ) {
                     callback( "read", result.done );
                 }
@@ -73,11 +85,14 @@ export default class CommonOpt extends React.Component {
                           remote = new Date( json.option.update.replace( /年|月/ig, "-" ).replace( "日", "" ));
                     if ( ver.Compare( json.version ) == 1 ) {
                         new Notify().Render( "本地版本与远程版本不一致，且本地版本较新，是否覆盖远程版本？", "覆盖", () => {
+                            watch.SendMessage( "import", true );
+                            /*
                             storage.option.sync = Now();
                             storage.Write( () => {
-                                watch.SendMessage( "import", true );
                                 writeConfig();
-                            }, storage.simpread );
+                            });
+                            */
+                            write();
                         });
                     }
                     else if ( local < remote ) {
@@ -92,11 +107,14 @@ export default class CommonOpt extends React.Component {
                         });
                     } else if ( local > remote ) {
                         new Notify().Render( "本地配置文件较新，是否覆盖远程备份文件？", "覆盖", () => {
+                            watch.SendMessage( "import", true );
+                            /*
                             storage.option.sync = Now();
                             storage.Write( () => {
-                                watch.SendMessage( "import", true );
                                 writeConfig();
-                            }, storage.simpread );
+                            });
+                            */
+                            write();
                         });
                     } else {
                         new Notify().Render( "本地与远程数据相同，无需重复同步。" );
