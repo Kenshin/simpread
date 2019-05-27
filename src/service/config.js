@@ -300,7 +300,7 @@ const readItems = {
             },
             "dropbox" : {
                 "name" : "保存到 Dropbox",
-                "icon" : ss.IconPath("sync_icon"),
+                "icon" : ss.IconPath("dropbox_icon"),
                 "color": "#00BCD4",
             },
             "onenote" : {

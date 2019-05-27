@@ -246,7 +246,7 @@ export default class CommonOpt extends React.Component {
         return(
             <div style={{ width: '100%' }}>
                 <Button type="raised" text="同步到你的 Dropbox 账户"
-                        icon={ ss.IconPath( "sync_icon" ) }
+                        icon={ ss.IconPath( "dropbox_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="md-waves-effect md-waves-button"
                         tooltip={{ text: this.state.sync }}
