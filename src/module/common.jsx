@@ -25,7 +25,7 @@ export default class CommonOpt extends React.Component {
         let notify;
         const dbx     = exp.dropbox,
               jianguo = exp.jianguo,
-        readdropbox   = () => {
+        readDropbox   = () => {
             notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
             dbx.Exist( dbx.config_name, ( result, error ) => {
                 if ( result == -1 ) {
@@ -116,7 +116,7 @@ export default class CommonOpt extends React.Component {
                                 sec_dbx.access_token = dbx.access_token;
                                 storage.Safe( () => {
                                     new Notify().Render( "授权成功！" );
-                                    read();
+                                    readDropbox();
                                 }, storage.secret );
                             })
                             .fail( error => {
@@ -125,7 +125,7 @@ export default class CommonOpt extends React.Component {
                             });
                     }) : ( () => {
                     dbx.access_token = sec_dbx.access_token;
-                    read();
+                    readDropbox();
                 })();
             } else {
                 const jianguo = storage.secret.jianguo;
