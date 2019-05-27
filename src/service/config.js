@@ -83,6 +83,16 @@ const keyboard = {
             "type" : "gdrive",
             "desc" : "保存到 Google 云端硬盘",
         },
+        jg: {
+            "kbd"  : "jg",
+            "type" : "jianguo",
+            "desc" : "保存到 坚果云",
+        },
+        yq: {
+            "kbd"  : "yq",
+            "type" : "yuque",
+            "desc" : "保存到 语雀",
+        },
         kd: {
             "kbd"  : "kd",
             "type" : "kindle",
