@@ -951,6 +951,10 @@ class Jianguo {
         return "md";
     }
 
+    get config_name() {
+        return "simpread_config.json";
+    }
+
     Auth( user, password, callback ) {
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.jianguo, {
             url: this.url,
@@ -964,17 +968,28 @@ class Jianguo {
         }), callback );
     }
 
-    Add( user, password, name, content, callback ) {
+    Add( user, password, path, content, callback ) {
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.jianguo, {
             url: this.url,
             user,
             password,
             method: {
                 type: "file",
-                root: this.root,
-                folder: this.folder,
-                name,
+                path,
                 content
+            },
+        }), callback );
+    }
+
+    Read( user, password, name, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.jianguo, {
+            url: this.url,
+            user,
+            password,
+            method: {
+                type : "read",
+                path: this.root + "/" + name,
+                name,
             },
         }), callback );
     }
