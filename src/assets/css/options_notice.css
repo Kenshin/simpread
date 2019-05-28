@@ -47,8 +47,9 @@ notice .failed span {
 }
 
 notice .list {
-    margin: 20px;
-    width: 450px;
+    margin: 20px 20px 0;
+    width: 300px;
+    min-height: 589px;
 }
 
 notice .detail {
@@ -61,6 +62,10 @@ notice .detail {
     width: 100%;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+}
+
+notice .detail img {
+    width: 100%;
 }
 
 notice .detail .empty {
@@ -82,4 +87,42 @@ notice .detail .empty .icon {
     background-position: center;
     background-repeat: no-repeat;
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBA0LLBOn/NkLAAABtklEQVRYw+2YPyxDURTGf5WOGCwiETH7s4kaDJo2FokYMBglZ66lOtGEqWIQm9zdoJouGERIEwNlE4NE4i0iBoO0CxIMvW1f26evvJY86Tfdc3LP99137vvuTa6HqlAwzxI9X064ISrxagweE5mfOXp18CHjoCDJFHbYlBCAOiywGWzLSYmAauUIn6koI+2g/Bzb0gMMyDWoZ9pNuTQByUKLbkSyhD6PyZroYcwiN0xSoQUYJGhZ+FKjwKtlNsggeAEIFJIbnJqm7BKpSeAIgHkdjbKgRwGucgIdOrEuYXOdXKo1Fm3pF+QOQBI6Tqg3wnleb8nUVHmtRNQBQueX5AZbclmRTVFYqBcbSKpS9jtocVLcFGgK/I6AhQ/UEPHCsf09GMyU287KaBc/Xm4vF+YbBv5oDzYd8FXUWrRIQoQa+wV1hfsFmj6whTt9IPvFRv3L39Q51AR7AKzKctMHtnCnD2wE6oAbpgF4bJCA3HKbH7vcaCsSdf9ZVCrQVyfW/uIwtwdZHcXUEzuSccKt2pglpoOsfkpQPs4a0p8ROc+1KI3RAHqDdPExpIv78nPQId7plgf4BCjPbVayklPeAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTEzVDExOjQ0OjE5KzA4OjAwPYuVdQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0xM1QxMTo0NDoxOSswODowMEzWLckAAAAASUVORK5CYII= );
+}
+
+notice .list {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+}
+
+notice list {
+    display: flex!important;
+    flex-direction: column;
+
+    padding: 16px;
+    min-height: 72px;
+
+    transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+notice list:hover {
+    background-color: #f5f5f5;
+    transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+notice list .title {
+    margin-bottom: 4px;
+
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+notice list .category {
+    margin-right: 4px;
+    padding: 2px 7px;
+    color: #fff;
+    font-weight: 400;
+    border-radius: 20px;
 }

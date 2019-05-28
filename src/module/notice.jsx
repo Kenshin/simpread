@@ -1,9 +1,8 @@
 console.log( "=== simpread notice load ===" )
 
-import * as exp from 'export';
-import * as ss  from 'stylesheet';
-
-import Button   from 'button';
+import th            from 'theme';
+import * as puplugin from 'puplugin';
+import Button        from 'button';
 
 export default class Notice extends React.Component {
 
@@ -13,15 +12,26 @@ export default class Notice extends React.Component {
         failed: false,
     }
 
+    onClick( event, id ) {
+        const markdown  = puplugin.Plugin( "markdown" ),
+              converter = new markdown.default.Converter(),
+              item      = this.state.items.filter( item => item.id == id ),
+              html      = converter.makeHtml( item[0].content );
+        $( "notice .detail" ).addClass( "simpread-theme-root" ).html( `<sr-rd-content>${html}</sr-rd-content>` );
+    }
+
     componentWillMount() {
         $.ajax( "http://localhost:3000/notice" )
             .done( result => {
-                console.log( result )
                 this.setState({ items: result.notice });
             })
             .fail( ( jqXHR, textStatus, errorThrown ) => {
                 this.setState({ failed: true });
             });
+    }
+
+    componentDidMount() {
+        th.Change( "pixyii" );
     }
 
     render() {
@@ -42,7 +52,9 @@ export default class Notice extends React.Component {
         } else if ( this.state.items.length > 0 ) {
             dom =
                 <notice>
-                    <div className="list"></div>
+                    <div>
+                        <List list={ this.state.items } onClick={ ( e, id )=> this.onClick( e, id ) } />
+                    </div>
                     <div className="detail">
                         <div className="empty">
                             <span className="icon"></span>
@@ -53,6 +65,38 @@ export default class Notice extends React.Component {
         }
         return (
             <div>{ dom }</div>
+        )
+    }
+}
+
+class List extends React.Component {
+
+    static defaultProps = {
+        list: [],
+        onClick: undefined,
+    };
+
+    static propTypes = {
+        list   : React.PropTypes.array,
+        onClick: React.PropTypes.func,
+    }
+
+    render() {
+        const list = this.props.list.map( item => {
+            return (
+                <list id={ item.id } className="md-waves-effect" onClick={ e => this.props.onClick( e, item.id ) }>
+                    <div className="title">{ item.title }</div>
+                    <span>
+                        <span style={{ backgroundColor: item.category.color }} className="category">{ item.category.name }</span>
+                        <span className="date">{ item.date }</span>
+                    </span>
+                </list>
+            )
+        });
+        return (
+            <div className="list">
+                { list }
+            </div>
         )
     }
 }
