@@ -7,6 +7,19 @@ import * as puplugin from 'puplugin';
 import * as watch    from 'watch';
 import Button        from 'button';
 
+/**
+ * Write storage
+ * 
+ * @param {func} callback 
+ */
+const write = ( callback ) => {
+    storage.Write( () => {
+        console.log( "current notice is ", storage.notice )
+        watch.SendMessage( "option", true );
+        callback && callback();
+    }, storage.simpread );
+}
+
 export default class Notice extends React.Component {
 
     state = {
@@ -27,12 +40,10 @@ export default class Notice extends React.Component {
         new Notify().Render( "snackbar", "是否将全部消息标记为已读？", "确认", () => {
             storage.notice.read = [];
             this.state.items.forEach( ( item, idx ) => { storage.notice.read.push( idx + 1 ) });
-            new Notify().Render( "已全部设置为已读，3 秒后自动刷新本页..." );
-            storage.Write( () => {
-                console.log( "current notice is ", storage.notice )
-                watch.SendMessage( "option", true );
-                setTimeout( ()=>location.reload(), 3000 );
-            }, storage.simpread );
+            write( ()=> {
+                new Notify().Render( "已全部设置为已读，3 秒后自动刷新本页..." );
+                setTimeout( ()=>location.reload(), 3000 )
+            });
         });
     }
 
@@ -107,11 +118,7 @@ class List extends React.Component {
     onActive( event, id ) {
         $( `list[id="${id}"]` ).addClass( "active" );
         storage.notice.read.push( id );
-        storage.Write( () => {
-            console.log( "current notice is ", storage.notice )
-            watch.SendMessage( "option", true );
-            new Notify().Render( "已设置为已读。" );
-        }, storage.simpread );
+        write( () => new Notify().Render( "已设置为已读。" ) );
     }
 
     render() {
