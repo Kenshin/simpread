@@ -42,9 +42,18 @@ export default class Notice extends React.Component {
     onClick( event, id ) {
         const markdown  = puplugin.Plugin( "markdown" ),
               converter = new markdown.default.Converter(),
-              item      = this.state.items.filter( item => item.id == id ),
-              html      = converter.makeHtml( item[0].content );
-        $( "notice .detail" ).addClass( "simpread-theme-root" ).html( `<sr-rd-content>${html}</sr-rd-content>` );
+              obj       = this.state.items.filter( item => item.id == id ),
+              item      = obj[0],
+              html      = converter.makeHtml( item.content ),
+              tmpl      =  `<div class="preview">
+                                <div class="title">${item.title}</div>
+                                <div class="desc">
+                                    <span style="background-color: ${item.category.color}" class="category">${item.category.name}</span>
+                                    <span class="date">发布于 ${item.date}</span>
+                                </div>
+                                <sr-rd-content>${html}</sr-rd-content>
+                            </div>`;
+        $( "notice .detail" ).addClass( "simpread-theme-root" ).html( tmpl );
     }
 
     onReadallClick() {
