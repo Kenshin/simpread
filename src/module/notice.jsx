@@ -1,7 +1,10 @@
 console.log( "=== simpread notice load ===" )
 
+import {storage}     from 'storage';
 import th            from 'theme';
+import * as ss       from 'stylesheet';
 import * as puplugin from 'puplugin';
+import * as watch    from 'watch';
 import Button        from 'button';
 
 export default class Notice extends React.Component {
@@ -81,15 +84,36 @@ class List extends React.Component {
         onClick: React.PropTypes.func,
     }
 
+    onActive( event, id ) {
+        $( `list[id="${id}"]` ).addClass( "active" );
+        storage.notice.read.push( id );
+        storage.Write( () => {
+            console.log( "current notice is ", storage.notice )
+            watch.SendMessage( "option", true );
+        }, storage.simpread );
+    }
+
     render() {
         const list = this.props.list.map( item => {
+            const active = storage.notice.read.findIndex( value=>value==item.id ) != -1 ? " active" : "";
             return (
-                <list id={ item.id } className="md-waves-effect" onClick={ e => this.props.onClick( e, item.id ) }>
+                <list id={ item.id } className={ "md-waves-effect" + active } onClick={ e => this.props.onClick( e, item.id ) }>
                     <div className="title">{ item.title }</div>
                     <span>
                         <span style={{ backgroundColor: item.category.color }} className="category">{ item.category.name }</span>
                         <span className="date">{ item.date }</span>
                     </span>
+                    { active == "" &&
+                    <div className="meta">
+                        <Button type="raised" text="" shape="circle"
+                            icon={ ss.IconPath( "read_icon" ) }
+                            tooltip={{ text: "已读" }}
+                            color="#fff" backgroundColor="transparent"
+                            waves="md-waves-effect md-waves-circle" hoverColor="transparent"
+                            onClick={ e => this.onActive( e, item.id ) }
+                        />
+                    </div>
+                    }
                 </list>
             )
         });

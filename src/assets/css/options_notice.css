@@ -109,8 +109,17 @@ notice list:hover {
     transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
+notice list:hover .meta {
+    opacity: 1;
+}
+
+notice list.active {
+    opacity: .5;
+}
+
 notice list .title {
     margin-bottom: 4px;
+    padding-right: 25px;
 
     font-size: 1.5rem;
     font-weight: 500;
@@ -125,4 +134,11 @@ notice list .category {
     color: #fff;
     font-weight: 400;
     border-radius: 20px;
+}
+
+notice list .meta {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
