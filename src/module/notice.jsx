@@ -23,6 +23,19 @@ export default class Notice extends React.Component {
         $( "notice .detail" ).addClass( "simpread-theme-root" ).html( `<sr-rd-content>${html}</sr-rd-content>` );
     }
 
+    onReadallClick() {
+        new Notify().Render( "snackbar", "是否将全部消息标记为已读？", "确认", () => {
+            storage.notice.read = [];
+            this.state.items.forEach( ( item, idx ) => { storage.notice.read.push( idx + 1 ) });
+            new Notify().Render( "已全部设置为已读，3 秒后自动刷新本页..." );
+            storage.Write( () => {
+                console.log( "current notice is ", storage.notice )
+                watch.SendMessage( "option", true );
+                setTimeout( ()=>location.reload(), 3000 );
+            }, storage.simpread );
+        });
+    }
+
     componentWillMount() {
         $.ajax( "http://localhost:3000/notice" )
             .done( result => {
@@ -56,6 +69,13 @@ export default class Notice extends React.Component {
             dom =
                 <notice>
                     <div>
+                        <div className="list controlbar">
+                            <Button type="raised" text="全部标记为已读"
+                                style={{ "margin": "0" }} width="100%"
+                                color="#fff" backgroundColor="#1976d2"
+                                waves="md-waves-effect md-waves-button"
+                                onClick={ ()=>this.onReadallClick() } />
+                        </div>
                         <List list={ this.state.items } onClick={ ( e, id )=> this.onClick( e, id ) } />
                     </div>
                     <div className="detail">
