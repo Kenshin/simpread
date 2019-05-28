@@ -9,7 +9,6 @@ import Button     from 'button';
 import * as waves from 'waves';
 import * as tt    from 'tooltip';
 
-
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
 
