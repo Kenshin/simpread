@@ -3,3 +3,8 @@
     opacity: 1;
     visibility: visible;
 }
+
+.notice {
+    margin-top: 65px;
+    width: 100%;
+}
