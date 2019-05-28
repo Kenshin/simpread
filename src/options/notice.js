@@ -9,6 +9,8 @@ import Button     from 'button';
 import * as waves from 'waves';
 import * as tt    from 'tooltip';
 
+import Notice     from 'notice';
+
 import {storage}  from 'storage';
 import * as ss    from 'stylesheet';
 
@@ -18,6 +20,7 @@ import * as ss    from 'stylesheet';
 storage.Read( () => {
     console.log( "simpread storage get success!", storage );
     navRender();
+    noticeRender();
     tt.Render( "body" );
     waves.Render({ root: "body" });
     $( "body" ).velocity({ opacity: 1 }, { duration: 1000, complete: ()=> {
@@ -34,4 +37,11 @@ function navRender() {
     };
     const button = <Button waves="md-waves-effect md-waves-circle" hoverColor="transparent" icon={ ss.IconPath( "gohome_icon" ) } onClick={ ()=>navClick() } />;
     ReactDOM.render( button, $( ".header .nav" )[0] );
+}
+
+/**
+ * notice Render
+ */
+function noticeRender() {
+    ReactDOM.render( <Notice />, $( ".notice" )[0] );
 }
