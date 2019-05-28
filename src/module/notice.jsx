@@ -72,7 +72,7 @@ export default class Notice extends React.Component {
                         <div className="list controlbar">
                             <Button type="raised" text="全部标记为已读"
                                 style={{ "margin": "0" }} width="100%"
-                                color="#fff" backgroundColor="#1976d2"
+                                color="#fff" backgroundColor="#FF5252"
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.onReadallClick() } />
                         </div>
@@ -110,6 +110,7 @@ class List extends React.Component {
         storage.Write( () => {
             console.log( "current notice is ", storage.notice )
             watch.SendMessage( "option", true );
+            new Notify().Render( "已设置为已读。" );
         }, storage.simpread );
     }
 
