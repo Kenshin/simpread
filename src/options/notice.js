@@ -3,6 +3,7 @@ console.log( "==== simpread options page: notice load ====" )
 import '../assets/css/simpread.css';
 import '../assets/css/options_page.css';
 import '../assets/css/options_notice.css';
+import 'notify_css';
 
 import Velocity   from 'velocity';
 import Button     from 'button';
