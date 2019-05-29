@@ -108,6 +108,7 @@ const name = "simpread",
         update    : "",
         sync      : "",
         save_at   : "dropbox", // include: dropbox | jianguo
+        notice    : true,
         //focus   : 0,
         //read    : 0,
         esc       : true,
