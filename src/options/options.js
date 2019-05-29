@@ -313,8 +313,6 @@ function bubbles() {
         }
         $.get( "http://localhost:3000/notice/latest", result => {
             console.log( "notice latest id ", result )
-            //result = 2;
-            //storage.notice.latest = 1;
             if ( storage.notice.latest == 0 ) {
                 $( "body" ).append( tmpl );
                 is_update = true;
