@@ -108,6 +108,7 @@ const name = "simpread",
         update    : "",
         sync      : "",
         save_at   : "dropbox", // include: dropbox | jianguo
+        notice    : true,
         //focus   : 0,
         //read    : 0,
         esc       : true,
@@ -159,6 +160,10 @@ const name = "simpread",
         avatar    : "",
         permission: "",
     },
+    notice = {
+        latest: 0,
+        read  : []
+    },
     unread = {
         idx       : 0,
         create    : "",
@@ -185,6 +190,7 @@ let current  = {},
             local  : [], // include focus.sites and read.sites
         },
         statistics,
+        notice,
         user,
     },
     plugins  = {},
@@ -287,6 +293,15 @@ class Storage {
      */
     get unrdist() {
         return simpread[ mode.unrdist ];
+    }
+
+    /**
+     * Get notice
+     * 
+     * @return {object} notice
+     */
+    get notice() {
+        return simpread.notice;
     }
 
     /**
@@ -401,6 +416,18 @@ class Storage {
     get service() {
         //return "http://localhost:3000";
         return "https://simpread.ksria.cn";
+    }
+
+    /**
+     * Get notice service url
+     * 
+     * @return {string} url
+     */
+    get notice_service() {
+        return {
+            latest: "http://simp.red/notice/latest",
+            message: "http://simp.red/notice",
+        }
     }
 
     /**
@@ -712,6 +739,30 @@ class Storage {
     }
 
     /**
+     * Notice set/get
+     * 
+     * @param {object}   notice
+     * @param {function} callback
+     */
+    Notice( callback, data ) {
+        if ( data ) {
+            browser.storage.local.set( { ["notice"] : data }, () => {
+                console.log( "chrome storage notice set success!", data );
+                callback && callback();
+            });
+        } else {
+            if ( br.isFirefox() && window.location.protocol != "moz-extension:" ) {
+                callback && callback();
+            } else {
+                browser.storage.local.get( ["notice"], result => {
+                    console.log( "chrome storage notice get success!", result );
+                    callback && callback( result );
+                });
+            }
+        }
+    }
+
+    /**
      * Plugins set/get, plugins not import/export
      * 
      * @param {object}   plugins
@@ -734,7 +785,7 @@ class Storage {
     }
 
     /**
-     * Export, only include: version, option, focus, read, unrdist
+     * Export
      * 
      * @return {string} object json stringify
      */
@@ -747,6 +798,7 @@ class Storage {
             websites: { ...this.websites },
             statistics: { ...this.statistics },
             user    : { ...this.user },
+            notice  : { ...this.notice },
             unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });

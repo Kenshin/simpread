@@ -74,6 +74,7 @@ export default class LabsOpt extends React.Component {
 
     onClick( state ) {
         state == "custom"  && ( location.href = location.origin + "/options/custom.html" );
+        state == "notice"  && ( location.href = location.origin + "/options/notice.html?is_update=" + sessionStorage.getItem( "is_update" ));
     }
 
     render() {
@@ -255,6 +256,22 @@ export default class LabsOpt extends React.Component {
                     <div className="more">
                         <div>增强「中文阅读体验」设置</div>
                         <span className="desc">包括：标题、描述、正文的字间距、行间距、首行缩进等及自定义 CSS。</span>
+                        <span className="arrow"></span>
+                    </div>
+                </div>
+
+                <div className="label">消息中心</div>
+                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
+                    <Switch width="100%" checked={ this.props.option.notice }
+                        thumbedColor="#3F51B5" trackedColor="#7986CB"
+                        label="当没有未读信息时，是否显示右下角提示框？"
+                        desc="关闭后，当没有新的未读信息时，隐藏未读提示；当有新的消息时，仍会在右下角显示未读提示。"
+                        onChange={ (s)=>this.onChange(s, "option", "notice") } />
+                </div>
+                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('notice') }>
+                    <div className="more">
+                        <div>查看全部消息</div>
+                        <span className="desc">简悦会不定期发送一些消息，包括：新的插件上线、新的适配站点上线、修复 Bug 等</span>
                         <span className="arrow"></span>
                     </div>
                 </div>

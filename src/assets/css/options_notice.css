@@ -1,0 +1,196 @@
+.header {
+    background-color: #16666f;
+    opacity: 1;
+    visibility: visible;
+}
+
+.notice {
+    margin-top: 65px;
+    width: 100%;
+}
+
+.notice notice {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+}
+
+notice .loading,
+notice .failed {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #fff;
+}
+
+notice .loading svg {
+    transform: scale(.8);
+}
+
+notice .failed {
+    flex-direction: column;
+}
+
+notice .failed span {
+    color: #9b9b9b;
+    font-size: 2.5rem;
+}
+
+notice .list {
+    margin: 20px 20px 0;
+    width: 300px;
+    min-height: 589px;
+}
+
+notice .list.controlbar {
+    min-height: initial;
+}
+
+notice .detail {
+    display: flex;
+    justify-content: center;
+
+    margin: 20px 20px 0 0;
+    padding: 39px 24px 0px;
+
+    width: 100%;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+notice .detail img {
+    width: 60%;
+}
+
+notice .detail .empty {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    padding-bottom: 39px;
+    min-height: 550px;
+
+    color: #9b9b9b;
+    font-size: 2.6rem;
+    font-weight: 400;
+}
+
+notice .detail .empty .icon {
+    width: 80px;
+    height: 80px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAHdElNRQfhBA0LLBOn/NkLAAABtklEQVRYw+2YPyxDURTGf5WOGCwiETH7s4kaDJo2FokYMBglZ66lOtGEqWIQm9zdoJouGERIEwNlE4NE4i0iBoO0CxIMvW1f26evvJY86Tfdc3LP99137vvuTa6HqlAwzxI9X064ISrxagweE5mfOXp18CHjoCDJFHbYlBCAOiywGWzLSYmAauUIn6koI+2g/Bzb0gMMyDWoZ9pNuTQByUKLbkSyhD6PyZroYcwiN0xSoQUYJGhZ+FKjwKtlNsggeAEIFJIbnJqm7BKpSeAIgHkdjbKgRwGucgIdOrEuYXOdXKo1Fm3pF+QOQBI6Tqg3wnleb8nUVHmtRNQBQueX5AZbclmRTVFYqBcbSKpS9jtocVLcFGgK/I6AhQ/UEPHCsf09GMyU287KaBc/Xm4vF+YbBv5oDzYd8FXUWrRIQoQa+wV1hfsFmj6whTt9IPvFRv3L39Q51AR7AKzKctMHtnCnD2wE6oAbpgF4bJCA3HKbH7vcaCsSdf9ZVCrQVyfW/uIwtwdZHcXUEzuSccKt2pglpoOsfkpQPs4a0p8ROc+1KI3RAHqDdPExpIv78nPQId7plgf4BCjPbVayklPeAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA0LTEzVDExOjQ0OjE5KzA4OjAwPYuVdQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wNC0xM1QxMTo0NDoxOSswODowMEzWLckAAAAASUVORK5CYII= );
+}
+
+notice .detail .preview {
+    width: 100%;
+}
+
+notice .detail .preview .title {
+    margin-bottom: 20px;
+
+    font-family: PingFang SC,Hiragino Sans GB,Microsoft Yahei,WenQuanYi Micro Hei,sans-serif;
+    font-size: 3.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-rendering: optimizelegibility;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+notice .detail .preview .desc {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #E0E0E0;
+}
+
+notice .list {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+notice list {
+    display: flex!important;
+    flex-direction: column;
+
+    padding: 16px;
+    min-height: 72px;
+
+    border-bottom: 1px solid #E0E0E0;
+    transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+notice list:hover {
+    background-color: #f5f5f5;
+    transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+notice list:hover .meta {
+    opacity: 1;
+}
+
+notice list.active {
+    opacity: .5;
+}
+
+notice list.selected {
+    background-color: #e1f5fe;
+    border-left: 4px solid #29b6f6;
+}
+
+notice list.active .title {
+    text-decoration: line-through;
+}
+
+notice list .title {
+    margin-bottom: 4px;
+    padding-right: 25px;
+
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+notice list .category,
+notice .detail .preview .category {
+    margin-right: 4px;
+    padding: 2px 7px;
+    padding: 2px 4px;
+
+    color: #fff;
+
+    font-weight: 400;
+    font-size: 0.8rem;
+    border-radius: 2px;
+}
+
+notice list .meta {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+notice .date {
+    color: #9e9e9e;
+}

@@ -77,10 +77,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Entry:
- * - storage get data form chrome storage
- * - waves.Render()
- * - tooltip.Render()
+ * Entry
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
@@ -93,6 +90,7 @@ storage.Read( first => {
     mainRender( tabsItemID );
     tt.Render( "body" );
     waves.Render({ root: "body" });
+    setTimeout(() => bubbles(), 500 );
     // only firefox and only usage 1.1.0.3024
     //if ( br.isFirefox() && ver.sub_ver == "3024" && !localStorage["opt-3024"] ) {
     //    welcomeRender( true );
@@ -295,4 +293,43 @@ function pRead() {
     storage.puread     = new PureRead( storage.sites );
     storage.pr.origins = storage.option.origins;
     console.log( "current puread object is   ", storage.pr )
+}
+
+/*
+ * Notice bubbles
+ */
+function bubbles() {
+    sessionStorage.setItem( "is_update", false );
+    const tmpl = `
+        <div class="md-waves-effect bubbles effect">
+            <i><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2555" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24"><defs><style type="text/css"></style></defs><path d="M787.908422 563.765991 787.908422 349.052814c0-152.726403-96.294137-222.682685-223.373417-236.678444 0.031722-0.931209 0.278339-1.811252 0.278339-2.76702 0-27.231201-22.429849-49.288566-50.031487-49.288566-27.662013 0-50.058093 22.057365-50.058093 49.288566 0 0.937348 0.23843 1.804089 0.295735 2.677992-127.636982 13.70207-224.524636 83.607186-224.524636 236.767472l0 214.713176c0 172.349323-442.565605 257.698177 265.890766 257.698177C1214.842001 821.464167 787.908422 736.115314 787.908422 563.765991L787.908422 563.765991zM514.782881 960.670649c52.405557 0 94.916766-41.893132 94.916766-93.54042L419.849742 867.13023C419.849742 918.777517 462.347648 960.670649 514.782881 960.670649L514.782881 960.670649zM514.782881 960.670649" p-id="2556" fill="#ffffff"></path></svg></i>
+            <em class="init">...</em>
+        </div>
+    `;
+    storage.Notice( result => {
+        if ( $.isEmptyObject( result ) ) {
+            storage.notice.latest = 0;
+            storage.Write();
+        }
+        $.get( storage.notice_service.latest, result => {
+            console.log( "notice latest id ", result )
+            if ( storage.notice.latest == 0 ) {
+                $( "body" ).append( tmpl );
+                sessionStorage.setItem( "is_update", true );
+            } else if ( storage.notice.latest < result ) {
+                $( "body" ).append( tmpl );
+                $( ".bubbles em" ).removeClass( "init" ).text( result - storage.notice.read.length );
+                sessionStorage.setItem( "is_update", true );
+            } else if ( storage.notice.latest > storage.notice.read.length ) {
+                $( "body" ).append( tmpl );
+                $( ".bubbles em" ).removeClass( "init" ).text( storage.notice.latest - storage.notice.read.length );
+            } else if ( storage.notice.latest == storage.notice.read.length && storage.option.notice ) {
+                $( "body" ).append( tmpl );
+                $( ".bubbles em" ).remove();
+            }
+        });
+    });
+    $( "body" ).on( "click", ".bubbles", event => {
+        location.href = location.origin + "/options/notice.html?is_update=" + sessionStorage.getItem( "is_update" );
+    });
 }
