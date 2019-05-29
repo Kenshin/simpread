@@ -44,5 +44,7 @@ function navRender() {
  * notice Render
  */
 function noticeRender() {
-    ReactDOM.render( <Notice />, $( ".notice" )[0] );
+    let is_update = location.search == "?is_update=true" ? true : false;
+    ReactDOM.render( <Notice is_update={ is_update } />, $( ".notice" )[0] );
+    history.pushState( "", "", "/options/notice.html" );
 }

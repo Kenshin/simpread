@@ -23,11 +23,13 @@ const write = ( callback ) => {
 export default class Notice extends React.Component {
 
     static defaultProps = {
+        is_update: false,
         step: 20,
     };
 
     static propsType = {
         step: React.PropTypes.number,
+        is_update: React.PropTypes.bool,
     };
 
     state = {
@@ -72,13 +74,22 @@ export default class Notice extends React.Component {
     }
 
     componentWillMount() {
-        $.ajax( "http://localhost:3000/notice" )
+        if ( this.props.is_update ) {
+            $.ajax( "http://localhost:3000/notice" )
             .done( result => {
+                storage.Notice( undefined, result.notice );
+                storage.notice.latest = result.notice.length;
+                write();
                 this.setState({ items: result.notice, total: Math.ceil( result.notice.length / this.props.step ) });
             })
             .fail( ( jqXHR, textStatus, errorThrown ) => {
                 this.setState({ failed: true });
             });
+        } else {
+            storage.Notice( result => {
+                this.setState({ items: result.notice, total: Math.ceil( result.notice.length / this.props.step ) });
+            });
+        }
     }
 
     componentDidMount() {
