@@ -66,9 +66,9 @@ function func( source ) {
     window.browser = browser;
     window.current = Clone( storage.pr.current );
     window.read    = Clone( storage.read );
-    return `( function ( $$version, $title, $desc, $content, $footer, $process, $toc, Notify, browser, $$current, $$read ) {
+    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, browser, $$current, $$read ) {
         ${ source }
-    })( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, browser, current, read );`
+    })( "0.0.1", $( "sr-rd-title" ), $( "sr-read" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, browser, current, read );`
 }
 
 /**
@@ -89,7 +89,7 @@ function addStyle( str ) {
 function testPlugin( style, plugin ) {
     style  && addStyle( style() );
     plugin && plugin( "0.0.1",
-                      $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
+                      $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
                       Notify,
                       browser,
                       storage.pr.current, storage.read );
