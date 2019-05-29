@@ -313,11 +313,11 @@ function bubbles() {
         if ( storage.notice.latest == 0 ) {
             $( "body" ).append( tmpl );
             is_update = true;
-        } else if ( storage.notice.latest < result ) {
+        } else if ( storage.notice.latest > storage.notice.read.length ) {
             $( "body" ).append( tmpl );
-            $( ".bubbles em" ).removeClass( "init" ).text( result - storage.notice.latest );
+            $( ".bubbles em" ).removeClass( "init" ).text( storage.notice.latest - storage.notice.read.length );
             is_update = true;
-        } else if ( storage.notice.latest == result && storage.option.notice ) {
+        } else if ( storage.notice.latest == storage.notice.read.length && storage.option.notice ) {
             $( "body" ).append( tmpl );
             $( ".bubbles em" ).remove();
         }
