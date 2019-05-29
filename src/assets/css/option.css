@@ -87,7 +87,7 @@ sr-opt-theme[sr-type="active"] {
  */
 .bubbles {
     position: fixed;
-    right: 20px;
+    right: 24px;
     bottom: 20px;
 
     display: flex;
@@ -96,11 +96,11 @@ sr-opt-theme[sr-type="active"] {
 
     padding: 10px;
 
-    width: 52px;
-    height: 52px;
+    width: 55px;
+    height: 56px;
 
     background-color: #16666f;
-    border-radius: .3125rem;
+    border-radius: 50%;
 
     box-shadow: 0 2px 6px 0 rgba(0,0,0,.4);
 
@@ -120,12 +120,12 @@ sr-opt-theme[sr-type="active"] {
 
 .bubbles em {
     position: absolute;
-    top: 3px;
-    right: 9px;
+    top: 6px;
+    right: 11px;
 
-    width: 15px;
-    height: 15px;
-    line-height: 15px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
 
     color: #fff;
     background-color: #e54545;

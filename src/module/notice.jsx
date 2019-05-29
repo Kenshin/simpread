@@ -160,6 +160,12 @@ class List extends React.Component {
         onClick: React.PropTypes.func,
     }
 
+    onClick( event, id ) {
+        $( "list" ).removeClass( "selected" );
+        $( `list[id="${id}"]` ).addClass( "selected" );
+        this.props.onClick( event, id );
+    }
+
     onActive( event, id ) {
         $( `list[id="${id}"]` ).addClass( "active" );
         storage.notice.read.push( id );
@@ -170,7 +176,7 @@ class List extends React.Component {
         const list = this.props.list.map( item => {
             const active = storage.notice.read.findIndex( value=>value==item.id ) != -1 ? " active" : "";
             return (
-                <list id={ item.id } className={ "md-waves-effect" + active } onClick={ e => this.props.onClick( e, item.id ) }>
+                <list id={ item.id } className={ "md-waves-effect" + active } onClick={ e => this.onClick( e, item.id ) }>
                     <div className="title">{ item.title }</div>
                     <span>
                         <span style={{ backgroundColor: item.category.color }} className="category">{ item.category.name }</span>

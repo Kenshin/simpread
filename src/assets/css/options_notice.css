@@ -65,7 +65,8 @@ notice .detail {
 
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 notice .detail img {
@@ -78,11 +79,12 @@ notice .detail .empty {
     flex-direction: column;
     align-items: center;
 
-    padding-top: 50px;
+    padding-bottom: 39px;
     min-height: 550px;
 
     color: #9b9b9b;
-    font-size: 2.7rem;
+    font-size: 2.6rem;
+    font-weight: 400;
 }
 
 notice .detail .empty .icon {
@@ -121,7 +123,8 @@ notice .detail .preview .desc {
 
 notice .list {
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 notice list {
@@ -131,6 +134,7 @@ notice list {
     padding: 16px;
     min-height: 72px;
 
+    border-bottom: 1px solid #E0E0E0;
     transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
@@ -145,6 +149,15 @@ notice list:hover .meta {
 
 notice list.active {
     opacity: .5;
+}
+
+notice list.selected {
+    background-color: #e1f5fe;
+    border-left: 4px solid #29b6f6;
+}
+
+notice list.active .title {
+    text-decoration: line-through;
 }
 
 notice list .title {
@@ -162,9 +175,13 @@ notice list .category,
 notice .detail .preview .category {
     margin-right: 4px;
     padding: 2px 7px;
+    padding: 2px 4px;
+
     color: #fff;
+
     font-weight: 400;
-    border-radius: 20px;
+    font-size: 0.8rem;
+    border-radius: 2px;
 }
 
 notice list .meta {
@@ -172,4 +189,8 @@ notice list .meta {
     right: 0;
     opacity: 0;
     transition : all 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+notice .date {
+    color: #9e9e9e;
 }
