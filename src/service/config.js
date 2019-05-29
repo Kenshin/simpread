@@ -401,7 +401,8 @@ const readItems = {
     },
     "trigger" : {
         "name" : "插件触发器",
-        "icon" : ss.IconPath("send_icon"),
+        "icon" : ss.IconPath("plugin_icon"),
+        "color": "#00bcd4",
         "items": {}
     },
     /*
