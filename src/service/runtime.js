@@ -88,7 +88,11 @@ function addStyle( str ) {
  */
 function testPlugin( style, plugin ) {
     style  && addStyle( style() );
-    plugin && plugin( "0.0.1", $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, browser, storage.pr.current, storage.read );
+    plugin && plugin( "0.0.1",
+                      $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
+                      Notify,
+                      browser,
+                      storage.pr.current, storage.read );
 }
 
 window.simpread = { testPlugin };
