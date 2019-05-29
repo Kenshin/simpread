@@ -42,6 +42,16 @@ function install( id, url, callback ) {
 }
 
 /**
+ * Dispatch event
+ * 
+ * @param {string} type include: export, read_ui, read_start, read_end
+ * @param {string} value
+ */
+function dispatch( type, value ) {
+    window.dispatchEvent( new CustomEvent( "simpread-plugin", { detail: { type, value }}));
+}
+
+/**
  * Execute
  * 
  * @param {string} state, include: read_start, read_loading, read_complete, read_end
@@ -103,4 +113,5 @@ export {
     install as Install,
     exec    as Exec,
     generateID as ID,
+    dispatch as Event,
 }
