@@ -74,7 +74,7 @@ export default class LabsOpt extends React.Component {
 
     onClick( state ) {
         state == "custom"  && ( location.href = location.origin + "/options/custom.html" );
-        state == "notice"  && ( location.href = location.origin + "/options/notice.html" );
+        state == "notice"  && ( location.href = location.origin + "/options/notice.html?is_update=" + sessionStorage.getItem( "is_update" ));
     }
 
     render() {
