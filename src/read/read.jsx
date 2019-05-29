@@ -130,6 +130,7 @@ class Read extends React.Component {
     }
 
     componentWillUnmount() {
+        run.Event( "read_end" );
         loadPlugins( "read_end" );
         ss.FontSize( "" );
         $root.removeClass( theme )
