@@ -59,12 +59,16 @@ function dispatch( type, value ) {
  * @param {object} plugin object
  */
 function exec( state, site, plugin ) {
-    if ( plugin.enable == false ) return;
-    if ( plugin.run_at != state ) return;
-    if ( plugin.site   != "" && !plugin.site.split(",").includes( site ) ) return;
-    console.log( "current plugin is running", plugin )
-    new Function( func( plugin.script ) )();
-    plugin.style != "" && addStyle( plugin.style );
+    try {
+        if ( plugin.enable == false ) return;
+        if ( plugin.run_at != state ) return;
+        if ( plugin.site   != "" && !plugin.site.split(",").includes( site ) ) return;
+        console.log( "current plugin is running", plugin )
+        new Function( func( plugin.script ) )();
+        plugin.style != "" && addStyle( plugin.style );
+    } catch ( error ) {
+        new Notify().Render( 2, `插件 ${ plugin.name } 运行时出错，可以的话，请 <a href="https://github.com/Kenshin/simpread/issues/new" target="_blank">提交此问题</a> 😁` );
+    }
 }
 
 /**
