@@ -399,6 +399,11 @@ const readItems = {
             },
         },
     },
+    "trigger" : {
+        "name" : "插件触发器",
+        "icon" : ss.IconPath("send_icon"),
+        "items": {}
+    },
     /*
     "down" : {
         "name" : "向下滚动",
