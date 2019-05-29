@@ -419,6 +419,18 @@ class Storage {
     }
 
     /**
+     * Get notice service url
+     * 
+     * @return {string} url
+     */
+    get notice_service() {
+        return {
+            latest: "http://simp.red/notice/latest",
+            message: "http://simp.red/notice",
+        }
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
