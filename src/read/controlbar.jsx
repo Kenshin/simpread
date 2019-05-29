@@ -159,6 +159,24 @@ export default class ReadCtlbar extends React.Component {
                     };
                 });
             })
+            // Add test source
+            storage.Plugins( () => {
+                storage.option.plugins.forEach( id => {
+                    const plugin = storage.plugins[id];
+                    // Add test source
+                    // if ( plugin.trigger )
+                    if ( plugin.id == "Y7JxbP7B4H" ) {
+                        conf.readItems.trigger.items["plugin_" + plugin.id] = {
+                            "name"     : plugin.name,
+                            "fontIcon" : plugin.icon.type,
+                            "color"    : plugin.icon.bgColor,
+                        };
+                    }
+                });
+                if ( $.isEmptyObject( conf.readItems.trigger.items )) {
+                    delete conf.readItems.trigger;
+                }
+            });
         } catch ( err ) {
             // TO-DO
         }
