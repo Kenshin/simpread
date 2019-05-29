@@ -314,7 +314,7 @@ function bubbles() {
         } else if ( storage.notice.latest < result ) {
             $( "body" ).append( tmpl );
             $( ".bubbles em" ).removeClass( "init" ).text( result - storage.notice.latest );
-        } else if ( storage.notice.latest == result ) {
+        } else if ( storage.notice.latest == result && storage.option.notice ) {
             $( "body" ).append( tmpl );
             $( ".bubbles em" ).remove();
         }
