@@ -305,7 +305,7 @@ function bubbles() {
             <em class="init">...</em>
         </div>
     `;
-    $.get( "http://simp.red/notice/latest", result => {
+    $.get( "http://localhost:3000/notice/latest", result => {
         console.log( "notice latest id ", result )
         //result = 2;
         //storage.notice.latest = 1;
