@@ -323,7 +323,6 @@ function bubbles() {
             } else if ( storage.notice.latest > storage.notice.read.length ) {
                 $( "body" ).append( tmpl );
                 $( ".bubbles em" ).removeClass( "init" ).text( storage.notice.latest - storage.notice.read.length );
-                sessionStorage.setItem( "is_update", true );
             } else if ( storage.notice.latest == storage.notice.read.length && storage.option.notice ) {
                 $( "body" ).append( tmpl );
                 $( ".bubbles em" ).remove();
