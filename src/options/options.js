@@ -311,7 +311,7 @@ function bubbles() {
             storage.notice.latest = 0;
             storage.Write();
         }
-        $.get( "http://localhost:3000/notice/latest", result => {
+        $.get( storage.notice_service.latest, result => {
             console.log( "notice latest id ", result )
             if ( storage.notice.latest == 0 ) {
                 $( "body" ).append( tmpl );

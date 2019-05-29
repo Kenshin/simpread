@@ -75,7 +75,7 @@ export default class Notice extends React.Component {
 
     componentWillMount() {
         if ( this.props.is_update ) {
-            $.ajax( "http://localhost:3000/notice" )
+            $.ajax( storage.notice_service.message )
             .done( result => {
                 storage.Notice( undefined, result.notice );
                 storage.notice.latest = result.notice.length;
