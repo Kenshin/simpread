@@ -3,6 +3,7 @@ console.log( "=== simpread runtime load ===" )
 import nanoid    from 'nanoid';
 import {browser} from 'browser';
 import {storage, Clone} from 'storage';
+import * as highlight from 'highlight';
 
 /**
  * Generate ID
@@ -66,9 +67,10 @@ function func( source ) {
     window.browser = browser;
     window.current = Clone( storage.pr.current );
     window.read    = Clone( storage.read );
-    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, browser, $$current, $$read ) {
+    window.highlight = highlight;
+    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$current, $$read ) {
         ${ source }
-    })( "0.0.1", $( "sr-rd-title" ), $( "sr-read" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, browser, current, read );`
+    })( "0.0.1", $( "sr-rd-title" ), $( "sr-read" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, current, read );`
 }
 
 /**
@@ -90,7 +92,7 @@ function testPlugin( style, plugin ) {
     style  && addStyle( style() );
     plugin && plugin( "0.0.1",
                       $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
-                      Notify,
+                      Notify, highlight,
                       browser,
                       storage.pr.current, storage.read );
 }
