@@ -306,21 +306,31 @@ function bubbles() {
             <em class="init">...</em>
         </div>
     `;
-    $.get( "http://localhost:3000/notice/latest", result => {
-        console.log( "notice latest id ", result )
-        //result = 2;
-        //storage.notice.latest = 1;
-        if ( storage.notice.latest == 0 ) {
-            $( "body" ).append( tmpl );
-            is_update = true;
-        } else if ( storage.notice.latest > storage.notice.read.length ) {
-            $( "body" ).append( tmpl );
-            $( ".bubbles em" ).removeClass( "init" ).text( storage.notice.latest - storage.notice.read.length );
-            is_update = true;
-        } else if ( storage.notice.latest == storage.notice.read.length && storage.option.notice ) {
-            $( "body" ).append( tmpl );
-            $( ".bubbles em" ).remove();
+    storage.Notice( result => {
+        if ( $.isEmptyObject( result ) ) {
+            storage.notice.latest = 0;
+            storage.Write();
         }
+        $.get( "http://localhost:3000/notice/latest", result => {
+            console.log( "notice latest id ", result )
+            //result = 2;
+            //storage.notice.latest = 1;
+            if ( storage.notice.latest == 0 ) {
+                $( "body" ).append( tmpl );
+                is_update = true;
+            } else if ( storage.notice.latest < result ) {
+                $( "body" ).append( tmpl );
+                $( ".bubbles em" ).removeClass( "init" ).text( result - storage.notice.read.length );
+                is_update = true;
+            } else if ( storage.notice.latest > storage.notice.read.length ) {
+                $( "body" ).append( tmpl );
+                $( ".bubbles em" ).removeClass( "init" ).text( storage.notice.latest - storage.notice.read.length );
+                is_update = true;
+            } else if ( storage.notice.latest == storage.notice.read.length && storage.option.notice ) {
+                $( "body" ).append( tmpl );
+                $( ".bubbles em" ).remove();
+            }
+        });
     });
     $( "body" ).on( "click", ".bubbles", event => {
         location.href = location.origin + "/options/notice.html?is_update=" + is_update;
