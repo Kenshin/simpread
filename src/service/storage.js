@@ -727,6 +727,30 @@ class Storage {
     }
 
     /**
+     * Notice set/get
+     * 
+     * @param {object}   notice
+     * @param {function} callback
+     */
+    Notice( callback, data ) {
+        if ( data ) {
+            browser.storage.local.set( { ["notice"] : data }, () => {
+                console.log( "chrome storage notice set success!", data );
+                callback && callback();
+            });
+        } else {
+            if ( br.isFirefox() && window.location.protocol != "moz-extension:" ) {
+                callback && callback();
+            } else {
+                browser.storage.local.get( ["notice"], result => {
+                    console.log( "chrome storage notice get success!", result );
+                    callback && callback( result );
+                });
+            }
+        }
+    }
+
+    /**
      * Plugins set/get, plugins not import/export
      * 
      * @param {object}   plugins
