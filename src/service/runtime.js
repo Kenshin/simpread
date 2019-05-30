@@ -97,18 +97,44 @@ function addStyle( str ) {
 }
 
 /**
+ * Add trigger
+ * 
+ * @param {string} add trigger to fap controlbar
+ */
+function addTrigger( str ) {
+    let is_found = false;
+    $( "fap action-bar" ).find( "sr-opt-label" ).map( ( idx, item ) => {
+        if ( $(item).text() == "插件触发器" ) {
+            is_found = true;
+            $(item).next().append( str );
+        }
+    });
+    if ( is_found == false ) {
+        const html = `<sr-opt-gp>
+                        <sr-opt-label>插件触发器</sr-opt-label>
+                        <actions style="display:flex;margin:10px 0;flex-wrap:wrap;">
+                            ${str}
+                        </actions>
+                      </sr-opt-gp>`;
+        $( "fap action-bar" ).append( html );
+    }
+}
+
+/**
  * Test Plugin
  * 
  * @param {func} style func
  * @param {func} plugin func
+ * @param {func} trigger func
  */
-function testPlugin( style, plugin ) {
+function testPlugin( style, plugin, trigger ) {
     style  && addStyle( style() );
     plugin && plugin( "0.0.1",
                       $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
                       Notify, highlight,
                       browser,
                       storage.pr.current, storage.read );
+    trigger && addTrigger( trigger() );
 }
 
 window.simpread = { testPlugin };
