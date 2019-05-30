@@ -164,7 +164,7 @@ export default class ReadCtlbar extends React.Component {
                 storage.option.plugins.forEach( id => {
                     const plugin = storage.plugins[id];
                     // Add test source
-                    // if ( plugin.trigger )
+                    // if ( plugin.trigger && plugin.enable )
                     if ( plugin.id == "Y7JxbP7B4H" ) {
                         conf.readItems.trigger.items["plugin_" + plugin.id] = {
                             "name"     : plugin.name,
