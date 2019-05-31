@@ -82,9 +82,29 @@ function func( source ) {
     window.current = Clone( storage.pr.current );
     window.read    = Clone( storage.read );
     window.highlight = highlight;
-    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$current, $$read ) {
+    window.db      = Storage;
+    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$storage, $$current, $$read ) {
         ${ source }
-    })( "0.0.1", $( "sr-rd-title" ), $( "sr-read" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, current, read );`
+    })( "0.0.1", $( "sr-rd-title" ), $( "sr-read" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, db, browser, current, read );`
+}
+
+/**
+ * Getter / Setter plugin config
+ * 
+ * @param {string} plugin id
+ * @param {object} data
+ * @param {func} callback 
+ */
+function Storage( id, data, callback ) {
+    if ( data ) {
+        browser.storage.local.set( { ["plugin-"+id] : data }, () => {
+            callback && callback();
+        });
+    } else {
+        browser.storage.local.get( ["plugin-"+id], result => {
+            callback && callback( result );
+        });
+    }
 }
 
 /**
@@ -132,7 +152,7 @@ function testPlugin( style, plugin, trigger ) {
     plugin && plugin( "0.0.1",
                       $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
                       Notify, highlight,
-                      browser,
+                      browser, db,
                       storage.pr.current, storage.read );
     trigger && addTrigger( trigger() );
 }
