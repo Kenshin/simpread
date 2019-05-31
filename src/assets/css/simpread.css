@@ -320,10 +320,25 @@ toc {
     max-height: 500px;
 
     overflow-x: hidden;
+    overflow-y: hidden;
     cursor: pointer;
     border: 1px solid rgba(158, 158, 158, 0.22);
     transition: width .5s;
 }
+
+toc:hover {
+    overflow-y: auto;
+}
+
+toc::-webkit-scrollbar {
+    width: 3px;
+}
+
+toc::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(139,137,134,0.5);
+}
+
 
 toc outline {
     position: relative;
