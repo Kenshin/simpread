@@ -85,7 +85,7 @@ function func( source ) {
     window.db      = Storage;
     return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$storage, $$current, $$read ) {
         ${ source }
-    })( "0.0.1", $( "sr-rd-title" ), $( "sr-read" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, db, current, read );`
+    })( "0.0.2", $( "sr-rd-title" ), $( "sr-read" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, db, current, read );`
 }
 
 /**
