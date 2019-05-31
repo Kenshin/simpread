@@ -345,9 +345,17 @@ toc outline a:active,
 toc outline a:visited,
 toc outline a:focus
 {
+    display: block;
+
+    width: 100%;
+
     color: inherit;
     font-size: 11px;
     text-decoration: none!important;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 toc outline a:hover {

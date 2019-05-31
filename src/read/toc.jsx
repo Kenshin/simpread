@@ -5,19 +5,29 @@ let is_click = false;
 class TOC extends React.Component {
 
     onClick( event ) {
-        is_click = true;
-        const $target = $( event.target ).parent();
-        $target.parent().find( "active" ).removeClass( "toc-outline-active" );
-        $target.find( "active" ).addClass( "toc-outline-active" );
+        try {
+            is_click    = true;
+            let $target = $( event.target ).parent();
 
-        const href     = $( event.target ).attr("href"),
-             offsetTop = href === "#" ? 0 : $(href).offset().top - 5;
-        $( "html" ).stop().animate({
-            scrollTop: offsetTop
-        }, 300, () => {
-            setTimeout( ()=>is_click = false, 500 );
-        });
-        event.preventDefault();
+            while ( $target.is( "a" ) ) { $target = $target.parent(); }
+            if ( $target.is( "toc" ) ){
+                return;
+            }
+
+            $target.parent().find( "active" ).removeClass( "toc-outline-active" );
+            $target.find( "active" ).addClass( "toc-outline-active" );
+
+            const href      = $target.find( "a" ).attr( "href" ),
+                  offsetTop = href === "#" ? 0 : $(href).offset().top - 5;
+            $( "html" ).stop().animate({
+                scrollTop: offsetTop
+            }, 300, () => {
+                setTimeout( ()=>is_click = false, 500 );
+            });
+            event.preventDefault();
+        } catch ( error ) {
+            console.error( "toc error ", error )
+        }
     }
 
     componentDidMount() {
@@ -57,9 +67,9 @@ class TOC extends React.Component {
     render() {
         const outline = this.props.table.map( item => {
             return (
-                <outline className={ item.level }>
+                <outline className={ item.level } onClick={ evt=>this.onClick(evt) }>
                     <active></active>
-                    <a className={ "toc-outline-theme-" + this.props.theme } href={ "#" + item.id} onClick={ evt=>this.onClick(evt) }>{ item.value }</a>
+                    <a className={ "toc-outline-theme-" + this.props.theme } href={ "#" + item.id}><span>{ item.value }</span></a>
                 </outline>
             )
         });
