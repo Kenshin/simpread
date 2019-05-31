@@ -50,6 +50,8 @@ class TOC extends React.Component {
         $( "outline" ).map( ( idx, item ) => {
             $(item).width( 180 - parseInt( $(item).css("padding-left") ) );
         })
+
+        this.props.hidden == false && $( "toc" ).css({ "width" : "initial" });
     }
 
     render() {
@@ -101,7 +103,7 @@ function Render( root, $target, theme, hidden ) {
     });
     console.log( "current toc is ", table )
     $( root ).append( `<toc-bg class=${cls}></tocbg>` );
-    table.length > 1 && ReactDOM.render( <TOC table={ table } theme={ theme } />, $( "toc-bg" )[0] );
+    table.length > 1 && ReactDOM.render( <TOC hidden={ hidden } table={ table } theme={ theme } />, $( "toc-bg" )[0] );
 }
 
 export {

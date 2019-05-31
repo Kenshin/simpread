@@ -276,8 +276,8 @@ toc-bg {
     position: fixed;
     left: 0;
     top: 0;
-    width: 200px;
-    height: 500px;
+    width: 50px;
+    height: 200px;
 
     font-size: initial;
 }
@@ -296,6 +296,10 @@ toc-bg:hover {
     z-index: 3;
 }
 
+.toc-bg-hidden:hover toc {
+    width: 180px;
+}
+
 toc * {
     all: unset;
 }
@@ -311,13 +315,14 @@ toc {
 
     padding: 10px;
 
+    width: 0;
     max-width: 200px;
     max-height: 500px;
 
     overflow-x: hidden;
     cursor: pointer;
     border: 1px solid rgba(158, 158, 158, 0.22);
-    transition: width 1.5s;
+    transition: width .5s;
 }
 
 toc outline {
@@ -347,7 +352,6 @@ toc outline a:focus
 
 toc outline a:hover {
     font-weight: bold!important;
-    text-decoration: underline!important;
 }
 
 toc outline a.toc-outline-theme-dark,
