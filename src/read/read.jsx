@@ -58,11 +58,10 @@ class Read extends React.Component {
     componentWillMount() {
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
-        // hack code
-        //storage.current.fap && $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">' );
         if ( storage.current.fap ) {
-            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp" crossorigin="anonymous">' );
-            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/solid.min.css" />' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/brands.min.css" />' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css" />' );
         }
     }
 
