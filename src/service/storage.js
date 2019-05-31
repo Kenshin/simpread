@@ -127,6 +127,7 @@ const name = "simpread",
         origins   : [],
         blacklist : [
             "google.com",
+            "youtube.com"
         ],
         plugins   : [], // plugin id, e.g. kw36BtjGu0
     },
