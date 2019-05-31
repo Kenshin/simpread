@@ -142,6 +142,8 @@ export default class ReadCtlbar extends React.Component {
                 delete conf.readItems.fontsize;
                 delete conf.readItems.layout;
                 delete conf.readItems.theme;
+            } else {
+                delete conf.readItems.trigger;
             }
             if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
                 delete conf.readItems.download;
@@ -164,7 +166,7 @@ export default class ReadCtlbar extends React.Component {
                 });
             })
             // Add test source
-            storage.Plugins( () => {
+            storage.current.fap && storage.Plugins( () => {
                 storage.option.plugins.forEach( id => {
                     const plugin = storage.plugins[id];
                     // Add test source
