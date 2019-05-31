@@ -149,7 +149,7 @@ function addTrigger( str ) {
  */
 function testPlugin( style, plugin, trigger ) {
     style  && addStyle( style() );
-    plugin && plugin( "0.0.1",
+    plugin && plugin( "0.0.2",
                       $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
                       Notify, highlight,
                       browser, db,
