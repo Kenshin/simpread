@@ -138,6 +138,10 @@ export default class ReadCtlbar extends React.Component {
             if ( storage.current.fap ) {
                 delete conf.readItems.exit;
                 delete conf.readItems.option.items.setting;
+                delete conf.readItems.fontfamily;
+                delete conf.readItems.fontsize;
+                delete conf.readItems.layout;
+                delete conf.readItems.theme;
             }
             if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
                 delete conf.readItems.download;
