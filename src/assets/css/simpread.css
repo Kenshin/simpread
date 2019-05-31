@@ -333,7 +333,7 @@ toc outline {
     overflow: hidden;
     text-overflow: ellipsis;
 
-    margin: 2px 0;
+    padding: 2px 0;
     min-height: 21px;
 
     line-height: 21px;
@@ -378,17 +378,20 @@ toc outline a.toc-outline-theme-night {
 }
 
 .toc-outline-active {
-    background-color: rgb(244, 67, 54);
+    border-left: 2px solid rgb(244, 67, 54);
 }
 
 toc outline active {
     position: absolute;
 
-    right: 0;
+    left: 0;
     top: 0;
     bottom: 0;
 
     padding: 0 0 0 3px;
+
+    border-left: 2px solid #e8e8e8;
+
 }
 
 /**
