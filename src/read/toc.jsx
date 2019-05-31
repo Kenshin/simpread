@@ -48,10 +48,11 @@ class TOC extends React.Component {
                 return this;
             });
             cur = cur[cur.length - 1];
-            const id = cur && cur.length ? cur[0].id : "";
+            let id = cur && cur.length ? cur[0].id : "";
 
             if ( lastId !== id ) {
                 lastId = id;
+                id == "" && ( id = "sr-toc-0" );
                 menuItems.parent().find( "active" ).removeClass( "toc-outline-active" );
                 menuItems.filter("[href='#"+id+"']").parent().find( "active" ).addClass( "toc-outline-active" );
             }
