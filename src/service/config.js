@@ -399,6 +399,12 @@ const readItems = {
             },
         },
     },
+    "trigger" : {
+        "name" : "插件触发器",
+        "icon" : ss.IconPath("plugin_icon"),
+        "color": "#00bcd4",
+        "items": {}
+    },
     /*
     "down" : {
         "name" : "向下滚动",

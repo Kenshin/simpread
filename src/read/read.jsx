@@ -56,7 +56,6 @@ const Footer = () => {
 class Read extends React.Component {
 
     componentWillMount() {
-        loadPlugins( "read_start" );
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
         // hack code
@@ -131,6 +130,7 @@ class Read extends React.Component {
     }
 
     componentWillUnmount() {
+        run.Event( "read_end" );
         loadPlugins( "read_end" );
         ss.FontSize( "" );
         $root.removeClass( theme )
@@ -229,6 +229,7 @@ class Read extends React.Component {
  * @param {boolean} true: call mathJaxMode(); false: @see mathJaxMode
  */
 function Render( callMathjax = true ) {
+    loadPlugins( "read_start" );
     callMathjax && mathJaxMode();
     storage.pr.ReadMode();
     if ( typeof storage.pr.html.include == "string" && storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {

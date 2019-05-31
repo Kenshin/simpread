@@ -9,6 +9,7 @@ import * as output from 'output';
 import * as watch  from 'watch';
 import * as kbd    from 'keyboard';
 import { storage } from 'storage';
+import * as run    from 'runtime';
 
 import ReadOpt     from 'readopt';
 import Actionbar   from 'actionbar';
@@ -60,6 +61,8 @@ export default class ReadCtlbar extends React.Component {
         console.log( "fab type is =", type )
 
         this.verify( type.split( "_" )[0] );
+
+        run.Event( "export", type );
 
         const action = ( event, type ) => {
             this.props.multi && 
@@ -121,6 +124,7 @@ export default class ReadCtlbar extends React.Component {
 
     onChange( type, custom ) {
         const [ key, value ] = [ type.split( "_" )[0], type.split( "_" )[1] ];
+        run.Event( "read_ui", { key, value, custom });
         this.props.onAction && this.props.onAction( key, value, custom );
         this.verify( key );
     }
@@ -155,6 +159,24 @@ export default class ReadCtlbar extends React.Component {
                     };
                 });
             })
+            // Add test source
+            storage.Plugins( () => {
+                storage.option.plugins.forEach( id => {
+                    const plugin = storage.plugins[id];
+                    // Add test source
+                    if ( plugin.enable != false && ( plugin.trigger == true || plugin.trigger == "true" )) {
+                    //if ( plugin.id == "Y7JxbP7B4H" ) {
+                        conf.readItems.trigger.items["plugin_" + plugin.id] = {
+                            "name"     : plugin.name,
+                            "fontIcon" : plugin.icon.type,
+                            "color"    : plugin.icon.bgColor,
+                        };
+                    }
+                });
+                if ( $.isEmptyObject( conf.readItems.trigger.items )) {
+                    delete conf.readItems.trigger;
+                }
+            });
         } catch ( err ) {
             // TO-DO
         }
