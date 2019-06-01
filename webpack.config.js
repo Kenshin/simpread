@@ -224,7 +224,6 @@ const webpack = require( 'webpack' ),
           notify_css : __dirname + '/src/vender/notify/notify.css',
           carous_css : __dirname + '/src/vender/carousel/carousel.css',
 
-          markdown   : __dirname + '/node_modules/to-markdown/dist/to-markdown.js',
           epubpress  : __dirname + '/node_modules/epub-press-js/build/index.js',
           nanoid     : __dirname + '/node_modules/nanoid/generate.js',
 
@@ -237,6 +236,8 @@ const webpack = require( 'webpack' ),
           filesaver  : __dirname + '/src/vender/filesaver.min.js',
           instapaper : __dirname + '/src/vender/instapaper.js',
           webdav     : __dirname + '/src/vender/webdav.js',
+          markdown   : __dirname + '/src/vender/turndown/turndown.js',
+          mdgfm      : __dirname + '/src/vender/turndown/turndown-plugin-gfm.js',
 
           util       : __dirname + '/src/service/util.js',
           local      : __dirname + '/src/service/local.js',
