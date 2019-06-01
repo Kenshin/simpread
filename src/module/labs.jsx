@@ -243,7 +243,7 @@ export default class LabsOpt extends React.Component {
                                 label="纯粹模式"
                                 desc="比【增强解析模式】还要彻底优化版本，包括：字形、颜色、字号、代码段等，专治页面及不规范，如：微信订阅号，CSDN 等。"
                                 onChange={ (s)=>this.onChange(s, "read", "pure") } />
-                    <div className="sublabel">如果经常阅读代码的话，请安装 <a target="_blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码段增强</a> 包括：高亮，去重，支持 CSDN 等特殊情况的代码段</div>
+                        <div className="sublabel">如果经常阅读代码的话，请安装 <a target="_blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码段增强</a> 包括：高亮，去重，支持 CSDN 等特殊情况的代码段</div>
                     </div>
                 </div>
 
