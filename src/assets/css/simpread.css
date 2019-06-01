@@ -382,8 +382,11 @@ toc outline a.toc-outline-theme-night {
     color: #fff!important;
 }
 
+.toc-level-h1 {
+    padding-left: 5px;
+}
 .toc-level-h2 {
-    padding-left: 10px;
+    padding-left: 15px;
 }
 .toc-level-h3 {
     padding-left: 25px;
