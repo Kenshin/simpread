@@ -167,7 +167,7 @@ export default class ReadCtlbar extends React.Component {
             })
             // Add test source
             storage.current.fap && storage.Plugins( () => {
-                storage.option.plugins.forEach( id => {
+                !$.isEmptyObject( storage.plugins ) && storage.option.plugins.forEach( id => {
                     const plugin = storage.plugins[id];
                     // Add test source
                     if ( plugin.enable != false && ( plugin.trigger == true || plugin.trigger == "true" )) {
