@@ -36,6 +36,7 @@ export default class LabsOpt extends React.Component {
         model == "read" && state == "auto" && this.exclusionState( value );
         model == "read" && state == "toc"  && this.tocState( value );
         model == "read" && state == "cleanup" && this.cleanupState( value );
+        model == "option" && state == "preload" && this.lazyloadState( value );
     }
 
     changeExclusion( event ) {
@@ -48,12 +49,21 @@ export default class LabsOpt extends React.Component {
         this.props.onChange && this.props.onChange( false );
     }
 
+    changeLazyload( event ) {
+        this.props.option.lazyload = event.target.value.split("\n");
+        this.props.onChange && this.props.onChange( false );
+    }
+
     tocState( value ) {
         $( this.refs.toc ).velocity( value ? "slideDown" : "slideUp" );
     }
 
     cleanupState( value ) {
         $( this.refs.cleanup ).velocity( value ? "slideDown" : "slideUp" );
+    }
+
+    lazyloadState( value ) {
+        $( this.refs.lazyload ).velocity( value ? "slideDown" : "slideUp" );
     }
 
     exclusionState( value ) {
@@ -70,6 +80,7 @@ export default class LabsOpt extends React.Component {
         this.exclusionState( this.props.read.auto );
         this.tocState( this.props.read.toc );
         this.cleanupState( this.props.read.cleanup == undefined ? true : this.props.read.cleanup );
+        this.lazyloadState( this.props.option.preload );
     }
 
     onClick( state ) {
@@ -244,6 +255,24 @@ export default class LabsOpt extends React.Component {
                                 desc="比【增强解析模式】还要彻底优化版本，包括：字形、颜色、字号、代码段等，专治页面及不规范，如：微信订阅号，CSDN 等。"
                                 onChange={ (s)=>this.onChange(s, "read", "pure") } />
                         <div className="sublabel">如果经常阅读代码的话，请安装 <a target="_blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码段增强</a> 包括：高亮，去重，支持 CSDN 等特殊情况的代码段</div>
+                    </div>
+                    <Switch width="100%" checked={ this.props.option.preload }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB"
+                            label="是否启用预加载机制？"
+                            desc="1. 简悦的词法分析引擎采用了预加载机制，如果你觉得影响性能的话，请关闭此功能。"
+                            onChange={ (s)=>this.onChange(s, "option", "preload") } />
+                    <div className="sublabel">2. 关闭此功能后，只有进入阅读模式时才会对页面进行解析，所以经常使用简悦的用户请勿关闭它。</div>
+                    <div className="sublabel">3. 此功能的优先级比「自动进入阅读模式」高；当关闭此功能时，自动进入阅读模式将不会工作。</div>
+                    <div ref="lazyload" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>预加载排除列表</div>
+                        <div className="sublabel">加入其中后的网址将不会启用预加载功能。</div>
+                        <div className="sublabel">此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等。</div>
+                        <TextField 
+                            multi={ true } rows={8}
+                            placeholder="每行一个，支持： URL, minimatch 等。" 
+                            value={ ( this.props.option.lazyload||[] ).join( "\n" ) }
+                            onChange={ (e)=>this.changeLazyload(e) }
+                        />
                     </div>
                 </div>
 
