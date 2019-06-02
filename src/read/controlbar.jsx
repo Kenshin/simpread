@@ -179,7 +179,7 @@ export default class ReadCtlbar extends React.Component {
                         };
                     }
                 });
-                if ( $.isEmptyObject( conf.readItems.trigger.items )) {
+                if ( conf.readItems.trigger && $.isEmptyObject( conf.readItems.trigger.items )) {
                     delete conf.readItems.trigger;
                 }
             });
