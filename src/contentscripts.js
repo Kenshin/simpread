@@ -45,7 +45,7 @@ storage.Read( () => {
         });
     } else {
         bindShortcuts();
-        autoOpen();
+        preload() && autoOpen();
     }
 });
 
@@ -73,6 +73,34 @@ function blacklist() {
 }
 
 /**
+ * Preload verify
+ * 
+ * @return {boolen}
+ */
+
+function preload() {
+    let is_proload = true;
+    if ( storage.option.preload == false ) {
+        is_proload = false;
+    } else if ( storage.option.preload ) {
+        for ( const item of storage.option.lazyload ) {
+            if ( item.trim() != "" && !item.startsWith( "http" ) ) {
+                if ( location.hostname.includes( item ) ) {
+                    is_proload = false;
+                    break;
+                }
+            } else {
+                if ( location.href == item ) {
+                    is_proload = false;
+                    break;
+                }
+            }
+        }
+    }
+    return is_proload;
+}
+
+/**
  * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
@@ -87,7 +115,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            browserAction( request.value.is_update );
+            if ( preload() == false ) {
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: 0 , url: window.location.href } ));
+            } else browserAction( request.value.is_update );
             break;
         case msg.MESSAGE_ACTION.read_mode:
         case msg.MESSAGE_ACTION.browser_click:
