@@ -114,6 +114,8 @@ const name = "simpread",
         esc       : true,
         br_exit   : false,
         secret    : false,
+        preload   : true,
+        lazyload  : [],
         menu      : {
             focus : true,
             read  : true,
