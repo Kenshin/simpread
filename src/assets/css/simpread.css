@@ -189,7 +189,8 @@ sr-rd-footer-copywrite .sr-icon:hover {
 }
 
 sr-rd-footer-copywrite a,
-sr-rd-footer-copywrite a:link {
+sr-rd-footer-copywrite a:link,
+sr-rd-footer-copywrite a:visited {
     margin: 0;
     padding: 0;
 
