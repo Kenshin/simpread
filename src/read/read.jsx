@@ -25,6 +25,7 @@ const rdcls   = "simpread-read-root",
       $root   = $( "html" ),
       theme   = "simpread-theme-root";
 
+// load count,.0: call Readability. 1: call highlight 2: all failed
 let   load_count = 0;
 
 const Footer = () => {
@@ -104,78 +105,45 @@ class Read extends React.Component {
     }
 
     async componentDidMount() {
-        /*
-        if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
-            // Puread level to III,can't work this flow.
-            this.componentWillUnmount();
-            if ( ! localStorage["sr-update-site"] ) {
-                new Notify().Render({ content: "当前页面结构改变导致不匹配阅读模式，接下来请选择？", action: "更新", cancel: "高亮", callback: type => {
-                    if ( type == "action" ) {
-                        new Notify().Render( "2 秒钟后将会自动查找更新，请勿关闭此页面..." );
-                        localStorage["sr-update-site"] = true;
-                        setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.update_site, { url: location.href, site: storage.pr.current.site } )), 2000 );
-                    } else {
-                        this.props.read.highlight == true ? setTimeout( () => {
-                            Highlight().done( dom => {
-                                storage.pr.TempMode( "read", dom );
-                                Render();
-                            });
-                        }, 200 ) : new Notify().Render( `请先开启 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a> 选项！` );
-                    }
-                }});
-            } else {
-                new Notify().Render({ content: "更新后仍无法适配此页面，是否提交？", action: "是的", cancel: "取消", callback: type => {
-                    if ( type == "cancel" ) return;
-                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed" }));
-                }});
-            }
-            localStorage.removeItem( "sr-update-site" );
-        }
-        else {
-        */
-
         if ( load_count > 0 && !this.verifyContent() ) {
             return;
         }
 
-            $root
-                .addClass( "simpread-font" )
+        $root
+            .addClass( "simpread-font" )
+            .addClass( theme )
+            .find( rdclsjq )
                 .addClass( theme )
-                .find( rdclsjq )
-                    .addClass( theme )
-                    .sreffect( { opacity: 1 }, { delay: 100 })
-                    .addClass( "simpread-read-root-show" );
+                .sreffect( { opacity: 1 }, { delay: 100 })
+                .addClass( "simpread-read-root-show" );
 
-            this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
-            this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
-            this.props.read.layout     && ss.Layout( this.props.read.layout );
-            this.props.read.site.css   && this.props.read.site.css.length > 0
-                && ss.SiteCSS( this.props.read.site.css );
-            ss.Preview( this.props.read.custom );
+        this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
+        this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
+        this.props.read.layout     && ss.Layout( this.props.read.layout );
+        this.props.read.site.css   && this.props.read.site.css.length > 0
+            && ss.SiteCSS( this.props.read.site.css );
+        ss.Preview( this.props.read.custom );
 
-            storage.pr.state == "txt"          && !location.href.endsWith( ".md" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
-            storage.pr.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
+        storage.pr.state == "txt"          && !location.href.endsWith( ".md" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
+        storage.pr.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
 
-            excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-            storage.pr.Beautify( $( "sr-rd-content" ) );
-            storage.pr.Format( rdcls );
+        excludes( $("sr-rd-content"), this.props.wrapper.exclude );
+        storage.pr.Beautify( $( "sr-rd-content" ) );
+        storage.pr.Format( rdcls );
 
-            kbd.Render( $( "sr-rd-content" ));
-            tooltip.Render( rdclsjq );
-            waves.Render({ root: rdclsjq });
-            storage.Statistics( "read" );
+        kbd.Render( $( "sr-rd-content" ));
+        tooltip.Render( rdclsjq );
+        waves.Render({ root: rdclsjq });
+        storage.Statistics( "read" );
 
-            !this.props.wrapper.avatar && this.props.read.toc 
-                && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+        !this.props.wrapper.avatar && this.props.read.toc 
+            && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
 
-            loadPlugins( "read_complete" );
+        loadPlugins( "read_complete" );
 
-            // Puread level to III,can't work this flow.
-            //localStorage.removeItem( "sr-update-site" );
-
-            setTimeout( ()=>{
-                this.verifyContent();
-            }, 50 );
+        setTimeout( ()=>{
+            this.verifyContent();
+        }, 50 );
     }
 
     componentWillUnmount() {
