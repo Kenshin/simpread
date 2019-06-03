@@ -287,7 +287,7 @@ export default class PluginsOpt extends React.Component {
 
                 <div className="label">
                     <span>{ this.state.plugins.length == 0 ? "" : "已安装 " + this.state.plugins.length + " 个插件 " }</span>
-                    { this.state.plugins.length > 5 && <a target="_blank" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold' }}>过多的插件会进入阅读模式变慢，建议不要超过 5 个</a> }
+                    { this.state.plugins.length > 5 && <a target="_blank" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold' }}>过多的插件会使进入阅读模式变慢，建议不要超过 6 个</a> }
                 </div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards plugins={ this.state.plugins } onChange={ t=>this.onChange(t) } />
