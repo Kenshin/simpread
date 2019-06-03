@@ -139,7 +139,6 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 if ( type == "cancel" ) return;
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed" }));
             }});
-            localStorage.removeItem( "sr-update-site" );
             break;
         case msg.MESSAGE_ACTION.menu_whitelist:
         case msg.MESSAGE_ACTION.menu_exclusion:
