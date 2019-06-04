@@ -12,7 +12,7 @@ import {version,patch}from 'version';
  */
 
 const name = "simpread",
-    remote = "http://sr.ksria.cn/website_list_v3.json",
+    remote = "http://sr.ksria.cn/website_list_v4.json",
     origins= "http://sr.ksria.cn/website_list_origins.json",
     versions= "http://sr.ksria.cn/versions.json",
     local  = browser.extension.getURL( "website_list.json" ),
