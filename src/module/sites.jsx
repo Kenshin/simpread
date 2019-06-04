@@ -114,6 +114,7 @@ export default class SitesOpts extends React.Component {
     }
 
     origins( type ) {
+        /*
         if ( type == "origins" ) {
             storage.GetRemote( "origins", ( result, error ) => {
                 if ( error ) new Notify().Render( 2, "获取失败，请稍后重新加载。" );
@@ -124,7 +125,9 @@ export default class SitesOpts extends React.Component {
                     new Notify().Render( "官方源加载成功。" );
                 }
             });
-        } else if ( type == "import" ) {
+        } else
+        */
+        if ( type == "import" ) {
             new Notify().Render( "snackbar", "导入后会覆盖掉原来的第三方适配列表，请问是否覆盖？", "确认", () => {
                 const urls = this.props.option.origins.filter( item => {
                     return item.trim() != "" && item.trim().startsWith( "http" ) && item.trim().endsWith( ".json" )
@@ -315,7 +318,7 @@ export default class SitesOpts extends React.Component {
                     />
                     <div style={{ "display": "flex" }}>
                         <Button type="raised" text="加载第三方适配列表"
-                            width="100%" style={{ "margin": "0" }}
+                            width="100%" style={{ "display": "none", "margin": "0" }}
                             color="#fff" backgroundColor="#4CAF50"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.origins( "origins" ) } />
