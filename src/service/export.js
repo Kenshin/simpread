@@ -1330,9 +1330,9 @@ function mdWrapper( content, name, notify ) {
  */
 function md2HTML( content ) {
     const markdown  = puplugin.Plugin( "markdown" ),
-          converter = new markdown.default.Converter(),
-          html      = converter.makeHtml( content );
-    return html;
+          converter = new markdown.default.Converter();
+    converter.setOption( 'noHeaderId', true );
+    return converter.makeHtml( content );
 }
 
 let noti; // notify variable
