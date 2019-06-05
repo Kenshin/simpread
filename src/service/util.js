@@ -154,6 +154,7 @@ function clearMD( str, header = true ) {
  * Clean HTML
  * 
  * @param {string} str
+ * @return {string} optimze str
  */
 function clearHTML( str ) {
     const url  = location.href,
