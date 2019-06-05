@@ -180,14 +180,14 @@ export default class PluginsOpt extends React.Component {
         storage.option.plugins.forEach( id => {
             run.Install( id, undefined, result => {
                 if ( !result ) {
-                    new Notify().Render( 2, id + "获取失败，请稍后再试。" );
+                    new Notify().Render( 2, id + " 获取失败，请稍后再试。" );
                     return;
                 }
                 count++;
-                    if ( storage.plugins[id].version != result.version ) {
-                        storage.plugins[result.id] = result;
-                        is_update = true;
-                    }
+                if ( storage.plugins[id].version != result.version ) {
+                    storage.plugins[result.id] = result;
+                    is_update = true;
+                }
                 count == storage.option.plugins.length && complete();
             });
         });
