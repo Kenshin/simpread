@@ -177,9 +177,8 @@ function action( type, title, desc, content ) {
                             new Notify().Render( "保存失败，正在尝试优化结构再次保存，请稍等..." );
                             exp.MDWrapper( util.ClearMD( content, false ), undefined, new Notify() ).done( result => {
                                 const md   = util.MD2ENML( result ),
-                                      html = util.HTML2ENML( exp.MD2HTML( result ), window.location.href );
-                                console.log( "asdfasdfasdf", html )
-                                evernote.Add( title, html, ( result, error ) => {
+                                      tmpl = util.ClearHTML( exp.MD2HTML( result ));
+                                evernote.Add( title, tmpl, ( result, error ) => {
                                     exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
                                     if ( error == "error" ) {
                                         new Notify().Render({ content: "导出失败，是否以 Markdown 格式保存？", action: "是的", cancel: "取消", callback: action => {
