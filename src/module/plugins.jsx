@@ -181,7 +181,6 @@ export default class PluginsOpt extends React.Component {
             run.Install( id, undefined, result => {
                 if ( !result ) {
                     new Notify().Render( 2, id + " 获取失败，请稍后再试。" );
-                    return;
                 }
                 count++;
                 if ( storage.plugins[id].version != result.version ) {
