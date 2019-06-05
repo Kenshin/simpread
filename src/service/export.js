@@ -9,6 +9,7 @@ import Instapaper from 'instapaper';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
+import * as puplugin from 'puplugin';
 
 /**
  * Create PNG
@@ -1322,6 +1323,18 @@ function mdWrapper( content, name, notify ) {
     return dtd;
 }
 
+/**
+ * Markdown to HTML
+ * 
+ * @param {string} content
+ */
+function md2HTML( content ) {
+    const markdown  = puplugin.Plugin( "markdown" ),
+          converter = new markdown.default.Converter(),
+          html      = converter.makeHtml( content );
+    return html;
+}
+
 let noti; // notify variable
 
 /**
@@ -1391,6 +1404,7 @@ export {
     markdown as Markdown,
     download as Download,
     prueDownload as PrDownload,
+    md2HTML  as MD2HTML,
     unlink   as Unlink,
     name     as Name,
     dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav,
