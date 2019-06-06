@@ -354,3 +354,8 @@ function analytics() {
     ga('create', 'UA-405976-12', 'auto');
     ga('send', 'pageview');
 }
+
+/**
+ * Uninstall
+ */
+browser.runtime.setUninstallURL( storage.service + "/uninstall" );
