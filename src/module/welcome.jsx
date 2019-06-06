@@ -265,7 +265,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                        { !first &&
+                    { !first &&
                             <div className="carousel-item" id="5005">
                                 <section style={ style.section }>
                                 <img src="http://sr.ksria.cn/welcome-puread-ii.png" style={ style.img }/>
