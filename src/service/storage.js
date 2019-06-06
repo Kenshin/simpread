@@ -153,6 +153,8 @@ const name = "simpread",
             "gdrive"     : 0,
             "kindle"     : 0,
             "temp"       : 0,
+            "yuque"      : 0,
+            "jianguo"    : 0,
         }
     },
     user   = {
