@@ -48,6 +48,7 @@ storage.Read( () => {
             }, ver.FixSubver( ver.patch, storage.simpread ));
     }
     menu.CreateAll();
+    uninstall();
 });
 
 /**
@@ -358,4 +359,6 @@ function analytics() {
 /**
  * Uninstall
  */
-browser.runtime.setUninstallURL( storage.service + "/uninstall" );
+function uninstall() {
+    browser.runtime.setUninstallURL( storage.option.uninstall ? storage.service + "/uninstall" : "" );
+}
