@@ -116,6 +116,7 @@ const name = "simpread",
         secret    : false,
         preload   : true,
         lazyload  : [],
+        uninstall : true,
         menu      : {
             focus : true,
             read  : true,
