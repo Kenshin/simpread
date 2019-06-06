@@ -123,6 +123,11 @@ export default class LabsOpt extends React.Component {
                             label="保存配置到 Dropbox ？"
                             desc="注意：默认（已勾选状态）保存到 Dropbox ；选否后（非勾选状态）保存到 【坚果云】。"
                             onChange={ (s)=>this.onChange(s, "option", "save_at") } />
+                    <Switch width="100%" checked={ this.props.option.uninstall ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="删除后是否给我反馈？"
+                            desc="建议开启此选项，简悦不会知道你是谁，但你可以帮助简悦变得更好。"
+                            onChange={ (s)=>this.onChange(s, "option", "uninstall") } />
                 </div>
 
                 <div className="label">右键菜单</div>
