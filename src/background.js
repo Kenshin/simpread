@@ -48,7 +48,7 @@ storage.Read( () => {
             }, ver.FixSubver( ver.patch, storage.simpread ));
     }
     menu.CreateAll();
-    uninstall();
+    setTimeout( ()=>uninstall(), 100 );
 });
 
 /**
