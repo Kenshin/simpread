@@ -321,7 +321,6 @@ function bubbles() {
     storage.Notice( result => {
         if ( $.isEmptyObject( result ) ) {
             storage.notice.latest = 0;
-            storage.Write();
         }
         $.get( storage.notice_service.latest, result => {
             console.log( "notice latest id ", result )
