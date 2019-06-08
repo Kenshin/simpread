@@ -141,8 +141,9 @@ function vernotify( first ) {
             watch.SendMessage( "version", true );
             loadState = { first: true, update: true };
             welcomeRender( false, version );
-            // option.origins rework
+            /////////////////////////
             // hard code
+            // option.origins rework
             storage.option.origins = storage.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
             if ( storage.option.origins.length > 0 ) {
                 new Notify().Render( `检测到你曾经修改过第三方适配源，请重新导入，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=重新导入">请看这里</a>`, "确认", () => {
@@ -151,6 +152,7 @@ function vernotify( first ) {
                     mainRender( idx );
                 });
             }
+            /////////////////////////
         }
         website_sync = true;
         browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });
