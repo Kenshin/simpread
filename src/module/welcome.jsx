@@ -265,7 +265,7 @@ class Welcome extends React.Component {
                             </section>
                         </div> }
 
-                        { !first &&
+                    { !first &&
                             <div className="carousel-item" id="5005">
                                 <section style={ style.section }>
                                 <img src="http://sr.ksria.cn/welcome-puread-ii.png" style={ style.img }/>
@@ -277,6 +277,17 @@ class Welcome extends React.Component {
                                     </div>
                                 </section>
                             </div> }
+
+                    { (( !first && version == "1.1.3" ) || version == "all" ) && 
+                        <div className="carousel-item" id="1.1.3">
+                            <section style={ style.section }>
+                                <img src="http://sr.ksria.cn/welcome-plugins.png" style={ style.img }/>
+                                <h2 style={ style.h2 }>语雀，坚果云，更支持 WebDAV</h2>
+                                <div style={ style.desc }>
+                                    语雀，坚果云，更支持 WebDAV
+                                </div>
+                            </section>
+                        </div> }
 
                     <div className="carousel-item" id="end">
                         <section style={ style.section }>

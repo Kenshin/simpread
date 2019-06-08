@@ -2,12 +2,14 @@ console.log( "=== simpread export load ===" )
 
 import domtoimage from 'dom2image';
 import FileSaver  from 'filesaver';
-import toMarkdown from 'markdown';
+import Turndown   from 'markdown';
+import mdgfm      from 'mdgfm';
 import EpubPress  from 'epubpress';
 import Instapaper from 'instapaper';
 
 import * as msg   from 'message';
 import {browser}  from 'browser';
+import * as puplugin from 'puplugin';
 
 /**
  * Create PNG
@@ -43,7 +45,19 @@ function pdf() {
  */
 function markdown( data, name, callback ) {
     try {
-        const md     = toMarkdown( data, { gfm: true }),
+        const turndownService = new Turndown(),
+              gfm             = mdgfm.gfm,
+              tables          = mdgfm.tables,
+              strikethrough   = mdgfm.strikethrough,
+              codeBlock       = mdgfm.highlightedCodeBlock;
+        turndownService.use([ gfm, tables, strikethrough, codeBlock ]);
+        turndownService.addRule( 'pre', {
+            filter: [ 'pre' ],
+            replacement: content => {
+                return '\n\n```\n' + content + '\n```\n\n'
+            }
+        });
+        const md     = turndownService.turndown( data ),
               base64 = "data:text/plain;charset=utf-8," + encodeURIComponent( md );
         name ? download( base64, name ) : callback( md );
     } catch( error ) {
@@ -1309,6 +1323,18 @@ function mdWrapper( content, name, notify ) {
     return dtd;
 }
 
+/**
+ * Markdown to HTML
+ * 
+ * @param {string} content
+ */
+function md2HTML( content ) {
+    const markdown  = puplugin.Plugin( "markdown" ),
+          converter = new markdown.default.Converter();
+    converter.setOption( 'noHeaderId', true );
+    return converter.makeHtml( content );
+}
+
 let noti; // notify variable
 
 /**
@@ -1378,6 +1404,7 @@ export {
     markdown as Markdown,
     download as Download,
     prueDownload as PrDownload,
+    md2HTML  as MD2HTML,
     unlink   as Unlink,
     name     as Name,
     dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav,

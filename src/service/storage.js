@@ -12,7 +12,7 @@ import {version,patch}from 'version';
  */
 
 const name = "simpread",
-    remote = "http://sr.ksria.cn/website_list_v3.json",
+    remote = "http://sr.ksria.cn/website_list_v4.json",
     origins= "http://sr.ksria.cn/website_list_origins.json",
     versions= "http://sr.ksria.cn/versions.json",
     local  = browser.extension.getURL( "website_list.json" ),
@@ -46,7 +46,7 @@ const name = "simpread",
     },
     read   = {
         version   : "2017-03-16",
-        progress  : true,
+        progress  : false,
         auto      : false,
         controlbar: true,
         fap       : true,
@@ -114,6 +114,9 @@ const name = "simpread",
         esc       : true,
         br_exit   : false,
         secret    : false,
+        preload   : true,
+        lazyload  : [],
+        uninstall : true,
         menu      : {
             focus : true,
             read  : true,
@@ -127,6 +130,7 @@ const name = "simpread",
         origins   : [],
         blacklist : [
             "google.com",
+            "youtube.com"
         ],
         plugins   : [], // plugin id, e.g. kw36BtjGu0
     },
@@ -150,6 +154,8 @@ const name = "simpread",
             "gdrive"     : 0,
             "kindle"     : 0,
             "temp"       : 0,
+            "yuque"      : 0,
+            "jianguo"    : 0,
         }
     },
     user   = {
@@ -195,7 +201,7 @@ let current  = {},
     },
     plugins  = {},
     secret   = {
-        version   : "2017-11-22",
+        version   : "2019-06-08",
         "dropbox" : {
             "access_token": ""
         },

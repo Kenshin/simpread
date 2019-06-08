@@ -180,14 +180,13 @@ export default class PluginsOpt extends React.Component {
         storage.option.plugins.forEach( id => {
             run.Install( id, undefined, result => {
                 if ( !result ) {
-                    new Notify().Render( 2, id + "获取失败，请稍后再试。" );
-                    return;
+                    new Notify().Render( 2, id + " 获取失败，请稍后再试。" );
                 }
                 count++;
-                    if ( storage.plugins[id].version != result.version ) {
-                        storage.plugins[result.id] = result;
-                        is_update = true;
-                    }
+                if ( storage.plugins[id].version != result.version ) {
+                    storage.plugins[result.id] = result;
+                    is_update = true;
+                }
                 count == storage.option.plugins.length && complete();
             });
         });
@@ -214,11 +213,9 @@ export default class PluginsOpt extends React.Component {
             storage.option.plugins.forEach( id => {
                 run.Install( id, undefined, result => {
                     if ( !result ) {
-                        new Notify().Render( 2, id + "获取失败，请稍后再试。" );
-                        return;
-                    }
+                        new Notify().Render( 2, id + " 获取失败，请稍后再试。" );
+                    } else storage.plugins[result.id] = result;
                     count++;
-                    storage.plugins[result.id] = result;
                     count == storage.option.plugins.length && complete();
                 });
             });
@@ -285,7 +282,10 @@ export default class PluginsOpt extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">已安装</div>
+                <div className="label">
+                    <span>{ this.state.plugins.length == 0 ? "" : "已安装 " + this.state.plugins.length + " 个插件 " }</span>
+                    { this.state.plugins.length > 5 && <a target="_blank" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold' }}>过多的插件会使进入阅读模式变慢，建议不要超过 6 个</a> }
+                </div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards plugins={ this.state.plugins } onChange={ t=>this.onChange(t) } />
                 </div>

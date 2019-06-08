@@ -17,7 +17,7 @@ const write = ( callback ) => {
         console.log( "current notice is ", storage.notice )
         watch.SendMessage( "option", true );
         callback && callback();
-    }, storage.simpread );
+    });
 }
 
 export default class Notice extends React.Component {

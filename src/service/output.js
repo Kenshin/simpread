@@ -174,18 +174,29 @@ function action( type, title, desc, content ) {
                     evernote.Add( title, util.HTML2ENML( content, window.location.href ), ( result, error ) => {
                         exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
                         if ( error == "error" ) {
-                            new Notify().Render({ content: "导出失败，是否以 Markdown 格式保存？", action: "是的", cancel: "取消", callback: action => {
-                                if ( action == "cancel" ) return;
-                                new Notify().Render({ content: "转换为 Markdown 并保存中，请稍等...", delay: 2000 } );
-                                exp.MDWrapper( util.ClearMD( content, false ), undefined, new Notify() ).done( result => {
-                                    content = util.MD2ENML( result );
-                                    service( type );
+                            new Notify().Render( "保存失败，正在尝试优化结构再次保存，请稍等..." );
+                            exp.MDWrapper( util.ClearMD( content, false ), undefined, new Notify() ).done( result => {
+                                const md   = util.MD2ENML( result ),
+                                      tmpl = util.ClearHTML( exp.MD2HTML( result ));
+                                evernote.Add( title, tmpl, ( result, error ) => {
+                                    exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
+                                    if ( error == "error" ) {
+                                        new Notify().Render({ content: "导出失败，是否以 Markdown 格式保存？", action: "是的", cancel: "取消", callback: action => {
+                                            if ( action == "cancel" ) return;
+                                            new Notify().Render({ content: "转换为 Markdown 并保存中，请稍等...", delay: 2000 } );
+                                            evernote.Add( title, util.HTML2ENML( md, window.location.href ), ( result, error ) => {
+                                                exp.svcCbWrapper( result, error, evernote.name, type, new Notify() );
+                                                if ( error == "error" ) {
+                                                    new Notify().Render({ content: `转换后保存失败，是否提交当前站点？`, action: "是的", cancel: "取消", callback: type => {
+                                                        if ( type == "cancel" ) return;
+                                                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: {}, uid: storage.user.uid, type: "evernote" }));
+                                                    }});
+                                                }
+                                            });
+                                        }});
+                                    }
                                 });
-                            }});
-                            new Notify().Render({ content: `此功能为实验性功能，是否提交当前站点？`, action: "是的", cancel: "取消", callback: type => {
-                                if ( type == "cancel" ) return;
-                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "evernote" }));
-                            }});
+                            });
                         }
                     });
                     break;

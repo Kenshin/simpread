@@ -48,6 +48,7 @@ storage.Read( () => {
             }, ver.FixSubver( ver.patch, storage.simpread ));
     }
     menu.CreateAll();
+    setTimeout( ()=>uninstall(), 100 );
 });
 
 /**
@@ -353,4 +354,11 @@ function analytics() {
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-405976-12', 'auto');
     ga('send', 'pageview');
+}
+
+/**
+ * Uninstall
+ */
+function uninstall() {
+    browser.runtime.setUninstallURL( storage.option.uninstall ? storage.service + "/uninstall" : "" );
 }

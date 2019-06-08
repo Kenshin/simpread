@@ -138,6 +138,12 @@ export default class ReadCtlbar extends React.Component {
             if ( storage.current.fap ) {
                 delete conf.readItems.exit;
                 delete conf.readItems.option.items.setting;
+                delete conf.readItems.fontfamily;
+                delete conf.readItems.fontsize;
+                delete conf.readItems.layout;
+                delete conf.readItems.theme;
+            } else {
+                delete conf.readItems.trigger;
             }
             if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
                 delete conf.readItems.download;
@@ -160,8 +166,8 @@ export default class ReadCtlbar extends React.Component {
                 });
             })
             // Add test source
-            storage.Plugins( () => {
-                storage.option.plugins.forEach( id => {
+            storage.current.fap && storage.Plugins( () => {
+                !$.isEmptyObject( storage.plugins ) && storage.option.plugins.forEach( id => {
                     const plugin = storage.plugins[id];
                     // Add test source
                     if ( plugin.enable != false && ( plugin.trigger == true || plugin.trigger == "true" )) {
@@ -173,7 +179,7 @@ export default class ReadCtlbar extends React.Component {
                         };
                     }
                 });
-                if ( $.isEmptyObject( conf.readItems.trigger.items )) {
+                if ( conf.readItems.trigger && $.isEmptyObject( conf.readItems.trigger.items )) {
                     delete conf.readItems.trigger;
                 }
             });
