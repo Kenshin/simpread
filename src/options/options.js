@@ -3,9 +3,11 @@ console.log( "==== simpread options page load ====" )
 import '../assets/css/options_page.css';
 import '../assets/css/option.css';
 import 'notify_css';
+import 'intro_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
+import intro      from 'intro';
 
 import Tabs       from 'tabs';
 import * as waves from 'waves';
