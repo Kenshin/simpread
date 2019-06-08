@@ -18,6 +18,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.1.0", "Sat Dec 23 2017 15:09:30 GMT+0800 (CST)" ],
           [ "1.1.1", "Mon Jun 11 2018 15:10:12 GMT+0800 (CST)" ],
           [ "1.1.2", "Tue Jun 19 2018 14:15:12 GMT+0800 (CST)" ],
+          [ "1.1.3", "Thu Jun 06 2019 15:47:44 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -30,6 +31,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.1.0", "新增「站点编辑器，站点适配源，站点管理器等」，" ],
           [ "1.1.1", "新增「黑名单，全新的控制栏面板，更丰富的中文定制化，无障碍阅读等」，" ],
           [ "1.1.2", "新增「插件中心，站点集市等」，" ],
+          [ "1.1.3", "新增「通知中心，支持语雀，坚果云，预加载机制，增强插件 API 等」，" ],
     ]);
 
 /**
@@ -155,6 +157,24 @@ function Verify( curver, data ) {
 
     if ( curver == "1.1.2" ) {
         data.patch != sub_ver && FixSubver( sub_ver, data );
+    }
+
+    if ( curver == "1.1.2" ) {
+        data.option.save_at   = "dropbox";
+        data.option.notice    = true;
+        data.option.preload   = true;
+        data.option.lazyload  = [];
+        data.option.uninstall = true;
+
+        data.statistics.service.yuque   = 0;
+        data.statistics.service.jianguo = 0;
+
+        data.notice = { "latest": 0, "read": [] };
+
+        data.option.blacklist.findIndex(item=>item.indexOf("youtube.com") > 0) < 0 && data.option.blacklist.push( "youtube.com" )
+
+        data.patch = 0;
+        curver = "1.1.3";
     }
 
     /*
