@@ -238,6 +238,8 @@ const webpack = require( 'webpack' ),
           webdav     : __dirname + '/src/vender/webdav.js',
           markdown   : __dirname + '/src/vender/turndown/turndown.js',
           mdgfm      : __dirname + '/src/vender/turndown/turndown-plugin-gfm.js',
+          intro      : __dirname + '/src/vender/intro/intro.min.js',
+          intro_css  : __dirname + '/src/vender/intro/intro.min.css',
 
           util       : __dirname + '/src/service/util.js',
           local      : __dirname + '/src/service/local.js',
