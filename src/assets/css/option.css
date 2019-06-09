@@ -153,11 +153,11 @@ sr-opt-theme[sr-type="active"] {
  */
 .bubbles.help {
     right: 24px;
-    background-color: #16666f;
+    background-color: #607D8B;
 }
 
 .help:hover {
-    background-color: rgba(22, 102, 111, .8);
+    background-color: rgba(96, 125, 139, .8);
 }
 
 @keyframes popup {
@@ -172,6 +172,92 @@ sr-opt-theme[sr-type="active"] {
         -webkit-transform: translateY(0);
         transform: translateY(0)
     }
+}
+
+/**
+ * Guide
+ */
+.guide-bg {
+    position: fixed;
+    right: 10px;
+    bottom: 90px;
+
+    animation-name: popup;
+    animation-duration: 1s;
+
+    z-index: 2147483647;
+}
+
+.guide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+
+    width: 350px;
+    height: 400px;
+
+    background-color: #F5F6F6;
+
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .26);
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.guide .title,
+.guide .subtitle {
+    height: 48px;
+    line-height: 48px;
+
+    color: #fff;
+    background-color: #26d07c;
+
+    font-size: 17px;
+    text-align: center;
+
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.guide .title {
+    font-weight: bold;
+}
+
+.guide .subtitle {
+    font-size: 15px;
+    height: 71px;
+}
+
+.guide .group {
+    margin-top: -30px;
+    padding: 10px;
+}
+
+guid-card {
+    display: flex;
+
+    margin-bottom: 10px;
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(193, 203, 212, 0.7) 0px 0px 0px 1px inset, rgb(193, 203, 212) 0px -1px 0px 0px inset;
+    transition: all 550ms cubic-bezier(0.23, 1, 0.32, 1) 0s;
+
+    cursor: pointer;
+}
+
+guid-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(193, 203, 212, 0.7) 0px 0px 0px 1px inset, rgb(193, 203, 212) 0px -1px 0px 0px inset;
+    transform: translate(0px, -2px);
+}
+
+guid-card-tips span {
+    font-size: 14px;
+    color: #0B242F;
 }
 
 

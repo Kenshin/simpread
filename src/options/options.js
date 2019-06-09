@@ -34,6 +34,7 @@ import AccountOps from 'accountopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
+import Guide      from 'guide';
 
 import PureRead   from 'puread';
 
@@ -359,6 +360,9 @@ function help() {
     `;
     $( "body" ).append( tmpl );
     $( "body" ).on( "click", ".help", event => {
-
+        if ( $(".guide-bg").length == 0 ) {
+            $( "body" ).append( `<div class="guide-bg"></div>` );
+            ReactDOM.render( <Guide />, $( ".guide-bg" )[0] );
+        }
     });
 }
