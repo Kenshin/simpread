@@ -151,7 +151,7 @@ sr-opt-theme[sr-type="active"] {
 /**
  * Help bubbles
  */
- .bubbles.help {
+.bubbles.help {
     right: 24px;
     background-color: #16666f;
 }
