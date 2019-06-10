@@ -41,6 +41,14 @@ export default class Guide extends React.Component {
         ]
     };
 
+    static propsType = {
+        tips: React.PropTypes.array,
+    };
+
+    state = {
+        tips: [],
+    }
+
     onClick( event, idx, url ) {
         if ( url != "#" ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
@@ -56,19 +64,23 @@ export default class Guide extends React.Component {
                 url   : storage.help_service,
                 method: "GET",
             }).done( ( result, textStatus, jqXHR ) => {
-                result.tips = [];
                 if ( result && result.tips.length == 0 ) {
                     $( ".guide .loading" ).html( '<span>没有新的消息</span>' ).css({"animation": ".1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popup"});
                     setTimeout( ()=> $( ".guide .loading" ).css({"animation": "1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popclose"}), 500 );
                     setTimeout( ()=> $( ".guide .loading" ).fadeOut(), 300 );
                 } else {
-                    // TO-DO
+                    this.setState({tips: this.props.tips.concat( result.tips ) });
+                    $( ".guide .loading" ).remove();
                 }
             }).fail( error => {
                 $( ".guide .loading" ).html( `<i class="fas fa-bug" style="color:#FF5252;"></i><span style="color:#FF5252;">发生了一些错误，请稍后再试。</span>` )
             });
         };
         setTimeout( ajax, 1000 );
+    }
+
+    componentWillMount() {
+        this.setState({ tips: this.props.tips });
     }
 
     componentDidMount() {
@@ -86,7 +98,7 @@ export default class Guide extends React.Component {
     }
 
     render() {
-        const tips = this.props.tips.map( item => {
+        const tips = this.state.tips.map( item => {
             return (
                 <guid-card id={ item.idx } class="md-waves-effect" onClick={ e=>this.onClick( e, item.idx, item.url ) }>
                     <guid-card-tips>
