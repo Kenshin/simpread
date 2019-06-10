@@ -2,6 +2,36 @@ console.log( "===== simpread option guide load =====" )
 
 export default class Guide extends React.Component {
 
+    static defaultProps = {
+        tips: [
+            {
+                idx: 0,
+                name: '说明文档请看这里',
+                icon: '<i class="fas fa-info-circle"></i>'
+            },
+            {
+                idx: 1,
+                name: '新手入门可以看这篇文章',
+                icon: '<i class="fas fa-file-word"></i>'
+            },
+            {
+                idx: 2,
+                name: '请通过 Github issues 提问',
+                icon: '<i class="fas fa-bug"></i>'
+            },
+            {
+                idx: 3,
+                name: '查看当前版本新增功能',
+                icon: '<i class="fas fa-folder-open"></i>'
+            },
+            {
+                idx: 4,
+                name: '查看当前页的功能描述',
+                icon: '<i class="fas fa-binoculars"></i>'
+            },
+        ]
+    };
+
     componentDidMount() {
         $( ".guide" ).scroll( event => {
             if ( $( event.target ).scrollTop() > 35 ) {
@@ -17,6 +47,16 @@ export default class Guide extends React.Component {
     }
 
     render() {
+        const tips = this.props.tips.map( item => {
+            return (
+                <guid-card id={ item.idx }>
+                    <guid-card-tips>
+                        <span dangerouslySetInnerHTML={{__html: item.icon }} ></span>
+                        <span>{ item.name }</span>
+                    </guid-card-tips>
+                </guid-card>
+            )
+        });
         return (
             <div className="guide">
                 <div className="title">
@@ -26,36 +66,7 @@ export default class Guide extends React.Component {
                     <span>快捷答案</span>
                 </div>
                 <div className="group">
-                    <guid-card>
-                        <guid-card-tips>
-                            <i className="fas fa-info-circle"></i>
-                            <span>说明文档请看这里</span>
-                        </guid-card-tips>
-                    </guid-card>
-                    <guid-card>
-                        <guid-card-tips>
-                            <i className="fas fa-file-word"></i>
-                            <span>新手入门可以看这篇文章</span>
-                        </guid-card-tips>
-                    </guid-card>
-                    <guid-card>
-                        <guid-card-tips>
-                            <i className="fas fa-bug"></i>
-                            <span>请通过 Github issues 提问</span>
-                        </guid-card-tips>
-                    </guid-card>
-                    <guid-card>
-                        <guid-card-tips>
-                            <i className="fas fa-folder-open"></i>
-                            <span>查看当前版本新增功能</span>
-                        </guid-card-tips>
-                    </guid-card>
-                    <guid-card>
-                        <guid-card-tips>
-                            <i className="fas fa-binoculars"></i>
-                            <span>查看当前页的功能描述</span>
-                        </guid-card-tips>
-                    </guid-card>
+                    { tips }
                 </div>
             </div>
         )
