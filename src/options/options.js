@@ -7,7 +7,6 @@ import 'intro_css';
 
 import Velocity   from 'velocity';
 import Notify     from 'notify';
-import intro      from 'intro';
 
 import Tabs       from 'tabs';
 import * as waves from 'waves';
@@ -34,7 +33,7 @@ import AccountOps from 'accountopt';
 import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
-import Guide      from 'guide';
+import * as guide from 'guide';
 
 import PureRead   from 'puread';
 
@@ -364,7 +363,7 @@ function help() {
     $( "body" ).on( "click", ".help", event => {
         if ( $(".guide-bg").length == 0 ) {
             $( "body" ).append( `<div class="guide-bg"></div>` );
-            ReactDOM.render( <Guide />, $( ".guide-bg" )[0] );
+            ReactDOM.render( <guide.Guide />, $( ".guide-bg" )[0] );
             $( ".help i" ).html( close_icon ).css({ "animation": ".1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popup" });
         } else {
             ReactDOM.unmountComponentAtNode( $( ".guide-bg" )[0] );

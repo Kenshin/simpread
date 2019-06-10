@@ -4,7 +4,7 @@ import {browser}          from 'browser';
 import * as msg           from 'message';
 import {storage}          from 'storage';
 
-export default class Guide extends React.Component {
+class Guide extends React.Component {
 
     static defaultProps = {
         tips: [
@@ -119,4 +119,8 @@ export default class Guide extends React.Component {
             </div>
         )
     }
+}
+
+export {
+    Guide,
 }
