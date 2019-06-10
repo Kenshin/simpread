@@ -65,7 +65,7 @@ export default class Guide extends React.Component {
     render() {
         const tips = this.props.tips.map( item => {
             return (
-                <guid-card id={ item.idx } onClick={ e=>this.onClick( e, item.idx, item.url ) }>
+                <guid-card id={ item.idx } class="md-waves-effect" onClick={ e=>this.onClick( e, item.idx, item.url ) }>
                     <guid-card-tips>
                         <span dangerouslySetInnerHTML={{__html: item.icon }} ></span>
                         <span>{ item.name }</span>
