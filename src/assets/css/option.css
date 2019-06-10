@@ -222,12 +222,29 @@ sr-opt-theme[sr-type="active"] {
 }
 
 .guide .title {
+    position: absolute;
+
+    left: 0;
+    right: 15px;
+
+    display: flex;
+    justify-content: center;
     font-weight: bold;
+
+    z-index: 2;
 }
 
 .guide .subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-top: 48px;
+
+    min-height: 55px;
+    line-height: initial;
+
     font-size: 15px;
-    height: 71px;
 }
 
 .guide .group {

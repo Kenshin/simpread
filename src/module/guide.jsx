@@ -6,7 +6,9 @@ export default class Guide extends React.Component {
         return (
             <div className="guide">
                 <div className="title">帮助中心</div>
-                <div className="subtitle">快捷答案</div>
+                <div className="subtitle">
+                    <span>快捷答案</span>
+                </div>
                 <div className="group">
                     <guid-card>
                         <guid-card-tips>
