@@ -1,5 +1,8 @@
 console.log( "===== simpread option guide load =====" )
 
+import {browser}          from 'browser';
+import * as msg           from 'message';
+
 export default class Guide extends React.Component {
 
     static defaultProps = {
@@ -7,30 +10,43 @@ export default class Guide extends React.Component {
             {
                 idx: 0,
                 name: '说明文档请看这里',
-                icon: '<i class="fas fa-info-circle"></i>'
+                icon: '<i class="fas fa-info-circle"></i>',
+                url: "http://ksria.com/simpread/docs"
             },
             {
                 idx: 1,
                 name: '新手入门可以看这篇文章',
-                icon: '<i class="fas fa-file-word"></i>'
+                icon: '<i class="fas fa-file-word"></i>',
+                url: "http://kenshin.wang/blog/#/posts/13"
             },
             {
                 idx: 2,
                 name: '请通过 Github issues 提问',
-                icon: '<i class="fas fa-bug"></i>'
+                icon: '<i class="fas fa-bug"></i>',
+                url: "https://github.com/Kenshin/simpread/issues/new"
             },
             {
                 idx: 3,
                 name: '查看当前版本新增功能',
-                icon: '<i class="fas fa-folder-open"></i>'
+                icon: '<i class="fas fa-folder-open"></i>',
+                url: "#"
             },
             {
                 idx: 4,
                 name: '查看当前页的功能描述',
-                icon: '<i class="fas fa-binoculars"></i>'
+                icon: '<i class="fas fa-binoculars"></i>',
+                url: "#"
             },
         ]
     };
+
+    onClick( event, idx, url ) {
+        if ( url != "#" ) {
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
+        } else {
+            // TO-DO
+        }
+    }
 
     componentDidMount() {
         $( ".guide" ).scroll( event => {
@@ -49,7 +65,7 @@ export default class Guide extends React.Component {
     render() {
         const tips = this.props.tips.map( item => {
             return (
-                <guid-card id={ item.idx }>
+                <guid-card id={ item.idx } onClick={ e=>this.onClick( e, item.idx, item.url ) }>
                     <guid-card-tips>
                         <span dangerouslySetInnerHTML={{__html: item.icon }} ></span>
                         <span>{ item.name }</span>
