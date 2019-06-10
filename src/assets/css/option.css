@@ -186,6 +186,17 @@ sr-opt-theme[sr-type="active"] {
     }
 }
 
+@keyframes popclose {
+    0% {
+        opacity: 1;
+        transform: translateY(0px)
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(20px)
+    }
+}
 /**
  * Guide
  */
@@ -261,6 +272,23 @@ sr-opt-theme[sr-type="active"] {
     line-height: initial;
 
     font-size: 15px;
+}
+
+.guide .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    font-weight: 500;
+    font-size: 13px;
+
+    transition : opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.guide .loading span {
+    padding: 5px;
 }
 
 .guide .group {

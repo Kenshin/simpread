@@ -2,6 +2,7 @@ console.log( "===== simpread option guide load =====" )
 
 import {browser}          from 'browser';
 import * as msg           from 'message';
+import {storage}          from 'storage';
 
 export default class Guide extends React.Component {
 
@@ -48,6 +49,28 @@ export default class Guide extends React.Component {
         }
     }
 
+    onLoadingClick() {
+        $( ".guide .loading" ).html( `<svg width="20" height="20" viewBox="0 0 38 38" stroke="#26d07c"> <g fill="none" fill-rule="evenodd"> <g transform="translate(1 1)" stroke-width="2"> <circle stroke-opacity=".5" cx="18" cy="18" r="18"/> <path d="M36 18c0-9.94-8.06-18-18-18"> <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/> </path> </g> </g></svg>` );
+        const ajax = () => {
+            $.ajax({
+                url   : storage.help_service,
+                method: "GET",
+            }).done( ( result, textStatus, jqXHR ) => {
+                result.tips = [];
+                if ( result && result.tips.length == 0 ) {
+                    $( ".guide .loading" ).html( '<span>没有新的消息</span>' ).css({"animation": ".1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popup"});
+                    setTimeout( ()=> $( ".guide .loading" ).css({"animation": "1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popclose"}), 500 );
+                    setTimeout( ()=> $( ".guide .loading" ).fadeOut(), 300 );
+                } else {
+                    // TO-DO
+                }
+            }).fail( error => {
+                $( ".guide .loading" ).html( `<i class="fas fa-bug" style="color:#FF5252;"></i><span style="color:#FF5252;">发生了一些错误，请稍后再试。</span>` )
+            });
+        };
+        setTimeout( ajax, 1000 );
+    }
+
     componentDidMount() {
         $( ".guide" ).scroll( event => {
             if ( $( event.target ).scrollTop() > 35 ) {
@@ -80,6 +103,7 @@ export default class Guide extends React.Component {
                 <div className="group">
                     { tips }
                 </div>
+                <div className="loading" onClick={ ()=>this.onLoadingClick() }><span className="md-waves-effect">加载更多</span></div>
             </div>
         )
     }
