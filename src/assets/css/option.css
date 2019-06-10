@@ -174,6 +174,18 @@ sr-opt-theme[sr-type="active"] {
     }
 }
 
+@keyframes popdown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
 /**
  * Guide
  */
@@ -234,6 +246,10 @@ sr-opt-theme[sr-type="active"] {
     z-index: 2;
 }
 
+.guide .title span {
+    animation: .1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popdown;
+}
+
 .guide .subtitle {
     display: flex;
     justify-content: center;
@@ -273,10 +289,10 @@ guid-card:hover {
 }
 
 guid-card-tips span {
+    margin-left: 5px;
     font-size: 14px;
     color: #0B242F;
 }
-
 
 /*
 opacity {
