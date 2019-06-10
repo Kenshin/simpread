@@ -437,6 +437,15 @@ class Storage {
     }
 
     /**
+     * Get help service url
+     * 
+     * @return {string} url
+     */
+    get help_service() {
+        return "http://sr.ksria.cn/help_tips.json";
+    }
+
+    /**
      * Get simpread object from chrome storage
      * 
      * @param {function} callback
