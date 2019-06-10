@@ -59,12 +59,8 @@ export default class Guide extends React.Component {
         });
         return (
             <div className="guide">
-                <div className="title">
-                    <span>帮助中心</span>
-                </div>
-                <div className="subtitle">
-                    <span>快捷答案</span>
-                </div>
+                <div className="title"><span>帮助中心</span></div>
+                <div className="subtitle"><span>快捷答案</span></div>
                 <div className="group">
                     { tips }
                 </div>
