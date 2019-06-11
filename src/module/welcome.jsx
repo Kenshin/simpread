@@ -327,10 +327,10 @@ class Welcome extends React.Component {
 }
 
 /**
- * Exit()
+ * Exit
  */
 function exit() {
-    $( welcbgclsjq ).velocity({ opacity: 0 }, { complete: ()=>{
+    $( welcbgclsjq ).velocity({ opacity: 0 }, { complete: () => {
         ReactDOM.unmountComponentAtNode( $(welcbgclsjq)[0] );
     }});
 }
