@@ -144,6 +144,20 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                     intro: '这是用户的已安装的全部插件，在这里进行管理，包括：禁用， 删除，更新，查看 等操作。<br>同样，在这里安装的插件可以在阅读模式下进行，位置在 阅读模式 → 右下角控制栏 → 插件（选项卡）查看。',
                 }
             ]
+        },
+        "later" : {
+            target: 'later',
+            idx: 5,
+            items: [
+                {
+                    id: 'laterlist',
+                    intro: '简悦自带了一个未读列表，你可以把任意 URL 通过 <a target="_blank" href="http://ksria.com/simpread/docs/#/右键菜单">右键菜单</a> / <a target="_blank" href="http://ksria.com/simpread/docs/#/控制栏-阅读模式">控制栏 → 动作</a> 发送到稍后读。<br>稍后读也支持发送这些链接到 Pocket · Instapaper · Linnk 里面，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">请看这里</a> 。',
+                },
+                {
+                    id: 'latermore',
+                    intro: '加载更多的稍后读。',
+                }
+            ]
         }
     };
 
