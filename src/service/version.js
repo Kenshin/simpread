@@ -46,6 +46,18 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             {
                 element: ".version-tips[data-hits='lazyload']",
                 intro: '此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a>',
+            },
+            {
+                element: ".version-tips[data-hits='jianguo']",
+                intro: '你可以在这里输入坚果云的用户名和第三方授权的密码来绑定坚果云，包括配置文件也可以保存到坚果云，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>',
+            },
+            {
+                element: ".version-tips[data-hits='yuque']",
+                intro: '与其它导出服务一样，你可以在这里绑定语雀来实现导出到语雀中，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/语雀">请看这里</a>',
+            },
+            {
+                element: ".version-tips[data-hits='webdav']",
+                intro: '「任意支持 WebDAV 协议的服务」均可享受简悦的导出服务，从现在开始使用你熟悉的网盘吧，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV">请看这里</a>',
             }
         ]
     };
