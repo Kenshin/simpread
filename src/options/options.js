@@ -249,6 +249,7 @@ function tabsRender( color ) {
                     </section>
                     <section style={{ 'padding': '0;' }}>
                         <div id="labs" style={{ width: '100%' }}>
+                            <div className="version-tips" data-hits="focusmode">
                             <div className="label">聚焦模式</div>
                             <div className="lab" style={{ 'padding': '30px 30px 10px 10px' }}>
                                 <FocusOpt option={ storage.focus } />
@@ -258,6 +259,8 @@ function tabsRender( color ) {
                                         waves="md-waves-effect md-waves-button"
                                         onClick={ ()=>save( true ) } />
                             </div>
+                            </div>
+                            <div className="version-tips" data-hits="readmode">
                             <div className="label">阅读模式</div>
                             <div className="lab" style={{ 'padding': '30px 30px 10px 10px' }}>
                                 <ReadOpt option={ storage.read } />
@@ -266,6 +269,7 @@ function tabsRender( color ) {
                                         icon={ ss.IconPath( "save_icon" ) }
                                         waves="md-waves-effect md-waves-button"
                                         onClick={ ()=>save( true ) } />
+                            </div>
                             </div>
                         </div>
                     </section>
