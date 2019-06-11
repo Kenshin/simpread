@@ -54,18 +54,19 @@ $( window ).scroll( (event) => {
 });
 
 /**
- * Get tabsItemID from window.location.hash exist
- */
-window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => window.location.hash.startsWith(item.route)));
-tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
-
-/**
  * Add event listenr turn page
  */
 window.addEventListener( 'TurnTab', event => {
     const idx = event.detail.page;
     tabChange( idx );
 });
+
+/**
+ * Get tabsItemID from window.location.hash exist
+ */
+window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => window.location.hash.startsWith(item.route)));
+tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
+
 /**
  * Listen runtime message
  */
