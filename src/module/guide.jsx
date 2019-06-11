@@ -136,8 +136,8 @@ function curVersion() {
           start  = () => {
             intros.setOptions({
                 hintButtonLabel: "确认",
-                nextLabel: "下一个 →",
-                prevLabel: "← 上一个",
+                nextLabel: "下一条 →",
+                prevLabel: "← 上一条",
                 skipLabel: "",
                 doneLabel: "完成",
                 hidePrev: true,
