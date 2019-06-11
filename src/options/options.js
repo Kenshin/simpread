@@ -36,7 +36,6 @@ import * as welc  from 'welcome';
 import * as guide from 'guide';
 
 import PureRead   from 'puread';
-import { exists } from 'fs';
 
 let tabsItemID   = 0,
     loadState    = { first: false, update: false },
