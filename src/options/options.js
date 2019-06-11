@@ -104,6 +104,15 @@ storage.Read( first => {
 });
 
 /**
+ * Pure Read
+*/
+function pRead() {
+    storage.puread     = new PureRead( storage.sites );
+    storage.pr.origins = storage.option.origins;
+    console.log( "current puread object is   ", storage.pr )
+}
+
+/**
  * Hash notify
  */
 function hashnotify() {
@@ -297,15 +306,6 @@ function sidebarRender() {
                              waves="md-waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
-}
-
-/** 
- * Pure Read
-*/
-function pRead() {
-    storage.puread     = new PureRead( storage.sites );
-    storage.pr.origins = storage.option.origins;
-    console.log( "current puread object is   ", storage.pr )
 }
 
 /**
