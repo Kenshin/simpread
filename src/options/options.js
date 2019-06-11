@@ -86,6 +86,16 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
+ * Change tab
+ * 
+ * @param {number} tab index
+ */
+function tabChange( idx ) {
+    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+    mainRender( idx );
+}
+
+/**
  * Entry
  */
 storage.Read( first => {
@@ -305,16 +315,6 @@ function sidebarRender() {
                              waves="md-waves-effect"
                              header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
-}
-
-/**
- * Change tab
- * 
- * @param {number} tab index
- */
-function tabChange( idx ) {
-    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-    mainRender( idx );
 }
 
 /*
