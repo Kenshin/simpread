@@ -37,6 +37,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
         "root"  : value => `.version-tips[data-hits='${value}']`,
         "1.1.3" : {
             target: "labs",
+            idx: 2,
             items: [
                 {
                     id: "save_at",
