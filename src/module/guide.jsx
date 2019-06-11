@@ -56,7 +56,7 @@ class Guide extends React.Component {
         if ( url != "#" ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
         } else if ( idx == 3 ) {
-            curVersion();
+            start( storage.version );
             this.props.onExit && this.props.onExit();
         }
     }
@@ -128,10 +128,10 @@ class Guide extends React.Component {
 /**
  * Show current version intro
  */
-function curVersion() {
-    const target = ver.tips[ storage.version ].target,
-          idx    = ver.tips[ storage.version ].idx,
-          steps  = ver.tips[ storage.version ].items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
+function start( id ) {
+    const target = ver.tips[ id ].target,
+          idx    = ver.tips[ id ].idx,
+          steps  = ver.tips[ id ].items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
           intros = intro(),
           start  = () => {
             intros.setOptions({
@@ -156,5 +156,5 @@ function curVersion() {
 
 export {
     Guide,
-    curVersion as Current
+    start as Start
 }
