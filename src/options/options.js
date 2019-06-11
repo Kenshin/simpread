@@ -54,11 +54,18 @@ $( window ).scroll( (event) => {
 });
 
 /**
- * Add event listenr turn page
+ * Add event listenr
  */
 window.addEventListener( 'TurnTab', event => {
     const idx = event.detail.page;
     tabChange( idx );
+});
+
+window.addEventListener( 'Welcome-Close', event => {
+    const { first, version } = event.detail;
+    !first && new Notify().Render({ content: "是否查看新版本的入门指引？", action: "确认", cancel: "取消", callback: type => {
+        type == "action" && guide.Current( version );
+    }});
 });
 
 /**

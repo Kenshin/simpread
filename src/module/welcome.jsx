@@ -114,6 +114,7 @@ class Welcome extends React.Component {
     }
 
     closeClick() {
+        window.dispatchEvent( new CustomEvent( "Welcome-Close", { detail: { first: this.props.first, version: this.props.version }}));
         exit();
     }
 
