@@ -118,11 +118,13 @@ export default class LabsOpt extends React.Component {
                             label="同步时是否包含授权服务中的授权码？"
                             desc="包括：导出配置文件到本地，默认（关闭）为不同步；启用后，请妥善保管你的授权码"
                             onChange={ (s)=>this.onChange(s, "option", "secret") } />
+                    <div className="version-tips" data-version="1.1.3" data-hits="save_at">
                     <Switch width="100%" checked={ this.props.option.save_at == "dropbox" ? true : false }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="保存配置到 Dropbox ？"
                             desc="注意：默认（已勾选状态）保存到 Dropbox ；选否后（非勾选状态）保存到 【坚果云】。"
                             onChange={ (s)=>this.onChange(s, "option", "save_at") } />
+                    </div>
                     <Switch width="100%" checked={ this.props.option.uninstall ? true : false }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="删除后是否给我反馈？"
@@ -261,6 +263,7 @@ export default class LabsOpt extends React.Component {
                                 onChange={ (s)=>this.onChange(s, "read", "pure") } />
                         <div className="sublabel">如果经常阅读代码的话，请安装 <a target="_blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码段增强</a> 包括：高亮，去重，支持 CSDN 等特殊情况的代码段</div>
                     </div>
+                    <div className="version-tips" data-version="1.1.3" data-hits="preload">
                     <Switch width="100%" checked={ this.props.option.preload }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="是否启用预加载机制？"
@@ -268,6 +271,8 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "preload") } />
                     <div className="sublabel">2. 关闭此功能后，只有进入阅读模式时才会对页面进行解析，所以经常使用简悦的用户请勿关闭它。</div>
                     <div className="sublabel">3. 此功能的优先级比「自动进入阅读模式」高；当关闭此功能时，自动进入阅读模式将不会工作。</div>
+                    </div>
+                    <div className="version-tips" data-version="1.1.3" data-hits="lazyload">
                     <div ref="lazyload" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
                         <div className="label" style={{'margin-bottom':' -15px'}}>预加载排除列表</div>
                         <div className="sublabel">加入其中后的网址将不会启用预加载功能。</div>
@@ -278,6 +283,7 @@ export default class LabsOpt extends React.Component {
                             value={ ( this.props.option.lazyload||[] ).join( "\n" ) }
                             onChange={ (e)=>this.changeLazyload(e) }
                         />
+                    </div>
                     </div>
                 </div>
 
