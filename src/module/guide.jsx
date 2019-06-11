@@ -129,19 +129,29 @@ class Guide extends React.Component {
  * Show current version intro
  */
 function curVersion() {
-    const steps  = ver.tips[ storage.version ].items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
-          intros = intro();
-    intros.setOptions({
-        hintButtonLabel: "确认",
-        nextLabel: "下一个 →",
-        prevLabel: "← 上一个",
-        skipLabel: "",
-        doneLabel: "完成",
-        hidePrev: true,
-        hideNext: true,
-        steps
-    });
-    intros.start();
+    const target = ver.tips[ storage.version ].target,
+          idx    = ver.tips[ storage.version ].idx,
+          steps  = ver.tips[ storage.version ].items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
+          intros = intro(),
+          start  = () => {
+            intros.setOptions({
+                hintButtonLabel: "确认",
+                nextLabel: "下一个 →",
+                prevLabel: "← 上一个",
+                skipLabel: "",
+                doneLabel: "完成",
+                hidePrev: true,
+                hideNext: true,
+                steps
+            });
+            intros.start();
+    };
+    if ( location.hash != `#${ target }` ) {
+        window.dispatchEvent( new CustomEvent( "Turn", { detail: { page: idx }}));
+        setTimeout( start, 500 );
+    } else {
+        start();
+    }
 }
 
 export {

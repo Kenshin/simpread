@@ -376,3 +376,9 @@ function help() {
         }
     });
 }
+
+window.addEventListener( 'Turn', event => {
+    const idx = event.detail.page;
+    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+    mainRender( idx );
+});
