@@ -79,7 +79,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'newsites',
-                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a>',
+                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。<br>什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a>',
                 },
                 {
                     id: 'clear',
