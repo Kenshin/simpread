@@ -166,7 +166,7 @@ function vernotify( first ) {
             watch.SendMessage( "version", true );
             loadState = { first: true, update: true };
             welcomeRender( false, version );
-            /////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
             // hard code
             // option.origins rework
             storage.option.origins = storage.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
@@ -175,7 +175,7 @@ function vernotify( first ) {
                     tabChange( 3 );
                 });
             }
-            /////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
         }
         website_sync = true;
         browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });
