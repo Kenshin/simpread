@@ -100,6 +100,24 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                     intro: '使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式">阅读模式</a> 时的选项<br>包括：主题色，进入阅读模式的快捷键，字体类型，版面布局，甚至正文的字体细调（字间距，行间距等）。<br>这些功能也可以在进入此模式后通过右下角控制栏调整。',
                 }
             ]
+        },
+        "sites" : {
+            target: 'sites',
+            idx: 2,
+            items: [
+                {
+                    id: 'customsites',
+                    intro: '从 1.1.3 开始，简悦调整了第三方适配的规则，从现在开始第三方适配仅针对个人的适配源，关于这部分的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a><br><b>注意：</b> 如果你使用了自己的适配源，请先清除再导入。',
+                },
+                {
+                    id: 'sitemgr',
+                    intro: '用来管理全部的站点，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点管理器">请看这里</a> 。',
+                },
+                {
+                    id: 'personsites',
+                    intro: '简悦用户自行上传且未收录到 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=官方（主）适配源">官方适配源</a> 里面的适配站点，可以在这里对这些站点进行安装，删除，更新等操作，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点集市">请看这里</a> 。',
+                }
+            ]
         }
     };
 

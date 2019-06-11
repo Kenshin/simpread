@@ -310,6 +310,7 @@ export default class SitesOpts extends React.Component {
             <div id="labs" style={{ width: '100%' }}>
                 <div className="label">第三方适配源</div>
                 <div ref="origins" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }} className="lab">
+                    <div className="version-tips" data-hits="customsites">
                     <TextField 
                         multi={ true } rows={8}
                         placeholder="仅支持 URL 地址，每行一个。" 
@@ -333,6 +334,8 @@ export default class SitesOpts extends React.Component {
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.origins( "clear" ) } />
                     </div>
+                    </div>
+                    <div className="version-tips" data-hits="sitemgr">
                     <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('sitemgr') }>
                         <div className="more">
                             <div>站点管理器</div>
@@ -340,8 +343,10 @@ export default class SitesOpts extends React.Component {
                             <span className="arrow" style={{ 'bottom': '13px' }}></span>
                         </div>
                     </div>
+                    </div>
                 </div>
 
+                <div className="version-tips" data-hits="personsites">
                 <div className="label">管理</div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
@@ -361,6 +366,7 @@ export default class SitesOpts extends React.Component {
                 <div className="label">已安装</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards onChange={ t=>this.onChange(t) } />
+                </div>
                 </div>
             </div>
         )
