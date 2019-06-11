@@ -263,8 +263,8 @@ function tabsRender( color ) {
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );
-                mainRender( idx );
                 conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+                mainRender( idx );
           },
           refresh = () => {
                 tt.Render( "body" );
