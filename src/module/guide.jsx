@@ -58,6 +58,10 @@ class Guide extends React.Component {
         } else if ( idx == 3 ) {
             start( storage.version );
             this.props.onExit && this.props.onExit();
+        } else {
+            const id = location.hash == "" ? "common" : location.hash.replace( "#", "" );
+            start( id, false );
+            this.props.onExit && this.props.onExit();
         }
     }
 
@@ -129,8 +133,9 @@ class Guide extends React.Component {
  * Show current version intro
  * 
  * @param {string} id, include: version id | hash id, e,g. 1.1.3, common, simple
+ * @param {boolean} verify current url and intros.start()
  */
-function start( id ) {
+function start( id, verify = true ) {
     const target = ver.tips[ id ].target,
           idx    = ver.tips[ id ].idx,
           steps  = ver.tips[ id ].items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
@@ -148,7 +153,7 @@ function start( id ) {
             });
             intros.start();
     };
-    if ( location.hash != `#${ target }` ) {
+    if ( verify && location.hash != `#${ target }` ) {
         window.dispatchEvent( new CustomEvent( msg.MESSAGE_ACTION.turn_tab, { detail: { page: idx }}));
         setTimeout( start, 500 );
     } else {
