@@ -36,31 +36,31 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
     tips      = {
         "root"  : value => `.version-tips[data-hits='${value}']`,
         "1.1.3" : {
-            target: "labs",
+            target: 'labs',
             idx: 2,
             items: [
                 {
-                    id: "save_at",
+                    id: 'save_at',
                     intro: '从现在开始可以将配置文件保存到坚果云了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>',
                 },
                 {
-                    id: "preload",
+                    id: 'preload',
                     intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a>',
                 },
                 {
-                    id: "lazyload",
+                    id: 'lazyload',
                     intro: '此功能适合 <b>经常使用简悦但又性能不够</b> 的用户；需要动态加载的页面；支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a>',
                 },
                 {
-                    id: "jianguo",
+                    id: 'jianguo',
                     intro: '你可以在这里输入坚果云的用户名和授权的密码来绑定坚果云，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>',
                 },
                 {
-                    id: "yuque",
+                    id: 'yuque',
                     intro: '连接你的语雀帐号后，就可使用导出到语雀的服务了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/语雀">请看这里</a>',
                 },
                 {
-                    id: "webdav",
+                    id: 'webdav',
                     intro: '导出服务 <b>任意支持 WebDAV 协议</b> 了，从现在开始使用你熟悉的网盘吧，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV">请看这里</a>',
                 }
             ]
