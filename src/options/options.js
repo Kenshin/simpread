@@ -61,6 +61,14 @@ window.location.hash && ( tabsItemID = conf.tabsItem.findIndex( item => window.l
 tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( item, index ) => item.active = tabsItemID == index ? true : false );
 
 /**
+ * Add event listenr turn page
+ */
+window.addEventListener( 'Turn', event => {
+    const idx = event.detail.page;
+    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+    mainRender( idx );
+});
+/**
  * Listen runtime message
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
@@ -376,9 +384,3 @@ function help() {
         }
     });
 }
-
-window.addEventListener( 'Turn', event => {
-    const idx = event.detail.page;
-    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-    mainRender( idx );
-});
