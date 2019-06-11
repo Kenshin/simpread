@@ -128,33 +128,31 @@ class Guide extends React.Component {
  * Show current version intro
  */
 function curVersion() {
-    setTimeout( ()=> {
-        const intros = intro();
-        intros.setOptions({
-            hintButtonLabel: "确认",
-            nextLabel: "下一个 →",
-            prevLabel: "← 上一个",
-            skipLabel: "",
-            doneLabel: "完成",
-            hidePrev: true,
-            hideNext: true,
-            steps: [
-                {
-                    element: $(".version-tips[data-version='1.1.3'][data-hits='save_at']")[0],
-                    intro: '从现在开始可以将配置文件保存到坚果云了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>',
-                },
-                {
-                    element: $(".version-tips[data-version='1.1.3'][data-hits='preload']")[0],
-                    intro: '简悦的词法分析引擎采用了预加载机制，你可以选择手动关闭此功能来缓解某些性能低下的系统。',
-                },
-                {
-                    element: $(".version-tips[data-version='1.1.3'][data-hits='lazyload']")[0],
-                    intro: '此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a>',
-                }
-            ]
-        });
-        intros.start();
-    }, 500 );
+    const intros = intro();
+    intros.setOptions({
+        hintButtonLabel: "确认",
+        nextLabel: "下一个 →",
+        prevLabel: "← 上一个",
+        skipLabel: "",
+        doneLabel: "完成",
+        hidePrev: true,
+        hideNext: true,
+        steps: [
+            {
+                element: $(".version-tips[data-version='1.1.3'][data-hits='save_at']")[0],
+                intro: '从现在开始可以将配置文件保存到坚果云了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>',
+            },
+            {
+                element: $(".version-tips[data-version='1.1.3'][data-hits='preload']")[0],
+                intro: '简悦的词法分析引擎采用了预加载机制，你可以选择手动关闭此功能来缓解某些性能低下的系统。',
+            },
+            {
+                element: $(".version-tips[data-version='1.1.3'][data-hits='lazyload']")[0],
+                intro: '此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a>',
+            }
+        ]
+    });
+    intros.start();
 }
 
 export {
