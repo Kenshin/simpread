@@ -110,9 +110,7 @@ class Welcome extends React.Component {
     nextClick() {
         if ( curidx != max ) {
             $( '.carousel.carousel-slider' ).carousel( "next" );
-        } else {
-            exit();
-        }
+        } else this.closeClick();
     }
 
     closeClick() {
