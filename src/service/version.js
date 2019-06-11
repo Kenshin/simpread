@@ -32,7 +32,23 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.1.1", "新增「黑名单，全新的控制栏面板，更丰富的中文定制化，无障碍阅读等」，" ],
           [ "1.1.2", "新增「插件中心，站点集市等」，" ],
           [ "1.1.3", "新增「通知中心，支持语雀，坚果云，预加载机制，增强插件 API 等」，" ],
-    ]);
+    ]),
+    tips      = {
+        "1.1.3" : [
+            {
+                element: ".version-tips[data-hits='save_at']",
+                intro: '从现在开始可以将配置文件保存到坚果云了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>',
+            },
+            {
+                element: ".version-tips[data-hits='preload']",
+                intro: '简悦的词法分析引擎采用了预加载机制，你可以选择手动关闭此功能来缓解某些性能低下的系统。',
+            },
+            {
+                element: ".version-tips[data-hits='lazyload']",
+                intro: '此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a>',
+            }
+        ]
+    };
 
 /**
  * Verify version
@@ -245,6 +261,7 @@ function FixSubver( patch, target ) {
 
 export {
     version,
+    tips,
     sub_ver as patch,
     Verify,
     Notify,
