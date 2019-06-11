@@ -54,8 +54,9 @@ class Guide extends React.Component {
     onClick( event, idx, url ) {
         if ( url != "#" ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-        } else {
-            // TO-DO
+        } else if ( idx == 3 ) {
+            curVersion();
+            this.props.onExit && this.props.onExit();
         }
     }
 
@@ -139,15 +140,15 @@ function curVersion() {
             hideNext: true,
             steps: [
                 {
-                    element: $("#version-113[data-hits='save_at']")[0],
+                    element: $(".version-tips[data-version='1.1.3'][data-hits='save_at']")[0],
                     intro: '从现在开始可以将配置文件保存到坚果云了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>',
                 },
                 {
-                    element: $("#version-113[data-hits='preload']")[0],
+                    element: $(".version-tips[data-version='1.1.3'][data-hits='preload']")[0],
                     intro: '简悦的词法分析引擎采用了预加载机制，你可以选择手动关闭此功能来缓解某些性能低下的系统。',
                 },
                 {
-                    element: $("#version-113[data-hits='lazyload']")[0],
+                    element: $(".version-tips[data-version='1.1.3'][data-hits='lazyload']")[0],
                     intro: '此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a>',
                 }
             ]
