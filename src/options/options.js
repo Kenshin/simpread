@@ -63,7 +63,7 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
 /**
  * Add event listenr turn page
  */
-window.addEventListener( 'Turn', event => {
+window.addEventListener( 'TurnTab', event => {
     const idx = event.detail.page;
     conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
     mainRender( idx );
