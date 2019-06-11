@@ -127,6 +127,8 @@ class Guide extends React.Component {
 
 /**
  * Show current version intro
+ * 
+ * @param {string} id, include: version id | hash id, e,g. 1.1.3, common, simple
  */
 function start( id ) {
     const target = ver.tips[ id ].target,
