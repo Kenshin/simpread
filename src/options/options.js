@@ -98,10 +98,10 @@ storage.Read( first => {
     navRender();
     vernotify( first );
     mainRender( tabsItemID );
-    tt.Render( "body" );
-    waves.Render({ root: "body" });
     setTimeout(() => noticeRender(), 500 );
     helpRender();
+    tt.Render( "body" );
+    waves.Render({ root: "body" });
 });
 
 /**
