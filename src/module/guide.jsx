@@ -60,8 +60,12 @@ class Guide extends React.Component {
             this.props.onExit && this.props.onExit();
         } else {
             const id = location.hash == "" ? "common" : location.hash.replace( "#", "" );
-            start( id, false );
-            this.props.onExit && this.props.onExit();
+            if ( id == "account" || id == "about" ) {
+                new Notify().Render( "此页面没有功能描述。" );
+            } else {
+                start( id, false );
+                this.props.onExit && this.props.onExit();
+            }
         }
     }
 
