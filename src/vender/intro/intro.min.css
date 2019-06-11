@@ -70,3 +70,7 @@
 .introjs-bullets ul li a {
     background-color: #999;
 }
+
+.introjs-helperNumberLayer {
+    display: none;
+}
