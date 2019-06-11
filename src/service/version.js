@@ -64,6 +64,28 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                     intro: '导出服务 <b>任意支持 WebDAV 协议</b> 了，从现在开始使用你熟悉的网盘吧，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV">请看这里</a>',
                 }
             ]
+        },
+        "common" : {
+            target: 'common',
+            idx: 0,
+            items: [
+                {
+                    id: 'sync',
+                    intro: '简悦支持导出配置文件到 Dropbox 或 坚果云，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/同步">请看这里</a>',
+                },
+                {
+                    id: 'config',
+                    intro: '从本地导入配置文件或导出配置文件到本地。注意：简悦支持导入任意版本的配置文件。',
+                },
+                {
+                    id: 'newsites',
+                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a>',
+                },
+                {
+                    id: 'clear',
+                    intro: '清除简悦产生的全部数据，等同于重新安装，慎用，使用前请先备份。',
+                }
+            ]
         }
     };
 
