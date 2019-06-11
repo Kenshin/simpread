@@ -36,6 +36,7 @@ import * as welc  from 'welcome';
 import * as guide from 'guide';
 
 import PureRead   from 'puread';
+import { exists } from 'fs';
 
 let tabsItemID   = 0,
     loadState    = { first: false, update: false },
@@ -358,17 +359,20 @@ function help() {
                 <div class="md-waves-effect bubbles help effect">
                     <i>${help_icon}</i>
                 </div>
-    `;
+    `,
+    exit = () => {
+        ReactDOM.unmountComponentAtNode( $( ".guide-bg" )[0] );
+        $( ".help i" ).html( help_icon ).css({ "animation": ".1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popdown" });
+        $( ".guide-bg" ).remove();
+    };
     $( "body" ).append( tmpl );
     $( "body" ).on( "click", ".help", event => {
         if ( $(".guide-bg").length == 0 ) {
             $( "body" ).append( `<div class="guide-bg"></div>` );
-            ReactDOM.render( <guide.Guide />, $( ".guide-bg" )[0] );
+            ReactDOM.render( <guide.Guide onExit={ ()=> exit() } />, $( ".guide-bg" )[0] );
             $( ".help i" ).html( close_icon ).css({ "animation": ".1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popup" });
         } else {
-            ReactDOM.unmountComponentAtNode( $( ".guide-bg" )[0] );
-            $( ".help i" ).html( help_icon ).css({ "animation": ".1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popdown" });
-            $( ".guide-bg" ).remove();
+            exit();
         }
     });
 }
