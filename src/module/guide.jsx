@@ -129,7 +129,7 @@ class Guide extends React.Component {
  * Show current version intro
  */
 function curVersion() {
-    const steps  = ver.tips[ storage.version ].map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
+    const steps  = ver.tips[ storage.version ].items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
           intros = intro();
     intros.setOptions({
         hintButtonLabel: "确认",
