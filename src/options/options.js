@@ -64,8 +64,7 @@ tabsItemID == -1 || tabsItemID == 0 ? tabsItemID = 0 : conf.tabsItem.forEach( ( 
  */
 window.addEventListener( 'TurnTab', event => {
     const idx = event.detail.page;
-    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-    mainRender( idx );
+    tabChange( idx );
 });
 /**
  * Listen runtime message
@@ -153,9 +152,7 @@ function vernotify( first ) {
             storage.option.origins = storage.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
             if ( storage.option.origins.length > 0 ) {
                 new Notify().Render( `检测到你曾经修改过第三方适配源，请重新导入，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=重新导入">请看这里</a>`, "确认", () => {
-                    const idx = 3;
-                    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-                    mainRender( idx );
+                    tabChange( 3 );
                 });
             }
             /////////////////////////
@@ -263,8 +260,7 @@ function tabsRender( color ) {
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );
-                conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-                mainRender( idx );
+                tabChange( idx );
           },
           refresh = () => {
                 tt.Render( "body" );
@@ -295,8 +291,7 @@ function navRender() {
 function sidebarRender() {
     const sidebarClick = ( $target, items ) => {
         const idx = conf.tabsItem.findIndex( item => item.value == items.value );
-        conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
-        mainRender( idx );
+        tabChange( idx );
     };
     const sidebar = <side.Sidebar items={ conf.menuItem }
                              waves="md-waves-effect"
@@ -311,6 +306,16 @@ function pRead() {
     storage.puread     = new PureRead( storage.sites );
     storage.pr.origins = storage.option.origins;
     console.log( "current puread object is   ", storage.pr )
+}
+
+/**
+ * Change tab
+ * 
+ * @param {number} tab index
+ */
+function tabChange( idx ) {
+    conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
+    mainRender( idx );
 }
 
 /*
