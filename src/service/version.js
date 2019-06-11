@@ -118,6 +118,32 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                     intro: '简悦用户自行上传且未收录到 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=官方（主）适配源">官方适配源</a> 里面的适配站点，可以在这里对这些站点进行安装，删除，更新等操作，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点集市">请看这里</a> 。',
                 }
             ]
+        },
+        "plugins" : {
+            target: 'plugins',
+            idx: 4,
+            items: [
+                {
+                    id: 'pluginsite',
+                    intro: '为了让阅读模式更加的丰富，简悦从 1.1.2 版本开始支持插件系统，插件系统 <b>仅支持阅读模式</b>。<br>点击这里打开到插件的官网。关于插件的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/插件系统">请看这里</a><br>注意：安装过多的插件会引起性能问题，建议不要超过 6 个。',
+                },
+                {
+                    id: 'pluginconfig',
+                    intro: '当用户上传了新的配置文件，需要手动从配置文件读取插件。<br>注意：上传配置文件后会清除当前环境的插件，所以请别忘记手动导入。',
+                },
+                {
+                    id: 'pluginupdate',
+                    intro: '更新已安装的全部插件到最新版本。',
+                },
+                {
+                    id: 'pluginclear',
+                    intro: '清除当前环境的全部插件。<br>注意：此操作并不能清除当前的配置文件。如果要清除配置文件，请前往 <b>共通 → 清除数据</b> 操作。',
+                },
+                {
+                    id: 'pluginmange',
+                    intro: '这是用户的已安装的全部插件，在这里进行管理，包括：禁用， 删除，更新，查看 等操作。<br>同样，在这里安装的插件可以在阅读模式下进行，位置在 阅读模式 → 右下角控制栏 → 插件（选项卡）查看。',
+                }
+            ]
         }
     };
 
