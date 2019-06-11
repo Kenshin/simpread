@@ -93,11 +93,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'focusmode',
-                    intro: '使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/聚焦模式">聚焦模式</a> 时的选项，包括：遮罩的主题色，遮罩的透明度，以及进入聚焦模式的快捷键；这些功能也可以在进入此模式后通过右下角控制栏调整。',
+                    intro: '使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/聚焦模式">聚焦模式</a> 时的选项<br>包括：遮罩的主题色，遮罩的透明度，以及进入聚焦模式的快捷键。<br>这些功能也可以在进入此模式后通过右下角控制栏调整。',
                 },
                 {
                     id: 'readmode',
-                    intro: '使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式">阅读模式</a> 时的选项，包括：主题色，进入阅读模式的快捷键，字体类型，版面布局，甚至正文的字体细调（字间距，行间距等）；这些功能也可以在进入此模式后通过右下角控制栏调整。',
+                    intro: '使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式">阅读模式</a> 时的选项<br>包括：主题色，进入阅读模式的快捷键，字体类型，版面布局，甚至正文的字体细调（字间距，行间距等）。<br>这些功能也可以在进入此模式后通过右下角控制栏调整。',
                 }
             ]
         }
