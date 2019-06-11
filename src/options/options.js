@@ -56,12 +56,12 @@ $( window ).scroll( (event) => {
 /**
  * Add event listenr
  */
-window.addEventListener( 'Turn_Tab', event => {
+window.addEventListener( msg.MESSAGE_ACTION.turn_tab, event => {
     const idx = event.detail.page;
     tabChange( idx );
 });
 
-window.addEventListener( 'Welcome_Close', event => {
+window.addEventListener( msg.MESSAGE_ACTION.welcome_close, event => {
     const { first, version } = event.detail;
     !first && new Notify().Render({ content: "是否查看新版本的入门指引？", action: "确认", cancel: "取消", callback: type => {
         type == "action" && guide.Current( version );

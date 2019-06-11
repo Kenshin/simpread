@@ -3,10 +3,11 @@ console.log( "===== simpread option welcome page load =====" )
 import 'carous_css';
 import 'carousel';
 
-import Button  from 'button';
+import Button   from 'button';
 
-import * as ss from 'stylesheet';
-import {br}    from 'browser';
+import * as ss  from 'stylesheet';
+import {br}     from 'browser';
+import * as msg from 'message';
 
 const welcbgcls   = "welcome",
       welcbgclsjq = `.${welcbgcls}`,
@@ -114,7 +115,7 @@ class Welcome extends React.Component {
     }
 
     closeClick() {
-        window.dispatchEvent( new CustomEvent( "Welcome_Close", { detail: { first: this.props.first, version: this.props.version }}));
+        window.dispatchEvent( new CustomEvent( msg.MESSAGE_ACTION.welcome_close, { detail: { first: this.props.first, version: this.props.version }}));
         exit();
     }
 

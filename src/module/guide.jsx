@@ -147,7 +147,7 @@ function curVersion() {
             intros.start();
     };
     if ( location.hash != `#${ target }` ) {
-        window.dispatchEvent( new CustomEvent( "Turn_Tab", { detail: { page: idx }}));
+        window.dispatchEvent( new CustomEvent( msg.MESSAGE_ACTION.turn_tab, { detail: { page: idx }}));
         setTimeout( start, 500 );
     } else {
         start();
