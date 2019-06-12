@@ -21,6 +21,7 @@
 }
 
 .introjs-tooltip {
+    min-width: 350px;
     color: #ffffff;
     background: #4285f4;
     border: none #4285f4;
