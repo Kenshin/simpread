@@ -15,7 +15,7 @@
         {
             "idx": 2,
             "name": "查看当前版本新增功能",
-            "icon": "<i class=\"fas fa-folder-open\"></i>",
+            "icon": "<i class=\"fas fa-plus-square\"></i>",
             "url": "#"
         },
         {
