@@ -264,6 +264,24 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                     intro: '加载更多的稍后读。',
                 }
             ]
+        },
+        "@performance" : {
+            target: 'labs',
+            idx: 2,
+            items: [
+                {
+                    id: 'preload',
+                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
+                },
+                {
+                    id: 'lazyload',
+                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a> 。',
+                },
+                {
+                    id: 'blacklist',
+                    intro: '也可以将完全不需要的站点加入到黑名单中，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/FAQ?id=黑名单">请看这里</a> 。',
+                }
+            ]
         }
     };
 
