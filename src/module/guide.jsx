@@ -24,7 +24,7 @@ class Guide extends React.Component {
     onClick( event, idx, url ) {
         if ( url != "#" ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-        } else if ( idx == 3 ) {
+        } else if ( idx == 2 ) {
             start( storage.version );
             this.props.onExit && this.props.onExit();
         } else {

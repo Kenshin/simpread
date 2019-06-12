@@ -14,21 +14,21 @@
         },
         {
             "idx": 2,
-            "name": "请通过 Github issues 提问",
-            "icon": "<i class=\"fas fa-bug\"></i>",
-            "url": "https://github.com/Kenshin/simpread/issues/new"
-        },
-        {
-            "idx": 3,
             "name": "查看当前版本新增功能",
             "icon": "<i class=\"fas fa-folder-open\"></i>",
             "url": "#"
         },
         {
-            "idx": 4,
+            "idx": 3,
             "name": "查看当前页的功能描述",
             "icon": "<i class=\"fas fa-binoculars\"></i>",
             "url": "#"
+        },
+        {
+            "idx": 4,
+            "name": "请通过 Github issues 提问",
+            "icon": "<i class=\"fas fa-bug\"></i>",
+            "url": "https://github.com/Kenshin/simpread/issues/new"
         },
         {
             "idx": 5,
