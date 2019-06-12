@@ -50,6 +50,12 @@
         },
         {
             "idx": 8,
+            "name": "当使用简悦疑似页面变慢的处理方式",
+            "icon": "<i class=\"fas fa-desktop\"></i>",
+            "url": "@performance"
+        },
+        {
+            "idx": 9,
             "name": "当阅读模式并未符合你的期望时，如何进一步优化？",
             "icon": "<i class=\"fas fa-book-open\"></i>",
             "url": "https://github.com/Kenshin/simpread/issues/522"
