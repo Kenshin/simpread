@@ -16,6 +16,7 @@ const name = "simpread",
     origins= "http://sr.ksria.cn/website_list_origins.json",
     versions= "http://sr.ksria.cn/versions.json",
     local  = browser.extension.getURL( "website_list.json" ),
+    help   = browser.extension.getURL( "help_tips.json" ),
     mode   = {
         focus     : "focus",
         read      : "read",
@@ -614,6 +615,9 @@ class Storage {
                 break;
             case "versions":
                 url = versions;
+                break;
+            case "help_tips":
+                url = help;
                 break;
             default:
                 url = type;
