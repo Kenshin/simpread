@@ -79,11 +79,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'sync',
-                    intro: '简悦支持导出配置文件到 Dropbox 或 坚果云，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/同步">请看这里</a>',
+                    intro: '简悦支持导出配置文件到 Dropbox 或 坚果云，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/同步">请看这里</a> 。',
                 },
                 {
                     id: 'config',
-                    intro: '从本地导入配置文件或导出配置文件到本地。<br>注意：简悦支持导入任意版本的配置文件。',
+                    intro: '从 <b>本地导入配置文件</b> 或 <b>导出配置文件到本地</b>。<br>注意：简悦支持导入任意版本的配置文件，但请尽量上传匹配版本的配置文件。',
                 },
                 {
                     id: 'newsites',
@@ -91,7 +91,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'clear',
-                    intro: '清除简悦产生的全部数据，等同于重新安装，慎用，使用前请先备份。',
+                    intro: '清除简悦产生的全部数据，等同于重新安装，慎用！使用前 <b>请先备份</b> 。',
                 }
             ]
         },
@@ -115,7 +115,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: '',
-                    intro: '本页的内容功能 <b>针对不同需求、不同使用场景</b> 的精细调整。<br>如果你是初级用户的话，完全可以无视这些调整，简悦支持 <b>开箱即用</b>。<br>如果想让阅读模式更具个性化，建议花 1 ~ 2 分钟来看下这些功能点。 😊 ' ,
+                    intro: '本页的功能专门针对 <b>不同需求、不同使用场景</b> 的精细调整。<br>如果你是初级用户的话，完全可以无视这些调整，简悦支持 <b>开箱即用</b>。<br>如果想让阅读模式更具个性化，建议花 1 ~ 2 分钟来看下这些功能点。 😊 ' ,
                 },
                 {
                     id: 'esc',
@@ -179,7 +179,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'puredpure',
-                    intro: '包括：字形、颜色、字号、代码段等，如：微信订阅号，CSDN 等。<br>注意：如果经常阅读代码的话，请安装 <a target="_blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码段增强</a> 包括：高亮，去重，支持 CSDN 等特殊情况的代码段。',
+                    intro: '包括：字形、颜色、字号、代码段等，如：微信订阅号，CSDN 等。<br>注意：如果经常阅读代码的话，请安装 <a target="_blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码段增强</a> 插件，功能包括：高亮，去重，支持 CSDN 等特殊情况的代码段。',
                 },
                 {
                     id: 'preload',
@@ -213,7 +213,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'customsites',
-                    intro: '从 1.1.3 开始，简悦调整了第三方适配的规则：仅针对个人的适配源，关于这部分的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a><br><b>注意：</b> 如果你使用了自己的适配源，请先清除再导入。',
+                    intro: '从 1.1.3 开始，简悦调整了第三方适配的规则：仅针对个人的适配源，关于这部分的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a> 。<br><b>注意：</b> 如果你使用了自己的适配源，请先清除再导入。',
                 },
                 {
                     id: 'sitemgr',
@@ -231,7 +231,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'pluginsite',
-                    intro: '为了让阅读模式更加的丰富，简悦从 1.1.2 版本开始支持插件系统，插件系统 <b>仅支持阅读模式</b>。<br>点击这里打开到插件的官网，关于插件的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/插件系统">请看这里</a><br>注意：安装过多的插件会引起性能问题，建议不要超过 6 个。',
+                    intro: '为了让阅读模式更加的丰富，简悦从 1.1.2 版本开始支持插件系统，插件系统 <b>仅支持阅读模式</b>。<br>点击这里打开到插件的官网，关于插件的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/插件系统">请看这里</a> 。<br>注意：安装过多的插件会引起性能问题，建议 <b>不要超过 6 个</b> 。',
                 },
                 {
                     id: 'pluginconfig',
@@ -243,7 +243,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'pluginclear',
-                    intro: '清除当前环境的全部插件。<br>注意：此操作并不能清除当前的配置文件。如果要清除配置文件，请前往 <b>共通 → 清除数据</b> 操作。',
+                    intro: '清除当前环境的全部插件。<br>注意：此操作并不能清除当前的配置文件，如果要清除配置文件，请前往 <b>共通 → 清除数据</b> 操作。',
                 },
                 {
                     id: 'pluginmange',
