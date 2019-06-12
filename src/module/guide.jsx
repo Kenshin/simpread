@@ -68,7 +68,7 @@ class Guide extends React.Component {
     }
 
     componentDidUpdate() {
-        $( "guid-card[id='4']" ).after( "<hr>" );
+        $( "guid-card[id='3']" ).after( "<hr>" );
     }
 
     componentDidMount() {
