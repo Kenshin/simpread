@@ -47,8 +47,6 @@ class Guide extends React.Component {
             }).done( ( result, textStatus, jqXHR ) => {
                 if ( result && result.tips.length == 0 ) {
                     $( ".guide .loading" ).html( '<span>没有新的消息</span>' ).css({"animation": ".1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popup"});
-                    setTimeout( ()=> $( ".guide .loading" ).css({"animation": "1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popclose"}), 500 );
-                    setTimeout( ()=> $( ".guide .loading" ).fadeOut(), 300 );
                 } else {
                     $( ".guide" ).find( "hr" ).remove();
                     this.setState({tips: this.state.tips.concat( result.tips ) });
