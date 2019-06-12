@@ -50,7 +50,7 @@ class Guide extends React.Component {
                     setTimeout( ()=> $( ".guide .loading" ).css({"animation": "1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popclose"}), 500 );
                     setTimeout( ()=> $( ".guide .loading" ).fadeOut(), 300 );
                 } else {
-                    this.setState({tips: this.props.tips.concat( result.tips ) });
+                    this.setState({tips: this.state.tips.concat( result.tips ) });
                     $( ".guide .loading" ).remove();
                 }
             }).fail( error => {
