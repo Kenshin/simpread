@@ -10,38 +10,7 @@ import * as ver           from 'version';
 class Guide extends React.Component {
 
     static defaultProps = {
-        tips: [
-            {
-                idx: 0,
-                name: '文档中心',
-                icon: '<i class="fas fa-info-circle"></i>',
-                url: "http://ksria.com/simpread/docs"
-            },
-            {
-                idx: 1,
-                name: '新手入门可以看这篇文章',
-                icon: '<i class="fas fa-file-word"></i>',
-                url: "http://kenshin.wang/blog/#/posts/13"
-            },
-            {
-                idx: 2,
-                name: '请通过 Github issues 提问',
-                icon: '<i class="fas fa-bug"></i>',
-                url: "https://github.com/Kenshin/simpread/issues/new"
-            },
-            {
-                idx: 3,
-                name: '查看当前版本新增功能',
-                icon: '<i class="fas fa-folder-open"></i>',
-                url: "#"
-            },
-            {
-                idx: 4,
-                name: '查看当前页的功能描述',
-                icon: '<i class="fas fa-binoculars"></i>',
-                url: "#"
-            },
-        ]
+        tips: []
     };
 
     static propsType = {
@@ -92,7 +61,9 @@ class Guide extends React.Component {
     }
 
     componentWillMount() {
-        this.setState({ tips: this.props.tips });
+        storage.GetRemote( "help_tips", ( result, error ) => {
+            result && result.tips && this.setState({ tips: result.tips });
+        });
     }
 
     componentDidMount() {
