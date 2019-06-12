@@ -324,6 +324,33 @@ guid-card-tips span {
     color: #0B242F;
 }
 
+.guide hr {
+    margin: 0;
+    border: 0;
+
+    text-align: center;
+    overflow: visible;
+}
+
+.guide hr:before {
+    content: '...';
+
+    position: relative;
+    top: -10px;
+
+    display: inline-block;
+
+    margin-left: .6em;
+
+    color: rgba(0,0,0,.68);
+
+    font-family: medium-content-slab-serif-font,Georgia,Cambria,"Times New Roman",Times,serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 30px;
+    letter-spacing: .6em;
+}
+
 /*
 opacity {
     margin: 8px 0 0 0;

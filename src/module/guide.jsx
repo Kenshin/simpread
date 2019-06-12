@@ -50,6 +50,7 @@ class Guide extends React.Component {
                     setTimeout( ()=> $( ".guide .loading" ).css({"animation": "1s reverse fadein,235ms cubic-bezier(.4,0,.2,1) popclose"}), 500 );
                     setTimeout( ()=> $( ".guide .loading" ).fadeOut(), 300 );
                 } else {
+                    $( ".guide" ).find( "hr" ).remove();
                     this.setState({tips: this.state.tips.concat( result.tips ) });
                     $( ".guide .loading" ).remove();
                 }
@@ -64,6 +65,10 @@ class Guide extends React.Component {
         storage.GetRemote( "help_tips", ( result, error ) => {
             result && result.tips && this.setState({ tips: result.tips });
         });
+    }
+
+    componentDidUpdate() {
+        $( "guid-card[id='4']" ).after( "<hr>" );
     }
 
     componentDidMount() {
