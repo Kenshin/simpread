@@ -13,7 +13,7 @@ class Guide extends React.Component {
         tips: [
             {
                 idx: 0,
-                name: '说明文档请看这里',
+                name: '文档中心',
                 icon: '<i class="fas fa-info-circle"></i>',
                 url: "http://ksria.com/simpread/docs"
             },
