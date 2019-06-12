@@ -75,7 +75,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'config',
-                    intro: '从本地导入配置文件或导出配置文件到本地。注意：简悦支持导入任意版本的配置文件。',
+                    intro: '从本地导入配置文件或导出配置文件到本地。<br>注意：简悦支持导入任意版本的配置文件。',
                 },
                 {
                     id: 'newsites',
@@ -107,7 +107,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'customsites',
-                    intro: '从 1.1.3 开始，简悦调整了第三方适配的规则，从现在开始第三方适配仅针对个人的适配源，关于这部分的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a><br><b>注意：</b> 如果你使用了自己的适配源，请先清除再导入。',
+                    intro: '从 1.1.3 开始，简悦调整了第三方适配的规则：仅针对个人的适配源，关于这部分的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a><br><b>注意：</b> 如果你使用了自己的适配源，请先清除再导入。',
                 },
                 {
                     id: 'sitemgr',
@@ -125,7 +125,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'pluginsite',
-                    intro: '为了让阅读模式更加的丰富，简悦从 1.1.2 版本开始支持插件系统，插件系统 <b>仅支持阅读模式</b>。<br>点击这里打开到插件的官网。关于插件的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/插件系统">请看这里</a><br>注意：安装过多的插件会引起性能问题，建议不要超过 6 个。',
+                    intro: '为了让阅读模式更加的丰富，简悦从 1.1.2 版本开始支持插件系统，插件系统 <b>仅支持阅读模式</b>。<br>点击这里打开到插件的官网，关于插件的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/插件系统">请看这里</a><br>注意：安装过多的插件会引起性能问题，建议不要超过 6 个。',
                 },
                 {
                     id: 'pluginconfig',
@@ -141,7 +141,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'pluginmange',
-                    intro: '这是用户的已安装的全部插件，在这里进行管理，包括：禁用， 删除，更新，查看 等操作。<br>同样，在这里安装的插件可以在阅读模式下进行，位置在 阅读模式 → 右下角控制栏 → 插件（选项卡）查看。',
+                    intro: '这是用户的已安装的全部插件，在这里进行管理，包括：禁用， 删除，更新，查看 等操作。<br>同样，在这里安装的插件可以在阅读模式下启用禁用操作，位置在 <b>阅读模式 → 右下角控制栏 → 插件（选项卡）</b> 查看。',
                 }
             ]
         },
