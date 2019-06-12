@@ -134,6 +134,7 @@ function start( id, verify = true ) {
             intros.start();
     };
     if ( verify && location.hash != `#${ target }` ) {
+        location.href = location.origin + "/options/options.html#labs";
         window.dispatchEvent( new CustomEvent( msg.MESSAGE_ACTION.turn_tab, { detail: { page: idx }}));
         setTimeout( start, 500 );
     } else {
