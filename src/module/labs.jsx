@@ -93,16 +93,21 @@ export default class LabsOpt extends React.Component {
             <div id="labs" style={{ width: '100%' }}>
                 <div className="label">全局</div>
                 <div className="lab">
+                    <div className="version-tips" data-hits="esc">
                     <Switch width="100%" checked={ this.props.option.esc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否启用 「ESC」 退出方式？"
                             desc="包括：聚焦模式与阅读模式"
                             onChange={ (s)=>this.onChange(s, "option", "esc") } />
+                    </div>
+                    <div className="version-tips" data-hits="br_exit">
                     <Switch width="100%" checked={ this.props.option.br_exit }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="动作栏图标是否改为 「进入/退出 」模式？"
                             desc="包括：聚焦模式和阅读模式，默认（关闭）为「弹出设定对话框」"
                             onChange={ (s)=>this.onChange(s, "option", "br_exit") } />
+                    </div>
+                    <div className="version-tips" data-hits="blacklist">
                     <div style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
                         <div className="label" style={{'margin-bottom':' -15px'}}>黑名单</div>
                         <div className="sublabel">加入其中后，不再启动简悦，有别于白名单和排除列表，黑名单则彻底不加载。</div>
@@ -113,11 +118,14 @@ export default class LabsOpt extends React.Component {
                             onChange={ (e)=>this.blacklist(e) }
                         />
                     </div>
+                    </div>
+                    <div className="version-tips" data-hits="secret">
                     <Switch width="100%" checked={ this.props.option.secret }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="同步时是否包含授权服务中的授权码？"
                             desc="包括：导出配置文件到本地，默认（关闭）为不同步；启用后，请妥善保管你的授权码"
                             onChange={ (s)=>this.onChange(s, "option", "secret") } />
+                    </div>
                     <div className="version-tips" data-version="1.1.3" data-hits="save_at">
                     <Switch width="100%" checked={ this.props.option.save_at == "dropbox" ? true : false }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
@@ -132,6 +140,7 @@ export default class LabsOpt extends React.Component {
                             onChange={ (s)=>this.onChange(s, "option", "uninstall") } />
                 </div>
 
+                <div className="version-tips" data-hits="menu">
                 <div className="label">右键菜单</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.option.menu.focus }
@@ -167,7 +176,9 @@ export default class LabsOpt extends React.Component {
                             label="是否显示「加入到稍后读」？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "unrdist" ) } />
                 </div>
+                </div>
 
+                <div className="version-tips" data-hits="focusconfig">
                 <div className="label">聚焦模式</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.focus.mask }
@@ -185,28 +196,39 @@ export default class LabsOpt extends React.Component {
                             desc="关闭意味着使用「自动聚焦模式」"
                             onChange={ (s)=>this.onChange(s, "focus", "highlight") } />
                 </div>
+                </div>
 
+                <div className="version-tips" data-hits="readconfig">
                 <div className="label">阅读模式</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
+                    <div className="version-tips" data-hits="progress">
                     <Switch width="100%" checked={ this.props.read.progress }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示阅读进度？"
                             onChange={ (s)=>this.onChange(s, "read", "progress") } />
+                    </div>
+                    <div className="version-tips" data-hits="readcontrolbar">
                     <Switch width="100%" checked={ this.props.read.controlbar }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否一直显示右下角的控制栏？"
                             desc="关闭意味着「鼠标移上时才显示」"
                             onChange={ (s)=>this.onChange(s, "read", "controlbar") } />
+                    </div>
+                    <div className="version-tips" data-hits="fap">
                     <Switch width="100%" checked={ this.props.read.fap }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否启用高级控制栏面板？"
                             desc="关闭意味着「使用浮动控制栏」"
                             onChange={ (s)=>this.onChange(s, "read", "fap") } />
+                    </div>
+                    <div className="version-tips" data-hits="highlight">
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="是否启动临时阅读模式？"
                             desc="当页面未适配阅读模式时，才能使用此功能"
                             onChange={ (s)=>this.onChange(s, "read", "highlight") } />
+                    </div>
+                    <div className="version-tips" data-hits="toc">
                     <Switch width="100%" checked={ this.props.read.toc }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             label="是否自动生成大纲（目录）？"
@@ -219,12 +241,16 @@ export default class LabsOpt extends React.Component {
                                 desc="关闭意味着「一直显示」"
                                 onChange={ (s)=>this.onChange(s, "read", "toc_hide") } />
                     </div>
+                    </div>
+                    <div className="version-tips" data-hits="readauto">
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
                             desc="白名单与排除列表功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
                             label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
+                    </div>
+                    <div className="version-tips" data-hits="exclusion">
                     <div ref="exclusion" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
                         <div className="label" style={{'margin-bottom':' -15px'}}>排除列表</div>
                         <div className="sublabel">加入其中后将不会自动进入阅读模式，仅当启用「自动进入阅读模式」有效。</div>
@@ -246,8 +272,11 @@ export default class LabsOpt extends React.Component {
                             onChange={ (e)=>this.changeWhitelist(e) }
                         />
                     </div>
+                    </div>
+                </div>
                 </div>
 
+                <div className="version-tips" data-hits="pured">
                 <div className="label">词法分析引擎 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>测试版</a></div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <Switch width="100%" checked={ this.props.read.cleanup == undefined ? true : this.props.read.cleanup }
@@ -255,6 +284,7 @@ export default class LabsOpt extends React.Component {
                                 label="是否启用增强解析模式？"
                                 desc="增强解析模式会对版面重新设计，包括：去除多余空格、优化版面结构等，此功能为测试版，遇到解析失败时，请关闭此功能。"
                                 onChange={ (s)=>this.onChange(s, "read", "cleanup") } />
+                    <div className="version-tips" data-hits="puredpure">
                     <div ref="cleanup" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
                         <Switch width="100%" checked={ this.props.read.pure }
                                 thumbedColor="#3F51B5" trackedColor="#7986CB"
@@ -262,6 +292,7 @@ export default class LabsOpt extends React.Component {
                                 desc="比【增强解析模式】还要彻底优化版本，包括：字形、颜色、字号、代码段等，专治页面及不规范，如：微信订阅号，CSDN 等。"
                                 onChange={ (s)=>this.onChange(s, "read", "pure") } />
                         <div className="sublabel">如果经常阅读代码的话，请安装 <a target="_blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码段增强</a> 包括：高亮，去重，支持 CSDN 等特殊情况的代码段</div>
+                    </div>
                     </div>
                     <div className="version-tips" data-version="1.1.3" data-hits="preload">
                     <Switch width="100%" checked={ this.props.option.preload }
@@ -286,12 +317,16 @@ export default class LabsOpt extends React.Component {
                     </div>
                     </div>
                 </div>
+                </div>
 
+                <div className="version-tips" data-hits="auth">
                 <div className="label">授权管理</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Auth/>
                 </div>
+                </div>
 
+                <div className="version-tips" data-hits="custom">
                 <div className="label">自定义样式</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('custom') }>
                     <div className="more">
@@ -300,7 +335,9 @@ export default class LabsOpt extends React.Component {
                         <span className="arrow"></span>
                     </div>
                 </div>
+                </div>
 
+                <div className="version-tips" data-version="1.1.3" data-hits="notice">
                 <div className="label">消息中心</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <Switch width="100%" checked={ this.props.option.notice }
@@ -315,6 +352,7 @@ export default class LabsOpt extends React.Component {
                         <span className="desc">简悦会不定期发送一些消息，包括：新的插件上线、新的适配站点上线、修复 Bug 等</span>
                         <span className="arrow"></span>
                     </div>
+                </div>
                 </div>
 
             </div>
