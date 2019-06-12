@@ -22,8 +22,11 @@ class Guide extends React.Component {
     }
 
     onClick( event, idx, url ) {
-        if ( url != "#" ) {
+        if ( url.startsWith( "http" ) ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
+        } else if ( url.startsWith( "@" ) ) {
+            start( url );
+            this.props.onExit && this.props.onExit();
         } else if ( idx == 2 ) {
             start( storage.version );
             this.props.onExit && this.props.onExit();
