@@ -27,13 +27,14 @@ function verifyHtml( html ) {
    - [['text']]        // remove '<text>'
    - [[/regexp/]]      // regexp e.g. $("sr-rd-content").find( "*[src='http://ifanr-cdn.b0.upaiyun.com/wp-content/uploads/2016/09/AppSo-qrcode-signature.jpg']" )
    - [[[juqery code]]] // new Function, e.g. $("xxx").find() return jquery object
+   - [[`xpath`]]       // /html[1]/div[1]/sr-read[1]/sr-rd-content[1]/p[1]
 
  * 
  * @param  {string} verify content
  * @return {boolen} verify result
  */
 function specTest( content ) {
-    return /^(\[\[)[\[{'/]{1}[ \S]+[}'/\]]\]\]{1}($)/g.test( content );
+    return /^(\[\[)[\[{`'/]{1}[ \S]+[}`'/\]]\]\]{1}($)/g.test( content );
 }
 
 /**
