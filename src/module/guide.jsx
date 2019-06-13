@@ -116,15 +116,16 @@ class Guide extends React.Component {
 /**
  * Show current version intro
  * 
- * @param {string} id, include: version id | hash id, e,g. 1.1.3, common, simple
+ * @param {string}  id     include: version id | hash id, e,g. 1.1.3, common, simple
  * @param {boolean} verify current url and intros.start()
  * @param {boolean} detail @see ver.tips data structure
  */
-function start( id, verify = true, detail = undefined ) {
-    const target = detail.target ? detail.target : ver.tips[ id ].target,
-          idx    = detail.idx    ? detail.idx    : ver.tips[ id ].idx,
+function start( id, verify = true, detail = {} ) {
+    const [ rm_idx, rm_target, rm_steps ] = [ detail.idx, detail.target, detail.steps ],
+          target = rm_target ? rm_target : ver.tips[ id ].target,
+          idx    = rm_idx    ? rm_idx    : ver.tips[ id ].idx,
           steps  = (() => {
-              const items = detail.steps ? detail.steps :  ver.tips[ id ].items;
+              const  items = rm_steps ? rm_steps : ver.tips[ id ].items;
               return items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }})
           })(),
           intros = intro(),
