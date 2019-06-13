@@ -53,7 +53,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'lazyload',
-                    intro: '此功能适合 <b>经常使用简悦但又性能不够</b> 的用户；需要动态加载的页面；支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a> 。',
+                    intro: '此功能适合 <b>经常使用简悦但又性能不够</b> 的用户；需要动态加载的页面；支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制?id=延迟加载">请看这里</a> 。',
                 },
                 {
                     id: 'jianguo',
