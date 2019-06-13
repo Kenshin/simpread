@@ -21,11 +21,14 @@ class Guide extends React.Component {
         tips: [],
     }
 
-    onClick( event, idx, url ) {
+    onClick( event, idx, url, detail ) {
         if ( url.startsWith( "http" ) ) {
             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
         } else if ( url.startsWith( "@" ) ) {
             start( url );
+            this.props.onExit && this.props.onExit();
+        } else if ( url.startsWith( "!!" ) ) {
+            start( url, true, detail );
             this.props.onExit && this.props.onExit();
         } else if ( idx == 2 ) {
             start( storage.version );
@@ -89,7 +92,7 @@ class Guide extends React.Component {
     render() {
         const tips = this.state.tips.map( item => {
             return (
-                <guid-card id={ item.idx } class="md-waves-effect" onClick={ e=>this.onClick( e, item.idx, item.url ) }>
+                <guid-card id={ item.idx } class="md-waves-effect" onClick={ e=>this.onClick( e, item.idx, item.url, item.detail ) }>
                     <guid-card-tips>
                         <span dangerouslySetInnerHTML={{__html: item.icon }} ></span>
                         <span>{ item.name }</span>
@@ -115,11 +118,15 @@ class Guide extends React.Component {
  * 
  * @param {string} id, include: version id | hash id, e,g. 1.1.3, common, simple
  * @param {boolean} verify current url and intros.start()
+ * @param {boolean} detail @see ver.tips data structure
  */
-function start( id, verify = true ) {
-    const target = ver.tips[ id ].target,
-          idx    = ver.tips[ id ].idx,
-          steps  = ver.tips[ id ].items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }}),
+function start( id, verify = true, detail = undefined ) {
+    const target = detail.target ? detail.target : ver.tips[ id ].target,
+          idx    = detail.idx    ? detail.idx    : ver.tips[ id ].idx,
+          steps  = (() => {
+              const items = detail.steps ? detail.steps :  ver.tips[ id ].items;
+              return items.map( item => { return { element: $( ver.tips.root( item.id ) )[0], intro: item.intro }})
+          })(),
           intros = intro(),
           start  = () => {
             intros.setOptions({
