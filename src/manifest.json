@@ -44,6 +44,6 @@
   ],
   "offline_enabled" : true,
   "update_url"      : "https://clients2.google.com/service/update2/crx",
-  "content_security_policy" : "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_security_policy" : "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
   "manifest_version": 2
 }

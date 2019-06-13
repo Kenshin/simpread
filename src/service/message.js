@@ -37,6 +37,9 @@ const action = {
     // webdav
     jianguo        : "jianguo",
     WebDAV         : "webdav",
+    // event
+    turn_tab       : "turn_tab",
+    welcome_close  : "welcome_close",
 };
 
 /**

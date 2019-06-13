@@ -3,10 +3,11 @@ console.log( "===== simpread option welcome page load =====" )
 import 'carous_css';
 import 'carousel';
 
-import Button  from 'button';
+import Button   from 'button';
 
-import * as ss from 'stylesheet';
-import {br}    from 'browser';
+import * as ss  from 'stylesheet';
+import {br}     from 'browser';
+import * as msg from 'message';
 
 const welcbgcls   = "welcome",
       welcbgclsjq = `.${welcbgcls}`,
@@ -110,12 +111,11 @@ class Welcome extends React.Component {
     nextClick() {
         if ( curidx != max ) {
             $( '.carousel.carousel-slider' ).carousel( "next" );
-        } else {
-            exit();
-        }
+        } else this.closeClick();
     }
 
     closeClick() {
+        window.dispatchEvent( new CustomEvent( msg.MESSAGE_ACTION.welcome_close, { detail: { first: this.props.first, version: this.props.version }}));
         exit();
     }
 
@@ -327,10 +327,10 @@ class Welcome extends React.Component {
 }
 
 /**
- * Exit()
+ * Exit
  */
 function exit() {
-    $( welcbgclsjq ).velocity({ opacity: 0 }, { complete: ()=>{
+    $( welcbgclsjq ).velocity({ opacity: 0 }, { complete: () => {
         ReactDOM.unmountComponentAtNode( $(welcbgclsjq)[0] );
     }});
 }

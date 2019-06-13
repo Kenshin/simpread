@@ -256,29 +256,37 @@ export default class PluginsOpt extends React.Component {
                 <div className="label">管理</div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
+                        <div className="version-tips" data-hits="pluginconfig" style={{ display: 'inline-flex', width: '50%' }}>
                         <Button type="raised" text="从配置文件导入插件" width="100%"
                             tooltip={{ text: "注意：本操作并不能更新本地插件。" }}
                             icon={ ss.IconPath( "import_icon" ) }
                             color="#fff" backgroundColor="#00BCD4"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.import() } />
+                        </div>
+                        <div className="version-tips" data-hits="pluginsite" style={{ display: 'inline-flex', width: '50%' }}>
                         <Button type="raised" text="查看并获取更多的插件" width="100%"
                             fontIcon={`<i class="fas fa-external-link-square-alt"></i>`}
                             color="#fff" backgroundColor="#00BCD4"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.addmore() } />
+                        </div>
                     </div>
                     <div style={{ display: 'inline-flex', width: '100%' }}>
+                        <div className="version-tips" data-hits="pluginupdate" style={{ display: 'inline-flex', width: '50%' }}>
                         <Button type="raised" text="更新本地全部插件" width="100%"
                                 icon={ ss.IconPath( "update_icon" ) }
                                 color="#fff" backgroundColor="#FF5252"
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.update() } />
+                        </div>
+                        <div className="version-tips" data-hits="pluginclear" style={{ display: 'inline-flex', width: '50%' }}>
                         <Button type="raised" text="清除本地全部插件" width="100%"
                                 icon={ ss.IconPath( "clear_icon" ) }
                                 color="#fff" backgroundColor="#757575"
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.clear() } />
+                        </div>
                     </div>
                 </div>
 
@@ -286,8 +294,10 @@ export default class PluginsOpt extends React.Component {
                     <span>{ this.state.plugins.length == 0 ? "" : "已安装 " + this.state.plugins.length + " 个插件 " }</span>
                     { this.state.plugins.length > 5 && <a target="_blank" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold' }}>过多的插件会使进入阅读模式变慢，建议不要超过 6 个</a> }
                 </div>
+                <div className="version-tips" data-hits="pluginmange">
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Cards plugins={ this.state.plugins } onChange={ t=>this.onChange(t) } />
+                </div>
                 </div>
 
             </div>

@@ -104,17 +104,21 @@ export default class Unrdist extends React.Component {
               items   = this.state.items.slice( 0, this.state.page * this.props.step ),
               content = this.state.items && this.state.items.length > 0 ?
             <div>
+                <div className="version-tips" data-hits="laterlist">
                 <List acIconWaves="md-waves-effect md-waves-circle"
                       acItemWaves="md-waves-effect"
                       title={ this.state.title } contentStyle={ content_style }
                       items={ items } actionItems={ conf.actionItems }
                       priBgColor ="#E1BEE7"
                       onAction={ (e,i,t,d)=>this.onAction(e,i,t,d) } />
+                </div>
+                <div className="version-tips" data-hits="latermore">
                 <Button type="raised" width="100%"
                         text={ disable ? "加载完毕" : "加载更多" } disable={ disable }
                         color="#fff" backgroundColor="rgb(156, 39, 176)"
                         waves="md-waves-effect md-waves-button"
                         onClick={ ()=>this.onClick() } />
+                </div>
             </div>
             : <div style={ style.root }>
                 <span style={ style.icon }></span>

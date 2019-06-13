@@ -245,12 +245,15 @@ export default class CommonOpt extends React.Component {
     render() {
         return(
             <div style={{ width: '100%' }}>
+                <div className="version-tips" data-hits="sync">
                 <Button type="raised" text={ `同步到你的 ${storage.option.save_at == "dropbox" ? "Dropbox" : "坚果云" } 账户` }
                         icon={ ss.IconPath( storage.option.save_at + "_icon" ) }
                         color="#fff" backgroundColor="#1976D2"
                         waves="md-waves-effect md-waves-button"
                         tooltip={{ text: this.state.sync }}
                         onClick={ ()=>this.sync() } />
+                </div>
+                <div className="version-tips" data-hits="config">
                 <div style={{ display: 'inline-flex', width: '100%' }}>
                     <Button type="raised" text="从本地导入配置文件" width="100%"
                             icon={ ss.IconPath( "import_icon" ) }
@@ -264,12 +267,15 @@ export default class CommonOpt extends React.Component {
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.export() } />
                 </div>
-                <div style={{ display: 'inline-flex', width: '100%' }}>
+                </div>
+                <div className="version-tips" data-hits="newsites" style={{ display: 'inline-flex', width: '50%' }}>
                     <Button type="raised" text="手动同步适配列表" width="100%"
                             icon={ ss.IconPath( "update_icon" ) }
                             color="#fff" backgroundColor="#2196F3"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.newsites() } />
+                </div>
+                <div className="version-tips" data-hits="clear" style={{ display: 'inline-flex', width: '50%' }}>
                     <Button type="raised" text="清除数据" width="100%"
                             icon={ ss.IconPath( "clear_icon" ) }
                             tooltip={{ text: "清除掉本地配置文件，需谨慎！" }}
