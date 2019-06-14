@@ -80,7 +80,8 @@ class SiteEditor extends React.Component {
         } else if ( site.include.trim() == "" ) {
             new Notify().Render( 2, "高亮区域不能为空。" );
         } else {
-            storage.pr.Updatesite( storage.current.site.target, storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
+            // changed storage.current.site.target to 'local'
+            storage.pr.Updatesite( 'local', storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
             storage.Writesite( storage.pr.sites, () => {
                 new Notify().Render( 0, "更新成功，页面刷新后生效！" );
                 watch.SendMessage( "site", true );
