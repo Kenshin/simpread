@@ -102,8 +102,12 @@ class SiteEditor extends React.Component {
 
     render() {
         site = { ...storage.pr.current.site };
-        if ( storage.pr.state == "temp" ) {
-            storage.pr.dom && ( site.include = storage.pr.dom.outerHTML.replace( storage.pr.dom.innerHTML, "" ).replace( /<\/\S+>$/i, "" ));
+        if ( storage.pr.state == "temp" && storage.pr.dom ) {
+            site.name   = site.name.replace( "tempread::", "" );
+            let include = storage.pr.Utils().dom2Xpath( storage.pr.dom );
+            if ( include != "" ) {
+                site.include    = `[[\`${include}\`]]`;
+            } else site.include = storage.pr.dom.outerHTML.replace( storage.pr.dom.innerHTML, "" ).replace( /<\/\S+>$/i, "" )
         }
         return (
             <dia.Dialog>
