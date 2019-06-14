@@ -187,9 +187,23 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "remove":
-                new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
+                new Notify().Render( "移动鼠标选择不想显示的内容。" );
                 $( "panel-bg" ).length > 0 && $( "panel-bg" ).trigger( "click" );
                 Highlight().done( dom => {
+                    const path = storage.pr.Utils().dom2Xpath( dom ),
+                          site = { ...storage.pr.current.site };
+                    site.exclude.push( `[[\`${path}\`]]` );
+                    if ( storage.pr.state == "temp" ) {
+                        const include = storage.pr.Utils().dom2Xpath( storage.pr.dom );
+                        site.name     = site.name.replace( "tempread::", "" );
+                        site.include  = `[[\`${include}\`]]`;
+                    }
+                    storage.pr.Updatesite( 'local', storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
+                    storage.Writesite( storage.pr.sites, () => {
+                        new Notify().Render( 0, "已加入到排除列表。" );
+                        storage.pr.current.site.name    = site.name;
+                        storage.pr.current.site.include = site.include;
+                    });
                     $(dom).remove();
                 });
                 break;
