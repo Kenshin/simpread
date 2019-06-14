@@ -159,7 +159,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'highlight',
-                    intro: '当某些页面未适配或已适配的阅读不符合期望，可以通过 <b>手动框选高亮</b> 的方式重新生成阅读模式，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">请看这里</a> 。',
+                    intro: '在 <b>手动框选</b> 方式的基础上增加了 <b>二次确认模式</b>，此模式专门针对页面极其复杂的情况，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">请看这里</a> 。',
                 },
                 {
                     id: 'toc',

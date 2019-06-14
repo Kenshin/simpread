@@ -224,8 +224,8 @@ export default class LabsOpt extends React.Component {
                     <div className="version-tips" data-hits="highlight">
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            label="是否启动临时阅读模式？"
-                            desc="当页面未适配阅读模式时，才能使用此功能"
+                            label="手动框选时是否启动二次确认模式？"
+                            desc="二次确认模式能精准的定位需要阅读模式的内容。"
                             onChange={ (s)=>this.onChange(s, "read", "highlight") } />
                     </div>
                     <div className="version-tips" data-hits="toc">
