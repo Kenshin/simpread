@@ -211,8 +211,14 @@ class Read extends React.Component {
                 new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
                 this.exit();
                 Highlight().done( dom => {
-                    storage.pr.TempMode( "read", dom );
-                    Render();
+                    const rerender = element => {
+                        storage.pr.TempMode( "read", element );
+                        Render();
+                    };
+                    storage.current.highlight ? 
+                        highlight.Control( dom ).done( newDom => {
+                            rerender( newDom );
+                        }) : rerender( dom );
                 });
                 break;
             /*
