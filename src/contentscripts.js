@@ -10,7 +10,7 @@ import Notify    from 'notify';
 
 import {focus}   from 'focus';
 import * as read from 'read';
-import * as modals from 'modals';
+import * as setting from 'setting';
 import * as kbd  from 'keyboard';
 
 import * as util from 'util';
@@ -127,8 +127,8 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                     new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
                 } else {
                      if ( storage.option.br_exit ) {
-                        modals.Exist()  && modals.Exit();
-                        !modals.Exist() && read.Exist( false ) ? read.Exit() : readMode();
+                        setting.Exist()  && setting.Exit();
+                        !setting.Exist() && read.Exist( false ) ? read.Exit() : readMode();
                      }
                      else readMode();
                 }
@@ -174,9 +174,9 @@ function bindShortcuts() {
     kbd.Bind( [ storage.read.shortcuts.toLowerCase()  ], readMode  );
     kbd.ListenESC( combo => {
         if ( combo == "esc" && storage.option.esc ) {
-            modals.Exist()  && modals.Exit();
-            !modals.Exist() && focus.Exist() && focus.Exit();
-            !modals.Exist() && read.Exist()  && read.Exit();
+            setting.Exist()  && setting.Exit();
+            !setting.Exist() && focus.Exist() && focus.Exit();
+            !setting.Exist() && read.Exist()  && read.Exit();
         }
     });
 }

@@ -4,7 +4,7 @@ import ProgressBar from 'schedule';
 import * as spec   from 'special';
 import ReadCtlbar  from 'readctlbar';
 import * as toc    from 'toc';
-import * as modals from 'modals';
+import * as setting from 'setting';
 import * as se     from 'siteeditor';
 import * as kbd    from 'keyboard';
 
@@ -177,7 +177,7 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                 break;
             case "siteeditor":
                 $( "panel-bg" ).length > 0 && $( "panel-bg" )[0].click();
@@ -303,7 +303,7 @@ function Highlight() {
  */
 function Exist( action ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        action && modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+        action && setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
         return true;
     } else {
         return false;

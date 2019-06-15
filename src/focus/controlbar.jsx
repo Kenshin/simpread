@@ -1,6 +1,6 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-import * as modals from 'modals';
+import * as setting from 'setting';
 import * as se     from 'siteeditor';
 import * as conf   from 'config';
 import { storage } from 'storage';
@@ -44,7 +44,7 @@ class FControl extends React.Component {
                     $( "html, body" ).animate({ scrollTop: 0 }, "normal" );
                     break;
                 case "setting":
-                    modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                    setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                     break;
                 case "siteeditor":
                     se.Render();
