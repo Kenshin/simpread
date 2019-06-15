@@ -20,7 +20,7 @@ import Fab         from 'fab';
 import Fap         from 'fap'
 import * as ttips  from 'tooltip';
 
-let notify;
+let notify, readItems;
 const tooltip_options = {
     target   : "name",
     position : "bottom",
@@ -134,31 +134,32 @@ export default class ReadCtlbar extends React.Component {
     }
 
     componentWillMount() {
+        readItems = $.extend( true, {}, conf.readItems );
         try {
             if ( storage.current.fap ) {
-                delete conf.readItems.exit;
-                delete conf.readItems.option.items.setting;
-                delete conf.readItems.fontfamily;
-                delete conf.readItems.fontsize;
-                delete conf.readItems.layout;
-                delete conf.readItems.theme;
+                delete readItems.exit;
+                delete readItems.option.items.setting;
+                delete readItems.fontfamily;
+                delete readItems.fontsize;
+                delete readItems.layout;
+                delete readItems.theme;
             } else {
-                delete conf.readItems.trigger;
+                delete readItems.trigger;
             }
             if ( this.props.type.startsWith( "txtread::" ) && this.props.type.endsWith( "::local" )) {
-                delete conf.readItems.download;
-                delete conf.readItems.readlater;
-                delete conf.readItems.send;
-                delete conf.readItems.share;
-                delete conf.readItems.option;
+                delete readItems.download;
+                delete readItems.readlater;
+                delete readItems.send;
+                delete readItems.share;
+                delete readItems.option;
             }
             if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
-                delete conf.readItems.option;
+                delete readItems.option;
             }
             storage.Safe( () => {
                 storage.secret.webdav.forEach( item => {
                     item = JSON.parse( item );
-                    conf.readItems.send.items[ "webdav_" + item.name ] = {
+                    readItems.send.items[ "webdav_" + item.name ] = {
                         name: item.name,
                         icon: ss.IconPath("webdav_icon"),
                         "color": "#00BCD4",
@@ -172,22 +173,22 @@ export default class ReadCtlbar extends React.Component {
                     // Add test source
                     if ( plugin.enable != false && ( plugin.trigger == true || plugin.trigger == "true" )) {
                     //if ( plugin.id == "Y7JxbP7B4H" ) {
-                        conf.readItems.trigger.items["plugin_" + plugin.id] = {
+                        readItems.trigger.items["plugin_" + plugin.id] = {
                             "name"     : plugin.name,
                             "fontIcon" : plugin.icon.type,
                             "color"    : plugin.icon.bgColor,
                         };
                     }
                 });
-                if ( conf.readItems.trigger && $.isEmptyObject( conf.readItems.trigger.items )) {
-                    delete conf.readItems.trigger;
+                if ( readItems.trigger && $.isEmptyObject( readItems.trigger.items )) {
+                    delete readItems.trigger;
                 }
             });
         } catch ( err ) {
             // TO-DO
         }
         // hack code
-        !/chrome/ig.test( navigator.userAgent ) && ( delete conf.readItems.dyslexia );
+        !/chrome/ig.test( navigator.userAgent ) && ( delete readItems.dyslexia );
     }
 
     constructor( props ) {
@@ -201,12 +202,12 @@ export default class ReadCtlbar extends React.Component {
                 onOpen={ ()=> this.onPop( "open" ) } onClose={ ()=> this.onPop( "close" ) }
                 onAction={ (event, type)=>this.onAction(event, type ) }>
                 <ReadOpt option={ storage.current } onChange={ (t,c)=>this.onChange(t,c)}/>
-                <Actionbar items={ conf.readItems } onAction={ (type)=>this.onAction(undefined, type ) }/>
+                <Actionbar items={ readItems } onAction={ (type)=>this.onAction(undefined, type ) }/>
                 <Sitebar />
                 <Pluginbar />
             </Fap>
             :
-            <Fab items={ conf.readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
+            <Fab items={ readItems } tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" onAction={ (event, type)=>this.onAction(event, type ) } />
         return (
             <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": "2" }}>
                 { Controlbar }
