@@ -39,6 +39,39 @@ function start() {
     return dtd;
 }
 
+/**
+ * Multi Highlight
+ * 
+ * @return {func} callback
+ */
+function multi( callback ) {
+    let $prev;
+    const mousemoveEvent = event => {
+            if ( !$prev ) {
+                $( event.target ).addClass( highlight_class );
+            } else {
+                $prev.removeClass( highlight_class );
+                $( event.target ).addClass( highlight_class );
+            }
+            $prev = $( event.target );
+    },
+    removeDomHander = event => {
+        callback( event.target );
+    };
+    $( "html" ).on( "click", removeDomHander );
+    $( "html" ).on( "keydown", event => {
+        if ( event.keyCode == 27 && $prev ) {
+            $( "html" ).find( `.${highlight_class}` ).removeClass( highlight_class );
+            $( "html" ).off( "mousemove", mousemoveEvent );
+            $( "html" ).off( "click", removeDomHander );
+            $prev = undefined;
+            event.preventDefault();
+            return false;
+        }
+    });
+    $( "html" ).on( "mousemove", mousemoveEvent );
+}
+
 function annotate() {
     const dtd = $.Deferred();
     $( "html" ).one( "mouseup", event => {
@@ -104,6 +137,7 @@ function controlbar( dom ) {
 
 export {
     start as Start,
+    multi as Multi,
     annotate as Annotate,
     controlbar as Control,
 }
