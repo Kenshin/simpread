@@ -13,7 +13,7 @@ import * as highlight from 'highlight';
 
 import Fab         from 'fab';
 
-let timer, $root, selector, callback;
+let focusItems, $root, selector, callback;
 
 const tooltip_options = {
     target   : "name",
@@ -81,8 +81,9 @@ class FControl extends React.Component {
     }
 
     componentWillMount() {
+        focusItems = $.extend( true, {}, conf.focusItems );
         if ( storage.current.site.name.startsWith( "metaread::" ) || storage.current.site.name.startsWith( "txtread::" ) ) {
-            delete conf.focusItems.option;
+            delete focusItems.option;
         }
     }
 
@@ -94,7 +95,7 @@ class FControl extends React.Component {
     render() {
         return (
             <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": 2147483647 }}>
-                <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
+                <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )
     }
