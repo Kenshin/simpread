@@ -1,3 +1,6 @@
+/**
+ * Options page style
+ */
 
 :root {
   --text-color: #333;
@@ -238,6 +241,10 @@ a {
     background-repeat: no-repeat;
 }
 
+/**
+ * Plugins & sites Card
+ */
+
 cards {
     display: flex;
     flex-flow: row wrap;
@@ -364,6 +371,28 @@ card-empty a {
 }
 
 /**
+ * Account
+ */
+.avatar {
+    margin: 10px;
+    padding: 5px;
+
+    width: 100px;
+    height: 100px;
+    line-height: 80px;
+
+    font-size: 50px;
+    font-weight: bold;
+
+    color: #fff;
+    background-color: rgb(111, 122, 155);
+
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 20px 0 rgba(168,182,191,0.6);
+}
+
+/**
  * Notice bubbles
  */
  .bubbles {
@@ -478,6 +507,7 @@ card-empty a {
         transform: translateY(20px)
     }
 }
+
 /**
  * Guide
  */
@@ -630,23 +660,4 @@ guid-card-tips span {
     font-style: italic;
     font-size: 30px;
     letter-spacing: .6em;
-}
-
-.avatar {
-    margin: 10px;
-    padding: 5px;
-
-    width: 100px;
-    height: 100px;
-    line-height: 80px;
-
-    font-size: 50px;
-    font-weight: bold;
-
-    color: #fff;
-    background-color: rgb(111, 122, 155);
-
-    border-radius: 50%;
-    border: 5px solid #fff;
-    box-shadow: 0 10px 20px 0 rgba(168,182,191,0.6);
 }
