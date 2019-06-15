@@ -1,12 +1,12 @@
 console.log( "=== simpread read load ===" )
 
-import ProgressBar from 'schedule';
-import * as spec   from 'special';
-import ReadCtlbar  from 'readctlbar';
-import * as toc    from 'toc';
-import * as setting from 'setting';
-import * as se     from 'siteeditor';
-import * as kbd    from 'keyboard';
+import ProgressBar        from 'schedule';
+import * as spec          from 'special';
+import ReadCtlbar         from 'readctlbar';
+import * as toc           from 'toc';
+import * as setting       from 'setting';
+import * as se            from 'siteeditor';
+import * as kbd           from 'keyboard';
 
 import { storage, Clone } from 'storage';
 import th                 from 'theme';

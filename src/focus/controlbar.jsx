@@ -1,13 +1,14 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-import * as setting from 'setting';
-import * as se     from 'siteeditor';
-import * as conf   from 'config';
-import { storage } from 'storage';
-import * as output from 'output';
-import * as watch  from 'watch';
-import {browser,br}from 'browser';
-import * as msg    from 'message';
+import * as setting   from 'setting';
+import * as se        from 'siteeditor';
+
+import * as conf      from 'config';
+import { storage }    from 'storage';
+import * as output    from 'output';
+import * as watch     from 'watch';
+import {browser,br}   from 'browser';
+import * as msg       from 'message';
 import * as highlight from 'highlight';
 
 import Fab         from 'fab';
