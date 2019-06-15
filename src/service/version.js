@@ -414,7 +414,9 @@ function Verify( curver, data ) {
         data.option.save_at   = "dropbox";
         data.option.notice    = true;
         data.option.preload   = true;
-        data.option.lazyload  = [];
+        data.option.lazyload  = [
+            "baidu.com", "weibo.com", "youtube.com"
+        ];
         data.option.uninstall = true;
 
         data.statistics.service.yuque   = 0;

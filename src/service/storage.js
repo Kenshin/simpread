@@ -116,7 +116,9 @@ const name = "simpread",
         br_exit   : false,
         secret    : false,
         preload   : true,
-        lazyload  : [],
+        lazyload  : [
+            "baidu.com", "weibo.com", "youtube.com"
+        ],
         uninstall : true,
         menu      : {
             focus : true,
