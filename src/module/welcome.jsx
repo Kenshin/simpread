@@ -207,9 +207,9 @@ class Welcome extends React.Component {
                                 <img src="http://sr.ksria.cn/welcome-service-v2.png?201806111215" style={ style.img }/>
                                 <h2 style={ style.h2 }>连接你的生产力工具</h2>
                                 <div style={ style.desc }>
-                                    支持下载 HTML · PDF · Markdown · PNG · <a target="_blank" href="http://ksria.com/simpread/docs/#/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Epub</a> 到本地 以及 发送到 <a target="_blank" href="http://ksria.com/simpread/docs/#/%E5%8F%91%E9%80%81%E5%88%B0-Kindle">Kindle</a>。<br/>
+                                    支持下载 HTML · PDF · Markdown · PNG · <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Epub">Epub</a> 到本地 以及 发送到 <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Kindle">Kindle</a>。<br/>
                                     支持输出到 Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘。<br/>
-                                    发送页面链接到 Pocket · Instapaper · Linnk，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1">请看这里</a> 。
+                                    发送页面链接到 Pocket · Instapaper · Linnk，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/授权服务">请看这里</a> 。
                                 </div>
                             </section>
                         </div> }
@@ -220,9 +220,9 @@ class Welcome extends React.Component {
                                 <img src={ ss.IconPath( "welcome-custom" )} style={ style.img }/>
                                 <h2 style={ style.h2 }>站点编辑器 · 站点适配源 · 站点管理器</h2>
                                 <div style={ style.desc }>
-                                    页面上任意元素均可隐藏，更支持编程，详细请看 <a href="http://ksria.com/simpread/docs/#/%E7%AB%99%E7%82%B9%E7%BC%96%E8%BE%91%E5%99%A8" target="_blank">站点编辑器</a><br/>
-                                    更灵活、社区化的多种 <a href="http://ksria.com/simpread/docs/#/%E7%AB%99%E7%82%B9%E9%80%82%E9%85%8D%E6%BA%90" target="_blank">站点适配源</a>。<br/>
-                                    内置了 <a href="http://ksria.com/simpread/docs/#/%E7%AB%99%E7%82%B9%E7%AE%A1%E7%90%86%E5%99%A8" target="_blank">站点管理器</a>，方便管理全部的适配站点。
+                                    页面上任意元素均可隐藏，更支持编程，详细请看 <a href="http://ksria.com/simpread/docs/#/站点编辑器" target="_blank">站点编辑器</a><br/>
+                                    更灵活、社区化的多种 <a href="http://ksria.com/simpread/docs/#/站点适配源" target="_blank">站点适配源</a>。<br/>
+                                    内置了 <a href="http://ksria.com/simpread/docs/#/站点管理器" target="_blank">站点管理器</a>，方便管理全部的适配站点。
                                 </div>
                             </section>
                         </div> }
@@ -246,7 +246,7 @@ class Welcome extends React.Component {
                                 <h2 style={ style.h2 }>插件系统</h2>
                                 <div style={ style.desc }>
                                     <a target="_blank" href="https://simpread.ksria.cn/plugins/details/kw36BtjGu0">字数统计</a> · <a target="_blank" href="https://simpread.ksria.cn/plugins/details/VQOZdNET2d">点击查看大图（Lightbox）</a> · <a target="_blank" href="https://simpread.ksria.cn/plugins/details/ohnTKVHz4a">划词翻译</a> 一个不能少。 <br/>
-                                    可以使用 JavaScript 编写基于「简悦」的插件了，详细说明请看 <a target="_blank" href="http://ksria.com/simpread/docs/#/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F">说明文档</a><br/>
+                                    可以使用 JavaScript 编写基于「简悦」的插件了，详细说明请看 <a target="_blank" href="http://ksria.com/simpread/docs/#/插件系统">说明文档</a><br/>
                                     现在就安装适合你的插件吧 → <a target="_blank" href="https://simpread.ksria.cn/plugins/">插件中心</a> 。
                                 </div>
                             </section>
