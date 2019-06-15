@@ -5,21 +5,21 @@ import './assets/css/option.css';
 import 'notify_css';
 import 'mintooltip';
 
-import Velocity     from 'velocity';
-import Notify       from 'notify';
+import Velocity      from 'velocity';
+import Notify        from 'notify';
 
-import {focus}      from 'focus';
-import * as read    from 'read';
-import * as setting from 'setting';
-import * as kbd     from 'keyboard';
+import {focus}       from 'focus';
+import * as read     from 'read';
+import * as setting  from 'setting';
+import * as kbd      from 'keyboard';
 
-import * as util    from 'util';
+import * as util     from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
-import * as msg     from 'message';
-import {browser}    from 'browser';
-import * as watch   from 'watch';
+import * as msg      from 'message';
+import {browser}     from 'browser';
+import * as watch    from 'watch';
 
-import PureRead  from 'puread';
+import PureRead      from 'puread';
 import * as puplugin from 'puplugin';
 
 let pr,                           // pure read object
