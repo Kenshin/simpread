@@ -74,9 +74,15 @@ class Read extends React.Component {
                     if ( type == "cancel" ) return;
                     setTimeout( () => {
                         Highlight().done( dom => {
-                            load_count++;
-                            storage.pr.TempMode( "read", dom );
-                            Render();
+                            const rerender = element => {
+                                load_count++;
+                                storage.pr.TempMode( "read", element );
+                                Render();
+                            };
+                            storage.current.highlight ? 
+                                highlight.Control( dom ).done( newDom => {
+                                    rerender( newDom );
+                                }) : rerender( dom );
                         });
                     }, 200 );
                 }});
@@ -327,8 +333,14 @@ function mathJaxMode() {
         if ( typeof dom == "undefined" ) {
             new Notify().Render( "智能感知失败，请移动鼠标框选。" );
             Highlight().done( dom => {
-                storage.pr.TempMode( "read", dom );
-                Render( false );
+                const rerender = element => {
+                    storage.pr.TempMode( "read", element );
+                    Render( false );
+                };
+                storage.current.highlight ? 
+                    highlight.Control( dom ).done( newDom => {
+                        rerender( newDom );
+                    }) : rerender( dom );
             });
         } else if ( typeof dom == "string" ) {
             const html = storage.pr.GetDom( dom, "html" );
