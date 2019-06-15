@@ -1,4 +1,4 @@
-console.log( "===== simpread option labs load =====" )
+console.log( "===== simpread option plugins load =====" )
 
 import {storage} from 'storage';
 import * as run  from 'runtime';

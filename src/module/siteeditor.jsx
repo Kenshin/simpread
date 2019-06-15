@@ -1,4 +1,4 @@
-console.log( "=== simpread option siteeditor ===" )
+console.log( "=== simpread option siteeditor load ===" )
 
 import { storage }  from 'storage';
 import * as watch   from 'watch';

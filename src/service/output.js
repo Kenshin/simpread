@@ -1,4 +1,4 @@
-console.log( "=== simpread control:action load ===" )
+console.log( "=== simpread output load ===" )
 
 import * as util   from 'util';
 import * as exp    from 'export';
