@@ -582,8 +582,11 @@ readLabels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月�
  */
 const focusItems = ( items => {
     const news = { ...items },
-          dels = [ "theme", "fontfamily", "fontsize", "layout", "dyslexia" ];
+          dels = [ "theme", "fontfamily", "fontsize", "layout", "dyslexia", "trigger" ];
     dels.forEach( del => delete news[ del ] );
+    delete news.option.items.fullscreen;
+    delete news.option.items.remove;
+    delete news.option.items.tempread;
     news.top = {
         "name" : "返回顶部",
         "icon" : ss.IconPath("top_icon"),
