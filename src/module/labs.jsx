@@ -305,7 +305,7 @@ export default class LabsOpt extends React.Component {
                     </div>
                     <div className="version-tips" data-version="1.1.3" data-hits="lazyload">
                     <div ref="lazyload" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
-                        <div className="label" style={{'margin-bottom':' -15px'}}>预加载排除列表</div>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>延迟加载列表</div>
                         <div className="sublabel">加入其中后的网址将不会启用预加载功能。</div>
                         <div className="sublabel">此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等。</div>
                         <TextField 
