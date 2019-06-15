@@ -280,16 +280,23 @@ sr-rd-crlbar.controlbar:hover {
 
 
 sr-highlight-group {
-    position: absolute;
+    position: fixed;
 
-    top: -14px;
+    top: 0;
     left: 0;
     right: 0;
 
     display: flex;
     justify-content: center;
 
+    padding: 15px;
+
     height: 24px;
+
+    background-color: rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+
+    z-index: 2147483640;
 }
 
 sr-highlight-ctl {

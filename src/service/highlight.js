@@ -86,13 +86,11 @@ function controlbar( dom ) {
             $target = $($target.children()[0]);
             $target.addClass( "simpread-highlight-controlbar" );
         } else if ( cls == "none" ) {
-            $target.removeClass( "simpread-highlight-controlbar" )
-                   .find( "sr-highlight-group" )
-                   .remove();
+            $target.removeClass( "simpread-highlight-controlbar" );
+            $( "sr-highlight-group" ).remove();
         } else {
-            $target.removeClass( "simpread-highlight-controlbar" )
-                   .find( "sr-highlight-group" )
-                   .remove();
+            $target.removeClass( "simpread-highlight-controlbar" );
+            $( "sr-highlight-group" ).remove();
             dtd.resolve( $target[0] );
         }
     });
