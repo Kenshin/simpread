@@ -263,19 +263,19 @@ sr-rd-crlbar.controlbar:hover {
  * Highlight
  */
 .simpread-highlight-selector {
-    background-color: #fafafa;
-    outline: 3px dashed #1976d2;
-    opacity: .8;
-    cursor: pointer;
-    transition: opacity .5s ease;
+    background-color: #fafafa !important;
+    outline: 3px dashed #1976d2 !important;
+    opacity: .8 !important;
+    cursor: pointer !important;
+    transition: opacity .5s ease !important;
 }
 
 .simpread-highlight-controlbar {
-    position: relative;
-    background-color: #fafafa;
-    outline: 3px dashed #1976d2;
-    opacity: .8;
-    transition: opacity .5s ease;
+    position: relative !important;
+    background-color: #fafafa !important;
+    outline: 3px dashed #1976d2 !important;
+    opacity: .8 !important;
+    transition: opacity .5s ease !important;
 }
 
 
