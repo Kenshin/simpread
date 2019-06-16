@@ -25,6 +25,7 @@ function start() {
         $( "html"       ).off( "mousemove", mousemoveEvent );
         $prev = undefined;
         dtd.resolve( event.target );
+        return false;
     });
     $( "html" ).one( "keydown", event => {
         if ( event.keyCode == 27 && $prev ) {
@@ -57,6 +58,7 @@ function multi( callback ) {
     },
     removeDomHander = event => {
         callback( event.target );
+        return false;
     };
     $( "html" ).on( "click", removeDomHander );
     $( "html" ).on( "keydown", event => {
