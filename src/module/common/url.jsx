@@ -26,7 +26,7 @@ export default class URL extends React.Component {
         if ( url == "" ) {
             code = -2;
             this.setState({ error : "当前输入不能为空。" });
-        }  else if ( !/^http(s)?:\/\//.test( url ) ) {
+        }  else if ( !/^http[s|*]?:\/\//.test( url ) ) {
             code = -1;
             this.setState({ error : "请输入有效的 url " });
         } else if ( location.protocol.startsWith( "http" ) && !minimatch( window.location.href, url ) && url != this.props.url ) {
