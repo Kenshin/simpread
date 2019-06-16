@@ -12,6 +12,7 @@ import {focus}       from 'focus';
 import * as read     from 'read';
 import * as setting  from 'setting';
 import * as kbd      from 'keyboard';
+import * as highlight from 'highlight';
 
 import * as util     from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
@@ -232,10 +233,16 @@ function readMode() {
             } else if ( pr.state == "temp" && pr.dom ) {
                 read.Render();
             } else {
-                new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='http://ksria.com/simpread/docs/#/临时阅读模式' target='_blank' >临时阅读模式</a>。" );
+                new Notify().Render( "智能感知正文失败，请移动鼠标，并通过 <a href='http://ksria.com/simpread/docs/#/手动框选' target='_blank' >手动框选</a> 的方式生成正文。" );
                 read.Highlight().done( dom => {
-                    pr.TempMode( mode.read, dom );
-                    read.Render();
+                    const rerender = element => {
+                        pr.TempMode( mode.read, dom );
+                        read.Render();
+                    };
+                    storage.current.highlight ? 
+                        highlight.Control( dom ).done( newDom => {
+                            rerender( newDom );
+                        }) : rerender( dom );
                 });
             }
         }
