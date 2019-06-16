@@ -206,7 +206,6 @@ class Read extends React.Component {
                     }
                     storage.pr.Updatesite( 'local', storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
                     storage.Writesite( storage.pr.sites, () => {
-                        //new Notify().Render( 0, "已加入到排除列表。" );
                         storage.pr.current.site.name    = site.name;
                         storage.pr.current.site.include = site.include;
                     });
