@@ -5,6 +5,8 @@ import {browser} from 'browser';
 import {storage, Clone} from 'storage';
 import * as highlight from 'highlight';
 
+let is_firstload = true;
+
 /**
  * Generate ID
  * 
@@ -83,9 +85,10 @@ function func( source ) {
     window.read    = Clone( storage.read );
     window.highlight = highlight;
     window.db      = Storage;
-    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$storage, $$current, $$read ) {
+    window.control = Controlbar;
+    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$storage, $$current, $$read, $$control ) {
         ${ source }
-    })( "0.0.2", $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, db, current, read );`
+    })( "0.0.2", $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, db, current, read, control );`
 }
 
 /**
@@ -105,6 +108,21 @@ function Storage( id, data, callback ) {
             callback && callback( result );
         });
     }
+}
+
+/**
+ * Contorlbar setting
+ * 
+ * @param {string} controlbar type include: markdown 
+ * @param {func} callback
+ */
+function Controlbar( type, callback ) {
+    if ( callback ) {
+        is_firstload && window.addEventListener( "simpread-plugin_controlbar", event => {
+            callback( event );
+        });
+    } else window.dispatchEvent( new CustomEvent( "simpread-plugin_controlbar", { detail: { type }}));
+    is_firstload = false;
 }
 
 /**
@@ -153,7 +171,7 @@ function testPlugin( style, plugin, trigger ) {
                       $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
                       Notify, highlight,
                       browser, db,
-                      storage.current, storage.read );
+                      storage.current, storage.read, control );
     trigger && addTrigger( trigger() );
 }
 
@@ -164,4 +182,5 @@ export {
     exec    as Exec,
     generateID as ID,
     dispatch as Event,
+    Controlbar,
 }
