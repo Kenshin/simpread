@@ -240,11 +240,11 @@ class Read extends React.Component {
     }
 
     render() {
-        const Article = this.props.wrapper.avatar ? 
+        const Article = this.props.wrapper.avatar && this.props.wrapper.avatar.length > 0 ? 
                         <spec.Multiple include={ this.props.wrapper.include } avatar={ this.props.wrapper.avatar } /> :
                         <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>;
 
-        const Page    = this.props.wrapper.paging && 
+        const Page    = this.props.wrapper.paging && this.props.wrapper.paging.length > 0 && 
                         <spec.Paging paging={ this.props.wrapper.paging } />;
         return (
             <sr-read>
