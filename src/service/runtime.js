@@ -79,7 +79,7 @@ function exec( state, site, plugin ) {
 function func( source ) {
     window.Notify  = Notify;
     window.browser = browser;
-    window.current = Clone( storage.pr.current );
+    window.current = Clone( storage.current );
     window.read    = Clone( storage.read );
     window.highlight = highlight;
     window.db      = Storage;
@@ -153,7 +153,7 @@ function testPlugin( style, plugin, trigger ) {
                       $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
                       Notify, highlight,
                       browser, db,
-                      storage.pr.current, storage.read );
+                      storage.current, storage.read );
     trigger && addTrigger( trigger() );
 }
 
