@@ -55,6 +55,9 @@ export default class ReadCtlbar extends React.Component {
         kbd.Listen( combo => {
             this.onAction( undefined, combo )
         });
+        run.Controlbar( undefined, event => {
+            this.onAction( undefined, event.detail.type );
+        });
     }
 
     onAction( event, type ) {
