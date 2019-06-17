@@ -40,6 +40,7 @@ const action = {
     // event
     turn_tab       : "turn_tab",
     welcome_close  : "welcome_close",
+    "controlbar"   : "simpread-plugin_controlbar",
 };
 
 /**
