@@ -245,8 +245,8 @@ export default class LabsOpt extends React.Component {
                     <div className="version-tips" data-hits="readauto">
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            desc="白名单与排除列表功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
-                            label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
+                            desc="注意：此功能只包含已适配的站点，智能识别出正文的站点无法使用此功能，但仍可通过手动方式进入阅读模式。"
+                            label="如果当前页面为适配站点，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
                     </div>
