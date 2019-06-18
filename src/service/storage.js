@@ -133,7 +133,11 @@ const name = "simpread",
         origins   : [],
         blacklist : [
             "google.com",
-            "youtube.com"
+            "youtube.com",
+            "simp.red",
+            "simpread.herokuapp.com",
+            "simpread-test.herokuapp.com",
+            "simpread.ksria.cn"
         ],
         plugins   : [], // plugin id, e.g. kw36BtjGu0
     },
