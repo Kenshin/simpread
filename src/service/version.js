@@ -167,7 +167,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'readauto',
-                    intro: '简悦会检测当前页面是否符合阅读模式，如果可以生成阅读模式的话，启用此选项后会自动进入到阅读模式，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/目录">请看这里</a> 。<br>注意：此功能仅限 <b>适配列表支持的站点</b> 自动进入。',
+                    intro: '如果当前 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源">站点已适配</a> 的话，启用此选项后会自动进入到阅读模式，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a> 。',
                 },
                 {
                     id: 'exclusion',
