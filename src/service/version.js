@@ -83,11 +83,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'config',
-                    intro: '从 <b>本地导入配置文件</b> 或 <b>导出配置文件到本地</b>。<br>注意：简悦支持导入任意版本的配置文件，但请尽量上传匹配版本的配置文件。',
+                    intro: '从 <b>本地导入配置文件</b> 或 <b>导出配置文件到本地</b> 。<br>注意：简悦支持导入任意版本的配置文件，但请尽量上传匹配版本的配置文件。',
                 },
                 {
                     id: 'newsites',
-                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。<br>什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a>',
+                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。<br>什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a> 。',
                 },
                 {
                     id: 'clear',
