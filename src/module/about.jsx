@@ -74,7 +74,7 @@ export default class About extends React.Component {
                 <div style={ style.root }>
                     <image src={browser.runtime.getURL("assets/images/icon128.png")}></image>
                     <div style={ style.title }>简悦 SimpRead</div>
-                    <div>让你瞬间进入沉浸式阅读的扩展</div>
+                    <div>为你提供「如杂志般沉浸式阅读体验」的扩展</div>
                     <div style={ style.badges }>
                         <a href={ urls.href.version      } target="_blank"><img style={ style.img } src={ urls.badges.version }/></a>
                         <a href={ urls.href.website      } target="_blank"><img style={ style.img } src={ urls.badges.website }/></a>
