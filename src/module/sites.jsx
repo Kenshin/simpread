@@ -366,7 +366,7 @@ export default class SitesOpts extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="personsites">
-                <div className="label">站点集市</div>
+                <div className="label">站点集市 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.pr.sites.person.length } 类</a></div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="打开「站点集市」" width="100%"
@@ -381,7 +381,6 @@ export default class SitesOpts extends React.Component {
                                 onClick={ ()=>this.clear() } />
                     </div>
 
-                    <div className="label">已安装 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.pr.sites.person.length } 类</a></div>
                     <div style={{ 'padding-top': '10px' }}>
                         <Cards onChange={ t=>this.onChange(t) } />
                     </div>
