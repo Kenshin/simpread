@@ -325,6 +325,7 @@ export default class SitesOpts extends React.Component {
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
+                <div className="version-tips" data-hits="newsites">
                 <div className="label">官方主适配源 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.simpread.sites.length } 类</a></div>
                 <div className="lab">
                     <Button type="raised" text="手动同步适配列表" width="100%"
@@ -332,6 +333,7 @@ export default class SitesOpts extends React.Component {
                             color="#fff" backgroundColor="rgb(103, 58, 183)"
                             waves="md-waves-effect md-waves-button"
                             onClick={ ()=>this.newsites() } />
+                </div>
                 </div>
 
                 <div className="label">第三方适配源</div>

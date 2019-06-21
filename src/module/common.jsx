@@ -268,7 +268,7 @@ export default class CommonOpt extends React.Component {
                             onClick={ ()=>this.export() } />
                 </div>
                 </div>
-                <div className="version-tips" data-hits="newsites" style={{ display: 'inline-flex', width: '50%' }}>
+                <div className="version-tips" data-hits="oldnewsites" style={{ display: 'inline-flex', width: '50%' }}>
                     <Button type="raised" text="手动同步适配列表" width="100%"
                             icon={ ss.IconPath( "update_icon" ) }
                             color="#fff" backgroundColor="#2196F3"

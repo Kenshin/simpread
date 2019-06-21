@@ -86,8 +86,8 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                     intro: '从 <b>本地导入配置文件</b> 或 <b>导出配置文件到本地</b> 。<br>注意：简悦支持导入任意版本的配置文件，但请尽量上传匹配版本的配置文件。',
                 },
                 {
-                    id: 'newsites',
-                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。<br>什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a> 。',
+                    id: 'oldnewsites',
+                    intro: '从 1.1.3 开始，此功能转移到 <b>站点管理</b> 选项卡里面，此功能已废除。',
                 },
                 {
                     id: 'clear',
@@ -211,6 +211,10 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             target: 'sites',
             idx: 2,
             items: [
+                {
+                    id: 'newsites',
+                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。<br>什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a> 。',
+                },
                 {
                     id: 'customsites',
                     intro: '从 1.1.3 开始，简悦调整了第三方适配的规则：仅针对个人的适配源，关于这部分的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a> 。<br><b>注意：</b> 如果你使用了自己的适配源，请先清除再导入。',
