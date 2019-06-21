@@ -340,7 +340,7 @@ export default class SitesOpts extends React.Component {
                 <div ref="origins" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }} className="lab">
                     <div className="version-tips" data-hits="customsites">
                     <TextField 
-                        multi={ true } rows={8}
+                        multi={ true } rows={4}
                         placeholder="仅支持 URL 地址，每行一个。" 
                         value={ ( this.props.option.origins||[] ).join( "\n" ) }
                         onChange={ ()=>this.changeOrigins() }
