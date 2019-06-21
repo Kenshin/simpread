@@ -10,6 +10,7 @@ import * as menu   from 'menu';
 import * as watch  from 'watch';
 import * as exp    from 'export';
 import {br}        from 'browser';
+import * as msg    from 'message';
 
 export default class CommonOpt extends React.Component {
 
@@ -192,6 +193,14 @@ export default class CommonOpt extends React.Component {
         }
     }
 
+    oldnewsites() {
+        new Notify().Render( "此功能转移到 <b>站点管理</b> 选项卡里面，3 秒钟后自动切换到此选项卡。" );
+        setTimeout( ()=> {
+            location.href = location.origin + "/options/options.html#labs";
+            window.dispatchEvent( new CustomEvent( msg.MESSAGE_ACTION.turn_tab, { detail: { page: 3 }}));
+        }, 3000 );
+    }
+
     newsites() {
         const notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
         storage.GetRemote( "remote", ( result, error ) => {
@@ -273,7 +282,7 @@ export default class CommonOpt extends React.Component {
                             icon={ ss.IconPath( "update_icon" ) }
                             color="#fff" backgroundColor="#2196F3"
                             waves="md-waves-effect md-waves-button"
-                            onClick={ ()=>this.newsites() } />
+                            onClick={ ()=>this.oldnewsites() } />
                 </div>
                 <div className="version-tips" data-hits="clear" style={{ display: 'inline-flex', width: '50%' }}>
                     <Button type="raised" text="清除数据" width="100%"
