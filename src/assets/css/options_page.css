@@ -421,7 +421,7 @@ card-empty a {
     background-color: #16666f;
 }
 
-.notice:hover {
+.bubbles.notice:hover {
     background-color: rgba(22, 102, 111, .8);
 }
 
