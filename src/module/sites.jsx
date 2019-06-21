@@ -103,6 +103,23 @@ class Cards extends React.Component {
 
 export default class SitesOpts extends React.Component {
 
+    newsites() {
+        const notify = new Notify().Render({ content: "数据同步中，请稍等...", state: "loading" });
+        storage.GetRemote( "remote", ( result, error ) => {
+            notify.complete();
+            if ( !error ) {
+                const count = storage.pr.Addsites( result );
+                storage.Writesite( storage.pr.sites, () => {
+                    watch.SendMessage( "site", true );
+                    count == 0 ? new Notify().Render( "适配列表已同步至最新版本，2 秒后自动自动刷新。" ) : new Notify().Render( 0, `适配列表已同步成功，本次新增 ${ count } 个站点，2 秒后自动自动刷新。` );
+                    setTimeout( ()=>location.reload(), 2000 );
+                });
+            } else {
+                new Notify().Render( 3, `同步时发生了一些问题，并不会影响本地配置文件，请稍后再试！` );
+            }
+        });
+    }
+
     onClick( state ) {
         state == "sitemgr" && ( location.href = location.origin + "/options/sitemgr.html" );
     }
@@ -308,6 +325,15 @@ export default class SitesOpts extends React.Component {
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
+                <div className="label">官方主适配源 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.simpread.sites.length } 类</a></div>
+                <div className="lab">
+                    <Button type="raised" text="手动同步适配列表" width="100%"
+                            icon={ ss.IconPath( "update_icon" ) }
+                            color="#fff" backgroundColor="rgb(103, 58, 183)"
+                            waves="md-waves-effect md-waves-button"
+                            onClick={ ()=>this.newsites() } />
+                </div>
+
                 <div className="label">第三方适配源</div>
                 <div ref="origins" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }} className="lab">
                     <div className="version-tips" data-hits="customsites">
@@ -335,19 +361,21 @@ export default class SitesOpts extends React.Component {
                             onClick={ ()=>this.origins( "clear" ) } />
                     </div>
                     </div>
-                    <div className="version-tips" data-hits="sitemgr">
-                    <div style={{ 'padding-top': '10px', 'position': 'relative' }} onClick={ ()=>this.onClick('sitemgr') }>
-                        <div className="more" style={{ 'cursor': 'pointer' }}>
-                            <div>站点管理器</div>
-                            <span className="desc">可以编辑全部的适配站点，包括：官方适配源、站点集市适配源、第三方适配源、自定义适配源。</span>
-                            <span className="arrow" style={{ 'bottom': '13px' }}></span>
-                        </div>
+                </div>
+
+                <div className="version-tips" data-hits="sitemgr">
+                <div className="label">站点管理器</div>
+                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('sitemgr') }>
+                    <div className="more" style={{ 'cursor': 'pointer' }}>
+                        <div>可以管理全部的适配站点</div>
+                        <span className="desc">包括：官方适配源、第三方适配源、站点集市适配源、自定义适配源。</span>
+                        <span className="arrow"></span>
                     </div>
-                    </div>
+                </div>
                 </div>
 
                 <div className="version-tips" data-hits="personsites">
-                <div className="label">管理</div>
+                <div className="label">站点集市</div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="打开「站点集市」" width="100%"
