@@ -1,13 +1,13 @@
 console.log( "===== simpread option sites load =====" )
 
-import {storage} from 'storage';
-import {browser} from 'browser';
-import * as msg  from 'message';
+import {storage}  from 'storage';
+import {browser}  from 'browser';
+import * as msg   from 'message';
 import * as watch from 'watch';
-import * as ss   from 'stylesheet';
+import * as ss    from 'stylesheet';
 
-import TextField from 'textfield';
-import Button    from 'button';
+import TextField  from 'textfield';
+import Button     from 'button';
 
 class Card extends React.Component {
 
