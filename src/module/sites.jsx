@@ -365,17 +365,6 @@ export default class SitesOpts extends React.Component {
                     </div>
                 </div>
 
-                <div className="version-tips" data-hits="sitemgr">
-                <div className="label">站点管理器</div>
-                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('sitemgr') }>
-                    <div className="more" style={{ 'cursor': 'pointer' }}>
-                        <div>可以管理全部的适配站点</div>
-                        <span className="desc">包括：官方适配源、第三方适配源、站点集市适配源、自定义适配源。</span>
-                        <span className="arrow"></span>
-                    </div>
-                </div>
-                </div>
-
                 <div className="version-tips" data-hits="personsites">
                 <div className="label">站点集市</div>
                 <div className="lab">
@@ -395,6 +384,17 @@ export default class SitesOpts extends React.Component {
                     <div className="label">已安装 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.pr.sites.person.length } 类</a></div>
                     <div style={{ 'padding-top': '10px' }}>
                         <Cards onChange={ t=>this.onChange(t) } />
+                    </div>
+                </div>
+                </div>
+
+                <div className="version-tips" data-hits="sitemgr">
+                <div className="label">站点管理器</div>
+                <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('sitemgr') }>
+                    <div className="more" style={{ 'cursor': 'pointer' }}>
+                        <div>可以管理全部的适配站点</div>
+                        <span className="desc">包括：官方适配源、第三方适配源、站点集市适配源、自定义适配源。</span>
+                        <span className="arrow"></span>
                     </div>
                 </div>
                 </div>
