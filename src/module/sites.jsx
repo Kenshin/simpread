@@ -391,11 +391,11 @@ export default class SitesOpts extends React.Component {
                                 waves="md-waves-effect md-waves-button"
                                 onClick={ ()=>this.clear() } />
                     </div>
-                </div>
 
-                <div className="label">已安装 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.pr.sites.person.length } 类</a></div>
-                <div style={{ 'padding-top': '10px' }} className="lab">
-                    <Cards onChange={ t=>this.onChange(t) } />
+                    <div className="label">已安装 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.pr.sites.person.length } 类</a></div>
+                    <div style={{ 'padding-top': '10px' }}>
+                        <Cards onChange={ t=>this.onChange(t) } />
+                    </div>
                 </div>
                 </div>
             </div>
