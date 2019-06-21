@@ -279,7 +279,7 @@ sr-rd-crlbar.controlbar:hover {
 }
 
 
-sr-highlight-group {
+simpread-highlight {
     position: fixed;
 
     top: 0;
@@ -293,7 +293,7 @@ sr-highlight-group {
 
     height: 50px;
 
-    background-color: rgba(0, 0, 0, .1);
+    background-color: rgba(50, 50, 50, .9);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
 
     z-index: 2147483640;
