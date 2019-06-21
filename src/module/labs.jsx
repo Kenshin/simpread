@@ -329,7 +329,7 @@ export default class LabsOpt extends React.Component {
                 <div className="version-tips" data-hits="custom">
                 <div className="label">自定义样式</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('custom') }>
-                    <div className="more">
+                    <div className="more" style={{ 'cursor': 'pointer' }}>
                         <div>增强「中文阅读体验」设置</div>
                         <span className="desc">包括：标题、描述、正文的字间距、行间距、首行缩进等及自定义 CSS。</span>
                         <span className="arrow"></span>
@@ -347,7 +347,7 @@ export default class LabsOpt extends React.Component {
                         onChange={ (s)=>this.onChange(s, "option", "notice") } />
                 </div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('notice') }>
-                    <div className="more">
+                    <div className="more" style={{ 'cursor': 'pointer' }}>
                         <div>查看全部消息</div>
                         <span className="desc">简悦会不定期发送一些消息，包括：新的插件上线、新的适配站点上线、修复 Bug 等</span>
                         <span className="arrow"></span>
