@@ -291,7 +291,7 @@ sr-highlight-group {
 
     padding: 15px;
 
-    height: 24px;
+    height: 50px;
 
     background-color: rgba(0, 0, 0, .1);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
@@ -307,6 +307,7 @@ sr-highlight-ctl {
     margin: 0 5px;
 
     width: 50px;
+    height: 20px;
 
     color: #fff;
     background-color: #1976d2;
