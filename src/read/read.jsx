@@ -201,8 +201,8 @@ class Read extends React.Component {
                     site.exclude.push( `[[\`${path}\`]]` );
                     if ( storage.pr.state == "temp" ) {
                         const include = storage.pr.Utils().dom2Xpath( storage.pr.dom );
-                        site.name     = site.name.replace( "tempread::", "" );
                         site.include  = `[[\`${include}\`]]`;
+                        site.name     = site.name.replace( "tempread::", "" );
                     }
                     storage.pr.Updatesite( 'local', storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
                     storage.Writesite( storage.pr.sites, () => {
