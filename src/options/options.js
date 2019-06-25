@@ -184,7 +184,7 @@ function vernotify( first ) {
             }
             ///////////////////////////////////////////////////////////////////////////
             // verify and remove old plugins
-            ver.VerifyPlugin( storage.option, version ) && storage.Write( () => {
+            ver.VerifyPlugins( storage.option, version ) && storage.Write( () => {
                 new Notify().Render({ content: `新版升级后，会自动删除一些已失效的插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">自定义主题</a>`, state: "holdon" });
             }, storage.simpread );
         }

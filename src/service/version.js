@@ -506,7 +506,7 @@ function FixSubver( patch, target ) {
  * @param {string} version
  * @param {object} option
  */
-function VerifyPlugin( ver, option ) {
+function VerifyPlugins( ver, option ) {
     try {
         if ( option.plugins.length == 0 ) return false;
         const str = option.plugins.join( "," );
@@ -533,5 +533,5 @@ export {
     Notify,
     Compare,
     FixSubver,
-    VerifyPlugin,
+    VerifyPlugins,
 }
