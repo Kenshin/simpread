@@ -213,7 +213,7 @@ class Read extends React.Component {
                 });
                 break;
             case "highlight":
-                new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
+                new Notify().Render( `移动鼠标选择高亮区域，以便生成阅读模式，此模式将会在页面刷新后失效，详细说明请看 <a href="http://ksria.com/simpread/docs/#/重新高亮" target="_blank">重新高亮</a>` );
                 this.exit();
                 Highlight().done( dom => {
                     const rerender = element => {
