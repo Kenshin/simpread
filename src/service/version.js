@@ -225,7 +225,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'personsites',
-                    intro: '简悦用户自行上传且未收录到 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=官方（主）适配源">官方适配源</a> 里面的适配站点，可以在这里对这些站点进行安装，删除，更新等操作，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点集市">请看这里</a> 。',
+                    intro: '简悦用户自行上传且未收录到 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=官方适配源">官方适配源</a> 里面的适配站点，可以在这里对这些站点进行安装，删除，更新等操作，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点集市">请看这里</a> 。',
                 }
             ]
         },
