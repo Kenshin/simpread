@@ -128,7 +128,7 @@
 
 * 方式3：通过 **新增站点编辑器** 的方式（适合逐一添加单个新站），详细说明 [请看这里](http://ksria.com/simpread/docs/#/站点编辑器?id=如何新增修改)；
 
-* 方式4：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](http://ksria.com/simpread/docs/#/站点适配源?id=如何提交到简悦的官方（次）适配源)
+* 方式4：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](http://ksria.com/simpread/docs/#/如何提交第三方适配源)；
 
 * 更多说明请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器) [站点管理](http://ksria.com/simpread/docs/#/站点管理器) [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)；
 
