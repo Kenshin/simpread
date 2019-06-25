@@ -500,6 +500,31 @@ function FixSubver( patch, target ) {
     return target;
 }
 
+/**
+ * Verify current version plugins
+ * 
+ * @param {string} version
+ * @param {object} option
+ */
+function VerifyPlugin( ver, option ) {
+    try {
+        if ( option.plugins.length == 0 ) return false;
+        const str = option.plugins.join( "," );
+        if ( ver == "1.1.3" ) {
+            const newStr = str.replace( /(E0j1nYBmDD,?|SumEaxStWE,?|UsayAKSuwe,?)/g, "" );
+            if ( str != newStr ) {
+                option.plugins = newStr.replace( /,$/, "" ).split( "," );
+                return true;
+            }
+        }
+        return false;
+    } catch( error ) {
+        console.error( "version::VerifyPlugin catch", error )
+    } finally {
+        return false;
+    }
+}
+
 export {
     version,
     tips,
@@ -508,4 +533,5 @@ export {
     Notify,
     Compare,
     FixSubver,
+    VerifyPlugin,
 }
