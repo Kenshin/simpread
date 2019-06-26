@@ -124,7 +124,7 @@ export default class CommonOpt extends React.Component {
                 })();
             } else {
                 const jianguo = storage.secret.jianguo;
-                !jianguo.access_token ? new Notify().Render( 2, `坚果云未授权，请先 <a href="http://ksria.com/simpread/docs/#/坚果云">授权</a>。` ) : readJianguo( storage.secret.jianguo );
+                !jianguo.access_token ? new Notify().Render( 2, `坚果云 <b>授权</b> 后才能使用此功能，如何授权 <a href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>。` ) : readJianguo( storage.secret.jianguo );
             }
         });
     }
