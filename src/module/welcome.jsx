@@ -278,7 +278,7 @@ class Welcome extends React.Component {
                                 </section>
                             </div> }
 
-                    { (( !first && version == "1.1.3" ) || version == "all" ) && 
+                    { !first && version == "1.1.3" &&
                         <div className="carousel-item" id="1.1.3">
                             <section style={ style.section }>
                                 <img src="http://sr.ksria.cn/welcome-plugins.png" style={ style.img }/>
