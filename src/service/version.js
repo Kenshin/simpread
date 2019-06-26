@@ -428,7 +428,7 @@ function Verify( curver, data ) {
 
         data.notice = { "latest": 0, "read": [] };
 
-        data.option.blacklist.findIndex(item=>item.indexOf("youtube.com") > 0) < 0 && data.option.blacklist.push( "youtube.com" )
+        data.option.blacklist.findIndex( item => item.toLowerCase() == "youtube.com" ) < 0 && data.option.blacklist.push( "youtube.com" );
 
         data.patch = 0;
         curver = "1.1.3";
