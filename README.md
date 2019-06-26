@@ -50,16 +50,16 @@
 - 主动适配  
   通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](http://ksria.com/simpread/docs/#/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
 
-- 智能适配  
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 智能适配  
 
-  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 全新的 `词法分析引擎`，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」，不仅能自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面，甚至于只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)
+  全新的 `词法分析引擎`，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」，不仅能自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面，甚至于只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)
 
-- 智能感知  
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 智能感知  
 
-  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 当生成的阅读模式出现问题时，简悦会自动重新获取正文，详细说明请看 [智能感知](http://ksria.com/simpread/docs/#/智能感知)
+  当生成的阅读模式出现问题时，简悦会自动重新获取正文，详细说明请看 [智能感知](http://ksria.com/simpread/docs/#/智能感知)
 
-- 手动框选适配  
-  ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 针对 `未适配` 或 `智能识别` 失败的情况，简悦可以使用手动框选的方式，生成阅读模式，详细请看 [手动框选](http://ksria.com/simpread/docs/#/手动框选) 
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 手动框选适配  
+  针对 `未适配` 或 `智能识别` 失败的情况，简悦可以使用手动框选的方式，生成阅读模式，详细请看 [手动框选](http://ksria.com/simpread/docs/#/手动框选) 
 
 - 站点适配源  
   包括：`官方适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
