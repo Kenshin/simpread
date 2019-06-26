@@ -18,17 +18,22 @@
 
 ## 马上使用
 * [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.3/simpread.crx)
+
 * [Firefox 扩展中心](https://addons.mozilla.org/zh-CN/firefox/addon/simpread) 
+
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
+
 * [iOS（ iPhone / iPad ）版](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](http://ksria.com/simpread/docs/#/JSBox)
 
-## 入门指引
+## 入门指南
 
 * 喜欢简悦，但不会用，对新手极度舒适的 [新手入门](http://ksria.com/simpread/guide)
 
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料
 
 * 想知道简悦的高级玩法，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
+
+* 更多联系方式请看 [相关链接](#相关链接)
 
 ## 主要功能一览
 - [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)  
