@@ -101,7 +101,10 @@
 ![定制化，可编程](http://sr.ksria.cn/welcome-readme-4.png)  
 
 ## 全部功能
-![功能一览](http://sr.ksria.cn/feature%201.1.3.png)
+
+<details>
+  <img src="http://sr.ksria.cn/feature%201.1.3.png">
+</details>
 
 ## 如何使用
 
