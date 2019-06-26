@@ -209,7 +209,7 @@ class Welcome extends React.Component {
                                 <div style={ style.desc }>
                                     支持下载 HTML · PDF · Markdown · PNG · <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Epub">Epub</a> 到本地 以及 发送到 <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Kindle">Kindle</a><br/>
                                     支持输出到 坚果云 · 语雀 · Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘<br/>
-                                    发送页面链接到 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">稍后读</a> · Pocket · Instapaper · Linnk，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/授权服务">请看这里</a>
+                                    发送页面链接到 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">稍后读</a> · Pocket · Instapaper · Linnk，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力">请看这里</a>
                                 </div>
                             </section>
                         </div> }
