@@ -47,9 +47,6 @@
 
   * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](http://ksria.com/simpread/docs/#/自定义样式)
 
-- 临时阅读模式  
-  将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](http://ksria.com/simpread/docs/#/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#temp-read-mode)
-
 - 主动适配  
   通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](http://ksria.com/simpread/docs/#/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
 
@@ -61,6 +58,9 @@
 
   * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 当生成的阅读模式出现问题时，简悦会自动重新获取正文，详细说明请看 [智能感知](http://ksria.com/simpread/docs/#/智能感知)
 
+- 手动框选适配  
+  ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 针对 `未适配` 或 `智能识别` 失败的情况，简悦可以使用手动框选的方式，生成阅读模式，详细请看 [手动框选](http://ksria.com/simpread/docs/#/手动框选) 
+
 - 站点适配源  
   包括：`官方适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
 
@@ -70,10 +70,10 @@
 - 站点管理器  
   可管理全部的适配站点，详细请看 [站点管理器](http://ksria.com/simpread/docs/#/站点管理器)
 
-- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 站点集市  
+- 站点集市  
   上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
 
-- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 插件系统  
+- 插件系统  
   现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) ，如何编写插件请看 → [说明文档](http://ksria.com/simpread/docs/#/插件系统)
 
 - 多种主题  
