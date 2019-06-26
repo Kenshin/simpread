@@ -29,9 +29,11 @@
 
 ## 入门指南
 
+* 简悦的内容较多，汇总到了一个页面 [新闻页](https://simp.red/news)
+
 * 喜欢简悦，但不会用，对新手极度舒适的 [新手入门](http://ksria.com/simpread/guide)
 
-* 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料
+* 参与讨论请加入 [Telegram 群](https://t.me/simpread)
 
 * 想知道简悦的高级玩法，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
 
