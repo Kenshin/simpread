@@ -152,8 +152,9 @@
 
 * 更多说明请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器) [站点管理](http://ksria.com/simpread/docs/#/站点管理器) [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)；
 
-## Chrome / Firefox / 轻阅版（UserScript）功能差别：
-![Chrome / Firefox / 轻阅版（UserScript）功能差别](https://i.imgur.com/z4WI7uK.png)
+## 简悦各平台版本之间的差异
+
+> 包括：Chrome / Firefox / 轻阅版（UserScript）/ JSBox ，请访问 [简悦 · 新闻页](https://www.notion.so/9c109ec145134297ab461f5b52dbadc7?v=ce94e37d8a794cfbbd39bf9dfaf9017a)
 
 ## 投票
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
