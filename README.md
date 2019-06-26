@@ -22,8 +22,11 @@
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 * [iOS（ iPhone / iPad ）版](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](http://ksria.com/simpread/docs/#/JSBox)
 
-* 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料。
-* 不同简悦如何使用？想知道简悦的高级功能，请看简悦的 [帮助中心](http://ksria.com/simpread/docs/#) 。
+* 喜欢简悦，但不会用，对新手极度舒适的 [新手入门](http://ksria.com/simpread/guide)
+
+* 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料
+
+* 不同简悦如何使用？想知道简悦的高级功能，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
 
 #### 主要功能一览：
 - [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)：  
@@ -32,7 +35,7 @@
 - [阅读模式](http://ksria.com/simpread/docs/#/阅读模式)：  
   简悦 `原创` 功能，逐一适配了 [数百种类型](https://simpread.ksria.cn/sites/) 的网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
-  * 支持 `自动生成目录` 
+  * 支持 [自动生成目录](http://ksria.com/simpread/docs/#/目录) 
 
   * 支持 [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) 
 
@@ -53,6 +56,10 @@
 - 智能适配：  
 
   * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 全新的 `词法分析引擎`，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」，不仅能自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面，甚至于只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)
+
+- 智能感知：  
+
+  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 当生成的阅读模式出现问题时，简悦会自动重新获取正文，详细说明请看 [智能感知](http://ksria.com/simpread/docs/#/智能感知)
 
 - 站点适配源：  
   包括：`官方适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
@@ -80,7 +87,7 @@
 
   - 导出到 `Pocket` `Linnk` `Instapaper` 的功能，包括：`当前页面的链接` `稍后读`
 
-  - 导出到生产力工具，包括：`Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [授权服务](http://ksria.com/simpread/docs/#/授权服务)
+  - 导出到生产力工具，包括：`坚果云` `语雀` `Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [导出到生产力](http://ksria.com/simpread/docs/#/导出到生产力)
 
 - 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](http://ksria.com/simpread/docs/#/快捷键) 等；
 
@@ -92,11 +99,6 @@
 ![简单阅读，愉悦心情！](http://sr.ksria.cn/welcome-readme-1.png)
 ![多种导出方式](http://sr.ksria.cn/welcome-readme-3.png)  
 ![定制化，可编程](http://sr.ksria.cn/welcome-readme-4.png)  
-
-#### 照片集：
-> 包含了 `稍后读` `阅读模式 · 设置界面` `导出到生产力工具` `发送到 Kindle` `自定义样式` `同步配置` `论坛类页面 · 分页` 等功能的截图（动图）
-
-* <http://ksria.com/simpread/gallery/>
 
 #### 全部功能：
 ![功能一览](http://sr.ksria.cn/feature%201.1.3.png)
