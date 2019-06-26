@@ -107,7 +107,15 @@
 ## 截图
 ![简单阅读，愉悦心情！](http://sr.ksria.cn/welcome-readme-1.png)
 ![多种导出方式](http://sr.ksria.cn/welcome-readme-3.png)  
-![定制化，可编程](http://sr.ksria.cn/welcome-readme-4.png)  
+
+<details><summary>更多截图</summary>
+  <img src="http://sr.ksria.cn/welcome-readme-2.png"/>
+  <img src="http://sr.ksria.cn/welcome-readme-4.png"/>
+  <img src="https://i.loli.net/2019/06/26/5d12e86b976f450493.png"/>
+  <img src="https://i.loli.net/2019/06/26/5d12e86bd9d6844696.png"/>
+  <img src="https://i.loli.net/2019/06/26/5d12e86bde78615339.png"/>
+  <img src="https://i.loli.net/2019/06/26/5d12e86c9468188114.png"/>
+</details>
 
 ## 全部功能
 
