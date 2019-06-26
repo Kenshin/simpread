@@ -23,7 +23,9 @@
 
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 
-* [iOS（ iPhone / iPad ）版](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](http://ksria.com/simpread/docs/#/JSBox)
+* [iPhone / iPad 版](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](http://ksria.com/simpread/docs/#/JSBox)
+
+* [Android 版](http://ksria.com/simpread/docs/#/Android) 详细 [请看这里](http://ksria.com/simpread/docs/#/Android)
 
 ## 入门指南
 
