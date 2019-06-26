@@ -28,7 +28,7 @@ sr-rd-content sr-blockquote:before {
  * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
  */
 
-.simpread-theme-root {
+.simpread-theme-root, .simpread-multi-root {
     background-color: #f3f2ee;
     color: #2C3E50;
 }
