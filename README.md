@@ -169,7 +169,7 @@
 
 ## 感谢
 
-[ksky521](https://github.com/ksky521) · [airycanon](https://github.com/airycanon) · [mikelei8291](https://github.com/mikelei8291) · [chenhbc](https://github.com/chenhbc) · [Nihility](https://github.com/NihilityT) · [WangLeto](https://github.com/WangLeto) · [SevenSteven](https://github.com/Seven-Steven) · [Leo](https://github.com/clinyong) · [Jonas Gao](https://github.com/JonasGao) · [Cologler](https://github.com/Cologler) · [bgh](https://github.com/bldght) · [Ronglong Pu](https://github.com/PuRonglong) · []() · []() · []() · []() · []() · []() · []()
+[ksky521](https://github.com/ksky521) [airycanon](https://github.com/airycanon) [mikelei8291](https://github.com/mikelei8291) [chenhbc](https://github.com/chenhbc) [Nihility](https://github.com/NihilityT) [WangLeto](https://github.com/WangLeto) [SevenSteven](https://github.com/Seven-Steven) [Leo](https://github.com/clinyong) [Jonas Gao](https://github.com/JonasGao) [Cologler](https://github.com/Cologler) [bgh](https://github.com/bldght) [Ronglong Pu](https://github.com/PuRonglong)
 
 ## 简悦的诞生离不开它们
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
