@@ -16,7 +16,7 @@
 
 ***
 
-#### 马上使用：
+## 马上使用：
 * [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.3/simpread.crx)
 * [Firefox 扩展中心](https://addons.mozilla.org/zh-CN/firefox/addon/simpread) 
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
@@ -28,7 +28,7 @@
 
 * 想知道简悦的高级玩法，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
 
-#### 主要功能一览：
+## 主要功能一览：
 - [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)：  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
@@ -95,17 +95,21 @@
 
 - 稍后读；
 
-#### 截图：
+## 截图：
 ![简单阅读，愉悦心情！](http://sr.ksria.cn/welcome-readme-1.png)
 ![多种导出方式](http://sr.ksria.cn/welcome-readme-3.png)  
 ![定制化，可编程](http://sr.ksria.cn/welcome-readme-4.png)  
 
-#### 全部功能：
+## 全部功能：
 ![功能一览](http://sr.ksria.cn/feature%201.1.3.png)
 
-#### 如何使用（阅读模式）：
+## 如何使用
 
-`简悦`会自动检测当前页面是否已经适配，如适配则在浏览器右上角显示 ![Imgur](http://i.imgur.com/dyROEBi.png) ，使用以下三种方式启动：
+> 简悦虽然拥有众多功能，但它支持开箱即用，新手（不想折腾党）来说，只需要看懂下面两种操作即可。
+
+### 阅读模式：
+
+> `简悦`会自动检测当前页面是否已经适配，如适配则在浏览器右上角显示 ![Imgur](http://i.imgur.com/dyROEBi.png) ，使用以下三种方式启动：
 
 - 点击浏览器右上角 `红色icon`；
 
@@ -113,15 +117,15 @@
 
 - 快捷键；（默认为 双击 <kbd>A</kbd> )
 
+### 聚焦模式：
 
-#### 如何使用（聚焦模式）：
-`聚焦模式` 会自动获取当前鼠标所在的段落并高亮，适合任意页面。
+> `聚焦模式` 会自动获取当前鼠标所在的段落并高亮，适合任意页面。
 
 - 在需要高亮的区域，右键选择 `简悦 - SimpRead` → `聚焦模式`；
 
 - 快捷键；（默认为 <kbd>A</kbd> <kbd>S</kbd> )
 
-#### 提交新站：
+## 提交新站：
 
 * 方式1：通过 **提交到 站点集市** 的方式，详细请看 [站点管理器 · 上传](http://ksria.com/simpread/docs/#/站点管理器?id=上传)
 
@@ -134,13 +138,13 @@
 
 * 更多说明请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器) [站点管理](http://ksria.com/simpread/docs/#/站点管理器) [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)；
 
-#### Chrome / Firefox / 轻阅版（UserScript）功能差别：
+## Chrome / Firefox / 轻阅版（UserScript）功能差别：
 ![Chrome / Firefox / 轻阅版（UserScript）功能差别](https://i.imgur.com/z4WI7uK.png)
 
-#### 投票：
+## 投票：
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
-#### 相关链接：
+## 相关链接：
 * [更新日志](http://ksria.com/simpread/changelog.html)
 * [帮助中心](http://ksria.com/simpread/docs/#)
 * [新手入门](http://ksria.com/simpread/docs/#/入门指南（-操作指引-）)
@@ -149,12 +153,12 @@
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
 
-#### 感谢：
+## 感谢：
 - [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 Pull requests [#16](https://github.com/kenshin/simpread/pull/16)；
 - [airycanon](https://github.com/airycanon) Pull requests 详细请看 [#23](https://github.com/kenshin/simpread/pull/23) [#44](https://github.com/kenshin/simpread/pull/44) [#124](https://github.com/kenshin/simpread/pull/124)；
 - [mikelei8291](https://github.com/mikelei8291) 详细请看 Pull requests [#114](https://github.com/kenshin/simpread/pull/114)；
 
-#### 简悦的诞生离不开它们：
+## 简悦的诞生离不开它们：
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
 - [Webpack](https://webpack.github.io/)
 - [React](https://facebook.github.io/react)
@@ -170,7 +174,7 @@
 - Mind Maps <https://coggle.it/>
 - 咖啡 · 网易音乐 · Google Chrome · rMBP
 
-#### 协作开发：
+## 协作开发：
 - Pull requests 方式：
   * 请从 `develop` 分支开始；（ 注意：非 develop 分支的 pr 将不会合并；）
   * Pull requests
@@ -185,12 +189,12 @@
   * npmw run develop ( for Win ) 用于开发
   * npmw run publish ( for Win ) 用于发布
 
-#### 请杯咖啡：
+## 请杯咖啡：
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
 _如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_  
 ![支付](http://sr.ksria.cn/zhifu_m2.png)
 
-#### 许可：
+## 许可：
 [![license-badge]][license-link]
 
 <!-- Link -->
