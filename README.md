@@ -3,12 +3,12 @@
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.2-blue.svg"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.3-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
 </p>
 <p align="center">
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
-   <a href="http://ksria.com/simpread/crx/1.1.2/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
+   <a href="http://ksria.com/simpread/crx/1.1.3/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
    <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://i.imgur.com/JFhxHeR.png"></a>
    <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.2.box?201810231502&name=%E7%AE%80%E6%82%A6"><img src="https://i.imgur.com/zZeOllB.png"></a>
@@ -17,7 +17,7 @@
 ***
 
 #### 马上使用：
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.2/simpread.crx)
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.3/simpread.crx)
 * [Firefox 扩展中心](https://addons.mozilla.org/zh-CN/firefox/addon/simpread) 
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 * [iOS（ iPhone / iPad ）版](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](http://ksria.com/simpread/docs/#/JSBox)
@@ -99,7 +99,7 @@
 * <http://ksria.com/simpread/gallery/>
 
 #### 全部功能：
-![功能一览](http://sr.ksria.cn/feature%201.1.2.png)
+![功能一览](http://sr.ksria.cn/feature%201.1.3.png)
 
 #### 如何使用（阅读模式）：
 
@@ -194,11 +194,11 @@ _如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_
 <!-- Link -->
 [www-badge]:        https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg
 [www-link]:         http://ksria.com/simpread
-[version-badge]:    https://img.shields.io/badge/lastest_version-1.1.2-blue.svg
+[version-badge]:    https://img.shields.io/badge/lastest_version-1.1.3-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
-[offline-link]:     http://ksria.com/simpread/crx/1.1.2/simpread.crx
+[offline-link]:     http://ksria.com/simpread/crx/1.1.3/simpread.crx
 [license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
 [license-link]:     https://opensource.org/licenses/MIT
