@@ -145,8 +145,7 @@ class Read extends React.Component {
         !this.props.wrapper.avatar && this.props.read.toc 
             && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
 
-        this.props.wrapper.avatar && [ "github", "pixyii", "monospace" ].includes( this.props.read.theme )
-            ? $( ".simpread-read-root" ).addClass( "simpread-multi-root" ) : $( ".simpread-read-root" ).removeClass( "simpread-multi-root" );
+        this.props.wrapper.avatar && $( ".simpread-read-root" ).addClass( "simpread-multi-root" );
 
         loadPlugins( "read_complete" );
 
