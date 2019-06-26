@@ -42,7 +42,7 @@
 
 * [协作开发](#协作开发)
 
-* [请杯咖啡](#请杯咖啡)
+* [请杯咖啡](#请杯咖啡-)
 
 * [开源列表](#简悦的诞生离不开它们)
 
@@ -138,6 +138,12 @@
 
 - 稍后读
 
+## 全部功能
+
+<details>
+  <img src="http://sr.ksria.cn/feature%201.1.3.png">
+</details>
+
 ## 截图
 ![简单阅读，愉悦心情！](http://sr.ksria.cn/welcome-readme-1.png)
 
@@ -149,12 +155,6 @@
   <img src="https://i.loli.net/2019/06/26/5d12e86bd9d6844696.png"/>
   <img src="https://i.loli.net/2019/06/26/5d12e86bde78615339.png"/>
   <img src="https://i.loli.net/2019/06/26/5d12e86c9468188114.png"/>
-</details>
-
-## 全部功能
-
-<details>
-  <img src="http://sr.ksria.cn/feature%201.1.3.png">
 </details>
 
 ## 如何使用
@@ -181,6 +181,10 @@
 
 - 快捷键；（默认为 <kbd>A</kbd> <kbd>S</kbd> )
 
+## 简悦各平台版本之间的差异
+
+> 包括：Chrome / Firefox / 轻阅版（UserScript）/ JSBox ，请访问 [简悦 · 新闻页](https://www.notion.so/9c109ec145134297ab461f5b52dbadc7?v=ce94e37d8a794cfbbd39bf9dfaf9017a)
+
 ## 提交新站
 
 * 方式1：通过 **提交到 站点集市** 的方式，详细请看 [站点管理器 · 上传](http://ksria.com/simpread/docs/#/站点管理器?id=上传)
@@ -193,10 +197,6 @@
 * 方式4：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](http://ksria.com/simpread/docs/#/如何提交第三方适配源)；
 
 * 更多说明请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器) [站点管理](http://ksria.com/simpread/docs/#/站点管理器) [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)；
-
-## 简悦各平台版本之间的差异
-
-> 包括：Chrome / Firefox / 轻阅版（UserScript）/ JSBox ，请访问 [简悦 · 新闻页](https://www.notion.so/9c109ec145134297ab461f5b52dbadc7?v=ce94e37d8a794cfbbd39bf9dfaf9017a)
 
 ## 投票
 简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
@@ -218,6 +218,21 @@
 
 [ksky521](https://github.com/ksky521) · [airycanon](https://github.com/airycanon) · [mikelei8291](https://github.com/mikelei8291) · [chenhbc](https://github.com/chenhbc) · [Nihility](https://github.com/NihilityT) · [WangLeto](https://github.com/WangLeto) · [SevenSteven](https://github.com/Seven-Steven) · [Leo](https://github.com/clinyong) · [Jonas · Gao](https://github.com/JonasGao) · [Cologler](https://github.com/Cologler) · [bgh](https://github.com/bldght) · [Ronglong Pu](https://github.com/PuRonglong)
 
+## 协作开发
+
+> Pull requests 方式：
+
+* 请务必从 **develop** 分支开始；（ **注意：非 develop 分支的 pr 将不会被合并** ）
+
+* Pull requests
+
+* 如果需要合并的话，合并后我会通知你；（在下个版本发布时一起发布）
+
+## 请杯咖啡 ☕
+如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
+_如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_  
+![支付](http://sr.ksria.cn/zhifu_m2.png)
+
 ## 简悦的诞生离不开它们
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
 - [Webpack](https://webpack.github.io/)
@@ -233,21 +248,6 @@
 - Material Design usage <https://material.io/guidelines/>
 - Mind Maps <https://coggle.it/>
 - 咖啡 · 网易音乐 · Google Chrome · rMBP
-
-## 协作开发
-
-> Pull requests 方式：
-
-* 请务必从 **develop** 分支开始；（ **注意：非 develop 分支的 pr 将不会被合并** ）
-
-* Pull requests
-
-* 如果需要合并的话，合并后我会通知你；（在下个版本发布时一起发布）
-
-## 请杯咖啡 ☕
-如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
-_如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_  
-![支付](http://sr.ksria.cn/zhifu_m2.png)
 
 ## 许可
 [![license-badge]][license-link]
