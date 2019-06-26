@@ -224,8 +224,8 @@ export default class LabsOpt extends React.Component {
                     <div className="version-tips" data-hits="highlight">
                     <Switch width="100%" checked={ this.props.read.highlight }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            label="是否启动临时阅读模式？"
-                            desc="当页面未适配阅读模式时，才能使用此功能"
+                            label="手动框选时是否启动二次确认模式？"
+                            desc="二次确认模式能精准的定位需要阅读模式的内容。"
                             onChange={ (s)=>this.onChange(s, "read", "highlight") } />
                     </div>
                     <div className="version-tips" data-hits="toc">
@@ -245,8 +245,8 @@ export default class LabsOpt extends React.Component {
                     <div className="version-tips" data-hits="readauto">
                     <Switch width="100%" checked={ this.props.read.auto }
                             thumbedColor="#3F51B5" trackedColor="#7986CB"
-                            desc="白名单与排除列表功能互斥，当启用「自动进入阅读模式」，白名单即失效。"
-                            label="如果当前页面适配阅读模式，是否自动进入阅读模式？"
+                            desc="注意：此功能只包含已适配的站点，智能识别出正文的站点无法使用此功能，但仍可通过手动方式进入阅读模式。"
+                            label="如果当前页面为适配站点，是否自动进入阅读模式？"
                             onChange={ (s)=>this.onChange(s, "read", "auto") } />
 
                     </div>
@@ -305,7 +305,7 @@ export default class LabsOpt extends React.Component {
                     </div>
                     <div className="version-tips" data-version="1.1.3" data-hits="lazyload">
                     <div ref="lazyload" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }}>
-                        <div className="label" style={{'margin-bottom':' -15px'}}>预加载排除列表</div>
+                        <div className="label" style={{'margin-bottom':' -15px'}}>延迟加载列表</div>
                         <div className="sublabel">加入其中后的网址将不会启用预加载功能。</div>
                         <div className="sublabel">此功能适合「经常使用简悦但又性能不够」的用户、需要动态加载及支持 Mathjax 解析的页面等。</div>
                         <TextField 
@@ -329,7 +329,7 @@ export default class LabsOpt extends React.Component {
                 <div className="version-tips" data-hits="custom">
                 <div className="label">自定义样式</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('custom') }>
-                    <div className="more">
+                    <div className="more" style={{ 'cursor': 'pointer' }}>
                         <div>增强「中文阅读体验」设置</div>
                         <span className="desc">包括：标题、描述、正文的字间距、行间距、首行缩进等及自定义 CSS。</span>
                         <span className="arrow"></span>
@@ -347,7 +347,7 @@ export default class LabsOpt extends React.Component {
                         onChange={ (s)=>this.onChange(s, "option", "notice") } />
                 </div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('notice') }>
-                    <div className="more">
+                    <div className="more" style={{ 'cursor': 'pointer' }}>
                         <div>查看全部消息</div>
                         <span className="desc">简悦会不定期发送一些消息，包括：新的插件上线、新的适配站点上线、修复 Bug 等</span>
                         <span className="arrow"></span>

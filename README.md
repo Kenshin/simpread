@@ -55,7 +55,7 @@
   * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 全新的 `词法分析引擎`，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」，不仅能自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面，甚至于只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)
 
 - 站点适配源：  
-  包括：`官方（主）适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
+  包括：`官方适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
 
 - 站点编辑器：  
   页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器)
@@ -128,7 +128,7 @@
 
 * 方式3：通过 **新增站点编辑器** 的方式（适合逐一添加单个新站），详细说明 [请看这里](http://ksria.com/simpread/docs/#/站点编辑器?id=如何新增修改)；
 
-* 方式4：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](http://ksria.com/simpread/docs/#/站点适配源?id=如何提交到简悦的官方（次）适配源)
+* 方式4：通过 **提交适配源** 的方式（适合同时添加多个新站），详细说明请看 [使用自定义适配源](http://ksria.com/simpread/docs/#/如何提交第三方适配源)；
 
 * 更多说明请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器) [站点管理](http://ksria.com/simpread/docs/#/站点管理器) [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)；
 

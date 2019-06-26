@@ -1,0 +1,83 @@
+
+/**
+ *  Setting: Focus/Read setting dailog
+*/
+
+sr-opt-focus,
+sr-opt-read {
+    display: -webkit-flex;
+    flex-direction:column;
+
+    width: 100%;
+}
+
+sr-opt-gp {
+    display: -webkit-flex;
+    position: relative;
+
+    flex-flow:row nowrap;
+    justify-content:flex-start;
+
+    width: 100%;
+    margin-bottom: 25px;
+
+    font-size: 15px;
+}
+
+sr-opt-gp sr-opt-label {
+    display: block;
+    position: absolute;
+
+    margin: -8px 0 0 0;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    color: rgba(0, 137, 123, .8);
+
+    user-select: none;
+    pointer-events: none;
+
+    transform: scale(0.75) translate( 0px, -8px );
+    transform-origin: left top 0px;
+}
+
+sr-opt-themes {
+    display: -webkit-flex;
+    flex-flow:row nowrap;
+    justify-content:space-between;
+
+    width: 100%;
+    /*height: 100%;*/
+
+    margin: 8px 0 17px;
+    padding: 0;
+}
+
+sr-opt-theme {
+    width: 40px;
+    height: 20px;
+
+    cursor: pointer;
+    list-style: none;
+
+    border-radius: 3px;
+    border: 1px solid #212121;
+    box-sizing: border-box;
+
+    opacity: 1;
+    transition: all 500ms opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+sr-opt-theme:hover {
+    opacity: .2;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+sr-opt-theme:not(:first-child) {
+    margin-left: 5px;
+}
+
+sr-opt-theme[sr-type="active"] {
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 2px 20px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.7);
+}

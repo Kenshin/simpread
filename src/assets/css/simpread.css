@@ -1,5 +1,5 @@
 /**
- * Golbal style
+ * SimpRead
  */
 
 .simpread-font {
@@ -263,11 +263,59 @@ sr-rd-crlbar.controlbar:hover {
  * Highlight
  */
 .simpread-highlight-selector {
-    background-color: #fafafa;
-    outline: 3px dashed #1976d2;
-    opacity: .8;
+    background-color: #fafafa !important;
+    outline: 3px dashed #1976d2 !important;
+    opacity: .8 !important;
+    cursor: pointer !important;
+    transition: opacity .5s ease !important;
+}
+
+.simpread-highlight-controlbar {
+    position: relative !important;
+    background-color: #fafafa !important;
+    outline: 3px dashed #1976d2 !important;
+    opacity: .8 !important;
+    transition: opacity .5s ease !important;
+}
+
+
+simpread-highlight {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+
+    height: 50px;
+
+    background-color: rgba(50, 50, 50, .9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+
+    z-index: 2147483640;
+}
+
+sr-highlight-ctl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 5px;
+
+    width: 50px;
+    height: 20px;
+
+    color: #fff;
+    background-color: #1976d2;
+
+    border-radius: 4px;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0,0,0,.12);
     cursor: pointer;
-    transition: opacity .5s ease;
 }
 
 /**

@@ -74,7 +74,7 @@ export default class About extends React.Component {
                 <div style={ style.root }>
                     <image src={browser.runtime.getURL("assets/images/icon128.png")}></image>
                     <div style={ style.title }>简悦 SimpRead</div>
-                    <div>让你瞬间进入沉浸式阅读的扩展</div>
+                    <div>为你提供「如杂志般沉浸式阅读体验」的扩展</div>
                     <div style={ style.badges }>
                         <a href={ urls.href.version      } target="_blank"><img style={ style.img } src={ urls.badges.version }/></a>
                         <a href={ urls.href.website      } target="_blank"><img style={ style.img } src={ urls.badges.website }/></a>
@@ -91,7 +91,7 @@ export default class About extends React.Component {
 
                 <div className="label">帮助</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
-                    <div className="more" style={{cursor: 'default'}}>
+                    <div className="more">
                         <div><a style={style.href} target="_blank" href="http://sr.ksria.cn/zhifu_m2.png">如果简悦可以解决你在阅读上痛点，可以请我喝杯咖啡</a></div>
                         <span className="desc">简悦是一个免费且开源的项目</span>
                         <span className="arrow"></span>
@@ -124,7 +124,7 @@ export default class About extends React.Component {
 
                 <div className="label">其它平台的简悦</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
-                    <div className="more" style={{cursor: 'default'}}>
+                    <div className="more">
                         <div><a style={style.href} target="_blank" href="http://ksria.com/simpread/#downloads">简悦已经上线了 Firefox 版，UserScript 版，JSBox 版，总有一款适合你</a></div>
                         <span className="desc">包括但不限于：Chrome · Firefox · Safari · Apple Safari · Microsoft Edge · Opera · iPhone · iPad</span>
                         <span className="arrow"></span>
@@ -145,8 +145,8 @@ export default class About extends React.Component {
                     </div>
                 </div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
-                    <div className="more">
-                        <a style={style.href} target="_blank" href="https://twitter.com/wanglei001">可以在 <b>Twitter</b></a> 或 <a style={style.href} target="_blank" href="https://weibo.com/23784148"><b>新浪微博</b></a> 上关注我
+                    <div className="more" style={{cursor: 'default'}}>
+                        可以在 <a style={style.href} target="_blank" href="https://twitter.com/wanglei001"><b>Twitter</b></a> 或 <a style={style.href} target="_blank" href="https://weibo.com/23784148"><b>新浪微博</b></a> 上关注我
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>

@@ -1,26 +1,27 @@
 console.log( "=== simpread contentscripts load ===" )
 
 import './assets/css/simpread.css';
-import './assets/css/option.css';
+import './assets/css/setting.css';
 import 'notify_css';
 import 'mintooltip';
 
-import Velocity  from 'velocity';
-import Notify    from 'notify';
+import Velocity       from 'velocity';
+import Notify         from 'notify';
 
-import {focus}   from 'focus';
-import * as read from 'read';
-import * as modals from 'modals';
-import * as kbd  from 'keyboard';
+import {focus}        from 'focus';
+import * as read      from 'read';
+import * as setting   from 'setting';
+import * as kbd       from 'keyboard';
+import * as highlight from 'highlight';
 
-import * as util from 'util';
+import * as util      from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
-import * as msg  from 'message';
-import {browser} from 'browser';
-import * as watch from 'watch';
+import * as msg       from 'message';
+import {browser}      from 'browser';
+import * as watch     from 'watch';
 
-import PureRead  from 'puread';
-import * as puplugin from 'puplugin';
+import PureRead       from 'puread';
+import * as puplugin  from 'puplugin';
 
 let pr,                           // pure read object
     is_blacklist = false,
@@ -127,8 +128,8 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                     new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
                 } else {
                      if ( storage.option.br_exit ) {
-                        modals.Exist()  && modals.Exit();
-                        !modals.Exist() && read.Exist( false ) ? read.Exit() : readMode();
+                        setting.Exist()  && setting.Exit();
+                        !setting.Exist() && read.Exist( false ) ? read.Exit() : readMode();
                      }
                      else readMode();
                 }
@@ -174,9 +175,9 @@ function bindShortcuts() {
     kbd.Bind( [ storage.read.shortcuts.toLowerCase()  ], readMode  );
     kbd.ListenESC( combo => {
         if ( combo == "esc" && storage.option.esc ) {
-            modals.Exist()  && modals.Exit();
-            !modals.Exist() && focus.Exist() && focus.Exit();
-            !modals.Exist() && read.Exist()  && read.Exit();
+            setting.Exist()  && setting.Exit();
+            !setting.Exist() && focus.Exist() && focus.Exit();
+            !setting.Exist() && read.Exist()  && read.Exit();
         }
     });
 }
@@ -232,10 +233,16 @@ function readMode() {
             } else if ( pr.state == "temp" && pr.dom ) {
                 read.Render();
             } else {
-                new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+                new Notify().Render( "智能感知正文失败，请移动鼠标，并通过 <a href='http://ksria.com/simpread/docs/#/手动框选' target='_blank' >手动框选</a> 的方式生成正文。" );
                 read.Highlight().done( dom => {
-                    pr.TempMode( mode.read, dom );
-                    read.Render();
+                    const rerender = element => {
+                        pr.TempMode( mode.read, dom );
+                        read.Render();
+                    };
+                    storage.current.highlight ? 
+                        highlight.Control( dom ).done( newDom => {
+                            rerender( newDom );
+                        }) : rerender( dom );
                 });
             }
         }

@@ -1,12 +1,12 @@
 console.log( "=== simpread read load ===" )
 
-import ProgressBar from 'schedule';
-import * as spec   from 'special';
-import ReadCtlbar  from 'readctlbar';
-import * as toc    from 'toc';
-import * as modals from 'modals';
-import * as se     from 'siteeditor';
-import * as kbd    from 'keyboard';
+import ProgressBar        from 'schedule';
+import * as spec          from 'special';
+import ReadCtlbar         from 'readctlbar';
+import * as toc           from 'toc';
+import * as setting       from 'setting';
+import * as se            from 'siteeditor';
+import * as kbd           from 'keyboard';
 
 import { storage, Clone } from 'storage';
 import th                 from 'theme';
@@ -74,9 +74,15 @@ class Read extends React.Component {
                     if ( type == "cancel" ) return;
                     setTimeout( () => {
                         Highlight().done( dom => {
-                            load_count++;
-                            storage.pr.TempMode( "read", dom );
-                            Render();
+                            const rerender = element => {
+                                load_count++;
+                                storage.pr.TempMode( "read", element );
+                                Render();
+                            };
+                            storage.current.highlight ? 
+                                highlight.Control( dom ).done( newDom => {
+                                    rerender( newDom );
+                                }) : rerender( dom );
                         });
                     }, 200 );
                 }});
@@ -171,7 +177,7 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                 break;
             case "siteeditor":
                 $( "panel-bg" ).length > 0 && $( "panel-bg" )[0].click();
@@ -187,18 +193,37 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "remove":
-                new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
                 $( "panel-bg" ).length > 0 && $( "panel-bg" ).trigger( "click" );
-                Highlight().done( dom => {
+                new Notify().Render({ content: "移动鼠标选择不想显示的内容，可多次选择，使用 ESC 退出。", delay: 5000 });
+                highlight.Multi( dom => {
+                    const path = storage.pr.Utils().dom2Xpath( dom ),
+                          site = { ...storage.pr.current.site };
+                    site.exclude.push( `[[\`${path}\`]]` );
+                    if ( storage.pr.state == "temp" ) {
+                        const include = storage.pr.Utils().dom2Xpath( storage.pr.dom );
+                        site.include  = `[[\`${include}\`]]`;
+                        site.name     = site.name.replace( "tempread::", "" );
+                    }
+                    storage.pr.Updatesite( 'local', storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
+                    storage.Writesite( storage.pr.sites, () => {
+                        storage.pr.current.site.name    = site.name;
+                        storage.pr.current.site.include = site.include;
+                    });
                     $(dom).remove();
                 });
                 break;
             case "highlight":
-                new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
+                new Notify().Render( `移动鼠标选择高亮区域，以便生成阅读模式，此模式将会在页面刷新后失效，详细说明请看 <a href="http://ksria.com/simpread/docs/#/重新高亮" target="_blank">重新高亮</a>` );
                 this.exit();
                 Highlight().done( dom => {
-                    storage.pr.TempMode( "read", dom );
-                    Render();
+                    const rerender = element => {
+                        storage.pr.TempMode( "read", element );
+                        Render();
+                    };
+                    storage.current.highlight ? 
+                        highlight.Control( dom ).done( newDom => {
+                            rerender( newDom );
+                        }) : rerender( dom );
                 });
                 break;
             /*
@@ -215,11 +240,11 @@ class Read extends React.Component {
     }
 
     render() {
-        const Article = this.props.wrapper.avatar ? 
+        const Article = this.props.wrapper.avatar && this.props.wrapper.avatar.length > 0 ? 
                         <spec.Multiple include={ this.props.wrapper.include } avatar={ this.props.wrapper.avatar } /> :
                         <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>;
 
-        const Page    = this.props.wrapper.paging && 
+        const Page    = this.props.wrapper.paging && this.props.wrapper.paging.length > 0 && 
                         <spec.Paging paging={ this.props.wrapper.paging } />;
         return (
             <sr-read>
@@ -277,7 +302,7 @@ function Highlight() {
  */
 function Exist( action ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        action && modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+        action && setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
         return true;
     } else {
         return false;
@@ -307,8 +332,14 @@ function mathJaxMode() {
         if ( typeof dom == "undefined" ) {
             new Notify().Render( "智能感知失败，请移动鼠标框选。" );
             Highlight().done( dom => {
-                storage.pr.TempMode( "read", dom );
-                Render( false );
+                const rerender = element => {
+                    storage.pr.TempMode( "read", element );
+                    Render( false );
+                };
+                storage.current.highlight ? 
+                    highlight.Control( dom ).done( newDom => {
+                        rerender( newDom );
+                    }) : rerender( dom );
             });
         } else if ( typeof dom == "string" ) {
             const html = storage.pr.GetDom( dom, "html" );

@@ -1,7 +1,7 @@
 console.log( "==== simpread options page: sitemanager load ====" )
 
 import '../assets/css/simpread.css';
-import '../assets/css/option.css';
+import '../assets/css/setting.css';
 import '../assets/css/options_page.css';
 import '../assets/css/options_custom.css';
 import '../assets/css/options_sitemgr.css';

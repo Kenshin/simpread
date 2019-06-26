@@ -1,7 +1,7 @@
 console.log( "==== simpread options page load ====" )
 
 import '../assets/css/options_page.css';
-import '../assets/css/option.css';
+import '../assets/css/setting.css';
 import 'notify_css';
 import 'intro_css';
 
@@ -183,6 +183,10 @@ function vernotify( first ) {
                 });
             }
             ///////////////////////////////////////////////////////////////////////////
+            // verify and remove old plugins
+            ver.VerifyPlugins( storage.option, version ) && storage.Write( () => {
+                new Notify().Render({ content: `新版升级后，会自动删除一些已失效的插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">自定义主题</a>`, state: "holdon" });
+            }, storage.simpread );
         }
         website_sync = true;
         browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });

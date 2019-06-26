@@ -83,11 +83,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'config',
-                    intro: '从 <b>本地导入配置文件</b> 或 <b>导出配置文件到本地</b>。<br>注意：简悦支持导入任意版本的配置文件，但请尽量上传匹配版本的配置文件。',
+                    intro: '从 <b>本地导入配置文件</b> 或 <b>导出配置文件到本地</b> 。<br>注意：简悦支持导入任意版本的配置文件，但请尽量上传匹配版本的配置文件。',
                 },
                 {
-                    id: 'newsites',
-                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。<br>什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a>',
+                    id: 'oldnewsites',
+                    intro: '从 1.1.3 开始，此功能转移到 <b>站点管理</b> 选项卡里面，此功能已废除。',
                 },
                 {
                     id: 'clear',
@@ -159,7 +159,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'highlight',
-                    intro: '当某些页面未适配或已适配的阅读不符合期望，可以通过 <b>手动框选高亮</b> 的方式重新生成阅读模式，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">请看这里</a> 。',
+                    intro: '在 <b>手动框选</b> 方式的基础上增加了 <b>二次确认模式</b>，此模式专门针对页面极其复杂的情况，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">请看这里</a> 。',
                 },
                 {
                     id: 'toc',
@@ -167,7 +167,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'readauto',
-                    intro: '简悦会检测当前页面是否符合阅读模式，如果可以生成阅读模式的话，启用此选项后会自动进入到阅读模式，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/目录">请看这里</a> 。<br>注意：此功能仅限 <b>适配列表支持的站点</b> 自动进入。',
+                    intro: '如果当前 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源">站点已适配</a> 的话，启用此选项后会自动进入到阅读模式，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a> 。',
                 },
                 {
                     id: 'exclusion',
@@ -212,6 +212,10 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             idx: 2,
             items: [
                 {
+                    id: 'newsites',
+                    intro: '简悦每隔一段时间会自动同步适配列表，你也可以手动同步。<br>什么是适配列表？详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/适配站点">请看这里</a> 。',
+                },
+                {
                     id: 'customsites',
                     intro: '从 1.1.3 开始，简悦调整了第三方适配的规则：仅针对个人的适配源，关于这部分的详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a> 。<br><b>注意：</b> 如果你使用了自己的适配源，请先清除再导入。',
                 },
@@ -221,7 +225,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'personsites',
-                    intro: '简悦用户自行上传且未收录到 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=官方（主）适配源">官方适配源</a> 里面的适配站点，可以在这里对这些站点进行安装，删除，更新等操作，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点集市">请看这里</a> 。',
+                    intro: '简悦用户自行上传且未收录到 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=官方适配源">官方适配源</a> 里面的适配站点，可以在这里对这些站点进行安装，删除，更新等操作，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点集市">请看这里</a> 。',
                 }
             ]
         },
@@ -414,7 +418,9 @@ function Verify( curver, data ) {
         data.option.save_at   = "dropbox";
         data.option.notice    = true;
         data.option.preload   = true;
-        data.option.lazyload  = [];
+        data.option.lazyload  = [
+            "baidu.com", "weibo.com", "youtube.com"
+        ];
         data.option.uninstall = true;
 
         data.statistics.service.yuque   = 0;
@@ -494,6 +500,31 @@ function FixSubver( patch, target ) {
     return target;
 }
 
+/**
+ * Verify current version plugins
+ * 
+ * @param {string} version
+ * @param {object} option
+ */
+function VerifyPlugins( ver, option ) {
+    try {
+        if ( option.plugins.length == 0 ) return false;
+        const str = option.plugins.join( "," );
+        if ( ver == "1.1.3" ) {
+            const newStr = str.replace( /(E0j1nYBmDD,?|SumEaxStWE,?|UsayAKSuwe,?)/g, "" );
+            if ( str != newStr ) {
+                option.plugins = newStr.replace( /,$/, "" ).split( "," );
+                return true;
+            }
+        }
+        return false;
+    } catch( error ) {
+        console.error( "version::VerifyPlugin catch", error )
+    } finally {
+        return false;
+    }
+}
+
 export {
     version,
     tips,
@@ -502,4 +533,5 @@ export {
     Notify,
     Compare,
     FixSubver,
+    VerifyPlugins,
 }

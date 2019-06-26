@@ -1,4 +1,4 @@
-console.log( "=== simpread option modals ===" )
+console.log( "=== simpread option setting ===" )
 
 import FocusOpt     from 'focusopt';
 import ReadOpt      from 'readopt';
@@ -25,14 +25,14 @@ let   callback;
  */
 class Modals extends React.Component {
 
-    // close modals
+    // close setting
     close( restore = rollback() ) {
         dia.Close();
     }
 
-    // save modals focus option
+    // save setting focus option
     save() {
-        console.log( "modals click submit button.", storage.current )
+        console.log( "setting click submit button.", storage.current )
         watch.Verify( ( state, result ) => {
             if ( state ) {
                 console.log( "watch.Lock()", result );

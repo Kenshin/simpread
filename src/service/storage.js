@@ -116,7 +116,9 @@ const name = "simpread",
         br_exit   : false,
         secret    : false,
         preload   : true,
-        lazyload  : [],
+        lazyload  : [
+            "baidu.com", "weibo.com", "youtube.com"
+        ],
         uninstall : true,
         menu      : {
             focus : true,
@@ -131,7 +133,11 @@ const name = "simpread",
         origins   : [],
         blacklist : [
             "google.com",
-            "youtube.com"
+            "youtube.com",
+            "simp.red",
+            "simpread.herokuapp.com",
+            "simpread-test.herokuapp.com",
+            "simpread.ksria.cn"
         ],
         plugins   : [], // plugin id, e.g. kw36BtjGu0
     },

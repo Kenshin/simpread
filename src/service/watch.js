@@ -1,4 +1,4 @@
-console.log( "=== simpread storage load ===" )
+console.log( "=== simpread watch load ===" )
 
 import * as msg    from 'message';
 import {br,browser}from 'browser';

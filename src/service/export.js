@@ -776,7 +776,7 @@ class Onenote {
             status != "success" && callback( undefined, "error" );
         }).fail( ( xhr, status, error ) => {
             console.error( xhr, status, error )
-            callback( undefined, error.toLowerCase() == "unauthorized" ? `${ this.name } 授权过期，请重新授权。` : "error" );
+            callback( undefined, xhr.status == 401 ? `${ this.name } 授权过期，请重新授权。` : "error" );
         });
     }
 }
