@@ -57,7 +57,7 @@ export default class CommonOpt extends React.Component {
                 dbx.Write( dbx.config_name, storage.Export(), callback );
             } else {
                 jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, jianguo.root + "/" + jianguo.config_name, storage.Export(), result => {
-                    callback( "write", undefined, result && result.status == 204 ? undefined : "error" );
+                    callback( "write", undefined, result && [ 201, 204 ].includes( result.status ) ? undefined : "error" );
                 });
             }
         },
