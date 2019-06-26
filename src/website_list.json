@@ -36,8 +36,8 @@
         "name"    : "36kr.com",
         "url"     : "http://36kr.com/p/",
         "title"   : "<title>",
-        "desc"    : "<section class='summary'>",
-        "include" : "<section class='textblock'>",
+        "desc"    : "<div class='summary'>",
+        "include" : "<div class='articleDetailContent'>",
         "exclude" : [
             "<div class='author-panel'>",
             "<section class='article-footer-label'>",
@@ -47,10 +47,10 @@
         ]
     },{
         "name"    : "pingwest.com",
-        "url"     : "http://www.pingwest.com/",
-        "title"   : "<h1 class='title'>",
+        "url"     : "http*://www.pingwest.com/a/*",
+        "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div id='sc-container'>",
+        "include" : "<article class=\"article-style\">",
         "exclude" : [
             "<p class='post-footer-wx'>"
         ]
@@ -291,6 +291,15 @@
             ""
         ]
     },{
+        "name"    : "news.geekpark.net",
+        "url"     : "https://www.geekpark.net/news/*",
+        "title"   : "<h1 class='topic-title'>",
+        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "jianshu.com",
         "url"     : "http://www.jianshu.com/p/",
         "title"   : "<h1 class='title'>",
@@ -302,9 +311,9 @@
     },{
         "name"    : "waerfa.com",
         "url"     : "http://www.waerfa.com/",
-        "title"   : "<h1 class='Article__title'>",
+        "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='Article__content'>",
+        "include" : "<div class='s-single-article'>",
         "exclude" : [
             "<div class='u-post-share-wrap'>"
         ]
@@ -321,7 +330,7 @@
         "name"    : "article.guokr.com",
         "url"     : "http://www.guokr.com/article/",
         "title"   : "<h1 id='articleTitle'>",
-        "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')}]]",
         "include" : "<div id='articleContent'>",
         "exclude" : [
             "<div class='article-extend'>",
@@ -383,6 +392,24 @@
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "book.douban.com",
+        "url"     : "https://book.douban.com/reading/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class=\"book-content\">",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "people.douban.com",
+        "url"     : "https://www.douban.com/people/*/status/*",
+        "title"   : "<h1>",
+        "desc"    : "",
+        "include" : "<div class=\"status-saying\">",
         "exclude" : [
             ""
         ]
@@ -487,7 +514,8 @@
             "<div class='sharing-options'>",
             "<div class='wptouch-custom-showcase'>",
             "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]",
-            "[[/src=\\S+(down)\\S+'/]]"
+            "[[/src=\\S+(down)\\S+'/]]",
+            "<button class='simplefavorite-button'>"
         ]
     },{
         "name"    : "free.apprcn.com",
@@ -753,6 +781,15 @@
             ""
         ]
     },{
+        "name"    : "iplaysoft.com",
+        "url"     : "https://www.iplaysoft.com/*.html",
+        "title"   : "<h1 id='post-title'>",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "blog.jobbole.com",
         "url"     : "http://blog.jobbole.com/*/",
         "title"   : "<title>",
@@ -963,7 +1000,7 @@
         "desc"    : "",
         "include" : "<div class='p_mainnew'>",
         "exclude" : [
-            "[[/src=\\S+(liiLIZF8Uh6yM.jpg)\\S+/]]"
+            ""
         ]
     },{
         "name"    : "ifeve.com",
@@ -1020,10 +1057,10 @@
         "name"    : "my.oschina.net",
         "url"     : "https://my.oschina.net/**/*/blog/*",
         "title"   : "<title>",
-        "desc"    : "<div class='blog-abstract'>",
+        "desc"    : "",
         "include" : "<div id='articleContent'>",
         "exclude" : [
-            ""
+            "[[/src=\\S+(hot3)\\S+'/]]"
         ]
     },{
         "name"    : "oschina.net",
@@ -1041,6 +1078,24 @@
         "title"   : "<span class='question-title-link'>",
         "desc"    : "",
         "include" : "<header class='detail'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.iteye.com",
+        "url"     : "http*://www.iteye.com/news/*",
+        "title"   : "<h3 id='h3-title'>",
+        "desc"    : "",
+        "include" : "<div id='news_content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "blog.iteye.com",
+        "url"     : "http*://*.iteye.com/blog/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='iteye-blog-content-contain'>",
         "exclude" : [
             ""
         ]
@@ -1088,7 +1143,7 @@
         ]
     },{
         "name"    : "freebuf.com",
-        "url"     : "http://www.freebuf.com/**/*/*.html",
+        "url"     : "http*://www.freebuf.com/**/*/*.html",
         "title"   : "[[{$('.title h2').text()}]]",
         "desc"    : "",
         "include" : "<div id='contenttxt'>",
@@ -1124,7 +1179,7 @@
         ]
     },{
         "name"    : "cnblogs.com",
-        "url"     : "http://www.cnblogs.com/**/*/*.html",
+        "url"     : "https://www.cnblogs.com/**/*/*.html",
         "title"   : "<a id='cb_post_title_url'>",
         "desc"    : "",
         "include" : "<div id='cnblogs_post_body'>",
@@ -1769,13 +1824,24 @@
             "<span class='comment-big'>"
         ]
     },{
-        "name"    : "post.smzdm.com",
-        "url"     : "http://post.smzdm.com/p/",
-        "title"   : "<h1 class='item-name'>",
+        "name"    : "news.smzdm.com",
+        "url"     : "http*://news.smzdm.com/p/*",
+        "title"   : "<title>",
         "desc"    : "",
-        "include" : "<article>",
+        "include" : "<div class='news_content'>",
         "exclude" : [
-            "<h1 class='item-name'>"
+            "<h1 class='item-name'>",
+            "<span class='embed-card'>"
+        ]
+    },{
+        "name"    : "post.smzdm.com",
+        "url"     : "http*://post.smzdm.com/p/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='news_content'>",
+        "exclude" : [
+            "<h1 class='item-name'>",
+            "<span class='embed-card'>"
         ]
     },{
         "name"    : "news.mydrivers.com",
@@ -1854,11 +1920,29 @@
              "[[/src=\\S+(favicon)\\S+'/]]"
         ]
     },{
+        "name"    : "news.mittrchina.com",
+        "url"     : "http*://www.mittrchina.com/news/*",
+        "title"   : "<div class='title'>",
+        "desc"    : "<div class='description'>",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "m.ithome.com",
         "url"     : "http*://wap.ithome.com/html/*.htm",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div id='paragraph'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "livesino.net",
+        "url"     : "https://livesino.net/archives/*.live",
+        "title"   : "<h1 class='post-title'>",
+        "desc"    : "",
+        "include" : "<div class='post-content'>",
         "exclude" : [
             ""
         ]
@@ -1894,7 +1978,7 @@
         "url"     : "http*://news.sina.com.cn/**/*/*.shtml",
         "title"   : "<h1 class='main-title'>",
         "desc"    : "",
-        "include" : "<div id='article'>",
+        "include" : "<div class='article'>",
         "exclude" : [
             ""
         ]
@@ -2098,7 +2182,7 @@
         "url"     : "http://*.people.com.cn/**/*/*.html",
         "title"   : "<h1>",
         "desc"    : "",
-        "include" : "<div id='rwb_zw'>",
+        "include" : "<div class='box_con'>",
         "exclude" : [
             "<div class='edit'>"
         ]
@@ -2399,7 +2483,7 @@
         ]
     },{
         "name"    : "pintu360.com",
-        "url"     : "http://www.pintu360.com/article/",
+        "url"     : "http*://www.pintu360.com/article/",
         "title"   : "<h1 class='title'>",
         "desc"    : "<div class='article-note'>",
         "include" : "[[[$('.article-content').find('.text')]]]",
@@ -2552,7 +2636,7 @@
         "url"     : "http*://jingyan.baidu.com/article/*.html",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<li class='exp-content-list'>",
+        "include" : "<div id='format-exp'>",
         "exclude" : [
             "<span class='exp-album-enter-mask'>",
             "<span class='enter-step-btn'>",
@@ -2828,6 +2912,370 @@
         "include" : "[[{$('.qa-html-content')}]]",
         "exclude" : [
             "<span class='show-content'>"
+        ]
+    },{
+        "name"    : "aktuell.faz.net",
+        "url"     : "http*://www.faz.net/aktuell/**/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='atc-Text'>",
+        "exclude" : [
+            "<aside class='atc-ContainerMore'>",
+            "<div class='o-Ratio_Content'>",
+            "<div class='ctn-PlaceholderContent'>",
+            "<div class='atc-ContainerInfo'>"
+        ]
+    },{
+        "name"    : "cn.nytstyle.com",
+        "url"     : "https://cn.nytstyle.com/*/*/*/",
+        "title"   : "<h3 class='articleHeadline'>",
+        "desc"    : "",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<div class='authorIdentification'>",
+            "<div class='articleCR'>",
+            "<div class='articleTool'>",
+            "<div id='disqus_thread'>",
+            "<div id='subscribe_cont'>",
+            "<div class='articleByside'>"
+        ]
+    },{
+        "name"    : "sueddeutsche.de",
+        "url"     : "http://www.sueddeutsche.de/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<section id='article-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "nytimes.com",
+        "url"     : "https://www.nytimes.com/*/*/*/**/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<section class='meteredContent'>",
+        "exclude" : [
+            "<button class='css-1vkv6l7'>"
+        ]
+    },{
+        "name"    : "cn.nytimes.com",
+        "url"     : "https://cn.nytimes.com/*/*/*/",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<section class='article-body'>",
+        "exclude" : [
+            "<div class='authorIdentification'>",
+            "<div class='articleCR'>",
+            "<div class='articleTool'>",
+            "<div id='disqus_thread'>",
+            "<div id='subscribe_cont'>",
+            "<div class='articleByside'>"
+        ]
+    },{
+        "name"    : "theverge.com",
+        "url"     : "https://www.theverge.com/**/*",
+        "title"   : "<h1 class='c-page-title'>",
+        "desc"    : "",
+        "include" : "<div class='c-entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "medium.com",
+        "url"     : "https://medium.com/@*/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='section-content'>",
+        "exclude" : [
+            "<h1 class='graf--title'>",
+            "<img class='progressiveMedia-thumbnail'>",
+            "<canvas class='progressiveMedia-canvas'>",
+            "<figcaption class='imageCaption'>"
+        ]
+    },{
+        "name"    : "news.bbc.com",
+        "url"     : "http*://www.bbc.com/news/**/*",
+        "title"   : "<h1 class='story-body__h1'>",
+        "desc"    : "",
+        "include" : "<div class='story-body__inner'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "simp.bbc.com",
+        "url"     : "http*://www.bbc.com/zhongwen/**/*",
+        "title"   : "<h1 class='story-body__h1'>",
+        "desc"    : "",
+        "include" : "<div class='story-body__inner'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "wsj.com",
+        "url"     : "https://www.wsj.com/articles/**/*",
+        "title"   : "<h1 class='wsj-article-headline'>",
+        "desc"    : "",
+        "include" : "<div class='wsj-snippet-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "economist.com",
+        "url"     : "https://www.economist.com/**/*",
+        "title"   : "[[{$('.flytitle-and-title__title:first').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='blog-post__text'>",
+        "exclude" : [
+            "<div class='newsletter-form--inline'>"
+        ]
+    },{
+        "name"    : "news.zerohedge.com",
+        "url"     : "https://www.zerohedge.com/news/**/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class=\"node__content\">",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "theinitium.com",
+        "url"     : "https://theinitium.com/article/*",
+        "title"   : "<h1 class=\"p-article__title\">",
+        "desc"    : "",
+        "include" : "[[{$($('.p-article__content')[1]).html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.cnbc.com",
+        "url"     : "https://www.cnbc.com/*/*/*/*.html",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='article_body'>",
+        "exclude" : [
+            "<div class='inline-player'>",
+            "<twitter-widget>",
+            "<iframe>",
+            "<div class='embed-container'>"
+        ]
+    },{
+        "name"    : "news.vox.com",
+        "url"     : "https://www.vox.com/*/*/*/**/*",
+        "title"   : "<h1 class='c-page-title'>",
+        "desc"    : "",
+        "include" : "<div class='c-entry-content '>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.theatlantic.com",
+        "url"     : "https://www.theatlantic.com/*/archive/**/*",
+        "title"   : "<h1 class='c-article-header__hed'>",
+        "desc"    : "",
+        "include" : "<div class='l-article__container'>",
+        "exclude" : [
+            "<address>",
+            "<figcaption class='c-lead-media__credit'>",
+            "<span class='c-menu__section__icon'>",
+            "<svg>"
+        ]
+    },{
+        "name"    : "time.com",
+        "url"     : "http*://time.com/*/*/",
+        "title"   : "<h1 class='heading-content'>",
+        "desc"    : "",
+        "include" : "<div id='article-body'>",
+        "exclude" : [
+            "<div class='newsletter-inline'>"
+        ]
+    },{
+        "name"    : "zh.asia.mercurymarine.com",
+        "url"     : "https://www.mercurymarine.com/zh/asia/news/*",
+        "title"   : "[[{$('.formatted-copy h2').text()}]]",
+        "desc"    : "",
+        "include" : "<div class='formatted-copy'>",
+        "exclude" : [
+            "<h2>"
+        ]
+    },{
+        "name"    : "article.scientificamerican.com",
+        "url"     : "https://www.scientificamerican.com/article/*",
+        "title"   : "<h1 class='article-header__title'>",
+        "desc"    : "",
+        "include" : "<div class='article-block'>",
+        "exclude" : [
+            "<figure class='newsletter-promo'>"
+        ]
+    },{
+        "name"    : "latimes.com",
+        "url"     : "http*://www.latimes.com/**/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='collection-cards'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.abcnews.com",
+        "url"     : "https://abcnews.go.com/*/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-copy'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "thehill.com",
+        "url"     : "https://thehill.com/*/**/*",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "[[{$('.field-item.even').html()}]]",
+        "exclude" : [
+            "<iframe>"
+        ]
+    },{
+        "name"    : "news.nieman.harvard.edu",
+        "url"     : "https://nieman.harvard.edu/news/*/*/*",
+        "title"   : "<h1 class='blog-h1'>",
+        "desc"    : "",
+        "include" : "<div class='ui-block-inner'>",
+        "exclude" : [
+            "<div class='tags-top'>",
+            "<div class='social-tools-bottom'>"
+        ]
+    },{
+        "name"    : "cjr.org",
+        "url"     : "https://www.cjr.org/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='article-content'>",
+        "exclude" : [
+            "<div id='mc_embed_signup'>",
+            "<div id='post-survey-box'>",
+            "<small>"
+        ]
+    },{
+        "name"    : "9to5mac.com",
+        "url"     : "https://9to5mac.com/*/*/*/*",
+        "title"   : "<h1 class='post-title'>",
+        "desc"    : "",
+        "include" : "<div class='post-body'>",
+        "exclude" : [
+            "[[/src=\\S+(volta-2.0-cable)\\S+'/]]",
+            "<div class='the9ca7210'>",
+            "[['<p>Check out 9to5Mac on YouTube</p>']]"
+        ]
+    },{
+        "name"    : "9to5google.com",
+        "url"     : "https://9to5google.com/*/*/*/*",
+        "title"   : "<h1 class='post-title'>",
+        "desc"    : "",
+        "include" : "<div class='post-body'>",
+        "exclude" : [
+            "[[/src=\\S+(volta-2.0-cable)\\S+'/]]",
+            "<div class='the9ca7210'>",
+            "[['<p>Check out 9to5Mac on YouTube</p>']]"
+        ]
+    },{
+        "name"    : "news.cnet.com",
+        "url"     : "http*://www.cnet.com/news/*",
+        "title"   : "<h1 class='speakableText'>",
+        "desc"    : "",
+        "include" : "<article id='article-body'>",
+        "exclude" : [
+            "<svg class='svg-symbol'>",
+            "<div class='shortcode'>"
+        ]
+    },{
+        "name"    : "engadget.com",
+        "url"     : "https://www.engadget.com/*/*/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-text'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "gizmodo.com",
+        "url"     : "https://gizmodo.com/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='post-content'>",
+        "exclude" : [
+            "<div class='meta--pe'>",
+            "<div class='instream-native-video'>",
+            "<svg>"
+        ]
+    },{
+        "name"    : "article.macworld.com",
+        "url"     : "https://www.macworld.com/article/*/*.html",
+        "title"   : "<title>",
+        "desc"    : "[[{$('h3[itemprop=\"description\"]').text()}]]",
+        "include" : "<div id='drr-container'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "article.newscientist.com",
+        "url"     : "https://www.newscientist.com/article/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ".simpread-hidden{display:none!important;}"
+    },{
+        "name"    : "readwrite.com",
+        "url"     : "https://readwrite.com/*/*/*/*/",
+        "title"   : "<h1 class=\"entry-title\">",
+        "desc"    : "",
+        "include" : "<div class='entry-content'>",
+        "exclude" : [
+            "<div class='clearfix'>",
+            "<div class='menu-social-media-container'>",
+            "<div class='popular-tags'>",
+            "<div class='related_posts'>",
+            "<div class='about-author'>"
+        ]
+    },{
+        "name"    : "article.techrepublic.com",
+        "url"     : "https://www.techrepublic.com/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('p[itemprop=\"description\"]').text()}]]",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<div class='newsletter-shortcode'>",
+            "<div class='shortcode'>"
+        ]
+    },{
+        "name"    : "blog.techrepublic.com",
+        "url"     : "https://www.techrepublic.com/blog/*/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('p[itemprop=\"description\"]').text()}]]",
+        "include" : "<div class='content'>",
+        "exclude" : [
+            "<div class='newsletter-shortcode'>",
+            "<div class='shortcode'>"
+        ]
+    },{
+        "name"    : "dailydot.com",
+        "url"     : "https://www.dailydot.com/*/*",
+        "title"   : "<h1 class='dd-article-headline'>",
+        "desc"    : "[[{$('p[itemprop=\"description\"]').text()}]]",
+        "include" : "<div class='dd-content-body-inner'>",
+        "exclude" : [
+            "<div class='moviereview'>"
+        ]
+    },{
+        "name"    : "technologyreview.com",
+        "url"     : "https://www.technologyreview.com/s/*/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='storyContent'>",
+        "exclude" : [
+            "<aside>",
+            "<svg>"
         ]
     }]
 }
