@@ -117,7 +117,7 @@
 
 ## 如何使用
 
-> 简悦虽然拥有众多功能，但它支持开箱即用，新手（不想折腾党）来说，只需要看懂下面两种操作即可。
+> 简悦虽然拥有众多功能，但它支持 **开箱即用**，新手（不想折腾党）来说，只需要看懂下面两种操作即可。
 
 ### 阅读模式
 
@@ -128,6 +128,8 @@
 - 右键选择 `简悦 - SimpRead` → `阅读模式`；
 
 - 快捷键；（默认为 双击 <kbd>A</kbd> )
+
+- 简悦支持自动进入阅读模式，详细请看 [自动进入阅读模式](http://ksria.com/simpread/docs/#/自动进入阅读模式)
 
 ### 聚焦模式
 
@@ -171,7 +173,7 @@
 
 ## 感谢
 
-[ksky521](https://github.com/ksky521) [airycanon](https://github.com/airycanon) [mikelei8291](https://github.com/mikelei8291) [chenhbc](https://github.com/chenhbc) [Nihility](https://github.com/NihilityT) [WangLeto](https://github.com/WangLeto) [SevenSteven](https://github.com/Seven-Steven) [Leo](https://github.com/clinyong) [Jonas Gao](https://github.com/JonasGao) [Cologler](https://github.com/Cologler) [bgh](https://github.com/bldght) [Ronglong Pu](https://github.com/PuRonglong)
+[ksky521](https://github.com/ksky521) · [airycanon](https://github.com/airycanon) · [mikelei8291](https://github.com/mikelei8291) · [chenhbc](https://github.com/chenhbc) · [Nihility](https://github.com/NihilityT) · [WangLeto](https://github.com/WangLeto) · [SevenSteven](https://github.com/Seven-Steven) · [Leo](https://github.com/clinyong) · [Jonas · Gao](https://github.com/JonasGao) · [Cologler](https://github.com/Cologler) · [bgh](https://github.com/bldght) · [Ronglong Pu](https://github.com/PuRonglong)
 
 ## 简悦的诞生离不开它们
 - [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
