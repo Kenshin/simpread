@@ -29,10 +29,10 @@
 * 想知道简悦的高级玩法，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
 
 ## 主要功能一览
-- [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)：  
+- [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)  
   不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
 
-- [阅读模式](http://ksria.com/simpread/docs/#/阅读模式)：  
+- [阅读模式](http://ksria.com/simpread/docs/#/阅读模式)  
   简悦 `原创` 功能，逐一适配了 [数百种类型](https://simpread.ksria.cn/sites/) 的网站，自动提取 `标题` `描述` `正文` `媒体资源（ 图片/ 视频 ）` 等，生成 `符合中文阅读` 的页面
 
   * 支持 [自动生成目录](http://ksria.com/simpread/docs/#/目录) 
@@ -47,39 +47,39 @@
 
   * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](http://ksria.com/simpread/docs/#/自定义样式)
 
-- 临时阅读模式：  
+- 临时阅读模式  
   将 `非适配阅读模式的页面` 生成 `阅读模式` 一样的排版，支持任意页面，详细请看 [临时阅读模式](http://ksria.com/simpread/docs/#/临时阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#temp-read-mode)
 
-- 主动适配：  
+- 主动适配  
   通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](http://ksria.com/simpread/docs/#/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
 
-- 智能适配：  
+- 智能适配  
 
   * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 全新的 `词法分析引擎`，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」，不仅能自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面，甚至于只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)
 
-- 智能感知：  
+- 智能感知  
 
   * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 当生成的阅读模式出现问题时，简悦会自动重新获取正文，详细说明请看 [智能感知](http://ksria.com/simpread/docs/#/智能感知)
 
-- 站点适配源：  
+- 站点适配源  
   包括：`官方适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
 
-- 站点编辑器：  
+- 站点编辑器  
   页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器)
 
-- 站点管理器：  
+- 站点管理器  
   可管理全部的适配站点，详细请看 [站点管理器](http://ksria.com/simpread/docs/#/站点管理器)
 
-- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 站点集市：  
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 站点集市  
   上传并共享自己的适配站点，一键分享临时阅读模式，适配失败的站一键提交，详细请看 [站点集市](https://simpread.ksria.cn/sites)
 
-- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 插件系统：  
+- ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 插件系统  
   现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) ，如何编写插件请看 → [说明文档](http://ksria.com/simpread/docs/#/插件系统)
 
-- 多种主题：  
+- 多种主题  
   `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
 
-- 丰富的导出功能，包括：
+- 丰富的导出功能
 
   - 导出 [Markdown](https://github.com/Kenshin/simpread#感谢) · `HTML` · `PNG` · `PDF` · [epub](http://ksria.com/simpread/docs/#/发送到-Epub)
 
@@ -93,7 +93,7 @@
 
 - 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](http://ksria.com/simpread/docs/#/FAQ?id=白名单) 以及 [排除列表](http://ksria.com/simpread/docs/#/FAQ?id=排除列表) 等
 
-- 稍后读；
+- 稍后读
 
 ## 截图
 ![简单阅读，愉悦心情！](http://sr.ksria.cn/welcome-readme-1.png)
@@ -153,7 +153,7 @@
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
 
-## 感谢：
+## 感谢
 - [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 Pull requests [#16](https://github.com/kenshin/simpread/pull/16)；
 - [airycanon](https://github.com/airycanon) Pull requests 详细请看 [#23](https://github.com/kenshin/simpread/pull/23) [#44](https://github.com/kenshin/simpread/pull/44) [#124](https://github.com/kenshin/simpread/pull/124)；
 - [mikelei8291](https://github.com/mikelei8291) 详细请看 Pull requests [#114](https://github.com/kenshin/simpread/pull/114)；
