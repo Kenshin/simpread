@@ -167,8 +167,6 @@
 
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
 
-* 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
-
 ## 感谢
 - [ksky521](https://github.com/ksky521) 提供 `minimatch` 和 `markdown转换功能` ，解决了 [Fix 11](https://github.com/kenshin/simpread/issues/11)，详细请看 Pull requests [#16](https://github.com/kenshin/simpread/pull/16)；
 - [airycanon](https://github.com/airycanon) Pull requests 详细请看 [#23](https://github.com/kenshin/simpread/pull/23) [#44](https://github.com/kenshin/simpread/pull/44) [#124](https://github.com/kenshin/simpread/pull/124)；
@@ -180,7 +178,7 @@
 - [React](https://facebook.github.io/react)
 - [ES6](http://es6-features.org/) · [Babel](https://babeljs.io)
 - [PostCSS](http://postcss.org/) · [cssnext](http://cssnext.io/)
-- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/) · [minimatch](https://github.com/isaacs/minimatch) · [to-markdown](https://github.com/domchristie/to-markdown) · [FileSaver.js](https://github.com/eligrey/FileSaver.js) · [dom-to-image](https://github.com/tsayen/dom-to-image)
+- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/) · [minimatch](https://github.com/isaacs/minimatch) · [to-markdown](https://github.com/domchristie/to-markdown) · [FileSaver.js](https://github.com/eligrey/FileSaver.js) · [dom-to-image](https://github.com/tsayen/dom-to-image) · [WebDAV]( https://github.com/aslakhellesoy/webdavjs)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
 - Icon from <http://iconfont.cn>
@@ -191,10 +189,14 @@
 - 咖啡 · 网易音乐 · Google Chrome · rMBP
 
 ## 协作开发
-- Pull requests 方式：
-  * 请从 `develop` 分支开始；（ 注意：非 develop 分支的 pr 将不会合并；）
-  * Pull requests
-  * 如果需要合并的话，合并后我会通知你；（在下个版本发布时一起发布）
+
+> Pull requests 方式：
+
+* 请务必从 **develop** 分支开始；（ **注意：非 develop 分支的 pr 将不会被合并** ）
+
+* Pull requests
+
+* 如果需要合并的话，合并后我会通知你；（在下个版本发布时一起发布）
 
 ## 请杯咖啡 ☕
 如果简悦可以解决你在阅读上痛点，提升 Web 端的阅读体验，可以请我喝杯咖啡，想必也是非常愉悦的事情。 :smile:  
