@@ -26,7 +26,7 @@
 
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料
 
-* 不同简悦如何使用？想知道简悦的高级功能，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
+* 想知道简悦的高级玩法，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
 
 #### 主要功能一览：
 - [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)：  
