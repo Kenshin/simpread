@@ -22,6 +22,8 @@
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 * [iOS（ iPhone / iPad ）版](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 详细 [请看这里](http://ksria.com/simpread/docs/#/JSBox)
 
+## 入门指引
+
 * 喜欢简悦，但不会用，对新手极度舒适的 [新手入门](http://ksria.com/simpread/guide)
 
 * 现在就加入 [Telegram 群](https://t.me/simpread)，获取简悦的第一手资料
@@ -149,11 +151,17 @@
 
 ## 相关链接
 * [更新日志](http://ksria.com/simpread/changelog.html)
+
 * [帮助中心](http://ksria.com/simpread/docs/#)
-* [新手入门](http://ksria.com/simpread/docs/#/入门指南（-操作指引-）)
+
+* [新手入门](http://ksria.com/simpread/guide)
+
 * [常见问题](http://ksria.com/simpread/docs/#/FAQ)
+
 * [反馈](https://github.com/kenshin/simpread/issues)
+
 * [联系](http://kenshin.wang) · [邮件](kenshin@ksria.com) · [微博](http://weibo.com/23784148) · [Telegram 群](https://t.me/simpread)
+
 * 想了解简悦背后的故事？ [猛击这里](https://sspai.com/post/39491)
 
 ## 感谢
