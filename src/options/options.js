@@ -178,9 +178,7 @@ function vernotify( first ) {
             // option.origins rework
             storage.option.origins = storage.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
             if ( storage.option.origins.length > 0 ) {
-                new Notify().Render( `检测到你曾经修改过第三方适配源，请重新导入，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a>`, "确认", () => {
-                    tabChange( 3 );
-                });
+                new Notify().Render({ content: `检测到你曾经修改过第三方适配源，请重新导入，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a>`, state: "holdon" });
             }
             ///////////////////////////////////////////////////////////////////////////
             // verify and remove old plugins
