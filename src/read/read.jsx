@@ -332,7 +332,7 @@ function mathJaxMode() {
         const dom = storage.pr.MathJaxMode();
         console.log( 'current get dom is ', dom )
         if ( typeof dom == "undefined" ) {
-            new Notify().Render( "智能感知失败，请移动鼠标框选。" );
+            new Notify().Render( "<a href='http://ksria.com/simpread/docs/#/词法分析引擎?id=智能感知' target='_blank' >智能感知</a> 失败，请移动鼠标框选。" );
             Highlight().done( dom => {
                 const rerender = element => {
                     storage.pr.TempMode( "read", element );
