@@ -70,7 +70,7 @@ class Read extends React.Component {
                 }});
             } else if ( load_count == 1 ) {
                 this.componentWillUnmount();
-                new Notify().Render({ content: "获取正文失败，是否使用手动框选高亮的方式获取？", action: "是的", cancel: "取消", callback: type => {
+                new Notify().Render({ content: '获取正文失败，是否使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">手动框选</a> 高亮的方式获取？', action: "是的", cancel: "取消", callback: type => {
                     if ( type == "cancel" ) return;
                     setTimeout( () => {
                         Highlight().done( dom => {
