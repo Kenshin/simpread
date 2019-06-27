@@ -130,7 +130,7 @@
 
   - 导出到 `Pocket` `Linnk` `Instapaper` 的功能，包括：`当前页面的链接` `稍后读`
 
-  - 导出到生产力工具，包括：`坚果云` `语雀` `Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [导出到生产力](http://ksria.com/simpread/docs/#/导出到生产力)
+  - 导出到生产力工具，包括：`坚果云` `语雀` `Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [导出到生产力](http://ksria.com/simpread/docs/#/导出到生产力工具)
 
 - 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](http://ksria.com/simpread/docs/#/快捷键) 等；
 
