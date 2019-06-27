@@ -187,7 +187,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'lazyload',
-                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a> 。',
+                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=延迟加载">请看这里</a> 。',
                 },
                 {
                     id: 'auth',
@@ -279,7 +279,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'lazyload',
-                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a> 。',
+                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=延迟加载">请看这里</a> 。',
                 },
                 {
                     id: 'blacklist',
