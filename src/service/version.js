@@ -261,7 +261,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'laterlist',
-                    intro: '简悦自带了一个未读列表，你可以把任意 URL 通过 <a target="_blank" href="http://ksria.com/simpread/docs/#/右键菜单">右键菜单</a> / <a target="_blank" href="http://ksria.com/simpread/docs/#/控制栏-阅读模式">控制栏 → 动作</a> 发送到稍后读。<br>稍后读也支持发送这些链接到 Pocket · Instapaper · Linnk 里面，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">请看这里</a> 。',
+                    intro: '简悦自带了一个未读列表，你可以把任意 URL 通过 <a target="_blank" href="http://ksria.com/simpread/docs/#/右键菜单">右键菜单</a> / <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式-控制栏">控制栏 → 动作</a> 发送到稍后读。<br>稍后读也支持发送这些链接到 Pocket · Instapaper · Linnk 里面，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">请看这里</a> 。',
                 },
                 {
                     id: 'latermore',
