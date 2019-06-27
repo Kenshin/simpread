@@ -61,7 +61,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'yuque',
-                    intro: '连接你的语雀帐号后，就可使用导出到语雀的服务了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/语雀">请看这里</a> 。',
+                    intro: '连接你的语雀帐号后，就可使用导出到语雀的服务了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/授权服务">请看这里</a> 。',
                 },
                 {
                     id: 'webdav',
