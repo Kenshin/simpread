@@ -49,11 +49,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'preload',
-                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a> 。',
+                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。',
                 },
                 {
                     id: 'lazyload',
-                    intro: '此功能适合 <b>经常使用简悦但又性能不够</b> 的用户；需要动态加载的页面；支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制?id=延迟加载">请看这里</a> 。',
+                    intro: '此功能适合 <b>经常使用简悦但又性能不够</b> 的用户；需要动态加载的页面；支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。',
                 },
                 {
                     id: 'jianguo',
@@ -183,7 +183,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'preload',
-                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
+                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
                 },
                 {
                     id: 'lazyload',
@@ -275,7 +275,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'preload',
-                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
+                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
                 },
                 {
                     id: 'lazyload',
