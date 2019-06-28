@@ -155,7 +155,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'fap',
-                    intro: '1.1.1 版开始提供 <b>控制栏浮动面板</b> 用来替代原来的 <b>控制栏浮动工具条</b>。<br>如果你并不经常使用简悦的一些高级功能，可以关闭此选项，使用更简洁的 <b>控制栏浮动工具条</b>，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/浮动控制面板（FAP）与浮动控制栏（FAB）">请看这里</a> 。',
+                    intro: '1.1.1 版开始提供 <b>控制栏浮动面板</b> 用来替代原来的 <b>控制栏浮动工具条</b>。<br>如果你并不经常使用简悦的一些高级功能，可以关闭此选项，使用更简洁的 <b>控制栏浮动工具条</b>，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式-控制栏">请看这里</a> 。',
                 },
                 {
                     id: 'highlight',

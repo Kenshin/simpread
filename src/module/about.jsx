@@ -111,7 +111,7 @@ export default class About extends React.Component {
                 </div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
-                        <a style={style.href} target="_blank" href="http://ksria.com/simpread/docs/#/入门指南（-操作指引-）">第一次使用简悦？或者并不了解「阅读模式」请前往 <b>新手入门</b></a>
+                        <a style={style.href} target="_blank" href="http://ksria.com/simpread/guide/">第一次使用简悦？或者并不了解「阅读模式」请前往 <b>新手入门</b></a>
                         <span style={{ bottom: "11px" }} className="arrow"></span>
                     </div>
                 </div>
