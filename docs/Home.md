@@ -10,23 +10,21 @@
 
 > 为了让简悦变得更好，请帮忙 [问卷调查](https://wj.qq.com/s2/3611463/7260/)
 
-简悦的各种平台（Platform）
+简悦的各种平台
 ---
 
-- [Chrome  · Firefox  → 全功能版](http://ksria.com/simpread/#downloads)
+- Chrome  · Firefox  ·  Microsoft Edge → [全功能版](http://ksria.com/simpread/#downloads)
 
-- [Apple Safari  · Microsoft Edge  →  UserScript 轻阅版](http://ksria.com/simpread/#lite)
+- Apple Safari  →  [UserScript 轻阅版](http://ksria.com/simpread/#lite)
 
-- [iPhone   ·  iPad → JSBox 版](JSBox)
+- iPhone   ·  iPad → [JSBox 版](JSBox)
 
 - [Android 版](Android)
-
-***
 
 文档中心
 ---
 
-＞ 请看 **左侧目录**
+> 请看 **左侧目录**
 
 全功能
 ---
@@ -44,7 +42,19 @@
 
 - 提交问题到 [Github](https://github.com/Kenshin/simpread/issues/new)
 
-***
+媒体报道
+---
+
+- [不只是「完美」阅读模式，他想用这款阅读工具帮你更好获取知识：专访简悦 | 幕后 | 少数派](https://sspai.com/post/52492)
+
+- [简悦：无干扰的沉浸式阅读体验 | 玩儿法](https://www.waerfa.com/simpread-review)
+
+- [[ UserScript 脚本]简悦 · 轻阅版 – 支持 Safari、Edge 的浏览器沉浸式阅读模式工具 | 小众软件](https://www.appinn.com/simpread-lite/)
+
+- [如何在开源的同时斩获 Chrome 商城 40000+ 用户 |  GitHub Daily](https://zhuanlan.zhihu.com/p/60222691)
+
+- [簡悅 SimpRead 追求 Chrome 上的沈浸式中文閱讀體驗](https://www.playpcesor.com/2017/06/simpread-chrome.html)
+
 
 简悦的开发故事
 ---
@@ -64,16 +74,3 @@
 - [各位久等了，Firefox 与 UserScript（轻阅版）已叒叕加入简悦豪华套餐](http://kenshin.wang/blog/#/posts/10)
 
 - [借助 JSBox 简悦终于来到了 iOS！](http://kenshin.wang/blog/#/posts/11)
-
-媒体报道
----
-
-- [不只是「完美」阅读模式，他想用这款阅读工具帮你更好获取知识：专访简悦 | 幕后 | 少数派](https://sspai.com/post/52492)
-
-- [简悦：无干扰的沉浸式阅读体验 | 玩儿法](https://www.waerfa.com/simpread-review)
-
-- [[ UserScript 脚本]简悦 · 轻阅版 – 支持 Safari、Edge 的浏览器沉浸式阅读模式工具 | 小众软件](https://www.appinn.com/simpread-lite/)
-
-- [各位久等，Chrome 好评率超 99% 的「简悦」正式加入 Firefox 豪华套餐 | 小众软件](https://www.appinn.com/simpread-for-firefox/)
-
-- [簡悅 SimpRead 追求 Chrome 上的沈浸式中文閱讀體驗](https://www.playpcesor.com/2017/06/simpread-chrome.html)
