@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="author" content="Kenshin"/>
-  <meta name="description" content="简悦 ( SimpRead ) - 让你瞬间进入沉浸式阅读的扩展" />
-  <meta name="keywords" content="Chrome extension, Chrome 扩展, 阅读模式, 沉浸式阅读, read mode, reading mode, reader view, firefox, firefox addon, userscript, safari, opera, tampermonkey"/>
+    <meta charset="UTF-8">
+    <meta name="author" content="Kenshin"/>
 
-  <meta name="thumbnail" content="http://sr.ksria.cn/introduce.png"/>
+    <meta name="description" content="简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展" />
+    <meta name="keywords" content="Chrome extension, Chrome 扩展, 阅读模式, 沉浸式阅读, 简悦, 简阅, read mode, reading mode, reader view, firefox, firefox addon, userscript, safari, opera, tampermonkey"/>
 
-  <meta property="og:title" content="简悦 ( SimpRead ) - 让你瞬间进入沉浸式阅读的扩展"/>
-  <meta property="og:type" content="website">
-  <meta property="og:local" content="zh_CN"/>
-  <meta property="og:url" content="http://ksria.com/simpread"/>
+    <meta name="thumbnail" content="http://sr.ksria.cn/introduce-2.png"/>
 
-  <meta property="og:image" content="http://sr.ksria.cn/introduce.png"/>
-  <meta property="og:image:type" content="image/png"/>
-  <meta property="og:image:width" content="960"/>
-  <meta property="og:image:height" content="355"/>
+    <meta property="og:title" content="入门指引 | 简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展"/>
+    <meta property="og:type" content="website">
+    <meta property="og:local" content="zh_CN"/>
+    <meta property="og:url" content="http://ksria.com/simpread"/>
 
-  <meta property="og:site_name" content="http://ksria.com/simpread"/>
-  <meta property="og:description" content="简悦 ( SimpRead ) - 让你瞬间进入沉浸式阅读的扩展"/>
-  <title>文档中心 - 简悦</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="apple-touch-icon" sizes="57x57" href="../assets/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="../assets/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="../assets/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="../assets/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="../assets/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="../assets/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="../assets/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="../assets/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="../assets/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="vendor/themes/vue.css">
+    <meta property="og:image" content="http://sr.ksria.cn/introduce-2.png"/>
+    <meta property="og:image:type" content="image/png"/>
+    <meta property="og:image:width" content="960"/>
+    <meta property="og:image:height" content="355"/>
+
+    <meta property="og:site_name" content="http://ksria.com/simpread"/>
+    <meta property="og:description" content="文档中心 | 简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展"/>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#2196f3">
+    <meta name="msapplication-TileImage" content="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#1976d2">
+
+    <link rel="stylesheet" href="vendor/themes/vue.css">
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
-    name: '简悦 · 官网',
+      name: '简悦 · 官网',
 	  nameLink: 'http://ksria.com/simpread/',
-    repo: 'https://github.com/Kenshin/simpread/',
+      repo: 'https://github.com/Kenshin/simpread/',
 	  homepage: 'Home.md',
 	  loadSidebar: true,
 	  subMaxLevel: 2,
@@ -58,10 +57,10 @@
 	  search: 'auto',
     }
   </script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.bootcss.com/docsify/4.9.4/docsify.min.js"></script>
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/ga.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+  <script src="//cdn.bootcss.com/docsify/4.9.4/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.bootcss.com/docsify/4.9.4/plugins/ga.min.js"></script>
+  <script src="//cdn.bootcss.com/docsify/4.9.4/plugins/search.min.js"></script>
 </body>
 </html>
