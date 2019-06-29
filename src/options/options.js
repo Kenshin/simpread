@@ -183,7 +183,7 @@ function vernotify( first ) {
             ///////////////////////////////////////////////////////////////////////////
             // verify and remove old plugins
             ver.VerifyPlugins( version, storage.option ) && storage.Write( () => {
-                new Notify().Render({ content: `新版升级后，会自动删除一些已失效的插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">自定义主题</a>`, state: "holdon" });
+                new Notify().Render({ content: `新版升级后，会自动删除一些已失效的插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">删除失效的插件</a>`, state: "holdon" });
             }, storage.simpread );
         }
         // website_sync = true; when version is 1.1.3 website_list is newer
