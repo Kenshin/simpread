@@ -1186,7 +1186,7 @@ body {
 }
 
 .update .info a {
-    padding-left: 2px;
+    margin-left: 2px;
     padding-bottom: 0;
 
     font-size: inherit;
@@ -1194,7 +1194,7 @@ body {
     text-decoration: none;
 
     transition: border-color .5s;
-    border-bottom: 0 solid transparent;
+    border-bottom: 1px dotted #000;
 }
 
 .update .info code {
