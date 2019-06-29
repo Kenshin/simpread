@@ -151,7 +151,7 @@ export default class CommonOpt extends React.Component {
                                 storage.version != json.version &&
                                     storage.Fix( json.read.sites, json.version, storage.version, json.focus.sites );
                                 json = ver.Verify( json.version, json );
-                                new Notify().Render({ content: `上传版本太低，已自动转换为最新版本。`, state: "holdon" });
+                                new Notify().Render({ type: 2, content: `上传版本太低，已自动转换为最新版本。`, state: "holdon" });
                             }
                             menu.Refresh( json.option.menu );
                             json.option.origins && json.option.origins.length > 0 &&
