@@ -447,6 +447,22 @@ function Verify( curver, data ) {
 }
 
 /**
+ * Fix Incompatible simpread data structure
+ * 
+ * @param {string} version
+ * @param {object} simpread data structure
+ */
+function Incompatible( ver, data ) {
+    if ( ver == "1.1.3" ) {
+        data.option.origins = data.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
+        data.option.origins.length > 0 &&
+            new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，请重新导入，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a>`, state: "holdon" });
+        VerifyPlugins( ver, data.option ) &&
+            new Notify().Render({ type: 2, content: `升级后，会清理已失效的插件，请重新导入，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">删除失效的插件</a>`, state: "holdon" });
+    }
+}
+
+/**
  * Notify with type and version
  * 1.0.4 before usage http://ksria.com/simpread/changelog.html#{ver}
  * 1.0.4 after  usage http://ksria.com/simpread/version_${ver}.html
@@ -455,7 +471,7 @@ function Verify( curver, data ) {
  * @param {string} type, include: firstload, update
  * @param {string} ver, e.g. 1.0.0, 1.0.1
  */
-function Notify( first, type, ver ) {
+function Notify2( first, type, ver ) {
     const str    = type == "firstload" ? "安装" : "更新",
           detail = type == "firstload" ? "" : details.get(ver),
           link   = first ? `${detail}如何使用请看 <a href="http://ksria.com/simpread/docs/#/" target="_blank">文档中心</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
@@ -516,11 +532,9 @@ function VerifyPlugins( ver, option ) {
                 option.plugins = newStr.replace( /,$/, "" ).split( "," );
                 return true;
             }
-        }
-        return false;
+        } else return false;
     } catch( error ) {
         console.error( "version::VerifyPlugin catch", error )
-    } finally {
         return false;
     }
 }
@@ -530,8 +544,9 @@ export {
     tips,
     sub_ver as patch,
     Verify,
-    Notify,
+    Notify2 as Notify,
     Compare,
     FixSubver,
     VerifyPlugins,
+    Incompatible,
 }
