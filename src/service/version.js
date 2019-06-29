@@ -458,7 +458,7 @@ function Incompatible( ver, data ) {
         data.option.origins.length > 0 &&
             new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，请重新导入，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">请看这里</a>`, state: "holdon" });
         VerifyPlugins( ver, data.option ) &&
-            new Notify().Render({ type: 2, content: `升级后，会清理已失效的插件，请重新导入，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">删除失效的插件</a>`, state: "holdon" });
+            new Notify().Render({ type: 2, content: `已清理 <b>已失效的插件</b>，请重新导入，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">删除失效的插件</a>`, state: "holdon" });
     }
 }
 
