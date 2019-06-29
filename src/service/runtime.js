@@ -1,9 +1,11 @@
 console.log( "=== simpread runtime load ===" )
 
-import nanoid    from 'nanoid';
-import {browser} from 'browser';
+import nanoid           from 'nanoid';
+
+import {browser}        from 'browser';
 import {storage, Clone} from 'storage';
-import * as highlight from 'highlight';
+import * as highlight   from 'highlight';
+import * as watch       from 'watch';
 
 let is_firstload = true;
 
@@ -86,9 +88,10 @@ function func( source ) {
     window.highlight = highlight;
     window.db      = Storage;
     window.control = Controlbar;
-    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$storage, $$current, $$read, $$control ) {
+    window.SRSave  = Save;
+    return `( function ( $$version, $read, $title, $desc, $content, $footer, $process, $toc, Notify, $$highlight, browser, $$storage, $$current, $$read, $$control, $$save ) {
         ${ source }
-    })( "0.0.2", $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, db, current, read, control );`
+    })( "0.0.2", $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ), Notify, highlight, browser, db, current, read, control, SRSave );`
 }
 
 /**
@@ -123,6 +126,28 @@ function Controlbar( type, callback ) {
         });
     } else window.dispatchEvent( new CustomEvent( "simpread-plugin_controlbar", { detail: { type }}));
     is_firstload = false;
+}
+
+/**
+ * Save adapter storage.Write
+ * 
+ * @param {object} simpread data structure
+ * @param {func}   callback
+ */
+function Save( data, callback ) {
+    if ( data ) {
+        storage.Write( ()=> {
+            watch.SendMessage( "option", true );
+            callback();
+        }, storage.simpread );
+    } else {
+        return {
+            focus  : storage.focus,
+            read   : storage.read,
+            option : storage.option,
+            version: storage.version
+        }
+    }
 }
 
 /**
@@ -170,8 +195,8 @@ function testPlugin( style, plugin, trigger ) {
     plugin && plugin( "0.0.2",
                       $( "sr-read" ), $( "sr-rd-title" ), $( "sr-rd-desc" ), $( "sr-rd-content" ), $( "sr-rd-footer" ), $( "read-process" ), $( "toc" ),
                       Notify, highlight,
-                      browser, db,
-                      storage.current, storage.read, control );
+                      browser, Storage,
+                      storage.current, storage.read, Controlbar, Save );
     trigger && addTrigger( trigger() );
 }
 
