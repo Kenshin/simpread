@@ -151,13 +151,13 @@ export default class CommonOpt extends React.Component {
                                 storage.version != json.version &&
                                     storage.Fix( json.read.sites, json.version, storage.version, json.focus.sites );
                                 json = ver.Verify( json.version, json );
-                                new Notify().Render( "上传版本太低，已自动转换为最新版本。" );
+                                new Notify().Render({ content: `上传版本太低，已自动转换为最新版本。`, state: "holdon" });
                             }
                             menu.Refresh( json.option.menu );
                             json.option.origins && json.option.origins.length > 0 &&
-                                new Notify().Render( "导入的配置文件包含了第三方源，请通过手动导入。" );
+                                new Notify().Render({ content: `导入的配置文件包含了第三方源，刷新后请 <b>手动重新导入</b>。`, state: "holdon" });
                             json.option.plugins && json.option.plugins.length > 0 &&
-                                new Notify().Render( "导入的配置文件包含了插件，请通过手动导入。" );
+                                new Notify().Render({ content: `导入的配置文件包含了插件，刷新后请 <b>手动重新导入</b>。`, state: "holdon" });
                             this.importsecret( json.option.secret, { ...json.secret }, () => {
                                 delete json.secret;
                                 storage.Write( ()=> {
