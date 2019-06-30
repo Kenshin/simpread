@@ -449,17 +449,24 @@ function Verify( curver, data ) {
 /**
  * Fix Incompatible simpread data structure
  * 
- * @param {string} version
- * @param {object} simpread data structure
+ * @param  {string} version
+ * @param  {object} simpread data structure
+ * @return {boolean} true: changed false: not changed
  */
 function Incompatible( ver, data ) {
+    let is_changed = false;
     if ( ver == "1.1.3" ) {
         data.option.origins = data.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
-        data.option.origins.length > 0 &&
+        if ( data.option.origins.length > 0 ) {
+            is_changed = true;
             new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，<b>务必刷新后重新导入</b>！<a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">详细说明</a>`, state: "holdon" });
-        VerifyPlugins( ver, data.option ) &&
+        }
+        if ( VerifyPlugins( ver, data.option )) {
+            is_changed = true;
             new Notify().Render({ type: 2, content: `已清理失效的插件，<b>务必刷新后重新导入</b>，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">删除失效的插件</a>`, state: "holdon" });
+        }
     }
+    return is_changed;
 }
 
 /**
