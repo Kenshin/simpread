@@ -131,6 +131,16 @@ function pRead() {
 }
 
 /**
+ * Incompatible and update 
+ */
+function updateData() {
+    ver.Incompatible( storage.version, storage.simpread ) && storage.Write( () => {
+        console.log( "current simpread is update ", storage.simpread )
+        watch.SendMessage( "option", true );
+    }, storage.simpread );
+}
+
+/**
  * Hash notify
  */
 function hashnotify() {
@@ -173,7 +183,7 @@ function vernotify( first ) {
             watch.SendMessage( "version", true );
             loadState = { first: true, update: true };
             welcomeRender( false, version );
-            ver.Incompatible( version, storage.simpread );
+            updateData();
         }
         // website_sync = true; when version is 1.1.3 website_list is newer
         browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });
