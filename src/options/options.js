@@ -119,7 +119,6 @@ storage.Read( first => {
     helpRender();
     tt.Render( "body" );
     waves.Render({ root: "body" });
-    welcomeRender( false, "1.1.3" )
 });
 
 /**
