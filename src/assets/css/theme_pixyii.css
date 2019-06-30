@@ -93,3 +93,11 @@ sr-rd-content p code {
     color: rgb(122, 122, 122);
     background-color: transparent;
 }
+
+/**
+ * Multiple page
+ */
+
+ .simpread-multi-root {
+    background: #F8F9FA;
+}

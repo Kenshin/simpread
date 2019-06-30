@@ -31,7 +31,7 @@ sr-blockquote >:last-child {
  * Custom style, include: background; title; desc; sr-rd-content; p,div; a; pre
  */
 
-.simpread-theme-root {
+.simpread-theme-root, .simpread-multi-root {
     background-color: rgb(252, 245, 237);
     color: rgb(51, 51, 51);
 }

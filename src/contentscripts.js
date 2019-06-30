@@ -1,26 +1,27 @@
 console.log( "=== simpread contentscripts load ===" )
 
 import './assets/css/simpread.css';
-import './assets/css/option.css';
+import './assets/css/setting.css';
 import 'notify_css';
 import 'mintooltip';
 
-import Velocity  from 'velocity';
-import Notify    from 'notify';
+import Velocity       from 'velocity';
+import Notify         from 'notify';
 
-import {focus}   from 'focus';
-import * as read from 'read';
-import * as modals from 'modals';
-import * as kbd  from 'keyboard';
+import {focus}        from 'focus';
+import * as read      from 'read';
+import * as setting   from 'setting';
+import * as kbd       from 'keyboard';
+import * as highlight from 'highlight';
 
-import * as util from 'util';
+import * as util      from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
-import * as msg  from 'message';
-import {browser} from 'browser';
-import * as watch from 'watch';
+import * as msg       from 'message';
+import {browser}      from 'browser';
+import * as watch     from 'watch';
 
-import PureRead  from 'puread';
-import * as puplugin from 'puplugin';
+import PureRead       from 'puread';
+import * as puplugin  from 'puplugin';
 
 let pr,                           // pure read object
     is_blacklist = false,
@@ -45,7 +46,7 @@ storage.Read( () => {
         });
     } else {
         bindShortcuts();
-        autoOpen();
+        preload() && autoOpen();
     }
 });
 
@@ -73,6 +74,34 @@ function blacklist() {
 }
 
 /**
+ * Preload verify
+ * 
+ * @return {boolen}
+ */
+
+function preload() {
+    let is_proload = true;
+    if ( storage.option.preload == false ) {
+        is_proload = false;
+    } else if ( storage.option.preload ) {
+        for ( const item of storage.option.lazyload ) {
+            if ( item.trim() != "" && !item.startsWith( "http" ) ) {
+                if ( location.hostname.includes( item ) ) {
+                    is_proload = false;
+                    break;
+                }
+            } else {
+                if ( location.href == item ) {
+                    is_proload = false;
+                    break;
+                }
+            }
+        }
+    }
+    return is_proload;
+}
+
+/**
  * Listen runtime message, include: `focus` `read` `shortcuts` `tab_selected`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
@@ -87,7 +116,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            browserAction( request.value.is_update );
+            if ( preload() == false ) {
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: 0 , url: window.location.href } ));
+            } else browserAction( request.value.is_update );
             break;
         case msg.MESSAGE_ACTION.read_mode:
         case msg.MESSAGE_ACTION.browser_click:
@@ -97,19 +128,18 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                     new Notify().Render( "配置文件已更新，刷新当前页面后才能生效。", "刷新", ()=>window.location.reload() );
                 } else {
                      if ( storage.option.br_exit ) {
-                        modals.Exist()  && modals.Exit();
-                        !modals.Exist() && read.Exist( false ) ? read.Exit() : readMode();
+                        setting.Exist()  && setting.Exit();
+                        !setting.Exist() && read.Exist( false ) ? read.Exit() : readMode();
                      }
                      else readMode();
                 }
             });
             break;
         case msg.MESSAGE_ACTION.pending_site:
-            new Notify().Render({ content: "是否提交，以便更好的适配此页面？", action: "是的", cancel: "取消", callback: type => {
+            new Notify().Render({ content: "是否提交，以便更好地适配此页面？", action: "是的", cancel: "取消", callback: type => {
                 if ( type == "cancel" ) return;
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed" }));
             }});
-            localStorage.removeItem( "sr-update-site" );
             break;
         case msg.MESSAGE_ACTION.menu_whitelist:
         case msg.MESSAGE_ACTION.menu_exclusion:
@@ -145,9 +175,9 @@ function bindShortcuts() {
     kbd.Bind( [ storage.read.shortcuts.toLowerCase()  ], readMode  );
     kbd.ListenESC( combo => {
         if ( combo == "esc" && storage.option.esc ) {
-            modals.Exist()  && modals.Exit();
-            !modals.Exist() && focus.Exist() && focus.Exit();
-            !modals.Exist() && read.Exist()  && read.Exit();
+            setting.Exist()  && setting.Exit();
+            !setting.Exist() && focus.Exist() && focus.Exit();
+            !setting.Exist() && read.Exist()  && read.Exit();
         }
     });
 }
@@ -203,10 +233,16 @@ function readMode() {
             } else if ( pr.state == "temp" && pr.dom ) {
                 read.Render();
             } else {
-                new Notify().Render( "当前并未适配阅读模式，请移动鼠标手动生成 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a>。" );
+                new Notify().Render( "<a href='http://ksria.com/simpread/docs/#/词法分析引擎?id=智能感知' target='_blank' >智能感知</a> 正文失败，请移动鼠标，并通过 <a href='http://ksria.com/simpread/docs/#/手动框选' target='_blank' >手动框选</a> 的方式生成正文。" );
                 read.Highlight().done( dom => {
-                    pr.TempMode( mode.read, dom );
-                    read.Render();
+                    const rerender = element => {
+                        pr.TempMode( mode.read, dom );
+                        read.Render();
+                    };
+                    storage.current.highlight ? 
+                        highlight.Control( dom ).done( newDom => {
+                            rerender( newDom );
+                        }) : rerender( dom );
                 });
             }
         }

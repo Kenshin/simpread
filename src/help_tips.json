@@ -1,0 +1,64 @@
+{
+    "tips": [
+        {
+            "idx": 0,
+            "name": "文档中心",
+            "icon": "<i class=\"fas fa-info-circle\"></i>",
+            "url": "http://ksria.com/simpread/docs"
+        },
+        {
+            "idx": 1,
+            "name": "新手入门可以看这篇文章",
+            "icon": "<i class=\"fas fa-file-word\"></i>",
+            "url": "http://ksria.com/simpread/guide/"
+        },
+        {
+            "idx": 2,
+            "name": "查看当前版本新增功能",
+            "icon": "<i class=\"fas fa-plus-square\"></i>",
+            "url": "#"
+        },
+        {
+            "idx": 3,
+            "name": "查看当前页的功能描述",
+            "icon": "<i class=\"fas fa-binoculars\"></i>",
+            "url": "#"
+        },
+        {
+            "idx": 4,
+            "name": "简悦的汇总（新闻页）",
+            "icon": "<i class=\"fas fa-bullhorn\"></i>",
+            "url": "https://simp.red/news"
+        },
+        {
+            "idx": 5,
+            "name": "请通过 Github issues 提问",
+            "icon": "<i class=\"fas fa-bug\"></i>",
+            "url": "https://github.com/Kenshin/simpread/issues/new"
+        },
+        {
+            "idx": 6,
+            "name": "如果简悦暂时未支持你使用的导出服务",
+            "icon": "<i class=\"fas fa-file-export\"></i>",
+            "url": "https://github.com/Kenshin/simpread/issues/473"
+        },
+        {
+            "idx": 7,
+            "name": "YouTube 加载出错的朋友请看这里",
+            "icon": "<i class=\"fas fa-bug\"></i>",
+            "url": "https://github.com/Kenshin/simpread/issues/487"
+        },
+        {
+            "idx": 8,
+            "name": "当使用简悦疑似页面变慢的处理方式",
+            "icon": "<i class=\"fas fa-desktop\"></i>",
+            "url": "@performance"
+        },
+        {
+            "idx": 9,
+            "name": "当阅读模式并未符合你的期望时，如何进一步优化？",
+            "icon": "<i class=\"fas fa-book-open\"></i>",
+            "url": "https://github.com/Kenshin/simpread/issues/522"
+        }
+    ]
+}

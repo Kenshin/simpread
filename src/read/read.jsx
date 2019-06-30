@@ -1,12 +1,12 @@
 console.log( "=== simpread read load ===" )
 
-import ProgressBar from 'schedule';
-import * as spec   from 'special';
-import ReadCtlbar  from 'readctlbar';
-import * as toc    from 'toc';
-import * as modals from 'modals';
-import * as se     from 'siteeditor';
-import * as kbd    from 'keyboard';
+import ProgressBar        from 'schedule';
+import * as spec          from 'special';
+import ReadCtlbar         from 'readctlbar';
+import * as toc           from 'toc';
+import * as setting       from 'setting';
+import * as se            from 'siteeditor';
+import * as kbd           from 'keyboard';
 
 import { storage, Clone } from 'storage';
 import th                 from 'theme';
@@ -24,6 +24,9 @@ const rdcls   = "simpread-read-root",
       rdclsjq = "." + rdcls,
       $root   = $( "html" ),
       theme   = "simpread-theme-root";
+
+// load count,.0: call Readability. 1: call highlight 2: all failed
+let   load_count = 0;
 
 const Footer = () => {
     const good_icon = '<svg t="1556354786433" viewBox="0 0 1024 1024" version="1.1" width="33" height="33"><defs><style type="text/css"></style></defs><path d="M859.8 191.2c-80.8-84.2-212-84.2-292.8 0L512 248.2l-55-57.2c-81-84.2-212-84.2-292.8 0-91 94.6-91 248.2 0 342.8L512 896l347.8-362C950.8 439.4 950.8 285.8 859.8 191.2z" p-id="6225" fill="#8C8C8C"></path></svg>',
@@ -55,82 +58,104 @@ const Footer = () => {
 
 class Read extends React.Component {
 
+    verifyContent() {
+        if ( $("sr-rd-content").text().length < 100 ) {
+            if ( load_count == 0 ) {
+                new Notify().Render({ content: "检测到正文获取异常，是否重新获取？", action: "是的", cancel: "取消", callback: type => {
+                    if ( type == "cancel" ) return;
+                    load_count++;
+                    this.componentWillUnmount();
+                    storage.pr.Readability();
+                    Render();
+                }});
+            } else if ( load_count == 1 ) {
+                this.componentWillUnmount();
+                new Notify().Render({ content: '获取正文失败，是否使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">手动框选</a> 高亮的方式获取？', action: "是的", cancel: "取消", callback: type => {
+                    if ( type == "cancel" ) return;
+                    setTimeout( () => {
+                        Highlight().done( dom => {
+                            const rerender = element => {
+                                load_count++;
+                                storage.pr.TempMode( "read", element );
+                                Render();
+                            };
+                            storage.current.highlight ? 
+                                highlight.Control( dom ).done( newDom => {
+                                    rerender( newDom );
+                                }) : rerender( dom );
+                        });
+                    }, 200 );
+                }});
+            } else if ( load_count >= 2 ) {
+                this.componentWillUnmount();
+                new Notify().Render({ content: "高亮无法仍无法适配此页面，是否提交？", action: "是的", cancel: "取消", callback: type => {
+                    if ( type == "cancel" ) return;
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: {}, uid: storage.user.uid, type: "failed" }));
+                }});
+                load_count = 0;
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     componentWillMount() {
-        loadPlugins( "read_start" );
         $( "body" ).addClass( "simpread-hidden" );
         th.Change( this.props.read.theme );
-        // hack code
-        //storage.current.fap && $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">' );
         if ( storage.current.fap ) {
-            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp" crossorigin="anonymous">' );
-            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/solid.min.css" />' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/brands.min.css" />' );
+            $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css" />' );
         }
     }
 
     async componentDidMount() {
-        if ( $root.find( "sr-rd-content-error" ).length > 0 ) {
-            // Puread level to III,can't work this flow.
-            this.componentWillUnmount();
-            if ( ! localStorage["sr-update-site"] ) {
-                new Notify().Render({ content: "当前页面结构改变导致不匹配阅读模式，接下来请选择？", action: "更新", cancel: "高亮", callback: type => {
-                    if ( type == "action" ) {
-                        new Notify().Render( "2 秒钟后将会自动查找更新，请勿关闭此页面..." );
-                        localStorage["sr-update-site"] = true;
-                        setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.update_site, { url: location.href, site: storage.pr.current.site } )), 2000 );
-                    } else {
-                        this.props.read.highlight == true ? setTimeout( () => {
-                            Highlight().done( dom => {
-                                storage.pr.TempMode( "read", dom );
-                                Render();
-                            });
-                        }, 200 ) : new Notify().Render( `请先开启 <a href='http://ksria.com/simpread/docs/#/%E4%B8%B4%E6%97%B6%E9%98%85%E8%AF%BB%E6%A8%A1%E5%BC%8F' target='_blank' >临时阅读模式</a> 选项！` );
-                    }
-                }});
-            } else {
-                new Notify().Render({ content: "更新后仍无法适配此页面，是否提交？", action: "是的", cancel: "取消", callback: type => {
-                    if ( type == "cancel" ) return;
-                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.save_site, { url: location.href, site: storage.pr.current.site, uid: storage.user.uid, type: "failed" }));
-                }});
-            }
-            localStorage.removeItem( "sr-update-site" );
-        } else {
-            $root
-                .addClass( "simpread-font" )
-                .addClass( theme )
-                .find( rdclsjq )
-                    .addClass( theme )
-                    .sreffect( { opacity: 1 }, { delay: 100 })
-                    .addClass( "simpread-read-root-show" );
-
-            this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
-            this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
-            this.props.read.layout     && ss.Layout( this.props.read.layout );
-            this.props.read.site.css   && this.props.read.site.css.length > 0
-                && ss.SiteCSS( this.props.read.site.css );
-            !this.props.wrapper.avatar && this.props.read.toc 
-                && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
-            ss.Preview( this.props.read.custom );
-
-            storage.pr.state == "txt"          && !location.href.endsWith( ".md" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
-            storage.pr.current.site.desc == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
-
-            excludes( $("sr-rd-content"), this.props.wrapper.exclude );
-            storage.pr.Beautify( $( "sr-rd-content" ) );
-            storage.pr.Format( rdcls );
-
-            kbd.Render( $( "sr-rd-content" ));
-            tooltip.Render( rdclsjq );
-            waves.Render({ root: rdclsjq });
-            storage.Statistics( "read" );
-
-            loadPlugins( "read_complete" );
-
-            // Puread level to III,can't work this flow.
-            //localStorage.removeItem( "sr-update-site" );
+        if ( load_count > 0 && !this.verifyContent() ) {
+            return;
         }
+
+        $root
+            .addClass( "simpread-font" )
+            .addClass( theme )
+            .find( rdclsjq )
+                .addClass( theme )
+                .sreffect( { opacity: 1 }, { delay: 100 })
+                .addClass( "simpread-read-root-show" );
+
+        this.props.read.fontfamily && ss.FontFamily( this.props.read.fontfamily );
+        this.props.read.fontsize   && ss.FontSize( this.props.read.fontsize );
+        this.props.read.layout     && ss.Layout( this.props.read.layout );
+        this.props.read.site.css   && this.props.read.site.css.length > 0
+            && ss.SiteCSS( this.props.read.site.css );
+        ss.Preview( this.props.read.custom );
+
+        storage.pr.state == "txt"             && !location.href.endsWith( ".md" ) && $( "sr-rd-content" ).css({ "word-wrap": "break-word", "white-space": "pre-wrap" });
+        $( "sr-rd-desc" ).text().trim() == "" && $( "sr-rd-desc" ).addClass( "simpread-hidden" );
+
+        excludes( $("sr-rd-content"), this.props.wrapper.exclude );
+        storage.pr.Beautify( $( "sr-rd-content" ) );
+        storage.pr.Format( rdcls );
+
+        kbd.Render( $( "sr-rd-content" ));
+        tooltip.Render( rdclsjq );
+        waves.Render({ root: rdclsjq });
+        storage.Statistics( "read" );
+
+        !this.props.wrapper.avatar && this.props.read.toc 
+            && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+
+        this.props.wrapper.avatar && $( ".simpread-read-root" ).addClass( "simpread-multi-root" );
+
+        loadPlugins( "read_complete" );
+
+        setTimeout( ()=>{
+            this.verifyContent();
+        }, 50 );
     }
 
     componentWillUnmount() {
+        run.Event( "read_end" );
         loadPlugins( "read_end" );
         ss.FontSize( "" );
         $root.removeClass( theme )
@@ -154,7 +179,7 @@ class Read extends React.Component {
                 this.exit();
                 break;
             case "setting":
-                modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                 break;
             case "siteeditor":
                 $( "panel-bg" ).length > 0 && $( "panel-bg" )[0].click();
@@ -170,18 +195,37 @@ class Read extends React.Component {
                 storage.Setcur( storage.current.mode );
                 break;
             case "remove":
-                new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
                 $( "panel-bg" ).length > 0 && $( "panel-bg" ).trigger( "click" );
-                Highlight().done( dom => {
+                new Notify().Render({ content: "移动鼠标选择不想显示的内容，可多次选择，使用 ESC 退出。", delay: 5000 });
+                highlight.Multi( dom => {
+                    const path = storage.pr.Utils().dom2Xpath( dom ),
+                          site = { ...storage.pr.current.site };
+                    site.exclude.push( `[[\`${path}\`]]` );
+                    if ( storage.pr.state == "temp" ) {
+                        const include = storage.pr.Utils().dom2Xpath( storage.pr.dom );
+                        site.include  = `[[\`${include}\`]]`;
+                        site.name     = site.name.replace( "tempread::", "" );
+                    }
+                    storage.pr.Updatesite( 'local', storage.current.url, [ site.url, storage.pr.Cleansite(site) ]);
+                    storage.Writesite( storage.pr.sites, () => {
+                        storage.pr.current.site.name    = site.name;
+                        storage.pr.current.site.include = site.include;
+                    });
                     $(dom).remove();
                 });
                 break;
             case "highlight":
-                new Notify().Render( "移动鼠标选择高亮区域，以便生成阅读模式，将会在页面刷新后失效。" );
+                new Notify().Render( `移动鼠标选择高亮区域，以便生成阅读模式，此模式将会在页面刷新后失效，详细说明请看 <a href="http://ksria.com/simpread/docs/#/重新高亮" target="_blank">重新高亮</a>` );
                 this.exit();
                 Highlight().done( dom => {
-                    storage.pr.TempMode( "read", dom );
-                    Render();
+                    const rerender = element => {
+                        storage.pr.TempMode( "read", element );
+                        Render();
+                    };
+                    storage.current.highlight ? 
+                        highlight.Control( dom ).done( newDom => {
+                            rerender( newDom );
+                        }) : rerender( dom );
                 });
                 break;
             /*
@@ -198,11 +242,11 @@ class Read extends React.Component {
     }
 
     render() {
-        const Article = this.props.wrapper.avatar ? 
+        const Article = this.props.wrapper.avatar && this.props.wrapper.avatar.length > 0 ? 
                         <spec.Multiple include={ this.props.wrapper.include } avatar={ this.props.wrapper.avatar } /> :
                         <sr-rd-content dangerouslySetInnerHTML={{__html: this.props.wrapper.include }} ></sr-rd-content>;
 
-        const Page    = this.props.wrapper.paging && 
+        const Page    = this.props.wrapper.paging && this.props.wrapper.paging.length > 0 && 
                         <spec.Paging paging={ this.props.wrapper.paging } />;
         return (
             <sr-read>
@@ -229,6 +273,7 @@ class Read extends React.Component {
  * @param {boolean} true: call mathJaxMode(); false: @see mathJaxMode
  */
 function Render( callMathjax = true ) {
+    loadPlugins( "read_start" );
     callMathjax && mathJaxMode();
     storage.pr.ReadMode();
     if ( typeof storage.pr.html.include == "string" && storage.pr.html.include.startsWith( "<sr-rd-content-error>" ) ) {
@@ -259,7 +304,7 @@ function Highlight() {
  */
 function Exist( action ) {
     if ( $root.find( rdclsjq ).length > 0 ) {
-        action && modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+        action && setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
         return true;
     } else {
         return false;
@@ -287,10 +332,16 @@ function mathJaxMode() {
         const dom = storage.pr.MathJaxMode();
         console.log( 'current get dom is ', dom )
         if ( typeof dom == "undefined" ) {
-            new Notify().Render( "智能感知失败，请移动鼠标框选。" );
+            new Notify().Render( "<a href='http://ksria.com/simpread/docs/#/词法分析引擎?id=智能感知' target='_blank' >智能感知</a> 失败，请移动鼠标框选。" );
             Highlight().done( dom => {
-                storage.pr.TempMode( "read", dom );
-                Render( false );
+                const rerender = element => {
+                    storage.pr.TempMode( "read", element );
+                    Render( false );
+                };
+                storage.current.highlight ? 
+                    highlight.Control( dom ).done( newDom => {
+                        rerender( newDom );
+                    }) : rerender( dom );
             });
         } else if ( typeof dom == "string" ) {
             const html = storage.pr.GetDom( dom, "html" );

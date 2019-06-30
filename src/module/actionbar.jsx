@@ -32,7 +32,7 @@ export default class Actionbar extends React.Component {
                 const obj = this.props.items[key].items[item];
                 return (
                     <Button shape="circle"
-                        icon={ obj.icon }
+                        icon={ obj.icon } fontIcon={ obj.fontIcon }
                         color="#fff" backgroundColor={ obj.color }
                         waves="md-waves-effect md-waves-button"
                         tooltip={{ text: obj.name }}
@@ -43,7 +43,7 @@ export default class Actionbar extends React.Component {
             return (
                 <sr-opt-gp>
                     <sr-opt-label>{action.name}</sr-opt-label>
-                    <actions style={{ display: "flex", margin: "10px 0" }}>{ items }</actions>
+                    <actions style={{ display: "flex", margin: "10px 0", "flex-wrap": "wrap" }}>{ items }</actions>
                 </sr-opt-gp>
             );
         });

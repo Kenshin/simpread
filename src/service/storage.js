@@ -12,10 +12,11 @@ import {version,patch}from 'version';
  */
 
 const name = "simpread",
-    remote = "http://sr.ksria.cn/website_list_v3.json",
+    remote = "http://sr.ksria.cn/website_list_v4.json",
     origins= "http://sr.ksria.cn/website_list_origins.json",
     versions= "http://sr.ksria.cn/versions.json",
     local  = browser.extension.getURL( "website_list.json" ),
+    help   = browser.extension.getURL( "help_tips.json" ),
     mode   = {
         focus     : "focus",
         read      : "read",
@@ -46,7 +47,7 @@ const name = "simpread",
     },
     read   = {
         version   : "2017-03-16",
-        progress  : true,
+        progress  : false,
         auto      : false,
         controlbar: true,
         fap       : true,
@@ -107,11 +108,18 @@ const name = "simpread",
         create    : "",
         update    : "",
         sync      : "",
+        save_at   : "dropbox", // include: dropbox | jianguo
+        notice    : true,
         //focus   : 0,
         //read    : 0,
         esc       : true,
         br_exit   : false,
         secret    : false,
+        preload   : true,
+        lazyload  : [
+            "baidu.com", "weibo.com", "youtube.com"
+        ],
+        uninstall : true,
         menu      : {
             focus : true,
             read  : true,
@@ -125,6 +133,11 @@ const name = "simpread",
         origins   : [],
         blacklist : [
             "google.com",
+            "youtube.com",
+            "simp.red",
+            "simpread.herokuapp.com",
+            "simpread-test.herokuapp.com",
+            "simpread.ksria.cn"
         ],
         plugins   : [], // plugin id, e.g. kw36BtjGu0
     },
@@ -148,6 +161,8 @@ const name = "simpread",
             "gdrive"     : 0,
             "kindle"     : 0,
             "temp"       : 0,
+            "yuque"      : 0,
+            "jianguo"    : 0,
         }
     },
     user   = {
@@ -157,6 +172,10 @@ const name = "simpread",
         email     : "",
         avatar    : "",
         permission: "",
+    },
+    notice = {
+        latest: 0,
+        read  : []
     },
     unread = {
         idx       : 0,
@@ -184,11 +203,12 @@ let current  = {},
             local  : [], // include focus.sites and read.sites
         },
         statistics,
+        notice,
         user,
     },
     plugins  = {},
     secret   = {
-        version   : "2017-11-22",
+        version   : "2019-06-08",
         "dropbox" : {
             "access_token": ""
         },
@@ -217,6 +237,16 @@ let current  = {},
             access_token  : "",
             folder_id     : "",
         },
+        "yuque"  : {
+            access_token  : "",
+            repos_id: "",
+        },
+        "jianguo"  : {
+            username      : "",
+            password      : "",
+            access_token  : "",
+        },
+        "webdav"  : []
     };
     //stcode = -1;
 
@@ -276,6 +306,15 @@ class Storage {
      */
     get unrdist() {
         return simpread[ mode.unrdist ];
+    }
+
+    /**
+     * Get notice
+     * 
+     * @return {object} notice
+     */
+    get notice() {
+        return simpread.notice;
     }
 
     /**
@@ -390,6 +429,27 @@ class Storage {
     get service() {
         //return "http://localhost:3000";
         return "https://simpread.ksria.cn";
+    }
+
+    /**
+     * Get notice service url
+     * 
+     * @return {string} url
+     */
+    get notice_service() {
+        return {
+            latest: "http://simp.red/notice/latest",
+            message: "http://simp.red/notice",
+        }
+    }
+
+    /**
+     * Get help service url
+     * 
+     * @return {string} url
+     */
+    get help_service() {
+        return "http://sr.ksria.cn/help_tips.json";
     }
 
     /**
@@ -562,6 +622,9 @@ class Storage {
             case "versions":
                 url = versions;
                 break;
+            case "help_tips":
+                url = help;
+                break;
             default:
                 url = type;
         }
@@ -701,6 +764,30 @@ class Storage {
     }
 
     /**
+     * Notice set/get
+     * 
+     * @param {object}   notice
+     * @param {function} callback
+     */
+    Notice( callback, data ) {
+        if ( data ) {
+            browser.storage.local.set( { ["notice"] : data }, () => {
+                console.log( "chrome storage notice set success!", data );
+                callback && callback();
+            });
+        } else {
+            if ( br.isFirefox() && window.location.protocol != "moz-extension:" ) {
+                callback && callback();
+            } else {
+                browser.storage.local.get( ["notice"], result => {
+                    console.log( "chrome storage notice get success!", result );
+                    callback && callback( result );
+                });
+            }
+        }
+    }
+
+    /**
      * Plugins set/get, plugins not import/export
      * 
      * @param {object}   plugins
@@ -723,7 +810,7 @@ class Storage {
     }
 
     /**
-     * Export, only include: version, option, focus, read, unrdist
+     * Export
      * 
      * @return {string} object json stringify
      */
@@ -736,6 +823,7 @@ class Storage {
             websites: { ...this.websites },
             statistics: { ...this.statistics },
             user    : { ...this.user },
+            notice  : { ...this.notice },
             unrdist : this.unrdist,
         };
         this.option.secret && ( download.secret = { ...secret });

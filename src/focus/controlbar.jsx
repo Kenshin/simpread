@@ -1,18 +1,19 @@
 console.log( "=== simpread focus controlbar load ===" )
 
-import * as modals from 'modals';
-import * as se     from 'siteeditor';
-import * as conf   from 'config';
-import { storage } from 'storage';
-import * as output from 'output';
-import * as watch  from 'watch';
-import {browser,br}from 'browser';
-import * as msg    from 'message';
+import * as setting   from 'setting';
+import * as se        from 'siteeditor';
+
+import * as conf      from 'config';
+import { storage }    from 'storage';
+import * as output    from 'output';
+import * as watch     from 'watch';
+import {browser,br}   from 'browser';
+import * as msg       from 'message';
 import * as highlight from 'highlight';
 
 import Fab         from 'fab';
 
-let timer, $root, selector, callback;
+let focusItems, $root, selector, callback;
 
 const tooltip_options = {
     target   : "name",
@@ -44,7 +45,7 @@ class FControl extends React.Component {
                     $( "html, body" ).animate({ scrollTop: 0 }, "normal" );
                     break;
                 case "setting":
-                    modals.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                    setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
                     break;
                 case "siteeditor":
                     se.Render();
@@ -80,8 +81,9 @@ class FControl extends React.Component {
     }
 
     componentWillMount() {
+        focusItems = $.extend( true, {}, conf.focusItems );
         if ( storage.current.site.name.startsWith( "metaread::" ) || storage.current.site.name.startsWith( "txtread::" ) ) {
-            delete conf.focusItems.option;
+            delete focusItems.option;
         }
     }
 
@@ -93,7 +95,7 @@ class FControl extends React.Component {
     render() {
         return (
             <sr-rd-crlbar class={ this.props.show ? "" : "controlbar" } style={{ "zIndex": 2147483647 }}>
-                <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ conf.focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
+                <Fab ref="target" tooltip={ tooltip_options } waves="md-waves-effect md-waves-circle md-waves-float" items={ focusItems } onAction={ (event, type)=>this.onAction(event, type ) } />
             </sr-rd-crlbar>
         )
     }

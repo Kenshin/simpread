@@ -83,6 +83,16 @@ const keyboard = {
             "type" : "gdrive",
             "desc" : "保存到 Google 云端硬盘",
         },
+        jg: {
+            "kbd"  : "jg",
+            "type" : "jianguo",
+            "desc" : "保存到 坚果云",
+        },
+        yq: {
+            "kbd"  : "yq",
+            "type" : "yuque",
+            "desc" : "保存到 语雀",
+        },
         kd: {
             "kbd"  : "kd",
             "type" : "kindle",
@@ -300,7 +310,7 @@ const readItems = {
             },
             "dropbox" : {
                 "name" : "保存到 Dropbox",
-                "icon" : ss.IconPath("sync_icon"),
+                "icon" : ss.IconPath("dropbox_icon"),
                 "color": "#00BCD4",
             },
             "onenote" : {
@@ -311,6 +321,16 @@ const readItems = {
             "gdrive" : {
                 "name" : "保存到 Google 云端硬盘",
                 "icon" : ss.IconPath("gdrive_icon"),
+                "color": "#00BCD4",
+            },
+            "jianguo" : {
+                "name" : "保存到 坚果云",
+                "icon" : ss.IconPath("jianguo_icon"),
+                "color": "#00BCD4",
+            },
+            "yuque" : {
+                "name" : "保存到 语雀",
+                "icon" : ss.IconPath("yuque_icon"),
                 "color": "#00BCD4",
             },
             "kindle" : {
@@ -378,6 +398,12 @@ const readItems = {
                 "color": "#0f4137",
             },
         },
+    },
+    "trigger" : {
+        "name" : "插件触发器",
+        "icon" : ss.IconPath("plugin_icon"),
+        "color": "#00bcd4",
+        "items": {}
     },
     /*
     "down" : {
@@ -555,9 +581,11 @@ readLabels = [ "白练", "白磁", "卯之花色", "丁子色", "娟鼠", "月�
  * Focus controlbar items
  */
 const focusItems = ( items => {
-    const news = { ...items },
-          dels = [ "theme", "fontfamily", "fontsize", "layout", "dyslexia" ];
+    const news = $.extend( true, {}, items ),
+          dels = [ "theme", "fontfamily", "fontsize", "layout", "dyslexia", "trigger" ];
     dels.forEach( del => delete news[ del ] );
+    delete news.option.items.fullscreen;
+    delete news.option.items.tempread;
     news.top = {
         "name" : "返回顶部",
         "icon" : ss.IconPath("top_icon"),
