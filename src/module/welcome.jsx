@@ -282,9 +282,24 @@ class Welcome extends React.Component {
                         <div className="carousel-item" id="1.1.3">
                             <section style={ style.section }>
                                 <img src="http://sr.ksria.cn/welcome-plugins.png" style={ style.img }/>
-                                <h2 style={ style.h2 }>语雀，坚果云，更支持 WebDAV</h2>
+                                <h2 style={ style.h2 }>导出服务又添新成员，更支持 WebDAV</h2>
                                 <div style={ style.desc }>
-                                    语雀，坚果云，更支持 WebDAV
+                                    期待已久的 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">语雀</a> 和 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">坚果云</a> 现已加入 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">导出服务</a> 豪华大礼包<br/>
+                                    配置文件的同步也可使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/同步">坚果云</a> 了<br/>
+                                    不仅如此，只要是支持 <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV">WebDAV</a> 的服务均可使用简悦的导出功能
+                                </div>
+                            </section>
+                        </div> }
+
+                    { (( !first && version == "1.1.3" ) || version == "all" ) && 
+                        <div className="carousel-item" id="1.1.3">
+                            <section style={ style.section }>
+                                <img src="http://sr.ksria.cn/welcome-plugins.png" style={ style.img }/>
+                                <h2 style={ style.h2 }>消息中心 · 帮助中心 · 新手入门</h2>
+                                <div style={ style.desc }>
+                                    <a target="_blank" href="http://ksria.com/simpread/docs/#/消息中心">消息中心</a> 让沟通更加便利<br/>
+                                    内置常用的文档说明、常见问题、及选项页全部功能说明的 <a target="_blank" href="http://ksria.com/simpread/docs/#/帮助中心">帮助中心</a><br/>
+                                    功能太多，无从下手？<a target="_blank" href="http://ksria.com/simpread/guide">新手入门</a> 不再让新手望而却步
                                 </div>
                             </section>
                         </div> }
