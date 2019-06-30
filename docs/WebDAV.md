@@ -9,6 +9,8 @@
 
 > 下面以 Box.net 为例说明。
 
+![Xnip2019-06-29_14-14-09.png](https://i.loli.net/2019/06/29/5d1701bae47fd92999.png)
+
 - Box.net WebDAV 地址为 https://dav.box.com/dav/
 
 - 在 选项页 → 授权管理 WebDAV 键入如下的结构
