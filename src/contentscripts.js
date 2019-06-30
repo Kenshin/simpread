@@ -233,7 +233,7 @@ function readMode() {
             } else if ( pr.state == "temp" && pr.dom ) {
                 read.Render();
             } else {
-                new Notify().Render( "智能感知正文失败，请移动鼠标，并通过 <a href='http://ksria.com/simpread/docs/#/手动框选' target='_blank' >手动框选</a> 的方式生成正文。" );
+                new Notify().Render( "<a href='http://ksria.com/simpread/docs/#/词法分析引擎?id=智能感知' target='_blank' >智能感知</a> 正文失败，请移动鼠标，并通过 <a href='http://ksria.com/simpread/docs/#/手动框选' target='_blank' >手动框选</a> 的方式生成正文。" );
                 read.Highlight().done( dom => {
                     const rerender = element => {
                         pr.TempMode( mode.read, dom );

@@ -31,7 +31,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.1.0", "新增「站点编辑器，站点适配源，站点管理器等」，" ],
           [ "1.1.1", "新增「黑名单，全新的控制栏面板，更丰富的中文定制化，无障碍阅读等」，" ],
           [ "1.1.2", "新增「插件中心，站点集市等」，" ],
-          [ "1.1.3", "新增「通知中心，入门指引，支持导入语雀 / 坚果云，预加载机制，增强插件 API 等」，" ],
+          [ "1.1.3", "新增「消息中心，帮助中心，入门指引，支持导入语雀 / 坚果云，预加载机制，增强插件 API 等」，" ],
     ]),
     tips      = {
         "root"  : value => `.version-tips[data-hits='${value}']`,
@@ -49,11 +49,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'preload',
-                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a> 。',
+                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。',
                 },
                 {
                     id: 'lazyload',
-                    intro: '此功能适合 <b>经常使用简悦但又性能不够</b> 的用户；需要动态加载的页面；支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制?id=延迟加载">请看这里</a> 。',
+                    intro: '此功能适合 <b>经常使用简悦但又性能不够</b> 的用户；需要动态加载的页面；支持 Mathjax 解析的页面等，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。',
                 },
                 {
                     id: 'jianguo',
@@ -61,7 +61,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'yuque',
-                    intro: '连接你的语雀帐号后，就可使用导出到语雀的服务了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/语雀">请看这里</a> 。',
+                    intro: '连接你的语雀帐号后，就可使用导出到语雀的服务了，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/授权服务">请看这里</a> 。',
                 },
                 {
                     id: 'webdav',
@@ -143,7 +143,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'readconfig',
-                    intro: '与 <b>基础设定</b> 中不同，这里是关于阅读模式细节的设定，同时这些选项也只能在选项页中修改。<br><br> <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式">阅读模式</a> 是简悦重要的组成部分，除了常规的阅读模式外，简悦还支持多种类型，包括：<br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/论坛类页面及分页">论坛类页面及分页</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/主动适配阅读模式">主动适配阅读模式</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/智能匹配模式">智能匹配模式</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式">临时阅读模式</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/TXT-阅读器">TXT 阅读器</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=markdown-识别">Markdown 阅读器</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=latex-识别">LaTeX 阅读器</a>',
+                    intro: '与 <b>基础设定</b> 中不同，这里是关于阅读模式细节的设定，同时这些选项也只能在选项页中修改。<br><br> <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式">阅读模式</a> 是简悦重要的组成部分，除了常规的阅读模式外，简悦还支持多种类型，包括：<br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/论坛类页面及分页">论坛类页面及分页</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/主动适配阅读模式">主动适配</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=智能感知">智能感知</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">手动框选</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/TXT-阅读器">TXT 阅读器</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=markdown-识别">Markdown 阅读器</a> <br> - <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=latex-识别">LaTeX 阅读器</a>',
                 },
                 {
                     id: 'progress',
@@ -155,7 +155,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'fap',
-                    intro: '1.1.1 版开始提供 <b>控制栏浮动面板</b> 用来替代原来的 <b>控制栏浮动工具条</b>。<br>如果你并不经常使用简悦的一些高级功能，可以关闭此选项，使用更简洁的 <b>控制栏浮动工具条</b>，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/浮动控制面板（FAP）与浮动控制栏（FAB）">请看这里</a> 。',
+                    intro: '1.1.1 版开始提供 <b>控制栏浮动面板</b> 用来替代原来的 <b>控制栏浮动工具条</b>。<br>如果你并不经常使用简悦的一些高级功能，可以关闭此选项，使用更简洁的 <b>控制栏浮动工具条</b>，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式-控制栏">请看这里</a> 。',
                 },
                 {
                     id: 'highlight',
@@ -183,11 +183,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'preload',
-                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
+                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
                 },
                 {
                     id: 'lazyload',
-                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a> 。',
+                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=延迟加载">请看这里</a> 。',
                 },
                 {
                     id: 'auth',
@@ -261,7 +261,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'laterlist',
-                    intro: '简悦自带了一个未读列表，你可以把任意 URL 通过 <a target="_blank" href="http://ksria.com/simpread/docs/#/右键菜单">右键菜单</a> / <a target="_blank" href="http://ksria.com/simpread/docs/#/控制栏-阅读模式">控制栏 → 动作</a> 发送到稍后读。<br>稍后读也支持发送这些链接到 Pocket · Instapaper · Linnk 里面，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">请看这里</a> 。',
+                    intro: '简悦自带了一个未读列表，你可以把任意 URL 通过 <a target="_blank" href="http://ksria.com/simpread/docs/#/右键菜单">右键菜单</a> / <a target="_blank" href="http://ksria.com/simpread/docs/#/阅读模式-控制栏">控制栏 → 动作</a> 发送到稍后读。<br>稍后读也支持发送这些链接到 Pocket · Instapaper · Linnk 里面，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">请看这里</a> 。',
                 },
                 {
                     id: 'latermore',
@@ -275,11 +275,11 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
             items: [
                 {
                     id: 'preload',
-                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
+                    intro: '简悦的词法分析引擎采用了预加载机制，当系统性能吃紧时，可以选择关闭此功能，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">请看这里</a> 。<br>注意：建议无特殊情况下不要关闭此功能，可以 <b>使用下一条的功能</b> 来规避性能问题。',
                 },
                 {
                     id: 'lazyload',
-                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/延迟加载">请看这里</a> 。',
+                    intro: '为了更快的进入到阅读模式，简悦会主动分析每个页面，但加入此列表的 URL 不会被主动分析。<br><br>此功能适合：<br><b> - 经常使用简悦但又性能不够</b> 的用户；<br> - 需要动态加载的页面；<br> - 支持 Mathjax 解析的页面等；<br><br>详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=延迟加载">请看这里</a> 。',
                 },
                 {
                     id: 'blacklist',
@@ -428,7 +428,7 @@ function Verify( curver, data ) {
 
         data.notice = { "latest": 0, "read": [] };
 
-        data.option.blacklist.findIndex(item=>item.indexOf("youtube.com") > 0) < 0 && data.option.blacklist.push( "youtube.com" )
+        data.option.blacklist.findIndex( item => item.toLowerCase() == "youtube.com" ) < 0 && data.option.blacklist.push( "youtube.com" );
 
         data.patch = 0;
         curver = "1.1.3";
@@ -447,6 +447,29 @@ function Verify( curver, data ) {
 }
 
 /**
+ * Fix Incompatible simpread data structure
+ * 
+ * @param  {string} version
+ * @param  {object} simpread data structure
+ * @return {boolean} true: changed false: not changed
+ */
+function Incompatible( ver, data ) {
+    let is_changed = false;
+    if ( ver == "1.1.3" ) {
+        data.option.origins = data.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
+        if ( data.option.origins.length > 0 ) {
+            is_changed = true;
+            new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，<b>务必刷新后重新导入</b>！<a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">详细说明</a>`, state: "holdon" });
+        }
+        if ( VerifyPlugins( ver, data.option )) {
+            is_changed = true;
+            new Notify().Render({ type: 2, content: `已清理失效的插件，<b>务必刷新后重新导入</b>，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">删除失效的插件</a>`, state: "holdon" });
+        }
+    }
+    return is_changed;
+}
+
+/**
  * Notify with type and version
  * 1.0.4 before usage http://ksria.com/simpread/changelog.html#{ver}
  * 1.0.4 after  usage http://ksria.com/simpread/version_${ver}.html
@@ -455,10 +478,10 @@ function Verify( curver, data ) {
  * @param {string} type, include: firstload, update
  * @param {string} ver, e.g. 1.0.0, 1.0.1
  */
-function Notify( first, type, ver ) {
+function Notify2( first, type, ver ) {
     const str    = type == "firstload" ? "安装" : "更新",
           detail = type == "firstload" ? "" : details.get(ver),
-          link   = first ? `${detail}如何使用请看 <a href="http://ksria.com/simpread/docs/#/" target="_blank">文档中心</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
+          link   = first ? `${detail}如何使用请看 <a href="http://ksria.com/simpread/guide/" target="_blank">新手入门</a> 及 <a href="http://ksria.com/simpread/docs/#/" target="_blank">文档中心</a>` : `${detail}请看 <a href="http://ksria.com/simpread/welcome/version_${ver}.html" target="_blank">更新说明</a>`;
     return `${str} 到最新版本 ${ver} ，${ link }`;
 }
 
@@ -516,11 +539,9 @@ function VerifyPlugins( ver, option ) {
                 option.plugins = newStr.replace( /,$/, "" ).split( "," );
                 return true;
             }
-        }
-        return false;
+        } else return false;
     } catch( error ) {
         console.error( "version::VerifyPlugin catch", error )
-    } finally {
         return false;
     }
 }
@@ -530,8 +551,9 @@ export {
     tips,
     sub_ver as patch,
     Verify,
-    Notify,
+    Notify2 as Notify,
     Compare,
     FixSubver,
     VerifyPlugins,
+    Incompatible,
 }

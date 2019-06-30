@@ -57,7 +57,7 @@ export default class CommonOpt extends React.Component {
                 dbx.Write( dbx.config_name, storage.Export(), callback );
             } else {
                 jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, jianguo.root + "/" + jianguo.config_name, storage.Export(), result => {
-                    callback( "write", undefined, result && result.status == 204 ? undefined : "error" );
+                    callback( "write", undefined, result && [ 201, 204 ].includes( result.status ) ? undefined : "error" );
                 });
             }
         },
@@ -124,7 +124,7 @@ export default class CommonOpt extends React.Component {
                 })();
             } else {
                 const jianguo = storage.secret.jianguo;
-                !jianguo.access_token ? new Notify().Render( 2, `坚果云未授权，请先 <a href="http://ksria.com/simpread/docs/#/坚果云">授权</a>。` ) : readJianguo( storage.secret.jianguo );
+                !jianguo.access_token ? new Notify().Render( 2, `坚果云 <b>授权</b> 后才能使用此功能，如何授权 <a href="http://ksria.com/simpread/docs/#/坚果云">请看这里</a>。` ) : readJianguo( storage.secret.jianguo );
             }
         });
     }
@@ -151,13 +151,14 @@ export default class CommonOpt extends React.Component {
                                 storage.version != json.version &&
                                     storage.Fix( json.read.sites, json.version, storage.version, json.focus.sites );
                                 json = ver.Verify( json.version, json );
-                                new Notify().Render( "上传版本太低，已自动转换为最新版本。" );
+                                new Notify().Render({ type: 2, content: `上传版本太低，已自动转换为最新版本。`, state: "holdon" });
                             }
                             menu.Refresh( json.option.menu );
+                            ver.Incompatible( json.version, json );
                             json.option.origins && json.option.origins.length > 0 &&
-                                new Notify().Render( "导入的配置文件包含了第三方源，请通过手动导入。" );
+                                new Notify().Render({ content: `导入的配置文件包含了第三方源，刷新后请重新 <b>手动导入</b>。`, state: "holdon" });
                             json.option.plugins && json.option.plugins.length > 0 &&
-                                new Notify().Render( "导入的配置文件包含了插件，请通过手动导入。" );
+                                new Notify().Render({ content: `导入的配置文件包含了插件，刷新后请重新 <b>手动导入</b>。`, state: "holdon" });
                             this.importsecret( json.option.secret, { ...json.secret }, () => {
                                 delete json.secret;
                                 storage.Write( ()=> {

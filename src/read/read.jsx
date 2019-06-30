@@ -70,7 +70,7 @@ class Read extends React.Component {
                 }});
             } else if ( load_count == 1 ) {
                 this.componentWillUnmount();
-                new Notify().Render({ content: "获取正文失败，是否使用手动框选高亮的方式获取？", action: "是的", cancel: "取消", callback: type => {
+                new Notify().Render({ content: '获取正文失败，是否使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选">手动框选</a> 高亮的方式获取？', action: "是的", cancel: "取消", callback: type => {
                     if ( type == "cancel" ) return;
                     setTimeout( () => {
                         Highlight().done( dom => {
@@ -144,6 +144,8 @@ class Read extends React.Component {
 
         !this.props.wrapper.avatar && this.props.read.toc 
             && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );
+
+        this.props.wrapper.avatar && $( ".simpread-read-root" ).addClass( "simpread-multi-root" );
 
         loadPlugins( "read_complete" );
 
@@ -330,7 +332,7 @@ function mathJaxMode() {
         const dom = storage.pr.MathJaxMode();
         console.log( 'current get dom is ', dom )
         if ( typeof dom == "undefined" ) {
-            new Notify().Render( "智能感知失败，请移动鼠标框选。" );
+            new Notify().Render( "<a href='http://ksria.com/simpread/docs/#/词法分析引擎?id=智能感知' target='_blank' >智能感知</a> 失败，请移动鼠标框选。" );
             Highlight().done( dom => {
                 const rerender = element => {
                     storage.pr.TempMode( "read", element );

@@ -131,6 +131,16 @@ function pRead() {
 }
 
 /**
+ * Incompatible and update 
+ */
+function updateData() {
+    ver.Incompatible( storage.version, storage.simpread ) && storage.Write( () => {
+        console.log( "current simpread is update ", storage.simpread )
+        watch.SendMessage( "option", true );
+    }, storage.simpread );
+}
+
+/**
  * Hash notify
  */
 function hashnotify() {
@@ -173,22 +183,9 @@ function vernotify( first ) {
             watch.SendMessage( "version", true );
             loadState = { first: true, update: true };
             welcomeRender( false, version );
-            ///////////////////////////////////////////////////////////////////////////
-            // hard code
-            // option.origins rework
-            storage.option.origins = storage.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
-            if ( storage.option.origins.length > 0 ) {
-                new Notify().Render( `检测到你曾经修改过第三方适配源，请重新导入，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=重新导入">请看这里</a>`, "确认", () => {
-                    tabChange( 3 );
-                });
-            }
-            ///////////////////////////////////////////////////////////////////////////
-            // verify and remove old plugins
-            ver.VerifyPlugins( storage.option, version ) && storage.Write( () => {
-                new Notify().Render({ content: `新版升级后，会自动删除一些已失效的插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">自定义主题</a>`, state: "holdon" });
-            }, storage.simpread );
+            updateData();
         }
-        website_sync = true;
+        // website_sync = true; when version is 1.1.3 website_list is newer
         browser.runtime.sendMessage({ type: "track", value: { eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" , eventCategory: "install", eventLabel: "install && update" } });
         history.pushState( "", "", "/options/options.html" );
     } else if ( hash.startsWith( "#update?patch=" ) ) {

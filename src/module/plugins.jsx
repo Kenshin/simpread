@@ -203,6 +203,7 @@ export default class PluginsOpt extends React.Component {
     }
 
     import() {
+        let newPlugins = {};
         if ( storage.option.plugins.length == 0 ) {
             new Notify().Render( "当前配置文件没有任何插件。" );
             return;
@@ -214,7 +215,7 @@ export default class PluginsOpt extends React.Component {
                 run.Install( id, undefined, result => {
                     if ( !result ) {
                         new Notify().Render( 2, id + " 获取失败，请稍后再试。" );
-                    } else storage.plugins[result.id] = result;
+                    } else newPlugins[result.id] = result;
                     count++;
                     count == storage.option.plugins.length && complete();
                 });
@@ -222,12 +223,11 @@ export default class PluginsOpt extends React.Component {
         }});
         const complete = () => {
             storage.Plugins( result => {
-                storage.option.plugins = Object.keys( storage.plugins );
                 storage.Write( () => {
                     new Notify().Render( "已从配置文件导入完毕。" );
                     this.setState({ plugins: Object.values( storage.plugins ) });
                 });
-            }, storage.plugins );
+            }, newPlugins );
         }
     }
 
