@@ -281,7 +281,7 @@ class Welcome extends React.Component {
                     { !first && version == "1.1.3" &&
                         <div className="carousel-item" id="1.1.3">
                             <section style={ style.section }>
-                                <img src="http://sr.ksria.cn/welcome-plugins.png" style={ style.img }/>
+                                <img src="http://sr.ksria.cn/welcome-newservice.png?201906301335" style={ style.img }/>
                                 <h2 style={ style.h2 }>导出服务又添新成员，更支持 WebDAV</h2>
                                 <div style={ style.desc }>
                                     期待已久的 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">语雀</a> 和 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">坚果云</a> 现已加入 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">导出服务</a> 豪华大礼包<br/>
@@ -294,7 +294,7 @@ class Welcome extends React.Component {
                     { (( !first && version == "1.1.3" ) || version == "all" ) && 
                         <div className="carousel-item" id="1.1.3">
                             <section style={ style.section }>
-                                <img src="http://sr.ksria.cn/welcome-plugins.png" style={ style.img }/>
+                                <img src="http://sr.ksria.cn/welcome-notice.png?20190630" style={ style.img }/>
                                 <h2 style={ style.h2 }>消息中心 · 帮助中心 · 新手入门</h2>
                                 <div style={ style.desc }>
                                     <a target="_blank" href="http://ksria.com/simpread/docs/#/消息中心">消息中心</a> 让沟通更加便利<br/>
@@ -311,6 +311,10 @@ class Welcome extends React.Component {
                             { !first && version == "5005" && <div style={ style.desc }>
                                 分享卡，右键菜单添加 「白名单 / 排除列表 / 黑名单」等<br/>
                                 详细说明请看 <a target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.2.5005.html">更新日志</a>
+                            </div> }
+                            { !first && version == "1.1.3" && <div style={ style.desc }>
+                                <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=预加载机制">预加载</a> <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=延迟加载">延迟加载</a> <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎?id=智能感知">智能感知</a> 与 <a target="_blank" href="http://ksria.com/simpread/docs/#/手动框选?id=二次确认">更便捷的手动框选</a> 等诸多新功能<br/>
+                                详细说明请看 <a target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.3.html">更新日志</a>
                             </div> }
                         </section>
                     </div>
