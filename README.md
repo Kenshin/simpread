@@ -3,7 +3,7 @@
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.3-blue.svg"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><a href="https://opencollective.com/simpread" alt="Financial Contributors on Open Collective"><img src="https://opencollective.com/simpread/all/badge.svg?label=financial+contributors" /></a> <img src="https://img.shields.io/badge/lastest_version-1.1.3-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
 </p>
 <p align="center">
@@ -263,3 +263,33 @@ _如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_
 [offline-link]:     http://ksria.com/simpread/crx/1.1.3/simpread.crx
 [license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
 [license-link]:     https://opensource.org/licenses/MIT
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/Kenshin/simpread/graphs/contributors"><img src="https://opencollective.com/simpread/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/simpread/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/simpread"><img src="https://opencollective.com/simpread/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/simpread/contribute)]
+
+<a href="https://opencollective.com/simpread/organization/0/website"><img src="https://opencollective.com/simpread/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/1/website"><img src="https://opencollective.com/simpread/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/2/website"><img src="https://opencollective.com/simpread/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/3/website"><img src="https://opencollective.com/simpread/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/4/website"><img src="https://opencollective.com/simpread/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/5/website"><img src="https://opencollective.com/simpread/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/6/website"><img src="https://opencollective.com/simpread/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/7/website"><img src="https://opencollective.com/simpread/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/8/website"><img src="https://opencollective.com/simpread/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/simpread/organization/9/website"><img src="https://opencollective.com/simpread/organization/9/avatar.svg"></a>
