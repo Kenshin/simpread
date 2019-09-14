@@ -21,7 +21,8 @@
     "publish": "cross-env NODE_ENV=production  webpack -p --progress --colors",
     "ext_dev": "cross-env NODE_ENV=development webpack --devtool=source-map --progress --colors --watch --config webpack.config.ext.js",
     "ext_pub": "cross-env NODE_ENV=production  webpack -p --progress --color --config webpack.config.ext.js",
-    "server": "webpack-dev-server --hot --progress --colors"
+    "server": "webpack-dev-server --hot --progress --colors",
+    "postinstall": "opencollective-postinstall || true"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
@@ -50,6 +51,11 @@
   },
   "dependencies": {
     "clean-webpack-plugin": "^0.1.14",
-    "copy-webpack-plugin": "^4.0.1"
+    "copy-webpack-plugin": "^4.0.1",
+    "opencollective-postinstall": "^2.0.2"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/simpread"
   }
 }
