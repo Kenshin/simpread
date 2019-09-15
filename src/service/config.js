@@ -333,6 +333,11 @@ const readItems = {
                 "icon" : ss.IconPath("yuque_icon"),
                 "color": "#00BCD4",
             },
+            "notion" : {
+                "name" : "保存到 Notion",
+                "icon" : ss.IconPath("notion_icon"),
+                "color": "#00BCD4",
+            },
             "kindle" : {
                 "name" : "保存到 Kindle",
                 "icon" : ss.IconPath("kindle_icon"),
