@@ -241,6 +241,10 @@ let current  = {},
             access_token  : "",
             repos_id: "",
         },
+        "notion"  : {
+            access_token  : "",
+            folder_id: "",
+        },
         "jianguo"  : {
             username      : "",
             password      : "",
