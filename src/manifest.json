@@ -40,7 +40,8 @@
   "options_page"    : "options/options.html",
   "web_accessible_resources": [
     "/assets/images/*",
-    "website_list.json"
+    "website_list.json",
+    "options/corb.html"
   ],
   "offline_enabled" : true,
   "update_url"      : "https://clients2.google.com/service/update2/crx",

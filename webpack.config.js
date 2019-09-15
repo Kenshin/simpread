@@ -53,6 +53,7 @@ const webpack = require( 'webpack' ),
             { from   : 'src/options/custom.html',         to : '../options/' },
             { from   : 'src/options/sitemgr.html',        to : '../options/' },
             { from   : 'src/options/notice.html',         to : '../options/' },
+            { from   : 'src/options/corb.html',           to : '../options/' },
             { context: 'src/assets/images/', from : "*" , to : '../assets/images' },
             { context: 'src/_locales/',    from : "*/*" , to : '../_locales/' },
           ])
@@ -174,6 +175,7 @@ const webpack = require( 'webpack' ),
         custom         : './src/options/custom.js',
         sitemgr        : './src/options/sitemgr.js',
         notice         : './src/options/notice.js',
+        corb           : './src/options/corb.js',
       },
 
       output: {
