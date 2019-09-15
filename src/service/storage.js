@@ -208,7 +208,7 @@ let current  = {},
     },
     plugins  = {},
     secret   = {
-        version   : "2019-06-08",
+        version   : "2019-09-15",
         "dropbox" : {
             "access_token": ""
         },
