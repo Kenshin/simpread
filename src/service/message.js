@@ -34,6 +34,7 @@ const action = {
     temp_site      : "temp_site",
     // corb
     CORB           : "corb",
+    AXIOS          : "axios",
     // webdav
     jianguo        : "jianguo",
     WebDAV         : "webdav",
