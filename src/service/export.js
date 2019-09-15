@@ -130,6 +130,7 @@ function unlink( id ) {
         "onenote" : "https://account.live.com/consent/Manage",
         "gdrive"  : "https://drive.google.com/drive/my-drive",
         "yuque"   : "https://www.yuque.com/yuque/developer/delete-oauth-apps",
+        "notion"  : "http://ksria.com/simpread/docs/#/发送到-Notion",
         "jianguo" : "http://help.jianguoyun.com/?p=2064",
         "linnk"   : "https://linnk.net/",
     }
