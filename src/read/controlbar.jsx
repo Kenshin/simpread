@@ -109,7 +109,7 @@ export default class ReadCtlbar extends React.Component {
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                        [ "fullscreen", "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque" ].includes( type )) {
+                        [ "fullscreen", "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion" ].includes( type )) {
                         const [ title, desc, content ] = [ $( "sr-rd-title" ).text().trim(), $( "sr-rd-desc" ).text().trim(), $( "sr-rd-content" ).html().trim() ];
                         output.Action( type, title, desc, content );
                     }

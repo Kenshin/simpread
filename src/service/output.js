@@ -138,8 +138,8 @@ function action( type, title, desc, content ) {
                 }
                 break;
         }
-    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque" ].includes( type ) ) {
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque } = exp,
+    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion" ].includes( type ) ) {
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
         const service = type => {
@@ -226,6 +226,19 @@ function action( type, title, desc, content ) {
                         yuque.Add( title, result,( result, error ) => exp.svcCbWrapper( result, error, yuque.name, type, new Notify() ));
                     });
                     break;
+                case "notion":
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                        corbLoader();
+                        setTimeout( () => {
+                            notion.access_token = storage.secret.notion.access_token;
+                            notion.folder_id    = storage.secret.notion.folder_id;
+                            notion.Add( title, result.replace( /.jpeg!720/ig, '.jpeg' ), ( result, error ) => {
+                                exp.svcCbWrapper( result, error, notion.name, type, new Notify() )
+                                corbLoader();
+                            });
+                        }, 500 );
+                    });
+                    break;
             }
         };
 
@@ -264,6 +277,15 @@ function action( type, title, desc, content ) {
     else {
         new Notify().Render( 2, "当前模式下，不支持此功能。" );
     }
+}
+
+/**
+ * Open and Remove CORB iframe
+ */
+function corbLoader() {
+    $( '#sr-corb' ).length == 0 ?
+        $( 'sr-read' ).after( `<iframe id="sr-corb" src="${browser.runtime.getURL('options/corb.html')}" width="0" height="0" frameborder="0"></iframe>` )
+        : $( '#sr-corb' ).remove();
 }
 
 export {
