@@ -9,6 +9,7 @@ import Notify    from 'notify';
 import Switch    from 'switch';
 import TextField from 'textfield';
 import Button    from 'button';
+import Dropdown  from 'dropdown';
 
 export default class Auth extends React.Component {
 
@@ -32,11 +33,12 @@ export default class Auth extends React.Component {
         linnk  : undefined,
         instapaper : undefined,
         jianguo: undefined,
+        notion : undefined,
     }
 
     onChange( state, value, flag ) {
         let notify;
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque } = exp,
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion } = exp,
             clear = ( id, name ) => {
                 Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
                 storage.Safe( ()=> {
@@ -53,6 +55,7 @@ export default class Auth extends React.Component {
                     id == "linnk"      && this.setState({ secret: storage.secret, linnk: false });
                     id == "instapaper" && this.setState({ secret: storage.secret, instapaper: false });
                     id == "jianguo"    && this.setState({ secret: storage.secret, jianguo: false });
+                    id == "notion"     && this.setState({ secret: storage.secret, notion: notion.blocks });
                     if ( location.hash.startsWith( "#labs?auth=" ) ) {
                         new Notify().Render( "3 秒钟将会关闭此页面..." );
                         setTimeout( () => {
@@ -212,6 +215,12 @@ export default class Auth extends React.Component {
                     });
                 }).fail( error => failed( error, yuque.id, yuque.name ));
                 break;
+            case "notion":
+                notion.Auth( ( result, error ) => {
+                    if ( error ) failed( error, notion.id, notion.name );
+                    else success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id });
+                });
+                break;
             case "jianguo":
                 jianguo.Auth( this.props.jianguo.username, this.props.jianguo.password, result => {
                     if ( result && result.status == 401 ) {
@@ -225,6 +234,7 @@ export default class Auth extends React.Component {
     save( state, value ) {
         state == "pocket" && ( storage.secret.pocket.tags      = value.trim() );
         state == "linnk"  && ( storage.secret.linnk.group_name = value.trim() );
+        state == "notion" && ( storage.secret.notion.folder_id = value.trim() );
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
 
@@ -243,6 +253,12 @@ export default class Auth extends React.Component {
     webdavOnChange() {
         this.state.secret.webdav = event.target.value.split("\n");
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
+    }
+
+    notionChange() {
+        exp.notion.Auth( ( result, error ) => {
+            this.setState({ secret: storage.secret, notion: exp.notion.blocks });
+        });
     }
 
     webdavAuth() {
@@ -417,6 +433,21 @@ export default class Auth extends React.Component {
                             label={ this.state.secret.yuque.access_token ? "已授权 语雀，是否取消授权？" : "是否连接并授权 语雀 ？" }
                             onChange={ (s)=>this.onChange( "yuque", s ) } />
                         </div>
+
+                        <Switch width="100%" checked={ this.state.secret.notion.access_token != "" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.notion.access_token ? "已授权 Notion，是否取消授权？" : "是否连接并授权 Notion ？" }
+                            onChange={ (s)=>this.onChange( "notion", s ) } />
+
+                        { this.state.secret.notion.access_token && 
+                            <div style={{ display: "flex","flex-direction": "row", "justify-content": "center" }}>
+                            { this.state.notion ? <Dropdown name={ "请选择保存的位置，默认为第一个" } items={ this.state.notion } width="100%" onChange={ (v,n)=>this.save( "notion", v ) } />
+                            : <Button type="flat" width="100%" style={{ "margin": "0" }}
+                                    text="重新获取 Notion Page"
+                                    color="#fff" backgroundColor="#3F51B5"
+                                    waves="md-waves-effect md-waves-button"
+                                    onClick={ (s)=>this.notionChange() } /> }
+                            </div> }
 
                         <div className="version-tips" data-version="1.1.3" data-hits="webdav">
                         <div className="label" style={{'margin-bottom':' -15px'}}>WebDAV</div>
