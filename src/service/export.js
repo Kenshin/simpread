@@ -1254,10 +1254,12 @@ class Notion {
             url     : this.url + "api/v3/loadUserContent",
             type    : "POST",
         }).done( ( result, status, xhr ) => {
-            console.log( result, status, xhr )
             if ( result && status == "success" ) {
                 this.access_token = Object.values( result.recordMap.notion_user )[0].value.id;
-                this.folder_id    = Object.values( result.recordMap.block )[0].value.id
+                this.folder_id    = Object.values( result.recordMap.block )[0].value.id;
+                this.blocks       = Object.values( result.recordMap.block ).map( item => {
+                    return { name: item.value.properties ? item.value.properties.title[0][0] : "Undefined", value: item.value.id }
+                });
                 callback( result, undefined );
             }
         }).fail( ( xhr, status, error ) => {
