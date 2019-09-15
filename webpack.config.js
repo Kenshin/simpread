@@ -229,6 +229,7 @@ const webpack = require( 'webpack' ),
           nanoid     : __dirname + '/node_modules/nanoid/generate.js',
 
           jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
+          axios      : __dirname + '/src/vender/axios.min.js',
           mousetrap  : __dirname + '/src/vender/mousetrap.min.js',
           velocity   : __dirname + '/src/vender/velocity.min.js',
           timeago    : __dirname + '/src/vender/timeago.min.js',
