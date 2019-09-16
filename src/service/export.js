@@ -1265,13 +1265,16 @@ class Notion {
             }
         }).fail( ( xhr, status, error ) => {
             console.error( error, status, xhr )
+            callback( undefined, xhr.status == 401 ? `请先 <a target="_blank" href="https://www.notion.so/">登录 Notion</a> ` : "请稍后再试" );
         });
     }
 
     Add( title, content, callback ) {
-        this.TempFile( this.folder_id, title, documentId => {
+        this.TempFile( this.folder_id, title, ( documentId, error ) => {
             console.log( 'TempFile: ', documentId )
-            this.GetFileUrl( `${title}.md`, urls => {
+            if ( error ) {
+                callback( undefined, error );
+            } else this.GetFileUrl( `${title}.md`, urls => {
                 console.log( 'GetFileUrl: ', urls )
                 this.WriteFile( urls.signedPutUrl, content, result => {
                     console.log( 'WriteFile: ', result )
@@ -1360,9 +1363,8 @@ class Notion {
             url: this.url + "api/v3/submitTransaction",
             data: operations
         }), result => {
-            if ( result && result.done ) {
-                callback( documentId );
-            }
+            result.done && callback( documentId, undefined );
+            result.fail && callback( undefined, result.fail.message.includes( '401' ) ? `授权已过期，请重新授权。` : "请稍后再试" );
         });
     }
 
