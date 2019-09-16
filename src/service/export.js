@@ -1471,6 +1471,7 @@ class Youdao {
                 }
             }).fail( ( xhr, status, error ) => {
                 console.error( error, status, xhr )
+                callback( undefined, xhr.status == 500 ? `请先 <a target="_blank" href="https://note.youdao.com/web">登录有道云笔记</a> ` : "请稍后再试" );
             });
         });
     }
