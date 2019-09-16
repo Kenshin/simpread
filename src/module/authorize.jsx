@@ -4,6 +4,8 @@ import {storage} from 'storage';
 import * as exp  from 'export';
 import * as msg  from 'message';
 import {browser} from 'browser';
+import * as permission
+                 from 'permission';
 
 import Notify    from 'notify';
 import Switch    from 'switch';
@@ -225,10 +227,20 @@ export default class Auth extends React.Component {
                 });
                 break;
             case "youdao":
-                    youdao.Auth( ( result, error ) => {
-                        if ( error ) failed( error, youdao.id, youdao.name );
-                        else success( youdao.id, youdao.name, { access_token: youdao.access_token, folder_id: youdao.folder_id });
-                    });
+                permission.getPermissions( youdao.permissions, result => {
+                    if ( !result ) {
+                        new Notify().Render( 2, `此功能需要申请 cookies 权限后才能使用，授权成功后会自动取消。` );
+                        this.setState({ secret: storage.secret });
+                        return;
+                    }
+                    setTimeout( () => {
+                        youdao.Auth( ( result, error ) => {
+                            if ( error ) failed( error, youdao.id, youdao.name );
+                            else success( youdao.id, youdao.name, { access_token: youdao.access_token, folder_id: youdao.folder_id });
+                            permission.removePermissions( youdao.permissions, result => new Notify().Render( `已取消 cookies 权限。` ));
+                        });
+                    }, 500 );
+                });
                 break;
             case "jianguo":
                 jianguo.Auth( this.props.jianguo.username, this.props.jianguo.password, result => {
