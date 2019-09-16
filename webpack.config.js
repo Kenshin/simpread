@@ -260,6 +260,7 @@ const webpack = require( 'webpack' ),
           highlight  : __dirname + '/src/service/highlight.js',
           output     : __dirname + '/src/service/output.js',
           runtime    : __dirname + '/src/service/runtime.js',
+          permission : __dirname + '/src/service/permission.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
