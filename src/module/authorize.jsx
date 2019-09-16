@@ -69,6 +69,7 @@ export default class Auth extends React.Component {
             failed = ( error, id, name ) => {
                 notify && notify.complete();
                 console.error( `${name} auth faild, error: ${error}` )
+                id == "youdao" ? new Notify().Render( 2, `获取 ${name} 授权失败，${error}` ) :
                 new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
                 storage.secret[state].access_token = "";
                 this.setState({ secret: storage.secret });
@@ -224,10 +225,10 @@ export default class Auth extends React.Component {
                 });
                 break;
             case "youdao":
-                youdao.Auth( ( result, error ) => {
-                    if ( error ) failed( error, youdao.id, youdao.name );
-                    else success( youdao.id, youdao.name, { access_token: youdao.access_token, folder_id: youdao.folder_id });
-                });
+                    youdao.Auth( ( result, error ) => {
+                        if ( error ) failed( error, youdao.id, youdao.name );
+                        else success( youdao.id, youdao.name, { access_token: youdao.access_token, folder_id: youdao.folder_id });
+                    });
                 break;
             case "jianguo":
                 jianguo.Auth( this.props.jianguo.username, this.props.jianguo.password, result => {
@@ -272,7 +273,8 @@ export default class Auth extends React.Component {
 
     youdaoChange() {
         exp.youdao.Auth( ( result, error ) => {
-            this.setState({ secret: storage.secret, youdao: exp.youdao.folders });
+            if ( result ) this.setState({ secret: storage.secret, youdao: exp.youdao.folders });
+            else new Notify().Render( 2, `重新获取失败，${error}` );
         });
    }
 
