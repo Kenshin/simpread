@@ -1476,24 +1476,23 @@ class Youdao {
               uuid      = this.UUID().replace( /-/g, '' ),
               fileId    = `WEB${uuid}`;
         let formData    = {};
+        formData[ 'fileId'        ] = fileId;
+        formData[ 'parentId'      ] = this.folder_id;
+        formData[ 'name'          ] = `${title}.md`;
+        formData[ 'domain'        ] = `1`;
+        formData[ 'rootVersion'   ] = `-1`;
+        formData[ 'dir'           ] = `false`;
+        formData[ 'sessionId'     ] = '';
+        formData[ 'createTime'    ] = timestamp;
+        formData[ 'modifyTime'    ] = timestamp;
+        formData[ 'transactionId' ] = fileId;
+        formData[ 'bodyString'    ] = content;
+        formData[ 'transactionTime' ] = timestamp;
+        formData[ 'cstk'          ] = this.access_token;
 
-        formData['fileId'] = fileId;
-        formData['parentId'] = this.folder_id;
-        formData['name'] = `${title}.md`;
-        formData['domain'] = `1`;
-        formData['rootVersion'] = `-1`;
-        formData['dir'] = `false`;
-        formData['sessionId'] = '';
-        formData['createTime'] = timestamp;
-        formData['modifyTime'] = timestamp;
-        formData['transactionId'] = fileId;
-        formData['bodyString'] = content;
-        formData['transactionTime'] = timestamp;
-        formData['cstk'] = this.access_token;
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
             type: "post",
-            url: this.url + `/yws/api/personal/sync?method=push&keyfrom=web&cstk=${this.access_token}`,
-            //data: formData,
+            url : this.url + `/yws/api/personal/sync?method=push&keyfrom=web&cstk=${this.access_token}`,
             form: formData,
         }), result => {
             callback( result );
