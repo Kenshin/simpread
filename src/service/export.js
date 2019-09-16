@@ -1500,7 +1500,8 @@ class Youdao {
             url : this.url + `/yws/api/personal/sync?method=push&keyfrom=web&cstk=${this.access_token}`,
             form: formData,
         }), result => {
-            callback( result );
+            if ( result.fail ) callback( undefined, result.fail.message.includes( '500' ) ? `授权已过期，请重新授权。` : "请稍后再试" );
+            else callback( result, undefined );
         });
     }
 
