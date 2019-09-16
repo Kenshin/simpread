@@ -69,7 +69,7 @@ export default class Auth extends React.Component {
             failed = ( error, id, name ) => {
                 notify && notify.complete();
                 console.error( `${name} auth faild, error: ${error}` )
-                id == "youdao" ? new Notify().Render( 2, `获取 ${name} 授权失败，${error}` ) :
+                id == "youdao" || id == "notion" ? new Notify().Render( 2, `获取 ${name} 授权失败，${error}` ) :
                 new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
                 storage.secret[state].access_token = "";
                 this.setState({ secret: storage.secret });
