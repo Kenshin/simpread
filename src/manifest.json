@@ -17,6 +17,7 @@
     "storage",
     "tts"
   ],
+  "optional_permissions": [ "cookies", "https://*.youdao.com/" ],
   "background": {
     "scripts"       : [ "/bundle/common.js", "/bundle/background.js" ]
   },
