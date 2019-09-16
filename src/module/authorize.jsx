@@ -106,6 +106,9 @@ export default class Auth extends React.Component {
                 this.props.jianguo.username = "";
                 this.props.jianguo.password = "";
             }
+            if ( state == "youdao" ) {
+                permission.removePermissions( youdao.permissions, result => new Notify().Render( `已取消 cookies 权限。` ));
+            }
             clear( state, exp.Name( state ));
             return;
         }
@@ -237,7 +240,6 @@ export default class Auth extends React.Component {
                         youdao.Auth( ( result, error ) => {
                             if ( error ) failed( error, youdao.id, youdao.name );
                             else success( youdao.id, youdao.name, { access_token: youdao.access_token, folder_id: youdao.folder_id });
-                            permission.removePermissions( youdao.permissions, result => new Notify().Render( `已取消 cookies 权限。` ));
                         });
                     }, 500 );
                 });
