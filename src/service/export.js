@@ -131,6 +131,7 @@ function unlink( id ) {
         "gdrive"  : "https://drive.google.com/drive/my-drive",
         "yuque"   : "https://www.yuque.com/yuque/developer/delete-oauth-apps",
         "notion"  : "http://ksria.com/simpread/docs/#/发送到-Notion",
+        "youdao"  : "http://ksria.com/simpread/docs/#/发送到有道云笔记",
         "jianguo" : "http://help.jianguoyun.com/?p=2064",
         "linnk"   : "https://linnk.net/",
     }
@@ -1463,6 +1464,10 @@ class Youdao {
             }).done( ( result, status, xhr ) => {
                 if ( result && result.length > 0 ) {
                     this.folder_id = result[0].fileEntry.id;
+                    this.folders   = result.map( item => {
+                        return { name: item.fileEntry.name, value: item.fileEntry.id };
+                    });
+                    console.log( "asdfasdfasd", this.folders )
                     callback( result, undefined );
                 }
             }).fail( ( xhr, status, error ) => {
