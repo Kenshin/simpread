@@ -208,7 +208,7 @@ let current  = {},
     },
     plugins  = {},
     secret   = {
-        version   : "2019-09-15",
+        version   : "2019-09-16",
         "dropbox" : {
             "access_token": ""
         },
@@ -244,6 +244,10 @@ let current  = {},
         "notion"  : {
             access_token  : "",
             folder_id: "",
+        },
+        "youdao"  : {
+            access_token  : "",
+            folder_id     : "",
         },
         "jianguo"  : {
             username      : "",
