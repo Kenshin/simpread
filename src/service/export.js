@@ -1467,7 +1467,6 @@ class Youdao {
                     this.folders   = result.map( item => {
                         return { name: item.fileEntry.name, value: item.fileEntry.id };
                     });
-                    console.log( "asdfasdfasd", this.folders )
                     callback( result, undefined );
                 }
             }).fail( ( xhr, status, error ) => {
