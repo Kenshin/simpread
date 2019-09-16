@@ -138,8 +138,8 @@ function action( type, title, desc, content ) {
                 }
                 break;
         }
-    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion" ].includes( type ) ) {
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion } = exp,
+    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion", "youdao" ].includes( type ) ) {
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion, youdao } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
         const service = type => {
@@ -237,6 +237,19 @@ function action( type, title, desc, content ) {
                                 corbLoader();
                             });
                         }, 500 );
+                    });
+                    break;
+                case "youdao":
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                        corbLoader();
+                        setTimeout( () => {
+                            youdao.access_token = storage.secret.youdao.access_token;
+                            youdao.folder_id    = storage.secret.youdao.folder_id;
+                            youdao.Add( title, result, ( result, error ) => {
+                                exp.svcCbWrapper( result, error, youdao.name, type, new Notify() )
+                                corbLoader();
+                            });
+                        }, 600 );
                     });
                     break;
             }
