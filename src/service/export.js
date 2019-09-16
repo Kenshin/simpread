@@ -1419,6 +1419,91 @@ class Notion {
 }
 
 /**
+ * Youdao
+ * 
+ * @class
+ */
+class Youdao {
+
+    get id()   { return "youdao"; }
+    get name() { return name( this.id ); }
+
+    get url() {
+        return "https://note.youdao.com";
+    }
+
+    UUID() {
+        var __extends=void 0&&(void 0).__extends||function(){var _extendStatics=function extendStatics(d,b){_extendStatics=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(d,b){d.__proto__=b}||function(d,b){for(var p in b)if(b.hasOwnProperty(p))d[p]=b[p]};return _extendStatics(d,b)};return function(d,b){_extendStatics(d,b);function __(){this.constructor=d}d.prototype=b===null?Object.create(b):(__.prototype=b.prototype,new __())}}();var ValueUUID=function(){function ValueUUID(_value){this._value=_value;this._value=_value}ValueUUID.prototype.asHex=function(){return this._value};return ValueUUID}();var V4UUID=function(_super){__extends(V4UUID,_super);function V4UUID(){return _super.call(this,[V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-','4',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._oneOf(V4UUID._timeHighBits),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex()].join(''))||this}V4UUID._oneOf=function(array){return array[Math.floor(array.length*Math.random())]};V4UUID._randomHex=function(){return V4UUID._oneOf(V4UUID._chars)};V4UUID._chars=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];V4UUID._timeHighBits=['8','9','a','b'];return V4UUID}(ValueUUID);function generateUuid(){return new V4UUID().asHex()}
+        return generateUuid();
+    }
+
+    Cookies( callback ) {
+        browser.cookies.get({
+            url: this.url,
+            name: 'YNOTE_CSTK',
+        }, cookie => {
+            callback( cookie );
+        })
+    }
+
+    Auth( callback ) {
+        this.Cookies( token => {
+            this.access_token = token.value;
+            const formData = new FormData();
+            formData.append( 'path', '/' );
+            formData.append( 'dirOnly', 'true' );
+            formData.append( 'f', 'true');
+            formData.append( 'cstk', this.access_token );
+            $.ajax({
+                url     : this.url + `/yws/api/personal/file?method=listEntireByParentPath&keyfrom=web&cstk=${this.access_token}`,
+                type    : "POST",
+                contentType: false,
+                processData: false,
+                data    : formData
+            }).done( ( result, status, xhr ) => {
+                if ( result && result.length > 0 ) {
+                    this.folder_id = result[0].fileEntry.id;
+                    callback( result, undefined );
+                }
+            }).fail( ( xhr, status, error ) => {
+                console.error( error, status, xhr )
+            });
+        });
+    }
+
+    Add( title, content, callback ) {
+        const timestamp = String( Math.floor( Date.now() / 1000 )),
+              uuid      = this.UUID().replace( /-/g, '' ),
+              fileId    = `WEB${uuid}`;
+        let formData    = {};
+
+        formData['fileId'] = fileId;
+        formData['parentId'] = this.folder_id;
+        formData['name'] = `${title}.md`;
+        formData['domain'] = `1`;
+        formData['rootVersion'] = `-1`;
+        formData['dir'] = `false`;
+        formData['sessionId'] = '';
+        formData['createTime'] = timestamp;
+        formData['modifyTime'] = timestamp;
+        formData['transactionId'] = fileId;
+        formData['bodyString'] = content;
+        formData['transactionTime'] = timestamp;
+        formData['cstk'] = this.access_token;
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+            type: "post",
+            url: this.url + `/yws/api/personal/sync?method=push&keyfrom=web&cstk=${this.access_token}`,
+            //data: formData,
+            form: formData,
+        }), result => {
+            callback( result );
+        });
+    }
+
+}
+
+
+/**
  * Kindle
  * 
  * @class
@@ -1491,6 +1576,8 @@ function name( type ) {
         return "坚果云";
     } else if ( type == "yuque" ) {
         return "语雀";
+    } else if ( type == "youdao" ) {
+        return "有道云笔记";
     }
 return type;
 }
@@ -1584,6 +1671,7 @@ const dropbox  = new Dropbox(),
       yuque    = new Yuque(),
       jianguo  = new Jianguo(),
       notion   = new Notion(),
+      youdao   = new Youdao(),
       webdav   = new WebDAV(),
       kindle   = new Kindle();
 
@@ -1597,7 +1685,7 @@ export {
     md2HTML  as MD2HTML,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav, notion,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav, notion, youdao,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,
