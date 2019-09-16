@@ -338,6 +338,11 @@ const readItems = {
                 "icon" : ss.IconPath("notion_icon"),
                 "color": "#00BCD4",
             },
+            "youdao" : {
+                "name" : "保存到 有道云笔记",
+                "icon" : ss.IconPath("youdao_icon"),
+                "color": "#00BCD4",
+            },
             "kindle" : {
                 "name" : "保存到 Kindle",
                 "icon" : ss.IconPath("kindle_icon"),
