@@ -284,9 +284,18 @@ export default class Auth extends React.Component {
     }
 
     youdaoChange() {
-        exp.youdao.Auth( ( result, error ) => {
-            if ( result ) this.setState({ secret: storage.secret, youdao: exp.youdao.folders });
-            else new Notify().Render( 2, `重新获取失败，${error}` );
+        permission.getPermissions( exp.youdao.permissions, result => {
+            if ( !result ) {
+                new Notify().Render( 2, `此功能需要申请 cookies 权限后才能使用，授权成功后会自动取消。` );
+                this.setState({ secret: storage.secret });
+                return;
+            }
+            setTimeout( () => {
+                exp.youdao.Auth( ( result, error ) => {
+                    if ( result ) this.setState({ secret: storage.secret, youdao: exp.youdao.folders });
+                    else new Notify().Render( 2, `重新获取失败，${error}` );
+                });
+            }, 500 );
         });
    }
 
