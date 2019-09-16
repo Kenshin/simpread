@@ -1435,6 +1435,13 @@ class Youdao {
         return "https://note.youdao.com";
     }
 
+    get permissions() {
+        return {
+            permissions: [ 'cookies' ],
+            origins: [ 'https://*.youdao.com/' ]
+        };
+    }
+
     UUID() {
         var __extends=void 0&&(void 0).__extends||function(){var _extendStatics=function extendStatics(d,b){_extendStatics=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(d,b){d.__proto__=b}||function(d,b){for(var p in b)if(b.hasOwnProperty(p))d[p]=b[p]};return _extendStatics(d,b)};return function(d,b){_extendStatics(d,b);function __(){this.constructor=d}d.prototype=b===null?Object.create(b):(__.prototype=b.prototype,new __())}}();var ValueUUID=function(){function ValueUUID(_value){this._value=_value;this._value=_value}ValueUUID.prototype.asHex=function(){return this._value};return ValueUUID}();var V4UUID=function(_super){__extends(V4UUID,_super);function V4UUID(){return _super.call(this,[V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-','4',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._oneOf(V4UUID._timeHighBits),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex()].join(''))||this}V4UUID._oneOf=function(array){return array[Math.floor(array.length*Math.random())]};V4UUID._randomHex=function(){return V4UUID._oneOf(V4UUID._chars)};V4UUID._chars=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];V4UUID._timeHighBits=['8','9','a','b'];return V4UUID}(ValueUUID);function generateUuid(){return new V4UUID().asHex()}
         return generateUuid();
@@ -1451,6 +1458,10 @@ class Youdao {
 
     Auth( callback ) {
         this.Cookies( token => {
+            if ( !token ) {
+                callback( undefined, `请先 <a target="_blank" href="https://note.youdao.com/web">登录有道云笔记</a> ` );
+                return;
+            }
             this.access_token = token.value;
             const formData = new FormData();
             formData.append( 'path', '/' );
