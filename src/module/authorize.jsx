@@ -107,7 +107,7 @@ export default class Auth extends React.Component {
                 this.props.jianguo.password = "";
             }
             if ( state == "youdao" ) {
-                permission.removePermissions( youdao.permissions, result => new Notify().Render( `已取消 cookies 权限。` ));
+                permission.Remove( youdao.permissions, result => new Notify().Render( `已取消 cookies 权限。` ));
             }
             clear( state, exp.Name( state ));
             return;
@@ -230,7 +230,7 @@ export default class Auth extends React.Component {
                 });
                 break;
             case "youdao":
-                permission.getPermissions( youdao.permissions, result => {
+                permission.Get( youdao.permissions, result => {
                     if ( !result ) {
                         new Notify().Render( 2, `此功能需要申请 cookies 权限后才能使用，授权成功后会自动取消。` );
                         this.setState({ secret: storage.secret });
@@ -286,7 +286,7 @@ export default class Auth extends React.Component {
     }
 
     youdaoChange() {
-        permission.getPermissions( exp.youdao.permissions, result => {
+        permission.Get( exp.youdao.permissions, result => {
             if ( !result ) {
                 new Notify().Render( 2, `此功能需要申请 cookies 权限后才能使用，授权成功后会自动取消。` );
                 this.setState({ secret: storage.secret });

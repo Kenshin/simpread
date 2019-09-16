@@ -1,7 +1,7 @@
 
 import {browser} from 'browser';
 
-function getPermissions( permissions, callback ) {
+function Get( permissions, callback ) {
     browser.permissions.contains({ permissions: permissions.permissions }, result => {
         result == false ? chrome.permissions.request( permissions, granted => {
             callback( granted );
@@ -9,13 +9,13 @@ function getPermissions( permissions, callback ) {
     });
 }
 
-function removePermissions( permissions, callback ) {
+function Remove( permissions, callback ) {
     browser.permissions.remove( { permissions: permissions.permissions }, result => {
         callback( result )
     })
 }
 
 export {
-    getPermissions,
-    removePermissions
+    Get,
+    Remove
 }
