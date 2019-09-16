@@ -228,28 +228,24 @@ function action( type, title, desc, content ) {
                     break;
                 case "notion":
                     exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
-                        corbLoader();
-                        setTimeout( () => {
+                        corbLoader( "load", () => {
                             notion.access_token = storage.secret.notion.access_token;
                             notion.folder_id    = storage.secret.notion.folder_id;
                             notion.Add( title, result.replace( /.jpeg!720/ig, '.jpeg' ), ( result, error ) => {
                                 exp.svcCbWrapper( result, error, notion.name, type, new Notify() )
-                                corbLoader();
                             });
                         }, 500 );
                     });
                     break;
                 case "youdao":
                     exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
-                        corbLoader();
-                        setTimeout( () => {
+                        corbLoader( "load", () => {
                             youdao.access_token = storage.secret.youdao.access_token;
                             youdao.folder_id    = storage.secret.youdao.folder_id;
                             youdao.Add( title, result, ( result, error ) => {
                                 exp.svcCbWrapper( result, error, youdao.name, type, new Notify() )
-                                corbLoader();
                             });
-                        }, 600 );
+                        });
                     });
                     break;
             }
@@ -294,11 +290,16 @@ function action( type, title, desc, content ) {
 
 /**
  * Open and Remove CORB iframe
+ * 
+ * @param {string} include: load & remove
  */
-function corbLoader() {
-    $( '#sr-corb' ).length == 0 ?
-        $( 'sr-read' ).after( `<iframe id="sr-corb" src="${browser.runtime.getURL('options/corb.html')}" width="0" height="0" frameborder="0"></iframe>` )
-        : $( '#sr-corb' ).remove();
+function corbLoader( state, callback ) {
+    if ( state == "load" ) {
+        if ( $( '#sr-corb' ).length == 0 ) {
+            $( 'html' ).append( `<iframe id="sr-corb" src="${browser.runtime.getURL('options/corb.html')}" width="0" height="0" frameborder="0"></iframe>` );
+            $( '#sr-corb' ).on( "load", event => callback());
+        } else callback();
+    } else $( '#sr-corb' ).remove();
 }
 
 export {
