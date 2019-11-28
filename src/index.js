@@ -1,7 +1,15 @@
-// Import css
+// import css
+import 'hamburgers'
 import 'main';
 
-// Google analytics
+// main
+$( document ).ready( function() {
+    var swiper = new Swiper('.swiper-container', {
+      pagination : { el: '.swiper-pagination', loop: true, clickable: true,dynamicBullets: true}
+    });
+});
+
+// google analytics
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
