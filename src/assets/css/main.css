@@ -134,6 +134,10 @@ body {
     @apply --white-link-hover;
 }
 
+.top ul li.nav-docs {
+    margin-right: 0;
+}
+
 /**
  *  header
  */
