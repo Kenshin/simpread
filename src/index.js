@@ -9,6 +9,7 @@ $( document ).ready( function() {
 });
 
 function reviewsRender() {
+    if ( location.pathname != '/' ) return;
     const swiper = new Swiper('.swiper-container', {
         pagination : { el: '.swiper-pagination', loop: true, clickable: true,dynamicBullets: true}
     });
