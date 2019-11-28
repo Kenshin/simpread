@@ -277,6 +277,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
             //jquery     : __dirname + '/src/vender/jquery-2.1.1.min.js',
             index      : __dirname + '/src/index.js',
             main       : __dirname + '/src/assets/css/main.css',
+            hamburgers : __dirname + '/src/assets/css/hamburgers.min.css',
           }
       }
 
