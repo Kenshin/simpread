@@ -11,9 +11,18 @@ $( document ).ready( function() {
 });
 
 function navRender() {
-    $( ".top .nav-ios     a" ).on( 'click', () => $( '.ios'     )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
-    $( ".top .nav-lite    a" ).on( 'click', () => $( '.lite'    )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
-    $( ".top .nav-feature a" ).on( 'click', () => $( '#feature' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+    const html = `<li class="nav-home"><a href="http://ksria.com/simpread/"><i class="fas fa-home"></i> 官网</a></li>
+                  <li class="nav-ios"><a href="http://ksria.com/simpread/#jsbox"><i class="fab fa-apple"></i> iOS</a></li>
+                  <li class="nav-lite"><a href="http://ksria.com/simpread/#lite"><i class="fas fa-lightbulb"></i> 轻阅版</a></li>
+                  <li class="nav-plugin"><a href="https://simpread.ksria.cn/plugins"><i class="fas fa-plug"></i> 插件中心</a></li>
+                  <li class="nav-sites"><a href="https://simpread.ksria.cn/sites"><i class="fas fa-sitemap"></i> 站点集市</a></li>
+                  <li class="nav-docs"><a href="http://ksria.com/simpread/docs" target="_blank"><i class="fas fa-question-circle"></i> 文档中心</a></li>
+                  <div class="hamburger hamburger--elastic"><div class="hamburger-box"><div class="hamburger-inner"></div></div></div>`;
+    if ( location.pathname == '/' ) {
+        $( ".top .nav-ios     a" ).on( 'click', () => $( '.jsbox'   )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+        $( ".top .nav-lite    a" ).on( 'click', () => $( '.lite'    )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+        $( ".top .nav-feature a" ).on( 'click', () => $( '#feature' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+    } else $( 'ul.navigator' ).html( html );
 }
 
 function reviewsRender() {
