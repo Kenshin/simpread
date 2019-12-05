@@ -125,6 +125,7 @@ body {
 
 .top ul li a {
     @apply --white-link;
+    cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

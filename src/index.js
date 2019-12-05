@@ -4,10 +4,17 @@ import 'main';
 
 // main
 $( document ).ready( function() {
+    navRender();
     reviewsRender();
     footerRender();
     analyticsRender();
 });
+
+function navRender() {
+    $( ".top .nav-ios     a" ).on( 'click', () => $( '.ios'     )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+    $( ".top .nav-lite    a" ).on( 'click', () => $( '.lite'    )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+    $( ".top .nav-feature a" ).on( 'click', () => $( '#feature' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+}
 
 function reviewsRender() {
     if ( location.pathname != '/' ) return;
