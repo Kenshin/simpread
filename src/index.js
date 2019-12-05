@@ -2,9 +2,34 @@
 import 'hamburgers'
 import 'main';
 
+/**
+ * mobile verify
+ */
+const isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    verify: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()) == null ? false : true;
+    }
+};
+
 // main
 $( document ).ready( function() {
     navRender();
+    headerRender();
     reviewsRender();
     footerRender();
     analyticsRender();
@@ -30,6 +55,20 @@ function navRender() {
             $( '.top' ).hasClass( 'scroll' ) && $( '.top' ).removeClass( 'scroll' );
         }
     });
+}
+
+function headerRender() {
+    if ( location.pathname != '/' ) return;
+    if ( isMobile.verify() ) return;
+    const top    = $( '.top' ).height(),
+          header = $( '.header' ).height(),
+          img    = $( '.introduce img' ).height(),
+          screen = document.body.clientHeight;
+    if ( screen > top + header ) {
+        const fixed = screen - top - header;
+        $( '.header' ).height( screen - top );
+        $( '.introduce img' ).height( img + fixed <= 650 ? img + fixed : 650 );
+    }
 }
 
 function reviewsRender() {
