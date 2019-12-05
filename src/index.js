@@ -29,6 +29,7 @@ const isMobile = {
 // main
 $( document ).ready( function() {
     navRender();
+    menubarRender();
     headerRender();
     reviewsRender();
     footerRender();
@@ -54,6 +55,21 @@ function navRender() {
         } else {
             $( '.top' ).hasClass( 'scroll' ) && $( '.top' ).removeClass( 'scroll' );
         }
+    });
+}
+
+function menubarRender() {
+    const html = `<div class="menu-bg">adasds</div>`;
+    $( '.top' ).append( `<nav class="menubar"></nav>` );
+    $( '.navigator .hamburger' ).on( 'click', event => {
+        if ( !$(event.currentTarget).hasClass( 'is-active' ) ) {
+            $( '.top .menubar' ).html( html );
+        } else {
+            $( '.top .menubar' ).empty();
+        }
+        $( '.top .hamburger' ).toggleClass( 'active' );
+        $( '.top .menubar' ).toggleClass( 'active' );
+        $( event.currentTarget ).toggleClass( 'is-active' );
     });
 }
 
