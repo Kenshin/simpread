@@ -23,6 +23,13 @@ function navRender() {
         $( ".top .nav-lite    a" ).on( 'click', () => $( '.lite'    )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
         $( ".top .nav-feature a" ).on( 'click', () => $( '#feature' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
     } else $( 'ul.navigator' ).html( html );
+    $( document ).scroll( ( )=> {
+        if ( $( 'body' ).scrollTop() > 0 ) {
+            !$( '.top' ).hasClass( 'scroll' ) && $( '.top' ).addClass( 'scroll' );
+        } else {
+            $( '.top' ).hasClass( 'scroll' ) && $( '.top' ).removeClass( 'scroll' );
+        }
+    });
 }
 
 function reviewsRender() {
