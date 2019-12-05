@@ -59,7 +59,27 @@ function navRender() {
 }
 
 function menubarRender() {
-    const html = `<div class="menu-bg">adasds</div>`;
+    const html = `<div class="menu-bg">
+                    <div class="menu">
+                        <div class="menuitem">
+                            <div class="title"><a href="https://simpread.ksria.cn/plugins"><i class="fas fa-plug"></i> 插件中心</a></div>
+                            <div class="links">
+                                <a href="https://simpread.ksria.cn/plugins/details/klGUASLasg" target="_blank">代码块增强</a>
+                                <a href="https://simpread.ksria.cn/plugins/details/3PHAZerSkb" target="_blank">页面信息统计</a>
+                                <a href="https://simpread.ksria.cn/plugins/details/NupOHRQHZ2" target="_blank">划词搜索</a>
+                                <a href="https://simpread.ksria.cn/plugins/details/Y7JxbP7B4H" target="_blank">全文翻译</a>
+                            </div>
+                        </div>
+                        <div class="menuitem">
+                            <div class="title"><a href="http://ksria.com/simpread/docs" target="_blank"><i class="fas fa-question-circle"></i> 帮助中心</a></div>
+                            <div class="links"></div>
+                        </div>
+                        <div class="menuitem">
+                            <div class="title">其它</div>
+                            <div class="links"></div>
+                        </div>
+                    </div>
+                  </div>`;
     $( '.top' ).append( `<nav class="menubar"></nav>` );
     $( '.navigator .hamburger' ).on( 'click', event => {
         if ( !$(event.currentTarget).hasClass( 'is-active' ) ) {

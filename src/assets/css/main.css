@@ -195,6 +195,86 @@ body {
     align-items: flex-start;
 }
 
+.menu-bg .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+    margin-top: 40px;
+
+    width: 80%;
+
+    color: #fff;
+}
+
+.menu-bg .menu .menuitem a {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+}
+
+.menu-bg .menu .menuitem .title a:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 46px;
+    bottom: -4px;
+    width: 58px;
+    height: 4px;
+    opacity: 0;
+    background-color: #fff;
+    transform: translateX(100px);
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+
+.menu-bg .menu .menuitem .title a:hover:before {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.menu-bg .menu .menuitem .title {
+    font-size: 35px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.menu-bg .menu .menuitem .title:hover {
+    transform: scale(1.1);
+}
+
+.menu-bg .menu .menuitem .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 24px;
+}
+
+.menu-bg .menu .menuitem .links a {
+    margin-bottom: 15px;
+    transition: all 0.5s ease;
+}
+
+.menu-bg .menu .menuitem .links a:before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    bottom: 0;
+    left: 25%;
+    background: white;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.menu-bg .menu .menuitem .links a:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
 /**
  *  header
  */
