@@ -206,6 +206,49 @@ body {
     width: 100%;
 
     color: #fff;
+
+    opacity: 0;
+    transition: all 0.7s ease-in-out;
+}
+
+.menu-bg .menu.open {
+    opacity: 1;
+}
+
+.menu-bg .menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+.menu-bg .menu.open .link {
+    animation-name: fadeInUp;
+    animation-fill-mode: both;
+    animation-duration: 1.0s;
+}
+
+.menu-bg .menu.open .link:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.menu-bg .menu.open .link:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.menu-bg .menu.open .link:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.menu-bg .menu.open .link:nth-child(4) {
+    animation-delay: 0.4s;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .menu-bg .menu .menuitem {
