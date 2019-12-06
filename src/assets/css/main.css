@@ -763,6 +763,13 @@ body {
     background-color: #37474F;
 }
 
+.footer.fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .footer a {
     @apply --white-link;
 }
