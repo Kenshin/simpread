@@ -192,7 +192,7 @@ body {
 
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .menu-bg .menu {
@@ -209,7 +209,7 @@ body {
 }
 
 .menu-bg .menu .menuitem {
-        max-width: 450px;
+    max-width: 450px;
     width: 100%;
 }
 
@@ -907,7 +907,7 @@ body {
 /**
  * iPad pro 12 and below
  */
- @media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
 
     .navigator .nav-feature,
     .navigator .nav-gallery {
