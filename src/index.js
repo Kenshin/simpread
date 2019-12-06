@@ -36,6 +36,9 @@ $( document ).ready( function() {
     analyticsRender();
 });
 
+// global event
+$(window).resize( () => headerRender() );
+
 function navRender() {
     const html = `<li class="nav-home"><a href="http://ksria.com/simpread/"><i class="fas fa-home"></i> 官网</a></li>
                   <li class="nav-ios"><a href="http://ksria.com/simpread/#jsbox"><i class="fab fa-apple"></i> iOS</a></li>
