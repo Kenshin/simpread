@@ -145,12 +145,23 @@ function headerRender() {
     const top    = $( '.top' ).height(),
           header = $( '.header' ).height(),
           img    = $( '.introduce img' ).height(),
-          screen = document.body.clientHeight;
+          title  = $( '.header .title' )[0].offsetHeight,
+          desc   = $( '.header .desc'  )[0].offsetHeight,
+          down   = $( '.header .download' )[0].offsetHeight,
+          screen = document.body.clientHeight,
+          width  = document.body.clientWidth;
     if ( screen > top + header ) {
         const fixed = screen - top - header;
         $( '.header' ).height( screen - top );
         $( '.introduce img' ).height( img + fixed <= 650 ? img + fixed : 650 );
     }
+    if ( $( '.introduce img' ).width() > width ) {
+        $( '.introduce img' ).css({ height: 'auto', 'max-width': '80%' });
+        setTimeout( () => {
+            $( '.header' ).height( title + desc + down + $( '.introduce' ).height() );
+        }, 200 );
+    }
+    console.log( "asdadffas", $( '.introduce img' ).width(), width )
 }
 
 function reviewsRender() {
