@@ -955,9 +955,25 @@ body {
 }
 
 /**
+ * menu max width
+ */
+@media only screen and (max-width: 1350px) {
+    .menu-bg .menu {
+        transform: scale(.9);
+    }
+}
+
+/**
  * iPad pro 12 and below
  */
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
+    .menu-bg .menu .menuitem:nth-child(2) {
+        margin: 0 10px;
+    }
+
+    .menu-bg .menu .menuitem .links .link span {
+        min-height: 45px;
+    }
 
     .navigator .nav-feature,
     .navigator .nav-gallery {
@@ -971,6 +987,32 @@ body {
     .top ul li:last-child {
         margin-right: 0;
     }
+}
+
+/**
+ * iPad mini
+ */
+@media only screen and (max-device-width: 768px) {
+    .menu-bg {
+        align-items: flex-start;
+    }
+}
+
+/**
+* iPhone XS Max and below
+*/
+@media only screen and (max-device-width: 414px) {
+
+    .menu-bg .menu {
+        flex-direction: column;
+        margin: 10px 0;
+        transform: scale(.8);
+    }
+
+    .menu-bg .menu .menuitem:nth-child(2) {
+        margin: 0;
+    }
+
 }
 
 /**
