@@ -46,6 +46,7 @@ function navRender() {
                   <li class="nav-plugin"><a href="https://simpread.ksria.cn/plugins"><i class="fas fa-plug"></i> 插件中心</a></li>
                   <li class="nav-sites"><a href="https://simpread.ksria.cn/sites"><i class="fas fa-sitemap"></i> 站点集市</a></li>
                   <li class="nav-docs"><a href="http://ksria.com/simpread/docs" target="_blank"><i class="fas fa-question-circle"></i> 文档中心</a></li>
+                  <li class="nav-changelog"><a href="http://ksria.com/simpread/changelog.html" target="_blank"><i class="fas fa-bullhorn"></i> 更新日志</a></li>
                   <div class="hamburger hamburger--elastic"><div class="hamburger-box"><div class="hamburger-inner"></div></div></div>`;
     if ( location.pathname == '/' ) {
         $( ".top .nav-ios     a" ).on( 'click', () => $( '.jsbox'   )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
