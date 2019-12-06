@@ -65,7 +65,7 @@ function menubarRender() {
                             <div class="title"><a href="https://simpread.ksria.cn/plugins">插件中心 <i class="fas fa-external-link-square-alt"></i></a></div>
                             <div class="links">
                                 <div class="link">
-                                    <a href="https://simpread.ksria.cn/plugins/details/klGUASLasg" target="_blank">代码块增强 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <a href="https://github.com/Kenshin/simpread/issues/500" target="_blank">代码块增强 <i class="fas fa-long-arrow-alt-right"></i></a>
                                     <span>代码段增强，包括：高亮，去重；支持 CSDN 等特殊情况的代码段</span>
                                 </div>
                                 <div class="link">
@@ -84,11 +84,45 @@ function menubarRender() {
                         </div>
                         <div class="menuitem">
                             <div class="title"><a href="http://ksria.com/simpread/docs" target="_blank">帮助中心 <i class="fas fa-external-link-square-alt"></i></a></div>
-                            <div class="links"></div>
+                            <div class="links">
+                                <div class="link">
+                                    <a href="http://ksria.com/simpread/guide/" target="_blank">新手入门 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>互动式新手入门</span>
+                                </div>
+                                <div class="link">
+                                    <a href="http://ksria.com/simpread/docs/#/" target="_blank">文档中心 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>关于简悦的全部功能介绍</span>
+                                </div>
+                                <div class="link">
+                                    <a href="https://github.com/Kenshin/simpread/issues/618" target="_blank">常见问题汇总 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>简悦已服务 60K+ 的用户，新手可以看看这里，或许能找到你的问题</span>
+                                </div>
+                                <div class="link">
+                                    <a href="https://github.com/Kenshin/simpread/issues/618" target="_blank">新闻汇总页 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>简悦的新闻页，里面有关于简悦各种信息咨询的汇总</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="menuitem">
-                            <div class="title">其它 <i class="fas fa-external-link-square-alt"></i></div>
-                            <div class="links"></div>
+                            <div class="title">媒体报道 <i class="fas fa-external-link-square-alt"></i></div>
+                            <div class="links">
+                                <div class="link">
+                                    <a href="https://sspai.com/post/52492" target="_blank">少数派 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>不只是「完美」阅读模式，他想用这款阅读工具帮你更好获取知识：专访简悦</span>
+                                </div>
+                                <div class="link">
+                                    <a href="https://www.ifanr.com/app/1240289" target="_blank">爱范儿 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>专访《简悦》：改善 318 类网站，只为做最好的「阅读模式」</span>
+                                </div>
+                                <div class="link">
+                                    <a href="https://www.waerfa.com/simpread-review" target="_blank">玩儿法 <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>简悦：无干扰的沉浸式阅读体验</span>
+                                </div>
+                                <div class="link">
+                                    <a href="https://zhuanlan.zhihu.com/p/60222691" target="_blank">GitHub Daily <i class="fas fa-long-arrow-alt-right"></i></a>
+                                    <span>如何在开源的同时斩获 Chrome 商城 40000+ 用户</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                   </div>`;
