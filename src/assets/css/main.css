@@ -792,7 +792,7 @@ body {
     &:hover {
         transform: translateY(-2px);
         background-color: #42A5F5;
-        box-shadow:0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05)!important;
+        box-shadow: 0 2.25rem 1.5rem -1.5rem rgba(33, 37, 41, .3),0 0 1.5rem .5rem rgba(33, 37, 41, .05)!important
     }
 
     &.offline:hover {
