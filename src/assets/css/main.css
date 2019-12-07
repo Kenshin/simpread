@@ -1062,7 +1062,12 @@ body {
     .main .feature.focus,
     .main .feature.theme,
     .main .feature.custom,
-    .main .feature.all {
+    .main .feature.multi,
+    .main .feature.sitemanager,
+    .main .feature.all,
+    .main .service,
+    .main .downloads
+    {
         justify-content: center;
 
         margin: 20px;
