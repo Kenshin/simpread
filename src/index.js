@@ -139,8 +139,12 @@ function menubarRender() {
     $( '.navigator .hamburger' ).on( 'click', event => {
         if ( !$(event.currentTarget).hasClass( 'is-active' ) ) {
             $( '.top .menubar' ).html( html );
-            setTimeout( ()=> $( '.menu-bg .menu' ).addClass( 'open' ), 200 )
+            setTimeout( ()=> {
+                $( '.menu-bg .menu' ).addClass( 'open' );
+                $( '.main' ).css( 'opacity', 0 );
+            }, 200 );
         } else {
+            $( '.main' ).css( 'opacity', 1 );
             $( '.top .menubar' ).empty();
         }
         $( '.top .hamburger' ).toggleClass( 'active' );
