@@ -378,9 +378,9 @@ body {
 
 .header .download {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .header .download .online {
@@ -402,6 +402,17 @@ body {
 .header .download .online span {
     color: var(--text-secondary-color);
     font-size: 2.4rem;
+}
+
+.header .download .stars {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    & i {
+        color: #FCC825;
+        margin-bottom: 2px;
+    }
 }
 
 .header .introduce img {
