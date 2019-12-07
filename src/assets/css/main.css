@@ -1003,6 +1003,10 @@ body {
 */
 @media only screen and (max-device-width: 414px) {
 
+    .menu-bg {
+        top: -150px;
+    }
+
     .menu-bg .menu {
         flex-direction: column;
         margin: 10px 0;
