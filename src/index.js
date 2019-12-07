@@ -28,6 +28,7 @@ const isMobile = {
 
 // main
 $( document ).ready( function() {
+    downloadRender();
     navRender();
     menubarRender();
     headerRender();
@@ -38,6 +39,10 @@ $( document ).ready( function() {
 
 // global event
 $(window).resize( () => headerRender() );
+
+function downloadRender() {
+    $( '.download .online' ).on( 'click', () => $( '.downloads' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+}
 
 function navRender() {
     const html = `<li class="nav-home"><a href="http://ksria.com/simpread/"><i class="fas fa-home"></i> 官网</a></li>

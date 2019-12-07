@@ -390,6 +390,8 @@ body {
 
     background-color: #F44336;
     @apply --large-button;
+
+    cursor: pointer;
 }
 
 .header .download .online:hover {
