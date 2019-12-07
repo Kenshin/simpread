@@ -1130,6 +1130,11 @@ body {
     .top ul li:last-child {
         margin-right: 0;
     }
+
+    .main .feature.all section {
+        max-width: initial;
+        transform: scale(.9);
+    }
 }
 
 /**
