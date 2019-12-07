@@ -407,7 +407,7 @@ body {
 .header .download .stars {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    padding-top: 10px;
 
     & i {
         color: #FCC825;

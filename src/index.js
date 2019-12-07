@@ -158,6 +158,7 @@ function headerRender() {
     if ( isMobile.verify() ) return;
     const top    = $( '.top' ).height(),
           header = $( '.header' ).height(),
+          stars  = $( '.header .stars' )[0].offsetHeight,
           img    = $( '.introduce img' ).height(),
           title  = $( '.header .title' )[0].offsetHeight,
           desc   = $( '.header .desc'  )[0].offsetHeight,
@@ -165,7 +166,7 @@ function headerRender() {
           screen = document.body.clientHeight,
           width  = document.body.clientWidth;
     if ( screen > top + header ) {
-        const fixed = screen - top - header;
+        const fixed = screen - top - header - stars;
         $( '.header' ).height( screen - top );
         $( '.introduce img' ).height( img + fixed <= 650 ? img + fixed : 650 );
     }
