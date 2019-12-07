@@ -18,7 +18,8 @@
   },
   "scripts": {
     "develop": "NODE_ENV=development webpack-dev-server --hot --progress --colors --devtool=source-map",
-    "publish": "NODE_ENV=production  webpack -p --progress --colors"
+    "publish": "NODE_ENV=production  webpack -p --progress --colors",
+    "test": "browser-sync start --server publish/"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
