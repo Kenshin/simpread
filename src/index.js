@@ -70,7 +70,7 @@ function menubarRender() {
                             <div class="links">
                                 <div class="link">
                                     <a href="https://github.com/Kenshin/simpread/issues/500" target="_blank">代码块增强 <i class="fas fa-long-arrow-alt-right"></i></a>
-                                    <span>代码段增强，包括：高亮，去重；支持 CSDN 等特殊情况的代码段</span>
+                                    <span>包括：高亮，去重；支持 CSDN 等特殊情况的代码段</span>
                                 </div>
                                 <div class="link">
                                     <a href="https://simpread.ksria.cn/plugins/details/3PHAZerSkb" target="_blank">页面信息统计 <i class="fas fa-long-arrow-alt-right"></i></a>
