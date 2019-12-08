@@ -1,6 +1,6 @@
 
 /**
- *  root
+ * root
  */
 :root {
     --text-color: #333;
@@ -88,7 +88,11 @@ body {
 }
 
 /**
- *  Index page
+ * Main page
+ */
+
+/**
+ * top
  */
 .top {
     display: flex;
@@ -160,6 +164,9 @@ body {
     z-index: 200;
 }
 
+/**
+ * menubar
+ */
 .menubar:before {
     content: '';
 
@@ -277,7 +284,6 @@ body {
     transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
-
 .menu-bg .menu .menuitem a:hover:before {
     opacity: 1;
     transform: translateX(0px);
@@ -348,7 +354,7 @@ body {
 }
 
 /**
- *  header
+ * header
  */
 .header {
     height: 754px;
@@ -423,7 +429,7 @@ body {
 }
 
 /**
- *  main
+ * main
  */
 .main .feature {
     display: flex;
@@ -864,6 +870,9 @@ body {
     }
 }
 
+/**
+ * reviews
+ */
 .reviews {
 
     background-color: var(--text-secondary-color);
@@ -933,7 +942,7 @@ body {
 }
 
 /**
- *  footer
+ * footer
  */
 .footer {
     display: flex;
@@ -1052,6 +1061,9 @@ body {
     @apply --white-link-hover;
 }
 
+/**
+ * media
+ */
 @media all and ( min-width: 2000px ) {
 
     .main {
@@ -1164,7 +1176,7 @@ body {
 }
 
 /**
- *  Changelog page
+ * Changelog page
  */
 .container {
     margin: 0 auto;
@@ -1365,7 +1377,7 @@ body {
 }
 
 /**
- * 404 page
+ * 404/500/auth page
  */
 .undefined {
     display: flex;
@@ -1442,7 +1454,6 @@ body {
     box-shadow: 0 5px 5px rgba(0,0,0,.3), 0 5px 5px rgba(0,0,0,.3);
 }
 
-
 /**
  * Auth page
  */
@@ -1457,7 +1468,7 @@ body {
 }
 
 /**
- *  version update page
+ * Welcome page
  */
 .update {
     margin: 0 auto;
