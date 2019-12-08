@@ -169,12 +169,14 @@ function headerRender() {
         $( '.header' ).height( screen - top );
         $( '.introduce img' ).height( img + fixed <= 650 ? img + fixed : 650 );
     }
-    if ( $( '.introduce img' ).width() > width ) {
-        $( '.introduce img' ).css({ height: 'auto', 'max-width': '80%' });
-        setTimeout( () => {
-            $( '.header' ).height( title + desc + down + $( '.introduce' ).height() );
-        }, 200 );
-    }
+    setTimeout( () => {
+        if ( $( '.introduce img' ).width() > width ) {
+            $( '.introduce img' ).css({ height: 'auto', 'max-width': '80%' });
+            setTimeout( () => {
+                $( '.header' ).height( title + desc + down + $( '.introduce' ).height() );
+            }, 200 );
+        }
+    }, 200);
 }
 
 function reviewsRender() {
