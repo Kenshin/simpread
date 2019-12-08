@@ -957,12 +957,15 @@ body {
     }
 }
 
+.group.reviews {
+    color: #fff;
+    background: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+}
+
 /**
  * reviews
  */
 .reviews {
-
-    background-color: var(--text-secondary-color);
 
     & .label {
         display: flex;
@@ -999,7 +1002,7 @@ body {
     & .review {
         line-height: 89px;
         font-size: 1.8rem;
-        color: var(--secondary-color);
+        color: #fff;
 
         & .content:before {
             content: '“';
@@ -1007,7 +1010,7 @@ body {
             font-size: 80px;
             font-family: "Arial";
 
-            color: rgba( 0, 0, 0, 0.15 );
+            color: #fff;
         }
 
         & .content:after {
@@ -1019,7 +1022,7 @@ body {
             font-size: 80px;
             font-family: "Arial";
 
-            color: rgba( 0, 0, 0, 0.15 );
+            color: #fff;
         }
 
         & .auth span {
