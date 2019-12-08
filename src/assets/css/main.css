@@ -1035,13 +1035,17 @@ body {
  * footer
  */
 .footer {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
 
+    padding: 40px 0;
+
     color: var(--text-secondary-color);
-    background-color: #37474F;
+    background-image: linear-gradient(20deg, #434343 0%, rgba(0, 0, 0, .8) 100%);
 }
 
 .footer.fixed {
@@ -1053,13 +1057,6 @@ body {
 
 .footer a {
     @apply --white-link;
-}
-
-.footer .copywrite {
-    padding-bottom: var(--padding-bottom);
-
-    width: 100%;
-    text-align: center;
 }
 
 .footer .groups {
@@ -1145,6 +1142,16 @@ body {
 
     opacity: .8;
     zoom: .8;
+}
+
+.footer .copywrite {
+    position: absolute;
+    bottom: 0;
+
+    padding-bottom: var(--padding-bottom);
+
+    width: 100%;
+    text-align: center;
 }
 
 .footer .copywrite a:hover {
