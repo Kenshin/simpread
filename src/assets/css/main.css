@@ -840,8 +840,28 @@ body {
         }
 
         &.lite {
-            width: 233px;
-            background-image: url( '../icons/download_userscript.png' );
+            width: initial;
+            font-size: 40px;
+            background-color: transparent;
+
+            & i.fa-opera {
+                color: #D01021;
+            }
+            & i.fa-safari {
+                color: #2BAEF9;
+            }
+            & i.fa-edge {
+                color: #1B78B5;
+            }
+            & i.fa-firefox {
+                color: #FA5A58;
+            }
+            & i.fa-safari {
+                color: #2BAEF9;
+            }
+            & i.fa-ellipsis-h {
+                transform: scale(.7);
+            }
         }
 }
 
