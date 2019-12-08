@@ -933,6 +933,26 @@ body {
     }
 }
 
+.main .group.browser {
+    background: linear-gradient(90deg, #e0e9f7 0%, white 100%);
+}
+
+.main .group.lite {
+    background: linear-gradient(-90deg, white 0%, #ecf7e0 100%);
+
+    & div.lite {
+        background-color: transparent;
+    }
+}
+
+.main .group.jsbox {
+    background-color: #fafafa;
+
+    & div.jsbox {
+        background-color: transparent;
+    }
+}
+
 /**
  * reviews
  */
