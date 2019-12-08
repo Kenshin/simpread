@@ -933,6 +933,10 @@ body {
     }
 }
 
+.main .group, .reviews {
+    padding: 40px 0;
+}
+
 .main .group.browser {
     background: linear-gradient(90deg, #e0e9f7 0%, white 100%);
 }
