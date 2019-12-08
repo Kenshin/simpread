@@ -786,6 +786,7 @@ body {
     justify-content: space-around;
 
     padding: 40px 0;
+    padding-bottom: 0;
 
     width: 100%;
 }
@@ -925,7 +926,7 @@ body {
 
     &.jsbox {
         font-size: 2.2rem;
-        background-color: #157efb;
+        background-color: #0099ff;
         @apply --large-button;
     }
 
@@ -952,6 +953,7 @@ body {
 }
 
 .main .group.jsbox {
+    padding-bottom: 0;
     background-color: #fafafa;
 
     & div.jsbox {
