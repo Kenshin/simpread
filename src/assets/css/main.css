@@ -1011,8 +1011,20 @@ body {
     }
 }
 
-.main .group, .reviews {
+.main .group {
     padding: 40px 0;
+
+    & .title {
+        padding-top: 0!important;
+    }
+}
+
+.group.reviews {
+    padding: 40px 0;
+
+    & .title {
+        padding-top: 0!important;
+    }
 }
 
 .main .group.browser {
