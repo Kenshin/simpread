@@ -624,7 +624,7 @@ body {
     & img.symbol {
         position: absolute;
 
-        right: 100px;
+        right: 30px;
         bottom: -10px;
 
         min-width: initial;
@@ -762,7 +762,7 @@ body {
 @media (pointer: coarse) {
     .main .group.feature.all {
 
-        & svg {
+        & svg, & img {
             display: none;
         }
     }
