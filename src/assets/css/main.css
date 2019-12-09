@@ -616,7 +616,7 @@ body {
     & svg {
         position: absolute;
         right: 0;
-        top: 7%;
+        top: 9%;
         opacity: .9;
         transform: scale(1.4);
     }
