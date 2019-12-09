@@ -139,6 +139,7 @@ function menubarRender() {
     $( '.navigator .hamburger' ).on( 'click', event => {
         if ( !$(event.currentTarget).hasClass( 'is-active' ) ) {
             $( '.top .menubar' ).html( html );
+            $( '.header .title, .header .desc, .header .download, .header .introduce img' ).css({ 'animation-fill-mode': 'none' });
             setTimeout( ()=> {
                 $( '.menu-bg .menu' ).addClass( 'open' );
                 $( '.main' ).css( 'opacity', 0 );
