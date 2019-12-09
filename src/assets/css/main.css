@@ -554,6 +554,105 @@ body {
     }
 }
 
+.main .group.plugins {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 350px;
+
+    color: #fff;
+    background-color: #506cf0;
+
+    & .title {
+        position: relative;
+    }
+
+    & .desc {
+        position: relative;
+        color: #fff;
+    }
+
+    & a {
+        border-bottom-color: #fff!important;
+    }
+
+    & .icon {
+        position: absolute;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100px;
+        min-height: 100px;
+        line-height: 100px;
+
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 1px 1px 5px rgba(0,0,0,.18);
+
+        & i {
+            color: rgba(51, 51, 51, 0.7);
+            font-size: 50px;
+        }
+    }
+
+    & .icon.images {
+        left: 20px;
+        top: 20px;
+    }
+
+    & .icon.clock {
+        right: 10px;
+        bottom: 8px;
+    }
+
+    & .icon.magic {
+        right: 200px;
+        top: -49px;
+        transform: scale(.7);
+    }
+
+    & .icon.file-download {
+        left: 250px;
+        bottom:49px;
+        transform: scale(.7);
+    }
+
+    & .icon.language {
+        right: 350px;
+        bottom: 149px;
+    }
+
+    & .icon.compass {
+        right: 250px;
+        bottom: 15px;
+         transform: scale(.5);
+    }
+
+    & .icon.plug {
+        left: 350px;
+        top: 15px;
+        transform: scale(.87);
+    }
+    
+    & .icon.eraser {
+        left: 550px;
+        bottom: -35px;
+        transform: scale(.6)
+    }
+    
+    & .icon.globe {
+        right: 80px;
+        top: 65px;
+        transform: scale(.5);
+    }
+}
+
 .main .lite,
 .main .service {
     background-color: var(--text-secondary-color);
@@ -1326,6 +1425,21 @@ body {
     .top ul li:last-child {
         margin-right: 0;
     }
+
+    .main .group.plugins {
+
+        & .icon.language, & .icon.file-download {
+            display: none;
+        }
+
+        & .icon.plug {
+            left: 50px;
+            bottom: 15px;
+            top: initial;
+            transform: scale(.6);
+        }
+    }
+
 }
 
 /**
@@ -1334,6 +1448,17 @@ body {
 @media only screen and (max-device-width: 768px) {
     .menu-bg {
         align-items: flex-start;
+    }
+
+    .main .group.plugins {
+
+        & .icon.language, & .icon.file-download, & .icon.compass {
+            display: none;
+        }
+
+        & .icon.globe {
+            right: 0;
+        }
     }
 }
 
