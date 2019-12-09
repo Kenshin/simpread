@@ -607,9 +607,29 @@ body {
 }
 
 .main .feature.all {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    & svg {
+        position: absolute;
+        right: 0;
+        top: 7%;
+        opacity: .9;
+        transform: scale(1.4);
+    }
+
+    & img.symbol {
+        position: absolute;
+
+        right: 100px;
+        bottom: -10px;
+
+        min-width: initial;
+        width: 200px;
+    }
 
     & .title {
         position: relative;
@@ -642,6 +662,8 @@ body {
 }
 
 .main .feature.all section {
+    position: relative;
+
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -734,6 +756,15 @@ body {
 
     &.clear {
         background-image: url( '../icons/feature_clear.png' );
+    }
+}
+
+@media (pointer: coarse) {
+    .main .group.feature.all {
+
+        & svg {
+            display: none;
+        }
     }
 }
 
