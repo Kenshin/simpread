@@ -74,6 +74,8 @@ body {
 
     color: var(--text-color);
     background-color: var(--background-color);
+
+    overflow-x: hidden;
 }
 
 .logo span {
@@ -926,13 +928,55 @@ body {
 
     &.jsbox {
         font-size: 2.2rem;
-        background-color: #0099ff;
+        color: #2163F7;
+        background-color: #fff;
         @apply --large-button;
     }
 
     &.jsbox:hover {
         transform: translateY(-2px);
         box-shadow: 0 2.25rem 1.5rem -1.5rem rgba(33,37,41,.3),0 0 1.5rem .5rem rgba(33,37,41,.05)!important;
+    }
+}
+
+.main .group.jsbox {
+    position: relative;
+    background-color: #fafafa;
+
+    & svg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 55%;
+    }
+
+    & div.jsbox {
+        position: relative;
+        background-color: transparent;
+    }
+
+    & .platforms {
+        position: relative;
+    }
+
+    & img {
+        max-width: 800px;
+        padding-top: 40px;
+    }
+}
+
+@media (pointer: coarse) {
+    .main .group.jsbox {
+
+        & a.jsbox {
+            color: #fff;
+            background-color: #3971F7;
+        }
+
+        & svg {
+            display: none;
+        }
     }
 }
 
@@ -948,15 +992,6 @@ body {
     background: linear-gradient(-90deg, white 0%, #ecf7e0 100%);
 
     & div.lite {
-        background-color: transparent;
-    }
-}
-
-.main .group.jsbox {
-    padding-bottom: 0;
-    background-color: #fafafa;
-
-    & div.jsbox {
         background-color: transparent;
     }
 }
