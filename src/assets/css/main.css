@@ -102,7 +102,7 @@ body {
     width: 100%;
     height: 100px;
 
-    background-color: #1976D2;
+    background-color: #195BF7;
     box-shadow: 0 2px 5px rgba(0,0,0,.26);
 
     transition: all .5s ease-in-out;
@@ -360,7 +360,7 @@ body {
     height: 754px;
 
     color: var(--text-secondary-color);
-    background: linear-gradient(to bottom, #1976D2 0, #2196F3 100%);
+    background: linear-gradient(to bottom, #195BF7 0, #2163F7 100%);
 }
 
 .header .title,    .header .desc,
