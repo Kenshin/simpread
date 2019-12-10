@@ -639,8 +639,8 @@ body {
     }
 
     &.instapaper {
-        right: 11px;
-        top: 11px;
+        left: 221px;
+        top: 81px;
         background-image: url( '../icons/service_instapaper.png' );
         transform: scale(.9);
         transform-origin: center;
