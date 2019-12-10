@@ -616,14 +616,6 @@ body {
         transform-origin: center;
     }
 
-    &.onenote {
-        bottom: 15px;
-        right: 15px;
-        background-image: url( '../icons/service_onenote.png' );
-        transform: scale(.7);
-        transform-origin: center;
-    }
-
     &.linnk {
         top: -40px;
         right: 125px;
@@ -631,8 +623,7 @@ body {
     }
 
     &.jianguo {
-        bottom: 67px;
-        right: 56x;
+        bottom: 30px;
         background-image: url( '../icons/service_jianguo.png' );
         transform: scale(.8);
         transform-origin: center;
@@ -647,7 +638,7 @@ body {
     }
 
     &.evernote {
-        top: 115px;
+        top: 135px;
         left: 95px;
         background-image: url( '../icons/service_evernote.png' );
     }
