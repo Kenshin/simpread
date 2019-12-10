@@ -671,6 +671,14 @@ body {
         transform: scale(.6);
         transform-origin: center;
     }
+
+    &.yuque {
+        top: 20px;
+        right: 278px;
+        background-image: url( '../icons/service_yuque.png' );
+        transform: scale(.8);
+        transform-origin: center;
+    }
 }
 
 .main .group.plugins {
