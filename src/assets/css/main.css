@@ -560,6 +560,119 @@ body {
     height: 350px;
 }
 
+.main .group.productive {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+}
+
+.main .group.productive .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px;
+
+    & .desc {
+        text-align: left;
+    }
+}
+
+.main .group.productive .icons {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+}
+
+.main .group.productive .icon {
+    position: absolute;
+
+    background-color: #fff;
+
+    border-radius: 50%;
+    box-shadow: 0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05)!important;
+
+    display: block;
+    width: 88px;
+    height: 88px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &.dropbox {
+        top: 10px;
+        left: 10px;
+        background-image: url( '../icons/service_dropbox.png' );
+    }
+
+    &.onenote {
+        bottom: 15px;
+        right: 15px;
+        background-image: url( '../icons/service_onenote.png' );
+        transform: scale(.7);
+        transform-origin: center;
+    }
+
+    &.onenote {
+        bottom: 15px;
+        right: 15px;
+        background-image: url( '../icons/service_onenote.png' );
+        transform: scale(.7);
+        transform-origin: center;
+    }
+
+    &.linnk {
+        top: -40px;
+        right: 125px;
+        background-image: url( '../icons/service_linnk.png' );
+    }
+
+    &.jianguo {
+        bottom: 67px;
+        right: 56x;
+        background-image: url( '../icons/service_jianguo.png' );
+        transform: scale(.8);
+        transform-origin: center;
+    }
+
+    &.instapaper {
+        right: 11px;
+        top: 11px;
+        background-image: url( '../icons/service_instapaper.png' );
+        transform: scale(.9);
+        transform-origin: center;
+    }
+
+    &.evernote {
+        top: 115px;
+        left: 95px;
+        background-image: url( '../icons/service_evernote.png' );
+    }
+
+    &.gdrive {
+        left: 40%;
+        bottom: 20px;
+        background-image: url( '../icons/service_gdrive.png' );
+    }
+
+    &.pocket {
+        right: 10%;
+        top: 30%;
+        background-image: url( '../icons/service_pocket.png' );
+    }
+
+    &.webdav {
+        left: 60%;
+        bottom: 50px;
+        background-image: url( '../icons/service_webdav.png' );
+        transform: scale(.6);
+        transform-origin: center;
+    }
+}
+
 .main .group.plugins {
     position: relative;
 
