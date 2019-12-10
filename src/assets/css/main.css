@@ -566,9 +566,12 @@ body {
     display: flex;
     align-items: center;
 
+    background-color: #F2F4F6;
 }
 
 .main .group.productive .content {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -670,6 +673,19 @@ body {
         transform: scale(.8);
         transform-origin: center;
     }
+}
+
+.main .group.productive .cloud {
+    position: absolute;
+    left: 0;
+    bottom: -70px;
+
+    width: 100%;
+    height: 260px;
+
+    background-image: url( '../icons/cloud.png' );
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .main .group.plugins {
