@@ -597,7 +597,7 @@ body {
 
         border-radius: 50%;
         background-color: #fff;
-        box-shadow: 1px 1px 5px rgba(0,0,0,.18);
+        box-shadow: 0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05);
 
         & i {
             color: rgba(51, 51, 51, 0.7);
