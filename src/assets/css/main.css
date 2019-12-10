@@ -688,6 +688,63 @@ body {
     background-position: center;
 }
 
+.main .group.export {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main .group.export .filesystem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+
+    & i {
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 20px;
+
+        font-size: 50px;
+
+        box-shadow: 0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05)!important;
+    }
+
+    & .html {
+        color: #DF4577;
+    }
+
+    & .png {
+        color: #30C8CA;
+    }
+
+    & .pdf {
+        color: #F29C3E;
+    }
+
+    & .md {
+        color: #DE424C;
+    }
+
+    & .epub {
+        color: #436895;
+    }
+}
+
+.main .group.export .filesystem .icon {
+
+    font-size: 10px;
+    color: #fff;
+    position: absolute;
+    bottom: 15px;
+
+}
+
 .main .group.plugins {
     position: relative;
 
