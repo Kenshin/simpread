@@ -1414,6 +1414,8 @@ body {
  */
 
 .install {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1427,12 +1429,16 @@ body {
     background-image: radial-gradient( circle farthest-corner at 10% 20%, rgba(215,223,252,1) 0%, rgba(255,255,255,1) 0%, rgba(215,223,252,1) 84% );
 
     & .title {
+        position: relative;
+
         padding-bottom: 20px;
         font-size: 3rem;
         font-weight: 300;
     }
 
     & .now {
+        position: relative;
+
         padding: 0 16px;
 
         color: #fff;
@@ -1457,6 +1463,13 @@ body {
             box-shadow: 0 2.25rem 1.5rem -1.5rem rgba(33, 37, 41, .3),0 0 1.5rem .5rem rgba(33, 37, 41, .05);
             transform: translateY(-2px);
         }
+    }
+
+    & .symbol {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 350px;
     }
 }
 
