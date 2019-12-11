@@ -1421,7 +1421,7 @@ body {
 
     padding: 40px;
 
-    min-height: 280px;
+    height: 350px;
     width: 100%;
 
     background-image: radial-gradient( circle farthest-corner at 10% 20%, rgba(215,223,252,1) 0%, rgba(255,255,255,1) 0%, rgba(215,223,252,1) 84% );
