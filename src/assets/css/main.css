@@ -720,7 +720,7 @@ body {
     }
 
     & .png {
-        color: #30C8CA;
+        color: rgb(26, 192, 198);
     }
 
     & .pdf {
@@ -728,11 +728,15 @@ body {
     }
 
     & .md {
-        color: #DE424C;
+        color: rgb(48, 153, 117);;
     }
 
     & .epub {
         color: #436895;
+    }
+
+    & .kindle {
+        color: rgb(213, 39, 183);
     }
 }
 
