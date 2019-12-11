@@ -41,7 +41,7 @@ $( document ).ready( function() {
 $(window).resize( () => headerRender() );
 
 function downloadRender() {
-    $( '.download .online' ).on( 'click', () => $( '.downloads' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+    $( '.download .online, .install .now' ).on( 'click', () => $( '.downloads' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
 }
 
 function navRender() {
