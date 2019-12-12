@@ -604,26 +604,17 @@ body {
 
 .main .feature.read,
 .main .feature.custom,
-.main .feature.theme,
 .main .feature.export,
-.main .feature.multi,
 .main .feature.all {
     background: #fff;
 }
 
-.main .feature.focus,
-.main .feature.sitemanager {
+.main .feature.focus {
     justify-content: flex-end;
 }
 
 .main .feature.custom .snapshot img.background {
     top: -60px;
-}
-
-.main .feature.theme,
-.main .feature.sitemanager,
-.main .feature.multi {
-    display: none;
 }
 
 .main .feature .intro .desc span {
@@ -1771,10 +1762,7 @@ body {
 
     .main .feature.read,
     .main .feature.focus,
-    .main .feature.theme,
     .main .feature.custom,
-    .main .feature.multi,
-    .main .feature.sitemanager,
     .main .feature.all,
     .main .service,
     .main .downloads
