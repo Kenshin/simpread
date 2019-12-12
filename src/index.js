@@ -29,6 +29,7 @@ const isMobile = {
 // main
 $( document ).ready( function() {
     downloadRender();
+    featureRender();
     navRender();
     menubarRender();
     headerRender();
@@ -42,6 +43,16 @@ $(window).resize( () => headerRender() );
 
 function downloadRender() {
     $( '.download .online, .install .now' ).on( 'click', () => $( '.downloads' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
+}
+
+function featureRender() {
+    $( '.main .feature.puread .mode .label' ).on( 'click', event => {
+        console.log( event.currentTarget )
+        $( '.main .feature.puread .mode .label' ).removeClass( 'active' ).find( '.sub' ).removeClass( 'active' );
+        $( event.currentTarget ).addClass( 'active' ).find( '.sub' ).addClass( 'active' );
+        $( '.main .feature.puread video' ).removeClass( 'active' );
+        $( '.main .feature.puread video[data-type=' + $( event.currentTarget ).attr( 'data-type' ) + ']' ).addClass( 'active' );
+    });
 }
 
 function navRender() {
