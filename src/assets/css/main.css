@@ -1843,6 +1843,36 @@ body {
         margin-right: 0;
     }
 
+    .main .feature {
+        flex-direction: column;
+
+        & img.background {
+            display: none;
+        }
+
+        & .intro {
+            padding: 0;
+            width: 650px;
+
+            & .desc br {
+                display: none;
+            }
+        }
+
+        & .snapshot {
+            padding: 20px 100px;
+        }
+
+        &.read .snapshot,
+        &.custom .snapshot {
+            order: 2;
+        }
+
+        &.puread {
+            padding-left: 0;
+        }
+    }
+
     .main .group.plugins {
 
         & .icon.language, & .icon.file-download {
