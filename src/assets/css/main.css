@@ -517,9 +517,18 @@ body {
 }
 
 .main .feature.focus,
-.main .feature.sitemanager,
-.main .feature.custom {
+.main .feature.sitemanager {
     justify-content: flex-end;
+}
+
+.main .feature.custom .snapshot img.background {
+    top: -60px;
+}
+
+.main .feature.theme,
+.main .feature.sitemanager,
+.main .feature.multi {
+    display: none;
 }
 
 .main .feature .intro .desc span {
