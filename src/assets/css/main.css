@@ -617,6 +617,10 @@ body {
     top: -60px;
 }
 
+.main .feature.read .intro .blockquote {
+    padding-top: 20px;
+}
+
 .main .feature .intro .desc span {
     position: relative;
     padding: 2px;
@@ -641,6 +645,17 @@ body {
 
         opacity: 0.28;
         z-index: 1;
+    }
+}
+
+.main .feature .intro .blockquote {
+    padding-top: 8px;
+    color: rgba(51, 51, 51, .7);
+    font-weight: 400;
+    font-size: 1.5rem;
+
+    & span {
+        margin-right: 5px;
     }
 }
 
