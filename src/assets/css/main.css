@@ -563,6 +563,7 @@ body {
         padding-left: 12px;
         background-color: #E8ECF4;
         border-radius: 10px;
+        box-shadow: 0 0 0 2px white, 0 8px 14px 0 rgba(0, 0, 0, 0.05);
     }
 
     & i {
