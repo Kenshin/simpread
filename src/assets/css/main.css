@@ -1777,34 +1777,59 @@ body {
 
     .main .feature.read,
     .main .feature.focus,
+    .main .feature.puread,
     .main .feature.custom,
     .main .feature.all,
     .main .service,
-    .main .downloads
+    .main .downloads,
+    .group.reviews
     {
+        width: 100%;
         justify-content: center;
-
-        margin: 20px;
-
-        width: 1035px;
-
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 10px 25px 0 rgba(49,49,93,0.1);
+        padding: 20px 20%;
     }
 
-    .main .feature.all {
-        background-color: #FCFCFC;
+    .main .feature.read,
+    .main .feature.focus,
+    .main .feature.puread,
+    .main .feature.custom {
+        margin-bottom: 40px;
+        padding: initial;
+        width: 1525px;
+        background-color: #fff;
+    }
 
-        & img {
-            max-width: 1030px;
-            zoom: initial;
+    .main .feature.read {
+        margin-top: 40px;
+    }
+
+    .main .service, .main .downloads {
+        background-color: #fafafa;
+    }
+
+    .main .group.lite {
+        margin: 40px 0;
+    }
+
+    .main .group.export {
+        background-color: #fff;
+    }
+
+    .main .group.plugins {
+        margin-top: 40px;
+    }
+
+    .main .group.jsbox {
+        background-color: #fff;
+
+        & a.jsbox {
+            color: #fff;
+            background-color: #3971F7;
         }
 
-    }
-
-    .footer {
-        margin-top: 20px;
+        & svg {
+            display: none;
+        }
     }
 
 }
