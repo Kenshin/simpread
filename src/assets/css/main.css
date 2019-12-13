@@ -1890,6 +1890,7 @@ body {
         & .intro {
             padding: 0;
             width: 650px;
+            transform: scale(1);
 
             & .desc br {
                 display: none;
