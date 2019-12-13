@@ -1809,6 +1809,43 @@ body {
 
 }
 
+@media all and ( max-width: 1575px ) {
+    .main .feature {
+        & .intro {
+            transform: scale(.9);
+        }
+
+        & .snapshot {
+            padding: 50px;
+            transform: scale(.8);
+            transform-origin: center;
+
+            & .videos {
+                left: 50px;
+                top: 125px;
+            }
+        }
+    }
+}
+
+@media all and ( max-width: 1475px ) {
+    .main .feature {
+
+        & img.background {
+            display: none;
+        }
+
+        & .snapshot {
+            padding: 20px;
+
+            & .videos {
+                left: 20px;
+                top: 95px;
+            }
+        }
+    }
+}
+
 /**
  * menu max width
  */
@@ -1821,7 +1858,7 @@ body {
 /**
  * iPad pro 12 and below
  */
-@media only screen and (max-device-width: 1024px) {
+@media only screen and (max-width: 1280px) {
     .menu-bg .menu .menuitem:nth-child(2) {
         margin: 0 10px;
     }
@@ -1861,6 +1898,12 @@ body {
 
         & .snapshot {
             padding: 20px 100px;
+            transform: scale(1);
+
+            & .videos {
+                left: 100px;
+                top: 95px;
+            }
         }
 
         &.read .snapshot,
