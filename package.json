@@ -17,8 +17,8 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "develop": "NODE_ENV=development webpack-dev-server --hot --progress --colors --devtool=source-map",
-    "publish": "NODE_ENV=production  webpack -p --progress --colors",
+    "develop": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --colors --devtool=source-map",
+    "publish": "cross-env NODE_ENV=production  webpack -p --progress --colors",
     "test": "browser-sync start --server publish/"
   },
   "devDependencies": {
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "clean-webpack-plugin": "^0.1.14",
-    "copy-webpack-plugin": "^4.0.1"
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^6.0.3"
   }
 }
