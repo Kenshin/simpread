@@ -181,7 +181,7 @@ body {
     width: 100%;
     height: 100%;
 
-    background: rgba(33, 150, 243, 1);
+    background: #3971F7;
 
     transition: all 200ms ease-in-out;
     clip-path: circle( 30px at calc(100% - 65px) 65px);

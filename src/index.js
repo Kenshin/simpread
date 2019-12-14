@@ -153,12 +153,13 @@ function menubarRender() {
         if ( !$(event.currentTarget).hasClass( 'is-active' ) ) {
             $( '.top .menubar' ).html( html );
             $( '.header .title, .header .desc, .header .download, .header .introduce img' ).css({ 'animation-fill-mode': 'none' });
+            $( '.header .download' ).css( 'opacity', 0 );
             setTimeout( ()=> {
                 $( '.menu-bg .menu' ).addClass( 'open' );
                 $( '.main' ).css( 'opacity', 0 );
             }, 200 );
         } else {
-            $( '.main' ).css( 'opacity', 1 );
+            $( '.main, .header .download' ).css( 'opacity', 1 );
             $( '.top .menubar' ).empty();
         }
         $( '.top .hamburger' ).toggleClass( 'active' );
