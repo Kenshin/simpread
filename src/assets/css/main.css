@@ -768,6 +768,12 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
 
+    &:hover {
+        animation-name: heartBeat;
+        animation-fill-mode: both;
+        animation-duration: 1.0s;
+    }
+
     &.dropbox {
         top: 10px;
         left: 10px;
@@ -950,6 +956,12 @@ body {
         border-radius: 50%;
         background-color: #fff;
         box-shadow: 0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05);
+
+        &:hover {
+            animation-name: heartBeat;
+            animation-fill-mode: both;
+            animation-duration: 1.0s;
+        }
 
         & i {
             color: rgba(51, 51, 51, 0.7);
