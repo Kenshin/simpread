@@ -164,7 +164,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         plugins.push(
           new CopyWebpackPlugin([
               { context: 'src/assets/images/',  from : "*" , to : './assets/images' },
-              { context: 'src/vender/',         from : "*" , to : './vender' },
+              { context: 'src/vender/',         from : "**/*" , to : './vender' },
           ])
         );
 
