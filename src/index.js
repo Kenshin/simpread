@@ -35,6 +35,7 @@ $( document ).ready( function() {
     headerRender();
     reviewsRender();
     footerRender();
+    wavesRender();
     analyticsRender();
 });
 
@@ -203,6 +204,18 @@ function footerRender() {
     $( '.footer' ).html( html );
     ![ '/', '/simpread/new/' ].includes( location.pathname ) && $( '.undefined' ).length > 0 && document.body.clientHeight > $( '.top' ).height() + $( '.undefined' ).height() + $( '.footer' ).height() &
         $( '.footer' ).addClass( 'fixed' );
+}
+
+function wavesRender() {
+    Waves.init();
+    $( '.feature .snapshot img.image' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-image' ]) );
+    $( '.group.productive .icons .icon, .group.plugins .icons .icon' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-circle', 'waves-float', 'waves-light' ]) );
+    Waves.attach( $( '.download .online' )[0], [ 'waves-button' ]);
+    Waves.attach( $( 'a.userscript' )[0], [ 'waves-button' ]);
+    Waves.attach( $( '.install .now' )[0], [ 'waves-button' ]);
+    $( '.jsbox-platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-button' ]) );
+    $( '.group.browser .platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
+    $( '.group.feature.all .only' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
 }
 
 // google analytics
