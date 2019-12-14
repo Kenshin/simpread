@@ -36,6 +36,7 @@ $( document ).ready( function() {
     reviewsRender();
     footerRender();
     wavesRender();
+    new WOW().init();
     analyticsRender();
 });
 
