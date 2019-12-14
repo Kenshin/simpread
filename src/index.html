@@ -45,12 +45,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" integrity="sha256-DBYdrj7BxKM3slMeqBVWX2otx7x4eqoHRJCsSDJ0Nxw=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha256-GqiEX9BuR1rv5zPU5Vs2qS/NSHl1BJyBcjQYJ6ycwD4=" crossorigin="anonymous" />
     <link rel="stylesheet" href="./vender/balloon.min.css" />
     <link rel="stylesheet" href="./vender/waves/waves.min.css" />
 
     <script src="./vender/waves/waves.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha256-z6FznuNG1jo9PP3/jBjL6P3tvLMtSwiVAowZPOgo56U=" crossorigin="anonymous"></script></head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha256-pQBbLkFHcP1cy0C8IhoSdxlm0CtcH5yJ2ki9jjgR03c=" crossorigin="anonymous"></script>
 <body>
     <div class="top">
         <a href="http://ksria.com/simpread" class="logo"><span></span></a>
@@ -80,7 +81,7 @@
     </div>
     <div id="feature" class="main">
         <div class="feature read">
-            <div class="snapshot wow bounceInLeft" data-wow-delay="200">
+            <div class="snapshot" data-aos="fade-right">
                 <img src="./assets/images/image_background.svg" class="background">
                 <img src="./assets/images/read_mode.png" class="image">
             </div>
@@ -108,13 +109,13 @@
                 </div>
                 <a class="more" target="_blank" href="http://ksria.com/simpread/docs/#/聚焦模式">详细了解 <i class="fas fa-long-arrow-alt-right"></i></a>
             </div>
-            <div class="snapshot wow bounceInRight" data-wow-delay="200">
+            <div class="snapshot" data-aos="fade-left">
                 <img src="./assets/images/image_background.svg" class="background">
                 <img src="./assets/images/focus_mode.png" class="image">
             </div>
         </div>
         <div class="feature custom">
-            <div class="snapshot wow bounceInLeft" data-wow-delay="200">
+            <div class="snapshot" data-aos="fade-right">
                 <img src="./assets/images/image_background.svg" class="background">
                 <img src="./assets/images/custom.png" class="image">
             </div>
@@ -160,7 +161,7 @@
                 </div>
                 <a class="more" target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎">详细了解 <i class="fas fa-long-arrow-alt-right"></i></a>
             </div>
-            <div class="snapshot wow bounceInRight" data-wow-delay="200">
+            <div class="snapshot" data-aos="fade-left">
                 <img src="./assets/images/image_background.svg" class="background">
                 <img src="./assets/images/multi_page.png" class="image">
                 <div class="videos">
@@ -182,11 +183,11 @@
         <div class="service">
             <div class="group productive">
                 <div class="cloud"></div>
-                <div class="content">
+                <div class="content" data-aos="zoom-in">
                     <div class="label"><div class="title">支持生产力工具，总有一款适合你</div></div>
                     <div class="desc">Pocket · Instapaper · Linnk · 印象笔记 / Evernote · Onenote<br>Dropbox · Google 云端硬盘 · 语雀 · 坚果云，甚至 WebDAV<br>详细请看 <i class="fas fa-hand-point-right"></i> <a href="http://ksria.com/simpread/docs/#/导出到生产力工具" target="_blank">生产力工具</a></div>
                 </div>
-                <div class="icons wow zoomIn" data-wow-offset="500">
+                <div class="icons" data-aos="zoom-in">
                     <span class="icon dropbox"></span>
                     <span class="icon onenote"></span>
                     <span class="icon linnk"></span>
@@ -199,7 +200,7 @@
                     <span class="icon yuque"></span>
                 </div>
             </div>
-            <div class="group export">
+            <div class="group export" data-aos="zoom-in-down">
                 <div class="label"><div class="title">多种导出方式，保存为你需要的格式</div></div>
                 <div class="desc">Markdown · PDF · PNG · Epub · HTML · Send to Kindle 详细请看 <i class="fas fa-hand-point-right"></i> <a href="http://ksria.com/simpread/docs/#/保存到本地" target="_blank">配置指南</a></div>
                 <div class="filesystem">
