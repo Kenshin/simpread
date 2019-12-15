@@ -214,7 +214,7 @@ function wavesRender() {
     $( '.group.productive .icons .icon, .group.plugins .icons .icon' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-circle', 'waves-float', 'waves-light' ]) );
     Waves.attach( $( '.download .online' )[0], [ 'waves-button' ]);
     Waves.attach( $( 'a.userscript' )[0], [ 'waves-button' ]);
-    Waves.attach( $( '.install .now' )[0], [ 'waves-button' ]);
+    Waves.attach( $( '.install .now' )[0], []);
     $( '.jsbox-platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-button' ]) );
     $( '.group.browser .platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
     $( '.group.feature.all .only' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
