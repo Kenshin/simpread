@@ -1223,10 +1223,12 @@ body {
 
 @media (pointer: coarse) {
     .main .group.feature.all {
-
         & svg, & img {
             display: none;
         }
+    }
+    .media img.symbol {
+        display: none;
     }
 }
 
