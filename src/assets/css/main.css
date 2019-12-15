@@ -2050,9 +2050,10 @@ body {
     }
 
     .media .company {
+        padding: 0 10px;
         & a {
             & img {
-                max-width: 48px;
+                height: 48px;
             }
         }
     }
