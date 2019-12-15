@@ -218,6 +218,7 @@ function wavesRender() {
     $( '.jsbox-platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-button' ]) );
     $( '.group.browser .platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
     $( '.group.feature.all .only' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
+    $( '.media .company a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
 }
 
 function aosEffectRender() {
