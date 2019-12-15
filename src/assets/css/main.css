@@ -624,28 +624,29 @@ body {
 .main .feature .intro .desc span {
     position: relative;
     padding: 2px;
+}
 
-    &:after {
-        content: "";
+.main .feature .desc span:after,
+.main .group .desc span:after {
+    content: "";
 
-        position: absolute;
-        right: 8px;
-        top: 0.65em;
-        left: 0.5em;
+    position: absolute;
+    right: 8px;
+    top: 0.65em;
+    left: 0.5em;
 
-        display: block;
+    display: block;
 
-        height: 0.75em;
+    height: 0.75em;
 
-        mix-blend-mode: multiply;
-        background: rgb(230, 190, 34);
+    mix-blend-mode: multiply;
+    background: rgb(230, 190, 34);
 
-        transform: skewX(-20deg) skewY(-2deg);
-        border-radius: 8px 12px 12px 20px;
+    transform: skewX(-20deg) skewY(-2deg);
+    border-radius: 8px 12px 12px 20px;
 
-        opacity: 0.28;
-        z-index: 1;
-    }
+    opacity: 0.28;
+    z-index: 1;
 }
 
 .main .feature .intro .blockquote {
@@ -1057,12 +1058,6 @@ body {
         font-size: 1.8rem;
         color: var(--secondary-color);
 
-        & span {
-            padding: 5px;
-            border-radius: 3px;
-            background-color: rgba(27,31,35,0.05);
-        }
-
         & a {
             color: inherit;
             font-size: inherit;
@@ -1275,9 +1270,7 @@ body {
 }
 
 .main .downloads span {
-    margin: 10px 0;
-    font-size: 1.8rem;
-    color: rgba(51, 51, 51, 0.7);
+    position: relative;
 }
 
 .main .downloads .platforms {
