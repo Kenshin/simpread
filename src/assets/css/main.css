@@ -2045,6 +2045,18 @@ body {
         }
     }
 
+    .main .group.feature.all .only {
+        transform: scale(.8);
+    }
+
+    .media .company {
+        & a {
+            & img {
+                max-width: 48px;
+            }
+        }
+    }
+
 }
 
 /**
