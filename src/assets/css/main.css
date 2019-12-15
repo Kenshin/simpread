@@ -1622,6 +1622,8 @@ body {
     }
 
     & .company {
+        position: relative;
+
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -1630,19 +1632,22 @@ body {
         padding: 0 10%;
         width: 100%;
 
-        & img {
-            margin: 0 20px;
-            max-width: 72px;
+        & a {
+            margin: 0 10px;
+            padding: 40px 20px;
 
-            opacity: .5;
-            filter: grayscale(100%);
-            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05)!important;
             transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 
             &:hover {
                 transform: translateY(-2px);
-                opacity: 1;
-                filter: initial;
+                box-shadow: 0 2.25rem 1.5rem -1.5rem rgba(33, 37, 41, .3),0 0 1.5rem .5rem rgba(33, 37, 41, .05)!important;
+            }
+
+            & img {
+                margin: 0 20px;
+                max-width: 72px;
             }
         }
     }
