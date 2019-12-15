@@ -27,6 +27,7 @@ const isMobile = {
 };
 
 // main
+aosEffectRender();
 $( document ).ready( function() {
     downloadRender();
     featureRender();
@@ -36,7 +37,6 @@ $( document ).ready( function() {
     reviewsRender();
     footerRender();
     wavesRender();
-    aosEffectRender();
     analyticsRender();
 });
 
