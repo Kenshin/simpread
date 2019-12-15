@@ -1640,6 +1640,9 @@ body {
         width: 100%;
 
         & a {
+            display: flex;
+            justify-content: center;
+
             margin: 0 10px;
             padding: 40px 20px;
 
