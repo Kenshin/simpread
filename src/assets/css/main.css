@@ -1597,6 +1597,13 @@ body {
 
     background-color: #fff;
 
+    & img.symbol {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 150px;
+    }
+
     & .title {
         position: relative;
         padding-bottom: 40px;
@@ -1635,6 +1642,8 @@ body {
         & a {
             margin: 0 10px;
             padding: 40px 20px;
+
+            background-color: #fff;
 
             border-radius: 8px;
             box-shadow: 0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05)!important;
