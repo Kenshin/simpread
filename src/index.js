@@ -1,5 +1,4 @@
 // import css
-import 'hamburgers'
 import 'main';
 
 /**
