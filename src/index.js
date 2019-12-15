@@ -36,7 +36,7 @@ $( document ).ready( function() {
     reviewsRender();
     footerRender();
     wavesRender();
-    !isMobile.verify() && AOS.init();
+    AOS.init();
     analyticsRender();
 });
 
