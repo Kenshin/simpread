@@ -36,7 +36,7 @@ $( document ).ready( function() {
     reviewsRender();
     footerRender();
     wavesRender();
-    AOS.init();
+    aosEffectRender();
     analyticsRender();
 });
 
@@ -218,6 +218,12 @@ function wavesRender() {
     $( '.jsbox-platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-button' ]) );
     $( '.group.browser .platform a' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
     $( '.group.feature.all .only' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-block' ]) );
+}
+
+function aosEffectRender() {
+    if ( isMobile.verify() ) {
+        $( 'link#aos' ).remove();
+    } else AOS.init();
 }
 
 // google analytics
