@@ -1314,30 +1314,6 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
 
-        &.chrome {
-            background-image: url( '../icons/download_chrome.png' );
-        }
-
-        &.offline {
-            background-image: url( '../icons/download_offline.png' );
-        }
-
-        &.firefox {
-            background-image: url( '../icons/download_firefox.png' );
-        }
-
-        &.safe {
-            background-image: url( '../icons/download_360.png' );
-        }
-
-        &.qq {
-            background-image: url( '../icons/download_qq.png' );
-        }
-
-        &.sogou {
-            background-image: url( '../icons/download_sogou.png' );
-        }
-
         &.lite {
             width: initial;
             font-size: 40px;
