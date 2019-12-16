@@ -2337,14 +2337,35 @@ body {
 /**
  * Auth page
  */
+.auth {
+    position: relative;
+    width: 100%;
+}
+
+.auth .bg {
+    width: 100%!important;
+    background-color: transparent!important;
+}
 
 .auth .title {
+    position: relative;
     font-size: 18px;
+
+    & span:after {
+        content: initial!important;
+    }
 }
 
 .auth .notice {
-    width: 583px;
+    position: relative;
     padding: 0 16px;
+    width: 583px;
+}
+
+.auth .icons {
+    position: relative!important;
+    width: 820px!important;
+    min-height: 350px!important;
 }
 
 /**
