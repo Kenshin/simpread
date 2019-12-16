@@ -1,6 +1,8 @@
 // import css
 import 'main';
 
+const VERSION = '1.0.6.1130';
+
 /**
  * mobile verify
  */
@@ -36,11 +38,21 @@ $( document ).ready( function() {
     reviewsRender();
     footerRender();
     wavesRender();
+    versionRender();
     analyticsRender();
 });
 
 // global event
 $(window).resize( () => headerRender() );
+
+function versionRender() {
+    const ver = localStorage[ 'simpread-version' ];
+    if ( !ver ) {
+        localStorage[ 'simpread-version' ] = VERSION;
+    } else {
+        //TO-DO
+    }
+}
 
 function downloadRender() {
     $( '.download .online, .install .now' ).on( 'click', () => $( '.downloads' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
