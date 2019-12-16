@@ -2316,7 +2316,7 @@ body {
     height: 36px;
 
     color: #fff;
-    background-color: #1976D2;
+    background-color: #195BF7;
 
     font-weight: bold;
     font-size: 15px;
@@ -2324,14 +2324,15 @@ body {
     line-height: 36px;
     text-decoration: none;
 
-    border-radius: 2px;
-    box-shadow: 0 2px 2px rgba(0,0,0,.3);
+    border-radius: .3em;
+    box-shadow: 0 2rem 1.5rem -1.5rem rgba(33, 37, 41, .15), 0 0 1.5rem 0.5rem rgba(33, 37, 41, .05);
     transition: all .5s;
 }
 
 .undefined .backup:hover {
-    background-color: #2196F3;
-    box-shadow: 0 5px 5px rgba(0,0,0,.3), 0 5px 5px rgba(0,0,0,.3);
+    background-color: #2163F7;
+    transform: translateY(-2px);
+    box-shadow: 0 2.25rem 1.5rem -1.5rem rgba(33, 37, 41, .3),0 0 1.5rem .5rem rgba(33, 37, 41, .05);
 }
 
 /**
