@@ -247,7 +247,7 @@ function footerRender() {
                     <span>简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展</span> <span>&nbsp;©&nbsp;2017 ~ 2019 <a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
                 </div>`;
     $( '.footer' ).html( html );
-    ![ '/', '/simpread/new/' ].includes( location.pathname ) && $( '.undefined' ).length > 0 && document.body.clientHeight > $( '.top' ).height() + $( '.undefined' ).height() + $( '.footer' ).height() &
+    ![ '/', '/simpread/new/' ].includes( location.pathname ) && $( '.undefined.auth' ).length == 0 && $( '.undefined' ).length > 0 && document.body.clientHeight > $( '.top' ).height() + $( '.undefined' ).height() + $( '.footer' ).height() &
         $( '.footer' ).addClass( 'fixed' );
 }
 
