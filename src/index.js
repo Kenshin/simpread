@@ -28,8 +28,8 @@ const isMobile = {
 };
 
 // main
-aosEffectRender();
 $( document ).ready( function() {
+    aosEffectRender();
     downloadRender();
     featureRender();
     navRender();
