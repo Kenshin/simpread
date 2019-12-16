@@ -252,7 +252,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
           { test: /\.css$/,           loader: ExtractTextPlugin.extract( 'style', 'css!postcss' ) },
 
           // image in js
-          { test: /\.(png|jpg|gif)$/, loader: 'url?limit=12288'   },
+          { test: /\.(png|jpg|gif)$/, loader: 'url?limit=2048'   },
 
           // expose $
           //{
