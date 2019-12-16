@@ -240,6 +240,7 @@ function footerRender() {
 }
 
 function wavesRender() {
+    if ( ![ '/', '/simpread/new/' ].includes( location.pathname ) ) return;
     Waves.init();
     $( '.feature .snapshot img.image' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-image' ]) );
     $( '.group.productive .icons .icon, .group.plugins .icons .icon' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-circle', 'waves-float', 'waves-light' ]) );
@@ -253,6 +254,7 @@ function wavesRender() {
 }
 
 function aosEffectRender() {
+    if ( ![ '/', '/simpread/new/' ].includes( location.pathname ) ) return;
     if ( isMobile.verify() ) {
         $( 'link#aos' ).remove();
     } else AOS.init();
