@@ -1311,9 +1311,6 @@ body {
     width: 92px;
     height: 81px;
 
-    background-repeat: no-repeat;
-    background-position: center center;
-
         &.lite {
             width: initial;
             font-size: 40px;
