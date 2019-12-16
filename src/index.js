@@ -28,6 +28,7 @@ const isMobile = {
 };
 
 // main
+isMobile.verify() && $( 'link#aos' ).remove();
 $( document ).ready( function() {
     aosEffectRender();
     downloadRender();
@@ -267,9 +268,7 @@ function wavesRender() {
 
 function aosEffectRender() {
     if ( ![ '/', '/simpread/' ].includes( location.pathname ) ) return;
-    if ( isMobile.verify() ) {
-        $( 'link#aos' ).remove();
-    } else AOS.init();
+    AOS.init();
 }
 
 // google analytics
