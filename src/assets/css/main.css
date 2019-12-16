@@ -1798,44 +1798,6 @@ body {
     zoom: .9;
 }
 
-.footer .groups .links ul li .icon {
-    display: block;
-
-    width: 30px;
-    height: 30px;
-
-    padding: 20px;
-
-    opacity: .4;
-
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-.footer .groups .links ul li .weibo {
-    background-image: url( '../icons/weibo.png' );
-}
-
-.footer .groups .links ul li .douban {
-    background-image: url( '../icons/douban.png' );
-}
-
-.footer .groups .links ul li .twitter {
-    background-image: url( '../icons/twitter.png' );
-}
-
-.footer .groups .links ul li .facebook {
-    background-image: url( '../icons/facebook.png' );
-}
-
-.footer .groups .links ul li .gplus {
-    background-image: url( '../icons/gplus.png' );
-}
-
-.footer .groups .links ul li .telegram {
-    background-image: url( '../icons/telegram.png' );
-}
-
 .footer .groups .links .logo {
     display: flex;
     justify-content: center;
@@ -1845,6 +1807,20 @@ body {
 
     opacity: .8;
     zoom: .8;
+}
+
+.footer .links .social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 22px;
+    color: #8C8C8C;
+
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
 .footer .copywrite {
