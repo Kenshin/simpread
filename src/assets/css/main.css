@@ -2342,6 +2342,13 @@ body {
     width: 100%;
 }
 
+.auth img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .auth .bg {
     margin: 10% 0!important;
     width: 100%!important;
