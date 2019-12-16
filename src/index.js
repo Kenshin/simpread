@@ -77,7 +77,7 @@ function navRender() {
                   <li class="nav-docs"><a href="http://ksria.com/simpread/docs" target="_blank"><i class="fas fa-question-circle"></i> 文档中心</a></li>
                   <li class="nav-changelog"><a href="http://ksria.com/simpread/changelog.html" target="_blank"><i class="fas fa-bullhorn"></i> 更新日志</a></li>
                   <div class="hamburger hamburger--elastic"><div class="hamburger-box"><div class="hamburger-inner"></div></div></div>`;
-    if ( [ '/', '/simpread/new/' ].includes( location.pathname ) ) {
+    if ( [ '/', '/simpread/' ].includes( location.pathname ) ) {
         $( ".top .nav-ios     a" ).on( 'click', () => $( '.jsbox'   )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
         $( ".top .nav-lite    a" ).on( 'click', () => $( '.lite'    )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
         $( ".top .nav-feature a" ).on( 'click', () => $( '#feature' )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' }) );
@@ -180,7 +180,7 @@ function menubarRender() {
 }
 
 function headerRender() {
-    if ( ![ '/', '/simpread/new/' ].includes( location.pathname ) ) return;
+    if ( ![ '/', '/simpread/' ].includes( location.pathname ) ) return;
     if ( isMobile.verify() ) return;
     const top    = $( '.top' ).height(),
           header = $( '.header' ).height(),
@@ -206,7 +206,7 @@ function headerRender() {
 }
 
 function reviewsRender() {
-    if ( ![ '/', '/simpread/new/' ].includes( location.pathname ) ) return;
+    if ( ![ '/', '/simpread/' ].includes( location.pathname ) ) return;
     const swiper = new Swiper('.swiper-container', {
         pagination : { el: '.swiper-pagination', loop: true, clickable: true,dynamicBullets: true}
     });
@@ -247,12 +247,12 @@ function footerRender() {
                     <span>简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展</span> <span>&nbsp;©&nbsp;2017 ~ 2019 <a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
                 </div>`;
     $( '.footer' ).html( html );
-    ![ '/', '/simpread/new/' ].includes( location.pathname ) && $( '.undefined.auth' ).length == 0 && $( '.undefined' ).length > 0 && document.body.clientHeight > $( '.top' ).height() + $( '.undefined' ).height() + $( '.footer' ).height() &
+    ![ '/', '/simpread/' ].includes( location.pathname ) && $( '.undefined.auth' ).length == 0 && $( '.undefined' ).length > 0 && document.body.clientHeight > $( '.top' ).height() + $( '.undefined' ).height() + $( '.footer' ).height() &
         $( '.footer' ).addClass( 'fixed' );
 }
 
 function wavesRender() {
-    if ( ![ '/', '/simpread/new/' ].includes( location.pathname ) ) return;
+    if ( ![ '/', '/simpread/' ].includes( location.pathname ) ) return;
     Waves.init();
     $( '.feature .snapshot img.image' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-image' ]) );
     $( '.group.productive .icons .icon, .group.plugins .icons .icon' ).map( (idx, item ) => Waves.attach( $(item)[0], [ 'waves-circle', 'waves-float', 'waves-light' ]) );
@@ -266,7 +266,7 @@ function wavesRender() {
 }
 
 function aosEffectRender() {
-    if ( ![ '/', '/simpread/new/' ].includes( location.pathname ) ) return;
+    if ( ![ '/', '/simpread/' ].includes( location.pathname ) ) return;
     if ( isMobile.verify() ) {
         $( 'link#aos' ).remove();
     } else AOS.init();
