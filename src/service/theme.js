@@ -66,6 +66,10 @@ class Theme {
         tocTheme( theme );
     }
 
+    Get( theme ) {
+        return themes[theme];
+    }
+
     constructor() {
         require( `../assets/css/theme_common.css` );
         names.forEach( name => require( `../assets/css/theme_${name}.css` ) );
@@ -86,6 +90,10 @@ function findThemeStyle( callback ) {
             const arr  = css.replace( flag, "" ).match( /\w+/ ),
                   name = arr[ arr.length - 1 ];
             callback( name, css, $target );
+        } else if ( css.search( ".simpread-font" ) > -1 ) {
+            themes["global"] = css;
+        } else if ( css.search( ".simpread-theme-root" ) > -1 ) {
+            themes["common"] = css;
         }
     });
 }
