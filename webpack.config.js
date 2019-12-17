@@ -261,6 +261,7 @@ const webpack = require( 'webpack' ),
           output     : __dirname + '/src/service/output.js',
           runtime    : __dirname + '/src/service/runtime.js',
           permission : __dirname + '/src/service/permission.js',
+          offline    : __dirname + '/src/service/offline.js',
 
           focus      : __dirname + '/src/focus/focus.js',
           controlbar : __dirname + '/src/focus/controlbar.jsx',
