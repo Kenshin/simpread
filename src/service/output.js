@@ -7,6 +7,8 @@ import {browser}   from 'browser';
 import * as msg    from 'message';
 import * as highlight from 'highlight';
 import * as share  from 'sharecard';
+import * as offline from 'offline';
+import th           from 'theme';
 
 /**
  * Controlbar common action, include:
@@ -89,6 +91,19 @@ function action( type, title, desc, content ) {
                 });
                 break;
             case "html":
+                /*
+                const notify2 = new Notify().Render({ content: "图片转换中吗，请稍等...", state: "loading" });
+                offline.getImages( () => {
+                    notify2.complete();
+                    new Notify().Render( 0, "全部图片已经转换完毕，马上开始下载，请稍等。" );
+                });
+                */
+                const theme  = th.Get( storage.read.theme ),
+                      global = th.Get( "global" ),
+                      common = th.Get( "common" );
+                const html = offline.HTML( title, desc, content, { global, common, theme } );
+                exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
+                break;
             case "temp":
             case "kindle":
                 const notify = new Notify().Render({ state: "loading", content: "开始转码阅读模式并上传到服务器，请稍后。" });
