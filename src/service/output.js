@@ -54,7 +54,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "bear" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "bear", "ulysses" ].includes( type ) ) {
         storage.Statistics( "service", type );
         switch ( type ) {
             case "save":
@@ -125,6 +125,12 @@ function action( type, title, desc, content ) {
                 storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                 exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
                     location.href = `bear://x-callback-url/create?title=${title}&text=${encodeURIComponent(result)}&tags=simpread`;
+                });
+                break;
+            case "ulysses":
+                storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
+                exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    location.href = `ulysses://x-callback-url/new-sheet?text=${encodeURIComponent(result)}`;
                 });
                 break;
             case "temp":

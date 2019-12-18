@@ -368,6 +368,11 @@ const readItems = {
                 "icon" : ss.IconPath("bear_icon"),
                 "color": "#00BCD4",
             },
+            "ulysses" : {
+                "name" : "保存到 Ulysses",
+                "icon" : ss.IconPath("ulysses_icon"),
+                "color": "#00BCD4",
+            },
         },
     },
     "dyslexia" : {
