@@ -156,7 +156,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         const url = URL.createObjectURL(blob);
         browser.downloads.download({
             url     : url,
-            filename: name,
+            filename: name.replace( /[|]/ig, "" ),
         }, downloadId => {
             sendResponse({ done: downloadId });
         });
