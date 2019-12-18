@@ -1538,7 +1538,7 @@ class Kindle {
     }
 
     get server() {
-        return "http://fivefilters.org/kindle-it/send.php";
+        return "https://pushtokindle.fivefilters.org/send.php";
     }
 
     Read( url, title, desc, content, style, callback ) {
