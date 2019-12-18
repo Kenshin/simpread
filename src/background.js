@@ -145,7 +145,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Listen runtime message, include: `download` && `base64`
+ * Listen runtime message, include: `download`, `base64` && `permission`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     if ( request.type == msg.MESSAGE_ACTION.download ) {
