@@ -28,6 +28,11 @@ const keyboard = {
             "kbd"  : "hm",
             "type" : "html",
             "desc" : "导出为 HTML",
+        },
+        ofh: {
+            "kbd"  : "ofh",
+            "type" : "offlinehtml",
+            "desc" : "导出为 离线 HTML",
         }
     },
     "控制栏 - 其它" : {
@@ -291,6 +296,11 @@ const readItems = {
                 "icon" : ss.IconPath("html_icon"),
                 "color": "#D4237A",
             },
+            "offlinehtml" : {
+                "name" : "导出为 离线 HTML",
+                "icon" : ss.IconPath("offline_html_icon"),
+                "color": "#D4237A",
+            }
         },
     },
     "send" : {

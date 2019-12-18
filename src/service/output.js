@@ -54,7 +54,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml" ].includes( type ) ) {
         storage.Statistics( "service", type );
         switch ( type ) {
             case "save":
@@ -91,7 +91,7 @@ function action( type, title, desc, content ) {
                     !success && new Notify().Render( 2, `转换失败，这是一个实验性功能，不一定能导出成功，详细请看 <a href="http://ksria.com/simpread/docs/#/发送到-Epub" target="_blank">epub.press</a>` );
                 });
                 break;
-            case "html":
+            case "offlinehtml":
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.permission ), result => {
                     if ( !result.done ) {
                         new Notify().Render( 2, `离线下载的文件体积较大，所以需要使用 Chrome 下载方案，请授权。` );
