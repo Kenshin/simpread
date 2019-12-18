@@ -98,7 +98,8 @@ function action( type, title, desc, content ) {
                     const theme  = th.Get( storage.read.theme ),
                           global = th.Get( "global" ),
                           common = th.Get( "common" ),
-                          html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme } );
+                          css    = storage.read.custom.css,
+                          html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css } );
                     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
                         console.log( "Current download result: ", result )
                     });
