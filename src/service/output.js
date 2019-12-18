@@ -54,7 +54,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "bear" ].includes( type ) ) {
         storage.Statistics( "service", type );
         switch ( type ) {
             case "save":
@@ -120,6 +120,12 @@ function action( type, title, desc, content ) {
                       css    = ss.GetCustomCSS(),
                       html   = offline.HTML( title, desc, content, { global, common, theme, css } );
                 exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
+                break;
+            case "bear":
+                storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
+                exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    location.href = `bear://x-callback-url/create?title=${title}&text=${encodeURIComponent(result)}&tags=simpread`;
+                });
                 break;
             case "temp":
             case "kindle":
