@@ -16,14 +16,7 @@ let currIdx = 0, maxCount = 0, urls = [], images, cb;
  * @return {string} html
  */
 function HTML( title, desc, content, styles ) {
-    const custom = () => {
-            let styles = "";
-            $( "head" ).find( "style" ).map( (index, item) => {
-                item.id.startsWith( "simpread-custom-" ) && ( styles += item.innerHTML );
-            });
-            return styles;
-        },
-          html = `
+    const html = `
                 <html lang="en" class="simpread-font simpread-theme-root" style='${ $( "html" ).attr( "style" ) }'>
                     <head>
                         <meta charset="UTF-8">
@@ -34,7 +27,6 @@ function HTML( title, desc, content, styles ) {
                         <style type="text/css">${ styles.common }</style>
                         <style type="text/css">${ styles.theme  }</style>
                         <style type="text/css">${ styles.global }</style>
-                        <style type="text/css">${ custom()      }</style>
                         <style type="text/css">${ styles.css    }</style>
                         <title>简悦 | ${title}</title>
                     </head>
