@@ -91,18 +91,18 @@ function action( type, title, desc, content ) {
                 });
                 break;
             case "html":
-                /*
                 const notify2 = new Notify().Render({ content: "图片转换中吗，请稍等...", state: "loading" });
                 offline.getImages( () => {
                     notify2.complete();
                     new Notify().Render( 0, "全部图片已经转换完毕，马上开始下载，请稍等。" );
+                    const theme  = th.Get( storage.read.theme ),
+                          global = th.Get( "global" ),
+                          common = th.Get( "common" ),
+                          html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme } );
+                    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
+                        console.log( "Current download result: ", result )
+                    });
                 });
-                */
-                const theme  = th.Get( storage.read.theme ),
-                      global = th.Get( "global" ),
-                      common = th.Get( "common" );
-                const html = offline.HTML( title, desc, content, { global, common, theme } );
-                exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
                 break;
             case "temp":
             case "kindle":
