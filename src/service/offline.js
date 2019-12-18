@@ -16,7 +16,12 @@ let currIdx = 0, maxCount = 0, urls = [], images, cb;
  * @return {string} html
  */
 function HTML( title, desc, content, styles ) {
-    const html = `
+    const hightlight = () => {
+            if ( content.search( 'pre class="hljs' ) > -1 || content.search( 'code class="hljs' ) > -1 ) {
+                return `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">`
+            } else return '';
+        },
+        html = `
                 <html lang="en" class="simpread-font simpread-theme-root" style='${ $( "html" ).attr( "style" ) }'>
                     <head>
                         <meta charset="UTF-8">
@@ -28,6 +33,7 @@ function HTML( title, desc, content, styles ) {
                         <style type="text/css">${ styles.theme  }</style>
                         <style type="text/css">${ styles.global }</style>
                         <style type="text/css">${ styles.css    }</style>
+                        ${hightlight()}
                         <title>简悦 | ${title}</title>
                     </head>
                     <body>
