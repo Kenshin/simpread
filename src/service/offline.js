@@ -17,7 +17,7 @@ let currIdx = 0, maxCount = 0, urls = [], images, cb;
  */
 function HTML( title, desc, content, styles ) {
     const   html = `
-                <html lang="en" class="simpread-font simpread-theme-root">
+                <html lang="en" class="simpread-font simpread-theme-root" style='${ $( "html" ).attr( "style" ) }'>
                     <head>
                         <meta charset="UTF-8">
                         <meta name="author" content="Kenshin"/>
@@ -31,7 +31,7 @@ function HTML( title, desc, content, styles ) {
                         <title>简悦 | ${title}</title>
                     </head>
                     <body>
-                        <sr-read>
+                        <sr-read style='${ $( "sr-read" ).attr( "style" ) }'>
                             <sr-rd-title>${title}</sr-rd-title>
                             <sr-rd-desc ${desc == "" ? 'style="display: none;"' : "" }>${desc}</sr-rd-desc>
                             <sr-rd-content>${content}</sr-rd-content>
