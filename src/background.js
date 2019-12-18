@@ -144,7 +144,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Listen runtime message, include: `corb`
+ * Listen runtime message, include: `download` && `base64`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     if ( request.type == msg.MESSAGE_ACTION.download ) {
