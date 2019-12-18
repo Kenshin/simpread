@@ -19,7 +19,7 @@ function HTML( title, desc, content, styles ) {
                     <body>
                         <sr-read>
                             <sr-rd-title>${title}</sr-rd-title>
-                            <sr-rd-desc style="${desc == "" && "display: none;" }">${desc}</sr-rd-desc>
+                            <sr-rd-desc ${desc == "" ? 'style="display: none;"' : "" }>${desc}</sr-rd-desc>
                             <sr-rd-content>${content}</sr-rd-content>
                             <sr-rd-footer>
                                 <sr-rd-footer-group>
