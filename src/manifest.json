@@ -15,10 +15,9 @@
     "contextMenus",
     "tabs",
     "storage",
-    "tts",
-    "downloads"
+    "tts"
   ],
-  "optional_permissions": [ "cookies", "https://*.youdao.com/" ],
+  "optional_permissions": [ "cookies", "https://*.youdao.com/", "downloads" ],
   "background": {
     "scripts"       : [ "/bundle/common.js", "/bundle/background.js" ]
   },
