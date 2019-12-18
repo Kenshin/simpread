@@ -42,6 +42,9 @@ const action = {
     turn_tab       : "turn_tab",
     welcome_close  : "welcome_close",
     controlbar     : "simpread-plugin_controlbar",
+    // offline
+    download       : "download",
+    base64         : "base64",
 };
 
 /**
