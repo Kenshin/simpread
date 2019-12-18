@@ -8,7 +8,8 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 import * as WebDAV from 'webdav';
-
+import * as permission
+                   from 'permission';
 import PureRead    from 'puread';
 
 // global update site tab id
@@ -176,6 +177,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             .catch( error => {
                 sendResponse({ fail: { error, url } });
             });
+    } else if ( request.type == msg.MESSAGE_ACTION.permission ) {
+        permission.Get({ permissions: [ "downloads" ] }, result => {
+            sendResponse({ done: result });
+        });
     }
     return true;
 });
