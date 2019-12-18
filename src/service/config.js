@@ -33,7 +33,12 @@ const keyboard = {
             "kbd"  : "ofh",
             "type" : "offlinehtml",
             "desc" : "导出为 离线 HTML",
-        }
+        },
+        tm: {
+            "kbd"  : "tm",
+            "type" : "temp",
+            "desc" : "导出为 临时页面",
+        },
     },
     "控制栏 - 其它" : {
         ff: {
@@ -132,11 +137,6 @@ const keyboard = {
             "kbd"  : "ul",
             "type" : "ulysses",
             "desc" : "保存到 Ulysses",
-        },
-        tm: {
-            "kbd"  : "tm",
-            "type" : "temp",
-            "desc" : "生成临时页面",
         },
     },
     "控制栏 - 无障碍" : {
