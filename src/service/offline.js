@@ -5,6 +5,16 @@ import * as msg    from 'message';
 
 let currIdx = 0, maxCount = 0, urls = [], images, cb;
 
+/**
+ * Offline HTML
+ * 
+ * @param {string} title
+ * @param {string} desc
+ * @param {string} content
+ * @param {object} styles, include: simpread(global), common, theme
+ * 
+ * @return {string} html
+ */
 function HTML( title, desc, content, styles ) {
     const   html = `
                 <html lang="en" class="simpread-font simpread-theme-root">
@@ -40,6 +50,11 @@ function HTML( title, desc, content, styles ) {
     return html;
 }
 
+/**
+ * Get current page( readmode ) all images and convert to base64
+ * 
+ * @param {func} callback 
+ */
 function getImages( callback ) {
     cb     = callback;
     images = new Map();
@@ -56,8 +71,15 @@ function getImages( callback ) {
     serialConvert( urls[0] );
 }
 
+/**
+ * Convert url to base64
+ * 
+ * @param {string} url
+ */
 function serialConvert( url ) {
+    // call contentscriptsa
     //toBase64( url, result => {
+    // call background
     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.base64, { url }), result => {
         currIdx++;
         if ( result && result.done ) {
@@ -74,11 +96,23 @@ function serialConvert( url ) {
     });
 }
 
+/**
+ * Change img.src to base64
+ * 
+ * @param {string} url
+ * @param {string} uri
+ */
 function setBase64( url, uri ) {
     const img = images.get( url );
     img.src   = uri;
 }
 
+/**
+ * toBase64 usage FileReader
+ * 
+ * @param {string} url
+ * @param {func} callback
+ */
 function toBase64( url, callback ) {
     fetch( url )
         .then( response => response.blob() )
