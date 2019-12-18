@@ -1,5 +1,8 @@
 console.log( "=== simpread offline load ===" )
 
+import {browser}   from 'browser';
+import * as msg    from 'message';
+
 let currIdx = 0, maxCount = 0, urls = [], images, cb;
 
 function HTML( title, desc, content, styles ) {
@@ -54,7 +57,8 @@ function getImages( callback ) {
 }
 
 function serialConvert( url ) {
-    toBase64( url, result => {
+    //toBase64( url, result => {
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.base64, { url }), result => {
         currIdx++;
         if ( result && result.done ) {
             setBase64( result.done.url, result.done.uri );
