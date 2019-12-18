@@ -197,6 +197,14 @@ function vfyCustom( type, styles ) {
     }
 }
 
+function getCustomCSS() {
+    let styles = "";
+    $( "head" ).find( "style" ).map( (index, item) => {
+        item.id.startsWith( "simpread-custom-" ) && ( styles += item.innerHTML );
+    });
+    return styles;
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
@@ -210,4 +218,5 @@ export {
     custom     as Custom,
     css        as CSS,
     vfyCustom  as VerifyCustom,
+    getCustomCSS as GetCustomCSS,
 }
