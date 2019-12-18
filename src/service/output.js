@@ -113,6 +113,14 @@ function action( type, title, desc, content ) {
                     }
                 });
                 break;
+            case "html":
+                const theme  = th.Get( storage.read.theme ),
+                      global = th.Get( "global" ),
+                      common = th.Get( "common" ),
+                      css    = ss.GetCustomCSS(),
+                      html   = offline.HTML( title, desc, content, { global, common, theme, css } );
+                exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
+                break;
             case "temp":
             case "kindle":
                 const notify = new Notify().Render({ state: "loading", content: "开始转码阅读模式并上传到服务器，请稍后。" });
@@ -136,15 +144,6 @@ function action( type, title, desc, content ) {
                             case "temp":
                                 new Notify().Render( "保存成功，3 秒钟后将跳转到临时页面。" );
                                 setTimeout( ()=>{ exp.kindle.Temp(); }, 3000 );
-                                break;
-                            case "html":
-                                new Notify().Render( "保存成功，开始下载..." );
-                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings: { url: `${exp.kindle.host}/${exp.kindle.id}.html`, type: "GET" }}), result => {
-                                    if ( result && result.done != "" ) {
-                                        result = result.done.replace( /<link rel=\"stylesheet\" href=\"\.\/css\//ig, '<link rel="stylesheet" href="http://sr.ksria.cn/puread/' )
-                                        exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(result), `simpread-${title}.html` );
-                                    } else new Notify().Render( 2, "导出出现问题，请稍后再试。" );
-                                });
                                 break;
                         }
                     }
