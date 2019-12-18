@@ -198,7 +198,7 @@ function vfyCustom( type, styles ) {
 }
 
 function getCustomCSS() {
-    let styles = "";
+    let styles = $( "style#simpread-site-css" ).text() || "";
     $( "head" ).find( "style" ).map( (index, item) => {
         item.id.startsWith( "simpread-custom-" ) && ( styles += item.innerHTML );
     });
