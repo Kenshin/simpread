@@ -9,6 +9,7 @@ import * as highlight from 'highlight';
 import * as share  from 'sharecard';
 import * as offline from 'offline';
 import th           from 'theme';
+import * as ss      from 'stylesheet';
 
 /**
  * Controlbar common action, include:
@@ -98,7 +99,7 @@ function action( type, title, desc, content ) {
                     const theme  = th.Get( storage.read.theme ),
                           global = th.Get( "global" ),
                           common = th.Get( "common" ),
-                          css    = storage.read.custom.css,
+                          css    = ss.GetCustomCSS(),
                           html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css } );
                     browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
                         console.log( "Current download result: ", result )
