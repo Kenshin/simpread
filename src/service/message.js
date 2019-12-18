@@ -45,6 +45,7 @@ const action = {
     // offline
     download       : "download",
     base64         : "base64",
+    permission     : "permission",
 };
 
 /**
