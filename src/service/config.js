@@ -123,6 +123,16 @@ const keyboard = {
             "type" : "save",
             "desc" : "保存到 稍后读",
         },
+        br: {
+            "kbd"  : "br",
+            "type" : "bear",
+            "desc" : "保存到 Bear",
+        },
+        ul: {
+            "kbd"  : "ul",
+            "type" : "ulysses",
+            "desc" : "保存到 Ulysses",
+        },
         tm: {
             "kbd"  : "tm",
             "type" : "temp",
