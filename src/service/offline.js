@@ -11,7 +11,7 @@ let currIdx = 0, maxCount = 0, urls = [], images, cb;
  * @param {string} title
  * @param {string} desc
  * @param {string} content
- * @param {object} styles, include: simpread(global), common, theme
+ * @param {object} styles, include: simpread(global), common, theme, css
  * 
  * @return {string} html
  */
@@ -27,6 +27,7 @@ function HTML( title, desc, content, styles ) {
                         <style type="text/css">${ styles.common }</style>
                         <style type="text/css">${ styles.theme  }</style>
                         <style type="text/css">${ styles.global }</style>
+                        <style type="text/css">${ styles.css    }</style>
                         <title>简悦 | ${title}</title>
                     </head>
                     <body>
