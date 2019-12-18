@@ -46,6 +46,8 @@ const action = {
     download       : "download",
     base64         : "base64",
     permission     : "permission",
+    // snapshot
+    snapshot       : "snapshot",
 };
 
 /**
