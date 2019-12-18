@@ -144,6 +144,43 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
+ * Listen runtime message, include: `corb`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.download ) {
+        const { data, name } = request.value;
+        const blob = new Blob([data], {
+            type: "html/plain;charset=utf-8"
+        });
+        const url = URL.createObjectURL(blob);
+        browser.downloads.download({
+            url     : url,
+            filename: name,
+        }, downloadId => {
+            sendResponse({ done: downloadId });
+        });
+    } else if ( request.type == msg.MESSAGE_ACTION.base64 ) {
+        const { url } = request.value;
+        fetch( url )
+            .then( response => response.blob() )
+            .then( blob     => new Promise(( resolve, reject ) => {
+                const reader = new FileReader()
+                reader.onloadend = event => {
+                    sendResponse({ done: { url, uri: event.target.result }});
+                };
+                reader.onerror = error => {
+                    sendResponse({ fail: { error, url } });
+                };
+                reader.readAsDataURL( blob );
+            }))
+            .catch( error => {
+                sendResponse({ fail: { error, url } });
+            });
+    }
+    return true;
+});
+
+/**
  * Listen runtime message, include: `shortcuts` `browser_action`
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
