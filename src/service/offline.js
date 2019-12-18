@@ -87,7 +87,10 @@ function toBase64( url, callback ) {
                 callback({ fail: { error, url } });
             };
             reader.readAsDataURL( blob );
-        }));
+        }))
+        .catch( error => {
+            callback({ fail: { error, url } });
+        });
 }
 
 export {
