@@ -68,11 +68,6 @@ function action( type, title, desc, content ) {
                 const md = "simpread-" + title + ".md";
                 storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                 exp.MDWrapper( util.ClearMD( content ), md, new Notify() );
-                /*
-                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.snapshot ), result => {
-                    $( "sr-rd-content" ).find( "img" )[0].src = result.done;
-                });
-                */
                 break;
             case "png":
                 try {
