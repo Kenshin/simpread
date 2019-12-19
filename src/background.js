@@ -190,6 +190,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     if ( request.type == msg.MESSAGE_ACTION.snapshot ) {
+        const { left, top, width, height } = request.value;
         chrome.tabs.captureVisibleTab( { format: "png" }, base64 => {
             const image  = new Image();
             image.src    = base64;
@@ -199,7 +200,8 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 
                 canvas.height = image.naturalHeight;
                 canvas.width  = image.naturalWidth;
-                ctx.drawImage( image, 0, 0, 1000, 1000, 0, 0, 1000, 1000 );
+                //ctx.drawImage( image, 0, 0, 1000, 1000, 0, 0, 1000, 1000 );
+                ctx.drawImage( image, left, top, width, height, 0, 0, width, height );
                 const uri = canvas.toDataURL( "image/png" );
                 sendResponse({ done: uri });
           };
