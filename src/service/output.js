@@ -10,6 +10,7 @@ import * as share  from 'sharecard';
 import * as offline from 'offline';
 import th           from 'theme';
 import * as ss      from 'stylesheet';
+import * as snap    from 'snapshot';
 
 /**
  * Controlbar common action, include:
@@ -54,7 +55,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "bear", "ulysses" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "snapshot", "bear", "ulysses" ].includes( type ) ) {
         storage.Statistics( "service", type );
         switch ( type ) {
             case "save":
@@ -120,6 +121,17 @@ function action( type, title, desc, content ) {
                       css    = ss.GetCustomCSS(),
                       html   = offline.HTML( title, desc, content, { global, common, theme, css } );
                 exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
+                break;
+            case "snapshot":
+                $("panel-bg").click();
+                setTimeout( () => {
+                    snap.Start().done( result => {
+                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.snapshot, result ), result => {
+                            exp.Download( result.done, `simpread-${title}.png` );
+                            snap.End();
+                        });
+                    });
+                }, 500 );
                 break;
             case "bear":
                 storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
