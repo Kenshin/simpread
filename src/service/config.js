@@ -310,7 +310,12 @@ const readItems = {
                 "name" : "导出为 离线 HTML",
                 "icon" : ss.IconPath("offline_html_icon"),
                 "color": "#D4237A",
-            }
+            },
+            "snapshot" : {
+                "name" : "截图",
+                "icon" : ss.IconPath("snapshot_icon"),
+                "color": "#D4237A",
+            },
         },
     },
     "send" : {
