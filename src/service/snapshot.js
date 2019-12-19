@@ -33,6 +33,11 @@ function start() {
     return dtd;
 }
 
+function remove() {
+    $( ".simpread-read-root" ).find( "sr-snapshot" ).remove();
+}
+
 export {
-    start as Start,
+    start  as Start,
+    remove as End,
 }
