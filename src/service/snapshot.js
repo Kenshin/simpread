@@ -5,8 +5,8 @@ let startPos, endPos, dragStart = false, position;
 function start() {
     const dtd = $.Deferred();
     dragStart = false;
-    $( ".simpread-read-root" ).append( `<sr-snapshot><sr-mask></sr-mask></sr-snapshot>` );
-    $( "sr-snapshot" )
+    $( ".simpread-read-root" ).append( `<simpread-snapshot><sr-mask></sr-mask></simpread-snapshot>` );
+    $( "simpread-snapshot" )
         .on( "mousemove", event => {
             if ( dragStart == false ) {
                 $( event.currentTarget ).css({ left: event.clientX, top: event.clientY });
@@ -36,7 +36,7 @@ function start() {
 }
 
 function remove() {
-    $( ".simpread-read-root" ).find( "sr-snapshot" ).remove();
+    $( ".simpread-read-root" ).find( "simpread-snapshot" ).remove();
 }
 
 export {

@@ -711,7 +711,7 @@ sharecard-control {
  * Snapshot
  */
 
-sr-snapshot {
+simpread-snapshot {
     position: fixed;
     left: 0;
     top: 0;
@@ -729,7 +729,7 @@ sr-mask {
     background-color: rgba(0, 0, 0, .1);
 }
 
-sr-snapshot::before {
+simpread-snapshot::before {
     content: '';
 
     position: absolute;
@@ -743,11 +743,11 @@ sr-snapshot::before {
     border-bottom: 3px dashed #1976d2;
 }
 
-sr-snapshot.active::before {
+simpread-snapshot.active::before {
     border: none;
 }
 
-sr-snapshot::after {
+simpread-snapshot::after {
     content: '';
 
     position: absolute;
@@ -761,6 +761,6 @@ sr-snapshot::after {
     border-left: 3px dashed #1976d2;
 }
 
-sr-snapshot.active::after {
+simpread-snapshot.active::after {
     border: none;
 }
