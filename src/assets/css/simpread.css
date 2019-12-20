@@ -279,7 +279,8 @@ sr-rd-crlbar.controlbar:hover {
 }
 
 
-simpread-highlight {
+simpread-highlight,
+sr-snapshot-ctlbar {
     position: fixed;
 
     top: 0;
@@ -297,6 +298,7 @@ simpread-highlight {
     background-color: rgba(50, 50, 50, .9);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
 
+    box-sizing: border-box;
     z-index: 2147483640;
 }
 
