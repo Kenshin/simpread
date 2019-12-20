@@ -123,14 +123,16 @@ function action( type, title, desc, content ) {
                 exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
                 break;
             case "snapshot":
-                new Notify().Render( "请移动鼠标，按住鼠标左键框选。" );
+                new Notify().Render( "请移动鼠标，按住鼠标左键框选，框选后可再次框选。" );
                 $("panel-bg").click();
                 setTimeout( () => {
                     snap.Start().done( result => {
-                        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.snapshot, result ), result => {
-                            exp.Download( result.done, `simpread-${title}.png` );
-                            snap.End();
-                        });
+                        snap.End();
+                        setTimeout(() => {
+                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.snapshot, result ), result => {
+                                exp.Download( result.done, `simpread-${title}.png` );
+                            });
+                        }, 100 );
                     });
                 }, 500 );
                 break;
