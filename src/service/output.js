@@ -123,6 +123,7 @@ function action( type, title, desc, content ) {
                 exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
                 break;
             case "snapshot":
+                new Notify().Render( "请移动鼠标，按住鼠标左键框选。" );
                 $("panel-bg").click();
                 setTimeout( () => {
                     snap.Start().done( result => {
