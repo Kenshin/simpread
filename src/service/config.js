@@ -39,6 +39,11 @@ const keyboard = {
             "type" : "temp",
             "desc" : "导出为 临时页面",
         },
+        cp: {
+            "kbd"  : "cp",
+            "type" : "snapshot",
+            "desc" : "截图",
+        },
     },
     "控制栏 - 其它" : {
         ff: {
