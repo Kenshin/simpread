@@ -9,7 +9,6 @@ function start() {
     $( "simpread-snapshot" )
         .on( "mousemove", event => {
             if ( dragStart == false ) {
-                $( event.currentTarget ).css({ left: event.clientX, top: event.clientY });
             } else {
                 endPos       = { left: event.clientX, top: event.clientY };
                 const width  = endPos.left - startPos.left,
@@ -20,12 +19,11 @@ function start() {
                     width : Math.abs( width ),
                     height: Math.abs( height ),
                 }
-                $( event.currentTarget ).addClass( "active" ).find( "sr-mask" ).css( position );
+                $( event.currentTarget ).find( "sr-mask" ).css( position );
             }
         })
         .on( "mousedown", event => {
             startPos  = { left: event.clientX, top: event.clientY };
-            $( event.currentTarget ).removeAttr( "style" );
             dragStart = true;
         })
         .on( "mouseup", event =>{
