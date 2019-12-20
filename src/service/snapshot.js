@@ -11,12 +11,14 @@ function start() {
             if ( dragStart == false ) {
                 $( event.currentTarget ).css({ left: event.clientX, top: event.clientY });
             } else {
-                endPos   = { left: event.clientX, top: event.clientY };
-                position = {
-                    left  : startPos.left,
-                    top   : startPos.top,
-                    width : endPos.left - startPos.left,
-                    height: endPos.top  - startPos.top,
+                endPos       = { left: event.clientX, top: event.clientY };
+                const width  = endPos.left - startPos.left,
+                      height = endPos.top  - startPos.top;
+                position     = {
+                    left  : width  >= 0 ? startPos.left : endPos.left,
+                    top   : height >= 0 ? startPos.top  : endPos.top,
+                    width : Math.abs( width ),
+                    height: Math.abs( height ),
                 }
                 $( event.currentTarget ).addClass( "active" ).find( "sr-mask" ).css( position );
             }
