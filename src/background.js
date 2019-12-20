@@ -196,13 +196,16 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             image.src    = base64;
             image.onload = () => {
                 const canvas  = document.createElement( "canvas" ),
-                      ctx     = canvas.getContext( "2d" );
-
-                canvas.height = image.naturalHeight;
-                canvas.width  = image.naturalWidth;
-                //ctx.drawImage( image, 0, 0, 1000, 1000, 0, 0, 1000, 1000 );
-                ctx.drawImage( image, left, top, width, height, 0, 0, width, height );
-                const uri = canvas.toDataURL( "image/png" );
+                      ctx     = canvas.getContext( "2d" ),
+                      dpi     = window.devicePixelRatio,
+                      sx      = left   * dpi,
+                      sy      = top    * dpi,
+                      sWidth  = width  * dpi,
+                      sHeight = height * dpi;
+                canvas.width  = sWidth;
+                canvas.height = sHeight;
+                ctx.drawImage( image, sx, sy, sWidth, height * dpi, 0, 0, sWidth, sHeight );
+                const uri     = canvas.toDataURL( "image/png" );
                 sendResponse({ done: uri });
           };
         });
