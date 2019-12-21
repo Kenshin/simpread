@@ -10,6 +10,7 @@ import Instapaper from 'instapaper';
 import * as msg   from 'message';
 import {browser}  from 'browser';
 import * as puplugin from 'puplugin';
+import * as wiz    from 'wiz';
 
 /**
  * Create PNG
@@ -1520,6 +1521,76 @@ class Youdao {
 
 }
 
+/**
+ * Wiz
+ * 
+ * @class
+ */
+class Wiz {
+
+    get id()   { return "weizhi"; }
+    get name() { return name( this.id ); }
+
+    get tag() {
+        return "SimpRead";
+    }
+
+    get category() {
+        return "/My Notes/";
+    }
+
+    Auth( user, password, callback ) {
+        const data = {
+            userId   : user,
+            password : password,
+            autoLogin: true,
+        };
+
+        $.ajax({
+            url     : "https://note.wiz.cn/as/user/login?clientType=webclip_chrome&clientVersion=4.0.10&apiVersion=10&lang=zh-CN",
+            type    : "POST",
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            data    : JSON.stringify(data),
+        }).done( ( result, textStatus, jqXHR ) => {
+            result && result.returnCode == 200 && ( this.access_token = result.result.userGuid );
+            callback( result, undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, textStatus );
+        });
+    }
+
+    Add( url, title, content, callback ) {
+        const info = {
+            title,
+            url,
+            category: this.category,
+            cmd     : "save_content",
+            comment : "",
+            tag     : this.tag,
+            userid  : this.username,
+            params  : wiz.getParams( url, title, content ),
+        };
+        let data = wiz.getInfos( info, this.access_token );
+        data     = JSON.stringify( data );
+        const options = {
+            url     : "https://kshttps0.wiz.cn/ks/gather?clientType=webclip_chrome&clientVersion=4.0.10&apiVersion=10&lang=zh-CN",
+            type    : "POST",
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            cache: false,
+            data,
+        };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings: options }), result => {
+            if ( result && result.done && result.done.return_code == 200 ) callback( result, undefined );
+            else if ( result && result.done ) callback( undefined, result.done.return_code == 301 ? `授权已过期，请重新授权。` : "请稍后再试" );
+            else callback( undefined, result.fail );
+        });
+    }
+
+}
 
 /**
  * Kindle
@@ -1596,6 +1667,8 @@ function name( type ) {
         return "语雀";
     } else if ( type == "youdao" ) {
         return "有道云笔记";
+    } else if ( type == "weizhi" ) {
+        return "为知笔记";
     }
 return type;
 }
@@ -1691,6 +1764,7 @@ const dropbox  = new Dropbox(),
       notion   = new Notion(),
       youdao   = new Youdao(),
       webdav   = new WebDAV(),
+      weizhi   = new Wiz(),
       kindle   = new Kindle();
 
 export {
@@ -1703,9 +1777,9 @@ export {
     md2HTML  as MD2HTML,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav, notion, youdao,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav, notion, youdao, weizhi,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,
     verifyService   as VerifySvcWrapper,
-}
+} 
