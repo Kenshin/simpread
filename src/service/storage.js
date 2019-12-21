@@ -163,6 +163,7 @@ const name = "simpread",
             "temp"       : 0,
             "yuque"      : 0,
             "jianguo"    : 0,
+            "weizhi"     : 0,
         }
     },
     user   = {
@@ -208,7 +209,7 @@ let current  = {},
     },
     plugins  = {},
     secret   = {
-        version   : "2019-09-16",
+        version   : "2019-12-20",
         "dropbox" : {
             "access_token": ""
         },
@@ -252,6 +253,10 @@ let current  = {},
         "jianguo"  : {
             username      : "",
             password      : "",
+            access_token  : "",
+        },
+        "weizhi"  : {
+            username      : "",
             access_token  : "",
         },
         "webdav"  : []
