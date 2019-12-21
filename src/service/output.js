@@ -188,8 +188,8 @@ function action( type, title, desc, content ) {
                 }
                 break;
         }
-    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion", "youdao" ].includes( type ) ) {
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion, youdao } = exp,
+    } else if ( [ "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion", "youdao", "weizhi" ].includes( type ) ) {
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion, youdao, weizhi } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
         const service = type => {
@@ -296,6 +296,18 @@ function action( type, title, desc, content ) {
                                 exp.svcCbWrapper( result, error, youdao.name, type, new Notify() )
                             });
                         });
+                    });
+                    break;
+                case "weizhi":
+                    const theme  = th.Get( storage.read.theme ),
+                          global = th.Get( "global" ),
+                          common = th.Get( "common" ),
+                          css    = ss.GetCustomCSS(),
+                          html   = offline.HTML( title, desc, content, { global, common, theme, css } );
+                    weizhi.username     = storage.secret.weizhi.username;
+                    weizhi.access_token = storage.secret.weizhi.access_token;
+                    weizhi.Add( window.location.href, title, html, ( result, error ) => {
+                        exp.svcCbWrapper( result, error, weizhi.name, type, new Notify() )
                     });
                     break;
             }
