@@ -10,7 +10,7 @@ import Instapaper from 'instapaper';
 import * as msg   from 'message';
 import {browser}  from 'browser';
 import * as puplugin from 'puplugin';
-import * as wiz    from 'wiz';
+import * as wiz   from 'wiz';
 
 /**
  * Create PNG
