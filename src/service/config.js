@@ -108,6 +108,11 @@ const keyboard = {
             "type" : "yuque",
             "desc" : "保存到 语雀",
         },
+        wz: {
+            "kbd"  : "wz",
+            "type" : "weizhi",
+            "desc" : "保存到 为知笔记",
+        },
         kd: {
             "kbd"  : "kd",
             "type" : "kindle",
