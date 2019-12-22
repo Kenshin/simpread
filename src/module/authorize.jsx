@@ -353,10 +353,12 @@ export default class Auth extends React.Component {
     }
 
     componentDidMount() {
-        storage.Safe( () => this.setState({ secret: storage.secret }) );
-        if ( location.hash.startsWith( "#labs?auth=" ) ) {
-            this.onChange( location.hash.replace( "#labs?auth=", "" ), true );
-        }
+        storage.Safe( () => {
+            this.setState({ secret: storage.secret })
+            if ( location.hash.startsWith( "#labs?auth=" ) ) {
+                this.onChange( location.hash.replace( "#labs?auth=", "" ), true );
+            }
+        });
     }
 
     render() {
