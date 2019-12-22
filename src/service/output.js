@@ -102,27 +102,29 @@ function action( type, title, desc, content ) {
                         offline.getImages( () => {
                             notify2.complete();
                             new Notify().Render( 0, "全部图片已经转换完毕，马上开始下载，请稍等。" );
-                            const theme  = th.Get( storage.read.theme ),
-                                  global = th.Get( "global" ),
-                                  common = th.Get( "common" ),
-                                  css    = ss.GetCustomCSS(),
-                                  special= ss.SpecialCSS( storage.pr.mathjax ),
-                                  html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
-                            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
-                                console.log( "Current download result: ", result )
+                            ss.SpecialCSS( storage.pr.mathjax, special => {
+                                const theme  = th.Get( storage.read.theme ),
+                                      global = th.Get( "global" ),
+                                      common = th.Get( "common" ),
+                                      css    = ss.GetCustomCSS(),
+                                      html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
+                                    console.log( "Current download result: ", result )
+                                });
                             });
                         });
                     }
                 });
                 break;
             case "html":
-                const theme  = th.Get( storage.read.theme ),
-                      global = th.Get( "global" ),
-                      common = th.Get( "common" ),
-                      css    = ss.GetCustomCSS(),
-                      special= ss.SpecialCSS( storage.pr.mathjax ),
-                      html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
-                exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
+                ss.SpecialCSS( storage.pr.mathjax, special => {
+                    const theme  = th.Get( storage.read.theme ),
+                        global = th.Get( "global" ),
+                        common = th.Get( "common" ),
+                        css    = ss.GetCustomCSS(),
+                        html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
+                    exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
+                });
                 break;
             case "snapshot":
                 new Notify().Render( "请移动鼠标，按住鼠标左键框选，框选后可再次框选。" );
@@ -301,16 +303,17 @@ function action( type, title, desc, content ) {
                     });
                     break;
                 case "weizhi":
-                    const theme  = th.Get( storage.read.theme ),
-                          global = th.Get( "global" ),
-                          common = th.Get( "common" ),
-                          css    = ss.GetCustomCSS(),
-                          special= ss.SpecialCSS( storage.pr.mathjax ),
-                          html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
-                    weizhi.username     = storage.secret.weizhi.username;
-                    weizhi.access_token = storage.secret.weizhi.access_token;
-                    weizhi.Add( window.location.href, title, html, ( result, error ) => {
-                        exp.svcCbWrapper( result, error, weizhi.name, type, new Notify() )
+                    ss.SpecialCSS( storage.pr.mathjax, special => {
+                        const theme  = th.Get( storage.read.theme ),
+                              global = th.Get( "global" ),
+                              common = th.Get( "common" ),
+                              css    = ss.GetCustomCSS(),
+                              html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
+                        weizhi.username     = storage.secret.weizhi.username;
+                        weizhi.access_token = storage.secret.weizhi.access_token;
+                        weizhi.Add( window.location.href, title, html, ( result, error ) => {
+                            exp.svcCbWrapper( result, error, weizhi.name, type, new Notify() )
+                        });
                     });
                     break;
             }
