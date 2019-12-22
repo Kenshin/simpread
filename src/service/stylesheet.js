@@ -205,9 +205,19 @@ function getCustomCSS() {
     return styles;
 }
 
-function specialCSS( mathjax ) {
+/**
+ * Get special style
+ * 
+ * @param {boolean} mathjax
+ * @param {func} callback
+ */
+function specialCSS( mathjax, callback ) {
     let css = "";
-    if ( mathjax ) {
+    if ( mathjax && location.hostname == "blog.csdn.net" ) {
+        $.get("https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-b6c3c6d139.css", result=> {
+            callback( result );
+        })
+    } else if ( mathjax ) {
         $( "head" ).find( "style" ).map( (index, item) => {
             const $target = $(item),
                   cls     = $target.attr( "class" ),
@@ -216,8 +226,8 @@ function specialCSS( mathjax ) {
                 css += html;
             }
         });
+        callback( css );
     }
-    return css;
 }
 
 export {
