@@ -268,6 +268,10 @@ export default class Auth extends React.Component {
                 });
                 break;
             case "weizhi":
+                if ( location.hash.startsWith( "#labs?auth=" ) ) {
+                    this.props.weizhi.username = storage.secret.weizhi.username;
+                    this.props.weizhi.password = storage.secret.weizhi.password;
+                }
                 weizhi.Auth( this.props.weizhi.username, this.props.weizhi.password, result => {
                     if ( result && result.status == 401 ) {
                         failed( "授权错误，请重新授权。", weizhi.id, weizhi.name );
