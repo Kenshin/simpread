@@ -159,6 +159,10 @@ export default class ReadCtlbar extends React.Component {
             if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
                 delete readItems.option;
             }
+            if ( !/macintosh|mac os x/i.test(navigator.userAgent) ) {
+                delete readItems.send.items.bear;
+                delete readItems.send.items.ulysses;
+            }
             storage.Safe( () => {
                 storage.secret.webdav.forEach( item => {
                     item = JSON.parse( item );
