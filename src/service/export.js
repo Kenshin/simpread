@@ -131,9 +131,9 @@ function unlink( id ) {
         "onenote" : "https://account.live.com/consent/Manage",
         "gdrive"  : "https://drive.google.com/drive/my-drive",
         "yuque"   : "https://www.yuque.com/yuque/developer/delete-oauth-apps",
-        "notion"  : "http://ksria.com/simpread/docs/#/发送到-Notion",
-        "youdao"  : "http://ksria.com/simpread/docs/#/发送到有道云笔记",
-        "weizhi"  : "http://ksria.com/simpread/docs/#/发送到为知笔记",
+        "notion"  : "http://ksria.com/simpread/docs/#/授权服务?id=取消授权",
+        "youdao"  : "http://ksria.com/simpread/docs/#/授权服务?id=取消授权",
+        "weizhi"  : "http://ksria.com/simpread/docs/#/授权服务?id=取消授权",
         "jianguo" : "http://help.jianguoyun.com/?p=2064",
         "linnk"   : "https://linnk.net/",
     }
