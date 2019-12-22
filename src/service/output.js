@@ -106,7 +106,8 @@ function action( type, title, desc, content ) {
                                   global = th.Get( "global" ),
                                   common = th.Get( "common" ),
                                   css    = ss.GetCustomCSS(),
-                                  html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css } );
+                                  special= ss.SpecialCSS( storage.pr.mathjax, storage.pr.org_url ),
+                                  html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
                             browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
                                 console.log( "Current download result: ", result )
                             });
@@ -119,7 +120,8 @@ function action( type, title, desc, content ) {
                       global = th.Get( "global" ),
                       common = th.Get( "common" ),
                       css    = ss.GetCustomCSS(),
-                      html   = offline.HTML( title, desc, content, { global, common, theme, css } );
+                      special= ss.SpecialCSS( storage.pr.mathjax, storage.pr.org_url ),
+                      html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
                 exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
                 break;
             case "snapshot":
@@ -303,7 +305,8 @@ function action( type, title, desc, content ) {
                           global = th.Get( "global" ),
                           common = th.Get( "common" ),
                           css    = ss.GetCustomCSS(),
-                          html   = offline.HTML( title, desc, content, { global, common, theme, css } );
+                          special= ss.SpecialCSS( storage.pr.mathjax, storage.pr.org_url ),
+                          html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
                     weizhi.username     = storage.secret.weizhi.username;
                     weizhi.access_token = storage.secret.weizhi.access_token;
                     weizhi.Add( window.location.href, title, html, ( result, error ) => {
