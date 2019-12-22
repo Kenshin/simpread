@@ -205,6 +205,21 @@ function getCustomCSS() {
     return styles;
 }
 
+function specialCSS( mathjax ) {
+    let css = "";
+    if ( mathjax ) {
+        $( "head" ).find( "style" ).map( (index, item) => {
+            const $target = $(item),
+                  cls     = $target.attr( "class" ),
+                  html    = $target.text();
+            if ( cls == "simpread-offline-special" || html.search( ".MathJax" ) > -1 || html.search( ".mathjax" ) > -1 || html.search( ".MJX" ) > -1 ) {
+                css += html;
+            }
+        });
+    }
+    return css;
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
@@ -219,4 +234,5 @@ export {
     css        as CSS,
     vfyCustom  as VerifyCustom,
     getCustomCSS as GetCustomCSS,
+    specialCSS as SpecialCSS,
 }
