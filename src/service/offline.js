@@ -42,6 +42,7 @@ function HTML( title, desc, content, styles ) {
                         <style type="text/css">${ styles.theme  }</style>
                         <style type="text/css">${ styles.global }</style>
                         <style type="text/css">${ styles.css    }</style>
+                        <style type="text/css">${ styles.special}</style>
                         ${hightlight()}
                         <title>简悦 | ${title}</title>
                     </head>
