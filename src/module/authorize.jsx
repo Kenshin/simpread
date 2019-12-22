@@ -516,7 +516,7 @@ export default class Auth extends React.Component {
                             <div style={{ display: "flex","flex-direction": "row", "justify-content": "center" }}>
                             { this.state.notion ? <Dropdown name={ "请选择保存的位置，默认为第一个" } items={ this.state.notion } width="100%" onChange={ (v,n)=>this.save( "notion", v ) } />
                             : <Button type="flat" width="100%" style={{ "margin": "0" }}
-                                    text="重新获取 Notion Page"
+                                    text="重新获取 Notion Page"
                                     color="#fff" backgroundColor="#3F51B5"
                                     waves="md-waves-effect md-waves-button"
                                     onClick={ (s)=>this.notionChange() } /> }
