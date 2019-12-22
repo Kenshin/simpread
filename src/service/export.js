@@ -133,6 +133,7 @@ function unlink( id ) {
         "yuque"   : "https://www.yuque.com/yuque/developer/delete-oauth-apps",
         "notion"  : "http://ksria.com/simpread/docs/#/发送到-Notion",
         "youdao"  : "http://ksria.com/simpread/docs/#/发送到有道云笔记",
+        "weizhi"  : "http://ksria.com/simpread/docs/#/发送到为知笔记",
         "jianguo" : "http://help.jianguoyun.com/?p=2064",
         "linnk"   : "https://linnk.net/",
     }
