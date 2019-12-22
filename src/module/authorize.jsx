@@ -119,6 +119,7 @@ export default class Auth extends React.Component {
             }
             if ( state == "weizhi" ) {
                 this.props.weizhi.username = "";
+                this.props.weizhi.password = "";
                 this.props.weizhi.access_token = "";
             }
             if ( state == "youdao" ) {
@@ -270,7 +271,7 @@ export default class Auth extends React.Component {
                 weizhi.Auth( this.props.weizhi.username, this.props.weizhi.password, result => {
                     if ( result && result.status == 401 ) {
                         failed( "授权错误，请重新授权。", weizhi.id, weizhi.name );
-                    } else success( "weizhi", "为知笔记", { username: this.props.weizhi.username, access_token: weizhi.access_token } );
+                    } else success( "weizhi", "为知笔记", { username: this.props.weizhi.username, password: this.props.weizhi.password, access_token: weizhi.access_token } );
                 });
                 break;
         }

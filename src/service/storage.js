@@ -257,6 +257,7 @@ let current  = {},
         },
         "weizhi"  : {
             username      : "",
+            password      : "",
             access_token  : "",
         },
         "webdav"  : []
