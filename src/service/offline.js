@@ -3,7 +3,7 @@ console.log( "=== simpread offline load ===" )
 import {browser}   from 'browser';
 import * as msg    from 'message';
 
-let currIdx = 0, maxCount = 0, urls = [], images, cb;
+let currIdx = 0, maxCount = 0, urls = [], images, cb, type = "html", markdown;
 
 /**
  * Offline HTML
@@ -68,11 +68,38 @@ function HTML( title, desc, content, styles ) {
 }
 
 /**
+ * Markdown offline e.g. ![img](http://xxx.png) → ![img][id] ... [id]:base54
+ * 
+ * @param {string} markdown str
+ * @param {func} callback
+ */
+function Markdown( content, callback ) {
+    type         = "markdown";
+    cb           = callback;
+    markdown     = content;
+    images       = new Map();
+    const arr    = markdown.match( /!\[\]\(http\S+\)/ig );
+    if ( arr && arr.length > 0 ) {
+        arr.forEach( ( item, idx ) => {
+            markdown = markdown.replace( item, `![][img-${idx}]` );
+            item     = item.replace( /[!\[\]\(]|[\)]/ig, "" );
+            markdown = markdown + `\r\n\r\n` + `[img-${idx}]:${item}`;
+            images.set( item, `[img-${idx}]:${item}` );
+        });
+        urls     = [...images.keys()];
+        maxCount = urls.length;
+        currIdx  = 0;
+        serialConvert( urls[0] );
+    } else cb( markdown );
+}
+
+/**
  * Get current page( readmode ) all images and convert to base64
  * 
  * @param {func} callback 
  */
 function getImages( callback ) {
+    type   = "html";
     cb     = callback;
     images = new Map();
     $( "sr-rd-content" ).find( "img" ).map( ( idx, img ) => {
@@ -108,7 +135,7 @@ function serialConvert( url ) {
             serialConvert( urls[currIdx] );
         } else {
             console.log( "All images convert done" )
-            cb && cb();
+            cb && cb( markdown );
         }
     });
 }
@@ -121,7 +148,12 @@ function serialConvert( url ) {
  */
 function setBase64( url, uri ) {
     const img = images.get( url );
-    img.src   = uri;
+    if ( type == "html" ) {
+        img.src  = uri;
+    } else {
+        const str = img.replace( url, uri )
+        markdown = markdown.replace( img, str );
+    }
 }
 
 /**
@@ -150,6 +182,7 @@ function toBase64( url, callback ) {
 
 export {
     HTML,
+    Markdown,
     getImages,
     toBase64,
 }
