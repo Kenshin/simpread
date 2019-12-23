@@ -55,7 +55,7 @@ function action( type, title, desc, content ) {
                 break;
         }
         type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
-    } else if ( [ "save", "markdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "snapshot", "bear", "ulysses" ].includes( type ) ) {
+    } else if ( [ "save", "markdown", "offlinemarkdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "snapshot", "bear", "ulysses" ].includes( type ) ) {
         storage.Statistics( "service", type );
         switch ( type ) {
             case "save":
@@ -69,6 +69,26 @@ function action( type, title, desc, content ) {
                 const md = "simpread-" + title + ".md";
                 storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
                 exp.MDWrapper( util.ClearMD( content ), md, new Notify() );
+                break;
+            case "offlinemarkdown":
+                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.permission ), result => {
+                    if ( !result.done ) {
+                        new Notify().Render( 2, `离线下载的文件体积较大，所以需要使用 Chrome 下载方案，请授权。` );
+                        return;
+                    } else {
+                        const notify2 = new Notify().Render({ content: "图片转换中吗，请稍等...", state: "loading" });
+                        const md = "simpread-" + title + ".md";
+                        storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
+                        exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                            offline.Markdown( result, str => {
+                                notify2.complete();
+                                browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: str, name: md }), result => {
+                                    console.log( "Current download result: ", result )
+                                });
+                            });
+                        });
+                    }
+                });
                 break;
             case "png":
                 try {

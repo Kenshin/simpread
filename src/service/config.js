@@ -311,6 +311,11 @@ const readItems = {
                 "icon" : ss.IconPath("markdown_icon"),
                 "color": "#D4237A",
             },
+            "offlinemarkdown" : {
+                "name" : "导出为 离线 MD",
+                "icon" : ss.IconPath("offline_markdown_icon"),
+                "color": "#D4237A",
+            },
             "html" : {
                 "name" : "导出为 HTML",
                 "icon" : ss.IconPath("html_icon"),
