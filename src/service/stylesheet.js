@@ -227,7 +227,7 @@ function specialCSS( mathjax, callback ) {
             }
         });
         callback( css );
-    }
+    } else callback( css );
 }
 
 export {
