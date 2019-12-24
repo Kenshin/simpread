@@ -24,6 +24,7 @@ function HTML( title, desc, content, styles ) {
         html = `
                 <html lang="en" class="simpread-font simpread-theme-root" style='${ $( "html" ).attr( "style" ) }'>
                     <head>
+                        <meta charset="utf-8">
                         <meta name="author" content="Kenshin"/>
                         <meta name="description" content="简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展" />
                         <meta name="keywords" content="Chrome extension, Chrome 扩展, 阅读模式, 沉浸式阅读, 简悦, 简阅, read mode, reading mode, reader view, firefox, firefox addon, userscript, safari, opera, tampermonkey"/>
