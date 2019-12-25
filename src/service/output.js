@@ -36,7 +36,10 @@ function action( type, title, desc, content ) {
                   css    = ss.GetCustomCSS();
             callback({ theme, global, common, css, special });
       });
-    }
+    },
+    toMarkdown = callback => {
+        exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => callback( result ));
+    };
 
     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) ) {
         let url = "";
@@ -89,7 +92,7 @@ function action( type, title, desc, content ) {
                         const notify2 = new Notify().Render({ content: "图片转换中吗，请稍等...", state: "loading" });
                         const md = "simpread-" + title + ".md";
                         storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
-                        exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                        toMarkdown( result => {
                             offline.Markdown( result, str => {
                                 notify2.complete();
                                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: str, name: md }), result => {
@@ -164,13 +167,13 @@ function action( type, title, desc, content ) {
                 break;
             case "bear":
                 storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
-                exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                toMarkdown( result => {
                     location.href = `bear://x-callback-url/create?title=${title}&text=${encodeURIComponent(result)}&tags=simpread`;
                 });
                 break;
             case "ulysses":
                 storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
-                exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                toMarkdown( result => {
                     location.href = `ulysses://x-callback-url/new-sheet?text=${encodeURIComponent(result)}`;
                 });
                 break;
@@ -222,7 +225,7 @@ function action( type, title, desc, content ) {
             switch( type ) {
                 case "dropbox":
                     storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    toMarkdown( result => {
                         dropbox.Write( `${ title }.md`, result, ( _, result, error ) => exp.svcCbWrapper( result, error, dropbox.name, type, new Notify() ), "md/" );
                     });
                     break;
@@ -281,12 +284,12 @@ function action( type, title, desc, content ) {
                     break;
                 case "gdrive":
                     storage.pr.current.site.avatar[0].name != "" && ( content = util.MULTI2ENML( content ) );
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    toMarkdown( result => {
                         gdrive.Add( "file",( result, error ) => exp.svcCbWrapper( result, error, gdrive.name, type, new Notify() ), gdrive.CreateFile( `${title}.md`, result ));
                     });
                     break;
                 case "jianguo":
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( markdown => {
+                    toMarkdown( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
                         jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${jianguo.root}/${jianguo.folder}/${title}.md`, markdown, result => {
                             let error = undefined;
@@ -298,12 +301,12 @@ function action( type, title, desc, content ) {
                     });
                     break;
                 case "yuque":
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    toMarkdown( result => {
                         yuque.Add( title, result,( result, error ) => exp.svcCbWrapper( result, error, yuque.name, type, new Notify() ));
                     });
                     break;
                 case "notion":
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    toMarkdown( result => {
                         corbLoader( "load", () => {
                             notion.access_token = storage.secret.notion.access_token;
                             notion.folder_id    = storage.secret.notion.folder_id;
@@ -314,7 +317,7 @@ function action( type, title, desc, content ) {
                     });
                     break;
                 case "youdao":
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( result => {
+                    toMarkdown( result => {
                         corbLoader( "load", () => {
                             youdao.access_token = storage.secret.youdao.access_token;
                             youdao.folder_id    = storage.secret.youdao.folder_id;
@@ -367,7 +370,7 @@ function action( type, title, desc, content ) {
                         });
                     });
                 } else {
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( markdown => {
+                    toMarkdown( markdown => {
                         callback( markdown );
                     });
                 }
