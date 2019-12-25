@@ -137,6 +137,7 @@ function action( type, title, desc, content ) {
                             new Notify().Render( 0, "全部图片已经转换完毕，马上开始下载，请稍等。" );
                             styles( csses => {
                                 const html = offline.HTML( title, desc, $( "sr-rd-content" ).html(), csses );
+                                offline.restoreImg();
                                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
                                     console.log( "Current download result: ", result )
                                 });
@@ -366,6 +367,7 @@ function action( type, title, desc, content ) {
                         new Notify().Render( 0, "全部图片已经转换完毕，开始发送，请稍等。" );
                         styles( csses => {
                             const html = offline.HTML( title, desc, $( "sr-rd-content" ).html(), csses );
+                            offline.restoreImg();
                             callback( html );
                         });
                     });
