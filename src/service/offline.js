@@ -150,7 +150,7 @@ function serialConvert( url ) {
 function setBase64( url, uri ) {
     const img = images.get( url );
     if ( type == "html" ) {
-        img.src  = uri;
+        $(img).attr( "src", uri ).attr( "sr-org-src", url );
     } else {
         const str = img.replace( url, uri )
         markdown = markdown.replace( img, str );
@@ -181,9 +181,20 @@ function toBase64( url, callback ) {
         });
 }
 
+/**
+ * Restore base64 to url
+ */
+function restoreImg() {
+    $( "sr-rd-content" ).find( "img" ).map( ( idx, img ) => {
+        const src = $(img).attr( "sr-org-src" );
+        $(img).attr( "src", src ).removeAttr( "sr-org-src" );
+    });
+}
+
 export {
     HTML,
     Markdown,
     getImages,
     toBase64,
+    restoreImg,
 }
