@@ -28,6 +28,16 @@ function action( type, title, desc, content ) {
 
     console.log( "output: Action is ", type )
 
+    const styles = callback => {
+        ss.SpecialCSS( storage.pr.mathjax, special => {
+            const theme  = th.Get( storage.read.theme ),
+                  global = th.Get( "global" ),
+                  common = th.Get( "common" ),
+                  css    = ss.GetCustomCSS();
+            callback({ theme, global, common, css, special });
+      });
+    }
+
     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) ) {
         let url = "";
         switch ( type.split("_")[1] ) {
@@ -122,12 +132,8 @@ function action( type, title, desc, content ) {
                         offline.getImages( () => {
                             notify2.complete();
                             new Notify().Render( 0, "全部图片已经转换完毕，马上开始下载，请稍等。" );
-                            ss.SpecialCSS( storage.pr.mathjax, special => {
-                                const theme  = th.Get( storage.read.theme ),
-                                      global = th.Get( "global" ),
-                                      common = th.Get( "common" ),
-                                      css    = ss.GetCustomCSS(),
-                                      html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
+                            styles( csses => {
+                                const html = offline.HTML( title, desc, $( "sr-rd-content" ).html(), csses );
                                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.download, { data: html, name: `simpread-${title}.html` }), result => {
                                     console.log( "Current download result: ", result )
                                 });
@@ -137,12 +143,8 @@ function action( type, title, desc, content ) {
                 });
                 break;
             case "html":
-                ss.SpecialCSS( storage.pr.mathjax, special => {
-                    const theme  = th.Get( storage.read.theme ),
-                        global = th.Get( "global" ),
-                        common = th.Get( "common" ),
-                        css    = ss.GetCustomCSS(),
-                        html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
+                styles( csses => {
+                    const html = offline.HTML( title, desc, content, csses );
                     exp.Download( "data:text/plain;charset=utf-8," + encodeURIComponent(html), `simpread-${title}.html` );
                 });
                 break;
@@ -323,12 +325,8 @@ function action( type, title, desc, content ) {
                     });
                     break;
                 case "weizhi":
-                    ss.SpecialCSS( storage.pr.mathjax, special => {
-                        const theme  = th.Get( storage.read.theme ),
-                              global = th.Get( "global" ),
-                              common = th.Get( "common" ),
-                              css    = ss.GetCustomCSS(),
-                              html   = offline.HTML( title, desc, content, { global, common, theme, css, special } );
+                    styles( csses => {
+                        const html          = offline.HTML( title, desc, content, csses );
                         weizhi.username     = storage.secret.weizhi.username;
                         weizhi.access_token = storage.secret.weizhi.access_token;
                         weizhi.Add( window.location.href, title, html, ( result, error ) => {
@@ -354,12 +352,8 @@ function action( type, title, desc, content ) {
         const id      = type.replace( "webdav_", "" ),
               covernt = ( type, callback ) => {
                 if ( type == "html" ) {
-                    ss.SpecialCSS( storage.pr.mathjax, special => {
-                        const theme  = th.Get( storage.read.theme ),
-                            global = th.Get( "global" ),
-                            common = th.Get( "common" ),
-                            css    = ss.GetCustomCSS(),
-                            html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
+                    styles( csses => {
+                        const html = offline.HTML( title, desc, content, csses );
                         callback( html );
                     });
                 } else if ( type == "ofhtml" ) {
@@ -367,12 +361,8 @@ function action( type, title, desc, content ) {
                     offline.getImages( () => {
                         notify2.complete();
                         new Notify().Render( 0, "全部图片已经转换完毕，开始发送，请稍等。" );
-                        ss.SpecialCSS( storage.pr.mathjax, special => {
-                            const theme  = th.Get( storage.read.theme ),
-                                  global = th.Get( "global" ),
-                                  common = th.Get( "common" ),
-                                  css    = ss.GetCustomCSS(),
-                                  html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
+                        styles( csses => {
+                            const html = offline.HTML( title, desc, $( "sr-rd-content" ).html(), csses );
                             callback( html );
                         });
                     });
