@@ -9,8 +9,8 @@ const keyboard = {
             "type" : "markdown",
             "desc" : "导出为 Markdown",
         },
-        ofm: {
-            "kbd"  : "ofm",
+        om: {
+            "kbd"  : "om",
             "type" : "offlinemarkdown",
             "desc" : "导出为 离线 Markdown",
         },
@@ -34,8 +34,8 @@ const keyboard = {
             "type" : "html",
             "desc" : "导出为 HTML",
         },
-        ofh: {
-            "kbd"  : "ofh",
+        oh: {
+            "kbd"  : "oh",
             "type" : "offlinehtml",
             "desc" : "导出为 离线 HTML",
         },
