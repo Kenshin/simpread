@@ -351,15 +351,47 @@ function action( type, title, desc, content ) {
     } else if ( type.startsWith( "fullscreen" ) ) {
         document.documentElement.requestFullscreen();
     } else if ( type.startsWith( "webdav_" ) ) {
-        const id = type.replace( "webdav_", "" );
+        const id      = type.replace( "webdav_", "" ),
+              covernt = ( type, callback ) => {
+                if ( type == "html" ) {
+                    ss.SpecialCSS( storage.pr.mathjax, special => {
+                        const theme  = th.Get( storage.read.theme ),
+                            global = th.Get( "global" ),
+                            common = th.Get( "common" ),
+                            css    = ss.GetCustomCSS(),
+                            html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
+                        callback( html );
+                    });
+                } else if ( type == "ofhtml" ) {
+                    const notify2 = new Notify().Render({ content: "图片转换中吗，请稍等...", state: "loading" });
+                    offline.getImages( () => {
+                        notify2.complete();
+                        new Notify().Render( 0, "全部图片已经转换完毕，开始发送，请稍等。" );
+                        ss.SpecialCSS( storage.pr.mathjax, special => {
+                            const theme  = th.Get( storage.read.theme ),
+                                  global = th.Get( "global" ),
+                                  common = th.Get( "common" ),
+                                  css    = ss.GetCustomCSS(),
+                                  html   = offline.HTML( title, desc, $( "sr-rd-content" ).html(), { global, common, theme, css, special } );
+                            callback( html );
+                        });
+                    });
+                } else {
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( markdown => {
+                        callback( markdown );
+                    });
+                }
+              };
         storage.Safe( () => {
             storage.secret.webdav.forEach( item => {
                 item = JSON.parse( item );
+                item.format == undefined && ( item.format = "md" );
                 if ( item.name == id ) {
-                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( markdown => {
-                        title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
+                    covernt( item.format, str => {
+                        title        = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
+                        const suffix = item.format.endsWith( "html" ) ? ".html" : ".md";
                         new Notify().Render( `开始保存到 ${ item.name}，请稍等...` );
-                        exp.webdav.Add( item.url, item.user, item.password, `${title}.md`, markdown, result => {
+                        exp.webdav.Add( item.url, item.user, item.password, `${title}${suffix}`, str, result => {
                             let error = undefined;
                             if ( result && ( result.status != 201 && result.status != 204 )) {
                                 error = `导出到 ${item.name} 失败，请稍后再试。`;
