@@ -9,6 +9,11 @@ const keyboard = {
             "type" : "markdown",
             "desc" : "导出为 Markdown",
         },
+        ofm: {
+            "kbd"  : "ofm",
+            "type" : "offlinemarkdown",
+            "desc" : "导出为 离线 Markdown",
+        },
         pg: {
             "kbd"  : "pg",
             "type" : "png",
