@@ -284,7 +284,7 @@ function action( type, title, desc, content ) {
                     });
                     break;
                 case "jianguo":
-                    exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
                         jianguo.Add( storage.secret.jianguo.username, storage.secret.jianguo.password, `${jianguo.root}/${jianguo.folder}/${title}.md`, markdown, result => {
                             let error = undefined;
@@ -356,7 +356,7 @@ function action( type, title, desc, content ) {
             storage.secret.webdav.forEach( item => {
                 item = JSON.parse( item );
                 if ( item.name == id ) {
-                    exp.MDWrapper( util.ClearMD( content ) , undefined, new Notify() ).done( markdown => {
+                    exp.MDWrapper( util.ClearMD( content ), undefined, new Notify() ).done( markdown => {
                         title = title.replace( /[|@!#$%^&*()<>/,.+=\\]/ig, "-" );
                         new Notify().Render( `开始保存到 ${ item.name}，请稍等...` );
                         exp.webdav.Add( item.url, item.user, item.password, `${title}.md`, markdown, result => {
