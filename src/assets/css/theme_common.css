@@ -82,6 +82,11 @@ sr-rd-content img {
     box-shadow: 1px 1px 3px #d4d4d4;
 }
 
+sr-rd-content figcaption {
+    text-align: center;
+    font-size: 14px;
+}
+
 sr-rd-content sr-blockquote {
     display: block;
     position: relative;
