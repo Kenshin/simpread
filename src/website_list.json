@@ -203,7 +203,7 @@
         "url"     : "https://sspai.com/post/",
         "title"   : "<h1 class='title'>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[$('.content')]]]",
+        "include" : "[[[$('.articleWidth-content').find('.content')]]]",
         "exclude" : [
             "<img id='s1' >",
             "<hr>",
