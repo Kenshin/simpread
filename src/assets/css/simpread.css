@@ -216,6 +216,9 @@ sr-rd-footer a:active {
     border-bottom: 1px dotted!important;
 }
 
+/**
+ * Special blocks
+ */
 .simpread-blocks {
     text-decoration: none!important;
 }
