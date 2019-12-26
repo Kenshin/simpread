@@ -216,6 +216,27 @@ sr-rd-footer a:active {
     border-bottom: 1px dotted!important;
 }
 
+.simpread-blocks {
+    text-decoration: none!important;
+}
+
+.simpread-blocks * {
+    margin: 0;
+}
+
+.simpread-blocks a {
+    padding: 0;
+    text-decoration: none!important;
+}
+
+.simpread-blocks img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
 /**
  * Controlbar: focus mode and read mode
  */
