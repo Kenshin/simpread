@@ -34,13 +34,20 @@ const action = {
     temp_site      : "temp_site",
     // corb
     CORB           : "corb",
+    AXIOS          : "axios",
     // webdav
     jianguo        : "jianguo",
     WebDAV         : "webdav",
     // event
     turn_tab       : "turn_tab",
     welcome_close  : "welcome_close",
-    "controlbar"   : "simpread-plugin_controlbar",
+    controlbar     : "simpread-plugin_controlbar",
+    // offline
+    download       : "download",
+    base64         : "base64",
+    permission     : "permission",
+    // snapshot
+    snapshot       : "snapshot",
 };
 
 /**

@@ -279,7 +279,8 @@ sr-rd-crlbar.controlbar:hover {
 }
 
 
-simpread-highlight {
+simpread-highlight,
+sr-snapshot-ctlbar {
     position: fixed;
 
     top: 0;
@@ -297,6 +298,7 @@ simpread-highlight {
     background-color: rgba(50, 50, 50, .9);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
 
+    box-sizing: border-box;
     z-index: 2147483640;
 }
 
@@ -497,7 +499,7 @@ kbd-mapping {
     flex-flow: row;
 
     width: 500px;
-    height: 590px;
+    height: 625px;
 
     background-color: #fff;
 
@@ -644,7 +646,7 @@ sharecard-content {
     max-height: 500px;
 
     font-size: 20px;
-    text-align: left;
+    text-align: justify;
 
     background-color: rgb(33, 150, 243);
 
@@ -705,4 +707,27 @@ sharecard-control {
 
     height: 80px;
     background-color: #fff;
+}
+
+/**
+ * Snapshot
+ */
+
+simpread-snapshot {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    cursor: move;
+    z-index: 2147483645;
+}
+
+sr-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .1);
 }

@@ -163,6 +163,7 @@ const name = "simpread",
             "temp"       : 0,
             "yuque"      : 0,
             "jianguo"    : 0,
+            "weizhi"     : 0,
         }
     },
     user   = {
@@ -208,7 +209,7 @@ let current  = {},
     },
     plugins  = {},
     secret   = {
-        version   : "2019-06-08",
+        version   : "2019-12-20",
         "dropbox" : {
             "access_token": ""
         },
@@ -241,7 +242,20 @@ let current  = {},
             access_token  : "",
             repos_id: "",
         },
+        "notion"  : {
+            access_token  : "",
+            folder_id: "",
+        },
+        "youdao"  : {
+            access_token  : "",
+            folder_id     : "",
+        },
         "jianguo"  : {
+            username      : "",
+            password      : "",
+            access_token  : "",
+        },
+        "weizhi"  : {
             username      : "",
             password      : "",
             access_token  : "",

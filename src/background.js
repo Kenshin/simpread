@@ -8,7 +8,8 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 import * as WebDAV from 'webdav';
-
+import * as permission
+                   from 'permission';
 import PureRead    from 'puread';
 
 // global update site tab id
@@ -141,6 +142,75 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         }
     }
     //return true;
+});
+
+/**
+ * Listen runtime message, include: `download`, `base64` && `permission`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.download ) {
+        const { data, name } = request.value;
+        const blob = new Blob([data], {
+            type: "html/plain;charset=utf-8"
+        });
+        const url = URL.createObjectURL(blob);
+        browser.downloads.download({
+            url     : url,
+            filename: name.replace( /[|]/ig, "" ),
+        }, downloadId => {
+            sendResponse({ done: downloadId });
+        });
+    } else if ( request.type == msg.MESSAGE_ACTION.base64 ) {
+        const { url } = request.value;
+        fetch( url )
+            .then( response => response.blob() )
+            .then( blob     => new Promise(( resolve, reject ) => {
+                const reader = new FileReader()
+                reader.onloadend = event => {
+                    sendResponse({ done: { url, uri: event.target.result }});
+                };
+                reader.onerror = error => {
+                    sendResponse({ fail: { error, url } });
+                };
+                reader.readAsDataURL( blob );
+            }))
+            .catch( error => {
+                sendResponse({ fail: { error, url } });
+            });
+    } else if ( request.type == msg.MESSAGE_ACTION.permission ) {
+        permission.Get({ permissions: [ "downloads" ] }, result => {
+            sendResponse({ done: result });
+        });
+    }
+    return true;
+});
+
+/**
+ * Listen runtime message, include: `snapshot`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.snapshot ) {
+        const { left, top, width, height } = request.value;
+        chrome.tabs.captureVisibleTab( { format: "png" }, base64 => {
+            const image  = new Image();
+            image.src    = base64;
+            image.onload = () => {
+                const canvas  = document.createElement( "canvas" ),
+                      ctx     = canvas.getContext( "2d" ),
+                      dpi     = window.devicePixelRatio,
+                      sx      = left   * dpi,
+                      sy      = top    * dpi,
+                      sWidth  = width  * dpi,
+                      sHeight = height * dpi;
+                canvas.width  = sWidth;
+                canvas.height = sHeight;
+                ctx.drawImage( image, sx, sy, sWidth, height * dpi, 0, 0, sWidth, sHeight );
+                const uri     = canvas.toDataURL( "image/png" );
+                sendResponse({ done: uri });
+          };
+        });
+    }
+    return true;
 });
 
 /**
