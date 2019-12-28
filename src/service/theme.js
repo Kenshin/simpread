@@ -73,6 +73,7 @@ class Theme {
     constructor() {
         require( `../assets/css/theme_common.css` );
         names.forEach( name => require( `../assets/css/theme_${name}.css` ) );
+        require( `../assets/css/theme_mobile.css` );
         findThemeStyle( ( name, content ) => themes[name] = content );
     }
 }
@@ -92,8 +93,10 @@ function findThemeStyle( callback ) {
             callback( name, css, $target );
         } else if ( css.search( ".simpread-font" ) > -1 ) {
             themes["global"] = css;
-        } else if ( css.search( ".simpread-theme-root" ) > -1 ) {
+        } else if ( css.search( "(pointer: coarse)" ) == -1 && css.search( ".simpread-theme-root" ) > -1 ) {
             themes["common"] = css;
+        } else if ( css.search( "(pointer: coarse)" ) > -1 && css.search( "sr-read" ) > -1 ) {
+            themes["mobile"] = css;
         }
     });
 }
