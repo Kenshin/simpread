@@ -1214,6 +1214,16 @@
             "[['<p>（完）</p>']]"
         ]
     },{
+        "name"    : "ruanyf.yuque.com",
+        "url"     : "[[/https://www.yuque.com/ruanyf/weekly/issue-\\d+/]]",
+        "title"   : "<h1 id='page-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[@id='content']/div[2]/div[1]/div[1]`]]",
+        "exclude" : [
+            ""
+        ],
+        "css": "span svg { display: none; }"
+    },{
         "name"    : "v2ex.com",
         "url"     : "https://www.v2ex.com/t/",
         "title"   : "[[{$('.header h1').text()}]]",
