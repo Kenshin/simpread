@@ -1,5 +1,5 @@
 /**
- * SimpRead
+ * SimpRead: Read mode
  */
 
 .simpread-font {
@@ -17,46 +17,9 @@
 }
 
 /**
- *  Focus: Background( root ) style
- */
-.simpread-focus-root {
-    display: block;
-    position: fixed;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    background-color: rgba( 235, 235, 235, 0.9 );
-    z-index: 2147483645;
-
-    opacity: 0;
-    transition : opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-}
-
-.simpread-focus-highlight {
-    position: relative;
-
-    box-shadow: 0 0 0 20px #fff;
-    background-color: #fff;
-
-    overflow: visible;
-    z-index: 2147483646;
-}
-
-.sr-controlbar-bg sr-rd-crlbar {
-    z-index: 2147483647;
-}
-
-.sr-controlbar-bg sr-rd-crlbar fab {
-    z-index: 2147483647;
-}
-
-/**
  *  Read: background( root ) style
  */
-.simpread-read-root {
+ .simpread-read-root {
     display: -webkit-flex;
     justify-content:center;
     align-items:center;
@@ -238,6 +201,43 @@ sr-rd-footer a:active {
     border: 0;
     background: transparent;
     box-shadow: none;
+}
+
+/**
+ *  Focus: Background( root ) style
+ */
+.simpread-focus-root {
+    display: block;
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba( 235, 235, 235, 0.9 );
+    z-index: 2147483645;
+
+    opacity: 0;
+    transition : opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.simpread-focus-highlight {
+    position: relative;
+
+    box-shadow: 0 0 0 20px #fff;
+    background-color: #fff;
+
+    overflow: visible;
+    z-index: 2147483646;
+}
+
+.sr-controlbar-bg sr-rd-crlbar {
+    z-index: 2147483647;
+}
+
+.sr-controlbar-bg sr-rd-crlbar fab {
+    z-index: 2147483647;
 }
 
 /**
