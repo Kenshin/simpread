@@ -77,6 +77,9 @@ sr-rd-content a:hover {
 sr-rd-content img {
     margin: 10px;
     padding: 5px;
+
+    max-width: 100%;
+
     background: #fff;
     border: 1px solid #bbb;
     box-shadow: 1px 1px 3px #d4d4d4;
