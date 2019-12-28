@@ -33,8 +33,9 @@ function action( type, title, desc, content ) {
             const theme  = th.Get( storage.read.theme ),
                   global = th.Get( "global" ),
                   common = th.Get( "common" ),
+                  mobile = th.Get( "mobile" ),
                   css    = ss.GetCustomCSS();
-            callback({ theme, global, common, css, special });
+            callback({ theme, global, common, css, mobile, special });
       });
     },
     toMarkdown = callback => {
