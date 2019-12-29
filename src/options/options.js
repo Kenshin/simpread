@@ -314,6 +314,7 @@ function navRender() {
     };
     const button = <Button waves="md-waves-effect md-waves-circle" hoverColor="transparent" icon={ ss.IconPath( "sidebar_icon" ) } onClick={ ()=>navClick() } />;
     ReactDOM.render( button, $( ".header .nav" )[0] );
+    ReactDOM.render( button, $( ".topnav" )[0] );
 }
 
 /**
