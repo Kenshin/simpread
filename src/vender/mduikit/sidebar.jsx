@@ -69,10 +69,6 @@ const cssinjs = () => {
             display: 'block',
             position: 'relative',
 
-            marginTop: '8px',
-            paddingRight: paddingLeft,
-            paddingLeft,
-
             width: '100%',
             height: '100%',
 
@@ -84,8 +80,6 @@ const cssinjs = () => {
             alignItems: 'center',
 
             marginTop: '8px',
-            paddingLeft,
-            paddingRight: paddingLeft,
 
             width: '100%',
             height,
@@ -148,12 +142,18 @@ const cssinjs = () => {
             alignItems: 'center',
 
             margin: 0,
-            padding: 0,
+            padding: '12px 48px 12px 24px',
 
             width: '100%',
             minHeight: itemHeight,
 
             color,
+            fontSize: '1.4rem',
+        },
+
+        large_link: {
+            paddingLeft: 0,
+            fontSize: '2.2rem',
         },
 
         icon: {
@@ -191,6 +191,26 @@ const cssinjs = () => {
             zIndex: 2000,
         },
 
+        font_icon: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+
+            marginRight: '12px',
+
+            fontSize: '18px',
+            color: '#9E9E9E',
+
+            order: -1,
+            display: 'block',
+
+            width: '24px',
+            height: '24px',
+
+            fontSize: '14px',
+            border: 'none',
+        },
+
     };
 
     return styles;
@@ -200,29 +220,39 @@ const cssinjs = () => {
  * React stateless component
  * 
  * @param {object} react props, include:
+ *   - large        : [PropTypes.boolean]
  *   - name         : [PropTypes.string] <a> text
  *   - value        : [PropTypes.string] <a> value
  *   - route        : [PropTypes.string] <a> href
  *   - icon         : [PropTypes.string] icon
+ *   - fontIcon     : [PropTypes.string] icon
  *   - style        : [PropTypes.object] include: icon link text
  *   - tooltip      : [PropTypes.string] tooltip
  *   - waves        : [PropTypes.string] waves
  *   - onClick      : [PropTypes.func]   event handler
  */
 const Item = ( props ) => {
-    if ( props.icon ) {
-        props.style.icon.display = "block";
-        props.style.icon.backgroundImage = `url(${props.icon })`;
+    let icon_style = {}, link_style = { ...props.style.link };
+    if ( props.fontIcon ) {
+        icon_style         = { ...props.style.font_icon };
+        icon_style.display = "flex";
+    } else if ( props.icon ) {
+        icon_style         = { ...props.style.icon };
+        icon_style.display = "block";
+        icon_style.backgroundImage = `url(${props.icon })`;
     } else {
-        props.style.icon.display = "none";
+        icon_style.display = "none";
+    }
+    if ( props.large ) {
+        link_style = { ...props.style.link, ...props.style.large_link };
     }
     const tooltip = props.tooltip;
     return (
-        <a style={ props.style.link } className={  props.route && props.waves }
+        <a style={ link_style } className={  props.route && props.waves }
            href={ props.route } value={ props.value }
            data-tooltip={ tooltip.text ? tooltip.text : props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
            onClick={ props.route && props.onClick && ( evt=>props.onClick(evt)) } >
-            <icon style={ props.style.icon }></icon>
+            <icon style={ icon_style } dangerouslySetInnerHTML={{__html: props.fontIcon || "" }} ></icon>
             <text style={ props.style.text }>{ props.name }</text>
         </a>
     );
@@ -358,7 +388,8 @@ class Sidebar extends React.Component {
                     <li style={ style.li } onClick={ item.items && ( evt=>this.liOnClick(evt) ) } >
                         <Item style={ style }
                             waves={ this.props.waves } tooltip={ this.props.tooltip }
-                            icon={ item.icon } name={ item.name } value={ item.value } route={ item.route }
+                            icon={ item.icon } fontIcon={ item.fontIcon || "" }
+                            name={ item.name } value={ item.value } route={ item.route }
                             onClick={ !item.items && ( evt=>this.onClick(evt) ) } />
                         { item.items && item.items.length > 0 &&
                                 <sub-menu style={ style.sub_menu }>
@@ -377,7 +408,7 @@ class Sidebar extends React.Component {
                 <side style={ style.root }>
                     { header &&
                     <header style={ style.header }>
-                        <Item style={ style } icon={ icon } name={ header }
+                        <Item style={ style } icon={ icon } name={ header } large={ true }
                               waves={ this.props.waves } tooltip={ this.props.tooltip }
                               onClick={ evt=>this.onClick(evt) }/>
                     </header>
