@@ -283,6 +283,7 @@ class Sidebar extends React.Component {
         footerStyle: undefined,
         maskStyle  : undefined,
         waves      : "",
+        autoClose  : true,
         tooltip    : {},
     };
 
@@ -299,6 +300,7 @@ class Sidebar extends React.Component {
         contentStyle: React.PropTypes.object,
         footerStyle: React.PropTypes.object,
         maskStyle  : React.PropTypes.object,
+        autoClose  : React.PropTypes.bool,
         waves      : React.PropTypes.string,
         tooltip    : React.PropTypes.object,
         onClick    : React.PropTypes.func,
@@ -312,7 +314,8 @@ class Sidebar extends React.Component {
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
         const [ name, value, href ] = [ $target.text(), $target.attr( "value" ), $target.attr( "href" ) ];
         this.props.onClick && this.props.onClick( $target, { name, value, href } );
-        this.maskOnClick();
+        console.log( "asdaadf" )
+        this.props.autoClose && this.maskOnClick();
     }
 
     liOnClick( event ) {
