@@ -211,6 +211,26 @@ const cssinjs = () => {
             border: 'none',
         },
 
+        close_icon: {
+            position: 'absolute',
+            top: '0',
+            left: '-256px',
+
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+
+            width: '48px',
+            height: '48px',
+
+            color: '#9E9E9E',
+            backgroundColor: '#fff',
+
+            fontSize: '2rem',
+            border: 'none',
+            cursor: 'pointer',
+        },
+
     };
 
     return styles;
@@ -284,6 +304,7 @@ class Sidebar extends React.Component {
         maskStyle  : undefined,
         waves      : "",
         autoClose  : true,
+        showClose  : false,
         tooltip    : {},
     };
 
@@ -301,6 +322,7 @@ class Sidebar extends React.Component {
         footerStyle: React.PropTypes.object,
         maskStyle  : React.PropTypes.object,
         autoClose  : React.PropTypes.bool,
+        showClose  : React.PropTypes.bool,
         waves      : React.PropTypes.string,
         tooltip    : React.PropTypes.object,
         onClick    : React.PropTypes.func,
@@ -314,7 +336,6 @@ class Sidebar extends React.Component {
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
         const [ name, value, href ] = [ $target.text(), $target.attr( "value" ), $target.attr( "href" ) ];
         this.props.onClick && this.props.onClick( $target, { name, value, href } );
-        console.log( "asdaadf" )
         this.props.autoClose && this.maskOnClick();
     }
 
@@ -360,6 +381,7 @@ class Sidebar extends React.Component {
             complete: () => {
                 $( "sidebar" ).css( "left", 0 - Number.parseInt( $( "side" ).width() ));
                 $( "mask" ).css( "display", "none" );
+                $( "side close" ).velocity({ left: 0 - Number.parseInt( $( "side" ).width() ) });
                 this.props.onExit && this.props.onExit();
             }
         });
@@ -369,7 +391,7 @@ class Sidebar extends React.Component {
         let menu    = [];
         const style = { ...this.style },
               { items, width,
-                header, icon, footer,
+                header, icon, footer, showClose,
                 color, bgColor,
                 headerStyle, contentStyle, footerStyle, maskStyle } = this.props;
 
@@ -424,7 +446,9 @@ class Sidebar extends React.Component {
                         <Item style={ style } name={ footer }
                               waves={ this.props.waves } tooltip={ this.props.tooltip }
                               onClick={ evt=>this.onClick(evt) }/>
-                    </footer>
+                    </footer> }
+                    {
+                        showClose && <close style={ style.close_icon } onClick={ ()=>this.maskOnClick() }>✕</close>
                     }
                 </side>
                 <mask style={ style.mask } onClick={ evt=>this.maskOnClick(evt) }></mask>
@@ -444,6 +468,7 @@ function Open() {
             $( "mask" ).css( "opacity", complete ).css( "display", "block" );
         }
     });
+    $( "side close" ).velocity( { left: 256 });
 }
 
 export {
