@@ -448,7 +448,7 @@ class Sidebar extends React.Component {
                               onClick={ evt=>this.onClick(evt) }/>
                     </footer> }
                     {
-                        showClose && <close style={ style.close_icon } onClick={ ()=>this.maskOnClick() }>✕</close>
+                        showClose && <close className={ this.props.waves } style={ style.close_icon } onClick={ ()=>this.maskOnClick() }>✕</close>
                     }
                 </side>
                 <mask style={ style.mask } onClick={ evt=>this.maskOnClick(evt) }></mask>
