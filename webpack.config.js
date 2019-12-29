@@ -306,6 +306,7 @@ const webpack = require( 'webpack' ),
           wavess     : __dirname + '/src/vender/waves/waves.js',
           notify     : __dirname + '/src/vender/notify/notify.js',
 
+          mduikit_css: __dirname + '/src/vender/mduikit/mduikit.css',
           textfield  : __dirname + '/src/vender/mduikit/textfield.jsx',
           fab        : __dirname + '/src/vender/mduikit/fab.jsx',
           fap        : __dirname + '/src/vender/mduikit/fap.jsx',
