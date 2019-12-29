@@ -2,6 +2,7 @@ console.log( "==== simpread options page load ====" )
 
 import '../assets/css/options_page.css';
 import '../assets/css/setting.css';
+import 'mduikit_css';
 import 'notify_css';
 import 'intro_css';
 
