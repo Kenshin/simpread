@@ -25,12 +25,12 @@ sidebar side content li.active {
     font-weight: bold;
 }
 
-toc {
+sidebar side toc {
     position: relative;
     width: 100%;
 }
 
-toc i {
+sidebar side toc i {
     position: absolute;
     left: 35px;
     top: 0;
@@ -42,7 +42,7 @@ toc i {
     background: rgba(189,189,189,.4);
 }
 
-toc outline {
+sidebar side toc outline {
     position: relative;
     display: -webkit-box!important;
     -webkit-line-clamp: 1;
@@ -59,25 +59,21 @@ toc outline {
     cursor: pointer;
 }
 
-toc outline:hover {
+sidebar side toc outline:hover {
     background-color: rgba(0,0,0,.04)!important;
 }
 
-.toc-level-h1 {
+sidebar side .toc-level-h1 {
     padding-left: 60px;
 }
-.toc-level-h2 {
+sidebar side .toc-level-h2 {
     padding-left: 70px;
 }
-.toc-level-h3 {
+sidebar side .toc-level-h3 {
     padding-left: 75px;
 }
-.toc-level-h4 {
+sidebar side .toc-level-h4 {
     padding-left: 80px;
-}
-
-.toc-outline-active {
-    border-left: 2px solid rgb(244, 67, 54);
 }
 
 /**
