@@ -20,3 +20,73 @@ sidebar side content a {
 sidebar side content a:hover {
     background-color: #D6D6D6;
 }
+
+/**
+ * Source from https://jonsuh.com/hamburgers/
+ */
+.hamburger {
+    font: inherit;
+    display: inline-block;
+    overflow: visible;
+    margin: 0;
+    padding: 15px;
+    cursor: pointer;
+    transition-timing-function: linear;
+    transition-duration: .15s;
+    transition-property: opacity,filter;
+    text-transform: none;
+    color: inherit;
+    border: 0;
+    background-color: transparent;
+    transform: scale(.5);
+}
+
+.hamburger-box {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.hamburger-inner {
+    top: 50%;
+    display: block;
+    margin-top: -2px;
+}
+
+.hamburger-inner, .hamburger-inner:after, .hamburger-inner:before {
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    transition-timing-function: ease;
+    transition-duration: .15s;
+    transition-property: transform;
+    border-radius: 4px;
+    background-color: #9E9E9E;
+}
+
+.hamburger-inner:after, .hamburger-inner:before {
+    content: "";
+    display: block;
+}
+
+.hamburger-inner:before {
+    top: -10px;
+}
+
+.hamburger-inner:after {
+    bottom: -10px;
+}
+
+.hamburger:hover .hamburger-inner, .hamburger:hover .hamburger-inner:after, .hamburger:hover .hamburger-inner:before {
+    background-color: #9E9E9E;
+    transform: scale(.7);
+}
+
+.hamburger--arrow:hover .hamburger-inner:before {
+    transform: translate3d(-8px,0,0) rotate(-45deg) scaleX(.7);
+}
+
+.hamburger--arrow:hover .hamburger-inner:after {
+    transform: translate3d(-8px,0,0) rotate(45deg) scaleX(.7);
+}

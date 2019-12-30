@@ -448,7 +448,14 @@ class Sidebar extends React.Component {
                               onClick={ evt=>this.onClick(evt) }/>
                     </footer> }
                     {
-                        showClose && <close className={ this.props.waves } style={ style.close_icon } onClick={ ()=>this.maskOnClick() }>✕</close>
+                        showClose &&
+                        <close className={ this.props.waves } style={ style.close_icon } onClick={ ()=>this.maskOnClick() }>
+                            <div className="hamburger hamburger--arrow js-hamburger is-active">
+                                <div className="hamburger-box">
+                                    <div className="hamburger-inner"></div>
+                                </div>
+                            </div>
+                        </close>
                     }
                 </side>
                 <mask style={ style.mask } onClick={ evt=>this.maskOnClick(evt) }></mask>
