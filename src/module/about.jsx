@@ -89,7 +89,7 @@ export default class About extends React.Component {
                         </div>
                 </div>
 
-                <div className="label">帮助</div>
+                <div className="label" data-head-level="h1">帮助</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
                         <div><a style={style.href} target="_blank" href="http://sr.ksria.cn/zhifu_m2.png">如果简悦可以解决你在阅读上痛点，可以请我喝杯咖啡</a></div>
@@ -122,7 +122,7 @@ export default class About extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">其它平台的简悦</div>
+                <div className="label" data-head-level="h1">其它平台的简悦</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
                         <div><a style={style.href} target="_blank" href="http://ksria.com/simpread/#downloads">简悦已经上线了 Firefox 版，UserScript 版，JSBox 版，总有一款适合你</a></div>
@@ -131,7 +131,7 @@ export default class About extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">反馈</div>
+                <div className="label" data-head-level="h1">反馈</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
                         <a style={style.href} target="_blank" href="https://github.com/kenshin/simpread/issues">如果有任何问题请提交 issues</a>
@@ -151,7 +151,7 @@ export default class About extends React.Component {
                     </div>
                 </div>
 
-                <div className="label">其它作品</div>
+                <div className="label" data-head-level="h1">其它作品</div>
                 <div style={{ 'margin-top': '10px', 'position': 'relative' }} className="lab">
                     <div className="more">
                         <a style={style.href} target="_blank" href="http://ksria.com/gnvm">GNVM - 使用 Go 语言编写的 Node.js 多版本管理器</a>

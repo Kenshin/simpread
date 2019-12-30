@@ -91,7 +91,7 @@ export default class LabsOpt extends React.Component {
     render() {
         return (
             <div id="labs" style={{ width: '100%' }}>
-                <div className="label">全局</div>
+                <div className="label" data-head-level="h1">全局</div>
                 <div className="lab">
                     <div className="version-tips" data-hits="esc">
                     <Switch width="100%" checked={ this.props.option.esc }
@@ -141,7 +141,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="menu">
-                <div className="label">右键菜单</div>
+                <div className="label" data-head-level="h1">右键菜单</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.option.menu.focus }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
@@ -179,7 +179,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="focusconfig">
-                <div className="label">聚焦模式</div>
+                <div className="label" data-head-level="h1">聚焦模式</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Switch width="100%" checked={ this.props.focus.mask }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
@@ -199,7 +199,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="readconfig">
-                <div className="label">阅读模式</div>
+                <div className="label" data-head-level="h1">阅读模式</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <div className="version-tips" data-hits="progress">
                     <Switch width="100%" checked={ this.props.read.progress }
@@ -277,7 +277,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="pured">
-                <div className="label">词法分析引擎 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>测试版</a></div>
+                <div className="label" data-head-level="h1" data-head-title="词法分析引擎">词法分析引擎 <a target="_blank" href="http://ksria.com/simpread/docs/#/词法分析引擎" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>测试版</a></div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <Switch width="100%" checked={ this.props.read.cleanup == undefined ? true : this.props.read.cleanup }
                                 thumbedColor="#3F51B5" trackedColor="#7986CB"
@@ -320,14 +320,14 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="auth">
-                <div className="label">授权管理</div>
+                <div className="label" data-head-level="h1">授权管理</div>
                 <div style={{ 'padding-top': '10px' }} className="lab">
                     <Auth/>
                 </div>
                 </div>
 
                 <div className="version-tips" data-hits="custom">
-                <div className="label">自定义样式</div>
+                <div className="label" data-head-level="h1">自定义样式</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('custom') }>
                     <div className="more" style={{ 'cursor': 'pointer' }}>
                         <div>增强「中文阅读体验」设置</div>
@@ -338,7 +338,7 @@ export default class LabsOpt extends React.Component {
                 </div>
 
                 <div className="version-tips" data-version="1.1.3" data-hits="notice">
-                <div className="label">消息中心</div>
+                <div className="label" data-head-level="h1">消息中心</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab">
                     <Switch width="100%" checked={ this.props.option.notice }
                         thumbedColor="#3F51B5" trackedColor="#7986CB"
