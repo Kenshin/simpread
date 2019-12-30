@@ -18,7 +18,66 @@ sidebar side content a {
 }
 
 sidebar side content a:hover {
-    background-color: #D6D6D6;
+    background-color: rgba(0,0,0,.04);
+}
+
+sidebar side content li.active {
+    font-weight: bold;
+}
+
+toc {
+    position: relative;
+    width: 100%;
+}
+
+toc i {
+    position: absolute;
+    left: 35px;
+    top: 0;
+    bottom: 0;
+
+    display: block;
+
+    width: 2px;
+    background: rgba(189,189,189,.4);
+}
+
+toc outline {
+    position: relative;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    padding: 12px 0 12px 60px;
+    min-height: 21px;
+
+    line-height: 21px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+toc outline:hover {
+    background-color: rgba(0,0,0,.04)!important;
+}
+
+.toc-level-h1 {
+    padding-left: 60px;
+}
+.toc-level-h2 {
+    padding-left: 70px;
+}
+.toc-level-h3 {
+    padding-left: 75px;
+}
+.toc-level-h4 {
+    padding-left: 80px;
+}
+
+.toc-outline-active {
+    border-left: 2px solid rgb(244, 67, 54);
 }
 
 /**

@@ -73,6 +73,7 @@ const cssinjs = () => {
             height: '100%',
 
             fontSize: '1.3rem',
+            overflowY: 'auto',
         },
 
         footer: {
@@ -476,6 +477,63 @@ function Open() {
         }
     });
     $( "side close" ).velocity( { left: 256 });
+    tocRender();
+    activeRender();
+}
+
+/**
+ * TocRender
+ */
+function tocRender() {
+    if ( $( "sidebar content toc" ).length > 0 ) return;
+    const ids = [], tocs = new Map();
+    $( "tabs" ).find( "tab-label a" ).map( ( idx, item ) => ids.push( $(item).attr("value") ));
+    ids.forEach( ( id, idx ) => {
+        const levels = [];
+        $($( "tabs tab-group" )[idx]).find( "[data-head-level]" ).map( ( idx, item ) => {
+            const $item = $( item ),
+                  id    = "sr-toc-" + idx,
+                  level = $item.attr( "data-head-level" ),
+                  text  = $item.attr( "data-head-title" ) || $item.text();
+            levels.push({ id, level, text });
+            $item.attr( "id", id );
+        });
+        tocs.set( id, levels );
+    });
+    $( "sidebar content" ).find( "a" ).map( ( idx, item ) => {
+        let html     = "";
+        const $item  = $( item ),
+              id     = $item.attr( "value" ),
+              levels = tocs.get( id );
+        levels.forEach( value => {
+            html += `<outline class="md-waves-effect" data-trigger="${ids[idx]}" data-id="${value.id}" class="toc-level-${ value.level }">${value.text}</outline>`;
+        });
+        html.length > 0 && $item.after( `<toc><i></i>${html}</to>` );
+    });
+    $( "sidebar content toc outline" ).on( "click", event => {
+        const id      = $( event.currentTarget ).attr( "data-id" ),
+              trigger = $( event.currentTarget ).attr( "data-trigger" );
+        if ( !location.hash.endsWith( trigger ) ) {
+            $( "tabs" ).find( `tab-label a[value=${trigger}]` )[0].click();
+        }
+        // hack code
+        $( "tabs" ).find( "tab-group[active=true]" ).find( "#" + id )[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' });
+    });
+}
+
+/**
+ * Active Render
+ */
+function activeRender() {
+    $( "sidebar content" ).find( "a" ).map( ( idx, item ) => {
+        const $item  = $( item ),
+              id     = $item.attr( "value" );
+        if ( location.hash.endsWith( id ) ) {
+            $item.parent().addClass( "active" );
+        } else {
+            $item.parent().removeClass( "active" );
+        }
+    });
 }
 
 export {
