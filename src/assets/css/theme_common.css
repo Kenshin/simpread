@@ -65,7 +65,7 @@ sr-rd-content a {
 
 sr-rd-content a, sr-rd-content a:link {
     color: inherit;
-    font-size: initial;
+    font-size: inherit;
     font-weight: inherit;
     border:none;
 }
