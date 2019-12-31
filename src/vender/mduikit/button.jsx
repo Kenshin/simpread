@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Button
  * 
- * @version : 0.0.4
- * @update  : 2018/06/21
+ * @version : 0.0.4.1231
+ * @update  : 2019/12/31
  * @homepage: https://github.com/kenshin/mduikit-ui
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
