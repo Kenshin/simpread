@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Tooltip
  * 
- * @version : 0.0.2
- * @update  : 2018/05/01
+ * @version : 0.0.3
+ * @update  : 2019/12/31
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
