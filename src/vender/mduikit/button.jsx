@@ -218,6 +218,7 @@ export default class Button extends React.Component {
 
     onMouseOut() {
         const [ style, $mask ] = [ { ...this.style }, $( this.refs.mask ) ];
+        this.props.shape == "circle" && ( style.mask.borderRadius = "50%" );
         $mask.css({ ...style.mask });
     }
 
@@ -278,13 +279,15 @@ export default class Button extends React.Component {
         },
         tooltip = this.props.tooltip;
 
+        this.props.shape == "circle" && ( style.mask.borderRadius = "50%" );
+
         return (
-            <a  style={ style.root }     className={ this.props.waves }
+            <a  style={ style.root }
                 href={ this.props.href } target={ this.props.target }
-                type={ this.props.type } mode={ this.props.mode } 
+                type={ this.props.type } mode={ this.props.mode }
                 data-tooltip={ tooltip.text ? tooltip.text : this.props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
                 { ...events }>
-                <button-mask ref="mask" style={ style.mask }>
+                <button-mask ref="mask" style={ style.mask } class={ this.props.waves }>
                     <button-span style={ style.span }>
                         <button-icon style={ style.icon } dangerouslySetInnerHTML={{__html: this.props.fontIcon }} ></button-icon>
                         <button-text style={ style.text }>{ this.props.text }</button-text>
