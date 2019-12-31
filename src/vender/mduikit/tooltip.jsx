@@ -245,17 +245,27 @@ class ToolTip extends React.Component {
  * 
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
  * @param {string} id
+ * @param {boolean} usage mintooltip default
  */
-function Render( root, id ) {
+function Render( root, id, is_mini = true ) {
     setTimeout( () => {
         const $root      = !id ? $(root) : $(id);
-        $root.find( "[data-tooltip]" ).map( ( idx, item )=>{
+        $root.find( "[data-tooltip]" ).map( ( idx, item ) => {
             const $item  = $(item),
                 position = $item.attr( "data-tooltip-position" ),
                 delay    = $item.attr( "data-tooltip-delay" ),
                 text     = $item.attr( "data-tooltip" );
-            text && text != "" && 
+            if ( is_mini ) {
+                $item
+                    .removeAttr( "data-tooltip-position" )
+                    .removeAttr( "data-tooltip-delay" )
+                    .removeAttr( "data-tooltip" )
+                    .attr( "aria-label", text )
+                    .attr( "data-balloon-pos", position || "up" );
+            } else {
+                text && text != "" && 
                 ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $(root), id ) );
+            }
         });
     }, 500 );
 }
