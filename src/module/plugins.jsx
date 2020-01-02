@@ -253,7 +253,7 @@ export default class PluginsOpt extends React.Component {
 
     render() {
         return (
-            <div id="labs" style={{ width: '100%' }}>
+            <div id="labs" style={{ width: '100%', overflow: 'hidden' }}>
                 <div className="label">管理</div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
