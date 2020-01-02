@@ -305,3 +305,26 @@ notify-gp .notify-snackbar {
     bottom: 0;
     right: 0;
 }
+
+@media (pointer: coarse) {
+    notify-gp {
+        top: initial;
+        bottom: 0;
+        left: 0;
+
+        margin: 0 10px 10px 10px;
+    }
+
+    notify-gp notify {
+        width: 100%;
+        max-width: inherit;
+    }
+
+    notify-gp .notify-show {
+        transform-origin: bottom;
+    }
+
+    notify-gp .notify-snackbar {
+        position: initial;
+    }
+}
