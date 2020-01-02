@@ -317,7 +317,7 @@ notify-gp .notify-snackbar {
 
     notify-gp notify {
         width: 100%;
-        max-width: inherit;
+        max-width: 600px;
     }
 
     notify-gp .notify-show {
