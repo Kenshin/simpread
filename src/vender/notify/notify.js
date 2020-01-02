@@ -142,6 +142,7 @@ var Notify = ( function () {
             hidden( this );
         },
         hidden = function( target ) {
+            return;
             target.addClass( "notify-hide" ).slideUp( 500, function() {
                 target.remove();
                 if ($root.children().length === 0 ) $root.css( "z-index", 0 );
@@ -203,6 +204,15 @@ var Notify = ( function () {
                 $content.css( "width", "100%" );
                 $cancel.text( this.cancel ).css( "display", "block" );
                 $root.on( "click", "." + item + " notify-cancel", [ item, this.callback, "cancel" ], callbackHander );
+            }
+
+            if ( this.type != 0 ) {
+                var css = function( element, property ) {
+                    return window.getComputedStyle( element, null ).getPropertyValue( property ).toLowerCase().replace( / /g, "" );
+                }, $span = $( '<span style="display:none;" class="verify-fas fas"></span>' )
+                $( 'body' ).append( $span );
+                !/fontawesome/.test( css( $span[0], 'font-family' ) ) && $icon.remove();
+                $span.remove();
             }
 
             this.mode !== MODE.modal && this.state !== STATE.loading && this.state !== STATE.holdon && ( this.action == "" || !this.callback || typeof this.callback != "function" ) &&
