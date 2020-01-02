@@ -179,19 +179,19 @@ var Notify = ( function () {
 
             switch( this.type ) {
                 case 1:
-                    $icon.html( '<i class="fas fa-check"></i>' ).css({ display: 'flex' });
+                    this.state != STATE.holdon && this.icon == "" && $icon.html( '<i class="fas fa-check"></i>' ).css({ display: 'flex' });
                     $target.addClass( "notify-success" );
                     break;
                 case 2:
-                    $icon.html( '<i class="fas fa-exclamation"></i>' ).css({ display: 'flex' });
+                    this.state != STATE.holdon && this.icon == "" && $icon.html( '<i class="fas fa-exclamation"></i>' ).css({ display: 'flex' });
                     $target.addClass( "notify-warning" );
                     break;
                 case 3:
-                    $icon.html( '<i class="fas fa-bug"></i>' ).css({ display: 'flex' });
+                    this.state != STATE.holdon && this.icon == "" && $icon.html( '<i class="fas fa-bug"></i>' ).css({ display: 'flex' });
                     $target.addClass( "notify-error" );
                     break;
                 case 4:
-                    $icon.html( '<i class="fas fa-info"></i>' ).css({ display: 'flex' });
+                    this.state != STATE.holdon && this.icon == "" && $icon.html( '<i class="fas fa-info"></i>' ).css({ display: 'flex' });
                     $target.addClass( "notify-info" );
                     break;
             }
