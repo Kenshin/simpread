@@ -1174,7 +1174,9 @@
         "desc"    : "",
         "include" : "<div class='article_content'>",
         "exclude" : [
-            "<div class='meau-gotop-box'>"
+            "<div class='meau-gotop-box'>",
+            "<div class='more-toolbox'>",
+            "<div class='person-messagebox'>"
         ],
         "css"     : ".markdown_views pre code{background-color:transparent!important;}"
     },{
