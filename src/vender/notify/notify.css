@@ -99,6 +99,8 @@ notify-gp notify-content a:hover {
 
 notify-gp notify-i {
     display: none;
+    justify-content: center;
+    align-items: center;
 
     margin: 0 10px 0 0;
 
