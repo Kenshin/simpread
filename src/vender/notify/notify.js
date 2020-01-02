@@ -171,8 +171,11 @@ var Notify = ( function () {
                 this.mode == MODE.snackbar && $target.addClass( "notify-snackbar" );
             }
 
-            this.mode !== MODE.modal && this.icon !== "" &&
-                $icon.css({ "background-image": "url(" + this.icon + ")", "display": "block" });
+            if ( this.mode !== MODE.modal && this.icon !== "" ) {
+                if ( this.icon.indexOf( '<i' ) > -1 ) {
+                    $icon.html( this.icon ).css({ display: 'flex' });
+                } else $icon.css({ "background-image": "url(" + this.icon + ")", "display": "block" });
+            }
 
             switch( this.type ) {
                 case 1:
