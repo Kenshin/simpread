@@ -212,15 +212,15 @@ notify-gp .notify-hide {
 }
 
 notify-gp .notify-success {
-    color: rgba(118, 255, 3, .8);
+    background-color: rgb(76, 175, 80);
 }
 
 notify-gp .notify-warning {
-    color: rgba(255, 238, 88, 1);
+    background-color: rgb(255, 160, 0);
 }
 
 notify-gp .notify-error {
-    color: rgba(239, 83, 80, 1);
+    background-color: rgba(239, 83, 80, 1);
 }
 
 notify-gp .notify-modal {

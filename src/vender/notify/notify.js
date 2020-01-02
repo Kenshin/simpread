@@ -175,13 +175,13 @@ var Notify = ( function () {
 
             switch( this.type ) {
                 case 1:
-                    $content.addClass( "notify-success" );
+                    $target.addClass( "notify-success" );
                     break;
                 case 2:
-                    $content.addClass( "notify-warning" );
+                    $target.addClass( "notify-warning" );
                     break;
                 case 3:
-                    $content.addClass( "notify-error" );
+                    $target.addClass( "notify-error" );
                     break;
             }
 
