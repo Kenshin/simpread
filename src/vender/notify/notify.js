@@ -58,7 +58,7 @@
 *
 */
 var Notify = ( function () {
-    var VERSION = "2.0.1",
+    var VERSION = "2.0.2",
         name    = "notify",
         root    = "notify-gp",
         roottmpl= "<" + root + ">",
