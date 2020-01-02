@@ -223,6 +223,10 @@ notify-gp .notify-error {
     background-color: rgba(239, 83, 80, 1);
 }
 
+notify-gp .notify-info {
+    background-color: rgb(25, 118, 210);
+}
+
 notify-gp .notify-modal {
     flex-flow: column nowrap;
     align-items: flex-start;

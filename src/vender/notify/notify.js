@@ -6,7 +6,7 @@
 *
 * - content ( string, required)
 *
-* - type    ( int, NORMAL/SUCCESS/WARING/ERROR)
+* - type    ( int, NORMAL/SUCCESS/WARING/ERROR/INFO)
 *           ( optional, default is NORMAL )
 *
 * - mode    ( string, toast/modal/snackbar)
@@ -67,6 +67,7 @@ var Notify = ( function () {
         SUCCESS = 1,
         WARNING = 2,
         ERROR   = 3,
+        INFO    = 4,
         MODE    = {
             toast    : "toast",
             modal    : "modal",
@@ -182,6 +183,9 @@ var Notify = ( function () {
                     break;
                 case 3:
                     $target.addClass( "notify-error" );
+                    break;
+                case 4:
+                    $target.addClass( "notify-info" );
                     break;
             }
 
