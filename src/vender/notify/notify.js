@@ -142,7 +142,6 @@ var Notify = ( function () {
             hidden( this );
         },
         hidden = function( target ) {
-            return;
             target.addClass( "notify-hide" ).slideUp( 500, function() {
                 target.remove();
                 if ($root.children().length === 0 ) $root.css( "z-index", 0 );
