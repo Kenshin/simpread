@@ -112,23 +112,32 @@ notify-gp notify-action,
 notify-gp notify-cancel {
     display: none;
 
-    margin: 0 0 0 24px;
+    margin: 0 8px;
 
     max-width: 80px;
     min-width: 56px;
+    height: 36px;
+    line-height: 34px;
 
     color: #bb86fc;
 
     font-weight: 500;
     font-size: inherit;
     text-transform: uppercase;
-    text-align: right;
+    text-align: center;
 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 
+    transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     cursor: pointer;
+}
+
+notify-gp notify-action:active,
+notify-gp notify-cancel:active {
+    border-radius: 4px;
+    background-color: rgba(98, 0, 238, .3);
 }
 
 notify-gp notify-cancel {
@@ -143,6 +152,33 @@ notify-gp notify-a {
     right: 5px;
 
     cursor: pointer;
+}
+
+notify-gp notify-exit {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 5px;
+
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+
+    background-color: transparent;
+
+    border-radius: 50%;
+    transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    cursor: pointer;
+}
+
+notify-gp notify-exit:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+notify-gp notify-exit:active {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 notify-gp notify-a notify-span {
