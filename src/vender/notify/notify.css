@@ -36,8 +36,9 @@ notify-gp notify {
     min-width: 288px;
     max-width: 568px;
 
-    height: 48px;
-    max-height: 48px;
+    /*height: 48px;
+    max-height: 48px;*/
+    min-height: 48px;
 
     color: rgba(255, 255, 255, 0.9);
     background-color: #000;
@@ -67,8 +68,8 @@ notify-gp notify-content {
     text-align: left;
 
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /*text-overflow: ellipsis;
+    white-space: nowrap;*/
 }
 
 notify-gp notify-content a,
