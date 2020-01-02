@@ -208,7 +208,7 @@ var Notify = ( function () {
                 $root.on( "click", "." + item + " notify-cancel", [ item, this.callback, "cancel" ], callbackHander );
             }
 
-            if ( this.type != 0 ) {
+            if ( this.type != 0 && this.icon.indexOf( '<i' ) > -1 ) {
                 var css = function( element, property ) {
                     return window.getComputedStyle( element, null ).getPropertyValue( property ).toLowerCase().replace( / /g, "" );
                 }, $span = $( '<span style="display:none;" class="verify-fas fas"></span>' )
