@@ -94,6 +94,7 @@ var Notify = ( function () {
             icon    : "",
             action  : "",
             cancel  : "",
+            exit    : undefined,
             callback: undefined,
             complete: undefined,
         },
@@ -248,7 +249,7 @@ var Notify = ( function () {
             $target.addClass( item );
             $root.append( $target ).css( "z-index", 2147483647 );
 
-            if ( this.mode == MODE.snackbar ) {
+            if ( this.mode == MODE.snackbar || this.exit ) {
                 $target.css( "margin-left", "-" + $target.width()/2 + "px" );
                 if ( this.cancel == "" ) {
                     $exit.html( exit ).css( "display", "flex" );
@@ -314,6 +315,7 @@ var Notify = ( function () {
                     this.content   = arguments[0];
                     this.action    = arguments[1];
                     this.callback  = arguments[2];
+                    this.exit      = true;
                     break;
                 case 4:
                     if ( arguments[0] == MODE.snackbar ) {
