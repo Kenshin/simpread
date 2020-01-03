@@ -205,7 +205,7 @@ notify-gp notify-i.holdon {
 
 notify-gp .notify-show {
     opacity: 1;
-    transform: scaleY(1);
+    transform: scaleY(1)!important;
 }
 
 notify-gp .notify-hide {
@@ -332,8 +332,9 @@ notify-gp .notify-snackbar {
         max-width: 600px;
     }
 
-    notify-gp .notify-show {
-        transform-origin: bottom;
+    notify-gp .notify-show,
+    notify-gp .notify-hide {
+        transform-origin: bottom!important;
     }
 
     notify-gp .notify-snackbar {
