@@ -161,7 +161,27 @@ var Notify = ( function () {
                 $cancel  = $target.find(prefix( "cancel"  )),
                 $exit    = $target.find(prefix( "exit"    )),
                 item     = "notify-item-" + num++,
-                position = this.constructor.Position;
+                position = this.constructor.Position,
+                isMobile = {
+                    Android: function() {
+                        return navigator.userAgent.match(/Android/i);
+                    },
+                    BlackBerry: function() {
+                        return navigator.userAgent.match(/BlackBerry/i);
+                    },
+                    iOS: function() {
+                        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                    },
+                    Opera: function() {
+                        return navigator.userAgent.match(/Opera Mini/i);
+                    },
+                    Windows: function() {
+                        return navigator.userAgent.match(/IEMobile/i);
+                    },
+                    verify: function() {
+                        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()) == null ? false : true;
+                    }
+                };
 
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
@@ -250,7 +270,8 @@ var Notify = ( function () {
             }
 
             $target.addClass( item );
-            $root.append( $target ).css( "z-index", 2147483647 );
+            $root.css( "z-index", 2147483647 );
+            isMobile.verify() ? $root.prepend( $target ) : $root.append( $target );
 
             if ( this.mode == MODE.snackbar || this.exit ) {
                 $target.css( "margin-left", "-" + $target.width()/2 + "px" );
