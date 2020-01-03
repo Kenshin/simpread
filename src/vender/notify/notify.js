@@ -143,10 +143,11 @@ var Notify = ( function () {
             hidden( this );
         },
         hidden = function( target ) {
-            target.addClass( "notify-hide" ).slideUp( 500, function() {
+            target[0].addEventListener( 'animationend', function(e) {
                 target.remove();
                 if ($root.children().length === 0 ) $root.css( "z-index", 0 );
-            });
+            }, false );
+            target.addClass( 'notify-hide' );
         },
         render = function() {
             var $target  = $( TMPL ),

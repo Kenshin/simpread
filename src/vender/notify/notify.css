@@ -209,8 +209,9 @@ notify-gp .notify-show {
 }
 
 notify-gp .notify-hide {
-    opacity: 0;
-    transform: scaleY(0);
+    animation-name: fadeOutUp;
+    animation-duration: 1s;
+    animation-fill-mode: both;
 }
 
 notify-gp .notify-success {
@@ -304,6 +305,17 @@ notify-gp .notify-snackbar {
 
     bottom: 0;
     right: 0;
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
 }
 
 @media (pointer: coarse) {
