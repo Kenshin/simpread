@@ -41,7 +41,7 @@ input, textarea {
     font-family: Raleway, Menlo, "Dank Mono", Inconsolata, "Operator Mono", Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace!important;
 }
 
-.loading {
+.loadingbar {
     position: fixed;
     top: 0;
     left: 0;

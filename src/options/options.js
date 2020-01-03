@@ -128,10 +128,10 @@ storage.Read( first => {
  */
 function loadingRender() {
     setTimeout( () => {
-        $( '.loading' ).animate({
+        $( '.loadingbar' ).animate({
             opacity: 0,
         }, () => {
-            $( '.loading' ).remove();
+            $( '.loadingbar' ).remove();
             $( ".bottom" ).removeAttr( "style" );
         });
     }, 1000 );
