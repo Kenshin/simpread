@@ -109,6 +109,7 @@ function tabChange( idx ) {
  */
 storage.Read( first => {
     console.log( "simpread storage get success!", storage.focus, storage.read, first );
+    loadingRender();
     pRead();
     hashnotify();
     firstLoad( first );
@@ -121,6 +122,20 @@ storage.Read( first => {
     tt.Render( "body" );
     waves.Render({ root: "body" });
 });
+
+/**
+ * Loading Render
+ */
+function loadingRender() {
+    setTimeout( () => {
+        $( '.loading' ).animate({
+            opacity: 0,
+        }, () => {
+            $( '.loading' ).remove();
+            $( ".bottom" ).removeAttr( "style" );
+        });
+    }, 1000 );
+}
 
 /**
  * Pure Read
