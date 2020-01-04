@@ -341,7 +341,21 @@ function sidebarRender() {
     const sidebarClick = ( $target, items ) => {
         const idx = conf.tabsItem.findIndex( item => item.value == items.value );
         tabChange( idx );
-    };
+    }, newItems = [
+        {
+            name: "帮助中心",
+            value: "help",
+            fontIcon: "<i class=\"fas fa-question-circle\"></i>",
+            route: "http://ksria.com/simpread/docs/",
+        },
+        {
+            name: "开源列表",
+            value: "license",
+            fontIcon: "<i class=\"fas fa-keyboard\"></i>",
+            route: "http://ksria.com/simpread/docs/#/开源列表",
+        },
+    ];
+    conf.menuItem = conf.menuItem.concat( newItems );
     const sidebar = <side.Sidebar items={ conf.menuItem }
                              waves="md-waves-effect" autoClose={false} showClose={ true }
                              header="设定" footer=" 简悦 © 2017 ~ 2019" onClick={ ($t,o)=>sidebarClick($t,o) } />;
