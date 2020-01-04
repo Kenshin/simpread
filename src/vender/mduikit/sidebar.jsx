@@ -1,7 +1,7 @@
 /*!
  * React Material Design: Sidebar
  * 
- * @version : 0.0.4
+ * @version : 0.0.4.0104
  * @update  : 2019/12/30
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
