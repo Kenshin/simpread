@@ -307,7 +307,8 @@
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
             "<i class='icon-external'>"
-        ]
+        ],
+        "css"     : ".MCNLinkCard-info { margin-left: 12px;}"
     },{
         "name"    : "geekpark.net",
         "url"     : "http://www.geekpark.net/topics/",
@@ -1904,11 +1905,12 @@
         "url"     : "http*://post.smzdm.com/p/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='news_content'>",
+        "include" : "[[`//*[@id='articleId']`]]",
         "exclude" : [
             "<h1 class='item-name'>",
             "<span class='embed-card'>"
-        ]
+        ],
+        "css"     : ".embed-card-logo { margin-right: 14px }"
     },{
         "name"    : "news.mydrivers.com",
         "url"     : "http://news.mydrivers.com/*/*/*.htm",
