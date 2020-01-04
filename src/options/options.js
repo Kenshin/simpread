@@ -343,7 +343,7 @@ function sidebarRender() {
     };
     const sidebar = <side.Sidebar items={ conf.menuItem }
                              waves="md-waves-effect" autoClose={false} showClose={ true }
-                             header="设定" footer=" 简悦 © 2017" onClick={ ($t,o)=>sidebarClick($t,o) } />;
+                             header="设定" footer=" 简悦 © 2017 ~ 2019" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
 
