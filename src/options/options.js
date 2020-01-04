@@ -100,6 +100,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
  * @param {number} tab index
  */
 function tabChange( idx ) {
+    if ( idx == -1 ) return;
     conf.tabsItem.forEach( ( item, index ) => item.active = idx == index ? true : false );
     mainRender( idx );
 }
