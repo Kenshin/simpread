@@ -336,6 +336,8 @@ class Sidebar extends React.Component {
         let $target = $( event.target );
         while ( !$target.is( "a" ) ) { $target = $target.parent(); }
         const [ name, value, href ] = [ $target.text(), $target.attr( "value" ), $target.attr( "href" ) ];
+        $target.parent().parent().find( "a" ).removeClass( "active" );
+        $target.addClass( "active" );
         this.props.onClick && this.props.onClick( $target, { name, value, href } );
         this.props.autoClose && this.maskOnClick();
     }
@@ -529,9 +531,9 @@ function activeRender() {
         const $item  = $( item ),
               id     = $item.attr( "value" );
         if ( location.hash.endsWith( id ) ) {
-            $item.parent().addClass( "active" );
+            $item.addClass( "active" );
         } else {
-            $item.parent().removeClass( "active" );
+            $item.removeClass( "active" );
         }
     });
 }

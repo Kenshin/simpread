@@ -21,7 +21,7 @@ sidebar side content a:hover {
     background-color: rgba(0,0,0,.04);
 }
 
-sidebar side content li.active {
+sidebar side content a.active {
     font-weight: bold;
 }
 
