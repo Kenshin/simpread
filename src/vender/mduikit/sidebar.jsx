@@ -269,7 +269,7 @@ const Item = ( props ) => {
     }
     const tooltip = props.tooltip;
     return (
-        <a style={ link_style } className={  props.route && props.waves }
+        <a style={ link_style } className={  props.route && props.waves } target={ props.route && props.route.startsWith( "#" ) ? "_self" : "_blank" }
            href={ props.route } value={ props.value }
            data-tooltip={ tooltip.text ? tooltip.text : props[ tooltip.target ] } data-tooltip-position={ tooltip.position } data-tooltip-delay={ tooltip.delay }
            onClick={ props.route && props.onClick && ( evt=>props.onClick(evt)) } >
@@ -505,7 +505,7 @@ function tocRender() {
         const $item  = $( item ),
               id     = $item.attr( "value" ),
               levels = tocs.get( id );
-        levels.forEach( value => {
+        ids[idx] && levels.forEach( value => {
             html += `<outline class="md-waves-effect" data-trigger="${ids[idx]}" data-id="${value.id}" class="toc-level-${ value.level }">${value.text}</outline>`;
         });
         html.length > 0 && $item.after( `<toc><i></i>${html}</to>` );
