@@ -147,7 +147,7 @@ var Notify = ( function () {
                 target.remove();
                 if ($root.children().length === 0 ) $root.css( "z-index", 0 );
             }, false );
-            target.css({ width: target[0].offsetWidth }).addClass( 'notify-hide' )
+            target.css({ width: target[0].offsetWidth }).addClass( 'notify-hide' );
         },
         render = function() {
             var $target  = $( TMPL ),
