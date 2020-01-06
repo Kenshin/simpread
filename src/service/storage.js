@@ -140,6 +140,7 @@ const name = "simpread",
             "simpread.ksria.cn"
         ],
         plugins   : [], // plugin id, e.g. kw36BtjGu0
+        urlscheme : true,
     },
     statistics = {
         "focus"   : 0,
