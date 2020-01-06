@@ -15,6 +15,7 @@ import {browser}          from 'browser';
 import * as msg           from 'message';
 import * as highlight     from 'highlight';
 import * as run           from 'runtime';
+import * as tips          from 'tips';
 
 import * as tooltip       from 'tooltip';
 import * as waves         from 'waves';
@@ -151,6 +152,7 @@ class Read extends React.Component {
 
         setTimeout( ()=>{
             this.verifyContent();
+            tips.Render( storage.option.plugins );
         }, 50 );
     }
 
