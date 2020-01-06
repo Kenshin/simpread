@@ -176,6 +176,7 @@ function clearHTML( str ) {
 function exclusion( minimatch, data ) {
     const url = window.location.origin + window.location.pathname;
     return data.exclusion.findIndex( item => {
+        item == null && ( item = "" );
         item = item.trim();
         return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
     }) == -1 ? true : false;
@@ -191,6 +192,7 @@ function exclusion( minimatch, data ) {
 function whitelist( minimatch, data ) {
     const url = window.location.origin + window.location.pathname;
     return data.whitelist.findIndex( item => {
+        item == null && ( item = "" );
         item = item.trim();
         return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
     }) != -1 ? true : false;
