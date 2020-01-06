@@ -155,6 +155,7 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示「使用阅读模式打开此链接」？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "link" ) } />
+                    <div className="dividers"></div>
                     <Switch width="100%" checked={ this.props.option.menu.list }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示「打开稍后读」？"
@@ -163,6 +164,7 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示「加入到稍后读」？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "unrdist" ) } />
+                    <div className="dividers"></div>
                     <Switch width="100%" checked={ this.props.option.menu.whitelist }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示「加入白名单」？"
