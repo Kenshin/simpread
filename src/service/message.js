@@ -48,6 +48,9 @@ const action = {
     permission     : "permission",
     // snapshot
     snapshot       : "snapshot",
+    // tips
+    tips           : "tips",
+    tips_norepeat  : "tips_norepeat",
 };
 
 /**
