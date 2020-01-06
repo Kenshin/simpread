@@ -180,6 +180,7 @@ export default class LabsOpt extends React.Component {
                     <Switch width="100%" checked={ this.props.option.urlscheme }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="默认弹出编辑框，取消后意味着直接保存"
+                            desc="包括：黑名单 · 白名单 · 排除列表均可使用"
                             onChange={ (s)=>this.onChange(s, "option", "urlscheme" ) } />
                 </div>
                 </div>
