@@ -754,3 +754,98 @@ sr-mask {
     top: 0;
     background-color: rgba(0, 0, 0, .1);
 }
+
+/**
+ * URL Scheme
+ */
+
+.simpread-urlscheme {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 2147483646;
+}
+
+simpread-urlscheme {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 20px 20px 0;
+
+    width: 500px;
+
+    color: rgba(51, 51, 51, .87);
+    background-color: #fff;
+    border-radius: 3px;
+
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 2px, rgba(0, 0, 0, 0.26) 0px 2px 2px;
+    overflow: hidden;
+
+    transform-origin: bottom;
+    transition: all .6s ease;
+}
+
+simpread-urlscheme * {
+    box-sizing: border-box;
+}
+
+simpread-urlscheme.active {
+    animation-name: fadeInUp;
+    animation-duration: 450ms;
+    animation-fill-mode: both;
+}
+
+simpread-urlscheme.hide {
+    animation-name: fadeInDown;
+    animation-duration: 450ms;
+    animation-fill-mode: both;
+}
+
+simpread-urlscheme sr-urls-label {
+    width: 100%;
+}
+
+simpread-urlscheme sr-urls-head {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    width: 100%;
+}
+
+simpread-urlscheme sr-urls-content {
+    width: 100%;
+}
+
+simpread-urlscheme sr-urls-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+}
