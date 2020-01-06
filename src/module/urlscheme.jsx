@@ -46,7 +46,7 @@ export class URLScheme extends React.Component {
             this.setState({ error : "正则表达式错误", disable: true });
         } else if ( !value.startsWith( "[[/" ) && !value.startsWith( "http" ) && value != location.hostname.replace( "www.", "" ) ) {
             this.setState({ error : "主域名不匹配", disable: true });
-        } else if ( !value.startsWith( "[[/" ) && !minimatch( location.href, value ) ) {
+        } else if ( !value.startsWith( "[[/" ) && value.startsWith( "http" ) && !minimatch( location.href, value ) ) {
             this.setState({ error : "minimatch 适配错误", disable: true });
         } else {
             this.setState({ error : "", disable: false });

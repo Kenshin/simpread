@@ -789,6 +789,7 @@ simpread-urlscheme {
 }
 
 simpread-urlscheme * {
+    font-size: 12px!important;
     box-sizing: border-box;
 }
 
@@ -842,10 +843,6 @@ simpread-urlscheme text-field-state {
 
 simpread-urlscheme switch {
     margin-top: 0!important;
-}
-
-simpread-urlscheme switch content span {
-    font-size: 12px!important;
 }
 
 @keyframes fadeInUp {
