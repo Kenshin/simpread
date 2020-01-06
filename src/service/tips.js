@@ -42,6 +42,20 @@ function Render( plugins ) {
 }
 
 /**
+ * Help
+ * 
+ * @param {object} storage.statistics
+ */
+function Help( statistics ) {
+    if ( statistics.read == 0 ) {
+        new Notify().Render({ content: "嗨，很高兴第一次使用简悦的阅读模式，是否看看新手帮助？", action: "我要看", cancel: "老司机", callback: type => {
+            type == "action" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: "http://ksria.com/simpread/guide/#readmode" }));
+            type == "cancel" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.tips_norepeat, { code: "readmode" }));
+        }});
+    }
+}
+
+/**
  * Background call
  * 
  * @param {string} plugin id
@@ -69,4 +83,5 @@ export {
     Render,
     Verify,
     Done,
+    Help,
 }
