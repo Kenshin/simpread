@@ -12,6 +12,7 @@ import * as read      from 'read';
 import * as setting   from 'setting';
 import * as kbd       from 'keyboard';
 import * as highlight from 'highlight';
+import * as scheme    from 'urlscheme';
 
 import * as util      from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
@@ -144,24 +145,32 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.menu_exclusion:
         case msg.MESSAGE_ACTION.menu_blacklist:
         case msg.MESSAGE_ACTION.menu_unrdist:
-            if ( request.type == msg.MESSAGE_ACTION.menu_whitelist ) {
-                storage.read.whitelist.push( request.value.url );
-                new Notify().Render( "已加入到白名单。" );
-            } else if ( request.type == msg.MESSAGE_ACTION.menu_exclusion ) {
-                storage.read.exclusion.push( request.value.url );
-                new Notify().Render( "已加入到排除列表。" );
-            } else if ( request.type == msg.MESSAGE_ACTION.menu_blacklist ) {
-                storage.option.blacklist.push( request.value.url );
-                new Notify().Render( "已加入到黑名单。" );
-            } else if ( request.type == msg.MESSAGE_ACTION.menu_unrdist ) {
-                storage.UnRead( "add", { url: request.value.url, title: $("head").find("title").text() , desc: "" }, success => {
-                    success  && new Notify().Render( 0, "成功加入未读列表。" );
-                    !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
+            const menuSrv = ( type, url ) => {
+                if ( type == msg.MESSAGE_ACTION.menu_whitelist ) {
+                    storage.read.whitelist.push( url );
+                    new Notify().Render( "已加入到白名单。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_exclusion ) {
+                    storage.read.exclusion.push( url );
+                    new Notify().Render( "已加入到排除列表。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_blacklist ) {
+                    storage.option.blacklist.push( url );
+                    new Notify().Render( "已加入到黑名单。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_unrdist ) {
+                    storage.UnRead( "add", { url: url, title: $("head").find("title").text() , desc: "" }, success => {
+                        success  && new Notify().Render( 0, "成功加入未读列表。" );
+                        !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
+                    });
+                }
+                storage.Write( () => {
+                    watch.SendMessage( "option", true );
                 });
-            }
-            storage.Write( () => {
-                watch.SendMessage( "option", true );
-            });
+            };
+            if ( storage.option.urlscheme && /whitelist|exclusion|blacklist/ig.test( request.type )) {
+                scheme.Render( request.type.replace( "menu_", "" ), storage.option.urlscheme, ( type, off, value ) => {
+                    storage.option.urlscheme = off;
+                    menuSrv( "menu_" + type, value );
+                });
+            } else menuSrv( request.type, request.value.url );
             break;
     }
 });
