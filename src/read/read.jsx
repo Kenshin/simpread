@@ -153,6 +153,7 @@ class Read extends React.Component {
         setTimeout( ()=>{
             this.verifyContent();
             tips.Render( storage.option.plugins );
+            tips.Help( storage.statistics );
         }, 50 );
     }
 
