@@ -74,7 +74,7 @@ function action( type, title, desc, content ) {
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
-                storage.UnRead( "add", { url, title, desc }, success => {
+                storage.UnRead( "add", util.GetPageInfo(), success => {
                     success  && new Notify().Render( 0, "成功加入未读列表。" );
                     !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
                 });

@@ -144,7 +144,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                     storage.option.blacklist.push( url );
                     new Notify().Render( "已加入到黑名单。" );
                 } else if ( type == msg.MESSAGE_ACTION.menu_unrdist ) {
-                    storage.UnRead( "add", { url: url, title: $("head").find("title").text() , desc: "" }, success => {
+                    storage.UnRead( "add", util.GetPageInfo(), success => {
                         success  && new Notify().Render( 0, "成功加入未读列表。" );
                         !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
                     });
