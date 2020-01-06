@@ -10,6 +10,7 @@ import * as watch  from 'watch';
 import * as WebDAV from 'webdav';
 import * as permission
                    from 'permission';
+import * as tips   from 'tips';
 import PureRead    from 'puread';
 
 // global update site tab id
@@ -287,6 +288,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             break;
         case msg.MESSAGE_ACTION.speak_stop:
             browser.tts.stop();
+            break;
+        case msg.MESSAGE_ACTION.tips:
+            tips.Verify( request.value.code, sendResponse );
+            break;
+        case msg.MESSAGE_ACTION.tips_norepeat:
+            tips.Done( request.value.code );
             break;
     }
 });
