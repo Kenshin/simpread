@@ -80,7 +80,7 @@ export class URLScheme extends React.Component {
                     <Dropdown name={ category.filter( item => item.value == this.props.type )[0].name } items={ category } width="100%" onChange={ (v)=>this.onDropdownChange(v) } />
                 </sr-urls-head>
                 <sr-urls-content>
-                    <sr-urls-label>支持 domin 正则表达式 minimatch 等规则</sr-urls-label>
+                    <sr-urls-label>支持 域名 · 主域名 · 正则表达式 · minimatch 等规则</sr-urls-label>
                     <TextField
                         multi={ false }
                         value={ this.props.url }
