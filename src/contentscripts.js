@@ -56,19 +56,7 @@ storage.Read( () => {
  * @return {boolean} true: is blacklist; false: is't blacklist
  */
 function blacklist() {
-    for ( const item of storage.option.blacklist ) {
-        if ( item.trim() != "" && !item.startsWith( "http" ) ) {
-            if ( location.hostname.includes( item ) ) {
-                is_blacklist = true;
-                break;
-            }
-        } else {
-            if ( location.href == item ) {
-                is_blacklist = true;
-                break;
-            }
-        }
-    }
+    is_blacklist = util.Blacklist( puplugin.Plugin( "minimatch" ), storage.option );
     console.log( "current site is blacklist", is_blacklist )
     return is_blacklist;
 }
