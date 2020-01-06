@@ -179,7 +179,7 @@ function exclusion( minimatch, data ) {
         item == null && ( item = "" );
         item = item.trim();
         if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
-            return new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ) ).test( url );
+            return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
         } else return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
     }) == -1 ? true : false;
 }
@@ -197,7 +197,7 @@ function whitelist( minimatch, data ) {
         item == null && ( item = "" );
         item = item.trim();
         if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
-            return new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ) ).test( url );
+            return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
         } else return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
     }) != -1 ? true : false;
 }
