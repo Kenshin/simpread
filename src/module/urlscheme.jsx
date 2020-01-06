@@ -80,13 +80,15 @@ export class URLScheme extends React.Component {
                     <Dropdown name={ category.filter( item => item.value == this.props.type )[0].name } items={ category } width="100%" onChange={ (v)=>this.onDropdownChange(v) } />
                 </sr-urls-head>
                 <sr-urls-content>
-                    <sr-urls-label>支持 域名 · 主域名 · 正则表达式 · minimatch 等规则</sr-urls-label>
+                    <sr-urls-label>支持 域名 · 主域名 · 正则表达式 · minimatch 等规则，详细 <sr-urls-a onClick={ ()=>window.open( 'http://ksria.com/simpread/docs/#/右键菜单?id=URL编辑器', '_blank') }>请看这里</sr-urls-a> </sr-urls-label>
                     <TextField
                         multi={ false }
                         value={ this.props.url }
                         errortext={ this.state.error }
                         onChange={ (e)=>this.onURLChange(e) }
                     />
+                </sr-urls-content>
+                <sr-urls-content>
                     <Switch width="100%" checked={ this.props.off }
                             thumbedColor="#2163f7" trackedColor="#6699FF" waves="md-waves-effect"
                             label="默认弹出编辑框，取消后意味着直接保存"

@@ -813,10 +813,12 @@ simpread-urlscheme sr-urls-head {
     align-items: center;
     flex-direction: row;
 
+    margin-bottom: 5px;
     width: 100%;
 }
 
 simpread-urlscheme sr-urls-content {
+    margin-bottom: 5px;
     width: 100%;
 }
 
@@ -824,6 +826,26 @@ simpread-urlscheme sr-urls-footer {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+}
+
+simpread-urlscheme sr-urls-a {
+    color: #2163f7;
+    cursor: pointer;
+}
+
+simpread-urlscheme text-field-state {
+    border-top: none rgba(34, 101, 247, 0.8)!important;
+    border-left: none rgba(34, 101, 247, 0.8)!important;
+    border-right: none rgba(34, 101, 247, 0.8)!important;
+    border-bottom: 2px solid rgba(34, 101, 247, 0.8)!important;
+}
+
+simpread-urlscheme switch {
+    margin-top: 0!important;
+}
+
+simpread-urlscheme switch content span {
+    font-size: 12px!important;
 }
 
 @keyframes fadeInUp {
