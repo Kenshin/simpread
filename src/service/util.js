@@ -219,6 +219,20 @@ function blacklist( minimatch, data ) {
     }) != -1 ? true : false;
 }
 
+/**
+ * Get page info
+ * 
+ * @return {object} include: url, title, favicon, img, desc
+ */
+function getPageInfo() {
+    const url     = location.href,
+          title   = $( "sr-read" ).find( "sr-rd-title" ).text() || $( "head" ).find( "title" ).text() || "",
+          favicon = $( `head link[rel~=icon]` ).attr( "href" ) || "",
+          img     = $( `head meta[property="og:image"]` ).attr( "content" ) || $( "sr-read" ).find( "img" ).attr( "src" ) || "",
+          desc    = $( "sr-read" ).find( "sr-rd-desc" ).text() || $( `head meta[property="og:description"]` ).attr( "content" ) || $( 'meta[name=description]' ).attr( 'content' ) || "";
+    return { url, title: title.trim(), favicon, img, desc: desc.trim() };
+}
+
 export {
     verifyHtml     as verifyHtml,
     html2enml      as HTML2ENML,
@@ -229,4 +243,5 @@ export {
     exclusion      as Exclusion,
     whitelist      as Whitelist,
     blacklist      as Blacklist,
+    getPageInfo    as GetPageInfo,
 }
