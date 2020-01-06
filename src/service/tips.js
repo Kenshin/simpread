@@ -35,7 +35,7 @@ function Render( plugins ) {
     if ( $( "sr-read" ).find( "img" ).length > 5 && plugins.findIndex( item => item == "VQOZdNET2d" ) == -1 ) {
         pushMessage( "VQOZdNET2d" );
     }
-    // verify VQOZdNET2d
+    // verify DxlFcL52iy
     if ( ( location.hostname == "www.zhihu.com" && location.pathname.startsWith( "/question/" ) ) && plugins.findIndex( item => item == "DxlFcL52iy" ) == -1 ) {
         pushMessage( "DxlFcL52iy" );
     }
