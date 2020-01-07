@@ -11,6 +11,7 @@ const category = [
     { name: "黑名单", value: "blacklist" },
     { name: "白名单", value: "whitelist" },
     { name: "排除列表", value: "exclusion" },
+    { name: "延迟加载", value: "lazyload" },
 ];
 
 export class URLScheme extends React.Component {
