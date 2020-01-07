@@ -9,10 +9,12 @@ const action = {
     tab_selected   : "tab_selected",
     new_tab        : "new_tab",
     close_tab      : "close_tab",
+    // menu
     menu           : "menu",
     menu_whitelist : "menu_whitelist",
     menu_exclusion : "menu_exclusion",
     menu_blacklist : "menu_blacklist",
+    menu_lazyload  : "menu_lazyload",
     menu_unrdist   : "menu_unrdist",
     updated        : "updated",
     save_verify    : "save_verify",
