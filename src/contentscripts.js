@@ -46,7 +46,7 @@ storage.Read( () => {
         });
     } else {
         bindShortcuts();
-        preload() && autoOpen();
+        !isLazyload() && autoOpen();
     }
 });
 
@@ -62,13 +62,13 @@ function blacklist() {
 }
 
 /**
- * Preload verify
+ * isLazyload verify
  * 
- * @return {boolen}
+ * @return {boolen} true: lazyload; false: preload
  */
 
-function preload() {
-    return !util.Lazyload( puplugin.Plugin( "minimatch" ), storage.option );
+function isLazyload() {
+    return util.Lazyload( puplugin.Plugin( "minimatch" ), storage.option );
 }
 
 /**
@@ -86,7 +86,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            if ( preload() == false ) {
+            if ( isLazyload() ) {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: 0 , url: window.location.href } ));
             } else browserAction( request.value.is_update );
             break;
