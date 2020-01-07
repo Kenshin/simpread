@@ -444,5 +444,6 @@ function analytics() {
  * Uninstall
  */
 function uninstall() {
+    ma.trackEvent( "uninstall", "uninstall", "uninstall", "uninstall" );
     browser.runtime.setUninstallURL( storage.option.uninstall ? storage.service + "/uninstall" : "" );
 }
