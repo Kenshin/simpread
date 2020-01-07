@@ -55,6 +55,9 @@ function createAll() {
     storage.option.menu.list &&
         ( context.list.id  = browser.contextMenus.create( context.list.menu ));
 
+    storage.option.menu.unrdist &&
+        ( context.unrdist.id  = browser.contextMenus.create( context.unrdist.menu ));
+
     storage.option.menu.whitelist &&
         ( context.whitelist.id  = browser.contextMenus.create( context.whitelist.menu ));
 
@@ -63,9 +66,6 @@ function createAll() {
 
     storage.option.menu.blacklist &&
         ( context.blacklist.id  = browser.contextMenus.create( context.blacklist.menu ));
-
-    storage.option.menu.unrdist &&
-        ( context.unrdist.id  = browser.contextMenus.create( context.unrdist.menu ));
 }
 
 /**
