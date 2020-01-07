@@ -71,6 +71,7 @@ function action( type, title, desc, content ) {
         type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
     } else if ( [ "save", "markdown", "offlinemarkdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "snapshot", "bear", "ulysses" ].includes( type ) ) {
         storage.Statistics( "service", type );
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "service", eventAction: "service", eventLabel: type }) );
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
@@ -223,6 +224,7 @@ function action( type, title, desc, content ) {
         const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion, youdao, weizhi } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "service", eventAction: "service", eventLabel: type }) );
         const service = type => {
             switch( type ) {
                 case "dropbox":
