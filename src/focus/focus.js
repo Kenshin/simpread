@@ -67,7 +67,7 @@ var storage  = require( "storage" ).storage,
         tooltip.Render( bgclsjq );
         waves.Render({ root: bgclsjq });
         storage.Statistics( "focus" );
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "mode", eventAction: "focusmode", eventLabel: "focusmode" }) );
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "mode", eventAction: "focusmode", eventValue: "focusmode" }) );
 
         // click mask remove it
         $( bgclsjq ).on( "click", function( event, data ) {

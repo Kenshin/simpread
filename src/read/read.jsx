@@ -142,7 +142,7 @@ class Read extends React.Component {
         tooltip.Render( rdclsjq );
         waves.Render({ root: rdclsjq });
         storage.Statistics( "read" );
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "mode", eventAction: "readmode", eventLabel: "readmode" }) );
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "mode", eventAction: "readmode", eventValue: "readmode" }) );
 
         !this.props.wrapper.avatar && this.props.read.toc 
             && toc.Render( "sr-read", $( "sr-rd-content" ), this.props.read.theme, this.props.read.toc_hide );

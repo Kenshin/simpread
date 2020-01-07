@@ -203,7 +203,7 @@ function vernotify( first ) {
             updateData();
         }
         // website_sync = true; when version is 1.1.3 website_list is newer
-        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "install", eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update", eventLabel: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" }) );
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "install", eventAction: hash.startsWith( "#firstload?ver=" ) ? "install" : "update", eventValue: hash.startsWith( "#firstload?ver=" ) ? "install" : "update" }) );
         history.pushState( "", "", "/options/options.html" );
     } else if ( hash.startsWith( "#update?patch=" ) ) {
         const patch = hash.match( /[0-9\.]+/ )[0];

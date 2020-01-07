@@ -410,9 +410,9 @@ function setMenuAndIcon( id, code ) {
  * 
  * @param {object} google analytics track object
  */
-function tracked({ eventCategory, eventAction, eventLabel }) {
-    console.log( "current track is", eventCategory, eventAction, eventLabel )
-    ma.trackEvent( eventCategory, eventAction, eventAction, eventLabel );
+function tracked({ eventCategory, eventAction, eventValue }) {
+    console.log( "current track is", eventCategory, eventAction, eventValue )
+    ma.trackEvent( eventCategory, eventAction, eventAction, eventValue );
 }
 
 /**
