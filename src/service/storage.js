@@ -665,7 +665,6 @@ class Storage {
             service ? simpread.statistics.service[ service ]++ : simpread.statistics[ type ]++;
         }
         console.log( "current statistics is ", simpread.statistics )
-        browser.runtime.sendMessage({ type: "track", value: { eventAction: type, eventCategory: "read mode", eventLabel: "click" } });
         save( undefined, type == "create" );
     }
 
