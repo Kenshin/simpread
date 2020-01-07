@@ -6,6 +6,8 @@ var storage  = require( "storage" ).storage,
     fcontrol = require( "controlbar" ),
     tooltip  = require( "tooltip" ),
     waves    = require( "waves" ),
+    browser  = require( "browser" ).browser,
+    msg      = require( "message" ),
     focus    = ( function () {
 
     var $parent,
