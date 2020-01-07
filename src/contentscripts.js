@@ -68,25 +68,7 @@ function blacklist() {
  */
 
 function preload() {
-    let is_proload = true;
-    if ( storage.option.preload == false ) {
-        is_proload = false;
-    } else if ( storage.option.preload ) {
-        for ( const item of storage.option.lazyload ) {
-            if ( item.trim() != "" && !item.startsWith( "http" ) ) {
-                if ( location.hostname.includes( item ) ) {
-                    is_proload = false;
-                    break;
-                }
-            } else {
-                if ( location.href == item ) {
-                    is_proload = false;
-                    break;
-                }
-            }
-        }
-    }
-    return is_proload;
+    return !util.Lazyload( puplugin.Plugin( "minimatch" ), storage.option );
 }
 
 /**
@@ -132,6 +114,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.menu_whitelist:
         case msg.MESSAGE_ACTION.menu_exclusion:
         case msg.MESSAGE_ACTION.menu_blacklist:
+        case msg.MESSAGE_ACTION.menu_lazyload:
         case msg.MESSAGE_ACTION.menu_unrdist:
             const menuSrv = ( type, url ) => {
                 if ( type == msg.MESSAGE_ACTION.menu_whitelist ) {
@@ -143,6 +126,9 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                 } else if ( type == msg.MESSAGE_ACTION.menu_blacklist ) {
                     storage.option.blacklist.push( url );
                     new Notify().Render( "已加入到黑名单。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_lazyload ) {
+                    storage.option.lazyload.push( url );
+                    new Notify().Render( "已加入到延迟加载。" );
                 } else if ( type == msg.MESSAGE_ACTION.menu_unrdist ) {
                     storage.UnRead( "add", util.GetPageInfo(), success => {
                         success  && new Notify().Render( 0, "成功加入未读列表。" );
@@ -153,7 +139,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
                     watch.SendMessage( "option", true );
                 });
             };
-            if ( storage.option.urlscheme && /whitelist|exclusion|blacklist/ig.test( request.type )) {
+            if ( storage.option.urlscheme && /whitelist|exclusion|blacklist|lazyload/ig.test( request.type )) {
                 scheme.Render( request.type.replace( "menu_", "" ), storage.option.urlscheme, ( type, off, value ) => {
                     storage.option.urlscheme = off;
                     menuSrv( "menu_" + type, value );
