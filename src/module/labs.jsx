@@ -177,6 +177,10 @@ export default class LabsOpt extends React.Component {
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="是否显示「加入到黑名单」？"
                             onChange={ (s)=>this.onChange(s, "option", "menu", "blacklist" ) } />
+                    <Switch width="100%" checked={ this.props.option.menu.lazyload }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label="是否显示「加入到延迟加载」？"
+                            onChange={ (s)=>this.onChange(s, "option", "menu", "lazyload" ) } />
                     <Switch width="100%" checked={ this.props.option.urlscheme }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
                             label="默认弹出编辑框，取消后意味着直接保存"
