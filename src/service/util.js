@@ -220,6 +220,23 @@ function blacklist( minimatch, data ) {
 }
 
 /**
+ * Lazyload
+ * 
+ * @param  {object} minimatch
+ * @param  {object} simpread.read
+ * @return {boolean} true: is blacklist; false: is't blacklist
+ */
+function lazyload( minimatch, data ) {
+    return data.lazyload.findIndex( item => {
+       item == null && ( item = "" );
+       item = item.trim();
+       if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
+           return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
+       } else return item.startsWith( "http" ) ? minimatch( location.href, item ) : location.hostname.includes( item );
+    }) != -1 ? true : false;
+}
+
+/**
  * Get page info
  * 
  * @return {object} include: url, title, favicon, img, desc
@@ -243,5 +260,6 @@ export {
     exclusion      as Exclusion,
     whitelist      as Whitelist,
     blacklist      as Blacklist,
+    lazyload       as Lazyload,
     getPageInfo    as GetPageInfo,
 }
