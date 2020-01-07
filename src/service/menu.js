@@ -23,11 +23,13 @@ const context = {
         "documentUrlPatterns" : [ "http://*/*" , "https://*/*" ]
     };
 
-Object.assign( context.focus.menu,  menu, { id: "focus", "title" : "聚焦模式" });
-Object.assign( context.read.menu,   menu, { id: "read",  "title" : "阅读模式" });
-Object.assign( context.link.menu,   menu, { id: "link",  "title" : "使用阅读模式打开此链接", contexts: [ "link" ] });
-Object.assign( context.unrdist.menu,menu, { id: "unrdist",   "title" : "将当前页面加入稍后读" });
-Object.assign( context.list.menu,   menu, { id: "list",  "title" : "打开稍后读" });
+Object.assign( context.focus.menu,      menu, { id: "focus",     "title" : "聚焦模式" });
+Object.assign( context.read.menu,       menu, { id: "read",      "title" : "阅读模式" });
+Object.assign( context.link.menu,       menu, { id: "link",      "title" : "使用阅读模式打开此链接", contexts: [ "link" ] });
+
+Object.assign( context.list.menu,       menu, { id: "list",      "title" : "打开稍后读" });
+Object.assign( context.unrdist.menu,    menu, { id: "unrdist",   "title" : "将当前页面加入稍后读" });
+
 Object.assign( context.whitelist.menu,  menu, { id: "whitelist", "title" : "将当前页面加入到白名单" });
 Object.assign( context.exclusion.menu,  menu, { id: "exclusion", "title" : "将当前页面加入到排除列表" });
 Object.assign( context.blacklist.menu,  menu, { id: "blacklist", "title" : "将当前页面加入到黑名单" });
