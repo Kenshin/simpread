@@ -412,12 +412,7 @@ function setMenuAndIcon( id, code ) {
  */
 function tracked({ eventCategory, eventAction, eventLabel }) {
     console.log( "current track is", eventCategory, eventAction, eventLabel )
-    ga( 'send', {
-        hitType      : 'event',
-        eventCategory,
-        eventAction,
-        eventLabel
-    });
+    ma.trackEvent( eventCategory, eventAction, eventAction, eventLabel );
 }
 
 /**
