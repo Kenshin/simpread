@@ -218,7 +218,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Listen runtime message, include: `shortcuts` `browser_action`
+ * Listen runtime message
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "background runtime Listener", request );
