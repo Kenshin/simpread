@@ -66,6 +66,7 @@ function getNewsitesHandler( result ) {
  */
 menu.OnClicked( ( info, tab ) => {
     console.log( "background contentmenu Listener", info, tab );
+    ma.trackEvent( "menu", "menu", "menu", info.menuItemId );
     if ( info.menuItemId == "link" ) {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
     } else if ( info.menuItemId == "list" ) {
