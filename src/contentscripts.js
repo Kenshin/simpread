@@ -232,13 +232,21 @@ function readMode() {
 }
 
 /**
- * Auto open read mode
+ * Auto open read mode, include:
+ * 
+ * - http://xxxx?simpread_mode=read
+ * - auto && location.href not include exclusion list
+ * - location.href include white list
  */
 function autoOpen() {
     getCurrent( mode.read );
-    if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && util.Exclusion(  puplugin.Plugin( "minimatch" ), storage.current )) ||
-         ( !storage.current.auto && util.Whitelist( puplugin.Plugin( "minimatch" ), storage.current ))
+    const suffix    = window.location.href.includes( "simpread_mode=read" ),
+          auto      = storage.current.auto,
+          minimatch = puplugin.Plugin( "minimatch" ),
+          whitelist = util.Whitelist( minimatch, storage.current ),
+          exclusion = util.Exclusion( minimatch, storage.current );
+    if  (
+        suffix || whitelist || ( auto && exclusion )
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
@@ -257,6 +265,7 @@ function autoOpen() {
                 break;
             default:
                 pr.state == "adapter" && readMode();
+                pr.state == "temp"    && pr.current.site.html != "" && whitelist && readMode();
                 break;
         }
     }
