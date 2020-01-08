@@ -66,7 +66,7 @@ function getNewsitesHandler( result ) {
  */
 menu.OnClicked( ( info, tab ) => {
     console.log( "background contentmenu Listener", info, tab );
-    _gaq.push([ '_trackEvent', "menu", info.menuItemId ]);
+    tracked({ eventCategory: "menu", eventAction: "menu", eventValue: info.menuItemId });
     if ( info.menuItemId == "link" ) {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
     } else if ( info.menuItemId == "list" ) {
@@ -423,5 +423,5 @@ function tracked({ eventCategory, eventAction, eventValue }) {
  */
 function uninstall() {
     browser.runtime.setUninstallURL( storage.option.uninstall ? storage.service + "/uninstall" : "" );
-    _gaq.push([ '_trackEvent', "install", "uninstall" ]);
+    tracked({ eventCategory: "install", eventAction: "install", eventValue: "uninstall" });
 }
