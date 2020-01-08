@@ -101,7 +101,7 @@ export default class CommonOpt extends React.Component {
         };
 
         storage.Safe( ()=> {
-            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "service", eventAction: "sync", eventValue: storage.option.save_at }) );
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "sync", eventAction: "sync", eventValue: storage.option.save_at }) );
             if ( storage.option.save_at == "dropbox" ) {
                 const sec_dbx = storage.secret.dropbox;
                 !sec_dbx.access_token ?
