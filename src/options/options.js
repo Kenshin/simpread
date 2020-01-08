@@ -193,7 +193,7 @@ function vernotify( first ) {
               version = hash.match( /[0-9\.]+/ )[0],
               message = ver.Notify( first, prefix, version );
 
-        new Notify().Render( "简悦 版本提示", msg );
+        new Notify().Render( "简悦 版本提示", message );
 
         loadState = { first: true };
         if ( hash.startsWith( "#update?ver=" )) {
