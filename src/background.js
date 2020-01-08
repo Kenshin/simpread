@@ -66,7 +66,7 @@ function getNewsitesHandler( result ) {
  */
 menu.OnClicked( ( info, tab ) => {
     console.log( "background contentmenu Listener", info, tab );
-    ma.trackEvent( "menu", "menu", "menu", info.menuItemId );
+    _gaq.push([ '_trackEvent', "menu", info.menuItemId ]);
     if ( info.menuItemId == "link" ) {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
     } else if ( info.menuItemId == "list" ) {
@@ -415,7 +415,6 @@ function setMenuAndIcon( id, code ) {
  */
 function tracked({ eventCategory, eventAction, eventValue }) {
     console.log( "current track is", eventCategory, eventAction, eventValue )
-    //ma.trackEvent( eventCategory, eventAction, eventAction, eventValue );
     _gaq.push([ '_trackEvent', eventCategory, eventValue ]);
 }
 
@@ -423,6 +422,6 @@ function tracked({ eventCategory, eventAction, eventValue }) {
  * Uninstall
  */
 function uninstall() {
-    ma.trackEvent( "uninstall", "uninstall", "uninstall", "uninstall" );
     browser.runtime.setUninstallURL( storage.option.uninstall ? storage.service + "/uninstall" : "" );
+    _gaq.push([ '_trackEvent', "install", "uninstall" ]);
 }
