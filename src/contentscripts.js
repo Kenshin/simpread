@@ -246,7 +246,7 @@ function autoOpen() {
           whitelist = util.Whitelist( minimatch, storage.current ),
           exclusion = util.Exclusion( minimatch, storage.current );
     if  (
-        suffix || whitelist || ( auto && exclusion )
+        suffix || whitelist || ( auto && exclusion == false )
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":

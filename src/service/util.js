@@ -171,7 +171,7 @@ function clearHTML( str ) {
  * 
  * @param  {object} minimatch
  * @param  {object} simpread.read
- * @return {boolen} true: not exist; false: exist
+ * @return {boolen} true: exist; false: not exist
  */
 function exclusion( minimatch, data ) {
     const url = window.location.origin + window.location.pathname;
@@ -181,7 +181,7 @@ function exclusion( minimatch, data ) {
         if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
             return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
         } else return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
-    }) == -1 ? true : false;
+    }) != -1 ? true : false;
 }
 
 /**
