@@ -657,6 +657,8 @@ const focusItems = ( items => {
     delete news.option.items.fullscreen;
     delete news.option.items.tempread;
     delete news.download.items.snapshot;
+    delete news.download.items.offlinehtml;
+    delete news.download.items.offlinemarkdown;
     news.top = {
         "name" : "返回顶部",
         "icon" : ss.IconPath("top_icon"),
