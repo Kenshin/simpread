@@ -656,6 +656,7 @@ const focusItems = ( items => {
     dels.forEach( del => delete news[ del ] );
     delete news.option.items.fullscreen;
     delete news.option.items.tempread;
+    delete news.download.items.snapshot;
     news.top = {
         "name" : "返回顶部",
         "icon" : ss.IconPath("top_icon"),
