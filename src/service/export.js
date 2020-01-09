@@ -403,12 +403,10 @@ class Ins {
             this.ins.token_secret    = this.token_secret;
             this.ins.consumer_key    = this.consumer_key;
             this.ins.consumer_secret = this.consumer_secret;
-            this.ins.add( url, title, description ).done( result => {
-                if ( result && result.length > 0 ) callback( "success", undefined );
-                else callback( undefined, "error" );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error )
-                callback( undefined, textStatus );
+            const settings           = this.ins.add( url, title, description );
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+                if ( result.done ) { callback( "success", undefined ); }
+                else callback( undefined, result.fail );
             });
         }
 }
