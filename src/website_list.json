@@ -966,6 +966,15 @@
             ""
         ]
     },{
+        "name"    : "infoq.cn",
+        "url"     : "http*://www.infoq.cn/article/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "infoq.com",
         "url"     : "http://www.infoq.com/cn/articles/",
         "title"   : "<title>",
