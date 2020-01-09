@@ -241,12 +241,13 @@ function action( type, title, desc, content ) {
                     break;
                 case "linnk":
                     const notify = new Notify().Render({ content: `开始保存到 Linnk，请稍等...`, state: "loading" });
+                    linnk.access_token = storage.secret.linnk.access_token;
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         notify.complete();
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
                             linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, type, new Notify() ));
-                        } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
+                        } else new Notify().Render( 2, error == "error" ? `${ linnk.name } 保存失败，请稍后重新再试。` : error );
                     });
                     break;
                 case "evernote":
