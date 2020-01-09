@@ -65,7 +65,7 @@ class FControl extends React.Component {
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                         [ "save", "markdown", "offlinemarkdown", "png", "epub", "pdf", "kindle", "temp", "html", "offlinehtml", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion", "youdao", "weizhi" ].includes( type )) {
+                         [ "save", "markdown", "offlinemarkdown", "png", "epub", "pdf", "kindle", "temp", "bear", "ulysses", "html", "offlinehtml", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion", "youdao", "weizhi" ].includes( type )) {
                         const [ title, desc, content ] = [ $( "head title" ).text().trim(), "", $( ".simpread-focus-highlight" ).html().trim() ];
                         output.Action( type, title, desc, content );
                     }
