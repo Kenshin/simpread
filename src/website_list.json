@@ -710,7 +710,8 @@
             "<table class='navbox'>",
             "<div class='thumb'>",
             "<div class='dablink'>",
-            "<table class='metadata'>"
+            "<table class='metadata'>",
+            "<math>"
         ]
     },{
         "name"    : "article.pmcaff.com",
