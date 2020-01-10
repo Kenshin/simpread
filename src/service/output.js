@@ -30,6 +30,7 @@ function action( type, title, desc, content ) {
 
     const styles = callback => {
         ss.SpecialCSS( storage.pr.mathjax, special => {
+            th.GetAll();
             const theme  = th.Get( storage.read.theme ),
                   global = th.Get( "global" ),
                   common = th.Get( "common" ),
