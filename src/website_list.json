@@ -252,7 +252,7 @@
         "url"     : "http*://www.dgtle.com/article-*.html",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "[[{$('.view_content').html()||$('#view_content').html()}]]",
+        "include" : "[[{$('.view_content').html()||$('#view_content').html()||$('#articleContent').html()||$('.forum-viewthread-article-box').html()}]]",
         "exclude" : [
             "<div id='comments_top'>",
             "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
@@ -403,6 +403,15 @@
         "include" : "[[`//*[@id='__next']/section[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]`]]",
         "exclude" : [
             "[[`/html[1]/div[1]/sr-read[1]/sr-rd-content[1]/div[1]`]]"
+        ]
+    },{
+        "name"    : "spaces.ac.cn",
+        "url"     : "https://spaces.ac.cn/archives/*",
+        "title"   : "<span class='sub-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='PostContent'>",
+        "exclude" : [
+            ""
         ]
     },{
         "name"    : "huxiu.com",
