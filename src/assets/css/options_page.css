@@ -488,7 +488,7 @@ card-empty a {
 }
 
 .bubbles.notice {
-    right: 94px;
+    right: 164px;
     background-color: #16666f;
 }
 
@@ -533,7 +533,7 @@ card-empty a {
  * Help bubbles
  */
 .bubbles.help {
-    right: 24px;
+    right: 94px;
     background-color: #607D8B;
 }
 
@@ -737,7 +737,7 @@ guid-card-tips span {
  * Feedback bubbles
  */
 .bubbles.feedback {
-    right: 164px;
+    right: 24px;
     background-color: #fb7756;
 }
 
