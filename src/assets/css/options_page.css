@@ -732,3 +732,162 @@ guid-card-tips span {
     font-size: 30px;
     letter-spacing: .6em;
 }
+
+/**
+ * Feedback bubbles
+ */
+.bubbles.feedback {
+    right: 164px;
+    background-color: #fb7756;
+}
+
+.feedback:hover {
+    background-color: rgba(251, 119, 86, .8);
+}
+
+/**
+ * URL Scheme source form simpread.css
+ */
+
+.simpread-urlscheme,
+.simpread-feedback {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 2147483646;
+}
+
+simpread-urlscheme,
+simpread-feedback {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 20px 20px 0;
+
+    width: 500px;
+
+    color: rgba(51, 51, 51, .87);
+    background-color: #fff;
+    border-radius: 3px;
+
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 2px, rgba(0, 0, 0, 0.26) 0px 2px 2px;
+    overflow: hidden;
+
+    transform-origin: bottom;
+    transition: all .6s ease;
+}
+
+simpread-urlscheme *,
+simpread-feedback * {
+    font-size: 12px!important;
+    box-sizing: border-box;
+}
+
+simpread-urlscheme.active,
+simpread-feedback.active {
+    animation-name: srFadeInUp;
+    animation-duration: 450ms;
+    animation-fill-mode: both;
+}
+
+simpread-urlscheme.hide,
+simpread-feedback.hide {
+    animation-name: srFadeInDown;
+    animation-duration: 450ms;
+    animation-fill-mode: both;
+}
+
+simpread-urlscheme sr-urls-label,
+simpread-feedback sr-fb-label {
+    width: 100%;
+}
+
+simpread-urlscheme sr-urls-head,
+simpread-feedback sr-fb-head {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+simpread-urlscheme sr-urls-content,
+simpread-feedback sr-fb-content {
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+simpread-urlscheme sr-urls-footer,
+simpread-feedback sr-urls-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+simpread-urlscheme sr-urls-a,
+simpread-feedback sr-fb-a {
+    color: #2163f7;
+    cursor: pointer;
+}
+
+simpread-urlscheme text-field-state,
+simpread-feedback text-field-state {
+    border-top: none rgba(34, 101, 247, 0.8)!important;
+    border-left: none rgba(34, 101, 247, 0.8)!important;
+    border-right: none rgba(34, 101, 247, 0.8)!important;
+    border-bottom: 2px solid rgba(34, 101, 247, 0.8)!important;
+}
+
+simpread-urlscheme switch,
+simpread-feedback switch {
+    margin-top: 0!important;
+}
+
+@keyframes srFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes srFadeInDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+}
+
+/**
+ * Feeback
+ */
+
+simpread-feedback sr-fb-head {
+    font-weight: bold;
+}
+
+simpread-feedback sr-fb-content {
+    display: flex;
+    flex-direction: column;
+}
+
+simpread-feedback sr-fb-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    width: 100%;
+}

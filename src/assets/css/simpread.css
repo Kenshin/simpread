@@ -759,7 +759,8 @@ sr-mask {
  * URL Scheme
  */
 
-.simpread-urlscheme {
+.simpread-urlscheme,
+.simpread-feedback {
     position: fixed;
     right: 20px;
     bottom: 20px;
@@ -767,7 +768,8 @@ sr-mask {
     z-index: 2147483646;
 }
 
-simpread-urlscheme {
+simpread-urlscheme,
+simpread-feedback {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -788,28 +790,33 @@ simpread-urlscheme {
     transition: all .6s ease;
 }
 
-simpread-urlscheme * {
+simpread-urlscheme *,
+simpread-feedback * {
     font-size: 12px!important;
     box-sizing: border-box;
 }
 
-simpread-urlscheme.active {
+simpread-urlscheme.active,
+simpread-feedback.active {
     animation-name: srFadeInUp;
     animation-duration: 450ms;
     animation-fill-mode: both;
 }
 
-simpread-urlscheme.hide {
+simpread-urlscheme.hide,
+simpread-feedback.hide {
     animation-name: srFadeInDown;
     animation-duration: 450ms;
     animation-fill-mode: both;
 }
 
-simpread-urlscheme sr-urls-label {
+simpread-urlscheme sr-urls-label,
+simpread-feedback sr-fb-label {
     width: 100%;
 }
 
-simpread-urlscheme sr-urls-head {
+simpread-urlscheme sr-urls-head,
+simpread-feedback sr-fb-head {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -818,30 +825,35 @@ simpread-urlscheme sr-urls-head {
     width: 100%;
 }
 
-simpread-urlscheme sr-urls-content {
+simpread-urlscheme sr-urls-content,
+simpread-feedback sr-fb-content {
     margin-bottom: 5px;
     width: 100%;
 }
 
-simpread-urlscheme sr-urls-footer {
+simpread-urlscheme sr-urls-footer,
+simpread-feedback sr-urls-footer {
     display: flex;
     justify-content: flex-end;
     width: 100%;
 }
 
-simpread-urlscheme sr-urls-a {
+simpread-urlscheme sr-urls-a,
+simpread-feedback sr-fb-a {
     color: #2163f7;
     cursor: pointer;
 }
 
-simpread-urlscheme text-field-state {
+simpread-urlscheme text-field-state,
+simpread-feedback text-field-state {
     border-top: none rgba(34, 101, 247, 0.8)!important;
     border-left: none rgba(34, 101, 247, 0.8)!important;
     border-right: none rgba(34, 101, 247, 0.8)!important;
     border-bottom: 2px solid rgba(34, 101, 247, 0.8)!important;
 }
 
-simpread-urlscheme switch {
+simpread-urlscheme switch,
+simpread-feedback switch {
     margin-top: 0!important;
 }
 
@@ -867,4 +879,25 @@ simpread-urlscheme switch {
         opacity: 0;
         transform: translateY(100px);
     }
+}
+
+/**
+ * Feeback
+ */
+
+simpread-feedback sr-fb-head {
+    font-weight: bold;
+}
+
+simpread-feedback sr-fb-content {
+    display: flex;
+    flex-direction: column;
+}
+
+simpread-feedback sr-fb-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    width: 100%;
 }
