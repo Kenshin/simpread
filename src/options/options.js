@@ -35,6 +35,7 @@ import About      from 'about';
 import Unrdist    from 'unrdist';
 import * as welc  from 'welcome';
 import * as guide from 'guide';
+import * as fb    from 'feedback';
 
 import PureRead   from 'puread';
 
@@ -120,6 +121,7 @@ storage.Read( first => {
     mainRender( tabsItemID );
     setTimeout(() => noticeRender(), 500 );
     helpRender();
+    feedbackRender();
     tt.Render( "body" );
     waves.Render({ root: "body" });
 });
@@ -425,5 +427,21 @@ function helpRender() {
         } else {
             exit();
         }
+    });
+}
+
+/*
+ * Feedback bubbles
+ */
+function feedbackRender() {
+    const tmpl = `
+        <div class="md-waves-effect bubbles feedback effect">
+            <i><svg t="1579077064404" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1988" width="24" height="24"><path d="M896 981.333333l-213.333333-128H213.333333c-46.933333 0-85.333333-38.4-85.333333-85.333333V128c0-46.933333 38.4-85.333333 85.333333-85.333333h597.333334c46.933333 0 85.333333 38.4 85.333333 85.333333v853.333333zM298.666667 512c-8.533333 0-12.8 0-21.333334 4.266667s-17.066667 17.066667-21.333333 25.6c0 12.8 0 25.6 4.266667 34.133333 55.466667 93.866667 153.6 149.333333 260.266666 149.333333 106.666667 0 204.8-55.466667 260.266667-149.333333 4.266667-8.533333 8.533333-21.333333 4.266667-34.133333-4.266667-12.8-8.533333-21.333333-21.333334-25.6-8.533333-4.266667-12.8-4.266667-21.333333-4.266667-17.066667 0-29.866667 8.533333-38.4 21.333333C665.6 597.333333 597.333333 640 520.533333 640c-76.8 0-145.066667-42.666667-183.466666-106.666667-8.533333-12.8-21.333333-21.333333-38.4-21.333333z" p-id="1989" fill="#ffffff"></path></svg></i>
+        </div>
+    `;
+    $( "body" ).append( tmpl );
+    $( "body" ).on( "click", ".feedback", event => {
+        fb.Render( storage.version, storage.user );
+        setTimeout( () => tt.Render( ".simpread-feedback" ), 200 );
     });
 }
