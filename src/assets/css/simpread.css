@@ -794,13 +794,13 @@ simpread-urlscheme * {
 }
 
 simpread-urlscheme.active {
-    animation-name: fadeInUp;
+    animation-name: srFadeInUp;
     animation-duration: 450ms;
     animation-fill-mode: both;
 }
 
 simpread-urlscheme.hide {
-    animation-name: fadeInDown;
+    animation-name: srFadeInDown;
     animation-duration: 450ms;
     animation-fill-mode: both;
 }
@@ -845,7 +845,7 @@ simpread-urlscheme switch {
     margin-top: 0!important;
 }
 
-@keyframes fadeInUp {
+@keyframes srFadeInUp {
     from {
         opacity: 0;
         transform: translateY(100px);
@@ -857,7 +857,7 @@ simpread-urlscheme switch {
     }
 }
 
-@keyframes fadeInDown {
+@keyframes srFadeInDown {
     from {
         opacity: 1;
         transform: translateY(0);
