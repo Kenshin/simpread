@@ -302,7 +302,7 @@ function tabsRender( color ) {
                     <section style={{ 'padding': '0;' }}>
                         <PluginsOpt />
                     </section>
-                    <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
+                    <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } onLoadMoreClick={ ()=> setTimeout( ()=> tt.Render( "list" ), 200 ) } /></section>
                     <section style={{ 'padding': '0;' }}>
                         <AccountOps user={ storage.user } load={ loadState } />
                     </section>

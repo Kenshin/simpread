@@ -40,6 +40,7 @@ export default class Unrdist extends React.Component {
     static propsType = {
         list: React.PropTypes.array,
         step: React.PropTypes.number,
+        onLoadMoreClick: React.PropTypes.func,
     };
 
     state = {
@@ -91,6 +92,7 @@ export default class Unrdist extends React.Component {
 
     onClick() {
         this.setState({ page: this.state.page + 1 });
+        this.props.onLoadMoreClick && this.props.onLoadMoreClick();
     }
 
     render() {
