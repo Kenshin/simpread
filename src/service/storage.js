@@ -210,6 +210,7 @@ let current  = {},
         user,
     },
     plugins  = {},
+    unrdist  = [],
     secret   = {
         version   : "2019-12-20",
         "dropbox" : {
@@ -321,7 +322,7 @@ class Storage {
      * @return {array} unread list
      */
     get unrdist() {
-        return simpread[ mode.unrdist ];
+        return unrdist;
     }
 
     /**
@@ -474,14 +475,16 @@ class Storage {
      * @param {function} callback
      */
     Read( callback ) {
-        browser.storage.local.get( [name], function( result ) {
+        browser.storage.local.get( [name], result => {
             let firstload = true;
             if ( result && !$.isEmptyObject( result )) {
                 simpread  = result[name];
                 firstload = false;
             }
             origin = clone( simpread );
-            callback( firstload );
+            this.UnRead( undefined, undefined, () => {
+                callback( firstload );
+            }, "read" );
             console.log( "chrome storage read success!", simpread, origin, result );
         });
     }
@@ -676,25 +679,51 @@ class Storage {
      * @param {type} include: add remove
      * @param {any} include: object( @see unread ) or index
      * @param {function} callback
+     * @param {boolean} include: read & write
      */
-    UnRead( type, args, callback ) {
+    UnRead( type, args, callback, state = "write" ) {
         let success = true;
-        switch ( type ) {
-            case "add":
-                const len = simpread.unrdist.length;
-                args.create = now();
-                args.idx = len > 0 ? simpread.unrdist[0].idx + 1 : 0;
-                simpread.unrdist.findIndex( item => item.url == args.url ) == -1 ?
-                    simpread.unrdist.splice( 0, 0, args ) : success = false;
-                break;
-            case "remove":
-                const idx = simpread.unrdist.findIndex( item => item.idx == args );
-                idx != -1 && simpread.unrdist.splice( idx, 1 );
-                idx == -1 && ( success = false );
-                break;
+        const write = () => {
+                browser.storage.local.set( { ["unrdist"] : unrdist }, () => {
+                    console.log( "chrome storage unrdist set success!", unrdist );
+                    callback && callback( success );
+                });
+            },
+            read = cb => {
+                browser.storage.local.get( ["unrdist"], result => {
+                    console.log( "chrome storage unrdist get success!", result );
+                    result && !$.isEmptyObject( result ) && ( unrdist = result["unrdist"] );
+                    cb  && cb();
+                    !cb && callback && callback( success );
+                });
+            };
+
+        if ( state == "read" ) {
+            if ( simpread.unrdist.length > 0 ) {
+                unrdist = $.extend( true, [], simpread.unrdist );
+                simpread.unrdist = [];
+                write();
+            } else read();
+        } else {
+            read( () => {
+                switch ( type ) {
+                    case "add":
+                        const len = unrdist.length;
+                        args.create = now();
+                        args.idx = len > 0 ? unrdist[0].idx + 1 : 0;
+                        unrdist.findIndex( item => item.url == args.url ) == -1 ?
+                            unrdist.splice( 0, 0, args ) : success = false;
+                        break;
+                    case "remove":
+                        const idx = unrdist.findIndex( item => item.idx == args );
+                        idx != -1 && unrdist.splice( idx, 1 );
+                        idx == -1 && ( success = false );
+                        break;
+                }
+                write();
+            });
         }
-        callback && save( callback( success ) );
-    }
+   }
 
     /**
      * Verify simpread data structure
