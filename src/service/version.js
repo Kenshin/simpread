@@ -19,6 +19,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.1.1", "Mon Jun 11 2018 15:10:12 GMT+0800 (CST)" ],
           [ "1.1.2", "Tue Jun 19 2018 14:15:12 GMT+0800 (CST)" ],
           [ "1.1.3", "Thu Jun 06 2019 15:47:44 GMT+0800 (CST)" ],
+          [ "1.1.4", "Thu Jan 16 2020 14:24:53 GMT+0800 (CST)" ],
       ]),
       details = new Map([
           [ "1.0.0", "" ],
@@ -32,9 +33,44 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.1.1", "新增「黑名单，全新的控制栏面板，更丰富的中文定制化，无障碍阅读等」，" ],
           [ "1.1.2", "新增「插件中心，站点集市等」，" ],
           [ "1.1.3", "新增「消息中心，帮助中心，入门指引，支持导入语雀 / 坚果云，预加载机制，增强插件 API 等」，" ],
+          [ "1.1.4", "新增「反馈中心，支持导入 Notion, 有道笔记，为知笔记，离线下载，截图 等」，" ],
     ]),
     tips      = {
         "root"  : value => `.version-tips[data-hits='${value}']`,
+        "1.1.4" : {
+            target: 'labs',
+            idx: 2,
+            items: [
+                {
+                    id: '',
+                    intro: '简悦 1.1.4 功能描述：<br>' + details.get( "1.1.4" ) + '详细说明 <a target="_blank" href="http://ksria.com/simpread/welcome/version_1.1.4.html">请看这里</a> 。' ,
+                },
+                {
+                    id: 'lazyload',
+                    intro: '现在可通过右键菜单发送「延迟加载」了',
+                },
+                {
+                    id: 'urlscheme',
+                    intro: '【黑名单 · 白名单 · 排除列表 · 延迟加载】加入 <b>正则表达式</b> 的方式，同时也新增加了 <a target="_blank" href="http://ksria.com/simpread/docs/#/右键菜单?id=URL编辑器">URL 编辑器</a>。',
+                },
+                {
+                    id: 'notion',
+                    intro: '简悦支持导出 Markdown 格式到 Notion，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/Notion">请看这里</a>',
+                },
+                {
+                    id: 'youdao',
+                    intro: '简悦支持导出 HTML 格式到 有道云笔记，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/有道云笔记">请看这里</a>',
+                },
+                {
+                    id: 'weizhi',
+                    intro: '简悦支持导出 HTML 格式到 为知笔记，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/为知笔记">请看这里</a>',
+                },
+                {
+                    id: 'webdav',
+                    intro: 'WebDAV 增加了导出格式的定制化，包括 <span>Markdown</span> <span>HTML</span>，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV?id=定制">请看这里</a>',
+                }
+            ]
+        },
         "1.1.3" : {
             target: 'labs',
             idx: 2,
@@ -432,6 +468,12 @@ function Verify( curver, data ) {
 
         data.patch = 0;
         curver = "1.1.3";
+    }
+
+    if ( curver == "1.1.3" ) {
+        data.option.urlscheme     = true;
+        data.option.menu.lazyload = false;
+        curver = "1.1.4";
     }
 
     /*
