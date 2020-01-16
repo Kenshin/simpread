@@ -145,49 +145,49 @@ export class Feedback extends React.Component {
             <simpread-feedback ref="target" class="active">
             { this.state.rate == false ?
                 <sr-block style={{ 'width': '100%' }}>
-                <sr-fb-head>
-                    <sr-fb-label>有了你们的帮助简悦才会变得更好 🙏</sr-fb-label>
-                </sr-fb-head>
-                <sr-fb-content>
-                    <sr-fb-label>提交的站点，默认为当前页面的地址，可为空</sr-fb-label>
-                    <TextField multi={ false } value={ this.props.url } onChange={ (e)=>this.onURLChange(e) } />
-                </sr-fb-content>
-                <sr-fb-content>
-                    <sr-fb-label>支持两种提交方式</sr-fb-label>
-                    <span style={{ 'display': 'flex' }}>
-                        <Button
-                            text="有 Github Issues 帐号" type="raised" waves="md-waves-effect"
-                            color="#fff" backgroundColor="#2196F3" width="50%" style={{ 'margin-left': '0', 'font-weight': 'bold' }}
-                            tooltip={{ text: "如果有 Github 帐号，请首选此方式" }} onClick={ ()=>this.onChangeMode( "github" ) } />
-                        <Button
-                            text="无 Github Issues 帐号" type="raised" mode="secondary" waves="md-waves-effect"
-                            color="#fff" backgroundColor="#757575" width="50%" style={{ 'margin-right': '0', 'font-weight': 'bold' }}
-                            tooltip={{ text: "腾讯旗下的一款用户反馈收集系统，无需注册" }} onClick={ ()=>this.onChangeMode( "tucao" ) } />
-                    </span>
-                </sr-fb-content>
-                { this.state.mode == "tucao" &&
+                    <sr-fb-head>
+                        <sr-fb-label>有了你们的帮助简悦才会变得更好 🙏</sr-fb-label>
+                    </sr-fb-head>
                     <sr-fb-content>
-                        <sr-fb-content>
-                            <Switch width="100%" checked={ this.props.anonymous }
-                                    thumbedColor="#2163f7" trackedColor="#6699FF" waves="md-waves-effect"
-                                    label="支持匿名提交，但建议不要勾选此项"
-                                    onChange={ (v)=>this.onAnonymousChange( v ) } />
-                        </sr-fb-content>
-                        <sr-fb-content>
-                            <sr-fb-label><b>吐个槽</b> 是腾讯旗下的一款用户反馈收集系统，具有如下特点：</sr-fb-label>
-                            <sr-fb-label>· 无需注册，点击后会自动使用简悦的注册系统</sr-fb-label>
-                            <sr-fb-label>· 如需实时收到反馈，请根据提示关注（腾讯官方）微信号</sr-fb-label>
-                            <sr-fb-label>· 你的提交内容，他人无法看到</sr-fb-label>
-                        </sr-fb-content>
+                        <sr-fb-label>提交的站点，默认为当前页面的地址，可为空</sr-fb-label>
+                        <TextField multi={ false } value={ this.props.url } onChange={ (e)=>this.onURLChange(e) } />
                     </sr-fb-content>
-                }
-                <sr-fb-content>
-                    <sr-fb-label><b>方便的话，请帮助简悦，使其变得更好 👉 <sr-fb-a onClick={ ()=>window.open( 'https://wj.qq.com/s2/3611463/7260/', '_blank') }>调查问卷</sr-fb-a></b></sr-fb-label>
-                </sr-fb-content>
-                <sr-fb-footer>
-                    <Button text="取 消" mode="secondary" color="#333" waves="md-waves-effect" onClick={ ()=>this.onClose() } />
-                    <Button text="提 交" waves="md-waves-effect" color="#2163f7" style={{ 'font-weight': 'bold' }} onClick={ ()=>this.onSubmitClick() } />
-                </sr-fb-footer>
+                    <sr-fb-content>
+                        <sr-fb-label>支持两种提交方式</sr-fb-label>
+                        <span style={{ 'display': 'flex' }}>
+                            <Button
+                                text="有 Github Issues 帐号" type="raised" waves="md-waves-effect"
+                                color="#fff" backgroundColor="#2196F3" width="50%" style={{ 'margin-left': '0', 'font-weight': 'bold' }}
+                                tooltip={{ text: "如果有 Github 帐号，请首选此方式" }} onClick={ ()=>this.onChangeMode( "github" ) } />
+                            <Button
+                                text="无 Github Issues 帐号" type="raised" mode="secondary" waves="md-waves-effect"
+                                color="#fff" backgroundColor="#757575" width="50%" style={{ 'margin-right': '0', 'font-weight': 'bold' }}
+                                tooltip={{ text: "腾讯旗下的一款用户反馈收集系统，无需注册" }} onClick={ ()=>this.onChangeMode( "tucao" ) } />
+                        </span>
+                    </sr-fb-content>
+                    { this.state.mode == "tucao" &&
+                        <sr-fb-content>
+                            <sr-fb-content>
+                                <Switch width="100%" checked={ this.props.anonymous }
+                                        thumbedColor="#2163f7" trackedColor="#6699FF" waves="md-waves-effect"
+                                        label="支持匿名提交，但建议不要勾选此项"
+                                        onChange={ (v)=>this.onAnonymousChange( v ) } />
+                            </sr-fb-content>
+                            <sr-fb-content>
+                                <sr-fb-label><b>吐个槽</b> 是腾讯旗下的一款用户反馈收集系统，具有如下特点：</sr-fb-label>
+                                <sr-fb-label>· 无需注册，点击后会自动使用简悦的注册系统</sr-fb-label>
+                                <sr-fb-label>· 如需实时收到反馈，请根据提示关注（腾讯官方）微信号</sr-fb-label>
+                                <sr-fb-label>· 你的提交内容，他人无法看到</sr-fb-label>
+                            </sr-fb-content>
+                        </sr-fb-content>
+                    }
+                    <sr-fb-content>
+                        <sr-fb-label><b>方便的话，请帮助简悦，使其变得更好 👉 <sr-fb-a onClick={ ()=>window.open( 'https://wj.qq.com/s2/3611463/7260/', '_blank') }>调查问卷</sr-fb-a></b></sr-fb-label>
+                    </sr-fb-content>
+                    <sr-fb-footer>
+                        <Button text="取 消" mode="secondary" color="#333" waves="md-waves-effect" onClick={ ()=>this.onClose() } />
+                        <Button text="提 交" waves="md-waves-effect" color="#2163f7" style={{ 'font-weight': 'bold' }} onClick={ ()=>this.onSubmitClick() } />
+                    </sr-fb-footer>
                 </sr-block>
                 :
                 <sr-block style={{ 'width': '100%' }}>
