@@ -575,7 +575,7 @@ function VerifyPlugins( ver, option ) {
     try {
         if ( option.plugins.length == 0 ) return false;
         const str = option.plugins.join( "," );
-        if ( ver == "1.1.3" ) {
+        if ( ver == "1.1.4" ) {
             const newStr = str.replace( /(E0j1nYBmDD,?|SumEaxStWE,?|EHLtCwBy6c,?|UsayAKSuwe,?)/g, "" );
             if ( str != newStr ) {
                 option.plugins = newStr.replace( /,$/, "" ).split( "," );
