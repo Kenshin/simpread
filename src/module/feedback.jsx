@@ -185,6 +185,7 @@ export class Feedback extends React.Component {
                         <sr-fb-label><b>方便的话，请帮助简悦，使其变得更好 👉 <sr-fb-a onClick={ ()=>window.open( 'https://wj.qq.com/s2/3611463/7260/', '_blank') }>调查问卷</sr-fb-a></b></sr-fb-label>
                     </sr-fb-content>
                     <sr-fb-footer>
+                        <Button text="评个分" color="#FF5252" waves="md-waves-effect" style={{ 'font-weight': 'bold' }} onClick={ ()=>this.setState({ rate: true }) } />
                         <Button text="取 消" mode="secondary" color="#333" waves="md-waves-effect" onClick={ ()=>this.onClose() } />
                         <Button text="提 交" waves="md-waves-effect" color="#2163f7" style={{ 'font-weight': 'bold' }} onClick={ ()=>this.onSubmitClick() } />
                     </sr-fb-footer>
