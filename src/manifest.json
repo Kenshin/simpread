@@ -20,7 +20,7 @@
   ],
   "optional_permissions": [ "cookies", "https://*.youdao.com/", "downloads" ],
   "background": {
-    "scripts"       : [ "/bundle/common.js", "/bundle/background.js" ]
+    "scripts"       : [ "/ga.js", "/bundle/common.js", "/bundle/background.js" ]
   },
   "content_scripts" : [
     {
@@ -47,6 +47,6 @@
   ],
   "offline_enabled" : true,
   "update_url"      : "https://clients2.google.com/service/update2/crx",
-  "content_security_policy" : "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "content_security_policy" : "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
   "manifest_version": 2
 }

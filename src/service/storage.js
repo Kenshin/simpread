@@ -128,6 +128,7 @@ const name = "simpread",
             whitelist: false,
             exclusion: false,
             blacklist: false,
+            lazyload: false,
             unrdist: false,
         },
         origins   : [],
@@ -140,6 +141,7 @@ const name = "simpread",
             "simpread.ksria.cn"
         ],
         plugins   : [], // plugin id, e.g. kw36BtjGu0
+        urlscheme : true,
     },
     statistics = {
         "focus"   : 0,
@@ -664,7 +666,6 @@ class Storage {
             service ? simpread.statistics.service[ service ]++ : simpread.statistics[ type ]++;
         }
         console.log( "current statistics is ", simpread.statistics )
-        browser.runtime.sendMessage({ type: "track", value: { eventAction: type, eventCategory: "read mode", eventLabel: "click" } });
         save( undefined, type == "create" );
     }
 

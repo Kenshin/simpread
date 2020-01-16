@@ -403,12 +403,10 @@ class Ins {
             this.ins.token_secret    = this.token_secret;
             this.ins.consumer_key    = this.consumer_key;
             this.ins.consumer_secret = this.consumer_secret;
-            this.ins.add( url, title, description ).done( result => {
-                if ( result && result.length > 0 ) callback( "success", undefined );
-                else callback( undefined, "error" );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error )
-                callback( undefined, textStatus );
+            const settings           = this.ins.add( url, title, description );
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+                if ( result.done ) { callback( "success", undefined ); }
+                else callback( undefined, result.fail );
             });
         }
 }
@@ -467,33 +465,36 @@ class Linnk {
             targetURL: url,
             title,
             tagsStr  : this.tags,
-        };
-
-        $.ajax({
+        },
+        settings = {
             url     : "https://linnk.net/a/api/bookmark/new",
             type    : "POST",
             headers : { Authorization: this.access_token },
             data,
-        }).done( ( result, textStatus, jqXHR ) => {
-            const data = JSON.parse(result);
-            if ( data && data.code == 200 ) callback( "success", undefined );
-            else callback( undefined, "error" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        };
+
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+            if ( result.done ) {
+                const data = JSON.parse( result.done );
+                if ( data && data.code == 200 ) callback( "success", undefined );
+                else callback( undefined, "error" );
+            } else callback( undefined, result.fail );
         });
     }
 
     Groups( callback ) {
-        $.ajax({
+        const settings = {
             url     : "https://linnk.net/a/api/group/my",
             type    : "GET",
             headers : { Authorization: this.access_token },
-        }).done( ( result, textStatus, jqXHR ) => {
-            callback( JSON.parse(result), undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+            if ( result.done ) {
+                const data = JSON.parse( result.done );
+                if ( data.code != 200 ) {
+                    callback( undefined, this.error_code[ data.code ] );
+                } else callback( data, undefined );
+            } else callback( undefined, "error" );
         });
     }
 
@@ -504,27 +505,27 @@ class Linnk {
     }
 
     NewGroup( name, callback ) {
-        $.ajax({
+        const settings = {
             url     : "https://linnk.net/a/api/group/new",
             type    : "POST",
             headers : { Authorization: this.access_token },
             data    : { groupName: name },
-        }).done( ( result, textStatus, jqXHR ) => {
-            callback( JSON.parse(result), undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+            if ( result.done ) {
+                callback( JSON.parse( result.done ), undefined );
+            } else callback( undefined, result.fail );
         });
     }
 
     GetSafeGroup( name, callback ) {
-        this.Groups( result => {
+        this.Groups( ( result, error ) => {
             if ( result && result.code == 200 ) {
                 const group = this.GetGroup( name, result.data );
                 !group && this.NewGroup( name, callback );
                 group  && callback({ data: group, code: 200 }, undefined );
             } else {
-                callback( undefined, "error" );
+                callback( undefined, error == "error" ? "error" : error );
             }
         })
     }

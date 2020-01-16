@@ -656,6 +656,9 @@ const focusItems = ( items => {
     dels.forEach( del => delete news[ del ] );
     delete news.option.items.fullscreen;
     delete news.option.items.tempread;
+    delete news.download.items.snapshot;
+    delete news.download.items.offlinehtml;
+    delete news.download.items.offlinemarkdown;
     news.top = {
         "name" : "返回顶部",
         "icon" : ss.IconPath("top_icon"),
@@ -723,28 +726,28 @@ const tabsItem = [{
        switch ( idx ) {
             case 0:
                 delete menu.active;
-                menu.icon = ss.IconPath( "common_icon" );
+                menu.fontIcon = '<i class="fas fa-sync-alt"></i>';
                 break;
             case 1:
-                menu.icon = ss.IconPath( "focus_mode_icon" );
+                menu.fontIcon = '<i class="fas fa-wrench"></i>';
                 break;
             case 2:
-                menu.icon = ss.IconPath( "read_mode_icon" );
+                menu.fontIcon = '<i class="fas fa-tools"></i>';
                 break;
             case 3:
-                menu.icon = ss.IconPath( "labs_icon" );
+                menu.fontIcon = '<i class="fas fa-sitemap"></i>';
                 break;
             case 4:
-                menu.icon = ss.IconPath( "plugins_icon" );
+                menu.fontIcon = '<i class="fas fa-plug"></i>';
                 break;
             case 5:
-                menu.icon = ss.IconPath( "read_later_icon" );
+                menu.fontIcon = '<i class="fas fa-inbox"></i>';
                 break;
             case 6:
-                menu.icon = ss.IconPath( "about_icon" );
+                menu.fontIcon = '<i class="fas fa-user"></i>';
                 break;
             case 7:
-                menu.icon = ss.IconPath( "help_icon" );
+                menu.fontIcon = '<i class="fas fa-info-circle"></i>';
                 break;
        }
        return menu;

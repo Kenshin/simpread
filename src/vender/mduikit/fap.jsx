@@ -1,7 +1,7 @@
 /*!
  * React Material Design: FAP( Floating Action Panel )
  * 
- * @version : 0.0.1
+ * @version : 0.0.1.1231
  * @update  : 2018/04/19
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
@@ -193,6 +193,7 @@ const cssinjs_panel = () => {
           groups: {
             display: 'block',
             width: '100%',
+            overflowX: 'hidden',
             overflowY: 'auto',
           },
 

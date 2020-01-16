@@ -534,7 +534,7 @@ function VerifyPlugins( ver, option ) {
         if ( option.plugins.length == 0 ) return false;
         const str = option.plugins.join( "," );
         if ( ver == "1.1.3" ) {
-            const newStr = str.replace( /(E0j1nYBmDD,?|SumEaxStWE,?|UsayAKSuwe,?)/g, "" );
+            const newStr = str.replace( /(E0j1nYBmDD,?|SumEaxStWE,?|EHLtCwBy6c,?|UsayAKSuwe,?)/g, "" );
             if ( str != newStr ) {
                 option.plugins = newStr.replace( /,$/, "" ).split( "," );
                 return true;

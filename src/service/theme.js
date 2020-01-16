@@ -70,9 +70,14 @@ class Theme {
         return themes[theme];
     }
 
+    GetAll() {
+        findThemeStyle();
+    }
+
     constructor() {
         require( `../assets/css/theme_common.css` );
         names.forEach( name => require( `../assets/css/theme_${name}.css` ) );
+        require( `../assets/css/theme_mobile.css` );
         findThemeStyle( ( name, content ) => themes[name] = content );
     }
 }
@@ -89,11 +94,13 @@ function findThemeStyle( callback ) {
         if ( css.startsWith( flag ) ) {
             const arr  = css.replace( flag, "" ).match( /\w+/ ),
                   name = arr[ arr.length - 1 ];
-            callback( name, css, $target );
+            callback && callback( name, css, $target );
         } else if ( css.search( ".simpread-font" ) > -1 ) {
-            themes["global"] = css;
-        } else if ( css.search( ".simpread-theme-root" ) > -1 ) {
-            themes["common"] = css;
+            !themes["global"] && ( themes["global"] = css );
+        } else if ( css.search( "(pointer: coarse)" ) == -1 && css.search( ".simpread-theme-root" ) > -1 ) {
+            !themes["common"] && ( themes["common"] = css );
+        } else if ( css.search( "(pointer: coarse)" ) > -1 && css.search( "sr-read" ) > -1 ) {
+            !themes["mobile"] && ( themes["mobile"] = css );
         }
     });
 }

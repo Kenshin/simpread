@@ -9,7 +9,7 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 import * as exp    from 'export';
-import {br}        from 'browser';
+import {browser,br}from 'browser';
 import * as msg    from 'message';
 
 export default class CommonOpt extends React.Component {
@@ -101,6 +101,7 @@ export default class CommonOpt extends React.Component {
         };
 
         storage.Safe( ()=> {
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "sync", eventAction: "sync", eventValue: storage.option.save_at }) );
             if ( storage.option.save_at == "dropbox" ) {
                 const sec_dbx = storage.secret.dropbox;
                 !sec_dbx.access_token ?

@@ -10,6 +10,7 @@ import * as watch  from 'watch';
 import * as WebDAV from 'webdav';
 import * as permission
                    from 'permission';
+import * as tips   from 'tips';
 import PureRead    from 'puread';
 
 // global update site tab id
@@ -65,6 +66,7 @@ function getNewsitesHandler( result ) {
  */
 menu.OnClicked( ( info, tab ) => {
     console.log( "background contentmenu Listener", info, tab );
+    tracked({ eventCategory: "menu", eventAction: "menu", eventValue: info.menuItemId });
     if ( info.menuItemId == "link" ) {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
     } else if ( info.menuItemId == "list" ) {
@@ -77,6 +79,8 @@ menu.OnClicked( ( info, tab ) => {
         browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_blacklist, {url: info.pageUrl } ));
     } else if ( info.menuItemId == "unrdist" ) {
         browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_unrdist, {url: info.pageUrl } ));
+    } else if ( info.menuItemId == "lazyload" ) {
+        browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_lazyload, {url: info.pageUrl } ));
     } else {
         if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
     }
@@ -214,7 +218,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Listen runtime message, include: `shortcuts` `browser_action`
+ * Listen runtime message
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "background runtime Listener", request );
@@ -287,6 +291,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             break;
         case msg.MESSAGE_ACTION.speak_stop:
             browser.tts.stop();
+            break;
+        case msg.MESSAGE_ACTION.tips:
+            tips.Verify( request.value.code, sendResponse );
+            break;
+        case msg.MESSAGE_ACTION.tips_norepeat:
+            tips.Done( request.value.code );
             break;
     }
 });
@@ -403,27 +413,9 @@ function setMenuAndIcon( id, code ) {
  * 
  * @param {object} google analytics track object
  */
-function tracked({ eventCategory, eventAction, eventLabel }) {
-    console.log( "current track is", eventCategory, eventAction, eventLabel )
-    ga( 'send', {
-        hitType      : 'event',
-        eventCategory,
-        eventAction,
-        eventLabel
-    });
-}
-
-/**
- * Google analytics
- */
-analytics();
-function analytics() {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-405976-12', 'auto');
-    ga('send', 'pageview');
+function tracked({ eventCategory, eventAction, eventValue }) {
+    console.log( "current track is", eventCategory, eventAction, eventValue )
+    _gaq.push([ '_trackEvent', eventCategory, eventValue ]);
 }
 
 /**
@@ -431,4 +423,5 @@ function analytics() {
  */
 function uninstall() {
     browser.runtime.setUninstallURL( storage.option.uninstall ? storage.service + "/uninstall" : "" );
+    tracked({ eventCategory: "install", eventAction: "install", eventValue: "uninstall" });
 }

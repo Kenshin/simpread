@@ -1,8 +1,8 @@
 /*!
  * React Material Design: FAB( Floating Action Button )
  * 
- * @version : 0.0.3
- * @update  : 2018/04/26
+ * @version : 0.0.3.0109
+ * @update  : 2020/01/09
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -40,6 +40,7 @@ const cssinjs = () => {
 
                 width: '100px',
                 height: '100%',
+                zIndex: 2147483647,
               },
 
               origin : {

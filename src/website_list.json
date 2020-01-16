@@ -33,6 +33,24 @@
             "<div class='embed-control'>"
         ]
     },{
+        "name"    : "topic.readhub.cn",
+        "url"     : "https://readhub.cn/topic/*",
+        "title"   : "<h2 class='topicTitle___3DA7c'>",
+        "desc"    : "",
+        "include" : "[[{$('.content___2CL42').find('.summary___3oqrM').parent().html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "newsflashes.36kr.com",
+        "url"     : "https://36kr.com/newsflashes/*",
+        "title"   : "<a class='item-title'>",
+        "desc"    : "",
+        "include" : "<pre class='pre-item-des'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "36kr.com",
         "url"     : "http://36kr.com/p/",
         "title"   : "<title>",
@@ -46,20 +64,29 @@
             "<div class='share-nav'>"
         ]
     },{
-        "name"    : "pingwest.com",
-        "url"     : "http*://www.pingwest.com/a/*",
+        "name"    : "s.pingwest.com",
+        "url"     : "http*://www.pingwest.com/s/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<article class=\"article-style\">",
+        "include" : "[[{$($('section.content')[1]).html()}]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "wire.pingwest.com",
+        "url"     : "http*://www.pingwest.com/wire/",
+        "title"   : "<h1 class='title'>",
+        "desc"    : "",
+        "include" : "<div id='sc-container'>",
         "exclude" : [
             "<p class='post-footer-wx'>"
         ]
     },{
         "name"    : "pingwest.com",
-        "url"     : "http://www.pingwest.com/wire/",
-        "title"   : "<h1 class='title'>",
+        "url"     : "http*://www.pingwest.com/a/*",
+        "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div id='sc-container'>",
+        "include" : "<article class=\"article-style\">",
         "exclude" : [
             "<p class='post-footer-wx'>"
         ]
@@ -201,9 +228,9 @@
     },{
         "name"    : "sspai.com",
         "url"     : "https://sspai.com/post/",
-        "title"   : "<h1 class='title'>",
+        "title"   : "[[{$('title').text().replace( ' - 少数派', '' )}]]",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[$('.content')]]]",
+        "include" : "[[[$('.articleWidth-content').find('.content')]]]",
         "exclude" : [
             "<img id='s1' >",
             "<hr>",
@@ -225,7 +252,7 @@
         "url"     : "http*://www.dgtle.com/article-*.html",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
-        "include" : "[[{$('.view_content').html()||$('#view_content').html()}]]",
+        "include" : "[[{$('.view_content').html()||$('#view_content').html()||$('#articleContent').html()||$('.forum-viewthread-article-box').html()}]]",
         "exclude" : [
             "<div id='comments_top'>",
             "[[/src=\\S+(xxxxxbbs)\\S+'/]]"
@@ -280,7 +307,8 @@
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
             "<i class='icon-external'>"
-        ]
+        ],
+        "css"     : ".MCNLinkCard-info { margin-left: 12px;}"
     },{
         "name"    : "geekpark.net",
         "url"     : "http://www.geekpark.net/topics/",
@@ -368,6 +396,24 @@
             ""
         ]
     },{
+        "name"    : "creatorsdaily.com",
+        "url"     : "[[/https://creatorsdaily.com/posts/\\w+/]]",
+        "title"   : "<span class='sub-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[@id='__next']/section[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]`]]",
+        "exclude" : [
+            "[[`/html[1]/div[1]/sr-read[1]/sr-rd-content[1]/div[1]`]]"
+        ]
+    },{
+        "name"    : "spaces.ac.cn",
+        "url"     : "https://spaces.ac.cn/archives/*",
+        "title"   : "<span class='sub-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='PostContent'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "huxiu.com",
         "url"     : "https://www.huxiu.com/article/",
         "title"   : "<h1 class='t-h1'>",
@@ -383,6 +429,24 @@
         "title"   : "<h1 id='title'>",
         "desc"    : "",
         "include" : "<div id='content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "movie.douban.com",
+        "url"     : "[[/https:\\/\\/movie.douban.com\\/subject\\/\\d+\\/?/]]",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='link-report'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "note.douban.com",
+        "url"     : "[[/https?:\\/\\/www.douban.com\\/note\\/\\d+\\/?/]]",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='link-report'>",
         "exclude" : [
             ""
         ]
@@ -655,7 +719,8 @@
             "<table class='navbox'>",
             "<div class='thumb'>",
             "<div class='dablink'>",
-            "<table class='metadata'>"
+            "<table class='metadata'>",
+            "<math>"
         ]
     },{
         "name"    : "article.pmcaff.com",
@@ -910,6 +975,15 @@
             ""
         ]
     },{
+        "name"    : "infoq.cn",
+        "url"     : "http*://www.infoq.cn/article/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div class='article-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "infoq.com",
         "url"     : "http://www.infoq.com/cn/articles/",
         "title"   : "<title>",
@@ -1120,7 +1194,9 @@
         "desc"    : "",
         "include" : "<div class='article_content'>",
         "exclude" : [
-            "<div class='meau-gotop-box'>"
+            "<div class='meau-gotop-box'>",
+            "<div class='more-toolbox'>",
+            "<div class='person-messagebox'>"
         ],
         "css"     : ".markdown_views pre code{background-color:transparent!important;}"
     },{
@@ -1159,6 +1235,16 @@
         "exclude" : [
             "[['<p>（完）</p>']]"
         ]
+    },{
+        "name"    : "ruanyf.yuque.com",
+        "url"     : "[[/https://www.yuque.com/ruanyf/weekly/issue-\\d+/]]",
+        "title"   : "<h1 id='page-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[@id='content']/div[2]/div[1]/div[1]`]]",
+        "exclude" : [
+            ""
+        ],
+        "css": "span svg { display: none; }"
     },{
         "name"    : "v2ex.com",
         "url"     : "https://www.v2ex.com/t/",
@@ -1838,11 +1924,12 @@
         "url"     : "http*://post.smzdm.com/p/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='news_content'>",
+        "include" : "[[`//*[@id='articleId']`]]",
         "exclude" : [
             "<h1 class='item-name'>",
             "<span class='embed-card'>"
-        ]
+        ],
+        "css"     : ".embed-card-logo { margin-right: 14px }"
     },{
         "name"    : "news.mydrivers.com",
         "url"     : "http://news.mydrivers.com/*/*/*.htm",

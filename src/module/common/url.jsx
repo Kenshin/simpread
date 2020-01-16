@@ -26,10 +26,12 @@ export default class URL extends React.Component {
         if ( url == "" ) {
             code = -2;
             this.setState({ error : "当前输入不能为空。" });
-        }  else if ( !/^http[s|*]?:\/\//.test( url ) ) {
+        } else if ( url.startsWith( "[[/" ) && url.endsWith( "/]]" ) && !new RegExp( url.replace( /^\[\[\/|\/\]\]/g, "" ) ).test( location.href )) {
+            location.protocol != "chrome-extension:" && this.setState({ error : "请输入与当前网址匹配的域名，正则表达式出现错误。" });
+        }  else if ( !url.startsWith( "[[/" ) && !/^http[s|*]?:\/\//.test( url ) ) {
             code = -1;
             this.setState({ error : "请输入有效的 url " });
-        } else if ( location.protocol.startsWith( "http" ) && !minimatch( window.location.href, url ) && url != this.props.url ) {
+        } else if ( !url.startsWith( "[[/" ) && location.protocol.startsWith( "http" ) && !minimatch( window.location.href, url ) && url != this.props.url ) {
             code = -1;
             this.setState({ error : "请输入与当前网址匹配的域名，支持 minimatch " });
         } else {

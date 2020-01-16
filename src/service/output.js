@@ -30,11 +30,13 @@ function action( type, title, desc, content ) {
 
     const styles = callback => {
         ss.SpecialCSS( storage.pr.mathjax, special => {
+            th.GetAll();
             const theme  = th.Get( storage.read.theme ),
                   global = th.Get( "global" ),
                   common = th.Get( "common" ),
+                  mobile = th.Get( "mobile" ),
                   css    = ss.GetCustomCSS();
-            callback({ theme, global, common, css, special });
+            callback({ theme, global, common, css, mobile, special });
       });
     },
     toMarkdown = callback => {
@@ -70,10 +72,11 @@ function action( type, title, desc, content ) {
         type.split("_")[1] != "card" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url }));
     } else if ( [ "save", "markdown", "offlinemarkdown", "png", "kindle", "pdf", "epub", "temp", "html", "offlinehtml", "snapshot", "bear", "ulysses" ].includes( type ) ) {
         storage.Statistics( "service", type );
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "service", eventAction: "service", eventValue: type }) );
         switch ( type ) {
             case "save":
                 const url = window.location.href.replace( /(\?|&)simpread_mode=read/, "" );
-                storage.UnRead( "add", { url, title, desc }, success => {
+                storage.UnRead( "add", util.GetPageInfo(), success => {
                     success  && new Notify().Render( 0, "成功加入未读列表。" );
                     !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
                 });
@@ -222,6 +225,7 @@ function action( type, title, desc, content ) {
         const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion, youdao, weizhi } = exp,
               id      = type == "yinxiang" ? "evernote" : type;
         storage.Statistics( "service", type );
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "service", eventAction: "service", eventValue: type }) );
         const service = type => {
             switch( type ) {
                 case "dropbox":
@@ -238,12 +242,13 @@ function action( type, title, desc, content ) {
                     break;
                 case "linnk":
                     const notify = new Notify().Render({ content: `开始保存到 Linnk，请稍等...`, state: "loading" });
+                    linnk.access_token = storage.secret.linnk.access_token;
                     linnk.GetSafeGroup( linnk.group_name, ( result, error ) => {
                         notify.complete();
                         if ( !error ) {
                             linnk.group_id = result.data.groupId;
                             linnk.Add( window.location.href, title, ( result, error ) => exp.svcCbWrapper( result, error, linnk.name, type, new Notify() ));
-                        } else new Notify().Render( 2, `${ linnk.name } 保存失败，请稍后重新再试。` );
+                        } else new Notify().Render( 2, error == "error" ? `${ linnk.name } 保存失败，请稍后重新再试。` : error );
                     });
                     break;
                 case "evernote":

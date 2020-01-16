@@ -25,6 +25,9 @@ function HTML( title, desc, content, styles ) {
                 <html lang="en" class="simpread-font simpread-theme-root" style='${ $( "html" ).attr( "style" ) }'>
                     <head>
                         <meta charset="utf-8">
+                        <meta http-equiv="content-type" content="text/html; charset=UTF-8;charset=utf-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
                         <meta name="author" content="Kenshin"/>
                         <meta name="description" content="简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展" />
                         <meta name="keywords" content="Chrome extension, Chrome 扩展, 阅读模式, 沉浸式阅读, 简悦, 简阅, read mode, reading mode, reader view, firefox, firefox addon, userscript, safari, opera, tampermonkey"/>
@@ -42,6 +45,7 @@ function HTML( title, desc, content, styles ) {
                         <style type="text/css">${ styles.common }</style>
                         <style type="text/css">${ styles.theme  }</style>
                         <style type="text/css">${ styles.global }</style>
+                        <style type="text/css">${ styles.mobile }</style>
                         <style type="text/css">${ styles.css    }</style>
                         <style type="text/css">${ styles.special}</style>
                         ${hightlight()}
