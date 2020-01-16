@@ -215,7 +215,7 @@ export class Feedback extends React.Component {
                     <sr-stars-footer>
                         { this.state.stars == 0 && <Button text="投个票，有你的参与简悦才能变得更美好" waves="md-waves-effect" color="#2163f7" style={{ 'font-weight': 'bold' }} /> }
                         { this.state.stars > 0 && this.state.stars < 4 && <Button text="吐个槽？" waves="md-waves-effect"  color="#FF5252" style={{ 'font-weight': 'bold' }} onClick={ () => this.onRateClick() }/> }
-                        { this.state.stars > 3 && <Button text="谢谢，方便请前往 Chrome 应用商店投票" waves="md-waves-effect" color="#2163f7" style={{ 'font-weight': 'bold' }} onClick={ () => this.onRateClick() }/> }
+                        { this.state.stars > 3 && <Button color="#fff" backgroundColor="#2196F3" text="谢谢，方便请前往 Chrome 应用商店投票 👉" waves="md-waves-effect" style={{ 'font-weight': 'bold' }} onClick={ () => this.onRateClick() }/> }
                     </sr-stars-footer>
                 </sr-block> }
             </simpread-feedback>
