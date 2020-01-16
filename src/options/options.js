@@ -399,6 +399,7 @@ function noticeRender() {
     $( "body" ).on( "click", ".notice", event => {
         location.href = location.origin + "/options/notice.html?is_update=" + sessionStorage.getItem( "is_update" );
     });
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "help", eventAction: "help", eventValue: "notice" }) );
 }
 
 /*
@@ -426,6 +427,7 @@ function helpRender() {
             exit();
         }
     });
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "help", eventAction: "help", eventValue: "help" }) );
 }
 
 /*
@@ -441,4 +443,5 @@ function feedbackRender() {
         fb.Render( storage.version, storage.user );
         setTimeout( () => tt.Render( ".simpread-feedback" ), 200 );
     });
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "help", eventAction: "help", eventValue: "feedback" }) );
 }
