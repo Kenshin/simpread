@@ -497,7 +497,7 @@ function Verify( curver, data ) {
  */
 function Incompatible( ver, data ) {
     let is_changed = false;
-    if ( ver == "1.1.3" ) {
+    if ( ver == "1.1.4" ) {
         data.option.origins = data.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
         if ( data.option.origins.length > 0 ) {
             is_changed = true;
