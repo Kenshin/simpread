@@ -124,9 +124,9 @@ export class Feedback extends React.Component {
 
     onTucaoClick() {
         const data = {
-            "nickname"     : this.props.anonymous ? "简悦用户" : this.props.user.name,
+            "nickname"     : this.props.anonymous ? "简悦用户" : this.props.user.name || "简悦用户",
             "avatar"       : `https://api.adorable.io/avatars/285/${ this.props.user.name || this.props.user.uid.substr( 0,13 ) }.png`,
-            "openid"       : this.props.user.uid,
+            "openid"       : this.props.user.uid.substr( 0,13 ),
             "clientVersion": this.props.version,
             "clientInfo"   : window.navigator.userAgent,
             "customInfo"   : "https://github.com/erguotou520/tucao-dingtalk-webhook"
