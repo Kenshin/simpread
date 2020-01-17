@@ -155,8 +155,10 @@ function pRead() {
 function updateData() {
     ver.Incompatible( storage.version, storage.simpread ) && storage.Write( () => {
         console.log( "current simpread is update ", storage.simpread )
+        new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，<b>务必刷新后重新导入</b>！<a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">详细说明</a>`, state: "holdon" });
         watch.SendMessage( "option", true );
     }, storage.simpread );
+    ver.VerifyPlugins( storage.option ) && new Notify().Render({ type: 2, content: `有需要清理的已失效插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${storage.version}.html#badplugins" target="_blank">失效插件</a>`, state: "holdon" });
 }
 
 /**

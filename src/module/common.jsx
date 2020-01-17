@@ -155,7 +155,8 @@ export default class CommonOpt extends React.Component {
                                 new Notify().Render({ type: 2, content: `上传版本太低，已自动转换为最新版本。`, state: "holdon" });
                             }
                             menu.Refresh( json.option.menu );
-                            ver.Incompatible( json.version, json );
+                            ver.Incompatible( json.version, json ) && new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，<b>务必刷新后重新导入</b>！<a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">详细说明</a>`, state: "holdon" });
+                            ver.VerifyPlugins( json.option )       && new Notify().Render({ type: 2, content: `已清理失效的插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${json.version}.html#badplugins" target="_blank">失效插件</a>`, state: "holdon" });
                             json.option.origins && json.option.origins.length > 0 &&
                                 new Notify().Render({ content: `导入的配置文件包含了第三方源，刷新后请重新 <b>手动导入</b>。`, state: "holdon" });
                             json.option.plugins && json.option.plugins.length > 0 &&
