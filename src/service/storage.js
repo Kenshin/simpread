@@ -143,7 +143,7 @@ const name = "simpread",
         plugins   : [], // plugin id, e.g. kw36BtjGu0
         urlscheme : true,
     },
-    statistics = {
+    /*statistics = {   remove by 1.1.4
         "focus"   : 0,
         "read"    : 0,
         "service" : {
@@ -167,7 +167,7 @@ const name = "simpread",
             "jianguo"    : 0,
             "weizhi"     : 0,
         }
-    },
+    },*/
     user   = {
         uid       : "",
         name      : "",
@@ -211,6 +211,11 @@ let current  = {},
     },
     plugins  = {},
     unrdist  = [],
+    statistics= {
+        "focus"   : 0,
+        "read"    : 0,
+        "service" : {},
+    },
     secret   = {
         version   : "2019-12-20",
         "dropbox" : {
@@ -367,7 +372,7 @@ class Storage {
      * @return {object} statistics object
      */
     get statistics() {
-        return simpread.statistics;
+        return statistics;
     }
 
     /**
@@ -482,6 +487,7 @@ class Storage {
                 firstload = false;
             }
             origin = clone( simpread );
+            this.Statistics( undefined, undefined, "read" );
             this.UnRead( undefined, undefined, () => {
                 callback( firstload );
             }, "read" );
@@ -661,16 +667,46 @@ class Storage {
      * 
      * @param {string} include: create, focus, read, service
      * @param {string} include: service type, e.g. pdf png onenote
+     * @param {boolean} include: read & write
      */
-    Statistics( type, service ) {
+    Statistics( type, service, state = "write" ) {
         if ( type == "create" ) {
             simpread.option.create = now();
-        } else {
-            service && simpread.statistics.service[ service ] == undefined && ( simpread.statistics.service[ service ] = 0 );
-            service ? simpread.statistics.service[ service ]++ : simpread.statistics[ type ]++;
+            save( undefined, type == "create" );
+            return;
         }
-        console.log( "current statistics is ", simpread.statistics )
-        save( undefined, type == "create" );
+
+        const write = () => {
+                browser.storage.local.set( { ["statistics"] : statistics }, () => {
+                    console.log( "chrome storage statistics set success!", statistics );
+                });
+            },
+            read = cb => {
+                browser.storage.local.get( ["statistics"], result => {
+                    console.log( "chrome storage statistics get success!", result );
+                    result && !$.isEmptyObject( result ) && ( statistics = result["statistics"] );
+                    cb && cb();
+                });
+            };
+
+        if ( state == "read" ) {
+            if ( !$.isEmptyObject( simpread.statistics ) ) {
+                statistics = clone( simpread.statistics );
+                simpread.statistics = {};
+                write();
+            } else read();
+        } else {
+            read( () => {
+                if ( type == "create" ) {
+                    simpread.option.create = now();
+                } else {
+                    service && statistics.service[ service ] == undefined && ( statistics.service[ service ] = 0 );
+                    service ? statistics.service[ service ]++ : statistics[ type ]++;
+                }
+                console.log( "current statistics is ",statistics )
+                write();
+            });
+        }
     }
 
     /**
