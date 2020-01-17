@@ -234,20 +234,7 @@ _如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_
 ![支付](http://sr.ksria.cn/zhifu_m2.png)
 
 ## 简悦的诞生离不开它们
-- [Node.js](https://nodejs.org/) · [NPM](https://www.npmjs.com)
-- [Webpack](https://webpack.github.io/)
-- [React](https://facebook.github.io/react)
-- [ES6](http://es6-features.org/) · [Babel](https://babeljs.io)
-- [PostCSS](http://postcss.org/) · [cssnext](http://cssnext.io/)
-- [jQuery](https://jquery.com/) · [Mousetrap](https://craig.is/killing/mice) · [pangu.js](https://github.com/vinta/pangu.js) · [ProgressBar.js](https://kimmobrunfeldt.github.io/progressbar.js/) · [timego.js](http://timeago.org/) · [Velocity.js](http://velocityjs.org/) · [minimatch](https://github.com/isaacs/minimatch) · [to-markdown](https://github.com/domchristie/to-markdown) · [FileSaver.js](https://github.com/eligrey/FileSaver.js) · [dom-to-image](https://github.com/tsayen/dom-to-image) · [WebDAV]( https://github.com/aslakhellesoy/webdavjs)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Sketch](https://www.sketchapp.com/) · [Pixelmator](http://www.pixelmator.com/)
-- Icon from <http://iconfont.cn>
-- [Welcome PuRead II](http://sr.ksria.cn/welcome-puread-ii.png) via [www.freepik.com](https://www.freepik.com/free-vector/it-specialists-upgrading-operating-system-illustration_4332393.htm)
-- Mockup Design usage <http://magicmockups.com/>
-- Material Design usage <https://material.io/guidelines/>
-- Mind Maps <https://coggle.it/>
-- 咖啡 · 网易音乐 · Google Chrome · rMBP
+<http://ksria.com/simpread/docs/#/开源列表>
 
 ## 许可
 [![license-badge]][license-link]
