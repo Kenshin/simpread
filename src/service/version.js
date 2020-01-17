@@ -497,16 +497,12 @@ function Verify( curver, data ) {
  */
 function Incompatible( ver, data ) {
     let is_changed = false;
-    if ( ver == "1.1.3" ) {
+    if ( ver == "1.1.4" ) {
         data.option.origins = data.option.origins.filter( item => item != "http://sr.ksria.cn/origins/website_list_en.json" && item != "http://sr.ksria.cn/origins/website_list_tw.json" ) 
         if ( data.option.origins.length > 0 ) {
             is_changed = true;
-            new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，<b>务必刷新后重新导入</b>！<a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">详细说明</a>`, state: "holdon" });
+            new Notify(); // hack code
         }
-    }
-    if ( VerifyPlugins( ver, data.option )) {
-        is_changed = true;
-        new Notify().Render({ type: 2, content: `已清理失效的插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${version}.html#badplugins" target="_blank">失效插件</a>`, state: "holdon" });
     }
     return is_changed;
 }
@@ -568,20 +564,18 @@ function FixSubver( patch, target ) {
 /**
  * Verify current version plugins
  * 
- * @param {string} version
  * @param {object} option
+ * @return {boolean}
  */
-function VerifyPlugins( ver, option ) {
+function VerifyPlugins( option ) {
     try {
         if ( option.plugins.length == 0 ) return false;
         const str = option.plugins.join( "," );
-        if ( ver == "1.1.4" ) {
-            const newStr = str.replace( /(E0j1nYBmDD,?|SumEaxStWE,?|EHLtCwBy6c,?|UsayAKSuwe,?)/g, "" );
-            if ( str != newStr ) {
-                option.plugins = newStr.replace( /,$/, "" ).split( "," );
-                return true;
-            }
-        } else return false;
+        const newStr = str.replace( /(E0j1nYBmDD,?|SumEaxStWE,?|EHLtCwBy6c,?|UsayAKSuwe,?)/g, "" );
+        if ( str != newStr ) {
+            option.plugins = newStr.replace( /,$/, "" ).split( "," );
+            return true;
+        }
     } catch( error ) {
         console.error( "version::VerifyPlugin catch", error )
         return false;
