@@ -208,7 +208,7 @@ class Welcome extends React.Component {
                                 <h2 style={ style.h2 }>连接你的生产力工具</h2>
                                 <div style={ style.desc }>
                                     支持下载 HTML · PDF · Markdown · PNG · <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Epub">Epub</a> 到本地 以及 发送到 <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Kindle">Kindle</a><br/>
-                                    支持输出到 坚果云 · 语雀 · Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘<br/>
+                                    支持输出到 坚果云 · 有道云笔记 · 为知笔记 · 语雀 · 印象笔记 · Dropbox · Onenote · Notion 等<br/>
                                     发送页面链接到 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">稍后读</a> · Pocket · Instapaper · Linnk，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">请看这里</a>
                                 </div>
                             </section>
