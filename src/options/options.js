@@ -118,6 +118,7 @@ storage.Read( first => {
     sidebarRender();
     navRender();
     vernotify( first );
+    //welcomeRender( false, "1.1.4" );
     mainRender( tabsItemID );
     setTimeout(() => noticeRender(), 500 );
     helpRender();
