@@ -533,7 +533,7 @@ export default class Auth extends React.Component {
                             <div style={{ display: "flex","flex-direction": "row", "justify-content": "center" }}>
                             { this.state.youdao ? <Dropdown name={ "请选择保存的位置，默认为第一个" } items={ this.state.youdao } width="100%" onChange={ (v,n)=>this.save( "youdao", v ) } />
                             : <Button type="flat" width="100%" style={{ "margin": "0" }}
-                                    text="重新获取 有道云笔记的文件夹"
+                                    text="重新获取 有道云笔记 的文件夹"
                                     color="#fff" backgroundColor="#3F51B5"
                                     waves="md-waves-effect md-waves-button"
                                     onClick={ (s)=>this.youdaoChange() } /> }
