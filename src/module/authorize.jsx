@@ -275,7 +275,10 @@ export default class Auth extends React.Component {
                 weizhi.Auth( this.props.weizhi.username, this.props.weizhi.password, result => {
                     if ( result && result.status == 401 ) {
                         failed( "授权错误，请重新授权。", weizhi.id, weizhi.name );
-                    } else success( "weizhi", "为知笔记", { username: this.props.weizhi.username, password: this.props.weizhi.password, access_token: weizhi.access_token } );
+                    } else {
+                        if ( result && result.returnCode == 200 ) success( "weizhi", "为知笔记", { username: this.props.weizhi.username, password: this.props.weizhi.password, access_token: weizhi.access_token } );
+                        else failed( "授权错误，请重新授权。", weizhi.id, weizhi.name );
+                    }
                 });
                 break;
         }
@@ -550,7 +553,7 @@ export default class Auth extends React.Component {
                         <div ref="weizhi">
                             <div style={{ "display": "flex", "flex-direction": "row" }}>
                                 <TextField
-                                    placeholder="请填入 为知笔记 的用户名，简悦不会记录你的用户名。" 
+                                    placeholder="请填入 为知笔记 的登录邮箱，简悦不会记录你的邮箱。" 
                                     onChange={ (evt)=>this.weizhiOnChange( "username", evt.target.value ) }
                                 />
                                 <TextField
