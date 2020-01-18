@@ -804,15 +804,15 @@ body {
 
     &.instapaper {
         left: 221px;
-        top: 81px;
+        top: 121px;
         background-image: url( '../icons/service_instapaper.png' );
         transform: scale(.9);
         transform-origin: center;
     }
 
     &.evernote {
-        top: 135px;
-        left: 95px;
+        top: 55px;
+        left: 115px;
         background-image: url( '../icons/service_evernote.png' );
     }
 
@@ -840,6 +840,38 @@ body {
         top: 20px;
         right: 278px;
         background-image: url( '../icons/service_yuque.png' );
+        transform: scale(.8);
+        transform-origin: center;
+    }
+
+    &.youdao {
+        top: 10px;
+        right: 28px;
+        background-image: url( '../icons/service_youdao.png' );
+        transform: scale(.8);
+        transform-origin: center;
+    }
+
+    &.notion {
+        left: 15px;
+        bottom: 150px;
+        background-image: url( '../icons/service_notion.png' );
+        transform: scale(.7);
+        transform-origin: center;
+    }
+
+    &.wiz {
+        bottom: 55px;
+        left: 135px;
+        background-image: url( '../icons/service_wiz.png' );
+        transform: scale(.8);
+        transform-origin: center;
+    }
+
+    &.bear {
+        top: 85px;
+        right: 185px;
+        background-image: url( '../icons/service_bear.png' );
         transform: scale(.8);
         transform-origin: center;
     }
