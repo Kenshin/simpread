@@ -3,12 +3,12 @@
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.3-blue.svg"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-1.1.4-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
 </p>
 <p align="center">
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
-   <a href="http://ksria.com/simpread/crx/1.1.3/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
+   <a href="http://ksria.com/simpread/crx/1.1.4/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-brightgreen.svg"></a>
    <a target="_blank" href="https://addons.mozilla.org/zh-CN/firefox/addon/simpread"><img src="https://img.shields.io/badge/download-_firefox_addon-DD512A.svg"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://i.imgur.com/JFhxHeR.png"></a>
    <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.2.box?201810231502&name=%E7%AE%80%E6%82%A6"><img src="https://i.imgur.com/zZeOllB.png"></a>
@@ -51,7 +51,7 @@
 ***
 
 ## 马上使用
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.3/simpread.crx)
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/1.1.4/simpread.crx)
 
 * [Firefox 扩展中心](https://addons.mozilla.org/zh-CN/firefox/addon/simpread) 
 
@@ -84,7 +84,7 @@
 
   * 支持 [论坛类页面及分页](http://ksria.com/simpread/docs/#/论坛类页面及分页) 如：知乎 · 百度贴吧等
 
-  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 [代码段的高亮](http://ksria.com/simpread/docs/#/代码段的高亮)，包含了大部分常见的网站
+  * ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png) 支持 [代码段的高亮](https://github.com/Kenshin/simpread/issues/500)，包含了大部分常见的网站
 
   * 支持 [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) · 支持 [LaTeX 解析](http://ksria.com/simpread/docs/#/LaTeX-阅读器) · [Markdown 阅读器](http://ksria.com/simpread/docs/#/Markdown-阅读器) 
 
@@ -130,7 +130,7 @@
 
   - 导出到 `Pocket` `Linnk` `Instapaper` 的功能，包括：`当前页面的链接` `稍后读`
 
-  - 导出到生产力工具，包括：`坚果云` `语雀` `Dropbox` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [导出到生产力](http://ksria.com/simpread/docs/#/导出到生产力工具)
+  - 导出到生产力工具，包括：`坚果云` `语雀` `有道云笔记` `为知笔记` `Dropbox` `Notion` `Onenote` `Google Drive` `印象笔记 / Evernote`，详细请看 [导出到生产力](http://ksria.com/simpread/docs/#/导出到生产力工具)
 
 - 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](http://ksria.com/simpread/docs/#/快捷键) 等；
 
@@ -141,7 +141,7 @@
 ## 全部功能
 
 <details>
-  <img src="http://sr.ksria.cn/feature%201.1.3.png">
+  <img src="http://sr.ksria.cn/feature%201.1.4.png">
 </details>
 
 ## 截图
@@ -242,11 +242,11 @@ _如发现下图显示不全，请直接访问 http://sr.ksria.cn/zhifu_m2.png_
 <!-- Link -->
 [www-badge]:        https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg
 [www-link]:         http://ksria.com/simpread
-[version-badge]:    https://img.shields.io/badge/lastest_version-1.1.3-blue.svg
+[version-badge]:    https://img.shields.io/badge/lastest_version-1.1.4-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
-[offline-link]:     http://ksria.com/simpread/crx/1.1.3/simpread.crx
+[offline-link]:     http://ksria.com/simpread/crx/1.1.4/simpread.crx
 [license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
 [license-link]:     https://opensource.org/licenses/MIT
