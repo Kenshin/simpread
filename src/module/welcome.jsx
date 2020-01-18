@@ -294,11 +294,11 @@ class Welcome extends React.Component {
                     { !first && version == "1.1.4" &&
                         <div className="carousel-item" id="1.1.4">
                             <section style={ style.section }>
-                                <img src="http://sr.ksria.cn/welcome-newservice.png?201906301335" style={ style.img }/>
-                                <h2 style={ style.h2 }>更强大，更易用的导出服务来啦~</h2>
+                                <img src="http://sr.ksria.cn/welcome-newservice-ii.png?202001181335" style={ style.img }/>
+                                <h2 style={ style.h2 }>更强大，更易用的导出服务</h2>
                                 <div style={ style.desc }>
                                     期待已久的 <a target="_blank" href="http://ksria.com/simpread/docs/#/Notion">Notion</a> · <a target="_blank" href="http://ksria.com/simpread/docs/#/有道云笔记">有道云笔记</a> · <a target="_blank" href="http://ksria.com/simpread/docs/#/为知笔记">为知笔记</a> 来啦~<br/>
-                                    原生的 <a target="_blank" href="http://ksria.com/simpread/docs/#/离线HTML">离线 HTML</a> 下载功能，还有可以截取任意位置的 <a target="_blank" href="http://ksria.com/simpread/docs/#/截图">截图</a> 功能<br/>
+                                    原生的 <a target="_blank" href="http://ksria.com/simpread/docs/#/离线HTML">离线 HTML / Markdown</a> 下载功能，还有截取任意位置的 <a target="_blank" href="http://ksria.com/simpread/docs/#/截图">截图</a> 功能<br/>
                                     <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV?id=定制">WebDAV</a> 现已定制导出格式，包括： <span>Markdown</span> · <span>HTML</span>
                                 </div>
                             </section>
