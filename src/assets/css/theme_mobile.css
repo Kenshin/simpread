@@ -1,7 +1,7 @@
 /**
  * Mobile media
  */
-@media (pointer: coarse) {
+@media (pointer:coarse) {
     sr-read {
         margin: 20px 5%!important;
         min-width: initial!important;

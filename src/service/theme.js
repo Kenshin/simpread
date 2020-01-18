@@ -97,9 +97,9 @@ function findThemeStyle( callback ) {
             callback && callback( name, css, $target );
         } else if ( css.search( ".simpread-font" ) > -1 ) {
             !themes["global"] && ( themes["global"] = css );
-        } else if ( css.search( "(pointer: coarse)" ) == -1 && css.search( ".simpread-theme-root" ) > -1 ) {
+        } else if ( css.search( "(pointer:coarse)" ) == -1 && css.search( ".simpread-theme-root" ) > -1 ) {
             !themes["common"] && ( themes["common"] = css );
-        } else if ( css.search( "(pointer: coarse)" ) > -1 && css.search( "sr-read" ) > -1 ) {
+        } else if ( css.search( "(pointer:coarse)" ) > -1 && css.search( "sr-read" ) > -1 ) {
             !themes["mobile"] && ( themes["mobile"] = css );
         }
     });
