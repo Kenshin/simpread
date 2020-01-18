@@ -126,7 +126,17 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
        collapseWhitespace: true,
       },
     }),
-    ],
+
+    new HtmlWebpackPlugin({
+      filename: 'welcome/version_1.1.4.html',
+      template: 'src/welcome/version_1.1.4.html',
+      inject: true,
+      minify: {
+       collapseWhitespace: true,
+      },
+    }),
+
+  ],
 
     // conditions environment
     isProduction = function () {
