@@ -1,0 +1,1 @@
+简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展  © 2017 - 2019 [ksria.com](http://ksria.com/simpread) by [Kenshin Wang](http://kenshin.wang/)
