@@ -216,7 +216,7 @@ function changelogRender() {
     $( '.versions .collapse' ).on( 'click', event => {
         $(event.currentTarget)
             .toggleClass( 'active' )
-            .parent().next().toggleClass( 'active' );
+            .parent().next().slideToggle();
     });
 }
 

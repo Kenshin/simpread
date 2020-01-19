@@ -2232,15 +2232,11 @@ body {
 }
 
 .version .details {
-    height: 0;
-    transform: scaleY(0);
-    transition: all 0.25s ease-out;
-    transform-origin: top;
+    display: none;
 }
 
 .version .details.active {
-    height: initial;
-    transform: scaleY(1);
+    display: initial;
 }
 
 .version .details img {
