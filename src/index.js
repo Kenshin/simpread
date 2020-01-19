@@ -37,6 +37,7 @@ $( document ).ready( function() {
     menubarRender();
     headerRender();
     reviewsRender();
+    changelogRender();
     footerRender();
     wavesRender();
     versionRender();
@@ -204,6 +205,19 @@ function headerRender() {
             }, 200 );
         }
     }, 200);
+}
+
+function changelogRender() {
+    if ( !location.pathname.endsWith( "changelog.html" ) ) return;
+    $( '.version .num' ).map( ( idx, item ) => {
+        idx == 0 && $( item ).append( '<span class="collapse"><i class="fas fa-angle-up"></i></span>' );
+        idx > 0  && $( item ).append( '<span class="collapse active"><i class="fas fa-angle-up"></i></span>' );
+    } )
+    $( '.versions .collapse' ).on( 'click', event => {
+        $(event.currentTarget)
+            .toggleClass( 'active' )
+            .parent().next().toggleClass( 'active' );
+    });
 }
 
 function reviewsRender() {
