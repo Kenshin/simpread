@@ -2163,12 +2163,12 @@ body {
     }
 }
 
-.version:last-child {
-    margin-bottom: 0;
-}
-
 .version {
     margin: 0 0 40px 10px;
+}
+
+.version:last-child {
+    margin-bottom: 0;
 }
 
 .version .data {
