@@ -209,10 +209,21 @@ function headerRender() {
 
 function changelogRender() {
     if ( !location.pathname.endsWith( "changelog.html" ) ) return;
+    let tocTemp = '';
+    $( '.version .num a' ).map( ( idx, item ) => {
+        tocTemp += `<div class="outline">${item.innerText}</div>`;
+    });
+    $( '.toc' ).append( tocTemp );
+    $( '.toc-header .collapse' ).on( 'click', event => {
+        $( '.toc' ).slideToggle();
+    });
+    $( '.toc .outline' ).on( 'click', event => {
+        $( '.num' ).find( 'a[name="1.1.3"]' )[0].scrollIntoView({ block: "end" });
+    });
     $( '.version .num' ).map( ( idx, item ) => {
         idx == 0 && $( item ).append( '<span class="collapse"><i class="fas fa-angle-up"></i></span>' );
         idx > 0  && $( item ).append( '<span class="collapse active"><i class="fas fa-angle-up"></i></span>' );
-    } )
+    });
     $( '.versions .collapse' ).on( 'click', event => {
         $(event.currentTarget)
             .toggleClass( 'active' )

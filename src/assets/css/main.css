@@ -2101,6 +2101,8 @@ body {
 }
 
 .container .title {
+    position: relative;
+
     font-size: 3rem;
     font-weight: bold;
 }
@@ -2110,6 +2112,77 @@ body {
 
     font-size: 1.6rem;
     border-bottom: 1px solid color(#333 alpha(-88%));
+}
+
+.changelog .collapse {
+    position: absolute;
+    right: 0;
+    top: 6px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 12px;
+
+    width: 20px;
+    height: 20px;
+
+    line-height: 20px;
+    font-size: 12px;
+
+    color: rgba(51, 51, 51, .8);
+    background-color: #fff;
+
+    border-radius: 50%;
+    box-shadow: 0 1px 3px 1px rgba(60,64,67,0.15), 0 1px 2px 0 rgba(60,64,67,0.3);
+    transition: all 0.25s ease-out;
+    cursor: pointer;
+}
+
+.changelog .collapse.active {
+    color: #ef5e3b;
+    transform: rotate(180deg);
+    box-shadow: 0 -1px 3px 1px rgba(60,64,67,0.15), 0 -1px 2px 0 rgba(60,64,67,0.3);
+}
+
+.toc-header {
+    padding: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.12);
+}
+
+.toc-header .collapse {
+    top: 36px;
+    right: 10px;
+}
+
+.toc {
+    display: none;
+}
+
+.toc .outline {
+    display: -webkit-box!important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    padding: 12px 0 12px 0;
+
+    min-height: 21px;
+    line-height: 21px;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    text-overflow: ellipsis;
+    text-align: left;
+
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+}
+
+.toc .outline:hover {
+    background-color: rgba(0,0,0,.04)!important;
 }
 
 .versions {
@@ -2197,38 +2270,6 @@ body {
     position: relative;
     font-size: 2rem;
     font-weight: 400;
-}
-
-.version .num .collapse {
-    position: absolute;
-    right: 0;
-    top: 6px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 12px;
-
-    width: 20px;
-    height: 20px;
-
-    line-height: 20px;
-    font-size: 12px;
-
-    color: rgba(51, 51, 51, .8);
-    background-color: #fff;
-
-    border-radius: 50%;
-    box-shadow: 0 1px 3px 1px rgba(60,64,67,0.15), 0 1px 2px 0 rgba(60,64,67,0.3);
-    transition: all 0.25s ease-out;
-    cursor: pointer;
-}
-
-.version .num .collapse.active {
-    color: #ef5e3b;
-    transform: rotate(180deg);
-    box-shadow: 0 -1px 3px 1px rgba(60,64,67,0.15), 0 -1px 2px 0 rgba(60,64,67,0.3);
 }
 
 .version .details {
