@@ -59,7 +59,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
                 },
                 {
                     id: 'youdao',
-                    intro: '简悦支持导出 HTML 格式到 有道云笔记，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/有道云笔记">请看这里</a>',
+                    intro: '简悦支持导出 Markdown 格式到 有道云笔记，详细说明 <a target="_blank" href="http://ksria.com/simpread/docs/#/有道云笔记">请看这里</a>',
                 },
                 {
                     id: 'weizhi',
