@@ -2135,6 +2135,34 @@ body {
     background-image: linear-gradient(to bottom, transparent 0, #2196F3 100% );
 }
 
+.versions .point {
+    position: absolute;
+
+    left: -14px;
+
+    margin: 10px;
+
+    width: 10px;
+    height: 10px;
+
+    text-align: start;
+
+    background-color: var(--text-secondary-color);
+    border-radius: 50%;
+    border: 2px solid #007aff;
+
+    z-index: 10;
+
+    &.milestone {
+        left: -17px;
+
+        width: 15px;
+        height: 15px;
+
+        background-color: #007aff;
+    }
+}
+
 .version:last-child {
     margin-bottom: 0;
 }
@@ -2163,34 +2191,6 @@ body {
 
 .version .data .day {
     font-size: 2rem;
-}
-
-.versions .point {
-    position: absolute;
-
-    left: -14px;
-
-    margin: 10px;
-
-    width: 10px;
-    height: 10px;
-
-    text-align: start;
-
-    background-color: var(--text-secondary-color);
-    border-radius: 50%;
-    border: 2px solid #007aff;
-
-    z-index: 10;
-
-    &.milestone {
-        left: -17px;
-
-        width: 15px;
-        height: 15px;
-
-        background-color: #007aff;
-    }
 }
 
 .version .num {
