@@ -171,14 +171,17 @@ function clearHTML( str ) {
  * 
  * @param  {object} minimatch
  * @param  {object} simpread.read
- * @return {boolen} true: not exist; false: exist
+ * @return {boolen} true: exist; false: not exist
  */
 function exclusion( minimatch, data ) {
     const url = window.location.origin + window.location.pathname;
     return data.exclusion.findIndex( item => {
+        item == null && ( item = "" );
         item = item.trim();
-        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
-    }) == -1 ? true : false;
+        if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
+            return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
+        } else return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+    }) != -1 ? true : false;
 }
 
 /**
@@ -191,9 +194,60 @@ function exclusion( minimatch, data ) {
 function whitelist( minimatch, data ) {
     const url = window.location.origin + window.location.pathname;
     return data.whitelist.findIndex( item => {
+        item == null && ( item = "" );
         item = item.trim();
-        return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
+        if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
+            return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
+        } else return item.startsWith( "http" ) ? minimatch( url, item ) : item == data.site.name;
     }) != -1 ? true : false;
+}
+
+/**
+ * Blacklist
+ * 
+ * @param  {object} minimatch
+ * @param  {object} simpread.read
+ * @return {boolean} true: is blacklist; false: is't blacklist
+ */
+function blacklist( minimatch, data ) {
+    return data.blacklist.findIndex( item => {
+       item == null && ( item = "" );
+       item = item.trim();
+       if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
+           return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
+       } else return item.startsWith( "http" ) ? minimatch( location.href, item ) : location.hostname.includes( item );
+    }) != -1 ? true : false;
+}
+
+/**
+ * Lazyload
+ * 
+ * @param  {object} minimatch
+ * @param  {object} simpread.read
+ * @return {boolean} true: is blacklist; false: is't blacklist
+ */
+function lazyload( minimatch, data ) {
+    return data.lazyload.findIndex( item => {
+       item == null && ( item = "" );
+       item = item.trim();
+       if ( item.startsWith( "[[/" ) && item.endsWith( "/]]" ) ) {
+           return location.href.replace( new RegExp( item.replace( /\[\[\/|\/\]\]/ig, "" ), "g" ), "" ) == "" ? true : false;
+       } else return item.startsWith( "http" ) ? minimatch( location.href, item ) : location.hostname.includes( item );
+    }) != -1 ? true : false;
+}
+
+/**
+ * Get page info
+ * 
+ * @return {object} include: url, title, favicon, img, desc
+ */
+function getPageInfo() {
+    const url     = location.href,
+          title   = $( "sr-read" ).find( "sr-rd-title" ).text() || $( "head" ).find( "title" ).text() || "",
+          favicon = $( `head link[rel~=icon]` ).attr( "href" ) || "",
+          img     = $( `head meta[property="og:image"]` ).attr( "content" ) || $( "sr-read" ).find( "img" ).attr( "src" ) || "",
+          desc    = $( "sr-read" ).find( "sr-rd-desc" ).text() || $( `head meta[property="og:description"]` ).attr( "content" ) || $( 'meta[name=description]' ).attr( 'content' ) || "";
+    return { url, title: title.trim(), favicon, img, desc: desc.trim() };
 }
 
 export {
@@ -205,4 +259,7 @@ export {
     clearHTML      as ClearHTML,
     exclusion      as Exclusion,
     whitelist      as Whitelist,
+    blacklist      as Blacklist,
+    lazyload       as Lazyload,
+    getPageInfo    as GetPageInfo,
 }

@@ -33,6 +33,13 @@ class FControl extends React.Component {
         });
     }
 
+    onClose() {
+        setTimeout( ()=> {
+            $( "fab-bg" ).css({ width: '100px' })
+            $( "fab" ).find( "ul[type=hori]" ).css({ opacity: 0, visibility: "hidden" })
+        }, 200 );
+    }
+
     onAction( event, type ) {
         console.log( "fab type is =", type )
 
@@ -46,9 +53,11 @@ class FControl extends React.Component {
                     break;
                 case "setting":
                     setting.Render( ()=>setTimeout( ()=>se.Render(), 500 ));
+                    this.onClose();
                     break;
                 case "siteeditor":
                     se.Render();
+                    this.onClose();
                     break;
                 case "remove":
                     new Notify().Render( "移动鼠标选择不想显示的内容，只针对本次有效。" );
@@ -65,7 +74,7 @@ class FControl extends React.Component {
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                         [ "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive" ].includes( type )) {
+                         [ "save", "markdown", "offlinemarkdown", "png", "epub", "pdf", "kindle", "temp", "bear", "ulysses", "html", "offlinehtml", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque", "notion", "youdao", "weizhi" ].includes( type )) {
                         const [ title, desc, content ] = [ $( "head title" ).text().trim(), "", $( ".simpread-focus-highlight" ).html().trim() ];
                         output.Action( type, title, desc, content );
                     }

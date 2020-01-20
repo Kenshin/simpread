@@ -197,6 +197,39 @@ function vfyCustom( type, styles ) {
     }
 }
 
+function getCustomCSS() {
+    let styles = $( "style#simpread-site-css" ).text() || "";
+    $( "head" ).find( "style" ).map( (index, item) => {
+        item.id.startsWith( "simpread-custom-" ) && ( styles += item.innerHTML );
+    });
+    return styles;
+}
+
+/**
+ * Get special style
+ * 
+ * @param {boolean} mathjax
+ * @param {func} callback
+ */
+function specialCSS( mathjax, callback ) {
+    let css = "";
+    if ( mathjax && location.hostname == "blog.csdn.net" ) {
+        $.get("https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-b6c3c6d139.css", result=> {
+            callback( result );
+        })
+    } else if ( mathjax ) {
+        $( "head" ).find( "style" ).map( (index, item) => {
+            const $target = $(item),
+                  cls     = $target.attr( "class" ),
+                  html    = $target.text();
+            if ( cls == "simpread-offline-special" || html.search( ".MathJax" ) > -1 || html.search( ".mathjax" ) > -1 || html.search( ".MJX" ) > -1 ) {
+                css += html;
+            }
+        });
+        callback( css );
+    } else callback( css );
+}
+
 export {
     iconPath as IconPath,
     getColor as GetColor,
@@ -210,4 +243,6 @@ export {
     custom     as Custom,
     css        as CSS,
     vfyCustom  as VerifyCustom,
+    getCustomCSS as GetCustomCSS,
+    specialCSS as SpecialCSS,
 }

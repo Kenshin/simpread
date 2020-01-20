@@ -28,7 +28,7 @@ sr-rd-content {
 }
 
 sr-rd-desc {
-    text-align: left;
+    text-align: justify;
     line-height: 2.4;
     margin: 0 0 1.2em 0;
 }
@@ -65,7 +65,7 @@ sr-rd-content a {
 
 sr-rd-content a, sr-rd-content a:link {
     color: inherit;
-    font-size: initial;
+    font-size: inherit;
     font-weight: inherit;
     border:none;
 }
@@ -77,9 +77,17 @@ sr-rd-content a:hover {
 sr-rd-content img {
     margin: 10px;
     padding: 5px;
+
+    max-width: 100%;
+
     background: #fff;
     border: 1px solid #bbb;
     box-shadow: 1px 1px 3px #d4d4d4;
+}
+
+sr-rd-content figcaption {
+    text-align: center;
+    font-size: 14px;
 }
 
 sr-rd-content sr-blockquote {

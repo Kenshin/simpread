@@ -4,11 +4,14 @@ import {storage} from 'storage';
 import * as exp  from 'export';
 import * as msg  from 'message';
 import {browser} from 'browser';
+import * as permission
+                 from 'permission';
 
 import Notify    from 'notify';
 import Switch    from 'switch';
 import TextField from 'textfield';
 import Button    from 'button';
+import Dropdown  from 'dropdown';
 
 export default class Auth extends React.Component {
 
@@ -24,6 +27,10 @@ export default class Auth extends React.Component {
         jianguo: {
             username: "",
             password: "",
+        },
+        weizhi: {
+            username: "",
+            password: "",
         }
     }
 
@@ -32,11 +39,14 @@ export default class Auth extends React.Component {
         linnk  : undefined,
         instapaper : undefined,
         jianguo: undefined,
+        weizhi : undefined,
+        notion : undefined,
+        youdao : undefined,
     }
 
     onChange( state, value, flag ) {
         let notify;
-        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque } = exp,
+        const { dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive, jianguo, yuque, notion, youdao, weizhi } = exp,
             clear = ( id, name ) => {
                 Object.keys( storage.secret[id] ).forEach( item => storage.secret[id][item] = "" );
                 storage.Safe( ()=> {
@@ -53,6 +63,9 @@ export default class Auth extends React.Component {
                     id == "linnk"      && this.setState({ secret: storage.secret, linnk: false });
                     id == "instapaper" && this.setState({ secret: storage.secret, instapaper: false });
                     id == "jianguo"    && this.setState({ secret: storage.secret, jianguo: false });
+                    id == "weizhi"     && this.setState({ secret: storage.secret, weizhi: false });
+                    id == "notion"     && this.setState({ secret: storage.secret, notion: notion.blocks });
+                    id == "youdao"     && this.setState({ secret: storage.secret, youdao: youdao.folders });
                     if ( location.hash.startsWith( "#labs?auth=" ) ) {
                         new Notify().Render( "3 秒钟将会关闭此页面..." );
                         setTimeout( () => {
@@ -64,6 +77,7 @@ export default class Auth extends React.Component {
             failed = ( error, id, name ) => {
                 notify && notify.complete();
                 console.error( `${name} auth faild, error: ${error}` )
+                id == "youdao" || id == "notion" ? new Notify().Render( 2, `获取 ${name} 授权失败，${error}` ) :
                 new Notify().Render( 2, `获取 ${name} 授权失败，请重新获取。` );
                 storage.secret[state].access_token = "";
                 this.setState({ secret: storage.secret });
@@ -84,6 +98,11 @@ export default class Auth extends React.Component {
             return;
         }
 
+        if ( state == "weizhi" && !flag && !storage.secret.weizhi.username ) {
+            this.setState({ weizhi: !this.state.weizhi });
+            return;
+        }
+
         if ( !value ) {
             state == "pocket" && $( this.refs.pocket_tags ).velocity( value ? "slideDown" : "slideUp" );
             if ( state == "linnk" ) {
@@ -97,6 +116,14 @@ export default class Auth extends React.Component {
             if ( state == "jianguo" ) {
                 this.props.jianguo.username = "";
                 this.props.jianguo.password = "";
+            }
+            if ( state == "weizhi" ) {
+                this.props.weizhi.username = "";
+                this.props.weizhi.password = "";
+                this.props.weizhi.access_token = "";
+            }
+            if ( state == "youdao" ) {
+                permission.Remove( youdao.permissions, result => new Notify().Render( `已取消 cookies 权限。` ));
             }
             clear( state, exp.Name( state ));
             return;
@@ -212,11 +239,46 @@ export default class Auth extends React.Component {
                     });
                 }).fail( error => failed( error, yuque.id, yuque.name ));
                 break;
+            case "notion":
+                notion.Auth( ( result, error ) => {
+                    if ( error ) failed( error, notion.id, notion.name );
+                    else success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id });
+                });
+                break;
+            case "youdao":
+                permission.Get( youdao.permissions, result => {
+                    if ( !result ) {
+                        new Notify().Render( 2, `此功能需要申请 cookies 权限后才能使用，授权成功后会自动取消。` );
+                        this.setState({ secret: storage.secret });
+                        return;
+                    }
+                    setTimeout( () => {
+                        youdao.Auth( ( result, error ) => {
+                            if ( error ) failed( error, youdao.id, youdao.name );
+                            else success( youdao.id, youdao.name, { access_token: youdao.access_token, folder_id: youdao.folder_id });
+                        });
+                    }, 500 );
+                });
+                break;
             case "jianguo":
                 jianguo.Auth( this.props.jianguo.username, this.props.jianguo.password, result => {
                     if ( result && result.status == 401 ) {
                         failed( "授权错误，请重新授权。", jianguo.id, jianguo.name );
                     } else success( "jianguo", "坚果云", { username: this.props.jianguo.username, password: this.props.jianguo.password } );
+                });
+                break;
+            case "weizhi":
+                if ( location.hash.startsWith( "#labs?auth=" ) ) {
+                    this.props.weizhi.username = storage.secret.weizhi.username;
+                    this.props.weizhi.password = storage.secret.weizhi.password;
+                }
+                weizhi.Auth( this.props.weizhi.username, this.props.weizhi.password, result => {
+                    if ( result && result.status == 401 ) {
+                        failed( "授权错误，请重新授权。", weizhi.id, weizhi.name );
+                    } else {
+                        if ( result && result.returnCode == 200 ) success( "weizhi", "为知笔记", { username: this.props.weizhi.username, password: this.props.weizhi.password, access_token: weizhi.access_token } );
+                        else failed( "授权错误，请重新授权。", weizhi.id, weizhi.name );
+                    }
                 });
                 break;
         }
@@ -225,6 +287,8 @@ export default class Auth extends React.Component {
     save( state, value ) {
         state == "pocket" && ( storage.secret.pocket.tags      = value.trim() );
         state == "linnk"  && ( storage.secret.linnk.group_name = value.trim() );
+        state == "notion" && ( storage.secret.notion.folder_id = value.trim() );
+        state == "youdao" && ( storage.secret.youdao.folder_id = value.trim() );
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
 
@@ -240,16 +304,42 @@ export default class Auth extends React.Component {
         this.props.jianguo[state] = value;
     }
 
+    weizhiOnChange( state, value ) {
+        this.props.weizhi[state] = value;
+    }
+
     webdavOnChange() {
         this.state.secret.webdav = event.target.value.split("\n");
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
 
+    notionChange() {
+        exp.notion.Auth( ( result, error ) => {
+            this.setState({ secret: storage.secret, notion: exp.notion.blocks });
+        });
+    }
+
+    youdaoChange() {
+        permission.Get( exp.youdao.permissions, result => {
+            if ( !result ) {
+                new Notify().Render( 2, `此功能需要申请 cookies 权限后才能使用，授权成功后会自动取消。` );
+                this.setState({ secret: storage.secret });
+                return;
+            }
+            setTimeout( () => {
+                exp.youdao.Auth( ( result, error ) => {
+                    if ( result ) this.setState({ secret: storage.secret, youdao: exp.youdao.folders });
+                    else new Notify().Render( 2, `重新获取失败，${error}` );
+                });
+            }, 500 );
+        });
+   }
+
     webdavAuth() {
         this.state.secret.webdav.forEach( ( item, idx ) => {
             try {
                 item = JSON.parse( item );
-                if ( Object.keys( item ).join( "" ).replace( /url|name|password|user/ig, "" ) != "" ) {
+                if ( Object.keys( item ).join( "" ).replace( /url|name|password|user|format/ig, "" ) != "" ) {
                     throw "error";
                 }
                 exp.webdav.Auth( item.url, item.user, item.password, result => {
@@ -270,10 +360,12 @@ export default class Auth extends React.Component {
     }
 
     componentDidMount() {
-        storage.Safe( () => this.setState({ secret: storage.secret }) );
-        if ( location.hash.startsWith( "#labs?auth=" ) ) {
-            this.onChange( location.hash.replace( "#labs?auth=", "" ), true );
-        }
+        storage.Safe( () => {
+            this.setState({ secret: storage.secret })
+            if ( location.hash.startsWith( "#labs?auth=" ) ) {
+                this.onChange( location.hash.replace( "#labs?auth=", "" ), true );
+            }
+        });
     }
 
     render() {
@@ -418,7 +510,68 @@ export default class Auth extends React.Component {
                             onChange={ (s)=>this.onChange( "yuque", s ) } />
                         </div>
 
-                        <div className="version-tips" data-version="1.1.3" data-hits="webdav">
+                        <div className="version-tips" data-version="1.1.4" data-hits="notion">
+                        <Switch width="100%" checked={ this.state.secret.notion.access_token != "" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.notion.access_token ? "已授权 Notion，是否取消授权？" : "是否连接并授权 Notion ？" }
+                            onChange={ (s)=>this.onChange( "notion", s ) } />
+
+                        { this.state.secret.notion.access_token && 
+                            <div style={{ display: "flex","flex-direction": "row", "justify-content": "center" }}>
+                            { this.state.notion ? <Dropdown name={ "请选择保存的位置，默认为第一个" } items={ this.state.notion } width="100%" onChange={ (v,n)=>this.save( "notion", v ) } />
+                            : <Button type="flat" width="100%" style={{ "margin": "0" }}
+                                    text="重新获取 Notion Page"
+                                    color="#fff" backgroundColor="#3F51B5"
+                                    waves="md-waves-effect md-waves-button"
+                                    onClick={ (s)=>this.notionChange() } /> }
+                            </div> }
+                        </div>
+                        <div className="version-tips" data-version="1.1.4" data-hits="youdao">
+                        <Switch width="100%" checked={ this.state.secret.youdao.access_token != "" ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.youdao.access_token ? "已授权 有道云笔记" : "是否连接并授权 有道云笔记 ？" }
+                            onChange={ (s)=>this.onChange( "youdao", s ) } />
+
+                        { this.state.secret.youdao.access_token && 
+                            <div style={{ display: "flex","flex-direction": "row", "justify-content": "center" }}>
+                            { this.state.youdao ? <Dropdown name={ "请选择保存的位置，默认为第一个" } items={ this.state.youdao } width="100%" onChange={ (v,n)=>this.save( "youdao", v ) } />
+                            : <Button type="flat" width="100%" style={{ "margin": "0" }}
+                                    text="重新获取 有道云笔记 的文件夹"
+                                    color="#fff" backgroundColor="#3F51B5"
+                                    waves="md-waves-effect md-waves-button"
+                                    onClick={ (s)=>this.youdaoChange() } /> }
+                            </div> }
+                        </div>
+
+                        <div className="version-tips" data-version="1.1.4" data-hits="weizhi">
+                        <Switch width="100%" checked={ this.state.secret.weizhi && this.state.secret.weizhi.username != "" && this.state.secret.weizhi.access_token ? true : false }
+                            thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                            label={ this.state.secret.weizhi && this.state.secret.weizhi.username != "" ? "已授权 为知笔记，是否取消授权？" : "是否连接并授权 为知笔记 ？" }
+                            onChange={ (s)=>this.onChange( "weizhi", s ) } />
+                        </div>
+                        { this.state.weizhi && 
+                        <div ref="weizhi">
+                            <div style={{ "display": "flex", "flex-direction": "row" }}>
+                                <TextField
+                                    placeholder="请填入 为知笔记 的登录邮箱，简悦不会记录你的邮箱。" 
+                                    onChange={ (evt)=>this.weizhiOnChange( "username", evt.target.value ) }
+                                />
+                                <TextField
+                                    password={true}
+                                    placeholder="请填入 为知笔记 的密码，简悦不会记录你的密码。" 
+                                    onChange={ (evt)=>this.weizhiOnChange( "password", evt.target.value ) }
+                                />
+                            </div>
+
+                            <Button type="raised" width="100%" style={{ "margin": "0" }}
+                                text="绑定 为知笔记 的信息"
+                                color="#fff" backgroundColor="#3F51B5"
+                                waves="md-waves-effect md-waves-button"
+                                onClick={ (s)=>this.onChange( "weizhi", s, "login" ) } />
+
+                        </div> }
+    
+                        <div className="version-tips" data-version="1.1.4" data-hits="webdav">
                         <div className="label" style={{'margin-bottom':' -15px'}}>WebDAV</div>
                         <div className="sublabel">简悦支持任意 WebDAV 的服务，包括：Box · TeraCLOUD 等</div>
                         <TextField 

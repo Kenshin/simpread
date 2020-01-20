@@ -8,7 +8,9 @@ import * as ver    from 'version';
 import * as menu   from 'menu';
 import * as watch  from 'watch';
 import * as WebDAV from 'webdav';
-
+import * as permission
+                   from 'permission';
+import * as tips   from 'tips';
 import PureRead    from 'puread';
 
 // global update site tab id
@@ -64,6 +66,7 @@ function getNewsitesHandler( result ) {
  */
 menu.OnClicked( ( info, tab ) => {
     console.log( "background contentmenu Listener", info, tab );
+    tracked({ eventCategory: "menu", eventAction: "menu", eventValue: info.menuItemId });
     if ( info.menuItemId == "link" ) {
         info.linkUrl && browser.tabs.create({ url: info.linkUrl + "?simpread_mode=read" });
     } else if ( info.menuItemId == "list" ) {
@@ -76,6 +79,8 @@ menu.OnClicked( ( info, tab ) => {
         browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_blacklist, {url: info.pageUrl } ));
     } else if ( info.menuItemId == "unrdist" ) {
         browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_unrdist, {url: info.pageUrl } ));
+    } else if ( info.menuItemId == "lazyload" ) {
+        browser.tabs.sendMessage( tab.id, msg.Add( msg.MESSAGE_ACTION.menu_lazyload, {url: info.pageUrl } ));
     } else {
         if ( !tab.url.startsWith( "chrome://" ) ) browser.tabs.sendMessage( tab.id, msg.Add(info.menuItemId));
     }
@@ -144,7 +149,76 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 });
 
 /**
- * Listen runtime message, include: `shortcuts` `browser_action`
+ * Listen runtime message, include: `download`, `base64` && `permission`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.download ) {
+        const { data, name } = request.value;
+        const blob = new Blob([data], {
+            type: "html/plain;charset=utf-8"
+        });
+        const url = URL.createObjectURL(blob);
+        browser.downloads.download({
+            url     : url,
+            filename: name.replace( /[|]/ig, "" ),
+        }, downloadId => {
+            sendResponse({ done: downloadId });
+        });
+    } else if ( request.type == msg.MESSAGE_ACTION.base64 ) {
+        const { url } = request.value;
+        fetch( url )
+            .then( response => response.blob() )
+            .then( blob     => new Promise(( resolve, reject ) => {
+                const reader = new FileReader()
+                reader.onloadend = event => {
+                    sendResponse({ done: { url, uri: event.target.result }});
+                };
+                reader.onerror = error => {
+                    sendResponse({ fail: { error, url } });
+                };
+                reader.readAsDataURL( blob );
+            }))
+            .catch( error => {
+                sendResponse({ fail: { error, url } });
+            });
+    } else if ( request.type == msg.MESSAGE_ACTION.permission ) {
+        permission.Get({ permissions: [ "downloads" ] }, result => {
+            sendResponse({ done: result });
+        });
+    }
+    return true;
+});
+
+/**
+ * Listen runtime message, include: `snapshot`
+ */
+browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.snapshot ) {
+        const { left, top, width, height } = request.value;
+        chrome.tabs.captureVisibleTab( { format: "png" }, base64 => {
+            const image  = new Image();
+            image.src    = base64;
+            image.onload = () => {
+                const canvas  = document.createElement( "canvas" ),
+                      ctx     = canvas.getContext( "2d" ),
+                      dpi     = window.devicePixelRatio,
+                      sx      = left   * dpi,
+                      sy      = top    * dpi,
+                      sWidth  = width  * dpi,
+                      sHeight = height * dpi;
+                canvas.width  = sWidth;
+                canvas.height = sHeight;
+                ctx.drawImage( image, sx, sy, sWidth, height * dpi, 0, 0, sWidth, sHeight );
+                const uri     = canvas.toDataURL( "image/png" );
+                sendResponse({ done: uri });
+          };
+        });
+    }
+    return true;
+});
+
+/**
+ * Listen runtime message
  */
 browser.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
     console.log( "background runtime Listener", request );
@@ -217,6 +291,12 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             break;
         case msg.MESSAGE_ACTION.speak_stop:
             browser.tts.stop();
+            break;
+        case msg.MESSAGE_ACTION.tips:
+            tips.Verify( request.value.code, sendResponse );
+            break;
+        case msg.MESSAGE_ACTION.tips_norepeat:
+            tips.Done( request.value.code );
             break;
     }
 });
@@ -333,27 +413,9 @@ function setMenuAndIcon( id, code ) {
  * 
  * @param {object} google analytics track object
  */
-function tracked({ eventCategory, eventAction, eventLabel }) {
-    console.log( "current track is", eventCategory, eventAction, eventLabel )
-    ga( 'send', {
-        hitType      : 'event',
-        eventCategory,
-        eventAction,
-        eventLabel
-    });
-}
-
-/**
- * Google analytics
- */
-analytics();
-function analytics() {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-405976-12', 'auto');
-    ga('send', 'pageview');
+function tracked({ eventCategory, eventAction, eventValue }) {
+    console.log( "current track is", eventCategory, eventAction, eventValue )
+    _gaq.push([ '_trackEvent', eventCategory, eventValue ]);
 }
 
 /**
@@ -361,4 +423,5 @@ function analytics() {
  */
 function uninstall() {
     browser.runtime.setUninstallURL( storage.option.uninstall ? storage.service + "/uninstall" : "" );
+    tracked({ eventCategory: "install", eventAction: "install", eventValue: "uninstall" });
 }

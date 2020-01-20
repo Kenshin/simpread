@@ -3,7 +3,6 @@ console.log( "=== simpread contentscripts load ===" )
 import './assets/css/simpread.css';
 import './assets/css/setting.css';
 import 'notify_css';
-import 'mintooltip';
 
 import Velocity       from 'velocity';
 import Notify         from 'notify';
@@ -13,6 +12,7 @@ import * as read      from 'read';
 import * as setting   from 'setting';
 import * as kbd       from 'keyboard';
 import * as highlight from 'highlight';
+import * as scheme    from 'urlscheme';
 
 import * as util      from 'util';
 import { storage, STORAGE_MODE as mode } from 'storage';
@@ -46,7 +46,7 @@ storage.Read( () => {
         });
     } else {
         bindShortcuts();
-        preload() && autoOpen();
+        !isLazyload() && autoOpen();
     }
 });
 
@@ -56,49 +56,19 @@ storage.Read( () => {
  * @return {boolean} true: is blacklist; false: is't blacklist
  */
 function blacklist() {
-    for ( const item of storage.option.blacklist ) {
-        if ( item.trim() != "" && !item.startsWith( "http" ) ) {
-            if ( location.hostname.includes( item ) ) {
-                is_blacklist = true;
-                break;
-            }
-        } else {
-            if ( location.href == item ) {
-                is_blacklist = true;
-                break;
-            }
-        }
-    }
+    is_blacklist = util.Blacklist( puplugin.Plugin( "minimatch" ), storage.option );
     console.log( "current site is blacklist", is_blacklist )
     return is_blacklist;
 }
 
 /**
- * Preload verify
+ * isLazyload verify
  * 
- * @return {boolen}
+ * @return {boolen} true: lazyload; false: preload
  */
 
-function preload() {
-    let is_proload = true;
-    if ( storage.option.preload == false ) {
-        is_proload = false;
-    } else if ( storage.option.preload ) {
-        for ( const item of storage.option.lazyload ) {
-            if ( item.trim() != "" && !item.startsWith( "http" ) ) {
-                if ( location.hostname.includes( item ) ) {
-                    is_proload = false;
-                    break;
-                }
-            } else {
-                if ( location.href == item ) {
-                    is_proload = false;
-                    break;
-                }
-            }
-        }
-    }
-    return is_proload;
+function isLazyload() {
+    return util.Lazyload( puplugin.Plugin( "minimatch" ), storage.option );
 }
 
 /**
@@ -116,7 +86,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             bindShortcuts();
             break;
         case msg.MESSAGE_ACTION.tab_selected:
-            if ( preload() == false ) {
+            if ( isLazyload() ) {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: 0 , url: window.location.href } ));
             } else browserAction( request.value.is_update );
             break;
@@ -144,25 +114,37 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.menu_whitelist:
         case msg.MESSAGE_ACTION.menu_exclusion:
         case msg.MESSAGE_ACTION.menu_blacklist:
+        case msg.MESSAGE_ACTION.menu_lazyload:
         case msg.MESSAGE_ACTION.menu_unrdist:
-            if ( request.type == msg.MESSAGE_ACTION.menu_whitelist ) {
-                storage.read.whitelist.push( request.value.url );
-                new Notify().Render( "已加入到白名单。" );
-            } else if ( request.type == msg.MESSAGE_ACTION.menu_exclusion ) {
-                storage.read.exclusion.push( request.value.url );
-                new Notify().Render( "已加入到排除列表。" );
-            } else if ( request.type == msg.MESSAGE_ACTION.menu_blacklist ) {
-                storage.option.blacklist.push( request.value.url );
-                new Notify().Render( "已加入到黑名单。" );
-            } else if ( request.type == msg.MESSAGE_ACTION.menu_unrdist ) {
-                storage.UnRead( "add", { url: request.value.url, title: $("head").find("title").text() , desc: "" }, success => {
-                    success  && new Notify().Render( 0, "成功加入未读列表。" );
-                    !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
+            const menuSrv = ( type, url ) => {
+                if ( type == msg.MESSAGE_ACTION.menu_whitelist ) {
+                    storage.read.whitelist.push( url );
+                    new Notify().Render( "已加入到白名单。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_exclusion ) {
+                    storage.read.exclusion.push( url );
+                    new Notify().Render( "已加入到排除列表。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_blacklist ) {
+                    storage.option.blacklist.push( url );
+                    new Notify().Render( "已加入到黑名单。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_lazyload ) {
+                    storage.option.lazyload.push( url );
+                    new Notify().Render( "已加入到延迟加载。" );
+                } else if ( type == msg.MESSAGE_ACTION.menu_unrdist ) {
+                    storage.UnRead( "add", util.GetPageInfo(), success => {
+                        success  && new Notify().Render( 0, "成功加入未读列表。" );
+                        !success && new Notify().Render( 0, "已加入未读列表，请勿重新加入。" );
+                    });
+                }
+                storage.Write( () => {
+                    watch.SendMessage( "option", true );
                 });
-            }
-            storage.Write( () => {
-                watch.SendMessage( "option", true );
-            });
+            };
+            if ( storage.option.urlscheme && /whitelist|exclusion|blacklist|lazyload/ig.test( request.type )) {
+                scheme.Render( request.type.replace( "menu_", "" ), storage.option.urlscheme, ( type, off, value ) => {
+                    storage.option.urlscheme = off;
+                    menuSrv( "menu_" + type, value );
+                });
+            } else menuSrv( request.type, request.value.url );
             break;
     }
 });
@@ -250,13 +232,21 @@ function readMode() {
 }
 
 /**
- * Auto open read mode
+ * Auto open read mode, include:
+ * 
+ * - http://xxxx?simpread_mode=read
+ * - auto && location.href not include exclusion list
+ * - location.href include white list
  */
 function autoOpen() {
     getCurrent( mode.read );
-    if   ( window.location.href.includes( "simpread_mode=read"     ) ||
-         ( storage.current.auto && util.Exclusion(  puplugin.Plugin( "minimatch" ), storage.current )) ||
-         ( !storage.current.auto && util.Whitelist( puplugin.Plugin( "minimatch" ), storage.current ))
+    const suffix    = window.location.href.includes( "simpread_mode=read" ),
+          auto      = storage.current.auto,
+          minimatch = puplugin.Plugin( "minimatch" ),
+          whitelist = util.Whitelist( minimatch, storage.current ),
+          exclusion = util.Exclusion( minimatch, storage.current );
+    if  (
+        suffix || whitelist || ( auto && exclusion == false )
         ) {
         switch ( storage.current.site.name ) {
             case "my.oschina.net":
@@ -275,6 +265,7 @@ function autoOpen() {
                 break;
             default:
                 pr.state == "adapter" && readMode();
+                pr.state == "temp"    && pr.current.site.html != "" && whitelist && readMode();
                 break;
         }
     }

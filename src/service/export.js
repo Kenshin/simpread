@@ -10,6 +10,7 @@ import Instapaper from 'instapaper';
 import * as msg   from 'message';
 import {browser}  from 'browser';
 import * as puplugin from 'puplugin';
+import * as wiz   from 'wiz';
 
 /**
  * Create PNG
@@ -130,6 +131,9 @@ function unlink( id ) {
         "onenote" : "https://account.live.com/consent/Manage",
         "gdrive"  : "https://drive.google.com/drive/my-drive",
         "yuque"   : "https://www.yuque.com/yuque/developer/delete-oauth-apps",
+        "notion"  : "http://ksria.com/simpread/docs/#/授权服务?id=取消授权",
+        "youdao"  : "http://ksria.com/simpread/docs/#/授权服务?id=取消授权",
+        "weizhi"  : "http://ksria.com/simpread/docs/#/授权服务?id=取消授权",
         "jianguo" : "http://help.jianguoyun.com/?p=2064",
         "linnk"   : "https://linnk.net/",
     }
@@ -399,12 +403,10 @@ class Ins {
             this.ins.token_secret    = this.token_secret;
             this.ins.consumer_key    = this.consumer_key;
             this.ins.consumer_secret = this.consumer_secret;
-            this.ins.add( url, title, description ).done( result => {
-                if ( result && result.length > 0 ) callback( "success", undefined );
-                else callback( undefined, "error" );
-            }).fail( ( jqXHR, textStatus, error ) => {
-                console.error( jqXHR, textStatus, error )
-                callback( undefined, textStatus );
+            const settings           = this.ins.add( url, title, description );
+            browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+                if ( result.done ) { callback( "success", undefined ); }
+                else callback( undefined, result.fail );
             });
         }
 }
@@ -463,33 +465,36 @@ class Linnk {
             targetURL: url,
             title,
             tagsStr  : this.tags,
-        };
-
-        $.ajax({
+        },
+        settings = {
             url     : "https://linnk.net/a/api/bookmark/new",
             type    : "POST",
             headers : { Authorization: this.access_token },
             data,
-        }).done( ( result, textStatus, jqXHR ) => {
-            const data = JSON.parse(result);
-            if ( data && data.code == 200 ) callback( "success", undefined );
-            else callback( undefined, "error" );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        };
+
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+            if ( result.done ) {
+                const data = JSON.parse( result.done );
+                if ( data && data.code == 200 ) callback( "success", undefined );
+                else callback( undefined, "error" );
+            } else callback( undefined, result.fail );
         });
     }
 
     Groups( callback ) {
-        $.ajax({
+        const settings = {
             url     : "https://linnk.net/a/api/group/my",
             type    : "GET",
             headers : { Authorization: this.access_token },
-        }).done( ( result, textStatus, jqXHR ) => {
-            callback( JSON.parse(result), undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+            if ( result.done ) {
+                const data = JSON.parse( result.done );
+                if ( data.code != 200 ) {
+                    callback( undefined, this.error_code[ data.code ] );
+                } else callback( data, undefined );
+            } else callback( undefined, "error" );
         });
     }
 
@@ -500,27 +505,27 @@ class Linnk {
     }
 
     NewGroup( name, callback ) {
-        $.ajax({
+        const settings = {
             url     : "https://linnk.net/a/api/group/new",
             type    : "POST",
             headers : { Authorization: this.access_token },
             data    : { groupName: name },
-        }).done( ( result, textStatus, jqXHR ) => {
-            callback( JSON.parse(result), undefined );
-        }).fail( ( jqXHR, textStatus, error ) => {
-            console.error( jqXHR, textStatus, error )
-            callback( undefined, textStatus );
+        };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+            if ( result.done ) {
+                callback( JSON.parse( result.done ), undefined );
+            } else callback( undefined, result.fail );
         });
     }
 
     GetSafeGroup( name, callback ) {
-        this.Groups( result => {
+        this.Groups( ( result, error ) => {
             if ( result && result.code == 200 ) {
                 const group = this.GetGroup( name, result.data );
                 !group && this.NewGroup( name, callback );
                 group  && callback({ data: group, code: 200 }, undefined );
             } else {
-                callback( undefined, "error" );
+                callback( undefined, error == "error" ? "error" : error );
             }
         })
     }
@@ -1230,6 +1235,366 @@ class Yuque {
 }
 
 /**
+ * Notion
+ * 
+ * @class
+ */
+class Notion {
+
+    get id()   { return "notion"; }
+    get name() { return name( this.id ); }
+
+    get url() {
+        return "https://www.notion.so/";
+    }
+
+    UUID() {
+        var __extends=void 0&&(void 0).__extends||function(){var _extendStatics=function extendStatics(d,b){_extendStatics=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(d,b){d.__proto__=b}||function(d,b){for(var p in b)if(b.hasOwnProperty(p))d[p]=b[p]};return _extendStatics(d,b)};return function(d,b){_extendStatics(d,b);function __(){this.constructor=d}d.prototype=b===null?Object.create(b):(__.prototype=b.prototype,new __())}}();var ValueUUID=function(){function ValueUUID(_value){this._value=_value;this._value=_value}ValueUUID.prototype.asHex=function(){return this._value};return ValueUUID}();var V4UUID=function(_super){__extends(V4UUID,_super);function V4UUID(){return _super.call(this,[V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-','4',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._oneOf(V4UUID._timeHighBits),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex()].join(''))||this}V4UUID._oneOf=function(array){return array[Math.floor(array.length*Math.random())]};V4UUID._randomHex=function(){return V4UUID._oneOf(V4UUID._chars)};V4UUID._chars=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];V4UUID._timeHighBits=['8','9','a','b'];return V4UUID}(ValueUUID);function generateUuid(){return new V4UUID().asHex()}
+        return generateUuid();
+    }
+
+    Auth( callback ) {
+        $.ajax({
+            url     : this.url + "api/v3/loadUserContent",
+            type    : "POST",
+        }).done( ( result, status, xhr ) => {
+            if ( result && status == "success" ) {
+                this.access_token = Object.values( result.recordMap.notion_user )[0].value.id;
+                this.folder_id    = Object.values( result.recordMap.block )[0].value.id;
+                this.blocks       = Object.values( result.recordMap.block ).map( item => {
+                    return { name: item.value.properties ? item.value.properties.title[0][0] : "Undefined", value: item.value.id }
+                });
+                callback( result, undefined );
+            }
+        }).fail( ( xhr, status, error ) => {
+            console.error( error, status, xhr )
+            callback( undefined, xhr.status == 401 ? `请先 <a target="_blank" href="https://www.notion.so/">登录 Notion</a> ` : "请稍后再试" );
+        });
+    }
+
+    Add( title, content, callback ) {
+        this.TempFile( this.folder_id, title, ( documentId, error ) => {
+            console.log( 'TempFile: ', documentId )
+            if ( error ) {
+                callback( undefined, error );
+            } else this.GetFileUrl( `${title}.md`, urls => {
+                console.log( 'GetFileUrl: ', urls )
+                this.WriteFile( urls.signedPutUrl, content, result => {
+                    console.log( 'WriteFile: ', result )
+                    this.ImportFile( urls.url, `${title}.md`, documentId, result => {
+                        console.log( 'ImportFile: ', result )
+                        result.done && callback( result, undefined );
+                        result.fail && callback( undefined, "error" );
+                    });
+                });
+            });
+        });
+    }
+
+    TempFile( parentId, title, callback ) {
+        const documentId = this.UUID(),
+              userId     = this.access_token,
+              time       = new Date().getDate(),
+              operations = {
+                operations: [
+                    {
+                        id: documentId,
+                        table: 'block',
+                        path: [],
+                        command: 'set',
+                        args: {
+                            type: 'page',
+                            id: documentId,
+                            version: 1,
+                        },
+                    },
+                    {
+                        id: documentId,
+                        table: 'block',
+                        path: [],
+                        command: 'update',
+                        args: {
+                            parent_id: parentId,
+                            parent_table: 'block',
+                            alive: true,
+                        },
+                    },
+                    {
+                        table: 'block',
+                        id: parentId,
+                        path: ['content'],
+                        command: 'listAfter',
+                        args: { id: documentId },
+                    },
+                    {
+                        id: documentId,
+                        table: 'block',
+                        path: [],
+                        command: 'update',
+                        args: {
+                            created_by: userId,
+                            created_time: time,
+                            last_edited_time: time,
+                            last_edited_by: userId,
+                        },
+                    },
+                    {
+                        id: parentId,
+                        table: 'block',
+                        path: [],
+                        command: 'update',
+                        args: { last_edited_time: time },
+                    },
+                    {
+                        id: documentId,
+                        table: 'block',
+                        path: ['properties', 'title'],
+                        command: 'set',
+                        args: [[title]],
+                    },
+                    {
+                        id: documentId,
+                        table: 'block',
+                        path: [],
+                        command: 'update',
+                        args: { last_edited_time: time },
+                    },
+                ],
+            };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+            type: "post",
+            url: this.url + "api/v3/submitTransaction",
+            data: operations
+        }), result => {
+            result.done && callback( documentId, undefined );
+            result.fail && callback( undefined, result.fail.message.includes( '401' ) ? `授权已过期，请重新授权。` : "请稍后再试" );
+        });
+    }
+
+    GetFileUrl( name, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+            type: "post",
+            url: this.url + "api/v3/getUploadFileUrl",
+            data:{
+                bucket: 'temporary',
+                name: name,
+                contentType: 'text/markdown',
+            }
+        }), result => {
+            if ( result && result.done ) {
+                callback( result.done.data );
+            }
+        });
+    }
+
+    WriteFile( url, content, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+            type: "put",
+            url,
+            content,
+            data: {
+                headers: {
+                    'Content-Type': 'text/markdown'
+                }
+            }
+        }), result => {
+            if ( result && result.done ) {
+                callback( result.done );
+            }
+        });
+    }
+
+    ImportFile( url, name, documentId, callback ) {
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+            type: "post",
+            url: this.url + "api/v3/enqueueTask",
+            data: {
+                task: {
+                    eventName: 'importFile',
+                    request: {
+                        fileURL: url,
+                        fileName: name,
+                        importType: 'ReplaceBlock',
+                        pageId: documentId,
+                    },
+                }
+            }
+        }), result => callback( result ));
+    }
+
+}
+
+/**
+ * Youdao
+ * 
+ * @class
+ */
+class Youdao {
+
+    get id()   { return "youdao"; }
+    get name() { return name( this.id ); }
+
+    get url() {
+        return "https://note.youdao.com";
+    }
+
+    get permissions() {
+        return {
+            permissions: [ 'cookies' ],
+            origins: [ 'https://*.youdao.com/' ]
+        };
+    }
+
+    UUID() {
+        var __extends=void 0&&(void 0).__extends||function(){var _extendStatics=function extendStatics(d,b){_extendStatics=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(d,b){d.__proto__=b}||function(d,b){for(var p in b)if(b.hasOwnProperty(p))d[p]=b[p]};return _extendStatics(d,b)};return function(d,b){_extendStatics(d,b);function __(){this.constructor=d}d.prototype=b===null?Object.create(b):(__.prototype=b.prototype,new __())}}();var ValueUUID=function(){function ValueUUID(_value){this._value=_value;this._value=_value}ValueUUID.prototype.asHex=function(){return this._value};return ValueUUID}();var V4UUID=function(_super){__extends(V4UUID,_super);function V4UUID(){return _super.call(this,[V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-','4',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._oneOf(V4UUID._timeHighBits),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex()].join(''))||this}V4UUID._oneOf=function(array){return array[Math.floor(array.length*Math.random())]};V4UUID._randomHex=function(){return V4UUID._oneOf(V4UUID._chars)};V4UUID._chars=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];V4UUID._timeHighBits=['8','9','a','b'];return V4UUID}(ValueUUID);function generateUuid(){return new V4UUID().asHex()}
+        return generateUuid();
+    }
+
+    Cookies( callback ) {
+        browser.cookies.get({
+            url: this.url,
+            name: 'YNOTE_CSTK',
+        }, cookie => {
+            callback( cookie );
+        })
+    }
+
+    Auth( callback ) {
+        this.Cookies( token => {
+            if ( !token ) {
+                callback( undefined, `请先 <a target="_blank" href="https://note.youdao.com/web">登录有道云笔记</a> ` );
+                return;
+            }
+            this.access_token = token.value;
+            const formData = new FormData();
+            formData.append( 'path', '/' );
+            formData.append( 'dirOnly', 'true' );
+            formData.append( 'f', 'true');
+            formData.append( 'cstk', this.access_token );
+            $.ajax({
+                url     : this.url + `/yws/api/personal/file?method=listEntireByParentPath&keyfrom=web&cstk=${this.access_token}`,
+                type    : "POST",
+                contentType: false,
+                processData: false,
+                data    : formData
+            }).done( ( result, status, xhr ) => {
+                if ( result && result.length > 0 ) {
+                    this.folder_id = result[0].fileEntry.id;
+                    this.folders   = result.map( item => {
+                        return { name: item.fileEntry.name, value: item.fileEntry.id };
+                    });
+                    callback( result, undefined );
+                }
+            }).fail( ( xhr, status, error ) => {
+                console.error( error, status, xhr )
+                callback( undefined, xhr.status == 500 ? `请先 <a target="_blank" href="https://note.youdao.com/web">登录有道云笔记</a> ` : "请稍后再试" );
+            });
+        });
+    }
+
+    Add( title, content, callback ) {
+        const timestamp = String( Math.floor( Date.now() / 1000 )),
+              uuid      = this.UUID().replace( /-/g, '' ),
+              fileId    = `WEB${uuid}`;
+        let formData    = {};
+        formData[ 'fileId'        ] = fileId;
+        formData[ 'parentId'      ] = this.folder_id;
+        formData[ 'name'          ] = `${title}.md`;
+        formData[ 'domain'        ] = `1`;
+        formData[ 'rootVersion'   ] = `-1`;
+        formData[ 'dir'           ] = `false`;
+        formData[ 'sessionId'     ] = '';
+        formData[ 'createTime'    ] = timestamp;
+        formData[ 'modifyTime'    ] = timestamp;
+        formData[ 'transactionId' ] = fileId;
+        formData[ 'bodyString'    ] = content;
+        formData[ 'transactionTime' ] = timestamp;
+        formData[ 'cstk'          ] = this.access_token;
+
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+            type: "post",
+            url : this.url + `/yws/api/personal/sync?method=push&keyfrom=web&cstk=${this.access_token}`,
+            form: formData,
+        }), result => {
+            if ( result.fail ) callback( undefined, result.fail.message.includes( '500' ) ? `授权已过期，请重新授权。` : "请稍后再试" );
+            else callback( result, undefined );
+        });
+    }
+
+}
+
+/**
+ * Wiz
+ * 
+ * @class
+ */
+class Wiz {
+
+    get id()   { return "weizhi"; }
+    get name() { return name( this.id ); }
+
+    get tag() {
+        return "SimpRead";
+    }
+
+    get category() {
+        return "/My Notes/";
+    }
+
+    Auth( user, password, callback ) {
+        const data = {
+            userId   : user,
+            password : password,
+            autoLogin: true,
+        };
+
+        $.ajax({
+            url     : "https://note.wiz.cn/as/user/login?clientType=webclip_chrome&clientVersion=4.0.10&apiVersion=10&lang=zh-CN",
+            type    : "POST",
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            data    : JSON.stringify(data),
+        }).done( ( result, textStatus, jqXHR ) => {
+            result && result.returnCode == 200 && ( this.access_token = result.result.userGuid );
+            callback( result, undefined );
+        }).fail( ( jqXHR, textStatus, error ) => {
+            console.error( jqXHR, textStatus, error )
+            callback( undefined, textStatus );
+        });
+    }
+
+    Add( url, title, content, callback ) {
+        const info = {
+            title,
+            url,
+            category: this.category,
+            cmd     : "save_content",
+            comment : "",
+            tag     : this.tag,
+            userid  : this.username,
+            params  : wiz.getParams( url, title, content ),
+        };
+        let data = wiz.getInfos( info, this.access_token );
+        data     = JSON.stringify( data );
+        const options = {
+            url     : "https://kshttps0.wiz.cn/ks/gather?clientType=webclip_chrome&clientVersion=4.0.10&apiVersion=10&lang=zh-CN",
+            type    : "POST",
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            cache: false,
+            data,
+        };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings: options }), result => {
+            if ( result && result.done && result.done.return_code == 200 ) callback( result, undefined );
+            else if ( result && result.done ) callback( undefined, result.done.return_code == 301 ? `授权已过期，请重新授权。` : "请稍后再试" );
+            else callback( undefined, result.fail );
+        });
+    }
+
+}
+
+/**
  * Kindle
  * 
  * @class
@@ -1246,7 +1611,7 @@ class Kindle {
     }
 
     get server() {
-        return "http://fivefilters.org/kindle-it/send.php";
+        return "https://pushtokindle.fivefilters.org/send.php";
     }
 
     Read( url, title, desc, content, style, callback ) {
@@ -1292,7 +1657,7 @@ class Kindle {
  */
 function name( type ) {
     type = type.toLowerCase();
-    if ( [ "dropbox", "pocket", "instapaper", "linnk" , "evernote", "onenote" ].includes( type ) ) {
+    if ( [ "dropbox", "pocket", "instapaper", "linnk" , "evernote", "onenote", "notion" ].includes( type ) ) {
         return type.replace( /\S/i, $0=>$0.toUpperCase() );
     } else if ( type == "yinxiang" ) {
         return "印象笔记";
@@ -1302,6 +1667,10 @@ function name( type ) {
         return "坚果云";
     } else if ( type == "yuque" ) {
         return "语雀";
+    } else if ( type == "youdao" ) {
+        return "有道云笔记";
+    } else if ( type == "weizhi" ) {
+        return "为知笔记";
     }
 return type;
 }
@@ -1376,7 +1745,7 @@ function verifyService( storage, service, type, name, notify, auto = true ) {
             dtd.resolve( type );
         } else {
             auto ? notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                notify.Clone().Render( type == "linnk" ? "Linnk 无法自动授权 3 秒后请自行授权。" : "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
+                notify.Clone().Render( [ "linnk", "jianguo", "youdao", "weizhi" ].includes( type ) ? `${name} 无法自动授权 3 秒后请自行授权。` : "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
                 setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
             }) : notify.Render( `请先获取 ${name} 的授权，才能使用此功能！` );
             dtd.reject( type );
@@ -1394,7 +1763,10 @@ const dropbox  = new Dropbox(),
       gdrive   = new GDrive(),
       yuque    = new Yuque(),
       jianguo  = new Jianguo(),
+      notion   = new Notion(),
+      youdao   = new Youdao(),
       webdav   = new WebDAV(),
+      weizhi   = new Wiz(),
       kindle   = new Kindle();
 
 export {
@@ -1407,9 +1779,9 @@ export {
     md2HTML  as MD2HTML,
     unlink   as Unlink,
     name     as Name,
-    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav,
+    dropbox, pocket, instapaper, linnk, evernote, onenote, gdrive,yuque, jianguo, webdav, notion, youdao, weizhi,
     kindle,
     mdWrapper       as MDWrapper,
     serviceCallback as svcCbWrapper,
     verifyService   as VerifySvcWrapper,
-}
+} 

@@ -9,6 +9,11 @@ const keyboard = {
             "type" : "markdown",
             "desc" : "导出为 Markdown",
         },
+        om: {
+            "kbd"  : "om",
+            "type" : "offlinemarkdown",
+            "desc" : "导出为 离线 Markdown",
+        },
         pg: {
             "kbd"  : "pg",
             "type" : "png",
@@ -28,7 +33,22 @@ const keyboard = {
             "kbd"  : "hm",
             "type" : "html",
             "desc" : "导出为 HTML",
-        }
+        },
+        oh: {
+            "kbd"  : "oh",
+            "type" : "offlinehtml",
+            "desc" : "导出为 离线 HTML",
+        },
+        tm: {
+            "kbd"  : "tm",
+            "type" : "temp",
+            "desc" : "导出为 临时页面",
+        },
+        cp: {
+            "kbd"  : "cp",
+            "type" : "snapshot",
+            "desc" : "截图",
+        },
     },
     "控制栏 - 其它" : {
         ff: {
@@ -93,6 +113,11 @@ const keyboard = {
             "type" : "yuque",
             "desc" : "保存到 语雀",
         },
+        wz: {
+            "kbd"  : "wz",
+            "type" : "weizhi",
+            "desc" : "保存到 为知笔记",
+        },
         kd: {
             "kbd"  : "kd",
             "type" : "kindle",
@@ -118,10 +143,15 @@ const keyboard = {
             "type" : "save",
             "desc" : "保存到 稍后读",
         },
-        tm: {
-            "kbd"  : "tm",
-            "type" : "temp",
-            "desc" : "生成临时页面",
+        br: {
+            "kbd"  : "br",
+            "type" : "bear",
+            "desc" : "保存到 Bear",
+        },
+        ul: {
+            "kbd"  : "ul",
+            "type" : "ulysses",
+            "desc" : "保存到 Ulysses",
         },
     },
     "控制栏 - 无障碍" : {
@@ -286,9 +316,24 @@ const readItems = {
                 "icon" : ss.IconPath("markdown_icon"),
                 "color": "#D4237A",
             },
+            "offlinemarkdown" : {
+                "name" : "导出为 离线 MD",
+                "icon" : ss.IconPath("offline_markdown_icon"),
+                "color": "#D4237A",
+            },
             "html" : {
                 "name" : "导出为 HTML",
                 "icon" : ss.IconPath("html_icon"),
+                "color": "#D4237A",
+            },
+            "offlinehtml" : {
+                "name" : "导出为 离线 HTML",
+                "icon" : ss.IconPath("offline_html_icon"),
+                "color": "#D4237A",
+            },
+            "snapshot" : {
+                "name" : "截图",
+                "icon" : ss.IconPath("snapshot_icon"),
                 "color": "#D4237A",
             },
         },
@@ -333,6 +378,21 @@ const readItems = {
                 "icon" : ss.IconPath("yuque_icon"),
                 "color": "#00BCD4",
             },
+            "notion" : {
+                "name" : "保存到 Notion",
+                "icon" : ss.IconPath("notion_icon"),
+                "color": "#00BCD4",
+            },
+            "youdao" : {
+                "name" : "保存到 有道云笔记",
+                "icon" : ss.IconPath("youdao_icon"),
+                "color": "#00BCD4",
+            },
+            "weizhi" : {
+                "name" : "保存到 为知笔记",
+                "icon" : ss.IconPath("wiz_icon"),
+                "color": "#00BCD4",
+            },
             "kindle" : {
                 "name" : "保存到 Kindle",
                 "icon" : ss.IconPath("kindle_icon"),
@@ -341,6 +401,16 @@ const readItems = {
             "temp" : {
                 "name" : "生成临时页面",
                 "icon" : ss.IconPath("temp_icon"),
+                "color": "#00BCD4",
+            },
+            "bear" : {
+                "name" : "保存到 Bear",
+                "icon" : ss.IconPath("bear_icon"),
+                "color": "#00BCD4",
+            },
+            "ulysses" : {
+                "name" : "保存到 Ulysses",
+                "icon" : ss.IconPath("ulysses_icon"),
                 "color": "#00BCD4",
             },
         },
@@ -586,6 +656,9 @@ const focusItems = ( items => {
     dels.forEach( del => delete news[ del ] );
     delete news.option.items.fullscreen;
     delete news.option.items.tempread;
+    delete news.download.items.snapshot;
+    delete news.download.items.offlinehtml;
+    delete news.download.items.offlinemarkdown;
     news.top = {
         "name" : "返回顶部",
         "icon" : ss.IconPath("top_icon"),
@@ -653,28 +726,28 @@ const tabsItem = [{
        switch ( idx ) {
             case 0:
                 delete menu.active;
-                menu.icon = ss.IconPath( "common_icon" );
+                menu.fontIcon = '<i class="fas fa-sync-alt"></i>';
                 break;
             case 1:
-                menu.icon = ss.IconPath( "focus_mode_icon" );
+                menu.fontIcon = '<i class="fas fa-wrench"></i>';
                 break;
             case 2:
-                menu.icon = ss.IconPath( "read_mode_icon" );
+                menu.fontIcon = '<i class="fas fa-tools"></i>';
                 break;
             case 3:
-                menu.icon = ss.IconPath( "labs_icon" );
+                menu.fontIcon = '<i class="fas fa-sitemap"></i>';
                 break;
             case 4:
-                menu.icon = ss.IconPath( "plugins_icon" );
+                menu.fontIcon = '<i class="fas fa-plug"></i>';
                 break;
             case 5:
-                menu.icon = ss.IconPath( "read_later_icon" );
+                menu.fontIcon = '<i class="fas fa-inbox"></i>';
                 break;
             case 6:
-                menu.icon = ss.IconPath( "about_icon" );
+                menu.fontIcon = '<i class="fas fa-user"></i>';
                 break;
             case 7:
-                menu.icon = ss.IconPath( "help_icon" );
+                menu.fontIcon = '<i class="fas fa-info-circle"></i>';
                 break;
        }
        return menu;

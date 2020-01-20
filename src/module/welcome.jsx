@@ -208,7 +208,7 @@ class Welcome extends React.Component {
                                 <h2 style={ style.h2 }>连接你的生产力工具</h2>
                                 <div style={ style.desc }>
                                     支持下载 HTML · PDF · Markdown · PNG · <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Epub">Epub</a> 到本地 以及 发送到 <a target="_blank" href="http://ksria.com/simpread/docs/#/发送到-Kindle">Kindle</a><br/>
-                                    支持输出到 坚果云 · 语雀 · Dropbox · 印象笔记 · Evernote · Onenote · Google 云端硬盘<br/>
+                                    支持输出到 坚果云 · 有道云笔记 · 为知笔记 · 语雀 · 印象笔记 · Dropbox · Onenote · Notion 等<br/>
                                     发送页面链接到 <a target="_blank" href="http://ksria.com/simpread/docs/#/稍后读">稍后读</a> · Pocket · Instapaper · Linnk，详细 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">请看这里</a>
                                 </div>
                             </section>
@@ -287,6 +287,19 @@ class Welcome extends React.Component {
                                     期待已久的 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">语雀</a> 和 <a target="_blank" href="http://ksria.com/simpread/docs/#/坚果云">坚果云</a> 现已加入 <a target="_blank" href="http://ksria.com/simpread/docs/#/导出到生产力工具">导出服务</a> 豪华大礼包<br/>
                                     配置文件的同步也可使用 <a target="_blank" href="http://ksria.com/simpread/docs/#/同步">坚果云</a> 了<br/>
                                     不仅如此，只要是支持 <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV">WebDAV</a> 的服务均可使用简悦的导出功能
+                                </div>
+                            </section>
+                        </div> }
+
+                    { !first && version == "1.1.4" &&
+                        <div className="carousel-item" id="1.1.4">
+                            <section style={ style.section }>
+                                <img src="http://sr.ksria.cn/welcome-newservice-ii.png?202001181335" style={ style.img }/>
+                                <h2 style={ style.h2 }>更强大，更易用的导出服务</h2>
+                                <div style={ style.desc }>
+                                    期待已久的 <a target="_blank" href="http://ksria.com/simpread/docs/#/Notion">Notion</a> · <a target="_blank" href="http://ksria.com/simpread/docs/#/有道云笔记">有道云笔记</a> · <a target="_blank" href="http://ksria.com/simpread/docs/#/为知笔记">为知笔记</a> · <a target="_blank" href="http://ksria.com/simpread/docs/#/URLSCHEME">Bear</a> · <a target="_blank" href="http://ksria.com/simpread/docs/#/URLSCHEME">Ulysses</a> 来啦~<br/>
+                                    原生的 <a target="_blank" href="http://ksria.com/simpread/docs/#/离线HTML">离线 HTML / Markdown</a> 下载功能，还有截取任意位置的 <a target="_blank" href="http://ksria.com/simpread/docs/#/截图">截图</a> 功能<br/>
+                                    <a target="_blank" href="http://ksria.com/simpread/docs/#/WebDAV?id=定制">WebDAV</a> 现已定制导出格式，包括： <span>Markdown</span> · <span>HTML</span>
                                 </div>
                             </section>
                         </div> }

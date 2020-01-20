@@ -1,8 +1,8 @@
 /*!
  * React Material Design: List
  * 
- * @version : 0.0.3
- * @update  : 2018/04/26
+ * @version : 0.0.3.0116
+ * @update  : 2020/01/16
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -251,7 +251,8 @@ const cssinjs = () => {
             height: '32px',
 
             color,
-            fontSize: '1.6rem',
+            fontSize: '1.2rem',
+            fontWeight: 400,
 
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -351,7 +352,7 @@ const ListItem = props => {
     return (
         <list-item idx={ idx } style={ style.list_item }>
             <pri-item style={ pri_style } onClick={ (e)=>events.priOnClick( e, props ) }>{ pri_value }</pri-item>
-            <content style={ content_style }>
+            <content style={ content_style } data-tooltip={ true_title } data-tooltip-position="up">
                 <a style={ style.link } href={ url } target="_blank">{ true_title }</a>
                 <subtitle style={ style.subtitle }>{ desc }</subtitle>
             </content>

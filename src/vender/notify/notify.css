@@ -36,11 +36,12 @@ notify-gp notify {
     min-width: 288px;
     max-width: 568px;
 
-    height: 48px;
-    max-height: 48px;
+    /*height: 48px;
+    max-height: 48px;*/
+    min-height: 48px;
 
-    color: rgba(255, 255, 255, .7);
-    background-color: rgba(50, 50, 50, 1);
+    color: rgba(255, 255, 255, 0.9);
+    background-color: #000;
 
     box-sizing: border-box;
     border-radius: 4px;
@@ -50,9 +51,9 @@ notify-gp notify {
     opacity: 0;
     transform: scaleY(0);
     transform-origin: left top 0px;
-    transition: transform 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 
-    box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302), 0 4px 8px 3px rgba(60,64,67,0.149);
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
 notify-gp notify-title {
@@ -64,11 +65,12 @@ notify-gp notify-content {
     display: block;
 
     font-size: 14px;
+    font-weight: 400;
     text-align: left;
 
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /*text-overflow: ellipsis;
+    white-space: nowrap;*/
 }
 
 notify-gp notify-content a,
@@ -98,6 +100,8 @@ notify-gp notify-content a:hover {
 
 notify-gp notify-i {
     display: none;
+    justify-content: center;
+    align-items: center;
 
     margin: 0 10px 0 0;
 
@@ -112,23 +116,32 @@ notify-gp notify-action,
 notify-gp notify-cancel {
     display: none;
 
-    margin: 0 0 0 24px;
+    margin: 0 8px;
 
     max-width: 80px;
     min-width: 56px;
+    height: 36px;
+    line-height: 34px;
 
-    color: #8ab4f8;
+    color: #bb86fc;
 
     font-weight: 500;
     font-size: inherit;
     text-transform: uppercase;
-    text-align: right;
+    text-align: center;
 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 
+    transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     cursor: pointer;
+}
+
+notify-gp notify-action:active,
+notify-gp notify-cancel:active {
+    border-radius: 4px;
+    background-color: rgba(98, 0, 238, .3);
 }
 
 notify-gp notify-cancel {
@@ -145,11 +158,39 @@ notify-gp notify-a {
     cursor: pointer;
 }
 
+notify-gp notify-exit {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 5px;
+
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+
+    background-color: transparent;
+
+    border-radius: 50%;
+    transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    cursor: pointer;
+}
+
+notify-gp notify-exit:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+notify-gp notify-exit:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 notify-gp notify-a notify-span {
     display: block;
     width: 16px;
     height: 16px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABpFBMVEUAAADl5eXj4+NSVFRTVVVaXFxLTU1hY2NdX18pLCwhJCSdnp5sbm6HiYmjpKSDhYX///+rrKytrq6XmJgzNTUoKyt3eXlydHRlZ2dbXV1ucHB4enrv7++KjIyIiort7e1oamosLy8aHR0VGBgUFxcbHh4rLi5oamprbGwgIyMKDQ0KDQ0iJSVjZWWfoaEkJiYICwsLDg4KDQ0MDw8iJSWMjo41ODgMDw8JDAw2OTkvMTELDg4LDg4xMzM1NzcJDAwLDg40NjYeISEHCgoeISFkZmYtLy8yNDRvcXEWGRkHCgoaHR3///8RFBQHCgohJCShoqLIyMgaHR0HCgoZGxv4+PgRFBQLDg4xMzOWl5eam5ssLi4bHh7///8fIiIJDAwwMzNzdHQXGhoeISFlZmYsLi4KDQ0gIiI6PDwOEREuMDAXGhoHCgodHx8pLCwNEBA1ODj///8nKSkICwsICwsJDAwnKSnZ2dl9fn4pKysNDw8OEREpLCxyc3ORkpIzNTUjJSUVGBgUFxcgIyM5PDyanJwEBwcDBwcDBgYFCAgGCQn///+5RDDmAAAAhnRSTlMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQUFAQU+i7S0jkAGEYrw8Y8SBIn++Pr3jQQ67fx8dvX6iWr27z+B/YsOcoMPdPiEAaL7iAgEcfWsA6D7iAkGcawDef2LDnOFD3T4gTLnfHb6iWrqNQJ4+ff7fQILd+ToewsCLHWZmXUwAyFsKwcAAAABYktHRBCVsg0sAAAAzElEQVQY02NgwAoYZWTl5JngXGYFRSVlFVU1dRYIn1VDU6sNCLR1dNlAfHY9fQNDw/YOI2MDE1MOoACnmbmFpZW1ja2dvYMjFwMDN4NTp7OLq5u7h6dXpzcDDwOvj29bm59/QGBQcFtbSCgfA79AWFtHeERkVLR1W1tMrCCDEENcZ3xCYlJySmpaZzqDMAODSEamRVZ2cE5unn1+gSjQFrHCIqNir7a2nJLSsnJxkEMkKiqrutrauqpraiUhTpWqq29obGpuaZVmIAYAAO06McffKEk8AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDEzLTA0LTAzVDE3OjE4OjAzKzA4OjAwRdgB9wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxMS0wNS0xOFQyMDowMTowMCswODowMB0r3XkAAABNdEVYdHNvZnR3YXJlAEltYWdlTWFnaWNrIDYuOC44LTcgUTE2IHg4Nl82NCAyMDE0LTAyLTI4IGh0dHA6Ly93d3cuaW1hZ2VtYWdpY2sub3JnWaRffwAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQAMTI4Q3xBgAAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAAxMjjQjRHdAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADEzMDU3MjAwNjArP9HVAAAAE3RFWHRUaHVtYjo6U2l6ZQAxLjAzS0JCZtQvXwAAAFx0RVh0VGh1bWI6OlVSSQBmaWxlOi8vL2hvbWUvZnRwLzE1MjAvZWFzeWljb24uY24vZWFzeWljb24uY24vY2RuLWltZy5lYXN5aWNvbi5jbi9wbmcvMTcvMTc4Ni5wbmcRsze7AAAAAElFTkSuQmCC);
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDklEQVQ4T6VT0VFCQQzcrQA7ECoRK1AqEDugA6ECsQPsADvgVSAlaAlWEGdvkjchczI45Osud9nc7m2IEmY2BfAEYA5A6xsARwAHAB8ktR6DeWNmKwAvXlSxY78i+RabEcDM9gAe/qoq+T3JhXINwDu/Xlgc1zYk13TOn+XZA4C7AvgN4LbkZgJYO+84O5C8N7Odi6n8O8llh+ZGAD3uO5LPDgIvzoDRbBDAV+dputBAXKNecQM5B9CefQlAj0JwVmdLdGSwHI1CFXEgOS8ihia1WRNRdpU9JwlatpWVc0gr3c0xu95IAfdPK2uoHkcrJxANkzTJdPKTf3ROchvJk2n0LxNPfV9vnDVEJ+P8C6jMhLeGEqMKAAAAAElFTkSuQmCC);
+    opacity: .9;
 }
 
 notify-gp notify-i.holdon {
@@ -165,24 +206,29 @@ notify-gp notify-i.holdon {
 
 notify-gp .notify-show {
     opacity: 1;
-    transform: scaleY(1);
+    transform: scaleY(1)!important;
 }
 
 notify-gp .notify-hide {
-    opacity: 0;
-    transform: scaleY(0);
+    animation-name: fadeOutUp;
+    animation-duration: 450ms;
+    animation-fill-mode: both;
 }
 
 notify-gp .notify-success {
-    color: rgba(118, 255, 3, .8);
+    background-color: rgb(76, 175, 80);
 }
 
 notify-gp .notify-warning {
-    color: rgba(255, 238, 88, 1);
+    background-color: rgb(255, 160, 0);
 }
 
 notify-gp .notify-error {
-    color: rgba(239, 83, 80, 1);
+    background-color: rgba(239, 83, 80, 1);
+}
+
+notify-gp .notify-info {
+    background-color: rgb(25, 118, 210);
 }
 
 notify-gp .notify-modal {
@@ -260,4 +306,43 @@ notify-gp .notify-snackbar {
 
     bottom: 0;
     right: 0;
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        margin-top: 0;
+        padding: 0;
+        height: 0;
+        min-height: 0;
+        opacity: 0;
+        transform: scaleY(0);
+    }
+}
+
+@media (pointer: coarse) {
+    notify-gp {
+        top: initial;
+        bottom: 0;
+        left: 0;
+
+        margin: 0 10px 10px 10px;
+    }
+
+    notify-gp notify {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    notify-gp .notify-show,
+    notify-gp .notify-hide {
+        transform-origin: bottom!important;
+    }
+
+    notify-gp .notify-snackbar {
+        position: initial;
+    }
 }

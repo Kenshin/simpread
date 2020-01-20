@@ -242,8 +242,9 @@ export default class PluginsOpt extends React.Component {
     }
 
     componentWillMount() {
-        $( "head" ).append( '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp" crossorigin="anonymous">' );
-        $( "head" ).append( '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">' );
+        $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.min.css" />' );
+        $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.min.css" />' );
+        $( "head" ).append( '<link rel="stylesheet" class="simpread-fs-style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" />' );
         storage.Plugins( () => {
             decodeURIComponent( location.href ).includes( "#plugins?install=" ) && this.install();
             this.setState({ plugins: Object.values( storage.plugins ) });
@@ -252,7 +253,7 @@ export default class PluginsOpt extends React.Component {
 
     render() {
         return (
-            <div id="labs" style={{ width: '100%' }}>
+            <div id="labs" style={{ width: '100%', overflow: 'hidden' }}>
                 <div className="label">管理</div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>

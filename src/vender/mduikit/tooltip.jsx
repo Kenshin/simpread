@@ -1,8 +1,8 @@
 /*!
  * React Material Design: Tooltip
  * 
- * @version : 0.0.2
- * @update  : 2018/05/01
+ * @version : 0.0.3
+ * @update  : 2019/12/31
  * @homepage: https://github.com/kenshin/mduikit
  * @license : MIT https://github.com/kenshin/mduikit/blob/master/LICENSE
  * @author  : Kenshin Wang <kenshin@ksria.com>
@@ -10,11 +10,14 @@
  * @reference:
  * - https://material.io/guidelines/components/tooltips.html
  * - http://materializecss.com/dialogs.html
+ * - https://kazzkiq.github.io/balloon.css/
  * 
  * @copyright 2017
  */
 
 console.log( "==== simpread component: ToolTip ====" )
+
+import 'mintooltip';
 
 let started = false, timeout, $target, $back, style, styles = new Map();
 const cssinjs = () => {
@@ -245,17 +248,27 @@ class ToolTip extends React.Component {
  * 
  * @param {string} element, e.g. class: .xxx; id: #xxxx; tag: xxx
  * @param {string} id
+ * @param {boolean} usage mintooltip default
  */
-function Render( root, id ) {
+function Render( root, id, is_mini = true ) {
     setTimeout( () => {
         const $root      = !id ? $(root) : $(id);
-        $root.find( "[data-tooltip]" ).map( ( idx, item )=>{
+        $root.find( "[data-tooltip]" ).map( ( idx, item ) => {
             const $item  = $(item),
                 position = $item.attr( "data-tooltip-position" ),
                 delay    = $item.attr( "data-tooltip-delay" ),
                 text     = $item.attr( "data-tooltip" );
-            text && text != "" && 
+            if ( is_mini ) {
+                $item
+                    .removeAttr( "data-tooltip-position" )
+                    .removeAttr( "data-tooltip-delay" )
+                    .removeAttr( "data-tooltip" )
+                    .attr( "aria-label", text )
+                    .attr( "data-balloon-pos", position || "up" );
+            } else {
+                text && text != "" && 
                 ReactDOM.render( <ToolTip root={ root } text={ text } position={ position } delay={ delay } $item={ $item } />, getTooltipRoot( $(root), id ) );
+            }
         });
     }, 500 );
 }

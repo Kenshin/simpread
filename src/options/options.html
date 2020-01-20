@@ -4,17 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>选项页 - 简悦 SimpRead</title>
+    <style>
+        .loadingbar{position:fixed;top:0;left:0;display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center;height:100%;width:100%;background-color:#fafafa;z-index:200}
+    </style>
 </head>
 <body>
+    <div class="loadingbar"><img class="heartBeat animated" src="/assets/images/icon128.png" width="80px"></div>
     <div class="sidebar"></div>
+    <div class="topnav nav"></div>
     <div class="header"><div class="nav"></div><div class="title"></div></div>
     <div class="top"></div>
     <div class="main">
         <div class="tabscontainer"></div>
     </div>
-    <div class="bottom">
-        <span>简悦 SimpRead - 为你提供「如杂志般沉浸式阅读体验」的扩展</span> <span>&nbsp;©&nbsp;2017&nbsp;-&nbsp;2019&nbsp;<a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
+    <div class="bottom" style="opacity:0;">
+        <span>简悦 SimpRead - 为你提供「如杂志般沉浸式阅读体验」的扩展</span> <span>&nbsp;©&nbsp;2017&nbsp;-&nbsp;2020&nbsp;<a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
     </div>
+    <script src="../ga.js"></script>
     <script src="../bundle/common.js"></script>
     <script src="../bundle/vendors.js"></script>
     <script src="../bundle/options.js"></script>

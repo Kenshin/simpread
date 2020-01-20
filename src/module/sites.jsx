@@ -326,7 +326,7 @@ export default class SitesOpts extends React.Component {
         return (
             <div id="labs" style={{ width: '100%' }}>
                 <div className="version-tips" data-hits="newsites">
-                <div className="label">官方主适配源 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.simpread.sites.length } 类</a></div>
+                <div className="label" data-head-level="h1" data-head-title="官方主适配源">官方主适配源 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.simpread.sites.length } 类</a></div>
                 <div className="lab">
                     <Button type="raised" text="手动同步适配列表" width="100%"
                             icon={ ss.IconPath( "update_icon" ) }
@@ -336,7 +336,7 @@ export default class SitesOpts extends React.Component {
                 </div>
                 </div>
 
-                <div className="label">第三方适配源</div>
+                <div className="label" data-head-level="h1">第三方适配源</div>
                 <div ref="origins" style={{ 'padding-top': '10px', 'margin-bottom': '8px;' }} className="lab">
                     <div className="version-tips" data-hits="customsites">
                     <TextField 
@@ -366,7 +366,7 @@ export default class SitesOpts extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="personsites">
-                <div className="label">站点集市 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.pr.sites.person.length } 类</a></div>
+                <div className="label" data-head-level="h1" data-head-title="站点集市">站点集市 <a target="_blank" href="https://simpread.ksria.cn/sites/" style={{ color:' #FF5252', borderBottom: '2px dotted', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>共计 { storage.pr.sites.person.length } 类</a></div>
                 <div className="lab">
                     <div style={{ display: 'inline-flex', width: '100%' }}>
                         <Button type="raised" text="打开「站点集市」" width="100%"
@@ -388,7 +388,7 @@ export default class SitesOpts extends React.Component {
                 </div>
 
                 <div className="version-tips" data-hits="sitemgr">
-                <div className="label">站点管理器</div>
+                <div className="label" data-head-level="h1">站点管理器</div>
                 <div style={{ 'padding-top': '10px', 'position': 'relative' }} className="lab" onClick={ ()=>this.onClick('sitemgr') }>
                     <div className="more" style={{ 'cursor': 'pointer' }}>
                         <div>可以管理全部的适配站点</div>

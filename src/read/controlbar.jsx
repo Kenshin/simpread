@@ -109,7 +109,7 @@ export default class ReadCtlbar extends React.Component {
                     break;
                 default:
                     if ( type.indexOf( "_" ) > 0 && type.startsWith( "share" ) || 
-                        [ "fullscreen", "save", "markdown", "png", "epub", "pdf", "kindle", "temp", "html", "dropbox", "pocket", "instapaper", "linnk", "yinxiang","evernote", "onenote", "gdrive", "jianguo", "yuque" ].includes( type )) {
+                        [ "fullscreen", "save", "markdown", "offlinemarkdown", "png", "epub", "pdf", "kindle", "temp", "bear", "ulysses", "html", "offlinehtml", "snapshot", "dropbox", "pocket", "instapaper", "linnk", "yinxiang", "evernote", "onenote", "gdrive", "jianguo", "yuque", "notion", "youdao", "weizhi" ].includes( type )) {
                         const [ title, desc, content ] = [ $( "sr-rd-title" ).text().trim(), $( "sr-rd-desc" ).text().trim(), $( "sr-rd-content" ).html().trim() ];
                         output.Action( type, title, desc, content );
                     }
@@ -158,6 +158,10 @@ export default class ReadCtlbar extends React.Component {
             }
             if ( this.props.type.startsWith( "metaread::" ) || this.props.type.startsWith( "txtread::" ) ) {
                 delete readItems.option;
+            }
+            if ( !/macintosh|mac os x/i.test(navigator.userAgent) ) {
+                delete readItems.send.items.bear;
+                delete readItems.send.items.ulysses;
             }
             storage.Safe( () => {
                 storage.secret.webdav.forEach( item => {

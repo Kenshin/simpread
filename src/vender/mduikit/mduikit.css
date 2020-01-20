@@ -1,0 +1,147 @@
+/*!
+ * React Material Design Style
+ * 
+ * @version : 0.0.1
+ * @update  : 2019/12/29
+ * @homepage: https://github.com/kenshin/mduikit
+ * @author  : Kenshin Wang <kenshin@ksria.com>
+ * 
+ * @copyright 2019
+ */
+
+/**
+ * Sidebar
+ */
+
+sidebar side content a {
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+sidebar side content a:hover {
+    background-color: rgba(0,0,0,.04);
+}
+
+sidebar side content a.active {
+    font-weight: bold;
+}
+
+sidebar side toc {
+    position: relative;
+    width: 100%;
+}
+
+sidebar side toc i {
+    position: absolute;
+    left: 35px;
+    top: 0;
+    bottom: 0;
+
+    display: block;
+
+    width: 2px;
+    background: rgba(189,189,189,.4);
+}
+
+sidebar side toc outline {
+    position: relative;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    padding: 12px 0 12px 60px;
+    min-height: 21px;
+
+    line-height: 21px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+sidebar side toc outline:hover {
+    background-color: rgba(0,0,0,.04)!important;
+}
+
+sidebar side .toc-level-h1 {
+    padding-left: 60px;
+}
+sidebar side .toc-level-h2 {
+    padding-left: 70px;
+}
+sidebar side .toc-level-h3 {
+    padding-left: 75px;
+}
+sidebar side .toc-level-h4 {
+    padding-left: 80px;
+}
+
+/**
+ * Source from https://jonsuh.com/hamburgers/
+ */
+.hamburger {
+    font: inherit;
+    display: inline-block;
+    overflow: visible;
+    margin: 0;
+    padding: 15px;
+    cursor: pointer;
+    transition-timing-function: linear;
+    transition-duration: .15s;
+    transition-property: opacity,filter;
+    text-transform: none;
+    color: inherit;
+    border: 0;
+    background-color: transparent;
+    transform: scale(.5);
+}
+
+.hamburger-box {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.hamburger-inner {
+    top: 50%;
+    display: block;
+    margin-top: -2px;
+}
+
+.hamburger-inner, .hamburger-inner:after, .hamburger-inner:before {
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    transition-timing-function: ease;
+    transition-duration: .15s;
+    transition-property: transform;
+    border-radius: 4px;
+    background-color: #9E9E9E;
+}
+
+.hamburger-inner:after, .hamburger-inner:before {
+    content: "";
+    display: block;
+}
+
+.hamburger-inner:before {
+    top: -10px;
+}
+
+.hamburger-inner:after {
+    bottom: -10px;
+}
+
+.hamburger:hover .hamburger-inner, .hamburger:hover .hamburger-inner:after, .hamburger:hover .hamburger-inner:before {
+    background-color: #9E9E9E;
+    transform: scale(.7);
+}
+
+.hamburger--arrow:hover .hamburger-inner:before {
+    transform: translate3d(-8px,0,0) rotate(-45deg) scaleX(.7);
+}
+
+.hamburger--arrow:hover .hamburger-inner:after {
+    transform: translate3d(-8px,0,0) rotate(45deg) scaleX(.7);
+}

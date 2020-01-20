@@ -9,10 +9,12 @@ const action = {
     tab_selected   : "tab_selected",
     new_tab        : "new_tab",
     close_tab      : "close_tab",
+    // menu
     menu           : "menu",
     menu_whitelist : "menu_whitelist",
     menu_exclusion : "menu_exclusion",
     menu_blacklist : "menu_blacklist",
+    menu_lazyload  : "menu_lazyload",
     menu_unrdist   : "menu_unrdist",
     updated        : "updated",
     save_verify    : "save_verify",
@@ -34,13 +36,23 @@ const action = {
     temp_site      : "temp_site",
     // corb
     CORB           : "corb",
+    AXIOS          : "axios",
     // webdav
     jianguo        : "jianguo",
     WebDAV         : "webdav",
     // event
     turn_tab       : "turn_tab",
     welcome_close  : "welcome_close",
-    "controlbar"   : "simpread-plugin_controlbar",
+    controlbar     : "simpread-plugin_controlbar",
+    // offline
+    download       : "download",
+    base64         : "base64",
+    permission     : "permission",
+    // snapshot
+    snapshot       : "snapshot",
+    // tips
+    tips           : "tips",
+    tips_norepeat  : "tips_norepeat",
 };
 
 /**

@@ -110,13 +110,13 @@ Instapaper = (function() {
     // Creates new Ajax request
     // Always uses POST
     request(options) {
-      var auth, req;
+      var auth, req, settings;
       req = options.req || (options.req = this.makeRequestObject({
         url: options.url,
         data: options.data
       }));
       auth = this.authTemplate(options.req);
-      return $.ajax({
+      settings = {
         url: `${this.baseUrl}${options.url}`,
         dataType: (function() {
           return options.dataType || "json";
@@ -126,7 +126,11 @@ Instapaper = (function() {
         headers: {
           Authorization: auth
         }
-      });
+      };
+      if ( options.url == "bookmarks/add" ) {
+        return settings;
+      }
+      return $.ajax(settings);
     }
 
     // ## Specific API Methods
