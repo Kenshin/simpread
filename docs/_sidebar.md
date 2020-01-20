@@ -48,7 +48,23 @@
     * [导出到 Epub](发送到-Epub)
     * [导出到 Kindle](发送到-Kindle)
     * [导出到 临时页面](临时页面)
+    * [导出 离线 HTML](离线HTML)
   * 导出到生产力工具
+    * 支持
+      * Linnk
+      * Pocket
+      * Instapaper
+      * 语雀
+      * [坚果云](坚果云)
+      * [有道云笔记](有道云笔记)
+      * 印象笔记/Evernote
+      * [为知笔记](为知笔记)
+      * Google 云端硬盘 
+      * Dropbox
+      * [WebDAV](WebDAV)
+      * [Notion](Notion)
+      * Onenote
+      * Bear | Ulysses
     * [介绍](导出到生产力工具)
     * [授权服务](授权服务)
     * [授权码](授权服务?id=授权码)

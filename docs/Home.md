@@ -29,7 +29,7 @@
 全功能
 ---
 
-![功能一览](http://sr.ksria.cn/feature%201.1.3.png)
+![功能一览](http://sr.ksria.cn/feature%201.1.4.png)
 
 联络方式
 ---

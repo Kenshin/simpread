@@ -45,3 +45,24 @@
 
 ![Xnip2019-06-27_11-26-14.png](https://i.loli.net/2019/06/27/5d1437d6c7d9e94788.png)
 
+定制
+--
+
+> 1.1.4 开始新增加 **导出文件的类型** 配置如下：
+
+```
+{"name":"Box","user":"****@gmail.com","password":"*********", "url": "https://dav.box.com/dav/","format":"html"}
+{"name":"Documents","user":"*","password":"*", "url": "http://*.*.*.*","format":"ofhtml"}
+```
+
+调用格式：
+
+```
+"format": "md|html|ofhtml"
+```
+
+包含的文件类型：
+
+- md <默认值>
+- html
+- ofhtml <离线 HTML>
