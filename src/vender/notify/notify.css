@@ -65,6 +65,7 @@ notify-gp notify-content {
     display: block;
 
     font-size: 14px;
+    font-weight: 400;
     text-align: left;
 
     overflow: hidden;

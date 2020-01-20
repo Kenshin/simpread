@@ -118,6 +118,7 @@ storage.Read( first => {
     sidebarRender();
     navRender();
     vernotify( first );
+    //welcomeRender( false, "1.1.4" );
     mainRender( tabsItemID );
     setTimeout(() => noticeRender(), 500 );
     helpRender();
@@ -155,8 +156,10 @@ function pRead() {
 function updateData() {
     ver.Incompatible( storage.version, storage.simpread ) && storage.Write( () => {
         console.log( "current simpread is update ", storage.simpread )
+        new Notify().Render({ type: 2, content: `检测到你曾经修改过第三方适配源，<b>务必刷新后重新导入</b>！<a target="_blank" href="http://ksria.com/simpread/docs/#/站点适配源?id=第三方适配源">详细说明</a>`, state: "holdon" });
         watch.SendMessage( "option", true );
     }, storage.simpread );
+    ver.VerifyPlugins( storage.option ) && new Notify().Render({ type: 2, content: `有需要清理的已失效插件，详细请看 <a href="http://ksria.com/simpread/welcome/version_${storage.version}.html#badplugins" target="_blank">失效插件</a>`, state: "holdon" });
 }
 
 /**
@@ -302,11 +305,11 @@ function tabsRender( color ) {
                     <section style={{ 'padding': '0;' }}>
                         <PluginsOpt />
                     </section>
-                    <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } /></section>
+                    <section><Unrdist list={ storage.unrdist.map( item => { return { ...item }} ) } onLoadMoreClick={ ()=> setTimeout( ()=> tt.Render( "list" ), 200 ) } /></section>
                     <section style={{ 'padding': '0;' }}>
                         <AccountOps user={ storage.user } load={ loadState } />
                     </section>
-                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.simpread.statistics } onClick={t=>welcomeRender(true,"all")}/></section>
+                    <section style={{ 'padding': '0;' }}><About option={ storage.option } site={ storage.simpread.sites.length } statistics={ storage.statistics } onClick={t=>welcomeRender(true,"all")}/></section>
                 </Tabs>,
           tabsOnChange = ( $prev, $target, event ) => {
                 const idx = $target.attr( "id" );
@@ -360,7 +363,7 @@ function sidebarRender() {
     conf.menuItem = conf.menuItem.concat( newItems );
     const sidebar = <side.Sidebar items={ conf.menuItem }
                              waves="md-waves-effect" autoClose={false} showClose={ true }
-                             header="设定" footer=" 简悦 © 2017 ~ 2019" onClick={ ($t,o)=>sidebarClick($t,o) } />;
+                             header="设定" footer=" 简悦 © 2017 ~ 2020" onClick={ ($t,o)=>sidebarClick($t,o) } />;
     ReactDOM.render( sidebar, $( ".sidebar" )[0] );
 }
 
@@ -399,6 +402,7 @@ function noticeRender() {
     $( "body" ).on( "click", ".notice", event => {
         location.href = location.origin + "/options/notice.html?is_update=" + sessionStorage.getItem( "is_update" );
     });
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "help", eventAction: "help", eventValue: "notice" }) );
 }
 
 /*
@@ -426,6 +430,7 @@ function helpRender() {
             exit();
         }
     });
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "help", eventAction: "help", eventValue: "help" }) );
 }
 
 /*
@@ -441,4 +446,5 @@ function feedbackRender() {
         fb.Render( storage.version, storage.user );
         setTimeout( () => tt.Render( ".simpread-feedback" ), 200 );
     });
+    browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.track, { eventCategory: "help", eventAction: "help", eventValue: "feedback" }) );
 }

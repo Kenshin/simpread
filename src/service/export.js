@@ -1745,7 +1745,7 @@ function verifyService( storage, service, type, name, notify, auto = true ) {
             dtd.resolve( type );
         } else {
             auto ? notify.Render( `请先获取 ${name} 的授权，才能使用此功能！`, "授权", ()=>{
-                notify.Clone().Render( type == "linnk" ? "Linnk 无法自动授权 3 秒后请自行授权。" : "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
+                notify.Clone().Render( [ "linnk", "jianguo", "youdao", "weizhi" ].includes( type ) ? `${name} 无法自动授权 3 秒后请自行授权。` : "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
                 setTimeout( ()=>browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.auth, { name: type } )), 3000 );
             }) : notify.Render( `请先获取 ${name} 的授权，才能使用此功能！` );
             dtd.reject( type );
