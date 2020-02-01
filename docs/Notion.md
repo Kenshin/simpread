@@ -5,7 +5,7 @@
 
 > 阅读模式 → 控制栏 → 动作 → 保存
 
-![lzcLOe.png](https://s2.ax1x.com/2020/01/17/lzcLOe.png)
+![lzcLOe.png](https://s2.ax1x.com/2020/02/01/18otu8.md.png)
 
 说明
 ---
@@ -22,5 +22,5 @@
 
 - 授权成功后，可选择保存的文件夹_**注意：与其它授权不同，简悦无法自动建立对应的文件夹**_
 
-![lzgEwj.png](https://s2.ax1x.com/2020/01/17/lzgEwj.png)
+![lzgEwj.png](https://s2.ax1x.com/2020/02/01/18oGgP.png)
 
