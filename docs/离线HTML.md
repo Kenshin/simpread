@@ -11,7 +11,7 @@
 
 > 阅读模式 → 控制栏 → 动作 → 导出
 
-[![1pJmrV.md.png](https://s2.ax1x.com/2020/01/18/1pJmrV.png)](https://imgchr.com/i/1pJmrV)
+[![1pJmrV.md.png](https://s2.ax1x.com/2020/02/01/184Tv8.png)](https://imgchr.com/i/1pJmrV)
 
 特点
 ---
@@ -22,7 +22,7 @@
 - 代码段的高亮
 - LaTeX
 
-![lzD7AP.png](https://s2.ax1x.com/2020/01/17/lzD7AP.png)
+![lzD7AP.png](https://s2.ax1x.com/2020/02/01/185kVJ.png)
 
 
 注意
@@ -30,6 +30,6 @@
 
 - 由于 HTML 较大（因为要 Base64 图片）所以，需要申请新的下载权限，请给予通过
 
-  ![lzB2ss.png](https://s2.ax1x.com/2020/01/17/lzB2ss.png)
+  ![lzB2ss.png](https://s2.ax1x.com/2020/02/01/184j5n.png)
   
 - 插件中心 → [离线下载](https://simpread.ksria.cn/plugins/details/EHLtCwBy6c) 因此被废弃掉了，所以请删除此插件
