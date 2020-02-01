@@ -11,9 +11,9 @@ Mac OS 可借助 `URL Scheme`  可将 阅读模式的页面发送到 Bear Ulysse
 
 > 阅读模式 → 控制栏 → 动作 → 保存
 
-![1pBwIx.png](https://s2.ax1x.com/2020/01/18/1pBwIx.png)
+![1pBwIx.png](https://s2.ax1x.com/2020/02/01/184wNR.png)
 
 使用
 ---
 
-![1p1f3t.png](https://s2.ax1x.com/2020/01/18/1p1f3t.png)
+![1p1f3t.png](https://s2.ax1x.com/2020/02/01/18483V.png)

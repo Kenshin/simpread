@@ -11,7 +11,7 @@
 
 > 阅读模式 → 控制栏 → 动作 → 导出
 
-[![1pJmrV.md.png](https://s2.ax1x.com/2020/02/01/184Tv8.png)](https://imgchr.com/i/1pJmrV)
+[![1pJmrV.md.png](https://s2.ax1x.com/2020/02/01/184Tv8.md.png)](https://imgchr.com/i/1pJmrV)
 
 特点
 ---
