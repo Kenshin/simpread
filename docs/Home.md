@@ -45,17 +45,17 @@
 媒体报道
 ---
 
-- [不只是「完美」阅读模式，他想用这款阅读工具帮你更好获取知识：专访简悦 | 幕后 | 少数派](https://sspai.com/post/52492)
+- [不只是完美阅读模式，他想用这款阅读工具帮你更好获取知识：专访简悦 | 少数派 · 幕后](https://sspai.com/post/52492)
 
-- [访《简悦》：改善 318 类网站，只为做最好的「阅读模式」](https://www.ifanr.com/app/1240289)
+- [专访简悦：改善 318 类网站，只为做最好的阅读模式 | 爱范儿](https://www.ifanr.com/app/1240289)
 
 - [简悦：无干扰的沉浸式阅读体验 | 玩儿法](https://www.waerfa.com/simpread-review)
 
-- [开发者说 | 我是「简悦」开发者， 关于独立开发产品，你有什么想问的](https://www.jianshu.com/p/d09d266de39e)
+- [我是简悦开发者，关于独立开发产品，你有什么想问的 | 简书 · 开发者说](https://www.jianshu.com/p/d09d266de39e)
 
 - [[ UserScript 脚本]简悦 · 轻阅版 – 支持 Safari、Edge 的浏览器沉浸式阅读模式工具 | 小众软件](https://www.appinn.com/simpread-lite/)
 
-- [如何在开源的同时斩获 Chrome 商城 40000+ 用户 |  GitHub Daily](https://zhuanlan.zhihu.com/p/60222691)
+- [如何在开源的同时斩获 Chrome 商城 40000+ 用户 | GitHub Daily](https://zhuanlan.zhihu.com/p/60222691)
 
 - [簡悅 SimpRead 追求 Chrome 上的沈浸式中文閱讀體驗](https://www.playpcesor.com/2017/06/simpread-chrome.html)
 
