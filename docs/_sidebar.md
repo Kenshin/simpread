@@ -51,6 +51,10 @@
       * [导出到 临时页面](临时页面)
       * [导出到 离线 HTML](离线HTML)
   * 导出到生产力工具
+    * [介绍](导出到生产力工具)
+    * [授权服务](授权服务)
+    * [授权码](授权服务?id=授权码)
+    * [FAQ](授权服务-FAQ)
     * 支持服务
       * Linnk
       * Pocket
@@ -66,10 +70,6 @@
       * [Notion ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Notion)
       * Onenote
       * [Bear | Ulysses ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](URLSCHEME)
-    * [介绍](导出到生产力工具)
-    * [授权服务](授权服务)
-    * [授权码](授权服务?id=授权码)
-    * [FAQ](授权服务-FAQ)
   * [自定义样式](自定义样式)
   * 插件系统
     * [介绍](插件系统)
