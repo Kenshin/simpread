@@ -6,8 +6,8 @@
 
 ## 下载地址
 
-- **简悦** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.0.box?201805251238&name=%E7%AE%80%E6%82%A6) 
-- **简悦 · 阅读器** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-reader.box?201805251238&name=%E7%AE%80%E6%82%A6%20%C2%B7%20%E9%98%85%E8%AF%BB%E5%99%A8)
+- **简悦** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.3.box?202002131303&name=%E7%AE%80%E6%82%A6) 
+- **简悦 · 阅读器** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-reader-1.0.3.box?202002131303&name=%E7%AE%80%E6%82%A6%20%C2%B7%20%E9%98%85%E8%AF%BB%E5%99%A8)
 
 ## 简悦 iOS with JSBox 是什么
 
@@ -40,8 +40,6 @@
 
 > 与 简悦 的区别是什么？
 
-- 阅读器无法单独使用；
-- 阅读器没有任何配置选项；
 - 简悦只能通过 Safari 打开，但阅读器支持任意 App （通过分享）打开；
 - 阅读器支持从剪切板直接进入阅读模式；（拷贝任意有效 URL 后，打开阅读器即可）
 
@@ -55,23 +53,27 @@
 
 ## 配置指南
 
+#### 方案一：
+
+> 从 [1.0.3](http://ksria.com/simpread/changelog.html#jsbox_1.0.3) 开始支持 **无需配置直接使用的方案** _此方案无法使用 **导出服务**_
+
+#### 方案二：
+
 - 确保已 [安装 JSBox](https://itunes.apple.com/cn/app/jsbox-%E5%88%9B%E9%80%A0%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%B7%A5%E5%85%B7/id1312014438?mt=8)；
 
 - 通过（上面的）地址分别下载 简悦 以及 阅读器；
 
-- 打开简悦的设定选项卡；_点击简悦右侧的 ▶ 并选择 **设定**_
+- 打开简悦的设定选项卡；_点击简悦右侧的 ▶ 并选择 **设定**_  
 
-  ![](https://i.imgur.com/EsyO9lDl.png)
+  ![](http://sr.ksria.cn/menu2@jsbox.png)
 
 - 按照下图步骤进行配置；
-  ![](https://i.imgur.com/INY5Gj6l.png)
+  ![](http://sr.ksria.cn/setting2@jsbox.png)
 
   1. 粘贴 Dropbox token 到输入框；_获取 Dropbox token 请看本文最下方 **如何获取 Dropbox token**_
   2. 点击 **从 Dropbox 读取你的配置文件** ； _以便获取其它导出服务的token_
   3. 点击 **同步适配列表**； _以便获取最新的适配列表_
   4. 如果已安装「阅读器」的话，请点击 **共享适配列表给阅读器** ；_建议每次同步更新后都需要操作一次_
-
-通过上述步骤即可设置完毕，如何使用请看上面的操作视频。
 
 ## 下一步
 
@@ -111,13 +113,13 @@
 
 ## 触发器脚本
 
-> JSBox 带有一个叫做 **触发器脚本** 的功能，简单的说就是当通过 点击 ![Imgur](https://i.imgur.com/yeskA2tm.jpg) 分享时自动弹出菜单，具体的设置如下：
+> JSBox 带有一个叫做 **触发器脚本** 的功能，简单的说就是当通过 点击 ![Imgur](https://s2.ax1x.com/2020/02/13/1qdqzQ.jpg) 分享时自动弹出菜单，具体的设置如下：
 
-![Imgur](https://i.imgur.com/37vkidgh.png)
+![Imgur](https://s2.ax1x.com/2020/02/13/1qd6PO.jpg)
 
 ## 一些对比图
 知乎的前后对比  
-![Imgur](https://i.imgur.com/xvBuenKm.jpg) ![Imgur](https://i.imgur.com/bxLL8eJm.jpg)
+![Imgur](https://s2.ax1x.com/2020/02/13/1qaXE6.jpg) ![Imgur](https://s2.ax1x.com/2020/02/13/1qdS8e.jpg)
 
 代码段的前后对比（与 Safari 阅读模式的对比）  
-![Imgur](https://i.imgur.com/4mYO0shm.png) ![Imgur](https://i.imgur.com/rWK2ejVm.png) 
+![Imgur](https://s2.ax1x.com/2020/02/13/1qd9vd.jpg) ![Imgur](https://s2.ax1x.com/2020/02/13/1qd3V0.jpg) 
