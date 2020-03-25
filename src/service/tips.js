@@ -25,7 +25,7 @@ function Render( plugins ) {
     messages = {
         "klGUASLasg": '检测到当前环境有代码段，请使用      <a target="blank" href="https://simpread.ksria.cn/plugins/details/klGUASLasg">代码增强插件</a> 辅助阅读',
         "VQOZdNET2d": '检测到当前环境有大量的图片，可以使用 <a target="blank" href="https://simpread.ksria.cn/plugins/details/VQOZdNET2d">点击查看大图</a> 辅助阅读',
-        "DxlFcL52iy": '如果你想换个论坛类页面风格，可以使用 <a target="blank" href="https://simpread.ksria.cn/plugins/details/DxlFcL52iy">Materail Design 风格</a> 辅助阅读',
+        "DxlFcL52iy": '如果你想换个论坛类页面风格，可以使用 <a target="blank" href="https://simpread.ksria.cn/plugins/details/DxlFcL52iy">Material Design 风格</a> 辅助阅读',
     }
     // verify klGUASLasg
     if ( $( "sr-read" ).find( "pre" ).length > 0 && plugins.findIndex( item => item == "klGUASLasg" ) == -1 ) {
