@@ -38,6 +38,7 @@ $( document ).ready( function() {
     headerRender();
     reviewsRender();
     changelogRender();
+    privacyRender();
     footerRender();
     wavesRender();
     versionRender();
@@ -241,6 +242,19 @@ function reviewsRender() {
     });
 }
 
+function privacyRender() {
+    if ( !location.pathname.endsWith( "privacy.html" ) ) return;
+    $( ".languages ul.nav a" ).on( "click", event => {
+        const $target = $( event.currentTarget ),
+              id      = $target.attr( "aria-controls" );
+        $( ".languages ul.nav a" ).attr( "aria-expanded", false );
+        $target.attr( "aria-expanded", true );
+        $target.parent().parent().find( "li" ).removeClass( "active" );
+        $target.parent().addClass( "active" );
+        $( ".tab-pane" ).removeClass( "active" );
+        $( ".tab-content" ).find( "#" + id ).addClass( "active" );
+    })
+}
 function footerRender() {
     const html = `<div class="groups">
                     <div class="links">
