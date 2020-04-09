@@ -1832,10 +1832,21 @@ body {
     position: absolute;
     bottom: 0;
 
-    padding-bottom: var(--padding-bottom);
+    padding-top: var(--padding-bottom);
 
     width: 100%;
     text-align: center;
+}
+
+.footer .copywrite .beian {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 4px;
+    padding-bottom: 1px;
+
+    font-size: inherit;
+    color: inherit;
 }
 
 .footer .copywrite a:hover {

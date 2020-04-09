@@ -255,6 +255,7 @@ function privacyRender() {
         $( ".tab-content" ).find( "#" + id ).addClass( "active" );
     })
 }
+
 function footerRender() {
     const html = `<div class="groups">
                     <div class="links">
@@ -287,11 +288,12 @@ function footerRender() {
                     </div>
                 </div>
                 <div class="copywrite">
-                    <span>简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展</span> <span>&nbsp;©&nbsp;2017 ~ 2019 <a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
+                    <span>简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展</span> <span>&nbsp;©&nbsp;2017 ~ 2020 <a href="http://ksria.com/simpread">ksria.com</a> by <a href="http://kenshin.wang" target="_blank">Kenshin Wang</a></span>
                 </div>`;
     $( '.footer' ).html( html );
     ![ '/', '/simpread/' ].includes( location.pathname ) && $( '.undefined.auth' ).length == 0 && $( '.undefined' ).length > 0 && document.body.clientHeight > $( '.top' ).height() + $( '.undefined' ).height() + $( '.footer' ).height() &
         $( '.footer' ).addClass( 'fixed' );
+    [ '/', '/simpread/' ].includes( location.pathname ) && $( ".copywrite" ).append( `<div class="beian"><a class="beian" href="http://www.miibeian.gov.cn" target="_blank">黑ICP备18004085号-1</a></div>` )
 }
 
 function wavesRender() {
