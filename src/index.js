@@ -293,7 +293,6 @@ function footerRender() {
     $( '.footer' ).html( html );
     ![ '/', '/simpread/' ].includes( location.pathname ) && $( '.undefined.auth' ).length == 0 && $( '.undefined' ).length > 0 && document.body.clientHeight > $( '.top' ).height() + $( '.undefined' ).height() + $( '.footer' ).height() &
         $( '.footer' ).addClass( 'fixed' );
-    [ '/', '/simpread/' ].includes( location.pathname ) && $( ".copywrite" ).append( `<div class="beian"><a class="beian" href="http://www.miibeian.gov.cn" target="_blank">黑ICP备18004085号-1</a></div>` )
 }
 
 function wavesRender() {
