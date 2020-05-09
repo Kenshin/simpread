@@ -123,7 +123,7 @@ const cssinjs_panel = () => {
               width: '100%',
 
               margin: 0,
-              padding: '39px 20px 0',
+              padding: '39px 24px 0',
 
               color: 'rgba(0, 0, 0, 0.870588)',
               backgroundColor: 'rgb(255, 255, 255)',
@@ -193,9 +193,9 @@ const cssinjs_panel = () => {
           groups: {
             display: 'block',
             width: '100%',
-            marginLeft: "-20px",
+            marginLeft: "-24px",
             overflowY: 'auto',
-            paddingLeft:"20px"
+            paddingLeft:"24px"
           },
 
           group: {
@@ -273,7 +273,7 @@ class Panel extends React.Component {
               $groups = $target.find( "panel-groups" ),
               height  = $groups.height();
         if ( offset < 0 ) {
-            $groups.height( height + offset - 32 ).css({ "padding-right": "20px" });
+            $groups.height( height + offset - 32 ).css({ "padding-right": "24px" });
         }
     }
 
