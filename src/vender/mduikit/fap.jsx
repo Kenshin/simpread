@@ -123,7 +123,7 @@ const cssinjs_panel = () => {
               width: '100%',
 
               margin: 0,
-              padding: '39px 24px 0',
+              padding: '39px 20px 0',
 
               color: 'rgba(0, 0, 0, 0.870588)',
               backgroundColor: 'rgb(255, 255, 255)',
@@ -193,8 +193,9 @@ const cssinjs_panel = () => {
           groups: {
             display: 'block',
             width: '100%',
-            overflowX: 'hidden',
+            marginLeft: "-20px",
             overflowY: 'auto',
+            paddingLeft:"20px"
           },
 
           group: {
