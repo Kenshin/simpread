@@ -528,7 +528,7 @@ export default class Auth extends React.Component {
                             </div> }
                         { this.state.secret.notion.access_token && 
                             <div style={{ display: "flex","flex-direction": "row", "justify-content": "center","paddingLeft":40,"fontSize":"80%" }}>
-                                <Switch onChange={ (v,n)=>this.save( "notion_save_image", v ) } checked={ this.state.secret.notion.save_image} label="是否将图片保存到Notion.so"></Switch>
+                                <Switch onChange={ (v,n)=>this.save( "notion_save_image", v ) } checked={ this.state.secret.notion.save_image} label="将图片保存到Notion.so （速度较慢，慎重）"></Switch>
                             </div>}
                         </div>
                         <div className="version-tips" data-version="1.1.4" data-hits="youdao">
