@@ -53,6 +53,9 @@ const action = {
     // tips
     tips           : "tips",
     tips_norepeat  : "tips_norepeat",
+    // notion.so
+    NOTION_DL_IMG  : "notion_dl_img",  
+    NOTION_UP_IMG  : "notion_up_img",  
 };
 
 /**

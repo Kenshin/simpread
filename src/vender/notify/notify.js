@@ -184,6 +184,11 @@ var Notify = ( function () {
             this.title   ? $title.text( this.title )     : $title.hide();
             this.content ? $content.html( this.content ) : $content.hide();
 
+            this.updateContent = function(content){
+                this.content = content;
+                this.content ? $content.html( this.content ) : $content.hide();
+            }
+
             if ( this.mode === MODE.modal ) {
                 $target.addClass( "notify-modal" );
                 $content.addClass( "notify-modal-content" );

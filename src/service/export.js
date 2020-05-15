@@ -1272,7 +1272,123 @@ class Notion {
         });
     }
 
-    Add( title, content, callback ) {
+    MathImages( content ) {
+        const result = content.match(/!\[.*?\]\(http(.*?)\)/g)
+
+        if( !result ){ return [] }
+
+        const images = result
+          .map(o => {
+            const temp = /!\[.*?\]\((http.*?)\)/.exec(o);
+            if (temp) {
+              return temp[1];
+            }
+            return '';
+          })
+          .filter(o => o && !~o.indexOf('secure.notion-static.com/'));
+        
+        return images
+    }
+
+    DonwloadOriginImage(url) {
+        return new Promise((resolve, reject) => {
+          browser.runtime.sendMessage(
+            msg.Add(msg.MESSAGE_ACTION.NOTION_DL_IMG, {
+              url,
+            }),
+            (res) => {
+                if (res.done) {
+                  resolve(res.done)
+                } else {
+                  reject(res.fail)
+                }
+            }
+          )
+        })
+    }
+
+    UploadOriginImage ( { type, size, url } ){
+        return new Promise((resolve, reject) => {
+          this.GetFileUrl(
+            this.UUID(),
+            (urls) => {
+              browser.runtime.sendMessage(
+                msg.Add(msg.MESSAGE_ACTION.NOTION_UP_IMG, {
+                  url: url,
+                  upUrl: urls.signedPutUrl,
+                }),
+                (res) => {
+                  if (res.done) {
+                    resolve({
+                      from: url,
+                      to: urls.url,
+                    })
+                  } else {
+                    resolve()
+                  }
+                }
+              )
+            },
+            {
+              bucket: 'secure',
+              contentType: type,
+            }
+          )
+        })
+    }
+
+    async UploadImages ( content ) {
+
+        function escapeRegExp(string) {
+          return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
+        }
+        
+        const images = [...new Set(this.MathImages(content))]
+        const imagesCount = images.length;
+        let completeCount = 0;
+        const replacements = []
+        const UploadOriginImage = this.UploadOriginImage.bind(this);
+        const notify = new Notify().Render({ state: "loading", content: `正在采集图片到 Notion，请稍等` });
+        const updateNotify = function(){
+            notify.updateContent(`正在采集图片到 Notion，请稍等 (${completeCount}/${imagesCount}) `)
+        }
+        replacements.push(
+          await images.reduce((prevPromise, imageUrl) => {
+            if (!imageUrl) return
+            console.log(' Notion Download Image :' + imageUrl)
+            return prevPromise.then((replacement) => {
+              if (replacement) {
+                replacements.push(replacement)
+              }
+              completeCount ++;
+              updateNotify()
+              return this.DonwloadOriginImage(imageUrl).then(
+                UploadOriginImage,
+                (err) => {
+                  console.error(err)
+                }
+              )
+            })
+          }, Promise.resolve())
+        )
+        notify.complete();
+
+        replacements.forEach((replacement) => {
+          if (replacement) {
+            content = content.replace(
+              new RegExp(escapeRegExp(replacement.from),'g'),
+              replacement.to
+            )
+          }
+        })
+
+        return content;
+    }
+
+    async Add( title, content, callback ) {
+        if ( this.save_image ) {
+            content = await this.UploadImages(content)
+        }
         this.TempFile( this.folder_id, title, ( documentId, error ) => {
             console.log( 'TempFile: ', documentId )
             if ( error ) {
@@ -1371,14 +1487,13 @@ class Notion {
         });
     }
 
-    GetFileUrl( name, callback ) {
+    GetFileUrl( name, callback, option = { bucket: 'temporary', contentType: 'text/markdown' } ) {
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
             type: "post",
             url: this.url + "api/v3/getUploadFileUrl",
             data:{
-                bucket: 'temporary',
                 name: name,
-                contentType: 'text/markdown',
+                ...option
             }
         }), result => {
             if ( result && result.done ) {

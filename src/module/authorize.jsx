@@ -288,6 +288,7 @@ export default class Auth extends React.Component {
         state == "pocket" && ( storage.secret.pocket.tags      = value.trim() );
         state == "linnk"  && ( storage.secret.linnk.group_name = value.trim() );
         state == "notion" && ( storage.secret.notion.folder_id = value.trim() );
+        state == "notion_save_image" && ( storage.secret.notion.save_image = value );
         state == "youdao" && ( storage.secret.youdao.folder_id = value.trim() );
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
@@ -525,6 +526,10 @@ export default class Auth extends React.Component {
                                     waves="md-waves-effect md-waves-button"
                                     onClick={ (s)=>this.notionChange() } /> }
                             </div> }
+                        { this.state.secret.notion.access_token && 
+                            <div style={{ display: "flex","flex-direction": "row", "justify-content": "center","paddingLeft":40,"fontSize":"80%" }}>
+                                <Switch onChange={ (v,n)=>this.save( "notion_save_image", v ) } checked={ this.state.secret.notion.save_image} label="是否将图片保存到Notion.so"></Switch>
+                            </div>}
                         </div>
                         <div className="version-tips" data-version="1.1.4" data-hits="youdao">
                         <Switch width="100%" checked={ this.state.secret.youdao.access_token != "" ? true : false }
