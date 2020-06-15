@@ -381,7 +381,7 @@ function noticeRender() {
         if ( $.isEmptyObject( result ) ) {
             storage.notice.latest = 0;
         }
-        $.get( storage.notice_service.latest, result => {
+        $.get( storage.notice_service.latest + "?" + Math.round(+new Date()), result => {
             console.log( "notice latest id ", result )
             if ( storage.notice.latest == 0 ) {
                 $( "body" ).append( tmpl );
