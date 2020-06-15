@@ -252,7 +252,8 @@ let current  = {},
         },
         "notion"  : {
             access_token  : "",
-            folder_id: "",
+            type          : "",
+            folder_id     : "",
         },
         "youdao"  : {
             access_token  : "",
