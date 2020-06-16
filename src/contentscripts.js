@@ -38,6 +38,7 @@ storage.Read( () => {
             if ( item.innerText.includes( "simpread"        ) || 
                  item.innerText.includes( "sr-opt-focus"    ) || 
                  item.innerText.includes( "sr-rd-theme"     ) || 
+                 item.innerText.includes( "html.simpread-theme-root, .simpread-theme-root" ) || 
                  item.innerText.includes( "notify-gp"       ) || 
                  item.innerText.includes( "md-waves-effect" )
             ) {
