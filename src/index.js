@@ -214,7 +214,7 @@ function changelogRender() {
     $( '.version .num a' ).map( ( idx, item ) => {
         const $item = $( item ),
               id    = $item.attr( 'name' ),
-              text  = $item.text();
+              text  = $item.html();
         tocTemp += `<div class="outline" data-id="${id}">${text}</div>`;
     });
     $( '.toc' ).append( tocTemp );
