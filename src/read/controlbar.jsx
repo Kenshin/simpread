@@ -163,7 +163,7 @@ export default class ReadCtlbar extends React.Component {
                 delete readItems.send.items.bear;
                 delete readItems.send.items.ulysses;
             }
-            storage.Safe( () => {
+            readItems.send && storage.Safe( () => {
                 storage.secret.webdav.forEach( item => {
                     item = JSON.parse( item );
                     readItems.send.items[ "webdav_" + item.name ] = {
