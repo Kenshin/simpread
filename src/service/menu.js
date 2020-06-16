@@ -47,8 +47,6 @@ function onClicked( callback ) {
  * Create all context menu
  */
 function createAll() {
-    browser.contextMenus.create({ "type": "separator" });
-
     storage.option.menu.focus &&
         ( context.focus.id = browser.contextMenus.create( context.focus.menu ));
 
@@ -59,7 +57,6 @@ function createAll() {
         ( context.link.id  = browser.contextMenus.create( context.link.menu ));
 
     browser.contextMenus.create({ "type": "separator" });
-    browser.contextMenus.create({ "type": "separator" });
 
     storage.option.menu.list &&
         ( context.list.id  = browser.contextMenus.create( context.list.menu ));
@@ -67,7 +64,6 @@ function createAll() {
     storage.option.menu.unrdist &&
         ( context.unrdist.id  = browser.contextMenus.create( context.unrdist.menu ));
 
-    browser.contextMenus.create({ "type": "separator" });
     browser.contextMenus.create({ "type": "separator" });
 
     storage.option.menu.whitelist &&
@@ -82,7 +78,8 @@ function createAll() {
     storage.option.menu.lazyload &&
         ( context.lazyload.id  = browser.contextMenus.create( context.lazyload.menu ));
 
-    browser.contextMenus.create({ "type": "separator" });
+    // all menu is false remove contextMenus
+    Object.values( storage.option.menu ).findIndex( menu => menu == true ) == -1 && browser.contextMenus.removeAll();
 }
 
 /**
@@ -91,10 +88,14 @@ function createAll() {
  * @param {string} include: foucs read link
  */
 function create( type ) {
+    /*
     if ( !context[type].id ) {
         delete context[type].menu.generatedId;
         context[type].id = browser.contextMenus.create( context[type].menu );
     }
+    */
+   browser.contextMenus.removeAll();
+   createAll();
 }
 
 /**
@@ -103,10 +104,14 @@ function create( type ) {
  * @param {string} include: foucs read link
  */
 function remove( type ) {
+    /*
     if ( context[type].id ) {
         browser.contextMenus.remove( context[type].id );
         context[type].id = undefined;
     }
+    */
+    browser.contextMenus.removeAll();
+    createAll();
 }
 
 /**
