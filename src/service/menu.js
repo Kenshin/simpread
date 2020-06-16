@@ -59,7 +59,7 @@ function createAll() {
     browser.contextMenus.create({ "type": "separator" });
 
     storage.option.menu.list &&
-        ( context.list.id  = browser.contextMenus.create( context.list.menu ));
+        ( context.list.id     = browser.contextMenus.create( context.list.menu ));
 
     storage.option.menu.unrdist &&
         ( context.unrdist.id  = browser.contextMenus.create( context.unrdist.menu ));
@@ -76,7 +76,7 @@ function createAll() {
         ( context.blacklist.id  = browser.contextMenus.create( context.blacklist.menu ));
 
     storage.option.menu.lazyload &&
-        ( context.lazyload.id  = browser.contextMenus.create( context.lazyload.menu ));
+        ( context.lazyload.id   = browser.contextMenus.create( context.lazyload.menu ));
 
     // all menu is false remove contextMenus
     Object.values( storage.option.menu ).findIndex( menu => menu == true ) == -1 && browser.contextMenus.removeAll();
