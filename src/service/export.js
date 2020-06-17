@@ -1248,6 +1248,17 @@ class Notion {
         return "https://www.notion.so/";
     }
 
+    hasWriteRule(role){
+        return role === 'read_and_write' || role === 'editor'
+    }
+
+    getBlockName(titleArray){
+        if (!titleArray) return 'Undefined'
+        if (Array.isArray(titleArray))
+          return titleArray.map((t) => t[0]).join('')
+        return 'Undefined'
+    }
+
     UUID() {
         var __extends=void 0&&(void 0).__extends||function(){var _extendStatics=function extendStatics(d,b){_extendStatics=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(d,b){d.__proto__=b}||function(d,b){for(var p in b)if(b.hasOwnProperty(p))d[p]=b[p]};return _extendStatics(d,b)};return function(d,b){_extendStatics(d,b);function __(){this.constructor=d}d.prototype=b===null?Object.create(b):(__.prototype=b.prototype,new __())}}();var ValueUUID=function(){function ValueUUID(_value){this._value=_value;this._value=_value}ValueUUID.prototype.asHex=function(){return this._value};return ValueUUID}();var V4UUID=function(_super){__extends(V4UUID,_super);function V4UUID(){return _super.call(this,[V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-','4',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._oneOf(V4UUID._timeHighBits),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),'-',V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex(),V4UUID._randomHex()].join(''))||this}V4UUID._oneOf=function(array){return array[Math.floor(array.length*Math.random())]};V4UUID._randomHex=function(){return V4UUID._oneOf(V4UUID._chars)};V4UUID._chars=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];V4UUID._timeHighBits=['8','9','a','b'];return V4UUID}(ValueUUID);function generateUuid(){return new V4UUID().asHex()}
         return generateUuid();
@@ -1261,20 +1272,76 @@ class Notion {
             if ( result && status == "success" ) {
                 this.access_token = Object.values( result.recordMap.notion_user )[0].value.id;
                 this.blocks       = [];
-                Object.values( result.recordMap.space ).forEach( item => {
-                    item.value.pages.forEach( ( id, idx ) => {
-                        const block = result.recordMap.block[id];
-                        idx == 0 && this.blocks.push({ name: item.value.name, value: block.value.id, type: block.value.type });
-                        if ( block.value.type == "page" ) {
-                            this.blocks.push({ name: "　　"　+ ( block.value.properties ? block.value.properties.title[0][0] : "Undefined" ), value: block.value.id, type: "page" });
-                        } else if ( block.value.type == "collection_view_page" ) {
-                            Object.values( result.recordMap.collection ).forEach( collection => {
-                                collection.value.parent_id == block.value.id &&
-                                    this.blocks.push({ name: "　　"　+ collection.value.name[0][0], value: collection.value.id, type: "collection" });
-                            });
-                        }
-                    });
-                });
+
+                /**
+                 * 读取所有空间，并创建映射。
+                 */
+                const spaceMaps = {}
+                Object.values(result.recordMap.space).forEach(
+                  ({ value: spaceValue, role }) => {
+                    if (!this.hasWriteRule(role)) return
+                    spaceMaps[spaceValue.id] = {
+                      name: spaceValue.name,
+                      value: spaceValue.id,
+                      type: 'space',
+                      blocks: [],
+                    }
+                  }
+                )
+                
+                /**
+                 * 读取所有收藏空间，并创建映射。
+                 */
+                const collectionMaps = {};
+                Object.values(
+                  result.recordMap.collection
+                ).forEach(({ value: collectionValue, role }) => {
+                    if (!this.hasWriteRule(role)) return
+                    collectionMaps[collectionValue.parent_id] = collectionValue
+                })
+
+                /**
+                 * 遍历所有当前用户能看到的空间。
+                 */
+                Object.values(result.recordMap.block).forEach(
+                  ({ role, value: blockValue }) => {
+                    if (!this.hasWriteRule(role)) return
+                    const {
+                      type,
+                      space_id,
+                      parent_id,
+                      id,
+                    } = blockValue
+
+                    const _space = space_id
+                      ? spaceMaps[space_id]
+                      : spaceMaps[parent_id]
+                    const _spaceBlocks = _space ? _space.blocks : this.blocks
+
+                    if (type == 'page') {
+                        _spaceBlocks.push({
+                        name: '　　' + this.getBlockName(blockValue.properties.title),
+                        value: id,
+                        type: 'page',
+                      })
+                    } else if (type == 'collection_view_page') {
+                      const collection = collectionMaps[id]
+                      if (!collection) return
+                      _spaceBlocks.push({
+                        name: '　　' + this.getBlockName(collection.name),
+                        value: collection.id,
+                        type: 'collection',
+                      })
+                    }
+                  }
+                )
+                
+                Object.values(spaceMaps).forEach((space) => {
+                  const { blocks, ...spaceAttr } = space
+                  this.blocks.push(spaceAttr)
+                  this.blocks.push(...blocks)
+                })
+
                 this.type         = this.blocks[0].type;
                 this.folder_id    = this.blocks[0].value;
                 callback( result, undefined );
