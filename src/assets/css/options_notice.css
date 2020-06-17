@@ -121,6 +121,18 @@ notice .detail .preview .desc {
     border-bottom: 1px solid #E0E0E0;
 }
 
+notice .detail .preview blockquote {
+    border-left: 5px solid rgb(122, 122, 122);
+    color: rgb(85, 85, 85);
+    margin: 0;
+    padding: 0 0 0 10px;
+}
+
+notice .detail .preview pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 notice .list {
     background-color: #fff;
     border-radius: 2px;

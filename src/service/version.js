@@ -35,6 +35,9 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
           [ "1.1.3", "新增「消息中心，帮助中心，入门指引，支持导入语雀 / 坚果云，预加载机制，增强插件 API 等」，" ],
           [ "1.1.4", "新增「反馈中心，支持导入 Notion, 有道笔记，为知笔记，离线下载，截图 等」，" ],
     ]),
+    patchs = new Map([
+        [ "1.1.4.6016", "修复 Notion 相关问题，并支持 Database 导出方案，" ],
+  ]),
     tips      = {
         "root"  : value => `.version-tips[data-hits='${value}']`,
         "1.1.4" : {
@@ -524,6 +527,14 @@ function Notify2( first, type, ver ) {
 }
 
 /**
+ * Silent update
+ */
+function SilentUpdate() {
+    const ver = `${ version }.${ sub_ver }`;
+    return `更新到最新版本 ${ ver } ，${ patchs.get( `${ ver }` ) }更多细节请看 <a href="http://ksria.com/simpread/changelog.html#${ver}" target="_blank">更新说明</a>`;
+}
+
+/**
  * Compare current version and target version
  * 
  * @param  {string} target version
@@ -592,4 +603,5 @@ export {
     FixSubver,
     VerifyPlugins,
     Incompatible,
+    SilentUpdate,
 }
