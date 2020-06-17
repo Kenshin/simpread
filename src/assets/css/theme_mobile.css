@@ -138,7 +138,7 @@
     * iPad pro 12 and below
     */
     @media only screen and (max-device-width: 1024px) {
-        html, .simpread-theme-root {
+        html.simpread-theme-root, .simpread-theme-root {
             font-size: 80%!important;
         }
 
@@ -154,7 +154,7 @@
     * iPhone XS Max and below
     */
     @media only screen and (max-device-width: 414px) {
-        html, .simpread-theme-root {
+        html.simpread-theme-root, .simpread-theme-root {
             font-size: 70%!important;
         }
 
@@ -170,7 +170,7 @@
     * iPhone SE and below
     */
     @media only screen and (max-device-width: 320px) {
-        html, .simpread-theme-root {
+        html.simpread-theme-root, .simpread-theme-root {
             font-size: 90%!important;
         }
 

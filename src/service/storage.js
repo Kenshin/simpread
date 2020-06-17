@@ -252,7 +252,8 @@ let current  = {},
         },
         "notion"  : {
             access_token  : "",
-            folder_id: "",
+            type          : "",
+            folder_id     : "",
         },
         "youdao"  : {
             access_token  : "",
@@ -460,8 +461,8 @@ class Storage {
      */
     get notice_service() {
         return {
-            latest: "http://simp.red/notice/latest",
-            message: "http://simp.red/notice",
+            latest: "https://static.simp.red/notice/latest",
+            message: "https://static.simp.red/notice",
         }
     }
 

@@ -79,8 +79,11 @@ function html2enml( html, url ) {
     str = $target.html();
     $target.remove();
 
+    const origin   = document.createElement( 'a' );
+    origin.href    = url;
+
     try {
-        const href = url.indexOf("chksm") > 0 ? "" : `，原文地址 <a href="${url}" target="_blank">${url}</a>`;
+        const href = url.indexOf("chksm") > 0 ? "" : `，原文地址 <a href="${url}" target="_blank">${origin.host}</a>`;
         str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码${href}</blockquote><hr></hr><br></br>` + str;
         str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex|name)="[\S ][^"]*"/ig, "" )
                 //.replace( / style=[ \w="-:\/\/:#;]+/ig, "" )             // style="xxxx"
@@ -143,7 +146,9 @@ function multi2enml( str ) {
  * @return {string} format string
  */
 function clearMD( str, header = true ) {
-    header && ( str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 ${ window.location.href } \r\n\r\n ${str}` );
+    const origin    = document.createElement( 'a' );
+    origin.href     = window.location.href;
+    header && ( str = `> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [${ origin.host }](${ window.location.href }) \r\n\r\n ${str}` );
     str = str.replace( /<\/?(ins|font|span|div|canvas|noscript|fig\w+)[ -\w*= \w=\-.:&\/\/?!;,%+()#'"{}\u4e00-\u9fa5]*>/ig, "" )
              .replace( /sr-blockquote/ig, "blockquote" )
              .replace( /<\/?style[ -\w*= \w=\-.:&\/\/?!;,+()#"\S]*>/ig, "" )
@@ -158,8 +163,13 @@ function clearMD( str, header = true ) {
  * @return {string} optimze str
  */
 function clearHTML( str ) {
-    const url  = location.href,
-          href = url.indexOf("chksm") > 0 || url.indexOf("#") > 0 ? "" : `，原文地址 <a href="${url}" target="_blank">${url}</a>`;
+    const host = url => {
+            const origin    = document.createElement( 'a' );
+            origin.href     = url;
+            return origin.host;
+          },
+          url  = location.href,
+          href = url.indexOf("chksm") > 0 || url.indexOf("#") > 0 ? "" : `，原文地址 <a href="${url}" target="_blank">${host( url )}</a>`;
     str = `<blockquote>本文由 <a href="http://ksria.com/simpread" target="_blank">简悦 SimpRead</a> 转码${href}</blockquote><hr></hr><br></br>` + str;
     str = str.replace( /(id|class|onclick|ondblclick|accesskey|data|dynsrc|tabindex|name)="[\S ][^"]*"/ig, "" )
              .replace( /&/ig, "&amp;" )

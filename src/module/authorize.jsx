@@ -287,8 +287,8 @@ export default class Auth extends React.Component {
     save( state, value ) {
         state == "pocket" && ( storage.secret.pocket.tags      = value.trim() );
         state == "linnk"  && ( storage.secret.linnk.group_name = value.trim() );
-        state == "notion" && ( storage.secret.notion.folder_id = value.trim() );
         state == "notion_save_image" && ( storage.secret.notion.save_image = value );
+        state == "notion" && ( storage.secret.notion.type      = this.state.notion.filter( item => item.value == value.trim() )[0].type );
         state == "youdao" && ( storage.secret.youdao.folder_id = value.trim() );
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }

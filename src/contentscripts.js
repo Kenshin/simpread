@@ -38,6 +38,7 @@ storage.Read( () => {
             if ( item.innerText.includes( "simpread"        ) || 
                  item.innerText.includes( "sr-opt-focus"    ) || 
                  item.innerText.includes( "sr-rd-theme"     ) || 
+                 item.innerText.includes( "html.simpread-theme-root, .simpread-theme-root" ) || 
                  item.innerText.includes( "notify-gp"       ) || 
                  item.innerText.includes( "md-waves-effect" )
             ) {
@@ -88,7 +89,11 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
         case msg.MESSAGE_ACTION.tab_selected:
             if ( isLazyload() ) {
                 browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.browser_action, { code: 0 , url: window.location.href } ));
-            } else browserAction( request.value.is_update );
+            } else {
+                request.value.is_update ?
+                    setTimeout( () => browserAction( request.value.is_update ), 200 )
+                    : browserAction( request.value.is_update );
+            }
             break;
         case msg.MESSAGE_ACTION.read_mode:
         case msg.MESSAGE_ACTION.browser_click:

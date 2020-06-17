@@ -1260,10 +1260,23 @@ class Notion {
         }).done( ( result, status, xhr ) => {
             if ( result && status == "success" ) {
                 this.access_token = Object.values( result.recordMap.notion_user )[0].value.id;
-                this.folder_id    = Object.values( result.recordMap.block )[0].value.id;
-                this.blocks       = Object.values( result.recordMap.block ).map( item => {
-                    return { name: item.value.properties ? item.value.properties.title[0][0] : "Undefined", value: item.value.id }
+                this.blocks       = [];
+                Object.values( result.recordMap.space ).forEach( item => {
+                    item.value.pages.forEach( ( id, idx ) => {
+                        const block = result.recordMap.block[id];
+                        idx == 0 && this.blocks.push({ name: item.value.name, value: block.value.id, type: block.value.type });
+                        if ( block.value.type == "page" ) {
+                            this.blocks.push({ name: "　　"　+ ( block.value.properties ? block.value.properties.title[0][0] : "Undefined" ), value: block.value.id, type: "page" });
+                        } else if ( block.value.type == "collection_view_page" ) {
+                            Object.values( result.recordMap.collection ).forEach( collection => {
+                                collection.value.parent_id == block.value.id &&
+                                    this.blocks.push({ name: "　　"　+ collection.value.name[0][0], value: collection.value.id, type: "collection" });
+                            });
+                        }
+                    });
                 });
+                this.type         = this.blocks[0].type;
+                this.folder_id    = this.blocks[0].value;
                 callback( result, undefined );
             }
         }).fail( ( xhr, status, error ) => {
@@ -1411,72 +1424,97 @@ class Notion {
         const documentId = this.UUID(),
               userId     = this.access_token,
               time       = new Date().getDate(),
+              collection = [
+                {
+                  id: documentId,
+                  table: 'block',
+                  path: [],
+                  command: 'set',
+                  args: {
+                    type: 'page',
+                    id: documentId,
+                    version: 1,
+                  },
+                },
+                {
+                  id: documentId,
+                  table: 'block',
+                  path: [],
+                  command: 'update',
+                  args: {
+                    parent_id: parentId,
+                    parent_table: 'collection',
+                    alive: true,
+                  },
+                },
+              ],
+              page = [
+                {
+                    id: documentId,
+                    table: 'block',
+                    path: [],
+                    command: 'set',
+                    args: {
+                        type: 'page',
+                        id: documentId,
+                        version: 1,
+                    },
+                },
+                {
+                    id: documentId,
+                    table: 'block',
+                    path: [],
+                    command: 'update',
+                    args: {
+                        parent_id: parentId,
+                        parent_table: 'block',
+                        alive: true,
+                    },
+                },
+                {
+                    table: 'block',
+                    id: parentId,
+                    path: ['content'],
+                    command: 'listAfter',
+                    args: { id: documentId },
+                },
+                {
+                    id: documentId,
+                    table: 'block',
+                    path: [],
+                    command: 'update',
+                    args: {
+                        created_by: userId,
+                        created_time: time,
+                        last_edited_time: time,
+                        last_edited_by: userId,
+                    },
+                },
+                {
+                    id: parentId,
+                    table: 'block',
+                    path: [],
+                    command: 'update',
+                    args: { last_edited_time: time },
+                },
+                {
+                    id: documentId,
+                    table: 'block',
+                    path: ['properties', 'title'],
+                    command: 'set',
+                    args: [[title]],
+                },
+                {
+                    id: documentId,
+                    table: 'block',
+                    path: [],
+                    command: 'update',
+                    args: { last_edited_time: time },
+                },
+              ],
               operations = {
-                operations: [
-                    {
-                        id: documentId,
-                        table: 'block',
-                        path: [],
-                        command: 'set',
-                        args: {
-                            type: 'page',
-                            id: documentId,
-                            version: 1,
-                        },
-                    },
-                    {
-                        id: documentId,
-                        table: 'block',
-                        path: [],
-                        command: 'update',
-                        args: {
-                            parent_id: parentId,
-                            parent_table: 'block',
-                            alive: true,
-                        },
-                    },
-                    {
-                        table: 'block',
-                        id: parentId,
-                        path: ['content'],
-                        command: 'listAfter',
-                        args: { id: documentId },
-                    },
-                    {
-                        id: documentId,
-                        table: 'block',
-                        path: [],
-                        command: 'update',
-                        args: {
-                            created_by: userId,
-                            created_time: time,
-                            last_edited_time: time,
-                            last_edited_by: userId,
-                        },
-                    },
-                    {
-                        id: parentId,
-                        table: 'block',
-                        path: [],
-                        command: 'update',
-                        args: { last_edited_time: time },
-                    },
-                    {
-                        id: documentId,
-                        table: 'block',
-                        path: ['properties', 'title'],
-                        command: 'set',
-                        args: [[title]],
-                    },
-                    {
-                        id: documentId,
-                        table: 'block',
-                        path: [],
-                        command: 'update',
-                        args: { last_edited_time: time },
-                    },
-                ],
-            };
+                  operations: this.type == "collection" ? collection : page,
+              };
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
             type: "post",
             url: this.url + "api/v3/submitTransaction",

@@ -46,7 +46,10 @@ storage.Read( () => {
         });
         ver.version == storage.version && ver.patch != storage.patch &&
             storage.Write(()=> {
-                browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?patch=" + ver.patch ) });
+                // when x.x.x.yyyy is silent update
+                //browser.tabs.create({ url: browser.extension.getURL( "options/options.html#update?patch=" + ver.patch ) });
+                //localStorage.setItem( "simpread-patch-update", true );
+                local.Patch( "add", true );
             }, ver.FixSubver( ver.patch, storage.simpread ));
     }
     menu.CreateAll();
