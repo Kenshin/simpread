@@ -103,6 +103,11 @@ const keyboard = {
             "type" : "gdrive",
             "desc" : "保存到 Google 云端硬盘",
         },
+        nt: {
+            "kbd"  : "nt",
+            "type" : "notion",
+            "desc" : "保存到 Notion",
+        },
         jg: {
             "kbd"  : "jg",
             "type" : "jianguo",

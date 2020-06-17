@@ -60,18 +60,18 @@ function multi( callback ) {
         callback( event.target );
         return false;
     };
-    $( "html" ).on( "click", removeDomHander );
-    $( "html" ).on( "keydown", event => {
+    $( "sr-rd-content" ).on( "click", removeDomHander );
+    $( "sr-rd-content" ).on( "keydown", event => {
         if ( event.keyCode == 27 && $prev ) {
-            $( "html" ).find( `.${highlight_class}` ).removeClass( highlight_class );
-            $( "html" ).off( "mousemove", mousemoveEvent );
-            $( "html" ).off( "click", removeDomHander );
+            $( "sr-rd-content" ).find( `.${highlight_class}` ).removeClass( highlight_class );
+            $( "sr-rd-content" ).off( "mousemove", mousemoveEvent );
+            $( "sr-rd-content" ).off( "click", removeDomHander );
             $prev = undefined;
             event.preventDefault();
             return false;
         }
     });
-    $( "html" ).on( "mousemove", mousemoveEvent );
+    $( "sr-rd-content" ).on( "mousemove", mousemoveEvent );
 }
 
 function annotate() {
