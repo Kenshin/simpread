@@ -5,6 +5,7 @@ const id    = "simpread",
         VER   : "version",
         COUNT : "count",
         FIRST : "firstload",
+        PATCH: "patch-update",
       },
       MAX_COUNT = 5;
 
@@ -62,6 +63,17 @@ class Local {
         set( NAMES.VER, version );
     }
 
+    /**
+     * Save manifest.json version to local storage
+     * 
+     * @param {string} version
+     */
+    Patch( state, value ) {
+        if ( state == "add" ) set( NAMES.PATCH, value );
+        else if ( state == "get" ) return get( NAMES.PATCH );
+        else if ( state == "remove" ) remove( NAMES.PATCH );
+    }
+
 }
 
 /**
@@ -83,5 +95,13 @@ function set( key, value ) {
     localStorage[ `${id}-${key}` ] = value;
 }
 
+/**
+ * Remove localStorage
+ * 
+ * @param {string} NAMES.{value}
+ */
+function remove( key ) {
+    localStorage.removeItem( `${id}-${key}` );
+}
 const local = new Local();
 export default local;

@@ -16,6 +16,7 @@ import Button     from 'button';
 import * as side  from 'sidebar';
 
 import { storage, STORAGE_MODE as mode } from 'storage';
+import local      from 'local';
 import * as ss    from 'stylesheet';
 import * as conf  from 'config';
 import * as ver   from 'version';
@@ -215,6 +216,11 @@ function vernotify( first ) {
         patch == "5005" && welcomeRender( false, patch );
         history.pushState( "", "", "/options/options.html" );
     }
+    // silent update
+    if ( local.Patch( "get" ) ) {
+        new Notify().Render( "简悦 版本提示", ver.SilentUpdate() );
+        local.Patch( "remove" );
+    }
 }
 
 /**
@@ -381,7 +387,7 @@ function noticeRender() {
         if ( $.isEmptyObject( result ) ) {
             storage.notice.latest = 0;
         }
-        $.get( storage.notice_service.latest, result => {
+        $.get( storage.notice_service.latest + "?" + Math.round(+new Date()), result => {
             console.log( "notice latest id ", result )
             if ( storage.notice.latest == 0 ) {
                 $( "body" ).append( tmpl );
