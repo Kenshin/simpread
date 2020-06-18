@@ -1298,11 +1298,34 @@ class Notion {
                 ).forEach(({ value: collectionValue, role }) => {
                     if (!this.hasWriteRule(role)) return
                     collectionMaps[collectionValue.parent_id] = collectionValue
+                    collectionMaps[collectionValue.id] = collectionValue
                 })
 
                 /**
                  * 遍历所有当前用户能看到的空间。
                  */
+                const processCollection = (id, spaceBlocks) => {
+                  const collection = collectionMaps[id]
+                  if (!collection) return
+                
+                  let URLSchemaKey = null;
+
+                  Object.keys(collection.schema).some((key) => {
+                    const schema = collection.schema[key]
+                    if (schema.type === 'url' && schema.name === 'URL') {
+                        URLSchemaKey = key;
+                        return true
+                    }
+                    return false
+                  })
+
+                  spaceBlocks.push({
+                    name: '　　' + this.getBlockName(collection.name),
+                    value: collection.id,
+                    type: 'collection',
+                    url_schema_key: URLSchemaKey,
+                  })
+                }
                 Object.values(result.recordMap.block).forEach(
                   ({ role, value: blockValue }) => {
                     if (!this.hasWriteRule(role)) return
@@ -1311,6 +1334,7 @@ class Notion {
                       space_id,
                       parent_id,
                       id,
+                      collection_id,
                     } = blockValue
 
                     const _space = space_id
@@ -1319,22 +1343,22 @@ class Notion {
                     const _spaceBlocks = _space ? _space.blocks : this.blocks
 
                     if (type == 'page') {
-                        _spaceBlocks.push({
-                        name: '　　' + this.getBlockName(blockValue.properties.title),
+                      _spaceBlocks.push({
+                        name:
+                          '　　' +
+                          this.getBlockName(blockValue.properties.title),
                         value: id,
                         type: 'page',
                       })
                     } else if (type == 'collection_view_page') {
-                      const collection = collectionMaps[id]
-                      if (!collection) return
-                      _spaceBlocks.push({
-                        name: '　　' + this.getBlockName(collection.name),
-                        value: collection.id,
-                        type: 'collection',
-                      })
+                      processCollection(id, _spaceBlocks)
+                    } else if (type == 'collection_view') {
+                      processCollection(collection_id, _spaceBlocks)
                     }
                   }
                 )
+
+                
                 
                 Object.values(spaceMaps).forEach((space) => {
                   const { blocks, ...spaceAttr } = space
@@ -1524,7 +1548,64 @@ class Notion {
                     },
                 }
             }
-        }), result => callback( result ));
+        }), result => {
+            if (this.type == 'collection' && this.url_schema_key) {
+                result.done && this.CheckQueueTask(result.done.data.taskId, () => {
+                  this.SetProperties(documentId, () => callback(result))
+                })
+            } else {
+              callback(result)
+            }
+        });
+    }
+
+    CheckQueueTask(taskId, callback){
+        if (taskId) {
+          browser.runtime.sendMessage(
+            msg.Add(msg.MESSAGE_ACTION.AXIOS, {
+              type: 'post',
+              url: this.url + 'api/v3/getTasks',
+              data: {
+                taskIds: [taskId],
+              },
+            }),
+            (result) => {
+              if (result.done) {
+                const { results } = result.done.data
+                if (results[0].state !== 'success') {
+                  setTimeout(() => {
+                    this.CheckQueueTask(taskId, callback)
+                  }, 500)
+                } else {
+                  callback()
+                }
+              }
+            }
+          )
+        }
+    }
+
+    SetProperties(documentId, callback){
+        browser.runtime.sendMessage(
+          msg.Add(msg.MESSAGE_ACTION.AXIOS, {
+            type: 'post',
+            url: this.url + 'api/v3/submitTransaction',
+            data: {
+              operations: [
+                {
+                  id: documentId,
+                  table: 'block',
+                  path: ['properties', this.url_schema_key],
+                  command: 'set',
+                  args: [[window.location.href, [['a', window.location.href]]]],
+                },
+              ],
+            },
+          }),
+          (result) => {
+            result.done && callback(documentId, undefined)
+          }
+        )
     }
 
 }
