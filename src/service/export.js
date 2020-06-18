@@ -11,6 +11,7 @@ import * as msg   from 'message';
 import {browser}  from 'browser';
 import * as puplugin from 'puplugin';
 import * as wiz   from 'wiz';
+import {storage} from 'storage'
 
 /**
  * Create PNG
@@ -1549,14 +1550,113 @@ class Notion {
                 }
             }
         }), result => {
-            if (this.type == 'collection' && this.url_schema_key) {
-                result.done && this.CheckQueueTask(result.done.data.taskId, () => {
+            if (this.type == 'collection') {
+               /*  result.done && this.CheckQueueTask(result.done.data.taskId, () => {
                   this.SetProperties(documentId, () => callback(result))
-                })
+                }) */
+                const taskId = result.done.data.taskId;
+                if (result.done) {
+                  this.CheckQueueTask(taskId, () => {
+                    if (this.url_schema_key) {
+                      this.SetProperties(documentId, () => callback(result))
+                    } else {
+                      this.GetCollectionData((collection) => {
+                        this.AddCollectionUrlSchema(collection, (schemaKey) => {
+                          this.url_schema_key = schemaKey
+                          storage.Safe(() => {
+                            storage.secret.notion.url_schema_key = schemaKey
+                          })
+                          this.SetProperties(documentId, () => callback(result))
+                        })
+                      })
+                    }
+                  })
+                } 
             } else {
               callback(result)
             }
         });
+    }
+
+    GetCollectionData(callback){
+        browser.runtime.sendMessage(
+          msg.Add(msg.MESSAGE_ACTION.AXIOS, {
+            type: 'post',
+            url: this.url + 'api/v3/loadUserContent',
+          }),
+          (result) => {
+            if (result.done) {
+              const {
+                recordMap: { collection },
+              } = result.done.data
+
+              const currentCollection = collection[this.folder_id].value;
+              callback(currentCollection)
+            }
+          }
+        )
+    }
+
+    AddCollectionUrlSchema(collection, callback){
+        const { schema } = collection
+        const schemaKeys = Object.keys(schema);
+        let urlSchemaKey = null
+        schemaKeys.some((key) => {
+          const schemaItem = schema[key]
+          if (schemaItem.type === 'url' && schemaItem.name === 'URL') {
+            urlSchemaKey = key
+            return true
+          }
+          return false
+        })
+        if (urlSchemaKey) {
+          callback(urlSchemaKey)
+          return;
+        }
+
+        const newSchema = { ...schema }
+        let newSchemaKey = ''
+        while (!newSchemaKey && schemaKeys.indexOf(newSchemaKey) < 0) {
+          newSchemaKey = genSchemaKey()
+        }
+
+        newSchema[newSchemaKey] = {
+          type: 'url',
+          name: 'URL',
+        }
+
+        browser.runtime.sendMessage(
+          msg.Add(msg.MESSAGE_ACTION.AXIOS, {
+            type: 'post',
+            url: this.url + 'api/v3/submitTransaction',
+            data: {
+              operations: [
+                {
+                  args: {
+                    schema: newSchema,
+                  },
+                  command: 'update',
+                  id: this.folder_id,
+                  path: [],
+                  table: 'collection',
+                },
+              ],
+            },
+          }),
+          (result) => {
+            if (result.done) {
+                callback(newSchemaKey)
+            }
+          }
+        )
+
+        function genSchemaKey(len = 4){
+            let key = '';
+            for (; key.length < len; ){
+                key += String.fromCharCode(33 + 94 * Math.random())
+            }
+            return key
+        }
     }
 
     CheckQueueTask(taskId, callback){
@@ -1575,7 +1675,7 @@ class Notion {
                 if (results[0].state !== 'success') {
                   setTimeout(() => {
                     this.CheckQueueTask(taskId, callback)
-                  }, 500)
+                  }, 1000)
                 } else {
                   callback()
                 }
@@ -1597,7 +1697,7 @@ class Notion {
                   table: 'block',
                   path: ['properties', this.url_schema_key],
                   command: 'set',
-                  args: [[window.location.href, [['a', window.location.href]]]],
+                  args: [[window.location.origin, [['a', window.location.href]]]],
                 },
               ],
             },
