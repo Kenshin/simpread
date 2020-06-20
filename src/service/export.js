@@ -1307,21 +1307,21 @@ class Notion {
                     const collection = collectionMaps[id];
                     if ( !collection ) return;
 
-                    let URLSchemaKey = null;
-                    Object.keys(collection.schema).some( key => {
-                        const schema = collection.schema[key]
+                    let schemaKey = null;
+                    Object.keys( collection.schema ).some( key => {
+                        const schema = collection.schema[key];
                         if ( schema.type === 'url' && schema.name === 'URL' ) {
-                            URLSchemaKey = key;
+                            schemaKey = key;
                             return true;
                         }
                         return false;
                     })
 
                     spaceBlocks.push({
-                        name : '　　' + this.getBlockName( collection.name ),
-                        value: collection.id,
-                        type : 'collection',
-                        schema: URLSchemaKey,
+                        name  : '　　' + this.getBlockName( collection.name ),
+                        value : collection.id,
+                        type  : 'collection',
+                        schema: schemaKey,
                     })
                 }
                 Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
@@ -1594,19 +1594,19 @@ class Notion {
                 }
                 return key;
             };
-        let urlSchemaKey = null;
+        let schemaKey = null;
 
         schemaKeys.some( key => {
             const schemaItem = schema[key];
             if ( schemaItem.type === 'url' && schemaItem.name === 'URL' ) {
-                urlSchemaKey = key;
+                schemaKey = key;
                 return true;
             }
             return false;
         });
 
-        if ( urlSchemaKey ) {
-            callback( urlSchemaKey );
+        if ( schemaKey ) {
+            callback( schemaKey );
             return;
         }
 
