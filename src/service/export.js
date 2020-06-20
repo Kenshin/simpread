@@ -1350,10 +1350,12 @@ class Notion {
                     }
                 });
 
-                Object.values( spaceMaps ).forEach( space => {
+                Object.values( spaceMaps ).forEach( ( space, idx ) => {
                     const { blocks, ...spaceAttr } = space;
-                    this.blocks.push( spaceAttr );
-                    this.blocks.push( ...blocks );
+                    if ( blocks && blocks.length > 0 ) {
+                        this.blocks.push({ name: spaceAttr.name, type: blocks[0].type, value: blocks[0].value, url_schema_key: blocks[0].url_schema_key });
+                        this.blocks.push( ...blocks );
+                    }
                 });
 
                 this.type         = this.blocks[0].type;
