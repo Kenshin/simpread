@@ -1326,7 +1326,7 @@ class Notion {
                     spaceBlocks.push( block );
                 }
                 Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
-                    if (!this.hasWriteRule(role)) return;
+                    if ( !this.hasWriteRule( role )) return;
                     const {
                         type,
                         space_id,
