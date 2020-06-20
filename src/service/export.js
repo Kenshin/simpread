@@ -1307,7 +1307,7 @@ class Notion {
                     const collection = collectionMaps[id];
                     if ( !collection ) return;
 
-                    let schemaKey = null;
+                    let schemaKey;
                     Object.keys( collection.schema ).some( key => {
                         const schema = collection.schema[key];
                         if ( schema.type === 'url' && schema.name === 'URL' ) {
@@ -1317,12 +1317,13 @@ class Notion {
                         return false;
                     })
 
-                    spaceBlocks.push({
+                    const block = {
                         name  : '　　' + this.getBlockName( collection.name ),
                         value : collection.id,
                         type  : 'collection',
-                        schema: schemaKey,
-                    })
+                    };
+                    schemaKey && ( block.schema = schemaKey );
+                    spaceBlocks.push( block );
                 }
                 Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
                     if (!this.hasWriteRule(role)) return;
