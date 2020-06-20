@@ -1278,18 +1278,16 @@ class Notion {
                  * 读取所有空间，并创建映射。
                  */
                 const spaceMaps = {}
-                Object.values(result.recordMap.space).forEach(
-                  ({ value: spaceValue, role }) => {
-                    if (!this.hasWriteRule(role)) return
+                Object.values( result.recordMap.space ).forEach(({ value: spaceValue, role }) => {
+                    if (!this.hasWriteRule(role)) return;
                     spaceMaps[spaceValue.id] = {
-                      name: spaceValue.name,
-                      value: spaceValue.id,
-                      type: 'space',
-                      blocks: [],
+                        name  : spaceValue.name,
+                        value : spaceValue.id,
+                        type  : 'space',
+                        blocks: [],
                     }
-                  }
-                )
-                
+                });
+
                 /**
                  * 读取所有收藏空间，并创建映射。
                  */
@@ -1297,75 +1295,66 @@ class Notion {
                 Object.values(
                   result.recordMap.collection
                 ).forEach(({ value: collectionValue, role }) => {
-                    if (!this.hasWriteRule(role)) return
-                    collectionMaps[collectionValue.parent_id] = collectionValue
-                    collectionMaps[collectionValue.id] = collectionValue
+                    if (!this.hasWriteRule(role)) return;
+                    collectionMaps[ collectionValue.parent_id ] = collectionValue;
+                    collectionMaps[ collectionValue.id ]        = collectionValue;
                 })
 
                 /**
                  * 遍历所有当前用户能看到的空间。
                  */
-                const processCollection = (id, spaceBlocks) => {
-                  const collection = collectionMaps[id]
-                  if (!collection) return
-                
-                  let URLSchemaKey = null;
+                const processCollection = ( id, spaceBlocks ) => {
+                    const collection = collectionMaps[id];
+                    if ( !collection ) return;
 
-                  Object.keys(collection.schema).some((key) => {
-                    const schema = collection.schema[key]
-                    if (schema.type === 'url' && schema.name === 'URL') {
-                        URLSchemaKey = key;
-                        return true
-                    }
-                    return false
-                  })
+                    let URLSchemaKey = null;
+                    Object.keys(collection.schema).some( key => {
+                        const schema = collection.schema[key]
+                        if ( schema.type === 'url' && schema.name === 'URL' ) {
+                            URLSchemaKey = key;
+                            return true;
+                        }
+                        return false;
+                    })
 
-                  spaceBlocks.push({
-                    name: '　　' + this.getBlockName(collection.name),
-                    value: collection.id,
-                    type: 'collection',
-                    url_schema_key: URLSchemaKey,
-                  })
+                    spaceBlocks.push({
+                        name : '　　' + this.getBlockName( collection.name ),
+                        value: collection.id,
+                        type : 'collection',
+                        url_schema_key: URLSchemaKey,
+                    })
                 }
-                Object.values(result.recordMap.block).forEach(
-                  ({ role, value: blockValue }) => {
-                    if (!this.hasWriteRule(role)) return
+                Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
+                    if (!this.hasWriteRule(role)) return;
                     const {
                       type,
                       space_id,
                       parent_id,
                       id,
                       collection_id,
-                    } = blockValue
+                    } = blockValue;
 
-                    const _space = space_id
-                      ? spaceMaps[space_id]
-                      : spaceMaps[parent_id]
-                    const _spaceBlocks = _space ? _space.blocks : this.blocks
+                    const _space       = space_id ? spaceMaps[space_id] : spaceMaps[parent_id],
+                          _spaceBlocks = _space   ? _space.blocks       : this.blocks;
 
                     if (type == 'page') {
-                      _spaceBlocks.push({
-                        name:
-                          '　　' +
-                          this.getBlockName(blockValue.properties.title),
-                        value: id,
-                        type: 'page',
-                      })
-                    } else if (type == 'collection_view_page') {
-                      processCollection(id, _spaceBlocks)
-                    } else if (type == 'collection_view') {
-                      processCollection(collection_id, _spaceBlocks)
+                        _spaceBlocks.push({
+                            name : '　　' + this.getBlockName( blockValue.properties.title ),
+                            value: id,
+                            type : 'page',
+                        });
+                    } else if ( type == 'collection_view_page' ) {
+                        processCollection( id, _spaceBlocks );
+                    } else if ( type == 'collection_view' ) {
+                        processCollection( collection_id, _spaceBlocks );
                     }
-                  }
-                )
+                });
 
-                
-                
-                Object.values(spaceMaps).forEach((space) => {
-                  const { blocks, ...spaceAttr } = space
-                  this.blocks.push(spaceAttr)
-                  this.blocks.push(...blocks)
-                })
+                Object.values( spaceMaps ).forEach( space => {
+                    const { blocks, ...spaceAttr } = space;
+                    this.blocks.push( spaceAttr );
+                    this.blocks.push( ...blocks );
+                });
 
                 this.type         = this.blocks[0].type;
                 this.folder_id    = this.blocks[0].value;
