@@ -1668,7 +1668,7 @@ class Notion {
         browser.runtime.sendMessage(
             msg.Add( msg.MESSAGE_ACTION.AXIOS, {
                 type: 'post',
-                url: this.url + 'api/v3/submitTransaction',
+                url : this.url + 'api/v3/submitTransaction',
                 data: {
                     operations: [{
                         id: documentId,
