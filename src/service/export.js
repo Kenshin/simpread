@@ -1353,7 +1353,7 @@ class Notion {
                 Object.values( spaceMaps ).forEach( ( space, idx ) => {
                     const { blocks, ...spaceAttr } = space;
                     if ( blocks && blocks.length > 0 ) {
-                        this.blocks.push({ name: spaceAttr.name, type: blocks[0].type, value: blocks[0].value, url_schema_key: blocks[0].url_schema_key });
+                        this.blocks.push({ name: spaceAttr.name, type: blocks[0].type, value: blocks[0].value });
                         this.blocks.push( ...blocks );
                     }
                 });
