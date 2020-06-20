@@ -1328,11 +1328,11 @@ class Notion {
                 Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
                     if (!this.hasWriteRule(role)) return;
                     const {
-                      type,
-                      space_id,
-                      parent_id,
-                      id,
-                      collection_id,
+                        type,
+                        space_id,
+                        parent_id,
+                        id,
+                        collection_id,
                     } = blockValue;
 
                     const _space       = space_id ? spaceMaps[space_id] : spaceMaps[parent_id],
