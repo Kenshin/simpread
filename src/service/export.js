@@ -11,7 +11,6 @@ import * as msg   from 'message';
 import {browser}  from 'browser';
 import * as puplugin from 'puplugin';
 import * as wiz   from 'wiz';
-import {storage} from 'storage'
 
 /**
  * Create PNG
@@ -1555,9 +1554,6 @@ class Notion {
                             this.GetCollectionData( collection => {
                                 this.AddCollectionUrlSchema( collection, schemaKey => {
                                     this.schema = schemaKey;
-                                    storage.Safe(() => {
-                                        storage.secret.notion.schema = schemaKey;
-                                    });
                                     this.SetProperties( documentId, () => callback( result ));
                                 });
                             });
@@ -1683,6 +1679,12 @@ class Notion {
                 result.done && callback( documentId, undefined );
             }
         )
+    }
+
+    Save( storage ) {
+        storage.Safe( () => {
+            // TO-DO
+        }, storage.secret );
     }
 
 }

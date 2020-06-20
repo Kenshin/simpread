@@ -293,6 +293,7 @@ export default class Auth extends React.Component {
             storage.secret.notion.folder_id = value.trim();
             storage.secret.notion.type      = obj.type;
             obj.schema && ( storage.secret.notion.schema = obj.schema );
+            obj.type == "page" && delete storage.secret.notion.schema;
         }
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
