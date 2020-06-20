@@ -1321,7 +1321,7 @@ class Notion {
                         name : '　　' + this.getBlockName( collection.name ),
                         value: collection.id,
                         type : 'collection',
-                        url_schema_key: URLSchemaKey,
+                        schema: URLSchemaKey,
                     })
                 }
                 Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
@@ -1548,14 +1548,14 @@ class Notion {
                 const taskId = result.done.data.taskId;
                 if ( result.done ) {
                     this.CheckQueueTask( taskId, () => {
-                        if ( this.url_schema_key ) {
+                        if ( this.schema ) {
                             this.SetProperties( documentId, () => callback( result ));
                         } else {
                             this.GetCollectionData( collection => {
                                 this.AddCollectionUrlSchema( collection, schemaKey => {
-                                    this.url_schema_key = schemaKey;
+                                    this.schema = schemaKey;
                                     storage.Safe(() => {
-                                        storage.secret.notion.url_schema_key = schemaKey;
+                                        storage.secret.notion.schema = schemaKey;
                                     });
                                     this.SetProperties( documentId, () => callback( result ));
                                 });
@@ -1673,7 +1673,7 @@ class Notion {
                     operations: [{
                         id: documentId,
                         table: 'block',
-                        path: ['properties', this.url_schema_key],
+                        path: ['properties', this.schema],
                         command: 'set',
                         args: [[ window.location.origin, [[ 'a', window.location.href ]]]],
                     }],

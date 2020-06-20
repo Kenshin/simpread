@@ -316,6 +316,7 @@ function action( type, title, desc, content ) {
                         corbLoader( "load", () => {
                             notion.access_token = storage.secret.notion.access_token;
                             notion.folder_id    = storage.secret.notion.folder_id;
+                            notion.schema       = storage.secret.notion.schema;
                             notion.Add( title, result.replace( /.jpeg!720/ig, '.jpeg' ), ( result, error ) => {
                                 exp.svcCbWrapper( result, error, notion.name, type, new Notify() )
                             });
