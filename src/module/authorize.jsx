@@ -289,10 +289,10 @@ export default class Auth extends React.Component {
         state == "linnk"  && ( storage.secret.linnk.group_name = value.trim() );
         state == "youdao" && ( storage.secret.youdao.folder_id = value.trim() );
         if (state == 'notion') {
-          const notionState = this.state.notion.filter( item => item.value == value.trim() )[0];
+          const obj = this.state.notion.filter( item => item.value == value.trim() )[0];
           storage.secret.notion.folder_id = value.trim();
-          storage.secret.notion.type      = notionState.type;
-          storage.secret.notion.schema    = notionState.schema;
+          storage.secret.notion.type      = obj.type;
+          storage.secret.notion.schema    = obj.schema;
         }
         storage.Safe( () => this.setState({ secret: storage.secret }), storage.secret );
     }
