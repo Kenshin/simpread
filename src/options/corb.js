@@ -21,10 +21,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
             axios.put( request.value.url, request.value.content, request.value.data )
                 .then( response => sendResponse({ done: response }))
                 .catch( error   => sendResponse({ fail: error    }));
-        }else if( request.value.type == 'download' ) {
-            axios(request.value)
-            .then( response => sendResponse({ done: response }))
-            .catch( error   => sendResponse({ fail: error    }));
+        } else if( request.value.type == 'download' ) {
+            axios( request.value )
+                .then( response => sendResponse({ done: response }))
+                .catch( error   => sendResponse({ fail: error    }));
         }
     }
     return true;
@@ -33,59 +33,47 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 /**
  * Listen runtime message, include: `notion`
  */
-;(function () {
-    const DownLoadCache = new Map();
+const downLoadCache = new Map();
 
-  browser.runtime.onMessage.addListener(async function (
-    request,
-    sender,
-    sendResponse
-  ) {
-    if (request.type == msg.MESSAGE_ACTION.NOTION_DL_IMG) {
-      try {
-        const option = request.value
-        const { url } = option
-        const dlRes = await axios({
-          method: 'get',
-          url,
-          responseType: 'blob',
-        })
+browser.runtime.onMessage.addListener( async function ( request, sender, sendResponse ) {
+    if ( request.type == msg.MESSAGE_ACTION.NOTION_DL_IMG ) {
+        try {
+            const option  = request.value,
+                  { url } = option,
+                  dlRes   = await axios({ method: 'get', url, responseType: 'blob', });
+            let blob      = dlRes.data;
 
-        let blob = dlRes.data
-
-        if (blob.type === 'image/webp') {
-          blob = blob.slice(0, blob.size, 'image/jpeg')
+            if ( blob.type === 'image/webp' ) {
+                blob = blob.slice( 0, blob.size, 'image/jpeg' );
+            }
+            downLoadCache.set( url, blob );
+            sendResponse({
+                done: {
+                    type: blob.type,
+                    size: blob.size,
+                    url,
+                },
+            });
+        } catch ( err ) {
+            sendResponse({ fail: err });
         }
-        DownLoadCache.set(url, blob)
-        sendResponse({
-          done: {
-            type: blob.type,
-            size: blob.size,
-            url,
-          },
-        })
-      } catch (err) {
-        sendResponse({ fail: err })
-      }
-    } else if (request.type == msg.MESSAGE_ACTION.NOTION_UP_IMG) {
-      try {
-        const option = request.value
-        const { url, upUrl } = option
+    } else if ( request.type == msg.MESSAGE_ACTION.NOTION_UP_IMG ) {
+        try {
+            const option = request.value,
+                  { url, upUrl } = option,
+                  blob   = downLoadCache.get( url );
 
-        const blob = DownLoadCache.get(url)
+            await axios.put( upUrl, blob, {
+                headers: {
+                    'Content-Type': blob.type,
+                },
+            });
 
-        await axios.put(upUrl, blob, {
-          headers: {
-            'Content-Type': blob.type,
-          },
-        })
-
-        DownLoadCache.delete(url)
-        sendResponse({ done: true })
-      } catch (err) {
-        sendResponse({ fail: err })
-      }
+            downLoadCache.delete( url );
+            sendResponse({ done: true });
+        } catch ( err ) {
+            sendResponse({ fail: err });
+        }
     }
-    return true
-  })
-})()
+    return true;
+});
