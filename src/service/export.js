@@ -1446,7 +1446,7 @@ class Notion {
         const UploadOriginImage = this.UploadOriginImage.bind(this);
         const notify = new Notify().Render({ state: "loading", content: `正在采集图片到 Notion，请稍等` });
         const updateNotify = function(){
-            notify.updateContent(`正在采集图片到 Notion，请稍等 (${completeCount}/${imagesCount}) `)
+            notify.update( `正在采集图片到 Notion，请稍等 (${ completeCount }/${ imagesCount })` );
         }
         replacements.push(
           await images.reduce((prevPromise, imageUrl) => {
