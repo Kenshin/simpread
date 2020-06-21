@@ -39,7 +39,7 @@ browser.runtime.onMessage.addListener( async function ( request, sender, sendRes
     if ( request.type == msg.MESSAGE_ACTION.NOTION_DL_IMG ) {
         try {
             const option  = request.value,
-                  { url } = option,
+                  { url, protocol } = option,
                   dlRes   = await axios({ method: 'get', url, responseType: 'blob', });
             let blob      = dlRes.data;
 
@@ -51,7 +51,7 @@ browser.runtime.onMessage.addListener( async function ( request, sender, sendRes
                 done: {
                     type: blob.type,
                     size: blob.size,
-                    url,
+                    url : url.replace( /https?:/, protocol ),
                 },
             });
         } catch ( err ) {
