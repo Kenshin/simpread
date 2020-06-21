@@ -40,7 +40,7 @@ browser.runtime.onMessage.addListener( async function ( request, sender, sendRes
         try {
             const option  = request.value,
                   { url, protocol } = option,
-                  dlRes   = await axios({ method: 'get', url, responseType: 'blob', });
+                  dlRes   = await axios({ method: 'get', url: url.replace( /https?:/, protocol ), responseType: 'blob', });
             let blob      = dlRes.data;
 
             if ( blob.type === 'image/webp' ) {
@@ -51,7 +51,7 @@ browser.runtime.onMessage.addListener( async function ( request, sender, sendRes
                 done: {
                     type: blob.type,
                     size: blob.size,
-                    url : url.replace( /https?:/, protocol ),
+                    url,
                 },
             });
         } catch ( err ) {
