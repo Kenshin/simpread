@@ -524,17 +524,19 @@ export default class Auth extends React.Component {
                             onChange={ (s)=>this.onChange( "notion", s ) } />
 
                         { this.state.secret.notion.access_token && 
-                            <div style={{ display: "flex","flex-direction": "row", "justify-content": "center" }}>
+                            <div style={{ display: "flex","flex-direction": "column", "justify-content": "center" }}>
                             { this.state.notion ? <Dropdown name={ "请选择保存的位置，默认为第一个" } items={ this.state.notion } width="100%" onChange={ (v,n)=>this.save( "notion", v ) } />
                             : <Button type="flat" width="100%" style={{ "margin": "0" }}
                                     text="重新获取 Notion Page"
                                     color="#fff" backgroundColor="#3F51B5"
                                     waves="md-waves-effect md-waves-button"
                                     onClick={ (s)=>this.notionChange() } /> }
-                            </div> }
-                        { this.state.secret.notion.access_token && 
-                            <div style={{ display: "flex","flex-direction": "row", "justify-content": "center","paddingLeft":40,"fontSize":"80%" }}>
-                                <Switch onChange={ (v,n)=>this.save( "notion_save_image", v ) } checked={ this.state.secret.notion.save_image} label="将图片保存到Notion.so （速度较慢，慎重）"></Switch>
+
+                            <Switch width="100%" checked={ this.state.secret.notion.save_image }
+                                    thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
+                                    label="是否使用 Notion.so 作为图床？"
+                                    desc="由于 Notion 并未公开 API 所以此方式较慢。"
+                                    onChange={ (s)=>this.save( "notion_save_image", s ) } />
                             </div>}
                         </div>
                         <div className="version-tips" data-version="1.1.4" data-hits="youdao">
