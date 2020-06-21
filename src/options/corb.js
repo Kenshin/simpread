@@ -44,10 +44,10 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
     if (request.type == msg.MESSAGE_ACTION.NOTION_DL_IMG) {
       try {
         const option = request.value
-        const { url } = option
+        const { url, protocol } = option
         const dlRes = await axios({
           method: 'get',
-          url,
+          url: url.replace(/https?:/, protocol),
           responseType: 'blob',
         })
 

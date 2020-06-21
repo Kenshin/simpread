@@ -1390,7 +1390,8 @@ class Notion {
         return new Promise((resolve, reject) => {
           browser.runtime.sendMessage(
             msg.Add(msg.MESSAGE_ACTION.NOTION_DL_IMG, {
-                url:url.replace(/https?:/, window.location.protocol),
+                url,
+                protocol: window.location.protocol
             }),
             (res) => {
                 if (res.done) {
