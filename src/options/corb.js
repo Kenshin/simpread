@@ -36,7 +36,7 @@ browser.runtime.onMessage.addListener( function( request, sender, sendResponse )
 const downLoadCache = new Map();
 
 browser.runtime.onMessage.addListener( async function ( request, sender, sendResponse ) {
-    if ( request.type == msg.MESSAGE_ACTION.NOTION_DL_IMG ) {
+    if ( request.type == msg.MESSAGE_ACTION.notion_dl_img ) {
         try {
             const option  = request.value,
                   { url, protocol } = option,
@@ -57,7 +57,7 @@ browser.runtime.onMessage.addListener( async function ( request, sender, sendRes
         } catch ( err ) {
             sendResponse({ fail: err });
         }
-    } else if ( request.type == msg.MESSAGE_ACTION.NOTION_UP_IMG ) {
+    } else if ( request.type == msg.MESSAGE_ACTION.notion_up_img ) {
         try {
             const option = request.value,
                   { url, upUrl } = option,

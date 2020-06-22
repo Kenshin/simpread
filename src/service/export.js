@@ -1386,7 +1386,7 @@ class Notion {
     DonwloadOriginImage( url ) {
         return new Promise(( resolve, reject ) => {
           browser.runtime.sendMessage(
-            msg.Add( msg.MESSAGE_ACTION.NOTION_DL_IMG, {
+            msg.Add( msg.MESSAGE_ACTION.notion_dl_img, {
                 url,
                 protocol: window.location.protocol
             }), res => {
@@ -1402,7 +1402,7 @@ class Notion {
                 this.UUID(),
                 urls => {
                     browser.runtime.sendMessage(
-                        msg.Add( msg.MESSAGE_ACTION.NOTION_UP_IMG, {
+                        msg.Add( msg.MESSAGE_ACTION.notion_up_img, {
                         url: url,
                         upUrl: urls.signedPutUrl,
                         }), res => {
