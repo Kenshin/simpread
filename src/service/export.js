@@ -1369,114 +1369,98 @@ class Notion {
     }
 
     MathImages( content ) {
-        const result = content.match(/!\[.*?\]\(http(.*?)\)/g)
+        const result = content.match( /!\[.*?\]\(http(.*?)\)/g );
 
-        if( !result ){ return [] }
+        if( !result ) { return []; }
 
-        const images = result
-          .map(o => {
-            const temp = /!\[.*?\]\((http.*?)\)/.exec(o);
-            if (temp) {
-              return temp[1];
+        const images   = result.map( o => {
+            const temp = /!\[.*?\]\((http.*?)\)/.exec( o );
+            if ( temp ) {
+                return temp[1];
             }
             return '';
-          })
-          .filter(o => o && !~o.indexOf('secure.notion-static.com/'));
-        
-        return images
+        }).filter( o => o && !~o.indexOf( 'secure.notion-static.com/' ));
+        return images;
     }
 
-    DonwloadOriginImage(url) {
-        return new Promise((resolve, reject) => {
+    DonwloadOriginImage( url ) {
+        return new Promise(( resolve, reject ) => {
           browser.runtime.sendMessage(
-            msg.Add(msg.MESSAGE_ACTION.NOTION_DL_IMG, {
+            msg.Add( msg.MESSAGE_ACTION.NOTION_DL_IMG, {
                 url,
                 protocol: window.location.protocol
-            }),
-            (res) => {
-                if (res.done) {
-                  resolve(res.done)
-                } else {
-                  reject(res.fail)
+            }), res => {
+                if ( res.done ) resolve( res.done );
+                else reject( res.fail );
+            });
+        });
+    }
+
+    UploadOriginImage({ type, size, url }) {
+        return new Promise(( resolve, reject ) => {
+            this.GetFileUrl(
+                this.UUID(),
+                urls => {
+                    browser.runtime.sendMessage(
+                        msg.Add( msg.MESSAGE_ACTION.NOTION_UP_IMG, {
+                        url: url,
+                        upUrl: urls.signedPutUrl,
+                        }), res => {
+                            if ( res.done ) {
+                                resolve({ from: url, to: urls.url });
+                            } else resolve();
+                        }
+                    )
+                },
+                {
+                    bucket: 'secure',
+                    contentType: type,
                 }
-            }
-          )
+            )
         })
     }
 
-    UploadOriginImage ( { type, size, url } ){
-        return new Promise((resolve, reject) => {
-          this.GetFileUrl(
-            this.UUID(),
-            (urls) => {
-              browser.runtime.sendMessage(
-                msg.Add(msg.MESSAGE_ACTION.NOTION_UP_IMG, {
-                  url: url,
-                  upUrl: urls.signedPutUrl,
-                }),
-                (res) => {
-                  if (res.done) {
-                    resolve({
-                      from: url,
-                      to: urls.url,
-                    })
-                  } else {
-                    resolve()
-                  }
-                }
-              )
-            },
-            {
-              bucket: 'secure',
-              contentType: type,
-            }
-          )
-        })
-    }
+    async UploadImages( content ) {
 
-    async UploadImages ( content ) {
-
-        function escapeRegExp(string) {
-          return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
-        }
-        
-        const images = [...new Set(this.MathImages(content))]
-        const imagesCount = images.length;
-        let completeCount = 0;
-        const replacements = []
-        const UploadOriginImage = this.UploadOriginImage.bind(this);
-        const notify = new Notify().Render({ state: "loading", content: `正在采集图片到 Notion，请稍等` });
-        const updateNotify = function(){
-            notify.update( `正在采集图片到 Notion，请稍等 (${ completeCount }/${ imagesCount })` );
-        }
+        let completeCount  = 0;
+        const images       = [ ...new Set( this.MathImages( content ))],
+              imagesCount  = images.length,
+              replacements = [],
+              uploadImage  = this.UploadOriginImage.bind( this ),
+              notify       = new Notify().Render({ state: "loading", content: `正在上传图片到 Notion ，请稍等` }),
+              updateNotify = () => {
+                notify.update( `正在上传图片到 Notion ，当前进度 ${ completeCount }/${ imagesCount }` );
+              },
+              escapeRegExp = str => {
+                return str.replace( /[.*+\-?^${}()|[\]\\]/g, '\\$&' ); // $& means the whole matched string
+              };
         replacements.push(
-          await images.reduce((prevPromise, imageUrl) => {
-            if (!imageUrl) return
-            console.log(' Notion Download Image :' + imageUrl)
-            return prevPromise.then((replacement) => {
-              if (replacement) {
-                replacements.push(replacement)
-              }
-              completeCount ++;
-              updateNotify()
-              return this.DonwloadOriginImage(imageUrl).then(
-                UploadOriginImage,
-                (err) => {
-                  console.error(err)
-                }
-              )
-            })
-          }, Promise.resolve())
+            await images.reduce(( prevPromise, imageUrl ) => {
+                if ( !imageUrl ) return;
+                return prevPromise.then(( replacement ) => {
+                    if ( replacement ) {
+                        replacements.push( replacement );
+                    }
+                    completeCount ++;
+                    updateNotify();
+                    return this.DonwloadOriginImage( imageUrl ).then(
+                        uploadImage,
+                        err => {
+                            console.error(err)
+                        }
+                    )
+                });
+            }, Promise.resolve())
         )
         notify.complete();
 
-        replacements.forEach((replacement) => {
-          if (replacement) {
-            content = content.replace(
-              new RegExp(escapeRegExp(replacement.from),'g'),
-              replacement.to
-            )
-          }
+        replacements.forEach(( replacement ) => {
+            if ( replacement ) {
+                content = content.replace(
+                    new RegExp(escapeRegExp( replacement.from ), 'g' ),
+                        replacement.to
+                )
+            }
         })
 
         return content;
@@ -1484,7 +1468,7 @@ class Notion {
 
     async Add( title, content, callback ) {
         if ( this.save_image ) {
-            content = await this.UploadImages(content)
+            content = await this.UploadImages( content );
         }
         this.TempFile( this.folder_id, title, ( documentId, error ) => {
             console.log( 'TempFile: ', documentId )
