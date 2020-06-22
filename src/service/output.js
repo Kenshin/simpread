@@ -319,7 +319,7 @@ function action( type, title, desc, content ) {
                             notion.save_image   = storage.secret.notion.save_image;
                             notion.schema       = storage.secret.notion.schema;
                             notion.type         = storage.secret.notion.type;
-                            notion.Add( title, result.replace( /.jpeg!720/ig, '.jpeg' ), ( result, error ) => {
+                            notion.Add( title, result.replace( /.jpeg!720/ig, '.jpeg' ).replace( /， 原文地址 \S+\)/i, '\n' ), ( result, error ) => {
                                 // hack code
                                 if ( notion.type == "collection" && notion.schema != storage.secret.notion.schema ) {
                                     storage.secret.notion.schema = notion.schema;
