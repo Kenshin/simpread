@@ -1,4 +1,4 @@
->  此功能最低要求 1.1.4 版本，如低于此版本，[请升级](http://ksria.com/simpread/) 到最新版本。
+>  此功能最低要求 1.1.4.6022 版本，如低于此版本，[请升级](http://ksria.com/simpread/) 到最新版本。
 
 位置
 ---
@@ -27,10 +27,24 @@
 
 ![lzgEwj.png](https://s1.ax1x.com/2020/06/16/NFU1k8.png)
 
-- 导出到 Notion 支持 **database** 和 **page** 方式 _**注意：需要 1.1.4.6016 版本才可支持**_
+- 导出到 Notion 支持 **database** 和 **page** 方式 _**注意：需要 1.1.4.6016 版本（以上）才可支持**_
 
-[![NFwLu9.png](https://s1.ax1x.com/2020/06/16/NFwLu9.png)](https://imgchr.com/i/NFwLu9)
+- 导出到 Notion 支持 **支持源网址**   _**注意：需要 1.1.4.6022 版本（以上）才可支持**_
 
+[![NFwLu9.png](https://s1.ax1x.com/2020/06/22/NGcYdO.png)](https://s1.ax1x.com/2020/06/22/NGcYdO.png)
+
+图床
+---
+
+> [1.1.4.6022](http://ksria.com/simpread/changelog.html#1.1.4.6022) 增加了 Notion.so 图传功能，导入到 Notion 的内容可自动上传为 Notion 本身，避免源页面 404 等问题
+
+> 注意：由于使用了 Notion 私有 API 所以在上传图片时较慢 
+
+- 选项页 → 高级设定 → 授权管理，开启图床功能 _**默认为关闭状态**_
+
+  ![NGBOWq.png](https://s1.ax1x.com/2020/06/22/NGBOWq.png)
+
+  ![NGcqkF.gif](https://s1.ax1x.com/2020/06/22/NGcqkF.gif)
 
 注意
 ---
