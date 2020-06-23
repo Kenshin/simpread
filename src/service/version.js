@@ -37,6 +37,7 @@ const version  = browser.runtime.getManifest().version.replace( /.\d{2,}/, "" ),
     ]),
     patchs = new Map([
         [ "1.1.4.6016", "修复 Notion 相关问题，并支持 Database 导出方案，" ],
+        [ "1.1.4.6022", "修复 Notion 授权问题，并支持 图床 导出方案，" ],
   ]),
     tips      = {
         "root"  : value => `.version-tips[data-hits='${value}']`,

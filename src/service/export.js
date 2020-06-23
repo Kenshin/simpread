@@ -11,7 +11,6 @@ import * as msg   from 'message';
 import {browser}  from 'browser';
 import * as puplugin from 'puplugin';
 import * as wiz   from 'wiz';
-import {storage} from 'storage'
 
 /**
  * Create PNG
@@ -1278,18 +1277,16 @@ class Notion {
                  * 读取所有空间，并创建映射。
                  */
                 const spaceMaps = {}
-                Object.values(result.recordMap.space).forEach(
-                  ({ value: spaceValue, role }) => {
-                    if (!this.hasWriteRule(role)) return
+                Object.values( result.recordMap.space ).forEach(({ value: spaceValue, role }) => {
+                    if (!this.hasWriteRule(role)) return;
                     spaceMaps[spaceValue.id] = {
-                      name: spaceValue.name,
-                      value: spaceValue.id,
-                      type: 'space',
-                      blocks: [],
+                        name  : spaceValue.name,
+                        value : spaceValue.id,
+                        type  : 'space',
+                        blocks: [],
                     }
-                  }
-                )
-                
+                });
+
                 /**
                  * 读取所有收藏空间，并创建映射。
                  */
@@ -1297,75 +1294,69 @@ class Notion {
                 Object.values(
                   result.recordMap.collection
                 ).forEach(({ value: collectionValue, role }) => {
-                    if (!this.hasWriteRule(role)) return
-                    collectionMaps[collectionValue.parent_id] = collectionValue
-                    collectionMaps[collectionValue.id] = collectionValue
+                    if (!this.hasWriteRule(role)) return;
+                    collectionMaps[ collectionValue.parent_id ] = collectionValue;
+                    collectionMaps[ collectionValue.id ]        = collectionValue;
                 })
 
                 /**
                  * 遍历所有当前用户能看到的空间。
                  */
-                const processCollection = (id, spaceBlocks) => {
-                  const collection = collectionMaps[id]
-                  if (!collection) return
-                
-                  let URLSchemaKey = null;
+                const processCollection = ( id, spaceBlocks ) => {
+                    const collection = collectionMaps[id];
+                    if ( !collection ) return;
 
-                  Object.keys(collection.schema).some((key) => {
-                    const schema = collection.schema[key]
-                    if (schema.type === 'url' && schema.name === 'URL') {
-                        URLSchemaKey = key;
-                        return true
-                    }
-                    return false
-                  })
+                    let schemaKey;
+                    Object.keys( collection.schema ).some( key => {
+                        const schema = collection.schema[key];
+                        if ( schema.type === 'url' && schema.name === 'URL' ) {
+                            schemaKey = key;
+                            return true;
+                        }
+                        return false;
+                    })
 
-                  spaceBlocks.push({
-                    name: '　　' + this.getBlockName(collection.name),
-                    value: collection.id,
-                    type: 'collection',
-                    url_schema_key: URLSchemaKey,
-                  })
+                    const block = {
+                        name  : '　　' + this.getBlockName( collection.name ),
+                        value : collection.id,
+                        type  : 'collection',
+                    };
+                    schemaKey && ( block.schema = schemaKey );
+                    spaceBlocks.push( block );
                 }
-                Object.values(result.recordMap.block).forEach(
-                  ({ role, value: blockValue }) => {
-                    if (!this.hasWriteRule(role)) return
+                Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
+                    if ( !this.hasWriteRule( role )) return;
                     const {
-                      type,
-                      space_id,
-                      parent_id,
-                      id,
-                      collection_id,
-                    } = blockValue
+                        type,
+                        space_id,
+                        parent_id,
+                        id,
+                        collection_id,
+                    } = blockValue;
 
-                    const _space = space_id
-                      ? spaceMaps[space_id]
-                      : spaceMaps[parent_id]
-                    const _spaceBlocks = _space ? _space.blocks : this.blocks
+                    const _space       = space_id ? spaceMaps[space_id] : spaceMaps[parent_id],
+                          _spaceBlocks = _space   ? _space.blocks       : this.blocks;
 
                     if (type == 'page') {
-                      _spaceBlocks.push({
-                        name:
-                          '　　' +
-                          this.getBlockName(blockValue.properties.title),
-                        value: id,
-                        type: 'page',
-                      })
-                    } else if (type == 'collection_view_page') {
-                      processCollection(id, _spaceBlocks)
-                    } else if (type == 'collection_view') {
-                      processCollection(collection_id, _spaceBlocks)
+                        _spaceBlocks.push({
+                            name : '　　' + this.getBlockName( blockValue.properties.title ),
+                            value: id,
+                            type : 'page',
+                        });
+                    } else if ( type == 'collection_view_page' ) {
+                        processCollection( id, _spaceBlocks );
+                    } else if ( type == 'collection_view' ) {
+                        processCollection( collection_id, _spaceBlocks );
                     }
-                  }
-                )
+                });
 
-                
-                
-                Object.values(spaceMaps).forEach((space) => {
-                  const { blocks, ...spaceAttr } = space
-                  this.blocks.push(spaceAttr)
-                  this.blocks.push(...blocks)
-                })
+                Object.values( spaceMaps ).forEach( space => {
+                    const { blocks, ...spaceAttr } = space;
+                    if ( blocks && blocks.length > 0 ) {
+                        this.blocks.push({ name: spaceAttr.name, type: blocks[0].type, value: blocks[0].value });
+                        this.blocks.push( ...blocks );
+                    }
+                });
 
                 this.type         = this.blocks[0].type;
                 this.folder_id    = this.blocks[0].value;
@@ -1377,7 +1368,108 @@ class Notion {
         });
     }
 
-    Add( title, content, callback ) {
+    MathImages( content ) {
+        const result = content.match( /!\[.*?\]\(http(.*?)\)/g );
+
+        if( !result ) { return []; }
+
+        const images   = result.map( o => {
+            const temp = /!\[.*?\]\((http.*?)\)/.exec( o );
+            if ( temp ) {
+                return temp[1];
+            }
+            return '';
+        }).filter( o => o && !~o.indexOf( 'secure.notion-static.com/' ));
+        return images;
+    }
+
+    DonwloadOriginImage( url ) {
+        return new Promise(( resolve, reject ) => {
+          browser.runtime.sendMessage(
+            msg.Add( msg.MESSAGE_ACTION.notion_dl_img, {
+                url,
+                protocol: window.location.protocol
+            }), res => {
+                if ( res.done ) resolve( res.done );
+                else reject( res.fail );
+            });
+        });
+    }
+
+    UploadOriginImage({ type, size, url }) {
+        return new Promise(( resolve, reject ) => {
+            this.GetFileUrl(
+                this.UUID(),
+                urls => {
+                    browser.runtime.sendMessage(
+                        msg.Add( msg.MESSAGE_ACTION.notion_up_img, {
+                        url: url,
+                        upUrl: urls.signedPutUrl,
+                        }), res => {
+                            if ( res.done ) {
+                                resolve({ from: url, to: urls.url });
+                            } else resolve();
+                        }
+                    )
+                },
+                {
+                    bucket: 'secure',
+                    contentType: type,
+                }
+            )
+        })
+    }
+
+    async UploadImages( content ) {
+
+        let completeCount  = 0;
+        const images       = [ ...new Set( this.MathImages( content ))],
+              imagesCount  = images.length,
+              replacements = [],
+              uploadImage  = this.UploadOriginImage.bind( this ),
+              notify       = new Notify().Render({ state: "loading", content: `正在上传图片到 Notion ，请稍等` }),
+              updateNotify = () => {
+                notify.update( `正在上传图片到 Notion ，当前进度 ${ completeCount }/${ imagesCount }` );
+              },
+              escapeRegExp = str => {
+                return str.replace( /[.*+\-?^${}()|[\]\\]/g, '\\$&' ); // $& means the whole matched string
+              };
+        replacements.push(
+            await images.reduce(( prevPromise, imageUrl ) => {
+                if ( !imageUrl ) return;
+                return prevPromise.then(( replacement ) => {
+                    if ( replacement ) {
+                        replacements.push( replacement );
+                    }
+                    completeCount ++;
+                    updateNotify();
+                    return this.DonwloadOriginImage( imageUrl ).then(
+                        uploadImage,
+                        err => {
+                            console.error(err)
+                        }
+                    )
+                });
+            }, Promise.resolve())
+        )
+        notify.complete();
+
+        replacements.forEach(( replacement ) => {
+            if ( replacement ) {
+                content = content.replace(
+                    new RegExp(escapeRegExp( replacement.from ), 'g' ),
+                        replacement.to
+                )
+            }
+        })
+
+        return content;
+    }
+
+    async Add( title, content, callback ) {
+        if ( this.save_image ) {
+            content = await this.UploadImages( content );
+        }
         this.TempFile( this.folder_id, title, ( documentId, error ) => {
             console.log( 'TempFile: ', documentId )
             if ( error ) {
@@ -1501,14 +1593,13 @@ class Notion {
         });
     }
 
-    GetFileUrl( name, callback ) {
+    GetFileUrl( name, callback, option = { bucket: 'temporary', contentType: 'text/markdown' } ) {
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.AXIOS, {
             type: "post",
             url: this.url + "api/v3/getUploadFileUrl",
             data:{
-                bucket: 'temporary',
                 name: name,
-                contentType: 'text/markdown',
+                ...option
             }
         }), result => {
             if ( result && result.done ) {
@@ -1550,162 +1641,150 @@ class Notion {
                 }
             }
         }), result => {
-            if (this.type == 'collection') {
+            if ( this.type == 'collection' ) {
                /*  result.done && this.CheckQueueTask(result.done.data.taskId, () => {
                   this.SetProperties(documentId, () => callback(result))
                 }) */
                 const taskId = result.done.data.taskId;
-                if (result.done) {
-                  this.CheckQueueTask(taskId, () => {
-                    if (this.url_schema_key) {
-                      this.SetProperties(documentId, () => callback(result))
-                    } else {
-                      this.GetCollectionData((collection) => {
-                        this.AddCollectionUrlSchema(collection, (schemaKey) => {
-                          this.url_schema_key = schemaKey
-                          storage.Safe(() => {
-                            storage.secret.notion.url_schema_key = schemaKey
-                          })
-                          this.SetProperties(documentId, () => callback(result))
-                        })
-                      })
-                    }
-                  })
-                } 
-            } else {
-              callback(result)
-            }
+                if ( result.done ) {
+                    this.CheckQueueTask( taskId, () => {
+                        if ( this.schema ) {
+                            this.SetProperties( documentId, () => callback( result ));
+                        } else {
+                            this.GetCollectionData( collection => {
+                                this.AddCollectionUrlSchema( collection, schemaKey => {
+                                    this.schema = schemaKey;
+                                    this.SetProperties( documentId, () => callback( result ));
+                                });
+                            });
+                        }
+                    })
+                }
+            } else callback( result );
         });
     }
 
-    GetCollectionData(callback){
+    GetCollectionData( callback ) {
         browser.runtime.sendMessage(
-          msg.Add(msg.MESSAGE_ACTION.AXIOS, {
-            type: 'post',
-            url: this.url + 'api/v3/loadUserContent',
-          }),
-          (result) => {
-            if (result.done) {
-              const {
-                recordMap: { collection },
-              } = result.done.data
-
-              const currentCollection = collection[this.folder_id].value;
-              callback(currentCollection)
-            }
-          }
-        )
-    }
-
-    AddCollectionUrlSchema(collection, callback){
-        const { schema } = collection
-        const schemaKeys = Object.keys(schema);
-        let urlSchemaKey = null
-        schemaKeys.some((key) => {
-          const schemaItem = schema[key]
-          if (schemaItem.type === 'url' && schemaItem.name === 'URL') {
-            urlSchemaKey = key
-            return true
-          }
-          return false
-        })
-        if (urlSchemaKey) {
-          callback(urlSchemaKey)
-          return;
-        }
-
-        const newSchema = { ...schema }
-        let newSchemaKey = ''
-        while (!newSchemaKey && schemaKeys.indexOf(newSchemaKey) < 0) {
-          newSchemaKey = genSchemaKey()
-        }
-
-        newSchema[newSchemaKey] = {
-          type: 'url',
-          name: 'URL',
-        }
-
-        browser.runtime.sendMessage(
-          msg.Add(msg.MESSAGE_ACTION.AXIOS, {
-            type: 'post',
-            url: this.url + 'api/v3/submitTransaction',
-            data: {
-              operations: [
-                {
-                  args: {
-                    schema: newSchema,
-                  },
-                  command: 'update',
-                  id: this.folder_id,
-                  path: [],
-                  table: 'collection',
-                },
-              ],
-            },
-          }),
-          (result) => {
-            if (result.done) {
-                callback(newSchemaKey)
-            }
-          }
-        )
-
-        function genSchemaKey(len = 4){
-            let key = '';
-            for (; key.length < len; ){
-                key += String.fromCharCode(33 + 94 * Math.random())
-            }
-            return key
-        }
-    }
-
-    CheckQueueTask(taskId, callback){
-        if (taskId) {
-          browser.runtime.sendMessage(
-            msg.Add(msg.MESSAGE_ACTION.AXIOS, {
-              type: 'post',
-              url: this.url + 'api/v3/getTasks',
-              data: {
-                taskIds: [taskId],
-              },
-            }),
-            (result) => {
-              if (result.done) {
-                const { results } = result.done.data
-                if (results[0].state !== 'success') {
-                  setTimeout(() => {
-                    this.CheckQueueTask(taskId, callback)
-                  }, 1000)
-                } else {
-                  callback()
+            msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+                type: 'post',
+                url : this.url + 'api/v3/loadUserContent',
+            }), result => {
+                if (result.done) {
+                    const {
+                        recordMap: { collection },
+                    } = result.done.data,
+                    currentCollection = collection[ this.folder_id ].value;
+                    callback( currentCollection );
                 }
-              }
             }
-          )
+        )
+    }
+
+    AddCollectionUrlSchema( collection, callback ) {
+        const { schema }   = collection,
+              schemaKeys   = Object.keys( schema ),
+              genSchemaKey = ( len = 4 ) => {
+                let key    = '';
+                for ( ; key.length < len; ) {
+                    key   += String.fromCharCode( 33 + 94 * Math.random());
+                }
+                return key;
+            };
+        let schemaKey = null;
+
+        schemaKeys.some( key => {
+            const schemaItem = schema[key];
+            if ( schemaItem.type === 'url' && schemaItem.name === 'URL' ) {
+                schemaKey = key;
+                return true;
+            }
+            return false;
+        });
+
+        if ( schemaKey ) {
+            callback( schemaKey );
+            return;
+        }
+
+        const newSchema  = { ...schema };
+        let newSchemaKey = '';
+        while ( !newSchemaKey && schemaKeys.indexOf(newSchemaKey) < 0 ) {
+            newSchemaKey = genSchemaKey();
+        }
+
+        newSchema[ newSchemaKey ] = { type: 'url', name: 'URL' };
+
+        browser.runtime.sendMessage(
+            msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+                type: 'post',
+                url : this.url + 'api/v3/submitTransaction',
+                data: {
+                operations: [{
+                    args: {
+                        schema: newSchema,
+                    },
+                    command: 'update',
+                    id: this.folder_id,
+                    path: [],
+                    table: 'collection',
+                    }],
+                },
+            }), result => {
+                if ( result.done ) {
+                    callback( newSchemaKey );
+                }
+            }
+        )
+    }
+
+    CheckQueueTask( taskId, callback ) {
+        if ( taskId ) {
+            browser.runtime.sendMessage(
+                msg.Add(msg.MESSAGE_ACTION.AXIOS, {
+                    type: 'post',
+                    url : this.url + 'api/v3/getTasks',
+                    data: {
+                        taskIds: [taskId],
+                    },
+                }), result => {
+                    if ( result.done ) {
+                        const { results } = result.done.data;
+                        if ( results[0].state !== 'success' ) {
+                        setTimeout( () => {
+                            this.CheckQueueTask( taskId, callback );
+                        }, 1000 );
+                        } else callback();
+                    }
+                }
+            )
         }
     }
 
-    SetProperties(documentId, callback){
+    SetProperties( documentId, callback ) {
         browser.runtime.sendMessage(
-          msg.Add(msg.MESSAGE_ACTION.AXIOS, {
-            type: 'post',
-            url: this.url + 'api/v3/submitTransaction',
-            data: {
-              operations: [
-                {
-                  id: documentId,
-                  table: 'block',
-                  path: ['properties', this.url_schema_key],
-                  command: 'set',
-                  args: [[window.location.origin, [['a', window.location.href]]]],
+            msg.Add( msg.MESSAGE_ACTION.AXIOS, {
+                type: 'post',
+                url : this.url + 'api/v3/submitTransaction',
+                data: {
+                    operations: [{
+                        id: documentId,
+                        table: 'block',
+                        path: ['properties', this.schema],
+                        command: 'set',
+                        args: [[ window.location.origin, [[ 'a', window.location.href ]]]],
+                    }],
                 },
-              ],
-            },
-          }),
-          (result) => {
-            result.done && callback(documentId, undefined)
-          }
+            }), result => {
+                result.done && callback( documentId, undefined );
+            }
         )
+    }
+
+    Save( storage ) {
+        storage.Safe( () => {
+            // TO-DO
+        }, storage.secret );
     }
 
 }
