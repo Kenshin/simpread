@@ -253,6 +253,7 @@ let current  = {},
         "notion"  : {
             access_token  : "",
             type          : "",
+            save_image    : false,
             folder_id     : "",
         },
         "youdao"  : {
