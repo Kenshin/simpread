@@ -61,3 +61,11 @@
 > C. 1.1.4.6016 版存在 **有小机率** 的授权错误
 
 前提是你有上万个 Page 或其它人共享给你的 Page ，如存在这种问题，可以手动解决，[请提 Issues](http://github.com/kenshin/simpread/issues/new)
+
+> 导出到 Notion database 的内容 **不含有链接** 的话，请参照下面的方式设定
+
+![NNWyDJ.png](https://s1.ax1x.com/2020/06/23/NNWyDJ.png)
+
+>  导出到 Notion database 的内容也可以显示导入的时间，请参照下面的方式设定
+ 
+![NNWsu4.png](https://s1.ax1x.com/2020/06/23/NNWsu4.png)
