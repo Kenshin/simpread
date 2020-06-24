@@ -1366,6 +1366,7 @@ class Notion {
     }
 
     Auth( callback ) {
+        let warn = "";
         $.ajax({
             url     : this.url + "api/v3/loadUserContent",
             type    : "POST",
@@ -1378,6 +1379,7 @@ class Notion {
                     this.getBlocks( result );
                 } catch ( error ) {
                     console.warn( error )
+                    warn = error;
                     this.getFirstBlock( result );
                 }
 
@@ -1389,7 +1391,7 @@ class Notion {
                 this.type         = this.blocks[0].type;
                 this.folder_id    = this.blocks[0].value;
                 this.save_image   = false;
-                callback( result, undefined );
+                callback( result, undefined, warn );
             }
         }).fail( ( xhr, status, error ) => {
             console.error( error, status, xhr )

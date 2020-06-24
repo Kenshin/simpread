@@ -240,9 +240,12 @@ export default class Auth extends React.Component {
                 }).fail( error => failed( error, yuque.id, yuque.name ));
                 break;
             case "notion":
-                notion.Auth( ( result, error ) => {
+                notion.Auth( ( result, error, warn ) => {
                     if ( error ) failed( error, notion.id, notion.name );
-                    else success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id, save_image: notion.save_image, type: notion.type });
+                    else {
+                        warn != "" && new Notify().Render({ type: 2, content: `请注意：授权时出现了问题导致 <b>仅成功授权了</b> 您的第一个 Notion Page 虽然不影响导出服务，但建议提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809"><b>Issues</b></a>`, state: "holdon" });
+                        success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id, save_image: notion.save_image, type: notion.type });
+                    }
                 });
                 break;
             case "youdao":
@@ -321,8 +324,15 @@ export default class Auth extends React.Component {
     }
 
     notionChange() {
-        exp.notion.Auth( ( result, error ) => {
-            this.setState({ secret: storage.secret, notion: exp.notion.blocks });
+        const notify = new Notify().Render({ state: "loading", content: `正在获取 Notion Page ，请稍等` });
+        exp.notion.Auth( ( result, error, warn ) => {
+            notify.complete();
+            if ( error ) new Notify().Render({ type: 2, content: `Notion.so 并未提供 API 所以会出现 <b>获取失败的情况</b>，如发生此问题，请提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809">Issues</a>`, state: "holdon" });
+            else {
+                warn != "" && new Notify().Render({ type: 2, content: `请注意：获取时出现了问题导致 <b>仅成功获取了</b> 您的第一个 Notion Page 虽然不影响导出服务，但建议提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809"><b>Issues</b></a>`, state: "holdon" });
+                warn == "" && new Notify().Render( 1, "获取成功，请选择导出的 Notion Page" );
+                this.setState({ secret: storage.secret, notion: exp.notion.blocks });
+            }
         });
     }
 
