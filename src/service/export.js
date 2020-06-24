@@ -1264,6 +1264,94 @@ class Notion {
         return generateUuid();
     }
 
+    getBlocks( result ) {
+        /**
+         * 读取所有空间，并创建映射。
+         */
+        const spaceMaps = {}
+        Object.values( result.recordMap.space ).forEach(({ value: spaceValue, role }) => {
+            if (!this.hasWriteRule(role)) return;
+            spaceMaps[spaceValue.id] = {
+                name  : spaceValue.name,
+                value : spaceValue.id,
+                type  : 'space',
+                blocks: [],
+            }
+        });
+
+        /**
+         * 读取所有收藏空间，并创建映射。
+         */
+        if ( !result.recordMap.collection ) result.recordMap.collection = {};
+        const collectionMaps = {};
+        Object.values(
+            result.recordMap.collection
+        ).forEach(({ value: collectionValue, role }) => {
+            if (!this.hasWriteRule(role)) return;
+            collectionMaps[ collectionValue.parent_id ] = collectionValue;
+            collectionMaps[ collectionValue.id ]        = collectionValue;
+        })
+
+        /**
+         * 遍历所有当前用户能看到的空间。
+         */
+        const processCollection = ( id, spaceBlocks ) => {
+            const collection = collectionMaps[id];
+            if ( !collection ) return;
+
+            let schemaKey;
+            Object.keys( collection.schema ).some( key => {
+                const schema = collection.schema[key];
+                if ( schema.type === 'url' && schema.name === 'URL' ) {
+                    schemaKey = key;
+                    return true;
+                }
+                return false;
+            })
+
+            const block = {
+                name  : '　　' + this.getBlockName( collection.name ),
+                value : collection.id,
+                type  : 'collection',
+            };
+            schemaKey && ( block.schema = schemaKey );
+            spaceBlocks.push( block );
+        }
+        Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
+            if ( !this.hasWriteRule( role )) return;
+            const {
+                type,
+                space_id,
+                parent_id,
+                id,
+                collection_id,
+            } = blockValue;
+
+            const _space       = space_id ? spaceMaps[space_id] : spaceMaps[parent_id],
+                    _spaceBlocks = _space   ? _space.blocks       : this.blocks;
+
+            if (type == 'page') {
+                _spaceBlocks.push({
+                    name : '　　' + this.getBlockName( blockValue.properties && blockValue.properties.title || undefined ),
+                    value: id,
+                    type : 'page',
+                });
+            } else if ( type == 'collection_view_page' ) {
+                processCollection( id, _spaceBlocks );
+            } else if ( type == 'collection_view' ) {
+                processCollection( collection_id, _spaceBlocks );
+            }
+        });
+
+        Object.values( spaceMaps ).forEach( space => {
+            const { blocks, ...spaceAttr } = space;
+            if ( blocks && blocks.length > 0 ) {
+                this.blocks.push({ name: spaceAttr.name, type: blocks[0].type, value: blocks[0].value });
+                this.blocks.push( ...blocks );
+            }
+        });
+    }
+
     Auth( callback ) {
         $.ajax({
             url     : this.url + "api/v3/loadUserContent",
@@ -1273,91 +1361,11 @@ class Notion {
                 this.access_token = Object.values( result.recordMap.notion_user )[0].value.id;
                 this.blocks       = [];
 
-                /**
-                 * 读取所有空间，并创建映射。
-                 */
-                const spaceMaps = {}
-                Object.values( result.recordMap.space ).forEach(({ value: spaceValue, role }) => {
-                    if (!this.hasWriteRule(role)) return;
-                    spaceMaps[spaceValue.id] = {
-                        name  : spaceValue.name,
-                        value : spaceValue.id,
-                        type  : 'space',
-                        blocks: [],
-                    }
-                });
-
-                /**
-                 * 读取所有收藏空间，并创建映射。
-                 */
-                if ( !result.recordMap.collection ) result.recordMap.collection = {};
-                const collectionMaps = {};
-                Object.values(
-                  result.recordMap.collection
-                ).forEach(({ value: collectionValue, role }) => {
-                    if (!this.hasWriteRule(role)) return;
-                    collectionMaps[ collectionValue.parent_id ] = collectionValue;
-                    collectionMaps[ collectionValue.id ]        = collectionValue;
-                })
-
-                /**
-                 * 遍历所有当前用户能看到的空间。
-                 */
-                const processCollection = ( id, spaceBlocks ) => {
-                    const collection = collectionMaps[id];
-                    if ( !collection ) return;
-
-                    let schemaKey;
-                    Object.keys( collection.schema ).some( key => {
-                        const schema = collection.schema[key];
-                        if ( schema.type === 'url' && schema.name === 'URL' ) {
-                            schemaKey = key;
-                            return true;
-                        }
-                        return false;
-                    })
-
-                    const block = {
-                        name  : '　　' + this.getBlockName( collection.name ),
-                        value : collection.id,
-                        type  : 'collection',
-                    };
-                    schemaKey && ( block.schema = schemaKey );
-                    spaceBlocks.push( block );
+                try {
+                    this.getBlocks( result );
+                } catch ( error ) {
+                    // TO-DO
                 }
-                Object.values( result.recordMap.block ).forEach( ({ role, value: blockValue }) => {
-                    if ( !this.hasWriteRule( role )) return;
-                    const {
-                        type,
-                        space_id,
-                        parent_id,
-                        id,
-                        collection_id,
-                    } = blockValue;
-
-                    const _space       = space_id ? spaceMaps[space_id] : spaceMaps[parent_id],
-                          _spaceBlocks = _space   ? _space.blocks       : this.blocks;
-
-                    if (type == 'page') {
-                        _spaceBlocks.push({
-                            name : '　　' + this.getBlockName( blockValue.properties && blockValue.properties.title || undefined ),
-                            value: id,
-                            type : 'page',
-                        });
-                    } else if ( type == 'collection_view_page' ) {
-                        processCollection( id, _spaceBlocks );
-                    } else if ( type == 'collection_view' ) {
-                        processCollection( collection_id, _spaceBlocks );
-                    }
-                });
-
-                Object.values( spaceMaps ).forEach( space => {
-                    const { blocks, ...spaceAttr } = space;
-                    if ( blocks && blocks.length > 0 ) {
-                        this.blocks.push({ name: spaceAttr.name, type: blocks[0].type, value: blocks[0].value });
-                        this.blocks.push( ...blocks );
-                    }
-                });
 
                 this.type         = this.blocks[0].type;
                 this.folder_id    = this.blocks[0].value;
