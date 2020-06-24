@@ -1352,6 +1352,19 @@ class Notion {
         });
     }
 
+    getFirstBlock( result ) {
+        const blocks = Object.values( result.recordMap.block );
+        for ( let i = 0; i < blocks.length; i++ ) {
+            const block = blocks[i].value,
+                  role  = blocks[i].role;
+            if ( [ "page", "collection_view" ].includes( block.type ) && this.hasWriteRule( role )) {
+                const name = block.properties && block.properties.title && block.properties.title[0][0] || "Undefined";
+                this.blocks.push({ name, value: block.id, type: block.type });
+                break;
+            }
+        }
+    }
+
     Auth( callback ) {
         $.ajax({
             url     : this.url + "api/v3/loadUserContent",
@@ -1364,7 +1377,13 @@ class Notion {
                 try {
                     this.getBlocks( result );
                 } catch ( error ) {
-                    // TO-DO
+                    console.warn( error )
+                    this.getFirstBlock( result );
+                }
+
+                if ( this.blocks.length == 0 ) {
+                    callback( undefined, `Notion.so 并未提供 API 所以会出现授权失败的情况，如发生此问题，请提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809">Issues</a>` );
+                    return;
                 }
 
                 this.type         = this.blocks[0].type;
