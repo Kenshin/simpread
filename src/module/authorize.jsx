@@ -242,7 +242,7 @@ export default class Auth extends React.Component {
             case "notion":
                 notion.Auth( ( result, error ) => {
                     if ( error ) failed( error, notion.id, notion.name );
-                    else success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id });
+                    else success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id, save_image: notion.save_image, type: notion.type });
                 });
                 break;
             case "youdao":

@@ -1388,6 +1388,7 @@ class Notion {
 
                 this.type         = this.blocks[0].type;
                 this.folder_id    = this.blocks[0].value;
+                this.save_image   = false;
                 callback( result, undefined );
             }
         }).fail( ( xhr, status, error ) => {
