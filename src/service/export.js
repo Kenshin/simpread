@@ -1290,6 +1290,7 @@ class Notion {
                 /**
                  * 读取所有收藏空间，并创建映射。
                  */
+                if ( !result.recordMap.collection ) result.recordMap.collection = {};
                 const collectionMaps = {};
                 Object.values(
                   result.recordMap.collection
@@ -1339,7 +1340,7 @@ class Notion {
 
                     if (type == 'page') {
                         _spaceBlocks.push({
-                            name : '　　' + this.getBlockName( blockValue.properties.title ),
+                            name : '　　' + this.getBlockName( blockValue.properties && blockValue.properties.title || undefined ),
                             value: id,
                             type : 'page',
                         });
