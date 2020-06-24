@@ -547,6 +547,8 @@ export default class Auth extends React.Component {
                                     label="是否使用 Notion.so 作为图床？"
                                     desc="由于 Notion 并未公开 API 所以此方式较慢。"
                                     onChange={ (s)=>this.save( "notion_save_image", s ) } />
+
+                            <span className="desc" style={{ "margin-top": "8px", "text-align": "left" }}>注意：由于 Notion.so 暂未提供 API 所以会出现 <b>授权</b> 或 <b>获取 Notion Page</b> 失败的情况，如遇到此情况，请提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809"><b>Issues</b></a></span>
                             </div>}
                         </div>
 
