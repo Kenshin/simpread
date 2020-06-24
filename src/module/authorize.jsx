@@ -549,6 +549,7 @@ export default class Auth extends React.Component {
                                     onChange={ (s)=>this.save( "notion_save_image", s ) } />
                             </div>}
                         </div>
+
                         <div className="version-tips" data-version="1.1.4" data-hits="youdao">
                         <Switch width="100%" checked={ this.state.secret.youdao.access_token != "" ? true : false }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
