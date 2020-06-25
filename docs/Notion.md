@@ -36,7 +36,7 @@
 图床
 ---
 
-> [1.1.4.6022](http://ksria.com/simpread/changelog.html#1.1.4.6022) 增加了 Notion.so 图传功能，导入到 Notion 的内容可自动上传为 Notion 本身，避免源页面 404 等问题
+> [1.1.4.6022](http://ksria.com/simpread/changelog.html#1.1.4.6022) 增加了 Notion.so 图床功能，导入到 Notion 的内容可自动上传为 Notion 本身，避免源页面 404 等问题
 
 > 注意：由于使用了 Notion 私有 API 所以在上传图片时较慢 
 
@@ -54,19 +54,11 @@
 1. 选项页 → 高级设定 → 授权管理
 2. 点击 **重新获取 Notion Page** 即可看到下拉列表
 
-> B. 暂时不支持 Notion Web Clipper 的图床功能
-
-接下来就会推出
-
-> C. 1.1.4.6016 版存在 **有小机率** 的授权错误
-
-前提是你有上万个 Page 或其它人共享给你的 Page ，如存在这种问题，可以手动解决，[请提 Issues](http://github.com/kenshin/simpread/issues/new)
-
-> 导出到 Notion database 的内容 **不含有链接** 的话，请参照下面的方式设定
+> B. 导出到 Notion database 的内容 **不含有链接** 的话，请参照下面的方式设定
 
 ![NNWyDJ.png](https://s1.ax1x.com/2020/06/23/NNWyDJ.png)
 
->  导出到 Notion database 的内容也可以显示导入的œ时间，请参照下面的方式设定
+>  C. 导出到 Notion database 的内容也可以显示导入时间，请参照下面的方式设定
 
 ![NNWsu4.png](https://s1.ax1x.com/2020/06/23/NNWsu4.png)
 
