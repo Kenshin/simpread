@@ -240,9 +240,12 @@ export default class Auth extends React.Component {
                 }).fail( error => failed( error, yuque.id, yuque.name ));
                 break;
             case "notion":
-                notion.Auth( ( result, error ) => {
+                notion.Auth( ( result, error, warn ) => {
                     if ( error ) failed( error, notion.id, notion.name );
-                    else success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id });
+                    else {
+                        warn != "" && new Notify().Render({ type: 2, content: `请注意：授权时出现了问题导致 <b>仅成功授权了</b> 您的第一个 Notion Page 虽然不影响导出服务，但建议提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809"><b>Issues</b></a>`, state: "holdon" });
+                        success( notion.id, notion.name, { access_token: notion.access_token, folder_id: notion.folder_id, save_image: notion.save_image, type: notion.type });
+                    }
                 });
                 break;
             case "youdao":
@@ -321,8 +324,15 @@ export default class Auth extends React.Component {
     }
 
     notionChange() {
-        exp.notion.Auth( ( result, error ) => {
-            this.setState({ secret: storage.secret, notion: exp.notion.blocks });
+        const notify = new Notify().Render({ state: "loading", content: `正在获取 Notion Page ，请稍等` });
+        exp.notion.Auth( ( result, error, warn ) => {
+            notify.complete();
+            if ( error ) new Notify().Render({ type: 2, content: `Notion.so 并未提供 API 所以会出现 <b>获取失败的情况</b>，如发生此问题，请提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809">Issues</a>`, state: "holdon" });
+            else {
+                warn != "" && new Notify().Render({ type: 2, content: `请注意：获取时出现了问题导致 <b>仅成功获取了</b> 您的第一个 Notion Page 虽然不影响导出服务，但建议提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809"><b>Issues</b></a>`, state: "holdon" });
+                warn == "" && new Notify().Render( 1, "获取成功，请选择导出的 Notion Page" );
+                this.setState({ secret: storage.secret, notion: exp.notion.blocks });
+            }
         });
     }
 
@@ -537,8 +547,11 @@ export default class Auth extends React.Component {
                                     label="是否使用 Notion.so 作为图床？"
                                     desc="由于 Notion 并未公开 API 所以此方式较慢。"
                                     onChange={ (s)=>this.save( "notion_save_image", s ) } />
+
+                            <span className="desc" style={{ "margin-top": "8px", "text-align": "left" }}>注意：由于 Notion.so 暂未提供 API 所以会出现 <b>授权</b> 或 <b>获取 Notion Page</b> 失败的情况，如遇到此情况，请提 <a target="_blank" href="https://github.com/Kenshin/simpread/issues/809"><b>Issues</b></a></span>
                             </div>}
                         </div>
+
                         <div className="version-tips" data-version="1.1.4" data-hits="youdao">
                         <Switch width="100%" checked={ this.state.secret.youdao.access_token != "" ? true : false }
                             thumbedColor="#3F51B5" trackedColor="#7986CB" waves="md-waves-effect"
