@@ -37,6 +37,16 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
         },
       }),
 
+      // minify html files
+      new HtmlWebpackPlugin({
+        filename: 'agreement.html',
+        template: 'src/agreement.html',
+        inject: true,
+        minify: {
+          collapseWhitespace: true,
+        },
+      }),
+
       new HtmlWebpackPlugin({
         filename: 'changelog.html',
         template: 'src/changelog.html',
