@@ -13,6 +13,10 @@
       * [目录](目录)
       * [阅读进度](阅读进度)
       * [控制栏](阅读模式-控制栏)
+* **简悦 2.0** ![new纯色.png](https://i.loli.net/2018/09/05/5b8f718046acb.png)
+  * [标注](标注)
+  * [稍后读](稍后读)
+  * [高级账户](高级账户)
 * **词法分析引擎**
   * [前言](词法分析引擎)
   * 模式
@@ -40,7 +44,6 @@
   * [消息中心](消息中心)
   * [帮助中心](帮助中心)
   * [浮动控制面板](浮动控制面板（FAP）与浮动控制栏（FAB）)
-  * [稍后读](稍后读)
   * [更新](更新)
 * **进阶功能**
   * 导出到本地
@@ -68,6 +71,8 @@
       * Dropbox
       * [WebDAV ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](WebDAV)
       * [Notion ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Notion)
+      * [Github ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Github)
+      * [Joplin ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Joplin)
       * Onenote
       * [Bear | Ulysses ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](URLSCHEME)
   * [自定义样式](自定义样式)
