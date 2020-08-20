@@ -13,7 +13,7 @@
 简悦的各种平台
 ---
 
-- Chrome  · Firefox  ·  Microsoft Edge → [全功能版](http://ksria.com/simpread/#downloads)
+- Chrome   ·  Microsoft Edge → [全功能版](http://ksria.com/simpread/#downloads)
 
 - Apple Safari  →  [UserScript 轻阅版](http://ksria.com/simpread/#lite)
 
@@ -37,6 +37,8 @@
 - [邮件](kenshin@ksria.com)
 
 - [Telegram](https://t.me/simpread)
+
+- [推特](https://twitter.com/wanglei001)
 
 - [微博](http://weibo.com/23784148)
 
@@ -80,3 +82,6 @@
 - [借助 JSBox 简悦终于来到了 iOS！](http://kenshin.wang/blog/#/posts/11)
 
 - [基于简悦 1.1.4 打造自己的专属知识收藏体系](https://sspai.com/post/58627)
+
+- [阅读模式 + 标注系统 + 稍后读，简悦 2.0 想成为你的知识管理解决方案](https://sspai.com/post/61996)
+
