@@ -18,7 +18,7 @@
   * [稍后读](稍后读)
   * [高级账户](高级账户)
   * 重要 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-    * [已购必读](高级账户?id=已购必读) 
+    * [已购必读](已购必读) 
     * [常见问题](https://github.com/Kenshin/simpread/issues/908)
 * **词法分析引擎**
   * [前言](词法分析引擎)
