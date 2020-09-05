@@ -3365,5 +3365,64 @@
             "<aside>",
             "<svg>"
         ]
+    },{
+        "name"    : "www.52pojie.cn",
+        "url"     : "http*://www.52pojie.cn/thread-*",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('td.t_f:first')]]]",
+        "exclude" : [
+            "[[[$('div.aimg_tip')]]]"
+        ]
+    },{
+        "name"    : "bbs.pcbeta.com",
+        "url"     : "http*://bbs.pcbeta.com/viewthread-*",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('td.t_f:first')]]]",
+        "exclude" : [
+            "[[[$('div.aimg_tip')]]]"
+        ]
+    },{
+        "name"    : "xie.infoq.cn",
+        "url"     : "http*://xie.infoq.cn/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[@class='preview-wrap']`]]",
+        "exclude" : [
+            "[[`//div[contains(@class,'selection-operation-bar')]`]]"
+        ]
+    },{
+        "name"    : "www.biji.com",
+        "url"     : "http*://www.biji.com/article/*",
+        "title"   : "[[{$('div.article-title').text()||$(title).text()}]]",
+        "desc"    : "[[{$('div.course-title').text()||$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//div[@class='artical-info']`]]",
+        "exclude" : [
+            "<div class='message-v2'>",
+            "<div class='em-menu'>",
+            "<div class='author'>",
+            "<div class='article-title'>",
+            "<div class='article-info'>"
+        ]
+    },{
+        "name"    : "www.chongdiantou.com",
+        "url"     : "http*://www.chongdiantou.com/wp/archives/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[contains(@class,'post-content')]`]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "bbs.pediy.com",
+        "url"     : "http*://bbs.pediy.com/thread-*",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('div.message:first')]]]",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ".simpread-read-root {align-items: baseline;}"
     }]
 }
