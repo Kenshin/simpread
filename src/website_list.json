@@ -272,7 +272,7 @@
         "url"     : "https://zhuanlan.zhihu.com/p/",
         "title"   : "<h1 class='Post-Title'>",
         "desc"    : "",
-        "include" : "<div class='RichText Post-RichText'>",
+        "include" : "[[[(function(){$('.ztext-gif').each(function(){if(this.src.match(/.jpg$/))this.src=this.src.replace(/.jpg$/,'.gif')});return $('.Post-RichText');}())]]]",
         "exclude" : [
             ""
         ]
