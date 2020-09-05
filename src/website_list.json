@@ -461,7 +461,7 @@
             ""
         ]
     },{
-        "name"    : "book.douban.com",
+        "name"    : "reading.book.douban.com",
         "url"     : "https://book.douban.com/reading/*",
         "title"   : "<h1>",
         "desc"    : "",
@@ -471,7 +471,16 @@
         ]
     },{
         "name"    : "annotation.book.douban.com",
-        "url"     : "https://book.douban.com/+(annotation|review)/*",
+        "url"     : "https://book.douban.com/annotation/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='link-report'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "review.book.douban.com",
+        "url"     : "https://book.douban.com/review/*",
         "title"   : "<title>",
         "desc"    : "",
         "include" : "<div id='link-report'>",
