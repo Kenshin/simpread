@@ -470,6 +470,15 @@
             ""
         ]
     },{
+        "name"    : "annotation.book.douban.com",
+        "url"     : "https://book.douban.com/+(annotation|review)/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='link-report'>",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "people.douban.com",
         "url"     : "https://www.douban.com/people/*/status/*",
         "title"   : "<h1>",
@@ -477,6 +486,23 @@
         "include" : "<div class=\"status-saying\">",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "group.douban.com",
+        "url"     : "http*://www.douban.com/group/topic/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "avatar"  : [
+            {"name" : "[[{$('.topic-doc h3 a,h4 a')}]]"},
+            {"url"  : "[[{$('.user-face img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('.paginator .prev a').attr('href')}]]"},
+            {"next" : "[[{$('.paginator .next a').attr('href')}]]"}
+        ],
+        "include" : "[[{$('.article #link-report,.reply-content')}]]",
+        "exclude" : [
+            ""            
         ]
     },{
         "name"    : "douban.com",
