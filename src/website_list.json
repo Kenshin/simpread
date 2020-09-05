@@ -1927,7 +1927,8 @@
         "include" : "[[`//*[@id='articleId']`]]",
         "exclude" : [
             "<h1 class='item-name'>",
-            "<span class='embed-card'>"
+            "<div class='coupon-card-wraper'>",
+            "<div class='brand-card-box'>"
         ],
         "css"     : ".embed-card-logo { margin-right: 14px }"
     },{
