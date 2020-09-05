@@ -296,13 +296,13 @@
         ]
     },{
         "name"    : "question.zhihu.com",
-        "url"     : "https://www.zhihu.com/question/*",
+        "url"     : "https://www.zhihu.com/question/**",
         "type"    : "multi",
         "avatar"  : [
             {"name" : "[[{$('.AuthorInfo-name')}]]"},
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
-        "title"   : "[[{$($('.QuestionHeader-main').find('h1')[0]).text()}]]",
+        "title"   : "[[{$('.QuestionHeader-main').find('h1').text()}]]",
         "desc"    : "[[{($('.QuestionRichText span').html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/.。$/,'。')}]]",
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
