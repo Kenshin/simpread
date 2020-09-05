@@ -3413,7 +3413,7 @@
     },{
         "name"    : "www.biji.com",
         "url"     : "http*://www.biji.com/article/*",
-        "title"   : "[[{$('div.article-title').text()||$(title).text()}]]",
+        "title"   : "<div class='article-title'>",
         "desc"    : "[[{$('div.course-title').text()||$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
         "include" : "[[`//div[@class='artical-info']`]]",
         "exclude" : [
