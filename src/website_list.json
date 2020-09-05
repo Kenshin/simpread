@@ -473,8 +473,8 @@
         "name"    : "annotation.book.douban.com",
         "url"     : "https://book.douban.com/annotation/*",
         "title"   : "<title>",
-        "desc"    : "",
-        "include" : "<div id='link-report'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')||''}]]",
+        "include" : "[[`//*[@id='link-report']`]]",
         "exclude" : [
             ""
         ]
