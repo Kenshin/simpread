@@ -296,7 +296,7 @@
         ]
     },{
         "name"    : "question.zhihu.com",
-        "url"     : "https://www.zhihu.com/question/**/*",
+        "url"     : "https://www.zhihu.com/question/*",
         "type"    : "multi",
         "avatar"  : [
             {"name" : "[[{$('.AuthorInfo-name')}]]"},
