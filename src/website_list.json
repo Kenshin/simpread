@@ -303,10 +303,11 @@
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
         "title"   : "[[{$($('.QuestionHeader-main').find('h1')[0]).text()}]]",
-        "desc"    : "",
+        "desc"    : "[[{($('.QuestionRichText span').html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/.。$/,'。')}]]",
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
-            "<i class='icon-external'>"
+            "<i class='icon-external'>",
+            "<div class='RichText-MCNLinkCardContainer'>"
         ],
         "css"     : ".MCNLinkCard-info { margin-left: 12px;}"
     },{
