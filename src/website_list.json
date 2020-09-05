@@ -3368,20 +3368,38 @@
     },{
         "name"    : "www.52pojie.cn",
         "url"     : "http*://www.52pojie.cn/thread-*",
-        "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')||$('title').text()}]]",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[$('td.t_f:first')]]]",
+        "avatar"  : [
+            {"name" : "[[{$('*.pls *.avatar img').parent().parent().parent().parent().find('div.pi a')}]]"},
+            {"url"  : "[[{$('*.pls *.avatar img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
+            {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
+        ],
+        "include" : "[[{$('td.t_f')}]]",
         "exclude" : [
-            "[[[$('div.aimg_tip')]]]"
+            "[[[$('div.tip')]]]",
+            "[[[$('i.pstatus')]]]"
         ]
     },{
         "name"    : "bbs.pcbeta.com",
         "url"     : "http*://bbs.pcbeta.com/viewthread-*",
-        "title"   : "[[{$('meta[name=keywords]').attr('content')}]]",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')||$('title').text()}]]",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[$('td.t_f:first')]]]",
+        "avatar"  : [
+            {"name" : "[[{$('*.pls *.avatar img').parent().parent().parent().parent().find('div.pi a')}]]"},
+            {"url"  : "[[{$('*.pls *.avatar img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
+            {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
+        ],
+        "include" : "[[{$('td.t_f')}]]",
         "exclude" : [
-            "[[[$('div.aimg_tip')]]]"
+            "[[[$('div.tip')]]]",
+            "[[[$('i.pstatus')]]]"
         ]
     },{
         "name"    : "xie.infoq.cn",
