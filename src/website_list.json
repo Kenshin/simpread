@@ -3438,6 +3438,19 @@
             "[[[$('i.pstatus')]]]"
         ]
     },{
+        "name"    : "www.guancha.cn",
+        "url"     : "https://www.guancha.cn/**/*html",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "paging"  : [
+            {"prev" : "[[{$('a.prev').last().attr('onclick')}]]"},
+            {"next" : "[[{$('a.next').attr('onclick')}]]"}
+        ],
+        "include" : "[[[$('.content-main .content')]]]",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "xie.infoq.cn",
         "url"     : "http*://xie.infoq.cn/article/*",
         "title"   : "<title>",
