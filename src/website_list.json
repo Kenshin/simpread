@@ -272,7 +272,7 @@
         "url"     : "https://zhuanlan.zhihu.com/p/",
         "title"   : "<h1 class='Post-Title'>",
         "desc"    : "",
-        "include" : "<div class='RichText Post-RichText'>",
+        "include" : "[[[(function(){$('.ztext-gif').each(function(){if(this.src.match(/.jpg$/))this.src=this.src.replace(/.jpg$/,'.gif')});return $('.Post-RichText');}())]]]",
         "exclude" : [
             ""
         ]
@@ -296,19 +296,20 @@
         ]
     },{
         "name"    : "question.zhihu.com",
-        "url"     : "https://www.zhihu.com/question/**/*",
+        "url"     : "https://www.zhihu.com/question/**",
         "type"    : "multi",
         "avatar"  : [
             {"name" : "[[{$('.AuthorInfo-name')}]]"},
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
-        "title"   : "[[{$($('.QuestionHeader-main').find('h1')[0]).text()}]]",
-        "desc"    : "",
+        "title"   : "[[{$('.QuestionHeader-main').find('h1').text()}]]",
+        "desc"    : "[[{($('.QuestionRichText span').html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/.。$/,'。')}]]",
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
-            "<i class='icon-external'>"
+            "<i class='icon-external'>",
+            "<div class='RichText-MCNLinkCardContainer'>"
         ],
-        "css"     : ".MCNLinkCard-info { margin-left: 12px;}"
+        "css"     : ".simpread-font {overflow: initial!important;}\n.MCNLinkCard-info { margin-left: 12px;}"
     },{
         "name"    : "geekpark.net",
         "url"     : "http://www.geekpark.net/topics/",
@@ -460,11 +461,30 @@
             ""
         ]
     },{
-        "name"    : "book.douban.com",
+        "name"    : "reading.book.douban.com",
         "url"     : "https://book.douban.com/reading/*",
         "title"   : "<h1>",
         "desc"    : "",
         "include" : "<div class=\"book-content\">",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "annotation.book.douban.com",
+        "url"     : "https://book.douban.com/annotation/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "[[`//*[@id='link-report']`]]",
+        "exclude" : [
+            ""
+        ],
+        "css"     : "sr-rd-content p {white-space: pre-wrap;}"
+    },{
+        "name"    : "review.book.douban.com",
+        "url"     : "https://book.douban.com/review/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "include" : "<div id='link-report'>",
         "exclude" : [
             ""
         ]
@@ -476,6 +496,23 @@
         "include" : "<div class=\"status-saying\">",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "group.douban.com",
+        "url"     : "http*://www.douban.com/group/topic/*",
+        "title"   : "<title>",
+        "desc"    : "",
+        "avatar"  : [
+            {"name" : "[[{$('.topic-doc h3 a,h4 a')}]]"},
+            {"url"  : "[[{$('.user-face img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('.paginator .prev a').attr('href')}]]"},
+            {"next" : "[[{$('.paginator .next a').attr('href')}]]"}
+        ],
+        "include" : "[[{$('.article #link-report,.reply-content')}]]",
+        "exclude" : [
+            ""            
         ]
     },{
         "name"    : "douban.com",
@@ -1927,7 +1964,8 @@
         "include" : "[[`//*[@id='articleId']`]]",
         "exclude" : [
             "<h1 class='item-name'>",
-            "<span class='embed-card'>"
+            "<div class='coupon-card-wraper'>",
+            "<div class='brand-card-box'>"
         ],
         "css"     : ".embed-card-logo { margin-right: 14px }"
     },{
@@ -2247,11 +2285,15 @@
             "<ul class='pagination'>"
         ]
     },{
-        "name"    : "guancha.cn",
-        "url"     : "http://www.guancha.cn/*/*.shtml",
+        "name"    : "www.guancha.cn",
+        "url"     : "https://www.guancha.cn/**/*html",
         "title"   : "<title>",
-        "desc"    : "",
-        "include" : "<div class='all-txt'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "paging"  : [
+            {"prev" : "[[{$('a.prev').last().attr('onclick')}]]"},
+            {"next" : "[[{$('a.next').attr('onclick')}]]"}
+        ],
+        "include" : "[[[$('.content-main .content')]]]",
         "exclude" : [
             ""
         ]
@@ -3364,5 +3406,82 @@
             "<aside>",
             "<svg>"
         ]
+    },{
+        "name"    : "www.52pojie.cn",
+        "url"     : "http*://www.52pojie.cn/thread-*",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')||$('title').text()}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "avatar"  : [
+            {"name" : "[[{$('*.pls *.avatar img').parent().parent().parent().parent().find('div.pi a')}]]"},
+            {"url"  : "[[{$('*.pls *.avatar img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
+            {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
+        ],
+        "include" : "[[{$('td.t_f')}]]",
+        "exclude" : [
+            "[[[$('div.tip')]]]",
+            "[[[$('i.pstatus')]]]"
+        ]
+    },{
+        "name"    : "bbs.pcbeta.com",
+        "url"     : "http*://bbs.pcbeta.com/viewthread-*",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')||$('title').text()}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "avatar"  : [
+            {"name" : "[[{$('*.pls *.avatar img').parent().parent().parent().parent().find('div.pi a')}]]"},
+            {"url"  : "[[{$('*.pls *.avatar img')}]]"}
+        ],
+        "paging"  : [
+            {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
+            {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
+        ],
+        "include" : "[[{$('td.t_f')}]]",
+        "exclude" : [
+            "[[[$('div.tip')]]]",
+            "[[[$('i.pstatus')]]]"
+        ]
+    },{
+        "name"    : "xie.infoq.cn",
+        "url"     : "http*://xie.infoq.cn/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[@class='preview-wrap']`]]",
+        "exclude" : [
+            "[[`//div[contains(@class,'selection-operation-bar')]`]]"
+        ]
+    },{
+        "name"    : "www.biji.com",
+        "url"     : "http*://www.biji.com/article/*",
+        "title"   : "<div class='article-title'>",
+        "desc"    : "[[{$('div.course-title').text()||$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//div[@class='artical-info']`]]",
+        "exclude" : [
+            "<div class='message-v2'>",
+            "<div class='em-menu'>",
+            "<div class='author'>",
+            "<div class='article-title'>",
+            "<div class='article-info'>"
+        ]
+    },{
+        "name"    : "www.chongdiantou.com",
+        "url"     : "http*://www.chongdiantou.com/wp/archives/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[contains(@class,'post-content')]`]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "bbs.pediy.com",
+        "url"     : "http*://bbs.pediy.com/thread-*",
+        "title"   : "[[{$('meta[name=keywords]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('div.message:first')]]]",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ".simpread-read-root {align-items: baseline;}"
     }]
 }
