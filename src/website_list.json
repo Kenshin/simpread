@@ -331,9 +331,9 @@
     },{
         "name"    : "jianshu.com",
         "url"     : "http://www.jianshu.com/p/",
-        "title"   : "<h1 class='title'>",
+        "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='show-content-free'>",
+        "include" : "<article>",
         "exclude" : [
             ""
         ]
