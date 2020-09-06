@@ -3419,7 +3419,7 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{$('td.t_f')}]]",
+        "include" : "[[{$('.t_fsz')}]]",
         "exclude" : [
             "[[[$('div.tip')]]]",
             "[[[$('i.pstatus')]]]"
@@ -3437,7 +3437,7 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{$('td.t_f')}]]",
+        "include" : "[[{$('.t_fsz')}]]",
         "exclude" : [
             "[[[$('div.tip')]]]",
             "[[[$('i.pstatus')]]]"
