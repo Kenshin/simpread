@@ -309,7 +309,7 @@
             "<i class='icon-external'>",
             "<div class='RichText-MCNLinkCardContainer'>"
         ],
-        "css"     : ".MCNLinkCard-info { margin-left: 12px;}"
+        "css"     : ".simpread-font {overflow: initial!important;}\n.MCNLinkCard-info { margin-left: 12px;}"
     },{
         "name"    : "geekpark.net",
         "url"     : "http://www.geekpark.net/topics/",
@@ -477,7 +477,8 @@
         "include" : "[[`//*[@id='link-report']`]]",
         "exclude" : [
             ""
-        ]
+        ],
+        "css"     : "sr-rd-content p {white-space: pre-wrap;}"
     },{
         "name"    : "review.book.douban.com",
         "url"     : "https://book.douban.com/review/*",
@@ -2284,11 +2285,15 @@
             "<ul class='pagination'>"
         ]
     },{
-        "name"    : "guancha.cn",
-        "url"     : "http://www.guancha.cn/*/*.shtml",
+        "name"    : "www.guancha.cn",
+        "url"     : "https://www.guancha.cn/**/*html",
         "title"   : "<title>",
-        "desc"    : "",
-        "include" : "<div class='all-txt'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "paging"  : [
+            {"prev" : "[[{$('a.prev').last().attr('onclick')}]]"},
+            {"next" : "[[{$('a.next').attr('onclick')}]]"}
+        ],
+        "include" : "[[[$('.content-main .content')]]]",
         "exclude" : [
             ""
         ]
@@ -3436,19 +3441,6 @@
         "exclude" : [
             "[[[$('div.tip')]]]",
             "[[[$('i.pstatus')]]]"
-        ]
-    },{
-        "name"    : "www.guancha.cn",
-        "url"     : "https://www.guancha.cn/**/*html",
-        "title"   : "<title>",
-        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "paging"  : [
-            {"prev" : "[[{$('a.prev').last().attr('onclick')}]]"},
-            {"next" : "[[{$('a.next').attr('onclick')}]]"}
-        ],
-        "include" : "[[[$('.content-main .content')]]]",
-        "exclude" : [
-            ""
         ]
     },{
         "name"    : "xie.infoq.cn",
