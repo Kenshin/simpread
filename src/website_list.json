@@ -3419,11 +3419,13 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{$('td.t_f')}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});return $('.t_fsz');}())}]]",
         "exclude" : [
             "[[[$('div.tip')]]]",
+            "[[[$('em.xg1').parent()]]]",
             "[[[$('i.pstatus')]]]"
-        ]
+        ],
+        "css"     : "sr-rd-mult sr-rd-mult-content{width:100%;overflow:hidden}sr-rd-content table td,sr-rd-content table th{border:1px solid transparent}sr-rd-content pre{white-space:pre-wrap}"
     },{
         "name"    : "bbs.pcbeta.com",
         "url"     : "http*://bbs.pcbeta.com/viewthread-*",
@@ -3437,11 +3439,13 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{$('td.t_f')}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});return $('.t_fsz');}())}]]",
         "exclude" : [
             "[[[$('div.tip')]]]",
+            "[[[$('em.xg1').parent()]]]",
             "[[[$('i.pstatus')]]]"
-        ]
+        ],
+        "css"     : "sr-rd-mult sr-rd-mult-content{width:100%;overflow:hidden}sr-rd-content table td,sr-rd-content table th{border:1px solid transparent}sr-rd-content pre{white-space:pre-wrap}"
     },{
         "name"    : "xie.infoq.cn",
         "url"     : "http*://xie.infoq.cn/article/*",
