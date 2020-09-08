@@ -3438,10 +3438,9 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});return $('.t_fsz');}())}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});$('.t_fsz .pattl').each(function(){$(this).parent().find('.t_f').append(this);});return $('.t_f');}())}]]",
         "exclude" : [
             "[[[$('div.tip')]]]",
-            "[[[$('em.xg1').parent()]]]",
             "[[[$('i.pstatus')]]]"
         ],
         "css"     : "sr-rd-mult sr-rd-mult-content{width:100%;overflow:hidden}sr-rd-content table td,sr-rd-content table th{border:1px solid transparent}sr-rd-content pre{white-space:pre-wrap}"
