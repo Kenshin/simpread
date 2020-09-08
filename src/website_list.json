@@ -272,7 +272,7 @@
         "url"     : "https://zhuanlan.zhihu.com/p/",
         "title"   : "<h1 class='Post-Title'>",
         "desc"    : "",
-        "include" : "[[[(function(){$('.ztext-gif').each(function(){if(this.src.match(/.jpg$/))this.src=this.src.replace(/.jpg$/,'.gif')});return $('.Post-RichText');}())]]]",
+        "include" : "[[[(function(){$('figure noscript').each(function(){var noscript = $(this).text();var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);});return $('.Post-RichText');}())]]]",
         "exclude" : [
             ""
         ]
@@ -304,7 +304,7 @@
         ],
         "title"   : "[[{$('.QuestionHeader-main').find('h1').text()}]]",
         "desc"    : "[[{($('.QuestionRichText span').html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/.。$/,'。')}]]",
-        "include" : "[[{$('.RichContent-inner')}]]",
+        "include" : "[[{(function(){$('figure noscript').each(function(){var noscript = $(this).text();var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);});return $('.RichContent-inner');}())}]]",
         "exclude" : [
             "<i class='icon-external'>",
             "<div class='RichText-MCNLinkCardContainer'>"
