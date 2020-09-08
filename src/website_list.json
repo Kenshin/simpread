@@ -3419,9 +3419,10 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{$('td.t_f')}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});return $('.t_fsz');}())}]]",
         "exclude" : [
             "[[[$('div.tip')]]]",
+            "[[[$('em.xg1').parent()]]]",
             "[[[$('i.pstatus')]]]"
         ]
     },{
@@ -3437,9 +3438,10 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{$('td.t_f')}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});return $('.t_fsz');}())}]]",
         "exclude" : [
             "[[[$('div.tip')]]]",
+            "[[[$('em.xg1').parent()]]]",
             "[[[$('i.pstatus')]]]"
         ]
     },{
