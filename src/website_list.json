@@ -1021,6 +1021,15 @@
             ""
         ]
     },{
+        "name"    : "xie.infoq.cn",
+        "url"     : "http*://xie.infoq.cn/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[(function(){var wrap = $('.preview-wrap');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素，请重新进入阅读模式尝试</p>');$('head').append(wrap);}return wrap;}())]]]",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "infoq.com",
         "url"     : "http://www.infoq.com/cn/articles/",
         "title"   : "<title>",
@@ -3444,15 +3453,6 @@
             "[[[$('sr-read .pstatus')]]]"
         ],
         "css"     : "sr-rd-mult sr-rd-mult-content{width:100%;overflow:hidden}sr-rd-content table td,sr-rd-content table th{border:1px solid transparent}sr-rd-content pre{white-space:pre-wrap}"
-    },{
-        "name"    : "xie.infoq.cn",
-        "url"     : "http*://xie.infoq.cn/article/*",
-        "title"   : "<title>",
-        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[`//*[@class='preview-wrap']`]]",
-        "exclude" : [
-            "[[`//div[contains(@class,'selection-operation-bar')]`]]"
-        ]
     },{
         "name"    : "www.biji.com",
         "url"     : "http*://www.biji.com/article/*",
