@@ -3476,6 +3476,24 @@
             ""
         ]
     },{
+        "name"    : "blog.sciencenet.cn",
+        "url"     : "http*://blog.sciencenet.cn/blog-*.html",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('#blog_article')]]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "article.imooc.com",
+        "url"     : "http*://www.imooc.com/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('.detail-content')]]]",
+        "exclude" : [
+            "<div class='showMore'>"
+        ]
+    },{
         "name"    : "bbs.pediy.com",
         "url"     : "http*://bbs.pediy.com/thread-*",
         "title"   : "[[{$('meta[name=keywords]').attr('content')||$('meta[name=description]').attr('content')}]]",
