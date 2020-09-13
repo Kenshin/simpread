@@ -789,10 +789,10 @@ body {
         transform-origin: center;
     }
 
-    &.linnk {
+    &.github {
         top: -40px;
         right: 125px;
-        background-image: url( '../icons/service_linnk.png' );
+        background-image: url( '../icons/service_github.png' );
     }
 
     &.jianguo {
