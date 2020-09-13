@@ -1398,8 +1398,8 @@ body {
         background-color: #0294b9;
     }
 
-    &.firefox:hover {
-        background-color: #fb6500;
+    &.edge:hover {
+        background-color: #4F6BC4;
     }
 
     &.safe:hover {
