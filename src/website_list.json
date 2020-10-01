@@ -302,8 +302,8 @@
             {"name" : "[[{$('.AuthorInfo-name')}]]"},
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
-        "title"   : "[[{$('.QuestionHeader-main').find('h1').text()}]]",
-        "desc"    : "[[{($('.QuestionRichText span').html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/.。$/,'。')}]]",
+        "title": "[[{$('main .QuestionHeader-main').find('h1').text()}]]",
+        "desc": "[[{($('main .QuestionRichText span').first().html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/\\.。$/,'。')}]]",
         "include" : "[[{(function(){$('figure noscript').each(function(){var noscript = $(this).text();var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);});return $('.RichContent-inner');}())}]]",
         "exclude" : [
             "<i class='icon-external'>",
