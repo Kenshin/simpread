@@ -3429,7 +3429,7 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});$('.t_fsz .pattl').each(function(){$(this).parent().find('.t_f').append(this);});return $('.t_f');}())}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){ var img=$(this); img.attr('real_src',img.attr('file'));});$('.t_fsz .pattl').each(function(){$(this).parent().find('.t_f').append(this);});return $('.t_f');}())}]]",
         "exclude" : [
             "[[[$('sr-read .tip')]]]",
             "[[[$('sr-read .pstatus')]]]"
@@ -3448,7 +3448,7 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});$('.t_fsz .pattl').each(function(){$(this).parent().find('.t_f').append(this);});return $('.t_f');}())}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){ var img=$(this); img.attr('real_src',img.attr('file'));});$('.t_fsz .pattl').each(function(){$(this).parent().find('.t_f').append(this);});return $('.t_f');}())}]]",
         "exclude" : [
             "[[[$('sr-read .tip')]]]",
             "[[[$('sr-read .pstatus')]]]"
