@@ -1026,7 +1026,7 @@
         "url"     : "http*://xie.infoq.cn/article/*",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[(function(){var wrap = $('.preview-wrap');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素，请重新进入阅读模式尝试</p>');$('head').append(wrap);}return wrap;}())]]]",
+        "include" : "[[[(function(){var wrap = $('.preview-wrap');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素，请重新进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>');$('head').append(wrap);}return wrap;}())]]]",
         "exclude" : [
             ""
         ]
