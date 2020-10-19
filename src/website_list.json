@@ -4,12 +4,17 @@
         "url"     : "http*://*.cnbeta.com/articles/*/*",
         "title"   : "[[{$('header.title h1').text()}]]",
         "desc"    : "[[{$('.article-summary').text()}]]",
-        "include" : "<div class='article-content'>",
+        "include" : "<div class='cnbeta-article-body'>",
         "exclude" : [
             "<div class='clearfix'>",
             "<div class='rating_box'>",
             "[['<strong>[广告]活动入口:</strong>']]",
-            "<div class='article-relation'>"
+            "<div class='article-relation'>",
+            "<div class='topic'>",
+            "<div class='tac'>",
+            "<div class='article-share-code'>",
+            "<div class='article-global'>",
+            "<div class='article-topic'>"
         ]
     },{
         "name"    : "m.qdaily.com",
@@ -3462,6 +3467,7 @@
         "include" : "[[[(function () { var body = $('.article-body'); if (!body.length) { body = $('<p>异步加载型页面，本次未能获取到内容元素，请重新进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>'); $('head').append(body); } return body; }())]]]",
         "exclude" : [
             "<div class='em-menu'>",
+            "[[{$('.elite-add-to-note')}]]",
             "[[{$('.letter')}]]"
         ]
     },{
