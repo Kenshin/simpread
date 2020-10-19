@@ -3498,6 +3498,15 @@
             "<div class='showMore'>"
         ]
     },{
+        "name"    : "zqb.cyol.com",
+        "url"     : "http://zqb.cyol.com/html/**/nw.*.htm",
+        "title"   : "[[{$('meta[name=description]').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('.c_c')]]]",
+        "exclude" : [
+            "[[{(function(){var e=$('sr-rd-content'); var content=e.html();content=content.replaceAll(/<!--[^<]*-->/g,'');e.html(content);}())}]]"
+        ]
+    },{
         "name"    : "bbs.pediy.com",
         "url"     : "http*://bbs.pediy.com/thread-*",
         "title"   : "[[{$('meta[name=keywords]').attr('content')||$('meta[name=description]').attr('content')}]]",
