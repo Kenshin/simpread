@@ -1244,7 +1244,7 @@
         "url"     : "http*://blog.csdn.net/*/article/details/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div id='content_views'>",
+        "include" : "[[[(function(){var e=$('#content_views');if(!e.length)e=$('#article_content');return e;}())]]]",
         "exclude" : [
             "<div class='meau-gotop-box'>",
             "<div class='more-toolbox'>",
