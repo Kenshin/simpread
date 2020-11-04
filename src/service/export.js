@@ -1511,7 +1511,7 @@ class Notion {
                     console.log( 'WriteFile: ', result )
                     this.ImportFile( urls.url, `${title}.md`, documentId, result => {
                         console.log( 'ImportFile: ', result )
-                        result.done && callback( result, undefined );
+                        result.done && callback( { ...(result || {}), documentId }, undefined );
                         result.fail && callback( undefined, "error" );
                     });
                 });
@@ -2113,7 +2113,15 @@ let noti; // notify variable
  */
 function serviceCallback( result, error, name, type, notify ) {
     noti && noti.complete();
-    !error && notify.Render( `已成功保存到 ${name}！` );
+    if (!error) {
+        let successMsg = `已成功保存到 ${name}！`;
+        if (type == "notion") {
+            successMsg = { content: successMsg, action: "点击查看", callback: type => {
+                type == "action" && browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.new_tab, { url: `https://www.notion.so/${String(result.documentId).replace(/-/g,'')}` }));
+            }}
+        }
+        notify.Render(successMsg);
+    }
     ![ "evernote", "yinxiang" ].includes( type ) && error && notify.Render( 2, error == "error" ? "保存失败，请稍后重新再试。" : error );
     if ( error && error.includes( "重新授权" )) {
         notify.Clone().Render( "3 秒钟后将会自动重新授权，请勿关闭此页面..." );
