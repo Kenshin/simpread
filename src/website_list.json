@@ -4,12 +4,17 @@
         "url"     : "http*://*.cnbeta.com/articles/*/*",
         "title"   : "[[{$('header.title h1').text()}]]",
         "desc"    : "[[{$('.article-summary').text()}]]",
-        "include" : "<div class='article-content'>",
+        "include" : "<div class='cnbeta-article-body'>",
         "exclude" : [
             "<div class='clearfix'>",
             "<div class='rating_box'>",
             "[['<strong>[广告]活动入口:</strong>']]",
-            "<div class='article-relation'>"
+            "<div class='article-relation'>",
+            "<div class='topic'>",
+            "<div class='tac'>",
+            "<div class='article-share-code'>",
+            "<div class='article-global'>",
+            "<div class='article-topic'>"
         ]
     },{
         "name"    : "m.qdaily.com",
@@ -272,9 +277,9 @@
         "url"     : "https://zhuanlan.zhihu.com/p/",
         "title"   : "<h1 class='Post-Title'>",
         "desc"    : "",
-        "include" : "[[[(function(){$('.ztext-gif').each(function(){if(this.src.match(/.jpg$/))this.src=this.src.replace(/.jpg$/,'.gif')});return $('.Post-RichText');}())]]]",
+        "include" : "[[[$('.Post-RichText')]]]",
         "exclude" : [
-            ""
+            "[[{(function(){$('sr-rd-content figure noscript').each(function(){var noscript = $(this).text();if(noscript.match(/<img/)) {var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);}});}())}]]"
         ]
     },{
         "name"    : "dudu.zhihu.com",
@@ -302,10 +307,11 @@
             {"name" : "[[{$('.AuthorInfo-name')}]]"},
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
-        "title"   : "[[{$('.QuestionHeader-main').find('h1').text()}]]",
-        "desc"    : "[[{($('.QuestionRichText span').html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/.。$/,'。')}]]",
+        "title"   : "[[{$('main .QuestionHeader-main').find('h1').text()}]]",
+        "desc"    : "[[{($('main .QuestionRichText span').first().html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/\\.。$/,'。')}]]",
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
+            "[[{(function(){$('sr-rd-content figure noscript').each(function(){var noscript = $(this).text();if(noscript.match(/<img/)) {var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);}});}())}]]",
             "<i class='icon-external'>",
             "<div class='RichText-MCNLinkCardContainer'>"
         ],
@@ -1021,6 +1027,15 @@
             ""
         ]
     },{
+        "name"    : "xie.infoq.cn",
+        "url"     : "http*://xie.infoq.cn/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[(function(){var wrap = $('.preview-wrap');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素，请重新进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>');$('head').append(wrap);}return wrap;}())]]]",
+        "exclude" : [
+            ""
+        ]
+    },{
         "name"    : "infoq.com",
         "url"     : "http://www.infoq.com/cn/articles/",
         "title"   : "<title>",
@@ -1229,7 +1244,7 @@
         "url"     : "http*://blog.csdn.net/*/article/details/*",
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "<div class='article_content'>",
+        "include" : "[[[(function(){var e=$('#content_views');if(!e.length)e=$('#article_content');return e;}())]]]",
         "exclude" : [
             "<div class='meau-gotop-box'>",
             "<div class='more-toolbox'>",
@@ -3419,11 +3434,10 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});return $('.t_fsz');}())}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){ var img=$(this); img.attr('real_src',img.attr('file'));});$('.t_fsz .pattl').each(function(){$(this).parent().find('.t_f').append(this);});return $('.t_f');}())}]]",
         "exclude" : [
-            "[[[$('div.tip')]]]",
-            "[[[$('em.xg1').parent()]]]",
-            "[[[$('i.pstatus')]]]"
+            "[[[$('sr-read .tip')]]]",
+            "[[[$('sr-read .pstatus')]]]"
         ],
         "css"     : "sr-rd-mult sr-rd-mult-content{width:100%;overflow:hidden}sr-rd-content table td,sr-rd-content table th{border:1px solid transparent}sr-rd-content pre{white-space:pre-wrap}"
     },{
@@ -3439,34 +3453,22 @@
             {"prev" : "[[{$('div.pg a.prev').attr('href')}]]"},
             {"next" : "[[{$('div.pg a.nxt').attr('href')}]]"}
         ],
-        "include" : "[[{(function(){$('img[file]').each(function(){this.src=this.getAttribute('file')});return $('.t_fsz');}())}]]",
+        "include" : "[[{(function(){$('img[file]').each(function(){ var img=$(this); img.attr('real_src',img.attr('file'));});$('.t_fsz .pattl').each(function(){$(this).parent().find('.t_f').append(this);});return $('.t_f');}())}]]",
         "exclude" : [
-            "[[[$('div.tip')]]]",
-            "[[[$('em.xg1').parent()]]]",
-            "[[[$('i.pstatus')]]]"
+            "[[[$('sr-read .tip')]]]",
+            "[[[$('sr-read .pstatus')]]]"
         ],
         "css"     : "sr-rd-mult sr-rd-mult-content{width:100%;overflow:hidden}sr-rd-content table td,sr-rd-content table th{border:1px solid transparent}sr-rd-content pre{white-space:pre-wrap}"
     },{
-        "name"    : "xie.infoq.cn",
-        "url"     : "http*://xie.infoq.cn/article/*",
-        "title"   : "<title>",
-        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[`//*[@class='preview-wrap']`]]",
-        "exclude" : [
-            "[[`//div[contains(@class,'selection-operation-bar')]`]]"
-        ]
-    },{
-        "name"    : "www.biji.com",
-        "url"     : "http*://www.biji.com/article/*",
-        "title"   : "<div class='article-title'>",
+        "name"    : "www.dedao.cn",
+        "url"     : "http*://www.dedao.cn/article/*",
+        "title"   : "[[{$('.article-title').text()||$('title').text()}]]",
         "desc"    : "[[{$('div.course-title').text()||$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[`//div[@class='artical-info']`]]",
+        "include" : "[[[(function () { var body = $('.article-body'); if (!body.length) { body = $('<p>异步加载型页面，本次未能获取到内容元素，请重新进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>'); $('head').append(body); } return body; }())]]]",
         "exclude" : [
-            "<div class='message-v2'>",
             "<div class='em-menu'>",
-            "<div class='author'>",
-            "<div class='article-title'>",
-            "<div class='article-info'>"
+            "[[{$('.elite-add-to-note')}]]",
+            "[[{$('.letter')}]]"
         ]
     },{
         "name"    : "www.chongdiantou.com",
@@ -3476,6 +3478,33 @@
         "include" : "[[`//*[contains(@class,'post-content')]`]]",
         "exclude" : [
             ""
+        ]
+    },{
+        "name"    : "blog.sciencenet.cn",
+        "url"     : "http*://blog.sciencenet.cn/blog-*.html",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('#blog_article')]]]",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "article.imooc.com",
+        "url"     : "http*://www.imooc.com/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('.detail-content')]]]",
+        "exclude" : [
+            "<div class='showMore'>"
+        ]
+    },{
+        "name"    : "zqb.cyol.com",
+        "url"     : "http://zqb.cyol.com/html/**/nw.*.htm",
+        "title"   : "[[{$('meta[name=description]').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('.c_c')]]]",
+        "exclude" : [
+            "[[{(function(){var e=$('sr-rd-content'); var content=e.html();content=content.replaceAll(/<!--[^<]*-->/g,'');e.html(content);}())}]]"
         ]
     },{
         "name"    : "bbs.pediy.com",
