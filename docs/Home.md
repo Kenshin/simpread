@@ -21,6 +21,36 @@
 
 - [Android 版](Android)
 
+各版本功能详细说明
+---
+
+- [2.1.0](http://ksria.com/simpread/welcome/version_2.1.0.html)
+
+- [2.0.0](http://ksria.com/simpread/welcome/version_2.0.0.html)
+
+- [1.1.4](http://ksria.com/simpread/welcome/version_1.1.4.html)
+
+- [1.1.3](http://ksria.com/simpread/welcome/version_1.1.3.html)
+
+- [1.1.2](http://ksria.com/simpread/welcome/version_1.1.2.html)
+
+- [1.1.2.5005](http://ksria.com/simpread/welcome/version_1.1.2.5005.html)
+
+- [1.1.1](http://ksria.com/simpread/welcome/version_1.1.1html)
+
+- [1.1.0](http://ksria.com/simpread/welcome/version_1.1.0.html)
+
+- [1.0.5](http://ksria.com/simpread/welcome/version_1.0.5.html)
+
+- [1.0.4](http://ksria.com/simpread/welcome/version_1.0.4.html)
+
+- [1.0.3](http://ksria.com/simpread/changelog.html#1.0.3)
+
+- [1.0.1](http://ksria.com/simpread/changelog.html#1.0.1)
+
+- [1.0.0](http://ksria.com/simpread/changelog.html#1.0.0)
+
+
 文档中心
 ---
 
@@ -29,7 +59,7 @@
 全功能
 ---
 
-![功能一览](http://sr.ksria.cn/feature%202.0.0.png)
+![功能一览](http://sr.ksria.cn/feature%202.1.0.png)
 
 联络方式
 ---

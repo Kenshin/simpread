@@ -17,9 +17,13 @@
   * [标注](标注)
   * [稍后读](稍后读)
   * [高级账户](高级账户)
+  * [每日回顾](每日回顾) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+  * [RSS 阅读器辅助](RSSReader)
+  * [自动同步](自动同步)  ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
   * 重要 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
     * [已购必读](已购必读) 
     * [常见问题](https://github.com/Kenshin/simpread/issues/908)
+* **简悦 · 同步助手**   ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 * **词法分析引擎**
   * [前言](词法分析引擎)
   * 模式
@@ -38,6 +42,7 @@
   * [配置文件](配置文件)
     * [同步](同步)
     * [清除](清除)
+    * [自动同步](自动同步)  ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
   * [黑名单](FAQ?id=黑名单)
   * [白名单](FAQ?id=白名单)
   * [排除列表](FAQ?id=排除列表)
