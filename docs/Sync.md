@@ -63,9 +63,10 @@
 下载
 ---
 
-> 目前 暂时仅支持 **坚果云**，接下来会有更多下载方案
+> 目前 暂时仅支持 **坚果云 & TG Channel**，接下来会有更多下载方案。
 
 - [坚果云](https://www.jianguoyun.com/p/DdXeyasQwobGBxjK7c0D)
+- [TG Channel](https://t.me/simpreadgroup)
 
 验证
 ---
