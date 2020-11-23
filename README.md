@@ -3,13 +3,13 @@
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-2.0.0-blue.svg"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-2.1.0-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
    <a target="_blank" href="https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://badgen.net/chrome-web-store/stars/ijllcpnolfcooahcekpamkbidhejabll?icon=chrome&color=0f9d58"></a>
 </p>
 <p align="center">
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
-   <a href="http://ksria.com/simpread/crx/2.0.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-0294b9.png"></a>
+   <a href="http://ksria.com/simpread/crx/2.1.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-0294b9.png"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://s1.ax1x.com/2020/07/25/UzMUSS.png"></a>
    <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.3.box?202010231502&name=%E7%AE%80%E6%82%A6"><img src="https://s1.ax1x.com/2020/07/25/UzMHfK.png"></a>
 </p>
@@ -44,12 +44,10 @@
 
 * [开源列表](#简悦的诞生离不开它们)
 
-* [许可](#许可)
-
 ***
 
 ## 马上使用
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/2.0.0/simpread.crx)
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/2.1.0/simpread.crx)
 
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 
@@ -241,6 +239,40 @@
 
 > 分享页的示例 → [稍后读生成的分享页](https://simpread.pro/s/simpread) · [合辑生成的分享页](https://simpread.pro/s/z2Axt6i1)
 
+#### 同步助手 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+
+> [简悦 · 同步助手](http://ksria.com/simpread/docs/#/Sync) 是 **随着简悦 2.1.0 发布的一个全新的桌面应用**，用于对简悦已知功能的补充，以及会 **持续提供更多** 的可玩性，包括：
+
+- [自动同步](http://ksria.com/simpread/docs/#/Sync?id=自动同步)
+
+- [导出到本地任意目录](http://ksria.com/simpread/docs/#/Sync?id=导出服务)
+
+- [原生的 Epub 输出](http://ksria.com/simpread/docs/#/Sync?id=Epub)
+
+- [原生的 PDF 输出](http://ksria.com/simpread/docs/#/Sync?id=PDF)
+
+- [邮件服务](http://ksria.com/simpread/docs/#/Sync?id=邮件服务) 
+
+- [直接发送到 Kindle](http://ksria.com/simpread/docs/#/Sync?id=发送到Kindle) 
+
+- [小书签](http://ksria.com/simpread/docs/#/Bookmarklet) 
+
+等多种服务，下载地址 👉 [包含多种平台](http://ksria.com/simpread/docs/#/Sync?id=下载)
+
+#### 每日回顾 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+
+> 简悦会在 **每天晚上 19点10分** 给你的邮箱发送一封二十四小时以内添加的稍后读，用作当天的每日回顾，同时发送内容也适配了手机端，你可以利用此功能对某些文章做 **精读**，详细说明 [请看这里](http://ksria.com/simpread/docs/#/每日回顾)。
+
+> 每日回顾的内容包括：链接，标题，描述，正文，标签，标注（备注 / 标签）。
+
+#### 自动同步 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+
+> 继续秉承 **不绑架用户的数据，还数据给用户**，用你喜欢的网盘 **自动同步** 你的数据，详细说明 [请看这里](http://ksria.com/simpread/docs/#/Sync?id=自动同步)。
+
+#### 授权登录 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+
+> 使用你的 **坚果云** 或 **Dropbox** 账户登录你的 **简悦 · 简悦账户**，详细说明 [请看这里](http://ksria.com/simpread/docs/#/授权登录)。
+
 ## 全部功能
 
 <details>
@@ -340,17 +372,12 @@
 ## 简悦的诞生离不开它们
 <http://ksria.com/simpread/docs/#/开源列表>
 
-## 许可
-[![license-badge]][license-link]
-
 <!-- Link -->
 [www-badge]:        https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg
 [www-link]:         http://ksria.com/simpread
-[version-badge]:    https://img.shields.io/badge/lastest_version-2.0.0-blue.svg
+[version-badge]:    https://img.shields.io/badge/lastest_version-2.1.0-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
-[offline-link]:     http://ksria.com/simpread/crx/2.0.0/simpread.crx
-[license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
-[license-link]:     https://opensource.org/licenses/MIT
+[offline-link]:     http://ksria.com/simpread/crx/2.1.0/simpread.crx
