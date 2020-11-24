@@ -245,6 +245,8 @@ Hypothesis
 3. SMTP 服务密码 → 请填入上步得到的密码即可。
 4. 接受的邮件地址
 
+[![DtrvZQ.png](https://s3.ax1x.com/2020/11/24/DtrvZQ.md.png)](https://imgchr.com/i/DtrvZQ)
+
 **简悦 · 扩展端** 需要设置发送时的附件方式，包括： `不包含附件` `PDF 附件` `离线 HTML 附件` 三类。
 
 并在 **简悦（扩展端） → 选项页 → 共通 → 简悦 · 同步助手 ** 开启并选择某种形式的附件。
@@ -273,7 +275,7 @@ Hypothesis
 
 在 [邮件服务](#邮件服务) 的基础上，支持 **原生发送到 Kindle**，只需填写你的 Kindle 邮箱即可，如下图：
 
-[![Bj8h4A.png](https://s1.ax1x.com/2020/11/11/Bj8h4A.md.png)](https://imgchr.com/i/Bj8h4A)
+[![DtrvZQ.png](https://s3.ax1x.com/2020/11/24/DtrvZQ.md.png)](https://imgchr.com/i/DtrvZQ)
 
 同样在 **简悦（扩展端） → 选项页 → 共通 → 简悦 · 同步助手 ** 开启此功能：
 
