@@ -17,6 +17,7 @@
   * [标注](标注)
   * [稍后读](稍后读)
   * [高级账户](高级账户)
+  * [授权登录](授权登录) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
   * [每日回顾](每日回顾) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
   * [RSS 阅读器辅助](RSSReader)
   * [自动同步](自动同步)  ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
@@ -24,6 +25,20 @@
     * [已购必读](已购必读) 
     * [常见问题](https://github.com/Kenshin/simpread/issues/908)
 * **简悦 · 同步助手**   ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+  * [下载](Sync=?id=下载)
+  * [验证](Sync=?id=验证)
+  * [同步](Sync=?id=同步)
+  * [自动同步](自动同步)
+  * [自动同步的注意事项](Sync=?id=自动同步?id=注意事项)
+  * [内置解析](Sync=?id=内置解析)
+  * [导出服务](Sync=?id=导出服务)
+    * [PDF](Sync=?id=PDF)
+    * [Epub](Sync=?id=Epub)
+    * [pandoc](Sync=?id=pandoc) 
+    * [Hypothesis](Sync=?id=Hypothesis)
+  * [邮件服务](Sync=?id=邮件服务)
+  * [发送到Kindle](Sync=?id=发送到Kindle)
+
 * **词法分析引擎**
   * [前言](词法分析引擎)
   * 模式
