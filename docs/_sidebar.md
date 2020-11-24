@@ -82,7 +82,6 @@
     * [授权码](授权服务?id=授权码)
     * [FAQ](授权服务-FAQ)
     * 支持服务
-      * Linnk
       * Pocket
       * Instapaper
       * 语雀
