@@ -16,6 +16,9 @@
 
 - [已知问题](#已知问题)
 
+- [一些技巧](#一些技巧)
+
+
 描述
 ---
 
@@ -67,7 +70,11 @@
 ---
 
 1. 由于需要解析动态加载页面，所以全文抓取时间稍长。
-
 2. 注入的 icons 会出现偶尔无法显示的问题（请重新加入这个 RSS Field 即可解决
+3. Inoreader 中视图模式选择 **列表视图** 正常，选择其它视图，如 **扩展视图** 则无法显示，如下图：
+   [![DaRSCF.jpg](https://s3.ax1x.com/2020/11/25/DaRSCF.jpg)](https://imgchr.com/i/DaRSCF)
 
+一些技巧
+---
 
+可以将 [小书签](Bookmarklet) 加入到 Inoreader ，详细说明 [请看这里](https://github.com/Kenshin/simpread/issues/1421)
