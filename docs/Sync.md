@@ -203,9 +203,23 @@ pandoc
 
 根据提示一路安装即可。
 
-#### 验证
+#### 验证（Windows）
 
-只要 **保证全局可以调用 pandoc 命令**，安装完毕后在命令行下输入 `pandoc -v` 看到后正常的输出即可。
+> 只要 **保证全局可以调用 pandoc 命令**，安装完毕后在命令行下输入 `pandoc -v` 看到后正常的输出即可。
+
+#### 验证（Mac）
+
+> 请确保 pandoc 在你的 `/usr/local/bin/` 目录下存在，同时也确保此目录在 `$PATH` 下。
+>
+> 一般情况下  `/usr/local/bin/`  都会存在于 `$PATH` 下。
+
+可以使用如下命令检验：
+
+`which pandoc` → 查看 pandoc 所在目录
+
+PS：一般使用 `pandoc-xxx-macOS.pkg` 安装的话，自然是 `/usr/local/bin/` 目录。
+
+> 下个版本会包含 `pandoc` 定制化目录功能
 
 #### 使用
 
