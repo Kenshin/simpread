@@ -686,13 +686,15 @@ class Onenote {
     }
 
     get scopes() {
-        return [ "office.onenote_create" ];
+        return [ "Notes.Create", "Notes.Read", "Notes.ReadWrite" ];
+        // return [ "office.onenote_create" ];
     }
 
     New() {
         this.dtd  = $.Deferred();
         this.code = "";
         this.access_token = "";
+        this.onte_type = "";
         return this;
     }
 
@@ -715,7 +717,8 @@ class Onenote {
     }
 
     Login() {
-        let url = "https://login.live.com/oauth20_authorize.srf?";
+        // let url = "https://login.live.com/oauth20_authorize.srf?";
+        let url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?";
         const params = {
             client_id    : this.client_id,
             redirect_uri : this.redirect_uri,
@@ -731,6 +734,7 @@ class Onenote {
 
     Accesstoken( url ) {
         url = url.replace( "http://ksria.com/simpread/auth.html?", "" );
+        url = url.split( "&session_state")[0]
         if ( url.startsWith( "code" ) ) {
             this.code = url.replace( "code=", "" );
             this.dtd.resolve();
@@ -741,7 +745,8 @@ class Onenote {
 
     Auth( callback ) {
         $.ajax({
-            url     : "https://login.live.com/oauth20_token.srf",
+            // url     : "https://login.live.com/oauth20_token.srf",
+            url     : "https://login.microsoftonline.com/common/oauth2/v2.0/token",
             type    : "POST",
             headers : {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -752,6 +757,7 @@ class Onenote {
                 code          : this.code,
                 grant_type    : "authorization_code",
                 redirect_uri  : this.redirect_uri,
+                scope         : this.scopes.join( " " ),
             }
         }).done( ( result, textStatus, jqXHR ) => {
             if ( result ) {
@@ -768,11 +774,12 @@ class Onenote {
 
     Add( html, callback ) {
         $.ajax({
-            url     : "https://www.onenote.com/api/v1.0/me/notes/pages",
+            url     : "https://graph.microsoft.com/v1.0/me/onenote/pages?sectionName=简阅",
             type    : "POST",
             headers : {
                 "Content-Type": "application/xhtml+xml",
-                "Authorization": `Bearer ${this.access_token}`
+                "Authorization": `Bearer ${this.access_token}`,
+                "Accept-Language": "en;q=0.8,en-US;q=0.6"
             },
             data    : html,
         }).done( ( result, status, xhr ) => {
