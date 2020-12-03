@@ -29,6 +29,8 @@
 
 - [Hypothesis](#Hypothesis)
 
+- [Readwise.io](#Readwise)
+
 - [邮件服务](#邮件服务)
 
 - [发送到Kindle](#发送到Kindle)
@@ -228,6 +230,40 @@ PS：一般使用 `pandoc-xxx-macOS.pkg` 安装的话，自然是 `/usr/local/bi
 Hypothesis
 ---
 
+<暂无>
+
+Readwise
+---
+
+> 随着 Readwise.io 公开了 API 后，可以使用 **简悦 · 同步助手同步标注到你的 Readwise.io**
+>
+> 如果你没有 Readwise.io 账户的话，可以使用 [此链接注册](https://readwise.io/i/kenshin)，关于 Readwise.io 的介绍可以看 [这篇文章](https://sspai.com/post/63879)
+
+#### 特殊说明
+
+1. 目前 **仅包含了 Mac**，有需要的请通过 [下载](#下载) ，下载的文件名为 **简悦 · 同步助手 1.0.0@mac with readwise.io**
+2. 由于简悦支持的标注比较丰富，所以目前仅可以同步简悦的文本到 Readwise.io （暂时不支持 代码段 和 图片）
+3. 同步为实时同步，操作包括：新建 · 更新 · 删除
+
+#### 使用方法（同步助手端）
+
+1. 访问 https://readwise.io/access_token 生成你的 Token
+2. 粘贴第一步得到 Token 到下图所示位置（图示➋）
+  [![DThMaF.png](https://s3.ax1x.com/2020/12/03/DThMaF.png)](https://imgchr.com/i/DThMaF)
+3. 并开启相关功能（上图 ➊ 所示）
+4. 保存
+
+####  使用方法（扩展端）
+
+> 因扩展端更新有审核周期，所以临时使用了 Hypothes.is 的导出通道，所以 **务必开启下图选项才可使用**
+
+[![DThsxI.png](https://s3.ax1x.com/2020/12/03/DThsxI.png)](https://imgchr.com/i/DThsxI)
+
+#### 效果
+
+在简悦中进行标注操作，并访问 https://readwise.io/articles 就能看到标注了。
+
+[![DThOdU.png](https://s3.ax1x.com/2020/12/03/DThOdU.png)](https://imgchr.com/i/DThOdU)
 
 邮件服务
 ---
