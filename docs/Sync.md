@@ -69,6 +69,7 @@
 
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 - [TG Channel](https://t.me/simpreadgroup)
+- [百度网盘](https://pan.baidu.com/s/1sJyEd0hgNWY7TC_XreC02g) 提取码: 5yp4
 
 验证
 ---
