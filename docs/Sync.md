@@ -65,7 +65,7 @@
 下载
 ---
 
-> 目前 暂时仅支持 **坚果云 & TG Channel**，接下来会有更多下载方案。
+> 目前 暂时仅支持下列网盘，接下来会有更多下载方案。
 
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 - [TG Channel](https://t.me/simpreadgroup)
@@ -191,6 +191,18 @@ Epub
 而 **原生 Epub 输出** 则没有上述问题。
 
 但如果要启用此功能的话，需要在 **本地安装  [pandoc](#pandoc) **。
+
+#### 扩展端开启方法
+
+> 选项页 → 共通 → 同步助手，下图所示：
+
+[![riixdx.png](https://s3.ax1x.com/2020/12/10/riixdx.png)](https://imgchr.com/i/riixdx)
+
+###同步助手端开启方法 
+
+> 同步助手默认开启此选项，下图所示
+
+[![riFkyd.png](https://s3.ax1x.com/2020/12/10/riFkyd.png)](https://imgchr.com/i/riFkyd)
 
 pandoc
 ---
