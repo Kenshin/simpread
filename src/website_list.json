@@ -308,7 +308,7 @@
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
         "title"   : "[[{$('main .QuestionHeader-main').find('h1').text()}]]",
-        "desc"    : "[[{($('main .QuestionRichText span').first().html(JSON.parse(JSON.stringify($.parseJSON($('#js-initialData').text()).initialState.entities.questions).replace(/\"\\d+\":/,'\"questions\":')).questions.detail.replaceAll('。','.')).text()+'。').replace(/\\.。$/,'。')}]]",
+        "desc"    : "",
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
             "[[{(function(){$('sr-rd-content figure noscript').each(function(){var noscript = $(this).text();if(noscript.match(/<img/)) {var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);}});}())}]]",
@@ -622,7 +622,11 @@
             "<div class='wptouch-custom-showcase'>",
             "[[/src=\\S+(ds-logo-1-2-64)\\S+'/]]",
             "[[/src=\\S+(down)\\S+'/]]",
-            "<button class='simplefavorite-button'>"
+            "<button class='simplefavorite-button'>",
+            "<noscript>",
+            "<button>",
+            "<div class='wpulike'>",
+            "<div class='bottomad'>"
         ]
     },{
         "name"    : "free.apprcn.com",
