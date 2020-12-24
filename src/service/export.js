@@ -686,7 +686,7 @@ class Onenote {
     }
 
     get scopes() {
-        return [ "Notes.Create", "Notes.Read", "Notes.ReadWrite" ];
+        return [ "Notes.Create", "Notes.Read", "Notes.ReadWrite" , "offline_access"];
         // return [ "office.onenote_create" ];
     }
 
@@ -694,7 +694,7 @@ class Onenote {
         this.dtd  = $.Deferred();
         this.code = "";
         this.access_token = "";
-        this.onte_type = "";
+        this.refresh_token = "";
         return this;
     }
 
@@ -745,7 +745,6 @@ class Onenote {
 
     Auth( callback ) {
         $.ajax({
-            // url     : "https://login.live.com/oauth20_token.srf",
             url     : "https://login.microsoftonline.com/common/oauth2/v2.0/token",
             type    : "POST",
             headers : {
@@ -773,29 +772,49 @@ class Onenote {
     }
 
     Add( html, callback ) {
-        $.ajax({
-            url     : "https://graph.microsoft.com/v1.0/me/onenote/pages?sectionName=简阅",
+        const settings = {
+            url     : "https://login.microsoftonline.com/common/oauth2/v2.0/token",
             type    : "POST",
-            headers : {
-                "Content-Type": "application/xhtml+xml",
-                "Authorization": `Bearer ${this.access_token}`,
-                "Accept-Language": "en;q=0.8,en-US;q=0.6"
-            },
-            data    : html,
-        }).done( ( result, status, xhr ) => {
-            console.log( result, status, xhr )
-            status == "success" && callback( result, undefined );
-            status != "success" && callback( undefined, "error" );
-        }).fail( ( xhr, status, error ) => {
-            console.error( xhr, status, error )
-            callback( undefined, xhr.status == 401 ? `${ this.name } 授权过期，请重新授权。` : "error" );
+            headers : { "Content-Type": "application/x-www-form-urlencoded" },
+            data    : {
+                 client_id: this.client_id,
+                 client_secret: this.client_secret,
+                 refresh_token: this.refresh_token,
+                 grant_type: "refresh_token",
+                 },
+        };
+        browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
+            if ( result.done ) {
+                console.log(result)
+                this.access_token = result.done.access_token;
+                this.refresh_token = result.done.refresh_token;
+                $.ajax({
+                    url     : "https://graph.microsoft.com/v1.0/me/onenote/pages?sectionName=简悦",
+                    type    : "POST",
+                    headers : {
+                        "Content-Type": "application/xhtml+xml",
+                        "Authorization": `Bearer ${this.access_token}`,
+                        "Accept-Language": "en;q=0.8,en-US;q=0.6"
+                    },
+                    data    : html,
+                }).done( ( result, status, xhr ) => {
+                    console.log( result, status, xhr )
+                    status == "success" && callback( result, undefined );
+                    status != "success" && callback( undefined, "error" );
+                }).fail( ( xhr, status, error ) => {
+                    console.error( xhr, status, error )
+                    callback( undefined, xhr.status == 401 ? `${ this.name } 授权过期，请重新授权。` : "error" );
+                })}
+            else {
+                callback( undefined, result.fail.jqXHR.status == 401 ? `${ this.name } 授权过期，请重新授权。` : "error" );
+            }
         });
     }
 }
 
 /**
  * GDrive
- * 
+ *
  * @class
  */
 class GDrive {
