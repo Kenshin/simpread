@@ -200,7 +200,7 @@ export default class Auth extends React.Component {
                 onenote.dtd.done( ()=> {
                     onenote.Auth( ( result, error ) => {
                         if ( error ) failed( error, onenote.id, onenote.name );
-                        else success( onenote.id, onenote.name, { access_token: onenote.access_token });
+                        else success( onenote.id, onenote.name, { access_token: onenote.access_token, refresh_token: onenote.refresh_token });
                     });
                 }).fail( error => failed( error, onenote.id, onenote.name ));
                 break;
