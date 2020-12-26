@@ -686,14 +686,14 @@ class Onenote {
     }
 
     get scopes() {
-        return [ "Notes.Create", "Notes.Read", "Notes.ReadWrite" , "offline_access"];
         // return [ "office.onenote_create" ];
+        return [ "Notes.Create", "Notes.Read", "Notes.ReadWrite" , "offline_access"];
     }
 
     New() {
         this.dtd  = $.Deferred();
         this.code = "";
-        this.access_token = "";
+        this.access_token  = "";
         this.refresh_token = "";
         return this;
     }
@@ -734,8 +734,8 @@ class Onenote {
 
     Accesstoken( url ) {
         url = url.replace( "http://ksria.com/simpread/auth.html?", "" );
-        url = url.split( "&session_state")[0]
-        if ( url.startsWith( "code" ) ) {
+        url = url.split( "&session_state" )[0]
+        if ( url.startsWith( "code" )) {
             this.code = url.replace( "code=", "" );
             this.dtd.resolve();
         } else {
@@ -760,7 +760,8 @@ class Onenote {
             }
         }).done( ( result, textStatus, jqXHR ) => {
             if ( result ) {
-                this.access_token = result.access_token;
+                this.access_token  = result.access_token;
+                this.refresh_token = result.refresh_token;
                 callback( result, undefined );
             } else {
                 callback( undefined, "error" );
@@ -777,23 +778,22 @@ class Onenote {
             type    : "POST",
             headers : { "Content-Type": "application/x-www-form-urlencoded" },
             data    : {
-                 client_id: this.client_id,
-                 client_secret: this.client_secret,
-                 refresh_token: this.refresh_token,
-                 grant_type: "refresh_token",
-                 },
+                client_id    : this.client_id,
+                client_secret: this.client_secret,
+                refresh_token: this.refresh_token,
+                grant_type   : "refresh_token",
+            },
         };
         browser.runtime.sendMessage( msg.Add( msg.MESSAGE_ACTION.CORB, { settings } ), result => {
             if ( result.done ) {
-                console.log(result)
-                this.access_token = result.done.access_token;
+                this.access_token  = result.done.access_token;
                 this.refresh_token = result.done.refresh_token;
                 $.ajax({
-                    url     : "https://graph.microsoft.com/v1.0/me/onenote/pages?sectionName=简悦",
+                    url     : "https://graph.microsoft.com/v1.0/me/onenote/pages?sectionName=SimpRead",
                     type    : "POST",
                     headers : {
-                        "Content-Type": "application/xhtml+xml",
-                        "Authorization": `Bearer ${this.access_token}`,
+                        "Content-Type"   : "application/xhtml+xml",
+                        "Authorization"  : `Bearer ${this.access_token}`,
                         "Accept-Language": "en;q=0.8,en-US;q=0.6"
                     },
                     data    : html,
