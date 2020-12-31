@@ -4,11 +4,16 @@
 简悦的汇总
 ---
 
-> 由于简悦的内容较多，所以我将其汇总到了一个页面，请访问 👉 [https://simp.red/news](https://www.notion.so/simpreadpublish/c8386288be1642c6bee7a29cb46fb7a8)
+> 简悦的帮助中心 👉 https://simpread.pro/help
 
 > 为了满足新手上手简悦的高级功能，增加了 👉 [新手入门](http://ksria.com/simpread/guide/)
 
-> 为了让简悦变得更好，请帮忙 [问卷调查](https://wj.qq.com/s2/3611463/7260/)
+> 简悦 · 高级账户的相关问题 👉[https://github.com/Kenshin/simpread/discussions/categories/高级账户]
+
+> 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧)
+
+> 当在使用过程中遇到了一些问题，也可访问这里查看 👉 [重要通知](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
+
 
 简悦的各种平台
 ---
@@ -56,11 +61,6 @@
 
 > 请看 **左侧目录**
 
-全功能
----
-
-![功能一览](http://sr.ksria.cn/feature%202.1.0.png)
-
 联络方式
 ---
 
@@ -92,8 +92,10 @@
 - [簡悅 SimpRead 追求 Chrome 上的沈浸式中文閱讀體驗](https://www.playpcesor.com/2017/06/simpread-chrome.html)
 
 
-简悦的开发故事
+简悦的理念
 ---
+
+> 简悦的每个版本都有其背后的设计理念，希望这些理念也能跟你有所共鸣。
 
 - [简悦 1.0.0，沉浸式阅读的 Chrome 扩展](https://sspai.com/post/39491)
 
@@ -113,5 +115,18 @@
 
 - [基于简悦 1.1.4 打造自己的专属知识收藏体系](https://sspai.com/post/58627)
 
+- [基于简悦打造自己的专属知识收藏体系](https://sspai.com/post/58627)
+
+- [什么才是阅读模式该有的样子](https://sspai.com/post/55467)
+
 - [阅读模式 + 标注系统 + 稍后读，简悦 2.0 想成为你的知识管理解决方案](https://sspai.com/post/61996)
+
+- [简悦大更新：新增同步助手、RSS 全文输出功能，增强稍后读和标注体验](https://sspai.com/post/63717)
+
+- [使用简悦 + Obsidian 打造一站式知识管理方案](https://github.com/Kenshin/simpread/discussions/1631)
+
+全功能
+---
+
+![功能一览](http://sr.ksria.cn/feature%202.1.0.png)
 
