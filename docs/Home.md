@@ -8,7 +8,7 @@
 
 > 为了满足新手上手简悦的高级功能，增加了 👉 [新手入门](http://ksria.com/simpread/guide/)
 
-> 简悦 · 高级账户的相关问题 👉[https://github.com/Kenshin/simpread/discussions/categories/高级账户]
+> 简悦 · 高级账户的相关问题 👉[高级账户]([https://github.com/Kenshin/simpread/discussions/categories/高级账户)
 
 > 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧)
 
@@ -18,11 +18,13 @@
 简悦的各种平台
 ---
 
-- Chrome   ·  Microsoft Edge → [全功能版](http://ksria.com/simpread/#downloads)
+- Chrome   ·  Microsoft Edge 👉 [全功能版](http://ksria.com/simpread/#downloads)
 
-- Apple Safari  →  [UserScript 轻阅版](http://ksria.com/simpread/#lite)
+- Apple Safari · Firefox 👉  [UserScript 轻阅版](http://ksria.com/simpread/#lite)
 
-- iPhone   ·  iPad → [JSBox 版](JSBox)
+- 其它基于 Chromium 的内核版本 👉 [离线版](http://ksria.com/simpread/#downloads)
+
+- iPhone   ·  iPad  👉 [JSBox 版](JSBox)
 
 - [Android 版](Android)
 
