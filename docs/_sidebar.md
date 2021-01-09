@@ -13,6 +13,7 @@
       * [目录](目录)
       * [阅读进度](阅读进度)
       * [控制栏](阅读模式-控制栏)
+    * 自动进入阅读模式
 * **简悦 2.0** ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
   * [标注](标注)
   * [稍后读](稍后读)
@@ -25,6 +26,7 @@
     * [已购必读](已购必读) 
     * [常见问题](https://github.com/Kenshin/simpread/issues/908)
 * **简悦 · 同步助手**   ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+  * [介绍](Sync)
   * [下载](Sync?id=下载)
   * [同步](Sync?id=同步)
   * [自动同步](自动同步)
