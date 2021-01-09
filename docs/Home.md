@@ -6,6 +6,8 @@
 
 > 简悦的帮助中心 👉 https://simpread.pro/help
 
+> 简悦的订阅中心 👉 https://simpread.pro/subscribe （欢迎订阅简悦的各种 ）
+
 > 为了满足新手上手简悦的高级功能，增加了 👉 [新手入门](http://ksria.com/simpread/guide/)
 
 > 简悦 · 高级账户的相关问题 👉[高级账户]([https://github.com/Kenshin/simpread/discussions/categories/高级账户)
