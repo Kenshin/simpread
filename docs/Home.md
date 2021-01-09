@@ -117,8 +117,6 @@
 
 - [借助 JSBox 简悦终于来到了 iOS！](http://kenshin.wang/blog/#/posts/11)
 
-- [基于简悦 1.1.4 打造自己的专属知识收藏体系](https://sspai.com/post/58627)
-
 - [基于简悦打造自己的专属知识收藏体系](https://sspai.com/post/58627)
 
 - [什么才是阅读模式该有的样子](https://sspai.com/post/55467)
