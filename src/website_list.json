@@ -237,7 +237,7 @@
         "desc"    : "[[{$('meta[name=description]').attr('content')}]]",
         "include" : "[[[$('.articleWidth-content').find('.content')]]]",
         "exclude" : [
-            "[[{(function(){var author=$('.article-author .author-item').children('a').clone();var time=$('.article-author .timer').text();var banner=$('.article-banner').clone();author=$('<p>作者：</p>').append(author);time=$('<p>时间：</p>').append(time);$('sr-rd-content').prepend(time).prepend(author).prepend(banner);}())}]]",
+            "[[{(function(){var author=$('.author-item').children('a').clone();var time=$('.article-author .timer').text();var banner=$('.article-banner').clone();author=$('<p>作者：</p>').append(author);time=$('<p>时间：</p>').append(time);$('sr-rd-content').prepend(time).prepend(author).prepend(banner);}())}]]",
             "<img id='s1' >",
             "<hr>",
             "[['<span>我们主张分享真实的产品体验</span>']]",
