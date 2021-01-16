@@ -32,3 +32,13 @@
 > 需要先开启全局快捷键 <kbd>sr</kbd> 后才能使用
 
 <kbd>gh</kbd>
+
+
+备注
+---
+
+> 当出现下图所示的提示，原因是 **你在 Github 上面已经存在了相同名称的 md 文件**，因 Github API 政策调整，导致没有返回准确提示，请留意。
+
+[![sBbaM4.png](https://s3.ax1x.com/2021/01/16/sBbaM4.png)](https://imgchr.com/i/sBbaM4)
+
+> 此问题仅限简悦 2.1 版（及以下）。
