@@ -70,6 +70,7 @@
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3) （如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接）
 - TG Channel [1.0.0@win](https://t.me/simpread/117) [1.0.0@mac](https://t.me/simpread/115)  [1.0.0@mac with readwise.io](https://t.me/simpread/128)
 - [百度网盘](https://pan.baidu.com/s/1Iz3KSjaLaCd8ACUfpucdjQ) 提取码: fqxu （百度会经常抽风把此分享取消，如被取消请 [通知我](http://github.com/kenshin/simpread/issues/new)
+- [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
 
 验证
 ---
