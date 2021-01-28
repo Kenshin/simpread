@@ -67,9 +67,9 @@
 
 > 目前 暂时仅支持下列网盘，接下来会有更多下载方案。
 
-- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
-- [TG Channel](https://t.me/simpreadgroup)
-- [百度网盘](https://pan.baidu.com/s/1sJyEd0hgNWY7TC_XreC02g) 提取码: 5yp4
+- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3) （如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接）
+- TG Channel [1.0.0@win](https://t.me/simpread/117) [1.0.0@mac](https://t.me/simpread/115)  [1.0.0@mac with readwise.io](https://t.me/simpread/128)
+- [百度网盘](https://pan.baidu.com/s/1Iz3KSjaLaCd8ACUfpucdjQ) 提取码: fqxu （百度会经常抽风把此分享取消，如被取消请 [通知我](http://github.com/kenshin/simpread/issues/new)
 
 验证
 ---
@@ -87,9 +87,9 @@
 2. **简悦 → 选项页 → 共通 → 简悦 · 同步助手 → 授权验证并开启简悦 · 同步助手**
 
   [![BXhkxP.png](https://s1.ax1x.com/2020/11/11/BXhkxP.md.png)](https://imgchr.com/i/BXhkxP)
-  
+
 3. 认证无误后会有提示，如下图：
-  
+
   [![BXh1x0.png](https://s1.ax1x.com/2020/11/11/BXh1x0.png)](https://imgchr.com/i/BXh1x0)
 
 注意事项
@@ -262,7 +262,7 @@ Readwise
 
 1. 访问 https://readwise.io/access_token 生成你的 Token
 2. 粘贴第一步得到 Token 到下图所示位置（图示➋）
-  [![DThMaF.png](https://s3.ax1x.com/2020/12/03/DThMaF.png)](https://imgchr.com/i/DThMaF)
+    [![DThMaF.png](https://s3.ax1x.com/2020/12/03/DThMaF.png)](https://imgchr.com/i/DThMaF)
 3. 并开启相关功能（上图 ➊ 所示）
 4. 保存
 
