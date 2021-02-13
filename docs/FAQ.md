@@ -33,7 +33,9 @@
 
 - Widows  & Mac OS 系统
 
-  > 将下载的 `simpread.crx` 拖拽到  `chrome://extensions/` 即可。
+  > 将下载的 `simpread.zip` 解压缩到某个文件夹，再通过 **加载已解压的扩展程序** 来加载。
+  >
+  > 关联问题 [使用简悦离线版后经常消失的解决方案](https://github.com/Kenshin/simpread/discussions/1645)
 
 - 在线下载 Chrome Webstore 方式
 
@@ -42,8 +44,11 @@
 白名单
 ---
 > 含义跟黑名单相反，当关闭 `如果当前页面适配阅读模式，是否自动进入阅读模式？` 选项后会启动此功能，加入到列表中的 URL 将自动进入阅读模式。（ 但不影响手动操作 ）
+>
+> 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
 
-添加规则
+**添加规则**
+
 - 支持 URL 如： http://www.jianshu.com/p/2917e4e0169d
 - 支持 [minimatch](https://github.com/isaacs/minimatch) 方案的 URL，如：`http://*.cnbeta.com/articles/*/*.htm`
 - 支持 [站点编辑器 的 name](站点编辑器#对应字段)，如：  
@@ -54,10 +59,14 @@
 ---
 
 > 即：黑名单。当选中 `如果当前页面适配阅读模式，是否自动进入阅读模式？` 会启动此功能，加入到列表中的 URL 将不会自动进入阅读模式。（ 但不影响手动操作 ）
+>
+> 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
+
 ![Imgur](http://i.imgur.com/dyROEBi.png) → 右键 → 选项 → 高级设定 → 排除列表` ，如图：
 ![Imgur](http://i.imgur.com/CdoZOkUl.png)
 
-添加规则：
+**添加规则**
+
 - 支持 URL 如： http://www.jianshu.com/p/2917e4e0169d
 - 支持 [minimatch](https://github.com/isaacs/minimatch) 方案的 URL，如：`http://*.cnbeta.com/articles/*/*.htm`
 - 支持 [站点编辑器 的 name](站点编辑器#对应字段)，如：  
@@ -66,8 +75,10 @@
 黑名单
 ---
 > 有别于排除列表，加入到黑名单中的网页将不会载入简悦的代码，而前者仅仅是无法自动进入阅读模式；
+>
+> 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
 
-黑名单仅支持 URL 与 hostname，如：http://ksria.com/simpread/ 或者 ksria.com 或者 xxx.ksria.com
+黑名单仅支持 URL 与 hostname，如：`http://ksria.com/simpread/` 或者 `ksria.com` 或 `xxx.ksria.com`
 
 快捷键
 ---
