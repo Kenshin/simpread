@@ -78,7 +78,7 @@
 >
 > 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
 
-黑名单仅支持 URL 与 hostname，如：`http://ksria.com/simpread/` 或者 `ksria.com` 或 `xxx.ksria.com`
+黑名单 **仅支持 URL 与 Host name**，如：`http://ksria.com/simpread/` 或者 `ksria.com` 或 `xxx.ksria.com`
 
 快捷键
 ---
