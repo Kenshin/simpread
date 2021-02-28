@@ -29,3 +29,8 @@
 > 需要先开启全局快捷键 <kbd>sr</kbd> 后才能使用
 
 <kbd>jp</kbd>
+
+无法授权的解决方案
+---
+
+> 当遇到无法授权 Joplin 请看这里提供的  [解决方案](https://github.com/Kenshin/simpread/discussions/1895)
