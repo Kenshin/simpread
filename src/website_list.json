@@ -3522,9 +3522,10 @@
         ]
     },{
         "name"    : "so.gushiwen.org",
-        "url"     : "http*://so.gushiwen.org/**.aspx",
+        "url"     : "http*://so.gushiwen.org/**/*.aspx",
         "title"   : "<title>",
-        "desc"    : "[[[(function(){left=$('.main3 .left');['译文','赏析','注释'].forEach(text=>{left.find(`img[alt='${text}']`).click();});left.find(\"div a:contains('展开阅读全文')\").each((i,e)=>{e.click()});return $('.main3 .left').children().eq(0).nextUntil('.title');}())]]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include"    : "[[[(function(){left=$('.main3 .left');['译文','赏析','注释'].forEach(text=>{left.find(`img[alt='${text}']`).click();});left.find(\"div a:contains('展开阅读全文')\").each((i,e)=>{e.click()});return $('.main3 .left').children().eq(0).nextUntil('.title');}())]]]",
         "exclude" : [
             "[[[$('.yizhu')]]]",
             "[[[$('.tool')]]]",
