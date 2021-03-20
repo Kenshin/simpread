@@ -3521,6 +3521,18 @@
             "[[{(function(){var e=$('sr-rd-content'); var content=e.html();content=content.replaceAll(/<!--[^<]*-->/g,'');e.html(content);}())}]]"
         ]
     },{
+        "name"    : "so.gushiwen.org",
+        "url"     : "http*://so.gushiwen.org/**.aspx",
+        "title"   : "<title>",
+        "desc"    : "[[[(function(){left=$('.main3 .left');['译文','赏析','注释'].forEach(text=>{left.find(`img[alt='${text}']`).click();});left.find(\"div a:contains('展开阅读全文')\").each((i,e)=>{e.click()});return $('.main3 .left').children().eq(0).nextUntil('.title');}())]]]",
+        "exclude" : [
+            "[[[$('.yizhu')]]]",
+            "[[[$('.tool')]]]",
+            "[[[$('a[href$=\")\"]')]]]",
+            "[[[$('div textarea')]]]"
+        ],
+        "css"     : ""
+    },{
         "name"    : "bbs.pediy.com",
         "url"     : "http*://bbs.pediy.com/thread-*",
         "title"   : "[[{$('meta[name=keywords]').attr('content')||$('meta[name=description]').attr('content')}]]",
