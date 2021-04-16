@@ -885,7 +885,7 @@
         ]
     },{
         "name"    : "note.space.bilibili.com",
-        "url"     : "[[/https://space.bilibili.com/\\d+/favlist\\?fid=note/]]",
+        "url"     : "http*://space.bilibili.com/v/note-list",
         "title"   : "[[{$('.note-single-item--selected .note-item__detail--title').text()||$('title').text()}]]",
         "desc"    : "[[{$('.note-single-item--selected .note-item__detail--summary').text()}]]",
         "include" : "[[[(function(){var note=$('.ql-editor');if(note.length){if(note.text().length<100)note.append('<p>笔记内容过短，未避免阅读模式失败，自动填充内容。</p><br><p>'+''.padEnd(80,'#')+'</p>');}else{note=$('<p>未能获取到笔记内容，请确认是否存在笔记内容。</p><br><p>'+''.padEnd(80,'#')+'</p>');$('head').append(note);}return note;}())]]]",
