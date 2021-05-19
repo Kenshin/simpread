@@ -66,9 +66,16 @@
 ---
 
 > 暂时仅支持下列网盘，接下来会有更多下载方案。
+>
+> 重要提示：**非 2.2.0 版用户不要下载 1.0.1 版**；反之 **2.2.0 版用户请务必下载 1.0.1 版**。
+
 
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3) （如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接）
+
 - TG Channel [1.0.0@win](https://t.me/simpread/117) [1.0.0@mac](https://t.me/simpread/115)  [1.0.0@mac with readwise.io](https://t.me/simpread/128)
+
+- TG Channel [1.0.1@win 64 & 32](https://t.me/simpread/171)  [1.0.1@mac](https://t.me/simpread/166)
+
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
 
 验证
