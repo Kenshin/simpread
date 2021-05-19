@@ -2,15 +2,21 @@
 
 ***
 
-> 抱歉，各位，因为这次 **Webstore 审核的超级快**，导致 2.2.0 相关的内容没有匹配，**当你看到这个文档时，说明我还没有来得及更新**。 😂 
+[**Textbundle**](http://textbundle.org/) 是一个包含图片资源的 Markdown 格式，相比 **离线 Markdown** 来说，因为未使用 Base64 编码，所以比 **离线 Markdown** 更友好。
+大多数主流 Markdown 编辑器都支持，如：Bear Carft FSNotes 等，需使用 [**简悦 · 同步助手 1.0.1**](http://ksria.com/simpread/docs/#/Sync) 才支持导出此格式。
 
-## 解决方案
+## 如何使用
 
-> 我在 [Github Issues](https://github.com/Kenshin/simpread/issues/2158) 建立一个 Issues 用于追踪这些内容，你可以在
+> 进入 **聚焦模式** **阅读模式** 甚至于只要是支持导出的功能，如：
 
-1. 在这个 [Issues](https://github.com/Kenshin/simpread/issues/2158) 留言并简单告知是什么文档需要查看，我今天会更新这些文档，到时候我会这里通知你（留意你的在 Github 注册时的邮箱即可收到
+- 聚焦模式
+- 阅读模式
+- 浮动标注栏
+- 标注卡（标注编辑框）
+- 稍后读 · 标注模式 与 阅读模式
+- 稍后读 · Evergreen · Workflowy · Kanban 模式
+- 支持稍后读的 反向链接 · 外部链接
+- 稍后读 · 合辑
 
-2. 请 [订阅简悦官方唯一 Newletter](https://www.getrevue.co/profile/kenshin) 文档更新完毕后我会通知你。
-
-建议上述两者都做，确保无误。
+上述功能均可使用。
 
