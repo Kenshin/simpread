@@ -1036,7 +1036,7 @@
         "url"     : "http*://*.infoq.cn/*/*",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[(function(){var wrap = $('.article-preview,.article-typo');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素。<br>请将 http*://*.infoq.cn/*/* 加入延迟加载列表后，刷新页面后手动进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>');$('head').append(wrap);}return wrap;}())]]]",
+        "include" : "[[[(function(){var wrap = $('.article-preview,.article-typo');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素。<br>请将 infoq.cn 加入排除列表后，刷新页面后手动进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>');$('head').append(wrap);}return wrap;}())]]]",
         "exclude" : [
             ""
         ]
