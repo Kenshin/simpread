@@ -3542,5 +3542,15 @@
             ""
         ],
         "css"     : ".simpread-read-root {align-items: baseline;}"
+    },{
+        "name"    : "colah.github.io",
+        "url"     : "http*://colah.github.io/posts/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('.col-md-8')]]]",
+        "exclude" : [
+            "[[[$('sr-rd-content style').nextAll()]]]",
+            "[[[$('sr-rd-content div:first').next().prevAll()]]]"
+        ]
     }]
 }
