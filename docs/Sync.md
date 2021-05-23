@@ -78,6 +78,14 @@
 
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
 
+### 无法运行
+
+> 在 Mac 上如果出现下图的话，请使用 **腾讯微云** 的方式，细节可以 [看这里](https://github.com/Kenshin/simpread/issues/2100#issuecomment-846510794)。
+
+![image](https://user-images.githubusercontent.com/6434137/119250114-6eb6d680-bbd0-11eb-9db9-c7ca71ce7ee6.png)
+
+> 在 Windows 上运行可能会被 360类的产品误报，因为同步助手使用了 Electron 技术，所以有可能存在此情况，如果是在上述官方提到的渠道下载，请放心使用。
+
 验证
 ---
 
@@ -256,7 +264,6 @@ Readwise
 ---
 
 > 请移步到 [自动化服务](自动化服务?id=Readwise)
->
 
 邮件服务
 ---
