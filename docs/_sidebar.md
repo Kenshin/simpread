@@ -14,17 +14,14 @@
       * [阅读进度](阅读进度)
       * [控制栏](阅读模式-控制栏)
       * [自动进入阅读模式](入门指南（-操作指引-）?id=自动进入阅读模式)
-* **[简悦 2.0 · 标注](标注)** ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
-* **[简悦 2.0 · 稍后读](稍后读)** ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
+* **[简悦 2.0 · 标注  ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)](标注)**
+* **[简悦 2.0 · 稍后读  ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)](稍后读)**
 * **简悦 2.0 · 高级账户** ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
   * [高级账户](高级账户)
   * [授权登录](授权登录) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
   * 重要 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
     * [已购必读](已购必读) 
     * [常见问题](https://github.com/Kenshin/simpread/issues/908)
-* **简悦 2.0 · 其它功能** ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
-  * [RSS 阅读器辅助](RSSReader)
-  * [自动同步](自动同步)  ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 * **简悦 · 同步助手**   ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
   * [介绍](Sync)
   * [下载](Sync?id=下载)
@@ -121,3 +118,5 @@
   * [站点适配源](站点适配源)
   * [站点集市](站点集市)
   * [待决站点](待决站点)
+* **简悦 2.0 · 其它功能**
+  * [RSS 阅读器辅助](RSSReader)
