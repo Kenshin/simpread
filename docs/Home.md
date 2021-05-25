@@ -4,15 +4,16 @@
 简悦的汇总
 ---
 
-> 简悦的帮助中心 👉 https://simpread.pro/help
+> 简悦的知识库 👉 https://simpread.pro/help
 
-> 简悦的订阅中心 👉 https://simpread.pro/subscribe （欢迎订阅简悦的各种 ）
+> 简悦的订阅中心 👉 https://simpread.pro/subscribe （欢迎订阅简悦 ）
 
 > 为了满足新手上手简悦的高级功能，增加了 👉 [新手入门](http://ksria.com/simpread/guide/)
 
 > 简悦 · 高级账户的相关问题 👉[高级账户]([https://github.com/Kenshin/simpread/discussions/categories/高级账户)
 
-> 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧)
+> 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧) · [与其它服务的联动](https://github.com/Kenshin/simpread/discussions/categories/服务)
+
 
 > 当在使用过程中遇到了一些问题，也可访问这里查看 👉 [重要通知](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
 
