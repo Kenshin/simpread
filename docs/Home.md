@@ -33,6 +33,8 @@
 各版本功能详细说明
 ---
 
+- [2.2.0](http://ksria.com/simpread/welcome/version_2.2.0.html) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
+
 - [2.1.0](http://ksria.com/simpread/welcome/version_2.1.0.html)
 
 - [2.0.0](http://ksria.com/simpread/welcome/version_2.0.0.html)
