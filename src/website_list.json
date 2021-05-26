@@ -1912,7 +1912,7 @@
         ],
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "[[{$('.post-text')}]]",
+        "include" : "[[{$('.js-post-body')}]]",
         "exclude" : [
             ""
         ],
