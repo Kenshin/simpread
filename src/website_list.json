@@ -341,7 +341,7 @@
         "desc"    : "",
         "include" : "<article>",
         "exclude" : [
-            ""
+            "[[[$('sr-rd-content button[aria-label=\"复制代码\"]')]]]"
         ]
     },{
         "name"    : "waerfa.com",
