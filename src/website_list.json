@@ -308,7 +308,7 @@
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
         "title"   : "[[{$('main .QuestionHeader-main').find('h1').text()}]]",
-        "desc"    : "",
+        "desc"    : "[[{(function(){var questions=JSON.parse($('#js-initialData').text()).initialState.entities.questions;var detail='';for(const id in questions){detail=questions[id].detail;break;};var text=$('<p>').append(detail).text();return text.replaceAll('。','.').replace(/\\.$/,'。');}())}]]",
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
             "[[{(function(){$('sr-rd-content figure noscript').each(function(){var noscript = $(this).text();if(noscript.match(/<img/)) {var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);}});}())}]]",
@@ -341,7 +341,7 @@
         "desc"    : "",
         "include" : "<article>",
         "exclude" : [
-            ""
+            "[[[$('sr-rd-content button[aria-label=\"复制代码\"]')]]]"
         ]
     },{
         "name"    : "waerfa.com",
@@ -1912,7 +1912,7 @@
         ],
         "title"   : "<title>",
         "desc"    : "",
-        "include" : "[[{$('.post-text')}]]",
+        "include" : "[[{$('.js-post-body')}]]",
         "exclude" : [
             ""
         ],
