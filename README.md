@@ -157,6 +157,22 @@
 
 ![Evergree Notes](https://z3.ax1x.com/2021/05/17/g2IHyQ.gif)
 
+#### 同步助手
+
+![](https://z3.ax1x.com/2021/05/19/g4vN9S.png)
+
+> [简悦 · 同步助手](http://ksria.com/simpread/docs/#/Sync) 是 **随着简悦 2.1.0 发布的一个全新的 Desktop App**，用于对简悦已知功能的补充，以及会 **持续提供更多** 的可玩性，包括：
+
+1. **[自动同步](http://ksria.com/simpread/docs/#/自动同步)**
+2. **小书签**
+3. 导出到文件 **本地的任意位置**
+4. **原生 PDF · Epub** 导出
+5. **直接发送到你的 Kindle**
+6. 内置解析
+7. **邮件发送**
+
+同步助手的 Logo 自于社区用户 [Shawn](https://shawnan.design/) 的设计。
+
 #### 插件系统 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 
   > 使用 JavaScript 编写基于 `简悦` 的插件了，请看 [插件中心](https://simpread.ksria.cn/plugins/)
