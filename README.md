@@ -13,7 +13,7 @@
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://s1.ax1x.com/2020/07/25/UzMUSS.png"></a>
    <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.3.box?202010231502&name=%E7%AE%80%E6%82%A6"><img src="https://s1.ax1x.com/2020/07/25/UzMHfK.png"></a>
 </p>
-<h1 align="center">阅读模式 + 标注 + 稍后读 = 做你的知识管理粘合剂</h1>
+<h1 align="center">阅读模式 + 剪藏 + 标注 + 稍后读 = 做你的知识管理粘合剂</h1>
 <p align="center">让简悦真正成为你的生产力工具</p>
 
 ***
