@@ -3494,5 +3494,16 @@
             ""
         ],
         "css"     : ".simpread-read-root {align-items: baseline;}"
+    },{
+        "name"    : "colah.github.io",
+        "url"     : "http*://colah.github.io/posts/**",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[(()=>{let body=$('.col-md-8 #body');if(!body.length){body=$('.col-md-8')};return body})()]]]",
+        "exclude" : [
+            "[[[$('sr-rd-content h1:first').next().prevAll()]]]",
+            "[[[$('sr-rd-content .footnotes').nextAll()]]]",
+            "[[[$('sr-rd-content .main-disqussion-link-wrp').prev().nextAll()]]]"
+        ]
     }]
 }
