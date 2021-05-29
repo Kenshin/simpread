@@ -3,18 +3,18 @@
 <p align="center">让你瞬间进入沉浸式阅读的扩展，还原阅读的本质，提升你的阅读体验。</p>
 <p align="center">为了达到完美的阅读模式这个小目标 ，我适配了 <a target="_blank" href="https://simpread.ksria.cn/sites/">数百种类型</a> 的网站，因此诞生了简悦。</p>
 <p align="center">
-   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-2.1.0-blue.svg"></a>
+   <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-2.2.0-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
    <a target="_blank" href="https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://badgen.net/chrome-web-store/stars/ijllcpnolfcooahcekpamkbidhejabll?icon=chrome&color=0f9d58"></a>
 </p>
 <p align="center">
    <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
-   <a href="http://ksria.com/simpread/crx/2.1.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-0294b9.png"></a>
+   <a href="http://ksria.com/simpread/crx/2.2.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-0294b9.png"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://s1.ax1x.com/2020/07/25/UzMUSS.png"></a>
    <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.3.box?202010231502&name=%E7%AE%80%E6%82%A6"><img src="https://s1.ax1x.com/2020/07/25/UzMHfK.png"></a>
 </p>
-<h1 align="center">阅读模式 + 标注 + 稍后读 = 简悦 <sup>2.0</sup></h1>
-<p align="center">让简悦真正成为你的生产力工具</p>
+<h1 align="center">简悦<sup>2.0</sup> - 真正成为你的生产力工具</h1>
+<h3 align="center">阅读模式 + 剪藏 + 标注 + 稍后读 = 做你的知识管理粘合剂</h3>
 
 ***
 
@@ -44,10 +44,12 @@
 
 * [开源列表](#简悦的诞生离不开它们)
 
+* [许可](#许可)
+
 ***
 
 ## 马上使用
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/2.1.0/simpread.crx)
+* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/2.0.0/simpread.crx)
 
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 
@@ -57,17 +59,18 @@
 
 ## 入门指南
 
-* 简悦的内容较多，汇总到了一个页面 [新闻页](https://www.notion.so/simpreadpublish/c8386288be1642c6bee7a29cb46fb7a8)
-
 * 喜欢简悦，但不会用，对新手极度舒适的 [新手入门](http://ksria.com/simpread/guide)
 
 * 参与讨论请加入 [Telegram 群](https://t.me/simpread)
 
-* 想知道简悦的高级玩法，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#)
+* 想知道简悦的高级玩法，请看简悦的 [文档中心](http://ksria.com/simpread/docs/#) [知识库](https://github.com/Kenshin/simpread/discussions/categories/服务) 与 [帮助中心](https://simpread.pro/help)
 
 * 更多联系方式请看 [相关链接](#相关链接)
 
 ## 主要功能一览
+
+#### 阅读模式
+
 - [聚焦模式](http://ksria.com/simpread/docs/#/聚焦模式)  
 
   > 不改变当前页面的结构，仅仅高亮需要阅读的部分，不分散用户的注意力；适合 `临时阅读` 或者 `未适配阅读模式` 的网站
@@ -82,61 +85,31 @@
 
   * 支持 [代码段的高亮](https://github.com/Kenshin/simpread/issues/500)，包含了大部分常见的网站
 
-  * 支持 [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) · 支持 [LaTeX 解析](http://ksria.com/simpread/docs/#/LaTeX-阅读器) · [Markdown 阅读器](http://ksria.com/simpread/docs/#/Markdown-阅读器) 
+  * 支持 **本地 HTML** · [TXT 阅读器](http://ksria.com/simpread/docs/#/TXT-阅读器) · 支持 [LaTeX 解析](http://ksria.com/simpread/docs/#/LaTeX-阅读器) · [Markdown 阅读器](http://ksria.com/simpread/docs/#/Markdown-阅读器) 
+
+  * 适配了一些 [常见的科研期刊类网站](https://github.com/Kenshin/simpread/discussions/2103)
 
   * 更符合 `中文阅读` 习惯的设置，包括：`字间距` `行间距` 等 以及 `自定义 CSS` ，详细请看 [自定义样式](http://ksria.com/simpread/docs/#/自定义样式)
 
-- 主动适配  
+- [手动模式](http://ksria.com/simpread/docs/#/手动框选)
 
-  通过简单的一个步骤，就可以让 `非适配页面` 支持阅读模式，详细请看 [主动适配](http://ksria.com/simpread/docs/#/主动适配阅读模式) 以及 [操作](http://ksria.com/simpread/welcome/version_1.0.5.html#mate-read-mode)
+  > 将页面内容内容均可生成 聚焦模式 or 阅读模式
 
-- 智能适配  
+#### 丰富的导出功能 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 
-  > 全新的 `词法分析引擎`，更智能、更精准的提取正文，辅以精准适配，任意网页均「不在话下」，不仅能自动识别出 Wordpress · Hexo · Ghost · Discuz 等博客 / 论坛的页面，甚至于只要是结构良好的页面，（无需适配）自动生成阅读模式，详细请看 [词法分析引擎](http://ksria.com/simpread/docs/#/词法分析引擎)
+  > 借助于简悦的阅读模式优化整理，导入到各种生产力的工具的会比其原生剪辑工具 **更具有优势**，关于这部份内容 [请看这里](http://ksria.com/simpread/docs/#/服务) 。
 
-- 智能感知  
-
-  > 当生成的阅读模式出现问题时，简悦会自动重新获取正文，详细说明请看 [智能感知](http://ksria.com/simpread/docs/#/智能感知)
-
-- 手动框选适配  
-
-  > 针对 `未适配` 或 `智能识别` 失败的情况，简悦可以使用手动框选的方式，生成阅读模式，详细请看 [手动框选](http://ksria.com/simpread/docs/#/手动框选) 
-
-- 站点适配源  
-
-  包括：`官方适配源` `第三方适配源` `站点集市适配源` `自定义适配源`，详细请看 [站点适配源](http://ksria.com/simpread/docs/#/站点适配源)
-
-- 站点编辑器  
-
-  页面任意元素，均可隐藏，`可编程，定制化`，详细请看 [站点编辑器](http://ksria.com/simpread/docs/#/站点编辑器)
-
-- 站点管理器  
-
-  可管理全部的适配站点，详细请看 [站点管理器](http://ksria.com/simpread/docs/#/站点管理器)
-
-- 插件系统 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-  > 现在开始可以使用 JavaScript 编写基于 `简悦` 的插件了，更上线了 [插件中心](https://simpread.ksria.cn/plugins/) ，如何编写插件请看 → [说明文档](http://ksria.com/simpread/docs/#/插件系统)
-
-- 多种主题  
-
-  > `白练、白磁、卯之花色、丁子色、娟鼠、月白、百合、紺鼠、黒鸢` 等
-
-- 丰富的导出功能 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-  > 借助于简悦的阅读模式优化整理，导入到各种生产力的工具的会比其原生剪辑工具 **更具有优势**。
-
-  - 导出 [Markdown](https://github.com/Kenshin/simpread#感谢) · `HTML` · `PNG` · `PDF` · [epub](http://ksria.com/simpread/docs/#/发送到-Epub) · [离线 HTML](http://ksria.com/simpread/docs/#/离线HTML) · `复制 Markdown 到剪切板`
+  - 导出 `Markdown` · `HTML` · `PNG` · [PDF](http://ksria.com/simpread/docs/#/发送到-Epub) · [Epub](http://ksria.com/simpread/docs/#/发送到-Epub) · [离线 HTML](http://ksria.com/simpread/docs/#/离线HTML) · `复制 Markdown 到剪切板` · [Textbundle](http://ksria.com/simpread/docs/#/Textbundle) · [Markdeep](http://ksria.com/simpread/docs/#/定制化导出?id=markdeep) 甚至 [任意格式均可导出](http://ksria.com/simpread/docs/#/定制化导出?id=自定义导出)
 
   - 发送阅读模式优化后的页面到 `Kindle`，详细配置 [请看这里](http://ksria.com/simpread/docs/#/发送到-Kindle)
 
-  - 导出到 `Pocket` · `Instapaper` · `Linnk` 的功能，包括：`当前页面的链接` `稍后读`
+  - 导出到 `Pocket` · `Instapaper` 的功能，包括：`当前页面的链接` 
 
-  - 导出到生产力工具，包括：`语雀` · [坚果云](http://ksria.com/simpread/docs/#/坚果云) · [有道云笔记](http://ksria.com/simpread/docs/#/有道云笔记) · [为知笔记](http://ksria.com/simpread/docs/#/为知笔记) · [Joplin](http://ksria.com/simpread/docs/#/Joplin) · `Dropbox` · [Github](http://ksria.com/simpread/docs/#/Github) · [Notion](http://ksria.com/simpread/docs/#/Notion) · `Onenote` · `Google Drive` · `印象笔记 / Evernote`，详细请看 [导出到生产力](http://ksria.com/simpread/docs/#/导出到生产力工具)
+  - 导出到生产力工具，包括：`语雀` · [坚果云](http://ksria.com/simpread/docs/#/坚果云) · flomo · [有道云笔记](http://ksria.com/simpread/docs/#/有道云笔记) · [专注笔记](http://ksria.com/simpread/docs/#/专注笔记) · [为知笔记](http://ksria.com/simpread/docs/#/为知笔记) · [Joplin](http://ksria.com/simpread/docs/#/Joplin) · `Dropbox` · [Github](http://ksria.com/simpread/docs/#/Github) · [Notion](http://ksria.com/simpread/docs/#/Notion) · `Onenote` · `Google Drive` · `印象笔记 / Evernote`，详细请看 [导出到生产力](http://ksria.com/simpread/docs/#/导出到生产力工具)
 
-- 同步 · 上传/下载 配置 · 同步适配列表 · [快捷键支持](http://ksria.com/simpread/docs/#/快捷键) 等；
+  - 定制化导出，可以方便导入到 Obsidian · Roam Research · Logseq 等双链笔记，更多说明及用法 [请看这里](https://github.com/Kenshin/simpread/discussions/2085)。
 
-- 高级定制，包括：`右键菜单` `控制栏可隐藏` `阅读进度可隐藏` `自动进入阅读模式` [白名单](http://ksria.com/simpread/docs/#/FAQ?id=白名单) 以及 [排除列表](http://ksria.com/simpread/docs/#/FAQ?id=排除列表) 等
+  - 将多种符合整合在一起的 [自动化方案](http://ksria.com/simpread/docs/#/自动化)，可以理解为 **简悦的 IFTTT**。
 
 #### 标注系统 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png)
 
@@ -172,106 +145,21 @@
 
 <img src="https://s1.ax1x.com/2020/07/21/UI4Jlq.png" width="400"/> <img src="https://s1.ax1x.com/2020/07/21/UI4qnf.png" width="400"/>
 
-> 简悦 · 稍后读，包含了经典的三栏布局，导航栏 · 列表栏 · 展示栏
+> 简悦的稍后读借鉴了 ZK 笔记法的一些特点，专门针对信息的整合增加了如下一些新功能：
 
-- 导航栏
+- [**双向链接**](http://ksria.com/simpread/docs/#/双向链接)
+- [**知识图谱**](http://ksria.com/simpread/docs/#/双向链接?id=图谱)
+- [**Mindmap**](http://ksria.com/simpread/docs/#/稍后读?id=Mindmap)
+- **多种信息展示方式（布局）**：[Evergreen](http://ksria.com/simpread/docs/#/稍后读-多种布局?id=Evergreen) · [Workflowy](http://ksria.com/simpread/docs/#/稍后读-多种布局?id=Workflowy) · [Kanban](http://ksria.com/simpread/docs/#/稍后读-多种布局?id=Kanban)
+- [**读取本地 HTML**](https://github.com/Kenshin/simpread/discussions/2146)
 
-  - 未读列表
+![知识图谱](https://z3.ax1x.com/2021/05/16/ggmmSf.gif)
 
-  - 树形无限层级标签系统
+![Evergree Notes](https://z3.ax1x.com/2021/05/17/g2IHyQ.gif)
 
-  - 智能分类
+#### 插件系统 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 
-  - 归档
-
-- 列表栏
-
-  - 删除
-
-  - 归档
-
-  - 选择
-
-  - 检索
-    检索标签 `#xxx` 方案和检索 描述/备注 `<不含有 #xxx>`
-
-- 展示栏
-
-  > 当前稍后读的全部细节，如：**标题** **描述** **标签** 每个标注的 **颜色/备注/标签** 等全部信息
-
-  - 顶栏
-
-    编辑 · 删除 · 归档 以及 **发送到生产力工具** 等常见操作
-
-  - 底栏
-
-    前一篇 · 后一篇 以及切换 **标注/阅读** 模式
-
-  - 标注模式
-
-    > 展示当前稍后读的全部标注，并具有一定的管理功能
-
-  - 阅读模式
-
-    > 稍后读 2.0 内置了简悦的阅读模式解析，所以在此界面下，可以直接查看具有标注及标注侧栏的阅读模式页面，并包含了大部分的 **标注功能**
-
-- 选项页
-
-  > 包括：**六种主题** 以及一些稍后读的定制化功能
-
-- 快捷键
-
-  > 稍后读支持全局快捷键操作，通过 <kbd>,</kbd> 开启/关闭
-
-#### 稍后读 · 合辑 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-<img src="http://sr.ksria.cn/welcome-unreader-collection.webp" />
-
-> 简悦 **最重要的功能**，从某种程度上说，合辑就是稍后读类产品的 **灵魂** 也不为过。通过此功能，可以让真正意义的 **稍后读 → 不再读** 变为 **稍后读 → 知识整理 → 知识吸纳**。
-
-> 合辑具有与稍后读类似的结构，如：**标题** **描述** **备注** **标签** 等。除此以外，还包含了加入到合辑中不同的稍后读的内容，所以 **合辑** 也可以理解为 **稍后读的集合**。
-
-#### 稍后读 · 分享页 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-<img src="http://sr.ksria.cn/welcome-unreader-share.webp" />
-
-> 分享页也是简悦 2.0 **最重要的功能** 之一，你可以将任何稍后读/合辑，以 **外链的方式** 分享出去，包含：**当前页面的标注** 以及 **内置包含标注高亮** 的阅读模式解析。
-
-> 分享页的示例 → [稍后读生成的分享页](https://simpread.pro/s/simpread) · [合辑生成的分享页](https://simpread.pro/s/z2Axt6i1)
-
-#### 同步助手 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-> [简悦 · 同步助手](http://ksria.com/simpread/docs/#/Sync) 是 **随着简悦 2.1.0 发布的一个全新的桌面应用**，用于对简悦已知功能的补充，以及会 **持续提供更多** 的可玩性，包括：
-
-- [自动同步](http://ksria.com/simpread/docs/#/Sync?id=自动同步)
-
-- [导出到本地任意目录](http://ksria.com/simpread/docs/#/Sync?id=导出服务)
-
-- [原生的 Epub 输出](http://ksria.com/simpread/docs/#/Sync?id=Epub)
-
-- [原生的 PDF 输出](http://ksria.com/simpread/docs/#/Sync?id=PDF)
-
-- [邮件服务](http://ksria.com/simpread/docs/#/Sync?id=邮件服务) 
-
-- [直接发送到 Kindle](http://ksria.com/simpread/docs/#/Sync?id=发送到Kindle) 
-
-- [小书签](http://ksria.com/simpread/docs/#/Bookmarklet) 
-
-等多种服务，下载地址 👉 [包含多种平台](http://ksria.com/simpread/docs/#/Sync?id=下载)
-
-#### 每日回顾 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-> 简悦会在 **每天晚上 19点10分** 给你的邮箱发送一封二十四小时以内添加的稍后读，用作当天的每日回顾，同时发送内容也适配了手机端，你可以利用此功能对某些文章做 **精读**，详细说明 [请看这里](http://ksria.com/simpread/docs/#/每日回顾)。
-
-> 每日回顾的内容包括：链接，标题，描述，正文，标签，标注（备注 / 标签）。
-
-#### 自动同步 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-> 继续秉承 **不绑架用户的数据，还数据给用户**，用你喜欢的网盘 **自动同步** 你的数据，详细说明 [请看这里](http://ksria.com/simpread/docs/#/Sync?id=自动同步)。
-
-#### 授权登录 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-
-> 使用你的 **坚果云** 或 **Dropbox** 账户登录你的 **简悦 · 简悦账户**，详细说明 [请看这里](http://ksria.com/simpread/docs/#/授权登录)。
+  > 使用 JavaScript 编写基于 `简悦` 的插件了，请看 [插件中心](https://simpread.ksria.cn/plugins/)
 
 ## 全部功能
 
@@ -372,12 +260,17 @@
 ## 简悦的诞生离不开它们
 <http://ksria.com/simpread/docs/#/开源列表>
 
+## 许可
+[![license-badge]][license-link]
+
 <!-- Link -->
 [www-badge]:        https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg
 [www-link]:         http://ksria.com/simpread
-[version-badge]:    https://img.shields.io/badge/lastest_version-2.1.0-blue.svg
+[version-badge]:    https://img.shields.io/badge/lastest_version-2.0.0-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
-[offline-link]:     http://ksria.com/simpread/crx/2.1.0/simpread.crx
+[offline-link]:     http://ksria.com/simpread/crx/2.0.0/simpread.crx
+[license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
+[license-link]:     https://opensource.org/licenses/MIT
