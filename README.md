@@ -111,7 +111,7 @@
 
   - 将多种符合整合在一起的 [自动化方案](http://ksria.com/simpread/docs/#/自动化)，可以理解为 **简悦的 IFTTT**。
 
-#### 标注系统 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png)
+#### 标注系统 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 
 > **[标注系统](http://ksria.com/simpread/docs/#/标注)** 是简悦 2.0 最重要的一个功能，借用此功能，可以让简悦真正你的成为生产力工具。
 
@@ -139,7 +139,7 @@
 
 > 如何使用以及详细内容 [请看这里](http://ksria.com/simpread/docs/#/标注)
 
-#### 稍后读 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png)
+#### 稍后读 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 
 > 简悦 2.0 启用了全新的 **[稍后读 2.0](http://ksria.com/simpread/docs/#/稍后读)**， 相比较之前的版本，此版本的稍后读算做是一个真正意义的稍后读。
 
@@ -157,7 +157,7 @@
 
 ![Evergree Notes](https://z3.ax1x.com/2021/05/17/g2IHyQ.gif)
 
-#### 同步助手
+#### 同步助手 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
 
 ![](https://z3.ax1x.com/2021/05/19/g4vN9S.png)
 
