@@ -1,0 +1,1 @@
+此文档因为输入错误，请前往 [正确的地址](https://simpread.pro/api/#/tools?id=telegram-bot)。
