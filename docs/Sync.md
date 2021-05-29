@@ -1,5 +1,7 @@
 > [简悦 · 同步助手](Sync) 是 **随着简悦 2.1.0 发布的一个全新的 Desktop App**，用于对简悦已知功能的补充，以及会 **持续提供更多** 的可玩性。
 
+![](https://z3.ax1x.com/2021/05/19/g4vN9S.png)
+
 目录
 ---
 
@@ -362,7 +364,9 @@ Bookmarklet
 
 详细 [请看这里](Bookmarklet)
 
+***
 
+> 同步助手的 Logo 自于社区用户 [Shawn](https://shawnan.design/) 的设计。
 
 
 
