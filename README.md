@@ -109,6 +109,8 @@
 
   - 定制化导出，可以方便导入到 Obsidian · Roam Research · Logseq 等双链笔记，更多说明及用法 [请看这里](https://github.com/Kenshin/simpread/discussions/2085)。
 
+  - 支持 [Webhooks](http://ksria.com/simpread/docs/#/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%AF%BC%E5%87%BA?id=webhook)
+
   - 将多种符合整合在一起的 [自动化方案](http://ksria.com/simpread/docs/#/自动化)，可以理解为 **简悦的 IFTTT**。
 
 #### 标注系统 ![new](https://s1.ax1x.com/2020/07/25/UzKubn.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
