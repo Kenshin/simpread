@@ -1033,60 +1033,12 @@
         ]
     },{
         "name"    : "infoq.cn",
-        "url"     : "http*://www.infoq.cn/article/*",
-        "title"   : "<title>",
-        "desc"    : "",
-        "include" : "<div class='article-content'>",
-        "exclude" : [
-            ""
-        ]
-    },{
-        "name"    : "xie.infoq.cn",
-        "url"     : "http*://xie.infoq.cn/article/*",
+        "url"     : "http*://*.infoq.cn/**/*",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[(function(){var wrap = $('.preview-wrap');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素，请重新进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>');$('head').append(wrap);}return wrap;}())]]]",
+        "include" : "[[[(function(){var wrap = $('.article-preview,.article-typo');if(!wrap.length) {wrap = $('<p>异步加载型页面，本次未能获取到内容元素。<br>请将 infoq.cn 加入排除列表后，刷新页面并手动进入阅读模式尝试</p><br><p>'+''.padEnd(100,'#')+'</p>');$('head').append(wrap);}return wrap;}())]]]",
         "exclude" : [
             ""
-        ]
-    },{
-        "name"    : "infoq.com",
-        "url"     : "http://www.infoq.com/cn/articles/",
-        "title"   : "<title>",
-        "desc"    : "",
-        "include" : "<div class='text_info_article'>",
-        "exclude" : [
-            "<div class='random_links'>",
-            "<div id='comment_here'>",
-            "<div class='comments'>",
-            "<div class='all_comments'>",
-            "<div id='overlay_comments'>",
-            "<div id='replyPopup'>",
-            "<div id='editCommentPopup'>",
-            "<div id='messagePopup'>",
-            "<div id='responseContent'>",
-            "<div class='related'>",
-            "<div class='comment_here'>",
-            "<script>",
-            "<div class='all_comments'>",
-            "<div class='comments'>",
-            "[['<p>对本文的审校</p>']]",
-            "[['<p>中文站投稿或者参与内容翻译工作</p>']]",
-            "[['<b>QCon北京2017</b>']]"
-        ]
-    },{
-        "name"    : "news.infoq.com",
-        "url"     : "http://www.infoq.com/cn/news/**/*",
-        "title"   : "<h1 class='general'>",
-        "desc"    : "",
-        "include" : "<div class='text_info'>",
-        "exclude" : [
-            "<div class='random_links'>",
-            "<div class='related'>",
-            "<div class='comment_here'>",
-            "<script>",
-            "<div class='all_comments'>",
-            "<div class='comments'>"
         ]
     },{
         "name"    : "segmentfault.com",
