@@ -241,7 +241,8 @@
             "<hr>",
             "[['<span>我们主张分享真实的产品体验</span>']]",
             "[['<span>本文内容仅代表作者本人观点</span>']]",
-            "[[/src=\\S+(342459.png)\\S+'/]]"
+            "[[/src=\\S+(342459.png)\\S+'/]]",
+            "<sup>"
         ]
     },{
         "name"    : "m.dgtle.com",
@@ -280,7 +281,8 @@
         "include" : "[[[$('.Post-RichText')]]]",
         "exclude" : [
             "[[{(function(){$('sr-rd-content figure noscript').each(function(){var noscript = $(this).text();if(noscript.match(/<img/)) {var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);}});}())}]]"
-        ]
+        ],
+        "css"     : ".simpread-font {overflow: initial!important;}"
     },{
         "name"    : "dudu.zhihu.com",
         "url"     : "http://dudu.zhihu.com/story/",
@@ -308,7 +310,7 @@
             {"url"  : "[[{$('.AuthorInfo-avatar')}]]"}
         ],
         "title"   : "[[{$('main .QuestionHeader-main').find('h1').text()}]]",
-        "desc"    : "[[{(function(){var questions=JSON.parse($('#js-initialData').text()).initialState.entities.questions;var detail='';for(const id in questions){detail=questions[id].detail;break;};var text=$('<p>').append(detail).text();return text.replaceAll('。','.').replace(/\\.$/,'。');}())}]]",
+        "desc"    : "",
         "include" : "[[{$('.RichContent-inner')}]]",
         "exclude" : [
             "[[{(function(){$('sr-rd-content figure noscript').each(function(){var noscript = $(this).text();if(noscript.match(/<img/)) {var img = $(this).parent().empty().append(noscript).find('img');var src = img.attr('src') || '';if(src.match(/.gif/)) img.attr('real_src',src);}});}())}]]",
@@ -894,7 +896,7 @@
             ""
         ]
     },{
-        "name"    : "www.yixieshi.com",
+        "name"    : "yixieshi.com",
         "url"     : "http*://www.yixieshi.com/*.html",
         "title"   : "<h1 class='post-title'>",
         "desc"    : "",
@@ -1870,6 +1872,16 @@
         ],
         "css": "code { background-color: transparent; }"
     },{
+        "name"    : "threadreaderapp.com",
+        "url"     : "https://threadreaderapp.com/thread/*.html",
+        "title"   : "[[{(function(){return $($('.content-tweet')[0]).text().replace('\\n','')}())}]]",
+        "desc"    : "",
+        "include" : "[[{(function(){let html='';$('.container.narrow').find('.content-tweet').map((idx,item)=>{if(idx>0){html+=$(item).html()}});return html})()}]]",
+        "exclude" : [
+            ""
+        ],
+        "css": ""
+    },{
         "name"    : "voidcn.com",
         "url"     : "http://www.voidcn.com/blog/**/*/*.html",
         "title"   : "<h1 class='title'>",
@@ -2266,7 +2278,7 @@
             "<ul class='pagination'>"
         ]
     },{
-        "name"    : "www.guancha.cn",
+        "name"    : "guancha.cn",
         "url"     : "https://www.guancha.cn/**/*html",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
@@ -3092,15 +3104,39 @@
         ]
     },{
         "name"    : "medium.com",
-        "url"     : "https://medium.com/@*/**/*",
+        "url"     : "https://*.medium.com/**",
         "title"   : "<title>",
-        "desc"    : "",
-        "include" : "<div class='section-content'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$($('article .n.p')[0])]]]",
         "exclude" : [
-            "<h1 class='graf--title'>",
-            "<img class='progressiveMedia-thumbnail'>",
-            "<canvas class='progressiveMedia-canvas'>",
-            "<figcaption class='imageCaption'>"
+            "<div class=\"sr-rd-content-exclude\">"
+        ]
+    },{
+        "name"    : "2.medium.com",
+        "url"     : "https://medium.com/@*/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$($('article .n.p')[0])]]]",
+        "exclude" : [
+            "<div class=\"sr-rd-content-exclude\">"
+        ]
+    },{
+        "name"    : "3.medium.com",
+        "url"     : "https://medium.com/*/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$($('article .n.p')[0])]]]",
+        "exclude" : [
+            "<div class=\"sr-rd-content-exclude\">"
+        ]
+    },{
+        "name"    : "4.medium.com",
+        "url"     : "https://medium.*.com/**",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$($('article .n.p')[1])]]]",
+        "exclude" : [
+            "<div class=\"sr-rd-content-exclude\">"
         ]
     },{
         "name"    : "news.bbc.com",
@@ -3388,7 +3424,7 @@
             "<svg>"
         ]
     },{
-        "name"    : "www.52pojie.cn",
+        "name"    : "52pojie.cn",
         "url"     : "http*://www.52pojie.cn/thread-*",
         "title"   : "[[{$('meta[name=keywords]').attr('content')||$('title').text()}]]",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
@@ -3426,7 +3462,7 @@
         ],
         "css"     : "sr-rd-mult sr-rd-mult-content{width:100%;overflow:hidden}sr-rd-content table td,sr-rd-content table th{border:1px solid transparent}sr-rd-content pre{white-space:pre-wrap}"
     },{
-        "name"    : "www.dedao.cn",
+        "name"    : "dedao.cn",
         "url"     : "http*://www.dedao.cn/article/*",
         "title"   : "[[{$('.article-title').text()||$('title').text()}]]",
         "desc"    : "[[{$('div.course-title').text()||$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
@@ -3437,7 +3473,7 @@
             "[[{$('.letter')}]]"
         ]
     },{
-        "name"    : "www.chongdiantou.com",
+        "name"    : "chongdiantou.com",
         "url"     : "http*://www.chongdiantou.com/wp/archives/*",
         "title"   : "<title>",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
@@ -3495,15 +3531,95 @@
         ],
         "css"     : ".simpread-read-root {align-items: baseline;}"
     },{
-        "name"    : "colah.github.io",
-        "url"     : "http*://colah.github.io/posts/**",
-        "title"   : "<title>",
+        "name"    : "sciencedirect.com",
+        "url"     : "https://www.sciencedirect.com/science/article/pii/*",
+        "title"   : "<span class='title-text'>",
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
-        "include" : "[[[(()=>{let body=$('.col-md-8 #body');if(!body.length){body=$('.col-md-8')};return body})()]]]",
+        "include" : "[[{(()=>{let html=\"\",abstract=\"\",graphical=\"\",keywords=\"\",body=\"\",references=\"\";abstract=$(\"body #abstracts\").html();$(\"body .Keywords.u-font-serif .keywords-section\").map((idx,item)=>{keywords+=\"<h2>\"+$(item).find(\"h2\").text()+\"</h2>\";let keyword=\"\";$(item).find(\".keyword\").map((idx,item)=>{keyword+=`<span>${item.innerText}&nbsp;&nbsp;</span>`});keywords+=`<span>${keyword}</span>`});body=$(\"body #body\").html();references=$(\"body dl.references\").html();html=abstract+keywords+body+references;$(\"html\").append(`<div class=\"simpread-clone-root\"style=\"display:none;\">${html}</div>`);$(\".simpread-clone-root\").find(\"h2\").removeAttr(\"class\").removeAttr(\"id\");html=$(\".simpread-clone-root\").html();$(\".simpread-clone-root\").remove();return html})()}]]",
         "exclude" : [
-            "[[[$('sr-rd-content h1:first').next().prevAll()]]]",
-            "[[[$('sr-rd-content .footnotes').nextAll()]]]",
-            "[[[$('sr-rd-content .main-disqussion-link-wrp').prev().nextAll()]]]"
-        ]
+            ""
+        ],
+        "css"     : ""
+    },{
+        "name"    : "ncbi.nlm.nih.gov",
+        "url"     : "https://www.ncbi.nlm.nih.gov/pmc/articles/*/",
+        "title"   : "<h1 class='content-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='tsec sec'>",
+        "exclude" : [
+            "<div class='jig-ncbiinpagenav-goto-container'>",
+            "<div class='ts_bar small'>"
+        ],
+        "css"     : "sr-rd-content .figure {\n    all: unset;\n}\nsr-rd-content .head, sr-rd-content .sub-head {\n    border-bottom: none;\n}"
+    },{
+        "name"    : "journals.biologists.com",
+        "url"     : "https://journals.biologists.com/bio/article/*/*/*/*/*",
+        "title"   : "<h1 class='wi-article-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[{(()=>{let html=\"\";html=$(\"body .widget-items[data-widgetname=ArticleFulltext]\").html();$(\"html\").append(`<div class=\"simpread-clone-root\"style=\"display:none;\">${html}</div>`);$(\".simpread-clone-root\").find(\"h2,h3\").removeAttr(\"class\").removeAttr(\"id\");html=$(\".simpread-clone-root\").html();$(\".simpread-clone-root\").remove();return html})()}]]",
+        "exclude" : [
+            ""
+        ],
+        "css"     : "sr-rd-content section.abstract, sr-rd-content section.abstract * {\n    all: unset!important;\n}\nsr-rd-content .citation div {\n    all: unset;\n}\n\nsr-rd-content .citation.mixed-citation {\n    all: unset;\n}"
+    },{
+        "name"    : "cell.com",
+        "url"     : "https://www.cell.com/*/fulltext/*",
+        "title"   : "<h1 class='article-header__title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='article__sections'>",
+        "exclude" : [
+            ""
+        ],
+        "css"     : "sr-rd-content .dropBlock__body {\n    display: none;\n}\nsr-rd-content .refs ol:not([class^=rlist]):not([class~=rlist])>li.ref:before {\n    display: none;\n}"
+    },{
+        "name"    : "elifesciences.org",
+        "url"     : "https://elifesciences.org/articles/*",
+        "title"   : "<h1 class='content-header__title--x-long'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[{(()=>{let html=\"\";html=$($(\"body .content-container\")[0]).html();return html})()}]]",
+        "exclude" : [
+            "<div class='speech-bubble--container'>"
+        ],
+        "css"     : "sr-rd-content .article-section__toggle:after {\n    display: none!important;\n}\nsr-rd-content a.article-section__toggle {\n    text-decoration: none!important;\n}\nsr-rd-content .article-section--js {\n    border: none!important;\n}"
+    },{
+        "name"    : "pnas.org",
+        "url"     : "https://www.pnas.org/content/*/*/*",
+        "title"   : "<h1 class='highwire-cite-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='fulltext-view'>",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ""
+    },{
+        "name"    : "science.sciencemag.org",
+        "url"     : "https://science.sciencemag.org/content/*/*/*",
+        "title"   : "<div class='highwire-cite-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='fulltext-view'>",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ""
+    },{
+        "name"    : "nature.com",
+        "url"     : "https://www.nature.com/articles/*",
+        "title"   : "<h1 class='c-article-title'>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "<div class='c-article-body'>",
+        "exclude" : [
+            "<div id='article-info-section'>"
+        ],
+        "css"     : "sr-rd-content .c-article-box__container {\n    height: initial!important;\n}\nsr-rd-content .c-article-box__controls {\n    display: none;\n}"
+    },{
+        "name"    : "frontiersin.org",
+        "url"     : "https://www.frontiersin.org/articles/*/*/full",
+        "title"   : "[[{$('meta[property=\"og:title\"').attr('content')}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[{(()=>{let html=\"\";if($($(\"body .mb0\")[0]).length>0){html=`<div>${$($(\"body .mb0\")[0]).html()}</div>`}html+=$(\"body .JournalFullText\").html();return html})()}]]",
+        "exclude" : [
+            ""
+        ],
+        "css"     : "sr-rd-content .FigureDesc {\n    background: #eee;\n    padding: 20px;\n    height: 100%;\n}\n\nsr-rd-content .FigureDesc .sr-rd-content-center-small {\n    all: unset!important;\n}\n\nsr-rd-content .FigureDesc img {\n    float: left;\n    margin-top: 40px;\n    margin-right: 30px;\n}\n\nsr-rd-content .FigureDesc p {\n    color: #3e3d40;\n    font-family: Georgia,\"Times New Roman\",Times,serif;\n    font-size: 18px;\n    line-height: 28px;\n    font-weight: 300;\n    margin: 0 0 10px;\n}"
     }]
 }
