@@ -293,5 +293,5 @@
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
 [offline-link]:     http://ksria.com/simpread/crx/2.0.0/simpread.crx
-[license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
+[license-badge]:    https://img.shields.io/badge/license-GPL-blue
 [license-link]:     https://opensource.org/licenses/gpl-license
