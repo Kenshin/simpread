@@ -279,6 +279,9 @@
 <http://ksria.com/simpread/docs/#/开源列表>
 
 ## 许可
+
+> 简悦 1.x（截至到 1.1.4.6205）是开源版本，2.x 为闭源版本，且仅闭源了 **标注** 与 **稍后读** 相关功能。
+
 [![license-badge]][license-link]
 
 <!-- Link -->
@@ -290,5 +293,5 @@
 [chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
 [offline-link]:     http://ksria.com/simpread/crx/2.0.0/simpread.crx
-[license-badge]:    https://img.shields.io/github/license/mashape/apistatus.svg
-[license-link]:     https://opensource.org/licenses/MIT
+[license-badge]:    https://img.shields.io/badge/license-GPL-blue
+[license-link]:     https://opensource.org/licenses/gpl-license
