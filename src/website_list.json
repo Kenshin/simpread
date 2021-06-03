@@ -892,7 +892,7 @@
         "desc"    : "[[{$('.note-single-item--selected .note-item__detail--summary').text()}]]",
         "include" : "[[[(function(){var note=$('.ql-editor');if(note.length){if(note.text().length<100)note.append('<p>笔记内容过短，未避免阅读模式失败，自动填充内容。</p><br><p>'+''.padEnd(80,'#')+'</p>');}else{note=$('<p>未能获取到笔记内容，请确认是否存在笔记内容。</p><br><p>'+''.padEnd(80,'#')+'</p>');$('head').append(note);}return note;}())]]]",
         "exclude" : [
-            "[[{(function(){var video_url=$('.note-single-item--selected .note-item__detail--info a').attr('href');var title=$('sr-rd-title').text().trim();var div=$(`<div><p>视频：<a href='${video_url}'>${title}</a></p></div>`);$('sr-rd-content').prepend(div);$('sr-rd-content div[data-seconds]').each(function(){var div=$(this);var time=div.find('div span').text();var p=div.attr('data-index');var t=div.attr('data-seconds');var url=video_url+`&p=${p}&t=${t}`;div.html(`<p><a href='${url}'>视频时间点：${time}</a></p>`);});$('sr-rd-content').children('div').contents().each(function(){if(this.nodeType===3)this.nodeValue=''});}())}]]",
+            "[[{(function(){var video_url=$('.note-single-item--selected .note-item__detail--info a').attr('href');var title=$('sr-rd-title').text().trim();var div=$(`<div><p>视频链接：<a href='${video_url}'>${title}</a></p></div>`);$('sr-rd-content').prepend(div);$('sr-rd-content div[data-seconds]').each(function(){var div=$(this);var time=div.find('div span').text();var p=div.attr('data-index');var t=div.attr('data-seconds');var url=video_url+`&p=${p}&t=${t}`;div.html(`<p><a href='${url}'>▶ ${time}</a></p>`);});$('sr-rd-content .ql-image-preview').removeAttr('style');$('sr-rd-content').children('div').contents().each(function(){if(this.nodeType===3)this.nodeValue=''})})()}]]",
             ""
         ]
     },{
