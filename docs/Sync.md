@@ -88,6 +88,8 @@
 
 > 在 Windows 上运行可能会被 360类的产品误报，因为同步助手使用了 Electron 技术，所以有可能存在此情况，如果是在上述官方提到的渠道下载，请放心使用。
 
+> 如果你在运行同步助手是遇到了问题，[Mac 用户看这里](https://github.com/Kenshin/simpread/discussions/2283) [Windows 用户看这里](https://github.com/Kenshin/simpread/discussions/2129)。
+
 验证
 ---
 
@@ -125,7 +127,6 @@
 配置起来很简单，只需要选择 **配置文件保存的本地文件夹位置** 后就可以了。
 
 [![BX4SyV.png](https://s1.ax1x.com/2020/11/11/BX4SyV.md.png)](https://imgchr.com/i/BX4SyV)
-
 
 自动同步
 ---
