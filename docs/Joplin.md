@@ -17,7 +17,7 @@
 - Joplin 新建 Notebook，并命名为 `SimpRead`
 - Joplin → Options → Web Clipper → 复制你的 Token
   ![U48prQ.png](https://s1.ax1x.com/2020/07/20/U48prQ.md.png)
-- 简悦 → 选项页 → 高级设定 → 授权管理
+- 简悦 → 选项页 → 服务 → 授权管理
   ![U48cQS.png](https://s1.ax1x.com/2020/07/20/U48cQS.png)
 - 粘贴上步复制的 Token 并选择 **验证并绑定 Joplin 的信息** 即可
 

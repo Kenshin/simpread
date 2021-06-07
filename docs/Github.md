@@ -19,7 +19,7 @@
 - 勾选 repo 权限，并对其命名，如下图：
   ![U4J7b4.png](https://s1.ax1x.com/2020/07/20/U4J7b4.png)
 
-- 简悦 → 选项页 → 高级设定 → 授权管理
+- 简悦 → 选项页 → 高级设定 → 服务
   [![U4YZxf.png](https://s1.ax1x.com/2020/07/20/U4YZxf.png)](https://imgchr.com/i/U4YZxf)
   1. 填入上个步骤生成的 Token
   2. 需要导入的 owner/repo 地址 e.g. Kenshin/simpread

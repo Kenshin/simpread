@@ -3,7 +3,7 @@
 ***
 
 [**Textbundle**](http://textbundle.org/) 是一个包含图片资源的 Markdown 格式，相比 **离线 Markdown** 来说，因为未使用 Base64 编码，所以比 **离线 Markdown** 更友好。
-大多数主流 Markdown 编辑器都支持，如：Bear Carft FSNotes 等，需使用 [**简悦 · 同步助手 1.0.1**](http://ksria.com/simpread/docs/#/Sync) 才支持导出此格式。
+大多数主流 Markdown 编辑器都支持，如：Bear Craft FSNotes 等，需使用 [**简悦 · 同步助手 1.0.1**](http://ksria.com/simpread/docs/#/Sync) 才支持导出此格式。
 
 ## 如何使用
 

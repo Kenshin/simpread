@@ -30,7 +30,7 @@
 ---
 
 1. https://feedly.com/
-2. https://www.inoreader.com/  https://www.inoreader.com/
+2. https://www.inoreader.com/  https://www.innoreader.com/
 3. https://feedbin.com/
 
 如何使用

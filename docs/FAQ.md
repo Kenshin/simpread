@@ -62,7 +62,7 @@
 >
 > 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
 
-![Imgur](http://i.imgur.com/dyROEBi.png) → 右键 → 选项 → 高级设定 → 排除列表` ，如图：
+![Imgur](http://i.imgur.com/dyROEBi.png) → 右键 → 选项 → 高级设定 → 排除列表 ，如图：
 ![Imgur](http://i.imgur.com/CdoZOkUl.png)
 
 **添加规则**

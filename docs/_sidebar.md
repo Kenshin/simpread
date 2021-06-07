@@ -1,4 +1,4 @@
-* [**文档中心**](Home.md)
+* [**文档中心**](Home)
 * **快速开始**
   * [新手入门](入门指南（-操作指引-）)
   * [常见问题](FAQ)
@@ -16,18 +16,17 @@
       * [自动进入阅读模式](入门指南（-操作指引-）?id=自动进入阅读模式)
   * 手动模式
     * [介绍](手动框选)
-* **简悦 2.0 · 标注**  ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
+* **简悦 2.0 · 标注 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
   * [标注](标注)
-* **简悦 2.0 · 稍后读**  ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
+* **简悦 2.0 · 稍后读 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
   * [稍后读](稍后读)
   * [稍后读 · 多种布局](稍后读-多种布局)
-* **简悦 2.0 · 高级账户** ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)
+* **简悦 2.0 · 高级账户 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
   * [高级账户](高级账户)
   * [授权登录 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](授权登录)
-  * 重要 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
-    * [已购必读](已购必读) 
-    * [常见问题](https://github.com/Kenshin/simpread/issues/908)
-* **简悦 · 同步助手**   ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+  * [已购必读 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](已购必读)
+  * [常见问题](https://github.com/Kenshin/simpread/issues/908)
+* **简悦 · 同步助手 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
   * [介绍](Sync)
   * [下载](Sync?id=下载)
   * [同步](Sync?id=同步)
@@ -41,7 +40,7 @@
     * [Textbundle](Textbundle) 
   * [小书签](Bookmarklet)
   * [发送到Kindle](Sync?id=发送到Kindle)
-* **服务** ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+* **服务 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
   * [前言](服务)
   * [导出到本地](保存到本地)
     * 支持服务
@@ -80,7 +79,7 @@
   * [开放平台  ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://simpread.pro/api)
   * [发送邮件](Sync?id=邮件服务)
   * [每日回顾](每日回顾)
-* **数据文件**   ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)
+* **数据文件 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
   * [配置文件](配置文件)
   * [同步](同步)
     * [手动同步](同步?id=手动同步)

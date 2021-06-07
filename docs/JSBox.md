@@ -107,7 +107,7 @@
 - 安装 [简悦 for Chrome](http://ksria.com/simpread/#download)；
 - 打开 选项 → 共通 → 同步到你的 Dropbox _Chrome 版会自动授权_
 - 打开 选项 → 高级设定 → 确保勾选 **同步时是否包含授权码** 
-- 打开 选项 → 高级设定 → 授权管理 _请授权你常用的服务，目前 iOS 版仅支持：Pocket / Evernote / 印象笔记 / Dropbox_
+- 打开 选项 → 高级设定 → 服务 _请授权你常用的服务，目前 iOS 版仅支持：Pocket / Evernote / 印象笔记 / Dropbox_
 - 打开 选项 → 共通 → 导出配置文件到本地；
 - 同任意文本编辑器打开的导出文件，搜索 `dropbox` 复制对应的 `access_token` 即可；
 

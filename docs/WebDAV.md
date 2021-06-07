@@ -13,7 +13,7 @@
 
 - Box.net WebDAV 地址为 https://dav.box.com/dav/
 
-- 在 选项页 → 授权管理 WebDAV 键入如下的结构
+- 在 选项页 → 服务 → 授权管理 WebDAV 键入如下的结构
 
   ```
   {"name":"Box","user":"admin@simpread.com","password":"abcdefg", "url": "https://dav.box.com/dav/"}

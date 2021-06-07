@@ -8,12 +8,11 @@
 
 > 简悦的订阅中心 👉 https://simpread.pro/subscribe （欢迎订阅简悦 ）
 
-> 为了满足新手上手简悦的高级功能，增加了 👉 [新手入门](http://ksria.com/simpread/guide/)
+> 为了满足新手上手简悦的高级功能，增加了新手入门 👉 [互动式](http://ksria.com/simpread/guide/) [视频介绍](https://www.bilibili.com/video/BV1JA411L7Ev)
 
 > 简悦 · 高级账户的相关问题 👉[高级账户]([https://github.com/Kenshin/simpread/discussions/categories/高级账户)
 
 > 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧) · [与其它服务的联动](https://github.com/Kenshin/simpread/discussions/categories/服务)
-
 
 > 当在使用过程中遇到了一些问题，也可访问这里查看 👉 [重要通知](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
 
@@ -21,7 +20,9 @@
 简悦的各种平台
 ---
 
-- Chrome   ·  Microsoft Edge 👉 [全功能版](http://ksria.com/simpread/#downloads)
+- Chrome  👉 [全功能版](https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll)
+
+- Microsoft Edge 👉 [全功能版](https://microsoftedge.microsoft.com/addons/detail/clgdhlhfiocphghdkdbgdlmfaafccfmc)
 
 - Apple Safari · Firefox 👉  [UserScript 轻阅版](http://ksria.com/simpread/#lite)
 

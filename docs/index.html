@@ -42,28 +42,54 @@
     <meta name="theme-color" content="#1976d2">
 
     <link rel="stylesheet" href="vendor/themes/vue.css">
-	<style type="text/css">.sidebar-nav a{display:flex!important;align-items:center;} .sidebar-nav a img{margin-left:5px;}</style>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet"/>
+    <style type="text/css">.sidebar-nav a{display:flex!important;align-items:center;} .sidebar-nav a img{margin-left:5px;}.sidebar ul li strong {display: flex;flex-direction: row;align-items: center;}.sidebar ul li strong img {margin-left: 5px;}.sidebar-nav li.file strong {font-size: 15px;}</style>
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
       name: '简悦 · 官网',
-	  nameLink: 'http://ksria.com/simpread/',
+      nameLink: 'https://simpread.pro',
       repo: 'https://github.com/Kenshin/simpread/',
-	  homepage: 'Home.md',
-	  loadSidebar: true,
-	  subMaxLevel: 2,
-	  auto2top: true,
-	  mergeNavbar: true,
-	  ga: 'UA-405976-9',
-	  search: 'auto',
+      homepage: 'Home.md',
+      noEmoji: true,
+      loadSidebar: true,
+      loadNavbar: true,
+      maxLevel: 4,
+      subMaxLevel: 2,
+      sidebarDisplayLevel: 0,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+      auto2top: true,
+      ga: 'UA-405976-9',
+      search: 'auto',
+      pagination: {
+        previousText: '上一章节',
+        nextText: '下一章节',
+      },
+      progress: {
+        position: "top",
+        color: "var(--theme-color,#42b983)",
+        height: "3px",
+      },
     }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/docsify.min.js" integrity="sha256-XMY0G7hpWotAJ/tZEZ0z3fue/UgKL2uQOQv1lKhjmpY=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/front-matter.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-plugin-flexible-alerts"></script>
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/zoom-image.min.js" integrity="sha256-9XY6xl1iRHy/YPKkaiYADE5uQ0W4TrUfcCnG0UqAo+o=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/ga.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/search.min.js" integrity="sha256-0DbPOmGeEjy/hP2rhFOwt5EwWZpEDUv+2NheJXSRLCU=" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/zoom-image.min.js" integrity="sha256-9XY6xl1iRHy/YPKkaiYADE5uQ0W4TrUfcCnG0UqAo+o=" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/ga.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/search.min.js" integrity="sha256-0DbPOmGeEjy/hP2rhFOwt5EwWZpEDUv+2NheJXSRLCU=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="//unpkg.com/docsify-material-icons/dist/docsify-material-icons.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-progress@latest/dist/progress.min.js"></script>
+
 </body>
 </html>
