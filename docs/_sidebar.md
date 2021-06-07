@@ -1,3 +1,4 @@
+* [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
 * [**文档中心**](Home)
 * **快速开始**
   * [新手入门](入门指南（-操作指引-）)
@@ -14,32 +15,33 @@
       * [阅读进度](阅读进度)
       * [控制栏](阅读模式-控制栏)
       * [自动进入阅读模式](入门指南（-操作指引-）?id=自动进入阅读模式)
-  * 手动模式
-    * [介绍](手动框选)
-* **简悦 2.0 · 标注 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
+      * [浮动控制面板](浮动控制面板（FAP）与浮动控制栏（FAB）)
+  * [手动模式](手动框选)
+* **标注 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
   * [标注](标注)
-* **简悦 2.0 · 稍后读 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
+* **稍后读 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
   * [稍后读](稍后读)
   * [稍后读 · 多种布局](稍后读-多种布局)
-* **简悦 2.0 · 高级账户 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
+* **高级账户 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
   * [高级账户](高级账户)
   * [授权登录 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](授权登录)
   * [已购必读 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](已购必读)
   * [常见问题](https://github.com/Kenshin/simpread/issues/908)
-* **简悦 · 同步助手 ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png) ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
+* **同步助手 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
   * [介绍](Sync)
   * [下载](Sync?id=下载)
   * [同步](Sync?id=同步)
   * [自动同步](自动同步)
     * [注意事项](自动同步?id=注意事项)
   * [内置解析](Sync?id=内置解析)
-  * [导出服务  ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](Sync?id=导出服务)
+  * [导出服务 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](Sync?id=导出服务)
     * [PDF](Sync?id=PDF)
     * [Epub](Sync?id=Epub)
     * [pandoc](Sync?id=pandoc) 
     * [Textbundle](Textbundle) 
   * [小书签](Bookmarklet)
   * [发送到Kindle](Sync?id=发送到Kindle)
+  * [RSS 阅读器辅助](RSSReader)
 * **服务 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
   * [前言](服务)
   * [导出到本地](保存到本地)
@@ -57,28 +59,28 @@
       * Pocket
       * Instapaper
       * 语雀
-      * [坚果云 ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](坚果云)
-      * [有道云笔记 ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](有道云笔记)
+      * [坚果云 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](坚果云)
+      * [有道云笔记 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](有道云笔记)
       * 印象笔记 | Evernote
-      * [为知笔记 ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](为知笔记)
-      * Google 云端硬盘 
+      * [为知笔记 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](为知笔记)
+      * Google 云端硬盘
       * Dropbox
-      * [WebDAV ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](WebDAV)
-      * [Notion ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Notion)
-      * [Github ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Github)
-      * [Joplin ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Joplin)
-      * [专注笔记 ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](专注笔记)
+      * [WebDAV ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](WebDAV)
+      * [Notion ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Notion)
+      * [Github ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Github)
+      * [Joplin ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Joplin)
+      * [专注笔记 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](专注笔记)
       * Onenote
-      * [Bear | Ulysses ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](URLSCHEME)
+      * [Bear | Ulysses ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](URLSCHEME)
   * [自动化](自动化)
   	* [自动化服务](自动化服务)
   * [定制导出](定制化导出)
     * [Webhook](定制化导出?id=Webhook)
     * [自定义导出](定制化导出?id=自定义导出)
   * [增强导出](Sync?id=导出服务)
-  * [开放平台  ![1NqLQg.png](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://simpread.pro/api)
   * [发送邮件](Sync?id=邮件服务)
   * [每日回顾](每日回顾)
+* [**开放平台** ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://simpread.pro/api)
 * **数据文件 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
   * [配置文件](配置文件)
   * [同步](同步)
@@ -109,19 +111,16 @@
   * [分享卡](分享卡)
   * [消息中心](消息中心)
   * [帮助中心](帮助中心)
-  * [浮动控制面板](浮动控制面板（FAP）与浮动控制栏（FAB）)
   * [更新](更新)
   * [自定义样式](自定义样式)
   * 插件系统
     * [前言](插件系统)
     * [开发](插件编写)
   * [账户系统](账户系统)
-* **高级功能**
+* **站点适配**
   * [适配站点](适配站点)
   * [站点编辑器](站点编辑器)
   * [站点管理器](站点管理器)
   * [站点适配源](站点适配源)
   * [站点集市](站点集市)
   * [待决站点](待决站点)
-* **简悦 2.0 · 其它功能**
-  * [RSS 阅读器辅助](RSSReader)
