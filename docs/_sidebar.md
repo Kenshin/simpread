@@ -1,8 +1,6 @@
 * [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
+* [**快速开始 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/wiki)
 * [**文档中心**](Home)
-* **快速开始**
-  * [新手入门](入门指南（-操作指引-）)
-  * [常见问题](FAQ)
 * **基础功能**
   * 聚焦模式
     * [介绍](聚焦模式)
@@ -80,7 +78,6 @@
   * [增强导出](Sync?id=导出服务)
   * [发送邮件](Sync?id=邮件服务)
   * [每日回顾](每日回顾)
-* [**开放平台** ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://simpread.pro/api)
 * **数据文件 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
   * [配置文件](配置文件)
   * [同步](同步)
@@ -124,3 +121,5 @@
   * [站点适配源](站点适配源)
   * [站点集市](站点集市)
   * [待决站点](待决站点)
+* [常见问题](FAQ)
+* [**开放平台** ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://simpread.pro/api)

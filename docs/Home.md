@@ -4,7 +4,7 @@
 起始于此
 ---
 
-嗨，你好，这里是简悦的文档中心，简悦的一切功能都可以在这里找到详细说明。这里适合动手能力强的用户，如果你是新用户的话，可以往下看，有适合你的内容。
+嗨，你好，这里是简悦的文档中心，简悦的一切功能都可以在这里找到详细说明。这里适合动手能力强的用户，如果你是新用户的话，可以看看 [知识库](https://simpread.pro/wiki) 帮助你更好的使用，了解简悦。
 
 简悦是什么
 ---
@@ -23,7 +23,9 @@
 
 > 简悦的帮助中心 👉 https://simpread.pro/help
 
-> 简悦的订阅中心 👉 https://simpread.pro/subscribe （欢迎订阅简悦 ）
+> 简悦的订阅中心 👉 https://simpread.pro/subscribe
+
+> 简悦的知识库 👉 https://simpread.pro/wiki
 
 > 为了满足新手上手简悦的高级功能，增加了新手入门 👉 [互动式](http://ksria.com/simpread/guide/) [视频介绍](https://www.bilibili.com/video/BV1JA411L7Ev)
 
@@ -117,7 +119,7 @@
 - [簡悅 SimpRead 追求 Chrome 上的沈浸式中文閱讀體驗](https://www.playpcesor.com/2017/06/simpread-chrome.html)
 
 
-简悦的理念
+开发故事
 ---
 
 > 简悦的每个版本都有其背后的设计理念，希望这些理念也能跟你有所共鸣。
@@ -130,17 +132,11 @@
 
 - [简悦 1.0.4，可支持任意页面生成阅读模式](https://sspai.com/post/41454)
 
-- [我是如何使用简悦来做知识管理的](https://sspai.com/post/40772)
-
 - [简悦 1.1.0， 离它的小目标只差一步了，如果简悦帮助过你，现在你也可以帮助更多的人了](http://kenshin.wang/blog/#/posts/8)
 
-- [各位久等了，Firefox 与 UserScript（轻阅版）已叒叕加入简悦豪华套餐](http://kenshin.wang/blog/#/posts/10)
+- [各位久等了，UserScript（轻阅版）已叒叕加入简悦豪华套餐](http://kenshin.wang/blog/#/posts/10)
 
 - [借助 JSBox 简悦终于来到了 iOS！](http://kenshin.wang/blog/#/posts/11)
-
-- [基于简悦打造自己的专属知识收藏体系](https://sspai.com/post/58627)
-
-- [什么才是阅读模式该有的样子](https://sspai.com/post/55467)
 
 - [阅读模式 + 标注系统 + 稍后读，简悦 2.0 想成为你的知识管理解决方案](https://sspai.com/post/61996)
 
