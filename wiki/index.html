@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+    <meta name="author" content="Kenshin"/>
+
+    <title>知识库 - 简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展</title>
+
+    <meta name="description" content="简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展" />
+    <meta name="keywords" content="Chrome extension, Chrome 扩展, 阅读模式, 沉浸式阅读, 简悦, 简阅, read mode, reading mode, reader view, firefox, firefox addon, userscript, safari, opera, tampermonkey"/>
+
+    <meta name="thumbnail" content="http://sr.ksria.cn/introduce-2.png"/>
+
+    <meta property="og:title" content="入门指引 | 简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展"/>
+    <meta property="og:type" content="website">
+    <meta property="og:local" content="zh_CN"/>
+    <meta property="og:url" content="http://ksria.com/simpread"/>
+
+    <meta property="og:image" content="http://sr.ksria.cn/introduce-2.png"/>
+    <meta property="og:image:type" content="image/png"/>
+    <meta property="og:image:width" content="960"/>
+    <meta property="og:image:height" content="355"/>
+
+    <meta property="og:site_name" content="http://ksria.com/simpread"/>
+    <meta property="og:description" content="知识库 | 简悦 SimpRead - 如杂志般沉浸式阅读体验的扩展"/>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#2196f3">
+    <meta name="msapplication-TileImage" content="http://simpread-1254315611.cos.ap-shanghai.myqcloud.com/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#1976d2">
+
+    <link rel="stylesheet" href="vendor/themes/vue.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet"/>
+    <style type="text/css">.sidebar-nav a{display:flex!important;align-items:center;} .sidebar-nav a img{margin-left:5px;}.sidebar ul li strong {display: flex;flex-direction: row;align-items: center;}.sidebar ul li strong img {margin-left: 5px;}.sidebar-nav li.file strong {font-size: 15px;}.app-sub-sidebar li:before{content:normal}.sidebar ul li a{height:42px;font-size:15px}.sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file):before{left:auto!important;right:15px}.sidebar ul li strong{height:42px;font-weight:400}.sidebar li.folder{margin:6px 0}</style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: '简悦 · 官网',
+      nameLink: 'https://simpread.pro',
+      repo: 'https://github.com/Kenshin/simpread/',
+      homepage: 'Home.md',
+      noEmoji: true,
+      loadSidebar: true,
+      loadNavbar: true,
+      maxLevel: 4,
+      subMaxLevel: 2,
+      sidebarDisplayLevel: 0,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+      auto2top: true,
+      ga: 'UA-405976-9',
+      search: 'auto',
+      pagination: {
+        previousText: '上一章节',
+        nextText: '下一章节',
+      },
+      progress: {
+        position: "top",
+        color: "var(--theme-color,#42b983)",
+        height: "3px",
+      },
+    }
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/front-matter.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-plugin-flexible-alerts"></script>
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/zoom-image.min.js" integrity="sha256-9XY6xl1iRHy/YPKkaiYADE5uQ0W4TrUfcCnG0UqAo+o=" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/ga.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/docsify/4.10.2/plugins/search.min.js" integrity="sha256-0DbPOmGeEjy/hP2rhFOwt5EwWZpEDUv+2NheJXSRLCU=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="//unpkg.com/docsify-material-icons/dist/docsify-material-icons.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-progress@latest/dist/progress.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script>
+    setTimeout( () => $( ".sidebar-toggle-button" ).on( "click", () => $( ".ready.sticky" ).toggleClass( "close" )), 200 );
+  </script>
+</body>
+</html>
