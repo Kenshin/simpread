@@ -5,6 +5,8 @@
   * [新手入门](入门指南（-操作指引-）)
   * [视频入门 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://www.bilibili.com/video/BV1JA411L7Ev)
   * [互动式 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](http://ksria.com/simpread/guide/)
+  * [功能地图@WorkFlowy ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
+  * [功能地图@幕布 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://mubu.com/doc/iv7u8E_7gp#m)
 * **知识库 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
   * [教程与使用场景](教程与使用场景)
   * [重要功能介绍](分类介绍)
