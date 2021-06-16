@@ -29,6 +29,8 @@
 
 > 为了满足新手上手简悦的高级功能，增加了新手入门 👉 [互动式](http://ksria.com/simpread/guide/) [视频介绍](https://www.bilibili.com/video/BV1JA411L7Ev)
 
+> 全部功能地图 👉 [幕布](https://mubu.com/doc/iv7u8E_7gp#m)  [WorkFlowy](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
+
 > 简悦 · 高级账户的相关问题 👉[高级账户]([https://github.com/Kenshin/simpread/discussions/categories/高级账户)
 
 > 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧) · [与其它服务的联动](https://github.com/Kenshin/simpread/discussions/categories/服务)
