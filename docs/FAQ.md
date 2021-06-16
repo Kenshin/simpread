@@ -36,42 +36,16 @@
 
 白名单
 ---
-> 含义跟黑名单相反，当关闭 `如果当前页面适配阅读模式，是否自动进入阅读模式？` 选项后会启动此功能，加入到列表中的 URL 将自动进入阅读模式。（ 但不影响手动操作 ）
->
-> 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
-
-**添加规则**
-
-- 支持 URL 如： http://www.jianshu.com/p/2917e4e0169d
-- 支持 [minimatch](https://github.com/isaacs/minimatch) 方案的 URL，如：`http://*.cnbeta.com/articles/*/*.htm`
-- 支持 [站点编辑器 的 name](站点编辑器#对应字段)，如：  
-
-![Imgur](https://i.imgur.com/DgQYFsn.png)
+请前往 [URL编辑器](URL编辑器?id=白名单) 查看。
 
 排除列表
 ---
 
-> 即：黑名单。当选中 `如果当前页面适配阅读模式，是否自动进入阅读模式？` 会启动此功能，加入到列表中的 URL 将不会自动进入阅读模式。（ 但不影响手动操作 ）
->
-> 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
-
-![Imgur](http://i.imgur.com/dyROEBi.png) → 右键 → 选项 → 高级设定 → 排除列表 ，如图：
-![Imgur](http://i.imgur.com/CdoZOkUl.png)
-
-**添加规则**
-
-- 支持 URL 如： http://www.jianshu.com/p/2917e4e0169d
-- 支持 [minimatch](https://github.com/isaacs/minimatch) 方案的 URL，如：`http://*.cnbeta.com/articles/*/*.htm`
-- 支持 [站点编辑器 的 name](站点编辑器#对应字段)，如：  
-![Imgur](http://i.imgur.com/IFc5kAEl.png) 
+请前往 [URL编辑器](URL编辑器?id=排除列表) 查看。
 
 黑名单
 ---
-> 有别于排除列表，加入到黑名单中的网页将不会载入简悦的代码，而前者仅仅是无法自动进入阅读模式；
->
-> 支持 [右键菜单](右键菜单) 方式，也可通过 [URL 编辑器](右键菜单?id=url编辑器) 打开进行编辑。
-
-黑名单 **仅支持 URL 与 Host name**，如：`http://ksria.com/simpread/` 或者 `ksria.com` 或 `xxx.ksria.com`
+请前往 [URL编辑器](URL编辑器?id=黑名单) 查看。
 
 快捷键
 ---
