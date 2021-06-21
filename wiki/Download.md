@@ -31,6 +31,8 @@
   
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
 
+!> 注意：以下内容**仅为简悦 1.x 时的功能，并未包含 2.x 时的功能，如：稍后读 / 标注 / 高级账户功能等**。
+
 ## 轻阅版
 
 > 专门针对 Apple Safari · Opera 以及任意支持 UserScript 的浏览器。
@@ -43,7 +45,7 @@
 
 ## iOS 版
 
-> 借助 [JSBox](https://itunes.apple.com/cn/app/jsbox-创造你自己的工具/id1312014438?mt=8) 终于来到了 iOS 系统，支持 iPhone / iPad，更多细节 [请看这里](http://ksria.com/simpread/docs/#/JSBox)
+> 借助 [JSBox](https://itunes.apple.com/cn/app/jsbox-创造你自己的工具/id1312014438?mt=8) 终于来到了 iOS 系统，支持 iPhone / iPad，更多细节 [请看这里](http://ksria.com/simpread/docs/#/JSBox)。
 
 - **简悦** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.3.box?202002131303&name=%E7%AE%80%E6%82%A6) 
 
@@ -51,6 +53,6 @@
 
 ## Android 版
 
-> 得益于 Kiwi Browser 可以让简悦运行在 Android 设备上，Kiwi Browser 支持 Chrome Webstore 或 zip 安装方式，细节 [看这里](http://ksria.com/simpread/docs/#/Android)。
+> 得益于 Kiwi Browser 可以让简悦运行在 Android 设备上，Kiwi Browser 支持 Chrome Webstore 或 zip 安装方式，细节 [请看这里](http://ksria.com/simpread/docs/#/Android)。
 
 - [Kiwi Browser with Google Play](http://t.cn/EKWTpLC) 或 [Kiwi Browser APK](http://t.cn/EKWTpL3)
