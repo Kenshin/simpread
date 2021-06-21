@@ -1,6 +1,7 @@
 * [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
 * [**文档中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/docs)
 * [Home](Home)
+* [下载地址](Download)
 * **新手营**
   * [新手入门](入门指南（-操作指引-）)
   * [视频入门 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://www.bilibili.com/video/BV1JA411L7Ev)
