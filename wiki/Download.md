@@ -27,7 +27,7 @@
 - **Telegram Channel**
   - [1.0.0@win](https://t.me/simpread/117) [1.0.0@mac](https://t.me/simpread/115)  [1.0.0@mac with readwise.io](https://t.me/simpread/128) → 简悦 2.1 用户
   
-  - [1.0.1@win 64 & 32](https://t.me/simpread/171)  [1.0.1@mac](https://t.me/simpread/166)→ 简悦 2.2 用户
+  - [1.0.1@win 64 & 32](https://t.me/simpread/171)  [1.0.1@mac](https://t.me/simpread/166) → 简悦 2.2 用户
   
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
 
