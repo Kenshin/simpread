@@ -27,7 +27,13 @@
 - Widows  & Mac OS 系统
 
   > 将下载的 `simpread.zip` 解压缩到某个文件夹，再通过 **加载已解压的扩展程序** 来加载。
-  >
+
+  ![](https://z3.ax1x.com/2021/06/21/RAIoss.png)
+
+  1. 打开 `chrome://extensions/`
+  2. 开启右侧**开发者模式**
+  3. 左侧**加载已解压的扩展程序**
+
   > 关联问题 [使用简悦离线版后经常消失的解决方案](https://github.com/Kenshin/simpread/discussions/1645)
 
 - 在线下载 Chrome Webstore 方式
