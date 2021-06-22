@@ -21,11 +21,13 @@
 简悦的汇总
 ---
 
-> 简悦的帮助中心 👉 https://simpread.pro/help
+> 帮助中心 👉 https://simpread.pro/help
 
-> 简悦的订阅中心 👉 https://simpread.pro/subscribe
+> 订阅中心 👉 https://simpread.pro/subscribe
 
-> 简悦的知识库 👉 https://simpread.pro/wiki
+> 简悦百科 👉 https://simpread.pro/wiki
+>
+> 知识库 👉 https://github.com/kenshin/simpread/discussions
 
 > 为了满足新手上手简悦的高级功能，增加了新手入门 👉 [互动式](http://ksria.com/simpread/guide/) [视频介绍](https://www.bilibili.com/video/BV1JA411L7Ev)
 
@@ -37,9 +39,10 @@
 
 > 当在使用过程中遇到了一些问题，也可访问这里查看 👉 [重要通知](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
 
-
 简悦的各种平台
 ---
+
+> 下面的内容汇总到 [下载中心](Download)。
 
 - Chrome  👉 [全功能版](https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll)
 
@@ -136,13 +139,15 @@
 
 - [简悦 1.1.0， 离它的小目标只差一步了，如果简悦帮助过你，现在你也可以帮助更多的人了](http://kenshin.wang/blog/#/posts/8)
 
-- [各位久等了，UserScript（轻阅版）已叒叕加入简悦豪华套餐](http://kenshin.wang/blog/#/posts/10)
+- [各位久等了，Firefox 与 UserScript（轻阅版）已叒叕加入简悦豪华套餐](http://kenshin.wang/blog/#/posts/10)
 
 - [借助 JSBox 简悦终于来到了 iOS！](http://kenshin.wang/blog/#/posts/11)
 
 - [阅读模式 + 标注系统 + 稍后读，简悦 2.0 想成为你的知识管理解决方案](https://sspai.com/post/61996)
 
 - [简悦 2.1：新增同步助手、RSS 全文输出功能，增强稍后读和标注体验](https://sspai.com/post/63717)
+
+- [看板、双向链接、知识图谱…… 简悦 2.2 想让你的稍后读不再不读](https://sspai.com/post/67074)
 
 
 全功能
