@@ -22,12 +22,14 @@
 简悦的汇总
 ---
 
+> 新用户一站式索引 👉 https://zhuanlan.zhihu.com/p/382683271
+
 > 帮助中心 👉 https://simpread.pro/help
 
 > 订阅中心 👉 https://simpread.pro/subscribe
 
 > 简悦百科 👉 https://simpread.pro/wiki
->
+
 > 知识库 👉 https://github.com/kenshin/simpread/discussions
 
 > 为了满足新手上手简悦的高级功能，增加了新手入门 👉 [互动式](http://ksria.com/simpread/guide/) [视频介绍](https://www.bilibili.com/video/BV1JA411L7Ev)
