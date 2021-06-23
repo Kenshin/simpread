@@ -1,5 +1,7 @@
 
 
+![](https://z3.ax1x.com/2021/06/22/Rec929.png)
+
 > **标注不是信息的终点，而是知识的起点。**导入到简悦的标注最终要被整理到各种笔记工具，这次我联合了少楠老师的 flomo 作为简悦输出工具。
 
 ## 简悦 x flomo
@@ -28,6 +30,7 @@ https://flomoapp.com/
 
 ## 教程
 
+- [高级账户注册/新设备的授权](https://github.com/Kenshin/simpread/discussions/1577)
 - 适合新手用户的 [在简悦配置 flomo](https://help.flomoapp.com/advance/extension/simpread)
 - 适合初级用户的 [简悦导入到 flomo 的几种常见方案](https://github.com/Kenshin/simpread/discussions/2150)
 - 适合高级玩家的 [定制导入到 flomo 的模板](https://github.com/Kenshin/simpread/discussions/2275)

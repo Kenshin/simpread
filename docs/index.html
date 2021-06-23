@@ -101,11 +101,13 @@
   <script>
     setTimeout( () => $( ".sidebar-toggle-button" ).on( "click", () => $( ".ready.sticky" ).toggleClass( "close" )), 200 );
     $( document ).ready(() => {
-      if ( ![ "/", "#/", "#/Home", "#/flomo" ].includes( location.hash )) return;
+      if ( ![ "/", "#/", "#/Home" ].includes( location.hash )) return;
       setTimeout( () => {
         $( ".markdown-section" ).prepend( `<div class="carousel">
           <img data-target="_blank" data-url="https://simpread.pro/help" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/help.png"></img>
           <img data-target="_blank" data-url="https://workflowy.com/s/22/iDn82ReW7Neki2oW" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/feature%20map.png"></img>
+          <img data-target="_blank" data-url="https://simpread.pro/subscribe" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/subscribe.png"></img>
+          <img data-target="_self"  data-url="http://ksria.com/simpread/docs/#/flomo" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/flomo%20x%20simpread.png"></img>
         </div>` );
         $( ".carousel" ).slick({
           dots: true,
