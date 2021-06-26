@@ -1960,7 +1960,7 @@
             "<div class='coupon-card-wraper'>",
             "<div class='brand-card-box'>"
         ],
-        "css"     : ".embed-card-logo { margin-right: 14px }"
+        "css"     : ".embed-card-logo { margin-right: 14px }\n.iframe-video {width: 682px; height: 480px; display: block}"
     },{
         "name"    : "news.mydrivers.com",
         "url"     : "http://news.mydrivers.com/*/*/*.htm",
