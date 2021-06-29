@@ -882,7 +882,7 @@
         "url"     : "https://www.bilibili.com/read/cv*",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
-        "include" : "<div class='article-holder'>",
+        "include" : "[[{ (() => { const bannerElem = $('.banner-container .card-image__image'); const bannerStyle = bannerElem.css('background-image'); const banner = bannerStyle.substring(5, bannerStyle.length - 2); return `<img src="${banner}"/>` + $('#article-content').html() })() }]]",
         "exclude" : [
             ""
         ]
