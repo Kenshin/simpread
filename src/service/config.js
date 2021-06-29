@@ -113,6 +113,11 @@ const keyboard = {
             "type" : "jianguo",
             "desc" : "保存到 坚果云",
         },
+        yd: {
+            "kbd"  : "yd",
+            "type" : "youdao",
+            "desc" : "保存到 有道云笔记",
+        },
         yq: {
             "kbd"  : "yq",
             "type" : "yuque",
