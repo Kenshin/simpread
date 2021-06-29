@@ -195,6 +195,8 @@ const cssinjs_panel = () => {
             width: '100%',
             overflowX: 'hidden',
             overflowY: 'auto',
+            paddingLeft:"24px",
+            marginLeft: "-24px"
           },
 
           group: {
