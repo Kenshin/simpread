@@ -882,8 +882,7 @@
         "url"     : "https://www.bilibili.com/read/cv*",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
-        "include" : "[[{ (()=>{const bannerStyle=$(".banner-container .card-image__image")?.css("background-image"),banner=bannerStyle?.substring(5,bannerStyle.length-2);$("#article-content").html()})(); }]]",
-        "exclude" : [
+        "include" : "(()=>{const bannerElem=undefined,bannerStyle=$('.banner-container .card-image__image')?.css('background-image'),banner=bannerStyle?.substring(5,bannerStyle.length-2);return(banner?`<img src='${banner}'/>`:'')+$('#article-content').html()})()
             "<div class='n-img-mask'>"
         ]
     },{
