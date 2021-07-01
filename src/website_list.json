@@ -2745,13 +2745,13 @@
             ""
         ]
     },{
-        "name"    : "baijia.baidu.com",
-        "url"     : "https://baijia.baidu.com/s?id=*",
-        "title"   : "<h1 class='title'>",
+        "name"    : "baijiahao.baidu.com",
+        "url"     : "https://baijiahao.baidu.com/s?id=*",
+        "title"   : "<title>",
         "desc"    : "",
-        "include" : "<section class='news-content'>",
+        "include" : "[[{ $(`#ssr-content [class^='index-module_articleWrap']`).html() }]]",
         "exclude" : [
-            ""
+            "[[[ $(`#ssr-content [class^='index-module_reportContainer']`) ]]]"
         ]
     },{
         "name"    : "jingyan.baidu.com",
