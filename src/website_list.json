@@ -2751,7 +2751,7 @@
         "desc"    : "",
         "include" : "[[{ $(`#ssr-content [class^='index-module_articleWrap']`).html() }]]",
         "exclude" : [
-            "[[[ $(`#ssr-content [class^='index-module_reportContainer']`) ]]]"
+            "[[[ $(`sr-rd-content [class^='index-module_reportContainer']`) ]]]"
         ]
     },{
         "name"    : "jingyan.baidu.com",
