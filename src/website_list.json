@@ -3360,6 +3360,14 @@
             ""
         ]
     },{
+        "name"    : "coffee.pmcaff.com",
+        "url"     : "https://coffee.pmcaff.com/article/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[[$('#articleCont pre')]]]",
+        "exclude" : [
+        ]
+    },{
         "name"    : "gizmodo.com",
         "url"     : "https://gizmodo.com/*",
         "title"   : "<title>",
