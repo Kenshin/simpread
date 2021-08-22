@@ -3366,7 +3366,18 @@
         "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
         "include" : "[[[$('#articleCont pre')]]]",
         "exclude" : [
+            ""
         ]
+    },{
+        "name"    : "materials.youzhiyouxing.cn",
+        "url"     : "https://youzhiyouxing.cn/materials/*",
+        "title"   : "<title>",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[`//*[@id='zx-rangy-root']`]]",
+        "exclude" : [
+            ""
+        ],
+        "css"     : ".simpread-hidden{display:none!important}"
     },{
         "name"    : "gizmodo.com",
         "url"     : "https://gizmodo.com/*",
