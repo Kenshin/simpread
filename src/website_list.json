@@ -3369,6 +3369,16 @@
             ""
         ]
     },{
+        "name"    : "articles.shanbay.com",
+        "url"     : "https://www.shanbay.com/news/articles/*",
+        "title"   : "[[{$('.article-body h2').text()}]]",
+        "desc"    : "[[{$('meta[name=Description]').attr('content')||$('meta[name=description]').attr('content')}]]",
+        "include" : "[[{(()=>{let html='';$('.article-content .sentence').map((idx,item)=>{const $target=$(item),text=$target.text();html+=`<p>${text}</p>`});return html})()}]]",
+        "exclude" : [
+            ""
+        ],
+        "css"     : "sr-read p{all:unset;display:block;margin:1em 0 1em 0;word-break:break-all;text-align:justify;overflow-wrap:break-word}"
+    },{
         "name"    : "materials.youzhiyouxing.cn",
         "url"     : "https://youzhiyouxing.cn/materials/*",
         "title"   : "<title>",
