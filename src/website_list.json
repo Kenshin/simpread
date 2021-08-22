@@ -882,9 +882,9 @@
         "url"     : "https://www.bilibili.com/read/cv*",
         "title"   : "<h1 class='title'>",
         "desc"    : "",
-        "include" : "<div class='article-holder'>",
+        "include" : "[[{(()=>{const bannerElem=undefined,bannerStyle=$('.banner-container .card-image__image')?.css('background-image'),banner=bannerStyle?.substring(5,bannerStyle.length-2);return(banner?`<img src='${banner}'/>`:'')+$('#article-content').html()})()}]]",
         "exclude" : [
-            ""
+            "<div class='n-img-mask'>"
         ]
     },{
         "name"    : "note.space.bilibili.com",
@@ -2763,13 +2763,13 @@
             ""
         ]
     },{
-        "name"    : "baijia.baidu.com",
-        "url"     : "https://baijia.baidu.com/s?id=*",
-        "title"   : "<h1 class='title'>",
+        "name"    : "baijiahao.baidu.com",
+        "url"     : "https://baijiahao.baidu.com/s?id=*",
+        "title"   : "<title>",
         "desc"    : "",
-        "include" : "<section class='news-content'>",
+        "include" : "[[{ $(`#ssr-content [class^='index-module_articleWrap']`).html() }]]",
         "exclude" : [
-            ""
+            "[[[ $(`sr-rd-content [class^='index-module_reportContainer']`) ]]]"
         ]
     },{
         "name"    : "jingyan.baidu.com",
