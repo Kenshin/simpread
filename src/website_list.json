@@ -296,7 +296,7 @@
     },{
         "name"    : "daily.zhihu.com",
         "url"     : "https://daily.zhihu.com/story/",
-        "title"   : "<h1 class='headline-title'>",
+        "title"   : "<p class='DailyHeader-title'>",
         "desc"    : "",
         "include" : "[[[$('.content')]]]",
         "exclude" : [
@@ -1066,6 +1066,24 @@
         "title"   : "[[{$('.entry-public-view h1').text()}]]",
         "desc"    : "",
         "include" : "<div class='entry-content'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "post.juejin.cn",
+        "url"     : "https://juejin.cn/post/*",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='markdown-body'>",
+        "exclude" : [
+            ""
+        ]
+    },{
+        "name"    : "news.juejin.cn",
+        "url"     : "https://juejin.cn/news/*",
+        "title"   : "<h1 class='article-title'>",
+        "desc"    : "",
+        "include" : "<div class='markdown-body'>",
         "exclude" : [
             ""
         ]
