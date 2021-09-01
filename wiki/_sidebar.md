@@ -3,7 +3,7 @@
 * [Home](Home)
 * [下载地址](Download)
 * **新手营**
-  * [新手入门](入门指南（-操作指引-）)
+  * [新手入门](新手入门)
   * [视频入门 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://www.bilibili.com/video/BV1JA411L7Ev)
   * [互动式 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](http://ksria.com/simpread/guide/)
   * [功能地图@WorkFlowy ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
