@@ -1,0 +1,1 @@
+此文档因为输入错误，请前往 [如何开通](https://simpread.pro/api/#/如何开通)，开放平台 [地址](https://simpread.pro/developer)。
