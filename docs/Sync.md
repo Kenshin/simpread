@@ -25,11 +25,11 @@
 
     - [PDF](#pdf)
 
+    - [pandoc](#pandoc)
+
     - [Epub](#epub)
 
     - [Textbundle](Textbundle)
-
-    - [pandoc](#pandoc)
 
     - [发送到 Kindle](#发送到Kindle)
 
@@ -268,6 +268,13 @@ Readwise
 ---
 
 > 请移步到 [自动化服务](自动化服务?id=Readwise)
+
+
+Textbundle
+---
+
+> 请移步到 [Textbundle](Textbundle)
+
 
 邮件服务
 ---
