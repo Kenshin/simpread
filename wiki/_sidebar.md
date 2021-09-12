@@ -8,9 +8,9 @@
   * [互动式 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](http://ksria.com/simpread/guide/)
   * [功能地图@WorkFlowy ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
   * [功能地图@幕布 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://mubu.com/doc/iv7u8E_7gp#m)
-  * [新用户一站式索引](https://zhuanlan.zhihu.com/p/382683271)
+  * [新用户一站式索引![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://zhuanlan.zhihu.com/p/382683271)
 * **知识库 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
-  * [教程与使用场景](https://github.com/Kenshin/simpread/discussions/2085)
+  * [教程与使用场景![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/2085)
   * [重要功能介绍](分类介绍)
     * [导出服务![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/服务)
     * [使用技巧![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/使用技巧)
