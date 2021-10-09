@@ -306,13 +306,13 @@ Textbundle
 3. SMTP 服务密码 → 请填入上步得到的密码即可。
 4. 接收的邮件地址
 
-[![DtrvZQ.png](https://s3.ax1x.com/2020/11/24/DtrvZQ.md.png)](https://imgchr.com/i/DtrvZQ)
+![DtrvZQ.png](https://z3.ax1x.com/2020/11/24/DtrvZQ.md.png)
 
 **简悦 · 扩展端** 需要设置发送时的附件方式，包括： `不包含附件` `PDF 附件` `离线 HTML 附件` 三类。
 
-并在 **简悦（扩展端） → 选项页 → 共通 → 简悦 · 同步助手 ** 开启并选择某种形式的附件。
+并在 **简悦（扩展端） → 选项页 → 服务 → 发送邮件 ** 开启并选择某种形式的附件。
 
-[![BjlWAs.png](https://s1.ax1x.com/2020/11/11/BjlWAs.md.png)](https://imgchr.com/i/BjlWAs)
+![DtrvZQ.png](https://z3.ax1x.com/2021/10/09/5i71je.png)
 
 即可。
 
