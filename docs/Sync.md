@@ -64,7 +64,9 @@
 支持平台
 ---
 
-基本上涵盖了全部平台，包括：`Windows` `Mac` `Linux`
+基本上涵盖了全部平台，包括：`Windows` `Mac`
+
+> 暂时不支持 `Linux` ，如果你有需要的话请 [订阅简悦](https://simpread.pro/subscribe)，当发布后我会通过到你。
 
 下载
 ---
