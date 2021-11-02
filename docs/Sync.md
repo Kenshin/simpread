@@ -22,17 +22,16 @@
 - [内置解析](#内置解析)
 
 - [导出服务](#导出服务)
-
     - [PDF](#pdf)
-
+    
     - [pandoc](#pandoc)
-
+    
     - [Epub](#epub)
-
+    
     - [Textbundle](Textbundle)
-
+    
     - [发送到 Kindle](#发送到Kindle)
-
+    
 - [Hypothesis](#Hypothesis)
 
 - [Readwise.io](#Readwise)
@@ -157,9 +156,7 @@
 导出服务
 ---
 
-得益于 **简悦 · 同步助手** 的同步功能，
-
-包括：
+得益于 **简悦 · 同步助手** 的加持，在简悦原有导出的功能的基础上增加（强）了如下功能：
 
 1. `Markdown` `HTML` `离线 Markdown` `离线 HTML`
 2. `原生 PDF`
