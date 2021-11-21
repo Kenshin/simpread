@@ -8,7 +8,7 @@
 
 # 视频
 
-> 来自简悦社区用户 **亮岚**，请移步到知乎视频 [请看这里](https://www.zhihu.com/zvideo/1445823589580300288)。
+> 来自简悦社区用户 **亮岚**，请移步到知乎视频 [Kiwi Browser 在小米平板4 上的使用效果](https://www.zhihu.com/zvideo/1445823589580300288) 与 [简悦在 Surface Due 上的使用效果](https://www.zhihu.com/zvideo/1445827182166155265)。
 
 ## 使用设备建议
 
