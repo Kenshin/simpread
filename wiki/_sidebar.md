@@ -2,16 +2,17 @@
 * [**文档中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/docs)
 * [Home](Home)
 * [下载地址](Download)
-* **新手营**
-  * [新手入门](新手入门)
-  * [视频入门 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://www.bilibili.com/video/BV1JA411L7Ev)
+* **[新手营](新手营)**
+  * [概览](新手营)
+  * [新用户入门![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://zhuanlan.zhihu.com/p/382683271)
+  * [教程一览![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW#/116c4d504937)
+  * [视频入门 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://www.bilibili.com/video/BV1sU4y1j7qQ)
   * [互动式 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](http://ksria.com/simpread/guide/)
   * [功能地图@WorkFlowy ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
-  * [功能地图@幕布 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://mubu.com/doc/iv7u8E_7gp#m)
-  * [新用户一站式索引![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://zhuanlan.zhihu.com/p/382683271)
-* **知识库 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
+* **[知识库 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](分类介绍)**
+  * [概览](分类介绍)
   * [教程与使用场景![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/2085)
-  * [重要功能介绍](分类介绍)
+  * 重要功能介绍
     * [导出服务![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/服务)
     * [使用技巧![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/使用技巧)
     * [高级账户![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/高级账户)
@@ -20,8 +21,8 @@
     * [开放平台![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/Developer)
     * [插件说明![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/插件说明)
     * [站点适配![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/站点适配)
-  * [让简悦为给你好的服务](让简悦为给你好的服务)
-* **简悦理念**
+* **[简悦理念](简悦理念)**
+  * [概览](简悦理念)
   * [定价原则](定价原则)
   * [简悦各版本的开发故事](简悦各版本的开发故事)
   * [阅读模式该有的样子](阅读模式该有的样子)
@@ -32,6 +33,7 @@
   * [用户拥有完整的数据所有权](用户拥有完整的数据所有权)
   * [为什么不需要登录系统](为什么不需要登录系统)
   * [为什么不自建同步服务](为什么不自建同步服务)
+  * [开放互联与私域流量：简悦API的选择](开放互联与私域流量：简悦API的选择)
   * [人人都应该建立自己的数据库](人人都应该建立自己的数据库)
   * [利用简悦打造工作流信息获取方案](利用简悦打造工作流信息获取方案)
   * [为什么要拒绝使用 All-in-one 的知识管理方案](为什么要拒绝使用All-in-one的知识管理方案)
@@ -52,10 +54,7 @@
 * **简悦故事**
   * [简悦的由来](简悦的由来)
   * [简悦四周年](简悦四周年)
-  * **简悦用户的花式用法**
-    * [简悦重塑了我的阅读流](简悦重塑了我的阅读流)
-    * [围绕简悦打造自己的工作流](围绕简悦打造自己的工作流)
-    * [其它使用方法汇总![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/2085)
+  * [简悦用户的花式用法![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/2085)
 * **简悦社区**
   * [社区](简悦社区)
   * [共建者](社区共建者)
