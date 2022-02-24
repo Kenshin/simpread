@@ -1,6 +1,8 @@
+***
 * [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
 * [**教程中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://kb.simpread.pro)
-* [**快速开始 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/wiki)
+* [**开放平台** ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://kb.simpread.pro/#/page/61f51785-e5fb-494f-8716-6f62cc89116b)
+***
 * [**文档中心**](Home)
 * **基础功能**
   * 聚焦模式
@@ -119,4 +121,3 @@
   * [站点集市](站点集市)
   * [待决站点](待决站点)
 * [常见问题](FAQ)
-* [**开放平台** ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://simpread.pro/api)
