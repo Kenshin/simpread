@@ -47,7 +47,10 @@
     <link rel="stylesheet" href="vendor/themes/vue.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css"/>
     <style type="text/css">.sidebar-nav a{display:flex!important;align-items:center;} .sidebar-nav a img{margin-left:5px;}.sidebar ul li strong {display: flex;flex-direction: row;align-items: center;}.sidebar ul li strong img {margin-left: 5px;}.sidebar-nav li.file strong {font-size: 15px;}.app-sub-sidebar li:before{content:normal}.sidebar ul li a{height:42px;font-size:15px}.sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file):before{left:auto!important;right:15px}.sidebar ul li strong{height:42px;font-weight:400}.sidebar li.folder{margin:6px 0}</style>
+    <style type="text/css">.carousel img {cursor: pointer;}</style>
 </head>
 <body>
   <div id="app"></div>
@@ -94,8 +97,36 @@
   <script src="//unpkg.com/docsify-material-icons/dist/docsify-material-icons.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-progress@latest/dist/progress.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script>
     setTimeout( () => $( ".sidebar-toggle-button" ).on( "click", () => $( ".ready.sticky" ).toggleClass( "close" )), 200 );
+    $( document ).ready(() => {
+      if ( ![ "/", "#/", "#/Home" ].includes( location.hash )) return;
+      setTimeout( () => {
+        $( ".markdown-section" ).prepend( `<div class="carousel">
+          <img data-target="_blank" data-url="https://kb.simpread.pro" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/manual.png"></img>
+          <img data-target="_blank" data-url="https://simpread.pro/help" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/help.png"></img>
+          <img data-target="_blank" data-url="https://workflowy.com/s/22/iDn82ReW7Neki2oW" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/feature%20map.png"></img>
+          <img data-target="_blank" data-url="https://simpread.pro/subscribe" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/subscribe.png"></img>
+        </div>` );
+        $( ".carousel" ).slick({
+          dots: true,
+          infinite: true,
+          speed: 500,
+          fade: true,
+          cssEase: 'linear'
+        });
+        $( ".carousel img" ).on( "click", event => {
+          const $target = $( event.currentTarget ),
+                url     = $target.attr( "data-url" ),
+                open    = $target.attr( "data-target" ),
+                $a      = $( `<a target="${ open }" href=${ url } ></a>` ).appendTo( "body" );
+          $a[0].click();
+          $a.remove();
+        });
+        setInterval( () => $( ".slick-next" ).click(), 5000 );
+      }, 1000 );
+    });
   </script>
 </body>
 </html>

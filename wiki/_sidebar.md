@@ -1,7 +1,9 @@
+***
 * [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
 * [**教程中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://kb.simpread.pro)
 * [**文档中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/docs)
-* [Home](Home)
+***
+* [简悦百科](Home)
 * [下载地址](Download)
 * **[新手营](新手营)**
   * [概览](新手营)
@@ -63,4 +65,5 @@
 * **简悦社区**
   * [社区](简悦社区)
   * [共建者](社区共建者)
+***
 * [关于作者![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://kenshin.wang/)
