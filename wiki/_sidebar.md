@@ -1,4 +1,5 @@
 * [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
+* [**教程中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://kb.simpread.pro)
 * [**文档中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/docs)
 * [Home](Home)
 * [下载地址](Download)
