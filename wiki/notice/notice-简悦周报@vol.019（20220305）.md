@@ -2,7 +2,7 @@
 
 > 每期周报都会推送到以下的渠道：
 
-- [Telegram Channel](https://t.me/simpread/344)
+- [Telegram Channel](https://t.me/simpread/349)
 - [RSS](https://rss.simpread.pro/feed)
 - **简悦扩展端 → 选项页 → 通知中心**
 - [竹白上的简悦专栏](https://simpread.zhubai.love)

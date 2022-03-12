@@ -42,7 +42,8 @@
 * **简悦周报**
   * [概览](简悦周报)
   * **周报汇总**
-    * [简悦周报  vol.019](notice/notice-简悦周报@vol.019（20220325）)
+    * [简悦周报  vol.020](notice/notice-简悦周报@vol.020（20220312）)
+    * [简悦周报  vol.019](notice/notice-简悦周报@vol.019（20220305）)
     * [简悦周报  vol.018](notice/notice-简悦周报@vol.018（20220226）)
     * [简悦周报  vol.017](notice/notice-简悦周报@vol.017（20220213）)
     * [简悦周报  vol.016](notice/notice-简悦周报@vol.016（20220124）)
