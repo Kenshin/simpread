@@ -29,20 +29,20 @@
 
 ![](https://cdn.jsdelivr.net/gh/23784148/upload-images@main/simpered/notice/Site.png)
 
-- 适配一组稍后读
-  - [Pocket · Instapaper](https://zhuanlan.zhihu.com/p/478337508)
-  - [印象笔记 · Evernote](https://zhuanlan.zhihu.com/p/474243241)
+### 适配一组稍后读
 
-- [简悦适配了常见的社交媒体](https://github.com/Kenshin/simpread/discussions/3518)
+- [Pocket · Instapaper](https://zhuanlan.zhihu.com/p/478337508)
+- [印象笔记 · Evernote](https://zhuanlan.zhihu.com/p/474243241)
 
-  - [Twitter 推文页](https://github.com/Kenshin/simpread/discussions/2923)
+### [简悦适配了常见的社交媒体](https://github.com/Kenshin/simpread/discussions/3518)
 
-    - [Threadreader](https://github.com/Kenshin/simpread/discussions/2046)
-    - [Typefully](https://github.com/Kenshin/simpread/discussions/3517)
+- [Twitter 推文页](https://github.com/Kenshin/simpread/discussions/2923)
 
-  - [即刻的文章页与转发页](https://github.com/Kenshin/simpread/discussions/2771)
+- [Threadreader](https://github.com/Kenshin/simpread/discussions/2046)
+- [Typefully](https://github.com/Kenshin/simpread/discussions/3517)
+- [即刻的文章页与转发页](https://github.com/Kenshin/simpread/discussions/2771)
 
-  - [一组微博页面](https://github.com/Kenshin/simpread/discussions/3515)
+- [一组微博页面](https://github.com/Kenshin/simpread/discussions/3515)
 
 ***
 
