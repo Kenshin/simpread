@@ -2048,12 +2048,15 @@
         ]
     },{
         "name"    : "caixin.com",
-        "url"     : "http://*.caixin.com/*/*.html",
+        "url"     : "http*://*.caixin.com/*/*.html",
         "title"   : "<h1>",
         "desc"    : "<div id='subhead'>",
-        "include" : "<div id='Main_Content_Val'>",
+        "include" : "[[{ (function(){if($(location).attr('hostname')=='photos.caixin.com'){var images=$('ul#pic_content>li').toArray().map((x)=>$(x).html());var captions=$('dl.bigPicTxt2').toArray().map((x)=>'('+$(x).children('dd').text()+') '+$(x).children('dt').text());return images.map((k,i)=>'<figure>'+k+'<figcaption>'+captions[i]+'</figcaption></figure>').join('\\n');}else{if($('dl.media_pic').length>0){return ('<figure>'+$('dl.media_pic>dt').html()+'<figcaption>'+$('dl.media_pic>dd').text()+'</figcaption></figure>'+$('div#Main_Content_Val').html());}else{return $('div#Main_Content_Val').html();}}}()) }]]",
         "exclude" : [
-             "[[/src=\\S+(favicon)\\S+'/]]"
+             "[[/src=\\S+(favicon)\\S+'/]]",
+             "<img id='swit'>",
+             "<a class='pc-aivoice listner'>",
+             "<div class='lanmu_textend'>"
         ]
     },{
         "name"    : "news.mittrchina.com",
