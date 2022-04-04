@@ -51,6 +51,7 @@
     * [简悦周报  vol.017](notice/notice-简悦周报@vol.017（20220213）)
     * [简悦周报  vol.016](notice/notice-简悦周报@vol.016（20220124）)
     * [简悦周报  vol.015](notice/notice-简悦周报@vol.015（20220111）)
+    * [简悦周报  vol.014](notice/notice-简悦周报@vol.014（20211226）)
     * [简悦周报  vol.013](notice/notice-简悦周报@vol.013（20211218）)
     * [简悦周报  vol.012](notice/notice-简悦周报@vol.012（20211206）)
     * [简悦周报  vol.011](notice/notice-简悦周报@vol.011（20211125）) 
