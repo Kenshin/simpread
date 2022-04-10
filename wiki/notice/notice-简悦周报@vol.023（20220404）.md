@@ -3,10 +3,15 @@
 > 每期周报都会推送到以下的渠道：
 
 - [Telegram Channel](https://t.me/simpread/368)
+
 - [RSS](https://rss.simpread.pro/feed)
+
 - **简悦扩展端 → 选项页 → 通知中心**
+
 - [竹白上的简悦专栏](https://simpread.zhubai.love)
+
 - [知乎专栏](https://zhuanlan.zhihu.com/p/492900692)
+
 - 微信 / 订阅时的信箱（通过竹白推送）
 
 # 本期内容
