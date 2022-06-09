@@ -16,20 +16,21 @@
 
 ## 同步助手
 
-> 暂时仅支持下列网盘，接下来会有更多下载方案。
->
-> 重要提示：**非 2.2.0 版用户不要下载 1.0.1 版**；反之 **2.2.0 版用户请务必下载 1.0.1 版**。
->
-> 同步助手的介绍和使用方法 [请看这里](http://ksria.com/simpread/docs/#/Sync)。
+包含简悦同步助手的全部版本：
 
-- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3) （如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接）
+- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 
-- **Telegram Channel**
-  - [1.0.0@win](https://t.me/simpread/117) [1.0.0@mac](https://t.me/simpread/115)  [1.0.0@mac with readwise.io](https://t.me/simpread/128) → 简悦 2.1 用户
-  
-  - [1.0.1@win 64 & 32](https://t.me/simpread/171)  [1.0.1@mac](https://t.me/simpread/166) → 简悦 2.2 用户
-  
+  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
+
+- [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG)
+
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
+
+- Telegram Channel
+
+  - 1.0.1 版 → [win 64 & 32](https://t.me/simpread/171)  [mac](https://t.me/simpread/166)
+
+- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)
 
 !> 注意：以下内容**仅为简悦 1.x 时的功能，并未包含 2.x 时的功能，如：稍后读 / 标注 / 高级账户功能等**。
 

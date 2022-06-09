@@ -21,20 +21,21 @@
 
 - [内置解析](#内置解析)
 
-- [导出服务](#导出服务)
+- [导出到本地](#导出服务)
     - [PDF](#pdf)
-    
-    - [pandoc](#pandoc)
-    
-    - [Epub](#epub)
-    
-    - [Textbundle](Textbundle)
-    
-    - [发送到 Kindle](#发送到Kindle)
-    
-- [Hypothesis](#Hypothesis)
 
-- [Readwise.io](#Readwise)
+    - [pandoc](#pandoc)
+
+    - [Epub](#epub)
+
+    - [Textbundle](Textbundle)
+
+    - [发送到 Kindle](#发送到Kindle)
+
+- 导出服务
+    - [Hypothesis](自动化服务?id=hypothes)
+
+    - [Readwise.io](自动化服务?id=readwise)
 
 - [邮件服务](#邮件服务)
 
@@ -43,6 +44,8 @@
 - [打开稍后读](#打开稍后读)
 
 - [Bookmarklet](#Bookmarklet)
+
+- [日志输出](#日志)
 
 描述
 ---
@@ -63,24 +66,26 @@
 支持平台
 ---
 
-基本上涵盖了全部平台，包括：`Windows` `Mac`
-
-> 暂时不支持 `Linux` ，如果你有需要的话请 [订阅简悦](https://simpread.pro/subscribe)，当发布后我会通知到你。
+基本上涵盖了全部平台，包括：`Windows` · `Mac` · `Linux` 与 [命令行版本](https://github.com/Kenshin/simpread/discussions/3704) 。
 
 下载
 ---
 
-> 暂时仅支持下列网盘，接下来会有更多下载方案。
->
-> 重要提示：**非 2.2.0 版用户不要下载 1.0.1 版**；反之 **2.2.0 版用户请务必下载 1.0.1 版**。
+包含简悦同步助手的全部版本：
 
+- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 
-- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3) （如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接）
-- **Telegram Channel**
+  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
 
-  - [1.0.0@win](https://t.me/simpread/117) [1.0.0@mac](https://t.me/simpread/115)  [1.0.0@mac with readwise.io](https://t.me/simpread/128) → 简悦 2.1 用户
-  - [1.0.1@win 64 & 32](https://t.me/simpread/171)  [1.0.1@mac](https://t.me/simpread/166) → 简悦 2.2 用户
+- [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG)
+
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
+
+- Telegram Channel
+
+  - 1.0.1 → [win 64 & 32](https://t.me/simpread/171)  [mac](https://t.me/simpread/166)
+
+- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)
 
 ### 无法运行
 
@@ -88,9 +93,9 @@
 
 ![image](https://user-images.githubusercontent.com/6434137/119250114-6eb6d680-bbd0-11eb-9db9-c7ca71ce7ee6.png)
 
-> 在 Windows 上运行可能会被 360类的产品误报，因为同步助手使用了 Electron 技术，所以有可能存在此情况，如果是在上述官方提到的渠道下载，请放心使用。
+在 Windows 上运行可能会被 360类的产品误报，因为同步助手使用了 Electron 技术，所以有可能存在此情况，如果是在上述官方提到的渠道下载，请放心使用。
 
-> 如果你在运行同步助手是遇到了问题，[Mac 用户看这里](https://github.com/Kenshin/simpread/discussions/2283) [Windows 用户看这里](https://github.com/Kenshin/simpread/discussions/2129)。
+如果你在运行同步助手是遇到了问题，[Mac 用户看这里](https://github.com/Kenshin/simpread/discussions/2283) [Windows 用户看这里](https://github.com/Kenshin/simpread/discussions/2129)。
 
 验证
 ---
@@ -181,6 +186,38 @@
 
 [![BXbhKs.png](https://s1.ax1x.com/2020/11/11/BXbhKs.md.png)](https://imgchr.com/i/BXbhKs)
 
+#### 增强导出
+
+1.0.2 版新增的功能，类似 Hazel 的自动化功能，可以将任意导出文件导出到指定目录。
+
+```
+{"extension":"external", "path":"/Users/xxxx/xxxx/simpublish-demo/api/_output"}
+{"extension":"pdf", "path":"/Users/xxxx/xxxx/Ebook"}
+{"extension":"epub", "path":""}
+{"extension":"docx", "path":""}
+{"extension":"assets", "path":"/Users/xxxx/xxxx/Obsidian/SimpRead"}
+{"extension":"textbundle", "path":""}
+{"extension":"md", "path":"/Users/xxxx/xxxx/Obsidian/SimpRead"}
+```
+
+简单的解释
+
+- `extension` → 任意文件的后缀 `epub` `docx` `md` `html` 等
+
+  有一类特殊的后缀 `external`，当设定后导出 HTML 时，会将当前 `xxx.html` 复制到 `path` 对应的目录，此功能注意针对 [简悦的外部资料库的自建方案](https://github.com/Kenshin/simpread/discussions?discussions_q=label%3A%22self+built%22)。
+
+- `output` → 导出文件夹地址
+
+  - `""` → 空值，即当前导出目录的同 `extension` 文件夹，如
+
+    `{"extension":"epub", "path":""}` 则会在导出文件夹中新建 `epub` 文件夹。
+
+  - `"/xxxx ` → 有值，根据对应值的位置导出。
+
+#### 删除旧文件
+
+当 **使用 [知识库](https://kb.simpread.pro/#/page/建立知识库) 时，请启用此功能**。当删除稍后读时，无法自动同步删除本地快照，启用此功能后会避免出现重复的 `idx-xxx.html`。
+
 PDF
 ---
 
@@ -196,6 +233,10 @@ PDF
 1. 一次点击，系统打印需要多次点击
 2. 布局更合理，系统打印的白边太大
 3. 跨页时图片无分割，系统打印的图片在跨页时会有分割
+
+#### wkhtmltopdf
+
+1.0.2 版的同步助手增加了更丰富的定制化 PDF 导出方案，详细 [请看这里](https://github.com/Kenshin/simpread/discussions/3887)。
 
 Epub
 ---
@@ -370,11 +411,18 @@ Textbundle
 Bookmarklet
 ---
 
-详细 [请看这里](Bookmarklet)
+详细 [请看这里](Bookmarklet)。
 
-***
+日志
+---
 
-> 同步助手的 Logo 自于社区用户 [Shawn](https://shawnan.design/) 的设计。
+1.0.2 版新增功能，可将同步助手的操作日志输出到任意目录。
+
+![](https://s1.ax1x.com/2022/06/07/XD9uzq.png)
+
+# Logo 设计
+
+同步助手的 Logo 自于社区用户 [Shawn](https://shawnan.design/) 的设计。
 
 
 
