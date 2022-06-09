@@ -20,11 +20,13 @@
 
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 
-  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
-
 - [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG)
 
+  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
+
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
+
+- [百度网盘](https://pan.baidu.com/s/1a2ONidboUASR92N-Xkllmg?pwd=f3y5) 提取码: f3y5
 
 - Telegram Channel
 

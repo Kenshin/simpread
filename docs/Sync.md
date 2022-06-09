@@ -9,6 +9,8 @@
 
 - [支持平台](#支持平台)
 
+- [教程](#教程)
+
 - [下载](#下载)
 
 - [验证](#验证)
@@ -68,6 +70,15 @@
 
 基本上涵盖了全部平台，包括：`Windows` · `Mac` · `Linux` 与 [命令行版本](https://github.com/Kenshin/simpread/discussions/3704) 。
 
+教程
+---
+
+包含同步助手验证、绑定、自动同步、增强导出等功能的一站式教程。
+
+- [语雀](https://www.yuque.com/kenshin/simpread/pwpnsx)
+
+- [Logseq](https://kb.simpread.pro/#/page/配置同步助手)
+
 下载
 ---
 
@@ -81,6 +92,8 @@
 
 - [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
 
+- [百度网盘](https://pan.baidu.com/s/1a2ONidboUASR92N-Xkllmg?pwd=f3y5) 提取码: f3y5
+
 - Telegram Channel
 
   - 1.0.1 → [win 64 & 32](https://t.me/simpread/171)  [mac](https://t.me/simpread/166)
@@ -89,11 +102,8 @@
 
 - [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)
 
-### 无法运行
-
-> 在 Mac 上如果出现下图的话，请使用 **腾讯微云** 的方式，细节可以 [看这里](https://github.com/Kenshin/simpread/issues/2100#issuecomment-846510794)。
-
-![image](https://user-images.githubusercontent.com/6434137/119250114-6eb6d680-bbd0-11eb-9db9-c7ca71ce7ee6.png)
+无法使用
+---
 
 在 Windows 上运行可能会被 360类的产品误报，因为同步助手使用了 Electron 技术，所以有可能存在此情况，如果是在上述官方提到的渠道下载，请放心使用。
 
