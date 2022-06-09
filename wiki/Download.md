@@ -30,6 +30,8 @@
 
   - 1.0.1 版 → [win 64 & 32](https://t.me/simpread/171)  [mac](https://t.me/simpread/166)
 
+  - 1.0.2 版  → [Telegram Group](https://t.me/simpreadgroup/56764)（含全部系统）
+
 - [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)
 
 !> 注意：以下内容**仅为简悦 1.x 时的功能，并未包含 2.x 时的功能，如：稍后读 / 标注 / 高级账户功能等**。
