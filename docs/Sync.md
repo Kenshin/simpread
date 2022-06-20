@@ -24,6 +24,7 @@
 - [内置解析](#内置解析)
 
 - [导出到本地](#导出服务)
+
     - [PDF](#pdf)
 
     - [pandoc](#pandoc)
@@ -48,6 +49,10 @@
 - [Bookmarklet](#Bookmarklet)
 
 - [日志输出](#日志)
+
+- [极速版](#极速版)
+
+- [URL Scheme](#URLScheme)
 
 描述
 ---
@@ -435,6 +440,38 @@ Bookmarklet
 1.0.2 版新增功能，可将同步助手的操作日志输出到任意目录。
 
 ![](https://s1.ax1x.com/2022/06/07/XD9uzq.png)
+
+URLScheme
+---
+
+1.1.0 版新增功能，目前支持三种 URL Scheme，未来还会陆续增加新方案。
+
+注意：Linux 用户暂时不支持 URL Scheme。
+
+- `simpread://open?type=unread&idx=1234&id=abc`
+
+以独立窗口打开 ID 为 `1234` 的本地快照并具有跳转到对应的标注 `abc` 此功能也叫[标注嵌入模式](https://github.com/Kenshin/simpread/discussions/4070)。
+
+- `simpread://open?type=extension`
+
+以独立窗口打开扩展端稍后读
+
+- `simpread://open?type=unread`
+
+以独立窗口打开 [稍后读极速版](https://github.com/Kenshin/simpread/discussions/3864)
+
+极速版
+---
+
+1.1.0 版新增功能，内置了一个极简版本的稍后读 [访问地址](http://localhost:7026/unread/)。可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方。
+
+同时此版本也包含了 [标注嵌入模式](https://github.com/Kenshin/simpread/discussions/4070)，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/3864)。
+
+**截图**（在 MenubarX 使用效果）
+
+![](https://s1.ax1x.com/2022/06/17/XquQyt.png)
+
+![](https://s1.ax1x.com/2022/06/17/XqnTRs.md.png)
 
 # Logo 设计
 
