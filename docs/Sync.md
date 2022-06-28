@@ -54,7 +54,7 @@
 
 - [标注嵌入模式](#标注嵌入模式)
 
-    - [嵌入到 Obsidian](#嵌入到obsidain)
+    - [嵌入到 Obsidian](#嵌入到obsidian)
 
     - [嵌入到 Logseq](#嵌入到logseq)
 
