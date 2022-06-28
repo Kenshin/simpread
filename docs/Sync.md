@@ -52,13 +52,13 @@
 
 - [极速版](#极速版)
 
-- [标注嵌入模式]([标注嵌入模式)
+- [标注嵌入模式](#标注嵌入模式)
 
-    - [嵌入到 Obsidian](嵌入到obsidain)
+    - [嵌入到 Obsidian](#嵌入到obsidain)
 
-    - [嵌入到 Logseq](嵌入到logseq)
+    - [嵌入到 Logseq](#嵌入到logseq)
 
-    - [嵌入到 MenubarX](嵌入到menbarx)
+    - [嵌入到 MenubarX](#嵌入到menbarx)
 
 - [URL Scheme](#URLScheme)
 
