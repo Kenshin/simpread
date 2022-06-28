@@ -52,6 +52,14 @@
 
 - [极速版](#极速版)
 
+- [标注嵌入模式]([标注嵌入模式)
+
+    - [嵌入到 Obsidian](嵌入到obsidain)
+
+    - [嵌入到 Logseq](嵌入到logseq)
+
+    - [嵌入到 MenubarX](嵌入到menbarx)
+
 - [URL Scheme](#URLScheme)
 
 描述
@@ -467,9 +475,26 @@ URLScheme
 
 1.1.0 版新增功能，内置了一个极简版本的稍后读 [访问地址](http://localhost:7026/unread/)。可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方。
 
+标注嵌入模式
+---
+
 同时此版本也包含了 [标注嵌入模式](https://github.com/Kenshin/simpread/discussions/4070)，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/3864)。
 
-**截图**（在 MenubarX 使用效果）
+#### 嵌入到Obsidian
+
+在 Obsidian 中标注本地快照并实时同步到你的 Obsidian，不仅如此还可以管理你的稍后读，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/2889#discussioncomment-2983691)。
+
+![](https://cdn.jsdelivr.net/gh/23784148/upload-images@main/simpered/notice/Obsidian%20Sync.png)
+
+#### 嵌入到Logseq
+
+将简悦的标注与稍后读集成到 Logseq 进而实现：**集文章标注实时同步到 Logseq、本地快照实时保存到本地、管理你全部的稍后读于一身的 Logseq + 简悦全流程化一站式解决方案**，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/4117)。
+
+![](https://cdn.jsdelivr.net/gh/23784148/upload-images@main/simpered/notice/Logseq%20Sync.png)
+
+#### MenubarX
+
+在  MenubarX 使用效果
 
 ![](https://s1.ax1x.com/2022/06/17/XquQyt.png)
 
