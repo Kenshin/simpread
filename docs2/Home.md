@@ -24,9 +24,9 @@
 
 > Telegram Chanel 👉 https://t.me/simpread 🔥🔥🔥🔥 每周 3 ~ 4篇推送 4.6K+ 订阅
 
-> Telegram Group 👉 https://t.me/simpreadgroup 🔥🔥🔥🔥欢迎跟 2K+ 小伙伴一起催更
+> Telegram Group 👉 https://t.me/simpreadgroup 🔥🔥🔥🔥 欢迎跟 2K+ 小伙伴一起催更
 
-> 免配置库 👉 https://www.yuque.com/kenshin/simpread/ds8zk0 🔥🔥🔥双链笔记用户必看
+> 免配置库 👉 https://www.yuque.com/kenshin/simpread/ds8zk0 🔥🔥🔥 双链笔记用户必看
 
 > 教程一览 👉 https://www.yuque.com/kenshin/simpread 🔥🔥
 
