@@ -20,25 +20,37 @@
 简悦的汇总
 ---
 
-> 新用户一站式索引 👉 https://zhuanlan.zhihu.com/p/382683271
+> QQ 频道 👉 https://pd.qq.com/s/5jp0meyfc 🔥🔥 照顾国内用户的 Discord + Telegram Channel 社区
 
-> 帮助中心 👉 https://simpread.pro/help
+> Telegram Chanel 👉 https://t.me/simpread 🔥🔥🔥🔥 每周 3 ~ 4篇推送 4.6K+ 订阅
 
-> 订阅中心 👉 https://simpread.pro/subscribe
+> Telegram Group 👉 https://t.me/simpreadgroup 🔥🔥🔥🔥欢迎跟 2K+ 小伙伴一起催更
+
+> 免配置库 👉 https://www.yuque.com/kenshin/simpread/ds8zk0 🔥🔥🔥双链笔记用户必看
+
+> 教程一览 👉 https://www.yuque.com/kenshin/simpread 🔥🔥
+
+> 订阅中心 👉 https://simpread.pro/subscribe 🔥🔥
+
+> 知识库 👉 https://github.com/kenshin/simpread/discussions 🔥🔥🔥
+
+> 反馈渠道 👉 https://github.com/kenshin/simpread/issues/new
+
+> 帮助中心 👉 https://simpread.pro/help 各种链接的汇总
+
+> 知乎专栏 👉 https://www.zhihu.com/column/kenshin
+
+> B 站视频专栏 👉 https://space.bilibili.com/1853727625 Notion、Obsidian、Logseq 各种联动视频
 
 > 简悦百科 👉 https://simpread.pro/wiki
 
-> 知识库 👉 https://github.com/kenshin/simpread/discussions
-
-> 为了满足新手上手简悦的高级功能，增加了新手入门 👉 [互动式](http://ksria.com/simpread/guide/) [视频介绍](https://www.bilibili.com/video/BV1JA411L7Ev)
-
 > 全部功能地图 👉 [幕布](https://mubu.com/doc/iv7u8E_7gp#m)  [WorkFlowy](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
 
-> 简悦 · 高级账户的相关问题 👉[高级账户]([https://github.com/Kenshin/simpread/discussions/categories/高级账户)
+> 简悦 · 高级账户的相关问题 👉[高级账户]([https://www.yuque.com/kenshin/simpread/xs0gp0)
 
 > 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧) · [与其它服务的联动](https://github.com/Kenshin/simpread/discussions/categories/服务)
 
-> 当在使用过程中遇到了一些问题，也可访问这里查看 👉 [重要通知](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
+> 当在使用过程中遇到了一些问题，也可访问这里查看 👉 [问题清单](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
 
 简悦的各种平台
 ---
