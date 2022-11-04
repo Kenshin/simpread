@@ -20,7 +20,7 @@
 简悦的汇总
 ---
 
-> QQ 频道 👉 https://pd.qq.com/s/5jp0meyfc 🔥🔥
+> QQ 频道 👉 https://pd.qq.com/s/5jp0meyfc 🔥🔥 照顾国内用户的 Discord + Telegram Channel 社区
 
 > Telegram Chanel 👉 https://t.me/simpread 🔥🔥🔥🔥 每周 3 ~ 4篇推送 4.6K+ 订阅
 
@@ -30,13 +30,13 @@
 
 > 教程一览 👉 https://www.yuque.com/kenshin/simpread 🔥🔥
 
-> 帮助中心 👉 https://simpread.pro/help
-
 > 订阅中心 👉 https://simpread.pro/subscribe 🔥🔥
 
-> 知识库 👉 https://github.com/kenshin/simpread/discussions
+> 知识库 👉 https://github.com/kenshin/simpread/discussions 🔥🔥🔥
 
 > 反馈渠道 👉 https://github.com/kenshin/simpread/issues/new
+
+> 帮助中心 👉 https://simpread.pro/help 各种链接的汇总
 
 > 知乎专栏 👉 https://www.zhihu.com/column/kenshin
 
