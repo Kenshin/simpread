@@ -1,7 +1,7 @@
 ***
-* [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
-* [**教程中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://kb.simpread.pro)
-* [**开放平台** ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://kb.simpread.pro/#/page/61f51785-e5fb-494f-8716-6f62cc89116b)
+* [**配置库 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)**](https://www.yuque.com/kenshin/simpread/ds8zk0)
+* [**教程中心 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)**](https://www.yuque.com/kenshin/simpread)
+* [**帮助中心 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)**](https://simpread.pro/help)
 ***
 * [**文档中心**](Home)
 * **基础功能**
@@ -18,28 +18,28 @@
       * [自动进入阅读模式](入门指南（-操作指引-）?id=自动进入阅读模式)
       * [浮动控制面板](浮动控制面板（FAP）与浮动控制栏（FAB）)
   * [手动模式](手动框选)
-* **标注 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
+* **标注 ![2.0](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/ver_2.0.png) ![new](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/new.png)**
   * [标注](标注)
-* **稍后读 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
+* **稍后读 ![2.0](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/ver_2.0.png) ![new](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/new.png)**
   * [稍后读](稍后读)
   * [多种布局](稍后读-多种布局)
-* **高级账户 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
+* **高级账户 ![2.0](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/ver_2.0.png) ![new](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/new.png)**
   * [高级账户](高级账户)
-  * [授权登录 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](授权登录)
-  * [已购必读 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](已购必读)
+  * [授权登录 ![important](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/important.png)](授权登录)
+  * [已购必读 ![important](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/important.png)](已购必读)
   * [常见问题](https://github.com/Kenshin/simpread/issues/908)
-* **同步助手 ![2.0](https://z3.ax1x.com/2021/06/07/206FYj.png) ![new](https://s1.ax1x.com/2020/08/20/d8MxL8.png)**
+* **同步助手 ![2.0](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/ver_2.0.png) ![new](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/new.png)**
   * [介绍](Sync)
   * [下载](Sync?id=下载)
   * [同步](Sync?id=同步)
   * [自动同步](自动同步)
     * [注意事项](自动同步?id=注意事项)
   * [内置解析](Sync?id=内置解析)
-  * [导出服务 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](Sync?id=导出服务)
+  * [导出服务 ![important](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/important.png)](Sync?id=导出服务)
   * [小书签](Bookmarklet)
   * [发送到Kindle](Sync?id=发送到Kindle)
   * [RSS 阅读器辅助](RSSReader)
-* **服务 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
+* **服务 ![important](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/important.png)**
   * [前言](服务)
   * [导出到本地](保存到本地)
     * 支持服务
@@ -56,19 +56,19 @@
       * Pocket
       * Instapaper
       * 语雀
-      * [坚果云 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](坚果云)
-      * [有道云笔记 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](有道云笔记)
+      * [坚果云 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](坚果云)
+      * [有道云笔记 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](有道云笔记)
       * 印象笔记 | Evernote
-      * [为知笔记 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](为知笔记)
+      * [为知笔记 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](为知笔记)
       * Google 云端硬盘
       * Dropbox
-      * [WebDAV ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](WebDAV)
-      * [Notion ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Notion)
-      * [Github ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Github)
-      * [Joplin ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](Joplin)
-      * [专注笔记 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](专注笔记)
+      * [WebDAV ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](WebDAV)
+      * [Notion ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](Notion)
+      * [Github ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](Github)
+      * [Joplin ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](Joplin)
+      * [专注笔记 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](专注笔记)
       * Onenote
-      * [Bear | Ulysses ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](URLSCHEME)
+      * [Bear | Ulysses ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](URLSCHEME)
   * [自动化](自动化)
   	* [自动化服务](自动化服务)
   * [定制导出](定制化导出)
@@ -77,7 +77,7 @@
   * [增强导出](Sync?id=导出服务)
   * [发送邮件](Sync?id=邮件服务)
   * [每日回顾](每日回顾)
-* **数据文件 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)**
+* **数据文件 ![important](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/important.png)**
   * [配置文件](配置文件)
   * [同步](同步)
     * [手动同步](同步?id=手动同步)
