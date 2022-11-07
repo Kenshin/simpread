@@ -31,4 +31,4 @@
 - 自动授权前确保关闭选项页；
 - 自动授权的页面为最后一个 Tab；
 
-![Imgur](https://i.imgur.com/wisTIKB.gif)
+![Imgur](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/wisTIKB.gif)

@@ -5,7 +5,7 @@
 可以读取 `本地` 或 `远程` 的 txt 文本。（又称 `文本阅读器` ）
 
 ### 效果：
-![Imgur](https://i.imgur.com/T1ycFeA.gif)
+![Imgur](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/T1ycFeA.gif)
 
 ### 限制：
 - 读取 `本地 txt`，只能使用 `字体大小` `字体样式` `布局` `主题` 功能；

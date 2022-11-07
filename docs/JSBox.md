@@ -45,11 +45,11 @@
 
 ## 操作视频
 
-- 初始化设定 [动图](https://i.imgur.com/oTD6Q7F.gif) [视频](http://sr.ksria.cn/setting@jsbox.mov)
-- 安装简悦 · 阅读器 [动图](https://i.imgur.com/2qRdMJZ.gif) [视频](http://sr.ksria.cn/reader@jsbox.mov)
-- 从 Safari 进入阅读模式 [动图](https://i.imgur.com/6xsd4dZ.gif) [视频](http://sr.ksria.cn/share%20to%20safari@jsbox.mov)
-- 从任意 App 通过分享到 「打开阅读器」进入阅读模式 [动图](https://i.imgur.com/rShmzQu.gif) [视频](http://sr.ksria.cn/share%20to%20reader@jsbox.mov)
-- 复制 URL 后直接打开 阅读器 [动图](https://i.imgur.com/qRKLCr0.gif) [视频](http://sr.ksria.cn/clipboard%20to%20reader@jsbox.mov)
+- 初始化设定 [动图](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/oTD6Q7F.gif) [视频](http://sr.ksria.cn/setting@jsbox.mov)
+- 安装简悦 · 阅读器 [动图](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/2qRdMJZ.gif) [视频](http://sr.ksria.cn/reader@jsbox.mov)
+- 从 Safari 进入阅读模式 [动图](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/6xsd4dZ.gif) [视频](http://sr.ksria.cn/share%20to%20safari@jsbox.mov)
+- 从任意 App 通过分享到 「打开阅读器」进入阅读模式 [动图](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/rShmzQu.gif) [视频](http://sr.ksria.cn/share%20to%20reader@jsbox.mov)
+- 复制 URL 后直接打开 阅读器 [动图](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/qRKLCr0.gif) [视频](http://sr.ksria.cn/clipboard%20to%20reader@jsbox.mov)
 
 ## 配置指南
 

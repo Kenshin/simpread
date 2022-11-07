@@ -1,6 +1,9 @@
 此功能最低要求 1.0.3 版本，如低于此版本，[请升级](http://ksria.com/simpread/) 到最新版本。
 ***
 
+> [!WARNING]
+> **此功能为 1.x 版功能**，2.x 版（同步助手）已经内置了此功能，详细说明 [请看这里](Sync?id=发送到kindle)。
+
 ### 一览
 > 如果下图无法显示请看 [Send to Kindle](http://sr.ksria.cn/send%20to%20kindle.gif)
 
@@ -17,16 +20,16 @@
 
 - 使用你的账户登陆并打开 https://www.amazon.cn/mn/dcw/myx.html#/home/settings/payment
 - 找到 `已认可的发件人电子邮箱列表` 节，并将 `kindle@fivefilters.org` 加入信任列表，如图：
-  ![Imgur](http://i.imgur.com/m406zSC.png)
+  ![Imgur](https://s1.ax1x.com/2022/11/07/xv3t8x.png)
 
 ### 使用
 - 由于转码使用了简悦自己的后台服务，所以请确保可以访问 https://simpread.herokuapp.com
 
 - 打开 `阅读模式` 后，通过控制栏进行发送，如下图：
-  ![Imgur](http://i.imgur.com/v49dYXs.png)
+  ![Imgur](https://s1.ax1x.com/2022/11/07/xv3N26.png)
 
 - 当转码成功后，会自动打开 fivefilters.org 发送页面，如下图：
-  ![Imgur](http://i.imgur.com/tn7xO5q.png)
+  ![Imgur](https://s1.ax1x.com/2022/11/07/xvQqxO.png)
 
 - 点击 `Send!` 即可，如之前的配置没有问题的话，将会在 Kindle 的后台看到如下内容：  
   ![](http://sr.ksria.cn/send%20to%20kindle.png)
