@@ -4,7 +4,15 @@
 起始于此
 ---
 
-嗨，你好，这里是简悦的文档中心，简悦的一切功能都可以在这里找到详细说明。这里适合动手能力强的用户，如果你是新用户的话，可以看看 [简悦百科](https://simpread.pro/wiki) 帮助你更好的使用 / 了解简悦。
+👋 你好，这里是简悦的文档中心。
+
+如果是 **阅读模式用户的话，简悦支持开箱即用，没有任何额外配置**。如果是 **双链笔记用户的话，可以直接使用配置库方案**，目前包括：Obsidian、Notion、Logseq 等，详细说明 [请看这里](https://www.yuque.com/kenshin/simpread/ds8zk0)。
+
+简悦扩展端的一切功能都可以在这里找到详细说明，你不需要也没必要全部都掌握这些，简悦扩展端 → 选项页的功能都有指向这里的链接，非常适合喜欢定制化的用户。
+
+简悦是一个主打隐私和数据所有权的知识管理工具，可以看看 [简悦百科](https://simpread.pro/wiki) 帮助你更好的使用 / 了解简悦。
+
+😄
 
 简悦是什么
 ---
@@ -60,8 +68,6 @@
 - Chrome  👉 [全功能版](https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll)
 
 - Microsoft Edge 👉 [全功能版](https://microsoftedge.microsoft.com/addons/detail/clgdhlhfiocphghdkdbgdlmfaafccfmc)
-
-- Apple Safari · Firefox 👉  [UserScript 轻阅版](http://ksria.com/simpread/#lite)
 
 - 其它基于 Chromium 的内核版本 👉 [离线版](http://ksria.com/simpread/#downloads)
 

@@ -1,4 +1,4 @@
->  此功能最低要求 1.1.4.6022 版本，如低于此版本，[请升级](http://ksria.com/simpread/) 到最新版本。
+>  此功能最低要求 1.1.4.6022 版本，如低于此版本，[请升级](https://simpread.pro) 到最新版本。
 
 > [!TIP]
 > 使用 Notion 的用户一般会配合 Notion 辅助增强实现更强大的导入方案，包括：增加 favicon、题图、同步稍后读标签、添加自定义标签等功能，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/3572)。

@@ -1,38 +1,16 @@
-此功能最低要求 1.0.3 版本，如低于此版本，[请升级](http://ksria.com/simpread/) 到最新版本。
-***
+发送到 Kindle
+---
 
-> [!WARNING]
-> **此功能为 1.x 版功能**，2.x 版（同步助手）已经内置了此功能，详细说明 [请看这里](Sync?id=发送到kindle)。
+## 配置
 
-### 一览
-> 如果下图无法显示请看 [Send to Kindle](http://sr.ksria.cn/send%20to%20kindle.gif)
+在 [邮件服务](#邮件服务) 的基础上，支持 **原生发送到 Kindle**，只需填写你的 Kindle 邮箱即可，如下图：
 
-![Send to Kindle](http://sr.ksria.cn/send%20to%20kindle.gif)
+[![DtrvZQ.png](https://s3.ax1x.com/2020/11/24/DtrvZQ.md.png)](https://imgchr.com/i/DtrvZQ)
 
-### 含义
-此功能是将由简悦优化后的 `阅读模式` 的页面发送到 Kindle 上，而非（转换前）原文。
+同样在 **简悦（扩展端） → 选项页 → 共通 → 简悦 · 同步助手 ** 开启此功能：
 
-### 第三方服务
-此功能使用了第三方服务 http://fivefilters.org/kindle-it ，所以请确保你的网络可以访问它。
+[![Bj8z3q.png](https://s1.ax1x.com/2020/11/11/Bj8z3q.png)](https://imgchr.com/i/Bj8z3q)
 
-### 配置
-> 需要将 http://fivefilters.org/kindle-it 对应的信箱 `kindle@fivefilters.org` 加入到 Kindle 的白名单中。
+## 使用
 
-- 使用你的账户登陆并打开 https://www.amazon.cn/mn/dcw/myx.html#/home/settings/payment
-- 找到 `已认可的发件人电子邮箱列表` 节，并将 `kindle@fivefilters.org` 加入信任列表，如图：
-  ![Imgur](https://s1.ax1x.com/2022/11/07/xv3t8x.png)
-
-### 使用
-- 由于转码使用了简悦自己的后台服务，所以请确保可以访问 https://simpread.herokuapp.com
-
-- 打开 `阅读模式` 后，通过控制栏进行发送，如下图：
-  ![Imgur](https://s1.ax1x.com/2022/11/07/xv3N26.png)
-
-- 当转码成功后，会自动打开 fivefilters.org 发送页面，如下图：
-  ![Imgur](https://s1.ax1x.com/2022/11/07/xvQqxO.png)
-
-- 点击 `Send!` 即可，如之前的配置没有问题的话，将会在 Kindle 的后台看到如下内容：  
-  ![](http://sr.ksria.cn/send%20to%20kindle.png)
-
-### 注意
-- 生成后的页面，如 `https://simpread.herokuapp.com/view/20170823xxxxxx.html` 并不会长久存在，超时后会自动删除。
+与其它导出服务一样进入 **阅读模式|聚焦模式 → 右下角 控制栏 → 动作 → 导出 → 发送到 Kindle** 即可。
