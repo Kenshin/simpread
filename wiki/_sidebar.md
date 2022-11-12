@@ -1,29 +1,29 @@
 ***
-* [**帮助中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/help)
-* [**教程中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://kb.simpread.pro)
-* [**文档中心 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)**](https://simpread.pro/docs)
+* [**帮助中心 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)**](https://simpread.pro/help)
+* [**教程中心 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)**](https://www.yuque.com/kenshin/simpread)
+* [**文档中心 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)**](https://simpread.pro/docs)
 ***
 * [简悦百科](Home)
 * [下载地址](Download)
 * **[新手营](新手营)**
   * [概览](新手营)
-  * [新用户入门![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://zhuanlan.zhihu.com/p/382683271)
-  * [教程一览![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW#/116c4d504937)
-  * [视频入门 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://www.bilibili.com/video/BV1sU4y1j7qQ)
-  * [互动式 ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](http://ksria.com/simpread/guide/)
-  * [功能地图@WorkFlowy ![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
-* **[知识库 ![important](https://s1.ax1x.com/2020/07/25/UzKr8O.png)](分类介绍)**
+  * [新用户入门![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://zhuanlan.zhihu.com/p/382683271)
+  * [教程一览![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW#/116c4d504937)
+  * [视频入门 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://www.bilibili.com/video/BV1sU4y1j7qQ)
+  * [互动式 ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](http://ksria.com/simpread/guide/)
+  * [功能地图@WorkFlowy ![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://workflowy.com/s/22/iDn82ReW7Neki2oW)
+* **[知识库 ![important](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/important.png)](分类介绍)**
   * [概览](分类介绍)
-  * [教程与使用场景![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/2085)
+  * [教程与使用场景![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/2085)
   * 重要功能介绍
-    * [导出服务![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/服务)
-    * [使用技巧![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/使用技巧)
-    * [高级账户![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/高级账户)
-    * [同步助手![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/同步助手)
-    * [重要通知![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
-    * [开放平台![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/Developer)
-    * [插件说明![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/插件说明)
-    * [站点适配![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://github.com/Kenshin/simpread/discussions/categories/站点适配)
+    * [导出服务![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/服务)
+    * [使用技巧![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/使用技巧)
+    * [高级账户![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/高级账户)
+    * [同步助手![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/同步助手)
+    * [重要通知![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
+    * [开放平台![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/Developer)
+    * [插件说明![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/插件说明)
+    * [站点适配![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://github.com/Kenshin/simpread/discussions/categories/站点适配)
 * **[简悦理念](简悦理念)**
   * [概览](简悦理念)
   * [定价原则](定价原则)
@@ -76,4 +76,4 @@
   * [社区](简悦社区)
   * [共建者](社区共建者)
 ***
-* [关于作者![external](https://s2.ax1x.com/2020/02/03/1NqLQg.png)](https://kenshin.wang/)
+* [关于作者![external](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/popup.png)](https://kenshin.wang/)
