@@ -4,10 +4,6 @@
 - 简悦并不会保存用户的授权码；
 - `输入 / 输出 / 同步` 时并不包含授权码；
 
-## 为什么需要输入 Linnk 的用户名和密码
-
-> 由于 Linnk 未提供 Oauth 授权机制，故需要用户名和密码。
-
 ## 为什么需要输入 Instapaper 的用户名和密码
 
 > 因为 Instapaper 只提供了 OAuth 1.0a 方式，所以第一次使用时需要输入用户名和密码。
@@ -31,4 +27,4 @@
 - 自动授权前确保关闭选项页；
 - 自动授权的页面为最后一个 Tab；
 
-![Imgur](https://i.imgur.com/wisTIKB.gif)
+![Imgur](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/wisTIKB.gif)
