@@ -172,5 +172,5 @@
 全功能
 ---
 
-![功能一览](http://sr.ksria.cn/feature%202.1.0.png)
+![功能一览](https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/static/docs/assets/feature%202.1.0.png)
 
