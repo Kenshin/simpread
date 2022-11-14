@@ -468,13 +468,13 @@ URLScheme
 
 ### 极速版
 
-1.1.0 版新增功能，内置了一个极简版本的稍后读 [访问地址](http://localhost:7026/unread/)。可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方。
+1.1.0 版新增功能，内置了一个极简版本的稍后读 [访问地址](http://localhost:7026/unread/)。可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/3864)。
 
 ![](https://s1.ax1x.com/2022/11/08/xzp4L8.png)
 
 ### 标注嵌入模式
 
-同时此版本也包含了 [标注嵌入模式](https://github.com/Kenshin/simpread/discussions/4070)，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/3864)。
+极速版稍后读还包含了 [标注嵌入模式](https://github.com/Kenshin/simpread/discussions/4070)。
 
 ![](https://s1.ax1x.com/2022/11/08/xzpHij.png)
 
