@@ -454,9 +454,7 @@ URLScheme
 
 #### 设置稍后读
 
-> 关于此部分细节请看 [binsee](https://github.com/binsee) 提供的 [详细说明](https://github.com/Kenshin/simpread/issues/1402)
-
-需要 **简悦（扩展端）· 稍后读**  [创建快捷方式](稍后读?id=创建快捷方式)，然后将快捷键方式的路径填入到下面的地址，即可。
+需要 **简悦（扩展端）· 稍后读**  [创建快捷方式](稍后读?id=创建快捷方式)，然后将快捷键方式的路径填入到下面的地址。
 
 ![](https://s1.ax1x.com/2022/11/09/zSZ1xg.png)
 
