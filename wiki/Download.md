@@ -18,15 +18,15 @@
 
 包含简悦同步助手的全部版本：
 
+- [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG) **国内用户首选**
+
+- [百度网盘](https://pan.baidu.com/s/1ARQZ-zcQroTzHDJWWRJUIQ?pwd=m4pt) 提取码: m4pt  **偶尔会被无故取消分享 😂**
+
+- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)  **国外用户首选**
+
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 
-- [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG)
-
-  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
-
-- [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
-
-- [百度网盘](https://pan.baidu.com/s/1a2ONidboUASR92N-Xkllmg?pwd=f3y5) 提取码: f3y5
+  >  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
 
 - Telegram Channel
 
@@ -35,8 +35,6 @@
   - 1.0.2  → [Telegram Group](https://t.me/simpreadgroup/56764)（含全部系统）
 
   - 1.1.0 → [Telegram Group](https://t.me/simpreadgroup/57763)（含全部系统）
-
-- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)
 
 !> 注意：以下内容**仅为简悦 1.x 时的功能，并未包含 2.x 时的功能，如：稍后读 / 标注 / 高级账户功能等**。
 
