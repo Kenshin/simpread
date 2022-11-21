@@ -132,6 +132,8 @@
 
 - [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG) **国内用户首选**
 
+- [FlowUs](https://flowus.cn/share/be3e616f-a047-40d4-94dc-e89f795a7a5e) **国内用户首选**
+
 - [百度网盘](https://pan.baidu.com/s/1ARQZ-zcQroTzHDJWWRJUIQ?pwd=m4pt) 提取码: m4pt  **偶尔会被无故取消分享 😂**
 
 - [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)  **国外用户首选**
