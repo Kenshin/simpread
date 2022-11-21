@@ -19,6 +19,8 @@
 
 - [同步](#同步)
 
+  - [如何配置](#如何配置)
+
   - [自动同步](#自动同步)
 
   - [自动同步的注意事项](#自动同步?id=注意事项)
@@ -27,20 +29,32 @@
 
 - [导出到本地](#导出服务)
 
+    - [导出文件夹](#导出文件夹)
+
+    - [如何使用](#如何使用)
+
+    - [增强导出](#增强导出)
+
+    - [读取外部文件](#外部文件)
+
+    - [删除旧文件](#删除旧文件)
+
+- [导出类型](#导出类型)
+
     - [PDF](#pdf)
-
+    
     - [pandoc](#pandoc)
-
+    
     - [Epub](#epub)
-
+    
     - [assets + md](#assets-md)
-
+    
     - [Textbundle](Textbundle)
-
+    
     - [邮件服务](邮件服务)
-
+    
     - [发送到 Kindle](发送到-Kindle)
-
+    
 - [导出服务](#自动化服务)
 
     - [Hypothesis](自动化服务?id=hypothes)
@@ -62,6 +76,14 @@
       - [嵌入到 Logseq](#嵌入到logseq)
 
       - [嵌入到 MenubarX](#嵌入到menbarx)
+
+  - [Token](#Token)
+
+- [主题](#主题)
+
+- [暗色模式](#暗色模式)
+
+- [文档地址源](#文档地址源)
 
 - [Bookmarklet](#Bookmarklet)
 
@@ -110,13 +132,13 @@
 
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 
-  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
+  >  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
 
 - [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG)
 
-- [腾讯微云](https://share.weiyun.com/S8C1bxJ7) 提取码：pqaytk
+- [百度网盘](https://pan.baidu.com/s/1ARQZ-zcQroTzHDJWWRJUIQ?pwd=m4pt) 提取码: m4pt
 
-- [百度网盘](https://pan.baidu.com/s/1a2ONidboUASR92N-Xkllmg?pwd=f3y5) 提取码: f3y5
+- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)
 
 - Telegram Channel
 
@@ -125,8 +147,6 @@
   - 1.0.2  → [Telegram Group](https://t.me/simpreadgroup/56764)（含全部系统）
 
   - 1.1.0 → [Telegram Group](https://t.me/simpreadgroup/57763)（含全部系统）
-
-- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)
 
 无法使用
 ---
@@ -156,11 +176,11 @@
 1. 运行 **简悦 · 同步助手** 
 2. **简悦 → 选项页 → 共通 → 简悦 · 同步助手 → 授权验证并开启简悦 · 同步助手**
 
-  [![BXhkxP.png](https://s1.ax1x.com/2020/11/11/BXhkxP.md.png)](https://imgchr.com/i/BXhkxP)
+  ![BXhkxP.png](https://s1.ax1x.com/2020/11/11/BXhkxP.md.png)
 
 3. 认证无误后会有提示，如下图：
 
-  [![BXh1x0.png](https://s1.ax1x.com/2020/11/11/BXh1x0.png)](https://imgchr.com/i/BXh1x0)
+  ![BXh1x0.png](https://s1.ax1x.com/2020/11/11/BXh1x0.png)
 
 注意事项
 ---
@@ -230,7 +250,7 @@
 
 3. **简悦（扩展端） → 选项页 → 共通 → 简悦 · 同步助手** 也同样开启以下功能。
 
-  [![BXb3Hx.png](https://s1.ax1x.com/2020/11/11/BXb3Hx.md.png)](https://imgchr.com/i/BXb3Hx)
+  ![BXb3Hx.png](https://s1.ax1x.com/2020/11/11/BXb3Hx.md.png)
 
 ### 如何使用
 
@@ -250,6 +270,8 @@
 {"extension":"assets", "path":"/Users/xxxx/xxxx/Obsidian/SimpRead"}
 {"extension":"textbundle", "path":""}
 {"extension":"md", "path":"/Users/xxxx/xxxx/Obsidian/SimpRead"}
+{"extension":"assets", "path":"/Users/xxxx/xxxx/Obsidian@simpread/Inbox", "type":"page"}
+{"extension":"md", "path":"/Users/xxxx/xxxx/Obsidian@simpread/SimpRead", "type":"annote"}
 ```
 
 简单的解释
@@ -257,9 +279,9 @@
 - `extension` → 任意文件的后缀 `epub` `docx` `md` `html` 等
 
   有两个特殊的后缀：
-  
+
   - `external` 导出 HTML 时，将当前 `xxx.html` 复制到 `path` 对应的目录，此功能注意针对 [简悦的外部资料库的自建方案](https://github.com/Kenshin/simpread/discussions?discussions_q=label%3A%22self+built%22)。
-  
+
   - `assets`，可以辅助 [导出 md + assets 格式](https://github.com/Kenshin/simpread/discussions/4041) 实现 `md + assets` 结构。
 
 - `output` → 导出文件夹地址
@@ -268,11 +290,29 @@
 
     `{"extension":"epub", "path":""}` 则会在导出文件夹中新建 `epub` 文件夹。
 
-  - `"/xxxx ` → 有值，根据对应值的位置导出。
+  - `"/xxxx"` → 有值，根据对应值的位置导出。
+
+- type → 导出类型（ 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载) ）。
+
+  - `annote` → 标注 e.g. `1234-xxx@annote`
+
+  - `page` → 全文 e.g. `1234-xxx`
+
+  > type 参数可以省略，当省略后不缺分 **全文 or 标注**。
+
+  > 通过区分全文 or 标注，可以实现以下方案：
+
+  > 将标注导入到 Obsidian SimpRead 文件夹，将 assets 形式的全文导入到 Inbox 文件夹，做到全文和标注分开管理。
+
+### 外部文件
+
+> 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载)。
+
+> 将本地的任意快照（ 包括： `.html` `.md` ）生成阅读模式，同时也加入到简悦的稍后读系统，详细说明 [外部文件](外部文件)。
 
 ### 删除旧文件
 
-当 **使用 [知识库](https://www.yuque.com/kenshin/simpread/lglfy2) 时，请启用此功能**。当删除稍后读时，无法自动同步删除本地快照，启用此功能后会避免出现重复的 `idx-xxx.html`。
+> 当 **使用 [知识库](https://www.yuque.com/kenshin/simpread/lglfy2) 时，请启用此功能**。当删除稍后读时，无法自动同步删除本地快照，启用此功能后会避免出现重复的 `idx-xxx.html`。
 
 ## 导出类型
 
@@ -375,13 +415,13 @@ PS：一般使用 `pandoc-xxx-macOS.pkg` 安装的话，自然是 `/usr/local/bi
 
 > 选项页 → 共通 → 同步助手，下图所示：
 
-[![riixdx.png](https://s3.ax1x.com/2020/12/10/riixdx.png)](https://imgchr.com/i/riixdx)
+![riixdx.png](https://s3.ax1x.com/2020/12/10/riixdx.png)
 
 #### 同步助手端开启方法 
 
 > 同步助手默认开启此选项，下图所示
 
-[![riFkyd.png](https://s3.ax1x.com/2020/12/10/riFkyd.png)](https://imgchr.com/i/riFkyd)
+![riFkyd.png](https://s3.ax1x.com/2020/12/10/riFkyd.png)
 
 ### Textbundle
 
@@ -425,17 +465,31 @@ URLScheme
 > [!TIP]
 > **1.1.0 版** 新增功能，目前支持三种 URL Scheme，未来还会陆续增加新方案。
 
-- `simpread://open?type=unread&idx=1234&id=abc`
+- `type` 包括：`unread` `extension`
 
-  以独立窗口打开 ID 为 `1234` 的本地快照并具有跳转到对应的标注 `abc` 此功能也叫[标注嵌入模式](https://github.com/Kenshin/simpread/discussions/4070)。
+  - `simpread://open?type=unread&idx=1234&id=abc`
 
-- `simpread://open?type=extension`
+    > 以独立窗口打开 ID 为 `1234` 的本地快照并具有跳转到对应的标注 `abc` 此功能也叫[标注嵌入模式](标注嵌入模式)。
 
-  以独立窗口打开扩展端稍后读
+  - `simpread://open?type=extension`
 
-- `simpread://open?type=unread`
+    > 以独立窗口打开扩展端稍后读
 
-  以独立窗口打开 [稍后读极速版](https://github.com/Kenshin/simpread/discussions/3864)
+  - `simpread://open?type=unread`
+
+    > 以独立窗口打开 [稍后读极速版](#极速版)
+
+- `popup` 包括： `window` → 加上参数后，每个链接都会新打开一个窗口，默认（不加此参数）则无论打开什么链接只在当前窗口打开，例如：
+
+  - `simpread://open?type=unread&popup=window`
+
+  - `simpread://open?type=unread&idx=2530&id=1666433469343&popup=window`
+
+- `embed`
+
+  - `logseq` → 显示 logseq 选项 e.g. `simpread://open?type=unread&embed=logseq`
+
+  - `rr` → 显示 roam research 选项 e.g. `simpread://open?type=unread&embed=rr`
 
 > [!WARNING]
 > 注意：Linux 用户暂时不支持 URL Scheme。
@@ -446,6 +500,16 @@ URLScheme
 > [!TIP]
 > 同步助手内置了一些跟稍后读有关系的功能，包括：通过快捷键打开稍后读、稍后读极速版等。
 
+> 1.1.3 版把同步助手稍后读的内容都整理到一起，位置：**同步助手 → 导出 → 稍后读**
+
+![](https://s1.ax1x.com/2022/11/18/znY9RH.png)
+
+### 快捷键
+
+> 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载)。
+
+> 在 1.1.3 版中把稍后读的相关快捷键整理到 **同步助手 → 导出 → 稍后读** 里面，并增加了一些新的快捷键，详细说明 [请看这里](稍后读快捷键)。
+
 ### 打开稍后读
 
 > 通过设置快捷键可将稍后读以独立窗口打开。
@@ -454,32 +518,43 @@ URLScheme
 
 #### 设置稍后读
 
-需要 **简悦（扩展端）· 稍后读**  [创建快捷方式](稍后读?id=创建快捷方式)，然后将快捷键方式的路径填入到下面的地址。
+> 需要 **简悦（扩展端）· 稍后读**  [创建快捷方式](稍后读?id=创建快捷方式)，然后将快捷键方式的路径填入到下面的地址。
 
-![](https://s1.ax1x.com/2022/11/09/zSZ1xg.png)
+> 1.1.2 版（及以下）位置：同步助手 → 共通
+
+![](https://s1.ax1x.com/2022/11/18/znJ1UO.png)
+
+> 1.1.3 版（及以下）位置：同步助手 → 导出 → 稍后读
+
+![](https://s1.ax1x.com/2022/11/18/znJmvR.png)
+
 
 #### 设置快捷键
 
-同时在快捷键栏里可以更改为你常用的快捷键。
+> 此功能为 1.1.2 版（及以下）功能。
 
-**注意：** 此方式的设置与 **简悦 · 扩展端** 一致，依次设置按键。
+![](https://s1.ax1x.com/2022/11/18/znJJ8H.png)
+
+> **注意：** 此方式的设置与 **简悦 · 扩展端** 一致，依次设置按键。
+
+> 1.1.3 版（及以上） [请看这里](#稍后读快捷键)。
 
 ### 极速版
 
 > 1.1.0 版新增功能，内置了一个极简版本的稍后读 [访问地址](http://localhost:7026/unread/)。
 
-> 可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/3864)。
+> 可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方，详细说明 [请看这里](稍后读极速版)。
 
 ![](https://s1.ax1x.com/2022/11/08/xzp4L8.png)
 
 ### 标注嵌入模式
 
-> 极速版稍后读还包含了 [标注嵌入模式](https://github.com/Kenshin/simpread/discussions/4070)。
+> 极速版稍后读还包含了 [标注嵌入模式](标注嵌入模式)。
 
 ![](https://s1.ax1x.com/2022/11/08/xzpHij.png)
 
 > [!TIP]
-> 基于极速版与标注嵌入模式，可以将简悦的标注系统嵌入到 Obsidian、Logseq、Roam Reasearch 等双链笔记中，彻底实现 **左侧笔记，右侧标注** 的完美方案。
+> 基于极速版与标注嵌入模式，可以将简悦的标注系统嵌入到 Obsidian、Logseq、Roam Reasearch 等双链笔记中，彻底实现 **左侧笔记，右侧标注** 的完美方案，详细说明 [配置库](#配置库)。
 
 #### 配置库
 
@@ -490,25 +565,66 @@ URLScheme
 
 > 在 Obsidian 中标注本地快照并实时同步到你的 Obsidian，不仅如此还可以管理你的稍后读，一站式教程 [请看这里](https://www.yuque.com/kenshin/simpread/fr8zo5)，配置库 [请看这里](https://www.yuque.com/kenshin/simpread/psugef)。
 
-![](https://cdn.jsdelivr.net/gh/23784148/upload-images@main/simpered/notice/Obsidian%20Sync.png)
+![](https://s1.ax1x.com/2022/11/19/zugNPH.png)
 
 #### 嵌入到Logseq
 
 > 将简悦的标注与稍后读集成到 Logseq 进而实现：**集文章标注实时同步到 Logseq、本地快照实时保存到本地、管理你全部的稍后读于一身的 Logseq + 简悦全流程化一站式解决方案**，一站式教程 [请看这里](https://www.yuque.com/kenshin/simpread/gbere7)，配置库 [请看这里](https://www.yuque.com/kenshin/simpread/pv5acw)。
 
+![](https://s1.ax1x.com/2022/11/19/zugUGd.png)
+
 #### 嵌入到Roam Research
 
 > 将简悦的标注与稍后读集成到 Roam Research 进而实现：**集文章标注实时同步到 Roam Research、本地快照实时保存到本地、管理你全部的稍后读于一身的 Roam Research + 简悦全流程化一站式解决方案**，一站式教程 [请看这里](https://www.yuque.com/kenshin/simpread/qlgddc)。
 
-![](https://cdn.jsdelivr.net/gh/23784148/upload-images@main/simpered/notice/Logseq%20Sync.png)
+![](https://s1.ax1x.com/2022/11/19/zugaRA.png)
 
-#### MenubarX
+### Token
 
-> 在  MenubarX 使用效果
+> 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载)。
 
-![](https://s1.ax1x.com/2022/06/17/XquQyt.png)
+> 简悦的稍后读数据均存在 `simpread_config.json` 中，通过此方式可以让任意应用通过 `HTTP` 方式调用的话，相当于读取了稍后读的数据，可以产生很多联动效果，详细说明 [稍后读外部访问](稍后读外部访问)。
 
-![](https://s1.ax1x.com/2022/06/17/XqnTRs.md.png)
+文档地址源
+---
+
+> 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载)。
+
+> 同步助手每个功能都配有相应的说明文档，可以通过此功能来切换不同的地址源。
+
+![](https://s1.ax1x.com/2022/11/17/zmtHLq.png)
+
+> 包括：
+
+- [Github Page](http://ksria.com/simpread/docs)
+
+  > 默认地址源。
+
+- [阿里云](https://simpread.pro/docs)
+
+  > 国内用户可选择此方案。
+
+- [国外线路](http://ksria.com/simpread/docs2)
+
+  > 使用 `cdnjs.cloudflare.com` 作为 CDN。
+
+主题
+---
+
+> 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载)。
+
+> 在默认样式的基础上增加了一个 Light 样式。
+
+![](https://s1.ax1x.com/2022/11/18/znQsPA.md.png)
+
+暗色模式
+---
+
+> 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载)。
+
+> 增加了暗色模式，会跟随系统的改变而已改变。（暂时不支持手动更改为暗色模式）
+
+![](https://s1.ax1x.com/2022/11/18/znQjZF.md.png)
 
 Bookmarklet
 ---
