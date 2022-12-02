@@ -1,7 +1,12 @@
 >  此功能最低要求 1.1.4.6022 版本，如低于此版本，[请升级](https://simpread.pro) 到最新版本。
 
 > [!TIP]
-> 使用 Notion 的用户一般会配合 Notion 辅助增强实现更强大的导入方案，包括：增加 favicon、题图、同步稍后读标签、添加自定义标签等功能，详细说明 [请看这里](https://github.com/Kenshin/simpread/discussions/3572)。
+> 使用 Notion 的用户一般会配合 Notion 辅助增强实现更强大的导入方案，包括：增加 favicon、题图、同步稍后读标签、添加自定义标签等功能，详细说明请看 [导入到 Notion 辅助增强](https://github.com/Kenshin/simpread/discussions/3572)。
+
+
+> [!TIP]
+> 简悦近期推出了配置库功能，包括 Notion 配置库，详细说明请看 [配置库](配置库)。
+
 
 位置
 ---

@@ -300,7 +300,7 @@
 
   - `page` → 全文 e.g. `1234-xxx`
 
-  > type 参数可以省略，当省略后不缺分 **全文 or 标注**。
+  > type 参数可以省略，当省略后不区分 **全文 or 标注**。
 
   > 通过区分全文 or 标注，可以实现以下方案：
 
@@ -556,30 +556,7 @@ URLScheme
 ![](https://s1.ax1x.com/2022/11/08/xzpHij.png)
 
 > [!TIP]
-> 基于极速版与标注嵌入模式，可以将简悦的标注系统嵌入到 Obsidian、Logseq、Roam Reasearch 等双链笔记中，彻底实现 **左侧笔记，右侧标注** 的完美方案，详细说明 [配置库](#配置库)。
-
-#### 配置库
-
-> [!TIP]
-> 因为此功能属于复合配置方案，为方便新用户快速上手，简悦官方推出配置库方案，包括：Obsidian · Logseq · Roam Research，细节 [请看这里](https://www.yuque.com/kenshin/simpread/ds8zk0)。
-
-#### 嵌入到Obsidian
-
-> 在 Obsidian 中标注本地快照并实时同步到你的 Obsidian，不仅如此还可以管理你的稍后读，一站式教程 [请看这里](https://www.yuque.com/kenshin/simpread/fr8zo5)，配置库 [请看这里](https://www.yuque.com/kenshin/simpread/psugef)。
-
-![](https://s1.ax1x.com/2022/11/19/zugNPH.png)
-
-#### 嵌入到Logseq
-
-> 将简悦的标注与稍后读集成到 Logseq 进而实现：**集文章标注实时同步到 Logseq、本地快照实时保存到本地、管理你全部的稍后读于一身的 Logseq + 简悦全流程化一站式解决方案**，一站式教程 [请看这里](https://www.yuque.com/kenshin/simpread/gbere7)，配置库 [请看这里](https://www.yuque.com/kenshin/simpread/pv5acw)。
-
-![](https://s1.ax1x.com/2022/11/19/zugUGd.png)
-
-#### 嵌入到Roam Research
-
-> 将简悦的标注与稍后读集成到 Roam Research 进而实现：**集文章标注实时同步到 Roam Research、本地快照实时保存到本地、管理你全部的稍后读于一身的 Roam Research + 简悦全流程化一站式解决方案**，一站式教程 [请看这里](https://www.yuque.com/kenshin/simpread/qlgddc)。
-
-![](https://s1.ax1x.com/2022/11/19/zugaRA.png)
+> 基于极速版与标注嵌入模式，可以将简悦的标注系统嵌入到 Obsidian、Logseq、Roam Reasearch 等双链笔记中，彻底实现 **左侧笔记，右侧标注** 的完美方案，详细说明 [配置库](配置库)。
 
 ### Token
 
