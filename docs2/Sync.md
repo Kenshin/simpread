@@ -262,7 +262,11 @@
 
 ### 增强导出
 
-1.0.2 版新增的功能，类似 Hazel 的自动化功能，可以将任意导出文件导出到指定目录。
+> [!TIP]
+> 1.0.2 版新增的功能，类似 Hazel 的自动化功能，可以将任意导出文件导出到指定目录。
+
+> [!WARNING]
+> 下面的例子只是例子，目前 **暂时不支持同一个关键字执行多次方案**，比如： `md` 关键字只能执行一次，即第一次设置它的规则，即便后面有多个 `md` 规则都不会生效。
 
 ```
 {"extension":"external", "path":"/Users/xxxx/xxxx/simpublish-demo/api/_output"}
@@ -272,8 +276,18 @@
 {"extension":"assets", "path":"/Users/xxxx/xxxx/Obsidian/SimpRead"}
 {"extension":"textbundle", "path":""}
 {"extension":"md", "path":"/Users/xxxx/xxxx/Obsidian/SimpRead"}
-{"extension":"assets", "path":"/Users/xxxx/xxxx/Obsidian@simpread/Inbox", "type":"page"}
+```
+
+当导出类型为 Markdown 且为标注时，保存到 `/Users/xxxx/xxxx/Obsidian@simpread/SimpRead`
+
+```
 {"extension":"md", "path":"/Users/xxxx/xxxx/Obsidian@simpread/SimpRead", "type":"annote"}
+```
+
+当导出类型为 md + assets 且为全文时，保存到 `/Users/xxxx/xxxx/Obsidian@simpread/Inbox`
+
+```
+{"extension":"assets", "path":"/Users/xxxx/xxxx/Obsidian@simpread/Inbox", "type":"page"}
 ```
 
 简单的解释
