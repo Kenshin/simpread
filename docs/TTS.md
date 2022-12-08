@@ -10,7 +10,7 @@
 
 # 效果
 
-![](https://s1.ax1x.com/2022/12/08/z2Cmgs.png)
+![](https://s1.ax1x.com/2022/12/08/z2PLfe.png)
 
 # 如何使用
 
@@ -25,7 +25,7 @@
 
 然后在页面的正下方就能看到了。
 
-xxxxxxxxx（缺失截图）
+![](https://s1.ax1x.com/2022/12/08/z2k4yj.png)
 
 ## 插件端
 
