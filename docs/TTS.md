@@ -8,14 +8,14 @@
 
 与 Edge 内置的大声朗读功能一样，均来自 [Microsoft Azure 的语音服务](https://learn.microsoft.com/zh-cn/azure/cognitive-services/Speech-Service/)。
 
-# 截图
+# 效果
 
-# 演示
+![](https://s1.ax1x.com/2022/12/08/z2Cmgs.png)
 
 # 如何使用
 
 > [!TIP]
-> 此功能包含两个部分：插件与内置到本地快照
+> 此功能包含两个部分：**插件端** 与 **内置到本地快照**。
 
 ## 插件端
 
