@@ -12,20 +12,10 @@
 
 ![](https://s1.ax1x.com/2022/12/08/z2Cmgs.png)
 
-# 设置
-
-同步助手 → 导出 → 朗读
-
-![](https://s1.ax1x.com/2022/12/08/z2pUJJ.png)
-
 # 如何使用
 
 > [!TIP]
 > 此功能包含两个部分：**插件端** 与 **内置到本地快照**。
-
-## 插件端
-
-可以在阅读模式中使用，详细说明 [请看这里](https://github.com/Kenshin/simpread/issues/4834)。
 
 ## 内置到本地快照
 
@@ -36,6 +26,16 @@
 然后在页面的正下方就能看到了。
 
 xxxxxxxxx（缺失截图）
+
+## 插件端
+
+可以在阅读模式中使用，详细说明 [请看这里](https://github.com/Kenshin/simpread/issues/4834)。
+
+# 设置
+
+同步助手 → 导出 → 朗读
+
+![](https://s1.ax1x.com/2022/12/08/z2pUJJ.png)
 
 # 自定义语音模型
 
