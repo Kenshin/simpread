@@ -40,7 +40,7 @@ https://simpread.ksria.cn/plugins/details/OpaogjT8KJ
 
 - <kbd>q n t</kbd> → [选择不同的 Page 后导入全文到 Notion](#选择任意Page导入)
 
-- <kbd>z n t</kbd> → 配合 自动化辅助增强插件 使用，细节 [请看这里](#当加入稍后读时自动导入)
+- <kbd>z n t</kbd> →  [配合自动化辅助增强插件使用](#当加入稍后读时自动导入)
 
 选项
 ---
