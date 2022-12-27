@@ -32,6 +32,7 @@ https://simpread.ksria.cn/plugins/details/OpaogjT8KJ
 通过上表可以看到，除了无法在稍后读中使用外（下个版本支持），扩展端具有的功能，插件端也都具有，但插件端还可支持随时更改不同的 Page 功能。
 
 同时，因为插件的更新不依赖与扩展端，可随时更新，具有更好的时效性。
+
 快捷键
 ---
 
@@ -56,6 +57,12 @@ https://simpread.ksria.cn/plugins/details/OpaogjT8KJ
 ![2022-12-26_13-05-42 (1)](https://user-images.githubusercontent.com/81074/209503863-00eadb68-ef0c-4b9f-9195-3f056c63aea2.gif)
 
 **注意：** 想要显示 Page 的话，必须要加 🌟 ，详细说明 [请看这里](#注意)。
+
+### 图床
+
+开启此功能后，会将当前页面的图片转换为 Notion 图床的地址，防止原图片 404，此功能可搭配 [选择不同的 Page 后导入全文到 Notion](#选择任意Page导入) 使用，也就是说随时可在导入前选择：是否开启图床功能。
+
+![](https://s1.ax1x.com/2022/12/27/zzen0K.png)
 
 ### 导入正文
 
