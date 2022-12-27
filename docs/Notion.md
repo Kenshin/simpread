@@ -36,9 +36,11 @@ https://simpread.ksria.cn/plugins/details/OpaogjT8KJ
 快捷键
 ---
 
-`n t` → [一键导入全文到 Notion](#导入正文)
+- <kbd>n t</kbd> → [一键导入全文到 Notion](#导入正文)
 
-`q n t` → [选择不同的 Page 后导入全文到 Notion](#选择任意Page导入)
+- <kbd>q n t</kbd> → [选择不同的 Page 后导入全文到 Notion](#选择任意Page导入)
+
+- <kbd>z n t</kbd> → 配合 自动化辅助增强插件 使用，细节 [请看这里](#当加入稍后读时自动导入)
 
 选项
 ---
@@ -103,9 +105,9 @@ https://simpread.ksria.cn/plugins/details/OpaogjT8KJ
 
 按下图所示添加
 
-![](https://s1.ax1x.com/2022/12/27/zzeyXq.png)
+![](https://s1.ax1x.com/2022/12/27/zzmNvR.png)
 
-> [!TIPS]
+> [!TIP]
 > 注意：如果没有在插件触发器中找到对应选项，请通过 [插件管理器](https://www.yuque.com/kenshin/simpread/fcw60u) 安装。
 
 > [!WARNING]
