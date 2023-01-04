@@ -290,15 +290,23 @@
 {"extension":"assets", "path":"/Users/xxxx/xxxx/Obsidian@simpread/Inbox", "type":"page"}
 ```
 
+当导出类型为 `tts`  ，保存到 `/Users/xxxx/xxxx/tts`
+
+```
+{"extension":"tts", "path":"/Users/xxxx/xxxx/tts"}
+```
+
 简单的解释
 
 - `extension` → 任意文件的后缀 `epub` `docx` `md` `html` 等
 
-  有两个特殊的后缀：
+  有几个特殊的后缀：
 
-  - `external` 导出 HTML 时，将当前 `xxx.html` 复制到 `path` 对应的目录，此功能注意针对 [简悦的外部资料库的自建方案](https://github.com/Kenshin/simpread/discussions?discussions_q=label%3A%22self+built%22)。
+  - `external` → 导出 HTML 时，将当前 `xxx.html` 复制到 `path` 对应的目录，此功能注意针对 [简悦的外部资料库的自建方案](https://github.com/Kenshin/simpread/discussions?discussions_q=label%3A%22self+built%22)。
 
-  - `assets`，可以辅助 [导出 md + assets 格式](https://github.com/Kenshin/simpread/discussions/4041) 实现 `md + assets` 结构。
+  - `assets` → 可以辅助 [导出 md + assets 格式](https://github.com/Kenshin/simpread/discussions/4041) 实现 `md + assets` 结构。
+
+  - `tts` → 可以辅助 [朗读](TTS?id=下载位置) 功能将正文转换的语音保存到任意位置。
 
 - `output` → 导出文件夹地址
 
