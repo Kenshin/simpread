@@ -61,6 +61,8 @@
 
     - [Readwise.io](自动化服务?id=readwise)
 
+- [数据中心](#数据中心)
+
 - [URL Scheme](#URLScheme)
 
 - [稍后读相关](#稍后读相关)
@@ -482,6 +484,24 @@ PS：一般使用 `pandoc-xxx-macOS.pkg` 安装的话，自然是 `/usr/local/bi
 ### Readwise
 
 > 详细说明 [自动化服务](自动化服务?id=Readwise)
+
+数据中心
+---
+
+> [!TIP]
+> **1.2.0 版** 新增功能，内置了一组针对 `simpread_config.json` 的优化、修复、整理、统计工具，包括：
+
+- [历史记录](数据中心?id=历史记录)
+
+- [修复配置文件](数据中心?id=修复配置文件)
+
+- [清理配置文件](数据中心?id=清理配置文件)
+
+- [查找重复数据](数据中心?id=查找重复数据)
+
+- [数据统计](数据中心?id=数据统计)
+
+![](https://s1.ax1x.com/2023/02/23/pSxYqOA.png)
 
 URLScheme
 ---
