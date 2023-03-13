@@ -1,5 +1,9 @@
 blank_issues_enabled: false
 contact_links:
+  - name: 📦 订阅中心
+    url: https://simpread.pro/subscribe
+    about: |
+      我每周都会推 3 ~ 4 篇关于简悦的新功能、联动等内容，建议简悦用户（尤其是经常使用简悦高级功能的用户）订阅【发布汇总】。
   - name: 📚 简悦手册
     url: https://www.yuque.com/kenshin/simpread/
     about: |
