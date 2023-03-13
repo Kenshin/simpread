@@ -1,4 +1,4 @@
-name: 提交 Bug
+name: 🐛 提交 Bug
 description: 请提交你的 Bug
 body:
   - type: markdown
