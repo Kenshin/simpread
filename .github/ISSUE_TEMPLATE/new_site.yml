@@ -2,7 +2,7 @@ name: 新站适配
 description: 提交需要适配的站点
 labels: ["new site"]
 body:
-    - type: markdown
+  - type: markdown
     attributes:
       value: |
         大部分网页都可以正常使用简悦的阅读模式，简悦官方收录的新站具有大众类型的网站。
