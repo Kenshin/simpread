@@ -1,0 +1,19 @@
+name: 功能建议或功能改善
+description: 你的建议会让简悦变得更好
+body:
+  - type: markdown
+    attributes:
+      value: |
+        你的每个想法都是对简悦最大的支持，简悦 60% 的功能都来自用户的简悦。
+  - type: textarea
+    id: feature
+    attributes:
+      label: 请描述你的建议或任何内容
+      description: 如有可能请详细说明它
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充说明
+      description: 如有可能请说明下这个建议具体使用场景（或如果有这个功能后，会改善你的什么流程？
