@@ -1,0 +1,45 @@
+name: 提交 Bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        谢谢帮忙提交 Bug 这会让简悦变得更好。
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 描述这个错误
+      description: 请尽量详细描述你的错误
+    validations:
+      required: true
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: 复现步骤
+      description: 请尽量用清晰的步骤（哪怕比较多）的描述你的问题，最好可以的话，请截图或者视频说明。
+      placeholder: |
+        1. 步骤1
+        2. 步骤2
+        3. 步骤3
+    validations:
+      required: true
+  - type: textarea
+    id: others
+    attributes:
+      label: 其他相关说明
+      description: 如果有需要，可以在这里继续说明
+    validations:
+      required: false
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: macOS
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: 发生问题的网址
+      placeholder: 如果任意网站均可的话，请随便留下一个你遇到问题的地址
+    validations:
+      required: true
