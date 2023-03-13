@@ -1,0 +1,22 @@
+name: 🚑 印象笔记或代码高亮问题
+description: 关于印象笔记或代码高亮的集中反馈渠道
+body:
+  - type: markdown
+    attributes:
+      value: |
+        谢谢帮忙提交 Bug 这会让简悦变得更好。
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: 请选择
+      multiple: false
+      options:
+        - 印象笔记
+        - 代码高亮
+  - type: input
+    id: website
+    attributes:
+      label: 发生问题的网址
+      placeholder: 如果任意网站均可的话，请随便留下一个你遇到问题的地址
+    validations:
+      required: true
