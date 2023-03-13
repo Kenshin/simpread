@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 简悦手册
+    url: https://www.yuque.com/kenshin/simpread/
+    about: |
+      简悦的阅读模式相关功能是不需要设置的。
+      如果你使用了更高级的功能，如：同步助手，或者你是 Obsidian / Logseq 等双链笔记用户，或者你本地快照等功能的话，则需要配置。
+      简悦官方已经准备好了相关的教程。
