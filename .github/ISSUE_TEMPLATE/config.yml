@@ -18,6 +18,14 @@ contact_links:
     url: https://www.yuque.com/kenshin/simpread/psugef
     about: |
       简悦与 Obsidian 的联动可以将简悦的标注系统内置到 Obsidian 中。
+  - name: 🖥 如何配置同步助手
+    url: https://www.yuque.com/kenshin/simpread/pwpnsx
+    about: |
+      同步助手相当于一个基于用户系统的服务器，可以实现诸多高级功能（如果你只是阅读模式用户，不需要这些）
+  - name: 💾 如何配置本地快照系统
+    url: https://www.yuque.com/kenshin/simpread/wkswh7
+    about: |
+      简悦最大的优势在于：用户拥有全部的数据所有权，只需要简单的几步就能实现一个基于本地的快照系统。
   - name: 👤 高级账户相关功能
     url: https://www.yuque.com/kenshin/simpread/xs0gp0
     about: |
