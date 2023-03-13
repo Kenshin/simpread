@@ -30,6 +30,10 @@ contact_links:
     url: https://www.yuque.com/kenshin/simpread/wkswh7
     about: |
       简悦最大的优势在于：用户拥有全部的数据所有权，只需要简单的几步就能实现一个基于本地的快照系统。
+  - name: 📓 一站式教程
+    url: https://www.yuque.com/kenshin/simpread/pn4bbg
+    about: |
+      如果不需要配置库方案的话，也可以直接查看 Notion / Obsidian / Logseq 的一站式教程，适合喜欢更灵活方案的用户。
   - name: 👤 高级账户相关功能
     url: https://www.yuque.com/kenshin/simpread/xs0gp0
     about: |
