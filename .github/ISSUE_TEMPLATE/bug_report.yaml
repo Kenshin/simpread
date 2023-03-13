@@ -33,8 +33,15 @@ body:
   - type: input
     id: os
     attributes:
-      label: OS
+      label: 操作系统
       placeholder: macOS
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: 浏览器
+      placeholder: 请说明浏览器以及尽量说明浏览器版本
     validations:
       required: true
   - type: input
