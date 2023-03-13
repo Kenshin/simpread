@@ -1,0 +1,22 @@
+name: 新站适配
+description: 提交需要适配的站点
+labels: ["new site"]
+body:
+    - type: markdown
+    attributes:
+      value: |
+        大部分网页都可以正常使用简悦的阅读模式，简悦官方收录的新站具有大众类型的网站。
+  - type: textarea
+    id: website
+    attributes:
+      label: 需要适配的新站
+      placeholder: 请输入这个站点的 URL，如果这个站的规则比较多，请多帮忙提供一些 URL 作为参考
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 有需要请描述这个站的性质
+      description: 尤其是英文类型的网站，我需要判断这个站是否具有适配的必要。
+    validations:
+      required: false
