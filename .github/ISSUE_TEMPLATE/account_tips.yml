@@ -2,9 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: 高级账户相关功能
     url: https://www.yuque.com/kenshin/simpread/xs0gp0
-    about: |
-      这是高级账户的常用功能，基本上能解决你大部分的使用问题。
+    about: 这是高级账户的常用功能，基本上能解决你大部分的使用问题。
   - name: 首次绑定高级账户仍出现带🔒的问题
     url: https://www.yuque.com/kenshin/simpread/xs0gp0
-    about: |
-      首次升级为高级账户后，请重启浏览器，如果没有重启的话，请使用此链接解决。
+    about: 首次升级为高级账户后，请重启浏览器，如果没有重启的话，请使用此链接解决。
