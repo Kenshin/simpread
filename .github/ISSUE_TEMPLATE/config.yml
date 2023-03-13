@@ -9,9 +9,8 @@ contact_links:
   - name: 高级账户相关功能
     url: https://www.yuque.com/kenshin/simpread/xs0gp0
     about: |
-      如果你首次绑定高级账户仍出现带🔒的问题，请
-      如果你使用了更高级的功能，如：同步助手，或者你是 Obsidian / Logseq 等双链笔记用户，或者你本地快照等功能的话，则需要配置。
-      简悦官方已经准备好了相关的教程。
+      这是简悦的高级账户相关操作，基本上你出现的问题大部分都可以通过此方式解决。
   - name: 首次绑定高级账户仍出现带🔒的问题
     url: https://www.yuque.com/kenshin/simpread/xs0gp0
-    about: 首次升级为高级账户后，请重启浏览器，如果没有重启的话，请使用此链接解决。
+    about: |
+      首次升级为高级账户后，请重启浏览器，如果没有重启的话，请使用此链接解决。
