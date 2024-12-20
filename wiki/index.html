@@ -100,7 +100,6 @@
   <script>
     //setTimeout( () => $( ".sidebar-toggle-button" ).on( "click", () => $( ".ready.sticky" ).toggleClass( "close" )), 200 );
     $( document ).ready(() => {
-      if ( ![ "/", "#/", "#/Home" ].includes( location.hash )) return;
       setTimeout( () => {
         if ( location.hostname == 'ksria.com' || location.hostname == 'localhost' ) {
           const url = location.href.replace( 'http://ksria.com/simpread', 'https://simpread.pro' );
@@ -113,6 +112,7 @@
           }, 1000 );
         }
       }, 100 );
+      if ( ![ "/", "#/", "#/Home" ].includes( location.hash )) return;
       setTimeout( () => {
         $( ".markdown-section" ).prepend( `<div class="carousel">
           <img data-target="_blank" data-url="https://pd.qq.com/s/5jp0meyfc" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/QQ%20Channel%40banner.png"></img>
