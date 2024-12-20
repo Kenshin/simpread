@@ -51,6 +51,7 @@
     <link rel="stylesheet" type="text/css" href="//s4.zstatic.net/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <style type="text/css">.sidebar-nav a{display:flex!important;align-items:center;} .sidebar-nav a img{margin-left:5px;}.sidebar ul li strong {display: flex;flex-direction: row;align-items: center;}.sidebar ul li strong img {margin-left: 5px;}.sidebar-nav li.file strong {font-size: 15px;}.app-sub-sidebar li:before{content:normal}.sidebar ul li a{height:42px;font-size:15px}.sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file):before{left:auto!important;right:15px}.sidebar ul li strong{height:42px;font-weight:400}.sidebar li.folder{margin:6px 0}</style>
     <style type="text/css">.carousel img {cursor: pointer;}</style>
+    <style type="text/css">.notice{position:fixed;left:0;top:0;display:flex;justify-content:center;padding:5px;font-size:13px;font-weight:400;line-height:2;width:100%;background:#c4e1f6;z-index:10000}.notice a{display:flex;align-items:center;font-weight:700;color:#195bf7;text-decoration:none}.notice .countdown{margin:0 5px;font-weight:700}</style>
 </head>
 <body>
   <div id="app"></div>
@@ -100,6 +101,18 @@
     //setTimeout( () => $( ".sidebar-toggle-button" ).on( "click", () => $( ".ready.sticky" ).toggleClass( "close" )), 200 );
     $( document ).ready(() => {
       if ( ![ "/", "#/", "#/Home" ].includes( location.hash )) return;
+      setTimeout( () => {
+        if ( location.hostname == 'ksria.com' || location.hostname == 'localhost' ) {
+          const url = location.href.replace( 'http://ksria.com/simpread', 'https://simpread.pro' );
+          $( 'body' ).append( `<div class="notice">请访问&nbsp;👉&nbsp;<a target="_blank" href="${ url }"><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M833.728 340.128l-163.904-178.144c-7.744-8.448-18.4-15.552-29.824-21.28v211.2l202.4 0.064c-2.752-4.192-5.536-8.448-8.64-11.84" fill="#195bf7" p-id="4310"></path><path d="M640 576h-256a32 32 0 1 1 0-64h256a32 32 0 1 1 0 64m0 160h-256a32 32 0 1 1 0-64h256a32 32 0 1 1 0 64m223.808-320h-223.744A64.128 64.128 0 0 1 576 351.872V128H223.808A64 64 0 0 0 160 192.064v639.84A64 64 0 0 0 223.744 896h576.512A64 64 0 0 0 864 831.84V417.632c0-0.544-0.16-1.12-0.192-1.664" fill="#195bf7"></path></svg>&nbsp;新版简悦百科</a> <span class="countdown">5</span> 秒中后自动跳转</div>` );
+          setInterval(() => {
+              const text = $( '.notice' ).find( '.countdown' ).text();
+              if ( text == '1' ) {
+                location.href = url;
+              } else $( '.notice' ).find( '.countdown' ).text( parseInt( text ) - 1 );
+          }, 1000 );
+        }
+      }, 100 );
       setTimeout( () => {
         $( ".markdown-section" ).prepend( `<div class="carousel">
           <img data-target="_blank" data-url="https://pd.qq.com/s/5jp0meyfc" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/QQ%20Channel%40banner.png"></img>
