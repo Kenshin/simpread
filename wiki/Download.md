@@ -10,9 +10,7 @@
 
   > 国内用户首选下载方式。
 
-- [直接下载](http://ksria.com/simpread/crx/2.2.0/simpread.zip)
-
-  > 适合任意 Chrome / Chromium 内核浏览器，如：360浏览器 / QQ 浏览器等，[安装方法](http://ksria.com/simpread/docs/#/FAQ?id=%e7%a6%bb%e7%ba%bf%e5%ae%89%e8%a3%85)。
+- [直接下载]([http://ksria.com/simpread/crx/2.2.0/simpread.zip](https://www.yuque.com/kenshin/simpread/fxszlhpp1iht441s))
 
 ## 同步助手
 
@@ -39,24 +37,6 @@
   - 1.1.0 → [Telegram Group](https://t.me/simpreadgroup/57763)（含全部系统）
 
 !> 注意：以下内容**仅为简悦 1.x 时的功能，并未包含 2.x 时的功能，如：稍后读 / 标注 / 高级账户功能等**。
-
-## 轻阅版
-
-> 专门针对 Apple Safari · Opera 以及任意支持 UserScript 的浏览器。
-
-- [Tampermonkey](http://tampermonkey.net/)
-
-- [Greasy Fork](https://greasyfork.org/zh-CN/scripts/39998-%E7%AE%80%E6%82%A6-simpread-%E8%BD%BB%E9%98%85%E7%89%88)
-
-- [暴力猴](https://github.com/Kenshin/simpread-little/raw/develop/src/simpread.user.js)
-
-## iOS 版
-
-> 借助 [JSBox](https://itunes.apple.com/cn/app/jsbox-创造你自己的工具/id1312014438?mt=8) 终于来到了 iOS 系统，支持 iPhone / iPad，更多细节 [请看这里](http://ksria.com/simpread/docs/#/JSBox)。
-
-- **简悦** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.3.box?202002131303&name=%E7%AE%80%E6%82%A6) 
-
-- **简悦 · 阅读器** [下载地址](https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-reader-1.0.3.box?202002131303&name=%E7%AE%80%E6%82%A6%20%C2%B7%20%E9%98%85%E8%AF%BB%E5%99%A8)
 
 ## Android 版
 
