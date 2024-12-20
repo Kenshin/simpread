@@ -10,7 +10,7 @@
 
   > 国内用户首选下载方式。
 
-- [直接下载]([http://ksria.com/simpread/crx/2.2.0/simpread.zip](https://www.yuque.com/kenshin/simpread/fxszlhpp1iht441s))
+- [直接下载](https://www.yuque.com/kenshin/simpread/fxszlhpp1iht441s)
 
 ## 同步助手
 
