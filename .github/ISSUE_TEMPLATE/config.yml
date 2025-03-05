@@ -1,5 +1,9 @@
 blank_issues_enabled: false
 contact_links:
+  - name: 🆘 当升级 Chrome 后无法使用简悦的解决方案
+    url: https://www.yuque.com/kenshin/simpread/fxszlhpp1iht441s
+    about: |
+      当 Chrome 应用商店提示【此扩展程序未遵循 Chrome 扩展程序的最佳实践，因此已无法再使用】的解决方案
   - name: 📮 订阅中心
     url: https://simpread.pro/subscribe
     about: |
