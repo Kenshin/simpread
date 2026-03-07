@@ -5,10 +5,10 @@
 <p align="center">
    <a href="https://github.com/kenshin/simpread/releases"><img src="https://img.shields.io/badge/lastest_version-2.2.0-blue.svg"></a>
    <a target="_blank" href="http://ksria.com/simpread"><img src="https://img.shields.io/badge/website-_simpread.ksria.com-1DBA90.svg"></a>
-   <a target="_blank" href="https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://badgen.net/chrome-web-store/stars/ijllcpnolfcooahcekpamkbidhejabll?icon=chrome&color=0f9d58"></a>
+   <a target="_blank" href="https://chromewebstore.google.com/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://badgen.net/chrome-web-store/stars/ijllcpnolfcooahcekpamkbidhejabll?icon=chrome&color=0f9d58"></a>
 </p>
 <p align="center">
-   <a target="_blank" href="https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
+   <a target="_blank" href="https://chromewebstore.google.com/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll"><img src="https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg"></a>
    <a href="http://ksria.com/simpread/crx/2.2.0/simpread.crx"><img src="https://img.shields.io/badge/download-_crx-0294b9.png"></a>
    <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/39998"><img src="https://s1.ax1x.com/2020/07/25/UzMUSS.png"></a>
    <a target="_blank" href="https://xteko.com/redir?url=http://sr.ksria.cn/jsbox/simpread-1.0.3.box?202010231502&name=%E7%AE%80%E6%82%A6"><img src="https://s1.ax1x.com/2020/07/25/UzMHfK.png"></a>
@@ -49,7 +49,7 @@
 ***
 
 ## 马上使用
-* [Chrome 应用商店](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/2.0.0/simpread.crx)
+* [Chrome 应用商店](https://chromewebstore.google.com/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll) 或者 [离线下载](http://ksria.com/simpread/crx/2.0.0/simpread.crx)
 
 * [支持 UserScript 的浏览器](https://greasyfork.org/zh-CN/scripts/39998) 如：Apple Safari · Microsoft Edge · Opera · Dolphin 详细 [请看这里](https://github.com/Kenshin/simpread-little)
 
@@ -246,7 +246,7 @@
 > 包括：Chrome / Firefox / 轻阅版（UserScript）/ JSBox ，请访问 [简悦 · 新闻页](https://www.notion.so/9c109ec145134297ab461f5b52dbadc7?v=ce94e37d8a794cfbbd39bf9dfaf9017a)
 
 ## 投票
-简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
+简悦是一个免费并开源的项目。如果觉得不错，请给我 [投票](https://chromewebstore.google.com/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll/reviews) 。这样让更多人了解并受用与 `简悦` 带来的便利，你的认可是对我最大的鼓励。
 
 ## 相关链接
 * [更新日志](http://ksria.com/simpread/changelog.html)
@@ -290,7 +290,7 @@
 [version-badge]:    https://img.shields.io/badge/lastest_version-2.0.0-blue.svg
 [version-link]:     https://github.com/kenshin/simpread/releases
 [chrome-badge]:     https://img.shields.io/badge/download-_chrome_webstore-brightgreen.svg
-[chrome-link]:      https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
+[chrome-link]:      https://chromewebstore.google.com/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
 [offline-badge]:    https://img.shields.io/badge/download-_crx-brightgreen.svg
 [offline-link]:     http://ksria.com/simpread/crx/2.0.0/simpread.crx
 [license-badge]:    https://img.shields.io/badge/license-GPL-blue
