@@ -53,7 +53,24 @@
     <style type="text/css">.medium-zoom-image{border-radius: 10px;}.sidebar-toggle {width: 38px;cursor: pointer;z-index: 100;}.sidebar-nav a{display:flex!important;align-items:center;} .sidebar-nav a img{margin-left:5px;}.sidebar ul li strong {display: flex;flex-direction: row;align-items: center;}.sidebar ul li strong img {margin-left: 5px;}.sidebar-nav li.file strong {font-size: 15px;}.app-sub-sidebar li:before{content:normal}.sidebar ul li a{height:42px;font-size:15px}.sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file):before{left:auto!important;right:15px}.sidebar ul li strong{height:42px;font-weight:400}.sidebar li.folder{margin:6px 0}</style>
     <style type="text/css">.carousel img {cursor: pointer;}article video {width: 100%;}</style>
     <style type="text/css">.notice{position:fixed;left:0;top:0;display:flex;justify-content:center;padding:5px;font-size:13px;font-weight:400;line-height:2;width:100%;background:#c4e1f6;z-index:10000}.notice a{display:flex;align-items:center;font-weight:700;color:#195bf7;text-decoration:none}.notice .countdown{margin:0 5px;font-weight:700}</style>
+    <style type="text/css">.tally{position:fixed;bottom:10px;right:10px;display:flex;justify-content:center;align-items:center;width:50px;height:50px;line-height:50px;color:#fff;background:linear-gradient(180deg,#195bf7 0,#2163f7);text-decoration:none;border-radius:50%;box-shadow:0 2px 6px 0 rgba(0,0,0,.4);cursor:pointer;transition:all .5s cubic-bezier(.23,1,.32,1) 0ms;animation:pulse 2.5s infinite}@keyframes pulse{0%,to{opacity:1;transform:scale(1)}50%{transform:scale(1.1);opacity:.7}}</style>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="097c1a34-6125-4e25-88c1-fd4e81213894"></script>
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <script>
+        /*
+        window.TallyConfig = {
+        "formId": "w5Eqkb",
+        "popup": {
+          "width": 420,
+          "emoji": {
+            "text": "👏",
+            "animation": "tada"
+          },
+          "hideTitle": true
+        }
+      };
+      */
+    </script>
 </head>
 <body>
   <div id="app"></div>
@@ -102,6 +119,32 @@
   <script>
     //setTimeout( () => $( ".sidebar-toggle-button" ).on( "click", () => $( ".ready.sticky" ).toggleClass( "close" )), 200 );
     $( document ).ready(() => {
+      const tally_id   = '2EJA2V' // 'w5Eqkb';
+      const is_popuped = localStorage.getItem( 'simpread-tally-' + tally_id );
+      let is_manual    = true;
+      if ( !is_popuped ) {
+        $( 'a.tally' ).hide();
+        setTimeout( () => {
+          Tally.openPopup( tally_id, {
+            width: 420,
+            emoji: {
+              text: '🔥', // '👏',
+              animation: 'tada'
+            },
+            hideTitle: true,
+            onOpen: () => {
+              setTimeout( () => {
+                is_manual = false;
+                Tally.closePopup( tally_id );
+              }, 1000 * 10 );
+            },
+            onClose: () => {
+              $( 'a.tally' ).show();
+              is_manual && localStorage.setItem( 'simpread-tally-' + tally_id, +new Date() );
+            },
+          });
+        }, 200 );
+      }
       setTimeout( () => {
         $( 'body img') .map( ( _,item ) => {
           const $target = $( item ),
@@ -110,7 +153,7 @@
             $target.css( 'border-radius', 'initial' );
           }
         });
-        if ( location.hostname == 'ksria.com' || location.hostname == 'localhost' ) {
+        if ( location.hostname == 'ksria.com' ) {
           const url = location.href.replace( 'http://ksria.com/simpread', 'https://simpread.pro' );
           $( 'body' ).append( `<div class="notice">请访问&nbsp;👉&nbsp;<a target="_blank" href="${ url }"><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M833.728 340.128l-163.904-178.144c-7.744-8.448-18.4-15.552-29.824-21.28v211.2l202.4 0.064c-2.752-4.192-5.536-8.448-8.64-11.84" fill="#195bf7" p-id="4310"></path><path d="M640 576h-256a32 32 0 1 1 0-64h256a32 32 0 1 1 0 64m0 160h-256a32 32 0 1 1 0-64h256a32 32 0 1 1 0 64m223.808-320h-223.744A64.128 64.128 0 0 1 576 351.872V128H223.808A64 64 0 0 0 160 192.064v639.84A64 64 0 0 0 223.744 896h576.512A64 64 0 0 0 864 831.84V417.632c0-0.544-0.16-1.12-0.192-1.664" fill="#195bf7"></path></svg>&nbsp;新版文档中心</a> <span class="countdown">5</span> 秒中后自动跳转</div>` );
           setInterval(() => {
@@ -124,6 +167,7 @@
       if ( ![ "/", "#/", "#/Home" ].includes( location.hash )) return;
       setTimeout( () => {
         $( ".markdown-section" ).prepend( `<div class="carousel">
+          <img data-target="_blank" data-url="https://www.yuque.com/kenshin/simpread/firefox" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/firefox%40banner.png"></img>
           <img data-target="_blank" data-url="https://pd.qq.com/s/5jp0meyfc" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/QQ%20Channel%40banner.png"></img>
           <img data-target="_blank" data-url="https://www.yuque.com/kenshin/simpread" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/manual.png"></img>
           <img data-target="_blank" data-url="https://simpread.pro/help" src="https://simpread-1254315611.cos.ap-shanghai.myqcloud.com/banner/docs/help.png"></img>
@@ -132,9 +176,11 @@
         $( ".carousel" ).slick({
           dots: true,
           infinite: true,
+          centerMode: true,     // none
+          variableWidth: true,  // none
           speed: 500,
-          fade: true,
-          cssEase: 'linear'
+          fade: false,          // true
+          cssEase: 'ease'       // 'linear'
         });
         $( ".carousel img" ).on( "click", event => {
           const $target = $( event.currentTarget ),
@@ -148,5 +194,7 @@
       }, 1000 );
     });
   </script>
+  <!--<a class="tally" href="#tally-open=w5Eqkb&tally-width=420&tally-hide-title=1&tally-emoji-text=👏&tally-emoji-animation=tada"><svg class="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M647.165837 2.332635L78.85493 44.179432C33.04873 48.138835 17.074585 78.005024 17.074585 113.810318v621.148461c0 27.886487 9.966774 51.745305 33.893858 83.625329l133.595729 173.189762c21.947382 27.886487 41.88093 33.859725 83.795993 31.880024l659.957441-39.832963c55.807107-3.959403 71.781251-29.866189 71.781251-73.658555V211.361824c0-22.630038-8.976923-29.1494-35.3957-48.468558a1594.683818 1594.683818 0 0 1-4.505528-3.276748L778.781865 32.198823C734.8871 0.387066 716.967387-3.640603 647.165837 2.332635zM283.310326 199.92734c-53.895671 3.618075-66.115209 4.437262-96.732319-20.377274l-77.822755-61.712079c-7.918807-7.987072-3.925271-17.953846 15.974144-19.933548l546.363525-39.79883c45.840333-3.993536 69.767417 11.946476 87.721263 25.872653l93.728634 67.71945c3.993536 1.979702 13.926177 13.892044 1.979702 13.892044l-564.249106 33.859725-6.963088 0.477859zM220.471864 904.189138V310.961297c0-25.906785 7.952939-37.853261 31.880024-39.867096l648.010965-37.819128c21.981515-1.979702 31.948289 11.946476 31.948289 37.819128v589.268439c0 25.906785-3.993536 47.820035-39.935361 49.799736l-620.090346 35.839427c-35.873559 1.979702-51.813571-9.932641-51.813571-41.812665z m612.171539-561.416084c3.959403 17.919713 0 35.839427-17.987979 37.887394l-29.900321 5.904972v437.991926c-25.940918 13.926177-49.833869 21.879117-69.767417 21.879116-31.914156 0-39.935361-9.966774-63.828313-39.79883l-195.444339-306.580694v296.613921l61.84861 13.96031s0 35.839427-49.902135 35.839426l-137.555132 7.95294c-3.959403-7.987072 0-27.886487 13.994443-31.845891l35.839426-9.932641v-392.185725l-49.833869-4.027669c-3.959403-17.919713 5.973238-43.792366 33.92799-45.772068l147.55604-9.966773 203.397279 310.608363v-274.768937l-51.881837-5.939105c-3.959403-21.947382 11.946476-37.853261 31.914156-39.832962l137.623398-7.987073z" fill="#ffffff"></path></svg></a>-->
+  <a class="tally" href="#tally-open=2EJA2V&tally-width=420&tally-hide-title=1&tally-emoji-text=🔥&tally-emoji-animation=tada"><svg viewBox="0 0 1057 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M532.065417 1024h1.174312q-167.926606 0-298.27523-88.66055T41.203032 701.06422q-34.055046-77.504587-39.926606-177.908257t15.266055-196.110091Q37.680096 231.33945 82.303949 143.266055t105.688073-143.266055l-7.045871 165.577982q7.045872-8.220183 40.513761-9.394496t40.513762 9.394496q25.834862-48.146789 95.706422-81.614679T495.661747 49.321101q-31.706422 27.009174-70.458715 88.073394t-35.229358 96.293578q15.266055 4.697248 37.577981 7.633028t36.40367 4.110092l70.458716 4.697247q9.394495 2.348624 5.871559 26.422019T521.496609 321.761468q-2.348624 3.522936-9.394495 10.568807t-33.46789 21.137615Q452.212206 367.559633 419.331472 373.431193l9.394495 111.559633-82.201835-39.926606q-10.568807 25.834862-4.697247 48.146789t21.137614 38.752294q15.266055 16.440367 38.752294 24.66055t48.146789 4.697248q29.357798-5.87156 57.541284-21.137615l49.321101-25.834862q21.137615-11.743119 43.449542-10.568807 35.229358 2.348624 52.25688 19.376146T664.762665 561.321101l-2.348624 3.522936q-1.174312 2.348624-5.284404 7.633027t-10.568807 8.80734q-6.458716 3.522936-18.201835 5.871559t-27.009174 1.174312q-35.229358 55.192661-85.137615 79.266055T392.322298 684.623853q43.449541 36.40367 95.706422 49.321101t99.229357 3.522936q46.972477-9.394495 91.009175-31.119266t75.743119-51.669725q31.706422-29.944954 46.972477-60.477064 25.834862-54.018349 23.486239-113.908257t-22.311927-110.972477Q782.193857 318.238532 756.358995 295.926606q51.669725 22.311927 81.027523 46.385321t44.623853 66.348623q9.394495-99.816514-33.46789-201.981651T724.652573 38.752294q156.183486 45.798165 243.082569 164.990825T1056.982848 508.477064q1.174312 75.155963-24.073394 150.899083t-72.80734 140.330275q-47.559633 64.587156-111.559633 115.669725t-146.201835 79.853211Q620.138811 1024 532.065417 1024z" fill="#ffffff"></path></svg></path></svg></a>
 </body>
 </html>

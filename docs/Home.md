@@ -25,6 +25,21 @@
 
 我给新用户的建议是：从**开箱即用的阅读模式**入手，等有了更深层级需求，再研究标注 / 稍后读 / 导入 / 双向链接 / 知识图谱等信息整理方法。
 
+简悦的各种平台
+---
+
+> 下面的内容汇总到 [下载中心](Download)。
+
+- Microsoft Edge 👉 [全功能版](https://microsoftedge.microsoft.com/addons/detail/clgdhlhfiocphghdkdbgdlmfaafccfmc)
+
+- 🔥🔥🔥 在 Firefox 上完美运行简悦  👉 [全功能版](Firefox)
+
+- 在 Chrome 完美运行简悦  👉 [全功能版](https://github.com/Kenshin/simpread/discussions/6633#discussioncomment-14129833)
+
+- 其它基于 Chromium 的内核版本 👉 [离线版](http://ksria.com/simpread/#downloads)
+
+- [Android 版](Android)
+
 简悦的汇总
 ---
 
@@ -59,21 +74,6 @@
 > 简悦的使用技巧汇总 👉 [使用技巧](https://github.com/Kenshin/simpread/discussions/categories/使用技巧) · [与其它服务的联动](https://github.com/Kenshin/simpread/discussions/categories/服务)
 
 > 当在使用过程中遇到了一些问题，也可访问这里查看 👉 [问题清单](https://github.com/Kenshin/simpread/discussions/categories/重要通知)
-
-简悦的各种平台
----
-
-> 下面的内容汇总到 [下载中心](Download)。
-
-- Chrome  👉 [全功能版](https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll)
-
-- Microsoft Edge 👉 [全功能版](https://microsoftedge.microsoft.com/addons/detail/clgdhlhfiocphghdkdbgdlmfaafccfmc)
-
-- 其它基于 Chromium 的内核版本 👉 [离线版](http://ksria.com/simpread/#downloads)
-
-- iPhone   ·  iPad  👉 [JSBox 版](JSBox)
-
-- [Android 版](Android)
 
 各版本功能详细说明
 ---

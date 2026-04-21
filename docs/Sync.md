@@ -1,6 +1,6 @@
 > [简悦 · 同步助手](Sync) 是 **随着简悦 2.1.0 发布的一个全新的 Desktop App**，用于对简悦已知功能的补充，以及会 **持续提供更多** 的可玩性。
 
-![](https://z3.ax1x.com/2021/05/19/g4vN9S.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759649374/config/%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B_v2-1_aioang.png)
 
 目录
 ---
@@ -55,12 +55,16 @@
     
     - [发送到 Kindle](发送到-Kindle)
     
-- [导出服务](#自动化服务)
+- [自动化服务](#自动化服务)
 
     - [Hypothesis](自动化服务?id=hypothes)
-
+    
     - [Readwise.io](自动化服务?id=readwise)
 
+- [RSS 生成](#rss生成)
+
+- [RSS 订阅](#rss订阅)
+  
 - [数据中心](#数据中心)
 
 - [URL Scheme](#URLScheme)
@@ -81,6 +85,8 @@
 
   - [Token](#Token)
 
+  - [极简稍后读列表](#极简稍后读列表)
+
 - [主题](#主题)
 
 - [暗色模式](#暗色模式)
@@ -97,7 +103,7 @@
 
 **简悦 · 同步助手** 为简悦 · 高级账户提供了增强型的功能，如：
 
-1. **自动同步**
+1. **自动同步**（支持任意网盘同步方案）
 
 2. **小书签**
 
@@ -112,6 +118,12 @@
 7. **邮件发送** 
 
 8. **自动化** 导出
+
+9. 内置 **极速版稍后读**、**极简稍后读列表**，同时内置 **标注嵌入模式**，可嵌入到任意其他应用中（如 DEVONthink / MenubarX 等）
+
+10. 支持 **Obsidian 图床方案**、**本地化图片**等
+
+11. 将 **稍后读生成 RSS**，方便其他 RSS 阅读器订阅 以及 **RSS 订阅** 功能
 
 等诸多仅扩展端无法提供的功能，同时也为简悦 · 稍后读的客户端提供了一个未来可接入的入口。
 
@@ -134,17 +146,19 @@
 
 - [Onedrive@世纪互联](https://experience.sharepoint.cn/:f:/s/simpread/EooPpw5vqrpLoMInbTpV1rgB5hyvrqv-cdhPCGwiLxrDvw?e=NJ9ZPG) **国内用户首选**
 
-- [FlowUs](https://flowus.cn/share/be3e616f-a047-40d4-94dc-e89f795a7a5e) **国内用户首选**
+- [百度网盘](https://pan.baidu.com/s/1ARQZ-zcQroTzHDJWWRJUIQ?pwd=m4pt) 提取码: m4pt **需要登录**
 
-- [百度网盘](https://pan.baidu.com/s/1ARQZ-zcQroTzHDJWWRJUIQ?pwd=m4pt) 提取码: m4pt  **偶尔会被无故取消分享 😂**
-
-- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)  **国外用户首选**
+- [夸克网盘](https://pan.quark.cn/s/b389559e2d46) **需要登录**
 
 - [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
 
-  >  如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
+  > 如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
+
+- [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)  **国外用户首选**
 
 - Telegram Channel
+
+  > Telegram Channel 仅保留旧版本
 
   - 1.0.1 → [win 64 & 32](https://t.me/simpread/171)  [mac](https://t.me/simpread/166)
 
@@ -180,11 +194,11 @@
 1. 运行 **简悦 · 同步助手** 
 2. **简悦 → 选项页 → 共通 → 简悦 · 同步助手 → 授权验证并开启简悦 · 同步助手**
 
-  ![BXhkxP.png](https://s1.ax1x.com/2020/11/11/BXhkxP.md.png)
+  ![BXhkxP.png](https://res.cloudinary.com/simpread/image/upload/v1759648562/config/ccf1badd63f849e73cca309166c269d2.png)
 
 3. 认证无误后会有提示，如下图：
 
-  ![BXh1x0.png](https://s1.ax1x.com/2020/11/11/BXh1x0.png)
+  ![BXh1x0.png](https://res.cloudinary.com/simpread/image/upload/v1759648580/config/736102a6f42603542ba6702320d4e014.png)
 
 注意事项
 ---
@@ -202,7 +216,7 @@
 
 配置起来很简单，只需要选择 **配置文件保存的本地文件夹位置** 后就可以了。
 
-![](https://s1.ax1x.com/2022/11/09/zSKDbQ.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648589/config/b7f07223c43058ab271f854bd3d71401.png)
 
 ### 自动同步
 
@@ -244,23 +258,23 @@
 
 1. 在 **同步配置文件夹目录** 建立 `output` 文件夹
 
-  ![](https://s1.ax1x.com/2022/11/09/zSK93V.png)
+  ![](https://res.cloudinary.com/simpread/image/upload/v1759648600/config/a4bdeebda1b0b4f3d55a6c3b5e138db7.png)
 
   > 也可选择与 **同步配置文件夹目录** 不一样的本地文件夹；也可保留为空，即使用 **同步配置文件夹目录** 下面的 `output` 文件夹。
 
 2. **简悦 · 同步助手** 开启相关选项（默认为开启状态）
 
-  ![](https://s1.ax1x.com/2022/11/09/zSF8W4.png)
+  ![](https://res.cloudinary.com/simpread/image/upload/v1759648612/config/73494511e697f1d8cf399e9b63e178e1.png)
 
 3. **简悦（扩展端） → 选项页 → 共通 → 简悦 · 同步助手** 也同样开启以下功能。
 
-  ![BXb3Hx.png](https://s1.ax1x.com/2020/11/11/BXb3Hx.md.png)
+  ![BXb3Hx.png](https://res.cloudinary.com/simpread/image/upload/v1759648622/config/66980985bd63126a044107d270d72eb9.png)
 
 ### 如何使用
 
 与之前的导出功能所在的位置一样，即：进入 **阅读模式|聚焦模式 → 右下角 控制栏 → 动作 → 导出**
 
-![](https://s1.ax1x.com/2022/11/09/zSMZqg.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648633/config/92cc5da885474bb7638f30bf81f245b7.png)
 
 ### 增强导出
 
@@ -320,15 +334,42 @@
 
 - type → 导出类型（ 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载) ）。
 
-  - `annote` → 标注 e.g. `1234-xxx@annote`
+  - `annote` → 仅标注 e.g. `1234-xxx@annote.md`
 
-  - `page` → 全文 e.g. `1234-xxx`
+  - `unread` → 仅稍后读  e.g. `1234-xxx.md` **1.3.0 新增**
 
-  > type 参数可以省略，当省略后不区分 **全文 or 标注**。
+  - `article` → 仅普通文章  e.g. `xxx.md` **1.3.0 新增**
 
-  > 通过区分全文 or 标注，可以实现以下方案：
+  - `page` → 全文 e.g. 稍后读 `1234-xxx` 或普通文章 `xxx` （ **legacy 1.3.0 去除** 不建议使用，请使用两个新的参数 `unread`或 `article`  ）
 
-  > 将标注导入到 Obsidian SimpRead 文件夹，将 assets 形式的全文导入到 Inbox 文件夹，做到全文和标注分开管理。
+  > type 参数可以省略，当省略后不区分 **普通文章 / 稍后读 / 标注**。
+
+> [!TIP]
+> 1.3.0 版增加了新的参数 `unread` `article` 如果你需要区分普通文章（非稍后读）与稍后读以及标注的话，请使用下面的方式。
+
+一个例子
+
+```
+{"extension":"assets", "path":"/Users/xxx/Obsidian/Inbox", "type":"article"}
+{"extension":"assets", "path":"/Users/xxx/Obsidian/Annote", "type":"annote"}
+{"extension":"assets", "path":"/Users/xxx/Obsidian/SimpRead", "type":"unread"}
+```
+
+通过上面的设置，可以做到：
+
+- 将普通文章保存到 Inbox 文件夹
+
+- 将稍后读保存到 SimpRead 文件夹
+
+- 将标注保存到 Annote 文件夹
+
+#### 注意
+
+如果是 Windows 用户的话，请使用下面的方案（留意有两个斜杠 `\\`）
+
+```
+{"extension":"md", "path":"C:\\Users\\***\\Documents\\***\\Desktop\\Documents"}
+```
 
 ### 外部文件
 
@@ -439,15 +480,15 @@ PS：一般使用 `pandoc-xxx-macOS.pkg` 安装的话，自然是 `/usr/local/bi
 
 #### 扩展端开启方法
 
-> 选项页 → 共通 → 同步助手，下图所示：
+> 选项页 → 服务 → 增强导出，下图所示：
 
-![riixdx.png](https://s3.ax1x.com/2020/12/10/riixdx.png)
+![image-20251005152709595](https://res.cloudinary.com/simpread/image/upload/v1759649239/config/6c254c3b78f6596a6d2860f32695d00e.png)
 
 #### 同步助手端开启方法 
 
 > 同步助手默认开启此选项，下图所示
 
-![riFkyd.png](https://s3.ax1x.com/2020/12/10/riFkyd.png)
+![image-20251005152636039](https://res.cloudinary.com/simpread/image/upload/v1759649197/config/7d40cd9a521844f7ac4d71eaeb409e9a.png)
 
 ### Textbundle
 
@@ -485,6 +526,18 @@ PS：一般使用 `pandoc-xxx-macOS.pkg` 安装的话，自然是 `/usr/local/bi
 
 > 详细说明 [自动化服务](自动化服务?id=Readwise)
 
+RSS订阅
+---
+
+> [!TIP]
+> **1.4.0 版** 新增功能，详细说明 [RSS订阅](RSS订阅)
+
+RSS生成
+---
+
+> [!TIP]
+> **1.4.0 版** 新增功能，详细说明 [RSS生成](RSS生成)
+
 数据中心
 ---
 
@@ -501,7 +554,9 @@ PS：一般使用 `pandoc-xxx-macOS.pkg` 安装的话，自然是 `/usr/local/bi
 
 - [数据统计](数据中心?id=数据统计)
 
-![](https://s1.ax1x.com/2023/02/23/pSxYqOA.png)
+> 详细说明 [数据中心](数据中心)
+
+![](https://res.cloudinary.com/simpread/image/upload/v1759648659/config/f89fe9fe2c9d80ad23991114d06aa04e.png)
 
 URLScheme
 ---
@@ -546,7 +601,7 @@ URLScheme
 
 > 1.1.3 版把同步助手稍后读的内容都整理到一起，位置：**同步助手 → 导出 → 稍后读**
 
-![](https://s1.ax1x.com/2022/11/18/znY9RH.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648692/config/d595adf8dcc8075a70756b89db8559de.png)
 
 ### 快捷键
 
@@ -558,7 +613,7 @@ URLScheme
 
 > 通过设置快捷键可将稍后读以独立窗口打开。
 
-![](https://s1.ax1x.com/2022/11/09/zSZdiV.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648708/config/19e8da5267232de445eb14ff9f199514.png)
 
 #### 设置稍后读
 
@@ -566,18 +621,18 @@ URLScheme
 
 > 1.1.2 版（及以下）位置：同步助手 → 共通
 
-![](https://s1.ax1x.com/2022/11/18/znJ1UO.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648726/config/b0da34640d1d5566fb84339e3bd6f95d.png)
 
 > 1.1.3 版（及以上）位置：同步助手 → 导出 → 稍后读
 
-![](https://s1.ax1x.com/2022/11/18/znJmvR.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648738/config/42dce1c4591f22d918476ee0669618cd.png)
 
 
 #### 设置快捷键
 
 > 此功能为 1.1.2 版（及以下）功能。
 
-![](https://s1.ax1x.com/2022/11/18/znJJ8H.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648750/config/4df470ddc8b88ab067fb45070b86873e.png)
 
 > **注意：** 此方式的设置与 **简悦 · 扩展端** 一致，依次设置按键。
 
@@ -589,16 +644,21 @@ URLScheme
 
 > 可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方，详细说明 [请看这里](稍后读极速版)。
 
-![](https://s1.ax1x.com/2022/11/08/xzp4L8.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648894/config/170c70d51c98cd83ffdf361892f54440.png)
 
 ### 标注嵌入模式
 
 > 极速版稍后读还包含了 [标注嵌入模式](标注嵌入模式)。
 
-![](https://s1.ax1x.com/2022/11/08/xzpHij.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648962/config/8db6e2ae9a2f62638b4d91b46a3b8bb2.png)
 
 > [!TIP]
 > 基于极速版与标注嵌入模式，可以将简悦的标注系统嵌入到 Obsidian、Logseq、Roam Reasearch 等双链笔记中，彻底实现 **左侧笔记，右侧标注** 的完美方案，详细说明 [配置库](配置库)。
+
+### 极简稍后读列表
+
+> [!TIP]
+> **1.4.0 版** 新增功能，相比 [极速版](#极速版) 具有更简洁的 UI 界面，更方便的嵌入到 DEVONthink / MenubarX 等工具中，同时内置 [标注嵌入模式](标注嵌入模式)，详细说明 [极简稍后读列表](极简稍后读列表)
 
 ### Token
 
@@ -613,7 +673,7 @@ URLScheme
 
 > 同步助手每个功能都配有相应的说明文档，可以通过此功能来切换不同的地址源。
 
-![](https://s1.ax1x.com/2022/11/17/zmtHLq.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648974/config/3bffbf118a116028f274053320fd0b03.png)
 
 > 包括：
 
@@ -636,7 +696,7 @@ URLScheme
 
 > 在默认样式的基础上增加了一个 Light 样式。
 
-![](https://s1.ax1x.com/2022/11/18/znQsPA.md.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759648989/config/7924351b34f4e14650a135240a185512.png)
 
 暗色模式
 ---
@@ -645,7 +705,7 @@ URLScheme
 
 > 增加了暗色模式，会跟随系统的改变而已改变。（暂时不支持手动更改为暗色模式）
 
-![](https://s1.ax1x.com/2022/11/18/znQjZF.md.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759649007/config/8c865da97c13600cc1b13e19be739f5e.png)
 
 Bookmarklet
 ---
@@ -657,7 +717,7 @@ Bookmarklet
 
 1.0.2 版新增功能，可将同步助手的操作日志输出到任意目录。
 
-![](https://s1.ax1x.com/2022/06/07/XD9uzq.png)
+![](https://res.cloudinary.com/simpread/image/upload/v1759649026/config/bf6c854ad7bd8c9cb56d6ae7106eb600.png)
 
 Logo 设计
 ---
