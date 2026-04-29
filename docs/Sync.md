@@ -41,6 +41,8 @@
 
 - [导出类型](#导出类型)
 
+    - [LLM Wiki 方案](#llm-wiki-方案)
+
     - [PDF](#pdf)
     
     - [pandoc](#pandoc)
@@ -67,11 +69,7 @@
   
 - [数据中心](#数据中心)
 
-- [URL Scheme](#URLScheme)
-
 - [稍后读相关](#稍后读相关)
-
-  - [打开稍后读](#打开稍后读)
 
   - [极速版](#极速版)
 
@@ -92,6 +90,8 @@
 - [暗色模式](#暗色模式)
 
 - [文档地址源](#文档地址源)
+
+- [URL Scheme](#URLScheme)
 
 - [Bookmarklet](#Bookmarklet)
 
@@ -150,15 +150,13 @@
 
 - [夸克网盘](https://pan.quark.cn/s/b389559e2d46) **需要登录**
 
-- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
-
-  > 如无法访问请退出你的 OneDrive 账户，或在隐身模式下打开此链接。
-
 - [Box.net](https://app.box.com/s/q7hz86hkeqgoc7mkofxaxu5eiup88j32)  **国外用户首选**
 
-- Telegram Channel
+> 下面的两个链接内容不全，仅作备份使用。
 
-  > Telegram Channel 仅保留旧版本
+- [OneDrive](https://1drv.ms/u/s!Aua4SNl3dUARh0iLAigvKGbGEHMz?e=LJe6f3)
+
+- Telegram Channel
 
   - 1.0.1 → [win 64 & 32](https://t.me/simpread/171)  [mac](https://t.me/simpread/166)
 
@@ -388,6 +386,13 @@
 > 
 > 下面介绍几个常见格式的导出。
 
+### LLM Wiki 方案
+
+> [!TIP]
+> 这是 1.5.1 版增加的功能，可以将 **通过搜索得到到稍后读合辑** 导出用于 Karpathy LLM Wiki 方案，详细说明 [请看这里](LLM-Wiki)。
+
+![image-20260420155107628](https://res.cloudinary.com/simpread/image/upload/v1776671469/config/44c1b5fb8b58e369a2a2178f9d5e41d1.png)
+
 ### PDF
 
 #### 同步助手基础打印方案
@@ -558,85 +563,14 @@ RSS生成
 
 ![](https://res.cloudinary.com/simpread/image/upload/v1759648659/config/f89fe9fe2c9d80ad23991114d06aa04e.png)
 
-URLScheme
----
-
-> [!TIP]
-> **1.1.0 版** 新增功能，目前支持三种 URL Scheme，未来还会陆续增加新方案。
-
-- `type` 包括：`unread` `extension`
-
-  - `simpread://open?type=unread&idx=1234&id=abc`
-
-    > 以独立窗口打开 ID 为 `1234` 的本地快照并具有跳转到对应的标注 `abc` 此功能也叫[标注嵌入模式](标注嵌入模式)。
-
-  - `simpread://open?type=extension`
-
-    > 以独立窗口打开扩展端稍后读
-
-  - `simpread://open?type=unread`
-
-    > 以独立窗口打开 [稍后读极速版](#极速版)
-
-- `popup` 包括： `window` → 加上参数后，每个链接都会新打开一个窗口，默认（不加此参数）则无论打开什么链接只在当前窗口打开，例如：
-
-  - `simpread://open?type=unread&popup=window`
-
-  - `simpread://open?type=unread&idx=2530&id=1666433469343&popup=window`
-
-- `embed`
-
-  - `logseq` → 显示 logseq 选项 e.g. `simpread://open?type=unread&embed=logseq`
-
-  - `rr` → 显示 roam research 选项 e.g. `simpread://open?type=unread&embed=rr`
-
-> [!WARNING]
-> 注意：Linux 用户暂时不支持 URL Scheme。
-
 稍后读相关
 ---
 
 > [!TIP]
 > 同步助手内置了一些跟稍后读有关系的功能，包括：通过快捷键打开稍后读、稍后读极速版等。
 
-> 1.1.3 版把同步助手稍后读的内容都整理到一起，位置：**同步助手 → 导出 → 稍后读**
-
-![](https://res.cloudinary.com/simpread/image/upload/v1759648692/config/d595adf8dcc8075a70756b89db8559de.png)
-
-### 快捷键
-
-> 此功能为 [同步助手 1.1.3 版](Sync) 功能，如低于此版本 [请升级](#下载)。
-
-> 在 1.1.3 版中把稍后读的相关快捷键整理到 **同步助手 → 导出 → 稍后读** 里面，并增加了一些新的快捷键，详细说明 [请看这里](稍后读快捷键)。
-
-### 打开稍后读
-
-> 通过设置快捷键可将稍后读以独立窗口打开。
-
-![](https://res.cloudinary.com/simpread/image/upload/v1759648708/config/19e8da5267232de445eb14ff9f199514.png)
-
-#### 设置稍后读
-
-> 需要 **简悦（扩展端）· 稍后读**  [创建快捷方式](稍后读?id=创建快捷方式)，然后将快捷键方式的路径填入到下面的地址。
-
-> 1.1.2 版（及以下）位置：同步助手 → 共通
-
-![](https://res.cloudinary.com/simpread/image/upload/v1759648726/config/b0da34640d1d5566fb84339e3bd6f95d.png)
-
-> 1.1.3 版（及以上）位置：同步助手 → 导出 → 稍后读
-
-![](https://res.cloudinary.com/simpread/image/upload/v1759648738/config/42dce1c4591f22d918476ee0669618cd.png)
-
-
-#### 设置快捷键
-
-> 此功能为 1.1.2 版（及以下）功能。
-
-![](https://res.cloudinary.com/simpread/image/upload/v1759648750/config/4df470ddc8b88ab067fb45070b86873e.png)
-
-> **注意：** 此方式的设置与 **简悦 · 扩展端** 一致，依次设置按键。
-
-> 1.1.3 版（及以上） [请看这里](#稍后读快捷键)。
+> [!WARNING]
+> 1.5.1 优化了 **同步助手 → 导出 → 稍后读** 的内容，并更名为 **稍后读 · 极速版**  。
 
 ### 极速版
 
@@ -644,16 +578,16 @@ URLScheme
 
 > 可以方便的将其嵌入到 Obsidian、MenubarX、以及新标签页等任意需要的地方，详细说明 [请看这里](稍后读极速版)。
 
-![](https://res.cloudinary.com/simpread/image/upload/v1759648894/config/170c70d51c98cd83ffdf361892f54440.png)
+![image-20260429112557540](https://res.cloudinary.com/simpread/image/upload/v1777433160/config/c346394a880bff256299bc18c38d217f.png)
 
 ### 标注嵌入模式
 
 > 极速版稍后读还包含了 [标注嵌入模式](标注嵌入模式)。
 
-![](https://res.cloudinary.com/simpread/image/upload/v1759648962/config/8db6e2ae9a2f62638b4d91b46a3b8bb2.png)
-
 > [!TIP]
 > 基于极速版与标注嵌入模式，可以将简悦的标注系统嵌入到 Obsidian、Logseq、Roam Reasearch 等双链笔记中，彻底实现 **左侧笔记，右侧标注** 的完美方案，详细说明 [配置库](配置库)。
+
+![](https://res.cloudinary.com/simpread/image/upload/v1759648962/config/8db6e2ae9a2f62638b4d91b46a3b8bb2.png)
 
 ### 极简稍后读列表
 
@@ -711,6 +645,41 @@ Bookmarklet
 ---
 
 > 详细说明 [请看这里](Bookmarklet)。
+
+URLScheme
+---
+
+> [!TIP]
+> **1.1.0 版** 新增功能，目前支持三种 URL Scheme，未来还会陆续增加新方案。
+
+- `type` 包括：`unread` `extension`
+
+  - `simpread://open?type=unread&idx=1234&id=abc`
+
+    > 以独立窗口打开 ID 为 `1234` 的本地快照并具有跳转到对应的标注 `abc` 此功能也叫[标注嵌入模式](标注嵌入模式)。
+
+  - `simpread://open?type=extension`
+
+    > 以独立窗口打开扩展端稍后读
+
+  - `simpread://open?type=unread`
+
+    > 以独立窗口打开 [稍后读极速版](#极速版)
+
+- `popup` 包括： `window` → 加上参数后，每个链接都会新打开一个窗口，默认（不加此参数）则无论打开什么链接只在当前窗口打开，例如：
+
+  - `simpread://open?type=unread&popup=window`
+
+  - `simpread://open?type=unread&idx=2530&id=1666433469343&popup=window`
+
+- `embed`
+
+  - `logseq` → 显示 logseq 选项 e.g. `simpread://open?type=unread&embed=logseq`
+
+  - `rr` → 显示 roam research 选项 e.g. `simpread://open?type=unread&embed=rr`
+
+> [!WARNING]
+> 注意：Linux 用户暂时不支持 URL Scheme。
 
 日志
 ---

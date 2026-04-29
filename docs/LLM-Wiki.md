@@ -53,3 +53,19 @@
 ### 操作过程
 
 ![](https://res.cloudinary.com/simpread/image/upload/v1776670224/config/11750bdd3a9cddf667743eff14ec2355.png)
+
+## 如何合理的设置最大行数
+
+在你的 LLM 中直接询问它可以读取的最大行数，如下图所示的话，需要设置的值为 **250**
+
+![](https://res.cloudinary.com/simpread/image/upload/v1777432858/config/c8f6ef2274791727eed80623414ade34.png)
+
+在我使用 Codex 询问时，这时可以考虑直接设置为 **1000**
+
+![](https://res.cloudinary.com/simpread/image/upload/v1777432545/config/97af27358a38f4d912807877eb14bc28.png)
+
+### 注意
+
+如果在生成的 Wiki 提问时感觉内容有所缺失，大概率是你的 LLM 没有彻底读完文件导致的，这时你需要降低你最大行数这个值。
+
+或者直接设置为 **0** （即按照稍后读的数量）
